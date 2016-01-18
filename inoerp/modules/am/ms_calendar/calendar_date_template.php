@@ -1,24 +1,24 @@
 <div id ="form_header">
- <span class="heading"><?php echo __('Calendar Date [For Maintenace Schedule]') ?></span>
+ <span class="heading"><?php echo gettext('Calendar Date [For Maintenace Schedule]') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo __('Schedule Info') ?></a></li>
-   <li><a href="#tabsHeader-2"><?php echo __('Future') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Schedule Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Future') ?></a></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsHeader-1" class="tabContent">
     <ul class="column header_field">
      <li><label><i class="am_maintenance_schedule_id select_popup clickable fa fa-search"></i>
-       <?php echo __('Sehedule ID') ?></label><?php 
+       <?php echo gettext('Sehedule ID') ?></label><?php 
        echo $f->text_field('am_maintenance_schedule_id', $maint_sch->am_maintenance_schedule_id, '', 'am_maintenance_schedule_id', '', '', 1) ?>
       <a name="show" href="form.php?class_name=am_ms_calendar_date&<?php echo "mode=$mode"; ?>" class="show document_id am_maintenance_schedule_id"><i class="fa fa-refresh"></i></a> 
      </li>
      <li><?php $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $maint_sch->org_id, 'org_id', '', 1, 1); ?></li>
      <li><?php $f->l_text_field('schedule_name', $maint_sch->schedule_name, '', '', '', '', 1); ?></li>
      <li><?php $f->l_text_field('schedule_number', $maint_sch->schedule_number, '', '', '', '', 1); ?></li>
-     <li><label><?php echo __('Inv Item Number') ?>
+     <li><label><?php echo gettext('Inv Item Number') ?>
       </label><?php echo $f->text_field('item_number', $maint_sch->item_number, '', '', '', '', 1); ?>    </li>
-     <li><label><?php echo __('Asset Number') ?></label><?php echo $f->text_field('am_asset_number', $maint_sch->am_asset_number, '', '', '', '', 1); ?>  </li>
+     <li><label><?php echo gettext('Asset Number') ?></label><?php echo $f->text_field('am_asset_number', $maint_sch->am_asset_number, '', '', '', '', 1); ?>  </li>
      <li><?php $f->l_date_fieldAnyDay_r('effective_start_date', $maint_sch->effective_start_date); ?></li>
      <li><?php $f->l_date_fieldAnyDay_r('effective_end_date', $maint_sch->effective_end_date); ?></li>
      <li><?php $f->l_number_field('intervals_per_cycle', $maint_sch->intervals_per_cycle, '', 'intervals_per_cycle', '', '', 1); ?></li>
@@ -34,10 +34,10 @@
  </div>
 </div>
 
-<div id ="form_line" class="form_line"><span class="heading"><?php echo __('Calendar Date') ?></span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Calendar Date') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1"><?php echo __('Dates') ?></a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Dates') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <form action=""  method="post" id="am_ms_calendar_date_line"  name="am_ms_calendar_date_line">
@@ -45,10 +45,10 @@
      <table class="form_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Calendar Date Id') ?></th>
-        <th><?php echo __('Maintenance Date') ?></th>
-        <th><?php echo __('Description') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Calendar Date Id') ?></th>
+        <th><?php echo gettext('Maintenance Date') ?></th>
+        <th><?php echo gettext('Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody am_ms_calendar_date_values" >

@@ -2,11 +2,11 @@
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Images') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Product Description') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Images') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Product Description') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -16,7 +16,7 @@
       </li>
       <li><?php $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?></li>
       <li><?php $f->l_text_field_dm('product_name'); ?></li>
-      <li><label><?php echo __('Inv Item Number') ?></label><?php
+      <li><label><?php echo gettext('Inv Item Number') ?></label><?php
        echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
        $f->text_field_dm('item_number', 'select_item_number');
        ?>
@@ -27,10 +27,10 @@
       <li><?php $f->l_date_fieldAnyDay('new_date_to', $$class->new_date_to) ?></li>
       <li><?php $f->l_select_field_from_array('status', ec_product::$status_a, $$class->status, 'status', '', 1); ?>        </li>
       <li><?php $f->l_select_field_from_array('visibility', ec_product::$visibility_a, $$class->visibility, 'visibility', ''); ?>        </li>
-      <li><label><?php echo __('View Item Details'); ?></label>
+      <li><label><?php echo gettext('View Item Details'); ?></label>
        <a role="button"  target="_blank" class="quick_select button btn btn-default" href="<?php echo HOME_URL . 'form.php?class_name=item&item_id=' . $$class->item_id_m; ?>">
         <?php echo $$class->item_id_m ?></a></li>
-      <li><label><?php echo __('View in Store'); ?></label>
+      <li><label><?php echo gettext('View in Store'); ?></label>
        <a role="button"  target="_blank" class="quick_select button btn btn-default" href="<?php echo HOME_URL . 'product.php?ec_product_id=' . $$class->ec_product_id; ?>">
         <?php echo $$class->product_name ?></a></li>
      </ul>
@@ -42,12 +42,12 @@
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <ul class="column two_column">
-      <li><label><?php echo __('Meta Title') ?></label><?php echo form::text_area('meta_title', $$class->meta_title, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
-      <li><label><?php echo __('Meta Keywords') ?></label><?php echo form::text_area('meta_keywords', $$class->meta_keywords, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
-      <li><label><?php echo __('Meta Description') ?></label><?php echo form::text_area('meta_title', $$class->meta_description, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
+      <li><label><?php echo gettext('Meta Title') ?></label><?php echo form::text_area('meta_title', $$class->meta_title, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
+      <li><label><?php echo gettext('Meta Keywords') ?></label><?php echo form::text_area('meta_keywords', $$class->meta_keywords, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
+      <li><label><?php echo gettext('Meta Description') ?></label><?php echo form::text_area('meta_title', $$class->meta_description, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
      </ul>
      <ul class="column one_column">
-      <li><label><?php echo __('Product Description') ?></label><?php echo form::text_area('product_description', $$class->product_description, '6', '120', '', 'No Character Limits'); ?>      </li>
+      <li><label><?php echo gettext('Product Description') ?></label><?php echo form::text_area('product_description', $$class->product_description, '6', '120', '', 'No Character Limits'); ?>      </li>
      </ul>
     </div>
     <div id="tabsHeader-4" class="tabContent">
@@ -76,12 +76,12 @@
  <div id ="form_line" class="form_line"><span class="heading"> Product Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Price') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Categories') ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Catalogs') ?></a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Related Products') ?></a></li>
-    <li><a href="#tabsLine-5"><?php echo __('Stores & Sites') ?></a></li>
-    <li><a href="#tabsLine-6"><?php echo __('Reviews') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Price') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Categories') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Catalogs') ?></a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Related Products') ?></a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('Stores & Sites') ?></a></li>
+    <li><a href="#tabsLine-6"><?php echo gettext('Reviews') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
@@ -97,10 +97,10 @@
     <div id="tabsLine-2" class="tabContent">
      <div class="category-div">
       <div class="existing-category">
-       <label><?php echo __('Existing Categories'); ?></label><?php echo!empty($category) ? category::category_stmt($category) : ''; ?>
+       <label><?php echo gettext('Existing Categories'); ?></label><?php echo!empty($category) ? category::category_stmt($category) : ''; ?>
       </div>
       <div class="add-category">
-       <label><?php echo __('New Category'); ?></label><?php echo $categoriey_select_option; ?>
+       <label><?php echo gettext('New Category'); ?></label><?php echo $categoriey_select_option; ?>
       </div>
      </div>
      <!--end of tab1 div three_column-->

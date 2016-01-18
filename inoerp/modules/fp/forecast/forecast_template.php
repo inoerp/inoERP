@@ -1,13 +1,13 @@
 <div class="row small-left-padding">
  <div id='fp_forecast_header_divId'>
-  <div id ="form_header"><span class="heading"><?php echo __('Forecast Header') ?></span>
+  <div id ="form_header"><span class="heading"><?php echo gettext('Forecast Header') ?></span>
    <form action=""  method="post" id="fp_forecast_header"  name="fp_forecast_header">
     <div id="tabsHeader">
      <ul class="tabMain">
-      <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
-      <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-      <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
-      <li><a href="#tabsHeader-4"><?php echo __('Secondary') ?></a></li>
+      <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+      <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+      <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+      <li><a href="#tabsHeader-4"><?php echo gettext('Secondary') ?></a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
@@ -24,7 +24,7 @@
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup">
           Customer Id</label><?php echo $f->text_field_dr('ar_customer_id'); ?></li>
         <li><label class="auto_complete">
-          <?php echo __('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly); ?></li>
+          <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly); ?></li>
         <li><?php $f->l_text_field_d('description'); ?>  </li>
        </ul>
       </div>
@@ -57,28 +57,28 @@
    </form>
   </div>
 
-  <div id="form_line" class="form_line"><span class="heading"><?php echo __('Forecast Lines') ?></span>
+  <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Forecast Lines') ?></span>
    <form action=""  method="post" id="forecast_line"  name="forecast_line">
     <div id="tabsLine">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
-      <li><a href="#tabsLine-2"><?php echo __('Quantity') ?> </a></li>
+      <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo gettext('Quantity') ?> </a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsLine-1" class="tabContent">
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo __('Action') ?></th>
-          <th><?php echo __('Seq') ?>#</th>
-          <th><?php echo __('Line Id') ?></th>
-          <th><?php echo __('Item Number') ?></th>
-          <th><?php echo __('Description') ?></th>
-          <th><?php echo __('UOM') ?></th>
-          <th><?php echo __('Bucket') ?></th>
-          <th><?php echo __('Start Date') ?></th>
-          <th><?php echo __('End Date') ?></th>
-          <th><?php echo __('No Of Bucket') ?></th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Line Id') ?></th>
+          <th><?php echo gettext('Item Number') ?></th>
+          <th><?php echo gettext('Description') ?></th>
+          <th><?php echo gettext('UOM') ?></th>
+          <th><?php echo gettext('Bucket') ?></th>
+          <th><?php echo gettext('Start Date') ?></th>
+          <th><?php echo gettext('End Date') ?></th>
+          <th><?php echo gettext('No Of Bucket') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody">
@@ -129,13 +129,13 @@
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo __('Seq') ?>#</th>
-          <th><?php echo __('Current') ?></th>
-          <th><?php echo __('Original') ?></th>
-          <th><?php echo __('Total Current') ?></th>
-          <th><?php echo __('Total Original') ?></th>
-          <th><?php echo __('Forecast Details') ?></th>
-          <th><?php echo __('Consumption Id') ?></th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Current') ?></th>
+          <th><?php echo gettext('Original') ?></th>
+          <th><?php echo gettext('Total Current') ?></th>
+          <th><?php echo gettext('Total Original') ?></th>
+          <th><?php echo gettext('Forecast Details') ?></th>
+          <th><?php echo gettext('Consumption Id') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody">

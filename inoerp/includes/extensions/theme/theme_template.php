@@ -5,7 +5,7 @@ $all_data_ai->seek($position);
 ?> 
 <!--    End of place for showing error messages-->
 <form  method="post" id="sys_extn_theme"  name="sys_extn_theme">
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Theme List') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Theme List') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1">Basic Info </a></li>

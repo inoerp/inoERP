@@ -1,12 +1,12 @@
-<div id ="form_header"><span class="heading"><?php echo __('Payment Header') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Payment Header') ?></span>
  <form  method="post" id="ap_payment_header"  name="ap_payment_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Finance') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -22,8 +22,8 @@
       <li><?php $f->l_text_field_d('document_number') ?>      </li>
       <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
        <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-        <?php echo __('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
-      <li><label class="auto_complete"><?php echo __('Supplier Number') ?></label><?php $f->text_field_d('supplier_number'); ?></li>
+        <?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
+      <li><label class="auto_complete"><?php echo gettext('Supplier Number') ?></label><?php $f->text_field_d('supplier_number'); ?></li>
       <li><label>Supplier Site</label><?php
        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
@@ -37,7 +37,7 @@
      <div> 
       <ul class="column header_field ">
        <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly1); ?>       </li>
-       <li><label><?php echo __('Period Name') ?></label><?php
+       <li><label><?php echo gettext('Period Name') ?></label><?php
         if (!empty($period_name_stmt)) {
          echo $period_name_stmt;
         } else {
@@ -76,7 +76,7 @@
     <div id="tabsHeader-5" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label><?php echo __('Action') ?></label>
+       <li><label><?php echo gettext('Action') ?></label>
         <?php
         echo $f->select_field_from_array('payment_action', $$class->action_a, '', 'payment_action', '', '', $readonly, $readonly)
         ?>
@@ -90,30 +90,30 @@
   </div>
  </form>
 </div>
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Payment Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Payment Lines') ?></span>
  <form method="post" id="po_site"  name="ap_payment_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('References') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Actions') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('References') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Actions') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Line') ?>#</th>
-        <th><?php echo __('Trnx Number') ?></th>
-        <th><?php echo __('Payment Amount') ?></th>
-        <th><?php echo __('Rate') ?></th>
-        <th><?php echo __('GL Amount') ?></th>
-        <th><?php echo __('Total Amount') ?></th>
-        <th><?php echo __('Paid') ?></th>
-        <th><?php echo __('Remaining') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Trnx Number') ?></th>
+        <th><?php echo gettext('Payment Amount') ?></th>
+        <th><?php echo gettext('Rate') ?></th>
+        <th><?php echo gettext('GL Amount') ?></th>
+        <th><?php echo gettext('Total Amount') ?></th>
+        <th><?php echo gettext('Paid') ?></th>
+        <th><?php echo gettext('Remaining') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -156,12 +156,12 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line Description') ?></th>
-        <th><?php echo __('Ref Key Name') ?></th>
-        <th><?php echo __('Ref Key Value') ?></th>
-        <th><?php echo __('View Ref Doc') ?></th>
-        <th><?php echo __('Status') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Description') ?></th>
+        <th><?php echo gettext('Ref Key Name') ?></th>
+        <th><?php echo gettext('Ref Key Value') ?></th>
+        <th><?php echo gettext('View Ref Doc') ?></th>
+        <th><?php echo gettext('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

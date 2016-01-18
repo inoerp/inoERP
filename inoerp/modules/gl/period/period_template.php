@@ -1,12 +1,12 @@
 <div class="row small-left-padding">
  <div id ="form_header">
   <form method="post" id="gl_period"  name="gl_period">
-   <span class="heading"><?php echo __('GL Periods') ?></span>
+   <span class="heading"><?php echo gettext('GL Periods') ?></span>
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Accounting Period') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Notes') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Accounting Period') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -15,10 +15,10 @@
          <a name="show" href="form.php?class_name=gl_period&<?php echo "mode=$mode"; ?>" class="show document_id gl_ledger_id ">
           <i class="fa fa-refresh"></i></a> 
         </li>
-        <li><label><?php echo __('Current Open Period') ?></label><?php echo $cop_stmt; ?></li>
+        <li><label><?php echo gettext('Current Open Period') ?></label><?php echo $cop_stmt; ?></li>
         <li><?php $f->l_select_field_from_object('gl_calendar_id', $next_open_period, 'gl_calendar_id', 'name', '', 'new_gl_calendar_id', '', '', $readonly); ?></li>
         <li><?php $f->l_text_field('status', 'AVAILABLE', '', '', 'status', '', 1); ?></li>
-        <li><label><?php echo __('Next Period') ?></label><input type="button" class="btn btn-warning" role="button" id="open_next_period" value="Open" 
+        <li><label><?php echo gettext('Next Period') ?></label><input type="button" class="btn btn-warning" role="button" id="open_next_period" value="Open" 
                                                                       <?php echo ($readonly == 1) ? 'disabled' : ''; ?>				></li>
        </ul>
       <div id="tabsHeader-2" class="tabContent">
@@ -46,11 +46,11 @@
   </form>
  </div>
 
- <div id="form_line" class="form_line"><span class="heading"><?php echo __('Existing & Available Periods') ?></span>
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Existing & Available Periods') ?></span>
   <form  method="post" id="gl_period_line"  name="gl_period_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Calendar View') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Calendar View') ?></a></li>
      <li><a href="#tabsLine-2">Future </a></li>
     </ul>
     <div class="tabContainer"> 
@@ -59,17 +59,17 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('PeriodId') ?>#</th>
-         <th><?php echo __('Period Name') ?></th>
-         <th><?php echo __('Status') ?>#</th>
-         <th><?php echo __('Year') ?></th>
-         <th><?php echo __('Quarter') ?></th>
-         <th><?php echo __('Number') ?></th>
-         <th><?php echo __('From Date') ?></th>
-         <th><?php echo __('To Date') ?></th>
-         <th><?php echo __('Cal Name') ?></th>
-         <th><?php echo __('Cal Id') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('PeriodId') ?>#</th>
+         <th><?php echo gettext('Period Name') ?></th>
+         <th><?php echo gettext('Status') ?>#</th>
+         <th><?php echo gettext('Year') ?></th>
+         <th><?php echo gettext('Quarter') ?></th>
+         <th><?php echo gettext('Number') ?></th>
+         <th><?php echo gettext('From Date') ?></th>
+         <th><?php echo gettext('To Date') ?></th>
+         <th><?php echo gettext('Cal Name') ?></th>
+         <th><?php echo gettext('Cal Id') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody calendar_values" >

@@ -8,17 +8,17 @@ inoERP
 -->
 
 <div id ="form_header"><span class="heading"><?php
-    echo __('Kanban Replenishment Strategy')
+    echo gettext('Kanban Replenishment Strategy')
   ?></span>
  <form method="post" id="fp_kanban_header"  name="fp_kanban_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Planning') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Supply') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo __('Action') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Planning') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Supply') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Action') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -63,7 +63,7 @@ inoERP
        echo $f->l_val_field_d('supplier_name', 'supplier', 'supplier_name', '', 'supplier_name', 'vf_select_supplier_name');
        echo $f->hidden_field_withId('supplier_id', $$class->supplier_id);
        ?><i class="generic g_select_supplier_name select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
-      <li><label><?php echo __('Supplier Site') ?></label><?php
+      <li><label><?php echo gettext('Supplier Site') ?></label><?php
        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
        ?> </li>
@@ -104,26 +104,26 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Kanban Cards') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Kanban Cards') ?></span>
  <form method="post" id="fp_kanban_line"  name="fp_kanban_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Card Number') ?></th>
-        <th><?php echo __('Card Type') ?></th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('Card Status') ?></th>
-        <th><?php echo __('Supply Status') ?></th>
-        <th><?php echo __('Kanban Size') ?></th>
-        <th><?php echo __('Action') ?></th>        
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Card Number') ?></th>
+        <th><?php echo gettext('Card Type') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Card Status') ?></th>
+        <th><?php echo gettext('Supply Status') ?></th>
+        <th><?php echo gettext('Kanban Size') ?></th>
+        <th><?php echo gettext('Action') ?></th>        
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

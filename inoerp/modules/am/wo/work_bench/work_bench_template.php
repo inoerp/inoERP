@@ -7,12 +7,12 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <form method="post" id="am_wo_work_bench"  name="am_wo_work_bench">
- <span class="heading"><?php echo __('Work Order Work Bench') ?></span>
+ <span class="heading"><?php echo gettext('Work Order Work Bench') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Tracking') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Tracking') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -45,10 +45,10 @@ inoERP
  <div id ="form_line_ws" class="form_line_ws"><span class="heading"> Operation Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-        <li><a href="#tabsLine-1"><?php echo __('Operation') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Data Collection') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Scrap') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('BOM (View Only)') ?> </a></li>
+        <li><a href="#tabsLine-1"><?php echo gettext('Operation') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Data Collection') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Scrap') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('BOM (View Only)') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
 <div id="tabsLine-1" class="tabContent">
@@ -61,19 +61,19 @@ inoERP
        <li><?php $f->l_number_field_dr('total_quantity'); ?></li>
        <li><?php $f->l_number_field('completed_quantity', $$class_second->completed_quantity); ?></li>
       </ul>
-      <span class="heading"><?php echo __('Quantity Status') ?></span>
+      <span class="heading"><?php echo gettext('Quantity Status') ?></span>
 
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Sequence') ?></th>
-         <th><?php echo __('Department') ?></th>
-         <th><?php echo __('Description') ?></th>
-         <th><?php echo __('Queue') ?></th>
-         <th><?php echo __('Running') ?></th>
-         <th><?php echo __('Rejected') ?></th>
-         <th><?php echo __('Scrapped') ?></th>
-         <th><?php echo __('To Move') ?></th>
+         <th><?php echo gettext('Sequence') ?></th>
+         <th><?php echo gettext('Department') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Queue') ?></th>
+         <th><?php echo gettext('Running') ?></th>
+         <th><?php echo gettext('Rejected') ?></th>
+         <th><?php echo gettext('Scrapped') ?></th>
+         <th><?php echo gettext('To Move') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody am_wo_routing_line_values" >
@@ -106,23 +106,23 @@ inoERP
        </div>
        <div class="panel-body">
         <ul class="column header_field"> 
-         <li><label><?php echo __('From Seq') ?></label>
+         <li><label><?php echo gettext('From Seq') ?></label>
           <?php echo!empty($routing_line_details) ? form::select_field_from_object('from_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->from_routing_sequence, 'from_routing_sequence', $readonly, '', '', 1) : form::text_field_ds('from_routing_sequence'); ?>
          </li>
-         <li><label><?php echo __('To Seq') ?></label>
+         <li><label><?php echo gettext('To Seq') ?></label>
           <?php echo!empty($routing_line_details) ? form::select_field_from_object('to_routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class->to_routing_sequence, 'to_routing_sequence', $readonly, '', '', 1) : form::text_field_ds('from_routing_sequence'); ?>
          </li>
-         <li><label><?php echo __('Available Qty') ?></label>
+         <li><label><?php echo gettext('Available Qty') ?></label>
           <?php form::number_field_drs('available_quantity'); ?>
          </li>
-<li><label><?php echo __('From Step') ?> </label>
+<li><label><?php echo gettext('From Step') ?> </label>
           <?php echo $f->select_field_from_array('from_operation_step', am_move_transaction::$am_move_step, $$class->from_operation_step, 'from_operation_step', '' , 1, $readonly1); ?>
          </li>
-         <li><label><?php echo __('To Step') ?></label>
+         <li><label><?php echo gettext('To Step') ?></label>
           <?php echo $f->select_field_from_array('to_operation_step', am_move_transaction::$am_move_step, $$class->to_operation_step, 'to_operation_step', '', 1 , $readonly1); ?>
          </li>
 
-         <li><label><?php echo __('Move Qty') ?></label>
+         <li><label><?php echo gettext('Move Qty') ?></label>
           <?php form::number_field_dm('move_quantity'); ?>
          </li>
 
@@ -242,16 +242,16 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('BOM Sequence') ?></th>
-        <th><?php echo __('Item Number') ?></th>
-        <th><?php echo __('Item Description') ?></th>
-        <th><?php echo __('Serial Generation') ?></th>
-        <th><?php echo __('Quantity') ?></th>
-        <th><?php echo __('Required') ?></th>
-        <th><?php echo __('Issued') ?></th>
-        <th><?php echo __('Supply Type') ?></th>
-        <th><?php echo __('Sub inventory') ?></th>
-        <th><?php echo __('Locator') ?></th>
+        <th><?php echo gettext('BOM Sequence') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('Serial Generation') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Required') ?></th>
+        <th><?php echo gettext('Issued') ?></th>
+        <th><?php echo gettext('Supply Type') ?></th>
+        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 am_wo_bom_values" >

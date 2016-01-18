@@ -402,8 +402,8 @@ class path extends dbObject {
     $other_child_paths = $this->findBy_module_inAset($path->module_code, $allowed_path_ids);
     if (!empty($other_child_paths)) {
      $url = $path->fullPath($path->path_link);
-     $path_name = __($path->name);
-     $path_description = __($path->description);
+     $path_name = gettext($path->name);
+     $path_description = gettext($path->description);
      if ($this->show_description) {
       $allPaths .= "<li title=\"$path_name\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_description . '</a>';
      } else {
@@ -413,8 +413,8 @@ class path extends dbObject {
 
      foreach ($other_child_paths as $child_paths_oth) {
       $key = array_search($child_paths_oth->path_id, $allowed_path_ids);
-      $child_paths_name = __($child_paths_oth->name);
-      $child_paths_description = __($child_paths_oth->description);
+      $child_paths_name = gettext($child_paths_oth->name);
+      $child_paths_description = gettext($child_paths_oth->description);
       if ($key) {
        $url_1 = $path->fullPath($child_paths_oth->path_link);
        if ($this->show_description) {
@@ -434,8 +434,8 @@ class path extends dbObject {
    }
 
    $url = $path->fullPath($path->path_link);
-   $path_name = __($path->name);
-   $path_description = __($path->description);
+   $path_name = gettext($path->name);
+   $path_description = gettext($path->description);
    if ($this->show_description) {
     $allPaths .= "<li title=\"$path_name\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_description . '</a>';
    } else {
@@ -445,8 +445,8 @@ class path extends dbObject {
 
    foreach ($childs as $child_paths) {
     $key = array_search($child_paths->path_id, $allowed_path_ids);
-    $child_paths_name = __($child_paths->name);
-    $child_paths_description = __($child_paths->description);
+    $child_paths_name = gettext($child_paths->name);
+    $child_paths_description = gettext($child_paths->description);
     if ($key) {
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
@@ -568,8 +568,8 @@ class path extends dbObject {
    $fa_icon = ino_icon($child_paths->path_type);
    if ($key) {
     $url = $path->fullPath($child_paths->path_link);
-    $path_name = __($child_paths->name);
-    $path_description = __($child_paths->description);
+    $path_name = gettext($child_paths->name);
+    $path_description = gettext($child_paths->description);
     $allPaths .= "<li title=\"$path_description\" class='expandable {$path->name} '>&nbsp;&nbsp;" . '<a href="' . $url . '">' . $fa_icon . '&nbsp;' . $path_name . '</a>';
     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
     $allPaths .= '</li>';

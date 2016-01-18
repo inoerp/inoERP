@@ -1,12 +1,12 @@
-<span class="heading"><?php echo __('Content Type') ?></span>
+<span class="heading"><?php echo gettext('Content Type') ?></span>
 <form action=""  method="post" id="content_type_header"  name="content_type_header" class="content_type_header">
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Comments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Categories') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Comments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Categories') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer" >
     <div id="tabsHeader-1" class="tabContent">
@@ -67,12 +67,12 @@
    </div>
   </div>
  </div>
- <span class="heading"><?php echo __('Content Type Fields/Columns') ?></span>
+ <span class="heading"><?php echo gettext('Content Type Fields/Columns') ?></span>
  <div id="form_line" class="form_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -80,15 +80,15 @@
       <thead> 
        <tr>
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Field Label') ?></th>
-        <th><?php echo __('Position') ?>#</th>
-        <th><?php echo __('Required') ?></th>
-        <th><?php echo __('Field Name') ?></th>
-        <th><?php echo __('Field Type') ?></th>
-        <th><?php echo __('Number') ?></th>
-        <th><?php echo __('enum Values') ?></th>
-        <th><?php echo __('Option List') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Field Label') ?></th>
+        <th><?php echo gettext('Position') ?>#</th>
+        <th><?php echo gettext('Required') ?></th>
+        <th><?php echo gettext('Field Name') ?></th>
+        <th><?php echo gettext('Field Type') ?></th>
+        <th><?php echo gettext('Number') ?></th>
+        <th><?php echo gettext('enum Values') ?></th>
+        <th><?php echo gettext('Option List') ?></th>
        </tr>
        </tr>
       </thead>

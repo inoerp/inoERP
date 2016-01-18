@@ -1,9 +1,9 @@
 <div id ="form_header">
  <form action=""  method="post" id="hr_approval_limit_header"  name="hr_approval_limit_header">
-  <span class="heading"><?php echo __('Approval Limit Header') ?></span>
+  <span class="heading"><?php echo gettext('Approval Limit Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -23,25 +23,25 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Approval Limit Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Approval Limit Lines') ?></span>
  <form action=""  method="post" id="hr_approval_limit_line"  name="hr_approval_limit_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Limit Object') ?>#</th>
-        <th><?php echo __('Limit Type') ?></th>
-        <th><?php echo __('Lowest Range') ?></th>
-        <th><?php echo __('Highest Range') ?></th>
-        <th><?php echo __('Amount') ?></th>
-        <th><?php echo __('Inactive Date') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Limit Object') ?>#</th>
+        <th><?php echo gettext('Limit Type') ?></th>
+        <th><?php echo gettext('Lowest Range') ?></th>
+        <th><?php echo gettext('Highest Range') ?></th>
+        <th><?php echo gettext('Amount') ?></th>
+        <th><?php echo gettext('Inactive Date') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

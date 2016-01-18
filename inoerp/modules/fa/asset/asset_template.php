@@ -1,13 +1,13 @@
 <div id="form_all">
  <form action=""  method="post" id="fa_asset"  name="fa_asset">
-  <span class="heading"><?php echo __('Fixed Asset Details') ?></span>
+  <span class="heading"><?php echo gettext('Fixed Asset Details') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Tracking Info') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Tracking Info') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -66,21 +66,21 @@
 
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Assignments') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Other Details') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Assignments') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Other Details') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Line Id') ?></th>
-         <th><?php echo __('Units') ?>#</th>
-         <th><?php echo __('Employee') ?></th>
-         <th><?php echo __('Expense') ?></th>
-         <th><?php echo __('Address') ?></th>
-         <th><?php echo __('Description') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Units') ?>#</th>
+         <th><?php echo gettext('Employee') ?></th>
+         <th><?php echo gettext('Expense') ?></th>
+         <th><?php echo gettext('Address') ?></th>
+         <th><?php echo gettext('Description') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody fa_asset_assignment_values" >

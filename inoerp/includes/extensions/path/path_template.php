@@ -3,7 +3,7 @@
  <!--    End of place for showing error messages-->
  <div id ="form_header">
   <form  method="post" id="path" name="path"  >
-   <span class="heading"><?php echo __('System Path') ?></span>
+   <span class="heading"><?php echo gettext('System Path') ?></span>
    <div class="tabContainer"> 
     <ul class="column header_field two_column_form"> 
      <li><?php $f->l_text_field_dr_withSearch('path_id') ?>

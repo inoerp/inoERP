@@ -1,12 +1,12 @@
 <div class="row small-left-padding">
 <div id="form_all">
  <form action=""  method="post" id="hr_payroll"  name="hr_payroll">
-  <span class="heading"><?php echo __('Payroll') ?> </span>
+  <span class="heading"><?php echo gettext('Payroll') ?> </span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Action') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Action') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -28,8 +28,8 @@
      <div id="tabsHeader-2" class="tabContent">
       <div> 
        <ul class="column four_column">
-        <li><a href="<?php HOME_URL ?>program.php?class_name=hr_payroll_schedule&program_name=prg_generate_payroll_schedule&hr_payroll_id=<?php echo $$class->hr_payroll_id ?>" class="button"><?php echo __('Generate Schedule') ?></a></li>
-        <li><a href="<?php HOME_URL ?>program.php?class_name=hr_payroll_schedule&program_name=prg_process_payroll&hr_payroll_id=<?php echo $$class->hr_payroll_id ?>" class="button"><?php echo __('Process Payroll') ?></a></li>
+        <li><a href="<?php HOME_URL ?>program.php?class_name=hr_payroll_schedule&program_name=prg_generate_payroll_schedule&hr_payroll_id=<?php echo $$class->hr_payroll_id ?>" class="button"><?php echo gettext('Generate Schedule') ?></a></li>
+        <li><a href="<?php HOME_URL ?>program.php?class_name=hr_payroll_schedule&program_name=prg_process_payroll&hr_payroll_id=<?php echo $$class->hr_payroll_id ?>" class="button"><?php echo gettext('Process Payroll') ?></a></li>
        </ul>
       </div>
      </div>
@@ -37,10 +37,10 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Line Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Line Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Schedules') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Schedules') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="hr_payroll_schedule_line"  name="hr_payroll_schedule_line">
@@ -48,14 +48,14 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Line Id') ?></th>
-         <th><?php echo __('Scheduled Date') ?>#</th>
-         <th><?php echo __('Start Date') ?></th>
-         <th><?php echo __('End Date') ?></th>
-         <th><?php echo __('Status') ?></th>
-         <th><?php echo __('Period Name') ?></th>
-         <th><?php echo __('Description') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Scheduled Date') ?>#</th>
+         <th><?php echo gettext('Start Date') ?></th>
+         <th><?php echo gettext('End Date') ?></th>
+         <th><?php echo gettext('Status') ?></th>
+         <th><?php echo gettext('Period Name') ?></th>
+         <th><?php echo gettext('Description') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody hr_payroll_schedule_values" >

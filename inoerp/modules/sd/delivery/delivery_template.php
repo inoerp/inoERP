@@ -7,13 +7,13 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header">
- <span class="heading"><?php echo __('Delivery Header') ?></span>
+ <span class="heading"><?php echo gettext('Delivery Header') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-   <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-   <li><a href="#tabsHeader-3"><?php echo __('Actions') ?></a></li>
-   <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo gettext('Actions') ?></a></li>
+   <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
   </ul>
   <div class="tabContainer">
    <form method="post" id="sd_delivery_header"  name="sd_delivery_header">
@@ -46,7 +46,7 @@ inoERP
     <div id="tabsHeader-3" class="tabContent">
      <div> 
       <ul class="column header_field">
-       <li><label><?php echo __('Action') ?></label>
+       <li><label><?php echo gettext('Action') ?></label>
         <?php
         if ($$class->status == 'SHIPPED') {
          $$class->action_a = [];
@@ -58,7 +58,7 @@ inoERP
        </li>
        <li><label></label><a  role="button" class="quick_select button btn btn-info" target="_blank" 
        href="<?php echo HOME_URL ?>form.php?class_name=sd_delivery_all_v&amp;router=pdf_print&amp;sd_delivery_header_id=<?php echo!(empty($$class->sd_delivery_header_id)) ? $$class->sd_delivery_header_id : ""; ?>" >
-         <?php echo __('Print Delivery') ?></a></li>
+         <?php echo gettext('Print Delivery') ?></a></li>
       </ul>
      </div>
     </div>
@@ -83,31 +83,31 @@ inoERP
  </div>
 
 </div>
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Delivery Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Delivery Lines') ?></span>
  <form  method="post" id="sd_delivery_line"  name="sd_delivery_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('SO Info') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Delivery') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Customer') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('References') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('SO Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Delivery') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Customer') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('References') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><label class="ino-label"><?php echo __('Delivery Line Id') ?></label></th>
-        <th><?php echo __('SO Id') ?>#</th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('SO') ?>#</th>
-        <th><?php echo __('Line') ?>#</th>
-        <th><?php echo __('Shipment Qty') ?></th>
-        <th><?php echo __('Shipped Qty') ?></th>
-        <th><?php echo __('SO Qty Change') ?></th>
-        <th><?php echo __('Delivery Status') ?></th>
-        <th><?php echo __('Line Action') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><label class="ino-label"><?php echo gettext('Delivery Line Id') ?></label></th>
+        <th><?php echo gettext('SO Id') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('SO') ?>#</th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Shipment Qty') ?></th>
+        <th><?php echo gettext('Shipped Qty') ?></th>
+        <th><?php echo gettext('SO Qty Change') ?></th>
+        <th><?php echo gettext('Delivery Status') ?></th>
+        <th><?php echo gettext('Line Action') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -145,12 +145,12 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Item Id') ?></th>
-        <th><?php echo __('Item Number') ?></th>
-        <th><?php echo __('Item Description') ?></th>
-        <th><?php echo __('UOM') ?></th>
-        <th><?php echo __('Sub Inventory') ?></th>
-        <th><?php echo __('Locator') ?></th>
+        <th><?php echo gettext('Item Id') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Sub Inventory') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -178,12 +178,12 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Customer Id') ?></th>
-        <th><?php echo __('Customer Number') ?></th>
-        <th><?php echo __('Customer Name') ?></th>
-        <th><?php echo __('Site Id') ?></th>
-        <th><?php echo __('Site Number') ?></th>
-        <th><?php echo __('Site Name') ?></th>
+        <th><?php echo gettext('Customer Id') ?></th>
+        <th><?php echo gettext('Customer Number') ?></th>
+        <th><?php echo gettext('Customer Name') ?></th>
+        <th><?php echo gettext('Site Id') ?></th>
+        <th><?php echo gettext('Site Number') ?></th>
+        <th><?php echo gettext('Site Name') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -213,10 +213,10 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Weight UOM') ?></th>
-        <th><?php echo __('Total Weight') ?></th>
-        <th><?php echo __('Volume UOM') ?></th>
-        <th><?php echo __('Total Volume') ?></th>
+        <th><?php echo gettext('Weight UOM') ?></th>
+        <th><?php echo gettext('Total Weight') ?></th>
+        <th><?php echo gettext('Volume UOM') ?></th>
+        <th><?php echo gettext('Total Volume') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

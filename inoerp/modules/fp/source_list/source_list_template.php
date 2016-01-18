@@ -1,11 +1,11 @@
 <div id='fp_source_list_header_divId'>
- <div id ="form_header"><span class="heading"><?php echo __('Source List Header') ?></span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('Source List Header') ?></span>
   <form method="post" id="fp_source_list_header"  name="fp_source_list_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -47,22 +47,22 @@
   </form>
  </div>
 
- <div id="form_line" class="form_line"><span class="heading"><?php echo __('Source List Lines') ?></span>
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Source List Lines') ?></span>
   <form  method="post" id="source_list_line"  name="source_list_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Line Id') ?></th>
-         <th><?php echo __('Type') ?></th>
-         <th><?php echo __('Source List') ?>#</th>
-         <th><?php echo __('Comments') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Type') ?></th>
+         <th><?php echo gettext('Source List') ?>#</th>
+         <th><?php echo gettext('Comments') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">

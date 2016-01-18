@@ -1,11 +1,11 @@
 <div id ="form_header">
- <span class="heading"><?php echo __('Process Flow Header') ?></span>
+ <span class="heading"><?php echo gettext('Process Flow Header') ?></span>
  <form action=""  method="post" id="process_flow_header"  name="process_flow_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Notes') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -45,29 +45,29 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Process Flow Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Process Flow Lines') ?></span>
  <form action=""  method="post" id="process_flow_line"  name="process_flow_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Decision') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Flow Diagram') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Decision') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Flow Diagram') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Line Number') ?></th>
-        <th><?php echo __('Sub Process Name') ?></th>
-        <th><?php echo __('Type') ?></th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('Class Name') ?></th>
-        <th><?php echo __('Method Name') ?></th>
-        <th><?php echo __('Process Actions') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line Number') ?></th>
+        <th><?php echo gettext('Sub Process Name') ?></th>
+        <th><?php echo gettext('Type') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Class Name') ?></th>
+        <th><?php echo gettext('Method Name') ?></th>
+        <th><?php echo gettext('Process Actions') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -102,22 +102,22 @@
           }
           ?>
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend><?php echo __('Detail Data') ?></legend>
+           <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Detail Data') ?></legend>
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo __('Basic') ?></a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo __('Action') ?></th>
-                  <th><?php echo __('Action Id') ?>#</th>
-                  <th><?php echo __('Seq Number') ?></th>
-                  <th><?php echo __('Action Type') ?></th>
-                  <th><?php echo __('Role') ?></th>
-                  <th><?php echo __('User') ?></th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Action Id') ?>#</th>
+                  <th><?php echo gettext('Seq Number') ?></th>
+                  <th><?php echo gettext('Action Type') ?></th>
+                  <th><?php echo gettext('Role') ?></th>
+                  <th><?php echo gettext('User') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -177,11 +177,11 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Next Seq On Pass') ?></th>
-        <th><?php echo __('Next Seq If Fail') ?></th>
-        <th><?php echo __('Next Seq On Return') ?>#</th>
-        <th><?php echo __('Activity Path') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Next Seq On Pass') ?></th>
+        <th><?php echo gettext('Next Seq If Fail') ?></th>
+        <th><?php echo gettext('Next Seq On Return') ?>#</th>
+        <th><?php echo gettext('Activity Path') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

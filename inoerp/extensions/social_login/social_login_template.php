@@ -3,7 +3,7 @@
  <!--    End of place for showing error messages-->
  <div id ="form_header">
   <form  method="post" id="extn_social_login" name="extn_social_login"  >
-   <span class="heading"><?php echo __('Social Log In') ?></span>
+   <span class="heading"><?php echo gettext('Social Log In') ?></span>
    <div class="tabContainer"> 
     <ul class="column header_field two_column_form"> 
      <li><?php $f->l_text_field_dr_withSearch('extn_social_login_id') ?>

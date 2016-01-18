@@ -7,7 +7,7 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="hr_attendance"  name="hr_attendance">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo __('HR attendance') ?></span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('HR attendance') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
        <li><a href="#tabsLine-1">Basics</a></li>
@@ -17,14 +17,14 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Id') ?></th>
-           <th><?php echo __('Date') ?></th>
-           <th><?php echo __('Punch In') ?></th>
-           <th><?php echo __('Punch In Note') ?></th>
-           <th><?php echo __('Punch Out') ?></th>
-           <th><?php echo __('Punch Out Note') ?></th>
-           <th><?php echo __('Description') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Id') ?></th>
+           <th><?php echo gettext('Date') ?></th>
+           <th><?php echo gettext('Punch In') ?></th>
+           <th><?php echo gettext('Punch In Note') ?></th>
+           <th><?php echo gettext('Punch Out') ?></th>
+           <th><?php echo gettext('Punch Out Note') ?></th>
+           <th><?php echo gettext('Description') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

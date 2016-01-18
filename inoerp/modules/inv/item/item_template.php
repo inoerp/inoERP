@@ -2,15 +2,15 @@
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Assignment') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Revisions') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Category') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Catalog') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-8"><?php echo __('Image') ?></a></li>
-    <li><a href="#tabsHeader-9"><?php echo __('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Assignment') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Revisions') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Category') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Catalog') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-8"><?php echo gettext('Image') ?></a></li>
+    <li><a href="#tabsHeader-9"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -24,11 +24,11 @@
        ?> 
       </li>
       <li>
-       <label><?php echo __('Item Id') ?></label><?php $f->text_field_dsr('item_id') ?>
+       <label><?php echo gettext('Item Id') ?></label><?php $f->text_field_dsr('item_id') ?>
        <i class="select_item_number select_popup clickable fa fa-search"></i>
        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><label><?php echo __('Item Number') ?>&nbsp; <i class="disable_autocomplete item_number clickable fa fa-plus"></i> 
+      <li><label><?php echo gettext('Item Number') ?>&nbsp; <i class="disable_autocomplete item_number clickable fa fa-plus"></i> 
        </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas, 'Enter Item Number To Serach', 'Click on the + sign before this field to enter a new item'); ?>
        <i class="select_item_number select_popup clickable fa fa-search"></i>
        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number">
@@ -54,17 +54,17 @@
          <table class="form_line_data_table">
           <thead> 
            <tr>
-            <th><?php echo __('Action') ?></th>
-            <th><?php echo __('Seq') ?>#</th>
-            <th><?php echo __('Line Id') ?></th>
-            <th><?php echo __('Revision') ?></th>
-            <th><?php echo __('Description') ?></th>
-            <th><?php echo __('Reason') ?></th>
-            <th><?php echo __('ECO') ?></th>
-            <th class='two_lines'><?php echo __('Eff. Start Date') ?></th>
-            <th class='two_lines'><?php echo __('End Date') ?></th>
-            <th class='two_lines'><?php echo __('Implementation Date') ?></th>
-            <th class='two_lines'><?php echo __('Origination Date') ?></th>
+            <th><?php echo gettext('Action') ?></th>
+            <th><?php echo gettext('Seq') ?>#</th>
+            <th><?php echo gettext('Line Id') ?></th>
+            <th><?php echo gettext('Revision') ?></th>
+            <th><?php echo gettext('Description') ?></th>
+            <th><?php echo gettext('Reason') ?></th>
+            <th><?php echo gettext('ECO') ?></th>
+            <th class='two_lines'><?php echo gettext('Eff. Start Date') ?></th>
+            <th class='two_lines'><?php echo gettext('End Date') ?></th>
+            <th class='two_lines'><?php echo gettext('Implementation Date') ?></th>
+            <th class='two_lines'><?php echo gettext('Origination Date') ?></th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody">
@@ -113,7 +113,7 @@
     </div>
     <div id="tabsHeader-4" class="tabContent">
      <div class="category-div">
-      <span class="heading"><?php echo __('Categories'); ?></span>
+      <span class="heading"><?php echo gettext('Categories'); ?></span>
       <div class="existing-category"><?php echo!empty($category) ? category::category_stmt($category) : ''; ?></div>
       <div class="add-category"><?php echo $categoriey_select_option; ?></div>
      </div>
@@ -157,7 +157,7 @@
       <ul class="column four_column">
        
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_template select_popup clickable">
-         <?php echo __('Item/Template') ?>: </label><input type="text" class="text_field select_item_template item_template" id="item_template">
+         <?php echo gettext('Item/Template') ?>: </label><input type="text" class="text_field select_item_template item_template" id="item_template">
          <?php echo $f->hidden_field_withId('template_item_id', '') ?>
         <button class="button non_clickable apply_item_template btn btn-warning" id="apply_item_template">Apply</button>
        </li>
@@ -171,15 +171,15 @@
  <div id ="form_line" class="form_line"><span class="heading"> Item Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Inventory') ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Sales') ?></a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Purchasing') ?></a></li>
-    <li><a href="#tabsLine-5"><?php echo __('Manufacturing') ?></a></li>
-    <li><a href="#tabsLine-6"><?php echo __('Planning') ?></a></li>
-    <li><a href="#tabsLine-7"><?php echo __('Control') ?></a></li>
-    <li><a href="#tabsLine-8"><?php echo __('Financial') ?></a></li>
-    <li><a href="#tabsLine-9"><?php echo __('Secondary') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Inventory') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Sales') ?></a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Purchasing') ?></a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('Manufacturing') ?></a></li>
+    <li><a href="#tabsLine-6"><?php echo gettext('Planning') ?></a></li>
+    <li><a href="#tabsLine-7"><?php echo gettext('Control') ?></a></li>
+    <li><a href="#tabsLine-8"><?php echo gettext('Financial') ?></a></li>
+    <li><a href="#tabsLine-9"><?php echo gettext('Secondary') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
@@ -194,7 +194,7 @@
 
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Long Description') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Long Description') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php echo form::text_area('long_description', $item->long_description, '5', '30', ''); ?></li>
@@ -202,7 +202,7 @@
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy large_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Lead Time Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Lead Time Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_text_field_d('pre_processing_lt'); ?></li>
@@ -236,7 +236,7 @@
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Lot Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Lot Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_select_field_from_array('lot_uniqueness', item::$ls_uniqueness_a, $$class->lot_uniqueness); ?>   </li>
@@ -247,7 +247,7 @@
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Serial Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Serial Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_select_field_from_array('serial_uniqueness', item::$ls_uniqueness_a, $$class->serial_uniqueness); ?>         </li>
@@ -258,7 +258,7 @@
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Measurement Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Measurement Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_select_field_from_object('weight_uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->weight_uom_id, 'weight_uom_id', '', '', $readonly); ?></li>
@@ -288,7 +288,7 @@
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Rule Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Rule Information') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_text_field_d('atp'); ?></li>
@@ -306,7 +306,7 @@
        <li><?php $f->l_checkBox_field_d('purchased_cb'); ?></li>
        <li><?php $f->l_checkBox_field_d('use_asl_cb'); ?></li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_popup select_sourcing_rule clickable">
-         <?php echo __('Sourcing Rule') ?></label><?php $f->text_field_d('sourcing_rule') ?></li>
+         <?php echo gettext('Sourcing Rule') ?></label><?php $f->text_field_d('sourcing_rule') ?></li>
        <li><?php $f->l_text_field_d('invoice_matching'); ?></li>
        <li><?php $f->l_text_field_d('default_buyer'); ?></li>
        <li><?php $f->l_text_field_d('list_price'); ?></li>
@@ -344,7 +344,7 @@
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy large_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo __('Cost Information') ?></div></div>
+       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Cost Information') ?></div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_checkBox_field_d('costing_enabled_cb'); ?></li>
@@ -369,7 +369,7 @@
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Order Modifiers') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Order Modifiers') ?></div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_number_field_d('fix_order_quantity'); ?></li>
@@ -382,7 +382,7 @@
       </div>
 
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Time Fences') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Time Fences') ?></div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_text_field_d('demand_timefence'); ?></li>
@@ -394,7 +394,7 @@
       </div>
 
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Min Max Planning') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Min Max Planning') ?></div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_number_field_d('minmax_min_quantity'); ?></li>
@@ -418,7 +418,7 @@
       </ul>
      </div>
      <div class="panel panel-collapse panel-ino-classy medium_box">
-      <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Asset Maintenance') ?></div></div>
+      <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Asset Maintenance') ?></div></div>
       <div class="panel-body">
        <ul class="column line_field">
         <li><?php $f->l_select_field_from_object('am_activity_cause', am_asset_activity::activity_cause(), 'option_line_code', 'option_line_value', $$class->am_activity_cause); ?></li>
@@ -429,7 +429,7 @@
 
      </div>
      <div class="panel panel-collapse panel-ino-classy medium_box">
-      <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Safety Stock') ?></div></div>
+      <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Safety Stock') ?></div></div>
       <div class="panel-body">
        <ul class="column line_field">
         <li><?php $f->l_number_field_d('saftey_stock_quantity'); ?></li>
@@ -440,7 +440,7 @@
 
      </div>
      <div class="panel panel-collapse panel-ino-classy medium_box">
-      <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Service') ?></div></div>
+      <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Service') ?></div></div>
       <div class="panel-body">
        <ul class="column line_field">
         <li><?php $f->l_checkBox_field_d('service_request_cb'); ?></li>

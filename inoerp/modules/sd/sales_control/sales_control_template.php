@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo __('Sales Control') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Sales Control') ?></span>
  <form method="post" id="sd_sales_control"  name="sd_sales_control">
   <div class="tabContainer">
    <ul class="column header_field">
@@ -17,19 +17,19 @@ inoERP
     </li>
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Defaulting Rules') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Future Rules') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Defaulting Rules') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future Rules') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div> 
        <ul class="column header_field"> 
         <li><?php $f->l_select_field_from_object('mdm_price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->mdm_price_list_header_id); ?>        </li>
-        <li><label><?php echo __('Default Order Type') ?></label><?php echo $f->select_field_from_object('h_default_document_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class->h_default_document_type_id, 'h_default_document_type_id', '', '', $readonly); ?></li>
-        <li><label><?php echo __('Default Line Type') ?></label><?php echo $f->select_field_from_object('l_default_document_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class->l_default_document_type_id, 'h_default_document_type_id', '', '', $readonly); ?></li>
+        <li><label><?php echo gettext('Default Order Type') ?></label><?php echo $f->select_field_from_object('h_default_document_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class->h_default_document_type_id, 'h_default_document_type_id', '', '', $readonly); ?></li>
+        <li><label><?php echo gettext('Default Line Type') ?></label><?php echo $f->select_field_from_object('l_default_document_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class->l_default_document_type_id, 'h_default_document_type_id', '', '', $readonly); ?></li>
         <li><?php $f->l_checkBox_field_d('default_requested_date_cb') ?>  </li>
         <li><?php $f->l_checkBox_field_d('default_schedule_ship_date_cb') ?></li>
         <li><?php $f->l_checkBox_field_d('default_promise_date_cb') ?> </li>

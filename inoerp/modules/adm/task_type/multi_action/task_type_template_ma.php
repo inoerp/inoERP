@@ -5,25 +5,25 @@
 
   <div id="searchResult">
    <form  method="post" id="adm_task_type"  name="adm_task_type">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Task Type') ?></span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Task Type') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-       <li><a href="#tabsLine-2"><?php echo __('Details') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Details') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Task Type Id') ?></th>
-           <th><?php echo __('Task Type') ?></th>
-           <th><?php echo __('Description') ?></th>
-           <th><?php echo __('Access Level') ?></th>
-           <th><?php echo __('From Date') ?></th>
-           <th><?php echo __('To Date') ?></th>
-           <th><?php echo __('Process Flow') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Task Type Id') ?></th>
+           <th><?php echo gettext('Task Type') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Access Level') ?></th>
+           <th><?php echo gettext('From Date') ?></th>
+           <th><?php echo gettext('To Date') ?></th>
+           <th><?php echo gettext('Process Flow') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -60,11 +60,11 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Details') ?>Task Type Id</th>
-           <th><?php echo __('Details') ?>Auto Notification</th>
-           <th><?php echo __('Details') ?>Schedule</th>
-           <th><?php echo __('Details') ?>Effort UOM</th>
-           <th><?php echo __('Details') ?>Effort Value</th>
+           <th><?php echo gettext('Details') ?>Task Type Id</th>
+           <th><?php echo gettext('Details') ?>Auto Notification</th>
+           <th><?php echo gettext('Details') ?>Schedule</th>
+           <th><?php echo gettext('Details') ?>Effort UOM</th>
+           <th><?php echo gettext('Details') ?>Effort Value</th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

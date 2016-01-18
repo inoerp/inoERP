@@ -1,31 +1,31 @@
 <div class="row small-left-padding">
  <form  method="post" id="gl_currency_conversion_line"  name="currency_conversion_line">
-  <span class="heading"><?php echo __('Currency Conversions') ?></span>
+  <span class="heading"><?php echo gettext('Currency Conversions') ?></span>
   <div id="form_serach_header" class="tabContainer">
    <?php $f->l_select_field_from_object('currency_conversion_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_value', $currency_conversion_type_h, 'currency_conversion_type', '', 1); ?>
    <a name="show" href="form.php?class_name=gl_currency_conversion&<?php echo "mode=$mode"; ?>" class="show document_id gl_currency_conversion_id">
     <i class="fa fa-refresh"></i></a> 
   </div> 
   <div id ="form_line" class="gl_currency_conversion"><span class="heading">
-    <?php echo __('Conversion Details') ?></span>
+    <?php echo gettext('Conversion Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Rates') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Rates') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Id') ?>#</th>
-         <th><?php echo __('From Currency') ?></th>
-         <th><?php echo __('To Currency') ?>#</th>
-         <th><?php echo __('Start Date') ?></th>
-         <th><?php echo __('End Date') ?></th>
-         <th><?php echo __('Rate') ?></th>
-         <th><?php echo __('Use Reverse Conversion') ?></th>
-         <th><?php echo __('Description') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Id') ?>#</th>
+         <th><?php echo gettext('From Currency') ?></th>
+         <th><?php echo gettext('To Currency') ?>#</th>
+         <th><?php echo gettext('Start Date') ?></th>
+         <th><?php echo gettext('End Date') ?></th>
+         <th><?php echo gettext('Rate') ?></th>
+         <th><?php echo gettext('Use Reverse Conversion') ?></th>
+         <th><?php echo gettext('Description') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody currency_conversion_values" >

@@ -3,16 +3,16 @@ if (!isset($readonly1)) {
  $readonly1 = $readonly;
 }
 ?>
-<span class="heading-right"><?php echo __('Journal Header') ?></span>
+<span class="heading-right"><?php echo gettext('Journal Header') ?></span>
 <div id ="form_header">
  <form method="post" id="gl_journal_header"  name="gl_journal_header">
   
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Reference Details') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Reference Details') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -37,7 +37,7 @@ if (!isset($readonly1)) {
     <div id="tabsHeader-2" class="tabContent">
      <div class="vertical-align-top">
       <div class="panel panel-collapse panel-ino-classy large_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Rate & Amounts') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Rate & Amounts') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_select_field_from_object('exchange_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_type, 'exchange_type', '', '', $readonly); ?></li>
@@ -51,7 +51,7 @@ if (!isset($readonly1)) {
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy medium_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('References') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('References') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_select_field_from_object('journal_source', option_header::find_options_byName('GL_JOURNAL_SOURCE'), 'option_line_code', 'option_line_value', $$class->journal_source, 'journal_source', '', 1) ?>				</li>
@@ -59,7 +59,7 @@ if (!isset($readonly1)) {
          <li><?php $f->l_text_field_d('reference_type'); ?></li>
          <li><?php $f->l_text_field_d('reference_key_name'); ?></li>
          <li><?php $f->l_text_field_d('reference_key_value'); ?></li>
-         <li><label><?php echo __('View Ref Doc') ?></label><?php echo $ref_doc_stmt; ?></li>
+         <li><label><?php echo gettext('View Ref Doc') ?></label><?php echo $ref_doc_stmt; ?></li>
         </ul>
        </div>
       </div>
@@ -89,11 +89,11 @@ if (!isset($readonly1)) {
  </form>
 </div>
 
-<div id ="form_line" class="gl_journal_line"><span class="heading"><?php echo __('Journal Lines') ?></span>
+<div id ="form_line" class="gl_journal_line"><span class="heading"><?php echo gettext('Journal Lines') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-   <li><a href="#tabsLine-2"><?php echo __('Other Info') ?></a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Other Info') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <form  method="post" id="gl_journal_line"  name="gl_journal_line">
@@ -101,16 +101,16 @@ if (!isset($readonly1)) {
      <table class="form_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Line #') ?></th>
-        <th><?php echo __('Account') ?></th>
-        <th><?php echo __('Debit') ?></th>
-        <th><?php echo __('Credit') ?></th>
-        <th><?php echo __('Ledger Dr') ?></th>
-        <th><?php echo __('Ledger Cr') ?></th>
-        <th><?php echo __('Status') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line #') ?></th>
+        <th><?php echo gettext('Account') ?></th>
+        <th><?php echo gettext('Debit') ?></th>
+        <th><?php echo gettext('Credit') ?></th>
+        <th><?php echo gettext('Ledger Dr') ?></th>
+        <th><?php echo gettext('Ledger Cr') ?></th>
+        <th><?php echo gettext('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody gl_journal_line_values" >
@@ -150,11 +150,11 @@ if (!isset($readonly1)) {
      <table class="form_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('Ref Type') ?></th>
-        <th><?php echo __('Ref Key Name') ?></th>
-        <th><?php echo __('Ref Value') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Ref Type') ?></th>
+        <th><?php echo gettext('Ref Key Name') ?></th>
+        <th><?php echo gettext('Ref Value') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody gl_journal_line_values" >

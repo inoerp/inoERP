@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo __('Payable Control') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Payable Control') ?></span>
  <form method="post" id="ap_payable_control"  name="ap_payable_control">
   <div class="tabContainer">
    <ul class="column header_field">
@@ -17,11 +17,11 @@ inoERP
     </li>
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Control Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Control Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Payable Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Accounts') ?> </a></li>      
+     <li><a href="#tabsLine-1"><?php echo gettext('Payable Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Accounts') ?> </a></li>      
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

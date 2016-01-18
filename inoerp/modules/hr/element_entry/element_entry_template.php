@@ -1,10 +1,10 @@
 <!--    End of place for showing error messages-->
 <div id ="form_header">
  <form action=""  method="post" id="hr_element_entry_header"  name="hr_element_entry_header">
-  <span class="heading"><?php echo __('Compensation Element Entry') ?></span>
+  <span class="heading"><?php echo gettext('Compensation Element Entry') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -30,24 +30,24 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Element Entry Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Element Entry Lines') ?></span>
  <form action=""  method="post" id="hr_element_entry_line"  name="hr_element_entry_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Element Name') ?>#</th>
-        <th><?php echo __('Element Value') ?></th>
-        <th><?php echo __('Monetary Value') ?></th>
-        <th><?php echo __('Inactive Date') ?></th>
-        <th><?php echo __('Description') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Element Name') ?>#</th>
+        <th><?php echo gettext('Element Value') ?></th>
+        <th><?php echo gettext('Monetary Value') ?></th>
+        <th><?php echo gettext('Inactive Date') ?></th>
+        <th><?php echo gettext('Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

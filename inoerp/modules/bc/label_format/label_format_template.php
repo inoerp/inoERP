@@ -1,10 +1,10 @@
 <div id ="form_header">
  <form method="post" id="bc_label_format_header"  name="bc_label_format_header">
-  <span class="heading"><?php echo __('Barcode Label Format') ?></span>
+  <span class="heading"><?php echo gettext('Barcode Label Format') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Data Object') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Data Object') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -33,24 +33,24 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Template Fields') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Template Fields') ?></span>
  <form method="post" id="bc_label_format_line"  name="bc_label_format_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Object/Table Name') ?></th>
-        <th><?php echo __('Sys Field Name') ?></th>
-        <th><?php echo __('Field Name') ?></th>
-        <th><?php echo __('Field Description') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Object/Table Name') ?></th>
+        <th><?php echo gettext('Sys Field Name') ?></th>
+        <th><?php echo gettext('Field Name') ?></th>
+        <th><?php echo gettext('Field Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

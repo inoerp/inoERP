@@ -1,8 +1,8 @@
 <div id ="form_header">
- <span class="heading"><?php echo __('Rating Values Header') ?></span>
+ <span class="heading"><?php echo gettext('Rating Values Header') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
   </ul>
   <div class="tabContainer">
    <form action=""  method="post" id="extn_rating_values"  name="extn_rating_values">

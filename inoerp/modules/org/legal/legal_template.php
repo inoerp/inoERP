@@ -1,12 +1,12 @@
-<span class="heading"><?php echo __('Legal Org Header') ?></span>
+<span class="heading"><?php echo gettext('Legal Org Header') ?></span>
 <div id ="form_header">
  <form action=""  method="post" id="legal"  name="legal">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -46,11 +46,11 @@
    </div>
   </div>
   <div id ="form_line" class="form_line">
-   <span class="heading"><?php echo __('Legal Org Details') ?></span>
+   <span class="heading"><?php echo gettext('Legal Org Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Ledger Details') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Ledger Details') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
@@ -71,7 +71,7 @@
      <div id="tabsLine-2" class="tabContent">
       <ul class="column header_field" > 
         <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '' , '' , $readonly) ?>        </li> 
-        <li><label><?php echo __('Balancing Segments') ?></label> 
+        <li><label><?php echo gettext('Balancing Segments') ?></label> 
          <?php echo form::text_field('balancing_segments', $$class->balancing_segments, 90, '', '', '', '', 1); ?>
         </li> 
        </ul>

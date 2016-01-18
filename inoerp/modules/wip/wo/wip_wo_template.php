@@ -9,16 +9,16 @@ inoERP
 
 <div id="wip_wo_divId">
  <div id="form_all">
-  <div id ="form_header">	 <span class="heading"><?php echo __('Work Order Header') ?></span>
+  <div id ="form_header">	 <span class="heading"><?php echo gettext('Work Order Header') ?></span>
    <form method="post" id="wip_wo_header"  name="wip_wo_header">
     <div id="tabsHeader">
      <ul class="tabMain">
-      <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-      <li><a href="#tabsHeader-2"><?php echo __('Planning') ?></a></li>
-      <li><a href="#tabsHeader-3"><?php echo __('History') ?></a></li>
-      <li><a href="#tabsHeader-4"><?php echo __('BOM & Routing') ?></a></li>
-      <li><a href="#tabsHeader-5"><?php echo __('Notes') ?></a></li>
-      <li><a href="#tabsHeader-6"><?php echo __('Attachments') ?></a></li>
+      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+      <li><a href="#tabsHeader-2"><?php echo gettext('Planning') ?></a></li>
+      <li><a href="#tabsHeader-3"><?php echo gettext('History') ?></a></li>
+      <li><a href="#tabsHeader-4"><?php echo gettext('BOM & Routing') ?></a></li>
+      <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
+      <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
@@ -42,7 +42,7 @@ inoERP
         <li><?php $f->l_text_field_d('item_description'); ?></li>
         <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', 'uom_id', '', $readonly1); ?>         </li>
         <li><?php $f->l_select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class->revision_name, 'revision_name', ''); ?> </li>
-        <li><label><?php echo __('Status') ?></label>                      
+        <li><label><?php echo gettext('Status') ?></label>                      
          <?php echo!empty($$class->wo_status) ? $$class->wo_status : ""; ?>
         </li>
        </ul>
@@ -111,14 +111,14 @@ inoERP
     </div>
    </form>
   </div>
-  <span class="heading"><?php echo __('Work Order Details') ?></span>
+  <span class="heading"><?php echo gettext('Work Order Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Routing') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Routing-2') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Routing - Data Collection') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('BOM') ?></a></li>
-    <li><a href="#tabsLine-5"><?php echo __('BOM-2') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Routing') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Routing-2') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Routing - Data Collection') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('BOM') ?></a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('BOM-2') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form  method="post" id="wip_wo_routing_line"  name="wip_wo_routing_line">
@@ -127,16 +127,16 @@ inoERP
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo __('Action') ?></th>
-          <th><?php echo __('WO Routing Id') ?></th>
-          <th><?php echo __('BOM Sequence') ?></th>
-          <th><?php echo __('Department') ?></th>
-          <th><?php echo __('Description') ?></th>
-          <th><?php echo __('Count Point') ?></th>
-          <th><?php echo __('Auto Charge') ?></th>
-          <th><?php echo __('Back flush') ?></th>
-          <th><?php echo __('MTQ') ?></th>
-          <th><?php echo __('Resource Details') ?></th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('WO Routing Id') ?></th>
+          <th><?php echo gettext('BOM Sequence') ?></th>
+          <th><?php echo gettext('Department') ?></th>
+          <th><?php echo gettext('Description') ?></th>
+          <th><?php echo gettext('Count Point') ?></th>
+          <th><?php echo gettext('Auto Charge') ?></th>
+          <th><?php echo gettext('Back flush') ?></th>
+          <th><?php echo gettext('MTQ') ?></th>
+          <th><?php echo gettext('Resource Details') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody wip_wo_routing_line_values" >
@@ -185,16 +185,16 @@ inoERP
                  <table class="form form_detail_data_table detail">
                   <thead>
                    <tr>
-                    <th><?php echo __('Action') ?></th>
-                    <th><?php echo __('DetailId') ?></th>
-                    <th><?php echo __('Resource Sequence') ?></th>
-                    <th><?php echo __('Resource') ?></th>
-                    <th><?php echo __('Usage Basis') ?></th>
-                    <th><?php echo __('Usage') ?></th>
-                    <th><?php echo __('Schedule') ?></th>
-                    <th><?php echo __('Units') ?></th>
-                    <th><?php echo __('Rate') ?></th>
-                    <th><?php echo __('Charge Type') ?></th>
+                    <th><?php echo gettext('Action') ?></th>
+                    <th><?php echo gettext('DetailId') ?></th>
+                    <th><?php echo gettext('Resource Sequence') ?></th>
+                    <th><?php echo gettext('Resource') ?></th>
+                    <th><?php echo gettext('Usage Basis') ?></th>
+                    <th><?php echo gettext('Usage') ?></th>
+                    <th><?php echo gettext('Schedule') ?></th>
+                    <th><?php echo gettext('Units') ?></th>
+                    <th><?php echo gettext('Rate') ?></th>
+                    <th><?php echo gettext('Charge Type') ?></th>
                    </tr>
                   </thead>
                   <tbody class="form_data_detail_tbody">
@@ -230,9 +230,9 @@ inoERP
                  <table class="form form_detail_data_table detail">
                   <thead>
                    <tr>
-                    <th><?php echo __('Required Qty') ?></th>
-                    <th><?php echo __('Applied Qty') ?></th>
-                    <th><?php echo __('Open Qty') ?></th>
+                    <th><?php echo gettext('Required Qty') ?></th>
+                    <th><?php echo gettext('Applied Qty') ?></th>
+                    <th><?php echo gettext('Open Qty') ?></th>
                    </tr>
                   </thead>
                   <tbody class="form_data_detail_tbody">
@@ -274,14 +274,14 @@ inoERP
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo __('Queue') ?></th>
-          <th><?php echo __('Running') ?></th>
-          <th><?php echo __('Rejected') ?></th>
-          <th><?php echo __('Scrapped') ?></th>
-          <th><?php echo __('To Move') ?></th>
-          <th><?php echo __('Start Date') ?></th>
-          <th><?php echo __('Completion Date') ?></th>
-          <th><?php echo __('Progress') ?>%</th>
+          <th><?php echo gettext('Queue') ?></th>
+          <th><?php echo gettext('Running') ?></th>
+          <th><?php echo gettext('Rejected') ?></th>
+          <th><?php echo gettext('Scrapped') ?></th>
+          <th><?php echo gettext('To Move') ?></th>
+          <th><?php echo gettext('Start Date') ?></th>
+          <th><?php echo gettext('Completion Date') ?></th>
+          <th><?php echo gettext('Progress') ?>%</th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody wip_wo_routing_line_values" >
@@ -327,17 +327,17 @@ inoERP
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo __('Action') ?></th>
-          <th><?php echo __('WO BOM Id') ?></th>
-          <th><?php echo __('BOM Sequence') ?></th>
-          <th><?php echo __('Routing Seq') ?></th>
-          <th><?php echo __('Item Id') ?></th>
-          <th><?php echo __('Item Number') ?></th>
-          <th><?php echo __('Revision') ?></th>
-          <th><?php echo __('Item Description') ?></th>
-          <th><?php echo __('UOM') ?></th>
-          <th><?php echo __('Usage Basis') ?></th>
-          <th><?php echo __('Quantity') ?></th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('WO BOM Id') ?></th>
+          <th><?php echo gettext('BOM Sequence') ?></th>
+          <th><?php echo gettext('Routing Seq') ?></th>
+          <th><?php echo gettext('Item Id') ?></th>
+          <th><?php echo gettext('Item Number') ?></th>
+          <th><?php echo gettext('Revision') ?></th>
+          <th><?php echo gettext('Item Description') ?></th>
+          <th><?php echo gettext('UOM') ?></th>
+          <th><?php echo gettext('Usage Basis') ?></th>
+          <th><?php echo gettext('Quantity') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
@@ -390,13 +390,13 @@ inoERP
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo __('Required') ?></th>
-          <th><?php echo __('Issued') ?></th>
-          <th><?php echo __('Open') ?></th>
-          <th><?php echo __('Onhand') ?></th>
-          <th><?php echo __('Supply Type') ?></th>
-          <th><?php echo __('Sub inventory') ?></th>
-          <th><?php echo __('Locator') ?></th>
+          <th><?php echo gettext('Required') ?></th>
+          <th><?php echo gettext('Issued') ?></th>
+          <th><?php echo gettext('Open') ?></th>
+          <th><?php echo gettext('Onhand') ?></th>
+          <th><?php echo gettext('Supply Type') ?></th>
+          <th><?php echo gettext('Sub inventory') ?></th>
+          <th><?php echo gettext('Locator') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody2 wip_wo_bom_values" >

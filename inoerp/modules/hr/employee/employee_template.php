@@ -1,14 +1,14 @@
 <div id ="form_header">
  <form action=""  method="post" id="hr_employee"  name="hr_employee">
-  <span class="heading"><?php echo __('Employee Header') ?></span>
+  <span class="heading"><?php echo gettext('Employee Header') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Personal') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Contact') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-5"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Personal') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Contact') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -77,16 +77,16 @@
     </div>
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Employee Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Employee Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Assignments') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Financial Info') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo __('Education') ?> </a></li>
-     <li><a href="#tabsLine-4"><?php echo __('Work Experience') ?> </a></li>
-     <li><a href="#tabsLine-5"><?php echo __('On Boarding') ?></a></li>
-     <li><a href="#tabsLine-6"><?php echo __('Exit') ?> </a></li>
-     <li><a href="#tabsLine-7"><?php echo __('Job History') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Assignments') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Financial Info') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Education') ?> </a></li>
+     <li><a href="#tabsLine-4"><?php echo gettext('Work Experience') ?> </a></li>
+     <li><a href="#tabsLine-5"><?php echo gettext('On Boarding') ?></a></li>
+     <li><a href="#tabsLine-6"><?php echo gettext('Exit') ?> </a></li>
+     <li><a href="#tabsLine-7"><?php echo gettext('Job History') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
@@ -97,7 +97,7 @@
         <li><?php $f->l_select_field_from_object('grade_id', hr_grade::find_all(), 'hr_grade_id', 'grade', $$class->grade_id, 'grade_id'); ?></li>
         <li><?php $f->l_select_field_from_object('payroll_id', hr_payroll::find_all(), 'hr_payroll_id', 'payroll', $$class->payroll_id, 'payroll_id'); ?>  </li>
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supervisor_employee_id select_popup clickable">
-          <?php echo __('Supervisor') ?></label><?php
+          <?php echo gettext('Supervisor') ?></label><?php
          $f->text_field_d('supervisor_employee_name');
          echo $f->hidden_field_withId('supervisor_employee_id', $$class->supervisor_employee_id);
          ?> 					</li>
@@ -119,24 +119,24 @@
      <div id="tabsLine-3"  class="tabContent">
       <div class="tabsDetail">
        <ul class="tabMain">
-        <li><a href="#tabsLine-11"><?php echo __('Basic Info') ?></a></li>
-        <li><a href="#tabsLine-12"><?php echo __('Details Info') ?></a></li>
+        <li><a href="#tabsLine-11"><?php echo gettext('Basic Info') ?></a></li>
+        <li><a href="#tabsLine-12"><?php echo gettext('Details Info') ?></a></li>
        </ul>
        <div class="tabContainer"> 
         <div id="tabsLine-11" class="tabContent">
          <table class="form_table">
           <thead> 
            <tr>
-            <th><?php echo __('Action') ?></th>
-            <th><?php echo __('Seq') ?>#</th>
-            <th><?php echo __('Line Id') ?></th>
-            <th><?php echo __('Degree Name') ?>#</th>
-            <th><?php echo __('University') ?></th>
-            <th><?php echo __('Start Date') ?></th>
-            <th><?php echo __('End Date') ?></th>
-            <th><?php echo __('Mode') ?></th>
-            <th><?php echo __('Percentage') ?></th>
-            <th><?php echo __('Grade') ?></th>
+            <th><?php echo gettext('Action') ?></th>
+            <th><?php echo gettext('Seq') ?>#</th>
+            <th><?php echo gettext('Line Id') ?></th>
+            <th><?php echo gettext('Degree Name') ?>#</th>
+            <th><?php echo gettext('University') ?></th>
+            <th><?php echo gettext('Start Date') ?></th>
+            <th><?php echo gettext('End Date') ?></th>
+            <th><?php echo gettext('Mode') ?></th>
+            <th><?php echo gettext('Percentage') ?></th>
+            <th><?php echo gettext('Grade') ?></th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody employee_education_values" >
@@ -178,10 +178,10 @@
          <table class="form_table">
           <thead> 
            <tr>
-            <th><?php echo __('Seq') ?>#</th>
-            <th><?php echo __('Specialization') ?></th>
-            <th><?php echo __('University Address') ?>#</th>
-            <th><?php echo __('Notes') ?></th>
+            <th><?php echo gettext('Seq') ?>#</th>
+            <th><?php echo gettext('Specialization') ?></th>
+            <th><?php echo gettext('University Address') ?>#</th>
+            <th><?php echo gettext('Notes') ?></th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody employee_education_values" >
@@ -212,24 +212,24 @@
      <div id="tabsLine-4"  class="tabContent">
       <div class="tabsDetail">
        <ul class="tabMain">
-        <li><a href="#tabsLine-21"><?php echo __('Basic') ?></a></li>
-        <li><a href="#tabsLine-22"><?php echo __('Details') ?></a></li>
+        <li><a href="#tabsLine-21"><?php echo gettext('Basic') ?></a></li>
+        <li><a href="#tabsLine-22"><?php echo gettext('Details') ?></a></li>
        </ul>
        <div class="tabContainer"> 
         <div id="tabsLine-21" class="tabContent">
          <table class="form_table">
           <thead> 
            <tr>
-            <th><?php echo __('Action') ?></th>
-            <th><?php echo __('Seq') ?>#</th>
-            <th><?php echo __('Line Id') ?></th>
-            <th><?php echo __('Organization Name') ?>#</th>
-            <th><?php echo __('Designation') ?></th>
-            <th><?php echo __('Start Date') ?></th>
-            <th><?php echo __('End Date') ?></th>
-            <th><?php echo __('Employee') ?>#</th>
-            <th><?php echo __('Department') ?></th>
-            <th><?php echo __('Last Manager') ?>#</th>
+            <th><?php echo gettext('Action') ?></th>
+            <th><?php echo gettext('Seq') ?>#</th>
+            <th><?php echo gettext('Line Id') ?></th>
+            <th><?php echo gettext('Organization Name') ?>#</th>
+            <th><?php echo gettext('Designation') ?></th>
+            <th><?php echo gettext('Start Date') ?></th>
+            <th><?php echo gettext('End Date') ?></th>
+            <th><?php echo gettext('Employee') ?>#</th>
+            <th><?php echo gettext('Department') ?></th>
+            <th><?php echo gettext('Last Manager') ?>#</th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody2 employee_experience_values" >
@@ -271,10 +271,10 @@
          <table class="form_table">
           <thead> 
            <tr>
-            <th><?php echo __('Seq') ?>#</th>
-            <th><?php echo __('Last Salary') ?></th>
-            <th><?php echo __('Communication Details') ?></th>
-            <th><?php echo __('Projects') ?>#</th>
+            <th><?php echo gettext('Seq') ?>#</th>
+            <th><?php echo gettext('Last Salary') ?></th>
+            <th><?php echo gettext('Communication Details') ?></th>
+            <th><?php echo gettext('Projects') ?>#</th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody2 employee_experience_values" >

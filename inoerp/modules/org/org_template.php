@@ -1,13 +1,13 @@
 <div id ="form_all">
  <form action=""  method="post" id="org"  name="org">
-  <span class="heading"><?php echo __('Organization') ?></span>
+  <span class="heading"><?php echo gettext('Organization') ?></span>
   <span class="heading"> </span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -52,12 +52,12 @@
 
    </div>
   </div>
-  <span class="heading"><?php echo __('Other Details') ?></span>
+  <span class="heading"><?php echo gettext('Other Details') ?></span>
   <div id ="form_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Address') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Contacts') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Address') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Contacts') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

@@ -1,9 +1,9 @@
 <div id ="form_header">
  <form method="post" id="cc_co_template_header"  name="cc_co_template_header">
-  <span class="heading"><?php echo __('Change Control Template') ?></span>
+  <span class="heading"><?php echo gettext('Change Control Template') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -24,30 +24,30 @@
 </div>
 
 <div id="form_line" class="form_line">
- <span class="heading"><?php echo __('Template Fields') ?></span>
+ <span class="heading"><?php echo gettext('Template Fields') ?></span>
  <form method="post" id="cc_co_template_line"  name="cc_co_template_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('List Values') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('List Values') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Field Name') ?>#</th>
-        <th><?php echo __('Label') ?></th>
-        <th><?php echo __('Value Type') ?></th>
-        <th><?php echo __('Mandatory Field') ?></th>
-        <th><?php echo __('Control Type') ?></th>
-        <th><?php echo __('Control Value') ?></th>
-        <th><?php echo __('Control UOM') ?>#</th>
-        <th><?php echo __('Display Weight') ?></th>
-        <th><?php echo __('Active') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Field Name') ?>#</th>
+        <th><?php echo gettext('Label') ?></th>
+        <th><?php echo gettext('Value Type') ?></th>
+        <th><?php echo gettext('Mandatory Field') ?></th>
+        <th><?php echo gettext('Control Type') ?></th>
+        <th><?php echo gettext('Control Value') ?></th>
+        <th><?php echo gettext('Control UOM') ?>#</th>
+        <th><?php echo gettext('Display Weight') ?></th>
+        <th><?php echo gettext('Active') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -96,11 +96,11 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Lower Limit') ?></th>
-        <th><?php echo __('Upper Limit') ?></th>
-        <th><?php echo __('List Option Type') ?></th>
-        <th><?php echo __('List Values') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Lower Limit') ?></th>
+        <th><?php echo gettext('Upper Limit') ?></th>
+        <th><?php echo gettext('List Option Type') ?></th>
+        <th><?php echo gettext('List Values') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

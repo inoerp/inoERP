@@ -14,8 +14,8 @@
   <?php echo!empty($$class->extn_report_name) ? "Custom Report : " . ucwords(str_replace('_', ' ', $$class->extn_report_name)) : ''; ?></span>
  <div id="tabsDetailA">
   <ul class="tabMain">
-   <li><a href="#tabsDetailA-1"><?php echo __('Result Data') ?></a></li>
-   <li><a href="#tabsDetailA-2"><?php echo __('Result Graph') ?></a></li>
+   <li><a href="#tabsDetailA-1"><?php echo gettext('Result Data') ?></a></li>
+   <li><a href="#tabsDetailA-2"><?php echo gettext('Result Graph') ?></a></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsDetailA-1" class="tabContent">
@@ -37,11 +37,11 @@
       </div>
      </div>
      <ul class="column header_field_small tabContainer">
-      <li><label><?php echo __('Chart Type') ?></label> 
+      <li><label><?php echo gettext('Chart Type') ?></label> 
        <?php echo $f->select_field_from_array('chart_type', getsvgimage::$chart_type_a, $$class->chart_type, 'chart_type'); ?></li>
-      <li><label><?php echo __('Chart Width') ?></label><?php echo $f->number_field('chart_width', $$class->chart_width, '', 'chart_width'); ?></li>
-      <li><label><?php echo __('Chart Height') ?></label><?php echo $f->number_field('chart_height', $$class->chart_height, '', 'chart_height'); ?></li>
-      <li><label><?php echo __('Label Field') ?></label>
+      <li><label><?php echo gettext('Chart Width') ?></label><?php echo $f->number_field('chart_width', $$class->chart_width, '', 'chart_width'); ?></li>
+      <li><label><?php echo gettext('Chart Height') ?></label><?php echo $f->number_field('chart_height', $$class->chart_height, '', 'chart_height'); ?></li>
+      <li><label><?php echo gettext('Label Field') ?></label>
        <?php
        if (!empty($column_list)) {
         echo $f->select_field_from_array('chart_label', $column_list, $$class->chart_label, 'chart_label', 'medium');
@@ -50,7 +50,7 @@
        }
        ?>
       </li>
-      <li><label><?php echo __('Value Field') ?></label>
+      <li><label><?php echo gettext('Value Field') ?></label>
        <?php
        if (!empty($column_list)) {
         echo $f->select_field_from_array('chart_value', $column_list, $$class->chart_value, 'chart_value', 'medium');
@@ -59,7 +59,7 @@
        }
        ?>
       </li>
-      <li><label><?php echo __('Legend') ?></label>
+      <li><label><?php echo gettext('Legend') ?></label>
        <?php
        if (!empty($column_list)) {
         echo $f->select_field_from_array('chart_legend', $column_list, $$class->chart_legend, 'chart_legend', 'medium');
@@ -67,7 +67,7 @@
         echo $f->text_field('chart_legend', $$class->chart_legend);
        }
        ?></li>
-      <li><label><?php echo __('Graph') ?></label><input type="button" value="Draw Chart" class="button display_result draw_svg_image" ></li>
+      <li><label><?php echo gettext('Graph') ?></label><input type="button" value="Draw Chart" class="button display_result draw_svg_image" ></li>
      </ul>
 
     </div>

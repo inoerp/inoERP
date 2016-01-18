@@ -1054,7 +1054,7 @@ function ra_conevrt_data_bar_column_wolegend($data_a, $ignore_empty_value) {
   $ra_data_element = [];
   $count = 0;
   foreach ($data as $key => $val) {
-   if($ignore_empty_value && empty($val)){
+   if ($ignore_empty_value && empty($val)) {
     continue;
    }
    if ($count == 0) {
@@ -1155,7 +1155,6 @@ function search_journal_category() {
  global $f;
  return $f->select_field_from_object('journal_category', option_header::find_options_byName('GL_JOURNAL_CATEGORY'), 'option_line_code', 'option_line_value', '', 'journal_category');
 }
-
 
 function search_show_details_cb() {
  global $f;
@@ -1491,7 +1490,8 @@ function search_project_number_to() {
 }
 
 function search_prj_cost_type_for_distribution() {
- global $f; $f = new inoform();
+ global $f;
+ $f = new inoform();
  $stmt = $f->select_field_from_array('cost_type_for_distribution', prj_expenditure_header::$distribute_cost_type_a, '', 'cost_type_for_distribution');
  return $stmt;
 }
@@ -2019,7 +2019,7 @@ function ino_showWarning_message($msg) {
 
  echo '<div class="alert alert-danger alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
- echo __($msg);
+ echo gettext($msg);
  echo '</div>';
 }
 

@@ -1,15 +1,15 @@
-<div id ="form_header"><span class="heading"><?php   echo __('Service Contract')   ?></span>
+<div id ="form_header"><span class="heading"><?php   echo gettext('Service Contract')   ?></span>
  <form action=""  method="post" id="hd_service_contract_header"  name="hd_service_contract_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Basic-2') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Address') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Finance') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Others') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo __('Notes') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-8"><?php echo __('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Basic-2') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Address') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Others') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-8"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -35,7 +35,7 @@
     <div id="tabsHeader-2" class="tabContent">
      <ul class="column header_field">
       <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
-       <label class="auto_complete"><?php echo __('Customer Name') ?></label>
+       <label class="auto_complete"><?php echo gettext('Customer Name') ?></label>
        <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?>
        <i class="ar_customer_id select_popup clickable fa fa-search"></i>
       </li>
@@ -102,7 +102,7 @@
      <div> 
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_array('transaction_action', $$class->action_a, '', 'transaction_action', '', '', $readonly); ?>       </li>
-       <li id="document_status"><label><?php echo __('Change Status') ?></label>
+       <li id="document_status"><label><?php echo gettext('Change Status') ?></label>
         <?php echo form::select_field_from_object('approval_status', hd_service_contract_header::ar_approval_status(), 'option_line_code', 'option_line_value', $hd_service_contract_header->approval_status, 'set_approval_status', $readonly, '', ''); ?>
        </li>
       </ul>
@@ -118,14 +118,14 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Contract Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Contract Lines') ?></span>
  <form action=""  method="post" id="hd_service_contract_line"  name="hd_service_contract_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Finance') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Renewal') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('References') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Renewal') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('References') ?> </a></li>
 
    </ul>
    <div class="tabContainer">
@@ -133,16 +133,16 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Line') ?>#</th>
-        <th><?php echo __('Type') ?></th>
-        <th><?php echo __('Item Number') ?></th>
-        <th><?php echo __('Item Description') ?></th>
-        <th><?php echo __('UOM') ?></th>
-        <th><?php echo __('Quantity') ?></th>
-        <th><?php echo __('Contract Details') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Type') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Contract Details') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -199,15 +199,15 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo __('Action') ?></th>
-                  <th><?php echo __('Seq') ?></th>
-                  <th><?php echo __('Detail Id') ?></th>
-                  <th><?php echo __('Detail') ?>#</th>
-                  <th><?php echo __('Level') ?></th>
-                  <th><?php echo __('Item') ?></th>
-                  <th><?php echo __('Serial') ?></th>
-                  <th><?php echo __('Start date') ?></th>
-                  <th><?php echo __('End Date') ?></th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Seq') ?></th>
+                  <th><?php echo gettext('Detail Id') ?></th>
+                  <th><?php echo gettext('Detail') ?>#</th>
+                  <th><?php echo gettext('Level') ?></th>
+                  <th><?php echo gettext('Item') ?></th>
+                  <th><?php echo gettext('Serial') ?></th>
+                  <th><?php echo gettext('Start date') ?></th>
+                  <th><?php echo gettext('End Date') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -257,13 +257,13 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo __('Seq') ?></th>
-                  <th><?php echo __('Unit Price') ?></th>
-                  <th><?php echo __('Line Price') ?></th>
-                  <th><?php echo __('Tax Code') ?></th>
-                  <th><?php echo __('Tax Amount') ?></th>
-                  <th><?php echo __('Duration UOM') ?></th>
-                  <th><?php echo __('Duration') ?></th>
+                  <th><?php echo gettext('Seq') ?></th>
+                  <th><?php echo gettext('Unit Price') ?></th>
+                  <th><?php echo gettext('Line Price') ?></th>
+                  <th><?php echo gettext('Tax Code') ?></th>
+                  <th><?php echo gettext('Tax Amount') ?></th>
+                  <th><?php echo gettext('Duration UOM') ?></th>
+                  <th><?php echo gettext('Duration') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -293,11 +293,11 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo __('Seq') ?></th>
-                  <th><?php echo __('Ref Type') ?>#</th>
-                  <th><?php echo __('Ref Key Name') ?></th>
-                  <th><?php echo __('Ref Key Value') ?>#</th>
-                  <th><?php echo __('Renewal Type') ?></th>
+                  <th><?php echo gettext('Seq') ?></th>
+                  <th><?php echo gettext('Ref Type') ?>#</th>
+                  <th><?php echo gettext('Ref Key Name') ?></th>
+                  <th><?php echo gettext('Ref Key Value') ?>#</th>
+                  <th><?php echo gettext('Renewal Type') ?></th>
 
                  </tr>
                 </thead>
@@ -342,13 +342,13 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?></th>
-        <th><?php echo __('Unit Price') ?></th>
-        <th><?php echo __('Line Price') ?></th>
-        <th><?php echo __('Tax Code') ?></th>
-        <th><?php echo __('Tax Amount') ?></th>
-        <th><?php echo __('Line Description') ?></th>
-        <th><?php echo __('Status') ?></th>
+        <th><?php echo gettext('Seq') ?></th>
+        <th><?php echo gettext('Unit Price') ?></th>
+        <th><?php echo gettext('Line Price') ?></th>
+        <th><?php echo gettext('Tax Code') ?></th>
+        <th><?php echo gettext('Tax Amount') ?></th>
+        <th><?php echo gettext('Line Description') ?></th>
+        <th><?php echo gettext('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -377,13 +377,13 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?></th>
-        <th><?php echo __('Source') ?></th>
-        <th><?php echo __('Start date') ?></th>
-        <th><?php echo __('End Date') ?></th>
-        <th><?php echo __('Duration UOM') ?></th>
-        <th><?php echo __('Duration') ?></th>
-        <th><?php echo __('Termination Date') ?></th>
+        <th><?php echo gettext('Seq') ?></th>
+        <th><?php echo gettext('Source') ?></th>
+        <th><?php echo gettext('Start date') ?></th>
+        <th><?php echo gettext('End Date') ?></th>
+        <th><?php echo gettext('Duration UOM') ?></th>
+        <th><?php echo gettext('Duration') ?></th>
+        <th><?php echo gettext('Termination Date') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -412,13 +412,13 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?></th>
-        <th><?php echo __('Source') ?></th>
-        <th><?php echo __('Ref Type') ?></th>
-        <th><?php echo __('Ref Key Name') ?></th>
-        <th><?php echo __('Ref Key Value') ?></th>
-        <th><?php echo __('Counter') ?></th>
-        <th><?php echo __('Event') ?>#</th>
+        <th><?php echo gettext('Seq') ?></th>
+        <th><?php echo gettext('Source') ?></th>
+        <th><?php echo gettext('Ref Type') ?></th>
+        <th><?php echo gettext('Ref Key Name') ?></th>
+        <th><?php echo gettext('Ref Key Value') ?></th>
+        <th><?php echo gettext('Counter') ?></th>
+        <th><?php echo gettext('Event') ?>#</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

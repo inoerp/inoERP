@@ -1,12 +1,12 @@
 <form  method="post" id="supplier_bu"  name="supplier_bu">
- <div id ="form_header"><span class="heading"><?php echo __('Supplier Business Unit Association') ?></span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('Supplier Business Unit Association') ?></span>
   <div class="tabContainer no_tab">
    <ul class="column header_field">
     <li><?php $f->l_text_field_dr_withSearch('supplier_bu_id') ?>
      <a name="show" href="form.php?class_name=supplier_bu&<?php echo "mode=$mode"; ?>" class="show document_id supplier_bu_id">
       <i class="fa fa-refresh"></i></a> 
     </li>
-    <li><label><?php echo __('Supplier Id') ?></label>
+    <li><label><?php echo gettext('Supplier Id') ?></label>
      <span class="button"><a href="form.php?class_name=supplier&mode=<?php echo $mode ?>&supplier_id=<?php echo $$class->supplier_id; ?>"><?php echo $$class->supplier_id; ?></a></span>
      <?php echo form::hidden_field('supplier_id', $$class->supplier_id); ?>
     </li>
@@ -19,14 +19,14 @@
   </div>
 
  </div>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Supplier BU Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Supplier BU Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Local Addresses') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Purchasing') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Invoice & Payment') ?> </a></li>
-    <li><a href="#tabsLine-5"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Local Addresses') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Purchasing') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Invoice & Payment') ?> </a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">

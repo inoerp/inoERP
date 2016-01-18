@@ -7,15 +7,15 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php
-   echo __('Collection Elements')
+   echo gettext('Collection Elements')
   ?></span>
  <form  method="post" id="qa_collection_element_header"  name="qa_collection_element_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Controls') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Controls') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -42,7 +42,7 @@ inoERP
       <li><?php $f->l_text_field_d('target_value'); ?></li>
       <li><?php $f->l_select_field_from_object('option_header_id', option_header::find_all(), 'option_header_id', 'option_type', $$class->option_header_id, 'option_header_id', '', '', $readonly1); ?>        </li>
       <div class="panel panel-collapse panel-ino-classy extra_large_box">
-       <div class="panel-heading"><div class="panel-title font-medium"><?php echo __('Specification Limits') ?></div></div>
+       <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Specification Limits') ?></div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_text_field_d('user_range_low'); ?></li>
@@ -82,12 +82,12 @@ inoERP
  </form>
 </div>
 
-<span class="heading"><?php echo __('Element Type Details') ?></span>
+<span class="heading"><?php echo gettext('Element Type Details') ?></span>
 
 <div id="tabsLine">
  <ul class="tabMain">
-  <li><a href="#tabsLine-1"><?php echo __('Values') ?></a></li>
-  <li><a href="#tabsLine-2"><?php echo __('Actions') ?></a></li>
+  <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
+  <li><a href="#tabsLine-2"><?php echo gettext('Actions') ?></a></li>
  </ul>
  <div class="tabContainer">
   <form action=""  method="post" id="qa_collection_element_line"  name="qa_collection_element_line" class="m-margin-top-20">
@@ -96,11 +96,11 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Element Value') ?>#</th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('End Date') ?>?</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Element Value') ?>#</th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('End Date') ?>?</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -138,15 +138,15 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('action Id') ?></th>
-        <th><?php echo __('Condition') ?></th>
-        <th><?php echo __('Comparison') ?></th>
-        <th><?php echo __('Value From') ?></th>
-        <th><?php echo __('Value To') ?></th>
-        <th><?php echo __('Spec Value') ?></th>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Description') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('action Id') ?></th>
+        <th><?php echo gettext('Condition') ?></th>
+        <th><?php echo gettext('Comparison') ?></th>
+        <th><?php echo gettext('Value From') ?></th>
+        <th><?php echo gettext('Value To') ?></th>
+        <th><?php echo gettext('Spec Value') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >

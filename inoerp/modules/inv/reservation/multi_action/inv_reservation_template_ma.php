@@ -8,28 +8,28 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="inv_reservation"  name="inv_reservation">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Onhand Reservation') ?></span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Onhand Reservation') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo __('Basics') ?></a></li>
-       <li><a href="#tabsLine-2"><?php echo __('Demand') ?></a></li>
-       <li><a href="#tabsLine-3"><?php echo __('Supply') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Demand') ?></a></li>
+       <li><a href="#tabsLine-3"><?php echo gettext('Supply') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Seq') ?> #</th>
-           <th><?php echo __('Reservation Id') ?></th>
-           <th><?php echo __('Org') ?></th>
-           <th><?php echo __('Item Number') ?></th>
-           <th><?php echo __('Description') ?></th>
-           <th><?php echo __('UOM') ?></th>
-           <th><?php echo __('Date') ?></th>
-           <th><?php echo __('Demand Qty') ?></th>
-           <th><?php echo __('Reason') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Seq') ?> #</th>
+           <th><?php echo gettext('Reservation Id') ?></th>
+           <th><?php echo gettext('Org') ?></th>
+           <th><?php echo gettext('Item Number') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('UOM') ?></th>
+           <th><?php echo gettext('Date') ?></th>
+           <th><?php echo gettext('Demand Qty') ?></th>
+           <th><?php echo gettext('Reason') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -76,14 +76,14 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Seq') ?> #</th>
-           <th><?php echo __('Demand Type') ?></th>
-           <th><?php echo __('SO') ?> #</th>
-           <th><?php echo __('SO Line') ?> #</th>
-           <th><?php echo __('Demand Comment') ?></th>
-           <th><?php echo __('Ref Key') ?></th>
-           <th><?php echo __('Ref Value') ?></th>
-           <th><?php echo __('Supply Comment') ?></th>
+           <th><?php echo gettext('Seq') ?> #</th>
+           <th><?php echo gettext('Demand Type') ?></th>
+           <th><?php echo gettext('SO') ?> #</th>
+           <th><?php echo gettext('SO Line') ?> #</th>
+           <th><?php echo gettext('Demand Comment') ?></th>
+           <th><?php echo gettext('Ref Key') ?></th>
+           <th><?php echo gettext('Ref Value') ?></th>
+           <th><?php echo gettext('Supply Comment') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -131,18 +131,18 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Seq') ?> #</th>
-           <th><?php echo __('Supply Type') ?></th>
-           <th><?php echo __('Subinventory') ?></th>
-           <th><?php echo __('Locator') ?></th>
-           <th><?php echo __('Serial') ?> #</th>
-           <th><?php echo __('Lot') ?> #</th>
-           <th><?php echo __('Onhand') ?></th>
-           <th><?php echo __('Res. Onhand') ?></th>
-           <th><?php echo __('Onhand Id') ?></th>
+           <th><?php echo gettext('Seq') ?> #</th>
+           <th><?php echo gettext('Supply Type') ?></th>
+           <th><?php echo gettext('Subinventory') ?></th>
+           <th><?php echo gettext('Locator') ?></th>
+           <th><?php echo gettext('Serial') ?> #</th>
+           <th><?php echo gettext('Lot') ?> #</th>
+           <th><?php echo gettext('Onhand') ?></th>
+           <th><?php echo gettext('Res. Onhand') ?></th>
+           <th><?php echo gettext('Onhand Id') ?></th>
 
-           <th><?php echo __('Key Name') ?></th>
-           <th><?php echo __('Key Value') ?></th>
+           <th><?php echo gettext('Key Name') ?></th>
+           <th><?php echo gettext('Key Value') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

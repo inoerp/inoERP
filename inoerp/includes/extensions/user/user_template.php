@@ -1,24 +1,24 @@
 <div id ="form_header">
  <form action="" method="post" id="user_header" name="user_header">
-  <span class="heading"><?php echo __('User Details') ?></span>
+  <span class="heading"><?php echo gettext('User Details') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Preference') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Association') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Future') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo __('Notes') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo __('Profile Picture') ?></a></li>
-    <li><a href="#tabsHeader-8"><?php echo __('Addresses') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Preference') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Association') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Future') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Profile Picture') ?></a></li>
+    <li><a href="#tabsHeader-8"><?php echo gettext('Addresses') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><?php $f->l_text_field_dr('user_id'); ?></li>
       <li><?php $f->l_text_field('username', $$class->username, '', '', '', 1, $readonly1); ?></li>
-      <li><label><?php echo __('Password') ?></label><input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
-      <li><label><?php echo __('Retype Password') ?></label><input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
+      <li><label><?php echo gettext('Password') ?></label><input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
+      <li><label><?php echo gettext('Retype Password') ?></label><input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
       <li><?php $f->l_text_field_dm('first_name'); ?> </li>
       <li><?php $f->l_text_field_dm('last_name'); ?>	 </li>
       <li><?php $f->l_text_field_dm('email'); ?> </li>
@@ -40,11 +40,11 @@
        echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
        ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
 
-      <li><label><?php echo __('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
+      <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
        <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
        <i class="fa fa-search supplier_id select_popup clickable"></i>
       </li>
-      <li><label><?php echo __('Customer Name') ?></label><?php $f->text_field_d('customer_name'); ?>
+      <li><label><?php echo gettext('Customer Name') ?></label><?php $f->text_field_d('customer_name'); ?>
        <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
        <i class="fa fa-search ar_customer_id select_popup clickable"></i>
       </li>
@@ -80,10 +80,10 @@
     </div>
     <div id="tabsHeader-8" class="tabContent">
      <div class="existing-address col-md-6">
-      <label><?php echo __('Existing Addresses'); ?></label>
+      <label><?php echo gettext('Existing Addresses'); ?></label>
       <?php echo!empty($existing_address_arr) ? address_reference::show_address($existing_address_arr) : ''; ?>
      </div>
-     <div class="new-address col-md-6"><label><?php echo __('Add New Address'); ?></label>
+     <div class="new-address col-md-6"><label><?php echo gettext('Add New Address'); ?></label>
       <?php $existing_address_c = !empty($existing_address_arr) ? count($existing_address_arr) : 0;
       echo $f->add_new_address();
       ?>
@@ -95,11 +95,11 @@
  </form>
 </div>
 
-<span class="heading"><?php echo __('User Access Details') ?></span>
+<span class="heading"><?php echo gettext('User Access Details') ?></span>
 <div id="tabsLine">
  <ul class="tabMain">
-  <li><a href="#tabsLine-1"><?php echo __('Role Control') ?></a></li>
-  <li><a href="#tabsLine-2"><?php echo __('User Group Assignment') ?></a></li>
+  <li><a href="#tabsLine-1"><?php echo gettext('Role Control') ?></a></li>
+  <li><a href="#tabsLine-2"><?php echo gettext('User Group Assignment') ?></a></li>
  </ul>
  <div class="tabContainer"> 
   <div id="tabsLine-1" class="tabContent">
@@ -108,9 +108,9 @@
      <table id="form_line_data_table" class="form">
       <thead>
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('User Role Access Id') ?>#</th>
-        <th><?php echo __('Role Name') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('User Role Access Id') ?>#</th>
+        <th><?php echo gettext('Role Name') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody user_role_assignment_values">
@@ -163,9 +163,9 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Group Access Id') ?>#</th>
-        <th><?php echo __('Group Name') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Group Access Id') ?>#</th>
+        <th><?php echo gettext('Group Name') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 user_group_values" >

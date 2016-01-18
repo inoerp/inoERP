@@ -1,10 +1,10 @@
 <div class="row small-left-padding">
- <div id ="form_header"><span class="heading"><?php echo __('ABC Assignment Header') ?></span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('ABC Assignment Header') ?></span>
   <form method="post" id="inv_abc_assignment_header"  name="inv_abc_assignment_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Assign Items') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Assign Items') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -14,7 +14,7 @@
        </li>
        <li><?php $f->l_text_field_d('abc_assignment_name'); ?></li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_abc_valuation_id select_popup clickable">
-         <?php echo __('ABC Valuation') ?></label> <?php
+         <?php echo gettext('ABC Valuation') ?></label> <?php
         echo $f->hidden_field_withId('inv_abc_valuation_id', $$class->inv_abc_valuation_id);
         $f->text_field_dm('valuation_name');
         ?> </li>
@@ -34,11 +34,11 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo __('ABC Class') ?></th>
-          <th><?php echo __('Sequence Number') ?></th>
-          <th><?php echo __('Value') ?></th>
-          <th><?php echo __('% of Items') ?></th>
-          <th><?php echo __('% of Value') ?></th>
+          <th><?php echo gettext('ABC Class') ?></th>
+          <th><?php echo gettext('Sequence Number') ?></th>
+          <th><?php echo gettext('Value') ?></th>
+          <th><?php echo gettext('% of Items') ?></th>
+          <th><?php echo gettext('% of Value') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody inv_abc_assignment_header_values" >
@@ -76,10 +76,10 @@
   </form>
  </div>
 
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('View & Update Items') ?> </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('View & Update Items') ?> </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Item ABC Class') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Item ABC Class') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="inv_abc_assignment_line_line"  name="inv_abc_assignment_line_line">
@@ -87,13 +87,13 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Line Id') ?></th>
-         <th><?php echo __('Master Item Id') ?></th>
-         <th><?php echo __('Item Number') ?></th>
-         <th><?php echo __('Item Description') ?></th>
-         <th><?php echo __('ABC Class') ?></th>
-         <th><?php echo __('Comments') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Master Item Id') ?></th>
+         <th><?php echo gettext('Item Number') ?></th>
+         <th><?php echo gettext('Item Description') ?></th>
+         <th><?php echo gettext('ABC Class') ?></th>
+         <th><?php echo gettext('Comments') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody inv_abc_assignment_line_values" >

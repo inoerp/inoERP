@@ -17,32 +17,32 @@
         <div id="form_all">
          <form action=""  method="post" id="block_line"  name="block_line">
           <div id ="form_line" class="form_line">
-           <span class="heading"><?php echo __('All Blocks') ?></span>
+           <span class="heading"><?php echo gettext('All Blocks') ?></span>
            <?php
            $block_list = new block();
            $result = $block_list->findALL_OrderBy_positionWeight();
            ?>
            <div id="tabsLine">
             <ul class="tabMain">
-             <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
-             <li><a href="#tabsLine-2"><?php echo __('Visibility') ?></a></li>
+             <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+             <li><a href="#tabsLine-2"><?php echo gettext('Visibility') ?></a></li>
             </ul>
             <div class="tabContainer"> 
              <div id="tabsLine-1" class="tabContent">
               <table class="form_table">
                <thead> 
                 <tr>
-                 <th><?php echo __('Action') ?></th>
-                 <th><?php echo __('Block') ?></th>
-                 <th><?php echo __('Block Id') ?>#</th>
-                 <th><?php echo __('Name') ?></th>
-                 <th><?php echo __('Title') ?></th>
-                 <th><?php echo __('Position') ?></th>
-                 <th><?php echo __('Weight') ?></th>
-                 <th><?php echo __('Enabled') ?></th>
-                 <th><?php echo __('Show Title') ?></th>
-                 <th><?php echo __('Reference Table') ?>#</th>
-                 <th><?php echo __('Cache Content') ?></th>
+                 <th><?php echo gettext('Action') ?></th>
+                 <th><?php echo gettext('Block') ?></th>
+                 <th><?php echo gettext('Block Id') ?>#</th>
+                 <th><?php echo gettext('Name') ?></th>
+                 <th><?php echo gettext('Title') ?></th>
+                 <th><?php echo gettext('Position') ?></th>
+                 <th><?php echo gettext('Weight') ?></th>
+                 <th><?php echo gettext('Enabled') ?></th>
+                 <th><?php echo gettext('Show Title') ?></th>
+                 <th><?php echo gettext('Reference Table') ?>#</th>
+                 <th><?php echo gettext('Cache Content') ?></th>
                 </tr>
                </thead>
                <tbody class="form_data_line_tbody block_lines" >

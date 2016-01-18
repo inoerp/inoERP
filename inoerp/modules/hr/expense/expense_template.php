@@ -7,15 +7,15 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo __('Expense Claim') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Expense Claim') ?></span>
  <form method="post" id="hr_expense_header"  name="hr_expense_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Finance') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Action') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Action') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -95,30 +95,30 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Expense Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Expense Lines') ?></span>
  <form method="post" id="hr_expense_line"  name="hr_expense_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Receipt') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Per Diem & Mileage') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Receipt') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Per Diem & Mileage') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Line') ?>#</th>
-        <th><?php echo __('Expense Type') ?></th>
-        <th><?php echo __('Date') ?></th>
-        <th><?php echo __('Currency') ?></th>
-        <th><?php echo __('Receipt Amount') ?></th>
-        <th><?php echo __('Purpose') ?></th>
-        <th><?php echo __('Exchange') ?></th>
-        <th><?php echo __('Vendor') ?></th>
-        <!--<th><?php // echo __('Vendor Details')      ?></th>-->
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Expense Type') ?></th>
+        <th><?php echo gettext('Date') ?></th>
+        <th><?php echo gettext('Currency') ?></th>
+        <th><?php echo gettext('Receipt Amount') ?></th>
+        <th><?php echo gettext('Purpose') ?></th>
+        <th><?php echo gettext('Exchange') ?></th>
+        <th><?php echo gettext('Vendor') ?></th>
+        <!--<th><?php // echo gettext('Vendor Details')      ?></th>-->
 
        </tr>
       </thead>
@@ -160,15 +160,15 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Locaion') ?></th>
-        <th><?php echo __('Daily Rate') ?></th>
-        <th><?php echo __('No Of Days') ?></th>
-        <th><?php echo __('Mileage UOM') ?></th>
-        <th><?php echo __('Distance') ?></th>
-        <th><?php echo __('Mileage Rate') ?></th>
-        <th><?php echo __('Receipt Missing') ?></th>
-        <th><?php echo __('Status') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Locaion') ?></th>
+        <th><?php echo gettext('Daily Rate') ?></th>
+        <th><?php echo gettext('No Of Days') ?></th>
+        <th><?php echo gettext('Mileage UOM') ?></th>
+        <th><?php echo gettext('Distance') ?></th>
+        <th><?php echo gettext('Mileage Rate') ?></th>
+        <th><?php echo gettext('Receipt Missing') ?></th>
+        <th><?php echo gettext('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

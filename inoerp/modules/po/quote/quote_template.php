@@ -8,27 +8,27 @@
  */-->
 
 <div id="po_quote_divId">
-<div id ="form_header"><span class="heading"><?php echo __('Quotation') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Quotation') ?></span>
  <form   method="post" id="po_quote_header"  name="po_quote_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Conditions') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Description') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Address Details') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo __('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Conditions') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Description') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field"><li>
        <?php $f->l_text_field_dr_withSearch('po_quote_header_id') ?>
        <a name="show" href="form.php?class_name=po_quote_header&<?php echo "mode=$mode"; ?>" class="show document_id po_quote_header_id"><i class="fa fa-refresh"></i></a>     </li>
-      <li><label><?php echo __('RFQ Number') ?></label><?php echo $f->hidden_field('po_rfq_header_id', $$class->po_rfq_header_id) ?>
+      <li><label><?php echo gettext('RFQ Number') ?></label><?php echo $f->hidden_field('po_rfq_header_id', $$class->po_rfq_header_id) ?>
        <?php echo $f->text_field_dsrm('rfq_number') ?>
       </li>
-      <li><label><?php echo __('Quote Type') ?>(2)</label><?php echo $f->hidden_field_withId('bu_org_id', $$class->bu_org_id); ?>
+      <li><label><?php echo gettext('Quote Type') ?>(2)</label><?php echo $f->hidden_field_withId('bu_org_id', $$class->bu_org_id); ?>
        <?php echo $f->select_field_from_array('quote_type', po_quote_header::$po_quote_type_a, $$class->quote_type, 'quote_type', '', 1); ?>
       </li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>        </li>
@@ -40,7 +40,7 @@
       <li><?php
        echo $f->l_val_field_d('supplier_number', 'supplier', 'supplier_number', '', '', 'vf_select_supplier_number');
        ?><i class="generic g_select_supplier_number select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
-      <li><label><?php echo __('Supplier Site') ?></label><?php
+      <li><label><?php echo gettext('Supplier Site') ?></label><?php
        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
        ?> </li>
@@ -59,7 +59,7 @@
      </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">
-     <div><label class="text_area_label"><?php echo __('Detailed Description') ?></label><?php
+     <div><label class="text_area_label"><?php echo gettext('Detailed Description') ?></label><?php
       echo $f->text_area_ap(array('name' => 'description', 'value' => $$class->description,
        'row_size' => '10', 'column_size' => '90'));
       ?> 	
@@ -92,11 +92,11 @@
     <div id="tabsHeader-7" class="tabContent">
      <div> 
       <ul class="column four_column">
-       <li id="document_print"><label><?php echo __('Document Print') ?></label>
+       <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
         <a class="button" target="_blank"
            href="<?php echo HOME_URL ?>modules/po/po_quote_print.php?po_quote_header_id=<?php echo!(empty($$class->po_quote_header_id)) ? $$class->po_quote_header_id : ""; ?>" >Print quote</a>
        </li>
-       <li><label><?php echo __('Action') ?></label>
+       <li><label><?php echo gettext('Action') ?></label>
         <?php
         $action_readonly = ($$class->quote_status == 'CLOSED') ? 1 : '';
         echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly, $action_readonly)
@@ -111,12 +111,12 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Quote Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Quote Lines') ?></span>
  <form method="post" id="po_quote_line"  name="po_quote_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Factors') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Factors') ?></a></li>
 
    </ul>
    <div class="tabContainer">
@@ -124,17 +124,17 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Line') ?>#</th>
-        <th><?php echo __('Item Number') ?></th>
-        <th><?php echo __('Item Description') ?></th>
-        <th><?php echo __('MFG Part Number') ?></th>
-        <th><?php echo __('Manufacturer') ?></th>
-        <th><?php echo __('Min Quantity') ?></th>
-        <th><?php echo __('Max Quantity') ?></th>
-        <th><?php echo __('Requirements') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('MFG Part Number') ?></th>
+        <th><?php echo gettext('Manufacturer') ?></th>
+        <th><?php echo gettext('Min Quantity') ?></th>
+        <th><?php echo gettext('Max Quantity') ?></th>
+        <th><?php echo gettext('Requirements') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -206,13 +206,13 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo __('Action') ?></th>
-                  <th><?php echo __('Seq') ?></th>
-                  <th><?php echo __('Requirement Id') ?></th>
-                  <th><?php echo __('Requirement Number') ?></th>
-                  <th><?php echo __('Requirement Name') ?></th>
-                  <th><?php echo __('Type') ?></th>
-                  <th><?php echo __('Max Evaluation Points') ?></th>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Seq') ?></th>
+                  <th><?php echo gettext('Requirement Id') ?></th>
+                  <th><?php echo gettext('Requirement Number') ?></th>
+                  <th><?php echo gettext('Requirement Name') ?></th>
+                  <th><?php echo gettext('Type') ?></th>
+                  <th><?php echo gettext('Max Evaluation Points') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -247,10 +247,10 @@
                <table class="form form_detail_data_table detail">
                 <thead>
                  <tr>
-                  <th><?php echo __('Seq') ?>#</th>
-                  <th><?php echo __('Target Value') ?></th>
-                  <th><?php echo __('Description') ?></th>
-                  <th><?php echo __('Supplier Value') ?></th>
+                  <th><?php echo gettext('Seq') ?>#</th>
+                  <th><?php echo gettext('Target Value') ?></th>
+                  <th><?php echo gettext('Description') ?></th>
+                  <th><?php echo gettext('Supplier Value') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -304,18 +304,18 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('UOM') ?></th>
-        <th><?php echo __('Unit Price') ?></th>
-        <th><?php echo __('Target Price') ?></th>
-        <th><?php echo __('Quote Price') ?></th>
-        <th><?php echo __('Min Agreement Qty') ?></th>
-        <th><?php echo __('Min Order Qty') ?>#</th>
-        <th><?php echo __('Lot Multiplier') ?></th>
-        <th><?php echo __('Processing LT') ?></th>
-        <th><?php echo __('Replenishment LT') ?></th>
-        <th><?php echo __('Daily Capacity') ?></th>
-        <th><?php echo __('Others') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Unit Price') ?></th>
+        <th><?php echo gettext('Target Price') ?></th>
+        <th><?php echo gettext('Quote Price') ?></th>
+        <th><?php echo gettext('Min Agreement Qty') ?></th>
+        <th><?php echo gettext('Min Order Qty') ?>#</th>
+        <th><?php echo gettext('Lot Multiplier') ?></th>
+        <th><?php echo gettext('Processing LT') ?></th>
+        <th><?php echo gettext('Replenishment LT') ?></th>
+        <th><?php echo gettext('Daily Capacity') ?></th>
+        <th><?php echo gettext('Others') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

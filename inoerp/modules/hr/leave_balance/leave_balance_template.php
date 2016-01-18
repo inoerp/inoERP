@@ -1,27 +1,27 @@
 <div class='row small-left-padding'>
  <div id="form_all">
   <div id="form_headerDiv">
-   <span class="heading"><?php echo __('Leave Details') ?></span>
+   <span class="heading"><?php echo gettext('Leave Details') ?></span>
    <form action=""  method="post" id="hr_leave_balance_line"  name="hr_leave_balance_line">
     <div class='tabContainer'>
      <ul class="inline_list">
       <li><label><i class="employee_id select_popup clickable fa fa-search"></i>
-        <?php echo __('Employee Id') ?></label><?php $f->text_field_dr('employee_id') ?>
+        <?php echo gettext('Employee Id') ?></label><?php $f->text_field_dr('employee_id') ?>
        <a name="show" href="form.php?class_name=hr_leave_balance&<?php echo "mode=$mode"; ?>" class="show document_id employee_id">
         <i class="fa fa-refresh"></i></a> 
       </li>
       <li>
        <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-        <?php echo __('Employee Name') ?></label>
+        <?php echo gettext('Employee Name') ?></label>
        <?php $f->text_field_d('employee_name'); ?>
       </li>
      </ul>
     </div>
     <div id ="form_line" class="hr_leave_balance">
-     <span class="heading"><?php echo __('Current Balance') ?> </span>
+     <span class="heading"><?php echo gettext('Current Balance') ?> </span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo __('Details') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
       </ul>
       <div class="tabContainer"> 
 
@@ -29,13 +29,13 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Id') ?></th>
-           <th><?php echo __('Type') ?>#</th>
-           <th><?php echo __('Leave/Year') ?></th>
-           <th><?php echo __('Available Balance') ?></th>
-           <th><?php echo __('Total Used') ?></th>
-           <th><?php echo __('Total Leave') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Id') ?></th>
+           <th><?php echo gettext('Type') ?>#</th>
+           <th><?php echo gettext('Leave/Year') ?></th>
+           <th><?php echo gettext('Available Balance') ?></th>
+           <th><?php echo gettext('Total Used') ?></th>
+           <th><?php echo gettext('Total Leave') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody leave_balance_values" >

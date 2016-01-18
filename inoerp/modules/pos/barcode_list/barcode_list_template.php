@@ -2,13 +2,13 @@
 <div class="row small-left-padding">
  <div id="form_all">
   <form action=""  method="post" id="pos_barcode_list_header"  name="pos_barcode_list_header">
-   <span class="heading"><?php echo __('POS Barcode List') ?></span>
+   <span class="heading"><?php echo gettext('POS Barcode List') ?></span>
    <div id ="form_header">
     <div id="tabsHeader">
      <ul class="tabMain">
-      <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-      <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-      <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+      <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+      <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
@@ -48,10 +48,10 @@
     </div>
    </div>
   </form>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('List Lines') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('List Lines') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Values') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <form  method="post" id="pos_barcode_list_line_line"  name="pos_barcode_list_line_line">
@@ -59,16 +59,16 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo __('Action') ?></th>
-          <th><?php echo __('Line Id') ?></th>
-          <th><?php echo __('Item') ?></th>
-          <th><?php echo __('Unit Price') ?></th>
-          <th><?php echo __('Quantity') ?></th>
-          <th><?php echo __('Discount Code') ?></th>
-          <th><?php echo __('Discount Amount') ?></th>
-          <th><?php echo __('Line Amount') ?></th>
-          <th><?php echo __('Final Amount') ?></th>
-          <th><?php echo __('No Of Labels') ?></th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Line Id') ?></th>
+          <th><?php echo gettext('Item') ?></th>
+          <th><?php echo gettext('Unit Price') ?></th>
+          <th><?php echo gettext('Quantity') ?></th>
+          <th><?php echo gettext('Discount Code') ?></th>
+          <th><?php echo gettext('Discount Amount') ?></th>
+          <th><?php echo gettext('Line Amount') ?></th>
+          <th><?php echo gettext('Final Amount') ?></th>
+          <th><?php echo gettext('No Of Labels') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody pos_barcode_list_line_values" >

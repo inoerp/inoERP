@@ -1,14 +1,14 @@
 <form method="post" id="mdm_bank_account"  name="mdm_bank_account">
- <div id ="form_header"><span class="heading"><?php echo __('Bank Account') ?></span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('Bank Account') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Bank Details') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Org Assignment') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Customer') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Supplier') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo __('Notes') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Bank Details') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Org Assignment') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Customer') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Supplier') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -18,15 +18,15 @@
         <i class="fa fa-refresh"></i></a> 
       </li>
       <li><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="mdm_bank_header_id select_popup clickable">
-        <?php echo __('Bank Name') ?></label><?php echo $f->hidden_field_withId('mdm_bank_header_id', $$class->mdm_bank_header_id); ?>
+        <?php echo gettext('Bank Name') ?></label><?php echo $f->hidden_field_withId('mdm_bank_header_id', $$class->mdm_bank_header_id); ?>
        <?php $f->text_field_d('bank_name') ?>	</li>
       <li><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="mdm_bank_site_id select_popup clickable">
-        <?php echo __('Branch Name') ?></label><?php echo $f->hidden_field_withId('mdm_bank_site_id', $$class->mdm_bank_site_id); ?>
+        <?php echo gettext('Branch Name') ?></label><?php echo $f->hidden_field_withId('mdm_bank_site_id', $$class->mdm_bank_site_id); ?>
        <?php $f->text_field_d('branch_name') ?>	</li>
-      <li><label><?php echo __('Account Number') ?></label> <?php $f->text_field_d('account_number') ?>	</li>
-      <li><label><?php echo __('Usage') ?></label> 
+      <li><label><?php echo gettext('Account Number') ?></label> <?php $f->text_field_d('account_number') ?>	</li>
+      <li><label><?php echo gettext('Usage') ?></label> 
        <?php echo $f->select_field_from_array('account_usage', mdm_bank_account::$account_usage_a, $$class->account_usage, 'account_usage', '', 1, $readonly1) ?>	</li>
-      <li><label><?php echo __('Type') ?></label> 
+      <li><label><?php echo gettext('Type') ?></label> 
        <?php echo $f->select_field_from_object('account_type', mdm_bank_account::bank_account_type(), 'option_line_code', 'option_line_value', $$class->account_type, 'account_type', '', 1, $readonly1) ?>	</li>
       <li><label>Description</label> <?php $f->text_field_d('description') ?>	</li>
      </ul>
@@ -78,7 +78,7 @@
        <li><?php
         echo $f->l_val_field_d('supplier_number', 'supplier', 'supplier_number', '', '', 'vf_select_supplier_number');
         ?><i class="generic g_select_supplier_number select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
-       <li><label><?php echo __('Supplier Site') ?></label><?php
+       <li><label><?php echo gettext('Supplier Site') ?></label><?php
         $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
         echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
         ?> </li>
@@ -105,13 +105,13 @@
    </div>
 
   </div>
-  <span class="heading"><?php echo __('Bank Account Details'); ?></span>
+  <span class="heading"><?php echo gettext('Bank Account Details'); ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Receivable'); ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Payable'); ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo __('HR'); ?></a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Secondary') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Receivable'); ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Payable'); ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('HR'); ?></a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Secondary') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">

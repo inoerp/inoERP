@@ -6,14 +6,14 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php   echo __('Project Agreements')   ?></span>
+<div id ="form_header"><span class="heading"><?php   echo gettext('Project Agreements')   ?></span>
  <form method="post" id="prj_agreement_header"  name="prj_agreement_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Basic-2') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Basic-2') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -24,15 +24,15 @@ inoERP
       <li><?php $f->l_text_field_d('agreement_number'); ?></li>
       <li><?php $f->l_text_field_d('agreement_type'); ?></li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
-      <li><label class="auto_complete"><?php echo __('Customer Name') ?></label><?php
+      <li><label class="auto_complete"><?php echo gettext('Customer Name') ?></label><?php
        echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
        echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1);
        ?>
        <i class="ar_customer_id select_popup clickable fa fa-search"></i></li>
-      <li><label class="auto_complete"><?php echo __('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+      <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
       <li><?php $f->l_number_field_dm('header_amount'); ?></li> 
-      <li><label><?php echo __('Admin') ?></label><?php $f->text_field_d('admin_employee_name', 'employee_name'); ?>
+      <li><label><?php echo gettext('Admin') ?></label><?php $f->text_field_d('admin_employee_name', 'employee_name'); ?>
        <?php echo $f->hidden_field_withId('admin_employee_id', $$class->admin_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
@@ -77,25 +77,25 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Funding Details') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Funding Details') ?></span>
  <form   method="post" id="prj_agreement_line"  name="prj_agreement_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Project') ?></th>
-        <!--<th><?php // echo __('Task') ?></th>-->
-        <th><?php echo __('Allocation Date') ?></th>
-        <th><?php echo __('Amount') ?></th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('Classification') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Project') ?></th>
+        <!--<th><?php // echo gettext('Task') ?></th>-->
+        <th><?php echo gettext('Allocation Date') ?></th>
+        <th><?php echo gettext('Amount') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Classification') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

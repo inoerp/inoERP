@@ -1,18 +1,18 @@
 <div id=gl_calendar_line_divId" class="pagination_page">
  <div class='row small-left-padding'>
   <div id="form_all">
-   <div id="form_headerDiv"><span class="heading"><?php echo __('Financial Calendars') ?></span>
+   <div id="form_headerDiv"><span class="heading"><?php echo gettext('Financial Calendars') ?></span>
     <form  method="post" id="gl_calendar_line"  name="calendar_line">
      <div class='tabContainer'>
       <?php $f->l_select_field_from_object('option_line_code', gl_calendar::gl_calendar_names(), 'option_line_code', 'option_line_value', $option_line_code_h, 'option_line_code', 'action', 1, $readonly); ?>
       <a name="show" href="form.php?class_name=gl_calendar&<?php echo "mode=$mode"; ?>" class="show document_id gl_calendar_id">
        <i class='fa fa-refresh'></i></a> 
      </div>
-     <div id ="form_line" class="gl_calendar"><span class="heading"><?php echo __('Calendar Period Details') ?> </span>
+     <div id ="form_line" class="gl_calendar"><span class="heading"><?php echo gettext('Calendar Period Details') ?> </span>
       <div id="tabsLine">
        <ul class="tabMain">
-        <li><a href="#tabsLine-1"><?php echo __('Basic - View Only') ?></a></li>
-        <li><a href="#tabsLine-2"><?php echo __('Effectivity') ?> </a></li>
+        <li><a href="#tabsLine-1"><?php echo gettext('Basic - View Only') ?></a></li>
+        <li><a href="#tabsLine-2"><?php echo gettext('Effectivity') ?> </a></li>
        </ul>
        <div class="tabContainer"> 
 
@@ -20,16 +20,16 @@
          <table class="form_table">
           <thead> 
            <tr>
-            <th><?php echo __('Action') ?></th>
-            <th><?php echo __('Id') ?>#</th>
-            <th><?php echo __('Period Type') ?></th>
-            <th><?php echo __('Prefix') ?>#</th>
-            <th><?php echo __('Year') ?></th>
-            <th><?php echo __('Quarter') ?></th>
-            <th><?php echo __('Number') ?></th>
-            <th><?php echo __('From Date') ?></th>
-            <th><?php echo __('To Date') ?></th>
-            <th><?php echo __('Name') ?></th>
+            <th><?php echo gettext('Action') ?></th>
+            <th><?php echo gettext('Id') ?>#</th>
+            <th><?php echo gettext('Period Type') ?></th>
+            <th><?php echo gettext('Prefix') ?>#</th>
+            <th><?php echo gettext('Year') ?></th>
+            <th><?php echo gettext('Quarter') ?></th>
+            <th><?php echo gettext('Number') ?></th>
+            <th><?php echo gettext('From Date') ?></th>
+            <th><?php echo gettext('To Date') ?></th>
+            <th><?php echo gettext('Name') ?></th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody calendar_values" >
@@ -71,8 +71,8 @@
          <table class="form_table">
           <thead> 
            <tr>
-            <th><?php echo __('Adjusting Period') ?></th>
-            <th><?php echo __('EF Id') ?>#</th>
+            <th><?php echo gettext('Adjusting Period') ?></th>
+            <th><?php echo gettext('EF Id') ?>#</th>
            </tr>
           </thead>
           <tbody class="form_data_line_tbody calendar_values" >

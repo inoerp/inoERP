@@ -1,11 +1,11 @@
-<div id="bom_divId"><span class='heading'><?php echo __('Change Order') ?></span>
+<div id="bom_divId"><span class='heading'><?php echo gettext('Change Order') ?></span>
  <?php
  $template_lines_ia = new ArrayIterator($template_lines);
  ?> 
  <div id="tabsDetailD">
   <ul class="tabMain">
-   <li><a href="#tabsDetailD-1"><?php echo __('Change Order') ?></a></li>
-   <li><a href="#tabsDetailD-2"><?php echo __('Process Steps') ?></a></li>
+   <li><a href="#tabsDetailD-1"><?php echo gettext('Change Order') ?></a></li>
+   <li><a href="#tabsDetailD-2"><?php echo gettext('Process Steps') ?></a></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsDetailD-1" class="tabContent">
@@ -13,13 +13,13 @@
      <form action=""  method="post" id="cc_co_header"  name="cc_co_header">
       <div id="tabsHeader">
        <ul class="tabMain">
-        <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-        <li><a href="#tabsHeader-2"><?php echo __('Other Info') ?></a></li>
-        <li><a href="#tabsHeader-3"><?php echo __('Secondary Fields') ?></a></li>
-        <li><a href="#tabsHeader-4"><?php echo __('Flow Diagram') ?></a></li>
-        <li><a href="#tabsHeader-5"><?php echo __('Notes') ?></a></li>
-        <li><a href="#tabsHeader-6"><?php echo __('Attachments') ?></a></li>
-        <li><a href="#tabsHeader-7"><?php echo __('CO Action') ?></a></li>
+        <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+        <li><a href="#tabsHeader-2"><?php echo gettext('Other Info') ?></a></li>
+        <li><a href="#tabsHeader-3"><?php echo gettext('Secondary Fields') ?></a></li>
+        <li><a href="#tabsHeader-4"><?php echo gettext('Flow Diagram') ?></a></li>
+        <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
+        <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
+        <li><a href="#tabsHeader-7"><?php echo gettext('CO Action') ?></a></li>
        </ul>
        <div class="tabContainer">
         <div id="tabsHeader-1" class="tabContent">
@@ -97,13 +97,13 @@
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo __('Action') ?></th>
-          <th><?php echo __('Line Id') ?></th>
-          <th><?php echo __('Line Number') ?>#</th>
-          <th><?php echo __('Sub Process Name') ?></th>
-          <th><?php echo __('Type') ?></th>
-          <th><?php echo __('Description') ?></th>
-          <th><?php echo __('Process Actions') ?></th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Line Id') ?></th>
+          <th><?php echo gettext('Line Number') ?>#</th>
+          <th><?php echo gettext('Sub Process Name') ?></th>
+          <th><?php echo gettext('Type') ?></th>
+          <th><?php echo gettext('Description') ?></th>
+          <th><?php echo gettext('Process Actions') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody2">
@@ -152,13 +152,13 @@
                  <table class="form form_detail_data_table detail">
                   <thead>
                    <tr>
-                    <th><?php echo __('Action') ?></th>
-                    <th><?php echo __('Action Id') ?></th>
-                    <th><?php echo __('PF Line Id') ?>#</th>
-                    <th><?php echo __('Seq Number') ?></th>
-                    <th><?php echo __('Action Type') ?></th>
-                    <th><?php echo __('Role') ?></th>
-                    <th><?php echo __('User') ?></th>
+                    <th><?php echo gettext('Action') ?></th>
+                    <th><?php echo gettext('Action Id') ?></th>
+                    <th><?php echo gettext('PF Line Id') ?>#</th>
+                    <th><?php echo gettext('Seq Number') ?></th>
+                    <th><?php echo gettext('Action Type') ?></th>
+                    <th><?php echo gettext('Role') ?></th>
+                    <th><?php echo gettext('User') ?></th>
                    </tr>
                   </thead>
                   <tbody class="form_data_detail_tbody">

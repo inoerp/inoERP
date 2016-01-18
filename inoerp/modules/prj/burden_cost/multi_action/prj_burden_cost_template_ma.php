@@ -4,23 +4,23 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="prj_burden_cost_base"  name="prj_burden_cost_base">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Expenditure Type') ?></span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Expenditure Type') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Cost Base Id') ?></th>
-           <th><?php echo __('Cost Base') ?></th>
-           <th><?php echo __('Description') ?></th>
-           <th><?php echo __('Eff. From') ?></th>
-           <th><?php echo __('Eff. To') ?></th>
-           <th><?php echo __('Cost Base Type') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Cost Base Id') ?></th>
+           <th><?php echo gettext('Cost Base') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Eff. From') ?></th>
+           <th><?php echo gettext('Eff. To') ?></th>
+           <th><?php echo gettext('Cost Base Type') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

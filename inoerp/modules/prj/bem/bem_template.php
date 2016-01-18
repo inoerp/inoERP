@@ -1,11 +1,11 @@
-<div id ="form_all"><span class="heading"><?php echo __('Budget Entry Method') ?></span>
+<div id ="form_all"><span class="heading"><?php echo gettext('Budget Entry Method') ?></span>
  <form  method="post" id="prj_bem"  name="prj_bem">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -46,22 +46,22 @@
    </div>
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Cost & Revenue') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Cost & Revenue') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Controls') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Controls') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div class='col-md-3'>
-       <span class='heading bg-primary text-muted'><?php echo __('Revenue Controls') ?></span>
+       <span class='heading bg-primary text-muted'><?php echo gettext('Revenue Controls') ?></span>
        <ul class="column header_field"> 
         <li><?php $f->l_checkBox_field_d('revenue_cb'); ?></li> 
         <li><?php $f->l_checkBox_field_d('quantity_revenue_cb'); ?></li> 
        </ul>
       </div>
       <div class='col-md-9'>
-       <span class='heading bg-primary'><?php echo __('Cost Controls') ?></span>
+       <span class='heading bg-primary'><?php echo gettext('Cost Controls') ?></span>
        <ul class="column header_field"> 
         <li><?php $f->l_checkBox_field_d('quantity_cost_cb'); ?></li> 
         <li><?php $f->l_checkBox_field_d('raw_cost_cb'); ?></li> 

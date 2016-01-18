@@ -1,10 +1,10 @@
 <div id="form_all">
- <span class="heading"><?php echo __('Bar code Label Auto Trigger') ?></span>
+ <span class="heading"><?php echo gettext('Bar code Label Auto Trigger') ?></span>
  <form action=""  method="post" id="sys_auto_trigger"  name="sys_auto_trigger">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -21,10 +21,10 @@
   </div>
  </form>
  <div id ="form_line" class="form_line">
-  <span class="heading"><?php echo __('Label Association') ?></span>
+  <span class="heading"><?php echo gettext('Label Association') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Values') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="bc_label_auto_trigger_line"  name="bc_label_auto_trigger_line">
@@ -32,9 +32,9 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Line Id') ?></th>
-         <th><?php echo __('Default Printer') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Default Printer') ?></th>
          <?php
          switch ($association_level) {
           case 'SITE' :

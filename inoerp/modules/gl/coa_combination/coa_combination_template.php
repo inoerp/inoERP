@@ -1,7 +1,7 @@
 <div id="coa_combination_divId" class="pagination_page">
  <div class='row small-left-padding'>
   <div id="form_header">
-   <span class="heading"><?php echo __('Chart Of Account Code Combinations') ?></span> 
+   <span class="heading"><?php echo gettext('Chart Of Account Code Combinations') ?></span> 
    <div class="tabContainer">
     <?php $f->l_select_field_from_object('coa_id', coa::find_all(), 'coa_id', 'coa_name', $coa_id_h, 'coa_id', '', 1, $readonly); ?>
     <a name="show" href="form.php?class_name=coa_combination&<?php echo "mode=$mode"; ?>" class="show document_id coa_id">
@@ -11,9 +11,9 @@
   <div id ="form_line" class="coa_combination"><span class="heading">Value Group Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Basic - View Only') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Field Values') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo __('Effectivity') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic - View Only') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Field Values') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Effectivity') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <form action=""  method="post" id="coa_combination_line"  name="coa_combination_line">
@@ -21,11 +21,11 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo __('Action') ?></th>
-          <th><?php echo __('CC Id') ?>#</th>
-          <th><?php echo __('Code Combination') ?></th>
-          <th><?php echo __('Description') ?>#</th>
-          <th><?php echo __('Account Type') ?></th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('CC Id') ?>#</th>
+          <th><?php echo gettext('Code Combination') ?></th>
+          <th><?php echo gettext('Description') ?>#</th>
+          <th><?php echo gettext('Account Type') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody coa_combination_values" >
@@ -116,9 +116,9 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo __('Status') ?></th>
-          <th><?php echo __('Start Date') ?>#</th>
-          <th><?php echo __('End Date') ?></th>
+          <th><?php echo gettext('Status') ?></th>
+          <th><?php echo gettext('Start Date') ?>#</th>
+          <th><?php echo gettext('End Date') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody coa_combination_values" >

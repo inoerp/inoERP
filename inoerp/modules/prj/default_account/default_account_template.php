@@ -2,7 +2,7 @@
  <div id="form_all">
   <div id="form_headerDiv">
    <form  method="post" id="prj_default_account_line"  name="default_account_line">
-    <span class="heading"><?php echo __('Project Default Accounts') ?></span>
+    <span class="heading"><?php echo gettext('Project Default Accounts') ?></span>
     <div id="form_serach_header" class="tabContainer"><ul class="inline_list">
       <li><?php $f->l_select_field_from_object('prj_project_type_header_id', prj_project_type_header::find_all(), 'prj_project_type_header_id', 'project_type', $prj_project_type_header_id_h, 'prj_project_type_header_id', 'action'); ?></li>
       <li><?php $f->l_select_field_from_object('accounting_group', option_header::find_options_byName('PRJ_ACCOUNTING_GRP'), 'option_line_code', 'option_line_value', $accounting_group_h, 'accounting_group', 'action'); ?>   </li>
@@ -10,10 +10,10 @@
              class="show2 document_id prj_default_account_id"><i class="fa fa-refresh"></i></a> </li>
      </ul>
     </div>
-    <div id ="form_line" class="prj_default_account"><span class="heading"><?php echo __('Line Details') ?></span>
+    <div id ="form_line" class="prj_default_account"><span class="heading"><?php echo gettext('Line Details') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo __('Default Accounts') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Default Accounts') ?></a></li>
       </ul>
       <div class="tabContainer"> 
 
@@ -21,12 +21,12 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Id') ?></th>
-           <th><?php echo __('Account Type') ?>#</th>
-           <th><?php echo __('Account') ?>#</th>
-           <th><?php echo __('Description') ?></th>
-           <th><?php echo __('Status') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Id') ?></th>
+           <th><?php echo gettext('Account Type') ?>#</th>
+           <th><?php echo gettext('Account') ?>#</th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Status') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody default_account_values" >

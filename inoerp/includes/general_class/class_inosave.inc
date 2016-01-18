@@ -220,7 +220,7 @@ class inosave extends dbObject {
     $before_save_result = $$class->_before_save();
     if ($before_save_result < 0) {
      if ($before_save_result === -99) {
-      echo '<br>' . __("This action is not allowed") . ' ' . $class . ' : _before_save() ';
+      echo '<br>' . gettext("This action is not allowed") . ' ' . $class . ' : _before_save() ';
      }
      return $before_save_result;
     } else if ($before_save_result === 10) {
@@ -236,7 +236,7 @@ class inosave extends dbObject {
     $required_field_flag = $required_field_flag && (isset($$class->$value));
     if (empty($$class->$value)) {
 //		 pa($$class);
-     echo "<div class='message'>" . __('Mandatory') . ' ' . $value . ' ' . __('is missing') . "</div> ";
+     echo "<div class='message'>" . gettext('Mandatory') . ' ' . $value . ' ' . gettext('is missing') . "</div> ";
      $error = [ 'Mandatory field is missing!' => "$value is NULL"];
      array_push($ie->page_exception, $error);
     }
@@ -251,7 +251,7 @@ class inosave extends dbObject {
      $new_entry = true;
     } catch (Exception $e) {
      $new_entry = false;
-     echo '<br> ' . __("Save failed!! error@inosavel line") . ' ' . __LINE__ . '<br>' . $e->getMessage();
+     echo '<br> ' . gettext("Save failed!! error@inosavel line") . ' ' . __LINE__ . '<br>' . $e->getMessage();
     }
     if ($new_entry) {
      if (method_exists($$class, '_after_save')) {
@@ -395,14 +395,14 @@ class inosave extends dbObject {
 
   if (!$dont_show_save_msg) {
    if ((!empty($$class)) && (count($$class) > 1)) {
-    echo '<div class="message">' . __('Data is Successfully saved') . '</div>';
+    echo '<div class="message">' . gettext('Data is Successfully saved') . '</div>';
     echo '<ul id="linids">';
     foreach ($$class as $array) {
      echo '<li class="' . $array->$keyField . '">' . $array->$primaryColumn . '</li>';
     }
     echo '</ul>';
    } else if (!empty($$class->$primaryColumn)) {
-    echo '<div class="message">' . __('Data is Successfully saved') . ' ' . $primaryColumn . __(' is ') . ' </div>';
+    echo '<div class="message">' . gettext('Data is Successfully saved') . ' ' . $primaryColumn . gettext(' is ') . ' </div>';
     echo '<div id="headerId">' . $$class->$primaryColumn . '</div>';
     if (!empty($primaryColumn2)) {
      echo '<div id="primary_column2">' . $$class->$primaryColumn2 . '</div>';
@@ -413,7 +413,7 @@ class inosave extends dbObject {
    } else {
     global $ie_array_page;
     global $ie;
-    echo '<div class="message">' . __('Action Completed') . '</div> ';
+    echo '<div class="message">' . gettext('Action Completed') . '</div> ';
     if (!empty($ie_array_page)) {
      echo $ie->show_pageErrors($ie_array_page);
     }
@@ -455,17 +455,17 @@ class inosave extends dbObject {
    }
 
    if ((!empty($$class)) && (count($$class) > 1) && is_object($$class)) {
-    echo '<div class="message">' . __('Data is Successfully saved') . ' ' . ' </div>';
+    echo '<div class="message">' . gettext('Data is Successfully saved') . ' ' . ' </div>';
     echo '<ul id="linids">';
     foreach ($$class as $array) {
      echo '<li class="lineId" data-trclass="' . $$class->$primaryColumn . '">' . $array->$primaryColumn . '</li>';
     }
     echo '</ul>';
    } elseif (!empty($$class->$primaryColumn)) {
-    echo '<div class="message">' . __('Transaction complete') . ' ' . '</div>';
+    echo '<div class="message">' . gettext('Transaction complete') . ' ' . '</div>';
     echo '<div class="lineId" data-trclass="' . $$class->$primaryColumn . '">' . $$class->$primaryColumn . '</div>';
    } else {
-    echo '<div class="message">' . __('Transaction complete') . ' ' . '</div>';
+    echo '<div class="message">' . gettext('Transaction complete') . ' ' . '</div>';
    }
   }
   echo '</div></div>';
@@ -498,14 +498,14 @@ class inosave extends dbObject {
      }
 
      if ((!empty($$class)) && (count($$class) > 1)) {
-      echo '<div class="message">' . __('Data is Successfully saved') . ' ' . ' </div>';
+      echo '<div class="message">' . gettext('Data is Successfully saved') . ' ' . ' </div>';
       echo '<ul id="linids">';
       foreach ($$class as $array) {
        echo '<li class="' . $trClass . '">' . $array->$primaryColumn . '</li>';
       }
       echo '</ul>';
      } elseif (!empty($$class->$primaryColumn)) {
-      echo '<div class="message">' . __('Data is Successfully saved') . ' ' . ' </div>';
+      echo '<div class="message">' . gettext('Data is Successfully saved') . ' ' . ' </div>';
       echo '<div class="lineId" data-trclass="' . $$class->$primaryColumn . '">' . $$class->$primaryColumn . '</div>';
      } else {
       echo ' Error code:  ! ';

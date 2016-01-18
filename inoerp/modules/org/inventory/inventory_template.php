@@ -1,11 +1,11 @@
 <div id ="form_header">
- <span class="heading"><?php echo __('Inventory Org Header') ?></span>
+ <span class="heading"><?php echo gettext('Inventory Org Header') ?></span>
  <form action=""  method="post" id="inventory"  name="inventory">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -47,11 +47,11 @@
   <div id ="form_line" class="form_line"><span class="heading">Inventory Org Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Item Attribute') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo __('Sourcing') ?> </a></li>
-     <li><a href="#tabsLine-4"><?php echo __('Costing Details') ?> </a></li>
-     <li><a href="#tabsLine-5"><?php echo __('Accounts') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Item Attribute') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Sourcing') ?> </a></li>
+     <li><a href="#tabsLine-4"><?php echo gettext('Costing Details') ?> </a></li>
+     <li><a href="#tabsLine-5"><?php echo gettext('Accounts') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

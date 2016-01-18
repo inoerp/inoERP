@@ -1,10 +1,10 @@
 <div id ="form_header">
  <form method="post" id="hr_leave_entitlement_header"  name="hr_leave_entitlement_header">
-  <span class="heading"><?php echo __('Leave Entitlement') ?></span>
+  <span class="heading"><?php echo gettext('Leave Entitlement') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Criteria') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Criteria') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -35,23 +35,23 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Entitlement Details') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Entitlement Details') ?></span>
  <form  method="post" id="hr_leave_entitlement_line"  name="hr_leave_entitlement_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Type') ?>#</th>
-        <th><?php echo __('Period') ?></th>
-        <th><?php echo __('Leave/Period') ?></th>
-        <th><?php echo __('Default no of Period') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Type') ?>#</th>
+        <th><?php echo gettext('Period') ?></th>
+        <th><?php echo gettext('Leave/Period') ?></th>
+        <th><?php echo gettext('Default no of Period') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody leave_entitlement_values" >

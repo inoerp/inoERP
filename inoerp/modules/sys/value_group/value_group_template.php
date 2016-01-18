@@ -1,15 +1,15 @@
 
 <div class="row small-left-padding">
 <div id="form_all">
- <span class="heading"><?php echo __('Value Group Header') ?></span>
+ <span class="heading"><?php echo gettext('Value Group Header') ?></span>
  <form action=""  method="post" id="sys_value_group_header"  name="sys_value_group_header">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Validation') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Validation') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -68,13 +68,13 @@
   </div>
  </form>
  <div id ="form_line" class="form_line">
-  <span class="heading"><?php echo __('Value Group Lines') ?></span>
+  <span class="heading"><?php echo gettext('Value Group Lines') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Values') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Parent Relationship') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Finance') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Item') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Parent Relationship') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Finance') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Item') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="sys_value_group_line_line"  name="sys_value_group_line_line">
@@ -82,15 +82,15 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Seq') ?>#</th>
-         <th><?php echo __('Line Id') ?></th>
-         <th><?php echo __('Code') ?></th>
-         <th><?php echo __('Value') ?></th>
-         <th><?php echo __('Description') ?></th>
-         <th><?php echo __('Status') ?></th>
-         <th><?php echo __('Start Date') ?></th>
-         <th><?php echo __('End Date') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Code') ?></th>
+         <th><?php echo gettext('Value') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Status') ?></th>
+         <th><?php echo gettext('Start Date') ?></th>
+         <th><?php echo gettext('End Date') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody sys_value_group_line_values" >
@@ -130,9 +130,9 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Seq') ?>#</th>
-         <th><?php echo __('Is Parent') ?></th>
-         <th><?php echo __('Parent Name') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Is Parent') ?></th>
+         <th><?php echo gettext('Parent Name') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody sys_value_group_line_values" >
@@ -166,10 +166,10 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Seq') ?></th>
-         <th><?php echo __('Account Qualifier') ?>#</th>
-         <th><?php echo __('Allow Budgeting') ?></th>
-         <th><?php echo __('Allow Posting') ?></th>
+         <th><?php echo gettext('Seq') ?></th>
+         <th><?php echo gettext('Account Qualifier') ?>#</th>
+         <th><?php echo gettext('Allow Budgeting') ?></th>
+         <th><?php echo gettext('Allow Posting') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody sys_value_group_line_values" >

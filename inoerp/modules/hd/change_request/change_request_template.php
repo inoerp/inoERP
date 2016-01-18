@@ -10,14 +10,14 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. 
  -->
- <div id ="form_all"><span class="heading"><?php echo __('Change Request') ?></span>
+ <div id ="form_all"><span class="heading"><?php echo gettext('Change Request') ?></span>
  <form method="post" id="hd_change_request"  name="hd_change_request">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -77,14 +77,14 @@
    </div>
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Request Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Request Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Description') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Change Plan') ?></a></li>
-     <li><a href="#tabsLine-3"><?php echo __('Review Info') ?></a></li>
-     <li><a href="#tabsLine-4"><?php echo __('Activity Details') ?></a></li>
-     <li><a href="#tabsLine-5"><?php echo __('Secondary') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Description') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Change Plan') ?></a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Review Info') ?></a></li>
+     <li><a href="#tabsLine-4"><?php echo gettext('Activity Details') ?></a></li>
+     <li><a href="#tabsLine-5"><?php echo gettext('Secondary') ?></a></li>
     </ul>
 
     <div class="tabContainer"> 

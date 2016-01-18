@@ -6,17 +6,17 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<span class="heading"><?php echo __('Sales Opportunity') ?></span>
+<span class="heading"><?php echo gettext('Sales Opportunity') ?></span>
 <div id ="form_header">
  <form  method="post" id="sd_opportunity"  name="sd_opportunity">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('New Contact') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
-     <li><a href="#tabsHeader-5"><?php echo __('Actions') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('New Contact') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -76,12 +76,12 @@ inoERP
      <div id="tabsHeader-5" class="tabContent">
       <div> 
        <ul class="column header_field">
-        <li><label><?php echo __('Action') ?></label>
+        <li><label><?php echo gettext('Action') ?></label>
          <?php
          echo $f->select_field_from_array('action', $$class->action_a, '', 'action');
          ?>
         </li>
-        <li><label><?php echo __('Close Reason') ?></label><?php $f->text_field_d('close_reason'); ?> 					</li>
+        <li><label><?php echo gettext('Close Reason') ?></label><?php $f->text_field_d('close_reason'); ?> 					</li>
        </ul>
 
        <div id="comment" class="shoe_comments">
@@ -92,12 +92,12 @@ inoERP
    </div>
   </div>
 
-  <div id ="form_line"><span class="heading"><?php echo __('Other Details') ?></span>
+  <div id ="form_line"><span class="heading"><?php echo gettext('Other Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Existing Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Address Details') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo __('Contact') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Existing Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Address Details') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Contact') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

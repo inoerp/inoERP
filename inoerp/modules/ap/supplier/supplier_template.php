@@ -1,11 +1,11 @@
 <div id ="form_header">
  <form  method="post" id="supplier_header"  name="supplier_header">
-  <span class="heading"><?php echo __('Supplier Master') ?></span>
+  <span class="heading"><?php echo gettext('Supplier Master') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('BU Assignment') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Address Details') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('BU Assignment') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -15,12 +15,12 @@
         <i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_number_field_d('supplier_number'); ?></li>               
-      <li><label><?php echo __('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly); ?>
+      <li><label><?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly); ?>
        <img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable">
       </li>
       <li><?php $f->l_select_field_from_object('supplier_type', supplier::supplier_types(), 'option_line_code', 'option_line_value', $$class->supplier_type, 'supplier_type', '', '', $readonly); ?>       </li>
       <li><?php $f->l_select_field_from_object('supplier_category', supplier::supplier_category(), 'option_line_code', 'option_line_value', $$class->supplier_category, 'supplier_category', '', '', $readonly); ?>       </li>
-      <li><label><?php echo __('Customer Name') ?></label><?php $f->text_field_d('customer_name', 'select_customer_name'); ?>
+      <li><label><?php echo gettext('Customer Name') ?></label><?php $f->text_field_d('customer_name', 'select_customer_name'); ?>
        <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
       </li>
       <li><?php $f->l_select_field_from_object('tax_country', option_header::COUNTRIES(), 'option_line_code', 'option_line_value', $$class->tax_country, 'tax_country', '', '', $readonly); ?>             </li>
@@ -44,7 +44,7 @@
  </form>
 </div>
 
-<div id ="form_line" class="form_line"><span class="heading"><?php echo __('Supplier Site Details') ?></span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Supplier Site Details') ?></span>
  <form  method="post" id="supplier_site"  name="supplier_site">
   <div id='line_before_tab' class="ino-well"> 
    <ul class="column header_field "> 
@@ -61,14 +61,14 @@
   </div>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Purchasing') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Receiving') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Site Address') ?> </a></li>
-    <li><a href="#tabsLine-5"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsLine-6"><?php echo __('Contact') ?> </a></li>
-    <li><a href="#tabsLine-7"><?php echo __('Notes') ?> </a></li>
-    <li><a href="#tabsLine-8"><?php echo __('Secondary') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Purchasing') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Receiving') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Site Address') ?> </a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsLine-6"><?php echo gettext('Contact') ?> </a></li>
+    <li><a href="#tabsLine-7"><?php echo gettext('Notes') ?> </a></li>
+    <li><a href="#tabsLine-8"><?php echo gettext('Secondary') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -120,7 +120,7 @@
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy small_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo __('Quantity Tolerance') ?></div></div>
+       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Quantity Tolerance') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_number_field('positive_qty_tolerance', $$class_second->positive_qty_tolerance); ?></li>
@@ -130,7 +130,7 @@
        </div>
       </div>
       <div class="panel panel-collapse panel-ino-classy small_box">
-       <div class="panel-heading"><div class="panel-title"><?php echo __('Receipt Days Tolerance') ?></div></div>
+       <div class="panel-heading"><div class="panel-title"><?php echo gettext('Receipt Days Tolerance') ?></div></div>
        <div class="panel-body">
         <ul class="column line_field">
          <li><?php $f->l_number_field('positive_receipt_days_tolerance', $$class_second->positive_receipt_days_tolerance); ?></li>

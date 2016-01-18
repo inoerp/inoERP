@@ -1,12 +1,12 @@
 <div id ="fp_forecast_group_divId">
  <form action=""  method="post" id="fp_forecast_group"  name="fp_forecast_group">
-  <span class="heading"><?php echo __('Forecast Group') ?></span>
+  <span class="heading"><?php echo gettext('Forecast Group') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -49,8 +49,8 @@
   <div id ="form_line" class="form_line"><span class="heading">Forecast Group Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Forecasts') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Forecasts') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

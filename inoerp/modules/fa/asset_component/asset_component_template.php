@@ -7,17 +7,17 @@ inoERP
  * @component code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo __('Asset Component') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Asset Component') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-   <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-   <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <div id="tabsHeader-1" class="tabContent">
     <ul class="column header_field">
-     <li><label><?php echo __('Asset Number') ?></label>
+     <li><label><?php echo gettext('Asset Number') ?></label>
       <?php
       echo $f->val_field('asset_number', $fa_asset->asset_number, '', 'asset_number', '', '', '', 'fa_asset', 'asset_number');
       echo $f->hidden_field_withIdClass('fa_asset_id', $fa_asset->fa_asset_id, 'fa_asset_id');
@@ -26,9 +26,9 @@ inoERP
       <a name="show" href="form.php?class_name=fa_asset_component&<?php echo "mode=$mode"; ?>" class="show document_id fa_asset_id">
        <i class="fa fa-refresh"></i></a> 
      </li>
-     <li><label><?php echo __('Asset Type') ?></label><?php echo $f->text_field('type', $fa_asset->type, '', 'type', '', '', 1); ?></li>
-     <li><label><?php echo __('Description') ?></label><?php echo $f->text_field('description', $fa_asset->description, '', 'description', '', '', 1); ?></li>
-     <li><label><?php echo __('Status') ?></label><?php echo $f->text_field('status', $fa_asset->status, '', 'status', '', '', 1); ?></li>
+     <li><label><?php echo gettext('Asset Type') ?></label><?php echo $f->text_field('type', $fa_asset->type, '', 'type', '', '', 1); ?></li>
+     <li><label><?php echo gettext('Description') ?></label><?php echo $f->text_field('description', $fa_asset->description, '', 'description', '', '', 1); ?></li>
+     <li><label><?php echo gettext('Status') ?></label><?php echo $f->text_field('status', $fa_asset->status, '', 'status', '', '', 1); ?></li>
     </ul>
    </div>
    <div id="tabsHeader-2" class="tabContent">
@@ -54,11 +54,11 @@ inoERP
   </div>
  </div>
 </div>
-<div id ="form_line" class="form_line"><span class="heading"><?php echo __('Component Details') ?></span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Component Details') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1"><?php echo __('Operation') ?></a></li>
-   <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Operation') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <form method="post" id="fa_asset_component"  name="fa_asset_component">
@@ -66,16 +66,16 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Asset component Id') ?></th>
-        <th><?php echo __('Line') ?> #</th>
-        <th><?php echo __('Asset') ?> #</th>
-        <th><?php echo __('Asset Description') ?></th>
-        <th><?php echo __('Component Type') ?></th>
-        <th><?php echo __('Source Type') ?></th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('Reference1') ?></th>
-        <th><?php echo __('Reference2') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Asset component Id') ?></th>
+        <th><?php echo gettext('Line') ?> #</th>
+        <th><?php echo gettext('Asset') ?> #</th>
+        <th><?php echo gettext('Asset Description') ?></th>
+        <th><?php echo gettext('Component Type') ?></th>
+        <th><?php echo gettext('Source Type') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Reference1') ?></th>
+        <th><?php echo gettext('Reference2') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody fa_asset_component_line_values" >

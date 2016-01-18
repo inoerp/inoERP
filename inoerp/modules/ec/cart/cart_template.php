@@ -2,9 +2,9 @@
  <div id="form_all">
   <div id="form_headerDiv">
    <form action=""  method="post" id="ec_cart_line"  name="cart_line">
-    <span class="heading"><?php echo __('Cart'); ?></span>
+    <span class="heading"><?php echo gettext('Cart'); ?></span>
     <div id="form_serach_header" class="tabContainer">
-     <label><?php echo __('User Name') ?></label>
+     <label><?php echo gettext('User Name') ?></label>
      <?php echo $f->select_field_from_object('user_id', user::find_all(), 'user_id', 'username', $user_id_h, 'user_id'); ?>
      <a name="show" href="form.php?class_name=ec_cart&<?php echo "mode=$mode"; ?>" class="show document_id ec_cart_id">
       <i class="fa fa-refresh"></i></a> 
@@ -12,22 +12,22 @@
     <div id ="form_line" class="ec_cart"><span class="heading">Product Details </span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo __('Current Cart') ?></a></li>
-       <li><a href="#tabsLine-2"><?php echo __('Saved Cart') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Current Cart') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Saved Cart') ?></a></li>
       </ul>
       <div class="tabContainer"> 
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Seq') ?>#</th>
-           <th><?php echo __('Id') ?></th>
-           <th><?php echo __('Product') ?>#</th>
-           <th><?php echo __('Qty') ?>#</th>
-           <th><?php echo __('Price') ?>#</th>
-           <th><?php echo __('Delivery Instruction') ?></th>
-           <th><?php echo __('Sub Total') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Seq') ?>#</th>
+           <th><?php echo gettext('Id') ?></th>
+           <th><?php echo gettext('Product') ?>#</th>
+           <th><?php echo gettext('Qty') ?>#</th>
+           <th><?php echo gettext('Price') ?>#</th>
+           <th><?php echo gettext('Delivery Instruction') ?></th>
+           <th><?php echo gettext('Sub Total') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody cart_values" >
@@ -66,14 +66,14 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Seq') ?>#</th>
-           <th><?php echo __('Id') ?></th>
-           <th><?php echo __('Product') ?>#</th>
-           <th><?php echo __('Qty') ?>#</th>
-           <th><?php echo __('Price') ?>#</th>
-           <th><?php echo __('Delivery Instruction') ?></th>
-           <th><?php echo __('Sub Total') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Seq') ?>#</th>
+           <th><?php echo gettext('Id') ?></th>
+           <th><?php echo gettext('Product') ?>#</th>
+           <th><?php echo gettext('Qty') ?>#</th>
+           <th><?php echo gettext('Price') ?>#</th>
+           <th><?php echo gettext('Delivery Instruction') ?></th>
+           <th><?php echo gettext('Sub Total') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody cart_values" >

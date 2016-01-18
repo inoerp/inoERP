@@ -3,7 +3,7 @@
  <!--    End of place for showing error messages-->
  <div id ="form_header">
   <form  method="post" id="gl_journal_interface" name="gl_journal_interface"  >
-   <span class="heading"><?php echo __('Journal Interface Details') ?></span>
+   <span class="heading"><?php echo gettext('Journal Interface Details') ?></span>
    <div class="tabContainer"> 
     <ul class="column header_field"> 
      <li><?php $f->l_text_field_dr_withSearch('gl_journal_interface_id') ?>

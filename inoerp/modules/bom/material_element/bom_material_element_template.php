@@ -8,14 +8,14 @@ inoERP
 -->
 
 
-<div id="form_all"><span class="heading"><?php echo __('Material Element') ?></span>
+<div id="form_all"><span class="heading"><?php echo gettext('Material Element') ?></span>
  <form method="post" id="bom_material_element"  name="bom_material_element">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -57,8 +57,8 @@ inoERP
   <div id ="form_line" class="form_line"><span class="heading"> Material Element Details </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Details') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Future') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

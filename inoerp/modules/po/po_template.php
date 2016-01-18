@@ -12,16 +12,16 @@ inoERP
  <!--    End of place for showing error messages-->
 
  <div id ="form_header">
-  <span class="heading"><?php echo __('Purchase Order') ?></span>
+  <span class="heading"><?php echo gettext('Purchase Order') ?></span>
   <form  method="post" id="po_header"  name="po_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Finance') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Address Details') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
-     <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-6"><?php echo __('Actions') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -43,7 +43,7 @@ inoERP
        <li><?php
         echo $f->l_val_field_d('supplier_number', 'supplier', 'supplier_number', '', '', 'vf_select_supplier_number');
         ?><i class="generic g_select_supplier_number select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
-       <li><label><?php echo __('Supplier Site') ?></label><?php
+       <li><label><?php echo gettext('Supplier Site') ?></label><?php
         $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
         echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
         ?> </li>
@@ -98,7 +98,7 @@ inoERP
      <div id="tabsHeader-6" class="tabContent">
       <div> 
        <ul class="column four_column">
-        <li id="document_print"><label><?php echo __('Document Print') ?></label>
+        <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
          <a class="button" target="_blank"
             href="<?php echo HOME_URL ?>form.php?class_name=po_header&amp;router=pdf_print&amp;po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" >Print PO</a>
         </li>
@@ -125,32 +125,32 @@ inoERP
   return;
  }
  ?>
- <div id="form_line" class="form_line"><span class="heading"><?php echo __('PO Lines & Shipments') ?></span>
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('PO Lines & Shipments') ?></span>
   <form action=""  method="post" id="po_line"  name="po_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Finance') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo __('Agreement Details') ?> </a></li>
-     <li><a href="#tabsLine-4"><?php echo __('Other Info') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Agreement Details') ?> </a></li>
+     <li><a href="#tabsLine-4"><?php echo gettext('Other Info') ?> </a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Seq') ?>#</th>
-         <th><?php echo __('Line Id') ?></th>
-         <th><?php echo __('Line') ?>#</th>
-         <th><?php echo __('Receiving') ?></th>
-         <th><?php echo __('Type') ?></th>
-         <th><?php echo __('Item Number') ?></th>
-         <th><?php echo __('Revision') ?></th>
-         <th><?php echo __('Description') ?></th>
-         <th><?php echo __('Quantity') ?></th>
-         <th><?php echo __('UOM') ?></th>
-         <th><?php echo __('Shipments') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Line') ?>#</th>
+         <th><?php echo gettext('Receiving') ?></th>
+         <th><?php echo gettext('Type') ?></th>
+         <th><?php echo gettext('Item Number') ?></th>
+         <th><?php echo gettext('Revision') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Quantity') ?></th>
+         <th><?php echo gettext('UOM') ?></th>
+         <th><?php echo gettext('Shipments') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -202,16 +202,16 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Seq') ?>#</th>
-         <th><?php echo __('Price List') ?></th>
-         <th><?php echo __('Price Date') ?></th>
-         <th><?php echo __('Unit Price') ?>#</th>
-         <th><?php echo __('Line Price') ?>#</th>
-         <th><?php echo __('Tax Code') ?></th>
-         <th><?php echo __('Tax Amount') ?></th>
-         <th><?php echo __('GL Line Price') ?></th>
-         <th><?php echo __('GL Tax Amount') ?></th>
-         <th><?php echo __('Line Description') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Price List') ?></th>
+         <th><?php echo gettext('Price Date') ?></th>
+         <th><?php echo gettext('Unit Price') ?>#</th>
+         <th><?php echo gettext('Line Price') ?>#</th>
+         <th><?php echo gettext('Tax Code') ?></th>
+         <th><?php echo gettext('Tax Amount') ?></th>
+         <th><?php echo gettext('GL Line Price') ?></th>
+         <th><?php echo gettext('GL Tax Amount') ?></th>
+         <th><?php echo gettext('Line Description') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -245,11 +245,11 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Seq') ?>#</th>
-         <th><?php echo __('Agreed Quantity') ?></th>
-         <th><?php echo __('Released Quantity') ?></th>
-         <th><?php echo __('Agreed Amount') ?></th>
-         <th><?php echo __('Released Amount') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Agreed Quantity') ?></th>
+         <th><?php echo gettext('Released Quantity') ?></th>
+         <th><?php echo gettext('Agreed Amount') ?></th>
+         <th><?php echo gettext('Released Amount') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -290,14 +290,14 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Seq') ?>#</th>
-         <th><?php echo __('On Hold') ?></th>
-         <th><?php echo __('Hold Details') ?></th>
-         <th><?php echo __('Kit Item') ?>?</th>
-         <th><?php echo __('Configured') ?>?</th>
-         <th><?php echo __('Item Configuration') ?></th>
-         <th><?php echo __('Ref Doc Type') ?></th>
-         <th><?php echo __('Ref Number') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('On Hold') ?></th>
+         <th><?php echo gettext('Hold Details') ?></th>
+         <th><?php echo gettext('Kit Item') ?>?</th>
+         <th><?php echo gettext('Configured') ?>?</th>
+         <th><?php echo gettext('Item Configuration') ?></th>
+         <th><?php echo gettext('Ref Doc Type') ?></th>
+         <th><?php echo gettext('Ref Number') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">

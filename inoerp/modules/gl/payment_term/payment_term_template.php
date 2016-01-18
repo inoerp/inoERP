@@ -1,4 +1,4 @@
-<div id ="form_header"><span class="heading"><?php echo __('Payment Term') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Payment Term') ?></span>
  <form  method="post" id="payment_term"  name="payment_term">
   <div class="tabContainer">
    <ul class="column header_field">
@@ -17,12 +17,12 @@
  </form>
 </div>
 
-<div id ="mix_form" class="mix_form"><span class="heading"><?php echo __('Schedule & Discount Lines') ?></span>
+<div id ="mix_form" class="mix_form"><span class="heading"><?php echo gettext('Schedule & Discount Lines') ?></span>
 
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1"><?php echo __('Schedule') ?></a></li>
-   <li><a href="#tabsLine-2"><?php echo __('Discount') ?> </a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Schedule') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Discount') ?> </a></li>
   </ul>
   <div class="tabContainer">
    <div id ="form_line" class="form_line">
@@ -31,13 +31,13 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Schedule Id') ?></th>
-         <th><?php echo __('Seq Number') ?></th>
-         <th><?php echo __('Percentage') ?></th>
-         <th><?php echo __('Due Days') ?></th>
-         <th><?php echo __('Due Dates') ?></th>
-         <th><?php echo __('Date of Month') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Schedule Id') ?></th>
+         <th><?php echo gettext('Seq Number') ?></th>
+         <th><?php echo gettext('Percentage') ?></th>
+         <th><?php echo gettext('Due Days') ?></th>
+         <th><?php echo gettext('Due Dates') ?></th>
+         <th><?php echo gettext('Date of Month') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody payment_term_schedule_values" >
@@ -73,13 +73,13 @@
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Discount Id') ?></th>
-         <th><?php echo __('Seq Number') ?></th>
-         <th><?php echo __('Percentage') ?></th>
-         <th><?php echo __('Due Days') ?></th>
-         <th><?php echo __('Due Dates') ?></th>
-         <th><?php echo __('Date of Month') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Discount Id') ?></th>
+         <th><?php echo gettext('Seq Number') ?></th>
+         <th><?php echo gettext('Percentage') ?></th>
+         <th><?php echo gettext('Due Days') ?></th>
+         <th><?php echo gettext('Due Dates') ?></th>
+         <th><?php echo gettext('Date of Month') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody2 payment_term_discount_values">

@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form  method="post" id="ap_payment_process"  name="ap_payment_process">
-  <span class="heading"><?php echo __('Payment Process') ?></span>
+  <span class="heading"><?php echo gettext('Payment Process') ?></span>
   <div class="tabContainer">
    <ul class="column header_field"> 
     <li><?php $f->l_text_field_dr_withSearch('ap_payment_process_id') ?>
@@ -15,11 +15,11 @@
 
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Payment Source Details') ?> </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Payment Source Details') ?> </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Bank Account') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Bank Account') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

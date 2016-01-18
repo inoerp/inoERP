@@ -1,11 +1,11 @@
 <div id ="form_header">
  <form method="post" id="fa_asset_category"  name="fa_asset_category">
-  <span class="heading"><?php echo __('Asset Category') ?></span>
+  <span class="heading"><?php echo gettext('Asset Category') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -49,7 +49,7 @@
   </div>
  </form>
 </div>
-<span class="heading"><?php echo __('Asset Book Category Association') ?></span>
+<span class="heading"><?php echo gettext('Asset Book Category Association') ?></span>
 <div id ="form_line" class="form_line">
  <form action=""  method="post" id="fa_book_category_association"  name="fa_book_category_association">
   <div class="line_before_tab"> 
@@ -65,28 +65,28 @@
   </div>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Cost Accounts') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Depreciation Accounts') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Cost Accounts') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Depreciation Accounts') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <ul class="column header_field"> 
-      <li><label><?php echo __('Cost Ac') ?></label><?php $f->ac_field_d2m('asset_cost_ac_id'); ?></li>
-      <li><label><?php echo __('Clearing Ac') ?></label><?php $f->ac_field_d2m('asset_clearing_ac_id'); ?></li>
-      <li><label><?php echo __('CIP Cost Ac') ?></label><?php $f->ac_field_d2m('cip_cost_ac_id'); ?></li>
-      <li><label><?php echo __('CIP Clearing Ac') ?></label><?php $f->ac_field_d2m('cip_clearing_ac_id'); ?></li>
+      <li><label><?php echo gettext('Cost Ac') ?></label><?php $f->ac_field_d2m('asset_cost_ac_id'); ?></li>
+      <li><label><?php echo gettext('Clearing Ac') ?></label><?php $f->ac_field_d2m('asset_clearing_ac_id'); ?></li>
+      <li><label><?php echo gettext('CIP Cost Ac') ?></label><?php $f->ac_field_d2m('cip_cost_ac_id'); ?></li>
+      <li><label><?php echo gettext('CIP Clearing Ac') ?></label><?php $f->ac_field_d2m('cip_clearing_ac_id'); ?></li>
      </ul>
     </div> 
     <!--end of tab1-->
     <div id="tabsLine-2" class="tabContent">
      <ul class="column five_column"> 
-      <li><label><?php echo __('Depreciation Expense') ?></label><?php $f->ac_field_d2m('depreciation_expense_ac_id'); ?></li>
-      <li><label><?php echo __('Accumulated Depreciation') ?></label><?php $f->ac_field_d2m('accumulated_depreciation_ac_id'); ?></li>
-      <li><label><?php echo __('Bonus Expense') ?></label><?php $f->ac_field_d2('bonus_expense_ac_id'); ?></li>
-      <li><label><?php echo __('Bonus Reserve') ?></label><?php $f->ac_field_d2('bonus_reserve_ac_id'); ?></li>
-      <li><label><?php echo __('Revalue Reserve') ?></label><?php $f->ac_field_d2m('revalue_reserve_ac_id'); ?></li>
-      <li><label><?php echo __('Retirement Gain/Loss') ?></label><?php $f->ac_field_d2('retirement_gl_ac_id'); ?></li>
-      <li><label><?php echo __('Unplanned Depreciation') ?></label><?php $f->ac_field_d2m('unplanned_depreciation_expense_ac_id'); ?></li>
+      <li><label><?php echo gettext('Depreciation Expense') ?></label><?php $f->ac_field_d2m('depreciation_expense_ac_id'); ?></li>
+      <li><label><?php echo gettext('Accumulated Depreciation') ?></label><?php $f->ac_field_d2m('accumulated_depreciation_ac_id'); ?></li>
+      <li><label><?php echo gettext('Bonus Expense') ?></label><?php $f->ac_field_d2('bonus_expense_ac_id'); ?></li>
+      <li><label><?php echo gettext('Bonus Reserve') ?></label><?php $f->ac_field_d2('bonus_reserve_ac_id'); ?></li>
+      <li><label><?php echo gettext('Revalue Reserve') ?></label><?php $f->ac_field_d2m('revalue_reserve_ac_id'); ?></li>
+      <li><label><?php echo gettext('Retirement Gain/Loss') ?></label><?php $f->ac_field_d2('retirement_gl_ac_id'); ?></li>
+      <li><label><?php echo gettext('Unplanned Depreciation') ?></label><?php $f->ac_field_d2m('unplanned_depreciation_expense_ac_id'); ?></li>
      </ul>
      <!--end of tab1 div three_column-->
     </div> 

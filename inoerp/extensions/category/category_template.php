@@ -1,12 +1,12 @@
 <form  method="post" id="category"  name="category">
  <div id ="form_header">
-  <span class="heading"><?php echo __('Category Header') ?></span>
+  <span class="heading"><?php echo gettext('Category Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Images') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Primary Image') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Images') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Primary Image') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
    </ul>
    <div class="tabContainer">
 
@@ -17,7 +17,7 @@
         <i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_checkBox_field_d('primary_cb'); ?></li>
-      <li><label><?php echo __('Parent Name') ?></label><?php
+      <li><label><?php echo gettext('Parent Name') ?></label><?php
        $cat = new category();
        echo $cat->all_child_category_select_option('parent_id', '', $$class->parent_id, 'parent_id', false)
        ?> 
@@ -61,7 +61,7 @@
  <div id ="form_line" class="form_line"><span class="heading">Category Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Long Description') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Long Description') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">

@@ -1,10 +1,10 @@
 <div class="row small-left-padding">
  <div id="form_all">
-  <span class="heading"><?php echo __('Tax Regions') ?></span>
+  <span class="heading"><?php echo gettext('Tax Regions') ?></span>
   <div id="form_headerDiv">
    <form  method="post" id="mdm_tax_region_line"  name="tax_region_line">
     <div id="form_serach_header" class="tabContainer">
-     <label><?php echo __('Country') ?></label>
+     <label><?php echo gettext('Country') ?></label>
      <?php $f->l_select_field_from_object('country_code', mdm_tax_region::country(), 'option_line_code', 'option_line_value', $country_code_h, 'country_code', ' ', '', $readonly1); ?>
      <a name="show" href="form.php?class_name=mdm_tax_region&<?php echo "mode=$mode"; ?>" class="show document_id mdm_tax_region_id">
       <i class="fa fa-refresh"></i></a> 
@@ -12,8 +12,8 @@
     <div id ="form_line" class="mdm_tax_region">
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo __('Location') ?></a></li>
-       <li><a href="#tabsLine-2"><?php echo __('Reporting') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Location') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Reporting') ?></a></li>
       </ul>
       <div class="tabContainer"> 
 
@@ -21,14 +21,14 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Seq') ?>#</th>
-           <th><?php echo __('Id') ?></th>
-           <th><?php echo __('Country Code') ?>#</th>
-           <th><?php echo __('State') ?></th>
-           <th><?php echo __('City') ?></th>
-           <th><?php echo __('Region Name') ?></th>
-           <th><?php echo __('Description') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Seq') ?>#</th>
+           <th><?php echo gettext('Id') ?></th>
+           <th><?php echo gettext('Country Code') ?>#</th>
+           <th><?php echo gettext('State') ?></th>
+           <th><?php echo gettext('City') ?></th>
+           <th><?php echo gettext('Region Name') ?></th>
+           <th><?php echo gettext('Description') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody tax_region_values" >
@@ -71,10 +71,10 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Seq') ?>#</th>
-           <th><?php echo __('Status') ?></th>
-           <th><?php echo __('Regime') ?></th>
-           <th><?php echo __('Jurisdiction') ?></th>
+           <th><?php echo gettext('Seq') ?>#</th>
+           <th><?php echo gettext('Status') ?></th>
+           <th><?php echo gettext('Regime') ?></th>
+           <th><?php echo gettext('Jurisdiction') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody tax_region_values" >

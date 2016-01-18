@@ -12,16 +12,16 @@ inoERP
  <!--    End of place for showing error messages-->
 
  <div id ="form_header">
-  <span class="heading"><?php echo __('Purchase Order') ?></span>
+  <span class="heading"><?php echo gettext('Purchase Order') ?></span>
   <form action=""  method="post" id="po_header"  name="po_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Finance') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Address Details') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
-     <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-6"><?php echo __('Actions') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -37,9 +37,9 @@ inoERP
         <li><?php echo $f->hidden_field_withId('ref_po_header_id', $$class->ref_po_header_id); ?>
          <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
          <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-          <?php echo __('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
+          <?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
         <li><?php $f->l_text_field_d('supplier_number'); ?></li>
-        <li><label><?php echo __('Supplier Site') ?></label><?php
+        <li><label><?php echo gettext('Supplier Site') ?></label><?php
          $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
          echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
          ?> </li>
@@ -69,7 +69,7 @@ inoERP
       <div class="left_half shipto address_details">
        <ul class="column four_column">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-          <?php __('Ship To Site Id'); ?></label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
+          <?php gettext('Ship To Site Id'); ?></label><?php $f->text_field_d('ship_to_id', 'address_id site_address_id'); ?>
         </li>
         <li><?php $f->l_text_field_dr('ship_to_address_name', 'address_name'); ?></li>
         <li><?php $f->l_text_field_dr('ship_to_address', 'address'); ?></li>
@@ -80,7 +80,7 @@ inoERP
       <div class="right_half billto address_details">
        <ul class="column four_column">
         <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-          <?php __('Bill To Site Id'); ?></label>
+          <?php gettext('Bill To Site Id'); ?></label>
          <?php $f->text_field_d('bill_to_id', 'address_id  site_address_id'); ?>
         </li>
         <li><?php $f->l_text_field_dr('bill_to_address_name', 'address_name'); ?></li>
@@ -111,7 +111,7 @@ inoERP
      <div id="tabsHeader-6" class="tabContent">
       <div> 
        <ul class="column four_column">
-        <li id="document_print"><label><?php echo __('Document Print') ?></label>
+        <li id="document_print"><label><?php echo gettext('Document Print') ?></label>
          <a class="button" target="_blank"
             href="<?php echo HOME_URL ?>modules/po/po_print.php?po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" >Print PO</a>
         </li>

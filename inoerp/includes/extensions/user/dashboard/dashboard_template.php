@@ -7,20 +7,20 @@ if (!empty($ino_user->use_personal_db_cb)) {
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 <div id ="user_dashboard_divId">
  <div id="tabsHeader">
-  <form method="post" id="user_header" name="user_header"><span class="heading"><?php echo __('User Dashboard ') ?>
+  <form method="post" id="user_header" name="user_header"><span class="heading"><?php echo gettext('User Dashboard ') ?>
     <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $user_id ?>" 
        class='fa fa-cog getAjaxForm'></a>
    </span>
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Navigation') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Quick Info ') ?></a></li>
-     <li><a href="#tabsHeader-3" class="get-report-content" data-report_id="3"><?php echo __('On hand') ?></a></li>
-     <li><a href="#tabsHeader-4" class="get-report-content" data-report_id="5"><?php echo __('Open PO') ?></a></li>
-     <li><a href="#tabsHeader-5" class="get-report-content" data-report_id="4"><?php echo __('Sales Funnel') ?></a></li>
-     <li><a href="#tabsHeader-6"><?php echo __('WIP Value') ?></a></li>
-     <li><a href="#tabsHeader-7" class="get-report-content" data-report_id="1"><?php echo __('Supplier Liability') ?></a></li>
-     <li><a href="#tabsHeader-8" class="get-report-content" data-report_id="6"><?php echo __('Customer Balance') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Navigation') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Quick Info ') ?></a></li>
+     <li><a href="#tabsHeader-3" class="get-report-content" data-report_id="3"><?php echo gettext('On hand') ?></a></li>
+     <li><a href="#tabsHeader-4" class="get-report-content" data-report_id="5"><?php echo gettext('Open PO') ?></a></li>
+     <li><a href="#tabsHeader-5" class="get-report-content" data-report_id="4"><?php echo gettext('Sales Funnel') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo gettext('WIP Value') ?></a></li>
+     <li><a href="#tabsHeader-7" class="get-report-content" data-report_id="1"><?php echo gettext('Supplier Liability') ?></a></li>
+     <li><a href="#tabsHeader-8" class="get-report-content" data-report_id="6"><?php echo gettext('Customer Balance') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">

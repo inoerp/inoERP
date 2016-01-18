@@ -1,12 +1,12 @@
 <form  method="post" id="fa_asset_retirement"  name="fa_asset_retirement">
- <span class="heading"><?php echo __('Asset Retirement') ?></span>
+ <span class="heading"><?php echo gettext('Asset Retirement') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Action') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Action') ?></a></li>
 
    </ul>
    <div class="tabContainer"> 
@@ -71,10 +71,10 @@
   </div>
  </div>
 
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Asset Retirement Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Asset Retirement Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basics') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">

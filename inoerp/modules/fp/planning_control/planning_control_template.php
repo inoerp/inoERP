@@ -1,5 +1,5 @@
 <div id="fp_planning_control_divId">
- <span class="heading"><?php echo __('Planning Control Header') ?></span>
+ <span class="heading"><?php echo gettext('Planning Control Header') ?></span>
  <form action=""  method="post" id="fp_planning_control"  name="fp_planning_control">
   <div class="tabContainer">
    <ul class="column header_field">
@@ -10,11 +10,11 @@
     </li>
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Planning Control Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Planning Control Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Planning Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Future') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Planning Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Future') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

@@ -6,13 +6,13 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo __('Collection Plan Assignment') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Collection Plan Assignment') ?></span>
  <form method="post" id="qa_cp_assignment_header"  name="qa_cp_assignment_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -54,23 +54,23 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Transaction Triggers') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Transaction Triggers') ?></span>
  <form  method="post" id="qa_cp_assignment_line"  name="qa_cp_assignment_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Amounts') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Amounts') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Trigger Name') ?></th>
-        <th><?php echo __('Condition') ?></th>
-        <th><?php echo __('From') ?></th>
-        <th><?php echo __('To') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Trigger Name') ?></th>
+        <th><?php echo gettext('Condition') ?></th>
+        <th><?php echo gettext('From') ?></th>
+        <th><?php echo gettext('To') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

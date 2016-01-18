@@ -6,13 +6,13 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo __('Rate Schedule') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Rate Schedule') ?></span>
  <form  method="post" id="prj_rate_schedule_header"  name="prj_rate_schedule_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -53,14 +53,14 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Rate Schedule Details') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Rate Schedule Details') ?></span>
  <form action=""  method="post" id="prj_rate_schedule_line"  name="prj_rate_schedule_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Employee') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Job') ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Non Labor') ?></a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Resource Class') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Employee') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Job') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Non Labor') ?></a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Resource Class') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">

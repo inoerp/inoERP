@@ -337,7 +337,7 @@ EOD;
   $stmt .= "<div class='existing-image'>" . $this->show_existing_image($value_file_id, $div_class) . '</div>';
   $stmt .= "<div class='show_attachment'>";
   $stmt .= '<div class="form-group">
-							<ul class="inRow asperWidth"><label for="exampleInputFile">' . __($label) . '</label>
+							<ul class="inRow asperWidth"><label for="exampleInputFile">' . gettext($label) . '</label>
 							 <li><input type="file" id="attachments" class="attachments" value="" name="uploaded_file[]" multiple/></li>
               <li><input type="hidden" class="hidden display_type" name="display_type[]" value="' . $display_type . '"/></li>
               <li><input type="hidden" class="hidden file_id ' . $name . '" name="' . $name . '[]" value="' . $value_file_id . '"/></li>
@@ -449,7 +449,7 @@ EOD;
  }
 
  public function l_text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256") {
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->text_field($name, $value, $size, $id, $div_class, $required, $readonly, $place_holder, $title, $maxlength);
  }
 
@@ -526,7 +526,7 @@ EOD;
  }
 
  public function l_number_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $min = "", $max = "") {
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->number_field($name, $value, $size, $id, $div_class, $required, $readonly, $place_holder, $title, $min, $max);
  }
 
@@ -537,25 +537,25 @@ EOD;
 
  public function l_number_field_d($field_name, $div_class = "") {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->number_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
  public function l_number_field_dr($field_name, $div_class = "") {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->number_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
  }
 
  public function l_number_field_dm($field_name, $div_class = "") {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->number_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1);
  }
 
  public function l_number_field_dsr($field_name, $div_class = "") {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   $field_name .=' small';
   echo $this->number_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
  }
@@ -575,15 +575,15 @@ EOD;
   $default_add_name = 'New Address ' . ($existing_add_count + 1);
   $add_field = '<div class="new-address">
         <ul class="column header_field address">';
-  $add_field .= '<li><label>' . __('Address Name') . '</label>' . $f->text_field('addr_address_name', $default_add_name, '', '', '', 1) . '</li>';
-  $add_field .= '<li><label>' . __('Phone') . '</label>' . $f->text_field('addr_phone', '') . '</li>';
-  $add_field .= '<li><label>' . __('eMail') . '</label>' . $f->text_field('addr_email', $email) . '</li>';
-  $add_field .= '<li><label>' . __('Website') . '</label>' . $f->text_field('addr_website', '') . '</li>';
-  $add_field .= '<li><label>' . __('Coutry') . '</label>' . $f->text_field('addr_country', '') . '</li>';
-  $add_field .= '<li><label>' . __('Postal Code') . '</label>' . $f->text_field('addr_postal_code', '') . '</li>';
-  $add_field .= '<li><label>' . __('Default') . '</label>' . $f->checkBox_field('addr_default_cb', '') . '</li>';
-  $add_field .= '<li><label>' . __('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', address::address_usage_type(), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';
-  $add_field .= '<li><label>' . __('Address') . '</label>' . form::text_area('addr_address', '', '3', '22', '', 'Complete Address', 'address') . '</li>';
+  $add_field .= '<li><label>' . gettext('Address Name') . '</label>' . $f->text_field('addr_address_name', $default_add_name, '', '', '', 1) . '</li>';
+  $add_field .= '<li><label>' . gettext('Phone') . '</label>' . $f->text_field('addr_phone', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('eMail') . '</label>' . $f->text_field('addr_email', $email) . '</li>';
+  $add_field .= '<li><label>' . gettext('Website') . '</label>' . $f->text_field('addr_website', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Coutry') . '</label>' . $f->text_field('addr_country', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $f->text_field('addr_postal_code', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Default') . '</label>' . $f->checkBox_field('addr_default_cb', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', address::address_usage_type(), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';
+  $add_field .= '<li><label>' . gettext('Address') . '</label>' . form::text_area('addr_address', '', '3', '22', '', 'Complete Address', 'address') . '</li>';
   $add_field .= '<li class="hidden">' . $f->hidden_field('address_id', '') . '</li>';
   $add_field .= '</ul>
        </div>';
@@ -666,13 +666,13 @@ EOD;
 
  public function l_address_field_d($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-//  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+//  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->address_field_d($field_name, $div_class);
  }
 
  public function l_address_field_wid($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->address_field_wid($field_name, $div_class);
  }
 
@@ -720,37 +720,37 @@ EOD;
 
  public function l_val_field_d($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
  public function l_val_field_dm($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->val_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
  public function l_val_field_d2($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
   global $class_second, $$class_second;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->val_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
  public function l_val_field_d2m($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
   global $class_second, $$class_second;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->val_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, 1, $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
  public function l_val_field_d3($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
   global $class_third, $$class_third;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->val_field($field_name, $$class_third->$field_name, '20', $field_name, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
  public function l_val_field_d3m($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
   global $class_third, $$class_third;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->val_field($field_name, $$class_third->$field_name, '20', $field_name, $div_class, 1, $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
@@ -786,64 +786,64 @@ EOD;
 
  public function l_text_field_d($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
  public function l_text_field_dd($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', '', '', '', '', 1);
  }
 
  public function l_text_field_ds($field_name, $div_class = "") {
   global $readonly, $class, $$class;
   $div_class = $div_class . ' small';
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
  public function l_text_field_dr($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
  }
 
  public function l_text_field_dm($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
  }
 
  public function l_text_field_d2($field_name, $div_class = "") {
   global $readonly, $class_second, $$class_second;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
  public function l_text_field_d2s($field_name, $div_class = "") {
   global $readonly, $class_second, $$class_second;
   $div_class = $div_class . ' small';
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
  public function l_text_field_d2r($field_name, $div_class = "") {
   global $readonly, $class_second, $$class_second;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, '', 1);
  }
 
  public function l_text_field_d2m($field_name, $div_class = "") {
   global $readonly, $class_second, $$class_second;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class_second->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
  }
 
  public function l_text_field_d_withSearch($field_name, $div_class = "") {
   global $readonly, $class, $$class;
   $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
-  $search_class_gt = __($search_class);
+  $search_class_gt = gettext($search_class);
   echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
                                                                   title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .
@@ -856,7 +856,7 @@ EOD;
   $class = $class_o;
   $$class = $$class_o;
   echo '</div></div></span>';
-  echo '<label class="big_popover">' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label class="big_popover">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   $div_class .= 'search-text-field';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class);
  }
@@ -864,8 +864,8 @@ EOD;
  public function l_text_field_dr_withSearch($field_name, $div_class = "") {
   global $readonly, $class, $$class;
   $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
-  $search_class_gt = __($search_class);
-  echo '<label class="big_popover">' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  $search_class_gt = gettext($search_class);
+  echo '<label class="big_popover">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
                                                                   title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .
@@ -886,7 +886,7 @@ EOD;
   global $readonly, $class, $$class;
   echo '<label>' . '<i class="fa fa-search-plus ' . $field_name . ' select_popup clickable" '
   . ' title="Click here to open the serch form" data-toggle="tooltip"></i>';
-  echo __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
  }
 
@@ -1228,25 +1228,25 @@ EOD;
 
  public function l_email_field_d($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->email_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
  public function l_email_field_dm($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->email_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
  }
 
  public function l_phone_field_d($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->phone_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', $this->readonly);
  }
 
  public function l_phone_field_dm($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->phone_field($field_name, $$class->$field_name, '20', $field_name, $div_class, 1, $this->readonly);
  }
 
@@ -1324,25 +1324,25 @@ EOD;
 
  public function l_ac_field_d($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
   echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', $this->readonly, $ac_type);
  }
 
  public function l_ac_field_dm($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
   echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", 1, $this->readonly, $ac_type);
  }
 
  public function l_ac_field_dr($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
   echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", '', 1, $ac_type);
  }
 
  public function l_ac_field_drm($field_name, $div_class = '', $ac_type = '') {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace(['_', '_id'], ' ', $field_name))) . '</label>';
   echo $this->account_field($field_name, $$class->$field_name, $this->ac_field_length, $field_name, "$div_class select_account", 1, 1, $ac_type);
  }
 
@@ -1555,7 +1555,7 @@ EOD;
  }
 
  public function l_dateTime_field($name, $value) {
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', 'dateTime');
  }
 
@@ -1566,25 +1566,25 @@ EOD;
 
  public function l_date_fieldFromToday($name, $value, $divClass = '') {
   $divClass = "dateFromToday $divClass ";
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', $divClass);
  }
 
  public function l_date_fieldFromToday_m($name, $value, $divClass = '') {
   $divClass = "dateFromToday $divClass ";
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', $divClass, 1);
  }
 
  public function l_date_fieldFromToday_dm($name, $value, $id = '', $divClass = '') {
   $divClass = "dateFromToday $divClass ";
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', $id, $divClass, 1);
  }
 
  public function l_date_fieldFromToday_d($name, $value, $id = '', $divClass = '') {
   $divClass = "dateFromToday $divClass ";
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', $id, $divClass);
  }
 
@@ -1615,19 +1615,19 @@ EOD;
 
  public function l_date_fieldAnyDay($name, $value, $div_class = '') {
   $div_class = $div_class . ' anyDate';
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', 'anyDate');
  }
 
  public function l_date_fieldAnyDay_r($name, $value, $div_class = '') {
   $div_class = $div_class . ' anyDate';
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', 'anyDate', '', 1);
  }
 
  public function l_date_fieldAnyDay_m($name, $value, $div_class = '') {
   $div_class = $div_class . ' anyDate';
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', 'anyDate', 1);
  }
 
@@ -1767,7 +1767,7 @@ EOD;
  }
 
  public function l_radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $divClass = "", $required = "", $readonly = "", $nonArrayName = "", $disabled = "") {
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $divClass, $required, $readonly, $nonArrayName, $disabled);
  }
 
@@ -1833,12 +1833,12 @@ EOD;
  }
 
  public function l_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $id, $divClass, $required, $readonly, $convertToText, $nonArrayName, $disabled, $dataname);
  }
 
  public function l_select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->select_field_from_array($name, $array, $value, $id, $class_name, $required, $readonly, $disabled, $convertToText);
  }
 
@@ -2008,19 +2008,19 @@ EOD;
 
  public function l_checkBox_field($name, $value, $id = "", $class_name = "", $readonly = "") {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $name))) . ' </label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . ' </label>';
   echo $this->checkBox_field($name, $value, $id, $class_name, $readonly);
  }
 
  public function l_checkBox_field_d($field_name) {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', $this->readonly);
  }
 
  public function l_checkBox_field_dr($field_name) {
   global $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', 1);
  }
 
@@ -2074,13 +2074,13 @@ EOD;
 
  public function l_status_field_d($field_name) {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->status_field($$class->$field_name, $this->readonly);
  }
 
  public function l_status_field_dr($field_name) {
   global $readonly, $class, $$class;
-  echo '<label>' . __(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->status_field($$class->$field_name, 1);
  }
 

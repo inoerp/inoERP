@@ -1,10 +1,10 @@
-<form method="post" id="locator"  name="locator"><span class="heading"><?php echo __('Storage Locator') ?></span>
+<form method="post" id="locator"  name="locator"><span class="heading"><?php echo gettext('Storage Locator') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -15,7 +15,7 @@
        </li> 
        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly); ?>    </li>
        <li><?php $f->l_select_field_from_object('subinventory_id', subinventory::find_all(), 'subinventory_id', 'subinventory', $$class->subinventory_id, 'subinventory_id', '', '', $readonly); ?>    </li>
-       <li><label><?php echo __('Locator Structure') ?></label><?php echo locator::locator_structure(); ?></li>
+       <li><label><?php echo gettext('Locator Structure') ?></label><?php echo locator::locator_structure(); ?></li>
        <li><?php $f->l_text_field_d('locator'); ?></li>
        <li><?php $f->l_text_field_d('alias'); ?></li>
        <li><?php $f->l_status_field_d('status'); ?></li>
@@ -47,11 +47,11 @@
   </div>
  </div>
 
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Locator Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Locator Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Dimensions') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Capacity') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Dimensions') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Capacity') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">

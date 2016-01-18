@@ -8,12 +8,12 @@ inoERP
 -->
 <div id ="form_header">
  <form method="post" id="bom_config_header"  name="bom_config_header">
-  <span class="heading"><?php echo __('Configured BOM Header') ?></span>
+  <span class="heading"><?php echo gettext('Configured BOM Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Notes') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -22,7 +22,7 @@ inoERP
        <a name="show" href="form.php?class_name=bom_config_header&<?php echo "mode=$mode"; ?>" class="show document_id bom_config_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_config_header->org_id, 'org_id', '', '', $readonly); ?>       </li>
-      <li><label><?php echo __('Item Number') ?></label><?php 
+      <li><label><?php echo gettext('Item Number') ?></label><?php 
       echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
        <?php $f->text_field_dm('item_number', 'select_item_number_allowedBOM'); ?>
        <i class="select_item_number select_popup clickable fa fa-search"></i>
@@ -59,31 +59,31 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Configured BOM Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Configured BOM Lines') ?></span>
  <form  method="post" id="bom_config_line"  name="bom_config_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Control') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Control') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('BOMLine Id') ?></th>
-        <th><?php echo __('BOM Sequence') ?>#</th>
-        <th><?php echo __('Routing Sequenceg') ?></th>
-        <th><?php echo __('Item Id') ?></th>
-        <th><?php echo __('Item Number') ?></th>
-        <th><?php echo __('Revision') ?></th>
-        <th><?php echo __('Item Description') ?></th>
-        <th><?php echo __('UOM') ?></th>
-        <th><?php echo __('Usage Basis') ?></th>
-        <th><?php echo __('Usage Qty') ?></th>
-        <th><?php echo __('Line Qty') ?></th>
-        <th><?php echo __('Transacted Qty') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('BOMLine Id') ?></th>
+        <th><?php echo gettext('BOM Sequence') ?>#</th>
+        <th><?php echo gettext('Routing Sequenceg') ?></th>
+        <th><?php echo gettext('Item Id') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Revision') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Usage Basis') ?></th>
+        <th><?php echo gettext('Usage Qty') ?></th>
+        <th><?php echo gettext('Line Qty') ?></th>
+        <th><?php echo gettext('Transacted Qty') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -135,11 +135,11 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Planning') ?>%</th>
-        <th><?php echo __('Yield') ?></th>
-        <th><?php echo __('WIP Supply Type') ?>#</th>
-        <th><?php echo __('Sub inventory') ?></th>
-        <th><?php echo __('Locator') ?></th>
+        <th><?php echo gettext('Planning') ?>%</th>
+        <th><?php echo gettext('Yield') ?></th>
+        <th><?php echo gettext('WIP Supply Type') ?>#</th>
+        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -6,17 +6,17 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php   echo __('Service Order')   ?></span>
+<div id ="form_header"><span class="heading"><?php   echo gettext('Service Order')   ?></span>
  <form  method="post" id="hd_svo_header"  name="hd_svo_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Basic - 2') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Finance') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Address Details') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-7"><?php echo __('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Basic - 2') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-7"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -28,14 +28,14 @@ inoERP
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
       <li><label>Service Type</label>
        <?php echo $f->select_field_from_object('hd_service_type_header_id', hd_service_type_header::find_all(), 'hd_service_type_header_id', 'service_type', $$class->hd_service_type_header_id, 'hd_service_type_header_id', 'medium', 1, $readonly1); ?>						 </li>
-      <li><label class="auto_complete"><?php echo __('Customer Name') ?></label><?php
+      <li><label class="auto_complete"><?php echo gettext('Customer Name') ?></label><?php
        echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
        echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1);
        ?>
        <i class="ar_customer_id select_popup clickable fa fa-search"></i></li>
-      <li><label class="auto_complete"><?php echo __('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+      <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
       <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
-      <li><label><?php echo __('Item Number') ?></label><?php
+      <li><label><?php echo gettext('Item Number') ?></label><?php
        echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
        $f->text_field_dm('item_number', 'select_item_number');
        echo $f->hidden_field_withCLass('build_in_wip_cb', '1', 'popup_value');
@@ -55,7 +55,7 @@ inoERP
      <ul class="column header_field">
       <li><?php $f->l_select_field_from_object('service_team_id', hr_team_header::find_all_by_type('SERVICE'), 'team_name', 'hr_team_header_id', $$class->service_team_id, 'service_team_id'); ?>
       </li>
-      <li><label><?php echo __('Service Person') ?></label><?php $f->text_field_d('service_person', 'employee_name'); ?>
+      <li><label><?php echo gettext('Service Person') ?></label><?php $f->text_field_d('service_person', 'employee_name'); ?>
        <?php echo $f->hidden_field_withIdClass('service_person_employee_id', $$class->service_person_employee_id, 'hr_employee_id'); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
@@ -106,10 +106,10 @@ inoERP
 
     <div id="tabsHeader-7" class="tabContent">
      <ul class="column header_field">
-      <li id="document_status"><label><?php echo __('Action') ?></label>
+      <li id="document_status"><label><?php echo gettext('Action') ?></label>
        <?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
       </li>
-      <li><label><?php echo __('Add To Order') ?></label>
+      <li><label><?php echo gettext('Add To Order') ?></label>
        <?php echo $f->select_field_from_array('add_to_order', $add_to_order_a, '', 'add_to_order', '', '', '', 1); ?>
       </li>
      </ul>
@@ -120,17 +120,17 @@ inoERP
  </form>
 </div>
 
-<span class="heading"><?php echo __('Order Details') ?></span>
+<span class="heading"><?php echo gettext('Order Details') ?></span>
 
 <div id="tabsLine">
  <ul class="tabMain">
-  <li><a href="#tabsLine-1"><?php echo __('Logistics') ?></a></li>
-  <li><a href="#tabsLine-2"><?php echo __('Logistics-2') ?></a></li>
-  <li><a href="#tabsLine-3"><?php echo __('Estimates') ?> </a></li>
-  <li><a href="#tabsLine-4"><?php echo __('Estimates-2') ?> </a></li>
-  <li><a href="#tabsLine-5"><?php echo __('Repair WO') ?> </a></li>
-  <li><a href="#tabsLine-6"><?php echo __('Actuals-1') ?> </a></li>
-  <li><a href="#tabsLine-7"><?php echo __('Actuals-2') ?> </a></li>
+  <li><a href="#tabsLine-1"><?php echo gettext('Logistics') ?></a></li>
+  <li><a href="#tabsLine-2"><?php echo gettext('Logistics-2') ?></a></li>
+  <li><a href="#tabsLine-3"><?php echo gettext('Estimates') ?> </a></li>
+  <li><a href="#tabsLine-4"><?php echo gettext('Estimates-2') ?> </a></li>
+  <li><a href="#tabsLine-5"><?php echo gettext('Repair WO') ?> </a></li>
+  <li><a href="#tabsLine-6"><?php echo gettext('Actuals-1') ?> </a></li>
+  <li><a href="#tabsLine-7"><?php echo gettext('Actuals-2') ?> </a></li>
  </ul>
  <div class="tabContainer">
   <form action=""  method="post" id="hd_svo_line"  name="hd_svo_line" class="m-margin-top-20">
@@ -139,18 +139,18 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Seq#') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Line') ?>#</th>
-        <th><?php echo __('Type') ?></th>
-        <th><?php echo __('Inv Org') ?></th>
-        <th><?php echo __('Item Number') ?></th>
-        <th><?php echo __('Item Description') ?></th>
-        <th><?php echo __('UOM') ?></th>
-        <th><?php echo __('Quantity') ?></th>
-        <th><?php echo __('Add To Order') ?></th>
-        <th><?php echo __('Logistic Action') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq#') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Type') ?></th>
+        <th><?php echo gettext('Inv Org') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Add To Order') ?></th>
+        <th><?php echo gettext('Logistic Action') ?></th>
 
        </tr>
       </thead>
@@ -193,15 +193,15 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq#') ?></th>
-        <th><?php echo __('SO Line Id') ?></th>
-        <th><?php echo __('SO Header Id') ?></th>
-        <th><?php echo __('Line Status') ?></th>
-        <th><?php echo __('Price List') ?></th>
-        <th><?php echo __('Price Date') ?></th>
-        <th><?php echo __('Unit Price') ?></th>
-        <th><?php echo __('Line Price') ?></th>
-        <th><?php echo __('View Details') ?></th>
+        <th><?php echo gettext('Seq#') ?></th>
+        <th><?php echo gettext('SO Line Id') ?></th>
+        <th><?php echo gettext('SO Header Id') ?></th>
+        <th><?php echo gettext('Line Status') ?></th>
+        <th><?php echo gettext('Price List') ?></th>
+        <th><?php echo gettext('Price Date') ?></th>
+        <th><?php echo gettext('Unit Price') ?></th>
+        <th><?php echo gettext('Line Price') ?></th>
+        <th><?php echo gettext('View Details') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -235,14 +235,14 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Estimate Id') ?></th>
-        <th><?php echo __('Billing Source') ?></th>
-        <th><?php echo __('Billing Category') ?></th>
-        <th><?php echo __('Item Id') ?></th>
-        <th><?php echo __('Item Number') ?></th>
-        <th><?php echo __('Item Description') ?></th>
-        <th><?php echo __('UOM') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Estimate Id') ?></th>
+        <th><?php echo gettext('Billing Source') ?></th>
+        <th><?php echo gettext('Billing Category') ?></th>
+        <th><?php echo gettext('Item Id') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
@@ -285,12 +285,12 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Estimate Id') ?></th>
-        <th><?php echo __('Quantity') ?></th>
-        <th><?php echo __('Price List') ?></th>
-        <th><?php echo __('Unit Price') ?></th>
-        <th><?php echo __('Line Price') ?></th>
-        <th><?php echo __('Line Status') ?></th>
+        <th><?php echo gettext('Estimate Id') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Price List') ?></th>
+        <th><?php echo gettext('Unit Price') ?></th>
+        <th><?php echo gettext('Line Price') ?></th>
+        <th><?php echo gettext('Line Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
@@ -321,14 +321,14 @@ inoERP
    <table class="form_line_data_table3">
     <thead> 
      <tr>
-      <th><?php echo __('Action') ?></th>
-      <th><?php echo __('Actuals Id') ?></th>
-      <th><?php echo __('Source') ?></th>
-      <th><?php echo __('Billing Category') ?></th>
-      <th><?php echo __('Item Id') ?></th>
-      <th><?php echo __('Item Number') ?></th>
-      <th><?php echo __('Item Description') ?></th>
-      <th><?php echo __('UOM') ?></th>
+      <th><?php echo gettext('Action') ?></th>
+      <th><?php echo gettext('Actuals Id') ?></th>
+      <th><?php echo gettext('Source') ?></th>
+      <th><?php echo gettext('Billing Category') ?></th>
+      <th><?php echo gettext('Item Id') ?></th>
+      <th><?php echo gettext('Item Number') ?></th>
+      <th><?php echo gettext('Item Description') ?></th>
+      <th><?php echo gettext('UOM') ?></th>
      </tr>
     </thead>
     <tbody class="form_data_line_tbody3 wip_wo_bom_values" >
@@ -370,12 +370,12 @@ inoERP
    <table class="form_line_data_table3">
     <thead> 
      <tr>
-      <th><?php echo __('Actual Id') ?></th>
-      <th><?php echo __('Quantity') ?></th>
-      <th><?php echo __('Unit Price') ?></th>
-      <th><?php echo __('Line Price') ?></th>
-      <th><?php echo __('Line Status') ?></th>
-      <th><?php echo __('SO Line Id') ?></th>
+      <th><?php echo gettext('Actual Id') ?></th>
+      <th><?php echo gettext('Quantity') ?></th>
+      <th><?php echo gettext('Unit Price') ?></th>
+      <th><?php echo gettext('Line Price') ?></th>
+      <th><?php echo gettext('Line Status') ?></th>
+      <th><?php echo gettext('SO Line Id') ?></th>
      </tr>
     </thead>
     <tbody class="form_data_line_tbody3 wip_wo_bom_values" >

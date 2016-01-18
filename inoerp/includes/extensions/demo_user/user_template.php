@@ -1,14 +1,14 @@
 <div id ="form_header">
  <form action="" method="post" id="user_header" name="user_header">
-  <span class="heading"><?php echo __('User Details') ?></span>
+  <span class="heading"><?php echo gettext('User Details') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Preference') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Employee') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Supplier') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo __('Notes') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Preference') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Employee') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Supplier') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Notes') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -17,8 +17,8 @@
        <a name="show" href="form.php?class_name=user&<?php echo "mode=$mode"; ?>" class="show document_id user_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_text_field('username', $$class->username, '', '', '', 1, $readonly1); ?></li>
-      <li><label><?php echo __('Password') ?></label><input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
-      <li><label><?php echo __('Retype Password') ?></label><input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
+      <li><label><?php echo gettext('Password') ?></label><input type="password" name="enteredPassword[]" value='' maxlength="50" id="enteredPassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
+      <li><label><?php echo gettext('Retype Password') ?></label><input type="password" name="enteredRePassword[]" value=''  maxlength="50" id="enteredRePassword" size="20" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" >       </li>
       <li><?php $f->l_text_field_dm('first_name'); ?> </li>
       <li><?php $f->l_text_field_dm('last_name'); ?>	 </li>
       <li><?php $f->l_text_field_dm('email'); ?> </li>
@@ -37,10 +37,10 @@
      <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-         <?php echo __('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
+         <?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
         <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
        </li>
-       <li><label><?php echo __('Identification') ?></label><?php $f->text_field_dr('identification_id'); ?>  </li>
+       <li><label><?php echo gettext('Identification') ?></label><?php $f->text_field_dr('identification_id'); ?>  </li>
       </ul>
      </div>
     </div>
@@ -48,10 +48,10 @@
      <div class="large_shadow_box"> 
       <ul class="column header_field">
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-         <?php echo __('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
+         <?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
         <?php echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id); ?>
        </li>
-       <li><label><?php echo __('Identification') ?></label><?php $f->text_field_dr('identification_id'); ?>  </li>
+       <li><label><?php echo gettext('Identification') ?></label><?php $f->text_field_dr('identification_id'); ?>  </li>
        <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
       </ul>
      </div>
@@ -81,11 +81,11 @@
  </form>
 </div>
 
-<span class="heading"><?php echo __('User Access Details') ?></span>
+<span class="heading"><?php echo gettext('User Access Details') ?></span>
 <div id="tabsLine">
  <ul class="tabMain">
-  <li><a href="#tabsLine-1"><?php echo __('Role Control') ?></a></li>
-  <li><a href="#tabsLine-2"><?php echo __('User Group Assignment') ?></a></li>
+  <li><a href="#tabsLine-1"><?php echo gettext('Role Control') ?></a></li>
+  <li><a href="#tabsLine-2"><?php echo gettext('User Group Assignment') ?></a></li>
  </ul>
  <div class="tabContainer"> 
   <div id="tabsLine-1" class="tabContent">
@@ -94,9 +94,9 @@
      <table id="form_line_data_table" class="form">
       <thead>
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('User Role Access Id') ?>#</th>
-        <th><?php echo __('Role Name') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('User Role Access Id') ?>#</th>
+        <th><?php echo gettext('Role Name') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody user_role_assignment_values">
@@ -149,9 +149,9 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Group Access Id') ?>#</th>
-        <th><?php echo __('Group Name') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Group Access Id') ?>#</th>
+        <th><?php echo gettext('Group Name') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 user_group_values" >

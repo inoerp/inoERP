@@ -1,6 +1,6 @@
 <div class="row small-left-padding">
  <div id ="form_header">
-  <span class="heading"><?php echo __('Role Details') ?></span>
+  <span class="heading"><?php echo gettext('Role Details') ?></span>
   <div class="tabContainer">
    <ul class="column header_field">
     <li><?php $f->l_select_field_from_object('role_code', role_access::roles(), 'option_line_code', 'option_line_value', $role_code_h, 'role_code'); ?>
@@ -15,20 +15,20 @@
  <form method="post" id="role_access"  name="role_access">
   <!--END OF FORM HEADER-->
   <div id ="form_line" class="role_access">
-   <span class="heading"><?php echo __('Class & Access Details') ?></span>
+   <span class="heading"><?php echo gettext('Class & Access Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Class Access') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Class Access') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Role Access Id') ?></th>
-         <th><?php echo __('Class/Object Name') ?>#</th>
-         <th><?php echo __('Access Level') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Role Access Id') ?></th>
+         <th><?php echo gettext('Class/Object Name') ?>#</th>
+         <th><?php echo gettext('Access Level') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody role_access_values" >

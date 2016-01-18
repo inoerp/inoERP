@@ -1,10 +1,10 @@
 <div id="form_all">
- <span class="heading"><?php echo __('Profile Header') ?></span>
+ <span class="heading"><?php echo gettext('Profile Header') ?></span>
  <form method="post" id="sys_profile_header"  name="sys_profile_header">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -24,11 +24,11 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Profile Values') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Profile Values') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Values') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Custom Query') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Custom Query') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="sys_profile_line_line"  name="sys_profile_line_line">
@@ -36,8 +36,8 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Line Id') ?></th> 
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th> 
          <?php
          switch ($profile_level) {
           case 'SITE' :

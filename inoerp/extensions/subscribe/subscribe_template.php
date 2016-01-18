@@ -3,7 +3,7 @@
  <!--    End of place for showing error messages-->
  <div id ="form_header">
   <form  method="post" id="extn_subscribe" name="extn_subscribe"  >
-   <span class="heading"><?php echo __('Subscription Details') ?></span>
+   <span class="heading"><?php echo gettext('Subscription Details') ?></span>
    <div class="tabContainer"> 
     <ul class="column header_field two_column_form"> 
      <li><?php $f->l_text_field_dr_withSearch('extn_subscribe_id') ?>

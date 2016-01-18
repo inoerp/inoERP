@@ -1,12 +1,12 @@
 <div id ="form_header">
  <form method="post" id="sys_extra_field_form"  name="sys_extra_field_form">
-  <span class="heading"><?php echo __('Extra Fields') ?></span>
+  <span class="heading"><?php echo gettext('Extra Fields') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -49,17 +49,17 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Extra Field Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Extra Field Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Instances') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Future') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Instances') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <?php
       if (empty($instances)) {
-       echo '<h2>'.__('No Instances Found').'</h2>';
+       echo '<h2>'.gettext('No Instances Found').'</h2>';
       }
       ?>
      </div> 

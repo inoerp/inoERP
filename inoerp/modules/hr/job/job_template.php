@@ -1,13 +1,13 @@
 <div id ="form_header">
  <form action=""  method="post" id="hr_job"  name="hr_job">
-  <span class="heading"><?php echo __('Job') ?></span>
+  <span class="heading"><?php echo gettext('Job') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Basics-2') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Basics-2') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -61,22 +61,22 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('job Details & Responsibility') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('job Details & Responsibility') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Job Details') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Responsibility') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Job Details') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Responsibility') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
-      <div><label class="text_area_label"><?php echo __('Job Details') ?></label><?php
+      <div><label class="text_area_label"><?php echo gettext('Job Details') ?></label><?php
        echo $f->text_area_ap(array('name' => 'job_details', 'value' => $$class->job_details,
         'row_size' => '10', 'column_size' => '90'));
        ?> 	
       </div> 
      </div> 
      <div id="tabsLine-2"  class="tabContent">
-      <div><label class="text_area_label"><?php echo __('Primary Responsibility') ?></label><?php
+      <div><label class="text_area_label"><?php echo gettext('Primary Responsibility') ?></label><?php
        echo $f->text_area_ap(array('name' => 'primary_responsibility', 'value' => $$class->primary_responsibility,
         'row_size' => '10', 'column_size' => '90'));
        ?> 	

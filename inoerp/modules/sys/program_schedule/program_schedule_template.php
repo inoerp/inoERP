@@ -1,12 +1,12 @@
 <div id ="form_header">
  <form method="post" id="sys_program_schedule"  name="sys_program_schedule">
-  <span class="heading"><?php echo __('Program / Report Scheduler') ?></span>
+  <span class="heading"><?php echo gettext('Program / Report Scheduler') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -54,13 +54,13 @@
 
    </div>
   </div>
-  <span class="heading"><?php echo __('Other Details') ?></span>
+  <span class="heading"><?php echo gettext('Other Details') ?></span>
   <div id ="form_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Entered Parameters') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Report Query') ?></a></li>
-     <li><a href="#tabsLine-3"><?php echo __('Email Address') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Entered Parameters') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Report Query') ?></a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Email Address') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

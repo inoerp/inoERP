@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form action=""  method="post" id="pos_inv_control"  name="pos_inv_control">
-  <span class="heading"><?php echo __('POS Inventory Control') ?></span>
+  <span class="heading"><?php echo gettext('POS Inventory Control') ?></span>
   <div class="tabContainer">
    <ul class="column header_field"> 
     <?php echo form::hidden_field('pos_inv_control_id', $$class->pos_inv_control_id);    ?>
@@ -13,8 +13,8 @@
   <div id ="form_line" class="form_line"><span class="heading">heading </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Future') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
@@ -27,7 +27,7 @@
         <li><?php $f->l_checkBox_field_d('allow_negative_onhand_cb') ?>       </li>
         <li><?php $f->l_ac_field_d('cogs_ac_id'); ?></li>
         <li><?php $f->l_select_field_from_object('ar_transaction_type_id', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->ar_transaction_type_id, 'transaction_type', '', 1) ?>        </li>
-        <li><label><?php echo __('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+        <li><label><?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
          <?php $f->text_field_dm('item_number', 'select_item_number'); ?>
          <i class="select_item_number select_popup clickable fa fa-search"></i>
         </li>

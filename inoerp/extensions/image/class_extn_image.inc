@@ -145,7 +145,7 @@ $stmt = "<div class='existing-image'>" . self::show_existing_images($images) . '
   $stmt .= '<div class="ino-images">';
   $stmt .= "<div class='show_attachment'>";
   $stmt .= '<div class="form-group">
-							<ul class="inRow asperWidth"><label for="exampleInputFile">' . __($label) . '</label>
+							<ul class="inRow asperWidth"><label for="exampleInputFile">' . gettext($label) . '</label>
 							 <li><input type="file" class="images" value="" name="uploaded_file[]" multiple/></li>
               <li><input type="hidden" class="hidden display_type" name="display_type[]" value="' . $display_type . '"/></li>
 							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">Upload</button></li>';

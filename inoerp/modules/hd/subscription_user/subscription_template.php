@@ -7,13 +7,13 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div class="row product level-1">
- <div id ="form_header" class="erp-form"><span class="heading"><?php echo __('Membership Application') ?></span>
+ <div id ="form_header" class="erp-form"><span class="heading"><?php echo gettext('Membership Application') ?></span>
   <form  method="post" id="hd_subscription_header"  action="<?php echo $header_post_link ?>" name="hd_subscription_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Address Details') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Address Details') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -74,24 +74,24 @@ inoERP
    </div>
   </form>
  </div>
- <div id="form_line" class="form_line erp-form"><span class="heading"><?php echo __('Edit Membership Plan') ?></span>
+ <div id="form_line" class="form_line erp-form"><span class="heading"><?php echo gettext('Edit Membership Plan') ?></span>
   <form action=""  method="post" id="hd_subscription_line"  name="hd_subscription_line">
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Compulsory') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Compulsory') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="table table-bordered table-large cart ">
        <thead> 
         <tr>
-         <th><?php echo __('Seq') ?> #</th>
-         <th><?php echo __('Product') ?></th>
-         <th><?php echo __('Description') ?></th>
-         <th><?php echo __('Quantity') ?></th>
-         <th><?php echo __('Price') ?></th>
-         <th><?php echo __('Delivery Instruction') ?></th>
-         <th><?php echo __('Sub Total') ?></th>
+         <th><?php echo gettext('Seq') ?> #</th>
+         <th><?php echo gettext('Product') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Quantity') ?></th>
+         <th><?php echo gettext('Price') ?></th>
+         <th><?php echo gettext('Delivery Instruction') ?></th>
+         <th><?php echo gettext('Sub Total') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody cart_values" >
@@ -153,16 +153,16 @@ inoERP
            <table class="form form_detail_data_table detail">
             <thead>
              <tr>
-              <th ><?php echo __('Action') ?></th>
-              <th><?php echo __('Detail Id') ?></th>
-              <th><?php echo __('Line Type') ?></th>
-              <th><?php echo __('Member Name') ?></th>
-              <th><?php echo __('DOB') ?></th>
-              <th><?php echo __('Vehcile No') ?></th>
-              <th><?php echo __('Vehcile Reg') ?></th>
-              <th><?php echo __('Tax Expiry Date') ?></th>
-              <th><?php echo __('Vehcile Details') ?></th>
-              <th><?php echo __('Description') ?></th>
+              <th ><?php echo gettext('Action') ?></th>
+              <th><?php echo gettext('Detail Id') ?></th>
+              <th><?php echo gettext('Line Type') ?></th>
+              <th><?php echo gettext('Member Name') ?></th>
+              <th><?php echo gettext('DOB') ?></th>
+              <th><?php echo gettext('Vehcile No') ?></th>
+              <th><?php echo gettext('Vehcile Reg') ?></th>
+              <th><?php echo gettext('Tax Expiry Date') ?></th>
+              <th><?php echo gettext('Vehcile Details') ?></th>
+              <th><?php echo gettext('Description') ?></th>
              </tr>
             </thead>
             <tbody class="form_data_detail_tbody <?php echo $count ?>">

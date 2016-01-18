@@ -70,10 +70,10 @@
  <div class="row product level-2">
   <div id="tabsDetailA">
    <ul class="tabMain">
-    <li><a href="#tabsDetailA-1"><?php echo __('Additional Information') ?></a></li>
-    <li><a href="#tabsDetailA-2"><?php echo __('Reviews') ?></a></li>
-    <li><a href="#tabsDetailA-3"><?php echo __('Related Products') ?></a></li>
-    <li><a href="#tabsDetailA-4"><?php echo __('Categories') ?></a></li>
+    <li><a href="#tabsDetailA-1"><?php echo gettext('Additional Information') ?></a></li>
+    <li><a href="#tabsDetailA-2"><?php echo gettext('Reviews') ?></a></li>
+    <li><a href="#tabsDetailA-3"><?php echo gettext('Related Products') ?></a></li>
+    <li><a href="#tabsDetailA-4"><?php echo gettext('Categories') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsDetailA-1" class="tabContent">
@@ -88,10 +88,10 @@
     <div id="tabsDetailA-4" class="tabContent">
      <div class="category-div">
       <div class="existing-category">
-       <label><?php echo __('Existing Categories'); ?></label><?php echo!empty($category) ? category::category_stmt($category) : ''; ?>
+       <label><?php echo gettext('Existing Categories'); ?></label><?php echo!empty($category) ? category::category_stmt($category) : ''; ?>
       </div>
       <div class="add-category">
-       <label><?php echo __('New Category'); ?></label><?php echo $categoriey_select_option; ?>
+       <label><?php echo gettext('New Category'); ?></label><?php echo $categoriey_select_option; ?>
       </div>
      </div>
      <!--end of tab1 div three_column-->

@@ -2,13 +2,13 @@
  <div id="option">
   <!--    START OF FORM HEADER-->
   <form method="post" id="option_header"  name="option_header">
-   <span class="heading"><?php     echo __('Option Header')     ?></span>
+   <span class="heading"><?php     echo gettext('Option Header')     ?></span>
    <div id ="form_header">
     <div id="tabsHeader">
      <ul class="tabMain">
-      <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-      <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-      <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+      <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+      <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsHeader-1" class="tabContent">
@@ -52,29 +52,29 @@
    </div>
   </form>
   <!--END OF FORM HEADER-->
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Option Line') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Option Line') ?></span>
    <form  method="post" id="option_line"  name="option_line">
     <div id="tabsLine">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-      <li><a href="#tabsLine-2"><?php echo __('Effectivity') ?> </a></li>
+      <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo gettext('Effectivity') ?> </a></li>
      </ul>
      <div class="tabContainer">
       <div id="tabsLine-1" class="tabContent">
        <table class="form_line_data_table">
         <thead>
          <tr>
-          <th><?php echo __('Action') ?></th>
-          <th><?php echo __('Seq') ?>#</th>
-          <th><?php echo __('Line Id') ?></th>
-          <th><?php echo __('Option Code') ?></th>
-          <th><?php echo __('Value') ?></th>
-          <th><?php echo __('Description') ?></th>
-          <th><?php echo __('Priority') ?></th>
-          <th><?php echo __('Mapper 1') ?></th>
-          <th><?php echo __('Mapper 2') ?></th>
-          <th><?php echo __('Value Group') ?></th>
-          <th class="add_detail_values_header"><?php echo __('Details') ?></th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Line Id') ?></th>
+          <th><?php echo gettext('Option Code') ?></th>
+          <th><?php echo gettext('Value') ?></th>
+          <th><?php echo gettext('Description') ?></th>
+          <th><?php echo gettext('Priority') ?></th>
+          <th><?php echo gettext('Mapper 1') ?></th>
+          <th><?php echo gettext('Mapper 2') ?></th>
+          <th><?php echo gettext('Value Group') ?></th>
+          <th class="add_detail_values_header"><?php echo gettext('Details') ?></th>
          </tr>
         </thead>
         <tbody  class="form_data_line_tbody">
@@ -115,17 +115,17 @@
             }
             ?>
             <div class="class_detail_form">
-             <fieldset class="form_detail_data_fs"><legend><?php echo __('Detail Data') ?></legend>
+             <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Detail Data') ?></legend>
               <table class="form form_detail_data_table detail">
                <thead>
                 <tr>
-                 <th><?php echo __('Action') ?></th>
-                 <th><?php echo __('Seq') ?>#</th>
-                 <th><?php echo __('Detail Id') ?></th>
-                 <th><?php echo __('Value') ?></th>
-                 <th><?php echo __('Description') ?></th>
-                 <th><?php echo __('Start Date') ?></th>
-                 <th><?php echo __('End Date') ?></th>
+                 <th><?php echo gettext('Action') ?></th>
+                 <th><?php echo gettext('Seq') ?>#</th>
+                 <th><?php echo gettext('Detail Id') ?></th>
+                 <th><?php echo gettext('Value') ?></th>
+                 <th><?php echo gettext('Description') ?></th>
+                 <th><?php echo gettext('Start Date') ?></th>
+                 <th><?php echo gettext('End Date') ?></th>
                 </tr>
                </thead>
                <tbody class="form_data_detail_tbody">
@@ -180,10 +180,10 @@
        <table class="form_line_data_table">
         <thead> 
          <tr>
-          <th><?php echo __('Seq') ?>#</th>
-          <th><?php echo __('Status') ?></th>
-          <th><?php echo __('Start Date') ?></th>
-          <th><?php echo __('End Date') ?></th>
+          <th><?php echo gettext('Seq') ?>#</th>
+          <th><?php echo gettext('Status') ?></th>
+          <th><?php echo gettext('Start Date') ?></th>
+          <th><?php echo gettext('End Date') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody">

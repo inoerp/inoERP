@@ -1,9 +1,9 @@
 <table class="form_line_data_table">
  <thead> 
   <tr>
-   <th><?php echo __('Seq') ?>#</th>
-   <th><?php echo __('Add Lot Numbers') ?></th>
-   <th><?php echo __('Add Serial Numbers') ?></th>
+   <th><?php echo gettext('Seq') ?>#</th>
+   <th><?php echo gettext('Add Lot Numbers') ?></th>
+   <th><?php echo gettext('Add Serial Numbers') ?></th>
   </tr>
  </thead>
  <tbody class="form_data_line_tbody">
@@ -37,9 +37,9 @@
           <table class="form form_detail_data_table detail">
            <thead>
             <tr>
-             <th><?php echo __('Action') ?></th>
-             <th><?php echo __('Lot Number') ?></th>
-             <th><?php echo __('Quantity') ?></th>
+             <th><?php echo gettext('Action') ?></th>
+             <th><?php echo gettext('Lot Number') ?></th>
+             <th><?php echo gettext('Quantity') ?></th>
             </tr>
            </thead>
            <tbody class="form_data_detail_tbody_ln">
@@ -111,8 +111,8 @@
           <table class="form form_detail_data_table detail">
            <thead>
             <tr>
-             <th><?php echo __('Action') ?></th>
-             <th><?php echo __('Serial Number') ?></th>
+             <th><?php echo gettext('Action') ?></th>
+             <th><?php echo gettext('Serial Number') ?></th>
             </tr>
            </thead>
            <tbody class="form_data_detail_tbody">

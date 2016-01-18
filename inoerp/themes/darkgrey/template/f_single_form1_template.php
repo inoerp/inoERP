@@ -3,10 +3,10 @@
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Message') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Message') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -55,18 +55,18 @@
  <div id ="form_line" class="form_line"><span class="heading"> Payment Method Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('URLs') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Logo Image') ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Secondary Fields') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('URLs') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Logo Image') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Secondary Fields') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <ul class="column two_column">
-      <li><label><?php echo __('Confirm URL') ?></label>
+      <li><label><?php echo gettext('Confirm URL') ?></label>
        <span class="small-hint">If the link doesnt contains '?' then put a '?' at the end of the link</span>
        <?php echo form::text_area('confirm_url', $$class->confirm_url, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
-      <li><label><?php echo __('Cancel URL') ?></label><?php echo form::text_area('cancel_url', $$class->cancel_url, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
-      <li><label><?php echo __('Return URL') ?></label><?php echo form::text_area('return_url', $$class->return_url, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
+      <li><label><?php echo gettext('Cancel URL') ?></label><?php echo form::text_area('cancel_url', $$class->cancel_url, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
+      <li><label><?php echo gettext('Return URL') ?></label><?php echo form::text_area('return_url', $$class->return_url, '2', '50', '', 'Maximum 255 Characters'); ?>      </li>
      </ul>
     </div>
     <div id="tabsLine-2" class="tabContent">

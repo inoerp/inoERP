@@ -7,11 +7,11 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo __('Mainteance WO Resource Transaction') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Mainteance WO Resource Transaction') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-   <li><a href="#tabsHeader-2"><?php echo __('Other Details') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Other Details') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <div id="tabsHeader-1" class="tabContent">
@@ -57,17 +57,17 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Routing Seq') ?></th>
-        <th><?php echo __('Department') ?></th>
-        <th><?php echo __('Resource Seq') ?></th>
-        <th><?php echo __('Resource') ?></th>
-        <th><?php echo __('Quantity') ?></th>
-        <th><?php echo __('Required') ?></th>
-        <th><?php echo __('Applied') ?></th>
-        <th><?php echo __('Reason') ?></th>
-        <th><?php echo __('Reference') ?></th>
-        <th><?php echo __('Trnx Id') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Routing Seq') ?></th>
+        <th><?php echo gettext('Department') ?></th>
+        <th><?php echo gettext('Resource Seq') ?></th>
+        <th><?php echo gettext('Resource') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Required') ?></th>
+        <th><?php echo gettext('Applied') ?></th>
+        <th><?php echo gettext('Reason') ?></th>
+        <th><?php echo gettext('Reference') ?></th>
+        <th><?php echo gettext('Trnx Id') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody am_wo_routing_line_values" >

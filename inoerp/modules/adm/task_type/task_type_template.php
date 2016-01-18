@@ -1,11 +1,11 @@
-<div id ="form_all"><span class="heading"><?php echo __('Task Type') ?></span>
+<div id ="form_all"><span class="heading"><?php echo gettext('Task Type') ?></span>
  <form method="post" id="adm_task_type"  name="adm_task_type">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -46,10 +46,10 @@
    </div>
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Task Type Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Task Type Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

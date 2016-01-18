@@ -6,22 +6,22 @@
     <div id ="form_line" class="ec_cart">
      <div class="panel panel-info">
       <div class="panel-heading">
-       <h3><?php echo __('Cart Details - Verify & Confirm Order') ?></h3>
+       <h3><?php echo gettext('Cart Details - Verify & Confirm Order') ?></h3>
       </div>
       <div class="panel-body">
-       <p><?php echo __('Free Standard Delivery if total order amount is $50 or above.') ?></p>
+       <p><?php echo gettext('Free Standard Delivery if total order amount is $50 or above.') ?></p>
       </div>
       <table class="table table-bordered table-large cart ">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Seq') ?>#</th>
-         <th><?php echo __('Product') ?></th>
-         <th><?php echo __('Description') ?></th>
-         <th><?php echo __('Quantity') ?></th>
-         <th><?php echo __('Price') ?></th>
-         <th><?php echo __('Delivery Instruction') ?></th>
-         <th><?php echo __('Sub Total') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Product') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Quantity') ?></th>
+         <th><?php echo gettext('Price') ?></th>
+         <th><?php echo gettext('Delivery Instruction') ?></th>
+         <th><?php echo gettext('Sub Total') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody cart_values" >
@@ -94,7 +94,7 @@
       </table>
       <div class="panel-footer">
        <div class="row">
-        <div class="col-md-5"><label><?php echo __('Discount Code') ?> </label>
+        <div class="col-md-5"><label><?php echo gettext('Discount Code') ?> </label>
          <?php echo $f->text_field('discount_code', '', '', 'discount_code', 'big-input') ?>
          <button class="btn btn-default continue-shopping" role="button">Apply Discount</button></div>
         <div class="col-md-5"><label>Pin Code </label>
@@ -115,10 +115,10 @@
    </form>
    <div class="panel-footer">
     <div class="row">
-     <div class="col-md-4"><a class="btn btn-lg btn-default continue-shopping" role="button" href="product.php"><?php echo __('Continue Shopping') ?></a></div>
-     <div class="col-md-3"><button class="btn btn-lg btn-default save-cart" role="button"><?php echo __('Save Cart') ?></button></div>
+     <div class="col-md-4"><a class="btn btn-lg btn-default continue-shopping" role="button" href="product.php"><?php echo gettext('Continue Shopping') ?></a></div>
+     <div class="col-md-3"><button class="btn btn-lg btn-default save-cart" role="button"><?php echo gettext('Save Cart') ?></button></div>
      <div class="col-md-3"><input type="submit" role="button" class="btn btn-lg btn-primary place-order" value="Place Order" form="ec_cart_line"></div>
-     <div class="col-md-2"><span class="btn btn-lg"><?php echo __('Total Amount') ?> : <?php echo $curr;
+     <div class="col-md-2"><span class="btn btn-lg"><?php echo gettext('Total Amount') ?> : <?php echo $curr;
         echo '<span class="total-amount">' . $total . '</span>'; ?></span></div>
     </div>
    </div>

@@ -137,7 +137,7 @@ class file extends dbObject {
   $stmt = '<div class="existing-image">'. $this->show_existing_files($file) .'</div>';
   $stmt .= '<div  class="show_attachment">';
 		$stmt .= '<div id="file_upload_form" class="form-group">
-							<ul class="inRow asperWidth"><li><label for="exampleInputFile">' . __($label) . '</label></li>
+							<ul class="inRow asperWidth"><li><label for="exampleInputFile">' . gettext($label) . '</label></li>
 							 <li><input type="file" id="attachments" class="attachments" name="' . $this->file_name . '[]" multiple/></li>
                 <li><input type="hidden" class="hidden" name="display_type[]" value="' . $this->display_type . '"/></li>
 							 <li><button  form="file_upload" name="attach_submit" id="attach_submit" class="submit button">Attach</button></li>';

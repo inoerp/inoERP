@@ -1,15 +1,15 @@
 <div id="form_all">
  <form method="post" id="am_asset"  name="am_asset">
-  <span class="heading"><?php echo __('Asset Numbers') ?></span>
+  <span class="heading"><?php echo gettext('Asset Numbers') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Tracking Info') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('References') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo __('Address Details') ?></a></li>
-     <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-6"><?php echo __('Note') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Tracking Info') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('References') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
+     <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-6"><?php echo gettext('Note') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -19,7 +19,7 @@
        </li>
        <li><?php $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?></li>
        <li><?php $f->l_text_field_d('asset_number'); ?></li>
-       <li><label><?php echo __('Inv Item Number') ?></label><?php
+       <li><label><?php echo gettext('Inv Item Number') ?></label><?php
         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
         $f->text_field_dm('item_number', 'select_item_number_am_asset_item');
         echo $f->hidden_field_withCLass('am_asset_type', 'ASSET_ITEM', 'popup_value');
@@ -31,7 +31,7 @@
        <li><?php $f->l_text_field_dm('serial_number'); ?></li>
        <li><?php $f->l_select_field_from_array('type', am_asset::$type_a, $$class->type, '', '', 1, 1, 1); ?></li>
        <li><?php $f->l_text_field_d('parent_asset_id'); ?></li>
-       <li><label><?php echo __('Accounting Group') ?></label><?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
+       <li><label><?php echo gettext('Accounting Group') ?></label><?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
        <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>
@@ -87,29 +87,29 @@
   </div>
 
   <div id ="form_line" class="form_line">
-   <span class="heading"><?php echo __('Asset Activities') ?></span>
+   <span class="heading"><?php echo gettext('Asset Activities') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Activity Reference') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Reference2') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo __('Other Details') ?> </a></li>
-     <li><a href="#tabsLine-4"><?php echo __('Secondary') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Activity Reference') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Reference2') ?> </a></li>
+     <li><a href="#tabsLine-3"><?php echo gettext('Other Details') ?> </a></li>
+     <li><a href="#tabsLine-4"><?php echo gettext('Secondary') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Seq') ?>#</th>
-         <th><?php echo __('Line Id') ?></th>
-         <th><?php echo __('Activity Item') ?></th>
-         <th><?php echo __('Start Date') ?></th>
-         <th><?php echo __('End Date') ?></th>
-         <th><?php echo __('Type') ?></th>
-         <th><?php echo __('Cause') ?></th>
-         <th><?php echo __('Source') ?></th>
-         <th><?php echo __('Description') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Activity Item') ?></th>
+         <th><?php echo gettext('Start Date') ?></th>
+         <th><?php echo gettext('End Date') ?></th>
+         <th><?php echo gettext('Type') ?></th>
+         <th><?php echo gettext('Cause') ?></th>
+         <th><?php echo gettext('Source') ?></th>
+         <th><?php echo gettext('Description') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody am_activity_reference_values" >
@@ -169,11 +169,11 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Seq') ?>#</th>
-         <th><?php echo __('Priority') ?></th>
-         <th><?php echo __('Shutdown Type') ?>#</th>
-         <th><?php echo __('Accounting Class') ?></th>
-         <th><?php echo __('Owning Department') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Priority') ?></th>
+         <th><?php echo gettext('Shutdown Type') ?>#</th>
+         <th><?php echo gettext('Accounting Class') ?></th>
+         <th><?php echo gettext('Owning Department') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody am_activity_reference_values" >

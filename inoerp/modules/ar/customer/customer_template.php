@@ -1,13 +1,13 @@
-<div id ="form_header"><span class="heading"><?php   echo __('Customer Information') ?></span>
+<div id ="form_header"><span class="heading"><?php   echo gettext('Customer Information') ?></span>
 
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-   <li><a href="#tabsHeader-2"><?php echo __('BU Assignment') ?></a></li>
-   <li><a href="#tabsHeader-3"><?php echo __('Profile') ?></a></li>
-   <li><a href="#tabsHeader-4"><?php echo __('Address Details') ?></a></li>
-   <li><a href="#tabsHeader-5"><?php echo __('Notes') ?></a></li>
-   <li><a href="#tabsHeader-6"><?php echo __('Relationship') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('BU Assignment') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo gettext('Profile') ?></a></li>
+   <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
+   <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
+   <li><a href="#tabsHeader-6"><?php echo gettext('Relationship') ?></a></li>
   </ul>
   <form  method="post" id="customer_header"  name="customer_header">
    <div class="tabContainer">
@@ -18,13 +18,13 @@
         <i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_number_field_d('customer_number'); ?>						 </li>               
-      <li><label><?php echo __('Customer Name') ?><img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable"></label>
+      <li><label><?php echo gettext('Customer Name') ?><img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable"></label>
        <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', 1, $readonly1); ?>
       </li>
       <li><?php $f->l_select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type'); ?>       </li>
       <li><?php echo $f->l_select_field_from_object('customer_category', ar_customer::customer_category(), 'option_line_code', 'option_line_value', $$class->customer_category, 'customer_category'); ?>       </li>
       <li><?php echo $f->l_select_field_from_object('customer_relationship', ar_customer::customer_relationship(), 'option_line_code', 'option_line_value', $$class->customer_relationship, 'customer_relationship'); ?>       </li>
-      <li><label><?php echo __('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
+      <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
        <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
        <i class="fa fa-search supplier_id select_popup clickable"></i>
       </li>
@@ -76,7 +76,7 @@
  </div>
 
 </div>
-<div id ="form_line" class="form_line"><span class="heading"><?php echo __('Customer Site Details') ?></span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Customer Site Details') ?></span>
  <form  method="post" id="customer_site"  name="customer_site">
    <div id='line_before_tab' class="ino-well"> 
    <ul class="column header_field "> 
@@ -91,13 +91,13 @@
   </div>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Main') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Finance') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Profile') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Sales') ?> </a></li>
-    <li><a href="#tabsLine-5"><?php echo __('Address') ?> </a></li>
-    <li><a href="#tabsLine-6"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsLine-7"><?php echo __('Contact') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Profile') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Sales') ?> </a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('Address') ?> </a></li>
+    <li><a href="#tabsLine-6"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsLine-7"><?php echo gettext('Contact') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -137,8 +137,8 @@
     <div id="tabsLine-3" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column five_column"> 
-       <li><label><?php echo __('Status') ?></label><?php echo form::status_field($$class_second->status); ?></li>
-       <li><label><?php echo __('Profile') ?></label><?php echo form::text_field_d2('profile_id'); ?></li> 
+       <li><label><?php echo gettext('Status') ?></label><?php echo form::status_field($$class_second->status); ?></li>
+       <li><label><?php echo gettext('Profile') ?></label><?php echo form::text_field_d2('profile_id'); ?></li> 
       </ul>
      </div>
     </div>

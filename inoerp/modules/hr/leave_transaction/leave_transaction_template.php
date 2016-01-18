@@ -1,12 +1,12 @@
 <div id ="form_header">
  <form action=""  method="post" id="hr_leave_transaction"  name="hr_leave_transaction">
-  <span class="heading"><?php echo __('Leave Application') ?></span>
+  <span class="heading"><?php echo gettext('Leave Application') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -23,7 +23,7 @@
        <li><?php $f->l_date_fieldFromToday('requsted_date', $$class->requsted_date); ?>  </li>
        <li><?php $f->l_date_fieldFromToday('approved_date', $$class->approved_date); ?>  </li>
        <li data-employee_type="approver"><label><i class="hr_employee_id select_popup clickable fa fa-search"></i>
-         <?php echo __('Approver') ?></label><?php
+         <?php echo gettext('Approver') ?></label><?php
         $f->text_field_dr('approved_by');
         echo $f->hidden_field_withId('approved_by_employee_id', $$class->approved_by_employee_id);
         ?>  </li>
@@ -57,10 +57,10 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Date Details') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Date Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Leave Details') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Leave Details') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <ul class="column header_field">

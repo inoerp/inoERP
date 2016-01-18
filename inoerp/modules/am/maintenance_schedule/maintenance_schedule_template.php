@@ -1,13 +1,13 @@
 <div id="form_all">
  <form method="post" id="am_maintenance_schedule"  name="am_maintenance_schedule">
-  <span class="heading"><?php echo __('Maintenance Schedule') ?></span>
+  <span class="heading"><?php echo gettext('Maintenance Schedule') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Planning') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Planning') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -20,7 +20,7 @@
        <li><?php $f->l_text_field_d('schedule_number'); ?></li>
        <li><label>
          <!--<i class="select_item_number select_popup clickable fa fa-search"></i>-->
-        <?php echo __('Inv Item Number') ?>
+        <?php echo gettext('Inv Item Number') ?>
         </label><?php
         echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
         $f->text_field_dr('item_number', 'select_item_number_am_asset_item');
@@ -28,7 +28,7 @@
         ?>
        </li>
        <li><label><i class="select_am_asset_number select_popup clickable fa fa-search"></i>
-         <?php echo __('Asset Number') ?></label><?php
+         <?php echo gettext('Asset Number') ?></label><?php
         $f->text_field_d('am_asset_number');
         echo $f->hidden_field_withId('am_asset_id', $$class->am_asset_id);
         ?>
@@ -76,26 +76,26 @@
   </div>
 
   <div id ="form_line" class="form_line">
-   <span class="heading"><?php echo __('Maintenance Schedule Activities') ?></span>
+   <span class="heading"><?php echo gettext('Maintenance Schedule Activities') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Activities') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Rules') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Activities') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Rules') ?> </a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Ref Id') ?></th>
-         <th><?php echo __('Activity') ?></th>
-         <th><?php echo __('Interval Multiple') ?></th>
-         <th><?php echo __('Repeat in Cycle') ?></th>
-         <th><?php echo __('Last Date') ?></th>
-         <th><?php echo __('Description') ?></th>
-         <th><?php echo __('Consolidate') ?></th>
-         <th><?php echo __('Last Service') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Ref Id') ?></th>
+         <th><?php echo gettext('Activity') ?></th>
+         <th><?php echo gettext('Interval Multiple') ?></th>
+         <th><?php echo gettext('Repeat in Cycle') ?></th>
+         <th><?php echo gettext('Last Date') ?></th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Consolidate') ?></th>
+         <th><?php echo gettext('Last Service') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">

@@ -7,15 +7,15 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo __('Item Cost Header') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Item Cost Header') ?></span>
  <form method="post" id="cst_item_cost_header"  name="cst_item_cost_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Finance') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -26,7 +26,7 @@ inoERP
        </li>
        <li><?php $f->l_select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class->bom_cost_type, 'bom_cost_type', '', 1, $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
-       <li><label><?php echo __('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
+       <li><label><?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withId('item_id_m', $$class->item_id_m); ?>
         <?php $f->text_field_d('item_number', 'select_item_number'); ?>
         <i class="select_item_number select_popup clickable fa fa-search"></i>
        </li>
@@ -102,12 +102,12 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Cost Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Cost Lines') ?></span>
  <form method="post" id="cst_item_cost_line"  name="cst_item_cost_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Future') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
 
    </ul>
    <div class="tabContainer">
@@ -115,13 +115,13 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Element Type') ?></th>
-        <th><?php echo __('Element Id') ?></th>
-        <th><?php echo __('Basis') ?></th>
-        <th><?php echo __('Amount') ?></th>
-        <th><?php echo __('This Level Cost ?') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Element Type') ?></th>
+        <th><?php echo gettext('Element Id') ?></th>
+        <th><?php echo gettext('Basis') ?></th>
+        <th><?php echo gettext('Amount') ?></th>
+        <th><?php echo gettext('This Level Cost ?') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -1,5 +1,5 @@
 <div id="form_box" class="clearfix">
- <div id ="form_header"><span class="heading"><?php echo __('User Group Details') ?></span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('User Group Details') ?></span>
   <div class="tabContainer">
    <ul class="column header_field">
     <li><?php $f->l_select_field_from_object('user_group_code', user_group_access::user_groups(), 'option_line_code', 'option_line_value', $user_group_code_h, 'user_group_code'); ?>
@@ -13,20 +13,20 @@
 
  <form action=""  method="post" id="user_group"  name="user_group">
   <!--END OF FORM HEADER-->
-  <div id ="form_line" class="user_group"><span class="heading"><?php echo __('Group Access Details') ?></span>
+  <div id ="form_line" class="user_group"><span class="heading"><?php echo gettext('Group Access Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Organization Access') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Organization Access') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Group Access Id') ?></th>
-         <th><?php echo __('Organization Name') ?>#</th>
-         <th><?php echo __('Access Level') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Group Access Id') ?></th>
+         <th><?php echo gettext('Organization Name') ?>#</th>
+         <th><?php echo gettext('Access Level') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody user_group_values" >

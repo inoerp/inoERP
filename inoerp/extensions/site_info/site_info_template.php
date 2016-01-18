@@ -1,11 +1,11 @@
 <form action=""  method="post" id="site_info"  name="site_info">
- <span class="heading"><?php echo __('Site Information') ?></span>
+ <span class="heading"><?php echo gettext('Site Information') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Maintenance') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Address') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Maintenance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Address') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -14,7 +14,7 @@
        <li><?php $f->l_text_field_d('email'); ?> </li> 
        <li><?php $f->l_text_field_d('phone_no'); ?> </li> 
        <li><?php $f->l_select_field_from_array('disabled_action', site_info::$disabled_action_a, $$class->disabled_action, 'disabled_action'); ?> </li> 
-       <li><label><?php echo __('Home Page : ') . ' ' . HOME_URL ?></label><?php echo $f->text_field('default_home_page', $$class->default_home_page, '20'); ?> </li>
+       <li><label><?php echo gettext('Home Page : ') . ' ' . HOME_URL ?></label><?php echo $f->text_field('default_home_page', $$class->default_home_page, '20'); ?> </li>
        <li><?php $f->l_select_field_from_array('move_line_wo_header', site_info::$move_line_wo_header_a, $$class->move_line_wo_header, 'move_line_wo_header'); ?> </li> 
       </ul>
      
@@ -22,10 +22,10 @@
     <div id="tabsHeader-2" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field"> 
-       <li><label><?php echo __('Put in Maintenance Mode') ?></label> <?php $f->checkBox_field_d('maintenance_cb') ?></li> 
+       <li><label><?php echo gettext('Put in Maintenance Mode') ?></label> <?php $f->checkBox_field_d('maintenance_cb') ?></li> 
       </ul>
       <ul class="inRow asperWidth"> 
-       <li><label><?php echo __('Maintenance Message') ?></label> 
+       <li><label><?php echo gettext('Maintenance Message') ?></label> 
         <textarea name="maintenance_msg" class="plaintext" rows="4" cols="100"><?php echo htmlentities($$class->maintenance_msg); ?> </textarea>
        </li> 
       </ul>
@@ -40,9 +40,9 @@
  <div id ="form_line" class="form_line"><span class="heading">Line Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Messages') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Hidden Texts') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Messages') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Hidden Texts') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
@@ -54,10 +54,10 @@
        <li><?php $f->l_text_field_d('anonymous_user_role') ?></li> 
       </ul>
       <ul class="inRow asperWidth"> 
-       <li><label><?php echo __('Footer Message') ?></label> 
+       <li><label><?php echo gettext('Footer Message') ?></label> 
         <textarea required name="footer_message" class="plaintext" rows="4" cols="80"><?php echo htmlentities($$class->footer_message); ?> </textarea>
        </li> 
-       <li><label><?php echo __('Site Logo Path') ?></label><?php echo HOME_URL . $f->text_field('logo_path', $$class->logo_path, '60'); ?> </li> 
+       <li><label><?php echo gettext('Site Logo Path') ?></label><?php echo HOME_URL . $f->text_field('logo_path', $$class->logo_path, '60'); ?> </li> 
       </ul>
      </div>
     </div> 
@@ -65,7 +65,7 @@
     <div id="tabsLine-2" class="tabContent">
      <div class="first_rowset"> 
       <ul class="inRow asperWidth"> 
-       <li><label><?php echo __('Access Denied Message') ?></label> 
+       <li><label><?php echo gettext('Access Denied Message') ?></label> 
         <textarea required name="footer_message" class="plaintext" rows="8" cols="80"><?php echo htmlentities($$class->access_denied); ?> </textarea>
        </li> 
       </ul>
@@ -76,7 +76,7 @@
     <div id="tabsLine-3" class="tabContent">
      <div class="first_rowset"> 
       <ul class="inRow asperWidth"> 
-       <li><label><?php echo __('Analytics Code') ?></label> 
+       <li><label><?php echo gettext('Analytics Code') ?></label> 
         <textarea name="analytics_code" class="plaintext" rows="8" cols="80"><?php echo htmlentities($$class->analytics_code); ?> </textarea>
        </li> 
       </ul>

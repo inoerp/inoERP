@@ -8,14 +8,14 @@ inoERP
 -->
 
 <div id="form_all">
- <span class="heading"><?php echo __('Standard Operation') ?></span>
+ <span class="heading"><?php echo gettext('Standard Operation') ?></span>
  <form action=""  method="post" id="bom_standard_operation"  name="bom_standard_operation">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Notes') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -56,11 +56,11 @@ inoERP
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Standard Operation Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Standard Operation Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Resource Assignment') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Future') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Resource Assignment') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="bom_standard_operation_resource_assignment_line"  name="bom_standard_operation_resource_assignment_line">
@@ -68,17 +68,17 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Assignment Id') ?>#</th>
-         <th><?php echo __('Resource Seq') ?></th>
-         <th><?php echo __('Resource') ?>#</th>
-         <th><?php echo __('Basis') ?>#</th>
-         <th><?php echo __('Usage') ?>#</th>
-         <th><?php echo __('Schedule') ?></th>
-         <th><?php echo __('Units') ?>#</th>
-         <th><?php echo __('24 Hours') ?>#</th>
-         <th><?php echo __('Stnd. Rate') ?>#</th>
-         <th><?php echo __('Charge Type') ?>#</th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Assignment Id') ?>#</th>
+         <th><?php echo gettext('Resource Seq') ?></th>
+         <th><?php echo gettext('Resource') ?>#</th>
+         <th><?php echo gettext('Basis') ?>#</th>
+         <th><?php echo gettext('Usage') ?>#</th>
+         <th><?php echo gettext('Schedule') ?></th>
+         <th><?php echo gettext('Units') ?>#</th>
+         <th><?php echo gettext('24 Hours') ?>#</th>
+         <th><?php echo gettext('Stnd. Rate') ?>#</th>
+         <th><?php echo gettext('Charge Type') ?>#</th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bom_standard_operation_resource_assignment_values" >

@@ -1,8 +1,8 @@
 <div id ="form_header">
- <span class="heading"><?php echo __('Catalog Value') ?></span>
+ <span class="heading"><?php echo gettext('Catalog Value') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsHeader-1" class="tabContent">
@@ -17,10 +17,10 @@
  </div>
 </div>
 
-<div id ="form_line" class="form_line"><span class="heading"><?php echo __('Catalog Values') ?></span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Catalog Values') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1"><?php echo __('Name & Values') ?></a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Name & Values') ?></a></li>
   </ul>
   <div class="tabContainer"> 
    <form action=""  method="post" id="sys_catalog_value"  name="sys_catalog_value">
@@ -28,11 +28,11 @@
      <table class="form_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Value Id') ?></th>
-        <th><?php echo __('Name') ?></th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('Values') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Value Id') ?></th>
+        <th><?php echo gettext('Name') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Values') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody sys_catalog_value_values" >

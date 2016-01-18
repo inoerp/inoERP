@@ -4,29 +4,29 @@
    <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
    <!--    End of place for showing error messages-->
    <form action=""  method="post" id="user_dashboard_config"  name="user_dashboard_config">
-    <span class="heading"><?php echo __('Dashboard Configuration') ?></span>
-    <span class="label label-primary"><?php echo __('(Enable User Personal Dashboard in My Preference to activate your customized dashboard)') ?></span>
+    <span class="heading"><?php echo gettext('Dashboard Configuration') ?></span>
+    <span class="label label-primary"><?php echo gettext('(Enable User Personal Dashboard in My Preference to activate your customized dashboard)') ?></span>
     <!--END OF FORM HEADER-->
     <div id ="form_line" class="user_dashboard_config">
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1"><?php echo __('Details') ?></a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>
       </ul>
       <div class="tabContainer"> 
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Id') ?></th>
-           <th><?php echo __('Config Level') ?></th>
-           <th><?php echo __('User Role') ?></th>
-           <th><?php echo __('User Name') ?></th>
-           <th><?php echo __('Group') ?></th>
-           <th><?php echo __('Report Type') ?></th>
-           <th><?php echo __('Report Name') ?> </th>
-           <th><?php echo __('Report Label') ?></th>
-           <th><?php echo __('Priority') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Id') ?></th>
+           <th><?php echo gettext('Config Level') ?></th>
+           <th><?php echo gettext('User Role') ?></th>
+           <th><?php echo gettext('User Name') ?></th>
+           <th><?php echo gettext('Group') ?></th>
+           <th><?php echo gettext('Report Type') ?></th>
+           <th><?php echo gettext('Report Name') ?> </th>
+           <th><?php echo gettext('Report Label') ?></th>
+           <th><?php echo gettext('Priority') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody user_dashboard_config_values" >

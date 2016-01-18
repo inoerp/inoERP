@@ -2,31 +2,31 @@
  <div id="form_all">
  <div id="form_headerDiv">
   <form  method="post" id="inv_location_default_line"  name="location_default_line"><span class="heading">
-   <?php echo __('Item Transaction Location Default') ?></span>
+   <?php echo gettext('Item Transaction Location Default') ?></span>
    <div class="tabContainer">
-    <label><?php echo __('Inventory Org') ?> </label>
+    <label><?php echo gettext('Inventory Org') ?> </label>
     <?php echo $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $org_id_h, 'org_id' , 'action'); ?>
     <a name="show" href="form.php?class_name=inv_location_default&<?php echo "mode=$mode"; ?>" class="show document_id inv_location_default_id">
      <i class='fa fa-refresh '></i></a> 
    </div>
-   <div id ="form_line" class="inv_location_default"><span class="heading"><?php echo __('Location Defaults') ?></span>
+   <div id ="form_line" class="inv_location_default"><span class="heading"><?php echo gettext('Location Defaults') ?></span>
     <div id="tabsLine">
      <ul class="tabMain">
-      <li><a href="#tabsLine-1"><?php echo __('Item-Location') ?></a></li>
-      <li><a href="#tabsLine-2"><?php echo __('Others') ?></a></li>
+      <li><a href="#tabsLine-1"><?php echo gettext('Item-Location') ?></a></li>
+      <li><a href="#tabsLine-2"><?php echo gettext('Others') ?></a></li>
      </ul>
      <div class="tabContainer"> 
       <div id="tabsLine-1" class="tabContent">
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo __('Action') ?></th>
-          <th><?php echo __('Seq') ?></th>
-          <th><?php echo __('Id') ?></th>
-          <th><?php echo __('Item') ?></th>
-          <th><?php echo __('Default Type') ?></th>
-          <th><?php echo __('Sub inventory') ?></th>
-          <th><?php echo __('Locator') ?></th>
+          <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Seq') ?></th>
+          <th><?php echo gettext('Id') ?></th>
+          <th><?php echo gettext('Item') ?></th>
+          <th><?php echo gettext('Default Type') ?></th>
+          <th><?php echo gettext('Sub inventory') ?></th>
+          <th><?php echo gettext('Locator') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody location_default_values" >
@@ -73,10 +73,10 @@
        <table class="form_table">
         <thead> 
          <tr>
-          <th><?php echo __('Seq') ?></th>
-          <th><?php echo __('Location') ?></th>
-          <th><?php echo __('Priority') ?></th>
-          <th><?php echo __('Description') ?></th>
+          <th><?php echo gettext('Seq') ?></th>
+          <th><?php echo gettext('Location') ?></th>
+          <th><?php echo gettext('Priority') ?></th>
+          <th><?php echo gettext('Description') ?></th>
          </tr>
         </thead>
         <tbody class="form_data_line_tbody location_default_values" >

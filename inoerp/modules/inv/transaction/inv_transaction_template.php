@@ -1,7 +1,7 @@
 <form method="post" id="inv_transaction"  name="inv_transaction">
  <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?> 
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
- <span class="heading"><?php echo __('Inventory Transaction ') ?></span> 
+ <span class="heading"><?php echo gettext('Inventory Transaction ') ?></span> 
  <div class='tabContainer'>
   <ul class='column header_field'>
    <li>
@@ -18,28 +18,28 @@
  <div id ="form_line" class="form_line"><span class="heading">Transaction Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('General Info') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Transfer') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Reference') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Finance') ?></a></li>
-    <li><a href="#tabsLine-5"><?php echo __('Lot & Serial') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Transfer') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Reference') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('Lot & Serial') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Transaction Id') ?></th>
-        <th><?php echo __('Item Id') ?></th>
-        <th><?php echo __('Item Number') ?></th>
-        <th><?php echo __('Revision') ?></th>
-        <th><?php echo __('Item Description') ?></th>
-        <th><?php echo __('UOM') ?></th>
-        <th><?php echo __('Quantity') ?></th>
-        <th><?php echo __('Kit Item') ?></th>
-        <th><?php echo __('Kit Config') ?></th>
-        <th><?php echo __('Config Id') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Transaction Id') ?></th>
+        <th><?php echo gettext('Item Id') ?></th>
+        <th><?php echo gettext('Item Number') ?></th>
+        <th><?php echo gettext('Revision') ?></th>
+        <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Kit Item') ?></th>
+        <th><?php echo gettext('Kit Config') ?></th>
+        <th><?php echo gettext('Config Id') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -73,14 +73,14 @@
     <div id="tabsLine-2" class="tabContent">
      <table class="form_line_data_table">
       <thead>
-      <th><?php echo __('From SubInv') ?></th>
-      <th><?php echo __('From Locator') ?></th>
-      <th><?php echo __('To SubInv') ?></th>
-      <th><?php echo __('To Locator') ?></th>
-      <th><?php echo __('Description') ?></th>
-      <th><?php echo __('Reason') ?></th>
-      <th><?php echo __('Onhand') ?></th>
-      <th><?php echo __('Res. Onhand') ?></th>
+      <th><?php echo gettext('From SubInv') ?></th>
+      <th><?php echo gettext('From Locator') ?></th>
+      <th><?php echo gettext('To SubInv') ?></th>
+      <th><?php echo gettext('To Locator') ?></th>
+      <th><?php echo gettext('Description') ?></th>
+      <th><?php echo gettext('Reason') ?></th>
+      <th><?php echo gettext('Onhand') ?></th>
+      <th><?php echo gettext('Res. Onhand') ?></th>
       
       </thead>
       <tbody class="form_data_line_tbody">
@@ -107,16 +107,16 @@
     <div id="tabsLine-3" class="tabContent">
      <table class="form_line_data_table">
       <thead>
-      <th><?php echo __('Document Type') ?></th>
-      <th><?php echo __('Doc. Number') ?></th>
-      <th><?php echo __('Doc. Id') ?></th>
-      <th><?php echo __('Ref Type') ?></th>
-      <th><?php echo __('Ref Name') ?></th>
-      <th><?php echo __('Ref Value') ?></th>
-      <th><?php echo __('Ref Doc') ?></th>
-      <th><?php echo __('WO BOM Line Id') ?></th>
-      <th><?php echo __('PO Detail Id') ?></th>
-      <th><?php echo __('SO Line Id') ?></th>
+      <th><?php echo gettext('Document Type') ?></th>
+      <th><?php echo gettext('Doc. Number') ?></th>
+      <th><?php echo gettext('Doc. Id') ?></th>
+      <th><?php echo gettext('Ref Type') ?></th>
+      <th><?php echo gettext('Ref Name') ?></th>
+      <th><?php echo gettext('Ref Value') ?></th>
+      <th><?php echo gettext('Ref Doc') ?></th>
+      <th><?php echo gettext('WO BOM Line Id') ?></th>
+      <th><?php echo gettext('PO Detail Id') ?></th>
+      <th><?php echo gettext('SO Line Id') ?></th>
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab3_1">
@@ -137,10 +137,10 @@
     <div id="tabsLine-4" class="tabContent">
      <table class="form_line_data_table">
       <thead>
-      <th><?php echo __('Account') ?></th>
-      <th><?php echo __('Unit Cost') ?></th>
-      <th><?php echo __('Costed Amount') ?></th>
-      <th><?php echo __('Journal Header Id') ?></th>
+      <th><?php echo gettext('Account') ?></th>
+      <th><?php echo gettext('Unit Cost') ?></th>
+      <th><?php echo gettext('Costed Amount') ?></th>
+      <th><?php echo gettext('Journal Header Id') ?></th>
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab4_1">

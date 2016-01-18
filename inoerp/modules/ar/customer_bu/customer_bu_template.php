@@ -1,11 +1,11 @@
 <form  method="post" id="customer_bu"  name="customer_bu">
- <div id ="form_header"><span class="heading"><?php echo __('Customer BU Assignment') ?></span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('Customer BU Assignment') ?></span>
   <div class="tabContainer">
    <ul class="column header_field">
     <li><?php $f->l_text_field_dr_withSearch('ar_customer_bu_id') ?><a name="show" href="?ar_customer_bu_id=" class="show ar_customer_bu_id">
       <i class='fa fa-refresh'></i></a> 
     </li>
-    <li><label><?php echo __('Customer Id') ?></label><a class='ajax-link' href="form.php?class_name=ar_customer&mode=<?php echo $mode; ?>&ar_customer_id=
+    <li><label><?php echo gettext('Customer Id') ?></label><a class='ajax-link' href="form.php?class_name=ar_customer&mode=<?php echo $mode; ?>&ar_customer_id=
                                      <?php echo $$class->ar_customer_id; ?>"><?php echo $$class->ar_customer_id; ?></a>
                                      <?php echo form::hidden_field('ar_customer_id', $$class->ar_customer_id); ?>
     </li>
@@ -19,15 +19,15 @@
    </ul>
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Customer BU Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Customer BU Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Accounts') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Finance') ?> </a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Profile') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo __('Sales') ?> </a></li>
-    <li><a href="#tabsLine-5"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsLine-6"><?php echo __('Contact') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Accounts') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Profile') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('Sales') ?> </a></li>
+    <li><a href="#tabsLine-5"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsLine-6"><?php echo gettext('Contact') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">

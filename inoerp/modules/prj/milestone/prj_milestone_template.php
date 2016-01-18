@@ -1,7 +1,7 @@
 <form method="post" id="prj_milestone"  name="prj_milestone">
- <div id="tabsHeader"><span class="heading"><?php echo __('Project Milestone') ?></span>
+ <div id="tabsHeader"><span class="heading"><?php echo gettext('Project Milestone') ?></span>
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1"><?php echo __('Project Info') ?></a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Project Info') ?></a></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsHeader-1" class="tabContent">
@@ -19,27 +19,27 @@
   </div>
 
  </div>
- <div id="form_line" class="form_line"><span class="heading"><?php echo __('Milestone Status') ?></span>
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Milestone Status') ?></span>
 
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Task') ?></th>
-        <th><?php echo __('Task Id') ?></th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('Status') ?></th>
-        <th><?php echo __('Revenue Amount') ?></th>
-        <th><?php echo __('Invoice Amount') ?></th>
-        <th><?php echo __('Sign-Off') ?></th>
-        <th><?php echo __('Comment') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Task') ?></th>
+        <th><?php echo gettext('Task Id') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Status') ?></th>
+        <th><?php echo gettext('Revenue Amount') ?></th>
+        <th><?php echo gettext('Invoice Amount') ?></th>
+        <th><?php echo gettext('Sign-Off') ?></th>
+        <th><?php echo gettext('Comment') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form method="post" id="ar_transaction_source"  name="ar_transaction_source">
-  <span class="heading"><?php echo __('Receivable Transaction Source') ?></span>
+  <span class="heading"><?php echo gettext('Receivable Transaction Source') ?></span>
   <div class="tabContainer">
    <ul class="column header_field"> 
     <li><?php $f->l_text_field_dr_withSearch('ar_transaction_source_id') ?>
@@ -16,11 +16,11 @@
    </ul>
   </div>
   <div id ="form_line" class="form_line"><span class="heading">
-    <?php echo __('Transaction Source Details') ?></span>
+    <?php echo gettext('Transaction Source Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo __('Basic Info') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo __('Future') ?> </a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">

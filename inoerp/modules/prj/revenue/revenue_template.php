@@ -8,17 +8,17 @@ inoERP
 -->
 
 <div id ="form_header"><span class="heading"><?php
-  echo __('Project Revenue')
+  echo gettext('Project Revenue')
   ?></span>
  <form  method="post" id="prj_revenue_header"  name="prj_revenue_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('Finance') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('References') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo __('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('References') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -86,7 +86,7 @@ inoERP
     </div>
     <div id="tabsHeader-6" class="tabContent">
      <ul class="column header_field">
-      <li id="document_status"><label><?php echo __('Action') ?></label>
+      <li id="document_status"><label><?php echo gettext('Action') ?></label>
        <?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
       </li>
      </ul>
@@ -96,28 +96,28 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Revenue Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Revenue Lines') ?></span>
  <form  method="post" id="prj_revenue_line"  name="prj_revenue_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Reference') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Reference') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Line') #    ?></th>
-        <th><?php echo __('Revenue Category') ?></th>
-        <th><?php echo __('Revenue Source') ?></th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('Amount') ?></th>
-        <th><?php echo __('Release Date') ?></th>
-        <th><?php echo __('Trasnfer Date') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Line') #    ?></th>
+        <th><?php echo gettext('Revenue Category') ?></th>
+        <th><?php echo gettext('Revenue Source') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Amount') ?></th>
+        <th><?php echo gettext('Release Date') ?></th>
+        <th><?php echo gettext('Trasnfer Date') ?></th>
 
        </tr>
       </thead>
@@ -154,14 +154,14 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Seq') ?>#</th>
-        <th><?php echo __('Reject Reason') ?></th>
-        <th><?php echo __('Document Number') ?></th>
-        <th><?php echo __('Reference Type') ?></th>
-        <th><?php echo __('Reference Key') ?></th>
-        <th><?php echo __('Reference Value') ?></th>
-        <th><?php echo __('Journal Header Id') ?></th>
-        <th><?php echo __('Transferred') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Reject Reason') ?></th>
+        <th><?php echo gettext('Document Number') ?></th>
+        <th><?php echo gettext('Reference Type') ?></th>
+        <th><?php echo gettext('Reference Key') ?></th>
+        <th><?php echo gettext('Reference Value') ?></th>
+        <th><?php echo gettext('Journal Header Id') ?></th>
+        <th><?php echo gettext('Transferred') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

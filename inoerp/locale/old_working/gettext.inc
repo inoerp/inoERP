@@ -275,7 +275,7 @@ function _textdomain($domain) {
 /**
  * Lookup a message in the current domain.
  */
-function ___($msgid) {
+function _gettext($msgid) {
     $l10n = _get_reader();
     return _encode($l10n->translate($msgid));
 }
@@ -283,22 +283,22 @@ function ___($msgid) {
 /**
  * Alias for gettext.
  */
-function __($msgid) {
-    return ___($msgid);
+function gettext($msgid) {
+    return _gettext($msgid);
 }
 
 /**
  * Plural version of gettext.
  */
-function _n__($singular, $plural, $number) {
+function _ngettext($singular, $plural, $number) {
     $l10n = _get_reader();
-    return _encode($l10n->n__($singular, $plural, $number));
+    return _encode($l10n->ngettext($singular, $plural, $number));
 }
 
 /**
  * Override the current domain.
  */
-function _d__($domain, $msgid) {
+function _dgettext($domain, $msgid) {
     $l10n = _get_reader($domain);
     return _encode($l10n->translate($msgid));
 }
@@ -306,72 +306,72 @@ function _d__($domain, $msgid) {
 /**
  * Plural version of dgettext.
  */
-function _dn__($domain, $singular, $plural, $number) {
+function _dngettext($domain, $singular, $plural, $number) {
     $l10n = _get_reader($domain);
-    return _encode($l10n->n__($singular, $plural, $number));
+    return _encode($l10n->ngettext($singular, $plural, $number));
 }
 
 /**
  * Overrides the domain and category for a single lookup.
  */
-function _dc__($domain, $msgid, $category) {
+function _dcgettext($domain, $msgid, $category) {
     $l10n = _get_reader($domain, $category);
     return _encode($l10n->translate($msgid));
 }
 /**
  * Plural version of dcgettext.
  */
-function _dcn__($domain, $singular, $plural, $number, $category) {
+function _dcngettext($domain, $singular, $plural, $number, $category) {
     $l10n = _get_reader($domain, $category);
-    return _encode($l10n->n__($singular, $plural, $number));
+    return _encode($l10n->ngettext($singular, $plural, $number));
 }
 
 /**
  * Context version of gettext.
  */
-function _p__($context, $msgid) {
+function _pgettext($context, $msgid) {
     $l10n = _get_reader();
-    return _encode($l10n->p__($context, $msgid));
+    return _encode($l10n->pgettext($context, $msgid));
 }
 
 /**
  * Override the current domain in a context gettext call.
  */
-function _dp__($domain, $context, $msgid) {
+function _dpgettext($domain, $context, $msgid) {
     $l10n = _get_reader($domain);
-    return _encode($l10n->p__($context, $msgid));
+    return _encode($l10n->pgettext($context, $msgid));
 }
 
 /**
  * Overrides the domain and category for a single context-based lookup.
  */
-function _dcp__($domain, $context, $msgid, $category) {
+function _dcpgettext($domain, $context, $msgid, $category) {
     $l10n = _get_reader($domain, $category);
-    return _encode($l10n->p__($context, $msgid));
+    return _encode($l10n->pgettext($context, $msgid));
 }
 
 /**
  * Context version of ngettext.
  */
-function _np__($context, $singular, $plural) {
+function _npgettext($context, $singular, $plural) {
     $l10n = _get_reader();
-    return _encode($l10n->np__($context, $singular, $plural));
+    return _encode($l10n->npgettext($context, $singular, $plural));
 }
 
 /**
  * Override the current domain in a context ngettext call.
  */
-function _dnp__($domain, $context, $singular, $plural) {
+function _dnpgettext($domain, $context, $singular, $plural) {
     $l10n = _get_reader($domain);
-    return _encode($l10n->np__($context, $singular, $plural));
+    return _encode($l10n->npgettext($context, $singular, $plural));
 }
 
 /**
  * Overrides the domain and category for a plural context-based lookup.
  */
-function _dcnp__($domain, $context, $singular, $plural, $category) {
+function _dcnpgettext($domain, $context, $singular, $plural, $category) {
     $l10n = _get_reader($domain, $category);
-    return _encode($l10n->np__($context, $singular, $plural));
+    return _encode($l10n->npgettext($context, $singular, $plural));
 }
 
 
@@ -399,88 +399,88 @@ function T_textdomain($domain) {
     if (_check_locale_and_function()) return textdomain($domain);
     else return _textdomain($domain);
 }
-function T___($msgid) {
-    if (_check_locale_and_function()) return __($msgid);
-    else return ___($msgid);
+function T_gettext($msgid) {
+    if (_check_locale_and_function()) return gettext($msgid);
+    else return _gettext($msgid);
 }
 function T_($msgid) {
     if (_check_locale_and_function()) return _($msgid);
-    return __($msgid);
+    return gettext($msgid);
 }
 
-function ____($singular) {
+function __gettext($singular) {
     if (_check_locale_and_function())
-        return n__($singular);
-    else return _n__($singular);
+        return ngettext($singular);
+    else return _ngettext($singular);
 }
 
-function T_n__($singular, $plural, $number) {
+function T_ngettext($singular, $plural, $number) {
     if (_check_locale_and_function())
-        return n__($singular, $plural, $number);
-    else return _n__($singular, $plural, $number);
+        return ngettext($singular, $plural, $number);
+    else return _ngettext($singular, $plural, $number);
 }
-function T_d__($domain, $msgid) {
-    if (_check_locale_and_function()) return d__($domain, $msgid);
-    else return _d__($domain, $msgid);
+function T_dgettext($domain, $msgid) {
+    if (_check_locale_and_function()) return dgettext($domain, $msgid);
+    else return _dgettext($domain, $msgid);
 }
-function T_dn__($domain, $singular, $plural, $number) {
+function T_dngettext($domain, $singular, $plural, $number) {
     if (_check_locale_and_function())
-        return dn__($domain, $singular, $plural, $number);
-    else return _dn__($domain, $singular, $plural, $number);
+        return dngettext($domain, $singular, $plural, $number);
+    else return _dngettext($domain, $singular, $plural, $number);
 }
-function T_dc__($domain, $msgid, $category) {
+function T_dcgettext($domain, $msgid, $category) {
     if (_check_locale_and_function())
-        return dc__($domain, $msgid, $category);
-    else return _dc__($domain, $msgid, $category);
+        return dcgettext($domain, $msgid, $category);
+    else return _dcgettext($domain, $msgid, $category);
 }
-function T_dcn__($domain, $singular, $plural, $number, $category) {
+function T_dcngettext($domain, $singular, $plural, $number, $category) {
     if (_check_locale_and_function())
-      return dcn__($domain, $singular, $plural, $number, $category);
-    else return _dcn__($domain, $singular, $plural, $number, $category);
+      return dcngettext($domain, $singular, $plural, $number, $category);
+    else return _dcngettext($domain, $singular, $plural, $number, $category);
 }
 
-function T_p__($context, $msgid) {
+function T_pgettext($context, $msgid) {
   if (_check_locale_and_function('pgettext'))
-      return p__($context, $msgid);
+      return pgettext($context, $msgid);
   else
-      return _p__($context, $msgid);
+      return _pgettext($context, $msgid);
 }
 
-function T_dp__($domain, $context, $msgid) {
+function T_dpgettext($domain, $context, $msgid) {
   if (_check_locale_and_function('dpgettext'))
-      return dp__($domain, $context, $msgid);
+      return dpgettext($domain, $context, $msgid);
   else
-      return _dp__($domain, $context, $msgid);
+      return _dpgettext($domain, $context, $msgid);
 }
 
-function T_dcp__($domain, $context, $msgid, $category) {
+function T_dcpgettext($domain, $context, $msgid, $category) {
   if (_check_locale_and_function('dcpgettext'))
-      return dcp__($domain, $context, $msgid, $category);
+      return dcpgettext($domain, $context, $msgid, $category);
   else
-      return _dcp__($domain, $context, $msgid, $category);
+      return _dcpgettext($domain, $context, $msgid, $category);
 }
 
-function T_np__($context, $singular, $plural, $number) {
+function T_npgettext($context, $singular, $plural, $number) {
     if (_check_locale_and_function('npgettext'))
-        return np__($context, $singular, $plural, $number);
+        return npgettext($context, $singular, $plural, $number);
     else
-        return _np__($context, $singular, $plural, $number);
+        return _npgettext($context, $singular, $plural, $number);
 }
 
-function T_dnp__($domain, $context, $singular, $plural, $number) {
+function T_dnpgettext($domain, $context, $singular, $plural, $number) {
   if (_check_locale_and_function('dnpgettext'))
-      return dnp__($domain, $context, $singular, $plural, $number);
+      return dnpgettext($domain, $context, $singular, $plural, $number);
   else
-      return _dnp__($domain, $context, $singular, $plural, $number);
+      return _dnpgettext($domain, $context, $singular, $plural, $number);
 }
 
-function T_dcnp__($domain, $context, $singular, $plural,
+function T_dcnpgettext($domain, $context, $singular, $plural,
                        $number, $category) {
     if (_check_locale_and_function('dcnpgettext'))
-        return dcnp__($domain, $context, $singular,
+        return dcnpgettext($domain, $context, $singular,
                            $plural, $number, $category);
     else
-        return _dcnp__($domain, $context, $singular,
+        return _dcnpgettext($domain, $context, $singular,
                             $plural, $number, $category);
 }
 
@@ -498,45 +498,45 @@ if (!function_exists('gettext')) {
     function textdomain($domain) {
         return _textdomain($domain);
     }
-    function __($msgid) {
-        return ___($msgid);
+    function gettext($msgid) {
+        return _gettext($msgid);
     }
     function _($msgid) {
-        return __($msgid);
+        return gettext($msgid);
     }
-    function n__($singular, $plural, $number) {
-        return _n__($singular, $plural, $number);
+    function ngettext($singular, $plural, $number) {
+        return _ngettext($singular, $plural, $number);
     }
-    function d__($domain, $msgid) {
-        return _d__($domain, $msgid);
+    function dgettext($domain, $msgid) {
+        return _dgettext($domain, $msgid);
     }
-    function dn__($domain, $singular, $plural, $number) {
-        return _dn__($domain, $singular, $plural, $number);
+    function dngettext($domain, $singular, $plural, $number) {
+        return _dngettext($domain, $singular, $plural, $number);
     }
-    function dc__($domain, $msgid, $category) {
-        return _dc__($domain, $msgid, $category);
+    function dcgettext($domain, $msgid, $category) {
+        return _dcgettext($domain, $msgid, $category);
     }
-    function dcn__($domain, $singular, $plural, $number, $category) {
-        return _dcn__($domain, $singular, $plural, $number, $category);
+    function dcngettext($domain, $singular, $plural, $number, $category) {
+        return _dcngettext($domain, $singular, $plural, $number, $category);
     }
-    function p__($context, $msgid) {
-        return _p__($context, $msgid);
+    function pgettext($context, $msgid) {
+        return _pgettext($context, $msgid);
     }
-    function np__($context, $singular, $plural, $number) {
-        return _np__($context, $singular, $plural, $number);
+    function npgettext($context, $singular, $plural, $number) {
+        return _npgettext($context, $singular, $plural, $number);
     }
-    function dp__($domain, $context, $msgid) {
-        return _dp__($domain, $context, $msgid);
+    function dpgettext($domain, $context, $msgid) {
+        return _dpgettext($domain, $context, $msgid);
     }
-    function dnp__($domain, $context, $singular, $plural, $number) {
-        return _dnp__($domain, $context, $singular, $plural, $number);
+    function dnpgettext($domain, $context, $singular, $plural, $number) {
+        return _dnpgettext($domain, $context, $singular, $plural, $number);
     }
-    function dcp__($domain, $context, $msgid, $category) {
-        return _dcp__($domain, $context, $msgid, $category);
+    function dcpgettext($domain, $context, $msgid, $category) {
+        return _dcpgettext($domain, $context, $msgid, $category);
     }
-    function dcnp__($domain, $context, $singular, $plural,
+    function dcnpgettext($domain, $context, $singular, $plural,
                          $number, $category) {
-      return _dcnp__($domain, $context, $singular, $plural,
+      return _dcnpgettext($domain, $context, $singular, $plural,
                           $number, $category);
     }
 }

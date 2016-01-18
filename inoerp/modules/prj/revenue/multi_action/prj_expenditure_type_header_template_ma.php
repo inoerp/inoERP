@@ -15,15 +15,15 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Action') ?></th>
-           <th><?php echo __('Expn Type Id') ?></th>
-           <th><?php echo __('Expenditure Type') ?></th>
-           <th><?php echo __('Expn Category') ?></th>
-           <th><?php echo __('Revenue Category') ?></th>
-           <th><?php echo __('Description') ?></th>
-           <th><?php echo __('Eff. From') ?></th>
-           <th><?php echo __('Eff. To') ?></th>
-           <th><?php echo __('UOM') ?></th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Expn Type Id') ?></th>
+           <th><?php echo gettext('Expenditure Type') ?></th>
+           <th><?php echo gettext('Expn Category') ?></th>
+           <th><?php echo gettext('Revenue Category') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Eff. From') ?></th>
+           <th><?php echo gettext('Eff. To') ?></th>
+           <th><?php echo gettext('UOM') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -61,14 +61,14 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo __('Inventory') ?></th>
-           <th><?php echo __('Burden') ?></th>
-           <th><?php echo __('Expense Reports') ?></th>
-           <th><?php echo __('Misc. Transaction') ?></th>
-           <th><?php echo __('Overtime') ?></th>
-           <th><?php echo __('Invoice') ?></th>
-           <th><?php echo __('Usage') ?></th>
-           <th><?php echo __('Work In Process') ?></th>
+           <th><?php echo gettext('Inventory') ?></th>
+           <th><?php echo gettext('Burden') ?></th>
+           <th><?php echo gettext('Expense Reports') ?></th>
+           <th><?php echo gettext('Misc. Transaction') ?></th>
+           <th><?php echo gettext('Overtime') ?></th>
+           <th><?php echo gettext('Invoice') ?></th>
+           <th><?php echo gettext('Usage') ?></th>
+           <th><?php echo gettext('Work In Process') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

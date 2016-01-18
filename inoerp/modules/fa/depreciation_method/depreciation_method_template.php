@@ -2,13 +2,13 @@
 <div class="row small-left-padding">
 <div id="form_all">
  <form  method="post" id="fa_depreciation_method"  name="fa_depreciation_method">
-  <span class="heading"><?php echo __('Depreciation Method') ?></span>
+  <span class="heading"><?php echo gettext('Depreciation Method') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1"><?php echo __('Basic') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo __('Attachments') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -51,11 +51,11 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo __('Depreciation Details') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Depreciation Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Rates') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Calculation') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Rates') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Calculation') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="fa_depreciation_method_rate_line"  name="fa_depreciation_method_rate_line">
@@ -63,12 +63,12 @@
       <table class="form_table">
        <thead> 
         <tr>
-         <th><?php echo __('Action') ?></th>
-         <th><?php echo __('Line Id') ?></th>
-         <th><?php echo __('Year') ?></th>
-         <th><?php echo __('Period') ?></th>
-         <th><?php echo __('Rate Percentage') ?></th>
-         <th><?php echo __('Description') ?></th>
+         <th><?php echo gettext('Action') ?></th>
+         <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Year') ?></th>
+         <th><?php echo gettext('Period') ?></th>
+         <th><?php echo gettext('Rate Percentage') ?></th>
+         <th><?php echo gettext('Description') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody fa_depreciation_method_rate_values" >

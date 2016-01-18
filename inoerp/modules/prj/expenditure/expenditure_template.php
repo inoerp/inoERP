@@ -7,15 +7,15 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php echo __('Project Expenditure') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Project Expenditure') ?></span>
  <form action=""  method="post" id="prj_expenditure_header"  name="prj_expenditure_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo __('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo __('References') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo __('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo __('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo __('Actions') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('References') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -62,7 +62,7 @@ inoERP
     </div>
     <div id="tabsHeader-5" class="tabContent">
      <ul class="column header_field">
-      <li id="document_status"><label><?php echo __('Action') ?></label>
+      <li id="document_status"><label><?php echo gettext('Action') ?></label>
        <?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
       </li>
      </ul>
@@ -72,32 +72,32 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo __('Expenditure Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Expenditure Lines') ?></span>
  <form action=""  method="post" id="prj_expenditure_line"  name="prj_expenditure_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo __('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo __('Finance') ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo __('Finance-2') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Finance-2') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Action') ?></th>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Type') ?></th>
-        <th><?php echo __('Org') ?></th>
-        <th><?php echo __('Employee') ?></th>
-        <th><?php echo __('Job') ?></th>
-        <th><?php echo __('Description') ?></th>
-        <th><?php echo __('Date') ?></th>
-        <th><?php echo __('Project') ?></th>
-        <th><?php echo __('Task') ?></th>
-        <th><?php echo __('UOM') ?></th>
-        <th><?php echo __('Quantity') ?></th>
-        <th><?php echo __('Rate') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Type') ?></th>
+        <th><?php echo gettext('Org') ?></th>
+        <th><?php echo gettext('Employee') ?></th>
+        <th><?php echo gettext('Job') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('Date') ?></th>
+        <th><?php echo gettext('Project') ?></th>
+        <th><?php echo gettext('Task') ?></th>
+        <th><?php echo gettext('UOM') ?></th>
+        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Rate') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -149,13 +149,13 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Line Amount') ?></th>
-        <th><?php echo __('Status') ?></th>
-        <th><?php echo __('Debit Account') ?></th>
-        <th><?php echo __('Credit Account') ?></th>
-        <th><?php echo __('Burden Amount') ?></th>
-        <th><?php echo __('Burden Details') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line Amount') ?></th>
+        <th><?php echo gettext('Status') ?></th>
+        <th><?php echo gettext('Debit Account') ?></th>
+        <th><?php echo gettext('Credit Account') ?></th>
+        <th><?php echo gettext('Burden Amount') ?></th>
+        <th><?php echo gettext('Burden Details') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -170,7 +170,7 @@ inoERP
          <td><?php $f->ac_field_wid2('debit_ac_id'); ?></td>
          <td><?php $f->ac_field_wid2('credit_ac_id'); ?></td>
          <td><?php $f->text_field_wid2r('burden_amount'); ?></td>
-         <td><a role="button" target="_blank" class="btn btn-sm btn-default dont_copy" href="search.php?class_name=prj_burden_expenditure_v&amp;show_block=1&amp;prj_expenditure_line_id=<?php echo $$class_second->prj_expenditure_line_id; ?>"><?php echo __('View') ?></a></td>
+         <td><a role="button" target="_blank" class="btn btn-sm btn-default dont_copy" href="search.php?class_name=prj_burden_expenditure_v&amp;show_block=1&amp;prj_expenditure_line_id=<?php echo $$class_second->prj_expenditure_line_id; ?>"><?php echo gettext('View') ?></a></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -183,11 +183,11 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo __('Line Id') ?></th>
-        <th><?php echo __('Journal Header Id') ?></th>
-        <th><?php echo __('Journal Interface Id') ?></th>
-        <th><?php echo __('Revene Calculated') ?></th>
-        <th><?php echo __('Invoiced') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Journal Header Id') ?></th>
+        <th><?php echo gettext('Journal Interface Id') ?></th>
+        <th><?php echo gettext('Revene Calculated') ?></th>
+        <th><?php echo gettext('Invoiced') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
