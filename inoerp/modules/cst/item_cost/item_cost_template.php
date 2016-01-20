@@ -90,7 +90,6 @@ inoERP
           disabled href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >BOM Cost</a>
        </li>
       </ul>
-
       <div id="comment" class="shoe_comments">
       </div>
      </div>
@@ -107,8 +106,6 @@ inoERP
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
-
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -182,9 +179,6 @@ inoERP
       </tbody>
      </table>
     </div>
-    <div id="tabsLine-2" class="scrollElement tabContent">
-
-    </div>
    </div>
   </div>
  </form>
@@ -208,6 +202,6 @@ inoERP
   <li class="btn1DivId" data-btn1DivId="cst_item_cost_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
-  <li class="noOfTabbs" data-noOfTabbs="2" ></li>
+  <li class="noOfTabbs" data-noOfTabbs="1" ></li>
  </ul>
 </div>
