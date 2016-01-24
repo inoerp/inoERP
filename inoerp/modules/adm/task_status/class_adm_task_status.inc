@@ -1,5 +1,4 @@
 <?php
-
 /**
  * inoERP
  *
@@ -8,7 +7,6 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
-
 /**
  * adm_task_status
  * Contains all the adm_task_status information, such as - adm_task_status, adm_task_status_id, org_id,  status, etc.
@@ -31,7 +29,7 @@ class adm_task_status extends dbObject {
   'mod_version' => '1.1.1',
   'primary_entity_cb' => '',
   'module_name' => 'inv',
-  'weight' => 17
+  'weight' => 22
  ];
  public static $start_by_a = [
   'CREATION_DATE' => 'Creation Date',
@@ -63,7 +61,7 @@ class adm_task_status extends dbObject {
   'last_update_by',
   'last_update_date',
  ];
-//variables used for showing data
+
  public $initial_search = [
   "task_status",
  ];
