@@ -1,9 +1,44 @@
 inoERP 0.4.1 High Level Plan
 -------------------------------
-FA	20-Aug
-CRM	1-Sep
-Projects	10-Sep
-AM	15-Sep
+
+- Quality
+	Collection Element
+	Specifications
+	Collection Plan
+	Quality Result
+	Intergation with Purchasing
+	Setups
+	      Collection Plan Type
+	      Element Type
+	      Quality Actions
+	      
+- Sales & Disribution Improvements
+	Auto Create orders from quote
+	Order configuarti 
+	Separate process flows
+	Pick list print - Before & After picking
+	Issues Fixed 
+	       Return Customer Order
+	       Back order picked Orders
+	       Sales delicery line association
+	       
+	       
+- Planning
+	A single kanban board for all items
+
+- System
+	gettext for all forms
+	report builder
+	rfid interface - view, update and delete
+	rfid & kanban integration
+        
+- Purchasing
+	Convert RFQ to Quote
+	Convert Quote to Order : Blanket & Standard
+	Approval process improvements
+	Issues Fixed 
+	       Selection of supplier from ASL
+
 Release 0.4.1	15-Oct-2015
 
 
