@@ -25,6 +25,14 @@ inoERP 0.4.1 High Level Plan
 	       
 - Planning
 	A single kanban board for all items
+	
+- WIP
+	Improved work bench 
+	      Sequnce Controll
+	      Avaialble Quantity Verification
+	      UOM Change Disabled
+	Validation to allow/disallow over completion
+	Work Order Less Completion/Return with out Serial/Lot
 
 - System
 	gettext for all forms
