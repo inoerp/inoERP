@@ -29,7 +29,7 @@ inoERP
         echo $f->text_field('supplier_name', $supplier_name);
         echo $f->hidden_field_withId('supplier_id', $supplier_id)
         ?>   </li>
-       <li><?php echo gettext('Supplier Site Name') ?><?php
+       <li><label><?php echo gettext('Supplier Site Name') ?></label><?php
         echo $f->text_field('supplier_site_name', $supplier_site_name);
         echo $f->hidden_field_withId('supplier_site_id', $supplier_site_id)
         ?>   </li>  
