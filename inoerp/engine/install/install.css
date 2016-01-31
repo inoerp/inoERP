@@ -29,6 +29,7 @@ ul{
 }
 
 li{
+  display: block;
  margin: 5px;
  padding: 2px;
 }
@@ -41,4 +42,13 @@ li.alert-danger{
  background: none repeat scroll 0% 0% rgba(173, 80, 80, 0.44);
 }
 
+li label{
+  display: inline-block;
+  width : 150px;
+  text-align: right;
+}
+
+#input-btn{
+  margin-left: 200px;
+}
 
