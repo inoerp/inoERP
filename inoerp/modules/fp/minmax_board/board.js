@@ -108,22 +108,4 @@ $(document).ready(function () {
   });
  });
 
-//
-// $(".draggable_element").draggable(
-//         {helper: 'clone'},
-// {cursor: "crosshair"});
-// $("#urgent_card_block").droppable({
-//  accept: ".draggable_element",
-//  drop: function (event, ui) {
-//   $(this).append($(ui.draggable).clone());
-////		remove_from_dragged_element();
-//  }
-// });
-//
-// $('#urgent_card_block').on('dblclick', 'li.draggable_element', function () {
-//
-//  $(this).remove();
-// });
-
 });
-
