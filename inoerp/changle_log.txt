@@ -1,4 +1,14 @@
-inoERP 0.4.1 High Level Plan
+inoERP 0.5.1 High Level Plan
+-----------------------------
+- Process Manufacturing
+	Formula
+	Ingredients
+	By Product
+
+
+
+
+inoERP 0.4.1  | 01-Feb-2016
 -------------------------------
 
 - Quality
