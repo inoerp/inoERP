@@ -1,10 +1,11 @@
 <?php include_once __DIR__ . '/../../includes/basics/basics.inc'; ?>
 <?php
- if ($session->login_status()) {
+if ($session->login_status()) {
  redirect_to(HOME_URL);
 }
 ?>
 <?php
+
 if (!isset($msg)) {
  $msg = '';
 }
@@ -89,7 +90,7 @@ If (isset($_REQUEST["provider"])) {
    $new_user->save();
    $new_user->_after_save();
    $dbc->confirm();
-  }else{
+  } else {
    $msg .= '<div class="message error"> Account creation failed!. Contact the admin. </div>';
    redirect_to(HOME_URL . "extensions/user/user_login.php?error_message=email_error");
   }
@@ -118,7 +119,18 @@ If (isset($_REQUEST["provider"])) {
  //Social login
 }//end of if post submit
 ?>
-<?php  include_once('../../includes/basics/header_public.inc');
+<?php
+
+include_once('../../includes/basics/header_public.inc');
+ if (!empty($_SESSION['default_theme'])) {
+  $selected_theme = $_SESSION['default_theme'];
+ } else {
+  set_default_theme();
+  $selected_theme = $_SESSION['default_theme'];
+ }
+
+ defined('THEME_DIR') ? null : define('THEME_DIR', HOME_DIR . DS . 'themes' . DS . $selected_theme);
+ defined('THEME_URL') ? null : define("THEME_URL", HOME_URL . 'themes/' . $selected_theme);
 //include_once(THEME_DIR . DS. 'header.inc');
 ?>
 <script type='text/javascript' src="user.js" ></script>
@@ -188,4 +200,11 @@ if (!empty($msg)) {
 }
 ?>
 
-<?php require_once('login/user_login_template.php') ?>
+<?php
+
+if (file_exists(THEME_DIR . '/template/user_login_template.php')) {
+ require_once(THEME_DIR . '/template/user_login_template.php');
+} else {
+ require_once('login/user_login_template.php');
+}
+?>
