@@ -45,15 +45,6 @@ class pm_formula_header extends dbObject {
   'PROCESS_LOGISTICS' => 'Process Logistics',
   'PROCESS_ACTUALS' => 'Process Actuals',
  ];
- public $billing_method_a = [
-  'CC' => 'Cost-Cost',
-  'CW' => 'Cost-Work',
-  'CE' => 'Cost-Event',
-  'EE' => 'Event-Event',
-  'EW' => 'Event-Work',
-  'WW' => 'Work-Work',
-  'WE' => 'Work-Event'
- ];
  public $field_a = [
   'pm_formula_header_id',
   'org_id',
@@ -107,7 +98,8 @@ class pm_formula_header extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
-
+ public $pm_employee_name;
+ public $action;
 
  private function _do_action() {
 

@@ -1,30 +1,33 @@
 <?php
 
-class prj_project_control extends dbObject {
+class pm_formula_ingredient extends dbObject {
 
- public static $table_name = "prj_project_control";
- public static $primary_column = "prj_project_control_id";
- public static $parent_primary_column = "prj_project_header_id";
- public static $key_column = 'description';
- public static $module = "hd";
+ public static $table_name = "pm_formula_ingredient";
+ public static $primary_column = "pm_formula_ingredient_id";
+ public static $parent_primary_column = "pm_formula_header_id";
+ public static $key_column = 'item_id_m';
+ public static $module = "pm";
  public static $source_a = [
   'ESTIMATES' => 'Estimates',
   'WORK_ORDER' => 'Work Order',
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'prj_project_control_id',
-  'prj_project_header_id',
-  'prj_expenditure_type_id',
-  'prj_expenditure_category_code',
+  'pm_formula_ingredient_id',
+  'pm_formula_header_id',
+  'line_no',
+  'revision_name',
+  'item_id_m',
+  'uom_id',
+  'quantity',
   'description',
-  'start_date',
-  'end_date',
-  'prj_nlr_header_id',
-  'hr_employee_id',
-  'hr_job_id',
-  'billable_cb',
-  'chargeable_cb',
+  'buffer_cb',
+  'scale_type',
+  'yield_type',
+  'byproduct_type',
+  'consumption_type',
+  'phantom_type',
+  'required_qty',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -34,39 +37,33 @@ class prj_project_control extends dbObject {
  public $fields_inForm_notInDataBase = [
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'prj_project_header_id'
+  'pm_formula_header_id'
  ];
  public $requiredField = [
-  'prj_project_header_id',
+  'pm_formula_header_id',
+  'item_id_m'
  ];
- public $prj_project_control_id;
- public $prj_project_header_id;
- public $prj_expenditure_type_id;
- public $prj_expenditure_category_code;
+ public $pm_formula_byproduct_id;
+ public $pm_formula_header_id;
+ public $line_no;
+ public $line_type;
+ public $item_id_m;
+ public $uom_id;
+ public $quantity;
  public $description;
- public $start_date;
- public $end_date;
- public $prj_nlr_header_id;
- public $hr_employee_id;
- public $hr_job_id;
- public $billable_cb;
- public $chargeable_cb;
+ public $yield_contribution_cb;
+ public $scale_type;
+ public $yield_type;
+ public $step_qty_cb;
+ public $consumption_type;
+ public $phantom_type;
+ public $required_qty;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
 
-
- public static function find_by_wip_wo_headerId($wi_wo_header_id) {
-  global $db;
-  $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where wip_wo_header_id= '{$wi_wo_header_id}' ";
-  $result = self::find_by_sql($sql);
-  return $result;
- }
-
 }
 
-//end of prj_project_control class
+//end of pm_formula_ingredient class
 ?>

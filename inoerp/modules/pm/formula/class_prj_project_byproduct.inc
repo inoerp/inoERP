@@ -1,21 +1,29 @@
 <?php
 
-class prj_project_member extends dbObject {
+class pm_formula_byproduct extends dbObject {
 
- public static $table_name = "prj_project_member";
- public static $primary_column = "prj_project_member_id";
- public static $parent_primary_column = "prj_project_header_id";
+ public static $table_name = "pm_formula_byproduct";
+ public static $primary_column = "pm_formula_byproduct_id";
+ public static $parent_primary_column = "pm_formula_header_id";
  public static $key_column = 'user_id';
  public static $module = "prj";
 //  data base variables as stored database column name
  public $field_a = [
-  'prj_project_member_id',
-  'prj_project_header_id',
-  'user_id',
-  'prj_role_id',
+  'pm_formula_byproduct_id',
+  'pm_formula_header_id',
+  'line_no',
+  'line_type',
+  'item_id_m',
+  'uom_id',
+  'quantity',
   'description',
-  'start_date',
-  'end_date',
+  'yield_contribution_cb',
+  'scale_type',
+  'yield_type',
+  'step_qty_cb',
+  'consumption_type',
+  'phantom_type',
+  'required_qty',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -26,25 +34,31 @@ class prj_project_member extends dbObject {
   "member_username",
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'prj_project_header_id'
+  'pm_formula_header_id'
  ];
  public $requiredField = [
-  'user_id',
-  'prj_role_id',
+  'pm_formula_header_id',
+  'item_id_m',
  ];
- public $prj_project_member_id;
- public $prj_project_header_id;
- public $user_id;
- public $prj_role_id;
+ public $pm_formula_byproduct_id;
+ public $pm_formula_header_id;
+ public $line_no;
+ public $line_type;
+ public $item_id_m;
+ public $uom_id;
+ public $quantity;
  public $description;
- public $start_date;
- public $end_date;
+ public $yield_contribution_cb;
+ public $scale_type;
+ public $yield_type;
+ public $step_qty_cb;
+ public $consumption_type;
+ public $phantom_type;
+ public $required_qty;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
- public $member_username;
-
 
  public static function find_by_headerId_and_status($prj_project_header_id, $line_status = 'PENDING_IMPORT') {
   global $db;
@@ -79,5 +93,5 @@ class prj_project_member extends dbObject {
 
 }
 
-//end of prj_project_member class
+//end of pm_formula_byproduct class
 ?>
