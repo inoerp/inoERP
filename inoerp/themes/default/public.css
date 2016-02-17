@@ -1,22 +1,30 @@
 
 @media print{
- body, html, #content {
-  width: 100%;
- }
+ body, html {
+  width: 1100px;
+  }
  body{ background-color:#FFFFFF; background-image:none; color:#000000 }
  #header, #header_top, #footer, #content_left, #comment_form, #content_right_right, 
  #content_top, #content_bottom , #header_top_container, #form_top_image,
  .sidebar, .navbar , .navbar-form, #header_bottom, #sys_menu_left_vertical,
- .footer-menu, #half_copyrights,#structure .heading, #searchForm, #searchResult .clickable, .showDiv_input
+ .footer-menu, #half_copyrights,#structure .heading, #searchForm, #searchResult .clickable, .showDiv_input, .ino.navbar-form,
+ .container-fluid.sidebar, #right_click_menu, .ino-breadcrumb-simple, .fa, a:link, a.show2 , a.show, a.show.document_id,
+ .navbar-fixed-top, #divider-bar
  { 
-  display:none;
+  display:none !important;
  }
- #content{ 
-
+ 
+ #content, .container-fluid.mainbar{ 
   display: block;
   height: auto;
   overflow: visible;
-  width: 100%;
+  width: 100% !important;
+  float: left !important;
+  margin: 20px !important;
+ }
+ 
+ .container-fluid.sidebar{
+  width: 0% !important;
  }
 
 }
@@ -2414,4 +2422,9 @@ padding: 15px 50px 5px;
 
 .ino-well ul {
 margin-top: 10px !important;
+}
+
+#structure #pagination{
+ margin: 10px 0 0 10px;
+ float: left;
 }

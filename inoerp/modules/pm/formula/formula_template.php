@@ -197,7 +197,7 @@ inoERP
    </form>
   </div>
   <div id ="form_line3" class="form_line3">
-   <div id="tabsLine-4" class="tabContent">
+   <div id="tabsLine-3" class="tabContent">
     <form  method="post" id="pm_formula_byproduct"  name="pm_formula_byproduct">
      <table class="form_line_data_table3">
       <thead> 

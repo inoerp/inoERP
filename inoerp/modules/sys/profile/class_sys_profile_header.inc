@@ -47,7 +47,7 @@ class sys_profile_header extends dbObject {
   'sys_profile_header_id',
   'access_level',
   'profile_name',
-  'class_name',
+  'profile_class_name',
   'description',
   'created_by',
   'creation_date',
@@ -67,7 +67,7 @@ class sys_profile_header extends dbObject {
   'description',
  ];
  public $requiredField = [
-  'class_name',
+  'profile_class_name',
   'access_level',
   'profile_name',
  ];
@@ -82,7 +82,7 @@ class sys_profile_header extends dbObject {
  public $sys_profile_header_id;
  public $access_level;
  public $profile_name;
- public $class_name;
+ public $profile_class_name;
  public $profile_level;
  public $description;
  public $created_by;
@@ -98,9 +98,6 @@ class sys_profile_header extends dbObject {
 //	$this->field_a = $prepare->fetchAll(PDO::FETCH_COLUMN, 0);
 // }
 
- public function __set($name, $value) {
-  $this->$name = $value;
- }
 
 }
 

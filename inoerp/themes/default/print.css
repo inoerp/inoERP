@@ -1,3 +1,31 @@
+@media print{
+button, .inline_action
+ { 
+  display:none !important;
+ }
+}
+
+
+#popup_print li{
+ display: inline-block;
+  width: 380px;
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  
+}
+
+#popup_print .inline_action{
+  display: none;
+}
+
+#popup_print li label {
+background-color: #eee;
+  width: 160px;
+  display: inline-block;
+  padding: 5px;
+  margin-right: 5px;
+}
 
 
 td.blank{

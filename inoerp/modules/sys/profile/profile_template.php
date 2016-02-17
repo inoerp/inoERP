@@ -12,7 +12,7 @@
        <li><?php $f->l_text_field_dr_withSearch('sys_profile_header_id'); ?></li>
        <li><?php $f->l_select_field_from_array('access_level', sys_profile_header::$access_level_a, $$class->access_level); ?></li>
        <li><?php $f->l_text_field_dm('profile_name'); ?> </li>
-       <li><?php $f->l_text_field_dm('class_name'); ?> </li>
+       <li><?php $f->l_text_field_dm('profile_class_name'); ?> </li>
        <li><?php $f->l_text_field_d('description'); ?></li>
        <li><?php $f->l_select_field_from_array('profile_level', sys_profile_header::$profile_level_a, $$class->profile_level, 'profile_level'); ?>
         <a name="show" href="form.php?class_name=sys_profile_header&<?php echo "mode=$mode"; ?>" class="show2 document_id sys_profile_header_id">
