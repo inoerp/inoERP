@@ -1,30 +1,56 @@
 @media print{
-button, .inline_action
+ button, .inline_action,.dropdown
  { 
   display:none !important;
  }
 }
 
+button, .inline_action, .dropdown, .ino_serch_setting
+{ 
+ display:none !important;
+}
 
 #popup_print li{
  display: inline-block;
-  width: 380px;
-  margin: 5px;
-  overflow: hidden;
-  border: 1px solid #ccc;
-  
+ width: 380px;
+ margin: 5px;
+ overflow: hidden;
+ border: 1px solid #ccc;
+
+}
+
+#popup_print td, #popup_print th{
+ border-width: 0.5px;
+border-style: solid;
+padding : 2px 5px;
+border-color: #cfa9b0;
+}
+
+#popup_print th{
+background-color : #000;
+  color: #fff;
+}
+
+#popup_print table{
+   border-collapse: collapse;
+    vertical-align: top;
+}
+
+#popup_print tr{
+  border: 1px solid #ecc;
+  padding: 2px 5px;
 }
 
 #popup_print .inline_action{
-  display: none;
+ display: none;
 }
 
 #popup_print li label {
-background-color: #eee;
-  width: 160px;
-  display: inline-block;
-  padding: 5px;
-  margin-right: 5px;
+ background-color: #eee;
+ width: 160px;
+ display: inline-block;
+ padding: 5px;
+ margin-right: 5px;
 }
 
 
@@ -43,12 +69,12 @@ tr.detail {
  display: block;
  float: left;
  margin: 10px 40px;
-/*  font-family :  courier;
-  font-size: 12px;*/
+ /*  font-family :  courier;
+   font-size: 12px;*/
 }
 
 #page_print td{
-  padding-left: 2px;
+ padding-left: 2px;
 }
 .full_page {
  float: left;

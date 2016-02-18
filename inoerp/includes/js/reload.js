@@ -262,9 +262,101 @@ $(document).ready(function () {
  $("[required]").addClass('required');
  $("[readonly]").addClass('readonly');
  //Popup for print
- $(".print").click(function () {
-  window.print();
- });
+$(".print").click(function () {
+//  window.print();
+
+   var pContent = '<div id="popup_print">';
+
+   if ($('.extn_report_content').length > 0) {
+    $('#structure').find('table').each(function (k, v) {
+     pContent += '<table>' + $(v).html() + '</table>';
+    });
+   } else if ($('#searchResult').length > 0) {
+    $('#searchResult').find('table').each(function (k, v) {
+     pContent += '<table>' + $(v).html() + '</table>';
+    });
+   } else {
+    pContent += '<ul>';
+    $('#form_header').not('.big_popover').find('label,:input').each(function (k, v) {
+     if ($(v).closest('span').hasClass('big_popover')) {
+      return true;
+     }
+     if ($(v).is('label')) {
+      pContent += '<li><label>';
+      pContent += $(v).html();
+     } else {
+
+      if ($(v).is('select')) {
+       pContent += $(v).find(':selected').text();
+
+      } else if ($(v).is(':text') || $(v).is('bool')) {
+       pContent += $(v).val();
+      }
+     }
+     if (!$(v).is('label')) {
+      pContent += '</li>';
+     } else {
+      pContent += '</label>';
+     }
+    });
+    pContent += '</ul>';
+   }
+
+   if ($('#form_line').length > 0) {
+    if ($('#form_line').find('table').length > 0) {
+     $('#form_line').find('table').each(function (k, v) {
+      pContent += '<table>' + $(v).html() + '</table>';
+     });
+    } else {
+     pContent += '<ul>';
+     $('#form_line').find('label,:input').each(function (k, v) {
+      if ($(v).closest('span').hasClass('big_popover')) {
+       return true;
+      }
+      if ($(v).is('label')) {
+       pContent += '<li><label>';
+       pContent += $(v).html();
+      } else {
+
+       if ($(v).is('select')) {
+        pContent += $(v).find(':selected').text();
+
+       } else if ($(v).is(':text') || $(v).is('bool')) {
+        pContent += $(v).val();
+       }
+      }
+      if (!$(v).is('label')) {
+       pContent += '</li>';
+      } else {
+       pContent += '</label>';
+      }
+     });
+     pContent += '</ul>';
+    }
+
+   }
+
+
+
+   pContent += '</div>';
+
+   var printContenet = '<!DOCTYPE html><html><head>';
+   printContenet += '<title>Print it!</title>';
+
+   printContenet += '<link rel="stylesheet" type="text/css" href="themes/default/print.css">';
+
+   printContenet += '</head><body>';
+   printContenet += pContent;
+   printContenet += '<' + '/body' + '><' + '/html' + '>';
+
+   var popupWin = window.open("", "_blank", "width=1300,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no");
+   popupWin.document.writeln('' + printContenet + '');
+   popupWin.document.close();
+   popupWin.focus();
+   popupWin.print();
+
+   popupWin.close();
+  });
  //all download
  $('#export_excel_allResult').on('click', function () {
   $('#download_all').submit();
@@ -510,8 +602,8 @@ $(document).ready(function () {
   json_url: 'modules/inv/item/json_item.php',
   primary_column1: 'org_id'
  });
- 
-  //vaidation field auto complete
+
+ //vaidation field auto complete
  $('.val_field').inoAutoCompleteElement({
   json_url: 'includes/json/json_validation_field.php',
   primary_column1: 'bu_org_id',
