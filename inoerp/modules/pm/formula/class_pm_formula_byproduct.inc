@@ -17,13 +17,9 @@ class pm_formula_byproduct extends dbObject {
   'uom_id',
   'quantity',
   'description',
-  'yield_contribution_cb',
   'scale_type',
   'yield_type',
-  'step_qty_cb',
-  'consumption_type',
-  'phantom_type',
-  'required_qty',
+  'byproduct_type',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -51,10 +47,7 @@ class pm_formula_byproduct extends dbObject {
  public $yield_contribution_cb;
  public $scale_type;
  public $yield_type;
- public $step_qty_cb;
- public $consumption_type;
- public $phantom_type;
- public $required_qty;
+ public $byproduct_type;
  public $created_by;
  public $creation_date;
  public $last_update_by;

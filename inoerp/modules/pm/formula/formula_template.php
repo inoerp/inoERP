@@ -143,18 +143,21 @@ inoERP
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Item') ?>#</th>
+        <th><?php echo gettext('Ingredient') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
-        <th><?php echo gettext('ByProduct') ?></th>
+        <th><?php echo gettext('Yield') ?></th>
         <th><?php echo gettext('Consumption') ?></th>
+        <th><?php echo gettext('Buffer') ?></th>
+        <th><?php echo gettext('Phantom') ?></th>
+        <th><?php echo gettext('Required Qty') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
        <?php
+       $f = new inoform();
        $count = 0;
        foreach ($pm_formula_ingredient_object as $pm_formula_ingredient) {
         if (!empty($pm_formula_ingredient->user_id)) {
@@ -175,17 +178,18 @@ inoERP
          <td><?php
           $f->val_field_wid3('item_number', 'item', 'item_number', 'receving_org_id');
           echo $f->hidden_field_withCLass('item_id_m', $$class_third->item_id_m, 'dont_copy_r');
-          echo $f->hidden_field_withCLass('purchased_cb', '1', 'popup_value');
           echo $f->hidden_field('processing_lt', '');
           ?>
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
-         <td><?php form::text_field_wid2('item_description'); ?></td>
-         <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('quantity', $$class_third->quantity, '', '', 'allow_change'); ?></td>
-         <td><?php $f->text_field_wid2('yield_type'); ?></td>
-         <td><?php $f->text_field_wid2('scale_type'); ?></td>
-         <td><?php $f->text_field_wid2('byproduct_type'); ?></td>     
-         <td><?php $f->text_field_wid2('consumption_type'); ?></td>
+         <td><?php form::text_field_wid3('item_description'); ?></td>
+         <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->uom_id, '', '', 'uom_id'); ?></td>
+         <td><?php echo $f->number_field('quantity', $$class_third->quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php $f->text_field_wid3('scale_type'); ?></td>
+         <td><?php $f->text_field_wid3('yield_type'); ?></td>     
+         <td><?php $f->text_field_wid3('consumption_type'); ?></td>
+         <td><?php echo $f->checkBox_field('buffer_cb', $$class_third->buffer_cb); ?></td>
+         <td><?php $f->text_field_wid3('phantom_type'); ?></td>
+         <td><?php $f->text_field_wid3('required_qty'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -204,14 +208,13 @@ inoERP
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Item') ?>#</th>
+        <th><?php echo gettext('By Product') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
-        <th><?php echo gettext('ByProduct') ?></th>
-        <th><?php echo gettext('Consumption') ?></th>
+        <th><?php echo gettext('Yield Type') ?></th>
+        <th><?php echo gettext('Byproduct Type') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody3 wip_wo_bom_values" >
@@ -229,14 +232,18 @@ inoERP
           </ul>
          </td>
          <td><?php form::text_field_wid4sr('pm_formula_byproduct_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('prj_expenditure_type_id', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_fourth->prj_expenditure_type_id, '', 'medium'); ?></td>
-         <td><?php echo $f->select_field_from_object('prj_expenditure_category_code', option_header::find_by_name('PRJ_EXPENDITURE_CATEGORY'), 'option_line_code', 'option_line_value', $$class_fourth->prj_expenditure_category_code, '', 'medium'); ?></td>
-         <td><?php $f->text_field_wid4('description'); ?></td>
-         <td><?php echo $f->select_field_from_object('hr_job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $$class_fourth->hr_job_id); ?></td>
-         <td><?php echo $f->date_fieldAnyDay('start_date', $$class_fourth->start_date); ?></td>
-         <td><?php echo $f->date_fieldAnyDay('end_date', $$class_fourth->end_date); ?></td> 
-         <td><?php echo $f->checkBox_field('chargeable_cb', $$class_fourth->chargeable_cb); ?></td>
-         <td><?php echo $f->checkBox_field('billable_cb', $$class_fourth->billable_cb); ?></td>
+         <td><?php
+          $f->val_field_wid4('item_number', 'item', 'item_number', 'receving_org_id');
+          echo $f->hidden_field_withCLass('item_id_m', $$class_fourth->item_id_m, 'dont_copy_r');
+          echo $f->hidden_field('processing_lt', '');
+          ?>
+          <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
+         <td><?php form::text_field_wid4('item_description'); ?></td>
+         <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->uom_id, '', '', 'uom_id'); ?></td>
+         <td><?php echo $f->number_field('quantity', $$class_fourth->quantity, '', '', 'allow_change'); ?></td>
+         <td><?php $f->text_field_wid4('scale_type'); ?></td>
+         <td><?php $f->text_field_wid4('yield_type'); ?></td>     
+         <td><?php $f->text_field_wid4('byproduct_type'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
