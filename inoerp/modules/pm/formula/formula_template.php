@@ -23,7 +23,7 @@ inoERP
       </li>
       <li><?php $f->l_text_field_d('name'); ?></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
-      <li><?php $f->l_text_field_d('type'); ?></li>
+      <li><?php $f->l_select_field_from_object('type', option_header::find_options_byName('PM_FORMULA_TYPE'), 'option_line_code', 'option_line_value', $$class->type, 'type'); ?></li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
       <li><?php $f->l_text_field_d('comment'); ?></li>
       <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
