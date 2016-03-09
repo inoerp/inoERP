@@ -7,6 +7,12 @@ class pm_formula_byproduct extends dbObject {
  public static $parent_primary_column = "pm_formula_header_id";
  public static $key_column = 'user_id';
  public static $module = "prj";
+ public static $byproduct_type_a = [
+  'REWORK' => 'Rework',
+  'SAMPLE' => 'Sample',
+  'WASTE' => 'Waste',
+  'YIELD' => 'Yield',
+ ];
 //  data base variables as stored database column name
  public $field_a = [
   'pm_formula_byproduct_id',

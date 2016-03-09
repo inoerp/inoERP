@@ -7,7 +7,17 @@ class pm_formula_line extends dbObject {
  public static $parent_primary_column = "pm_formula_header_id";
  public static $key_column = 'item_id_m';
  public static $module = "pm";
-
+ public static $yield_type_a = [
+  'AUTO' => 'Automatic',
+  'MANUAL' => 'Manual',
+  'INC' => 'Incremental',
+  'AUTOBS' => 'Auto By Step',
+ ];
+ 
+  public static $scale_type_a = [
+  'FIX' => 'Fixed',
+  'PROP' => 'Proportional',
+ ];
 
  public $field_a = [
   'pm_formula_line_id',
