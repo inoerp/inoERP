@@ -42,8 +42,6 @@ class pm_formula_line extends dbObject {
  ];
  public $requiredField = [
   'pm_formula_header_id',
-  'line_no',
-  'line_type',
   'item_id_m',
   'uom_id',
   'quantity',
@@ -79,34 +77,34 @@ public $last_update_date;
 public $item_description;
 
 
- public function findBy_parentId($pm_formula_header_id, $order_by_field = '', $order_by_seq = '') {
-  /*
-   * 1. Find all where parent project task number is null
-   */
-  $final_result = [];
-  if (!ino_validate_num($pm_formula_header_id)) {
-   return false;
-  }
-  $this->pm_formula_header_id = $pm_formula_header_id;
-  $sql = " SELECT * FROM pm_formula_line WHERE pm_formula_header_id = '{$pm_formula_header_id}' AND parent_prj_task_num IS NULL ";
-  $sql .= " ORDER BY task_level_weight ASC ";
-  $result = self::find_by_sql($sql);
-
-  if ($result) {
-   foreach ($result as $result_line) {
-    $child_final_result = [];
-    $this->_find_all_childs($result_line, $child_final_result);
-    array_push($final_result, $result_line);
-    if (!empty($child_final_result)) {
-     foreach ($child_final_result as $k => $obj) {
-      array_push($final_result, $obj);
-     }
-    }
-   }
-  }
-//  pa($final_result);
-  return $final_result;
- }
+// public function findBy_parentId($pm_formula_header_id, $order_by_field = '', $order_by_seq = '') {
+//  /*
+//   * 1. Find all where parent project task number is null
+//   */
+//  $final_result = [];
+//  if (!ino_validate_num($pm_formula_header_id)) {
+//   return false;
+//  }
+//  $this->pm_formula_header_id = $pm_formula_header_id;
+//  $sql = " SELECT * FROM pm_formula_line WHERE pm_formula_header_id = '{$pm_formula_header_id}' AND parent_prj_task_num IS NULL ";
+//  $sql .= " ORDER BY task_level_weight ASC ";
+//  $result = self::find_by_sql($sql);
+//
+//  if ($result) {
+//   foreach ($result as $result_line) {
+//    $child_final_result = [];
+//    $this->_find_all_childs($result_line, $child_final_result);
+//    array_push($final_result, $result_line);
+//    if (!empty($child_final_result)) {
+//     foreach ($child_final_result as $k => $obj) {
+//      array_push($final_result, $obj);
+//     }
+//    }
+//   }
+//  }
+////  pa($final_result);
+//  return $final_result;
+// }
 
  private function _find_all_childs($result_line, &$child_final_result) {
   $sql = " SELECT * FROM pm_formula_line WHERE pm_formula_header_id = '{$this->pm_formula_header_id}' AND parent_prj_task_num ='{$result_line->task_number}' ";

@@ -84,6 +84,7 @@ inoERP
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?> #</th>
         <th><?php echo gettext('Item') ?>#</th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
@@ -100,6 +101,13 @@ inoERP
        $pm_formula_line_object_ai->seek($position);
        while ($pm_formula_line_object_ai->valid()) {
         $pm_formula_line = $pm_formula_line_object_ai->current();
+        if(!empty($pm_formula_line->item_id_m)){
+         $item_f = item::find_by_item_id_m($pm_formula_line->item_id_m);
+         $$class_second->item_number = $item_f->item_number;
+         $$class_second->item_description = $item_f->item_description;
+        }else{
+          $$class_second->item_number = $$class_second->item_description = null;
+        }
         ?>         
         <tr class="pm_formula_line<?php echo $count ?>">
          <td>
@@ -108,6 +116,7 @@ inoERP
           ?>
          </td>
          <td><?php $f->text_field_wid2sr('pm_formula_line_id', 'line_id'); ?></td>
+         <td><?php echo $f->number_field('line_no', $$class_second->line_no, '', '', 'lines_number small ' , 1, $readonly); ?></td>
          <td><?php
           $f->val_field_wid2('item_number', 'item', 'item_number', 'receving_org_id');
           echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m, 'dont_copy_r');
