@@ -11,6 +11,13 @@ class pm_formula_ingredient extends dbObject {
   'ESTIMATES' => 'Estimates',
   'WORK_ORDER' => 'Work Order',
  ];
+ 
+  public static $consumption_type_a = [
+  'AUTO' => 'Automatic',
+  'MANUAL' => 'Manual',
+  'INC' => 'Incremental',
+  'AUTOBS' => 'Auto By Step',
+ ];
 //  data base variables as stored database column name
  public $field_a = [
   'pm_formula_ingredient_id',
@@ -22,7 +29,7 @@ class pm_formula_ingredient extends dbObject {
   'quantity',
   'description',
   'scale_type',
-  'yield_type',
+  'contribute_yield_cb',
   'consumption_type',
   'buffer_cb',
   'phantom_type',
@@ -50,7 +57,7 @@ class pm_formula_ingredient extends dbObject {
  public $uom_id;
  public $quantity;
  public $description;
- public $yield_contribution_cb;
+ public $contribute_yield_cb;
  public $scale_type;
  public $yield_type;
  public $step_qty_cb;

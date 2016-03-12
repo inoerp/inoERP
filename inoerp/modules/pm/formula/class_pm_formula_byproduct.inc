@@ -5,8 +5,8 @@ class pm_formula_byproduct extends dbObject {
  public static $table_name = "pm_formula_byproduct";
  public static $primary_column = "pm_formula_byproduct_id";
  public static $parent_primary_column = "pm_formula_header_id";
- public static $key_column = 'user_id';
- public static $module = "prj";
+ public static $key_column = 'item_id_m';
+ public static $module = "pm";
  public static $byproduct_type_a = [
   'REWORK' => 'Rework',
   'SAMPLE' => 'Sample',
@@ -59,36 +59,6 @@ class pm_formula_byproduct extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
- public static function find_by_headerId_and_status($prj_project_header_id, $line_status = 'PENDING_IMPORT') {
-  global $db;
-  $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where prj_project_header_id= '{$prj_project_header_id}' AND line_status= '{$line_status}' ";
-  $result = self::find_by_sql($sql);
-  return $result;
- }
-
- public static function find_by_wipWoHeaderId_and_routingSequence($wip_wo_header_id, $routing_sequence) {
-  global $db;
-  $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where wip_wo_header_id= '{$wip_wo_header_id}' 
-					 AND routing_sequence= '{$routing_sequence}' ";
-  $result = self::find_by_sql($sql);
-  return $result;
- }
-
- public function findBy_woHeaderId_routingSeq() {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE wip_wo_header_id = :wip_wo_header_id ";
-  $sql .= " AND routing_sequence = :routing_sequence ";
-
-  $param_a = ['wip_wo_header_id', 'routing_sequence'];
-  $value_a = ['wip_wo_header_id' => $this->wip_wo_header_id, 'routing_sequence' => $this->routing_sequence];
-  $result = $this->findBy_sql($sql, $param_a, $value_a);
-  return !empty($result) ? $result : false;
- }
 
 }
 

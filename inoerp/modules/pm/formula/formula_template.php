@@ -6,7 +6,9 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Formula') ?></span>
+<div id ="form_header"><span class="heading"><?php $f = new inoform();
+echo gettext('Formula')
+?></span>
  <form method="post" id="pm_formula_header"  name="pm_formula_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -27,7 +29,7 @@ inoERP
       <li><?php $f->l_text_field_d('revision'); ?></li>
       <li><?php $f->l_text_field_d('comment'); ?></li>
       <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
-       <?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
+<?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
       <li><?php $f->l_text_field_d('description') ?></li>
@@ -37,7 +39,7 @@ inoERP
      <div> 
       <div id="comments">
        <div id="comment_list">
-        <?php echo!(empty($comments)) ? $comments : ""; ?>
+<?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
         <?php
@@ -57,7 +59,7 @@ inoERP
     <div id="tabsHeader-4" class="tabContent">
      <ul class="column header_field">
       <li id="document_status"><label><?php echo gettext('Action') ?></label>
-       <?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
+<?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
       </li>
      </ul>
     </div>
@@ -101,12 +103,12 @@ inoERP
        $pm_formula_line_object_ai->seek($position);
        while ($pm_formula_line_object_ai->valid()) {
         $pm_formula_line = $pm_formula_line_object_ai->current();
-        if(!empty($pm_formula_line->item_id_m)){
+        if (!empty($pm_formula_line->item_id_m)) {
          $item_f = item::find_by_item_id_m($pm_formula_line->item_id_m);
          $$class_second->item_number = $item_f->item_number;
          $$class_second->item_description = $item_f->item_description;
-        }else{
-          $$class_second->item_number = $$class_second->item_description = null;
+        } else {
+         $$class_second->item_number = $$class_second->item_description = null;
         }
         ?>         
         <tr class="pm_formula_line<?php echo $count ?>">
@@ -116,12 +118,10 @@ inoERP
           ?>
          </td>
          <td><?php $f->text_field_wid2sr('pm_formula_line_id', 'line_id'); ?></td>
-         <td><?php echo $f->number_field('line_no', $$class_second->line_no, '', '', 'lines_number small ' , 1, $readonly); ?></td>
+         <td><?php echo $f->number_field('line_no', $$class_second->line_no, '', '', 'lines_number small ', 1, $readonly); ?></td>
          <td><?php
           $f->val_field_wid2('item_number', 'item', 'item_number', 'receving_org_id');
           echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m, 'dont_copy_r');
-          echo $f->hidden_field_withCLass('purchased_cb', '1', 'popup_value');
-          echo $f->hidden_field('processing_lt', '');
           ?>
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid2('item_description'); ?></td>
@@ -152,12 +152,13 @@ inoERP
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
         <th><?php echo gettext('Ingredient') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
-        <th><?php echo gettext('Yield') ?></th>
+        <th><?php echo gettext('Contribute Yield') ?></th>
         <th><?php echo gettext('Consumption') ?></th>
         <th><?php echo gettext('Buffer') ?></th>
         <th><?php echo gettext('Phantom') ?></th>
@@ -166,12 +167,14 @@ inoERP
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
        <?php
-       $f = new inoform();
        $count = 0;
        foreach ($pm_formula_ingredient_object as $pm_formula_ingredient) {
-        if (!empty($pm_formula_ingredient->user_id)) {
-         $mem_user_i = user::find_by_id($pm_formula_ingredient->user_id);
-         $$class_third->member_username = $mem_user_i->username;
+        if (!empty($pm_formula_ingredient->item_id_m)) {
+         $item_ig = item::find_by_item_id_m($pm_formula_ingredient->item_id_m);
+         $$class_third->item_number = $item_f->item_number;
+         $$class_third->item_description = $item_f->item_description;
+        } else {
+         $$class_third->item_number = $$class_second->item_description = null;
         }
         ?>         
         <tr class="pm_formula_ingredient<?php echo $count ?>">
@@ -184,19 +187,19 @@ inoERP
           </ul>
          </td>
          <td><?php form::text_field_wid3sr('pm_formula_ingredient_id'); ?></td>
+         <td><?php echo $f->number_field('line_no', $$class_third->line_no, '', '', 'lines_number small ', 1, $readonly); ?></td>
          <td><?php
-          $f->val_field_wid3('item_number', 'item', 'item_number', 'receving_org_id');
+          $f->val_field_wid3('item_number', 'item', 'item_number', 'org_id');
           echo $f->hidden_field_withCLass('item_id_m', $$class_third->item_id_m, 'dont_copy_r');
-          echo $f->hidden_field('processing_lt', '');
+          echo $f->hidden_field_withCLass('purchased_cb', '1', 'popup_value');
           ?>
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid3('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->uom_id, '', '', 'uom_id'); ?></td>
          <td><?php echo $f->number_field('quantity', $$class_third->quantity, '', '', 'allow_change small'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_third->scale_type, '', 'medium') ?></td>
-         <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_third->yield_type, '', 'medium'); ?></td>
-
-         <td><?php $f->text_field_wid3('consumption_type'); ?></td>
+         <td><?php echo $f->checkBox_field('contribute_yield_cb', $$class_third->contribute_yield_cb); ?></td>
+         <td><?php echo $f->select_field_from_array('consumption_type', pm_formula_ingredient::$consumption_type_a, $$class_third->consumption_type, '', 'medium'); ?></td>
          <td><?php echo $f->checkBox_field('buffer_cb', $$class_third->buffer_cb); ?></td>
          <td><?php $f->text_field_wid3('phantom_type'); ?></td>
          <td><?php $f->text_field_wid3('required_qty'); ?></td>
@@ -218,6 +221,7 @@ inoERP
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Line') ?>#</th>
         <th><?php echo gettext('By Product') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
@@ -231,6 +235,13 @@ inoERP
        <?php
        $count = 0;
        foreach ($pm_formula_byproduct_object as $pm_formula_byproduct) {
+        if (!empty($pm_formula_byproduct->item_id_m)) {
+         $item_bp = item::find_by_item_id_m($pm_formula_byproduct->item_id_m);
+         $$class_fourth->item_number = $item_bp->item_number;
+         $$class_fourth->item_description = $item_bp->item_description;
+        } else {
+         $$class_fourth->item_number = $$class_fourth->item_description = null;
+        }
         ?>         
         <tr class="pm_formula_byproduct<?php echo $count ?>">
          <td>    
@@ -242,8 +253,9 @@ inoERP
           </ul>
          </td>
          <td><?php form::text_field_wid4sr('pm_formula_byproduct_id'); ?></td>
+         <td><?php echo $f->number_field('line_no', $$class_third->line_no, '', '', 'lines_number small ', 1, $readonly); ?></td>
          <td><?php
-          $f->val_field_wid4('item_number', 'item', 'item_number', 'receving_org_id');
+          $f->val_field_wid4('item_number', 'item', 'item_number', 'org_id');
           echo $f->hidden_field_withCLass('item_id_m', $$class_fourth->item_id_m, 'dont_copy_r');
           echo $f->hidden_field('processing_lt', '');
           ?>
@@ -253,7 +265,7 @@ inoERP
          <td><?php echo $f->number_field('quantity', $$class_fourth->quantity, '', '', 'allow_change'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_fourth->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_fourth->yield_type, '', 'medium'); ?></td>
-         <td><?php echo $f->select_field_from_array('yield_type', pm_formula_byproduct::$byproduct_type_a, $$class_fourth->byproduct_type, '', 'medium'); ?></td>
+         <td><?php echo $f->select_field_from_array('byproduct_type', pm_formula_byproduct::$byproduct_type_a, $$class_fourth->byproduct_type, '', 'medium'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -269,7 +281,7 @@ inoERP
 
 <div class="row small-top-margin">
  <div id="pagination" style="clear: both;">
-  <?php echo $pagination->show_pagination(); ?>
+<?php echo $pagination->show_pagination(); ?>
  </div>
 </div>
 
