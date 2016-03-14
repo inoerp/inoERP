@@ -37,6 +37,12 @@ class pm_process_routing_header extends dbObject {
   'ORDER' => 'Order',
   'RETURN' => 'Return'
  ];
+ public static $status_a = [
+  'APPROVED' => 'Approved',
+  'PEND_APPROVAL' => 'Pening Approval',
+  'ON_HOLD' => 'On Hold',
+  'INACTIVE' => 'In Active',
+ ];
  public $field_a = [
   'pm_process_routing_header_id',
   'routing_name',
@@ -65,7 +71,7 @@ class pm_process_routing_header extends dbObject {
  ];
  public $requiredField = [
   'routing_name',
-  'owning_org_id',
+  'org_id',
  ];
  public $fields_inForm_notInDataBase = [
   'action',

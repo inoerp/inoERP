@@ -23,13 +23,13 @@ inoERP
       <li><?php $f->l_text_field_d('routing_name'); ?></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
       <li><?php $f->l_text_field_d('description'); ?></li>
-      <li><?php $f->l_text_field_d('status'); ?></li>
+      <li><?php $f->l_select_field_from_array('status', pm_process_routing_header::$status_a,  $$class->status); ?></li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
       <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date) ?></li>
       <li><?php $f->l_date_fieldAnyDay('end_date', $$class->end_date) ?></li>
       <li><?php $f->l_text_field_d('routing_class'); ?></li>
       <li><?php $f->l_text_field_d('quantity'); ?></li>
-      <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id medium'); ?></li>
+      <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', '', 'uom_id medium'); ?></li>
       <li><?php $f->l_text_field_d('planned_loss'); ?></li>
       <li><?php $f->l_text_field_d('theoretical_loss'); ?></li>
       <li><?php $f->l_text_field_d('fixed_loss'); ?></li>

@@ -38,21 +38,22 @@ class pm_process_operation_header extends dbObject {
   'RETURN' => 'Return'
  ];
  public $field_a = [
-  'pm_process_operation_header_id',
-  'operation_name',
-  'org_id',
-  'class',
-  'description',
-  'version',
-  'start_date',
-  'end_date',
-  'status',
-  'min_quantity',
-  'uom_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+'pm_process_operation_header_id',
+'operation_name',
+'org_id',
+'operation_class',
+'description',
+'version',
+'start_date',
+'end_date',
+'status',
+'min_quantity',
+'uom_id',
+'created_by',
+'creation_date',
+'last_update_by',
+'last_update_date',
+
  ];
  public $initial_search = [
   'operation_name',
@@ -61,7 +62,7 @@ class pm_process_operation_header extends dbObject {
  ];
  public $requiredField = [
   'operation_name',
-  'owning_org_id',
+  'org_id',
  ];
  public $fields_inForm_notInDataBase = [
   'action',
@@ -70,26 +71,23 @@ class pm_process_operation_header extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1
  ];
- public $pageTitle = " operation Header "; //page Title
- public $pm_process_operation_header_id;
- public $operation_name;
- public $org_id;
- public $status;
- public $description;
- public $revision;
- public $start_date;
- public $end_date;
- public $operation_class;
- public $owner_employee_id;
- public $quantity;
- public $uom_id;
- public $planned_loss;
- public $theoretical_loss;
- public $fixed_loss;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
+ public $pageTitle = "Operation Header "; //page Title
+public $pm_process_operation_header_id;
+public $operation_name;
+public $org_id;
+public $operation_class;
+public $description;
+public $version;
+public $start_date;
+public $end_date;
+public $status;
+public $min_quantity;
+public $uom_id;
+public $created_by;
+public $creation_date;
+public $last_update_by;
+public $last_update_date;
+
 
  public static function find_all_activity_of_serviceType($service_type_id) {
   $sql = "SELECT sah.activity_name, sah.activity_description,

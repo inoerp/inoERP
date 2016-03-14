@@ -7,22 +7,20 @@ class pm_process_operation_line extends dbObject {
  public static $parent_primary_column = "pm_process_operation_header_id";
  public static $key_column = 'step_no';
  public static $module = "pm";
- 
-  public static $release_type_a = [
+ public static $release_type_a = [
   'AUTO' => 'Automatic',
   'MANUAL' => 'Manual'
  ];
-  
  public $field_a = [
   'pm_process_operation_line_id',
   'pm_process_operation_header_id',
-  'step_no',
-  'pm_operion_header_id',
-  'uom_id',
-  'release_type',
-  'min_quantity',
+  'activity_code',
   'description',
-  'step_quantity',
+  'activity_factror',
+  'sequence_dependency_cb',
+  'offset_interval',
+  'breakable_cb',
+  'material_scheduled_cb',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -37,13 +35,13 @@ class pm_process_operation_line extends dbObject {
  ];
  public $pm_process_operation_line_id;
  public $pm_process_operation_header_id;
- public $step_no;
- public $pm_operion_header_id;
- public $uom_id;
- public $release_type;
- public $min_quantity;
+ public $activity_code;
  public $description;
- public $step_quantity;
+ public $activity_factror;
+ public $sequence_dependency_cb;
+ public $offset_interval;
+ public $breakable_cb;
+ public $material_scheduled_cb;
  public $created_by;
  public $creation_date;
  public $last_update_by;

@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id="form_header"><span class="heading"><?php echo gettext('Process operation') ?></span>
+<div id="form_header"><span class="heading"><?php echo gettext('Process Operation') ?></span>
  <form  method="post" id="pm_process_operation_header"  name="pm_process_operation_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -28,15 +28,8 @@ inoERP
       <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date) ?></li>
       <li><?php $f->l_date_fieldAnyDay('end_date', $$class->end_date) ?></li>
       <li><?php $f->l_text_field_d('operation_class'); ?></li>
-      <li><?php $f->l_text_field_d('quantity'); ?></li>
+      <li><?php $f->l_text_field_d('min_quantity'); ?></li>
       <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id medium'); ?></li>
-      <li><?php $f->l_text_field_d('planned_loss'); ?></li>
-      <li><?php $f->l_text_field_d('theoretical_loss'); ?></li>
-      <li><?php $f->l_text_field_d('fixed_loss'); ?></li>
-      <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
-       <?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
-       <i class="select_employee_name select_popup clickable fa fa-search"></i>
-      </li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -64,11 +57,11 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('operation Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Operation Lines') ?></span>
  <form method="post" id="pm_process_operation_line"  name="pm_process_operation_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('operation Steps') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('process Steps') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -76,15 +69,14 @@ inoERP
       <thead> 
        <tr>
         <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Step') ?></th>
-        <th><?php echo gettext('Operation') ?></th>
+        <th><?php echo gettext('Activity') ?></th>
         <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Step Quantity') ?></th>
-        <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Min Quantity') ?></th>
-        <th><?php echo gettext('Release Type') ?></th>
+        <th><?php echo gettext('Factor') ?></th>
+        <th><?php echo gettext('Seq Dependency') ?>?</th>
+        <th><?php echo gettext('Offset Interval') ?></th>
+        <th><?php echo gettext('Breakable') ?>?</th>
+        <th><?php echo gettext('Material Scheduled') ?>?</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -98,15 +90,15 @@ inoERP
           echo ino_inline_action($pm_process_operation_line->pm_process_operation_line_id, array('pm_process_operation_header_id' => $$class->pm_process_operation_header_id));
           ?>
          </td>
-         <td><?php $f->seq_field_d($count) ?></td>
+        
          <td><?php form::text_field_wid2sr('pm_process_operation_line_id'); ?></td>
-         <td><?php $f->text_field_wid2('step_no'); ?></td>
-         <td><?php $f->text_field_wid2('pm_operion_header_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('activity_code', option_header::find_options_byName('PM_OPERATION_ACTIVITY' ), 'option_line_code' , 'option_line_value', $$class_second->activity_code ,'','medium'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
-         <td><?php $f->text_field_wid2('step_quantity'); ?></td>
-         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id medium'); ?></td>
-         <td><?php $f->text_field_wid2('min_quantity'); ?></td>
-         <td><?php echo $f->select_field_from_array('release_type', pm_process_operation_line::$release_type_a,  $$class_second->release_type, '', 'uom_id medium'); ?></td>
+         <td><?php $f->text_field_wid2('activity_factror'); ?></td>
+         <td><?php $f->checkBox_field_wid2('sequence_dependency_cb'); ?></td>
+         <td><?php $f->text_field_wid2('offset_interval'); ?></td>
+         <td><?php $f->checkBox_field_wid2('breakable_cb'); ?></td>
+         <td><?php $f->checkBox_field_wid2('material_scheduled_cb'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
