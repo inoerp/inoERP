@@ -76,6 +76,13 @@ class sys_document_sequence extends dbObject {
  ];
  public $pageTitle = " Document Sequence  "; //page Title
 
+ public static function xx_find_all_header_levels() {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE level = 'HEADER' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
 
 }
 

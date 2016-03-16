@@ -53,8 +53,8 @@ class pm_process_operation_header extends dbObject {
 'creation_date',
 'last_update_by',
 'last_update_date',
-
  ];
+ 
  public $initial_search = [
   'operation_name',
   'status',
@@ -72,7 +72,8 @@ class pm_process_operation_header extends dbObject {
   '_show_view_path' => 1
  ];
  public $pageTitle = "Operation Header "; //page Title
-public $pm_process_operation_header_id;
+
+ public $pm_process_operation_header_id;
 public $operation_name;
 public $org_id;
 public $operation_class;

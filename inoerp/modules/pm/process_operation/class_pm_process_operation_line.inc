@@ -5,7 +5,7 @@ class pm_process_operation_line extends dbObject {
  public static $table_name = "pm_process_operation_line";
  public static $primary_column = "pm_process_operation_line_id";
  public static $parent_primary_column = "pm_process_operation_header_id";
- public static $key_column = 'step_no';
+ public static $key_column = 'activity_code';
  public static $module = "pm";
  public static $release_type_a = [
   'AUTO' => 'Automatic',
@@ -28,7 +28,7 @@ class pm_process_operation_line extends dbObject {
  ];
  public $requiredField = [
   'pm_process_operation_header_id',
-  'step_no'
+  'activity_code'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "pm_process_operation_header_id"

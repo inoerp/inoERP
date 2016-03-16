@@ -21,7 +21,7 @@ inoERP
        <a name="show" href="form.php?class_name=pm_process_routing_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_process_routing_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_text_field_d('routing_name'); ?></li>
-      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, 1, ''); ?>						 </li>
       <li><?php $f->l_text_field_d('description'); ?></li>
       <li><?php $f->l_select_field_from_array('status', pm_process_routing_header::$status_a,  $$class->status); ?></li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
@@ -58,6 +58,7 @@ inoERP
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
+     <span class="hidden"><?php echo $f->select_field_from_object('pm_operion_header_id', $all_operation_objs, 'pm_process_operation_header_id', array('operation_name' ,'org_id') , $$class_second->pm_operion_header_id, 'pm_operion_header_id', 'medium' ,'','','','','','org_id'); ?></span>
     </div>
    </div>
   </div>
@@ -101,7 +102,7 @@ inoERP
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('pm_process_routing_line_id'); ?></td>
          <td><?php $f->text_field_wid2('step_no'); ?></td>
-         <td><?php $f->text_field_wid2('pm_operion_header_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('pm_operion_header_id', $all_operation_objs, 'pm_process_operation_header_id', array('operation_name' ,'org_id') , $$class_second->pm_operion_header_id, '', 'medium' ,'','','','','','org_id'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
          <td><?php $f->text_field_wid2('step_quantity'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id medium'); ?></td>

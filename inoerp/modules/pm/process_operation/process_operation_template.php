@@ -29,7 +29,7 @@ inoERP
       <li><?php $f->l_date_fieldAnyDay('end_date', $$class->end_date) ?></li>
       <li><?php $f->l_text_field_d('operation_class'); ?></li>
       <li><?php $f->l_text_field_d('min_quantity'); ?></li>
-      <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id medium'); ?></li>
+      <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '',  'uom_id medium', 1); ?></li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -51,6 +51,7 @@ inoERP
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
+     
     </div>
    </div>
   </div>
@@ -120,7 +121,7 @@ inoERP
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="pm_process_operation_header_id" ></li>
   <li class="form_header_id" data-form_header_id="pm_process_operation_header" ></li>
-  <li class="line_key_field" data-line_key_field="header_type_id" ></li>
+  <li class="line_key_field" data-line_key_field="step_no" ></li>
   <li class="single_line" data-single_line="false" ></li>
   <li class="form_line_id" data-form_line_id="pm_process_operation_line" ></li>
  </ul>

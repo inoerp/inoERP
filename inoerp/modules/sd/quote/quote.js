@@ -100,13 +100,6 @@ function beforeContextMenu() {
 
 $(document).ready(function () {
 //mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'quote_header_id';
- mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["bu_org_id", "quote_type"];
- mandatoryCheck.mandatory_messages = ["First Select BU Org", "No PO Type"];
-// mandatoryCheck.mandatoryField();
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
