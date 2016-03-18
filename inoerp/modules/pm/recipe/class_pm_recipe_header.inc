@@ -17,9 +17,8 @@
 class pm_recipe_header extends dbObject {
 
  public static $table_name = "pm_recipe_header";
- public static $dependent_classes = ['pm_recipe_line', 'pm_recipe_ingredient', 'pm_recipe_byproduct'];
+ public static $dependent_classes = ['pm_recipe_line', 'pm_recipe_customer'];
  public static $primary_column = "pm_recipe_header_id";
- public static $primary_column2 = "project_number";
  public static $key_column = 'name';
  public static $module = "pm";
  public static $system_info = [
@@ -29,29 +28,18 @@ class pm_recipe_header extends dbObject {
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
-  'dependent_class' => array('pm_recipe_line', 'pm_recipe_ingredient', 'pm_recipe_byproduct'),
+  'dependent_class' => array('pm_recipe_line', 'pm_recipe_customer'),
   'primary_entity_cb' => '',
   'module_name' => 'prj',
   'weight' => 1
- ];
- public $action_a = [
-  'APPROVE' => 'Approve',
-  'PRINT' => 'Print Estimates',
-  'CANCEL' => 'Cancel',
-  'CLOSE' => 'Close',
-  'CREATE_WO' => 'Create Work Order',
-  'COPY_ESTIMATES' => 'Copy Estimates to Actuals',
-  'COPY_WO' => 'Copy WO Charges to Actuals',
-  'PROCESS_LOGISTICS' => 'Process Logistics',
-  'PROCESS_ACTUALS' => 'Process Actuals',
  ];
  public $field_a = [
   'pm_recipe_header_id',
   'org_id',
   'name',
-  'type',
+  'pm_formula_header_id',
   'revision',
-  'comment',
+  'item_id_m',
   'status',
   'description',
   'owner_employee_id',
@@ -62,20 +50,12 @@ class pm_recipe_header extends dbObject {
  ];
  public $initial_search = [
   'name',
-  'type',
+  'description',
  ];
  public $requiredField = [
   'org_id',
   'name',
- ];
- public $fields_inForm_notInDataBase = [
-  'action',
-  'pm_employee_name'
- ];
- public static $json_label_fields = [
-  'bu_org_id',
-  'name',
-  'type',
+  'pm_formula_header_id',
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
@@ -84,13 +64,13 @@ class pm_recipe_header extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " recipe "; //page Title
+ public $pageTitle = " Recipe "; //page Title
  public $pm_recipe_header_id;
  public $org_id;
  public $name;
- public $type;
+ public $pm_formula_header_id;
  public $revision;
- public $comment;
+ public $item_id_m;
  public $status;
  public $description;
  public $owner_employee_id;
@@ -98,7 +78,6 @@ class pm_recipe_header extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
- public $pm_employee_name;
  public $action;
 
  private function _do_action() {
@@ -124,27 +103,7 @@ class pm_recipe_header extends dbObject {
   }
  }
 
- public static function find_financial_details_from_projectHeaderId($pm_recipe_header_id) {
-  $sql = " 
-         SELECT org.org_id, org.legal_org_id, legal.ledger_id,
-            gl.ledger, gl.description as ledger_description, gl.coa_id, gl.calendar_option_line_code, gl.currency_code, legal.balancing_segments,
-            org.org, org.code,org.type, org.description as org_description, pph.pm_recipe_header_id, pph.project_number
-            FROM org,
-            legal,
-            gl_ledger gl,
-            pm_recipe_header pph
-            WHERE org.legal_org_id = legal.org_id 
-            AND gl.gl_ledger_id = legal.ledger_id
-            AND org.org_id = pph.bu_org_id
-            AND pph.pm_recipe_header_id = '{$pm_recipe_header_id}'
-           LIMIT 1
- "
-  ;
-
-  $result = self::find_by_sql($sql);
-
-  return !empty($result) ? array_pop($result) : false;
- }
+ 
 
 }
 
