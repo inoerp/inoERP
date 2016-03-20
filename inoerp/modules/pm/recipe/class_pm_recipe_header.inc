@@ -33,11 +33,21 @@ class pm_recipe_header extends dbObject {
   'module_name' => 'prj',
   'weight' => 1
  ];
+ 
+ public static $recipe_type_a = [
+  'GENERAL' => 'General',
+  'SITE' => 'Site',
+  'MASTER' => 'Master',
+ ];
+ 
+ public $action_a = [];
+ 
  public $field_a = [
   'pm_recipe_header_id',
   'org_id',
   'name',
   'pm_formula_header_id',
+  'recipe_type',
   'revision',
   'item_id_m',
   'status',
@@ -68,6 +78,7 @@ class pm_recipe_header extends dbObject {
  public $pm_recipe_header_id;
  public $org_id;
  public $name;
+ public $recipe_type;
  public $pm_formula_header_id;
  public $revision;
  public $item_id_m;

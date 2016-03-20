@@ -7,6 +7,10 @@ class pm_recipe_line extends dbObject {
  public static $parent_primary_column = "pm_recipe_header_id";
  public static $key_column = 'org_id';
  public static $module = "pm";
+ public static $org_type_a = [
+  'PLANT' => 'Plant',
+  'LABORATORY' => 'Laboratory'
+ ];
  public $field_a = [
   'pm_recipe_line_id',
   'pm_recipe_header_id',
