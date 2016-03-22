@@ -19,7 +19,6 @@ class pm_formula_header extends dbObject {
  public static $table_name = "pm_formula_header";
  public static $dependent_classes = ['pm_formula_line', 'pm_formula_ingredient', 'pm_formula_byproduct'];
  public static $primary_column = "pm_formula_header_id";
- public static $primary_column2 = "project_number";
  public static $key_column = 'name';
  public static $module = "pm";
  public static $system_info = [
@@ -34,9 +33,6 @@ class pm_formula_header extends dbObject {
   'module_name' => 'prj',
   'weight' => 1
  ];
- 
-
-  
  public $action_a = [
   'APPROVE' => 'Approve',
   'PRINT' => 'Print Estimates',
@@ -51,7 +47,7 @@ class pm_formula_header extends dbObject {
  public $field_a = [
   'pm_formula_header_id',
   'org_id',
-  'name',
+  'formula_name',
   'type',
   'revision',
   'comment',
@@ -64,21 +60,23 @@ class pm_formula_header extends dbObject {
   'last_update_date',
  ];
  public $initial_search = [
-  'name',
+  'formula_name',
   'type',
  ];
  public $requiredField = [
   'org_id',
-  'name',
+  'formula_name',
  ];
  public $fields_inForm_notInDataBase = [
   'action',
   'pm_employee_name'
  ];
  public static $json_label_fields = [
-  'bu_org_id',
-  'name',
+  'formula_name',
+  'description',
+  'status',
   'type',
+  'org_id',
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
@@ -90,7 +88,7 @@ class pm_formula_header extends dbObject {
  public $pageTitle = " Formula "; //page Title
  public $pm_formula_header_id;
  public $org_id;
- public $name;
+ public $formula_name;
  public $type;
  public $revision;
  public $comment;

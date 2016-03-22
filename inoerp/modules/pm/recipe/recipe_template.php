@@ -6,7 +6,10 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php   echo gettext('Recipe')   ?></span>
+<div id ="form_header"><span class="heading"><?php
+  $f = new inoform();
+  echo gettext('Recipe')
+  ?></span>
  <form method="post" id="pm_recipe_header"  name="pm_recipe_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -22,12 +25,20 @@ inoERP
       </li>
       <li><?php $f->l_text_field_d('name'); ?></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
-      <li><?php $f->l_select_field_from_object('pm_formula_header_id', pm_formula_header::find_by_ColumnNameVal('org_id', $$class->org_id), 'pm_formula_header_id', 'name', $$class->pm_formula_header_id, 'pm_formula_header_id'); ?></li>
+      <li><?php
+       echo $f->l_val_field_dm('formula_name', 'pm_formula_header', 'formula_name', '', 'formula_name', 'vf_select_formula_name');
+       echo $f->hidden_field_withId('pm_formula_header_id', $$class->pm_formula_header_id);
+       ?><i class="generic g_select_routing_name select_popup clickable fa fa-search" data-class_name="pm_formula_header"></i></li>
+      <li><?php
+       echo $f->l_val_field_dm('routing_name', 'pm_process_routing_header', 'routing_name', '', 'routing_name', 'vf_select_routing_name');
+       echo $f->hidden_field_withId('pm_process_routing_header_id', $$class->pm_process_routing_header_id);
+       echo $f->hidden_field_withCLass('org_id', $$class->org_id, 'popup_value org_id');
+       ?><i class="generic g_select_routing_name select_popup clickable fa fa-search" data-class_name="pm_process_routing_header"></i></li>
       <li><?php $f->l_select_field_from_array('recipe_type', pm_recipe_header::$recipe_type_a, $$class->recipe_type); ?></li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
       <li><?php $f->l_text_field_d('comment'); ?></li>
       <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
-       <?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
+<?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
       <li><?php $f->l_text_field_d('description') ?></li>
@@ -37,7 +48,7 @@ inoERP
      <div> 
       <div id="comments">
        <div id="comment_list">
-        <?php echo!(empty($comments)) ? $comments : ""; ?>
+<?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
         <?php
@@ -64,7 +75,7 @@ inoERP
 <div id="tabsLine">
  <ul class="tabMain">
   <li><a href="#tabsLine-1"><?php echo gettext('Organization') ?></a></li>
-  <li><a href="#tabsLine-2"><?php echo gettext('customers') ?></a></li>
+  <li><a href="#tabsLine-2"><?php echo gettext('Customers') ?></a></li>
  </ul>
  <div class="tabContainer">
   <form method="post" id="pm_recipe_line"  name="pm_recipe_line" class="m-margin-top-20">
@@ -99,7 +110,7 @@ inoERP
           ?>
          </td>
          <td><?php $f->text_field_wid2sr('pm_recipe_line_id', 'line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->org_id, '', '', 1, $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->org_id, '', '', 1, $readonly1); ?></td>
          <td><?php echo $f->select_field_from_array('org_type', pm_recipe_line::$org_type_a, $$class_second->org_type, '', 'medium'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
          <td><?php echo $f->number_field('planned_loss', $$class_second->planned_loss, '', '', 'allow_change'); ?></td>
@@ -138,6 +149,9 @@ inoERP
        <?php
        $count = 0;
        foreach ($pm_recipe_customer_object as $pm_recipe_customer) {
+        if (!empty($pm_recipe_customer->ar_customer_id)) {
+         $pm_recipe_customer->customer_name = ar_customer::find_by_id($pm_recipe_customer->ar_customer_id)->customer_name;
+        }
         if (!empty($$class_third->ar_customer_site_id)) {
          $arc = new ar_customer_site();
          $arc_i = $arc->findBy_id($$class_third->ar_customer_site_id);
@@ -153,19 +167,19 @@ inoERP
            <li><?php echo form::hidden_field('pm_recipe_header_id', $$class->pm_recipe_header_id); ?></li>
           </ul>
          </td>
-         <td><?php form::text_field_wid3sr('pm_recipe_customer_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class_third->org_id, '', 'large', '', $readonly1); ?>						 </td>
-       <td><?php
-        echo $f->val_field_dm('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name large');
-        echo $f->hidden_field_withId('ar_customer_id', $$class_third->ar_customer_id);
-        ?><i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i></td>
-       <td><?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class_third->ar_customer_site_id, '', 'large'); ?> </td>
-       <td><?php  $f->text_field_wid3('description','large'); ?></td>
-       </tr>
-       <?php
-       $count = $count + 1;
-      }
-      ?>
+         <td><?php form::text_field_wid3sr('pm_recipe_customer_id');?></td>
+         <td><?php echo $f->select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class_third->org_id, '', 'large', '', $readonly); ?>						 </td>
+         <td><?php
+          echo $f->val_field('customer_name', $pm_recipe_customer->customer_name ,'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name large');
+          echo $f->hidden_field_withId('ar_customer_id', $$class_third->ar_customer_id);
+          ?><i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i></td>
+         <td><?php echo $f->select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class_third->ar_customer_site_id, '', 'large'); ?> </td>
+         <td><?php $f->text_field_wid3('description', 'large'); ?></td>
+        </tr>
+        <?php
+        $count = $count + 1;
+       }
+       ?>
       </tbody>
      </table>
     </div>
@@ -176,7 +190,7 @@ inoERP
 
 <div class="row small-top-margin">
  <div id="pagination" style="clear: both;">
-  <?php echo $pagination->show_pagination(); ?>
+<?php echo $pagination->show_pagination(); ?>
  </div>
 </div>
 

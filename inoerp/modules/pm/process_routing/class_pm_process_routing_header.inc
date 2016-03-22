@@ -22,7 +22,7 @@ class pm_process_routing_header extends dbObject {
  public static $key_column = 'routing_name';
  public static $module = "pm";
  public static $system_info = [
-  'name' => 'Service Activity',
+  'name' => 'Process Routing',
   'number' => '5108',
   'description' => 'Create & Mainten Process Routing',
   'version' => '0.1.1',
@@ -79,6 +79,14 @@ class pm_process_routing_header extends dbObject {
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1
+ ];
+ 
+  public static $json_label_fields = [
+  'routing_name',
+  'description',
+  'routing_class',
+   'status',
+  'org_id',
  ];
  public $pageTitle = " Routing Header "; //page Title
  public $pm_process_routing_header_id;

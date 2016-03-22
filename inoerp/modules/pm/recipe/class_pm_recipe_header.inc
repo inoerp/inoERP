@@ -33,20 +33,18 @@ class pm_recipe_header extends dbObject {
   'module_name' => 'prj',
   'weight' => 1
  ];
- 
  public static $recipe_type_a = [
   'GENERAL' => 'General',
   'SITE' => 'Site',
   'MASTER' => 'Master',
  ];
- 
  public $action_a = [];
- 
  public $field_a = [
   'pm_recipe_header_id',
   'org_id',
   'name',
   'pm_formula_header_id',
+  'pm_process_routing_header_id',
   'recipe_type',
   'revision',
   'item_id_m',
@@ -74,12 +72,18 @@ class pm_recipe_header extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
+ public $fields_inForm_notInDataBase = [
+  "routing_name",
+  'formula_name'
+ ];
+
  public $pageTitle = " Recipe "; //page Title
  public $pm_recipe_header_id;
  public $org_id;
  public $name;
  public $recipe_type;
  public $pm_formula_header_id;
+ public $pm_process_routing_header_id;
  public $revision;
  public $item_id_m;
  public $status;
@@ -90,8 +94,8 @@ class pm_recipe_header extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $action;
-
- 
+ public $routing_name;
+ public $formula_name;
 
 }
 

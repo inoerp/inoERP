@@ -23,7 +23,7 @@ echo gettext('Formula')
       <li><?php $f->l_text_field_dr_withSearch('pm_formula_header_id') ?>
        <a name="show" href="form.php?class_name=pm_formula_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_formula_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_text_field_d('name'); ?></li>
+      <li><?php $f->l_text_field_d('formula_name'); ?></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
       <li><?php $f->l_select_field_from_object('type', option_header::find_options_byName('PM_FORMULA_TYPE'), 'option_line_code', 'option_line_value', $$class->type, 'type'); ?></li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
