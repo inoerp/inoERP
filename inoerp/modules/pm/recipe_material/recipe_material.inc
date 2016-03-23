@@ -1,0 +1,1 @@
+<?php$all_operation_objs = !empty($$class->org_id) ? pm_process_operation_header::find_by_fieldVal(['org_id' => $$class->org_id]) : pm_process_operation_header::find_all();if (empty($$class->status)) { $$class->status = 'APPROVED';}?>

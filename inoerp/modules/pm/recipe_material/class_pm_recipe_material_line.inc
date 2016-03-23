@@ -1,0 +1,43 @@
+<?php
+
+class pm_recipe_material_line extends dbObject {
+
+ public static $table_name = "pm_recipe_material_line";
+ public static $primary_column = "pm_recipe_material_line_id";
+ public static $parent_primary_column = "pm_recipe_material_header_id";
+ public static $key_column = 'step';
+ public static $module = "pm";
+ public $field_a = [
+  'pm_recipe_material_line_id',
+  'pm_recipe_material_header_id',
+  'step',
+  'pm_formula_ingredient_id',
+  'description',
+  'pm_process_routing_line_id',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
+ ];
+ public $requiredField = [
+  'pm_recipe_material_header_id',
+  'step_no'
+ ];
+ public $fields_inHeader_needsToBeInserted_inPOST = [
+  "pm_recipe_material_header_id"
+ ];
+ public $pm_recipe_material_line_id;
+ public $pm_recipe_material_header_id;
+ public $step;
+ public $pm_formula_ingredient_id;
+ public $description;
+ public $pm_process_routing_line_id;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
+
+}
+
+//end of pm_recipe_material_line class
+?>
