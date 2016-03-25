@@ -26,6 +26,15 @@ class pm_recipe_material_line extends dbObject {
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "pm_recipe_material_header_id"
  ];
+ public $fields_inForm_notInDataBase = [
+  'operation_name',
+  'step_qty',
+  'uom_id',
+  'item_number',
+  'item_type',
+  'item_quantity',
+  'line_uom_id'
+ ];
  public $pm_recipe_material_line_id;
  public $pm_recipe_material_header_id;
  public $step;

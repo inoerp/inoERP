@@ -52,16 +52,6 @@ class pm_recipe_material_header extends dbObject {
   'creation_date',
   'last_update_by',
   'last_update_date',
-  'pm_recipe_material_line_id',
-  'pm_recipe_material_header_id',
-  'step',
-  'pm_formula_ingredient_id',
-  'description',
-  'pm_process_routing_line_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
  ];
  public $initial_search = [
   'routing_name',
@@ -74,6 +64,11 @@ class pm_recipe_material_header extends dbObject {
  ];
  public $fields_inForm_notInDataBase = [
   'action',
+  'recipe_name',
+  'routing_name',
+  'formula_name',
+  'routing_description',
+  'formula_description',
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -105,7 +100,11 @@ class pm_recipe_material_header extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
-
+ public $recipe_name;
+ public $routing_name;
+ public $formula_name;
+ public $routing_description;
+ public $formula_description;
 
 }
 

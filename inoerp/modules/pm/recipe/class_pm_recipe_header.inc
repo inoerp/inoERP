@@ -19,7 +19,7 @@ class pm_recipe_header extends dbObject {
  public static $table_name = "pm_recipe_header";
  public static $dependent_classes = ['pm_recipe_line', 'pm_recipe_customer'];
  public static $primary_column = "pm_recipe_header_id";
- public static $key_column = 'name';
+ public static $key_column = 'recipe_name';
  public static $module = "pm";
  public static $system_info = [
   'name' => 'recipe',
@@ -42,7 +42,7 @@ class pm_recipe_header extends dbObject {
  public $field_a = [
   'pm_recipe_header_id',
   'org_id',
-  'name',
+  'recipe_name',
   'pm_formula_header_id',
   'pm_process_routing_header_id',
   'recipe_type',
@@ -57,12 +57,12 @@ class pm_recipe_header extends dbObject {
   'last_update_date',
  ];
  public $initial_search = [
-  'name',
+  'recipe_name',
   'description',
  ];
  public $requiredField = [
   'org_id',
-  'name',
+  'recipe_name',
   'pm_formula_header_id',
  ];
  public $profile_default = [
@@ -80,7 +80,7 @@ class pm_recipe_header extends dbObject {
  public $pageTitle = " Recipe "; //page Title
  public $pm_recipe_header_id;
  public $org_id;
- public $name;
+ public $recipe_name;
  public $recipe_type;
  public $pm_formula_header_id;
  public $pm_process_routing_header_id;

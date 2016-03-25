@@ -62,7 +62,7 @@ inoERP
  <form method="post" id="pm_process_operation_line"  name="pm_process_operation_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('process Steps') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Process Steps') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">

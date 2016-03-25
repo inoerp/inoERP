@@ -6,10 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php
-  $f = new inoform();
-  echo gettext('Recipe')
-  ?></span>
+<div id ="form_header"><span class="heading"><?php   echo gettext('Recipe')   ?></span>
  <form method="post" id="pm_recipe_header"  name="pm_recipe_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -23,7 +20,7 @@ inoERP
       <li><?php $f->l_text_field_dr_withSearch('pm_recipe_header_id') ?>
        <a name="show" href="form.php?class_name=pm_recipe_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_recipe_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_text_field_d('name'); ?></li>
+      <li><?php $f->l_text_field_d('recipe_name'); ?></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
       <li><?php
        echo $f->l_val_field_dm('formula_name', 'pm_formula_header', 'formula_name', '', 'formula_name', 'vf_select_formula_name');
