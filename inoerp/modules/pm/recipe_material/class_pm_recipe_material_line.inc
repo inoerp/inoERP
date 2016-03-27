@@ -14,6 +14,8 @@ class pm_recipe_material_line extends dbObject {
   'pm_formula_ingredient_id',
   'description',
   'pm_process_routing_line_id',
+  'quantity',
+  'uom_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -45,6 +47,8 @@ class pm_recipe_material_line extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $quantity;
+ public $uom_id;
 
 }
 

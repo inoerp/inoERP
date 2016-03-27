@@ -19,7 +19,7 @@ class pm_recipe_material_header extends dbObject {
  public static $table_name = "pm_recipe_material_header";
  public static $dependent_classes = ['pm_recipe_material_line'];
  public static $primary_column = "pm_recipe_material_header_id";
- public static $key_column = 'routing_name';
+ public static $key_column = 'pm_recipe_header_id';
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Recipe Material',
@@ -59,8 +59,7 @@ class pm_recipe_material_header extends dbObject {
   'description',
  ];
  public $requiredField = [
-  'routing_name',
-  'org_id',
+  'pm_recipe_header_id',
  ];
  public $fields_inForm_notInDataBase = [
   'action',
@@ -90,16 +89,7 @@ class pm_recipe_material_header extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
- public $pm_recipe_material_line_id;
- public $pm_recipe_material_header_id;
- public $step;
- public $pm_formula_ingredient_id;
- public $description;
- public $pm_process_routing_line_id;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
+ 
  public $recipe_name;
  public $routing_name;
  public $formula_name;

@@ -21,9 +21,10 @@ inoERP
        <a name="show" href="form.php?class_name=pm_recipe_material_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_recipe_material_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php
-       echo $f->l_val_field_dm('recipe_name', 'pm_recipe_header', 'recipe_name', '', 'recipe_name', 'vf_select_recipe_name');
+       echo $f->l_val_field_dm('recipe_name', 'pm_recipe_header', 'recipe_name', '', 'recipe_name', 'vf_select_recipe_name ');
        echo $f->hidden_field_withId('pm_recipe_header_id', $$class->pm_recipe_header_id);
-       ?><i class="generic g_select_routing_name select_popup clickable fa fa-search" data-class_name="pm_recipe_header"></i></li>
+       ?><i class="generic g_select_routing_name select_popup clickable fa fa-search" data-class_name="pm_recipe_header"></i> 
+       <a name="show" href="form.php?class_name=pm_recipe_material_header&<?php echo "mode=$mode"; ?>" class="show2 document_id pm_recipe_material_header_id_withRecipeName"><i class="fa fa-refresh"></i></a></li>
       <li><?php $f->l_text_field_dr('routing_name'); ?></li>
       <li><?php $f->l_text_field_dr('routing_description'); ?></li>
       <li><?php $f->l_text_field_dr('formula_name'); ?></li>
@@ -88,13 +89,14 @@ inoERP
         <tr class="pm_recipe_material_line<?php echo $count ?>">
          <td>
           <?php
+          $f = new inoform();
           echo ino_inline_action($pm_recipe_material_line->pm_recipe_material_line_id, array('pm_recipe_material_header_id' => $$class->pm_recipe_material_header_id));
           ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('pm_recipe_material_line_id'); ?></td>
          <td><?php $f->text_field_wid2('step'); ?></td>
-         <td><?php $f->text_field_wid2('pm_formula_ingredient_id'); ?></td>
+         <td><?php  echo $f->select_field_from_object('pm_formula_ingredient_id', $forumla_ingredients, 'pm_formula_ingredient_id', ['item_number', 'revision_name', 'item_description' , 'description'], $$class_second->pm_formula_ingredient_id, '', 'large' ,1,'', '','','','quantity'); ?></td>
          <td><?php $f->text_field_wid2('pm_process_routing_line_id'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
         </tr>
@@ -105,7 +107,7 @@ inoERP
       </tbody>
      </table>
     </div>
-        <div id="tabsLine-2" class="tabContent">
+    <div id="tabsLine-2" class="tabContent">
 
     </div>
    </div>

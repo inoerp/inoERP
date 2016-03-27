@@ -11,8 +11,7 @@ class pm_formula_ingredient extends dbObject {
   'ESTIMATES' => 'Estimates',
   'WORK_ORDER' => 'Work Order',
  ];
- 
-  public static $consumption_type_a = [
+ public static $consumption_type_a = [
   'AUTO' => 'Automatic',
   'MANUAL' => 'Manual',
   'INC' => 'Incremental',
@@ -68,6 +67,27 @@ class pm_formula_ingredient extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+
+ public static function find_allLine_byHeaderId($header_id) {
+  $sql = " SELECT 
+pfi.pm_formula_ingredient_id, pfi.pm_formula_header_id, pfi.line_no, pfi.revision_name, pfi.item_id_m,
+pfi.uom_id, pfi.quantity, pfi.description, pfi.scale_type, pfi.contribute_yield_cb, pfi.consumption_type,
+pfi.buffer_cb, pfi.phantom_type, pfi.required_qty,
+item.item_number, item.item_description
+
+from pm_formula_ingredient pfi,
+pm_formula_header pfh,
+item
+
+WHERE item.item_id_m = pfi.item_id_m
+and pfh.pm_formula_header_id =pfi.pm_formula_header_id
+and pfh.org_id =item.org_id
+and pfi.pm_formula_header_id = '{$header_id}'
+";
+
+  $result_array = self::find_by_sql($sql);
+  return !empty($result_array) ? $result_array : false;
+ }
 
 }
 

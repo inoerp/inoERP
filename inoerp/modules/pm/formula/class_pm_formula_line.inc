@@ -124,17 +124,20 @@ public $item_description;
   }
  }
 
- public static function find_allLowestTask_byHeaderId($header_id) {
-  $sql = " SELECT prl.task_number, prl.task_name,  prl.description as task_description, 
-   prl.pm_formula_line_id, prl.pm_formula_header_id, prl.parent_prj_task_num
-FROM pm_formula_line prl
-WHERE    
-prl.pm_formula_header_id = '{$header_id}'
-prl.task_number NOT IN(
-SELECT prl.parent_prj_task_num
-FROM pm_formula_line prl
-WHERE    prl.parent_prj_task_num IS NOT NULL
-)
+ public static function find_allLine_byHeaderId($header_id) {
+  $sql = " SELECT
+pfl.pm_formula_line_id,   pfl.pm_formula_header_id,   pfl.line_no,   pfl.line_type,   pfl.item_id_m,   pfl.uom_id,   pfl.quantity,
+pfl.description,   pfl.cost_allocation,   pfl.scale_type,   pfl.yield_type,   pfl.byproduct_type,   pfl.consumption_type,   pfl.phantom_type,
+pfl.required_qty, item.item_number, item.item_description
+
+from pm_formula_line pfl,
+pm_formula_header pfh,
+item
+
+WHERE item.item_id_m = pfl.item_id_m
+and pfh.pm_formula_header_id = pfl.pm_formula_header_id
+and pfh.org_id =item.org_id
+and pfl.pm_formula_header_id = '{$header_id}'
 ";
 
   $result_array = self::find_by_sql($sql);

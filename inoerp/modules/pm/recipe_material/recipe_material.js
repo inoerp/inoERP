@@ -1,18 +1,12 @@
 $(document).ready(function () {
- $('body').off('change', '#org_id').on('change', '#org_id', function () {
-  var org_id = $(this).val();
-  $('form#pm_recipe_material_line .pm_operion_header_id').find('option').remove();
-  $('form#pm_recipe_material_line .pm_operion_header_id').append($('#pm_operion_header_id').html());
-  $('form#pm_recipe_material_line').find('.pm_operion_header_id').each(function (i, op_obj) {
-   $(op_obj).find('option').each(function (i, opt) {
-    if ($(opt).data('org_id') != org_id) {
-     $(this).remove();
-    }
-   });
-  });
- });
-
-
+ $('body').off('click', 'a.pm_recipe_material_header_id_withRecipeName').on('click', 'a.pm_recipe_material_header_id_withRecipeName', function (e) {
+  e.preventDefault();
+  var pm_recipe_header_id = $('#pm_recipe_header_id').val();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + '&pm_recipe_header_id=' + pm_recipe_header_id ;
+  getFormDetails(formUrl);
+ }).one();
 
 
 });
