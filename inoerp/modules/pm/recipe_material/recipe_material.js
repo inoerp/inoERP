@@ -9,4 +9,11 @@ $(document).ready(function () {
  }).one();
 
 
+$('#form_line').on('change', '.pm_formula_ingredient_id', function(){
+  var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/,'.');
+  $(trClass).find('.uom_id').val($(this).find('option:selected').data('uom_id'));
+  $(trClass).find('.quantity').val($(this).find('option:selected').data('quantity'));
+
+})
+
 });

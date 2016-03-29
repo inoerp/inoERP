@@ -38,23 +38,22 @@ class pm_process_operation_header extends dbObject {
   'RETURN' => 'Return'
  ];
  public $field_a = [
-'pm_process_operation_header_id',
-'operation_name',
-'org_id',
-'operation_class',
-'description',
-'version',
-'start_date',
-'end_date',
-'status',
-'min_quantity',
-'uom_id',
-'created_by',
-'creation_date',
-'last_update_by',
-'last_update_date',
+  'pm_process_operation_header_id',
+  'operation_name',
+  'org_id',
+  'operation_class',
+  'description',
+  'version',
+  'start_date',
+  'end_date',
+  'status',
+  'min_quantity',
+  'uom_id',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
- 
  public $initial_search = [
   'operation_name',
   'status',
@@ -72,38 +71,23 @@ class pm_process_operation_header extends dbObject {
   '_show_view_path' => 1
  ];
  public $pageTitle = "Operation Header "; //page Title
-
  public $pm_process_operation_header_id;
-public $operation_name;
-public $org_id;
-public $operation_class;
-public $description;
-public $version;
-public $start_date;
-public $end_date;
-public $status;
-public $min_quantity;
-public $uom_id;
-public $created_by;
-public $creation_date;
-public $last_update_by;
-public $last_update_date;
+ public $operation_name;
+ public $org_id;
+ public $operation_class;
+ public $description;
+ public $version;
+ public $start_date;
+ public $end_date;
+ public $status;
+ public $min_quantity;
+ public $uom_id;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
 
 
- public static function find_all_activity_of_serviceType($service_type_id) {
-  $sql = "SELECT sah.activity_name, sah.activity_description,
-sah.line_category,
-stl.billing_type, stl.service_activity_id, stl.description, stl.hd_service_type_line_id, stl.hd_service_type_header_id
-
-FROM hd_service_type_line stl,
-pm_process_operation_header sah
-
-WHERE sah.pm_process_operation_header_id =stl.service_activity_id
-AND sah.pm_process_operation_header_id ='{$service_type_id}'
-";
-  $result = self::find_by_sql($sql);
-  return !empty($result) ? ($result) : false;
- }
 
 }
 

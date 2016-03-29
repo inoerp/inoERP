@@ -58,7 +58,7 @@ inoERP
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
-     <span class="hidden"><?php echo $f->select_field_from_object('pm_operion_header_id', $all_operation_objs, 'pm_process_operation_header_id', array('operation_name' ,'org_id') , $$class_second->pm_operion_header_id, 'pm_operion_header_id', 'medium' ,'','','','','','org_id'); ?></span>
+     <span class="hidden"><?php echo $f->select_field_from_object('pm_process_operation_header_id', $all_operation_objs, 'pm_process_operation_header_id', array('operation_name' ,'org_id') , $$class_second->pm_process_operation_header_id, 'pm_process_operation_header_id', 'medium' ,'','','','','','org_id'); ?></span>
     </div>
    </div>
   </div>
@@ -102,7 +102,7 @@ inoERP
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('pm_process_routing_line_id'); ?></td>
          <td><?php $f->text_field_wid2('step_no'); ?></td>
-         <td><?php echo $f->select_field_from_object('pm_operion_header_id', $all_operation_objs, 'pm_process_operation_header_id', array('operation_name' ,'org_id') , $$class_second->pm_operion_header_id, '', 'medium' ,'','','','','','org_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('pm_process_operation_header_id', $all_operation_objs, 'pm_process_operation_header_id', array('operation_name' ,'org_id') , $$class_second->pm_process_operation_header_id, '', 'medium' ,'','','','','','org_id'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
          <td><?php $f->text_field_wid2('step_quantity'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id medium'); ?></td>

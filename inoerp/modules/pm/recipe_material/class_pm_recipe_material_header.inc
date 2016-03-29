@@ -68,6 +68,7 @@ class pm_recipe_material_header extends dbObject {
   'formula_name',
   'routing_description',
   'formula_description',
+  'pm_process_routing_header_id',
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -89,6 +90,7 @@ class pm_recipe_material_header extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $pm_process_routing_header_id;
  
  public $recipe_name;
  public $routing_name;

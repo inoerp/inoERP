@@ -23,7 +23,7 @@ class pm_recipe_material_line extends dbObject {
  ];
  public $requiredField = [
   'pm_recipe_material_header_id',
-  'step_no'
+  'step'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "pm_recipe_material_header_id"
