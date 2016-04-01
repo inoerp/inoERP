@@ -29,7 +29,7 @@ if (!isset($readonly1)) {
       <li><?php $f->l_text_field_dm('journal_name'); ?></li>
       <li><?php $f->l_text_field_d('description'); ?></li>
       <li><?php $f->l_select_field_from_object('balance_type', $$class->gl_balance_type(), 'option_line_code', 'option_line_value', $$class->balance_type, 'balance_type', '', 1, $readonly1); ?></li>
-      <li><?php $f->l_select_field_from_array('status', $$class->status_a, $$class->status, 'status','','',1,1); ?></li>
+      <li><?php $f->l_select_field_from_array('status', $$class->status_a, $$class->status, 'status','always_readonly', 1); ?></li>
       <li><?php $f->l_date_fieldFromToday_d('post_date', $$class->post_date) ?></li>
       <li id="document_status"><?php $f->l_select_field_from_array('action', $action_a, $$class->action, 'action'); ?></li>
      </ul>
