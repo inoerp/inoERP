@@ -11,24 +11,24 @@
 
 /**
  * hd_ro_header CLass
- * Contains all the pm_formula_header information, such as - document_type, so_number, ar_customer_id
+ * Contains all the pm_batch_header information, such as - document_type, so_number, ar_customer_id
  *
  */
-class pm_formula_header extends dbObject {
+class pm_batch_header extends dbObject {
 
- public static $table_name = "pm_formula_header";
- public static $dependent_classes = ['pm_formula_line', 'pm_formula_ingredient', 'pm_formula_byproduct'];
- public static $primary_column = "pm_formula_header_id";
- public static $key_column = 'name';
+ public static $table_name = "pm_batch_header";
+ public static $dependent_classes = ['pm_batch_line', 'pm_batch_ingredient', 'pm_batch_byproduct'];
+ public static $primary_column = "pm_batch_header_id";
+ public static $key_column = 'batch_name';
  public static $module = "pm";
  public static $system_info = [
-  'name' => 'Formula',
-  'number' => '6014',
-  'description' => 'Create & Mainten Formula',
+  'name' => 'batch',
+  'number' => '6214',
+  'description' => 'Create & Mainten Process Batch',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
-  'dependent_class' => array('pm_formula_line', 'pm_formula_ingredient', 'pm_formula_byproduct'),
+  'dependent_class' => array('pm_batch_line', 'pm_batch_ingredient', 'pm_batch_byproduct'),
   'primary_entity_cb' => '',
   'module_name' => 'prj',
   'weight' => 1
@@ -45,37 +45,40 @@ class pm_formula_header extends dbObject {
   'PROCESS_ACTUALS' => 'Process Actuals',
  ];
  public $field_a = [
-  'pm_formula_header_id',
+  'pm_batch_header_id',
+  'batch_name',
   'org_id',
-  'formula_name',
-  'type',
-  'revision',
+  'pm_recipe_header_id',
+  'cost_batch_id',
+  'recipe_version',
   'comment',
   'status',
   'description',
-  'owner_employee_id',
+  'terminate_reason',
+  'planned_start_date',
+  'planned_completion_date',
+  'required_completion_date',
+  'actual_completion_date',
+  'actual_start_date',
+  'update_invnetory_cb',
   'created_by',
   'creation_date',
   'last_update_by',
   'last_update_date',
  ];
  public $initial_search = [
-  'formula_name',
-  'type',
+  'batch_name',
+  'description',
  ];
  public $requiredField = [
+  'batch_name',
   'org_id',
-  'formula_name',
- ];
- public $fields_inForm_notInDataBase = [
-  'action',
-  'pm_employee_name'
+  'pm_recipe_header_id',
  ];
  public static $json_label_fields = [
-  'formula_name',
+  'batch_name',
   'description',
   'status',
-  'type',
   'org_id',
  ];
  public $profile_default = [
@@ -85,21 +88,28 @@ class pm_formula_header extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Formula "; //page Title
- public $pm_formula_header_id;
- public $org_id;
- public $formula_name;
- public $type;
- public $revision;
- public $comment;
- public $status;
- public $description;
- public $owner_employee_id;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
- public $pm_employee_name;
+ public $pageTitle = " Production Batch "; //page Title
+public $pm_batch_header_id;
+public $org_id;
+public $batch_name;
+public $pm_recipe_header_id;
+public $cost_batch_id;
+public $recipe_version;
+public $comment;
+public $status;
+public $description;
+public $terminate_reason;
+public $planned_start_date;
+public $planned_completion_date;
+public $required_completion_date;
+public $actual_completion_date;
+public $actual_start_date;
+public $update_invnetory_cb;
+public $created_by;
+public $creation_date;
+public $last_update_by;
+public $last_update_date;
+
  public $action;
 
  private function _do_action() {
@@ -125,19 +135,19 @@ class pm_formula_header extends dbObject {
   }
  }
 
- public static function find_financial_details_from_projectHeaderId($pm_formula_header_id) {
+ public static function find_financial_details_from_projectHeaderId($pm_batch_header_id) {
   $sql = " 
          SELECT org.org_id, org.legal_org_id, legal.ledger_id,
             gl.ledger, gl.description as ledger_description, gl.coa_id, gl.calendar_option_line_code, gl.currency_code, legal.balancing_segments,
-            org.org, org.code,org.type, org.description as org_description, pph.pm_formula_header_id, pph.project_number
+            org.org, org.code,org.type, org.description as org_description, pph.pm_batch_header_id, pph.project_number
             FROM org,
             legal,
             gl_ledger gl,
-            pm_formula_header pph
+            pm_batch_header pph
             WHERE org.legal_org_id = legal.org_id 
             AND gl.gl_ledger_id = legal.ledger_id
             AND org.org_id = pph.bu_org_id
-            AND pph.pm_formula_header_id = '{$pm_formula_header_id}'
+            AND pph.pm_batch_header_id = '{$pm_batch_header_id}'
            LIMIT 1
  "
   ;
@@ -149,5 +159,5 @@ class pm_formula_header extends dbObject {
 
 }
 
-//end of pm_formula_header class
+//end of pm_batch_header class
 ?>

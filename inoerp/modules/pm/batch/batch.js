@@ -11,7 +11,7 @@ $(document).ready(function () {
  //add new lines
  $("#content tbody.form_data_line_tbody2").on("click", ".add_row_img", function () {
   var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'pm_formula_ingredient';
+  addNewRow.trClass = 'pm_batch_ingredient';
   addNewRow.tbodyClass = 'form_data_line_tbody2';
   addNewRow.noOfTabs = 1;
   addNewRow.removeDefault = true;
@@ -21,7 +21,7 @@ $(document).ready(function () {
  //add new lines
  $("#content tbody.form_data_line_tbody3").on("click", ".add_row_img", function () {
   var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'pm_formula_byproduct';
+  addNewRow.trClass = 'pm_batch_byproduct';
   addNewRow.tbodyClass = 'form_data_line_tbody3';
   addNewRow.noOfTabs = 1;
   addNewRow.removeDefault = true;

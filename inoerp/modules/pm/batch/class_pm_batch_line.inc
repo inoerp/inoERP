@@ -1,10 +1,10 @@
 <?php
 
-class pm_formula_line extends dbObject {
+class pm_batch_line extends dbObject {
 
- public static $table_name = "pm_formula_line";
- public static $primary_column = "pm_formula_line_id";
- public static $parent_primary_column = "pm_formula_header_id";
+ public static $table_name = "pm_batch_line";
+ public static $primary_column = "pm_batch_line_id";
+ public static $parent_primary_column = "pm_batch_header_id";
  public static $key_column = 'item_id_m';
  public static $module = "pm";
  public static $yield_type_a = [
@@ -13,101 +13,68 @@ class pm_formula_line extends dbObject {
   'INC' => 'Incremental',
   'AUTOBS' => 'Auto By Step',
  ];
- 
-  public static $scale_type_a = [
-  'FIX' => 'Fixed',
-  'PROP' => 'Proportional',
- ];
-
  public $field_a = [
-  'pm_formula_line_id',
-  'pm_formula_header_id',
+  'pm_batch_line_id',
+  'pm_batch_header_id',
   'line_no',
   'line_type',
   'item_id_m',
   'uom_id',
-  'quantity',
+  'planned_quantity',
+  'wip_planned_quantity',
+  'actual_quantity',
+  'allocated_qty',
+  'yield_date',
+  'subinventory_id',
+  'locator_id',
   'description',
-  'cost_allocation',
   'scale_type',
   'yield_type',
-  'byproduct_type',
-  'consumption_type',
-  'phantom_type',
-  'required_qty',
+  'cost_allocation_cb',
   'created_by',
   'creation_date',
   'last_update_by',
   'last_update_date',
  ];
  public $requiredField = [
-  'pm_formula_header_id',
+  'pm_batch_header_id',
   'item_id_m',
   'uom_id',
-  'quantity',
+  'planned_quantity',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "pm_formula_header_id"
+  "pm_batch_header_id"
  ];
  public $fields_inForm_notInDataBase = [
   'item_description',
  ];
-public $pm_formula_line_id;
-public $pm_formula_header_id;
-public $line_no;
-public $line_type;
-public $item_id_m;
-public $uom_id;
-public $quantity;
-public $description;
-public $cost_allocation;
-public $scale_type;
-public $yield_type;
-public $byproduct_type;
-public $consumption_type;
-public $phantom_type;
-public $required_qty;
-public $created_by;
-public $creation_date;
-public $last_update_by;
-public $last_update_date;
-
- public $time;
+ public $pm_batch_line_id;
+ public $pm_batch_header_id;
+ public $line_no;
+ public $line_type;
+ public $item_id_m;
+ public $uom_id;
+ public $planned_quantity;
+ public $wip_planned_quantity;
+ public $actual_quantity;
+ public $allocated_qty;
+ public $yield_date;
+ public $subinventory_id;
+ public $locator_id;
+ public $description;
+ public $scale_type;
+ public $yield_type;
+ public $cost_allocation_cb;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
  public $msg;
-public $item_description;
+ public $item_description;
 
-
-// public function findBy_parentId($pm_formula_header_id, $order_by_field = '', $order_by_seq = '') {
-//  /*
-//   * 1. Find all where parent project task number is null
-//   */
-//  $final_result = [];
-//  if (!ino_validate_num($pm_formula_header_id)) {
-//   return false;
-//  }
-//  $this->pm_formula_header_id = $pm_formula_header_id;
-//  $sql = " SELECT * FROM pm_formula_line WHERE pm_formula_header_id = '{$pm_formula_header_id}' AND parent_prj_task_num IS NULL ";
-//  $sql .= " ORDER BY task_level_weight ASC ";
-//  $result = self::find_by_sql($sql);
-//
-//  if ($result) {
-//   foreach ($result as $result_line) {
-//    $child_final_result = [];
-//    $this->_find_all_childs($result_line, $child_final_result);
-//    array_push($final_result, $result_line);
-//    if (!empty($child_final_result)) {
-//     foreach ($child_final_result as $k => $obj) {
-//      array_push($final_result, $obj);
-//     }
-//    }
-//   }
-//  }
-////  pa($final_result);
-//  return $final_result;
-// }
 
  private function _find_all_childs($result_line, &$child_final_result) {
-  $sql = " SELECT * FROM pm_formula_line WHERE pm_formula_header_id = '{$this->pm_formula_header_id}' AND parent_prj_task_num ='{$result_line->task_number}' ";
+  $sql = " SELECT * FROM pm_batch_line WHERE pm_batch_header_id = '{$this->pm_batch_header_id}' AND parent_prj_task_num ='{$result_line->task_number}' ";
   $sql .= " ORDER BY task_level_weight ASC ";
   $result = self::find_by_sql($sql);
   if ($result) {
@@ -126,18 +93,18 @@ public $item_description;
 
  public static function find_allLine_byHeaderId($header_id) {
   $sql = " SELECT
-pfl.pm_formula_line_id,   pfl.pm_formula_header_id,   pfl.line_no,   pfl.line_type,   pfl.item_id_m,   pfl.uom_id,   pfl.quantity,
+pfl.pm_batch_line_id,   pfl.pm_batch_header_id,   pfl.line_no,   pfl.line_type,   pfl.item_id_m,   pfl.uom_id,   pfl.quantity,
 pfl.description,   pfl.cost_allocation,   pfl.scale_type,   pfl.yield_type,   pfl.byproduct_type,   pfl.consumption_type,   pfl.phantom_type,
 pfl.required_qty, item.item_number, item.item_description
 
-from pm_formula_line pfl,
-pm_formula_header pfh,
+from pm_batch_line pfl,
+pm_batch_header pfh,
 item
 
 WHERE item.item_id_m = pfl.item_id_m
-and pfh.pm_formula_header_id = pfl.pm_formula_header_id
+and pfh.pm_batch_header_id = pfl.pm_batch_header_id
 and pfh.org_id =item.org_id
-and pfl.pm_formula_header_id = '{$header_id}'
+and pfl.pm_batch_header_id = '{$header_id}'
 ";
 
   $result_array = self::find_by_sql($sql);
@@ -146,5 +113,5 @@ and pfl.pm_formula_header_id = '{$header_id}'
 
 }
 
-//end of pm_formula_line class
+//end of pm_batch_line class
 ?>

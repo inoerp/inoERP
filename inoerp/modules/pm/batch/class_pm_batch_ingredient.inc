@@ -1,10 +1,10 @@
 <?php
 
-class pm_formula_ingredient extends dbObject {
+class pm_batch_ingredient extends dbObject {
 
- public static $table_name = "pm_formula_ingredient";
- public static $primary_column = "pm_formula_ingredient_id";
- public static $parent_primary_column = "pm_formula_header_id";
+ public static $table_name = "pm_batch_ingredient";
+ public static $primary_column = "pm_batch_ingredient_id";
+ public static $parent_primary_column = "pm_batch_header_id";
  public static $key_column = 'item_id_m';
  public static $module = "pm";
  public static $source_a = [
@@ -19,20 +19,25 @@ class pm_formula_ingredient extends dbObject {
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'pm_formula_ingredient_id',
-  'pm_formula_header_id',
+  'pm_batch_ingredient_id',
+  'pm_batch_header_id',
   'line_no',
   'revision_name',
   'item_id_m',
   'uom_id',
-  'quantity',
+  'planned_quantity',
   'description',
+  'wip_planned_quantity',
   'scale_type',
   'contribute_yield_cb',
+  'byproduct_type',
   'consumption_type',
-  'buffer_cb',
   'phantom_type',
-  'required_qty',
+  'required_quantity',
+  'actual_quantity',
+  'requirement_date',
+  'subinventory_id',
+  'locator_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -42,47 +47,52 @@ class pm_formula_ingredient extends dbObject {
  public $fields_inForm_notInDataBase = [
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'pm_formula_header_id'
+  'pm_batch_header_id'
  ];
  public $requiredField = [
-  'pm_formula_header_id',
+  'pm_batch_header_id',
   'item_id_m'
  ];
- public $pm_formula_byproduct_id;
- public $pm_formula_header_id;
- public $line_no;
- public $line_type;
- public $item_id_m;
- public $uom_id;
- public $quantity;
- public $description;
- public $contribute_yield_cb;
- public $scale_type;
- public $yield_type;
- public $step_qty_cb;
- public $consumption_type;
- public $phantom_type;
- public $required_qty;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
+public $pm_batch_ingredient_id;
+public $pm_batch_header_id;
+public $line_no;
+public $revision_name;
+public $item_id_m;
+public $uom_id;
+public $planned_quantity;
+public $description;
+public $wip_planned_quantity;
+public $scale_type;
+public $contribute_yield_cb;
+public $byproduct_type;
+public $consumption_type;
+public $phantom_type;
+public $required_quantity;
+public $actual_quantity;
+public $requirement_date;
+public $subinventory_id;
+public $locator_id;
+public $created_by;
+public $creation_date;
+public $last_update_by;
+public $last_update_date;
+
 
  public static function find_allLine_byHeaderId($header_id) {
   $sql = " SELECT 
-pfi.pm_formula_ingredient_id, pfi.pm_formula_header_id, pfi.line_no, pfi.revision_name, pfi.item_id_m,
+pfi.pm_batch_ingredient_id, pfi.pm_batch_header_id, pfi.line_no, pfi.revision_name, pfi.item_id_m,
 pfi.uom_id, pfi.quantity, pfi.description, pfi.scale_type, pfi.contribute_yield_cb, pfi.consumption_type,
 pfi.buffer_cb, pfi.phantom_type, pfi.required_qty,
 item.item_number, item.item_description
 
-from pm_formula_ingredient pfi,
-pm_formula_header pfh,
+from pm_batch_ingredient pfi,
+pm_batch_header pfh,
 item
 
 WHERE item.item_id_m = pfi.item_id_m
-and pfh.pm_formula_header_id =pfi.pm_formula_header_id
+and pfh.pm_batch_header_id =pfi.pm_batch_header_id
 and pfh.org_id =item.org_id
-and pfi.pm_formula_header_id = '{$header_id}'
+and pfi.pm_batch_header_id = '{$header_id}'
 ";
 
   $result_array = self::find_by_sql($sql);
@@ -91,5 +101,5 @@ and pfi.pm_formula_header_id = '{$header_id}'
 
 }
 
-//end of pm_formula_ingredient class
+//end of pm_batch_ingredient class
 ?>

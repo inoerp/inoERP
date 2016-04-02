@@ -1,10 +1,10 @@
 <?php
 
-class pm_formula_byproduct extends dbObject {
+class pm_batch_byproduct extends dbObject {
 
- public static $table_name = "pm_formula_byproduct";
- public static $primary_column = "pm_formula_byproduct_id";
- public static $parent_primary_column = "pm_formula_header_id";
+ public static $table_name = "pm_batch_byproduct";
+ public static $primary_column = "pm_batch_byproduct_id";
+ public static $parent_primary_column = "pm_batch_header_id";
  public static $key_column = 'item_id_m';
  public static $module = "pm";
  public static $byproduct_type_a = [
@@ -36,10 +36,10 @@ class pm_formula_byproduct extends dbObject {
   "member_username",
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'pm_formula_header_id'
+  'pm_batch_header_id'
  ];
  public $requiredField = [
-  'pm_formula_header_id',
+  'pm_batch_header_id',
   'item_id_m',
  ];
  public $pm_formula_byproduct_id;
@@ -50,7 +50,6 @@ class pm_formula_byproduct extends dbObject {
  public $uom_id;
  public $quantity;
  public $description;
- public $yield_contribution_cb;
  public $scale_type;
  public $yield_type;
  public $byproduct_type;
@@ -59,8 +58,7 @@ class pm_formula_byproduct extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
-
 }
 
-//end of pm_formula_byproduct class
+//end of pm_batch_byproduct class
 ?>

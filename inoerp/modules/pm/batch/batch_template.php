@@ -6,10 +6,11 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php $f = new inoform();
-echo gettext('Formula')
-?></span>
- <form method="post" id="pm_formula_header"  name="pm_formula_header">
+<div id ="form_header"><span class="heading"><?php
+  $f = new inoform();
+  echo gettext('Production Batch')
+  ?></span>
+ <form method="post" id="pm_batch_header"  name="pm_batch_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -20,16 +21,16 @@ echo gettext('Formula')
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_dr_withSearch('pm_formula_header_id') ?>
-       <a name="show" href="form.php?class_name=pm_formula_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_formula_header_id"><i class="fa fa-refresh"></i></a> 
+      <li><?php $f->l_text_field_dr_withSearch('pm_batch_header_id') ?>
+       <a name="show" href="form.php?class_name=pm_batch_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_batch_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_text_field_d('formula_name'); ?></li>
+      <li><?php $f->l_text_field_d('batch_name'); ?></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
       <li><?php $f->l_select_field_from_object('type', option_header::find_options_byName('PM_FORMULA_TYPE'), 'option_line_code', 'option_line_value', $$class->type, 'type'); ?></li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
       <li><?php $f->l_text_field_d('comment'); ?></li>
       <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
-<?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
+       <?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
       <li><?php $f->l_text_field_d('description') ?></li>
@@ -39,12 +40,12 @@ echo gettext('Formula')
      <div> 
       <div id="comments">
        <div id="comment_list">
-<?php echo!(empty($comments)) ? $comments : ""; ?>
+        <?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
         <?php
-        $reference_table = 'pm_formula_header';
-        $reference_id = $$class->pm_formula_header_id;
+        $reference_table = 'pm_batch_header';
+        $reference_id = $$class->pm_batch_header_id;
         ?>
        </div>
        <div id="new_comment">
@@ -59,7 +60,7 @@ echo gettext('Formula')
     <div id="tabsHeader-4" class="tabContent">
      <ul class="column header_field">
       <li id="document_status"><label><?php echo gettext('Action') ?></label>
-<?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
+       <?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
       </li>
      </ul>
     </div>
@@ -69,7 +70,7 @@ echo gettext('Formula')
  </form>
 </div>
 
-<span class="heading"><?php echo gettext('Formula Details') ?></span>
+<span class="heading"><?php echo gettext('Production Details') ?></span>
 
 <div id="tabsLine">
  <ul class="tabMain">
@@ -78,7 +79,7 @@ echo gettext('Formula')
   <li><a href="#tabsLine-3"><?php echo gettext('By Products') ?> </a></li>
  </ul>
  <div class="tabContainer">
-  <form method="post" id="pm_formula_line"  name="pm_formula_line" class="m-margin-top-20">
+  <form method="post" id="pm_batch_line"  name="pm_batch_line" class="m-margin-top-20">
    <div id="form_line" class="form_line">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
@@ -99,25 +100,25 @@ echo gettext('Formula')
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-       $pm_formula_line_object_ai = new ArrayIterator($pm_formula_line_object);
-       $pm_formula_line_object_ai->seek($position);
-       while ($pm_formula_line_object_ai->valid()) {
-        $pm_formula_line = $pm_formula_line_object_ai->current();
-        if (!empty($pm_formula_line->item_id_m)) {
-         $item_f = item::find_by_item_id_m($pm_formula_line->item_id_m);
+       $pm_batch_line_object_ai = new ArrayIterator($pm_batch_line_object);
+       $pm_batch_line_object_ai->seek($position);
+       while ($pm_batch_line_object_ai->valid()) {
+        $pm_batch_line = $pm_batch_line_object_ai->current();
+        if (!empty($pm_batch_line->item_id_m)) {
+         $item_f = item::find_by_item_id_m($pm_batch_line->item_id_m);
          $$class_second->item_number = $item_f->item_number;
          $$class_second->item_description = $item_f->item_description;
         } else {
          $$class_second->item_number = $$class_second->item_description = null;
         }
         ?>         
-        <tr class="pm_formula_line<?php echo $count ?>">
+        <tr class="pm_batch_line<?php echo $count ?>">
          <td>
           <?php
-          echo ino_inline_action($pm_formula_line->pm_formula_line_id, array('pm_formula_header_id' => $pm_formula_header->pm_formula_header_id));
+          echo ino_inline_action($pm_batch_line->pm_batch_line_id, array('pm_batch_header_id' => $pm_batch_header->pm_batch_header_id));
           ?>
          </td>
-         <td><?php $f->text_field_wid2sr('pm_formula_line_id', 'line_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('pm_batch_line_id', 'line_id'); ?></td>
          <td><?php echo $f->number_field('line_no', $$class_second->line_no, '', '', 'lines_number small ', 1, $readonly); ?></td>
          <td><?php
           $f->val_field_wid2('item_number', 'item', 'item_number', 'receving_org_id');
@@ -132,8 +133,8 @@ echo gettext('Formula')
          <td><?php $f->text_field_wid2('cost_allocation'); ?></td>
         </tr>
         <?php
-        $pm_formula_line_object_ai->next();
-        if ($pm_formula_line_object_ai->key() == $position + $per_page) {
+        $pm_batch_line_object_ai->next();
+        if ($pm_batch_line_object_ai->key() == $position + $per_page) {
          break;
         }
         $count = $count + 1;
@@ -145,7 +146,7 @@ echo gettext('Formula')
    </div>
   </form>
   <div id ="form_line2" class="form_line2">
-   <form  method="post" id="pm_formula_ingredient"  name="pm_formula_ingredient">
+   <form  method="post" id="pm_batch_ingredient"  name="pm_batch_ingredient">
     <div id="tabsLine-2" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
@@ -168,25 +169,25 @@ echo gettext('Formula')
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
        <?php
        $count = 0;
-       foreach ($pm_formula_ingredient_object as $pm_formula_ingredient) {
-        if (!empty($pm_formula_ingredient->item_id_m)) {
-         $item_ig = item::find_by_item_id_m($pm_formula_ingredient->item_id_m);
+       foreach ($pm_batch_ingredient_object as $pm_batch_ingredient) {
+        if (!empty($pm_batch_ingredient->item_id_m)) {
+         $item_ig = item::find_by_item_id_m($pm_batch_ingredient->item_id_m);
          $$class_third->item_number = $item_f->item_number;
          $$class_third->item_description = $item_f->item_description;
         } else {
          $$class_third->item_number = $$class_second->item_description = null;
         }
         ?>         
-        <tr class="pm_formula_ingredient<?php echo $count ?>">
+        <tr class="pm_batch_ingredient<?php echo $count ?>">
          <td>    
           <ul class="inline_action">
            <li class="add_row_img"><i class="fa fa-plus-circle"></i></li>
            <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($pm_formula_ingredient->pm_formula_ingredient_id); ?>"></li>           
-           <li><?php echo form::hidden_field('pm_formula_header_id', $$class->pm_formula_header_id); ?></li>
+           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($pm_batch_ingredient->pm_batch_ingredient_id); ?>"></li>           
+           <li><?php echo form::hidden_field('pm_batch_header_id', $$class->pm_batch_header_id); ?></li>
           </ul>
          </td>
-         <td><?php form::text_field_wid3sr('pm_formula_ingredient_id'); ?></td>
+         <td><?php form::text_field_wid3sr('pm_batch_ingredient_id'); ?></td>
          <td><?php echo $f->number_field('line_no', $$class_third->line_no, '', '', 'lines_number small ', 1, $readonly); ?></td>
          <td><?php
           $f->val_field_wid3('item_number', 'item', 'item_number', 'org_id');
@@ -215,7 +216,7 @@ echo gettext('Formula')
   </div>
   <div id ="form_line3" class="form_line3">
    <div id="tabsLine-3" class="tabContent">
-    <form  method="post" id="pm_formula_byproduct"  name="pm_formula_byproduct">
+    <form  method="post" id="pm_batch_byproduct"  name="pm_batch_byproduct">
      <table class="form_line_data_table3">
       <thead> 
        <tr>
@@ -234,25 +235,25 @@ echo gettext('Formula')
       <tbody class="form_data_line_tbody3 wip_wo_bom_values" >
        <?php
        $count = 0;
-       foreach ($pm_formula_byproduct_object as $pm_formula_byproduct) {
-        if (!empty($pm_formula_byproduct->item_id_m)) {
-         $item_bp = item::find_by_item_id_m($pm_formula_byproduct->item_id_m);
+       foreach ($pm_batch_byproduct_object as $pm_batch_byproduct) {
+        if (!empty($pm_batch_byproduct->item_id_m)) {
+         $item_bp = item::find_by_item_id_m($pm_batch_byproduct->item_id_m);
          $$class_fourth->item_number = $item_bp->item_number;
          $$class_fourth->item_description = $item_bp->item_description;
         } else {
          $$class_fourth->item_number = $$class_fourth->item_description = null;
         }
         ?>         
-        <tr class="pm_formula_byproduct<?php echo $count ?>">
+        <tr class="pm_batch_byproduct<?php echo $count ?>">
          <td>    
           <ul class="inline_action">
            <li class="add_row_img"><i class="fa fa-plus-circle"></i></li>
            <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($pm_formula_byproduct->pm_formula_byproduct_id); ?>"></li>           
-           <li><?php echo form::hidden_field('pm_formula_header_id', $$class->pm_formula_header_id); ?></li>
+           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($pm_batch_byproduct->pm_batch_byproduct_id); ?>"></li>           
+           <li><?php echo form::hidden_field('pm_batch_header_id', $$class->pm_batch_header_id); ?></li>
           </ul>
          </td>
-         <td><?php form::text_field_wid4sr('pm_formula_byproduct_id'); ?></td>
+         <td><?php form::text_field_wid4sr('pm_batch_byproduct_id'); ?></td>
          <td><?php echo $f->number_field('line_no', $$class_third->line_no, '', '', 'lines_number small ', 1, $readonly); ?></td>
          <td><?php
           $f->val_field_wid4('item_number', 'item', 'item_number', 'org_id');
@@ -281,28 +282,28 @@ echo gettext('Formula')
 
 <div class="row small-top-margin">
  <div id="pagination" style="clear: both;">
-<?php echo $pagination->show_pagination(); ?>
+  <?php echo $pagination->show_pagination(); ?>
  </div>
 </div>
 
 
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="pm_formula_header" ></li>
-  <li class="lineClassName" data-lineClassName="pm_formula_line" ></li>
-  <li class="lineClassName2" data-lineClassName2="pm_formula_ingredient" ></li>
-  <li class="lineClassName3" data-lineClassName3="pm_formula_byproduct" ></li>
+  <li class="headerClassName" data-headerClassName="pm_batch_header" ></li>
+  <li class="lineClassName" data-lineClassName="pm_batch_line" ></li>
+  <li class="lineClassName2" data-lineClassName2="pm_batch_ingredient" ></li>
+  <li class="lineClassName3" data-lineClassName3="pm_batch_byproduct" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
-  <li class="primary_column_id" data-primary_column_id="pm_formula_header_id" ></li>
-  <li class="form_header_id" data-form_header_id="pm_formula_header" ></li>
+  <li class="primary_column_id" data-primary_column_id="pm_batch_header_id" ></li>
+  <li class="form_header_id" data-form_header_id="pm_batch_header" ></li>
   <li class="line_key_field" data-line_key_field="item_description" ></li>
   <li class="single_line" data-single_line="false" ></li>
-  <li class="form_line_id" data-form_line_id="pm_formula_line" ></li>
+  <li class="form_line_id" data-form_line_id="pm_batch_line" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedaderId" data-docHedaderId="pm_formula_header_id" ></li>
-  <li class="docLineId" data-docLineId="pm_formula_line_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="pm_formula_header" ></li>
+  <li class="docHedaderId" data-docHedaderId="pm_batch_header_id" ></li>
+  <li class="docLineId" data-docLineId="pm_batch_line_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="pm_batch_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
   <li class="noOfTabbs" data-noOfTabbs="6" ></li>
