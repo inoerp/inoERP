@@ -7,12 +7,7 @@ class pm_batch_line extends dbObject {
  public static $parent_primary_column = "pm_batch_header_id";
  public static $key_column = 'item_id_m';
  public static $module = "pm";
- public static $yield_type_a = [
-  'AUTO' => 'Automatic',
-  'MANUAL' => 'Manual',
-  'INC' => 'Incremental',
-  'AUTOBS' => 'Auto By Step',
- ];
+
  public $field_a = [
   'pm_batch_line_id',
   'pm_batch_header_id',
@@ -72,24 +67,6 @@ class pm_batch_line extends dbObject {
  public $msg;
  public $item_description;
 
-
- private function _find_all_childs($result_line, &$child_final_result) {
-  $sql = " SELECT * FROM pm_batch_line WHERE pm_batch_header_id = '{$this->pm_batch_header_id}' AND parent_prj_task_num ='{$result_line->task_number}' ";
-  $sql .= " ORDER BY task_level_weight ASC ";
-  $result = self::find_by_sql($sql);
-  if ($result) {
-   foreach ($result as $result_line_l) {
-    $child_final_result_a = [];
-    $this->_find_all_childs($result_line_l, $child_final_result_a);
-    array_push($child_final_result, $result_line_l);
-    if (!empty($child_final_result_a)) {
-     foreach ($child_final_result_a as $k => $obj) {
-      array_push($child_final_result, $obj);
-     }
-    }
-   }
-  }
- }
 
  public static function find_allLine_byHeaderId($header_id) {
   $sql = " SELECT
