@@ -3,8 +3,8 @@
 class pm_recipe_all_v extends dbObject {
 
  public static $table_name = "pm_recipe_all_v";
- public static $primary_column = "po_header_id";
- public static $form_class_name = "po_header";
+ public static $primary_column = "pm_recipe_header_id";
+ public static $form_class_name = "pm_recipe_header";
  public static $system_info = [
   'name' => 'PO All View',
   'number' => '2220',
@@ -29,18 +29,21 @@ class pm_recipe_all_v extends dbObject {
   'routing_description',
   'item_number',
   'item_description',
+  'org'
  ];
  public $initial_search = [
   "recipe_name",
   "formula_name",
   'routing_name',
   "item_number",
+  
  ];
  public static $json_label_fields = [
   "recipe_name",
   "formula_name",
   'routing_name',
   "item_number",
+  'org'
  ];
  public $search = [
   '_update_path' => 'form.php?class_name=pm_recipe_header',
@@ -65,6 +68,7 @@ class pm_recipe_all_v extends dbObject {
  public $routing_description;
  public $item_number;
  public $item_description;
+ public $org;
 
  private function create_pm_recipe_all_v() {
   $sql = "
@@ -72,21 +76,23 @@ CREATE OR REPLACE VIEW pm_recipe_all_v
 (
 pm_recipe_header_id, org_id, recipe_name, pm_formula_header_id, pm_process_routing_header_id, item_id_m,
 formula_name, formula_description, routing_name, routing_description, 
-item_number, item_description
+item_number, item_description, org
 )
 AS
 SELECT
 prh.pm_recipe_header_id, prh.org_id, prh.recipe_name, prh.pm_formula_header_id, prh.pm_process_routing_header_id, prh.item_id_m,
 pfh.formula_name, pfh.description as formula_description, pprh.routing_name, pprh.description as routing_description, 
-item.item_number, item.item_description as item_description
+item.item_number, item.item_description as item_description, org.org
 FROM 
 pm_recipe_header prh
 LEFT JOIN item ON item.item_id_m = prh.item_id_m AND item.org_id = prh.org_id ,
 pm_formula_header pfh,
-pm_process_routing_header pprh
+pm_process_routing_header pprh,
+org
 
 WHERE prh.pm_formula_header_id = pfh.pm_formula_header_id
 AND prh.pm_process_routing_header_id = pprh.pm_process_routing_header_id
+AND org.org_id = prh.org_id
 
 ";
  }

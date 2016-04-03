@@ -14,9 +14,10 @@ inoERP
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Planning') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -25,18 +26,35 @@ inoERP
        <a name="show" href="form.php?class_name=pm_batch_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_batch_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_text_field_d('batch_name'); ?></li>
+      <li><?php
+       echo $f->l_val_field_dm('recipe_name', 'pm_recipe_all_v', 'recipe_name', '',  'vf_select_recipe_name');
+       echo $f->hidden_field_withId('pm_recipe_header_id', $$class->pm_recipe_header_id);
+       ?><i class="generic g_select_recipe_name select_popup clickable fa fa-search" data-class_name="pm_recipe_all_v"></i></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
-      <li><?php $f->l_select_field_from_object('type', option_header::find_options_byName('PM_FORMULA_TYPE'), 'option_line_code', 'option_line_value', $$class->type, 'type'); ?></li>
+      <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_woType('PROCESS'), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
       <li><?php $f->l_text_field_d('comment'); ?></li>
       <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
        <?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
+      <li><?php $f->l_text_field_d('routing_name') ?></li>
+      <li><?php $f->l_text_field_d('formula_name') ?></li>
       <li><?php $f->l_text_field_d('description') ?></li>
      </ul> 
     </div>
     <div id="tabsHeader-2" class="tabContent">
+     <ul class="column header_field">
+      <li><?php $f->l_date_fieldFromToday_d('planned_start_date', $$class->planned_start_date) ?></li>
+      <li><?php $f->l_date_fieldFromToday_d('planned_completion_date', $$class->planned_completion_date) ?></li>
+      <li><?php $f->l_date_fieldFromToday_dm('required_completion_date', $$class->required_completion_date) ?></li>
+      <li><?php $f->l_date_fieldFromToday_d('actual_completion_date', $$class->actual_completion_date) ?></li>
+      <li><?php $f->l_date_fieldFromToday_d('actual_start_date', $$class->actual_start_date) ?></li>
+      <li><?php $f->l_text_field_d('terminate_reason') ?></li>
+      <li><?php $f->l_checkBox_field_dr('batch_exploded_cb'); ?> </li>
+     </ul> 
+    </div>
+    <div id="tabsHeader-3" class="tabContent">
      <div> 
       <div id="comments">
        <div id="comment_list">
@@ -53,11 +71,11 @@ inoERP
       </div>
      </div>
     </div>
-    <div id="tabsHeader-3" class="tabContent">
+    <div id="tabsHeader-4" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
 
-    <div id="tabsHeader-4" class="tabContent">
+    <div id="tabsHeader-5" class="tabContent">
      <ul class="column header_field">
       <li id="document_status"><label><?php echo gettext('Action') ?></label>
        <?php echo $f->select_field_from_array('action', $$class->action_a, '', 'action'); ?>
@@ -65,13 +83,10 @@ inoERP
      </ul>
     </div>
    </div>
-
   </div>
  </form>
 </div>
-
 <span class="heading"><?php echo gettext('Production Details') ?></span>
-
 <div id="tabsLine">
  <ul class="tabMain">
   <li><a href="#tabsLine-1"><?php echo gettext('Products') ?></a></li>

@@ -11,8 +11,9 @@ inoERP
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Material') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -41,7 +42,12 @@ inoERP
       <li><?php $f->l_text_field_d('description') ?></li>
      </ul> 
     </div>
-    <div id="tabsHeader-2" class="tabContent">
+        <div id="tabsHeader-2" class="tabContent">
+     <div><a class="btn btn-info btn-lg" target="_new" 
+             href="form.php?class_name=pm_recipe_material_header&mode=9&pm_recipe_material_header_id=<?php echo $$class->pm_recipe_material_header_id; ?>"><?php echo gettext('Recipe Material') ?></a>
+     </div>
+    </div>
+    <div id="tabsHeader-3" class="tabContent">
      <div> 
       <div id="comments">
        <div id="comment_list">
@@ -58,7 +64,7 @@ inoERP
       </div>
      </div>
     </div>
-    <div id="tabsHeader-3" class="tabContent">
+    <div id="tabsHeader-4" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
    </div>
@@ -73,6 +79,7 @@ inoERP
  <ul class="tabMain">
   <li><a href="#tabsLine-1"><?php echo gettext('Organization') ?></a></li>
   <li><a href="#tabsLine-2"><?php echo gettext('Customers') ?></a></li>
+  
  </ul>
  <div class="tabContainer">
   <form method="post" id="pm_recipe_line"  name="pm_recipe_line" class="m-margin-top-20">

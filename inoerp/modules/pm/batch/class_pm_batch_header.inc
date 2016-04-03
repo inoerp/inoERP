@@ -49,7 +49,7 @@ class pm_batch_header extends dbObject {
   'batch_name',
   'org_id',
   'pm_recipe_header_id',
-  'cost_batch_id',
+  'wip_accounting_group_id',
   'recipe_version',
   'comment',
   'status',
@@ -61,6 +61,7 @@ class pm_batch_header extends dbObject {
   'actual_completion_date',
   'actual_start_date',
   'update_invnetory_cb',
+  'batch_exploded_cb',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -71,7 +72,6 @@ class pm_batch_header extends dbObject {
   'description',
  ];
  public $requiredField = [
-  'batch_name',
   'org_id',
   'pm_recipe_header_id',
  ];
@@ -81,6 +81,11 @@ class pm_batch_header extends dbObject {
   'status',
   'org_id',
  ];
+ public $fields_inForm_notInDataBase = [
+  'recipe_name',
+  "routing_name",
+  'formula_name'
+ ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
  ];
@@ -89,28 +94,30 @@ class pm_batch_header extends dbObject {
   '_show_view_path' => 1,
  ];
  public $pageTitle = " Production Batch "; //page Title
-public $pm_batch_header_id;
-public $org_id;
-public $batch_name;
-public $pm_recipe_header_id;
-public $cost_batch_id;
-public $recipe_version;
-public $comment;
-public $status;
-public $description;
-public $terminate_reason;
-public $planned_start_date;
-public $planned_completion_date;
-public $required_completion_date;
-public $actual_completion_date;
-public $actual_start_date;
-public $update_invnetory_cb;
-public $created_by;
-public $creation_date;
-public $last_update_by;
-public $last_update_date;
-
+ public $pm_batch_header_id;
+ public $org_id;
+ public $batch_name;
+ public $pm_recipe_header_id;
+ public $wip_accounting_group_id;
+ public $recipe_version;
+ public $comment;
+ public $status;
+ public $description;
+ public $terminate_reason;
+ public $planned_start_date;
+ public $planned_completion_date;
+ public $required_completion_date;
+ public $actual_completion_date;
+ public $actual_start_date;
+ public $update_invnetory_cb;
+ public $batch_exploded_cb;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
  public $action;
+ public $recipe_name;
+ private $_pm_formula_header_id;
 
  private function _do_action() {
 
@@ -133,6 +140,42 @@ public $last_update_date;
   if (empty($this->approval_status)) {
    $this->approval_status = 'ENTERED';
   }
+ }
+
+ public function _after_save() {
+
+  if ((!empty($this->pm_batch_header_id)) && empty($this->batch_name)) {
+   $this->batch_name = $this->org_id . '-' . $this->pm_batch_header_id;
+   echo ' System generated Batch number is ' . $this->batch_name;
+   $this->save();
+  }
+
+  //copy line details
+  if ((!empty($this->pm_recipe_header_id)) && (empty($this->batch_exploded_cb))) {
+   $this->_copy_batch_lines();
+  }
+ }
+
+ private function _copy_batch_lines() {
+  $recipe_details = pm_recipe_header::find_by_id($this->pm_recipe_header_id);
+  $this->_pm_formula_header_id = $recipe_details->pm_formula_header_id;
+
+  $this->_copy_batch_products();
+  $this->_copy_batch_ingredients();
+  $this->_copy_batch_byproducts();
+ }
+
+ private function _copy_batch_products() {
+  $all_product_lines = pm_formula_line::find_by_parent_id($this->_pm_formula_header_id);
+  
+ }
+
+ private function _copy_batch_byproducts() {
+  
+ }
+
+ private function _copy_batch_ingredients() {
+  
  }
 
  public static function find_financial_details_from_projectHeaderId($pm_batch_header_id) {

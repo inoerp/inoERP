@@ -32,7 +32,13 @@ $(document).ready(function () {
  if (!($('.lines_number:first').val())) {
   $('.lines_number:first').val('1');
  }
- 
+
+ $('#pm_batch_line, #pm_batch_ingredient, #pm_batch_byproduct').on('click', ':input', function () {
+  if (!$('#pm_batch_header_id').val()) {
+   alert('No header details in database : Enter/Save header data');
+  }
+ });
+
  $('body').off('change', '#action').on('change', '#action', function () {
   if ($(this).val() == 'PROCESS_ACTUALS') {
    $('#add_to_order').prop('disabled', false);
