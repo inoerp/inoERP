@@ -48,6 +48,13 @@ class pm_process_operation_header extends dbObject {
   'end_date',
   'status',
   'min_quantity',
+  'department',
+  "material_ac_id",
+  "material_oh_ac_id",
+  "overhead_ac_id",
+  "resource_ac_id",
+  "osp_ac_id",
+  "expense_ac_id",
   'uom_id',
   'created_by',
   'creation_date',
@@ -82,12 +89,16 @@ class pm_process_operation_header extends dbObject {
  public $status;
  public $min_quantity;
  public $uom_id;
+ public $material_ac_id;
+ public $material_oh_ac_id;
+ public $overhead_ac_id;
+ public $resource_ac_id;
+ public $osp_ac_id;
+ public $expense_ac_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
-
-
 
 }
 

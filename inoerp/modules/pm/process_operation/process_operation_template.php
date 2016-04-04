@@ -11,8 +11,9 @@ inoERP
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Accounts') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -32,7 +33,7 @@ inoERP
       <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '',  'uom_id medium', 1); ?></li>
      </ul>
     </div>
-    <div id="tabsHeader-2" class="tabContent">
+    <div id="tabsHeader-3" class="tabContent">
      <div> 
       <div id="comments">
        <div id="comment_list">
@@ -49,7 +50,7 @@ inoERP
       </div>
      </div>
     </div>
-    <div id="tabsHeader-3" class="tabContent">
+    <div id="tabsHeader-4" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
      
     </div>
