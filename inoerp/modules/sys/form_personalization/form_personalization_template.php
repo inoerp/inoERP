@@ -1,6 +1,6 @@
 <div id="view_divId">
  <div id ="form_header"> <span class="heading"><?php echo gettext('Form Personalization') ?></span>
-  <form action=""  method="post" id="sys_form_personalization_header"  name="sys_form_personalization_header">
+  <form   method="post" id="sys_form_personalization_header"  name="sys_form_personalization_header">
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <div id="form_serach_header" class="tabContainer">
@@ -48,8 +48,9 @@
       </div>
      </div>
     </div>
-  </form>   
+   
  </div>
+</form>
 </div>
 </div>
 <div id="js_data">

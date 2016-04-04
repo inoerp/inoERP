@@ -148,7 +148,7 @@
               if ((!empty($multi_selct_input_fields) && is_array($multi_selct_input_fields)) && (in_array($all_columns[$k], $multi_selct_input_fields))) {
                $value = null;
               } else {
-               $value = $records->$all_columns[$k];
+                      $value = $records->{$all_columns[$k]};
               }
               echo "<td><input type=\"text\" name=\"$bracketName\" class=\"$div_class_name text $all_columns[$k]\" value=\"$value\" $readonly size=\"12\"> </td>";
              } else {

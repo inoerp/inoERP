@@ -142,7 +142,7 @@
   }
 
   public function findAll_profile($profile_name) {
-   $sql = " SELECT sph.profile_name,sph.description,sph.class_name,
+   $sql = " SELECT sph.profile_name,sph.description,sph.profile_class_name,
            spl.sys_profile_line_id, spl.sys_profile_header_id, spl.profile_level, spl.level_name, spl.level_value
            FROM sys_profile_header sph
           LEFT JOIN sys_profile_line spl ON spl.sys_profile_header_id = sph.sys_profile_header_id 

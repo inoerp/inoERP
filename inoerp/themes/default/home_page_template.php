@@ -144,7 +144,11 @@ include_once("includes/functions/loader.inc");
 
           <?php
          } else {
-          include_once 'extensions/user/popup_login/user_popup_login_template.php';
+          if (file_exists(__DIR__ . '/template/user_popup_login_template.php')) {
+           require_once(__DIR__ . '/template/user_popup_login_template.php');
+          } else {
+           require_once('login/user_popup_login_template.php');
+          }
          }
          ?>
         </div>

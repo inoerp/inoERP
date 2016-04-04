@@ -64,7 +64,7 @@
     js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
     fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));</script>
-<nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top">
    <div id="topbar" class="topbar clearfix ">
     <div class="container">
      <div class="row">
@@ -114,7 +114,11 @@
 
           <?php
          } else {
-          include_once 'extensions/user/popup_login/user_popup_login_template.php';
+          if (file_exists(__DIR__ . '/template/user_popup_login_template.php')) {
+           require_once(__DIR__ . '/template/user_popup_login_template.php');
+          } else {
+           require_once('login/user_popup_login_template.php');
+          }
          }
          ?>
         </div>
@@ -166,7 +170,7 @@
    echo '<div id="header_bottom"></div>';
   }
   ?>
-<div class='content-top-padding'></div>
+  <div class='content-top-padding'></div>
   <?php
 //  if ($si->maintenance_cb == 1) {
 //   echo "<div class='error'>Site is under maintenance mode </div>";

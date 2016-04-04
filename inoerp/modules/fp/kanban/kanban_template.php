@@ -171,6 +171,7 @@ inoERP
   <li class="line_key_field" data-line_key_field="line_name" ></li>
   <li class="single_line" data-single_line="false" ></li>
   <li class="form_line_id" data-form_line_id="fp_kanban_line" ></li>
+  <li class="allow_header_delete" data-allow_header_delete="true" ></li>
  </ul>
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="fp_kanban_header_id" ></li>
