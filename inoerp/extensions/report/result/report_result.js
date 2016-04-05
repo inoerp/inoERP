@@ -1,11 +1,11 @@
-function getextn_reportResult_i(filterData, sortData) {
+function getReportResult_i(filterData, sortData) {
  if (typeof filterData === 'undefined') {
   filterData = $('.extn_report_filters').find('.filtered_field:input').serializeArray();
  }
  if (typeof sortData === 'undefined') {
   sortData = $('.extn_report_filters').find('.sorted_field:input').serializeArray();
  }
- getextn_reportResult({
+ getReportResult({
   filterData: filterData,
   sortData: sortData,
   extn_report_id: $('#extn_report_id').val(),
@@ -13,11 +13,11 @@ function getextn_reportResult_i(filterData, sortData) {
  });
 }
 
-$.fn.getextn_reportResult_e = function(options) {
+$.fn.getReportResult_e = function(options) {
  var thisElement = $(this);
  var filterData = $(this).closest('div.extn_report_content').find('.extn_report_filters').find('.filtered_field:input').serializeArray();
  var sortData = $(this).closest('div.extn_report_content').find('.extn_report_filters').find('.sorted_field:input').serializeArray();
- $.when(getextn_reportResult({
+ $.when(getReportResult({
   filterData: filterData,
   sortData: sortData,
   extn_report_id: $(this).closest('div.extn_report_content').find('.extn_report_id').val(),
@@ -41,7 +41,7 @@ $(document).ready(function() {
 //  $(this).find('ul').removeClass('icon_header');
 // });
 
- $('.extn_report_content').on('click', '.ino_filter', function() {
+ $('.extn_report_content').off('click', '.ino_filter').on('click', '.ino_filter', function() {
 //  $(this).removeClass('show_add_filter');
   var fieldName = $(this).closest('th').data('field_name');
   var filter_value = prompt("Enter value for\n" + fieldName);
@@ -49,15 +49,15 @@ $(document).ready(function() {
   newDataField += '<input class="hidden filtered_field" type="hidden" value="' + filter_value + '" name="' + $(this).closest('th').data('field_name') + '"></span>';
   if (filter_value) {
    $(this).closest('div.extn_report_content').find('.extn_report_filters').append(newDataField);
-   $(this).getextn_reportResult_e();
+   $(this).getReportResult_e();
   }
  });
 
- $('.extn_report_filters').on('click', '.filtered_field, .show_sort_remove', function() {
+ $('.extn_report_filters').off('click', '.filtered_field, .show_sort_remove').on('click', '.filtered_field, .show_sort_remove', function() {
   var thisElement = $(this);
   var filterData = $(this).closest('div.extn_report_content').find('.extn_report_filters .filtered_field').not(this).find(':input').not(this).serializeArray();
   var sortData = $(this).closest('div.extn_report_content').find('.extn_report_filters .sorted_field').not(this).find(':input').not(this).serializeArray();
-  $.when(getextn_reportResult({
+  $.when(getReportResult({
    filterData: filterData,
    sortData: sortData,
    extn_report_id: $(this).closest('div.extn_report_content').find('.extn_report_id').val(),
@@ -72,18 +72,18 @@ $(document).ready(function() {
 
  });
 
- $('body').on('click', '.extn_report_content .ino_sort_a_z', function() {
+ $('body').off('click', '.extn_report_content .ino_sort_a_z').on('click', '.extn_report_content .ino_sort_a_z', function() {
   var fieldName = $(this).closest('th').data('field_name');
   var newSortField = '<span class="show_sort_remove show_remove_filter ' + fieldName + '">' + fieldName + ' : ' + 'Sort Up';
   newSortField += '<input class="hidden sorted_field" type="hidden" value="' + 'sort_up' + '" name="' + fieldName + '"></span>';
   $(this).closest('div.extn_report_content').find('.extn_report_filters').append(newSortField);
-  $(this).getextn_reportResult_e();
+  $(this).getReportResult_e();
  }).on('click', '.extn_report_content .ino_sort_z_a', function() {
   var fieldName = $(this).closest('th').data('field_name');
   var newSortField = '<span class="show_sort_remove show_remove_filter ' + fieldName + '">' + fieldName + ' : ' + 'Sort Down';
   newSortField += '<input class="hidden sorted_field" type="hidden" value="' + 'sort_down' + '" name="' + fieldName + '"></span>';
   $(this).closest('div.extn_report_content').find('.extn_report_filters').append(newSortField);
-  $(this).getextn_reportResult_e();
+  $(this).getReportResult_e();
  });
 
 
@@ -111,7 +111,7 @@ $(document).ready(function() {
  });
 
  $('.extn_report_refresh_button').on('click', function() {
-  $(this).getextn_reportResult_e();
+  $(this).getReportResult_e();
  });
 
 });

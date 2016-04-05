@@ -52,6 +52,9 @@ function getFormDetails(url) {
 
   }
  }).done(function (result) {
+//  if($('#path_by_module').html()){
+//   var path_by_module_content = '<div id="path_by_module" class="hidden">' + $('#path_by_module').html() + '</div>';
+//  }
   var newContent = $(result).find('div#structure').html();
   var allButton = $(result).find('div#header_top_container #form_top_image').html();
   if (typeof allButton === 'undefined') {
@@ -60,6 +63,7 @@ function getFormDetails(url) {
   var commentForm = $(result).find('div#comment_form').html();
   if (newContent) {
    $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
+//   $('#structure').append(path_by_module_content);
    $('#header_top_container').replaceWith('<div id="header_top_container"> <ul id="form_top_image" class="draggable">' + allButton + '</ul></div>');
    $('#display_comment_form').append(commentForm);
    if ($(result).find('div#document_history').html()) {
@@ -927,7 +931,7 @@ function deleteReferences(options) {
 }
 
 function deleteData(json_url) {
- $("#delete_button").click(function (e) {
+ $('body').on('click', '#delete_button' , function (e) {
   remove_unsaved_msg();
   $("#delete_button").addClass("show_loading_small");
   $("#delete_button").prop('disabled', true);
@@ -2250,7 +2254,7 @@ function getReportResult(options) {
    query_v: settings.query_v,
    find_result: 1,
    class_name: settings.class_name,
-   view_id: settings.view_id,
+   extn_report_id: settings.extn_report_id,
    pageno: settings.pageno,
    per_page: settings.per_page,
    show_from_query: settings.show_from_query,
@@ -4049,7 +4053,7 @@ $(document).ready(function () {
  $("[readonly]").addClass('readonly');
 
  //Popup for print
- $(".print").click(function () {
+ $('body').on('click' ,  '.print' , function () {
 //  window.print();
 
   var pContent = '<div id="popup_print">';
@@ -4499,7 +4503,7 @@ $(document).ready(function () {
 
 //#path_by_module a, #pagination .page_nos a, .pagination_page .page_nos a
 //#pagination .page_nos a added for price list
- $('body').on('click', '.getAjaxForm,#top-path-menu-ul a, #path_by_module a, .search_result a,#erp_form_area a.ajax-link , #pagination .page_nos a, .pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
+ $('body').on('click', '.getAjaxForm,#top-path-menu-ul a, #path_by_module a, .search_result a, .page_nos.pagination a ,#erp_form_area a.ajax-link , #pagination .page_nos a, .pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
