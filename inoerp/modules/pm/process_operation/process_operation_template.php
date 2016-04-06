@@ -30,8 +30,19 @@ inoERP
       <li><?php $f->l_date_fieldAnyDay('end_date', $$class->end_date) ?></li>
       <li><?php $f->l_text_field_d('operation_class'); ?></li>
       <li><?php $f->l_text_field_d('min_quantity'); ?></li>
-      <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '',  'uom_id medium', 1); ?></li>
+      <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', 'uom_id medium', 1); ?></li>
      </ul>
+    </div>
+    <div id="tabsHeader-2" class="tabContent">
+     <ul class="column header_field">
+      <li><?php $f->l_ac_field_d('material_ac_id', '', 'A'); ?></li>  
+      <li><?php $f->l_ac_field_d('overhead_ac_id', '', 'A'); ?></li> 
+      <li><?php $f->l_ac_field_d('material_oh_ac_id', '', 'A'); ?></li> 
+      <li><?php $f->l_ac_field_d('resource_ac_id', '', 'A'); ?></li>  
+      <li><?php $f->l_ac_field_d('osp_ac_id', '', 'A'); ?></li>  
+      <li><?php $f->l_ac_field_d('expense_ac_id', '', 'X'); ?></li>  
+     </ul>
+
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div> 
@@ -52,7 +63,7 @@ inoERP
     </div>
     <div id="tabsHeader-4" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
-     
+
     </div>
    </div>
   </div>
@@ -79,10 +90,12 @@ inoERP
         <th><?php echo gettext('Offset Interval') ?></th>
         <th><?php echo gettext('Breakable') ?>?</th>
         <th><?php echo gettext('Material Scheduled') ?>?</th>
+        <th><?php echo gettext('Operation Details') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
-       <?php $f = new inoform();
+       <?php
+       $f = new inoform();
        $count = 0;
        foreach ($pm_process_operation_line_object as $pm_process_operation_line) {
         ?>         
@@ -92,15 +105,99 @@ inoERP
           echo ino_inline_action($pm_process_operation_line->pm_process_operation_line_id, array('pm_process_operation_header_id' => $$class->pm_process_operation_header_id));
           ?>
          </td>
-        
+
          <td><?php form::text_field_wid2sr('pm_process_operation_line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('activity_code', option_header::find_options_byName('PM_OPERATION_ACTIVITY' ), 'option_line_code' , 'option_line_value', $$class_second->activity_code ,'','medium'); ?></td>
+         <td><?php echo $f->select_field_from_object('activity_code', option_header::find_options_byName('PM_OPERATION_ACTIVITY'), 'option_line_code', 'option_line_value', $$class_second->activity_code, '', 'medium'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
          <td><?php $f->text_field_wid2('activity_factror'); ?></td>
          <td><?php $f->checkBox_field_wid2('sequence_dependency_cb'); ?></td>
          <td><?php $f->text_field_wid2('offset_interval'); ?></td>
          <td><?php $f->checkBox_field_wid2('breakable_cb'); ?></td>
          <td><?php $f->checkBox_field_wid2('material_scheduled_cb'); ?></td>
+         <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
+          <?php
+          $pm_process_operation_line_id = $pm_process_operation_line->pm_process_operation_line_id;
+          if (!empty($pm_process_operation_line_id)) {
+           $pm_process_operation_detail_object = pm_process_operation_detail::find_by_routing_lineId($pm_process_operation_line_id);
+          } else {
+           $pm_process_operation_detail_object = array();
+          }
+          if (count($pm_process_operation_detail_object) == 0) {
+           $pm_process_operation_detail = new pm_process_operation_detail();
+           $pm_process_operation_detail_object = array();
+           array_push($pm_process_operation_detail_object, $pm_process_operation_detail);
+          }
+          ?>
+          <div class="class_detail_form">
+           <fieldset class="form_detail_data_fs">
+            <div class="tabsDetail">
+             <ul class="tabMain">
+              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Resource') ?></a></li>
+              <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Future') ?></a></li>
+             </ul>
+             <div class="tabContainer">
+              <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
+               <table class="form form_detail_data_table detail">
+                <thead>
+                 <tr>
+                  <th><?php echo gettext('Action') ?></th>
+                  <th><?php echo gettext('Detail Id') ?></th>
+                  <th><?php echo gettext('Resource Seq') ?></th>
+                  <th><?php echo gettext('Resource') ?></th>
+                  <th><?php echo gettext('Basis') ?></th>
+                  <th><?php echo gettext('Usage') ?></th>
+                  <th><?php echo gettext('Schedule') ?></th>
+                  <th><?php echo gettext('Units') ?></th>
+                  <th><?php echo gettext('24 Hours') ?></th>
+                  <th><?php echo gettext('Stnd. Rate') ?></th>
+                  <th><?php echo gettext('Charge Type') ?></th>
+                 </tr>
+                </thead>
+                <tbody class="form_data_detail_tbody">
+                 <?php
+                 $detailCount = 0;
+                 foreach ($pm_process_operation_detail_object as $pm_process_operation_detail) {
+                  $class_third = 'pm_process_operation_detail';
+                  $$class_third = &$pm_process_operation_detail;
+                  ?>
+                  <tr class="pm_process_operation_detail<?php echo $count . '-' . $detailCount; ?>">
+                   <td>   
+                    <ul class="inline_action">
+                     <li class="add_row_detail_img"><i class="fa fa-plus-circle"></i></li>
+                     <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
+                     <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($pm_process_operation_detail->pm_process_operation_detail_id); ?>"></li>           
+                     <li><?php echo form::hidden_field('pm_process_operation_line_id', $pm_process_operation_line->pm_process_operation_line_id); ?></li>
+                     <li><?php echo form::hidden_field('pm_process_operation_header_id', $pm_process_operation_header->pm_process_operation_header_id); ?></li>
+                    </ul>
+                   </td>
+                   <td><?php form::text_field_wid3sr('pm_process_operation_detail_id'); ?></td>
+                   <td><?php $f->text_field_d3s('resource_sequence', 'detail_number'); ?></td>
+                   <td><?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', $readonly, 'resource_id', '', 1); ?></td>
+                   <td><?php echo form::select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->charge_basis, '', $readonly, 'default_basis', '', 1); ?></td>
+                   <td><?php form::number_field_wid3sm('resource_usage') ?></td>
+                   <td><?php echo form::select_field_from_object('resource_schedule', bom_header::bom_schedule_option(), 'option_line_code', 'option_line_value', $$class_third->resource_schedule, '', $readonly, '', '', 1); ?></td>
+                   <td><?php form::number_field_wid3s('assigned_units') ?></td>
+                   <td><?php echo form::checkBox_field('twenty_four_hr_cb', $$class_third->twenty_four_hr_cb); ?></td>
+                   <td><?php echo form::checkBox_field('standard_rate_cb', $$class_third->standard_rate_cb); ?></td>
+                   <td><?php echo form::select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_value', $$class_third->charge_type, '', $readonly, '', '', 1); ?></td>
+                  </tr>
+                  <?php
+                  $detailCount++;
+                 }
+                 ?>
+                </tbody>
+               </table>
+              </div>
+              <div id="tabsDetail-2-<?php echo $count ?>" class="tabContent">
+
+              </div>
+             </div>
+            </div>
+           </fieldset>
+
+          </div>
+
+         </td>
         </tr>
         <?php
         $count = $count + 1;
@@ -119,6 +216,7 @@ inoERP
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="pm_process_operation_header" ></li>
   <li class="lineClassName" data-lineClassName="pm_process_operation_line" ></li>
+    <li class="detailClassName" data-detailClassName="pm_process_operation_detail" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="pm_process_operation_header_id" ></li>
   <li class="form_header_id" data-form_header_id="pm_process_operation_header" ></li>
@@ -129,6 +227,7 @@ inoERP
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="pm_process_operation_header_id" ></li>
   <li class="docLineId" data-docLineId="pm_process_operation_line_id" ></li>
+  <li class="docDetailId" data-docDetailId="pm_process_operation_detail_id" ></li>
   <li class="btn1DivId" data-btn1DivId="pm_process_operation_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>

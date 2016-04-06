@@ -17,7 +17,7 @@
 class pm_process_operation_header extends dbObject {
 
  public static $table_name = "pm_process_operation_header";
- public static $dependent_classes = ['pm_process_operation_line'];
+ public static $dependent_classes = ['pm_process_operation_line' , 'pm_process_operation_detail'];
  public static $primary_column = "pm_process_operation_header_id";
  public static $key_column = 'operation_name';
  public static $module = "pm";
