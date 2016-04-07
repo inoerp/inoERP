@@ -11,6 +11,7 @@ class pm_process_operation_detail extends dbObject {
   'pm_process_operation_detail_id',
   'pm_process_operation_header_id',
   'pm_process_operation_line_id',
+  'resource_sequence',
   'description',
   'bom_resource_id',
   'process_quantity',
@@ -36,13 +37,13 @@ class pm_process_operation_detail extends dbObject {
   'pm_process_operation_line_id',
   'pm_process_operation_header_id',
   'resource_sequence',
-  'charge_basis',
-  'resource_id',
-  'resource_usage'
+  'bom_resource_id',
+  'resource_usage',
  ];
  public $pm_process_operation_detail_id;
  public $pm_process_operation_header_id;
  public $pm_process_operation_line_id;
+ public $resource_sequence;
  public $description;
  public $bom_resource_id;
  public $process_quantity;
