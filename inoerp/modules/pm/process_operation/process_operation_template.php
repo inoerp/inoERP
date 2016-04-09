@@ -141,11 +141,10 @@ inoERP
                   <th><?php echo gettext('Detail Id') ?></th>
                   <th><?php echo gettext('Resource Seq') ?></th>
                   <th><?php echo gettext('Resource') ?></th>
-                  <th><?php echo gettext('Usage') ?></th>
+                  <th><?php echo gettext('Process UOM') ?></th>
+                  <th><?php echo gettext('Quantity') ?></th>
                   <th><?php echo gettext('UOM') ?></th>
-                  <th><?php echo gettext('Component Class') ?></th>
-                  <th><?php echo gettext('Cost Code') ?></th>
-                  <th><?php echo gettext('Plan Type') ?></th>
+                  <th><?php echo gettext('Usage') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -168,11 +167,10 @@ inoERP
                    <td><?php form::text_field_wid3sr('pm_process_operation_detail_id'); ?></td>
                    <td><?php $f->text_field_d3s('resource_sequence', 'detail_number'); ?></td>
                    <td><?php echo form::select_field_from_object('bom_resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->bom_resource_id, '', $readonly, 'resource_id', '', 1); ?></td>
-                   <td><?php form::number_field_wid3sm('resource_usage') ?></td>
-                   <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->uom_id, '', 'small'); ?></td>
-                   <td><?php form::text_field_wid3('component_class') ?></td>
-                   <td><?php form::text_field_wid3('cost_analysis_code') ?></td>
-                   <td><?php form::text_field_wid3('plan_type') ?></td>
+                   <td><?php echo $f->select_field_from_object('process_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->process_uom_id); ?></td>
+                   <td><?php form::number_field_wid3sm('process_quantity','large') ?></td>
+                   <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->uom_id); ?></td>
+                   <td><?php form::number_field_wid3sm('resource_usage','large') ?></td>
                   </tr>
                   <?php
                   $detailCount++;
@@ -189,6 +187,9 @@ inoERP
                   <th><?php echo gettext('Resource Count') ?></th>
                   <th><?php echo gettext('Offset Interval') ?></th>
                   <th><?php echo gettext('Scale Type') ?></th>
+                  <th><?php echo gettext('Component Class') ?></th>
+                  <th><?php echo gettext('Cost Code') ?></th>
+                  <th><?php echo gettext('Plan Type') ?></th>
                  </tr>
                 </thead>
                 <tbody class="form_data_detail_tbody">
@@ -203,6 +204,9 @@ inoERP
                    <td><?php form::text_field_wid3('resource_count') ?></td>
                    <td><?php form::text_field_wid3('offset_interval') ?></td>
                    <td><?php form::text_field_wid3('scale_type') ?></td>
+                   <td><?php form::text_field_wid3('component_class') ?></td>
+                   <td><?php form::text_field_wid3('cost_analysis_code') ?></td>
+                   <td><?php form::text_field_wid3('plan_type') ?></td>
                   </tr>
                   <?php
                   $detailCount++;
