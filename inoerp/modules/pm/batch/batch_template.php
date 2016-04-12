@@ -41,6 +41,7 @@ inoERP
       <li><?php $f->l_text_field_d('routing_name') ?></li>
       <li><?php $f->l_text_field_d('formula_name') ?></li>
       <li><?php $f->l_text_field_d('description') ?></li>
+      <li><label></label><a target="_new" href="form.php?class_name=pm_batch_operation_header&pm_batch_header_id=<?php echo $$class->pm_batch_header_id ; ?>" class="button btn btn-success"><?php echo gettext('Operation Details') ?></a></li>
      </ul> 
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -103,7 +104,7 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Line') ?> #</th>
-        <th><?php echo gettext('Item') ?>#</th>
+        <th><?php echo gettext('Item') ?> #</th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>

@@ -18,7 +18,7 @@ if ($childs_of_parent_id_array && (count($childs_of_parent_id_array) > 0)) {
  $childs_of_parent_id .="</ul>";
 }
 
-if (!empty($content->parent_id)) {
+if (!empty($content->parent_id) && !empty ($parent_content->subject)) {
  $parent_content = content::find_by_id($content->parent_id);
  $parent_of_content = '<a href="'.HOME_URL.'content.php?content_type=' . $content_type_name . '&amp;content_id=' . $parent_content->content_id . '"   
                class="content_subject"> ' . $parent_content->subject . ' </a>';

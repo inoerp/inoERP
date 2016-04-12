@@ -70,7 +70,7 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Operation Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Batch Operation Details') ?></span>
  <form method="post" id="pm_batch_operation_line"  name="pm_batch_operation_line">
   <div id="tabsLine">
    <ul class="tabMain">

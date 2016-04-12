@@ -104,7 +104,7 @@ inoERP
          <th><?php echo gettext('Back flush') ?></th>
          <th><?php echo gettext('MTQ') ?></th>
          <th><?php echo gettext('Lead Time') ?>%</th>
-         <th><?php echo gettext('Operation Details') ?>#</th>
+         <th><?php echo gettext('Operation Details') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -213,7 +213,8 @@ inoERP
 
            </div>
 
-          </td></tr>
+          </td>
+         </tr>
          <?php
          $count = $count + 1;
         }

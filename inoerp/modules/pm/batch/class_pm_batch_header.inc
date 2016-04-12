@@ -163,18 +163,66 @@ class pm_batch_header extends dbObject {
   $this->_copy_batch_products();
   $this->_copy_batch_ingredients();
   $this->_copy_batch_byproducts();
+  $this->_copy_batch_routings();
  }
 
  private function _copy_batch_products() {
+  global $dbc, $ie;
   $all_product_lines = pm_formula_line::find_by_parent_id($this->_pm_formula_header_id);
-  
+  //check if batch products exists
+  $bacth_lines = pm_batch_line::find_by_parent_id($this->pm_batch_header_id);
+  if (!empty($bacth_lines)) {
+   return -1;
+  }
+  $pbl = new pm_batch_line();
+  foreach ($all_product_lines as $product_line) {
+   $pbl->pm_batch_line_id = null;
+   foreach ($pbl->field_a as $pbl_k => $pbl_v) {
+    if (property_exists($product_line, $pbl_v)) {
+     $pbl->$pbl_v = $product_line->$pbl_v;
+    }
+   }
+   $pbl->pm_batch_header_id = $this->pm_batch_header_id;
+   try {
+    $pbl->save();
+   } catch (Exception $e) {
+    array_push($ie->user_exp, 'Unable to copy batch product. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    $dbc->rollback = 1;
+   }
+  }
  }
-
- private function _copy_batch_byproducts() {
-  
+ 
+  private function _copy_batch_byproducts() {
+  global $dbc, $ie;
+  $all_product_lines = pm_formula_line::find_by_parent_id($this->_pm_formula_header_id);
+  //check if batch products exists
+  $bacth_lines = pm_batch_line::find_by_parent_id($this->pm_batch_header_id);
+  if (!empty($bacth_lines)) {
+   return -1;
+  }
+  $pbl = new pm_batch_line();
+  foreach ($all_product_lines as $product_line) {
+   $pbl->pm_batch_line_id = null;
+   foreach ($pbl->field_a as $pbl_k => $pbl_v) {
+    if (property_exists($product_line, $pbl_v)) {
+     $pbl->$pbl_v = $product_line->$pbl_v;
+    }
+   }
+   $pbl->pm_batch_header_id = $this->pm_batch_header_id;
+   try {
+    $pbl->save();
+   } catch (Exception $e) {
+    array_push($ie->user_exp, 'Unable to copy batch product. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    $dbc->rollback = 1;
+   }
+  }
  }
 
  private function _copy_batch_ingredients() {
+  
+ }
+
+ private function _copy_batch_routings() {
   
  }
 
