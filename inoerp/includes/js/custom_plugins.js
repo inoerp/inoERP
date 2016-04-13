@@ -204,7 +204,7 @@
    set_value_for_one_field: false
   };
   var settings = $.extend({}, defaults, options);
-  var form_id_h = '#' + settings.form_id;
+
 //  settings.select_class = $(this).attr('class').replace(/\s+/g, '.');
 
   var methods = {
@@ -212,7 +212,7 @@
     if (settings.select_class === 'undefined') {
      settings.select_class = 'select' + settings.field_name;
     }
-
+  var form_id_h = '#' + $(this).closest('form').attr('id');
     if (!$(this).data("autocomplete")) {
      var auto_element = $(this);
      var auto_element_class = $(this).prop('class');
@@ -370,6 +370,7 @@
           }
          } else if (elemenType === 'TD') {
           var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
+//          console.log(form_id_h + ' ' + trClass + ' ' + v_d + ' ' +  value_v);
           if (value_k.substr(-3) === '_cb' && (value_v == 1)) {
            $(form_id_h).find(trClass).find(v_d).prop('checked', true);
           } else {

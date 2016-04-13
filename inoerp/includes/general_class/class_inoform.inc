@@ -783,6 +783,16 @@ EOD;
   global $class_third, $$class_third;
   echo $this->val_field($field_name, $$class_third->$field_name, '20', 1, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
+ 
+  public function val_field_wid4($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_fourth, $$class_fourth;
+  echo $this->val_field($field_name, $$class_fourth->$field_name, '20', '', $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function val_field_wid4m($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_fourth, $$class_fourth;
+  echo $this->val_field($field_name, $$class_fourth->$field_name, '20', 1, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
 
  public function l_text_field_d($field_name, $div_class = "") {
   global $readonly, $class, $$class;
@@ -1807,7 +1817,14 @@ EOD;
     $element_select_field .= '<option value="' . $record->$objectValueKey . '" ';
     $element_select_field .= $selected;
     if (!empty($dataname)) {
-     $element_select_field .= " data-$dataname='" . $record->$dataname . "' ";
+     if(is_array($dataname)){
+      foreach($dataname as $dataname_k => $dataname_v ){
+       $element_select_field .= " data-$dataname_v='" . $record->$dataname_v . "' ";
+      }
+     }else{
+      $element_select_field .= " data-$dataname='" . $record->$dataname . "' ";
+     }
+     
     }
     $element_select_field .= '>';
     if (is_array($objectDescriptionKey)) {

@@ -191,35 +191,57 @@ class pm_batch_header extends dbObject {
    }
   }
  }
- 
-  private function _copy_batch_byproducts() {
+
+ private function _copy_batch_byproducts() {
   global $dbc, $ie;
-  $all_product_lines = pm_formula_line::find_by_parent_id($this->_pm_formula_header_id);
+  $all_byproduct_lines = pm_formula_byproduct::find_by_parent_id($this->_pm_formula_header_id);
   //check if batch products exists
-  $bacth_lines = pm_batch_line::find_by_parent_id($this->pm_batch_header_id);
-  if (!empty($bacth_lines)) {
+  $byproduct_lines = pm_batch_byproduct::find_by_parent_id($this->pm_batch_header_id);
+  if (!empty($byproduct_lines)) {
    return -1;
   }
-  $pbl = new pm_batch_line();
-  foreach ($all_product_lines as $product_line) {
-   $pbl->pm_batch_line_id = null;
-   foreach ($pbl->field_a as $pbl_k => $pbl_v) {
-    if (property_exists($product_line, $pbl_v)) {
-     $pbl->$pbl_v = $product_line->$pbl_v;
+  $pbb = new pm_batch_byproduct();
+  foreach ($all_byproduct_lines as $byproduct_line) {
+   $pbb->pm_batch_byproduct_id = null;
+   foreach ($pbb->field_a as $pbb_k => $pbb_v) {
+    if (property_exists($byproduct_line, $pbb_v)) {
+     $pbb->$pbb_v = $byproduct_line->$pbb_v;
     }
    }
-   $pbl->pm_batch_header_id = $this->pm_batch_header_id;
+   $pbb->pm_batch_header_id = $this->pm_batch_header_id;
    try {
-    $pbl->save();
+    $pbb->save();
    } catch (Exception $e) {
-    array_push($ie->user_exp, 'Unable to copy batch product. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    array_push($ie->user_exp, 'Unable to copy batch by product. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
     $dbc->rollback = 1;
    }
   }
  }
 
  private function _copy_batch_ingredients() {
-  
+  global $dbc, $ie;
+  $all_ingredient_lines = pm_formula_ingredient::find_by_parent_id($this->_pm_formula_header_id);
+  //check if batch products exists
+  $ingredient_lines = pm_batch_ingredient::find_by_parent_id($this->pm_batch_header_id);
+  if (!empty($ingredient_lines)) {
+   return -1;
+  }
+  $pbi = new pm_batch_ingredient();
+  foreach ($all_ingredient_lines as $ingredient_line) {
+   $pbi->pm_batch_byproduct_id = null;
+   foreach ($pbi->field_a as $pbi_k => $pbi_v) {
+    if (property_exists($ingredient_line, $pbi_v)) {
+     $pbi->$pbb_v = $ingredient_line->$pbb_v;
+    }
+   }
+   $pbi->pm_batch_header_id = $this->pm_batch_header_id;
+   try {
+    $pbi->save();
+   } catch (Exception $e) {
+    array_push($ie->user_exp, 'Unable to copy batch by ingredient. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    $dbc->rollback = 1;
+   }
+  }
  }
 
  private function _copy_batch_routings() {

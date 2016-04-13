@@ -15,8 +15,8 @@ class pm_batch_byproduct extends dbObject {
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'pm_formula_byproduct_id',
-  'pm_formula_header_id',
+  'pm_batch_byproduct_id',
+  'pm_batch_header_id',
   'line_no',
   'line_type',
   'item_id_m',
@@ -42,8 +42,8 @@ class pm_batch_byproduct extends dbObject {
   'pm_batch_header_id',
   'item_id_m',
  ];
- public $pm_formula_byproduct_id;
- public $pm_formula_header_id;
+ public $pm_batch_byproduct_id;
+ public $pm_batch_header_id;
  public $line_no;
  public $line_type;
  public $item_id_m;

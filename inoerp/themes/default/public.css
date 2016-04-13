@@ -1296,11 +1296,23 @@ select.search_document_list option:nth-child(even) {
 }
 
 #dashborad_menu li:nth-child(4n){
- background-color: rgba(42, 147, 177, 0.89);
+ background-color: rgba(42, 147, 177, 0.89) !important;;
 }
 
 #dashborad_menu li:nth-child(5n) {
- background-color: rgba(41, 67, 136, 0.77);
+ background-color: rgba(41, 67, 136, 0.77) !important;;
+}
+
+#dashborad_menu li:nth-child(6n) {
+        background-color: rgba(153, 79, 38, 0.93) !important;
+}
+
+#dashborad_menu li:nth-child(11n) {
+        background-color: rgba(12, 119, 210, 0.9) !important;
+}
+
+#dashborad_menu li:nth-child(17n) {
+        background-color: rgba(12, 119, 210, 0.9) !important;
 }
 
 #dashborad_menu li:hover{
@@ -1463,9 +1475,6 @@ ul.inline-block {
  margin-top:-20px;
 }
 
-#form_line input[type="radio"],#form_line  input[type="checkbox"] {
- margin-left: 5px !important;
-}
 
 a.popup {
  font-size: 1.2em;
@@ -2427,4 +2436,8 @@ margin-top: 10px !important;
 #structure #pagination{
  margin: 10px 0 0 10px;
  float: left;
+}
+
+td .checkBox ,#form_line  input[type="radio"]{
+       margin-left: 35% !important;
 }

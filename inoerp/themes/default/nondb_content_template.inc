@@ -15,7 +15,7 @@
         <!--    End of place for showing error messages-->
         <div id="form_all">
          <div id ="form_header">
-          <div class='heading'> <?php echo $content_type->description; ?></div>
+          <div class='heading'> <?php echo !empty($content_type->description) ? $content_type->description : '' ; ?></div>
           <?php
           $view_page = false;
           if (method_exists($content_type, 'entry_form')) {

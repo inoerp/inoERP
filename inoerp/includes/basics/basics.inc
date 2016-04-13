@@ -51,7 +51,7 @@ require_once(INC_EXTENSIONS . DS . "path" . DS . "class_path.inc");
 require_once(INC_CLASS . DS . "class.pagination.inc");
 require_once(INC_CLASS . DS . "class_inomail.inc");
 require_once(INC_CLASS . DS . "class.search.inc");
-require_once(INC_CLASS . DS . "class.ino_exception.inc");
+require_once(INC_CLASS . DS . "class_ino_exception.inc");
 require_once(INC_CLASS . DS . "class_inosave.inc");
 require_once(INC_CLASS . DS . "class_downloads.inc");
 require_once(INC_CLASS . DS . "class_getsvgimage.inc");
@@ -271,7 +271,7 @@ require_once(INC_MODULE . DS . "fp" . DS . "mrp_existing" . DS . "class_fp_mrp_e
 //require_once(INC_MODULE . DS . "pos" . DS . "pos_inv_control" . DS . "class_pos_inv_control.inc");
 //require_once(INC_MODULE . DS . "pos" . DS . "tt" . DS . "class_pos_tt_header.inc");
 //require_once(INC_MODULE . DS . "pos" . DS . "tt" . DS . "class_pos_tt_line.inc");
-//require_once(INC_MODULE . DS . "pos" . DS . "tt_with_search" . DS . "class_pos_tt_with_search_header.inc");
+require_once(INC_MODULE . DS . "pos" . DS . "tt_with_search" . DS . "class_pos_tt_with_search_header.inc");
 //require_once(INC_MODULE . DS . "pos" . DS . "barcode_list" . DS . "class_pos_barcode_list_header.inc");
 //require_once(INC_MODULE . DS . "pos" . DS . "barcode_list" . DS . "class_pos_barcode_list_line.inc");
 //require_once(INC_MODULE . DS . "wip" . DS . "wip_wo" . DS . "class_wip_wo_header.inc");

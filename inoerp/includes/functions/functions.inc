@@ -67,7 +67,7 @@ function autoLoadAll($className) {
   default :
    break;
  }
-//echo $filename;
+//echo '<br>'. $filename;
  if (!empty($filename) && is_readable($filename)) {
   require $filename;
  }

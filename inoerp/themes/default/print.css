@@ -19,6 +19,15 @@ button, .inline_action, .dropdown, .ino_serch_setting
 
 }
 
+#print_content{
+        border: 2px solid #ccc;
+        display: block;
+        float: left;
+        padding: 20px;
+        margin: 10px;
+}
+
+
 #popup_print td, #popup_print th{
  border-width: 0.5px;
 border-style: solid;
