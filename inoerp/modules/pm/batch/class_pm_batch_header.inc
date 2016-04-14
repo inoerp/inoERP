@@ -231,7 +231,7 @@ class pm_batch_header extends dbObject {
    $pbi->pm_batch_byproduct_id = null;
    foreach ($pbi->field_a as $pbi_k => $pbi_v) {
     if (property_exists($ingredient_line, $pbi_v)) {
-     $pbi->$pbb_v = $ingredient_line->$pbb_v;
+     $pbi->$pbi_v = $ingredient_line->$pbi_v;
     }
    }
    $pbi->pm_batch_header_id = $this->pm_batch_header_id;
@@ -245,6 +245,9 @@ class pm_batch_header extends dbObject {
  }
 
  private function _copy_batch_routings() {
+/*
+ * 
+ */
   
  }
 
