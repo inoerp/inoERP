@@ -4,7 +4,7 @@ class pm_batch_operation_line extends dbObject {
 
  public static $table_name = "pm_batch_operation_line";
  public static $primary_column = "pm_batch_operation_line_id";
- public static $parent_primary_column = "pm_batch_operation_header_id";
+ public static $parent_primary_column = "pm_batch_header_id";
  public static $key_column = 'activity_code';
  public static $module = "pm";
  public static $release_type_a = [
@@ -14,6 +14,7 @@ class pm_batch_operation_line extends dbObject {
  public $field_a = [
   'pm_batch_operation_line_id',
   'pm_batch_operation_header_id',
+  'pm_process_routing_header_id',
   'activity_code',
   'description',
   'activity_factror',
@@ -35,6 +36,7 @@ class pm_batch_operation_line extends dbObject {
  ];
  public $pm_batch_operation_line_id;
  public $pm_batch_operation_header_id;
+ public $pm_process_routing_header_id;
  public $activity_code;
  public $description;
  public $activity_factror;
