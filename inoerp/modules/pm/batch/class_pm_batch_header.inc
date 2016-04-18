@@ -274,7 +274,7 @@ class pm_batch_header extends dbObject {
     $pbol->pm_process_routing_header_id = $routing_line->pm_process_operation_header_id;
     try {
      $pbol->save();
-     $this->_copy_batch_operation_details();
+     $this->_copy_batch_operation_details($pbol);
     } catch (Exception $e) {
      array_push($ie->user_exp, 'Unable to copy batch routing line. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
      $dbc->rollback = 1;
@@ -286,27 +286,22 @@ class pm_batch_header extends dbObject {
  private function _copy_batch_operation_details($pbol) {
   global $dbc, $ie;
 
-  $pbol = new pm_batch_operation_line();
+//  $pbol = new pm_batch_operation_line();
 
-  $all_detail_lines = pm_process_routing ::find_by_parent_id($this->_pm_process_routing_header_id);
-  //check if batch products exists
-  $batch_routing_lines_check = pm_batch_operation_line::find_by_parent_id($this->pm_batch_header_id);
-  if (!empty($batch_routing_lines_check)) {
-   return -1;
-  }
-  $pbol = new pm_batch_operation_line();
-  foreach ($all_routing_lines as $routing_line) {
-   $pbol->pm_batch_operation_line_id = null;
-   foreach ($pbol->field_a as $pbol_k => $pbol_v) {
-    if (property_exists($routing_line, $pbol_v)) {
-     $pbol->$pbol_v = $routing_line->$pbol_v;
+  $all_detail_lines = pm_process_operation_detail::find_by_fieldVal(['pm_process_operation_header_id',$pbol->pm_process_operation_header_id]);
+  $pbod = new pm_batch_operation_detail();
+  foreach ($all_detail_lines as $routing_detail) {
+   $pbod->pm_batch_operation_line_id = null;
+   foreach ($pbod->field_a as $pbod_k => $pbod_v) {
+    if (property_exists($routing_detail, $pbod_v)) {
+     $pbod->$pbod_v = $routing_detail->$pbod_v;
     }
    }
-   $pbol->pm_batch_header_id = $this->pm_batch_header_id;
+   $pbod->pm_batch_operation_line_id = $pbol->pm_batch_operation_line_id;
    try {
-    $pbol->save();
+    $pbod->save();
    } catch (Exception $e) {
-    array_push($ie->user_exp, 'Unable to copy batch routing line. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    array_push($ie->user_exp, 'Unable to copy batch detail line. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
     $dbc->rollback = 1;
    }
   }
