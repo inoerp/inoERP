@@ -144,7 +144,7 @@ class pm_batch_header extends dbObject {
  }
 
  public function _after_save() {
-
+  global $dbc, $ie;
   if ((!empty($this->pm_batch_header_id)) && empty($this->batch_name)) {
    $this->batch_name = $this->org_id . '-' . $this->pm_batch_header_id;
    echo ' System generated Batch number is ' . $this->batch_name;
@@ -153,7 +153,15 @@ class pm_batch_header extends dbObject {
 
   //copy line details
   if ((!empty($this->pm_recipe_header_id)) && (empty($this->batch_exploded_cb))) {
-   $this->_copy_batch_lines();
+   try {
+    $this->_copy_batch_lines();
+    $this->batch_exploded_cb = 1;
+    echo ' System generated Batch number is ' . $this->batch_name;
+    $this->save();
+   } catch (Exception $e) {
+    array_push($ie->user_exp, 'Unable to copy batch product details. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    $dbc->rollback = 1;
+   }
   }
  }
 
@@ -288,7 +296,7 @@ class pm_batch_header extends dbObject {
 
 //  $pbol = new pm_batch_operation_line();
 
-  $all_detail_lines = pm_process_operation_detail::find_by_fieldVal(['pm_process_operation_header_id',$pbol->pm_process_operation_header_id]);
+  $all_detail_lines = pm_process_operation_detail::find_by_fieldVal(['pm_process_operation_header_id', $pbol->pm_process_operation_header_id]);
   $pbod = new pm_batch_operation_detail();
   foreach ($all_detail_lines as $routing_detail) {
    $pbod->pm_batch_operation_line_id = null;
@@ -307,27 +315,6 @@ class pm_batch_header extends dbObject {
   }
  }
 
- public static function find_financial_details_from_projectHeaderId($pm_batch_header_id) {
-  $sql = " 
-         SELECT org.org_id, org.legal_org_id, legal.ledger_id,
-            gl.ledger, gl.description as ledger_description, gl.coa_id, gl.calendar_option_line_code, gl.currency_code, legal.balancing_segments,
-            org.org, org.code,org.type, org.description as org_description, pph.pm_batch_header_id, pph.project_number
-            FROM org,
-            legal,
-            gl_ledger gl,
-            pm_batch_header pph
-            WHERE org.legal_org_id = legal.org_id 
-            AND gl.gl_ledger_id = legal.ledger_id
-            AND org.org_id = pph.bu_org_id
-            AND pph.pm_batch_header_id = '{$pm_batch_header_id}'
-           LIMIT 1
- "
-  ;
-
-  $result = self::find_by_sql($sql);
-
-  return !empty($result) ? array_pop($result) : false;
- }
 
 }
 
