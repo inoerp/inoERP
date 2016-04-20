@@ -2441,3 +2441,8 @@ margin-top: 10px !important;
 td .checkBox ,#form_line  input[type="radio"]{
        margin-left: 35% !important;
 }
+
+.comment.panel-body.new-comment{
+        
+                white-space: pre-line;
+}

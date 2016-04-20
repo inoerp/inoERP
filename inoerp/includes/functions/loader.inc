@@ -204,7 +204,7 @@ if ((!empty($class_names)) && (!(is_array($class_names)))) {
 
 
 //add comment class for all if not POST
-if (empty($_POST)) {
+if (empty($_POST) && !in_array('comment', $class_names)) {
  array_push($class_names, 'comment');
 }
 

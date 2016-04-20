@@ -250,7 +250,7 @@ function updateComment(comment_id, ulId) {
    comment_id: comment_id},
   type: 'get'
  }).done(function (result) {
-  var div = $(result).filter('div#commentForm').html();
+  var div = '<div class="temp-update-form">' + $(result).filter('div#commentForm').html() + '</div>';
   var ulId_h = '#' + ulId;
   $('#content').find(ulId_h).find('.update-comment').empty().append(div);
   $('#loading').hide();
@@ -931,7 +931,7 @@ function deleteReferences(options) {
 }
 
 function deleteData(json_url) {
- $('body').on('click', '#delete_button' , function (e) {
+ $('body').on('click', '#delete_button', function (e) {
   remove_unsaved_msg();
   $("#delete_button").addClass("show_loading_small");
   $("#delete_button").prop('disabled', true);
@@ -4053,7 +4053,7 @@ $(document).ready(function () {
  $("[readonly]").addClass('readonly');
 
  //Popup for print
- $('body').on('click' ,  '.print' , function () {
+ $('body').on('click', '.print', function () {
 //  window.print();
 
   var pContent = '<div id="popup_print">';
@@ -4598,24 +4598,25 @@ $(document).ready(function () {
  });
 
  $('body').on('click', '.submit_comment', function () {
+  var this_e = $(this);
   $('.show_loading_small').show();
   $(this).prop('disabled', true);
-//  $(this).closest('form').find('textarea').each(function () {
-//   var divId = $(this).prop('id');
-//   var data = tinyMCE.get(divId).getContent();
-//   $(this).html(data);
-//  });
   var headerData = $(this).closest('form').serializeArray();
   var homeUrl = $('#home_url').val();
   var savePath = homeUrl + 'form.php?class_name=comment';
   $.when(saveHeader(savePath, headerData, '#comment_id', '', '', true, 'comment')).then(function () {
-   var message = '<div class="alert alert-success alert-dismissible" role="alert">';
-   message += 'Comment is Successfully Posted. &nbsp; <input type="button" class="btn-sucess" value="Reload page" onclick="location.reload();">';
-   message += '</div>';
-   $(".comment_error").replaceWith(message);
+   var msg = '<div class="panel panel-info commentRecord"><div class="panel-heading"><ul class="header_li">';
+   msg += '</ul></div>';
+   msg += '<div class="comment panel-body new-comment update-comment">';
+   msg += this_e.closest('form').find('textarea').val();
+   msg += '<span class="comment-reply"><a class="btn btn-success" role="button" href="#commentForm">Reply</a></span></div>';
+   msg += '</div>';
+   $(msg).insertBefore('#comment_list .pagination');
    $('.show_loading_small').hide();
+   this_e.prop('disabled', false);
+   this_e.closest('form').find('textarea').val(''); 
+   $('.temp-update-form').closest('.commentRecord').remove();
   });
-
  });
 
  $('body').on('click', '#save_program', function () {

@@ -8,7 +8,7 @@
       <div id="structure">
        <div id="view_content" class="<?php echo $content_type_name; ?>">
         <!--    START OF FORM HEADER-->
-        <div class="error"></div><div id="loading"></div>
+
         <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 
         <?php form::hidden_field('content_id', $content->content_id) ?>
