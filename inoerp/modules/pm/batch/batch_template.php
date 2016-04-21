@@ -27,7 +27,7 @@ inoERP
       </li>
       <li><?php $f->l_text_field_d('batch_name'); ?></li>
       <li><?php
-       echo $f->l_val_field_dm('recipe_name', 'pm_recipe_all_v', 'recipe_name', '',  'vf_select_recipe_name');
+       echo $f->l_val_field_dm('recipe_name', 'pm_recipe_all_v', 'recipe_name', '', 'vf_select_recipe_name');
        echo $f->hidden_field_withId('pm_recipe_header_id', $$class->pm_recipe_header_id);
        ?><i class="generic g_select_recipe_name select_popup clickable fa fa-search" data-class_name="pm_recipe_all_v"></i></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
@@ -41,7 +41,7 @@ inoERP
       <li><?php $f->l_text_field_d('routing_name') ?></li>
       <li><?php $f->l_text_field_d('formula_name') ?></li>
       <li><?php $f->l_text_field_d('description') ?></li>
-      <li><label></label><a target="_new" href="form.php?class_name=pm_batch_operation_header&pm_batch_header_id=<?php echo $$class->pm_batch_header_id ; ?>" class="button btn btn-success"><?php echo gettext('Operation Details') ?></a></li>
+      <li><label></label><a target="_new" href="form.php?class_name=pm_batch_operation_header&pm_batch_header_id=<?php echo $$class->pm_batch_header_id; ?>" class="button btn btn-success"><?php echo gettext('Operation Details') ?></a></li>
      </ul> 
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -107,7 +107,8 @@ inoERP
         <th><?php echo gettext('Item') ?> #</th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Planned Qty') ?></th>
+        <th><?php echo gettext('Allocated Qty') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Cost Allocation') ?></th>
@@ -143,7 +144,8 @@ inoERP
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid2('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('quantity', $$class_second->quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('planned_quantity', $$class->planned_quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('allocated_quantity', $$class->allocated_quantity, '', '', 'allow_change'); ?></td>
          <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_second->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_second->scale_type, '', 'medium') ?></td>
          <td><?php $f->text_field_wid2('cost_allocation'); ?></td>
@@ -242,7 +244,8 @@ inoERP
         <th><?php echo gettext('By Product') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Planned Qty') ?></th>
+        <th><?php echo gettext('Allocated Qty') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Byproduct Type') ?></th>

@@ -21,7 +21,9 @@ class pm_formula_byproduct extends dbObject {
   'line_type',
   'item_id_m',
   'uom_id',
-  'quantity',
+  'allocated_quantity',
+  'planned_quantity',
+  'actual_quantity',
   'description',
   'scale_type',
   'yield_type',
@@ -48,7 +50,9 @@ class pm_formula_byproduct extends dbObject {
  public $line_type;
  public $item_id_m;
  public $uom_id;
- public $quantity;
+ public $actual_quantity;
+ public $allocated_quantity;
+ public $planned_quantity;
  public $description;
  public $yield_contribution_cb;
  public $scale_type;

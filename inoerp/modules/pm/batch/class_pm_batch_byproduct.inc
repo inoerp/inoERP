@@ -21,7 +21,9 @@ class pm_batch_byproduct extends dbObject {
   'line_type',
   'item_id_m',
   'uom_id',
-  'quantity',
+   'allocated_quantity',
+  'planned_quantity',
+  'actual_quantity',
   'description',
   'scale_type',
   'yield_type',
@@ -52,6 +54,9 @@ class pm_batch_byproduct extends dbObject {
  public $description;
  public $scale_type;
  public $yield_type;
+  public $actual_quantity;
+ public $allocated_quantity;
+ public $planned_quantity;
  public $byproduct_type;
  public $created_by;
  public $creation_date;

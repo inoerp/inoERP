@@ -25,7 +25,7 @@ class pm_batch_line extends dbObject {
   'description',
   'scale_type',
   'yield_type',
-  'cost_allocation_cb',
+  'cost_allocation',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -59,7 +59,7 @@ class pm_batch_line extends dbObject {
  public $description;
  public $scale_type;
  public $yield_type;
- public $cost_allocation_cb;
+ public $cost_allocation;
  public $created_by;
  public $creation_date;
  public $last_update_by;

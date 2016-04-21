@@ -225,7 +225,8 @@ echo gettext('Formula')
         <th><?php echo gettext('By Product') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Planned Qty') ?></th>
+        <th><?php echo gettext('Allocated Qty') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Byproduct Type') ?></th>
@@ -262,7 +263,8 @@ echo gettext('Formula')
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid4('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('quantity', $$class_fourth->quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('planned_quantity', $$class_fourth->planned_quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('allocated_quantity', $$class_fourth->allocated_quantity, '', '', 'allow_change'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_fourth->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_fourth->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('byproduct_type', pm_formula_byproduct::$byproduct_type_a, $$class_fourth->byproduct_type, '', 'medium'); ?></td>
