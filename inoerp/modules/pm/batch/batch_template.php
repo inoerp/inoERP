@@ -111,7 +111,7 @@ inoERP
         <th><?php echo gettext('Allocated Qty') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
-        <th><?php echo gettext('Cost Allocation') ?></th>
+
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -148,7 +148,7 @@ inoERP
          <td><?php echo $f->number_field('allocated_quantity', $$class->allocated_quantity, '', '', 'allow_change'); ?></td>
          <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_second->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_second->scale_type, '', 'medium') ?></td>
-         <td><?php $f->text_field_wid2('cost_allocation'); ?></td>
+
         </tr>
         <?php
         $pm_batch_line_object_ai->next();
@@ -175,13 +175,13 @@ inoERP
         <th><?php echo gettext('Ingredient') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Planned Qty') ?></th>
+        <th><?php echo gettext('Allocated Qty') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Contribute Yield') ?></th>
         <th><?php echo gettext('Consumption') ?></th>
-        <th><?php echo gettext('Buffer') ?></th>
         <th><?php echo gettext('Phantom') ?></th>
-        <th><?php echo gettext('Required Qty') ?></th>
+
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
@@ -215,13 +215,12 @@ inoERP
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid3('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('quantity', $$class_third->quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php echo $f->number_field('planned_quantity', $$class_third->planned_quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php echo $f->number_field('allocated_quantity', $$class_third->allocated_quantity, '', '', 'allow_change small'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_third->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->checkBox_field('contribute_yield_cb', $$class_third->contribute_yield_cb); ?></td>
          <td><?php echo $f->select_field_from_array('consumption_type', pm_formula_ingredient::$consumption_type_a, $$class_third->consumption_type, '', 'medium'); ?></td>
-         <td><?php echo $f->checkBox_field('buffer_cb', $$class_third->buffer_cb); ?></td>
          <td><?php $f->text_field_wid3('phantom_type'); ?></td>
-         <td><?php $f->text_field_wid3('required_qty'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -282,7 +281,8 @@ inoERP
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid4('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('quantity', $$class_fourth->quantity, '', '', 'allow_change'); ?></td>
+                  <td><?php echo $f->number_field('planned_quantity', $$class_fourth->planned_quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php echo $f->number_field('allocated_quantity', $$class_fourth->allocated_quantity, '', '', 'allow_change small'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_fourth->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_fourth->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('byproduct_type', pm_formula_byproduct::$byproduct_type_a, $$class_fourth->byproduct_type, '', 'medium'); ?></td>

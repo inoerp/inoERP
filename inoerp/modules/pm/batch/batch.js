@@ -47,6 +47,10 @@ $(document).ready(function () {
   }
  });
 
+ $('body').off('click', '#menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_2, #menu_button4_2_1', function () {
+  $('#batch_name').val('');
+  $('#batch_exploded_cb').prop('checked', false);
+ });
 
 
 });

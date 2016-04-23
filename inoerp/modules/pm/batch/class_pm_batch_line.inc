@@ -25,7 +25,6 @@ class pm_batch_line extends dbObject {
   'description',
   'scale_type',
   'yield_type',
-  'cost_allocation',
   'created_by',
   'creation_date',
   'last_update_by',

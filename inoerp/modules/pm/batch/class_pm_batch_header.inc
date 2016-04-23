@@ -62,9 +62,6 @@ class pm_batch_header extends dbObject {
   'actual_start_date',
   'update_invnetory_cb',
   'batch_exploded_cb',
-    'allocated_quantity',
-  'planned_quantity',
-  'actual_quantity',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -176,8 +173,8 @@ class pm_batch_header extends dbObject {
   $this->_pm_formula_header_id = $recipe_details->pm_formula_header_id;
   $this->_pm_process_routing_header_id = $recipe_details->pm_process_routing_header_id;
 
-//  $this->_copy_batch_products();
-//  $this->_copy_batch_ingredients();
+  $this->_copy_batch_products();
+  $this->_copy_batch_ingredients();
   $this->_copy_batch_byproducts();
 //  $this->_copy_batch_routings();
  }
