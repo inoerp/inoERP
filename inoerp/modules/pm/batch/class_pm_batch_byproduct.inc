@@ -21,7 +21,7 @@ class pm_batch_byproduct extends dbObject {
   'line_type',
   'item_id_m',
   'uom_id',
-   'allocated_quantity',
+  'allocated_quantity',
   'planned_quantity',
   'actual_quantity',
   'description',
@@ -34,9 +34,7 @@ class pm_batch_byproduct extends dbObject {
   'last_update_date',
  ];
 //variables used for showing data
- public $fields_inForm_notInDataBase = [
-  "member_username",
- ];
+
  public $fields_inHeader_needsToBeInserted_inPOST = [
   'pm_batch_header_id'
  ];
@@ -54,7 +52,7 @@ class pm_batch_byproduct extends dbObject {
  public $description;
  public $scale_type;
  public $yield_type;
-  public $actual_quantity;
+ public $actual_quantity;
  public $allocated_quantity;
  public $planned_quantity;
  public $byproduct_type;

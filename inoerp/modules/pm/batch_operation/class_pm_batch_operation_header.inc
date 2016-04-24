@@ -30,17 +30,36 @@ class pm_batch_operation_header extends pm_process_operation_header {
   'module_name' => 'hd',
   'weight' => 1
  ];
-  public $fields_inForm_notInDataBase = [
+ public $fields_inForm_notInDataBase = [
   "pm_batch_header_id",
  ];
-  
  public $pm_batch_header_id;
- 
  public $pageTitle = "Batch Header "; //page Title
-
- public function _before_save() {
-  
- }
+ public $org_id;
+ public $batch_name;
+ public $pm_recipe_header_id;
+ public $wip_accounting_group_id;
+ public $recipe_version;
+ public $comment;
+ public $status;
+ public $description;
+ public $terminate_reason;
+ public $planned_start_date;
+ public $planned_completion_date;
+ public $required_completion_date;
+ public $actual_completion_date;
+ public $actual_start_date;
+ public $update_invnetory_cb;
+ public $batch_exploded_cb;
+ public $actual_quantity;
+ public $allocated_quantity;
+ public $planned_quantity;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
+ public $action;
+ public $recipe_name;
 
 }
 

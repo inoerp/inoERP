@@ -13,7 +13,7 @@ class pm_batch_operation_line extends dbObject {
  ];
  public $field_a = [
   'pm_batch_operation_line_id',
-  'pm_batch_operation_header_id',
+  'pm_batch_header_id',
   'pm_process_routing_header_id',
   'activity_code',
   'description',
@@ -35,7 +35,7 @@ class pm_batch_operation_line extends dbObject {
   "pm_batch_operation_header_id"
  ];
  public $pm_batch_operation_line_id;
- public $pm_batch_operation_header_id;
+ public $pm_batch_header_id;
  public $pm_process_routing_header_id;
  public $activity_code;
  public $description;

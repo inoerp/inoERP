@@ -9,15 +9,15 @@ class pm_batch_operation_detail extends dbObject {
  public static $module = "pm";
  public $field_a = [
   'pm_batch_operation_detail_id',
-  'pm_batch_operation_header_id',
   'pm_batch_operation_line_id',
   'resource_sequence',
   'description',
   'bom_resource_id',
-  'batch_quantity',
+  'process_quantity',
   'resource_usage',
-  'uom_id',
   'batch_uom_id',
+  'uom_id',
+  'batch_quantity',
   'component_class',
   'cost_analysis_code',
   'plan_type',
@@ -41,15 +41,15 @@ class pm_batch_operation_detail extends dbObject {
   'resource_usage',
  ];
  public $pm_batch_operation_detail_id;
- public $pm_batch_operation_header_id;
  public $pm_batch_operation_line_id;
  public $resource_sequence;
  public $description;
  public $bom_resource_id;
- public $batch_quantity;
+ public $process_quantity;
  public $resource_usage;
- public $uom_id;
  public $batch_uom_id;
+ public $batch_quantity;
+ public $uom_id;
  public $component_class;
  public $cost_analysis_code;
  public $plan_type;

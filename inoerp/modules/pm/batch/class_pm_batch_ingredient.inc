@@ -33,7 +33,7 @@ class pm_batch_ingredient extends dbObject {
   'byproduct_type',
   'consumption_type',
   'phantom_type',
-  'required_quantity',
+  'allocated_quantity',
   'actual_quantity',
   'requirement_date',
   'subinventory_id',
@@ -67,7 +67,7 @@ public $contribute_yield_cb;
 public $byproduct_type;
 public $consumption_type;
 public $phantom_type;
-public $required_quantity;
+public $allocated_quantity;
 public $actual_quantity;
 public $requirement_date;
 public $subinventory_id;

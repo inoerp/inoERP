@@ -18,19 +18,25 @@ inoERP
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_dr_withSearch('pm_batch_operation_header_id') ?>
-       <a name="show" href="form.php?class_name=pm_batch_operation_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_batch_operation_header_id"><i class="fa fa-refresh"></i></a> 
+      <li><?php $f->l_text_field_dr_withSearch('pm_batch_header_id') ?>
+       <a name="show" href="form.php?class_name=pm_batch_operation_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_batch_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_text_field_d('operation_name'); ?></li>
-      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
-      <li><?php $f->l_text_field_d('description'); ?></li>
-      <li><?php $f->l_text_field_d('status'); ?></li>
-      <li><?php $f->l_text_field_d('revision'); ?></li>
-      <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date) ?></li>
-      <li><?php $f->l_date_fieldAnyDay('end_date', $$class->end_date) ?></li>
-      <li><?php $f->l_text_field_d('operation_class'); ?></li>
-      <li><?php $f->l_text_field_d('min_quantity'); ?></li>
-      <li><?php $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', 'uom_id medium', 1); ?></li>
+      <li><?php $f->l_text_field_d('batch_name'); ?></li>
+      <li><?php
+       echo $f->l_val_field_dm('recipe_name', 'pm_recipe_all_v', 'recipe_name', '', 'vf_select_recipe_name');
+       echo $f->hidden_field_withId('pm_recipe_header_id', $$class->pm_recipe_header_id);
+       ?><i class="generic g_select_recipe_name select_popup clickable fa fa-search" data-class_name="pm_recipe_all_v"></i></li>
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', 'always_readonly'); ?>						 </li>
+      <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_woType('PROCESS'), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', 'always_readonly'); ?>         </li>
+      <li><?php $f->l_text_field_dr('revision'); ?></li>
+      <li><?php $f->l_text_field_dr('comment'); ?></li>
+      <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
+       <?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
+       <i class="select_employee_name select_popup clickable fa fa-search"></i>
+      </li>
+      <li><?php $f->l_text_field_dr('routing_name') ?></li>
+      <li><?php $f->l_text_field_dr('formula_name') ?></li>
+      <li><?php $f->l_text_field_dr('description') ?></li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -70,11 +76,11 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Batch Operation Details') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Batch Operation Line & Details') ?></span>
  <form method="post" id="pm_batch_operation_line"  name="pm_batch_operation_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('batch Steps') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Batch Steps') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -95,7 +101,7 @@ inoERP
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0;
+       $count = 0; 
        foreach ($pm_batch_operation_line_object as $pm_batch_operation_line) {
         ?>         
         <tr class="pm_batch_operation_line<?php echo $count ?>">
@@ -141,7 +147,7 @@ inoERP
                   <th><?php echo gettext('Detail Id') ?></th>
                   <th><?php echo gettext('Resource Seq') ?></th>
                   <th><?php echo gettext('Resource') ?></th>
-                  <th><?php echo gettext('batch UOM') ?></th>
+                  <th><?php echo gettext('Batch UOM') ?></th>
                   <th><?php echo gettext('Quantity') ?></th>
                   <th><?php echo gettext('UOM') ?></th>
                   <th><?php echo gettext('Usage') ?></th>

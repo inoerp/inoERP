@@ -176,7 +176,7 @@ class pm_batch_header extends dbObject {
   $this->_copy_batch_products();
   $this->_copy_batch_ingredients();
   $this->_copy_batch_byproducts();
-//  $this->_copy_batch_routings();
+  $this->_copy_batch_routings();
  }
 
  private function _copy_batch_products() {

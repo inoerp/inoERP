@@ -33,8 +33,7 @@ class pm_batch_line extends dbObject {
  public $requiredField = [
   'pm_batch_header_id',
   'item_id_m',
-  'uom_id',
-  'planned_quantity',
+  'uom_id'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "pm_batch_header_id"
