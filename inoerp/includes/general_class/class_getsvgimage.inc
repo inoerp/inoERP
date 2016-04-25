@@ -264,7 +264,7 @@ class getsvgimage extends dbObject {
       foreach ($this->_legend as $l_k => $l_v) {
        $isnull = true;
        foreach ($result1 as $data_obj) {
-        if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)) {
+        if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)&& !empty($obj->$chart_value)) {
          $row['value'][] = $obj->$chart_value;
          $isnull = false;
          break;

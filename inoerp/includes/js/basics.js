@@ -47,9 +47,10 @@ function getFormDetails(url) {
   },
   beforeSend: function () {
    $('#overlay').css('display', 'block');
+   $('.show_loading_small').show();
   },
   complete: function () {
-
+$('.show_loading_small').hide();
   }
  }).done(function (result) {
 //  if($('#path_by_module').html()){
@@ -171,6 +172,7 @@ function deleteComment() {
  var daletePath = homeUrl + 'form.php?class_name=comment';
  $("body").on('click', '.delete_button', function (e) {
   var headerId = $(this).val();
+  var this_dce = $(this);
   $(".delete_button").addClass("show_loading_small");
   $(".delete_button").prop('disabled', true);
   e.preventDefault();
@@ -193,6 +195,7 @@ function deleteComment() {
     $("#accordion").accordion({active: 0});
     $(".delete_button").removeClass("show_loading_small");
     $(".delete_button").prop('disabled', false);
+    $(this_dce).closest('.commentRecord').remove();
    }).fail(function (error, textStatus, xhr) {
     alert("delete failed \n" + error + textStatus + xhr);
     $(".delete_button").removeClass("show_loading_small");
@@ -4503,7 +4506,7 @@ $(document).ready(function () {
 
 //#path_by_module a, #pagination .page_nos a, .pagination_page .page_nos a
 //#pagination .page_nos a added for price list
- $('body').on('click', '.getAjaxForm,#top-path-menu-ul a, #path_by_module a, .search_result a, .page_nos.pagination a ,#erp_form_area a.ajax-link , #pagination .page_nos a, .pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
+ $('body').on('click', '.getAjaxForm,#top-path-menu-ul a, #path_by_module a, .search_result a, #erp_form_area a.ajax-link , #pagination .page_nos a, .pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
@@ -4571,6 +4574,7 @@ $(document).ready(function () {
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
   var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] + link;
+  var pageUrlLink = 'form.php?' + urlLink_a[1] + link;
 //  console.log(link +  ' : ' + formUrl );
   if ($(this).data('search_field')) {
    var search_field = $(this).data('search_field');
@@ -4578,7 +4582,7 @@ $(document).ready(function () {
    var search_field_val = $(search_field_h).val();
    formUrl += '&' + search_field + '=' + search_field_val;
   }
-//  alert(formUrl);
+history.pushState(null, null, pageUrlLink);
   getFormDetails(formUrl);
  }).one();
 
@@ -4611,7 +4615,12 @@ $(document).ready(function () {
    msg += this_e.closest('form').find('textarea').val();
    msg += '<span class="comment-reply"><a class="btn btn-success" role="button" href="#commentForm">Reply</a></span></div>';
    msg += '</div>';
-   $(msg).insertBefore('#comment_list .pagination');
+   if($('#comment_list .pagination').length > 0 ){
+    $(msg).insertBefore('#comment_list .pagination');
+   }else{
+    $(msg).insertBefore('#comment_list');
+   }
+   
    $('.show_loading_small').hide();
    this_e.prop('disabled', false);
    this_e.closest('form').find('textarea').val(''); 
