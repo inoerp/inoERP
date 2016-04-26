@@ -70,6 +70,8 @@ If (isset($_REQUEST["provider"])) {
  }
 
  // check if the current user already have authenticated using this provider before 
+
+ 
  $$class->auth_provider_name = $provider_name;
  $$class->auth_provider_id = $user_profile->identifier;
  $user_exist = $$class->findBy_providerName_and_provierId();
@@ -79,13 +81,12 @@ If (isset($_REQUEST["provider"])) {
   $loggedin_user = $user_exist;
  } else {
   $new_user = new user();
-  $new_user->username = $user_profile->displayName;
+  $new_user->username = $user_profile->email;
   $new_user->email = $user_profile->email;
   $new_user->enteredPassword = $new_user->enteredRePassword = $new_user->auth_provider_id = $user_profile->identifier;
   $new_user->auth_provider_name = $provider_name;
   $new_user->first_name = $user_profile->firstName;
   $new_user->last_name = $user_profile->lastName;
-
   if ($new_user->_before_save() == 1) {
    $new_user->save();
    $new_user->_after_save();

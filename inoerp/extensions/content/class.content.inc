@@ -32,7 +32,7 @@ class content extends dbObject {
  public static $system_info = [
   'name' => 'Content',
   'number' => '10014',
-  'description' => 'Used for creating differnt type of contents. Such as Forum, Documentation, etc',
+  'description' => 'Used for creating different type of contents. Such as Forum, Documentation, etc',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',

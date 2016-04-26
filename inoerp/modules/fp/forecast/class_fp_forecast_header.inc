@@ -12,7 +12,7 @@
 
 /**
  * bom_routing_header
- * Used for creating differnt user defined routings for make items
+ * Used for creating different user defined routings for make items
  * Routing specifies the flow of matrial in the production line
  * Contains all the bom_overhead information, such as - effective_date, description , item_id_m, org_id
  * 

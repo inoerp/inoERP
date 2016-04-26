@@ -49,6 +49,8 @@ class user extends dbObject {
   'use_personal_db_cb',
   'image_file_id',
   'default_theme',
+  'auth_provider_id',
+  'auth_provider_name',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -138,6 +140,8 @@ class user extends dbObject {
  public $address_id;
  public $customer_name;
  public $supplier_name;
+ public $auth_provider_id;
+ public $auth_provider_name;
 
  public function _before_showing() {
   
@@ -267,7 +271,7 @@ $ret = false;
   }
   $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
            default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
-            last_update_by,    last_update_date , image_file_id, use_personal_db_cb FROM ";
+            last_update_by,    last_update_date , auth_provider_id, auth_provider_name, image_file_id, use_personal_db_cb FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";
   $sql.= " LIMIT 1 ";
@@ -327,7 +331,7 @@ $ret = false;
      <a href="' . $_SERVER['PHP_SELF'] . '#tabsHeader-3">Reset your password</a>');
    } else If ($this->_check_userName()) {
     $returnedData = false;
-    throw new Exception('Sorry, username is not available.<br/>Please try a differnt user name');
+    throw new Exception('Sorry, username is not available.<br/>Please try a different user name');
    } elseif ($this->enteredPassword == $this->enteredRePassword) {
     $this->password = $this->_codeThePassword($this->enteredPassword);
     $returnedData = true;

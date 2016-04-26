@@ -31,7 +31,7 @@ setValFromSelectPage.prototype.setVal = function () {
  var fieldClass = '.' + localStorage.getItem("field_class");
  var adding_header = localStorage.getItem("adding_header");
  if (sd_delivery_header_id === -1) {
-  alert('Selected delivery is assigned to a differnt delivery number');
+  alert('Selected delivery is assigned to a different delivery number');
   return;
  }
  rowClass = rowClass.replace(/\s+/g, '.');

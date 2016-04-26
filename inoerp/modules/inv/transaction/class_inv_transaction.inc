@@ -1402,7 +1402,7 @@ class inv_transaction extends dbObject {
       array_push($journal_line_a, $journal_line);
      }
 
-     //PPV if the Accrual & Standard Cost Amounts are differnt
+     //PPV if the Accrual & Standard Cost Amounts are different
      if ($accural_amount - $total_amount != 0) {
       $line_number++;
       $ppv_amount = abs($accural_amount - $total_amount);
@@ -1731,7 +1731,7 @@ class inv_transaction extends dbObject {
    array_push($journal_line_a, $journal_line);
   }
 
-  //PPV if the Accrual & Standard Cost Amounts are differnt
+  //PPV if the Accrual & Standard Cost Amounts are different
   if ($accural_amount - $total_amount != 0) {
    $line_number++;
    $ppv_amount = $accural_amount - $total_amount;

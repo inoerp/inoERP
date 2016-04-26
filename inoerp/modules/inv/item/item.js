@@ -167,7 +167,7 @@ $(document).ready(function () {
    }
   } else {
    e.preventDefault();
-   alert('Item is not defined in the organization.Select a differnt organization');
+   alert('Item is not defined in the organization.Select a different organization');
   }
  });
 
