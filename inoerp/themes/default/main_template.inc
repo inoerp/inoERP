@@ -200,6 +200,13 @@
 
       </div>
 
+      <h3 class="clickable nav-panel minform-data"><i class="fa fa-file-text"></i> <?php echo gettext('Minimized Forms') ?></h3>
+      <div id="left-minform">
+       <div id="left-minform-data">
+       </div>
+
+      </div>
+
      </div>
     </div>
 
@@ -288,11 +295,11 @@
    <?php
    echo searching_tips();
    echo ino_filter_form();
-   echo '<div id="shortcut_keys_divId" class="hidden shortcut_keys">'.ino_shortcut_keys().'</div>';
+   echo '<div id="shortcut_keys_divId" class="hidden shortcut_keys">' . ino_shortcut_keys() . '</div>';
    ?>
-   
+   <div id="hidden-div" class="hidden"><div id="hidden-div-content"></div></div>
   </div>
-<!--  Load JavaScrips-->
+  <!--  Load JavaScrips-->
   <script src="includes/js/jquery-2.0.3.min.js"></script>
   <script src="includes/js/jquery-ui.min.js"></script>
   <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>

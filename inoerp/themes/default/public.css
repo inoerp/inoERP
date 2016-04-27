@@ -2446,3 +2446,16 @@ td .checkBox ,#form_line  input[type="radio"]{
         
                 white-space: pre-line;
 }
+
+.min_height_600px{
+ min-height: 600px;
+}
+
+j.ino-close-form{
+ padding: 2px 10px;
+background-color: rgba(242, 242, 242, 0.94);
+border: 1px solid rgba(206, 198, 198, 0.9);
+font-weight: bold;
+font-size: 0.9em;
+color: rgba(12, 23, 32, 0.75) !important;
+}

@@ -171,6 +171,7 @@ ul.second_level li{
     box-shadow: 4px 4px 1px #808080;
     color: #333;
 }
+
 #right_click_menu ul {
  padding: 0px;
  list-style: none; 
@@ -178,14 +179,22 @@ ul.second_level li{
  white-space:nowrap; 
  text-align:left;
  margin: 0px;
+ border-left: 20px solid #ccc;
+    width: 250px; 
 }
 
 #right_click_menu li{
- padding : 4px 40px 4px 5px;
- margin-left: 40px;
+cursor: pointer;    
+  
+}
+
+
+#right_click_menu li .fa{
  cursor: pointer;
  list-style:none;
- border-left: 1px solid #ccc;
+ padding-right: 10px;
+ width: 15px;
+ margin: 10px 5px 10px 10px; 
 }
 
 
@@ -195,13 +204,13 @@ ul.second_level li{
  padding-left: 30px;
 }
 
+
 #right_click_menu li:hover {
  color:#111;
- margin-left: -2px;
  text-align: left;
- padding-left: 42px;
  margin-right: 0px;
- background: #eee; /* Old browsers */
+ background: #ddd; /* Old browsers */
+ color: green;   
 }
 
 #right_click_menu li:hover ul{
@@ -212,9 +221,19 @@ ul.second_level li{
  margin-left:-1px;
 }
 
+#right_click_menu ul ul li {
+ margin: 4px 0 4px 0;
+}
+
+#right_click_menu ul ul li:hover {
+background : #fff;
+padding: 5px;    
+width: 98%;  
+}
+
+
 #right_click_menu li:hover li{
  margin-left: 0px;
- border-left: 1px solid #ccc;
  display: block;
 }
 
@@ -227,7 +246,7 @@ ul.second_level li{
 #right_click_menu li:hover li:hover ul ul {left:-9999px;}
 
 li.end_li_type{
- border-bottom: 1px solid #ccc;
+ border-bottom: 1px solid #ccc; 
 }
 /*end of right click menu*/
 
