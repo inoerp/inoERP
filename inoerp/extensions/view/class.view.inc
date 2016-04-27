@@ -753,7 +753,7 @@ class view extends dbObject {
    return false;
   }
 
-  $return_stmt .= show_download_button($result);
+  $return_stmt .= show_download_button_inSelectFormat($result);
   $return_stmt .= $this->header_text;
   switch ($this->display_type) {
    case 'LIST' :
