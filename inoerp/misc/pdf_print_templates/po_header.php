@@ -87,6 +87,7 @@
    $external_entiry_info .= "</ul>";
   }
   ?>
+<div id="print_content">
   <div id="page_print">
    <div id="print_header">
     <div class="half_page left logo">
@@ -166,3 +167,4 @@
    </div>
   </div>
 
+</div>

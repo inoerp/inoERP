@@ -1,4 +1,5 @@
 <div id="page_print">
+  <div id="print_content">
  <div id="print_header">
   <div class="half_page left logo">
    <div class="logo">
@@ -83,7 +84,7 @@
         <td><?php echo $req_line->inv_line_quantity; ?></td>
         <td><?php echo $req_line->inv_line_price; ?></td>
         <td><?php echo $req_line->line_description; ?></td>
-        <td><?php echo $req_line->so_number; ?></td>
+        <td><?php echo !empty($req_line->so_number) ? $req_line->so_number : ''; ?></td>
         <td><?php echo $req_line->so_line_number; ?></td>
        </tr>
        <?php
@@ -96,3 +97,4 @@
   </div>
  </div>
 </div>
+ </div>

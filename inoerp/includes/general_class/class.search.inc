@@ -363,6 +363,7 @@ class search extends dbObject {
 
 //start of the srach statement
   $search_form_statement = "";
+  
   $search_form_statement .= "<span id='search_tip' class='clickable ino-btn2'>Searching Tips</span>";
   if ((isset($_GET['window_type']) && $_GET['window_type'] == 'popover') || $this->_window_type == 'popover') {
    $search_form_statement .= '<div class="tabContainer"> ';

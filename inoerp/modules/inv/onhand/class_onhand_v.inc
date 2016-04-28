@@ -17,6 +17,8 @@ class onhand_v extends dbObject {
   'reservable_onhand',
   'reserved_quantity',
   'item_id_m',
+  'serial_generation',
+  'lot_generation',
   'revision_name',
   'org_id',
   'subinventory_id',
@@ -47,12 +49,10 @@ class onhand_v extends dbObject {
   'subinventory_id',
   'locator_id',
  ];
-
-  public $search_functions = [
+ public $search_functions = [
   'Item' => 'search_item_number',
   'Organization' => 'search_org_name',
  ];
-  
  public $dateField = [
  ];
  public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
@@ -116,6 +116,8 @@ class onhand_v extends dbObject {
  public $onhand_id;
  public $item_number;
  public $item_description;
+ public $serial_generation;
+ public $lot_generation;
  public $product_line;
  public $org_name;
  public $subinventory;
@@ -146,7 +148,8 @@ class onhand_v extends dbObject {
  private function create_onhand_v() {
   $sql = "
 		 CREATE OR REPLACE VIEW onhand_v
-(onhand_id, item_number, item_description, product_line, org_name, subinventory, locator,
+(onhand_id, item_number, item_description, product_line, lot_generation,serial_generation,
+org_name, subinventory, locator,
 uom_id,onhand, reservable_onhand,  reserved_quantity, standard_cost, onhand_value,
 item_id_m, revision_name, org_id, subinventory_id, subinventory_type,
 locator_id, lot_id, serial_id, 
@@ -155,7 +158,7 @@ secondary_uom_id, onhand_status, ef_id, created_by,
 creation_date, last_update_by, last_update_date)
 AS
 SELECT onhand.onhand_id, 
-item.item_number, item.item_description, item.product_line,
+item.item_number, item.item_description, item.product_line, item.lot_generation,item.serial_generation,
 org.org, subinventory.subinventory, locator.locator,
 onhand.uom_id,onhand.onhand, onhand.onhand - IFNULL(SUM(ir.demand_quantity) , 0) as  reservable_onhand,
 SUM(ir.demand_quantity) as reserved_quantity,
@@ -281,8 +284,6 @@ GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator
   return !empty($result_f) ? $result_f : false;
  }
 
- 
- 
 }
 
 //end of po_detail class

@@ -21,10 +21,9 @@ if (!empty($_POST) && !empty($_POST['program_name'])) {
  $str_var = $_POST["data"];
 
  if (!empty($_POST['data_type']) && $_POST['data_type'] == 'sql_query') {
-  $sql =  unserialize(base64_decode($str_var));
+  $sql = unserialize(base64_decode($str_var));
   $array_var = json_decode(json_encode(dbObject::find_by_sql($sql)), true);
-
-  } else {
+ } else {
   $array_var = unserialize(base64_decode($str_var));
  }
 
@@ -51,6 +50,7 @@ switch ($download_format) {
   break;
 
  case 'pdf_format':
+ case 'pdf_format_list':
   $format_extn = '.pdf';
   break;
 
@@ -87,6 +87,12 @@ switch ($download_format) {
  case 'pdf_format':
   if (is_array($array_var)) {
    echo array2pdf($array_var);
+  }
+  break;
+
+ case 'pdf_format_list':
+  if (is_array($array_var)) {
+   echo array2pdf_list($array_var);
   }
   break;
 

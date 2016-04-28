@@ -271,6 +271,10 @@ function getBreadCrumb($class_first) {
   $form_bread_crum .= "<li title=\"My Dashboard\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"> Dashboard </a></li>';
   $form_bread_crum .= '<li> &nbsp;&nbsp;<i class="fa fa-angle-double-right"></i> &nbsp;&nbsp;</li>';
   $form_bread_crum .= '<li title="' . $module_description . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">&nbsp; ' . $module_name_c . ' </a></li>';
+  $form_bread_crum .= '<li> &nbsp;&nbsp;<i class="fa fa-pause"></i> &nbsp;&nbsp;</li>';
+  $form_bread_crum .= '<li title="Close This Form" ><j  class="ajax-link ino-close-form clickable ino-nav-btn" > Close &nbsp; <i class="fa fa-file-o"></i> </j></li>';
+  $form_bread_crum .= '<li> &nbsp;&nbsp;<i class="fa fa-angle-double-right"></i> &nbsp;&nbsp;</li>';
+  $form_bread_crum .= '<li title="Minimize This Form" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable ino-nav-btn" > Minimize &nbsp; <i class="fa fa-file-o"></i></j></li>';
   $form_bread_crum .= '</ul>';
   return $form_bread_crum;
  } else {
@@ -1590,6 +1594,18 @@ function show_download_button_inSelectFormat($result_data_query, $total_count = 
  return $return_stmt;
 }
 
+function ino_include_css() {
+ $stmt = '';
+ $stmt .= '<link href="' . HOME_URL . 'misc/ecss/pdf_print.css" rel="stylesheet">';
+ $stmt .= '<link href="' . HOME_URL . 'tparty/bootstrap/css/bootstrap.css" rel="stylesheet">';
+ $stmt .= '<link href="' . HOME_URL . 'tparty/bootstrap/css/style.css" rel="stylesheet">';
+ $stmt .= '<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic" rel="stylesheet" type="text/css">';
+ $stmt .= '<link href="https://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900" rel="stylesheet" type="text/css">';
+ $stmt .= '<link href="https://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900" rel="stylesheet" type="text/css">';
+
+ return $stmt;
+}
+
 function xxshow_download_button_inSelectFormat($result_data, $total_count = 0, $total_count_all = 0) {
  global $f;
  $return_stmt = '<div id="searchResultMessages">';
@@ -1653,7 +1669,7 @@ function array2text(array &$array) {
  return ob_get_clean();
 }
 
-function array2pdf(array &$array, $print_in_browser = true) {
+function array2pdf_list(array &$array, $print_in_browser = true) {
  if (count($array) == 0) {
   return null;
  }
@@ -1667,6 +1683,40 @@ function array2pdf(array &$array, $print_in_browser = true) {
   }
   $html .= '<br><br>';
  }
+
+ ob_start();
+ // send the captured HTML from the output buffer to the mPDF class for processing
+ $mpdf->WriteHTML($html);
+ if ($print_in_browser) {
+  download_send_headers("search_record" . date("Y-m-d") . ".pdf", 'pdf_format');
+ }
+ echo $mpdf->Output();
+ return ob_get_clean();
+}
+
+function array2pdf(array &$array, $print_in_browser = true) {
+ if (count($array) == 0) {
+  return null;
+ }
+ include(dirname(__FILE__) . "/../../tparty/mpdf/mpdf.php");
+ $mpdf = new mPDF('c');
+
+ $html = '<!doctype html><html><head>' . ino_include_css() . '</head><body>';
+ $html .= '<table id="pdf-print-tbl" class="table table-bordered">';
+ $array_1 = $array[0];
+ $html .= '<tr>';
+ foreach ($array_1 as $key_1 => $value_1) {
+  $html .= '<th>' . ucwords(str_replace('_', ' ', $key_1)) . ' </th>';
+ }
+ $html .= '</tr>';
+ foreach ($array as $data) {
+  $html .= '<tr>';
+  foreach ($data as $key => $value) {
+   $html .= "<td> $value </td>";
+  }
+  $html .= '</tr>';
+ }
+ $html .= '</table></body></html>';
 
  ob_start();
  // send the captured HTML from the output buffer to the mPDF class for processing
@@ -1737,6 +1787,7 @@ function download_send_headers($filename, $download_format = 'text_format') {
    break;
 
   case 'pdf_format':
+  case 'pdf_format_list':
    header("Content-type:application/pdf");
    break;
 

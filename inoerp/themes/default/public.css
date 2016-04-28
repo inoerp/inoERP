@@ -2,7 +2,7 @@
 @media print{
  body, html {
   width: 1100px;
-  }
+ }
  body{ background-color:#FFFFFF; background-image:none; color:#000000 }
  #header, #header_top, #footer, #content_left, #comment_form, #content_right_right, 
  #content_top, #content_bottom , #header_top_container, #form_top_image,
@@ -13,7 +13,7 @@
  { 
   display:none !important;
  }
- 
+
  #content, .container-fluid.mainbar{ 
   display: block;
   height: auto;
@@ -22,7 +22,7 @@
   float: left !important;
   margin: 20px !important;
  }
- 
+
  .container-fluid.sidebar{
   width: 0% !important;
  }
@@ -1304,15 +1304,15 @@ select.search_document_list option:nth-child(even) {
 }
 
 #dashborad_menu li:nth-child(6n) {
-        background-color: rgba(153, 79, 38, 0.93) !important;
+ background-color: rgba(153, 79, 38, 0.93) !important;
 }
 
 #dashborad_menu li:nth-child(11n) {
-        background-color: rgba(12, 119, 210, 0.9) !important;
+ background-color: rgba(12, 119, 210, 0.9) !important;
 }
 
 #dashborad_menu li:nth-child(17n) {
-        background-color: rgba(12, 119, 210, 0.9) !important;
+ background-color: rgba(12, 119, 210, 0.9) !important;
 }
 
 #dashborad_menu li:hover{
@@ -2404,33 +2404,33 @@ a.btn-info{
 
 .parent-child-nav{
  background-color: rgb(240, 240, 220);
-padding: 15px 50px 5px;
+ padding: 15px 50px 5px;
 }
 
 .ino-tooltip{
-	margin:8px;
-	padding:8px;
-	border:1px solid blue;
-	background-color:yellow;
-	position: absolute;
-	z-index: 99999;
+ margin:8px;
+ padding:8px;
+ border:1px solid blue;
+ background-color:yellow;
+ position: absolute;
+ z-index: 99999;
 }
 
 .ino-left-30-n{
-        margin-left: -30px;
+ margin-left: -30px;
 }
 
 .ino-well {
-     min-height: 20px;
-    padding: 5px;
-    background-color: #F5F5F5;
-    border: 1px solid #E3E3E3;
-    width: 98%;
-    margin-bottom: 20px;
+ min-height: 20px;
+ padding: 5px;
+ background-color: #F5F5F5;
+ border: 1px solid #E3E3E3;
+ width: 98%;
+ margin-bottom: 20px;
 }
 
 .ino-well ul {
-margin-top: 10px !important;
+ margin-top: 10px !important;
 }
 
 #structure #pagination{
@@ -2439,23 +2439,24 @@ margin-top: 10px !important;
 }
 
 td .checkBox ,#form_line  input[type="radio"]{
-       margin-left: 35% !important;
+ margin-left: 35% !important;
 }
 
 .comment.panel-body.new-comment{
-        
-                white-space: pre-line;
+
+ white-space: pre-line;
 }
 
 .min_height_600px{
  min-height: 600px;
 }
 
-j.ino-close-form{
+.ino-nav-btn{
  padding: 2px 10px;
-background-color: rgba(242, 242, 242, 0.94);
-border: 1px solid rgba(206, 198, 198, 0.9);
-font-weight: bold;
-font-size: 0.9em;
-color: rgba(12, 23, 32, 0.75) !important;
+ background-color: rgba(242, 242, 242, 0.94);
+ border: 1px solid rgba(206, 198, 198, 0.9);
+ font-weight: bold;
+ font-size: 0.9em;
+ color: rgba(12, 23, 32, 0.75) !important;
 }
+

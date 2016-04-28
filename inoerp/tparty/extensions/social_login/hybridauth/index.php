@@ -1,6 +1,4 @@
 <?php
-error_reporting(-1);
-ini_set('display_errors', 'On');
 /**
 * HybridAuth
 * http://hybridauth.sourceforge.net | http://github.com/hybridauth/hybridauth
@@ -11,7 +9,7 @@ ini_set('display_errors', 'On');
 //	HybridAuth End Point
 // ------------------------------------------------------------------------
 
-require_once(__DIR__. "/Hybrid/Auth.php" );
-require_once( __DIR__. "/Hybrid/Endpoint.php" );
+require_once( "Hybrid/Auth.php" );
+require_once( "Hybrid/Endpoint.php" );
 
 Hybrid_Endpoint::process();

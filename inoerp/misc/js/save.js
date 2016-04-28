@@ -537,7 +537,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
  line_form_id is REQUIRED FOR one header & one line but not required for one header & multiple lines
  primary_column_id2 is required for forms which generate a number from id like PO number
  line_key_field is only used to check if any line checkbox is checked or not..to save that particular line...
- ...and its  mandatory..used in all forms but not in all forms that use more 3 differnt table sets (ex: overhead,WO) (exception : payment term with SEQ)
+ ...and its  mandatory..used in all forms but not in all forms that use more 3 different table sets (ex: overhead,WO) (exception : payment term with SEQ)
  line_key_field determines if line ajax should be called or not (correct usage ledger)
  onlyHeader is not mandatory - value 1 shows the form contains only header and 
  the save button is enabled after header saving

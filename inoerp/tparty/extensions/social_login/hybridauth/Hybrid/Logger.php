@@ -38,7 +38,7 @@ class Hybrid_Logger {
 	 */
 	public static function debug($message, $object = null) {
 		if (Hybrid_Auth::$config["debug_mode"] === true) {
-                        $dt = new DateTime;
+      $dt = new DateTime('now', new DateTimeZone( 'UTC' ));
 			file_put_contents(Hybrid_Auth::$config["debug_file"], implode(' -- ', array(
 				"DEBUG",
 				$_SERVER['REMOTE_ADDR'],
@@ -58,7 +58,7 @@ class Hybrid_Logger {
 	 */
 	public static function info($message) {
 		if (in_array(Hybrid_Auth::$config["debug_mode"], array(true, 'info'), true)) {
-                        $dt = new DateTime;
+      $dt = new DateTime('now', new DateTimeZone( 'UTC' ));
 			file_put_contents(Hybrid_Auth::$config["debug_file"], implode(' -- ', array(
 				"INFO",
 				$_SERVER['REMOTE_ADDR'],
@@ -77,7 +77,7 @@ class Hybrid_Logger {
 	 */
 	public static function error($message, $object = null) {
 		if (isset(Hybrid_Auth::$config["debug_mode"]) && in_array(Hybrid_Auth::$config["debug_mode"], array(true, 'info', 'error'), true)) {
-                        $dt = new DateTime;
+      $dt = new DateTime('now', new DateTimeZone( 'UTC' ));
 			file_put_contents(Hybrid_Auth::$config["debug_file"], implode(' -- ', array(
 				'ERROR',
 				$_SERVER['REMOTE_ADDR'],
@@ -86,6 +86,17 @@ class Hybrid_Logger {
 				print_r($object, true) . PHP_EOL
 					)), FILE_APPEND);
 		}
+	}
+
+    /**
+     * Dumps the data in the way suitable to be output in log files for debug purposes
+     *
+     * @param mixed $data
+     *
+     * @return string
+     */
+    public static function dumpData($data) {
+		return var_export($data, true);
 	}
 
 }

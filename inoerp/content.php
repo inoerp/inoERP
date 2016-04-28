@@ -8,6 +8,7 @@ $class_names = [
 ];
 ?>
 <?php
+
 include_once("includes/functions/loader.inc");
 $read_access = true;
 //exit script in case of delete statement
@@ -19,15 +20,21 @@ if ((!empty($_POST))) {
 }
 ?>
 <?php
-$content_rp = getrwuPrivilage($content_type->read_role, $_SESSION['user_roles'][0]);
-$content_wp = getrwuPrivilage($content_type->write_role, $_SESSION['user_roles'][0]);
-$content_up = getrwuPrivilage($content_type->update_role, $_SESSION['user_roles'][0]);
-$content_privilage = $content_rp + $content_wp + $content_up;
 
-$crp = getrwuPrivilage($content_type->comment_read_role, $_SESSION['user_roles'][0]);
-$cwp = getrwuPrivilage($content_type->comment_write_role, $_SESSION['user_roles'][0]);
-$cup = getrwuPrivilage($content_type->comment_update_role, $_SESSION['user_roles'][0]);
-$comment_privilage = $crp + $cwp + $cup;
+if (!empty($content_type)) {
+ $content_rp = getrwuPrivilage($content_type->read_role, $_SESSION['user_roles'][0]);
+ $content_wp = getrwuPrivilage($content_type->write_role, $_SESSION['user_roles'][0]);
+ $content_up = getrwuPrivilage($content_type->update_role, $_SESSION['user_roles'][0]);
+ $content_privilage = $content_rp + $content_wp + $content_up;
+
+ $crp = getrwuPrivilage($content_type->comment_read_role, $_SESSION['user_roles'][0]);
+ $cwp = getrwuPrivilage($content_type->comment_write_role, $_SESSION['user_roles'][0]);
+ $cup = getrwuPrivilage($content_type->comment_update_role, $_SESSION['user_roles'][0]);
+ $comment_privilage = $crp + $cwp + $cup;
+} else {
+ $content_privilage = $content_rp = $content_wp = $content_up = $comment_privilage = $crp = $cwp = $cup = 0;
+}
+
 
 if ($continue) {
  include_once(THEME_DIR . '/header.inc');
@@ -48,16 +55,16 @@ if (($content_privilage >= 6) && ($mode == 9)) {
  include_once(THEME_DIR . '/content_template.inc');
 } else {
  require_once(INC_EXTENSIONS . DS . 'content' . DS . 'view' . DS . "content_view.php");
- echo!empty($breadCrum) ?  $breadCrum  : false;
+ echo!empty($breadCrum) ? $breadCrum : false;
  if ((!empty($content->content_id)) && ($content_type_name)) {
   include_once(THEME_DIR . '/view_content_template.inc');
  } elseif (!empty($non_db_content_type)) {
   include_once(THEME_DIR . '/nondb_content_template.inc');
  } elseif ((!empty($category_id)) && ($content_type_name)) {
   include_once(THEME_DIR . '/contents_list_template.inc');
- } else if(SHOW_COTENT_LIST == 1) {
+ } else if (SHOW_COTENT_LIST == 1) {
   include_once(THEME_DIR . '/contents_list_template.inc');
- }else {
+ } else {
   echo ino_access_denied('Sorry!!! Requested content is not found');
  }
 }

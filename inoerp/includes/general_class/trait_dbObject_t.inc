@@ -45,6 +45,7 @@ trait dbObject_t {
   'excel_format' => 'Excel',
   'text_format' => 'Text',
   'pdf_format' => 'PDF',
+  'pdf_format_list' => 'PDF List',
   'xml_format' => 'XML',
   'worddoc_format' => 'Word Doc',
  ];
