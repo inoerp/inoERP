@@ -259,6 +259,43 @@ function getBreadCrumb($class_first) {
    $module_name = $class_first::$module;
   }
 
+  if (isset(user_dashboard_v::$icon_stmt_a[$module_name])) {
+   $module_icon = user_dashboard_v::$icon_stmt_a[$module_name];
+   $module_name_c = '<i class="fa ' . $module_icon['div_class'] . '"></i>';
+   $module_description = ucwords($module_icon['description']);
+  } else {
+   $module_name_c = '<i class="fa fa-backward"></i>';
+   $module_description = null;
+//   $module_line = option_line::find_by_optionId_lineCode('182', $module_name);
+//   if ($module_line) {
+//    $module_description = ucwords($module_line->description);
+//   } else {
+//    $module_description = ucwords($module_name);
+//   }
+  }
+
+  $form_bread_crum = '<ul class="btn-group-vertical vertical-list imp-link ino-breadcrumb-simple" role="group" aria-label="...">';
+  $form_bread_crum .= '<li title="Close This Form" ><j  class="ajax-link ino-close-form clickable " ><i class="fa fa-remove"></i> </j></li>';
+  $form_bread_crum .= '<li title="Minimize This Form" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable " ><i class="fa fa-minus"></i></j></li>';
+  $form_bread_crum .= "<li title=\"Navigate to Dashboard\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"><i class="fa fa-dashboard"></i> </a></li>';
+  $form_bread_crum .= '<li title="Navigate to ' . $module_description . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . $module_name_c . ' </a></li>';
+
+  $form_bread_crum .= '</ul>';
+  return $form_bread_crum;
+ } else {
+  return false;
+ }
+}
+
+function xx_getBreadCrumb($class_first) {
+ global $$class_first;
+ if (property_exists($class_first, 'module') && !property_exists($class_first, 'dont_show_bread_crum')) {
+  if (!empty($$class_first) && is_object($$class_first) && method_exists($$class_first, 'module_code')) {
+   $module_name = call_user_func(array($$class_first, 'module_code'));
+  } else {
+   $module_name = $class_first::$module;
+  }
+
   $module_line = option_line::find_by_optionId_lineCode('182', $module_name);
   if ($module_line) {
    $module_name_c = ucwords($module_line->option_line_value);
