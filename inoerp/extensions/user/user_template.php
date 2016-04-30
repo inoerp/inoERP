@@ -1,3 +1,8 @@
+<?php  if (empty($access_level) || ($access_level < 2 )) {
+  echo '<div><div id="structure">'.  access_denied().  '</div></div>';
+  return;
+ }
+ ?>
 <div id ="form_header">
  <form action="" method="post" id="user_header" name="user_header">
   <span class="heading"><?php echo gettext('User Details') ?></span>
