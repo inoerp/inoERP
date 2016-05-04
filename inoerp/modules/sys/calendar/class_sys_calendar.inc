@@ -14,43 +14,31 @@
  * Contains all the mail_form information, such as - mail_form_id, type, description,  mail_form_name, etc.
  * 
  */
-class qa_quality_result extends dbObject {
+class sys_calendar extends dbObject {
 
- public static $key_column = 'reference_key_name';
- public static $table_name = 'qa_quality_result';
+ public static $key_column = 'user_id';
+ public static $table_name = 'sys_calendar';
  public $field_a = [
-  'reference_type',
-  'reference_entity',
-  'reference_key_name',
-  'reference_key_value',
-  'qa_cp_header_id',
+  'user_id',
+  'period_type',
  ];
- public static $common_fields_a = [
-  'reference_type',
-  'reference_entity',
-  'reference_key_name',
-  'reference_key_value',
-  'qa_cp_header_id',
- ];
+
  public $initial_search = [
-  'reference_key_name',
-  'reference_key_value',
+  'user_id',
+  'period_type',
+ ];
+ 
+  public $fields_inForm_notInDataBase = [
+  "employee_name",
  ];
  public $search = [
   '_show_view_path' => 1,
-  '_show_multifield_path' => [ 'qa_cp_header_id', 'reference_key_name', 'reference_key_value']
  ];
- public $pageTitle = " Collection Plan "; //page Title
- public $reference_type;
- public $reference_entity;
- public $reference_key_name;
- public $reference_key_value;
- public $qa_cp_header_id;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
- public $primary_clmn;
+ public $pageTitle = " Calendar "; //page Title
+ public $user_id;
+ public $period_type;
+ public $employee_name;
+
 
  public function _before_save() {
   try {
@@ -73,7 +61,7 @@ class qa_quality_result extends dbObject {
   $this->reference_type = !empty($_POST['reference_type'][0]) ? $_POST['reference_type'][0] : 'table';
   $this->reference_entity = !empty($_POST['reference_entity'][0]) ? $_POST['reference_entity'][0] : null;
   foreach ($_POST as $field_name => $field_value_a) {
-   if (empty($field_value_a[0]) || in_array($field_name, qa_quality_result::$common_fields_a)) {
+   if (empty($field_value_a[0]) || in_array($field_name, sys_calendar::$common_fields_a)) {
     continue;
    } else {
     $class = qa_collection_element_header::tableName_from_elementName($field_name);
