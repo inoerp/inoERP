@@ -18,19 +18,19 @@
   </div>
  </div>
 
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('View Option') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Viewing Options') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Day') ?></a></li>
-    <li><a href="#tabsLine-1"><?php echo gettext('Week') ?></a></li>
-    <li><a href="#tabsLine-1"><?php echo gettext('Month') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Week') ?></a></li>
+    <li><a href="#tabsLine-3"><?php echo gettext('Month') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
 
     </div> 
     <div id="tabsLine-2" class="tabContent">
-     <table class="table table-bordered table-sm cal cal-week">
+     <table class="table table-hover table-sm cal cal-week">
       <thead>
        <tr class="cal-row cal-header">
         <th class="cal-th col1"></th>
@@ -51,7 +51,7 @@
         echo "<tr class='cal-row $rowclass'>";
          for($j=0 ; $j <=7 ; $j ++ ){
           $tdval = ($j == 0 && $rowclass == 'cal-major') ? $i/2 . ' AM ' : ' ';
-          echo "<td class='cell_{$i}_{$j}'> $tdval </td>";
+          echo "<td class='clickable cell_{$i}_{$j}'> $tdval </td>";
          }
         echo "</tr>";
        }
