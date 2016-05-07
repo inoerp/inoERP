@@ -5233,7 +5233,7 @@ $(document).ready(function () {
   if ($('ul#minform-list').find('li').length == 1) {
    $('#accordion h3.minform-data').trigger('click');
   }
- $(this).closest('ul').find('.ino-close-form').trigger('click');
+  $(this).closest('ul').find('.ino-close-form').trigger('click');
  });
 
  $('body').on('click', '.min-form-list', function (e) {
@@ -5425,6 +5425,44 @@ $(document).ready(function () {
   $(this).unbind('keypress');
  });
 
+
+ $("#event-datepicker").datepicker({
+  changeMonth: true,
+  changeYear: true,
+  dateFormat: "dd-mm-yy",
+  onSelect: function (sd) {
+   var date_p = $(this).datepicker('getDate');
+   var date_s = date_p.getDate();
+   var month_s = date_p.getMonth() + 1;
+   var year_s = date_p.getFullYear();
+   var sunday_date = date_p.getDate() - date_p.getDay();
+   $('table.cal-day .col1').find('.cal-date').empty().append(' ' + sd + ' ');
+   $('table.cal-week .col1').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
+   sunday_date++;
+   $('table.cal-week .col2').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
+   sunday_date++;
+   $('table.cal-week .col3').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
+   sunday_date++;
+   $('table.cal-week .col4').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
+   sunday_date++;
+   $('table.cal-week .col5').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
+   sunday_date++;
+   $('table.cal-week .col6').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
+   sunday_date++;
+   $('table.cal-week .col7').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
+   $('table.cal-month').find('td').empty();
+   $('table.ui-datepicker-calendar td').each(function (i, v) {
+    i++;
+    var cell_no = 'cell_' + i;
+    if ($(this).find('a').length > 0) {
+     $('table.cal-month').find('td.' + cell_no).empty().append($(this).find('a').text());
+    } else {
+     $('table.cal-month').find('td.' + cell_no).empty();
+    }
+
+   });
+  }
+ });
 
 });
 

@@ -27,10 +27,10 @@
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
-     <table class="table table-hover table-sm cal cal-month">
+     <table class="table table-hover table-sm cal cal-day">
       <thead>
        <tr class="cal-row cal-header">
-        <th class="cal-th col2">Date :  <i class="cal-date"></i></th>
+        <th class="cal-th col1">Date :  <i class="cal-date"></i></th>
        </tr>
       </thead>
       <tbody>
@@ -50,14 +50,14 @@
      <table class="table table-hover table-sm cal cal-week">
       <thead>
        <tr class="cal-row cal-header">
-        <th class="cal-th col1"></th>
-        <th class="cal-th col2">Mon <i class="cal-date"></i></th>
-        <th class="cal-th col3">Tue <i class="cal-date"></i></th>
-        <th class="cal-th col4">Wed <i class="cal-date"></i></th>
-        <th class="cal-th col5">Thu <i class="cal-date"></i></th>
-        <th class="cal-th col6">Fri <i class="cal-date"></i></th>
-        <th class="cal-th col7">Sat <i class="cal-date"></i></th>
-        <th class="cal-th col8">Sun <i class="cal-date"></i></th>
+        <th class="cal-th col0"></th>
+        <th class="cal-th col1"><?php echo gettext('Sun') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col2"><?php echo gettext('Mon') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col3"><?php echo gettext('Tue') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col4"><?php echo gettext('Wed') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col5"><?php echo gettext('Thu') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col6"><?php echo gettext('Fri') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col7"><?php echo gettext('Sat') ?> <i class="cal-date"></i></th>
        </tr>
       </thead>
       <tbody>
@@ -80,23 +80,23 @@
      <table class="table table-hover table-sm cal cal-month">
       <thead>
        <tr class="cal-row cal-header">
-        <th class="cal-th col2">Mon <i class="cal-date"></i></th>
-        <th class="cal-th col3">Tue <i class="cal-date"></i></th>
-        <th class="cal-th col4">Wed <i class="cal-date"></i></th>
-        <th class="cal-th col5">Thu <i class="cal-date"></i></th>
-        <th class="cal-th col6">Fri <i class="cal-date"></i></th>
-        <th class="cal-th col7">Sat <i class="cal-date"></i></th>
-        <th class="cal-th col8">Sun <i class="cal-date"></i></th>
+        <th class="cal-th col1"><?php echo gettext('Sun') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col2"><?php echo gettext('Mon') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col3"><?php echo gettext('Tue') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col4"><?php echo gettext('Wed') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col5"><?php echo gettext('Thu') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col6"><?php echo gettext('Fri') ?> <i class="cal-date"></i></th>
+        <th class="cal-th col7"><?php echo gettext('Sat') ?> <i class="cal-date"></i></th>
        </tr>
       </thead>
       <tbody>
        <?php
        $c_count = 0;
-       for ($i = 7; $i > 0; $i--) {
+       for ($i = 6; $i > 0; $i--) {
         echo "<tr class='cal-row height-100'>";
         for ($j = 0; $j <= 6; $j ++) {
          $c_count++;
-         echo "<td class='clickable cell_{$i}_{$j}'>$c_count </td>";
+         echo "<td class='clickable cell_{$c_count}'>$c_count </td>";
         }
         echo "</tr>";
        }

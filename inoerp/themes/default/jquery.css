@@ -51,6 +51,13 @@ ul.tabMain li a{
  border-color:rgba(123, 207, 128, 0.77) !important;
 }
 
+.ui-datepicker-calendar .ui-state-active
+{
+  
+  background:rgb(10, 150, 19) !important;
+  color: #fff;
+}
+
 html ul.tabMain li.active, html ul.tabMain li.active a:hover {
 /* background-color:#c3dde0;
  border-color:#c3dde0;
@@ -265,43 +272,53 @@ ul.tabVerticalMain li a {
 .ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
 
 .ui-datepicker {
-
- display: none;
- background: #eee;
- padding: 1em;
- border-radius: 0.5em;
- border: 1px solid;
+ background: #EAE9D8;
 }
+
+
 
 .ui-datepicker .ui-datepicker-header {
  position: relative;
- padding: .2em .6em;
- border-radius: 0.5em;
- background: #ccc;
- margin-bottom: .5em;
+ background: #aaa;
  font-weight: bold;
+  width: 202px;
+  padding: 2px 10px;
+  
 }
 
 .ui-datepicker .ui-datepicker-title {
- margin: 0 2.3em;
  text-align: center;
+ 
 }
+
 .ui-datepicker .ui-datepicker-title select {
  font-size: 1em;
  margin: 1px 0;
- color: #333
+ color: #333;
+ width: 45px;
 }
 
 .ui-datepicker-prev{
  float: left;
+ cursor:  pointer;
+  color: #fff !important;
 }
 
 .ui-datepicker-next {
  float: right;
+  cursor:  pointer;
+ color: #fff !important;
+
+}
+
+.ui-icon-circle-triangle-e,
+.ui-icon-circle-triangle-w{
+    padding : 0 4px;
+  border-radius: 12px;
+  border: 1px solid #fff;
 }
 
 table.ui-datepicker-calendar{
- margin: 0 1.5em;
  text-align: center;
 }
 
@@ -313,8 +330,10 @@ table.ui-datepicker-calendar tr th{
 table.ui-datepicker-calendar tr td,
 table.ui-datepicker-calendar tr th{
  border: 1px solid #ccc;
- padding: 0.21em
+  padding: 3px 7px ;
+  
 }
+
 
 /*move to animated block*/
 

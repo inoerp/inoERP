@@ -207,6 +207,12 @@
 
       </div>
 
+      <h3 class="clickable nav-panel minform-data"><i class="fa fa-calendar"></i> <?php echo gettext('Event Calendar') ?></h3>
+      <div id="left-event-cal">
+       <div id="event-datepicker"></div>
+
+      </div>
+
      </div>
     </div>
 
