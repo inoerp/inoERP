@@ -33,7 +33,7 @@ class hr_event_header extends dbObject {
  ];
  public $field_a = [
   'hr_event_header_id',
-  'requestor_employee_id',
+  'user_id',
   'start_date',
   'start_time',
   'end_date',
@@ -52,6 +52,9 @@ class hr_event_header extends dbObject {
  ];
  public $fields_inForm_notInDataBase = [
   "employee_name",
+  'username',
+  'first_name',
+  'last_name',
  ];
  public $requiredField = [
   'start_date',
@@ -68,7 +71,7 @@ class hr_event_header extends dbObject {
  ];
  public $pageTitle = " Event "; //page Title
  public $hr_event_header_id;
- public $requestor_employee_id;
+ public $user_id;
  public $start_date;
  public $start_time;
  public $end_date;
@@ -84,7 +87,9 @@ class hr_event_header extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
-
+ public $username;
+ public $first_name;
+ public $last_name;
 
 }
 

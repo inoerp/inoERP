@@ -3,14 +3,17 @@
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
+    <li><a href="#tabsHeader-1"><?php $f = new inoform();
+echo gettext('Basic') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><?php $f->l_text_field('period_type', $$class->period_type); ?></li>
-       <li><?php $f->l_text_field('user_id', $$class->user_id); ?></li>
+       <li><?php $f->l_text_field_dr('username'); ?></li>
+       <li><?php $f->l_text_field_dr('first_name'); ?></li>
+       <li><?php $f->l_text_field_dr('last_name'); ?></li>
+       <li><?php echo $f->hidden_field_withId('user_id', $$class->user_id); ?></li>
       </ul>
      </div>
     </div>
@@ -60,15 +63,27 @@
         <th class="cal-th col7"><?php echo gettext('Sat') ?> <i class="cal-date"></i></th>
        </tr>
       </thead>
-      <tbody>
+      <tbody class="cal-week-tbdy">
        <?php
        $times = ' AM';
-       for ($i = 24; $i > 0; $i--) {
+       for ($i = 0; $i < 24; $i++) {
         $rowclass = ($i % 2 == 0 ) ? 'cal-major' : 'cal-minor';
         echo "<tr class='cal-row $rowclass'>";
         for ($j = 0; $j <= 7; $j ++) {
-         $tdval = ($j == 0 && $rowclass == 'cal-major') ? $i / 2 . ' AM ' : ' ';
-         echo "<td class='clickable cell_{$i}_{$j}'> $tdval </td>";
+         
+         $tdval = ($j == 0 && $rowclass == 'cal-major') ? $i / 2 . ' AM' : ' ';
+         $tdval = ($tdval == '0 AM') ? '12 AM' : $tdval;
+         echo "<td class='clickable row_{$i} col_{$j}'> $tdval </td>";
+        }
+        echo "</tr>";
+       }
+       for ($i = 0; $i < 24; $i++) {
+        $rowclass = ($i % 2 == 0 ) ? 'cal-major' : 'cal-minor';
+        echo "<tr class='cal-row $rowclass'>";
+        for ($j = 0; $j <= 7; $j ++) {
+         $tdval = ($j == 0 && $rowclass == 'cal-major') ? $i / 2 . ' PM' : ' ';
+         $tdval = ($tdval == '0 PM') ? '12 PM' : $tdval;
+         echo "<td class='clickable row_{$i} col_{$j}'> $tdval </td>";
         }
         echo "</tr>";
        }
@@ -89,7 +104,7 @@
         <th class="cal-th col7"><?php echo gettext('Sat') ?> <i class="cal-date"></i></th>
        </tr>
       </thead>
-      <tbody>
+      <tbody class="cal-month-tbdy">
        <?php
        $c_count = 0;
        for ($i = 6; $i > 0; $i--) {

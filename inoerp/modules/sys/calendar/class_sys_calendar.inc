@@ -22,14 +22,14 @@ class sys_calendar extends dbObject {
   'user_id',
   'period_type',
  ];
-
  public $initial_search = [
   'user_id',
   'period_type',
  ];
- 
-  public $fields_inForm_notInDataBase = [
-  "employee_name",
+ public $fields_inForm_notInDataBase = [
+  'username',
+  'first_name',
+  'last_name',
  ];
  public $search = [
   '_show_view_path' => 1,
@@ -38,7 +38,10 @@ class sys_calendar extends dbObject {
  public $user_id;
  public $period_type;
  public $employee_name;
-
+ public $username;
+ public $first_name;
+ public $last_name;
+ 
 
  public function _before_save() {
   try {

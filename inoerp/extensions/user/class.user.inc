@@ -152,8 +152,8 @@ class user extends dbObject {
    $this->verify_user();
    return 1;
   }catch(Exception $e){
-   echo '<div role="alert" class="alert alert-warning error alert-dismissible">'
-   . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' . $e->getMessage().'</div>';
+//   echo '<div role="alert" class="alert alert-warning error alert-dismissible">'
+//   . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' . $e->getMessage().'</div>';
    return -99;
   }
  }

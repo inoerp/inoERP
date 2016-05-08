@@ -3,10 +3,7 @@
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php
-      $f = new inoform();
-      echo gettext('Basic')
-      ?></a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic'); ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -17,12 +14,14 @@
          <i class="fa fa-refresh"></i></a> 
        </li>
        <li><?php $f->l_text_field_dm('title'); ?></li>
-       
-       <li><?php $f->l_date_fieldAnyDay_m('start_date' , $$class->start_date); ?></li>
-       <li><?php $f->l_select_field_from_array('start_time' , inoform::$time_a, $$class->start_time); ?></li>
-       
+       <li><?php $f->l_date_fieldAnyDay_m('start_date', $$class->start_date); ?></li>
+       <li><?php $f->l_select_field_from_array('start_time', inoform::$time_a, $$class->start_time); ?></li>
        <li><?php $f->l_date_fieldAnyDay_m('end_date', $$class->end_date); ?></li>
-       <li><?php $f->l_select_field_from_array('end_time' , inoform::$time_a, $$class->end_time); ?></li>
+       <li><?php $f->l_select_field_from_array('end_time', inoform::$time_a, $$class->end_time); ?></li>
+       <li><?php $f->l_text_field_dr('username'); ?></li>
+       <li><?php $f->l_text_field_dr('first_name'); ?></li>
+       <li><?php $f->l_text_field_dr('last_name'); ?></li>
+       <li><?php echo $f->hidden_field_withId('user_id', $$class->user_id); ?></li>
       </ul>
      </div>
     </div>
@@ -50,7 +49,7 @@
     </div> 
     <div id="tabsLine-2" class="tabContent">
      <div class="first_rowset"> 
-<?php echo $f->text_area('event_details', $$class->event_details ,'10','','','','','','','170'); ?>
+      <?php echo $f->text_area('event_details', $$class->event_details, '10', '', '', '', '', '', '', '170'); ?>
      </div>
     </div> 
    </div>
