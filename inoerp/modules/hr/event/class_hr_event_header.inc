@@ -91,6 +91,23 @@ class hr_event_header extends dbObject {
  public $first_name;
  public $last_name;
 
+ public static function find_by_year_user($year = '', $user = '') {
+  $year = empty($year) ? date("Y") : $year;
+  $user = empty($user) ? $_SESSION['user_id'] : $user;
+  $first_date = $year. '-01-01';
+  $last_date = $year.'-12-31';
+  
+  $sql = " SELECT * from ";
+  $sql .= self::$table_name ;
+  $sql .= " WHERE start_date >= '$first_date' ";
+  $sql .= " AND end_date <= '$last_date' ";
+  $sql .= " AND user_id = '$user' ";
+  $sql .= " ORDER BY start_date, start_time ASC ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+  
+ }
+
 }
 
 ?>

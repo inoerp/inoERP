@@ -208,6 +208,41 @@ function deleteComment() {
  });
 }
 
+function calendar_update() {
+ var data_arr = [];
+ $('tbody.cal-year-tbdy').find('td.col3').each(function () {
+  var this_arr = [];
+  this_arr['start_date'] = $(this).attr('start_date');
+  this_arr['end_date'] = $(this).attr('end_date');
+  this_arr['start_time'] = $(this).attr('start_time');
+  this_arr['end_time'] = $(this).attr('end_time');
+  this_arr['title'] = $(this).closest('tr').find('td.col2').text();
+  data_arr.push(this_arr);
+
+ });
+
+
+ $('tbody.cal-week-tbdy').find('td').not('.col_0').empty();
+
+ for (var key in data_arr) {
+  var this_arr = data_arr[key];
+  var start_date = this_arr['start_date'];
+  var start_time = this_arr['start_time'];
+  var end_time = this_arr['end_time'];
+  var title = this_arr['title'];
+
+  var start_time_spla = start_time.split(':');
+  var end_time_spla = end_time.split(':');
+  var total_time = (end_time_spla[0] - start_time_spla[0]) * 60 + (end_time_spla[1] - start_time_spla[1]);
+  var tilte_height = total_time / 30;
+
+  var msg1 = '<div class="event-msg" height="' + tilte_height + '">' + title + '</div>';
+  $('tbody.cal-week-tbdy').find("td[date='" + start_date + "'][time='" + start_time + "']").empty().append(msg1);
+
+ }
+
+}
+
 function deleteImage() {
  var homeUrl = $('#home_url').val();
  var daletePath = homeUrl + 'form.php?class_name=extn_image_reference';
@@ -5444,34 +5479,42 @@ $(document).ready(function () {
   dateFormat: "dd-mm-yy",
   onSelect: function (sd) {
    var date_p = $(this).datepicker('getDate');
-   var date_s = date_p.getDate();
-   var month_s = date_p.getMonth() + 1;
+   var date_s = ("0" + date_p.getDate()).slice(-2);
+   var month_s = ("0" + (date_p.getMonth() + 1)).slice(-2);
    var year_s = date_p.getFullYear();
-   var sunday_date = date_p.getDate() - date_p.getDay();
+   var sunday_date_i = date_p.getDate() - date_p.getDay();
+   var sunday_date = ("0" + (sunday_date_i)).slice(-2);
+   var ino_date = year_s + '-' + month_s + '-' + date_s;
    //day
-   $('table.cal-day .col1').find('.cal-date').empty().append(' ' + sd + ' ');
-   $('table.cal-day').find('td').attr('date', date_p);
+   $('table.cal-day .col1').find('.cal-date').empty().append(' ' + ino_date + ' ');
+   $('table.cal-day').find('td').attr('date', ino_date);
    //week
-   $('table.cal-week .col1').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
-   $('tbody.cal-week-tbdy').find('td.col_1').attr('date', sunday_date + '-' + month_s + '-' + year_s);
+   $('table.cal-week .col1').find('.cal-date').empty().append(' (' + year_s + '-' + month_s + '-' + sunday_date + ') ');
+   $('tbody.cal-week-tbdy').find('td.col_1').attr('date', year_s + '-' + month_s + '-' + sunday_date);
    sunday_date++;
-   $('table.cal-week .col2').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
-   $('tbody.cal-week-tbdy').find('td.col_2').attr('date', sunday_date + '-' + month_s + '-' + year_s);
+   sunday_date = ("0" + (sunday_date)).slice(-2);
+   $('table.cal-week .col2').find('.cal-date').empty().append(' (' + year_s + '-' + month_s + '-' + sunday_date + ') ');
+   $('tbody.cal-week-tbdy').find('td.col_2').attr('date', year_s + '-' + month_s + '-' + sunday_date);
    sunday_date++;
-   $('table.cal-week .col3').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
-   $('tbody.cal-week-tbdy').find('td.col_3').attr('date', sunday_date + '-' + month_s + '-' + year_s);
+   sunday_date = ("0" + (sunday_date)).slice(-2);
+   $('table.cal-week .col3').find('.cal-date').empty().append(' (' + year_s + '-' + month_s + '-' + sunday_date + ') ');
+   $('tbody.cal-week-tbdy').find('td.col_3').attr('date', year_s + '-' + month_s + '-' + sunday_date);
    sunday_date++;
-   $('table.cal-week .col4').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
-   $('tbody.cal-week-tbdy').find('td.col_4').attr('date', sunday_date + '-' + month_s + '-' + year_s);
+   sunday_date = ("0" + (sunday_date)).slice(-2);
+   $('table.cal-week .col4').find('.cal-date').empty().append(' (' + year_s + '-' + month_s + '-' + sunday_date + ') ');
+   $('tbody.cal-week-tbdy').find('td.col_4').attr('date', year_s + '-' + month_s + '-' + sunday_date);
    sunday_date++;
-   $('table.cal-week .col5').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
-   $('tbody.cal-week-tbdy').find('td.col_5').attr('date', sunday_date + '-' + month_s + '-' + year_s);
+   sunday_date = ("0" + (sunday_date)).slice(-2);
+   $('table.cal-week .col5').find('.cal-date').empty().append(' (' + year_s + '-' + month_s + '-' + sunday_date + ') ');
+   $('tbody.cal-week-tbdy').find('td.col_5').attr('date', year_s + '-' + month_s + '-' + sunday_date);
    sunday_date++;
-   $('table.cal-week .col6').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
-   $('tbody.cal-week-tbdy').find('td.col_6').attr('date', sunday_date + '-' + month_s + '-' + year_s);
+   sunday_date = ("0" + (sunday_date)).slice(-2);
+   $('table.cal-week .col6').find('.cal-date').empty().append(' (' + year_s + '-' + month_s + '-' + sunday_date + ') ');
+   $('tbody.cal-week-tbdy').find('td.col_6').attr('date', year_s + '-' + month_s + '-' + sunday_date);
    sunday_date++;
-   $('table.cal-week .col7').find('.cal-date').empty().append(' (' + sunday_date + '-' + month_s + '-' + year_s + ') ');
-   $('tbody.cal-week-tbdy').find('td.col_7').attr('date', sunday_date + '-' + month_s + '-' + year_s);
+   sunday_date = ("0" + (sunday_date)).slice(-2);
+   $('table.cal-week .col7').find('.cal-date').empty().append(' (' + year_s + '-' + month_s + '-' + sunday_date + ') ');
+   $('tbody.cal-week-tbdy').find('td.col_7').attr('date', year_s + '-' + month_s + '-' + sunday_date);
    //month
    $('table.cal-month').find('td').empty();
    $('table.ui-datepicker-calendar td').each(function (i, v) {
@@ -5480,12 +5523,12 @@ $(document).ready(function () {
     if ($(this).find('a').length > 0) {
      var date_val = +$(this).find('a').text();
      $('table.cal-month').find('td.' + cell_no).empty().append(date_val);
-     $('table.cal-month').find('td.' + cell_no).attr('date',date_val + '-' + month_s + '-' + year_s);
+     $('table.cal-month').find('td.' + cell_no).attr('date', year_s + '-' + month_s + '-' + date_val);
     } else {
      $('table.cal-month').find('td.' + cell_no).empty();
     }
-
    });
+   calendar_update();
   }
  });
 

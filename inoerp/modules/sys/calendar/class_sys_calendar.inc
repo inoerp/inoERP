@@ -41,7 +41,6 @@ class sys_calendar extends dbObject {
  public $username;
  public $first_name;
  public $last_name;
- 
 
  public function _before_save() {
   try {
@@ -51,6 +50,18 @@ class sys_calendar extends dbObject {
    echo "Exception<br>" . $e->getMessage();
    return -90;
   }
+ }
+
+ public static function convt_number_time($i, $is_pm = false) {
+  $td_time = '';
+  if ($i < 20) {
+   $td_time .= ($is_pm) ? '0' . 12 + (int) ($i / 2) : '0' . (int) ($i / 2);
+   $td_time .= ($i % 2 == 0 ) ? ':00' : ':30';
+  } else {
+   $td_time .= ($is_pm) ? 12 + (int) ($i / 2) : (int) ($i / 2) ;
+   $td_time .= ($i % 2 == 0 ) ? ':00' : ':30';
+  }
+  return $td_time;
  }
 
  private function _do_before_save() {
