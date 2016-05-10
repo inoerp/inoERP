@@ -217,12 +217,15 @@ function calendar_update() {
   this_arr['start_time'] = $(this).attr('start_time');
   this_arr['end_time'] = $(this).attr('end_time');
   this_arr['title'] = $(this).closest('tr').find('td.col2').text();
+  this_arr['event_id'] = $(this).attr('event_id');
   data_arr.push(this_arr);
 
  });
 
 
  $('tbody.cal-week-tbdy').find('td').not('.col_0').empty();
+ $('tbody.cal-day-tbdy').find('td').not('.col_0').empty();
+// $('tbody.cal-day-tbdy').find('td').not('.col_0').empty();
 
  for (var key in data_arr) {
   var this_arr = data_arr[key];
@@ -230,19 +233,32 @@ function calendar_update() {
   var start_time = this_arr['start_time'];
   var end_time = this_arr['end_time'];
   var title = this_arr['title'];
+  var event_id = this_arr['event_id'];
 
   var start_time_spla = start_time.split(':');
   var end_time_spla = end_time.split(':');
   var total_time = (end_time_spla[0] - start_time_spla[0]) * 60 + (end_time_spla[1] - start_time_spla[1]);
   var tilte_height = total_time / 30;
-
-  var msg1 = '<div class="event-msg" height="' + tilte_height + '">' + title + '</div>';
+  var height_class = 'cal-hgt' + tilte_height;
+  var msg1 = '<div class="event-msg ' + height_class + ' " height="' + tilte_height + '"  event_id="' + event_id + '"   >' + title + '</div>';
   $('tbody.cal-week-tbdy').find("td[date='" + start_date + "'][time='" + start_time + "']").empty().append(msg1);
-
+  $('tbody.cal-day-tbdy').find("td[date='" + start_date + "'][time='" + start_time + "']").empty().append(msg1);
+  $('tbody.cal-month-tbdy').find("td[date='" + start_date + "']").empty().append(msg1);
  }
 
 }
 
+function calendar_size_update() {
+ $('.event-msg').each(function () {
+  var height = $(this).attr('height') * $(this).parent().height();
+  var width = $(this).parent().width();
+  $(this).css({
+   'height': height + 'px',
+   'width': width + 'px'
+  });
+ });
+
+}
 function deleteImage() {
  var homeUrl = $('#home_url').val();
  var daletePath = homeUrl + 'form.php?class_name=extn_image_reference';
@@ -5487,7 +5503,8 @@ $(document).ready(function () {
    var ino_date = year_s + '-' + month_s + '-' + date_s;
    //day
    $('table.cal-day .col1').find('.cal-date').empty().append(' ' + ino_date + ' ');
-   $('table.cal-day').find('td').attr('date', ino_date);
+   $('tbody.cal-day-tbdy').find('td.col_1').attr('date', ino_date);
+
    //week
    $('table.cal-week .col1').find('.cal-date').empty().append(' (' + year_s + '-' + month_s + '-' + sunday_date + ') ');
    $('tbody.cal-week-tbdy').find('td.col_1').attr('date', year_s + '-' + month_s + '-' + sunday_date);
@@ -5529,6 +5546,7 @@ $(document).ready(function () {
     }
    });
    calendar_update();
+   calendar_size_update();
   }
  });
 

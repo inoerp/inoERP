@@ -744,6 +744,12 @@ function ino_eval($string) {
  return $evaled_string;
 }
 
+function ino_validateDate($date)
+{
+    $d = DateTime::createFromFormat('Y-m-d', $date);
+    return $d && $d->format('Y-m-d') === $date;
+}
+
 //function ino_eval($string) {
 // $verify_code = substr($string, 0, 2);
 // if ($verify_code == '<?') {

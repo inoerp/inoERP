@@ -19,6 +19,7 @@ class hr_event_header extends dbObject {
  public static $key_column = 'title';
  public static $table_name = 'hr_event_header';
  public static $primary_column = "hr_event_header_id";
+ public static $dependent_classes = ['hr_event_line'];
  public static $module = "hr";
  public static $system_info = [
   'name' => 'HR Event',

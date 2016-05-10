@@ -61,7 +61,7 @@
 //);
 
 
-$sl_home_url = HOME_URL . 'tparty/extensions/social_login/hybridauth';
+$sl_home_url = HOME_URL . 'tparty/extensions/social_login/hybridauth/';
 
 $providers_a = [];
 $all_providers = extn_social_login::find_all();
@@ -69,15 +69,15 @@ foreach ($all_providers as $k => $sp) {
  switch ($sp->provider_name) {
 
   case 'Facebook':
-   $providers_a['Facebook'] = ['enabled' => true, 'keys' => ['id' => $sp->sl_id, 'secret' => $sp->sl_secret], "trustForwarded" => false];
+   $providers_a['Facebook'] = ['enabled' => true, 'keys' => ['id' => $sp->slid, 'secret' => $sp->sl_secret], "trustForwarded" => false];
    break;
 
   case 'Google':
-   $providers_a['Google'] = ['enabled' => true, 'keys' => ['id' => $sp->sl_id, 'secret' => $sp->sl_secret]];
+   $providers_a['Google'] = ['enabled' => true, 'keys' => ['id' => $sp->slid, 'secret' => $sp->sl_secret]];
    break;
 
   case 'Yahoo':
-   $providers_a['Yahoo'] = ['enabled' => true, 'keys' => ['key' => $sp->sl_id, 'secret' => $sp->sl_secret]];
+   $providers_a['Yahoo'] = ['enabled' => true, 'keys' => ['key' => $sp->slid, 'secret' => $sp->sl_secret]];
    break;
 
   default:
