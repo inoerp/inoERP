@@ -7,6 +7,8 @@
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic'); ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Basic-2'); ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Details'); ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -44,12 +46,32 @@
       <?php echo $f->text_area('event_details', $$class->event_details, '10', '', '', '', '', '', '', '150'); ?>
      </div>
     </div>
+    <div id="tabsHeader-4" class="tabContent">
+     <div> 
+      <div id="comments">
+       <div id="comment_list">
+        <?php echo!(empty($comments)) ? $comments : ""; ?>
+       </div>
+       <div id ="display_comment_form">
+        <?php
+        $reference_table = 'hr_event_header';
+        $reference_id = $$class->hr_event_header_id;
+        ?>
+       </div>
+       <div id="new_comment">
+       </div>
+      </div>
+     </div>
+    </div>
+    <div id="tabsHeader-5" class="tabContent">
+     <div> <?php echo ino_attachement($file) ?> </div>
+    </div>
    </div>
   </div>
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Event Members & Resources' ) ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Event Members & Resources') ?></span>
  <form method="post" id="hr_event_line"  name="hr_event_line">
   <div id="tabsLine">
    <ul class="tabMain">
@@ -72,7 +94,8 @@
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0; $f = new inoform();
+       $count = 0;
+       $f = new inoform();
        foreach ($hr_event_line_object as $hr_event_line) {
         $$class_second->username = !empty($hr_event_line->user_id) ? user::find_by_id($hr_event_line->user_id)->username : '';
         ?>         

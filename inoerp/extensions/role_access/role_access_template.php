@@ -37,20 +37,19 @@
         foreach ($role_access_object as $role_access) {
          ?>         
          <tr class="role_access<?php echo $count ?>">
-          <td>    
-           <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->role_access_id); ?>"></li>           
-            <li><?php echo form::hidden_field('role_code', $role_code_h); ?></li>
-           </ul>
+          <td><?php
+           echo ino_inline_action($$class->role_access_id, array('role_code' => $role_code_h));
+           ?>
           </td>
+
           <td><?php form::number_field_drs('role_access_id') ?></td>
-          <td><?php $eng_all = engine::find_all();
-          foreach($eng_all as $k => $v ){
-           $v->obj_class_name_fn = ucwords(str_replace('_', ' ', $v->obj_class_name));
-          }
-          echo $f->select_field_from_object('obj_class_name', $eng_all, 'obj_class_name', 'obj_class_name_fn', $$class->obj_class_name, '', '', 1); ?></td>
+          <td><?php
+           $eng_all = engine::find_all();
+           foreach ($eng_all as $k => $v) {
+            $v->obj_class_name_fn = ucwords(str_replace('_', ' ', $v->obj_class_name));
+           }
+           echo $f->select_field_from_object('obj_class_name', $eng_all, 'obj_class_name', 'obj_class_name_fn', $$class->obj_class_name, '', '', 1);
+           ?></td>
           <td><?php echo $f->select_field_from_array('access_level', role_access::$access_map, $$class->access_level); ?></td>
          </tr>
          <?php
@@ -69,7 +68,7 @@
 
 <div class="row small-top-margin">
  <div id="pagination" style="clear: both;">
-  <?php echo $pagination->show_pagination(); ?>
+<?php echo $pagination->show_pagination(); ?>
  </div>
 </div>
 

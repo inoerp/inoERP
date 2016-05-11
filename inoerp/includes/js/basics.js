@@ -5550,6 +5550,13 @@ $(document).ready(function () {
   }
  });
 
+//remove links with no child
+$('ul.block_menu').find('li.parent_menu').each(function(){
+  if($(this).children('ul.child_menu').children().length < 1 ){
+    $(this).remove();
+  }
+});
+
 });
 
 function remove_unsaved_msg() {
