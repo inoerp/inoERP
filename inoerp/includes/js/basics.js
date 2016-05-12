@@ -61,6 +61,7 @@ function getFormDetails(url) {
   if (typeof allButton === 'undefined') {
    allButton = '';
   }
+  var breadCrumb = $(result).filter('div#top-bc').html();
   var commentForm = $(result).find('div#comment_form').html();
   if (newContent) {
    if ($('#path_by_module').length > 0) {
@@ -69,6 +70,10 @@ function getFormDetails(url) {
    $('#structure').replaceWith('<div id="structure">' + newContent + '</div>');
 //   $('#structure').append(path_by_module_content);
    $('#header_top_container').replaceWith('<div id="header_top_container"> <ul id="form_top_image" class="draggable">' + allButton + '</ul></div>');
+   if (typeof breadCrumb !== 'undefined') {
+    $('#top-bc').replaceWith('<div id="top-bc" class="container ajax_content">' + breadCrumb + '</div>');
+   }
+
    $('#display_comment_form').append(commentForm);
    if ($(result).find('div#document_history').html()) {
     $('#document_history').replaceWith('<div id="document_history">' + $(result).find('div#document_history').html() + '</div>');
@@ -4589,6 +4594,8 @@ $(document).ready(function () {
   var pageType = urlLink_firstPart_a.pop();
   if (pageType == 'form.php') {
    var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
+  } else if (pageType == 'content.php') {
+   var formUrl = 'includes/json/json_content.php?' + urlLink_a[1];
   } else if (pageType == 'program.php') {
    var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
   } else {
@@ -5551,11 +5558,11 @@ $(document).ready(function () {
  });
 
 //remove links with no child
-$('ul.block_menu').find('li.parent_menu').each(function(){
-  if($(this).children('ul.child_menu').children().length < 1 ){
-    $(this).remove();
+ $('ul.block_menu').find('li.parent_menu').each(function () {
+  if ($(this).children('ul.child_menu').children().length < 1) {
+   $(this).remove();
   }
-});
+ });
 
 });
 
