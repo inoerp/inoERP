@@ -4595,7 +4595,8 @@ $(document).ready(function () {
   if (pageType == 'form.php') {
    var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
   } else if (pageType == 'content.php') {
-   var formUrl = 'includes/json/json_content.php?' + urlLink_a[1];
+     var homeUrl = $('#home_url').val();
+     var formUrl = homeUrl + 'includes/json/json_content.php?' + urlLink_a[1];
   } else if (pageType == 'program.php') {
    var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
   } else {
@@ -4812,17 +4813,10 @@ $(document).ready(function () {
   modal: true,
   minWidth: 800,
   title: "Filters",
-  show: {
-   effect: "blind",
-   duration: 1000
-  },
-  hide: {
-   effect: "explode",
-   duration: 1000
-  },
   buttons: [
    {
     text: "Done",
+    class: 'button btn btn-info btn-done',
     click: function () {
      $("#filter_area").find('input.field_name').val('');
      $(this).dialog("close");
@@ -4835,6 +4829,9 @@ $(document).ready(function () {
 
 
  $('body').off('click', '.apply-filter').on('click', '.apply-filter', function () {
+  if($('#searchForm').length < 1 ){
+   return true;
+  }
   var inputFieldName = $(this).closest('.list_filter').find('select.field_name').val();
   var inputFieldCondition = $(this).closest('.list_filter').find('select.condition_name').val();
   var inputFieldValue = $(this).closest('.list_filter').find('input.condition_value').val();

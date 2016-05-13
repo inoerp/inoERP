@@ -626,7 +626,7 @@ class extn_report extends dbObject {
 
   $return_stmt .= $this->footer_text;
   if (!empty($this->_class_name)) {
-   $return_stmt = '<div class="' . $this->_class_name . '"><div class="extn_report_display_data">' . $return_stmt . '</div></div>';
+   $return_stmt = '<div class="' . $this->_class_name . '"><div class="extn_report_display_data" id="report_id'.$this->extn_report_id.'">' . $return_stmt . '</div></div>';
   } else {
    $return_stmt = '<div class="extn_report_display_data">' . $return_stmt . '</div>';
   }
