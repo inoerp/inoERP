@@ -2054,6 +2054,18 @@ function ino_filter_form() {
    <button title="Remove Filter" class="btn btn-default btn-sm remove-filter"><i class="fa fa-remove text-muted"></i></button>
   </div>
  </div>
+    <div class="sorted_elements_asc">
+    <div class="btn-group">
+     <button title="Edit Sort" class="btn btn-default btn-sm toggle-sort-asc"><i class="fa fa-sort-alpha-asc"></i></button>
+     <button title="Remove Sort" class="btn btn-default btn-sm remove-sort-asc"><i class="fa fa-remove text-muted"></i></button>
+    </div>
+   </div>
+       <div class="sorted_elements_desc">
+    <div class="btn-group">
+     <button title="Edit Sort" class="btn btn-default btn-sm toggle-sort-desc"><i class="fa fa-sort-alpha-desc"></i></button>
+     <button title="Remove Sort" class="btn btn-default btn-sm remove-sort-desc"><i class="fa fa-remove text-muted"></i></button>
+    </div>
+   </div>
  ';
  // <button class="button btn btn-warning remove-filter" type="submit"  name="removeFilter">Remove</button>  
  return $ino_filter_form;

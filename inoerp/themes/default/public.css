@@ -2467,3 +2467,8 @@ td .checkBox ,#form_line  input[type="radio"]{
 .height-100{
  height : 100px;
 }
+
+#contents_listDiv table{
+        border : 1px solid #ccc;
+        
+}

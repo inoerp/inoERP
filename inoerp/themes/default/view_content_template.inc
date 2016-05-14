@@ -69,7 +69,7 @@
           if ($comment_privilage >= 4) {
            $reference_table = 'content';
            $reference_id = $content->content_id;
-           include_once 'comment.php';
+           include_once __DIR__.'/../../comment.php';
           } else {
            echo "<a href='" . HOME_URL . "extensions/user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
           }
