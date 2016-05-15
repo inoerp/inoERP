@@ -11350,8 +11350,8 @@ msgstr "No lot Number Found!\nCheck the subinventory, locator and item number   
 msgid "No from subinventory      "
 msgstr "No from subinventory      "
 
-msgid "Item is not defined in the organization.Select a differnt organization      "
-msgstr "Item is not defined in the organization.Select a differnt organization      "
+msgid "Item is not defined in the organization.Select a different organization      "
+msgstr "Item is not defined in the organization.Select a different organization      "
 
 msgid "No Receipt Header ID/nEnter or Save The Header Details       "
 msgstr "No Receipt Header ID/nEnter or Save The Header Details       "
@@ -11359,8 +11359,8 @@ msgstr "No Receipt Header ID/nEnter or Save The Header Details       "
 msgid "Please update your terminal number!      "
 msgstr "Please update your terminal number!      "
 
-msgid "Selected delivery is assigned to a differnt delivery number      "
-msgstr "Selected delivery is assigned to a differnt delivery number      "
+msgid "Selected delivery is assigned to a different delivery number      "
+msgstr "Selected delivery is assigned to a different delivery number      "
 
 msgid "You cant ship more than picked quantity      "
 msgstr "You cant ship more than picked quantity      "

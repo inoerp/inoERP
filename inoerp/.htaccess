@@ -9,6 +9,8 @@ DirectoryIndex index.php index1.php index.html index.htm
   Order allow,deny
 </FilesMatch>
 
+
+
 #for conten url alias
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f

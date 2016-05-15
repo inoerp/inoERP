@@ -14,6 +14,10 @@ $('#form_line').on('change', '.pm_formula_ingredient_id', function(){
   $(trClass).find('.uom_id').val($(this).find('option:selected').data('uom_id'));
   $(trClass).find('.quantity').val($(this).find('option:selected').data('quantity'));
 
-})
+});
 
+$('body').off('change', 'select.pm_process_routing_line_id').on('change', 'select.pm_process_routing_line_id' , function (e) {
+  $(this).closest('tr').find('input.step').val($(this).find('option:selected').data('step_no'));
+ });
+ 
 });

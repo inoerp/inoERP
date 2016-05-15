@@ -74,11 +74,11 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Step') ?></th>
         <th><?php echo gettext('Ingredient') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
         <th><?php echo gettext('Routing Line') ?></th>
+        <th><?php echo gettext('Step') ?></th>
         <th><?php echo gettext('Description') ?></th>
        </tr>
       </thead>
@@ -91,17 +91,16 @@ inoERP
         <tr class="pm_recipe_material_line<?php echo $count ?>">
          <td>
           <?php
-          $f = new inoform();
           echo ino_inline_action($pm_recipe_material_line->pm_recipe_material_line_id, array('pm_recipe_material_header_id' => $$class->pm_recipe_material_header_id));
           ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('pm_recipe_material_line_id'); ?></td>
-         <td><?php $f->text_field_wid2('step'); ?></td>
          <td><?php echo $f->select_field_from_object('pm_formula_ingredient_id', $forumla_ingredients, 'pm_formula_ingredient_id', ['item_number', 'revision_name', 'item_description', 'description'], $$class_second->pm_formula_ingredient_id, '', 'large', 1, '', '', '', '', ['quantity' ,'uom_id']); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small always_readonly' , '', '1'); ?></td>
          <td><?php form::number_field_wid2s('quantity'); ?></td>
-         <td><?php echo $f->select_field_from_object('pm_process_routing_line_id', $pm_process_routing_lines, 'pm_process_routing_line_id', ['operation_name', 'operation_description'], $$class_second->pm_process_routing_line_id, '', 'large', 1); ?></td>
+         <td><?php echo $f->select_field_from_object('pm_process_routing_line_id', $pm_process_routing_lines, 'pm_process_routing_line_id', [ 'step_no', 'operation_name'], $$class_second->pm_process_routing_line_id, '', 'large', 1 ,'','','','','step_no'); ?></td>
+         <td><?php $f->text_field_wid2r('step' ,'always_readonly'); ?></td>
          <td><?php $f->text_field_wid2('description', 'large'); ?></td>
         </tr>
         <?php

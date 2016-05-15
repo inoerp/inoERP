@@ -37,6 +37,7 @@ class pm_batch_ingredient extends dbObject {
   'actual_quantity',
   'requirement_date',
   'subinventory_id',
+  'step_no',
   'locator_id',
   'created_by',
   'creation_date',
@@ -63,6 +64,7 @@ public $planned_quantity;
 public $description;
 public $wip_planned_quantity;
 public $scale_type;
+public $step_no;
 public $contribute_yield_cb;
 public $byproduct_type;
 public $consumption_type;

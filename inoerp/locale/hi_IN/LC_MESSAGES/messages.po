@@ -11377,8 +11377,8 @@ msgstr "कोई बहुत नंबर मिला! check subinventory, �
 msgid "No from subinventory      "
 msgstr "कोई subinventory से"
 
-msgid "Item is not defined in the organization.Select a differnt organization      "
-msgstr "आइटम एक differnt संगठन organization.Select में परिभाषित नहीं है"
+msgid "Item is not defined in the organization.Select a different organization      "
+msgstr "आइटम एक different संगठन organization.Select में परिभाषित नहीं है"
 
 msgid "No Receipt Header ID/nEnter or Save The Header Details       "
 msgstr "कोई रसीद हैडर आईडी / Nenter या सहेजें हैडर विवरण"
@@ -11386,8 +11386,8 @@ msgstr "कोई रसीद हैडर आईडी / Nenter या सह�
 msgid "Please update your terminal number!      "
 msgstr "अपने टर्मिनल नंबर अपडेट करें!"
 
-msgid "Selected delivery is assigned to a differnt delivery number      "
-msgstr "चयनित वितरण एक differnt वितरण नंबर को सौंपा है"
+msgid "Selected delivery is assigned to a different delivery number      "
+msgstr "चयनित वितरण एक different वितरण नंबर को सौंपा है"
 
 msgid "You cant ship more than picked quantity      "
 msgstr "आप उठाया मात्रा से अधिक जहाज नहीं कर सकते"

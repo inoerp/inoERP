@@ -2472,3 +2472,7 @@ td .checkBox ,#form_line  input[type="radio"]{
         border : 1px solid #ccc;
         
 }
+
+li.flow_coneector .fa{
+        color: #ccc;
+}

@@ -25,6 +25,7 @@ class pm_batch_line extends dbObject {
   'description',
   'scale_type',
   'yield_type',
+  'step_no',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -52,6 +53,7 @@ class pm_batch_line extends dbObject {
  public $actual_quantity;
  public $allocated_qty;
  public $yield_date;
+ public $step_no;
  public $subinventory_id;
  public $locator_id;
  public $description;
