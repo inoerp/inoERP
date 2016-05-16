@@ -181,8 +181,8 @@ class pm_batch_header extends dbObject {
 
  private function _copy_batch_products() {
   global $dbc, $ie;
-  $all_product_lines = pm_formula_line::find_by_parent_id($this->_pm_formula_header_id);
-  //check if batch products exists
+  $all_product_lines = pm_formula_line::find_by_headerId_recipeMaterial($this->_pm_formula_header_id);
+   //check if batch products exists
   $bacth_lines = pm_batch_line::find_by_parent_id($this->pm_batch_header_id);
   if (!empty($bacth_lines)) {
    return -1;
@@ -207,10 +207,10 @@ class pm_batch_header extends dbObject {
 
  private function _copy_batch_byproducts() {
   global $dbc, $ie;
-  $all_byproduct_lines = pm_formula_byproduct::find_by_parent_id($this->_pm_formula_header_id);
+  $all_byproduct_lines = pm_formula_byproduct::find_by_headerId_recipeMaterial($this->_pm_formula_header_id);
   //check if batch products exists
   $byproduct_lines = pm_batch_byproduct::find_by_parent_id($this->pm_batch_header_id);
-  if (!empty($byproduct_lines)) {
+  if (!empty($byproduct_lines) || empty($all_byproduct_lines)) {
    return -1;
   }
   $pbb = new pm_batch_byproduct();
@@ -233,7 +233,7 @@ class pm_batch_header extends dbObject {
 
  private function _copy_batch_ingredients() {
   global $dbc, $ie;
-  $all_ingredient_lines = pm_formula_ingredient::find_by_parent_id($this->_pm_formula_header_id);
+  $all_ingredient_lines = pm_formula_ingredient::find_by_headerId_recipeMaterial($this->_pm_formula_header_id);
   //check if batch products exists
   $ingredient_lines = pm_batch_ingredient::find_by_parent_id($this->pm_batch_header_id);
   if (!empty($ingredient_lines)) {
@@ -282,6 +282,7 @@ class pm_batch_header extends dbObject {
      }
     }
     $pbol->pm_batch_header_id = $this->pm_batch_header_id;
+    $pbol->step_no = $routing_line->step_no;
     $pbol->pm_process_routing_header_id = $routing_line->pm_process_operation_header_id;
     try {
      $pbol->save();

@@ -13,12 +13,10 @@ class pm_formula_line extends dbObject {
   'INC' => 'Incremental',
   'AUTOBS' => 'Auto By Step',
  ];
- 
-  public static $scale_type_a = [
+ public static $scale_type_a = [
   'FIX' => 'Fixed',
   'PROP' => 'Proportional',
  ];
-
  public $field_a = [
   'pm_formula_line_id',
   'pm_formula_header_id',
@@ -52,30 +50,28 @@ class pm_formula_line extends dbObject {
  public $fields_inForm_notInDataBase = [
   'item_description',
  ];
-public $pm_formula_line_id;
-public $pm_formula_header_id;
-public $line_no;
-public $line_type;
-public $item_id_m;
-public $uom_id;
-public $quantity;
-public $description;
-public $cost_allocation;
-public $scale_type;
-public $yield_type;
-public $byproduct_type;
-public $consumption_type;
-public $phantom_type;
-public $required_qty;
-public $created_by;
-public $creation_date;
-public $last_update_by;
-public $last_update_date;
-
+ public $pm_formula_line_id;
+ public $pm_formula_header_id;
+ public $line_no;
+ public $line_type;
+ public $item_id_m;
+ public $uom_id;
+ public $quantity;
+ public $description;
+ public $cost_allocation;
+ public $scale_type;
+ public $yield_type;
+ public $byproduct_type;
+ public $consumption_type;
+ public $phantom_type;
+ public $required_qty;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
  public $time;
  public $msg;
-public $item_description;
-
+ public $item_description;
 
 // public function findBy_parentId($pm_formula_header_id, $order_by_field = '', $order_by_seq = '') {
 //  /*
@@ -139,6 +135,68 @@ and pfh.pm_formula_header_id = pfl.pm_formula_header_id
 and pfh.org_id =item.org_id
 and pfl.pm_formula_header_id = '{$header_id}'
 ";
+
+  $result_array = self::find_by_sql($sql);
+  return !empty($result_array) ? $result_array : false;
+ }
+
+ public static function find_by_headerId_recipeMaterial($header_id) {
+  $sql = "  SELECT 
+   pfl.pm_formula_line_id,   pfl.pm_formula_header_id,   pfl.line_no,   pfl.line_type,   pfl.item_id_m,   pfl.uom_id,   pfl.quantity,
+pfl.description,   pfl.cost_allocation,   pfl.scale_type,   pfl.yield_type,   pfl.byproduct_type,   pfl.consumption_type,   pfl.phantom_type,
+pfl.required_qty,
+   rml.pm_recipe_material_line_id,  	rml.pm_process_routing_line_id, rml.step_no
+  
+  FROM pm_formula_line as pfl,
+  pm_recipe_material_line rml
+  
+  WHERE rml.pm_formula_line_id = pfl.pm_formula_line_id
+  and pfl.pm_formula_header_id = '{$header_id}'
+";
+
+  $result_array = self::find_by_sql($sql);
+  return !empty($result_array) ? $result_array : false;
+ }
+
+// public static function find_all_by_ReceipeHeaderId($pm_recipe_header_id) {
+//  $sql = " SELECT
+//prh.pm_recipe_header_id, prh.org_id, prh.recipe_name, prh.pm_formula_header_id, prh.pm_process_routing_header_id, prh.item_id_m,
+//pfl.pm_formula_line_id,item.item_number, item.item_description as item_description
+//
+//FROM 
+//pm_recipe_header prh,
+//item,
+//pm_formula_line pfl
+//
+//
+//WHERE prh.pm_formula_header_id = pfl.pm_formula_header_id
+//AND pfl.item_id_m = item.item_id_m
+//AND item.org_id = prh.org_id
+//and prh.pm_recipe_header_id = '{$pm_recipe_header_id}'
+//";
+//
+//  $result_array = self::find_by_sql($sql);
+//
+//  return !empty($result_array) ? $result_array : false;
+// }
+ 
+  public static function find_all_by_formulaHeaderId($pm_formula_header_id) {
+  $sql = " SELECT 
+pfl.pm_formula_line_id,   pfl.pm_formula_header_id,   pfl.line_no,   pfl.line_type,   pfl.item_id_m,   pfl.uom_id,   pfl.quantity,
+pfl.description,   pfl.cost_allocation,   pfl.scale_type,   pfl.yield_type,   pfl.byproduct_type,   pfl.consumption_type,   pfl.phantom_type,
+pfl.required_qty,
+item.item_number, item.item_description
+
+from pm_formula_line pfl,
+pm_formula_header pfh,
+item
+
+WHERE item.item_id_m = pfl.item_id_m
+and pfh.pm_formula_header_id =pfl.pm_formula_header_id
+and pfh.org_id =item.org_id
+and pfh.pm_formula_header_id = '{$pm_formula_header_id}'
+";
+
 
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? $result_array : false;

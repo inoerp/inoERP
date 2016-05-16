@@ -64,7 +64,6 @@ inoERP
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Routing Steps') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Other Details') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -77,8 +76,10 @@ inoERP
         <th><?php echo gettext('Ingredient') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Routing Line') ?></th>
-        <th><?php echo gettext('Step') ?></th>
+        <th><?php echo gettext('Product') ?></th>
+        <th><?php echo gettext('By Product') ?></th>
+          <th><?php echo gettext('Routing Line') ?></th>
+        <th><?php echo gettext('Step') ?> #</th>
         <th><?php echo gettext('Description') ?></th>
        </tr>
       </thead>
@@ -96,11 +97,13 @@ inoERP
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('pm_recipe_material_line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('pm_formula_ingredient_id', $forumla_ingredients, 'pm_formula_ingredient_id', ['item_number', 'revision_name', 'item_description', 'description'], $$class_second->pm_formula_ingredient_id, '', 'large', 1, '', '', '', '', ['quantity' ,'uom_id']); ?></td>
-         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small always_readonly' , '', '1'); ?></td>
+         <td><?php echo $f->select_field_from_object('pm_formula_ingredient_id', $forumla_ingredients, 'pm_formula_ingredient_id', ['item_number', 'revision_name', 'item_description', 'description'], $$class_second->pm_formula_ingredient_id, '', 'one_value', '', '', '', '', '', ['quantity', 'uom_id']); ?></td>
+         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small always_readonly', '', '1'); ?></td>
          <td><?php form::number_field_wid2s('quantity'); ?></td>
-         <td><?php echo $f->select_field_from_object('pm_process_routing_line_id', $pm_process_routing_lines, 'pm_process_routing_line_id', [ 'step_no', 'operation_name'], $$class_second->pm_process_routing_line_id, '', 'large', 1 ,'','','','','step_no'); ?></td>
-         <td><?php $f->text_field_wid2r('step' ,'always_readonly'); ?></td>
+         <td><?php echo $f->select_field_from_object('pm_formula_line_id', $pm_formula_lines, 'pm_formula_line_id', ['item_number', 'item_description'], $$class_second->pm_formula_line_id, '', 'one_value'); ?></td>
+         <td><?php echo $f->select_field_from_object('pm_formula_byproduct_id', $pm_formula_byproducts, 'pm_formula_byproduct_id', ['item_number', 'item_description'], $$class_second->pm_formula_byproduct_id, '', 'one_value medium'); ?></td>
+         <td><?php echo $f->select_field_from_object('pm_process_routing_line_id', $pm_process_routing_lines, 'pm_process_routing_line_id', [ 'step_no', 'operation_name'], $$class_second->pm_process_routing_line_id, '', '', 1, '', '', '', '', 'step_no'); ?></td>
+         <td><?php $f->text_field_wid2r('step_no', 'always_readonly small'); ?></td>
          <td><?php $f->text_field_wid2('description', 'large'); ?></td>
         </tr>
         <?php
@@ -110,9 +113,7 @@ inoERP
       </tbody>
      </table>
     </div>
-    <div id="tabsLine-2" class="tabContent">
 
-    </div>
    </div>
   </div>
  </form>

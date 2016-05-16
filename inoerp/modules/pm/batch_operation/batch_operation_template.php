@@ -89,6 +89,7 @@ inoERP
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Step') ?> #</th>
         <th><?php echo gettext('Activity') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('Factor') ?></th>
@@ -112,6 +113,7 @@ inoERP
          </td>
 
          <td><?php form::text_field_wid2sr('pm_batch_operation_line_id'); ?></td>
+         <td><?php echo $f->number_field('step_no', $$class_second->step_no, '', '', 'small ','' , 1); ?></td>
          <td><?php echo $f->select_field_from_object('activity_code', option_header::find_options_byName('PM_OPERATION_ACTIVITY'), 'option_line_code', 'option_line_value', $$class_second->activity_code, '', 'medium'); ?></td>
          <td><?php $f->text_field_wid2('description', 'xlarge'); ?></td>
          <td><?php $f->text_field_wid2('activity_factror'); ?></td>

@@ -175,8 +175,8 @@ inoERP
         <th><?php echo gettext('Ingredient') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Planned Qty') ?></th>
-        <th><?php echo gettext('Allocated Qty') ?></th>
+        <th><?php echo gettext('Planned') ?></th>
+        <th><?php echo gettext('Allocated') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Yield') ?></th>
         <th><?php echo gettext('Consumption') ?></th>
@@ -190,10 +190,10 @@ inoERP
        foreach ($pm_batch_ingredient_object as $pm_batch_ingredient) {
         if (!empty($pm_batch_ingredient->item_id_m)) {
          $item_ig = item::find_by_item_id_m($pm_batch_ingredient->item_id_m);
-         $$class_third->item_number = $item_f->item_number;
-         $$class_third->item_description = $item_f->item_description;
+         $$class_third->item_number = $item_ig->item_number;
+         $$class_third->item_description = $item_ig->item_description;
         } else {
-         $$class_third->item_number = $$class_second->item_description = null;
+         $$class_third->item_number = $$class_third->item_description = null;
         }
         ?>         
         <tr class="pm_batch_ingredient<?php echo $count ?>">

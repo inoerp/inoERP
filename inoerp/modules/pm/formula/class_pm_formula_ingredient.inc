@@ -89,6 +89,47 @@ and pfi.pm_formula_header_id = '{$header_id}'
   return !empty($result_array) ? $result_array : false;
  }
 
+ public static function find_by_headerId_recipeMaterial($header_id) {
+  $sql = "  SELECT fih.pm_formula_ingredient_id,   fih.pm_formula_header_id,   fih.line_no,
+  fih.revision_name,   fih.item_id_m,   fih.uom_id,   fih.quantity,
+  fih.description,   fih.scale_type,   fih.contribute_yield_cb,   fih.consumption_type,
+  fih.buffer_cb,   fih.phantom_type,   fih.required_qty,   fih.created_by,
+  fih.creation_date,   fih.last_update_by,   fih.last_update_date,
+   rml.pm_recipe_material_line_id,  	rml.pm_process_routing_line_id, rml.step_no
+  
+  FROM pm_formula_ingredient as fih,
+  pm_recipe_material_line rml
+  
+  WHERE rml.pm_formula_ingredient_id = fih.pm_formula_ingredient_id
+  and fih.pm_formula_header_id = '{$header_id}'
+";
+
+  $result_array = self::find_by_sql($sql);
+  return !empty($result_array) ? $result_array : false;
+ }
+
+ public static function find_all_by_formulaHeaderId($pm_formula_header_id) {
+  $sql = " SELECT 
+pfi.pm_formula_ingredient_id, pfi.pm_formula_header_id, pfi.line_no, pfi.revision_name, pfi.item_id_m,
+pfi.uom_id, pfi.quantity, pfi.description, pfi.scale_type, pfi.contribute_yield_cb, pfi.consumption_type,
+pfi.buffer_cb, pfi.phantom_type, pfi.required_qty,
+item.item_number, item.item_description
+
+from pm_formula_ingredient pfi,
+pm_formula_header pfh,
+item
+
+WHERE item.item_id_m = pfi.item_id_m
+and pfh.pm_formula_header_id =pfi.pm_formula_header_id
+and pfh.org_id =item.org_id
+and pfh.pm_formula_header_id = '{$pm_formula_header_id}'
+";
+
+
+  $result_array = self::find_by_sql($sql);
+  return !empty($result_array) ? $result_array : false;
+ }
+
 }
 
 //end of pm_formula_ingredient class

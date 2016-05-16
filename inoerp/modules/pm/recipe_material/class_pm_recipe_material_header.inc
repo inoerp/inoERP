@@ -81,7 +81,7 @@ class pm_recipe_material_header extends dbObject {
   'status',
   'org_id',
  ];
- public $pageTitle = " Recipe Header "; //page Title
+ public $pageTitle = " Recipe Material "; //page Title
  public $pm_recipe_material_header_id;
  public $pm_recipe_header_id;
  public $status;
