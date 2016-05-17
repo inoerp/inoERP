@@ -53,7 +53,6 @@ inoERP
         echo $f->l_val_field_d('buyer', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
         echo $f->hidden_field_withId('hr_employee_id', $$class->hr_employee_id);
         ?><i class="generic g_select_document_owner select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
-       <li><?php $f->l_text_field_d('buyer'); ?></li> 
        <li><?php $f->l_text_field_d('description'); ?></li> 
       </ul>
      </div>

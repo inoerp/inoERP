@@ -33,6 +33,13 @@ class pm_batch_header extends dbObject {
   'module_name' => 'prj',
   'weight' => 1
  ];
+ public static $status_a = [
+  'PENDING' => 'Pending',
+  'WIP' => 'WIP',
+  'COMPLETED' => 'Completed',
+  'CLOSED' => 'Closed',
+  'CANCELLED' => 'Cancelled',
+ ];
  public $action_a = [
   'APPROVE' => 'Approve',
   'PRINT' => 'Print Estimates',
@@ -70,6 +77,7 @@ class pm_batch_header extends dbObject {
  public $initial_search = [
   'batch_name',
   'description',
+  'status',
  ];
  public $requiredField = [
   'org_id',

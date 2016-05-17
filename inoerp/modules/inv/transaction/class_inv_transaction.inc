@@ -78,6 +78,10 @@ class inv_transaction extends dbObject {
   'bom_config_header_id',
   'transaction_rev_enabled_cb',
   'rev_start_number',
+  'pm_batch_line_id',
+  'pm_batch_header_id',
+  'pm_batch_ingredient_id',
+  'pm_batch_byproduct_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -114,7 +118,8 @@ class inv_transaction extends dbObject {
   'lot_quantity',
   'kit_cb',
   'onhand',
-  'reservable_onhand'
+  'reservable_onhand',
+  'line_type'
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
@@ -177,6 +182,10 @@ class inv_transaction extends dbObject {
  public $bom_config_header_id;
  public $transaction_rev_enabled_cb;
  public $rev_start_number;
+ public $pm_batch_line_id;
+ public $pm_batch_header_id;
+ public $pm_batch_ingredient_id;
+ public $pm_batch_byproduct_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -227,6 +236,7 @@ class inv_transaction extends dbObject {
  public $reservable_onhand;
  public $onhand;
  public $ar_customer_site_id;
+ public $line_type;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -701,7 +711,7 @@ class inv_transaction extends dbObject {
   }
 
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25 , 26))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26))) {
    $return_val = $this->_transact_serial_receipt();
   }
 
