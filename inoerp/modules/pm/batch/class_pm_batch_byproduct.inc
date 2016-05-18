@@ -29,6 +29,8 @@ class pm_batch_byproduct extends dbObject {
   'scale_type',
   'yield_type',
   'byproduct_type',
+  'subinventory_id',
+  'locator_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -58,6 +60,8 @@ class pm_batch_byproduct extends dbObject {
  public $allocated_quantity;
  public $planned_quantity;
  public $byproduct_type;
+ public $subinventory_id;
+ public $locator_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;

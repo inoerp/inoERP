@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id="pm_material_transaction_divId">
- <?php // echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
+ <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
  $f = new inoform() ?> 
  <!--    End of place for showing error messages-->
 
@@ -50,6 +50,7 @@ inoERP
         <tr>
          <th><?php echo gettext('Action') ?></th>
          <th><?php echo gettext('Seq') ?></th>
+         <th><?php echo gettext('Line Type') ?></th>
          <th><?php echo gettext('Line Id') ?></th>
          <th><?php echo gettext('Item Id') ?></th>
          <th><?php echo gettext('Item Number') ?></th>
@@ -65,12 +66,13 @@ inoERP
         <tr class="pm_material_transaction0" id="tab1_1">
          <td>
           <?php
-          echo ino_inline_action($$class->pm_batch_ingredient_id, array('org_id' => $$class->org_id,
-           'pm_batch_header_id' => $$class->pm_batch_header_id, 'transaction_type_id' => $$class->transaction_type_id));
+          echo ino_inline_action($$class->bom_sequence, array('org_id' => $$class->org_id,
+           'pm_wo_header_id' => $$class->pm_wo_header_id, 'transaction_type_id' => $$class->transaction_type_id));
           ?>
          </td>
          <td><?php echo !empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
-         <td><?php $f->text_field_widr('pm_batch_ingredient_id'); ?></td>
+         <td><?php $f->text_field_widr('line_type'); ?></td>
+         <td><?php $f->text_field_widr('line_id'); ?></td>
          <td><?php $f->text_field_widrm('item_id_m'); ?></td>
          <td><?php $f->text_field_widr('item_number'); ?></td>
          <td><?php $f->text_field_widr('item_description'); ?></td>

@@ -85,10 +85,10 @@ $(document).ready(function () {
  });
 
 
- var document_type = 'Batch';
- var reference = 'pm_batch_header_id';
- var documentNumber = $('#batch_name').val();
- var documentId = $('#pm_batch_header_id').val();
+ var document_type = 'Work Order';
+ var reference = 'wip_wo_header_id';
+ var documentNumber = $('#wo_number').val();
+ var documentId = $('#wip_wo_header_id').val();
 
 // addOrShow_lineDetails('tr.inv_transaction_row0');
 // onClick_addDetailLine(1, '.add_row_detail_img');
@@ -96,9 +96,15 @@ $(document).ready(function () {
 
 
  $('#content').off('blur', '.bom_sequence').on('blur', '.bom_sequence', function () {
+  if (!$('#allData tr').length) {
+   alert('No BOM found for the work order#' + $('#wo_number').val());
+   $(this).val('');
+   return false;
+  }
+
   var bomSeq = $(this).val();
   var trClass = '.' + $(this).closest('tr').attr('class');
-  var bomId = $('#allData tr.' + bomSeq).find('.pm_batch_ingredient_id').val();
+  var bomId = $('#allData tr.' + bomSeq).find('.wip_wo_bom_id').val();
   var transaction_type_id = $('#transaction_type_id').val();
   $(this).closest('tr').find('.wip_wo_bom_id').val(bomId);
   $(this).closest('.tabContainer').find(trClass).find('.wip_wo_bom_id').val(bomId);
