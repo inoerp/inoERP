@@ -95,8 +95,7 @@ class user extends dbObject {
   'customer_name',
   'supplier_name'
  ];
- 
-  public $checkbox = [
+ public $checkbox = [
   "use_personal_db_cb"
  ];
  public $search = [
@@ -148,10 +147,10 @@ class user extends dbObject {
  }
 
  public function _before_save() {
-  try{
+  try {
    $this->verify_user();
    return 1;
-  }catch(Exception $e){
+  } catch (Exception $e) {
 //   echo '<div role="alert" class="alert alert-warning error alert-dismissible">'
 //   . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' . $e->getMessage().'</div>';
    return -99;
@@ -231,10 +230,11 @@ class user extends dbObject {
 
  public function authenticate($username = "", $password = "") {
 //  $password_final = $this->_codeThePassword($password);
-$ret = false;
+  $ret = false;
   $sql = "SELECT * from user 
-            WHERE username='{$username}'  LIMIT 1";
-  $result_array = self::find_by_sql($sql);
+            WHERE username=:username  LIMIT 1";
+  $value_a = ['username' => $username];
+  $result_array = $this->findBySql($sql, $value_a);
   if ($result_array) {
    if (password_verify($password, $result_array[0]->password)) {
     $ret = $result_array[0];
