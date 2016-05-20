@@ -22,7 +22,7 @@ inoERP
       $f->l_val_field_dm('batch_name', 'pm_batch_header', 'batch_name', '', 'vf_select_batch_name');
       echo $f->hidden_field_withId('pm_batch_header_id', $$class->pm_batch_header_id);
       echo $f->hidden_field_withCLass('org_id', $$class->org_id, 'popup_value');
-//      echo $f->hidden_field_withCLass('status', 'WIP', 'popup_value');
+      echo $f->hidden_field_withCLass('status', 'WIP', 'popup_value');
       ?>
       <i class="generic g_select_batch_name select_popup clickable fa fa-search" data-class_name="pm_batch_header"></i></li>
      <li><?php $f->l_select_field_from_array('transaction_type_id', pm_material_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
@@ -71,13 +71,13 @@ inoERP
          </td>
          <td><?php echo !empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
          <td><?php $f->text_field_widr('pm_batch_ingredient_id'); ?></td>
-         <td><?php $f->text_field_widrm('item_id_m'); ?></td>
-         <td><?php $f->text_field_widr('item_number'); ?></td>
+         <td><?php $f->text_field_widrm('item_id_m' , 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widr('item_number' , 'always_readonly'); ?></td>
          <td><?php $f->text_field_widr('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', $readonly); ?></td>
-         <td><?php form::text_field_widm('quantity'); ?></td>
-         <td><?php form::text_field_widr('quantity'); ?></td>
-         <td><?php form::text_field_widr('quantity'); ?></td>
+         <td><?php form::text_field_widm('quantity' , 'always_readonly'); ?></td>
+         <td><?php form::text_field_widr('quantity' , 'always_readonly'); ?></td>
+         <td><?php form::text_field_widr('quantity' , 'always_readonly'); ?></td>
          <td><?php echo form::text_field_dsr('inv_transaction_id'); ?></td>
         </tr>
        </tbody>

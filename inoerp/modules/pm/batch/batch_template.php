@@ -25,7 +25,7 @@ inoERP
       <li><?php $f->l_text_field_dr_withSearch('pm_batch_header_id') ?>
        <a name="show" href="form.php?class_name=pm_batch_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_batch_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_text_field_d('batch_name'); ?></li>
+      <li><?php $f->l_text_field_dm('batch_name'); ?></li>
       <li><?php
        echo $f->l_val_field_dm('recipe_name', 'pm_recipe_all_v', 'recipe_name', '', 'vf_select_recipe_name');
        echo $f->hidden_field_withId('pm_recipe_header_id', $$class->pm_recipe_header_id);
@@ -41,7 +41,7 @@ inoERP
       <li><?php $f->l_text_field_d('routing_name') ?></li>
       <li><?php $f->l_text_field_d('formula_name') ?></li>
       <li><?php $f->l_text_field_d('description') ?></li>
-      <li><label></label><a target="_new" href="form.php?class_name=pm_batch_operation_header&pm_batch_header_id=<?php echo $$class->pm_batch_header_id; ?>" class="button btn btn-success"><?php echo gettext('Operation Details') ?></a></li>
+      <li><label></label><a target="_new" href="form.php?class_name=pm_batch_operation_header&pm_batch_header_id=<?php echo $$class->pm_batch_header_id; ?>" class="button btn btn-info"><?php echo gettext('Operation Details') ?></a></li>
      </ul> 
     </div>
     <div id="tabsHeader-2" class="tabContent">

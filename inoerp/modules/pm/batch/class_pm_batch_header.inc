@@ -41,16 +41,11 @@ class pm_batch_header extends dbObject {
   'CANCELLED' => 'Cancelled',
  ];
  public $action_a = [
-  'APPROVE' => 'Approve',
-  'PRINT' => 'Print Estimates',
+  'RELEASE' => 'Release',
+  'PRINT' => 'Print',
   'CANCEL' => 'Cancel',
-  'CLOSE' => 'Close',
-  'CREATE_WO' => 'Create Work Order',
-  'COPY_ESTIMATES' => 'Copy Estimates to Actuals',
-  'COPY_WO' => 'Copy WO Charges to Actuals',
-  'PROCESS_LOGISTICS' => 'Process Logistics',
-  'PROCESS_ACTUALS' => 'Process Actuals',
- ];
+  'CLOSE' => 'Close'
+  ];
  public $field_a = [
   'pm_batch_header_id',
   'batch_name',
@@ -92,7 +87,8 @@ class pm_batch_header extends dbObject {
  public $fields_inForm_notInDataBase = [
   'recipe_name',
   "routing_name",
-  'formula_name'
+  'formula_name',
+  'action'
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
@@ -132,10 +128,9 @@ class pm_batch_header extends dbObject {
  private $_pm_process_routing_header_id;
 
  private function _do_action() {
-
   switch ($this->action) {
-   case 'APPROVE':
-    $this->approval_status = 'APPROVED';
+   case 'RELEASE':
+    $this->status = 'WIP';
     break;
 
    default :
@@ -149,8 +144,8 @@ class pm_batch_header extends dbObject {
    $this->_do_action();
   }
 
-  if (empty($this->approval_status)) {
-   $this->approval_status = 'ENTERED';
+  if (empty($this->status)) {
+   $this->status = 'PENDING';
   }
  }
 
@@ -170,7 +165,7 @@ class pm_batch_header extends dbObject {
     echo ' System generated Batch number is ' . $this->batch_name;
     $this->save();
    } catch (Exception $e) {
-    array_push($ie->user_exp, 'Unable to copy batch product details. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    array_push($ie->user_exp, 'Unable to copy batch product details. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
     $dbc->rollback = 1;
    }
   }
@@ -192,7 +187,7 @@ class pm_batch_header extends dbObject {
   $all_product_lines = pm_formula_line::find_by_headerId_recipeMaterial($this->_pm_formula_header_id);
    //check if batch products exists
   $bacth_lines = pm_batch_line::find_by_parent_id($this->pm_batch_header_id);
-  if (!empty($bacth_lines)) {
+  if (!empty($bacth_lines) || empty($all_product_lines)) {
    return -1;
   }
   $pbl = new pm_batch_line();
@@ -207,7 +202,7 @@ class pm_batch_header extends dbObject {
    try {
     $pbl->save();
    } catch (Exception $e) {
-    array_push($ie->user_exp, 'Unable to copy batch product. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    array_push($ie->user_exp, 'Unable to copy batch product. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
     $dbc->rollback = 1;
    }
   }
@@ -233,7 +228,7 @@ class pm_batch_header extends dbObject {
    try {
     $pbb->save();
    } catch (Exception $e) {
-    array_push($ie->user_exp, 'Unable to copy batch by product. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    array_push($ie->user_exp, 'Unable to copy batch by product. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
     $dbc->rollback = 1;
    }
   }
@@ -244,12 +239,12 @@ class pm_batch_header extends dbObject {
   $all_ingredient_lines = pm_formula_ingredient::find_by_headerId_recipeMaterial($this->_pm_formula_header_id);
   //check if batch products exists
   $ingredient_lines = pm_batch_ingredient::find_by_parent_id($this->pm_batch_header_id);
-  if (!empty($ingredient_lines)) {
+  if (!empty($ingredient_lines)|| empty($all_ingredient_lines)) {
    return -1;
   }
-  $pbi = new pm_batch_ingredient();
+    $pbi = new pm_batch_ingredient();
   foreach ($all_ingredient_lines as $ingredient_line) {
-   $pbi->pm_batch_byproduct_id = null;
+   $pbi->pm_batch_ingredient_id = null;
    foreach ($pbi->field_a as $pbi_k => $pbi_v) {
     if (property_exists($ingredient_line, $pbi_v)) {
      $pbi->$pbi_v = $ingredient_line->$pbi_v;
@@ -259,7 +254,7 @@ class pm_batch_header extends dbObject {
    try {
     $pbi->save();
    } catch (Exception $e) {
-    array_push($ie->user_exp, 'Unable to copy batch ingredient. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    array_push($ie->user_exp, 'Unable to copy batch ingredient. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
     $dbc->rollback = 1;
    }
   }
@@ -296,7 +291,7 @@ class pm_batch_header extends dbObject {
      $pbol->save();
      $this->_copy_batch_operation_details($pbol);
     } catch (Exception $e) {
-     array_push($ie->user_exp, 'Unable to copy batch routing line. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+     array_push($ie->user_exp, 'Unable to copy batch routing line. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
      $dbc->rollback = 1;
     }
    }
@@ -321,7 +316,7 @@ class pm_batch_header extends dbObject {
    try {
     $pbod->save();
    } catch (Exception $e) {
-    array_push($ie->user_exp, 'Unable to copy batch detail line. Error @ ' . __FILE__ . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    array_push($ie->user_exp, 'Unable to copy batch detail line. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
     $dbc->rollback = 1;
    }
   }

@@ -29,32 +29,6 @@ if (!empty($pm_batch_header_id)) {
  if (count($pm_batch_bom_object) == 0) {
   $pm_batch_bom_object = [new pm_batch_line()];
  }
-
-// $hidden_stmt = "<div id='allData' class='hidden'><table>";
-// $count = 0;
-// if (!empty($pm_batch_bom_object) && !empty($$class->org_id)) {
-//  foreach ($pm_batch_bom_object as $pm_batch_bom) {
-//   $item = item::find_by_orgId_item_id_m($pm_batch_bom->item_id_m, $$class->org_id);
-////	 $$class_second->component_item_number = $item->item_number;
-////	 $$class_second->component_description = $item->item_description;
-////	 $$class_second->component_uom = $item->uom_id;
-//   $hidden_stmt .= "<tr class='$pm_batch_bom->bom_sequence'>";
-//   $hidden_stmt .= "<td>" . form::text_field('line_id', $$class_second->pm_batch_ingredient_id, '8', '50', 1, '', '', 1, 'pm_batch_ingredient_id') . "</td>";
-//   $hidden_stmt .= "<td>" . form::text_field('item_id_m', $$class_second->item_id_m, '8', '50', 1, '', '', 1, 'item_id_m') . "</td>";
-//   $hidden_stmt .= "<td>" . form::text_field('item_number', $$class_second->item_number, '20', '50', '', '', '', '', 'item_number') . "</td>";
-//   $hidden_stmt .= "<td>" . form::text_field('item_description', $$class_second->item_description, '20', '50', '', '', '', 1, 'item_description') . "</td>";
-//   $hidden_stmt .= "<td>" . form::text_field('step_no', $$class_second->step_no, '8', '50', 1, '', '', 1, 'step_no') . "</td>";
-//   $hidden_stmt .= "<td>" . form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom') . "</td>";
-//   $hidden_stmt .= "<td>" . form::select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', $readonly, 'sub_inventory', '', '') . "</td>";
-//   $hidden_stmt .= "<td>" . form::select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', $readonly, 'locator_id', '', '') . "</td>";
-//   $hidden_stmt .= "<td>" . $f->text_field('serial_generation', $item->serial_generation) . "</td>";
-//   $hidden_stmt .= "<td>" . $f->text_field('lot_generation', $item->lot_generation) . "</td>";
-//   $hidden_stmt .= "</tr>";
-//   $count = $count + 1;
-//  }
-// }
-//
-// $hidden_stmt .= "</table></div>";
 }
 ?>
 
@@ -66,7 +40,7 @@ if ((!empty($pm_batch_header_id)) && !empty($pm_batch_bom_object)) {
   $bom_sequence_stament .='<option ';
   $bom_sequence_stament .='< data-item_number ="' . $array->item_number . '"';
   $bom_sequence_stament .='< data-item_description ="' . $array->item_description . '"';
-  $bom_sequence_stament .='< data-item_number ="' . $array->item_number . '"';
+  $bom_sequence_stament .='< data-item_id_m ="' . $array->item_id_m . '"';
   $bom_sequence_stament .='< data-step_no ="' . $array->step_no . '"';
   $bom_sequence_stament .='< data-uom_id ="' . $array->uom_id . '"';
   $bom_sequence_stament .='< data-org_id ="' . $array->org_id . '"';

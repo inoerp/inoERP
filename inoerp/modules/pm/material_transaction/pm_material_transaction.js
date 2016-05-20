@@ -95,6 +95,20 @@ $(document).ready(function () {
  onClick_addDetailLine(2, '.add_row_detail_img1');
 
 
+$('body').off('blur', '.bom_sequence').on('blur', '.bom_sequence', function () {
+  var selected = $(this).find('option:selected');
+  var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g,'.');
+ $(trClass).find('.item_description').val($(selected).data('item_description'));
+  $(trClass).find('.item_number').val($(selected).data('item_number'));
+  $(trClass).find('.item_id_m').val($(selected).data('item_id_m'));
+  $(trClass).find('.uom_id').val($(selected).data('uom_id'));
+   $(trClass).find('.step_no').val($(selected).data('step_no'));
+   $(trClass).find('.serial_generation').val($(selected).data('serial_generation'));
+   $(trClass).find('.lot_generation').val($(selected).data('lot_generation'));
+ });
+ 
+
+ 
  $('#content').off('blur', '.bom_sequence').on('blur', '.bom_sequence', function () {
   var bomSeq = $(this).val();
   var trClass = '.' + $(this).closest('tr').attr('class');

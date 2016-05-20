@@ -18,7 +18,7 @@
           <li class="created_by f-right"><?php
            $content_user = user::find_by_id($content->created_by);
            if (!empty($content_user)) {
-            echo '<a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($content->created_by) . '">' . ($content_user->username) . '</a>';
+            echo '<a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($content->created_by) . '">' . ino_getUserName_from_email($content_user->username) . '</a>';
             $profile_image = $f->show_existing_image($content_user->image_file_id, 'img-vs');
             if (!empty($profile_image)) {
              echo "&nbsp; $profile_image";

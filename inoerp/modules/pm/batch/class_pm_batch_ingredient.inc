@@ -39,7 +39,6 @@ class pm_batch_ingredient extends dbObject {
   'subinventory_id',
   'locator_id',
   'step_no',
-  'locator_id',
   'created_by',
   'creation_date',
   'last_update_by',

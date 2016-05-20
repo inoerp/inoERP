@@ -224,6 +224,7 @@ class ap_transaction_line extends dbObject {
  }
 
  public function _before_save() {
+
   if (empty($this->line_type)) {
    $this->line_type = 'GOODS';
   }

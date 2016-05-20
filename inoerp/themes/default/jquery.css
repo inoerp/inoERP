@@ -13,8 +13,8 @@ ul.tabMain li {
  /* border:1px solid #999;*/
  overflow:hidden;
  position:relative;
- background-color: rgba(222, 221, 221, 0.94);
-
+ /*background-color: rgba(222, 221, 221, 0.94);*/
+    background-color: rgba(152, 157, 149, 0.44);
  -webkit-border-top-left-radius:4px;
  -webkit-border-top-right-radius:4px;
  -moz-border-radius-topleft:4px;
@@ -25,8 +25,8 @@ ul.tabMain li {
  display: inline-block; 
 }
 
-ul.tabMain li.ui-state-active{
- background-color:rgba(123, 186, 81, 0.57);
+ul.tabMain li.ui-state-active {
+    background-color: rgba(202, 201, 201, 0.39);
 }
 
 ul.tabMain li a{
@@ -404,6 +404,8 @@ table.ui-datepicker-calendar tr th{
  font-size: 0.9em;
  background-color:#3FB6DA;
  color: #fff;
+ max-height: 200px;
+overflow: scroll;
 }
 
 .ui-autocomplete li{
@@ -416,3 +418,7 @@ table.ui-datepicker-calendar tr th{
 /*input.ui-autocomplete-input{
   width: 88% !important;
 }*/
+
+.ui-autocomplete li:hover{
+ background: #9BB3BA;
+}

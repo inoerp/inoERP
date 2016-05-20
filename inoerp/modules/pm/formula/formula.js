@@ -40,6 +40,9 @@ $(document).ready(function () {
    $('#add_to_order').prop('disabled', true);
   }
  });
+ $('body').off('click', '#menu_button4, #menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4, #menu_button4_2, #menu_button4_2_1', function () {
+  $('.pm_formula_ingredient_id, .pm_formula_byproduct_id').val('');
+ });
 
 
 

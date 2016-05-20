@@ -101,10 +101,10 @@ input.search-text-field{
  cursor: hand; 
 }
 
-.login-form{
+/*.login-form{
  width: 70%;
  margin:0 12%;
-}
+}*/
 
 tr.major_row{
  background-color:#fff !important;

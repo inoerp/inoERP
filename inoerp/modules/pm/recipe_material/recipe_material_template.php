@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id="form_header"><span class="heading"><?php echo gettext('Recipe Material') ?></span>
+<div id="form_header"><span class="heading"><?php  echo gettext('Recipe Material') ?></span>
  <form  method="post" id="pm_recipe_material_header"  name="pm_recipe_material_header">
   <div id="tabsHeader">
    <ul class="tabMain">

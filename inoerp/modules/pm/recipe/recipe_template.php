@@ -44,7 +44,7 @@ inoERP
     </div>
         <div id="tabsHeader-2" class="tabContent">
      <div><a class="btn btn-info btn-lg" target="_new" 
-             href="form.php?class_name=pm_recipe_material_header&mode=9&pm_recipe_material_header_id=<?php echo $$class->pm_recipe_material_header_id; ?>"><?php echo gettext('Recipe Material') ?></a>
+             href="form.php?class_name=pm_recipe_material_header&mode=9&pm_recipe_header_id=<?php echo $$class->pm_recipe_header_id; ?>"><?php echo gettext('Recipe Material') ?></a>
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">

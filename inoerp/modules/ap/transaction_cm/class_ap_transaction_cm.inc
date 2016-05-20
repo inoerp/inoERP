@@ -15,6 +15,7 @@
    $ap_td->account_type = 'ACCRUAL';
    $ap_td->description = '';
    $ap_td->amount = $this->inv_line_price;
+   $ap_td->gl_amount = $ap_td->amount * $ap_th_i->exchange_rate;
    $ap_td->detail_ac_id = $this->detail_ac_id;
    $ap_td->status = '';
    $ap_td->reference_type = 'table';
@@ -24,7 +25,7 @@
    $ap_td->po_line_id = $this->po_line_id;
    $ap_td->po_detail_id = $this->po_detail_id;
    $ap_td->period_id = $ap_th_i->period_id;
-   $ap_td->audit_trial();
+
    //update PO details
    foreach ($po_d_i as $pd_key => $pd_value) {
     $po_d->$pd_key = $pd_value;
@@ -32,6 +33,11 @@
    $po_d->invoiced_quantity += $this->inv_line_quantity;
    $po_d->save();
    $ap_td->save();
+  }
+  
+    public function _before_save() {
+   $this->line_quantity = - $this->line_quantity;
+   parent::_before_save();
   }
 
   public function _after_save() {
