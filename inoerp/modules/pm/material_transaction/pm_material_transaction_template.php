@@ -8,7 +8,8 @@ inoERP
 -->
 <div id="pm_material_transaction_divId">
  <?php // echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
- $f = new inoform() ?> 
+ $f = new inoform()
+ ?> 
  <!--    End of place for showing error messages-->
 
 
@@ -69,15 +70,15 @@ inoERP
            'pm_batch_header_id' => $$class->pm_batch_header_id, 'transaction_type_id' => $$class->transaction_type_id));
           ?>
          </td>
-         <td><?php echo !empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
+         <td><?php echo!empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
          <td><?php $f->text_field_widr('pm_batch_ingredient_id'); ?></td>
-         <td><?php $f->text_field_widrm('item_id_m' , 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widr('item_number' , 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widrm('item_id_m', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widr('item_number', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widr('item_description'); ?></td>
-         <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', $readonly); ?></td>
-         <td><?php form::text_field_widm('quantity' , 'always_readonly'); ?></td>
-         <td><?php form::text_field_widr('quantity' , 'always_readonly'); ?></td>
-         <td><?php form::text_field_widr('quantity' , 'always_readonly'); ?></td>
+         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widm('quantity', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widr('quantity', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widr('quantity', 'always_readonly'); ?></td>
          <td><?php echo form::text_field_dsr('inv_transaction_id'); ?></td>
         </tr>
        </tbody>
@@ -96,16 +97,16 @@ inoERP
        <tbody class="inv_transaction_values form_data_line_tbody">
         <tr class="pm_material_transaction0" id="tab2_1">
          <td>
-<?php echo form::select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', $readonly, 'subinventory_id'); ?>
+<?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '',  'subinventory_id'); ?>
          </td>
          <td>
-<?php echo form::select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', $readonly, 'subinventory_id'); ?>
+<?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'subinventory_id'); ?>
          </td>
          <td>
-<?php echo form::select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', $readonly, 'subinventory_id'); ?>
+<?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id'); ?>
          </td>
          <td>
-<?php echo form::select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', $readonly, 'subinventory_id'); ?>
+<?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'subinventory_id'); ?>
          </td>
         </tr>
        </tbody>
@@ -128,11 +129,11 @@ inoERP
        <tbody class="inv_transaction_values form_data_line_tbody">
         <tr class="pm_material_transaction0" id="tab3_1">
          <td><?php $f->text_field_widr('document_type'); ?>							</td>
-         <td><?php echo $f->text_field('document_number', $$class->wo_number, '8', '', '', 1, 1); ?>							</td>
-         <td><?php echo $f->text_field('document_id', $$class->pm_wo_header_id, '8', '', '', 1, 1); ?>							</td>
+         <td><?php echo $f->text_field('document_number', $$class->batch_name, '8', '', '', 1, 1); ?>							</td>
+         <td><?php echo $f->text_field('document_id', $$class->pm_batch_header_id, '8', '', '', 1, 1); ?>							</td>
          <td><?php $f->text_field_widr('reference_type'); ?>							</td>
-         <td><?php echo $f->text_field('reference_key_name', 'pm_wo_header', '20', '', '', 1, 1); ?>							</td>
-         <td><?php echo $f->text_field('reference_key_value', $$class->pm_wo_header_id, '8', '', '', 1, 1); ?>							</td>
+         <td><?php echo $f->text_field('reference_key_name', 'pm_batch_header', '20', '', '', 1, 1); ?>							</td>
+         <td><?php echo $f->text_field('reference_key_value', $$class->pm_batch_header_id, '8', '', '', 1, 1); ?>							</td>
          <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : ''; ?></td>
          <td><?php $f->text_field_widsr('pm_wo_bom_id'); ?></td>
         </tr>
