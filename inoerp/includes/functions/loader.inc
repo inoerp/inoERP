@@ -222,21 +222,25 @@ if (($continue) && (!empty($class_names))) {
    }
   }
 
+  //	$table_name = $class;
+  if (class_exists($class)) {
+   $$class = new $class;
+  } else if ($class =='index') {
+   $continue = false;
+   return;
+  }else{
+      $class = 'user_dashboard_v';
+   $class_names[0] = $class;
+   $$class = new $class;
+  }
+
   $module = property_exists($class, 'module') ? $class::$module : 'module';
   $primary_column = property_exists($class, 'primary_column') ? $class::$primary_column : false;
   $primary_column2 = property_exists($class, 'primary_column2') ? $class::$primary_column2 : false;
   $primary_column3 = property_exists($class, 'primary_column3') ? $class::$primary_column3 : false;
   $key_field = property_exists($class, 'key_column') ? $class::$key_column : $class . '_id';
   $table_name = property_exists($class, 'table_name') ? $class::$table_name : $class;
-//	$table_name = $class;
-  if (class_exists($class)) {
-   $$class = new $class;
-  } else {
-   $continue = false;
-   return;
-//   pa(get_declared_classes());
-//   redirect_to(HOME_URL);
-  }
+
 
   if (property_exists($class, 'field_a')) {
    if ((empty($$class->field_a))) {

@@ -666,7 +666,7 @@ trait dbObject_t {
 //   pa($stmt);
    $this->msg = 0;
    $dbc->rollback = 1;
-   echo "<br>Record couldnt be saved. Error @ " . __FILE__ . ' @@line' . __LINE__ . '<br>' . $e->getMessage() . "<br>";
+   echo "<br>Record couldnt be saved. Error @ " . basename(__FILE__) . ' @@line' . __LINE__ . '<br>' . $e->getMessage() . "<br>";
 //   if(isset($_SESSION['debug'])){
 //    echo "<br>The statement is <br>" . $stmt;
 //   }
@@ -1254,7 +1254,7 @@ trait dbObject_t {
    $this->currency = $fin_details->currency_code;
   } else {
    $dbc->rollback = true;
-   echo "<br>Setup in complete. No currency found. Error @ " . __FILE__ . ' @@ line ' . __LINE__;
+   echo "<br>Setup in complete. No currency found. Error @ " . basename(__FILE__) . ' @@ line ' . __LINE__;
   }
  }
 

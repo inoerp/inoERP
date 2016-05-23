@@ -104,7 +104,7 @@ and pfi.pm_batch_header_id = '{$header_id}'
   $sql = "SELECT
 pbi.pm_batch_ingredient_id,   pbi.pm_batch_header_id, pbi.line_no, pbi.step_no, pbi.item_id_m, pbi.uom_id, pbi.planned_quantity,
 pbi.actual_quantity, pbi.subinventory_id, pbi.locator_id, item.item_number,
-item.item_description
+item.item_description, item.lot_generation, item.serial_generation
 
 from pm_batch_ingredient pbi,
 item

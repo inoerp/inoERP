@@ -676,7 +676,7 @@ class inv_transaction extends dbObject {
    return $return_val;
   }
 
-  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 25, 26, 29))) {
+  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 25, 26, 29, 30))) {
    $this->_serial_type = 'ID';
   }
 
@@ -711,7 +711,7 @@ class inv_transaction extends dbObject {
   }
 
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26, 30))) {
    $return_val = $this->_transact_serial_receipt();
   }
 
@@ -761,7 +761,7 @@ class inv_transaction extends dbObject {
    $return_val = $this->_transact_lot_issue();
   }
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26, 30))) {
    $return_val = $this->_transact_lot_receipt();
   }
 
@@ -1303,7 +1303,7 @@ class inv_transaction extends dbObject {
     }
     //create journals for Misc Issue/ WIP Return - from locations
     $journal_line_a = $this->_cretae_journal_line_array($element_value_a, $this->from_subinventory_id, 'cr', 1);
-    
+
     //Dr accounting
     //wip transactions
     $line_number = 1;
@@ -1383,6 +1383,7 @@ class inv_transaction extends dbObject {
    case 20 :
    case 23 :
    case 25 :
+   case 30 :
     $onhand->setProperty('_to_org_id', $this->org_id);
     $onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
     $onhand->setProperty('_to_locator_id', $this->to_locator_id);
@@ -1442,7 +1443,7 @@ class inv_transaction extends dbObject {
      }
     }
 
-    if (in_array($this->transaction_type_id, array(7, 10, 11))) {
+    if (in_array($this->transaction_type_id, array(7, 10, 11, 30))) {
      $line_number = 1;
      foreach ($journal_line_a as $journal_line) {
       if ($journal_line['line_number'] > $line_number) {
@@ -1600,6 +1601,16 @@ class inv_transaction extends dbObject {
    $wo_bom->issued_quantity = $wo_bom_i->issued_quantity - $this->quantity;
    $wo_bom->audit_trial();
    $wo_bom->save();
+  }
+
+  //update the item return quantity on Batch
+  if (($this->transaction_type_id == 30) && (!empty($this->pm_batch_ingredient_id))) {
+   //update issued quantity
+   $pm_batch_ing_i = new pm_batch_ingredient();
+   $pm_batch_ing_j = $pm_batch_ing_i->findBy_id($this->pm_batch_ingredient_id);
+   $pm_batch_ing_i->pm_batch_ingredient_id = $this->pm_batch_ingredient_id;
+   $pm_batch_ing_i->actual_quantity = $pm_batch_ing_j->actual_quantity - $this->quantity;
+   $pm_batch_ing_i->save();
   }
 
   //update the item issue quantity on WO

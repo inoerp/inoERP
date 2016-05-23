@@ -250,6 +250,12 @@ function ino_validate_num($num) {
  }
 }
 
+
+function ino_getUserName_from_email($email) {
+ $email_a = explode('@' , $email);
+ return $email_a[0];
+}
+
 function getBreadCrumb($class_first) {
  global $$class_first;
  if (property_exists($class_first, 'module') && !property_exists($class_first, 'dont_show_bread_crum')) {

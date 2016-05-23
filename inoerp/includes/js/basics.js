@@ -2838,6 +2838,7 @@ function show_dialog_box() {
   buttons: [
    {
     text: "OK",
+    class: 'button btn btn-info btn-done',
     click: function () {
      $(this).dialog("close");
     }
@@ -4282,6 +4283,7 @@ $(document).ready(function () {
   buttons: [
    {
     text: "OK",
+    class: 'button btn btn-info btn-done',
     click: function () {
      $(this).dialog("close");
 
@@ -5599,6 +5601,12 @@ $(document).ready(function () {
    $(this).remove();
   }
  });
+//serial lot form flip
+$('body').on('click', '.ino-flip.fa-plus-square-o', function(){
+$(this).removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
+}).on('click', '.ino-flip.fa-minus-square-o', function(){
+$(this).removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
+});
 
 });
 
