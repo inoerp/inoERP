@@ -71,6 +71,8 @@ $(document).ready(function () {
  mandatoryCheck.mandatory_messages = ["First Select Org", "No Transaction Type"];
 // mandatoryCheck.mandatoryField();
 
+
+
  $('body').off("change", ".from_subinventory_id").on("change", ".from_subinventory_id", function () {
   var rowIdValue = $(this).closest("tr").attr("id");
   var idValue = "tr#" + rowIdValue;
@@ -95,76 +97,96 @@ $(document).ready(function () {
  onClick_addDetailLine(2, '.add_row_detail_img1');
 
 
-$('body').off('blur', '.bom_sequence').on('blur', '.bom_sequence', function () {
-  var selected = $(this).find('option:selected');
-  var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g,'.');
- $(trClass).find('.item_description').val($(selected).data('item_description'));
-  $(trClass).find('.item_number').val($(selected).data('item_number'));
-  $(trClass).find('.item_id_m').val($(selected).data('item_id_m'));
-  $(trClass).find('.uom_id').val($(selected).data('uom_id'));
+ $('body').off('blur', '.bom_sequence').on('blur', '.bom_sequence', function () {
+  var transaction_type_id = +$('#transaction_type_id').val();
+  var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+  if ($(this).find('option:selected').val() == 'undefined' || $(this).find('option:selected').val() == "") {
+   $(trClass).find('.item_description,.item_number,.item_id_m,.uom_id, .step_no, .serial_generation .lot_generation').val('');
+   return false;
+  } else {
+   var selected = $(this).find('option:selected');
+   $(trClass).find('.item_description').val($(selected).data('item_description'));
+   $(trClass).find('.item_number').val($(selected).data('item_number'));
+   $(trClass).find('.item_id_m').val($(selected).data('item_id_m'));
+   $(trClass).find('.uom_id').val($(selected).data('uom_id'));
    $(trClass).find('.step_no').val($(selected).data('step_no'));
    $(trClass).find('.serial_generation').val($(selected).data('serial_generation'));
    $(trClass).find('.lot_generation').val($(selected).data('lot_generation'));
- });
- 
-
- 
- $('#content').off('blur', '.bom_sequence').on('blur', '.bom_sequence', function () {
-  var bomSeq = $(this).val();
-  var trClass = '.' + $(this).closest('tr').attr('class');
-  var bomId = $('#allData tr.' + bomSeq).find('.pm_batch_ingredient_id').val();
-  var transaction_type_id = $('#transaction_type_id').val();
-  $(this).closest('tr').find('.wip_wo_bom_id').val(bomId);
-  $(this).closest('.tabContainer').find(trClass).find('.wip_wo_bom_id').val(bomId);
-
-  var itemId = $('#allData tr.' + bomSeq).find('.component_item_id_m').val();
-  $(this).closest('tr').find('.item_id_m').val(itemId);
-
-  var item_number = $('#allData tr.' + bomSeq).find('.component_item_number').val();
-  $(this).closest('tr').find('.item_number').val(item_number);
-
-  var item_description = $('#allData tr.' + bomSeq).find('.component_description').val();
-  $(this).closest('tr').find('.item_description').val(item_description);
-
-  var uom_id = $('#allData tr.' + bomSeq).find('.component_uom').val();
-  $(this).closest('tr').find('.uom_id').val(uom_id);
-  var subinventory_id = $('#allData tr.' + bomSeq).find('.supply_sub_inventory').val();
-  var locator_html = $('#allData tr.' + bomSeq).find('.supply_locator').html();
-  if (transaction_type_id == 6) {
-   $(this).closest('.tabContainer').find(trClass).find('.from_subinventory_id').val(subinventory_id);
-   $(this).closest('.tabContainer').find(trClass).find('.from_locator_id').empty().append(locator_html);
-   $(this).closest('.tabContainer').find(trClass).find('.to_subinventory_id').val('');
-   $(".to_subinventory_id").attr("disabled", true);
-   $(".to_locator_id").attr("disabled", true);
+   $(trClass).find('.pm_batch_ingredient_id').val($(selected).val());
+   $(trClass).find('.planned_quantity').val($(selected).data('planned_quantity'));
+   $(trClass).find('.actual_quantity').val($(selected).data('actual_quantity'));
+   
   }
-  else if (transaction_type_id == 7) {
-   $(this).closest('.tabContainer').find(trClass).find('.to_subinventory_id').val(subinventory_id);
-   $(this).closest('.tabContainer').find(trClass).find('.to_locator_id').empty().append(locator_html);
-   $(this).closest('.tabContainer').find(trClass).find('.from_subinventory_id').val('');
-   $(".from_subinventory_id").attr("disabled", true);
-   $(".from_locator_id").attr("disabled", true);
-  } else {
-   $(this).closest('.tabContainer').find(trClass).find('.to_subinventory_id').val('');
-   $(this).closest('.tabContainer').find(trClass).find('.from_subinventory_id').val('');
-   $(".from_subinventory_id").attr("disabled", true);
-   $(".from_locator_id").attr("disabled", true);
-   $(".to_subinventory_id").attr("disabled", true);
-   $(".to_locator_id").attr("disabled", true);
+  
+  if (transaction_type_id === 29) {
+   $(trClass).find('.from_subinventory_id, .from_locator_id').removeAttr('disabled');
+   $(trClass).find('.to_subinventory_id, .to_locator_id').attr("disabled", true);
+  }
+  else if (transaction_type_id === 30 ) {
+   $(trClass).find('.to_subinventory_id, .to_locator_id').removeAttr('disabled');
+   $(trClass).find('.from_subinventory_id, .from_locator_id').attr("disabled", true);
   }
 
-  $(this).closest('.tabContainer').find(trClass).find('.document_type').val(document_type);
-  $(this).closest('.tabContainer').find(trClass).find('.document_number').val(documentNumber);
-  $(this).closest('.tabContainer').find(trClass).find('.document_id').val(documentId);
-  $(this).closest('.tabContainer').find(trClass).find('.reference_type').val('table');
-  $(this).closest('.tabContainer').find(trClass).find('.reference_key_name').val('wip_wo_header');
-  $(this).closest('.tabContainer').find(trClass).find('.reference_key_value').val(documentId);
-  $(this).closest('.tabContainer').find(trClass).find('.reference').val(reference);
-  var lot_generation = $('#allData tr.' + bomSeq).find('.lot_generation').val();
-  $(this).closest('.tabContainer').find(trClass).find('.lot_generation').val(lot_generation);
-  var serial_generation = $('#allData tr.' + bomSeq).find('.serial_generation').val();
-  $(this).closest('.tabContainer').find(trClass).find('.serial_generation').val(serial_generation);
-  serial_details(serial_generation, $(this).closest('tr').attr('class'));
  });
+
+
+//
+// $('#content').off('blur', '.bom_sequence').on('blur', '.bom_sequence', function () {
+//  var bomSeq = $(this).val();
+//  var trClass = '.' + $(this).closest('tr').attr('class');
+//  var bomId = $('#allData tr.' + bomSeq).find('.pm_batch_ingredient_id').val();
+//  var transaction_type_id = $('#transaction_type_id').val();
+//  $(this).closest('tr').find('.wip_wo_bom_id').val(bomId);
+//  $(this).closest('.tabContainer').find(trClass).find('.wip_wo_bom_id').val(bomId);
+//
+//  var itemId = $('#allData tr.' + bomSeq).find('.component_item_id_m').val();
+//  $(this).closest('tr').find('.item_id_m').val(itemId);
+//
+//  var item_number = $('#allData tr.' + bomSeq).find('.component_item_number').val();
+//  $(this).closest('tr').find('.item_number').val(item_number);
+//
+//  var item_description = $('#allData tr.' + bomSeq).find('.component_description').val();
+//  $(this).closest('tr').find('.item_description').val(item_description);
+//
+//  var uom_id = $('#allData tr.' + bomSeq).find('.component_uom').val();
+//  $(this).closest('tr').find('.uom_id').val(uom_id);
+//  var subinventory_id = $('#allData tr.' + bomSeq).find('.supply_sub_inventory').val();
+//  var locator_html = $('#allData tr.' + bomSeq).find('.supply_locator').html();
+//  if (transaction_type_id == 6) {
+//   $(this).closest('.tabContainer').find(trClass).find('.from_subinventory_id').val(subinventory_id);
+//   $(this).closest('.tabContainer').find(trClass).find('.from_locator_id').empty().append(locator_html);
+//   $(this).closest('.tabContainer').find(trClass).find('.to_subinventory_id').val('');
+//   $(".to_subinventory_id").attr("disabled", true);
+//   $(".to_locator_id").attr("disabled", true);
+//  }
+//  else if (transaction_type_id == 7) {
+//   $(this).closest('.tabContainer').find(trClass).find('.to_subinventory_id').val(subinventory_id);
+//   $(this).closest('.tabContainer').find(trClass).find('.to_locator_id').empty().append(locator_html);
+//   $(this).closest('.tabContainer').find(trClass).find('.from_subinventory_id').val('');
+//   $(".from_subinventory_id").attr("disabled", true);
+//   $(".from_locator_id").attr("disabled", true);
+//  } else {
+//   $(this).closest('.tabContainer').find(trClass).find('.to_subinventory_id').val('');
+//   $(this).closest('.tabContainer').find(trClass).find('.from_subinventory_id').val('');
+//   $(".from_subinventory_id").attr("disabled", true);
+//   $(".from_locator_id").attr("disabled", true);
+//   $(".to_subinventory_id").attr("disabled", true);
+//   $(".to_locator_id").attr("disabled", true);
+//  }
+//
+//  $(this).closest('.tabContainer').find(trClass).find('.document_type').val(document_type);
+//  $(this).closest('.tabContainer').find(trClass).find('.document_number').val(documentNumber);
+//  $(this).closest('.tabContainer').find(trClass).find('.document_id').val(documentId);
+//  $(this).closest('.tabContainer').find(trClass).find('.reference_type').val('table');
+//  $(this).closest('.tabContainer').find(trClass).find('.reference_key_name').val('wip_wo_header');
+//  $(this).closest('.tabContainer').find(trClass).find('.reference_key_value').val(documentId);
+//  $(this).closest('.tabContainer').find(trClass).find('.reference').val(reference);
+//  var lot_generation = $('#allData tr.' + bomSeq).find('.lot_generation').val();
+//  $(this).closest('.tabContainer').find(trClass).find('.lot_generation').val(lot_generation);
+//  var serial_generation = $('#allData tr.' + bomSeq).find('.serial_generation').val();
+//  $(this).closest('.tabContainer').find(trClass).find('.serial_generation').val(serial_generation);
+//  serial_details(serial_generation, $(this).closest('tr').attr('class'));
+// });
 
  $('body').off("blur", '#transaction_type_id').on("blur", '#transaction_type_id', function () {
   $("tr.transfer_info").find("td select").each(function () {

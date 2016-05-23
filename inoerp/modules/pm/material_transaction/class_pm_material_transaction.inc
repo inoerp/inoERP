@@ -106,7 +106,8 @@ class pm_material_transaction extends inv_transaction {
   "quantity",
   "org_id",
   "item_id_m",
-  "transaction_type_id"
+  "transaction_type_id",
+  'pm_batch_ingredient_id'
  ];
  public $search = [
   '_show_view_path' => 1,
@@ -127,11 +128,15 @@ class pm_material_transaction extends inv_transaction {
   'kit_cb',
   'onhand',
   'reservable_onhand',
-  'line_type'
+  'line_type',
+  'planned_quantity',
+  'actual_quantity'
  ];
  public $batch_name;
  public $line_type;
  public $line_id;
+ public $planned_quantity;
+ public $actual_quantity;
 
 }
 

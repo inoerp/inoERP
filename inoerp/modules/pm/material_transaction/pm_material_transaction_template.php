@@ -7,7 +7,8 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id="pm_material_transaction_divId">
- <?php // echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
+ <?php
+ // echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
  $f = new inoform()
  ?> 
  <!--    End of place for showing error messages-->
@@ -71,14 +72,14 @@ inoERP
           ?>
          </td>
          <td><?php echo!empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
-         <td><?php $f->text_field_widr('pm_batch_ingredient_id'); ?></td>
+         <td><?php $f->text_field_widsr('pm_batch_ingredient_id'); ?></td>
          <td><?php $f->text_field_widrm('item_id_m', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widr('item_number', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widr('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widm('quantity', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widr('quantity', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widr('quantity', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widsm('quantity'); ?></td>
+         <td><?php $f->text_field_widr('planned_quantity', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widr('actual_quantity', 'always_readonly'); ?></td>
          <td><?php echo form::text_field_dsr('inv_transaction_id'); ?></td>
         </tr>
        </tbody>
@@ -97,16 +98,16 @@ inoERP
        <tbody class="inv_transaction_values form_data_line_tbody">
         <tr class="pm_material_transaction0" id="tab2_1">
          <td>
-<?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '',  'subinventory_id'); ?>
+<?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id large'); ?>
          </td>
          <td>
-<?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'subinventory_id'); ?>
+<?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'subinventory_id large'); ?>
          </td>
          <td>
-<?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id'); ?>
+<?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id large'); ?>
          </td>
          <td>
-<?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'subinventory_id'); ?>
+<?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'subinventory_id large'); ?>
          </td>
         </tr>
        </tbody>
@@ -123,19 +124,19 @@ inoERP
          <th><?php echo gettext('Ref Name') ?></th>
          <th><?php echo gettext('Ref Value') ?></th>
          <th><?php echo gettext('Ref Doc') ?></th>
-         <th><?php echo gettext('WO BOM Line Id') ?></th>
+         <!--<th><?php // echo gettext('WO BOM Line Id') ?></th>-->
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
         <tr class="pm_material_transaction0" id="tab3_1">
-         <td><?php $f->text_field_widr('document_type'); ?>							</td>
-         <td><?php echo $f->text_field('document_number', $$class->batch_name, '8', '', '', 1, 1); ?>							</td>
-         <td><?php echo $f->text_field('document_id', $$class->pm_batch_header_id, '8', '', '', 1, 1); ?>							</td>
-         <td><?php $f->text_field_widr('reference_type'); ?>							</td>
-         <td><?php echo $f->text_field('reference_key_name', 'pm_batch_header', '20', '', '', 1, 1); ?>							</td>
-         <td><?php echo $f->text_field('reference_key_value', $$class->pm_batch_header_id, '8', '', '', 1, 1); ?>							</td>
+         <td><?php $f->text_field_widr('document_type' , 'copyValue'); ?>							</td>
+         <td><?php echo $f->text_field('document_number', $$class->batch_name, '8', '', 'copyValue', 1, 1); ?>							</td>
+         <td><?php echo $f->text_field('document_id', $$class->pm_batch_header_id, '8', '', 'copyValue', 1, 1); ?>							</td>
+         <td><?php $f->text_field_widr('reference_type','copyValue'); ?>							</td>
+         <td><?php echo $f->text_field('reference_key_name', 'pm_batch_header', '20', '', 'copyValue', 1, 1); ?>							</td>
+         <td><?php echo $f->text_field('reference_key_value', $$class->pm_batch_header_id, '8', '', 'copyValue', 1, 1); ?>							</td>
          <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : ''; ?></td>
-         <td><?php $f->text_field_widsr('pm_wo_bom_id'); ?></td>
+         <!--<td><?php // $f->text_field_widsr('pm_wo_bom_id','copyValue'); ?></td>-->
         </tr>
        </tbody>
       </table>
@@ -145,14 +146,14 @@ inoERP
        <thead> 
         <tr>
          <th><?php echo gettext('Account') ?></th>
-         <th><?php echo gettext('Unit Cost') ?></th>
+           <th><?php echo gettext('Unit Cost') ?></th>
          <th><?php echo gettext('Costed Amount') ?></th>
          <th><?php echo gettext('Journal Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
         <tr class="pm_material_transaction0" id="tab4_1">
-         <td><?php $f->ac_field_wid('account_id'); ?></td>
+         <td><?php $f->ac_field_widr('account_id' , 'always_readonly'); ?></td>
          <td><?php form::text_field_wid('unit_cost'); ?></td>
          <td><?php form::text_field_wid('costed_amount'); ?></td>
          <td><?php form::text_field_wid('gl_journal_header_id'); ?></td>

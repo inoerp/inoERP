@@ -109,7 +109,7 @@ inoERP
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Planned Qty') ?></th>
-        <th><?php echo gettext('Allocated Qty') ?></th>
+        <th><?php echo gettext('Actual Qty') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Step') ?> #</th>
@@ -145,8 +145,8 @@ inoERP
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid2('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('planned_quantity', $$class->planned_quantity, '', '', 'allow_change'); ?></td>
-         <td><?php echo $f->number_field('allocated_quantity', $$class->allocated_quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('planned_quantity', $$class_second->planned_quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('actual_quantity', $$class_second->actual_quantity, '', '', 'always_readonly','',1); ?></td>
          <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_second->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_second->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->number_field('step_no', $$class_second->step_no, '', 'always_readonly', 'small ', '', 1); ?></td>
@@ -177,7 +177,7 @@ inoERP
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Planned') ?></th>
-        <th><?php echo gettext('Allocated') ?></th>
+        <th><?php echo gettext('Actual') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Yield') ?></th>
         <th><?php echo gettext('Consumption') ?></th>
@@ -217,7 +217,7 @@ inoERP
          <td><?php form::text_field_wid3('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->uom_id, '', '', 'uom_id'); ?></td>
          <td><?php echo $f->number_field('planned_quantity', $$class_third->planned_quantity, '', '', 'allow_change small'); ?></td>
-         <td><?php echo $f->number_field('allocated_quantity', $$class_third->allocated_quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php echo $f->number_field('actual_quantity', $$class_third->actual_quantity, '', '', 'always_readonly small' , '', 1); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_third->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->checkBox_field('contribute_yield_cb', $$class_third->contribute_yield_cb); ?></td>
          <td><?php echo $f->select_field_from_array('consumption_type', pm_formula_ingredient::$consumption_type_a, $$class_third->consumption_type, '', 'medium'); ?></td>
