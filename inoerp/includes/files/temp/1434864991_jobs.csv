@@ -1,0 +1,5 @@
+hr_job_id,job_code,job_name,start_date,end_date,description,min_education,min_experience,technology,skillset,position_type,functional_area,job_usage,group_hr_job_id,location,job_level,status,job_details,primary_responsibility
+1,MFG_1211,Technician,0000-00-00,0,,,,,,FULL_TIME_REGULAR,ENGG,,0,,10,active,,
+2,MFG_1210,Ops Manager,0000-00-00,0,,,,,,FULL_TIME_REGULAR,OPR,,0,,20,,"Job Details : Job Details : Job Details : Job Details :
+Job Details : Job Details : Job Details : Job Details :
+Job Details : Job Details : Job Details : Job Details :",

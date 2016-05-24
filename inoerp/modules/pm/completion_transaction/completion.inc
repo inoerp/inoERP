@@ -25,7 +25,7 @@ if (!empty($pm_batch_header_id)) {
  $$class->org_id = $pm_batch->org_id;
  $$class->pm_batch_header_id = $pm_batch_header_id;
  $$class->batch_name = $pm_batch->batch_name;
- $pm_batch_bom_object = pm_batch_ingredient::find_all_lines_for_trnx_by_headerId($pm_batch_header_id);
+ $pm_batch_bom_object = pm_batch_line::find_all_lines_with_byProduct_by_headerId($pm_batch_header_id);
  if (count($pm_batch_bom_object) == 0) {
   $pm_batch_bom_object = [new pm_batch_line()];
  }
@@ -50,8 +50,9 @@ if ((!empty($pm_batch_header_id)) && !empty($pm_batch_bom_object)) {
   $bom_sequence_stament .=' data-subinventory_id ="' . $array->subinventory_id . '"';
   $bom_sequence_stament .=' data-serial_generation ="' . $array->serial_generation . '"';
   $bom_sequence_stament .=' data-lot_generation ="' . $array->lot_generation . '"';
-  $bom_sequence_stament .=' value="' . $array->pm_batch_ingredient_id . '" >';
-  $bom_sequence_stament .= $array->step_no . ' | ' . $array->item_number . ' | ' . $array->item_description;
+  $bom_sequence_stament .=' data-line_type ="' . $array->line_type . '"';
+  $bom_sequence_stament .=' value="' . $array->line_id . '" >';
+  $bom_sequence_stament .= $array->line_type . ' | ' . $array->step_no . ' | ' . $array->item_number . ' | ' . $array->item_description;
   $bom_sequence_stament .= '</option>';
  }
  $bom_sequence_stament .= '</select>';

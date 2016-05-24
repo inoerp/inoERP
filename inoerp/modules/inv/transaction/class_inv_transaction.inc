@@ -867,24 +867,23 @@ class inv_transaction extends dbObject {
  }
 
  public function _before_save() {
-
+  if (method_exists($this, '_before_save_2')) {
+   $this->_before_save_2();
+  }
   try {
    $validate_before_save_r = $this->_validate_before_save();
   } catch (Exception $e) {
    echo "<br>Failed _before_save. Error @ " . __FILE__ . ' @@ ' . __LINE__ . '<br>' . $e->getMessage();
    return -90;
   }
-
   if ($validate_before_save_r < 0) {
    return $validate_before_save_r;
   }
-
   if (!empty($this->org_id)) {
    $inv = new inventory();
    $inv_i = $inv->findRelatedDetail_ByOrgId($this->org_id);
    $this->ledger_id = $this->_ledger_id = $inv_i->ledger_id;
   }
-
   if (!(empty($this->transaction_type_id))) {
    switch ($this->transaction_type_id) {
     case 1 :
@@ -1743,6 +1742,10 @@ class inv_transaction extends dbObject {
   //update lot transaction
   if ($this->_transact_lot_number() < 0) {
    return -99;
+  }
+
+  if (method_exists($this, '_after_save_2')) {
+   $this->_after_save_2();
   }
  }
 

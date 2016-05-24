@@ -90,48 +90,38 @@ and pfl.pm_batch_header_id = '{$header_id}'
   return !empty($result_array) ? $result_array : false;
  }
  
- 
-  public static function find_all_lines_with_byProductIng_by_headerId($header_id){
+
+  public static function find_all_lines_with_byProduct_by_headerId($header_id){
   $sql = "SELECT
 pbl.pm_batch_line_id as line_id,  'pm_batch_line' as line_type , pbl.pm_batch_header_id, 'Finished Goods'  as line_type,
 pbl.line_no, pbl.step_no, pbl.item_id_m, pbl.uom_id, pbl.planned_quantity,
 pbl.actual_quantity, pbl.subinventory_id, pbl.locator_id, item.item_number,
-item.item_description
+item.item_description, item.lot_generation, item.serial_generation, pbh.org_id
 
 from pm_batch_line pbl,
+pm_batch_header pbh,
 item
 
 WHERE pbl.item_id_m = item.item_id_m
-AND item.item_id = item.item_id_m
+AND item.org_id = pbh.org_id
 AND pbl.pm_batch_header_id='{$header_id}'
-
-UNION
-SELECT
-pbi.pm_batch_ingredient_id as line_id,  'pm_batch_ingredient' as line_type , pbi.pm_batch_header_id, 'Ingredients'  as line_type,
-pbi.line_no, pbi.step_no, pbi.item_id_m, pbi.uom_id, pbi.planned_quantity,
-pbi.actual_quantity, pbi.subinventory_id, pbi.locator_id, item.item_number,
-item.item_description
-
-from pm_batch_ingredient pbi,
-item
-
-WHERE pbi.item_id_m = item.item_id_m
-AND item.item_id = item.item_id_m
-AND pbi.pm_batch_header_id='{$header_id}'
+AND pbl.pm_batch_header_id= pbh.pm_batch_header_id
 
 UNION
 SELECT
 pbb.pm_batch_byproduct_id as line_id,  'pm_batch_byproduct' as line_type , pbb.pm_batch_header_id, 'By Product'  as line_type,
 pbb.line_no, pbb.step_no, pbb.item_id_m, pbb.uom_id, pbb.planned_quantity,
 pbb.actual_quantity, pbb.subinventory_id, pbb.locator_id, item.item_number,
-item.item_description
+item.item_description, item.lot_generation, item.serial_generation, pbh.org_id
 
 from pm_batch_byproduct pbb,
+pm_batch_header pbh,
 item
 
 WHERE pbb.item_id_m = item.item_id_m
 AND item.item_id = item.item_id_m     
-AND pbb.pm_batch_header_id='{$header_id}'    "
+AND pbb.pm_batch_header_id='{$header_id}'    
+AND pbb.pm_batch_header_id= pbh.pm_batch_header_id "
 ;
 
 $result = self::find_by_sql($sql);

@@ -6,9 +6,16 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id="pm_material_transaction_divId">
+<div id="pm_completion_transaction_divId">
+ <?php
+ // echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
+ $f = new inoform()
+ ?> 
+ <!--    End of place for showing error messages-->
+
+
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
- <div id ="form_header"><span class="heading"><?php echo gettext('Process Material Transaction') ?></span> 
+ <div id ="form_header"><span class="heading"><?php echo gettext('Process Completion Transaction') ?></span> 
   <div id="form_serach_header" class="tabContainer">
    <div class="tabContent">
     <ul class="column header_field">
@@ -20,8 +27,8 @@ inoERP
       echo $f->hidden_field_withCLass('status', 'WIP', 'popup_value');
       ?>
       <i class="generic g_select_batch_name select_popup clickable fa fa-search" data-class_name="pm_batch_header"></i></li>
-     <li><?php $f->l_select_field_from_array('transaction_type_id', pm_material_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
-      <a name="show" href="form.php?class_name=pm_material_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id pm_material_transaction_id">          
+     <li><?php $f->l_select_field_from_array('transaction_type_id', pm_completion_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
+      <a name="show" href="form.php?class_name=pm_completion_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id pm_completion_transaction_id">          
        <i class="fa fa-refresh"></i></a> 
      </li>
     </ul>
@@ -38,7 +45,7 @@ inoERP
     <li><a href="#tabsLine-5"><?php echo gettext('Lot & Serial') ?></a></li>
    </ul>
    <div class="tabContainer"> 
-    <form action=""  method="post" id="pm_material_transaction"  name="pm_material_transaction">
+    <form action=""  method="post" id="pm_completion_transaction"  name="pm_completion_transaction">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
@@ -46,18 +53,19 @@ inoERP
          <th><?php echo gettext('Action') ?></th>
          <th><?php echo gettext('Seq') ?></th>
          <th><?php echo gettext('Line Id') ?></th>
+         <th><?php echo gettext('Line TYpe') ?></th>
          <th><?php echo gettext('Item Id') ?></th>
          <th><?php echo gettext('Item Number') ?></th>
          <th><?php echo gettext('Item Description') ?></th>
          <th><?php echo gettext('UOM') ?></th>
          <th><?php echo gettext('Quantity') ?></th>
-         <th><?php echo gettext('Planned Quantity') ?></th>
-         <th><?php echo gettext('Actual Quantity') ?></th>
+         <th><?php echo gettext('Planned Qty') ?></th>
+         <th><?php echo gettext('Actual Qty') ?></th>
          <th><?php echo gettext('Trnx. Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="pm_material_transaction0" id="tab1_1">
+        <tr class="pm_completion_transaction0" id="tab1_1">
          <td>
           <?php
           echo ino_inline_action($$class->pm_batch_ingredient_id, array('org_id' => $$class->org_id,
@@ -65,7 +73,8 @@ inoERP
           ?>
          </td>
          <td><?php echo!empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
-         <td><?php $f->text_field_widsr('pm_batch_ingredient_id'); ?></td>
+         <td><?php $f->text_field_widsr('line_id'); ?></td>
+         <td><?php $f->text_field_widr('line_type', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widrm('item_id_m', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widr('item_number', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widr('item_description'); ?></td>
@@ -89,7 +98,7 @@ inoERP
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="pm_material_transaction0" id="tab2_1">
+        <tr class="pm_completion_transaction0" id="tab2_1">
          <td>
           <?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id large'); ?>
          </td>
@@ -121,7 +130,7 @@ inoERP
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="pm_material_transaction0" id="tab3_1">
+        <tr class="pm_completion_transaction0" id="tab3_1">
          <td><?php $f->text_field_widr('document_type', 'copyValue'); ?>							</td>
          <td><?php echo $f->text_field('document_number', $$class->batch_name, '8', '', 'copyValue', 1, 1); ?>							</td>
          <td><?php echo $f->text_field('document_id', $$class->pm_batch_header_id, '8', '', 'copyValue', 1, 1); ?>							</td>
@@ -145,7 +154,7 @@ inoERP
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="pm_material_transaction0" id="tab4_1">
+        <tr class="pm_completion_transaction0" id="tab4_1">
          <td><?php $f->ac_field_widr('account_id', 'always_readonly'); ?></td>
          <td><?php form::text_field_wid('unit_cost'); ?></td>
          <td><?php form::text_field_wid('costed_amount'); ?></td>
@@ -157,7 +166,7 @@ inoERP
 
      <div id="tabsLine-5" class="tabContent scrollElement">
       <?php
-      $ls_trclass = 'pm_material_transaction';
+      $ls_trclass = 'pm_completion_transaction';
       $line_object_ls = array($$class);
       $each_line_ls = $class;
       $line_class_name_sl = &$class;
@@ -178,11 +187,11 @@ inoERP
 
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="lineClassName" data-lineClassName="pm_material_transaction" ></li>
+  <li class="lineClassName" data-lineClassName="pm_completion_transaction" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="line_key_field" data-line_key_field="item_id_m" ></li>
   <li class="single_line" data-single_line="false" ></li>
-  <li class="form_line_id" data-form_line_id="pm_material_transaction" ></li>
+  <li class="form_line_id" data-form_line_id="pm_completion_transaction" ></li>
   <li class="before_save_function" data-before_save_function="beforeSave" ></li>
  </ul>
  <ul id="js_contextMenu_data">
