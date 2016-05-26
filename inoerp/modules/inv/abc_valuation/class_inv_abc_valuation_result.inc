@@ -8,45 +8,45 @@ class inv_abc_valuation_result extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "inv";
  public $field_a = [
-   'seq_number',
-   'inv_abc_valuation_result_id',
-   'inv_abc_valuation_id',
-   'item_id_m',
-   'quantity',
-   'value',
-   'cum_quantity',
-   'cum_value',
-   'created_by',
-   'creation_date',
-   'last_update_by',
-   'last_update_date',
+  'seq_number',
+  'inv_abc_valuation_result_id',
+  'inv_abc_valuation_id',
+  'item_id_m',
+  'quantity',
+  'value',
+  'cum_quantity',
+  'cum_value',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  public $initial_search = [
-   'inv_abc_valuation_result_id',
-   'inv_abc_valuation_id',
-   'seq_number',
-   'item_id_m',
+  'inv_abc_valuation_result_id',
+  'inv_abc_valuation_id',
+  'seq_number',
+  'item_id_m',
  ];
  public $column = [
-   'inv_abc_valuation_result_id',
-   'inv_abc_valuation_id',
-   'seq_number',
-   'item_id_m',
-   'item_number',
-   'item_description',
-   'cum_quantity',
-   'cum_value',
-   'quantity',
-   'value',
+  'inv_abc_valuation_result_id',
+  'inv_abc_valuation_id',
+  'seq_number',
+  'item_id_m',
+  'item_number',
+  'item_description',
+  'cum_quantity',
+  'cum_value',
+  'quantity',
+  'value',
  ];
  public $requiredField = [
-   'inv_abc_valuation_id',
-   'seq_number',
-   'item_id_m',
+  'inv_abc_valuation_id',
+  'seq_number',
+  'item_id_m',
  ];
  public $fields_inForm_notInDataBase = [
-   'item_number',
-   'item_description'
+  'item_number',
+  'item_description'
  ];
  public $search = [
  ];
@@ -78,6 +78,15 @@ class inv_abc_valuation_result extends dbObject {
   }
  }
 
+ public static function find_impInfo_by_headerid($header_id) {
+  $sql = "SELECT COUNT(item_id_m) as total_no_of_items, max(cum_value) as total_value
+FROM inv_abc_valuation_result
+WHERE inv_abc_valuation_id = '{$header_id}' ";
+
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
+ }
+
  public static function find_by_orgId($org_id) {
   $sql = "SELECT * FROM " . self::$table_name . " 
       where org_id={$org_id} LIMIT 1";
@@ -95,7 +104,7 @@ class inv_abc_valuation_result extends dbObject {
  public static function find_by_parentId_cumValue($parent_id, $cum_value) {
   $sql = "SELECT * FROM " . self::$table_name . " 
       where inv_abc_valuation_id= '{$parent_id}' AND cum_value >= '{$cum_value}' "
-      . " ORDER BY  cum_value ASC LIMIT 1";
+   . " ORDER BY  cum_value ASC LIMIT 1";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }

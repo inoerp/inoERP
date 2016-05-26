@@ -124,7 +124,6 @@ class inv_abc_assignment_header extends dbObject {
      $assignment_line->item_id_m = $obj->item_id_m;
      $assignment_line->abc_class = $assign_abc_class_value;
      $assignment_line->description = 'System Generated On ' . current_time(1);
-     $assignment_line->audit_trial();
      $assignment_line->save();
     }
     $assign_seq_number_l = $assign_seq_number;
