@@ -2476,3 +2476,7 @@ td .checkBox ,#form_line  input[type="radio"]{
 li.flow_coneector .fa{
         color: #ccc;
 }
+
+.query-mode{
+    background: none repeat scroll 0% 0% rgba(204, 249, 196, 0.28) !important;
+}

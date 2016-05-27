@@ -5593,6 +5593,7 @@ $(document).ready(function () {
    calendar_update();
    calendar_size_update();
   }
+  
  });
 
 //remove links with no child
@@ -5606,6 +5607,16 @@ $('body').on('click', '.ino-flip.fa-plus-square-o', function(){
 $(this).removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
 }).on('click', '.ino-flip.fa-minus-square-o', function(){
 $(this).removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
+});
+
+$('body').off('click', '#start_query_mode').on('click', '#start_query_mode', function () {
+ $('#form_header .tabContainer').find(':input').val('').addClass('val_field, query-mode');
+ $('#content').find(':input').val('');
+ $('.val_field').inoAutoCompleteElement({
+  json_url: 'includes/json/json_validation_field.php',
+  primary_column1: 'bu_org_id',
+  min_length: 2
+ });
 });
 
 });

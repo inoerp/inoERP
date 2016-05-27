@@ -425,9 +425,9 @@ class comment extends dbObject {
      $comment_string .= "<li class='user-profile-image'>$profile_image</li>";
     }
     if (!empty($records->username) && ($records->created_by != -99)) {
-     $comment_string .= '<li class="comment_by"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($records->created_by) . '">' . ($records->username) . '</a></li>';
+     $comment_string .= '<li class="comment_by"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($records->created_by) . '">' . ino_getUserName_from_email($records->username) . '</a></li>';
     } else if (!empty($records->username)) {
-     $comment_string .= '<li class="comment_by">' . ($records->username) . '</li>';
+     $comment_string .= '<li class="comment_by">' . ino_getUserName_from_email($records->username) . '</li>';
     } else {
      $comment_string .= '<li class="comment_by">Anonymous</li>';
     }

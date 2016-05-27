@@ -1,1 +1,0 @@
-<?php	$all_data = $$class->findAll_singleRecord_db();	foreach($$class->field_a as $key=>$val){	 $$class->$val = $all_data->$val;	} ?>

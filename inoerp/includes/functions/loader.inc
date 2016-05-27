@@ -54,7 +54,12 @@ if ($continue) {
    $_SESSION['recent_visit'][$request_class_name] = $current_url;
   }
  } else {
-  $_SESSION['recent_visit'][$_SERVER['QUERY_STRING']] = $current_url;
+  if(isset($_SERVER['QUERY_STRING'])){
+   $_SESSION['recent_visit'][$_SERVER['QUERY_STRING']] = $current_url;
+  }else{
+   $_SESSION['recent_visit']['QUERY_STRING'] = $current_url;
+  }
+  
  }
 
  /*
@@ -166,7 +171,7 @@ if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" || $_GET['per_page'
 $per_page = empty($per_page) ? 10 : $per_page;
 $search_order_by = !(empty($_GET['search_order_by'])) ? $_GET['search_order_by'] : '';
 $search_asc_desc = !(empty($_GET['search_asc_desc'])) ? $_GET['search_asc_desc'] : '';
-$query_string = $_SERVER['QUERY_STRING'];
+$query_string = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
 
 /*
   ---------------------------------------------------------------------------------------------------------------

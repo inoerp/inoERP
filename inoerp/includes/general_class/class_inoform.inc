@@ -362,6 +362,7 @@ EOD;
         <li><a class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></a></li>
         <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
         <li class='fa fa-remove clickable' id='remove_row_button' title='Remove'></li>
+        <li class='fa fa-search-plus clickable query_mode_icon' id='start_query_mode' title='Query Mode'></li>
         <li class='fa fa-print clickable print' id='print_searchResult' title='Print'></li>
 </ul>
 EOD;

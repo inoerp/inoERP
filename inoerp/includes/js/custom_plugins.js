@@ -212,7 +212,7 @@
     if (settings.select_class === 'undefined') {
      settings.select_class = 'select' + settings.field_name;
     }
-  var form_id_h = '#' + $(this).closest('form').attr('id');
+    var form_id_h = '#' + $(this).closest('form').attr('id');
     if (!$(this).data("autocomplete")) {
      var auto_element = $(this);
      var auto_element_class = $(this).prop('class');
@@ -221,7 +221,11 @@
      if ($(this).attr('data-val_field') && $(this).attr('data-val_value')) {
       var val_field = $(this).data('val_field');
       var val_value = $(this).data('val_value');
-     } else {
+     } else if ($('ul#js_saving_data').find('.headerClassName').data('headerclassname')) {
+      var val_field = $('ul#js_saving_data').find('.headerClassName').data('headerclassname');
+      var val_value = $(this).attr('name').replace(/\[]+/g, '');
+     }
+     else {
       var val_value = val_field = null;
      }
 
@@ -336,11 +340,14 @@
         });
         //close the auto complete
         $(this).autocomplete("close");
+                if ($(this).hasClass('query-mode')) {
+         $('#content a.show').trigger('click');
+        }
        } else if (ui.content.length === 0 || ui.content == 'false' || ui.content == false) {
         alert('No Data Found');
 //        this_e.attr('value', '').prop('value', '');
         if (elemenType === 'LI') {
-          this_e.closest("ul").find(auto_element_class_d).val('');
+         this_e.closest("ul").find(auto_element_class_d).val('');
         } else if (elemenType === 'TD') {
          var trClass = '.' + $(auto_element).closest("tr").attr('class').replace(/\s+/g, '.');
          $('#content').find(trClass).find(auto_element_class_d).val('');
@@ -350,6 +357,7 @@
         }
         //close the auto complete
         $(this).autocomplete("close");
+
        }
       },
       //select
@@ -387,11 +395,14 @@
 
        //close the auto complete
        $(this).autocomplete("close");
+       if ($(this).hasClass('query-mode')) {
+        $('#content a.show').trigger('click');
+       }
       },
       minLength: settings.min_length
      });
     }
-   $('#content').trigger('setInoVal');
+    $('#content').trigger('setInoVal');
    }
   };
 
@@ -421,7 +432,7 @@
      },
      success: function (result) {
       if (result) {
-       var select_class_d =  $(thisElement).attr('class').replace(/\s+/g, '.');
+       var select_class_d = $(thisElement).attr('class').replace(/\s+/g, '.');
        if (settings.trDivId) {
         var select_stmt = '<select id="hr_element_entry_tpl_header_id" class="select hr_element_entry_tpl_header_id" name="hr_element_entry_tpl_header_id[]" style="max-width:95%;">';
        } else {
@@ -453,7 +464,7 @@
   };
 
   if ($(thisElement).length > 2) {
-   var select_class_d =  $(this).attr('class').replace(/\s+/g, '.');
+   var select_class_d = $(this).attr('class').replace(/\s+/g, '.');
    $('body').on("focusin", select_class_d, methods.jsonValue).one();
   }
 //  return this;
