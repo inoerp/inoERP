@@ -52,48 +52,46 @@ inoERP
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Transfer Info') ?></a></li>
-    <li><a href="#tabsLine-3"><?php echo gettext('Reference Info') ?></a></li>
-    <li><a href="#tabsLine-4"><?php echo gettext('Finance Info') ?></a></li>
-    <li><a href="#tabsLine-5"><?php echo gettext('Lot & Serial') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Reference Info') ?></a></li>
    </ul>
    <div class="tabContainer"> 
-    <form action=""  method="post" id="pm_material_transaction"  name="pm_material_transaction">
+    <form  method="post" id="pm_material_transaction"  name="pm_material_transaction">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
         <tr>
          <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Seq') ?></th>
-         <th><?php echo gettext('Line Id') ?></th>
-         <th><?php echo gettext('Item Id') ?></th>
-         <th><?php echo gettext('Item Number') ?></th>
-         <th><?php echo gettext('Item Description') ?></th>
-         <th><?php echo gettext('UOM') ?></th>
-         <th><?php echo gettext('Quantity') ?></th>
-         <th><?php echo gettext('Planned Quantity') ?></th>
-         <th><?php echo gettext('Actual Quantity') ?></th>
+         <th><?php echo gettext('Seq') ?>#</th>
+         <th><?php echo gettext('Resource') ?></th>
+         <th><?php echo gettext('Op Detail Id') ?></th>
+         <th><?php echo gettext('Step') ?>#</th>
+         <th><?php echo gettext('Batch Qty') ?></th>
+         <th><?php echo gettext('Op Line Id') ?></th>
+         <th><?php echo gettext('Op Routing Id') ?></th>
+         <th><?php echo gettext('Activity Code') ?></th>
+         <th><?php echo gettext('Activity Factor') ?></th>
          <th><?php echo gettext('Trnx. Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="pm_material_transaction0" id="tab1_1">
+        <tr class="pm_resource_transaction">
          <td>
           <?php
+          $count = 0;
           echo ino_inline_action($$class->pm_batch_ingredient_id, array('org_id' => $$class->org_id,
            'pm_batch_header_id' => $$class->pm_batch_header_id, 'transaction_type_id' => $$class->transaction_type_id));
           ?>
          </td>
-         <td><?php echo!empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wids('bom_sequence'); ?></td>
-         <td><?php $f->text_field_widsr('pm_batch_ingredient_id'); ?></td>
-         <td><?php $f->text_field_widrm('item_id_m', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widr('item_number', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widr('item_description'); ?></td>
-         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widsm('quantity'); ?></td>
-         <td><?php $f->text_field_widr('planned_quantity', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widr('actual_quantity', 'always_readonly'); ?></td>
-         <td><?php echo form::text_field_dsr('inv_transaction_id'); ?></td>
+         <td><?php $f->seq_field_d($count) ?></td>
+         <td><?php echo !empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wid('bom_sequence'); ?></td>
+         <td><?php $f->text_field_widsr('pm_batch_operation_detail_id'); ?></td>
+         <td><?php $f->text_field_widsr('step_no', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widr('batch_quantity', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widsr('pm_batch_operation_line_id'); ?></td>
+         <td><?php $f->text_field_widsr('pm_process_routing_header_id'); ?></td>
+         <td><?php $f->text_field_widr('activity_code', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widr('activity_factror', 'always_readonly'); ?></td>
+         <td><?php echo form::text_field_dr('inv_transaction_id'); ?></td>
         </tr>
        </tbody>
       </table>
@@ -102,34 +100,7 @@ inoERP
       <table class="form_line_data_table">
        <thead> 
         <tr>
-         <th><?php echo gettext('From SubInv') ?></th>
-         <th><?php echo gettext('From Locator') ?></th>
-         <th><?php echo gettext('To SubInv') ?></th>
-         <th><?php echo gettext('To Locator') ?></th>
-        </tr>
-       </thead>
-       <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="pm_material_transaction0" id="tab2_1">
-         <td>
-          <?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id large'); ?>
-         </td>
-         <td>
-          <?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'subinventory_id large'); ?>
-         </td>
-         <td>
-          <?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id large'); ?>
-         </td>
-         <td>
-          <?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'subinventory_id large'); ?>
-         </td>
-        </tr>
-       </tbody>
-      </table>
-     </div>
-     <div id="tabsLine-3" class="tabContent">
-      <table class="form_line_data_table">
-       <thead> 
-        <tr>
+         <th><?php echo gettext('Seq') ?>#</th>
          <th><?php echo gettext('Document Type') ?></th>
          <th><?php echo gettext('Doc. Number') ?></th>
          <th><?php echo gettext('Doc. Id') ?></th>
@@ -141,7 +112,8 @@ inoERP
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="pm_material_transaction0" id="tab3_1">
+        <tr class="pm_resource_transaction">
+         <td><?php $f->seq_field_d($count) ?></td>
          <td><?php $f->text_field_widr('document_type', 'copyValue'); ?>							</td>
          <td><?php echo $f->text_field('document_number', $$class->batch_name, '8', '', 'copyValue', 1, 1); ?>							</td>
          <td><?php echo $f->text_field('document_id', $$class->pm_batch_header_id, '8', '', 'copyValue', 1, 1); ?>							</td>
@@ -153,38 +125,6 @@ inoERP
         </tr>
        </tbody>
       </table>
-     </div>
-     <div id="tabsLine-4" class="tabContent">
-      <table class="form_line_data_table">
-       <thead> 
-        <tr>
-         <th><?php echo gettext('Account') ?></th>
-         <th><?php echo gettext('Unit Cost') ?></th>
-         <th><?php echo gettext('Costed Amount') ?></th>
-         <th><?php echo gettext('Journal Id') ?></th>
-        </tr>
-       </thead>
-       <tbody class="inv_transaction_values form_data_line_tbody">
-        <tr class="pm_material_transaction0" id="tab4_1">
-         <td><?php $f->ac_field_widr('account_id', 'always_readonly'); ?></td>
-         <td><?php form::text_field_wid('unit_cost'); ?></td>
-         <td><?php form::text_field_wid('costed_amount'); ?></td>
-         <td><?php form::text_field_wid('gl_journal_header_id'); ?></td>
-        </tr>
-       </tbody>
-      </table>
-     </div>
-
-     <div id="tabsLine-5" class="tabContent scrollElement">
-      <?php
-      $ls_trclass = 'pm_material_transaction';
-      $line_object_ls = array($$class);
-      $each_line_ls = $class;
-      $line_class_name_sl = &$class;
-      $ref_key_name = 'inv_transaction';
-      $ref_key_val = 'inv_transaction_id';
-      include_once HOME_DIR . '/includes/template/lot_serial_template.inc'
-      ?>
      </div>
     </form>
    </div>
