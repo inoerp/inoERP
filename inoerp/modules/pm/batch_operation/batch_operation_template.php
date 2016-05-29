@@ -97,7 +97,9 @@ inoERP
         <th><?php echo gettext('Offset Interval') ?></th>
         <th><?php echo gettext('Breakable') ?>?</th>
         <th><?php echo gettext('Material Scheduled') ?>?</th>
+        <th><?php echo gettext('Release Type') ?></th>
         <th><?php echo gettext('Operation Details') ?></th>
+        
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -115,12 +117,13 @@ inoERP
          <td><?php form::text_field_wid2sr('pm_batch_operation_line_id'); ?></td>
          <td><?php echo $f->number_field('step_no', $$class_second->step_no, '', '', 'small ','' , 1); ?></td>
          <td><?php echo $f->select_field_from_object('activity_code', option_header::find_options_byName('PM_OPERATION_ACTIVITY'), 'option_line_code', 'option_line_value', $$class_second->activity_code, '', 'medium'); ?></td>
-         <td><?php $f->text_field_wid2('description', 'xlarge'); ?></td>
-         <td><?php $f->text_field_wid2('activity_factror'); ?></td>
+         <td><?php $f->text_field_wid2('description'); ?></td>
+         <td><?php $f->text_field_wid2s('activity_factror'); ?></td>
          <td><?php $f->checkBox_field_wid2('sequence_dependency_cb'); ?></td>
          <td><?php $f->text_field_wid2('offset_interval'); ?></td>
          <td><?php $f->checkBox_field_wid2('breakable_cb'); ?></td>
          <td><?php $f->checkBox_field_wid2('material_scheduled_cb'); ?></td>
+         <td><?php echo $f->select_field_from_array('release_type', pm_process_routing_line::$release_type_a,  $$class_second->release_type, '', 'uom_id medium'); ?></td>
          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <?php
           $pm_batch_operation_line_id = $pm_batch_operation_line->pm_batch_operation_line_id;
@@ -151,6 +154,7 @@ inoERP
                   <th><?php echo gettext('Resource') ?></th>
                   <th><?php echo gettext('Batch UOM') ?></th>
                   <th><?php echo gettext('Quantity') ?></th>
+                  <th><?php echo gettext('Applied Quantity') ?></th>
                   <th><?php echo gettext('UOM') ?></th>
                   <th><?php echo gettext('Usage') ?></th>
                  </tr>
@@ -172,13 +176,14 @@ inoERP
                      <li><?php echo form::hidden_field('pm_batch_operation_header_id', $pm_batch_operation_header->pm_batch_operation_header_id); ?></li>
                     </ul>
                    </td>
-                   <td><?php form::text_field_wid3sr('pm_batch_operation_detail_id'); ?></td>
-                   <td><?php $f->text_field_d3s('resource_sequence', 'detail_number'); ?></td>
+                   <td><?php form::text_field_wid3r('pm_batch_operation_detail_id'); ?></td>
+                   <td><?php $f->text_field_d3('resource_sequence', 'detail_number'); ?></td>
                    <td><?php echo form::select_field_from_object('bom_resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->bom_resource_id, '', $readonly, 'resource_id', '', 1); ?></td>
                    <td><?php echo $f->select_field_from_object('batch_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->batch_uom_id); ?></td>
-                   <td><?php form::number_field_wid3sm('batch_quantity','large') ?></td>
+                   <td><?php form::number_field_wid3sm('process_quantity') ?></td>
+                   <td><?php $f->text_field_d3r('applied_quantiy', 'always_readonly'); ?></td>
                    <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->uom_id); ?></td>
-                   <td><?php form::number_field_wid3sm('resource_usage','large') ?></td>
+                   <td><?php form::number_field_wid3sm('resource_usage') ?></td>
                   </tr>
                   <?php
                   $detailCount++;

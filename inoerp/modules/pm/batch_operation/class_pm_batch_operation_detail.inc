@@ -18,6 +18,7 @@ class pm_batch_operation_detail extends dbObject {
   'batch_uom_id',
   'uom_id',
   'batch_quantity',
+  'applied_quantiy',
   'component_class',
   'cost_analysis_code',
   'plan_type',
@@ -46,6 +47,7 @@ class pm_batch_operation_detail extends dbObject {
  public $description;
  public $bom_resource_id;
  public $process_quantity;
+ public $applied_quantiy;
  public $resource_usage;
  public $batch_uom_id;
  public $batch_quantity;

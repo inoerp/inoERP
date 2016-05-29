@@ -274,6 +274,7 @@ class pm_batch_header extends dbObject {
   $pbol = new pm_batch_operation_line();
   foreach ($all_routing_lines as $routing_line) {
    $all_operation_lines = pm_process_operation_line::find_by_parent_id($routing_line->pm_process_operation_header_id);
+//   pa($all_operation_lines);pa($pbol);
    if (empty($all_operation_lines)) {
     continue;
    }
@@ -286,6 +287,7 @@ class pm_batch_header extends dbObject {
     }
     $pbol->pm_batch_header_id = $this->pm_batch_header_id;
     $pbol->step_no = $routing_line->step_no;
+    $pbol->release_type = $routing_line->release_type;
     $pbol->pm_process_routing_header_id = $routing_line->pm_process_operation_header_id;
     try {
      $pbol->save();

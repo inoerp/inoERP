@@ -18,7 +18,7 @@ class pm_resource_transaction extends dbObject {
  public static $table_name = "pm_resource_transaction";
  public static $dependent_classes = ['wip_wo_bom', 'wip_wo_routing_line', 'wip_wo_routing_detail'];
  public static $primary_column = "pm_resource_transaction_id";
- public static $key_column = 'wip_wo_routing_detail_id';
+ public static $key_column = 'pm_batch_operation_detail_id';
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Resource Transaction',
@@ -81,9 +81,8 @@ class pm_resource_transaction extends dbObject {
   'transaction_date'
  ];
  public $requiredField = [
-  'wip_wo_routing_line_id',
-  'wip_wo_routing_detail_id',
-  'wip_wo_header_id',
+  'pm_batch_operation_line_id',
+  'pm_batch_operation_detail_id',
   'org_id',
   'transaction_type',
   'transaction_date',
@@ -132,7 +131,6 @@ class pm_resource_transaction extends dbObject {
  public $item_id_m;
  public $routing_sequence;
 
-
  Public static function wip_transactions() {
   $option_header = option_header::find_by_name('WIP_TRANSACTIONS');
   $wip_transactions = option_line::find_by_option_id($option_header->option_header_id);
@@ -159,7 +157,6 @@ class pm_resource_transaction extends dbObject {
   $gjh->journal_name = $gjh->journal_category . '-' . $gjh->reference_key_value;
   $gjh->description = $gjh->journal_name . '-' . current_time();
   $gjh->balance_type = 'A';
-  $gjh->audit_trial();
   $gjh->save();
   $this->gl_journal_header_id = $gjh->gl_journal_header_id;
   echo "<br> The New Journal Header Id is " . $this->gl_journal_header_id;
@@ -185,7 +182,6 @@ class pm_resource_transaction extends dbObject {
    $new_gjl->reference_type = 'table';
    $new_gjl->reference_key_name = 'pm_resource_transaction_id';
    $new_gjl->reference_key_value = $this->pm_resource_transaction_id;
-   $new_gjl->audit_trial();
    $new_gjl->save();
   }
  }
@@ -193,32 +189,27 @@ class pm_resource_transaction extends dbObject {
  public function _after_save() {
   global $db;
   //Insert in WIP WO BOM - item issues for operational pull
-  if ((!empty($this->pm_resource_transaction_id)) && (!(empty($this->wip_wo_routing_detail_id))) && (!(empty($this->transaction_quantity)))) {
-   $wip_wo_routing_detail = new wip_wo_routing_detail();
-   $wip_wo_routing_detail_i = $wip_wo_routing_detail->findBy_id($this->wip_wo_routing_detail_id);
-   if ($wip_wo_routing_detail->charge_type != 'WIP_MOVE') {
-    return 10;
-   }
-   $wip_wo_routing_detail->wip_wo_routing_detail_id = $wip_wo_routing_detail_i->wip_wo_routing_detail_id;
-   $wip_wo_routing_detail->applied_quantity = $wip_wo_routing_detail_i->applied_quantity + $this->transaction_quantity;
+  if ((!empty($this->pm_resource_transaction_id)) && (!(empty($this->pm_batch_operation_detail_id))) && (!(empty($this->transaction_quantity)))) {
+   $batch_op_detail = new pm_batch_operation_detail();
+   $batch_op_detail_i = $batch_op_detail->findBy_id($this->pm_batch_operation_detail_id);
+   $batch_op_detail->pm_batch_operation_detail_id = $batch_op_detail_i->pm_batch_operation_detail_id;
+   $batch_op_detail->applied_quantiy = $batch_op_detail_i->applied_quantiy + $this->transaction_quantity;
    try {
-    $wip_wo_routing_detail->audit_trial();
-    $wip_wo_routing_detail->save();
+    $batch_op_detail->save();
     $resource = new bom_resource();
-    $resource->findBy_id($wip_wo_routing_detail->resource_id);
-    $bom_resource_cost = bom_resource_cost::find_by_resourceId_bomCostType($wip_wo_routing_detail->resource_id);
+    $resource->findBy_id($batch_op_detail->bom_resource_id);
+    $bom_resource_cost = bom_resource_cost::find_by_resourceId_bomCostType($batch_op_detail->bom_resource_id);
     $resource_unit_cost = !empty($bom_resource_cost->resource_rate) ? $bom_resource_cost->resource_rate : 0;
     $total_amount = $resource_unit_cost * $this->transaction_quantity;
-
     if (!empty($total_amount)) {
      $journal_line_a = [];
      $journal_line = [];
      $this->_save_journal_header();
      $line_number = 1;
-     $woh = new wip_wo_header();
-     $woh->findBy_id($this->wip_wo_header_id);
+     $pbh = new pm_batch_header();
+     $pbh->findBy_id($this->pm_batch_header_id);
      $wip_accounting_group = new wip_accounting_group();
-     $wip_accounting_group->findBy_id($woh->wip_accounting_group_id);
+     $wip_accounting_group->findBy_id($pbh->wip_accounting_group_id);
      $journal_line['line_number'] = $line_number;
      $journal_line['amount'] = $total_amount;
      $journal_line['account_id'] = $wip_accounting_group->resource_ac_id;

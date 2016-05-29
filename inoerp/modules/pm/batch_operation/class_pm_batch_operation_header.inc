@@ -34,7 +34,7 @@ class pm_batch_operation_header extends pm_process_operation_header {
   "pm_batch_header_id",
  ];
  public $pm_batch_header_id;
- public $pageTitle = "Batch Header "; //page Title
+ public $pageTitle = "Batch Operation "; //page Title
  public $org_id;
  public $batch_name;
  public $pm_recipe_header_id;

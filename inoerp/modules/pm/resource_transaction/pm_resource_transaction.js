@@ -30,7 +30,7 @@ $(document).ready(function () {
    $(trClass).find('.pm_batch_operation_detail_id').val($(selected).data('pm_batch_operation_detail_id'));
    $(trClass).find('.resource_sequence').val($(selected).data('resource_sequence'));
    $(trClass).find('.resource_usage').val($(selected).data('resource_usage'));
-   $(trClass).find('.batch_quantity').val($(selected).data('batch_quantity'));
+   $(trClass).find('.process_quantity').val($(selected).data('process_quantity'));
    $(trClass).find('.step_no').val($(selected).data('step_no'));
    $(trClass).find('.pm_batch_operation_line_id').val($(selected).data('pm_batch_operation_line_id'));
    $(trClass).find('.pm_process_routing_header_id').val($(selected).data('pm_process_routing_header_id'));

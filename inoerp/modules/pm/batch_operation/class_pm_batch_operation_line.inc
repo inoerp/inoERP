@@ -19,6 +19,7 @@ class pm_batch_operation_line extends dbObject {
   'activity_code',
   'description',
   'activity_factror',
+  'release_type',
   'sequence_dependency_cb',
   'offset_interval',
   'breakable_cb',
@@ -38,6 +39,7 @@ class pm_batch_operation_line extends dbObject {
  public $pm_batch_operation_line_id;
  public $pm_batch_header_id;
  public $pm_process_routing_header_id;
+ public $release_type;
  public $step_no;
  public $activity_code;
  public $description;

@@ -65,7 +65,8 @@ inoERP
          <th><?php echo gettext('Resource') ?></th>
          <th><?php echo gettext('Op Detail Id') ?></th>
          <th><?php echo gettext('Step') ?>#</th>
-         <th><?php echo gettext('Batch Qty') ?></th>
+         <th><?php echo gettext('Qty') ?></th>
+         <th><?php echo gettext('Trnx. Qty') ?></th>
          <th><?php echo gettext('Op Line Id') ?></th>
          <th><?php echo gettext('Op Routing Id') ?></th>
          <th><?php echo gettext('Activity Code') ?></th>
@@ -77,21 +78,22 @@ inoERP
         <tr class="pm_resource_transaction">
          <td>
           <?php
-          $count = 0;
+          $count = 0; $f = new inoform();
           echo ino_inline_action($$class->pm_batch_ingredient_id, array('org_id' => $$class->org_id,
-           'pm_batch_header_id' => $$class->pm_batch_header_id, 'transaction_type_id' => $$class->transaction_type_id));
+           'pm_batch_header_id' => $$class->pm_batch_header_id, 'transaction_type' => $$class->transaction_type, 'transaction_date' => $$class->transaction_date));
           ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php echo !empty($bom_sequence_stament) ? $bom_sequence_stament : form::text_field_wid('bom_sequence'); ?></td>
          <td><?php $f->text_field_widsr('pm_batch_operation_detail_id'); ?></td>
          <td><?php $f->text_field_widsr('step_no', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widr('batch_quantity', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widsr('pm_batch_operation_line_id'); ?></td>
-         <td><?php $f->text_field_widsr('pm_process_routing_header_id'); ?></td>
+         <td><?php $f->text_field_widsr('process_quantity', 'always_readonly'); ?></td>
+         <td><?php echo $f->number_field('transaction_quantity' , $$class->transaction_quantity); ?></td>
+         <td><?php $f->text_field_widsr('pm_batch_operation_line_id', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widsr('pm_process_routing_header_id', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widr('activity_code', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widr('activity_factror', 'always_readonly'); ?></td>
-         <td><?php echo form::text_field_dr('inv_transaction_id'); ?></td>
+         <td><?php $f->text_field_widsr('activity_factror', 'always_readonly'); ?></td>
+         <td><?php echo form::text_field_dsr('inv_transaction_id'); ?></td>
         </tr>
        </tbody>
       </table>
@@ -136,7 +138,7 @@ inoERP
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="lineClassName" data-lineClassName="pm_resource_transaction" ></li>
-  <li class="line_key_field" data-line_key_field="name" ></li>
+  <li class="line_key_field" data-line_key_field="pm_batch_operation_detail_id" ></li>
   <li class="single_line" data-single_line="false" ></li>
   <li class="form_line_id" data-form_line_id="pm_resource_transaction" ></li>
  </ul>
