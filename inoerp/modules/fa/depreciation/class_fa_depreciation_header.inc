@@ -86,9 +86,11 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
  private $_max_line_num;
  private $_acc_dep_ac = [];
  public $prg_run_depreciation_parameters = [
-  'Depreciation Id' => 'search_depreciation_id',
+  'Description' => 'search_depreciation_description',
+//  'Depreciation Id' => 'search_depreciation_id',
   'Asset Book' => 'search_asset_book',
   'Period' => 'search_depreciation_period'
+  
  ];
  public $prg_run_depreciation_details = [
   'name' => 'Run Depreciation',

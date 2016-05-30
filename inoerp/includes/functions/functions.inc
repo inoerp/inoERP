@@ -1165,10 +1165,28 @@ function search_inv_count_entry_status() {
  return $f->select_field_from_array('status', inv_count_schedule::$status_a, '');
 }
 
-function search_depreciation_id() {
+function xxsearch_depreciation_id() {
  $stmt = '<input id="fa_depreciation_header_id" class="number fa_depreciation_header_id"  required type="text" value=" " name="fa_depreciation_header_id[]">
 <img class="fa_depreciation_header_id select_popup clickable" src="http://localhost/inoerp/themes/images/serach.png" style="display: inline-block;">';
 
+ return $stmt;
+}
+
+function search_depreciation_id() {
+ $stmt = '<input id="fa_depreciation_header_id" class="val_field textfield vf_fa_depreciation_header_id fa_depreciation_header_id" 
+                type="text" data-toggle="tooltip" title="Select fa_depreciation_header_id" data-val_field="fa_depreciation_header" data-val_value="fa_depreciation_header_id" 
+                size="20" value="" name="fa_depreciation_header_id">
+<i class="generic g_select_fa_depreciation_header_id select_popup clickable fa fa-search" data-class_name="fa_depreciation_header" style="display: inline-block;"></i>';
+//<input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
+ return $stmt;
+}
+
+function search_depreciation_description() {
+ $stmt = '<input id="description" class="val_field textfield vf_fa_depreciation_header_id description" 
+                type="text" data-toggle="tooltip" title="Select description" data-val_field="fa_depreciation_header" data-val_value="description" 
+                size="20" value="" name="description">
+<i class="generic g_select_fa_depreciation_header_id select_popup clickable fa fa-search" data-class_name="fa_depreciation_header" style="display: inline-block;"></i>';
+//<input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
  return $stmt;
 }
 
@@ -1185,7 +1203,7 @@ function search_asset_book() {
 //}
 
 function search_depreciation_period() {
- $stmt = '<input id="gl_period_id" class="number gl_period_id"  required type="text" value=" " name="gl_period_id[]">';
+ $stmt = '<input id="gl_period_id" class="number gl_period_id"  type="text" value=" " name="gl_period_id[]">';
  return $stmt;
 }
 

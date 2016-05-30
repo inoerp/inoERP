@@ -574,10 +574,10 @@ class search extends dbObject {
 
   //start of first ul
   $program_form_statement .= '<fieldset class="col-md-6 parameters"><legend class="fs-default">Program Parameters</legend>';
-  $program_form_statement .= '<ul>';
+  $program_form_statement .= '<ul class="tabContent">';
   if (!empty($this->_search_functions)) {
    foreach ($this->_search_functions as $key => $value) {
-    $program_form_statement .= "<li class='prg tabContent' id='" . $value . "' ><label class=\"label_$key\"> $key</label>";
+    $program_form_statement .= "<li class='prg' id='" . $value . "' ><label class=\"label_$key\"> $key</label>";
     if (method_exists($class_obj, $value)) {
      $program_form_statement .= call_user_func(array($class_obj, $value));
     } else if (function_exists($value)) {
