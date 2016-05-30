@@ -16,7 +16,7 @@ inoERP
   <div class="tabContainer"> 
    <div id="tabsHeader-1" class="tabContent">
     <ul class="column header_field">
-     <li><?php
+     <li><?php 
       $f->l_val_field_dm('batch_name', 'pm_batch_header', 'batch_name', '', 'vf_select_batch_name');
       echo $f->hidden_field_withId('pm_batch_header_id', $$class->pm_batch_header_id);
       echo $f->hidden_field_withCLass('org_id', $$class->org_id, 'popup_value');
@@ -137,6 +137,7 @@ inoERP
 
 <div id="js_data">
  <ul id="js_saving_data">
+  <li class="headerClassName" data-headerClassName="pm_resource_transaction" ></li>
   <li class="lineClassName" data-lineClassName="pm_resource_transaction" ></li>
   <li class="line_key_field" data-line_key_field="pm_batch_operation_detail_id" ></li>
   <li class="single_line" data-single_line="false" ></li>
