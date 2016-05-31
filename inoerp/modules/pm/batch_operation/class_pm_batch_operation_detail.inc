@@ -32,11 +32,11 @@ class pm_batch_operation_detail extends dbObject {
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   'pm_batch_operation_line_id',
-  'pm_batch_operation_header_id'
+  'pm_batch_header_id'
  ];
  public $requiredField = [
   'pm_batch_operation_line_id',
-  'pm_batch_operation_header_id',
+  'pm_batch_header_id',
   'resource_sequence',
   'bom_resource_id',
   'resource_usage',
@@ -64,6 +64,10 @@ class pm_batch_operation_detail extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
+
+ public function _before_save() {
+  return 10;
+ }
 
 }
 

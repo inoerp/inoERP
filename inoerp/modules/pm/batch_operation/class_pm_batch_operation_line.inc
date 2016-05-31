@@ -11,6 +11,10 @@ class pm_batch_operation_line extends dbObject {
   'AUTO' => 'Automatic',
   'MANUAL' => 'Manual'
  ];
+ public static $line_action_a = [
+  'COMPLETE' => 'Complete',
+  'CLOSE' => 'Close'
+ ];
  public $field_a = [
   'pm_batch_operation_line_id',
   'pm_batch_header_id',
@@ -30,11 +34,14 @@ class pm_batch_operation_line extends dbObject {
   'last_update_date',
  ];
  public $requiredField = [
-  'pm_batch_operation_header_id',
+  'pm_batch_header_id',
   'activity_code'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "pm_batch_operation_header_id"
+  "pm_batch_header_id"
+ ];
+ public $fields_inForm_notInDataBase = [
+  'line_action'
  ];
  public $pm_batch_operation_line_id;
  public $pm_batch_header_id;
@@ -52,6 +59,11 @@ class pm_batch_operation_line extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $line_action;
+
+ public function _before_save() {
+  return 10;
+ }
 
  public static function find_by_headerId_and_buOrgId($pm_batch_operation_header_id, $bu_org_id) {
   $sql = "SELECT * FROM " .

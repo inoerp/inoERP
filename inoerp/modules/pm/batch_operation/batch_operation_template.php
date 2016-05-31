@@ -18,10 +18,17 @@ inoERP
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_dr_withSearch('pm_batch_header_id') ?>
-       <a name="show" href="form.php?class_name=pm_batch_operation_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_batch_header_id"><i class="fa fa-refresh"></i></a> 
-      </li>
-      <li><?php $f->l_text_field_d('batch_name'); ?></li>
+      <li><?php
+       $f->l_val_field_dm('pm_batch_header_id', 'pm_batch_header', 'pm_batch_header_id', '', 'vf_select_batch_name');
+       echo $f->hidden_field_withCLass('org_id', $$class->org_id, 'popup_value');
+       ?>
+       <i class="generic g_select_batch_name select_popup clickable fa fa-search" data-class_name="pm_batch_header"></i>
+       <a name="show" href="form.php?class_name=pm_batch_operation_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_batch_header_id"><i class="fa fa-refresh"></i></a> </li>
+      <li><?php
+       $f->l_val_field_dm('batch_name', 'pm_batch_header', 'batch_name', '', 'vf_select_batch_name');
+       echo $f->hidden_field_withCLass('org_id', $$class->org_id, 'popup_value');
+       ?>
+       <i class="generic g_select_batch_name select_popup clickable fa fa-search" data-class_name="pm_batch_header"></i></li>
       <li><?php
        echo $f->l_val_field_dm('recipe_name', 'pm_recipe_all_v', 'recipe_name', '', 'vf_select_recipe_name');
        echo $f->hidden_field_withId('pm_recipe_header_id', $$class->pm_recipe_header_id);
@@ -31,7 +38,7 @@ inoERP
       <li><?php $f->l_text_field_dr('revision'); ?></li>
       <li><?php $f->l_text_field_dr('comment'); ?></li>
       <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
-       <?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
+<?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
       </li>
       <li><?php $f->l_text_field_dr('routing_name') ?></li>
@@ -54,7 +61,7 @@ inoERP
      <div> 
       <div id="comments">
        <div id="comment_list">
-        <?php echo!(empty($comments)) ? $comments : ""; ?>
+<?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
         <?php
@@ -94,36 +101,38 @@ inoERP
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('Factor') ?></th>
         <th><?php echo gettext('Seq Dependency') ?>?</th>
-        <th><?php echo gettext('Offset Interval') ?></th>
         <th><?php echo gettext('Breakable') ?>?</th>
         <th><?php echo gettext('Material Scheduled') ?>?</th>
         <th><?php echo gettext('Release Type') ?></th>
+        <th><?php echo gettext('Line Action') ?></th>
         <th><?php echo gettext('Operation Details') ?></th>
         
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0; 
+       $count = 0;
        foreach ($pm_batch_operation_line_object as $pm_batch_operation_line) {
+        $pm_batch_operation_line->line_action = null;
         ?>         
         <tr class="pm_batch_operation_line<?php echo $count ?>">
          <td>
           <?php
-          echo ino_inline_action($pm_batch_operation_line->pm_batch_operation_line_id, array('pm_batch_operation_header_id' => $$class->pm_batch_operation_header_id));
+          echo ino_inline_action($pm_batch_operation_line->pm_batch_operation_line_id, array('pm_batch_header_id' => $$class->pm_batch_header_id));
           ?>
          </td>
 
          <td><?php form::text_field_wid2sr('pm_batch_operation_line_id'); ?></td>
-         <td><?php echo $f->number_field('step_no', $$class_second->step_no, '', '', 'small ','' , 1); ?></td>
+         <td><?php echo $f->number_field('step_no', $$class_second->step_no, '', '', 'small ', '', 1); ?></td>
          <td><?php echo $f->select_field_from_object('activity_code', option_header::find_options_byName('PM_OPERATION_ACTIVITY'), 'option_line_code', 'option_line_value', $$class_second->activity_code, '', 'medium'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
          <td><?php $f->text_field_wid2s('activity_factror'); ?></td>
          <td><?php $f->checkBox_field_wid2('sequence_dependency_cb'); ?></td>
-         <td><?php $f->text_field_wid2('offset_interval'); ?></td>
+         
          <td><?php $f->checkBox_field_wid2('breakable_cb'); ?></td>
          <td><?php $f->checkBox_field_wid2('material_scheduled_cb'); ?></td>
-         <td><?php echo $f->select_field_from_array('release_type', pm_process_routing_line::$release_type_a,  $$class_second->release_type, '', 'uom_id medium'); ?></td>
+         <td><?php echo $f->select_field_from_array('release_type', pm_process_routing_line::$release_type_a, $$class_second->release_type, '', 'uom_id medium'); ?></td>
+         <td><?php echo $f->select_field_from_array('line_action', pm_batch_operation_line::$line_action_a, $$class_second->line_action, '', 'medium'); ?></td>
          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <?php
           $pm_batch_operation_line_id = $pm_batch_operation_line->pm_batch_operation_line_id;
@@ -173,7 +182,7 @@ inoERP
                      <li class="remove_row_img"><i class="fa fa-minus-circle clickable"></i></li>
                      <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($pm_batch_operation_detail->pm_batch_operation_detail_id); ?>"></li>           
                      <li><?php echo form::hidden_field('pm_batch_operation_line_id', $pm_batch_operation_line->pm_batch_operation_line_id); ?></li>
-                     <li><?php echo form::hidden_field('pm_batch_operation_header_id', $pm_batch_operation_header->pm_batch_operation_header_id); ?></li>
+                     <li><?php echo form::hidden_field('pm_batch_header_id', $$class->pm_batch_header_id); ?></li>
                     </ul>
                    </td>
                    <td><?php form::text_field_wid3r('pm_batch_operation_detail_id'); ?></td>
@@ -251,7 +260,7 @@ inoERP
 
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="pm_batch_operation_header" ></li>
+  <!--<li class="headerClassName" data-headerClassName="pm_batch_operation_header" ></li>-->
   <li class="lineClassName" data-lineClassName="pm_batch_operation_line" ></li>
   <li class="detailClassName" data-detailClassName="pm_batch_operation_detail" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
