@@ -7,13 +7,11 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id="form_header"><span class="heading"><?php echo gettext('Batch Operation') ?></span>
- <form  method="post" id="pm_batch_operation_header"  name="pm_batch_operation_header">
+ 
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('Accounts') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -55,32 +53,10 @@ inoERP
       <li><?php $f->l_ac_field_d('osp_ac_id', '', 'A'); ?></li>  
       <li><?php $f->l_ac_field_d('expense_ac_id', '', 'X'); ?></li>  
      </ul>
-
-    </div>
-    <div id="tabsHeader-3" class="tabContent">
-     <div> 
-      <div id="comments">
-       <div id="comment_list">
-<?php echo!(empty($comments)) ? $comments : ""; ?>
-       </div>
-       <div id ="display_comment_form">
-        <?php
-        $reference_table = 'pm_batch_operation_header';
-        $reference_id = $$class->pm_batch_operation_header_id;
-        ?>
-       </div>
-       <div id="new_comment">
-       </div>
-      </div>
-     </div>
-    </div>
-    <div id="tabsHeader-4" class="tabContent">
-     <div> <?php echo ino_attachement($file) ?> </div>
-
     </div>
    </div>
   </div>
- </form>
+
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Batch Operation Line & Details') ?></span>
@@ -260,7 +236,7 @@ inoERP
 
 <div id="js_data">
  <ul id="js_saving_data">
-  <!--<li class="headerClassName" data-headerClassName="pm_batch_operation_header" ></li>-->
+  <li class="headerClassName" data-headerClassName="pm_batch_operation_header" ></li>
   <li class="lineClassName" data-lineClassName="pm_batch_operation_line" ></li>
   <li class="detailClassName" data-detailClassName="pm_batch_operation_detail" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>

@@ -62,7 +62,23 @@ class pm_batch_operation_line extends dbObject {
  public $line_action;
 
  public function _before_save() {
-  return 10;
+  if (empty($this->line_action)) {
+   return 10;
+  } else {
+   $this->_do_line_action();
+  }
+ }
+
+ private function _do_line_action() {
+  //complete resource and material transaction
+ }
+ 
+ private function _do_resource_trnx(){
+  
+ }
+ 
+  private function _do_material_trnx(){
+  
  }
 
  public static function find_by_headerId_and_buOrgId($pm_batch_operation_header_id, $bu_org_id) {
@@ -86,6 +102,23 @@ pm_batch_operation_detail pbod
 
 WHERE pbol.pm_batch_operation_line_id = pbod.pm_batch_operation_line_id
 AND pbol.pm_batch_header_id = '{$pm_batch_header_id}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? $result : false;
+ }
+
+ public static function find_operationDetails_by_operationLineId($op_line_id) {
+  $sql = " SELECT 
+pbod.pm_batch_operation_detail_id, pbod.resource_sequence, pbod.description, pbod.bom_resource_id, pbod.process_quantity,
+pbod.resource_usage, pbod.batch_uom_id, pbod.uom_id, pbod.batch_quantity, pbod.component_class, pbod.cost_analysis_code,
+pbod.plan_type, pbod.resource_count, pbol.pm_batch_operation_line_id, pbol.pm_batch_header_id, pbol.step_no, pbol.pm_process_routing_header_id,
+pbol.activity_code, pbol.description, pbol.activity_factror, pbol.sequence_dependency_cb, pbol.offset_interval,
+pbol.breakable_cb, pbol.material_scheduled_cb
+
+FROM pm_batch_operation_line pbol,
+pm_batch_operation_detail pbod
+
+WHERE pbol.pm_batch_operation_line_id = pbod.pm_batch_operation_line_id
+AND pbol.pm_batch_operation_line_id = '{$op_line_id}' ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
