@@ -71,14 +71,33 @@ class pm_batch_operation_line extends dbObject {
 
  private function _do_line_action() {
   //complete resource and material transaction
+  $this->_do_resource_trnx();
+//  $this->_do_material_trnx();
  }
- 
- private function _do_resource_trnx(){
-  
+
+ private function _do_resource_trnx() {
+  $op_details_a = self::find_operationDetails_by_operationLineId($this->pm_batch_operation_line_id);
+  foreach ($op_details_a as $op_details) {
+   $res_trnx = new pm_resource_transaction();
+   foreach ($res_trnx->field_a as $k => $v) {
+    if (!empty($op_details->$v)) {
+     $res_trnx->$v = $this->$v;
+    }
+    $res_trnx->save();
+    $res_trnx->_after_save();
+   }
+  }
  }
- 
-  private function _do_material_trnx(){
-  
+
+ private function _do_material_trnx() {
+  $mat_trnx = new pm_matource_transaction();
+  foreach ($mat_trnx->field_a as $k => $v) {
+   if (!empty($this->$v)) {
+    $mat_trnx->$v = $this->$v;
+   }
+   $mat_trnx->save();
+   $mat_trnx->_after_save();
+  }
  }
 
  public static function find_by_headerId_and_buOrgId($pm_batch_operation_header_id, $bu_org_id) {
