@@ -12,6 +12,10 @@ class pm_batch_operation_line extends dbObject {
   'MANUAL' => 'Manual'
  ];
  public static $line_action_a = [
+  'COMPLETED' => 'Completed',
+  'CLOSED' => 'Closed'
+ ];
+ public static $line_status_a = [
   'COMPLETE' => 'Complete',
   'CLOSE' => 'Close'
  ];
@@ -28,6 +32,7 @@ class pm_batch_operation_line extends dbObject {
   'offset_interval',
   'breakable_cb',
   'material_scheduled_cb',
+  'status',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -55,6 +60,7 @@ class pm_batch_operation_line extends dbObject {
  public $offset_interval;
  public $breakable_cb;
  public $material_scheduled_cb;
+ public $status;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -71,8 +77,18 @@ class pm_batch_operation_line extends dbObject {
 
  private function _do_line_action() {
   //complete resource and material transaction
-  $this->_do_resource_trnx();
-//  $this->_do_material_trnx();
+  $existing_line = self::find_by_id($this->pm_batch_operation_line_id);
+  if (empty($existing_line->status)) {
+   if (empty($this->line_action == 'COMPLETE')) {
+//    $this->_do_resource_trnx();
+    $this->_do_material_trnx();
+//    $this->status = 'COMPLETED';
+   } else if (empty($this->line_action == 'CLOSE')) {
+    $this->status = 'CLOSED';
+   }
+  } else {
+   echo "<br>Line status does not allow update";
+  }
  }
 
  private function _do_resource_trnx() {
@@ -90,13 +106,26 @@ class pm_batch_operation_line extends dbObject {
  }
 
  private function _do_material_trnx() {
-  $mat_trnx = new pm_matource_transaction();
-  foreach ($mat_trnx->field_a as $k => $v) {
-   if (!empty($this->$v)) {
-    $mat_trnx->$v = $this->$v;
+  $pm_batch_ing_object = pm_batch_ingredient::find_all_lines_for_trnx_by_headerId($this->pm_batch_header_id);
+//  pa($pm_batch_ing_object);
+  foreach ($pm_batch_ing_object as $ing_details) {
+   if (!empty($ing_details->lot_generation) || $ing_details->serial_generation) {
+    echo "<br>Item # {$ing_details->item_number} is not transacted as Item is Lot/Serial controlled ";
+    continue;
+   } else {
+    $mat_trnx = new pm_material_transaction();
+    foreach ($mat_trnx->field_a as $k => $v) {
+     if (!empty($ing_details->$v)) {
+      $mat_trnx->$v = $ing_details->$v;
+     }
+    }
+    $mat_trnx->transaction_type_id = '29';
+    $mat_trnx->transacted_quantity = $ing_details->planned_quantity - $ing_details->actual_quantity;
+    $mat_trnx->_before_save();
+    $mat_trnx->save();
+    $mat_trnx->_after_save();
+//    pa($mat_trnx);
    }
-   $mat_trnx->save();
-   $mat_trnx->_after_save();
   }
  }
 

@@ -104,13 +104,16 @@ and pfi.pm_batch_header_id = '{$header_id}'
   $sql = "SELECT
 pbi.pm_batch_ingredient_id,   pbi.pm_batch_header_id, pbi.line_no, pbi.step_no, pbi.item_id_m, pbi.uom_id, pbi.planned_quantity,
 pbi.actual_quantity, pbi.subinventory_id, pbi.locator_id, item.item_number,
-item.item_description, item.lot_generation, item.serial_generation
+item.item_description, item.lot_generation, item.serial_generation,
+pbh.org_id, pbh.wip_accounting_group_id
 
 from pm_batch_ingredient pbi,
-item
+item,
+pm_batch_header pbh
 
 WHERE pbi.item_id_m = item.item_id_m
 AND item.item_id = item.item_id_m
+AND pbh.pm_batch_header_id = pbi.pm_batch_header_id
 AND pbi.pm_batch_header_id='{$header_id}'
  "
   ;

@@ -81,7 +81,8 @@ inoERP
         <th><?php echo gettext('Material Scheduled') ?>?</th>
         <th><?php echo gettext('Release Type') ?></th>
         <th><?php echo gettext('Line Action') ?></th>
-        <th><?php echo gettext('Operation Details') ?></th>
+        <th><?php echo gettext('Status') ?></th>
+        <th><?php echo gettext('Details') ?></th>
         
        </tr>
       </thead>
@@ -90,6 +91,7 @@ inoERP
        $count = 0;
        foreach ($pm_batch_operation_line_object as $pm_batch_operation_line) {
         $pm_batch_operation_line->line_action = null;
+        $line_action_class = !empty($pm_batch_operation_line->status) ? ' always_readonly ' : null;
         ?>         
         <tr class="pm_batch_operation_line<?php echo $count ?>">
          <td>
@@ -108,7 +110,8 @@ inoERP
          <td><?php $f->checkBox_field_wid2('breakable_cb'); ?></td>
          <td><?php $f->checkBox_field_wid2('material_scheduled_cb'); ?></td>
          <td><?php echo $f->select_field_from_array('release_type', pm_process_routing_line::$release_type_a, $$class_second->release_type, '', 'uom_id medium'); ?></td>
-         <td><?php echo $f->select_field_from_array('line_action', pm_batch_operation_line::$line_action_a, $$class_second->line_action, '', 'medium'); ?></td>
+         <td><?php echo $f->select_field_from_array('line_action', pm_batch_operation_line::$line_action_a, $$class_second->line_action, '', $line_action_class); ?></td>
+         <td><?php $f->text_field_wid2sr('status','always_readonly'); ?></td>
          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <?php
           $pm_batch_operation_line_id = $pm_batch_operation_line->pm_batch_operation_line_id;

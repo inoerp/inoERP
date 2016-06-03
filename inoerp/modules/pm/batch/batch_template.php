@@ -33,7 +33,7 @@ inoERP
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
       <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_woType('PROCESS'), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
-      <li><?php $f->l_select_field_from_array('status', pm_batch_header::$status_a, $$class->status, ''  ,'always_readonly', '', 1); ?></li>
+      <li><?php $f->l_select_field_from_array('status', pm_batch_header::$status_a, $$class->status, '', 'always_readonly', '', 1); ?></li>
       <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
        <?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
@@ -146,7 +146,7 @@ inoERP
          <td><?php form::text_field_wid2('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id'); ?></td>
          <td><?php echo $f->number_field('planned_quantity', $$class_second->planned_quantity, '', '', 'allow_change'); ?></td>
-         <td><?php echo $f->number_field('actual_quantity', $$class_second->actual_quantity, '', '', 'always_readonly','',1); ?></td>
+         <td><?php echo $f->number_field('actual_quantity', $$class_second->actual_quantity, '', '', 'always_readonly', '', 1); ?></td>
          <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_second->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_second->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->number_field('step_no', $$class_second->step_no, '', 'always_readonly', 'small ', '', 1); ?></td>
@@ -181,7 +181,8 @@ inoERP
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Yield') ?></th>
         <th><?php echo gettext('Consumption') ?></th>
-        <th><?php echo gettext('Phantom') ?></th>
+        <th><?php echo gettext('Sub') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
         <th><?php echo gettext('Step') ?> #</th>
        </tr>
       </thead>
@@ -217,11 +218,12 @@ inoERP
          <td><?php form::text_field_wid3('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->uom_id, '', '', 'uom_id'); ?></td>
          <td><?php echo $f->number_field('planned_quantity', $$class_third->planned_quantity, '', '', 'allow_change small'); ?></td>
-         <td><?php echo $f->number_field('actual_quantity', $$class_third->actual_quantity, '', '', 'always_readonly small' , '', 1); ?></td>
+         <td><?php echo $f->number_field('actual_quantity', $$class_third->actual_quantity, '', '', 'always_readonly small', '', 1); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_third->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->checkBox_field('contribute_yield_cb', $$class_third->contribute_yield_cb); ?></td>
          <td><?php echo $f->select_field_from_array('consumption_type', pm_formula_ingredient::$consumption_type_a, $$class_third->consumption_type, '', 'medium'); ?></td>
-         <td><?php $f->text_field_wid3('phantom_type'); ?></td>
+         <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id medium'); ?></td>
          <td><?php echo $f->number_field('step_no', $$class_third->step_no, '', 'always_readonly', 'small ', '', 1); ?></td>
         </tr>
         <?php
@@ -284,7 +286,7 @@ inoERP
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid4('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->uom_id, '', '', 'uom_id'); ?></td>
-                  <td><?php echo $f->number_field('planned_quantity', $$class_fourth->planned_quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php echo $f->number_field('planned_quantity', $$class_fourth->planned_quantity, '', '', 'allow_change small'); ?></td>
          <td><?php echo $f->number_field('allocated_quantity', $$class_fourth->allocated_quantity, '', '', 'allow_change small'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_fourth->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_fourth->yield_type, '', 'medium'); ?></td>
