@@ -430,7 +430,6 @@ saveMainClass.prototype.saveMain = function (beforeSave)
        detailData = "";
       }
       count++;
-//      console.log('433');
       saveLine(json_url, lineData, trclass, detailData, primary_column_id_h, lineClassName, detailClassName);
      });
 //     alert('Saving ' + count + ' Record(s)');

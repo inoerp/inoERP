@@ -64,7 +64,7 @@ class pm_completion_transaction extends inv_transaction {
   "org_id",
   "item_id_m",
   "transaction_type_id",
-  'pm_batch_ingredient_id'
+  'pm_batch_header_id'
  ];
  public $search = [
   '_show_view_path' => 1,
@@ -86,17 +86,42 @@ class pm_completion_transaction extends inv_transaction {
   'onhand',
   'reservable_onhand',
   'line_type',
+  'line_type_code',
   'planned_quantity',
   'actual_quantity'
  ];
  public $batch_name;
  public $line_type;
+ public $line_type_code;
  public $line_id;
  public $planned_quantity;
  public $actual_quantity;
- 
- public function _before_save_2(){
-  
+
+ public function _before_save() {
+  global $dbc;
+  if (!empty($_POST['line_type_code']) && $_POST['line_type_code'] == 'pm_batch_line') {
+   try {
+    $this->_do_line_action();
+   } catch (Exception $e) {
+    $dbc->rollback = true;
+    echo "<br>Failed to complete operation line transaction @ " . get_class($this) . ' @@ ' . __LINE__;
+    return 10;
+   }
+  }
+ }
+
+ private function _do_line_action() {
+  //find all operations and do operation trasaction with line action
+  $all_operation_lines = pm_batch_operation_line::find_by_parent_id($this->pm_batch_header_id);
+  foreach ($all_operation_lines as $operation_line) {
+   if ($operation_line->release_type == 'AUTO' && empty($operation_line->status)) {
+    $op_line = new pm_batch_operation_line();
+    $op_line->findBy_id($operation_line->pm_batch_operation_line_id);
+    $op_line->line_action = 'COMPLETE';
+    $op_line->_before_save();
+    $op_line->save();
+   }
+  }
  }
 
 }

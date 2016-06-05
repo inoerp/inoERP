@@ -43,6 +43,12 @@ class pm_batch_line extends dbObject {
   'line_type',
   'line_id'
  ];
+ public static $yield_type_a = [
+  'MANUAL' => 'Manual',
+//  'INC' => 'Incremental',
+//  'AUTOBS' => 'Auto By Step',
+//  'AUTO' => 'Automatic',
+ ];
  public $pm_batch_line_id;
  public $pm_batch_header_id;
  public $line_no;
@@ -89,11 +95,10 @@ and pfl.pm_batch_header_id = '{$header_id}'
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? $result_array : false;
  }
- 
 
-  public static function find_all_lines_with_byProduct_by_headerId($header_id){
+ public static function find_all_lines_with_byProduct_by_headerId($header_id) {
   $sql = "SELECT
-pbl.pm_batch_line_id as line_id,  'pm_batch_line' as line_type , pbl.pm_batch_header_id, 'Finished Goods'  as line_type,
+pbl.pm_batch_line_id as line_id,  'pm_batch_line' as line_type_code , pbl.pm_batch_header_id, 'Finished Goods'  as line_type,
 pbl.line_no, pbl.step_no, pbl.item_id_m, pbl.uom_id, pbl.planned_quantity,
 pbl.actual_quantity, pbl.subinventory_id, pbl.locator_id, item.item_number,
 item.item_description, item.lot_generation, item.serial_generation, pbh.org_id
@@ -109,7 +114,7 @@ AND pbl.pm_batch_header_id= pbh.pm_batch_header_id
 
 UNION
 SELECT
-pbb.pm_batch_byproduct_id as line_id,  'pm_batch_byproduct' as line_type , pbb.pm_batch_header_id, 'By Product'  as line_type,
+pbb.pm_batch_byproduct_id as line_id,  'pm_batch_byproduct' as line_type_code , pbb.pm_batch_header_id, 'By Product'  as line_type,
 pbb.line_no, pbb.step_no, pbb.item_id_m, pbb.uom_id, pbb.planned_quantity,
 pbb.actual_quantity, pbb.subinventory_id, pbb.locator_id, item.item_number,
 item.item_description, item.lot_generation, item.serial_generation, pbh.org_id
@@ -122,15 +127,12 @@ WHERE pbb.item_id_m = item.item_id_m
 AND item.item_id = item.item_id_m     
 AND pbb.pm_batch_header_id='{$header_id}'    
 AND pbb.pm_batch_header_id= pbh.pm_batch_header_id "
-;
+  ;
 
-$result = self::find_by_sql($sql);
+  $result = self::find_by_sql($sql);
 
-return !empty($result) ? $result : '';
-
+  return !empty($result) ? $result : '';
  }
-
- 
 
 }
 

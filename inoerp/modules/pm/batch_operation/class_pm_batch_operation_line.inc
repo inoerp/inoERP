@@ -78,11 +78,12 @@ class pm_batch_operation_line extends dbObject {
  private function _do_line_action() {
   //complete resource and material transaction
   $existing_line = self::find_by_id($this->pm_batch_operation_line_id);
+
   if (empty($existing_line->status)) {
    if (empty($this->line_action == 'COMPLETE')) {
-//    $this->_do_resource_trnx();
+    $this->_do_resource_trnx();
     $this->_do_material_trnx();
-//    $this->status = 'COMPLETED';
+    $this->status = 'COMPLETED';
    } else if (empty($this->line_action == 'CLOSE')) {
     $this->status = 'CLOSED';
    }
@@ -97,17 +98,25 @@ class pm_batch_operation_line extends dbObject {
    $res_trnx = new pm_resource_transaction();
    foreach ($res_trnx->field_a as $k => $v) {
     if (!empty($op_details->$v)) {
-     $res_trnx->$v = $this->$v;
+     $res_trnx->$v = $op_details->$v;
     }
+   }
+
+   $res_trnx->transaction_date = current_time(1);
+   $res_trnx->transaction_type = 'WIP_RESOURCE_TRANSACTION';
+   $res_trnx->transaction_quantity = $op_details->process_quantity - $op_details->applied_quantiy;
+   if ($res_trnx->transaction_quantity > 0) {
     $res_trnx->save();
     $res_trnx->_after_save();
+   } else {
+    echo gettext("No quantity to transact. All planned quantities have been issued.");
    }
+//   pa($res_trnx);
   }
  }
 
  private function _do_material_trnx() {
   $pm_batch_ing_object = pm_batch_ingredient::find_all_lines_for_trnx_by_headerId($this->pm_batch_header_id);
-//  pa($pm_batch_ing_object);
   foreach ($pm_batch_ing_object as $ing_details) {
    if (!empty($ing_details->lot_generation) || $ing_details->serial_generation) {
     echo "<br>Item # {$ing_details->item_number} is not transacted as Item is Lot/Serial controlled ";
@@ -120,10 +129,15 @@ class pm_batch_operation_line extends dbObject {
      }
     }
     $mat_trnx->transaction_type_id = '29';
-    $mat_trnx->transacted_quantity = $ing_details->planned_quantity - $ing_details->actual_quantity;
-    $mat_trnx->_before_save();
-    $mat_trnx->save();
-    $mat_trnx->_after_save();
+    $mat_trnx->quantity = $ing_details->planned_quantity - $ing_details->actual_quantity;
+    if ($mat_trnx->quantity > 0) {
+     $mat_trnx->_before_save();
+     $mat_trnx->save();
+     $mat_trnx->_after_save();
+    } else {
+     echo gettext("No quantity to transact. All planned quantities have been issued.");
+    }
+
 //    pa($mat_trnx);
    }
   }
@@ -156,16 +170,18 @@ AND pbol.pm_batch_header_id = '{$pm_batch_header_id}' ";
 
  public static function find_operationDetails_by_operationLineId($op_line_id) {
   $sql = " SELECT 
-pbod.pm_batch_operation_detail_id, pbod.resource_sequence, pbod.description, pbod.bom_resource_id, pbod.process_quantity,
+pbod.pm_batch_operation_detail_id, pbod.resource_sequence, pbod.description, pbod.bom_resource_id, pbod.process_quantity, pbod.applied_quantiy,
 pbod.resource_usage, pbod.batch_uom_id, pbod.uom_id, pbod.batch_quantity, pbod.component_class, pbod.cost_analysis_code,
 pbod.plan_type, pbod.resource_count, pbol.pm_batch_operation_line_id, pbol.pm_batch_header_id, pbol.step_no, pbol.pm_process_routing_header_id,
 pbol.activity_code, pbol.description, pbol.activity_factror, pbol.sequence_dependency_cb, pbol.offset_interval,
-pbol.breakable_cb, pbol.material_scheduled_cb
+pbol.breakable_cb, pbol.material_scheduled_cb, pbh.org_id
 
 FROM pm_batch_operation_line pbol,
-pm_batch_operation_detail pbod
+pm_batch_operation_detail pbod,
+pm_batch_header pbh
 
 WHERE pbol.pm_batch_operation_line_id = pbod.pm_batch_operation_line_id
+AND pbol.pm_batch_header_id = pbh.pm_batch_header_id
 AND pbol.pm_batch_operation_line_id = '{$op_line_id}' ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;

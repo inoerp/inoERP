@@ -147,7 +147,7 @@ inoERP
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id'); ?></td>
          <td><?php echo $f->number_field('planned_quantity', $$class_second->planned_quantity, '', '', 'allow_change'); ?></td>
          <td><?php echo $f->number_field('actual_quantity', $$class_second->actual_quantity, '', '', 'always_readonly', '', 1); ?></td>
-         <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_second->yield_type, '', 'medium'); ?></td>
+         <td><?php echo $f->select_field_from_array('yield_type', pm_batch_line::$yield_type_a, $$class_second->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_second->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->number_field('step_no', $$class_second->step_no, '', 'always_readonly', 'small ', '', 1); ?></td>
         </tr>
@@ -289,7 +289,7 @@ inoERP
          <td><?php echo $f->number_field('planned_quantity', $$class_fourth->planned_quantity, '', '', 'allow_change small'); ?></td>
          <td><?php echo $f->number_field('allocated_quantity', $$class_fourth->allocated_quantity, '', '', 'allow_change small'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_fourth->scale_type, '', 'medium') ?></td>
-         <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_fourth->yield_type, '', 'medium'); ?></td>
+         <td><?php echo $f->select_field_from_array('yield_type', pm_batch_line::$yield_type_a, $$class_fourth->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('byproduct_type', pm_formula_byproduct::$byproduct_type_a, $$class_fourth->byproduct_type, '', 'medium'); ?></td>
          <td><?php echo $f->number_field('step_no', $$class_fourth->step_no, '', 'always_readonly', 'small ', '', 1); ?></td>
         </tr>

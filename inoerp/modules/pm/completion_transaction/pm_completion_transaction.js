@@ -55,6 +55,7 @@ $(document).ready(function () {
    $(trClass).find('.item_description').val($(selected).data('item_description'));
    $(trClass).find('.item_number').val($(selected).data('item_number'));
    $(trClass).find('.line_type').val($(selected).data('line_type'));
+   $(trClass).find('.line_type_code').val($(selected).data('line_type_code'));
    $(trClass).find('.item_id_m').val($(selected).data('item_id_m'));
    $(trClass).find('.uom_id').val($(selected).data('uom_id'));
    $(trClass).find('.step_no').val($(selected).data('step_no'));

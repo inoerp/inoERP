@@ -120,6 +120,7 @@ inoERP
        <thead> 
         <tr>
          <th><?php echo gettext('Document Type') ?></th>
+         <th><?php echo gettext('Line Type Code') ?></th>
          <th><?php echo gettext('Doc. Number') ?></th>
          <th><?php echo gettext('Doc. Id') ?></th>
          <th><?php echo gettext('Ref Type') ?></th>
@@ -132,8 +133,9 @@ inoERP
        <tbody class="inv_transaction_values form_data_line_tbody">
         <tr class="pm_completion_transaction0" id="tab3_1">
          <td><?php $f->text_field_widr('document_type', 'copyValue'); ?>							</td>
-         <td><?php echo $f->text_field('document_number', $$class->batch_name, '8', '', 'copyValue', 1, 1); ?>							</td>
-         <td><?php echo $f->text_field('document_id', $$class->pm_batch_header_id, '8', '', 'copyValue', 1, 1); ?>							</td>
+         <td><?php $f->text_field_widr('line_type_code', 'copyValue'); ?>							</td>
+         <td><?php echo $f->text_field('document_number', $$class->batch_name, '', '', 'copyValue', 1, 1); ?>							</td>
+         <td><?php echo $f->text_field('document_id', $$class->pm_batch_header_id, '', '', 'copyValue', 1, 1); ?>							</td>
          <td><?php $f->text_field_widr('reference_type', 'copyValue'); ?>							</td>
          <td><?php echo $f->text_field('reference_key_name', 'pm_batch_header', '20', '', 'copyValue', 1, 1); ?>							</td>
          <td><?php echo $f->text_field('reference_key_value', $$class->pm_batch_header_id, '8', '', 'copyValue', 1, 1); ?>							</td>

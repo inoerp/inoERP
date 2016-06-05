@@ -51,6 +51,7 @@ if ((!empty($pm_batch_header_id)) && !empty($pm_batch_bom_object)) {
   $bom_sequence_stament .=' data-serial_generation ="' . $array->serial_generation . '"';
   $bom_sequence_stament .=' data-lot_generation ="' . $array->lot_generation . '"';
   $bom_sequence_stament .=' data-line_type ="' . $array->line_type . '"';
+  $bom_sequence_stament .=' data-line_type_code ="' . $array->line_type_code . '"';
   $bom_sequence_stament .=' value="' . $array->line_id . '" >';
   $bom_sequence_stament .= $array->line_type . ' | ' . $array->step_no . ' | ' . $array->item_number . ' | ' . $array->item_description;
   $bom_sequence_stament .= '</option>';
