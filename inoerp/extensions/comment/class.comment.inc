@@ -117,6 +117,10 @@ class comment extends dbObject {
  public $subscribe_cb;
 
  public function _before_save() {
+  if (empty(trim($this->comment))) {
+   echo '<br>No comment to post';
+   return -90;
+  }
   if (empty($this->subject)) {
    $this->subject = substr($this->comment, 0, 50);
   }

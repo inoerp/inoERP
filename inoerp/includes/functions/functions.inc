@@ -250,9 +250,8 @@ function ino_validate_num($num) {
  }
 }
 
-
 function ino_getUserName_from_email($email) {
- $email_a = explode('@' , $email);
+ $email_a = explode('@', $email);
  return $email_a[0];
 }
 
@@ -750,10 +749,9 @@ function ino_eval($string) {
  return $evaled_string;
 }
 
-function ino_validateDate($date)
-{
-    $d = DateTime::createFromFormat('Y-m-d', $date);
-    return $d && $d->format('Y-m-d') === $date;
+function ino_validateDate($date) {
+ $d = DateTime::createFromFormat('Y-m-d', $date);
+ return $d && $d->format('Y-m-d') === $date;
 }
 
 //function ino_eval($string) {
@@ -2182,6 +2180,56 @@ function update_htaccessFile() {
  fclose($hta_file);
  fclose($write_file);
  return $return;
+}
+
+function ino_upload_error_msg($msg_code) {
+ $rtn_msg = '';
+ switch ($msg_code) {
+  case '1':
+   $rtn_msg .= 'Code : UPLOAD_ERR_INI_SIZE ';
+   $rtn_msg .= '<br>The uploaded file exceeds the upload_max_filesize directive in php.ini.';
+   break;
+
+  case '1':
+   $rtn_msg .= 'Code : UPLOAD_ERR_INI_SIZE ';
+   $rtn_msg .= '<br>The uploaded file exceeds the upload_max_filesize directive in php.ini.';
+   break;
+
+  case '2':
+   $rtn_msg .= 'Code : UPLOAD_ERR_FORM_SIZE ';
+   $rtn_msg .= '<br>The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.';
+   break;
+
+  case '3':
+   $rtn_msg .= 'Code : UPLOAD_ERR_PARTIAL ';
+   $rtn_msg .= '<br>The uploaded file was only partially uploaded.';
+   break;
+
+  case '4':
+   $rtn_msg .= 'Code : UPLOAD_ERR_NO_FILE ';
+   $rtn_msg .= '<br>No file was uploaded.';
+   break;
+
+  case '6':
+   $rtn_msg .= 'Code : UPLOAD_ERR_NO_TMP_DIR ';
+   $rtn_msg .= '<br>Missing a temporary folder.';
+   break;
+
+  case '7':
+   $rtn_msg .= 'Code : UPLOAD_ERR_CANT_WRITE ';
+   $rtn_msg .= '<br>Failed to write file to disk';
+   break;
+
+  case '8':
+   $rtn_msg .= 'Code : UPLOAD_ERR_EXTENSION ';
+   $rtn_msg .= '<br> A PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop; examining the list of loaded extensions with phpinfo() may help';
+   break;
+
+  default:
+   $rtn_msg .= 'Unknown Error';
+   break;
+ }
+ return $rtn_msg;
 }
 
 ?>

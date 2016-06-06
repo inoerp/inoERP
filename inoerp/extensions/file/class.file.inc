@@ -82,7 +82,7 @@ class file extends dbObject {
  protected $_class_name;
  protected $_file_dir;
  protected $_upload_type;
- protected $_max_size = '2097152';
+ protected $_max_size = '9097152';
 
  const MAX_SIZE = '2097152';
 
@@ -219,6 +219,11 @@ class file extends dbObject {
   $errors = [];
   $uploaded_file_ids = [];
   foreach ($FILES as $new_files) {
+   if($new_files['error'] > 0 ){
+    echo '<div class="message"> Upload error '. ino_upload_error_msg($new_files['error']) .'</div>';
+    continue;
+   }
+
    $extension_t = explode(".", $new_files["name"]);
    $extension = end($extension_t);
    try {

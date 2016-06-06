@@ -2299,7 +2299,7 @@ function getViewResult(options) {
 
 function getReportResult(options) {
  var defaults = {
-  json_url:  $('#home_url').val() + 'extensions/report/json_report.php',
+  json_url: $('#home_url').val() + 'extensions/report/json_report.php',
   display_field_id: 'live_display_data',
   query_v: $('#query_v').val(),
   show_from_query: true,
@@ -4714,6 +4714,11 @@ $(document).ready(function () {
  $('body').on('click', '.submit_comment', function () {
   var this_e = $(this);
   $('.show_loading_small').show();
+  var comment_text = $('form').find('.ed-mediumtext').val().trim();
+  if (!comment_text) {
+   alert('Enter comment and then click on post');
+   return false;
+  }
   $(this).prop('disabled', true);
   var headerData = $(this).closest('form').serializeArray();
   var homeUrl = $('#home_url').val();
@@ -4949,16 +4954,16 @@ $(document).ready(function () {
  });
 
  $('body').on('click', '.remove-filter', function () {
-  var report_elem =  $(this).closest('.extn_report_filters');
-  var field_name =  $(this).closest('.applied-filter').data('field_name');
+  var report_elem = $(this).closest('.extn_report_filters');
+  var field_name = $(this).closest('.applied-filter').data('field_name');
   var field_name_d = '.' + field_name;
   $('#searchForm').find('ul.search_form').find(field_name_d).remove();
   $(this).closest('.applied-filter').remove();
   if ($('#searchForm').find('.window_type').val() && $('#searchForm').find('.window_type').val() == 'popover') {
    getSelectResult();
   } else if ($(this).closest('.extn_report_content') != 'undefined') {
-   $(report_elem).find('.hidden'+field_name_d).remove();
-       $(report_elem).siblings('.live_display_data').find('.ino_filter').first().getReportResult_e();
+   $(report_elem).find('.hidden' + field_name_d).remove();
+   $(report_elem).siblings('.live_display_data').find('.ino_filter').first().getReportResult_e();
   } else {
    getSearchResult();
   }
@@ -5102,10 +5107,13 @@ $(document).ready(function () {
   $(this).prop('disabled', true);
   $.when(saveHeader('content.php', headerData, '#content_id', '', '', true, 'content')).then(function () {
    var message = '<div class="alert alert-success alert-dismissible" role="alert">';
-   message += 'Document is Successfully Posted. <br> Click on view to view the post';
+   message += 'Document is Successfully Posted, and you will be re-directed to the new post <br> Click on view to view the post';
    message += '</div>';
    $(".error").replaceWith(message);
    $('.show_loading_small').hide();
+   var path = 'content.php?mode=2&content_id=' + $('#content_id').val()
+           + '&content_type=' + $('#content_type').val();
+   window.location.href = path;
   });
 
  });
@@ -5593,7 +5601,7 @@ $(document).ready(function () {
    calendar_update();
    calendar_size_update();
   }
-  
+
  });
 
 //remove links with no child
@@ -5603,21 +5611,21 @@ $(document).ready(function () {
   }
  });
 //serial lot form flip
-$('body').on('click', '.ino-flip.fa-plus-square-o', function(){
-$(this).removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
-}).on('click', '.ino-flip.fa-minus-square-o', function(){
-$(this).removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
-});
-
-$('body').off('click', '#start_query_mode').on('click', '#start_query_mode', function () {
- $('#form_header .tabContainer').find(':input').val('').addClass('val_field, query-mode');
- $('#content').find(':input').val('');
- $('.val_field').inoAutoCompleteElement({
-  json_url: 'includes/json/json_validation_field.php',
-  primary_column1: 'bu_org_id',
-  min_length: 2
+ $('body').on('click', '.ino-flip.fa-plus-square-o', function () {
+  $(this).removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
+ }).on('click', '.ino-flip.fa-minus-square-o', function () {
+  $(this).removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
  });
-});
+
+ $('body').off('click', '#start_query_mode').on('click', '#start_query_mode', function () {
+  $('#form_header .tabContainer').find(':input').val('').addClass('val_field, query-mode');
+  $('#content').find(':input').val('');
+  $('.val_field').inoAutoCompleteElement({
+   json_url: 'includes/json/json_validation_field.php',
+   primary_column1: 'bu_org_id',
+   min_length: 2
+  });
+ });
 
 });
 

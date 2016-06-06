@@ -1,4 +1,4 @@
-<?php include_once("../../includes/basics/basics.inc"); ?>
+<?php set_time_limit(120); include_once("../../includes/basics/basics.inc"); ?>
 <?php
 
 if (isset($_FILES)) {

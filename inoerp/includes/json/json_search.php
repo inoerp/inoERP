@@ -246,7 +246,7 @@ if (!empty($_GET['class_name'])) {
    $sql .=" LIMIT {$per_page} ";
    $sql .=" OFFSET {$pagination->offset()}";
   }
-//  echo "<br><br><br> sql is $sql";
+  echo "<br><br><br> sql is $sql and per page is $per_page";
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);
  }
@@ -294,10 +294,13 @@ if (!empty($_GET['class_name'])) {
  }
 
 
- $search_class_obj_all = $$class->findBySql($all_download_sql);
- $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
+
+ $search_class_array_all = null;
 
  if (!empty($_GET['email_addresses'])) {
+
+  $search_class_obj_all = $$class->findBySql($all_download_sql);
+  $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
   //send email
   $im = new inomail();
   $im->FromName = $si->site_name;
