@@ -262,7 +262,7 @@ if (($continue) && (!empty($class_names))) {
   if (empty($_POST)) {
    $class_id = property_exists($class, 'primary_column') ? $class::$primary_column : $table_name . '_id';
    if (!empty($_GET[$class_id])) {
-    $class_id_value = $_GET[$class_id];
+     $class_id_value = filter_var($_GET[$class_id], FILTER_SANITIZE_NUMBER_INT);
     $verify_web_form_allowed = false;
    } else {
     $class_id_value = null;
@@ -661,6 +661,9 @@ if ($continue && !empty($form_page)) {
    $template_file_names = [$custom_template_name];
   } else {
    $template_file_names = glob($fdir . DS . "*_template.php");
+   if(empty($template_file_names)){
+    $template_file_names = [THEME_DIR . '/template/default_template.inc'];
+   }
   }
  }
 } else {

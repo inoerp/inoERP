@@ -1598,6 +1598,17 @@ EOD;
                                  cols=\"$columnsize\" rows=\"$rowsize\" class=\"textfield $name $div_class \" title=\"$title\" placeholder=\"$place_holder\" $required $idvalue $readonly>$value</textarea>";
   return $element_text_field;
  }
+ 
+  public function text_area_d($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo $this->text_area($field_name, $$class->$field_name, '10', $field_name, $field_name.' '.$div_class, '', $this->readonly,'','','40');
+ }
+ 
+  public function l_text_area_d($field_name,  $div_class = "") {
+   global $readonly, $class, $$class;
+  echo '<label class="text_area_label">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_area($field_name, $$class->$field_name, '6', $field_name, $field_name.' text_area_d '.$div_class, '', $this->readonly,'','','40');
+ }
 
  public function text_area_ap($array) {
   $name = array_key_exists('name', $array) ? $array['name'] : null;

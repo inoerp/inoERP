@@ -536,6 +536,9 @@ function setConetntRightLeft() {
 function getBlocks() {
  var pathname = window.location.href;
  var homeUrl = $('#home_url').val();
+ if(!homeUrl){
+  return false;
+ }
  var blockPath = homeUrl + 'includes/basics/json.basics.php';
  var smallLoadingImg = homeUrl + 'files/images/small_loading.gif';
  $.ajax({

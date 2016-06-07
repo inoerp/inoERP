@@ -1566,6 +1566,18 @@ ul.column.two_column_form input, ul.column.two_column_form select{
  max-width: 250px;
 }
 
+ul.column.one_column_form input, ul.column.one_column_form select{
+ width: 80% !important;
+}
+
+ul.column.one_column_form .checkBox  {
+ width: 40px !important;
+}
+
+.text_area_d{
+ width: 87%;
+float: right;
+}
 .ino-20{
  width: 20px !important;
 }
@@ -1595,6 +1607,10 @@ ul.column.two_column_form input, ul.column.two_column_form select{
  width: 100px !important;
 }
 
+ul.column.one_column_form li {
+ margin-bottom: 10px;
+ width: 98% !important;
+}
 
 ul.column.two_column_form li {
  margin-bottom: 10px;
@@ -2479,4 +2495,8 @@ li.flow_coneector .fa{
 
 .query-mode{
     background: none repeat scroll 0% 0% rgba(204, 249, 196, 0.28) !important;
+}
+
+label.text_area_label{
+        display: block;
 }
