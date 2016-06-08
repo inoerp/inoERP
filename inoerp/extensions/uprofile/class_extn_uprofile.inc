@@ -19,6 +19,7 @@ class extn_uprofile extends dbObject {
  public static $primary_column = "extn_uprofile_id";
  public static $key_column = 'profile_name';
  public static $module = "extensions";
+ public static $allow_search = false;
  public static $system_info = [
   'name' => 'User Profile',
   'number' => '10029',
@@ -33,6 +34,7 @@ class extn_uprofile extends dbObject {
  public $field_a = [
   'extn_uprofile_id',
   'user_id',
+  'website',
   'google_page',
   'profile_name',
   'about',
@@ -62,6 +64,7 @@ class extn_uprofile extends dbObject {
  public $google_page;
  public $profile_name;
  public $about;
+ public $website;
  public $facebook_page;
  public $linkedin_page;
  public $allow_private_msg_cb;
@@ -79,12 +82,24 @@ class extn_uprofile extends dbObject {
   ],
   [
    'name' => 'username',
-   'field_function' => 'l_val_field_d',
-   'function_parameters' => ['username', 'user', 'username'],
-   'hidden_fields' => ['user_id']
-  ], [
+   'field_function' => 'l_text_field_d',
+   'function_parameters' => ['always_readonly'],
+  ],
+
+//  [
+//   'name' => 'username',
+//   'field_function' => 'l_val_field_d',
+//   'function_parameters' => ['username', 'user', 'username','','always_readonly'],
+//   'hidden_fields' => ['user_id']
+//  ], 
+  [
    'name' => 'google_page',
    'field_function' => 'l_text_field_d'
+  ],
+    [
+   'name' => 'user_id',
+   'field_function' => 'hidden_field_d',
+   'function_parameters' => ['user_id' ],
   ]
  ];
  public static $no_ofline_tabs = 1;
@@ -92,6 +107,10 @@ class extn_uprofile extends dbObject {
   'ul_class' => 'column header_field one_column_form',
   'tab_heading' => 'About',
   [
+   'name' => 'website',
+   'field_function' => 'l_text_field_d'
+  ],
+    [
    'name' => 'facebook_page',
    'field_function' => 'l_text_field_d'
   ],
@@ -111,18 +130,22 @@ class extn_uprofile extends dbObject {
    'name' => 'show_my_phone_cb',
    'field_function' => 'l_checkBox_field_d'
   ],
-    [
+  [
    'name' => 'about',
    'field_function' => 'text_area'
   ]
  ];
 
-
-
  public function findBy_userId() {
   $sql = "SELECT * FROM " . self::$table_name . " where user_id='{$this->user_id}' ";
   $result = $this->findBySql($sql);
-  return !empty($result) ? $result : false;
+  return !empty($result) ? array_pop($result) : false;
+ }
+ 
+  public static function find_by_userId($user_id) {
+  $sql = "SELECT * FROM " . self::$table_name . " where user_id='{$user_id}' ";
+  $result = self::find_by_sql($sql);
+  return !empty($result) ? array_pop($result) : false;
  }
 
  public function findBy_currentUser() {
@@ -133,8 +156,6 @@ class extn_uprofile extends dbObject {
    return false;
   }
  }
-
-
 
 }
 

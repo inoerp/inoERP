@@ -2500,3 +2500,7 @@ li.flow_coneector .fa{
 label.text_area_label{
         display: block;
 }
+
+.about-me{
+ min-height: 220px;
+}

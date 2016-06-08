@@ -5203,6 +5203,10 @@ $(document).ready(function () {
 
   if ($(this).hasClass('search-list-page')) {
    if ($('ul#js_saving_data').find('.headerClassName').data('headerclassname')) {
+    var hideSearchPage = $('ul#js_saving_data').find('.hideSearchPage').data('hidesearchpage');
+    if(hideSearchPage){
+     return false;
+    }
     var headerClassName = $('ul#js_saving_data').find('.headerClassName').data('headerclassname');
     var formUrl = 'search.php?class_name=' + headerClassName;
     getFormDetails(formUrl);

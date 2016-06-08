@@ -11,9 +11,16 @@
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field"> 
-       <li><?php $f->l_text_field_dr_withSearch($class_id_first) ?>
-        <a name="show" href="form.php?class_name=<?php echo "$class_first&mode=$mode"; ?>" class="show document_id <?php echo $class_id_first ?>">
-         <i class="fa fa-refresh"></i></a> 
+       <li>
+        <?php
+        if ($allow_search) {
+         $f->l_text_field_dr_withSearch($class_id_first);
+         echo '<a name="show" href="form.php?class_name="' . $class_first . '&mode=' . $mode . '" class="show document_id' . $class_id_first . '">
+         <i class="fa fa-refresh"></i></a> ';
+        } else {
+         $f->l_text_field_dr($class_id_first, 'always_readonly');
+        }
+        ?> 
        </li>
        <?php
        if (!empty($tab1)) {
@@ -75,13 +82,13 @@
        exit;
       }
       $line_tab_var = 'line_tab_' . $tab_count;
-      $ul_class = isset ($$line_tab_var['ul_class']) ? $$line_tab_var['ul_class'] : '';
+      $ul_class = isset($$line_tab_var['ul_class']) ? $$line_tab_var['ul_class'] : '';
       echo '<div id="tabsLine-1" class="tabContent"><div><ul>';
       echo "<ul class='{$ul_class}'>";
       $line_tab_var = 'line_tab_' . $tab_count;
       if (!empty($$line_tab_var)) {
        foreach ($$line_tab_var as $tab_l) {
-        if(!is_array($tab_l)){
+        if (!is_array($tab_l)) {
          continue;
         }
         echo '<li>';
@@ -103,13 +110,18 @@
 
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="extn_uprofile" ></li>
+  <li class="headerClassName" data-headerClassName="<?php echo $class_first ?>" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="true" ></li>
-  <li class="primary_column_id" data-primary_column_id="extn_uprofile_id" ></li>
-  <li class="form_header_id" data-form_header_id="extn_uprofile" ></li>
+  <li class="primary_column_id" data-primary_column_id="<?php echo $class_id_first ?>" ></li>
+  <li class="form_header_id" data-form_header_id="<?php echo $class_first ?>" ></li>
+  <?php
+  if (!$allow_search) {
+   echo '<li class="hideSearchPage" data-hideSearchPage="1" ></li>';
+  }
+  ?>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedaderId" data-docHedaderId="extn_uprofile_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="extn_uprofile_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="<?php echo $class_id_first ?>" ></li>
+  <li class="btn1DivId" data-btn1DivId="<?php echo $class_id_first ?>" ></li>
  </ul>
 </div>

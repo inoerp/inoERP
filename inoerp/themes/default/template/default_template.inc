@@ -7,6 +7,8 @@ if (property_exists($class_first, 'header_tab_1')) {
  $tab1 = null;
 }
 
+
+
 $no_ofline_tabs = property_exists($class_first, 'no_ofline_tabs') ? $class_first::$no_ofline_tabs : 1;
 $line_tab_1 = property_exists($class_first, 'line_tab_1') ? $class_first::$line_tab_1 : null;
 $line_tab_2 = property_exists($class_first, 'line_tab_2') ? $class_first::$line_tab_2 : null;
@@ -26,12 +28,17 @@ function ino_showField_from_details_a($arr) {
    $ret_stmt = $f->l_text_field_d($arr['name']);
    break;
 
+  case 'hidden_field_d':
+   $val_f = isset($arr['function_parameters'][0]) ? $arr['function_parameters'][0] : null;
+   $ret_stmt = $f->hidden_field_d($arr['name'], $val_f);
+   break;
+
   case 'l_checkBox_field_d':
    $ret_stmt = $f->l_checkBox_field_d($arr['name']);
    break;
 
   case 'text_area':
-   echo $f->l_text_area_d( $arr['name']);
+   echo $f->l_text_area_d($arr['name']);
    break;
 
   case 'l_val_field_d':
@@ -49,8 +56,14 @@ function ino_showField_from_details_a($arr) {
    break;
  }
 
- 
+
  echo $ret_stmt;
+}
+
+if(property_exists($class_first, 'allow_search')){
+ $allow_search = $class_first::$allow_search;
+}else{
+ $allow_search = 1;
 }
 
 require_once 'default_template.php'
