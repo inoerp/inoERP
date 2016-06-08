@@ -1,9 +1,9 @@
 inoERP
 =========================
 
-Demo: <http://inoerp.org/extensions/user/user_login.php>
-
 Homepage: <http://inoideas.org/>
+
+Demo: <http://inoideas.org/content/demo>
 
 Documentation: <http://inoideas.org/content.php?content_type=documentation&category_id=30>
 
