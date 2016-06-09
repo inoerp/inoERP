@@ -790,10 +790,10 @@ EOD;
   $contact_stmt = '<div>
       <ul id="new_contact_reference">
        <li class="new_object1">
-        <label><i class="fa fa-search extn_contact_id select_popup clickable" ></i> Associate Contact : </label> ';
+        <label>Associate Contact </label> ';
   $contact_stmt .= $this->hidden_field_withCLass('extn_contact_id_new', '', 'extn_contact_id');
-  $contact_stmt .= $this->text_field('contact_name_new', '', '20', '', 'select_contact contact_name');
-  $contact_stmt .=' </li>
+  $contact_stmt .= $this->val_field('contact_name_new', '', '20', '', 'select_contact contact_name', '' ,'','extn_contact','contact_name');
+  $contact_stmt .='<i class="extn_contact_id select_popup clickable fa fa-search" data-class_name="extn_contact"></i> </li>
 <li class="clickable" id="add_new_contact" title="New contact reference field"><i class="fa fa-plus-circle"></i></li>
 </ul>
 </div>';

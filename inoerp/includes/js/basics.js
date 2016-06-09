@@ -3869,6 +3869,7 @@ $(document).ready(function () {
  $('#content').on('click', '.extn_contact_id.select_popup', function () {
   var close_field_class = '.' + $(this).closest('li').find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
+  localStorage.setItem("set_value_for_one_field", 1);
   void window.open('select.php?class_name=extn_contact', '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
@@ -4459,12 +4460,12 @@ $(document).ready(function () {
 
  $('body').off('click', '.hideDiv_input').on('click', '.hideDiv_input', function () {
   $(this).parent().find('.hideDiv_input_element').toggle();
-  $(this).removeClass('hideDiv_input').addClass('showDiv_input');
+  $(this).removeClass('hideDiv_input fa-minus-circle').addClass('showDiv_input fa-plus-circle');
  });
 
  $('body').off('click', '.showDiv_input').on('click', '.showDiv_input', function () {
   $(this).parent().find('.hideDiv_input_element').toggle();
-  $(this).removeClass('showDiv_input').addClass('hideDiv_input');
+  $(this).removeClass('showDiv_input fa-plus-circle').addClass('hideDiv_input fa-minus-circle');
  });
 
  $('#content_divId .hideDiv_input, #program_header .hideDiv_input').trigger('click');
@@ -5617,6 +5618,11 @@ $(document).ready(function () {
    $(this).remove();
   }
  });
+ 
+ $('body').on('click', '.search.reset ', function(){
+  $(this).closest('form').find(':input:not(.btn, .readonly, .hidden)').not('readonly').val('');
+});
+
 //serial lot form flip
  $('body').on('click', '.ino-flip.fa-plus-square-o', function () {
   $(this).removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
@@ -5625,7 +5631,7 @@ $(document).ready(function () {
  });
 
  $('body').off('click', '#start_query_mode').on('click', '#start_query_mode', function () {
-  $('#form_header .tabContainer').find(':input').val('').addClass('val_field, query-mode');
+  $('#form_header .tabContainer').find(':input').val('').addClass('val_field query-mode');
   $('#content').find(':input').val('');
   $('.val_field').inoAutoCompleteElement({
    json_url: 'includes/json/json_validation_field.php',

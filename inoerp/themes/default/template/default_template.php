@@ -69,7 +69,8 @@
        exit;
       }
       $line_tab_var = 'line_tab_' . $tab_count;
-      echo '<li><a href="#tabsLine-1">' . gettext($$line_tab_var['tab_heading']) . '</a></li>';
+      $line_tab_var_a = $$line_tab_var;
+      echo '<li><a href="#tabsLine-1">' . gettext($line_tab_var_a['tab_heading']) . '</a></li>';
       $tab_count++;
      }
      ?>
@@ -81,13 +82,14 @@
       if ($tab_count > 8) {
        exit;
       }
-      $line_tab_var = 'line_tab_' . $tab_count;
-      $ul_class = isset($$line_tab_var['ul_class']) ? $$line_tab_var['ul_class'] : '';
+      $line_tab_var2 = 'line_tab_' . $tab_count;
+      $line_tab_var2_a = $$line_tab_var2;
+      $ul_class = isset($line_tab_var2_a['ul_class']) ? $line_tab_var2_a['ul_class'] : '';
       echo '<div id="tabsLine-1" class="tabContent"><div><ul>';
       echo "<ul class='{$ul_class}'>";
-      $line_tab_var = 'line_tab_' . $tab_count;
-      if (!empty($$line_tab_var)) {
-       foreach ($$line_tab_var as $tab_l) {
+    
+      if (!empty($line_tab_var2_a)) {
+       foreach ($line_tab_var2_a as $tab_l) {
         if (!is_array($tab_l)) {
          continue;
         }

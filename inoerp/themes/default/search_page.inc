@@ -231,21 +231,21 @@
     </div>
     <div id="content">
      <div id="structure"><?php echo getBreadCrumb($class_first); ?>
-      <span class="heading">
+      <div class="heading search-top-msg">
        <?php
        if (!empty($_GET['function_name'])) {
-        echo '<div class="alert ino-alert-info" role="alert" >' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</div>';
+        echo '<span>' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</span>';
        } else {
-        echo '<div class="alert ino-alert-info" role="alert" >Search ' . ucwords(str_replace('_', ' ', $class)) . '</div>';
+        echo '<span>Search ' . ucwords(str_replace('_', ' ', $class)) . '</span>';
        }
        ?>
-      </span>
+      </div>
       <div id="search_page">
        <div id ="form_header">
         <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
        </div>
        <div id="list_contents">
-        <div id="searchForm" ><div class='hideDiv_input'></div>
+        <div id="searchForm" ><div class='hideDiv_input fa fa-minus-circle fa-2x clickable'></div>
          <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
         <div id="searchResult">
          <?php

@@ -65,7 +65,7 @@ class user_activity_v extends dbObject {
  public $reference_table;
  public $phone;
 
- public function user_contents($user_id) {
+ public function user_contents($user_id='') {
 
   $sql = " 
    SELECT con.content_id, con.content_type_id, con.subject, con.created_by, con.creation_date, con.published_cb,
@@ -79,8 +79,8 @@ LEFT JOIN content_type ct ON ct.content_type_id = con.content_type_id
 WHERE  con.created_by = user.user_id
 ";
 
-  if (!empty($user_id)) {
-   $sql .= " AND user.user_id = '{$user_id}' ";
+  if (!empty($this->user_id)) {
+   $sql .= " AND user.user_id = '{$this->user_id}' ";
   }
 
   if (!empty($this->category)) {
@@ -91,10 +91,11 @@ WHERE  con.created_by = user.user_id
   }
 
   $result = $this->findBySql($sql);
+ 
   return !empty($result) ? $result : false;
  }
 
- public function user_comments($user_id) {
+ public function user_comments($user_id='') {
 
   $sql = " 
    SELECT com.comment_id, com.reference_table, com.reference_id, com.comment ,com.published_cb, com.creation_date, 
@@ -108,8 +109,8 @@ AND com.reference_table = 'content'
 AND con.content_id =  com.reference_id
 ";
 
-  if (!empty($user_id)) {
-   $sql .= " AND user.user_id = '{$user_id}' ";
+  if (!empty($this->user_id)) {
+   $sql .= " AND user.user_id = '{$this->user_id}' ";
   }
   if (!empty($this->username)) {
    $sql .= " AND user.username = '{$this->username}' ";

@@ -661,8 +661,8 @@ function thisPage_url() {
 
 function select_per_page($per_page = '10') {
  $link = $_SERVER['PHP_SELF'] . '?';
- $content_string = '<div class="noOfcontents">';
- $content_string .= 'Show<select name="per_page" class="per_page small">';
+ $content_string = '<div class="noOfcontents " >';
+ $content_string .= '<select name="per_page" class="per_page small">';
  $content_string .= '<option value="3" ';
  $content_string .= ( $per_page == 3) ? ' selected > 3 </option>' : ' > 3 </option>';
  $content_string .= '<option value="5" ';
@@ -675,9 +675,9 @@ function select_per_page($per_page = '10') {
  $content_string .= ( $per_page == 50) ? ' selected > 50 </option>' : '> 50 </option>';
  $content_string .= '<option value="200" ';
  $content_string .= ( $per_page == 200) ? ' selected > 200 </option>' : '> 200 </option>';
- $content_string .= '</select>';
+ $content_string .= '</select>&nbsp;';
  $content_string .= '<a name="content_per_page" '
-  . 'href="' . $link . '" class="content_per_page button">Per Page</a>';
+  . 'href="' . $link . '" class="content_per_page">Per Page</a>';
  $content_string .= '</div>';
  return $content_string;
 }

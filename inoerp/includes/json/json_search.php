@@ -2,7 +2,7 @@
 <?php
 
 if (!empty($_GET['class_name'])) {
-
+$mode = 2;
  $class = $class_names = $_GET['class_name'];
  $$class = new $class;
  $table_name = empty($table_name) ? $class::$table_name : $table_name;
@@ -246,7 +246,7 @@ if (!empty($_GET['class_name'])) {
    $sql .=" LIMIT {$per_page} ";
    $sql .=" OFFSET {$pagination->offset()}";
   }
-  echo "<br><br><br> sql is $sql and per page is $per_page";
+//  echo "<br><br><br> sql is $sql and per page is $per_page";
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);
  }

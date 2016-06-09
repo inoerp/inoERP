@@ -13,7 +13,7 @@
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field"> 
-       <li><?php  $f->l_text_field_dr_withSearch('hr_employee_id') ?>
+       <li><?php $f->l_text_field_dr_withSearch('hr_employee_id') ?>
         <a name="show" href="form.php?class_name=hr_employee&<?php echo "mode=$mode"; ?>" class="show document_id hr_employee_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
@@ -96,11 +96,12 @@
         <li><?php $f->l_select_field_from_object('position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $$class->position_id, 'position_id'); ?>  </li>
         <li><?php $f->l_select_field_from_object('grade_id', hr_grade::find_all(), 'hr_grade_id', 'grade', $$class->grade_id, 'grade_id'); ?></li>
         <li><?php $f->l_select_field_from_object('payroll_id', hr_payroll::find_all(), 'hr_payroll_id', 'payroll', $$class->payroll_id, 'payroll_id'); ?>  </li>
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supervisor_employee_id select_popup clickable">
-          <?php echo gettext('Supervisor') ?></label><?php
-         $f->text_field_d('supervisor_employee_name');
-         echo $f->hidden_field_withId('supervisor_employee_id', $$class->supervisor_employee_id);
-         ?> 					</li>
+
+
+        <li><?php
+         echo $f->l_val_field_d('supervisor_employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
+         echo $f->hidden_field_withIdClass('hr_employee_id', $$class->hr_employee_id,'employee_id');
+         ?><i class="generic g_select_document_owner select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
        </ul> 
       </div> 
      </div> 
