@@ -47,7 +47,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
             </div>
             <!--End of Content-->
             <div id="content_element_divId" class="col-md-12" >
-             <div class="hideDiv_input"></div>
+             <div class="hideDiv_input fa fa-plus-circle clickable"></div>
              <div class="hideDiv_input_element">
               <legend class="collapsible major">
                <ul class="column header_field">

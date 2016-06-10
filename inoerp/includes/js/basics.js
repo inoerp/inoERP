@@ -5640,6 +5640,22 @@ $(document).ready(function () {
   });
  });
 
+//selected files for upload
+$('body').on('change',  '#attachments, #comment_attachments', function(){
+ var this_e = $(this);
+ $(this.files).each(function(k, elem){
+ var thisFile = elem[0];
+ var fileSize = elem.size / 1024 / 1024;
+ var stmt = '<ul class="inRow asperWidth ready-to-upload">';
+ stmt += '<li class="file-details">File Details : </li>';
+ stmt += '<li class="file-name">' + elem.name + '</a></li>';
+ stmt += '<li class="file-size">' + fileSize.toFixed(2) + " MB" + '</a></li>';
+ stmt += '<li class="file-type">' + elem.type  + '</a></li>';
+ stmt += '</ul>';
+ $(this_e).closest('#file_upload_form').find('.uploaded_file_details').append(stmt);
+ });
+});
+
 });
 
 function remove_unsaved_msg() {

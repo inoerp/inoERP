@@ -198,7 +198,7 @@
         <?php
         if (!empty($_GET['function_name'])) {
          echo '<div class="alert alert-info" role="alert" >' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</div>';
-        } else {
+        } else if (!empty($class)) {
          echo '<div class="alert alert-info" role="alert" >Search ' . ucwords(str_replace('_', ' ', $class)) . '</div>';
         }
         ?>

@@ -1231,10 +1231,12 @@ fileUploadMain.prototype.fileUpload = function () {
     $(this_e).closest('.show_attachment').find('.uploaded_file_details').append(result);
     $(this_e).closest('.show_attachment').find('.file_id').val(file_id);
    }
+   $('ul.ready-to-upload').remove();
    $('.show_loading_small').hide();
    alert('Upload Completed\nCheck output/errors section for details');
   }).fail(function (error, textStatus, xhr) {
    alert("save failed \n" + error + textStatus + xhr);
+   $('ul.ready-to-upload').remove();
    $('.show_loading_small').hide();
   });
  });

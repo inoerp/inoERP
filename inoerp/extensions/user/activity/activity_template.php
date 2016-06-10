@@ -37,9 +37,6 @@
     <div class="panel-heading"><?php echo!empty($up->profile_name) ? $up->profile_name : ino_getUserName_from_email($up->username); ?> @ <?php echo $site_info->site_name; ?></div>
     <div class="panel-body about-me"><?php echo!empty($up->about) ? $up->about : 'No User Profile'; ?></div>
    </div>
-   <div class="panel panel-ino-light-grey target">
-    <div class="panel-heading" contenteditable="false">My Activities</div>
-    <div class="panel-body my-activities"> 
      <div id="tabsHeader">
       <ul class="tabMain">
        <li><a href="#tabsHeader-1">Posts</a></li>
@@ -54,9 +51,7 @@
        </div>
       </div>
      </div>
-    </div>
 
-   </div>
   </div>
 
 

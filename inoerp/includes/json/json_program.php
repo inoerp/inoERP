@@ -1,7 +1,7 @@
 <?php
 
 if (!empty($_POST)) {
- include_once ('includes/basics/basics.inc');
+ include_once (__DIR__.'/../basics/basics.inc');
  $postArray = get_postArray_From_jqSearializedArray($_POST['headerData']);
  if ((!empty($postArray['class_name'])) && (!empty($postArray['program_name']))) {
   $class = $postArray['class_name'][0];
@@ -35,7 +35,7 @@ if ((!empty($_GET['class_name'])) && (!empty($_GET['program_name']))) {
  $_GET['mode'] = 2;
 } else {
  $class_names[] = 'path';
- include_once("includes/functions/loader.inc");
+ include_once (__DIR__.'/../basics/basics.inc');
  $path = new path();
  $all_search_paths = $path->findAll_programPaths();
  $search_result_statement = "";

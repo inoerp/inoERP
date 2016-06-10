@@ -8,21 +8,21 @@
 				<div class="tabContainer">
 				 <div id="tabsHeader-1" class="tabContent">
 				 <ul class="column header_field">
-						<li><label>Org Name(1) : </label>
+						<li><label>Org Name</label>
 						 <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id','','',1); ?>
 						</li>
-						<li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="bom_header_id select_popup clickable">
-							BOM Id : </label><?php echo form::text_field_d('bom_header_id') ?>
-             <a name="show" href="form.php?class_name=indented_bom&<?php echo "mode=$mode"; ?>" class="show document_id bom_header_id">
+            <li><?php echo $f->l_val_field_d('bom_header_id' ,'bom_header', 'bom_header_id' ,'org_id') ?>
+             <i class="generic g_select_bom_header_id select_popup clickable fa fa-search" data-class_name="bom_header"></i>
+             <a name="show" href="form.php?class_name=bom_indented_bom&<?php echo "mode=$mode"; ?>" class="show document_id bom_header_id">
               <i class='fa fa-refresh'></i></a> 
 						</li>
-						<li><label>Item Id : </label>
+						<li><label>Item Id</label>
 						 <?php form::text_field_drm('item_id_m'); ?>
 						</li>
-						<li><label>Item Number(2) : </label>
+						<li><label>Item Number</label>
 						 <?php form::text_field_dm('item_number'); ?>
 						</li>
-						<li><label>Description: </label>
+						<li><label>Description</label>
 						 <?php form::text_field_widr('item_description'); ?>
 						</li>
 						<li><label>UOM : </label>
