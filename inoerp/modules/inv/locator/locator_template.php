@@ -11,7 +11,8 @@
      <div class="large_shadow_box"> 
       <ul class="column header_field"> 
        <li><?php $f->l_text_field_dr_withSearch('locator_id') ?>
-        <a name="show" href="form.php?class_name=locator&<?php echo "mode=$mode"; ?>" class="show document_id locator_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+        <a name="show" href="form.php?class_name=locator&<?php echo "mode=$mode"; ?>" class="show document_id locator_id">
+         <i class="fa fa-refresh"></i></a> 
        </li> 
        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly); ?>    </li>
        <li><?php $f->l_select_field_from_object('subinventory_id', subinventory::find_all(), 'subinventory_id', 'subinventory', $$class->subinventory_id, 'subinventory_id', '', '', $readonly); ?>    </li>

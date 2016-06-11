@@ -50,7 +50,7 @@ if (!empty($msg)) {
    <div id="list_contents">
     <!--			Beginning of line form-->
     <div id ="form_line" class="multi_select_line">
-     <div id="searchForm" ><div class='hideDiv_input'></div>
+     <div id="searchForm" ><div class='hideDiv_input fa fa-minus-circle clickable'></div>
       <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
      <div id="searchResult">
 

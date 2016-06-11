@@ -4615,6 +4615,8 @@ $(document).ready(function () {
    var formUrl = 'includes/json/json_form.php?' + urlLink_a[1];
   } else if (pageType == 'program.php') {
    var formUrl = 'includes/json/json_program.php?' + urlLink_a[1];
+  }else if (pageType == 'search.php') {
+   var formUrl = 'includes/json/json_blank_search.php?' + urlLink_a[1];
   } else {
    var formUrl = urlLink;
   }
@@ -5209,7 +5211,7 @@ $(document).ready(function () {
      return false;
     }
     var headerClassName = $('ul#js_saving_data').find('.headerClassName').data('headerclassname');
-    var formUrl = 'search.php?class_name=' + headerClassName;
+    var formUrl = 'includes/json/json_blank_search.php?class_name=' + headerClassName;
     getFormDetails(formUrl);
    }
   } else if ($(this).hasClass('form-page')) {

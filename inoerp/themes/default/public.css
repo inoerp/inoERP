@@ -534,10 +534,11 @@ ul.commentRecord li ul.line{
 }
 
 select.per_page{
- border: 1px solid rgb(204, 204, 204) !important;;
- padding: 4.8px !important;;
- border-radius: unset !important;
- height:unset !important;;
+border: none !important;
+font-size: 1em;
+border-radius: unset !important;
+height: unset !important;
+cursor: pointer;
 }
 
 #content_type_a{

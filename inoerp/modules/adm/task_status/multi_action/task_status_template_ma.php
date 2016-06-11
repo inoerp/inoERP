@@ -1,6 +1,6 @@
 <div id="adm_task_type_divId">
  <div class="row small-top-margin" id="multi_select">
-  <div id="searchForm" ><div class='hideDiv_input'></div>
+  <div id="searchForm" ><div class='hideDiv_input fa fa-minus-circle clickable'></div>
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
 
   <div id="searchResult">

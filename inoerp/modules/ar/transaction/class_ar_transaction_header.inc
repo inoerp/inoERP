@@ -661,15 +661,15 @@ class ar_transaction_header extends dbObject {
   }
  }
 
- public function get_details_from_om_so_header() {
+ public function get_details_from_sd_so_header() {
   if (empty($this->sd_so_header_id)) {
    return false;
   }
-  $po = new om_so_header();
+  $po = new sd_so_header();
   $om_so_i = $po->findBy_id($this->sd_so_header_id);
   $this->bu_org_id = $om_so_i->bu_org_id;
   $this->transaction_type = 'INVOICE';
-  $this->om_so_number = $om_so_i->om_so_number;
+  $this->sd_so_number = $om_so_i->sd_so_number;
   $this->ar_customer_id = $om_so_i->ar_customer_id;
   $this->ar_customer_site_id = $om_so_i->ar_customer_site_id;
   $this->doc_currency = $om_so_i->currency;

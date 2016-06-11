@@ -979,7 +979,7 @@ EOD;
   global $readonly, $class, $$class;
   $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
   $search_class_gt = gettext($search_class);
-  echo '<label class="big_popover">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label class="big_popover">' . gettext(ucwords(str_replace(['_', 'id'], [' ', ''] , $field_name))) . '</label>';
   echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
                                                                   title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .

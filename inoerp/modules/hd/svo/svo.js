@@ -41,12 +41,10 @@ $('body').off('change','#action').on('change','#action', function(){
 
  get_customer_detail_for_bu();
 
- $("#content").off("change", '#ar_customer_site_id').on("change", '#ar_customer_site_id', function () {
-  var customer_site_id = $("#ar_customer_site_id").val();
-  if (customer_site_id) {
-   $.when(getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id)).then(function () {
-    getExchangeRate();
-   });
+    $('#hd_svo_header').off("change", "#ar_customer_site_id").on("change", "#ar_customer_site_id", function () {
+  var ar_customer_site_id = $("#ar_customer_site_id").val();
+  if (ar_customer_site_id) {
+   getCustomerSiteDetails('modules/ar/customer/json_customer.php', ar_customer_site_id);
   }
  });
 

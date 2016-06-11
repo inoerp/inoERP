@@ -32,33 +32,33 @@ $(document).ready(function () {
  if (!($('.lines_number:first').val())) {
   $('.lines_number:first').val('1');
  }
- 
-var taskObjectCount = 1;
-$('body').off('click', '.add_child').on('click', '.add_child', function () {
- var trClass = '.' + $(this).closest('tr').prop('class').replace(/\s+/g, '.');
- var taskNum = $(this).closest('tr').find('.task_number').val();
- var heighest_child_no = $(this).data('heighest_child');
- heighest_child_no++;
- var childTaskNum = taskNum + '-' + heighest_child_no;
- $(this).data('heighest_child', heighest_child_no);
- var lastParentObj = $('input.parent_prj_task_num').filter(function () {
-  return this.value == taskNum;
- }).last();
-  
- if ($(lastParentObj).length > 0) {
-  var last_trClass = '.' + $(lastParentObj).closest('tr').prop('class').replace(/\s+/g, '.');
- } else {
-  var last_trClass = trClass;
- }
-  
- $("#tabsLine-1 " + last_trClass).after($("#tabsLine-1 " + trClass).clone().attr("class", "new_object" + taskObjectCount + ' taskNum' + taskNum).removeAttr('id'));
- $("#tabsLine-2 " + last_trClass).after($("#tabsLine-2 " + trClass).clone().attr("class", "new_object" + taskObjectCount + ' taskNum' + taskNum).removeAttr('id'));
- $("#tabsLine-1 " + '.new_object' + taskObjectCount).find('.task_number').val(childTaskNum);
- $("#tabsLine-1 " + '.new_object' + taskObjectCount).find('.prj_project_line_id').val('');
- $("#tabsLine-2 " + '.new_object' + taskObjectCount).find('.task_number').val(childTaskNum);
- $("#tabsLine-1 " + '.new_object' + taskObjectCount).find('.parent_prj_task_num').val(taskNum);
- taskObjectCount++;
-});
+
+ var taskObjectCount = 1;
+ $('body').off('click', '.add_child').on('click', '.add_child', function () {
+  var trClass = '.' + $(this).closest('tr').prop('class').replace(/\s+/g, '.');
+  var taskNum = $(this).closest('tr').find('.task_number').val();
+  var heighest_child_no = $(this).data('heighest_child');
+  heighest_child_no++;
+  var childTaskNum = taskNum + '-' + heighest_child_no;
+  $(this).data('heighest_child', heighest_child_no);
+  var lastParentObj = $('input.parent_prj_task_num').filter(function () {
+   return this.value == taskNum;
+  }).last();
+
+  if ($(lastParentObj).length > 0) {
+   var last_trClass = '.' + $(lastParentObj).closest('tr').prop('class').replace(/\s+/g, '.');
+  } else {
+   var last_trClass = trClass;
+  }
+
+  $("#tabsLine-1 " + last_trClass).after($("#tabsLine-1 " + trClass).clone().attr("class", "new_object" + taskObjectCount + ' taskNum' + taskNum).removeAttr('id'));
+  $("#tabsLine-2 " + last_trClass).after($("#tabsLine-2 " + trClass).clone().attr("class", "new_object" + taskObjectCount + ' taskNum' + taskNum).removeAttr('id'));
+  $("#tabsLine-1 " + '.new_object' + taskObjectCount).find('.task_number').val(childTaskNum);
+  $("#tabsLine-1 " + '.new_object' + taskObjectCount).find('.prj_project_line_id').val('');
+  $("#tabsLine-2 " + '.new_object' + taskObjectCount).find('.task_number').val(childTaskNum);
+  $("#tabsLine-1 " + '.new_object' + taskObjectCount).find('.parent_prj_task_num').val(taskNum);
+  taskObjectCount++;
+ });
 
  $('body').off('change', '#action').on('change', '#action', function () {
   if ($(this).val() == 'PROCESS_ACTUALS') {
@@ -78,10 +78,11 @@ $('body').off('click', '.add_child').on('click', '.add_child', function () {
 
  get_customer_detail_for_bu();
 
- $("#content").off("change", '#ar_customer_site_id').on("change", '#ar_customer_site_id', function () {
-  var customer_site_id = $("#ar_customer_site_id").val();
-  if (customer_site_id) {
-   $.when(getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id)).then(function () {
+
+ $('#prj_project_header').off("change", "#ar_customer_site_id").on("change", "#ar_customer_site_id", function () {
+  var ar_customer_site_id = $("#ar_customer_site_id").val();
+  if (ar_customer_site_id) {
+   $.when(getCustomerSiteDetails('modules/ar/customer/json_customer.php', ar_customer_site_id)).then(function () {
     getExchangeRate();
    });
   }
@@ -104,7 +105,7 @@ $('body').off('click', '.add_child').on('click', '.add_child', function () {
          });
  $('#currency').val()
 
-  //default quantity
+ //default quantity
  $("#content").off("click", "table.form_line_data_table .add_detail_values_img")
          .on("click", "table.form_line_data_table .add_detail_values_img", function () {
           var lineQuantity = $(this).closest('tr').find('.line_quantity:first').val();

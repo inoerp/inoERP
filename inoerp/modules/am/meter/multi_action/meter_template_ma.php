@@ -20,7 +20,7 @@
   </div>
   <div id="form_top">
   </div>
-  <div id="searchForm" ><div class='hideDiv_input'></div>
+  <div id="searchForm" ><div class='hideDiv_inputfa fa-minus-circle clickable'></div>
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="form_header">
    <form  method="post" id="subinventory"  name="subinventory">

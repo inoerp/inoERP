@@ -208,7 +208,7 @@
          <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
         </div>
         <div id="list_contents">
-         <div id="searchForm" ><div class='hideDiv_input'></div>
+         <div id="searchForm" ><div class='hideDiv_input fa fa-plus-circle clickable'></div>
           <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
          <div id="searchResult" class="heading">
           <?php

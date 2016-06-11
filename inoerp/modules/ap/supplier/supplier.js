@@ -1,12 +1,8 @@
 
 $(document).ready(function () {
-//selecting supplier
-// $('body').off('click','supplier_id.select_popup').on('click','supplier_id.select_popup' ,function () {
-//  void window.open('select.php?class_name=supplier', '_blank',
-//          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
-//  return false;
-// });
- 
+$('body').off('change','#supplier_site_id').on('change','#supplier_site_id', function(){
+ $('a.document_id.supplier_site_id').trigger('click');
+});
    //Popup for selecting address
  $('body').off('click','.address_popup').on('click','.address_popup',function (e) {
   e.preventDefault();
