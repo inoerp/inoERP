@@ -39,6 +39,7 @@ include_once("includes/functions/loader.inc");
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php
   if (!empty($metaname_description)) {
    echo "<meta name='description' content=\"inoERP - A Open Source PHP based Enterprise Management System\">";

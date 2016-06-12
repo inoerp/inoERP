@@ -1,45 +1,43 @@
 <?php
 
-class hd_service_type_line extends dbObject {
+class extn_emessage_line extends dbObject {
 
- public static $table_name = "hd_service_type_line";
- public static $primary_column = "hd_service_type_line_id";
- public static $parent_primary_column = "hd_service_type_header_id";
- public static $key_column = 'billing_type';
- public static $module = "hd";
+ public static $table_name = "extn_emessage_line";
+ public static $primary_column = "extn_emessage_line_id";
+ public static $parent_primary_column = "extn_emessage_header_id";
+ public static $key_column = 'text_message';
+ public static $module = "extn";
  public $field_a = [
-  'hd_service_type_line_id',
-  'hd_service_type_header_id',
-  'billing_type',
-  'service_activity_id',
-  'description',
+  'extn_emessage_line_id',
+  'extn_emessage_header_id',
+  'from_user_id',
+  'to_user_id',
+  'text_message',
   'created_by',
   'creation_date',
   'last_update_by',
   'last_update_date',
  ];
  public $requiredField = [
-  'hd_service_type_header_id',
-  'billing_type',
-  'service_activity_id',
+  'extn_emessage_header_id',
+  'from_user_id',
+  'to_user_id',
+  'text_message',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "hd_service_type_header_id"
+  "extn_emessage_header_id"
  ];
- 
- public $hd_service_type_line_id;
-public $hd_service_type_header_id;
-public $billing_type;
-public $service_activity_id;
-public $description;
-public $created_by;
-public $creation_date;
-public $last_update_by;
-public $last_update_date;
-
-
+ public $extn_emessage_line_id;
+ public $extn_emessage_header_id;
+ public $from_user_id;
+ public $to_user_id;
+ public $text_message;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
 
 }
 
-//end of hd_service_type_line class
+//end of extn_emessage_line class
 ?>
