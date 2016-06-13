@@ -1743,7 +1743,7 @@ legend.major{
 }
 
 #file_upload_form ul li{
- vertical-align: middle;
+ vertical-align: top;
 }
 
 #file_upload_form .input-group{
@@ -2535,4 +2535,14 @@ ul.program.form_buttons{
 
 ul.program.form_buttons li{
    margin-right: 20px     
+}
+
+.panel-success.ino-simple-panel{
+ border-color: rgba(141, 146, 149, 0.6);
+}
+
+.panel-heading.ino-simple-heading{
+ color: #aaa !important;
+background-color: rgba(239, 239, 239, 0.5) !important;
+border-color: rgba(131, 134, 135, 0.6) !important;
 }

@@ -55,7 +55,7 @@ inoERP
         <tr class="inv_transaction_row0" id="tab1_1">
          <td>    
           <ul class="inline_action">
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+           <li class="remove_row_img"><i  class="fa fa-minus-circle" alt="remove this line" ></i></li>
            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->item_id_m); ?>">
             <?php echo form::hidden_field('org_id', $$class->org_id); ?>
             <?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?>
@@ -64,7 +64,7 @@ inoERP
          </td>
          <td><?php $f->text_field_widr('item_id_m', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widr('item_number', 'always_readonly'); ?></td>
-         <td><?php $f->text_field_widlr('item_description', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_widr('item_description', 'always_readonly'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, '', $readonly); ?></td>
          <td><?php $f->text_field_widr('total_quantity', 'always_readonly'); ?></td>
          <td><?php $f->text_field_widr('available_quantity', 'always_readonly'); ?></td>
