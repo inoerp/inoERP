@@ -105,16 +105,6 @@
       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
       <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
-      <li>
-       <div class="btn-group">
-        <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="Favourites"></i></button>
-        <button type="button" title="Favourites" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-         <span class="caret"></span>
-         <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <?php echo $fav->show_currentUser_fav(true); ?>
-       </div>
-      </li>
       <!--<li role="presentation"><i class="fa fa-gears right-click-menu clickable" title="Actions"></i></li>-->
       <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="Search & List Page"></i></a></li>
       <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="Form Page"></i></a></li>
@@ -177,12 +167,6 @@
         ?>
        </div>
       </div>
-      <h3 class="clickable nav-panel recent-visits"><i class="fa fa-history"></i> <?php echo gettext('Recent Visits') ?></h3>
-      <div>
-       <div id="recent-visits">
-        <?php echo ino_recent_visits(); ?>
-       </div>
-      </div>
       <h3 class="clickable nav-panel clipboard-data"><i class="fa fa-clipboard"></i> <?php echo gettext('Clipboard') ?></h3>
       <div id="left-clipboard">
        <div id="left-clipboard-icons">
@@ -200,6 +184,16 @@
       <h3 class="clickable nav-panel event-cal-h"><i class="fa fa-calendar"></i> <?php echo gettext('Event Calendar') ?></h3>
       <div id="left-event-cal">
        <div id="event-datepicker"></div>
+      </div>
+      <h3 class="clickable nav-panel favourites-h" title="Favourites"><i class="fa fa-star-o"></i> <?php echo gettext('Favourites') ?></h3>
+      <div id="left-favourites">
+       <div id="favourites-links"><?php echo $fav->show_currentUser_fav(false, 'class="btn-group-vertical" role="group" aria-label="..."', 'list-group-item'); ?></div>
+      </div>
+      <h3 class="clickable nav-panel recent-visits"><i class="fa fa-history"></i> <?php echo gettext('Recent Visits') ?></h3>
+      <div>
+       <div id="recent-visits">
+        <?php echo ino_recent_visits(); ?>
+       </div>
       </div>
      </div>
     </div>

@@ -2546,3 +2546,9 @@ ul.program.form_buttons li{
 background-color: rgba(239, 239, 239, 0.5) !important;
 border-color: rgba(131, 134, 135, 0.6) !important;
 }
+
+#header_top_quick_nav ul.inline_list li {
+    display: inline-block;
+    margin-right: 30px;
+    float: left;
+}
