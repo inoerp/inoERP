@@ -31,6 +31,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
   localStorage.removeItem("dont_save_header");
   return true;
  }
+ var dont_show_save_msg = $('ul#js_saving_data').find('.dont_show_save_msg').data('dont_show_save_msg');
  if ($(primary_column_id).val()) {
   var trigger_save_for_line = false;
  } else {
@@ -42,6 +43,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
    className: form_header},
   type: 'post',
   success: function (result) {
+
    if (result) {
     var div = $(result).filter('div#json_save_header').html();
 //  if ($(div).length > 1) {
@@ -49,7 +51,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
 //  }
 
     var message = $(result).find('.message, .rollback_msg').html();
-    if (message && message.length > 1) {
+    if (message && message.length > 1 && (dont_show_save_msg == 'undefined' || dont_show_save_msg == '')) {
      $(".error").prepend(result);
      $("#accordion").accordion({active: 0});
     }
@@ -89,14 +91,17 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
    }
   },
   beforeSend: function () {
-   $('#overlay').css('display', 'block');
-   $('#form_top_image').css('display', 'none');
+   if ((dont_show_save_msg == 'undefined' || dont_show_save_msg == '')) {
+    $('#overlay').css('display', 'block');
+    $('#form_top_image').css('display', 'none');
+   } 
   },
   error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
   },
   complete: function () {
    $('.show_loading_small').hide();
+   $('body').find('.remove_after_save').val('');
   }
  });
 }
@@ -126,6 +131,7 @@ function saveSingleLine(json_url, lineData, primary_column_id, lineClassName) {
 //	$('#form_data_table tbody tr' + '.' + trclass).find(".line_id").val(line_id);
   $('#overlay').css('display', 'none');
   $('#form_top_image').css('display', 'block');
+  $('body').find('.remove_after_save').val('');
  }).fail(function (error, textStatus, xhr) {
   $('#overlay').css('display', 'none');
   $('#form_top_image').css('display', 'block');
@@ -160,10 +166,9 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
 
   var line_id = $(result).find('.lineId').data('trclass');
   $('#content ' + '.' + trclass).find(".line_id").val(line_id);
-//  console.log(line_id);
-//  console.log($('#content ' + '.' + trclass).find(".line_id"));
   $('#overlay').css('display', 'none');
   $('#form_top_image').css('display', 'block');
+  $('body').find('.remove_after_save').val('');
  }).fail(function (error, textStatus, xhr) {
   $('#overlay').css('display', 'none');
   $('#form_top_image').css('display', 'block');
@@ -193,6 +198,7 @@ function saveLineSecondForm(json_url, lineData, trclass, detailData, lineClassNa
   }
   $('#overlay').css('display', 'none');
   $('#form_top_image').css('display', 'block');
+  $('body').find('.remove_after_save').val('');
  }).fail(function (error, textStatus, xhr) {
   $('#overlay').css('display', 'none');
   $('#form_top_image').css('display', 'block');
@@ -281,7 +287,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    $(form_header_id_h + " :required").each(function () {
     if (!$(this).val())
     {
-     missingMandatoryValues.push($(this).attr('name').replace(/(\[])|(\_)/g,' '));
+     missingMandatoryValues.push($(this).attr('name').replace(/(\[])|(\_)/g, ' '));
      noOfRequiredFileValuesMissing++;
     }
    });
@@ -289,7 +295,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    $(":required").each(function () {
     if (!$(this).val())
     {
-     missingMandatoryValues.push($(this).attr('name').replace(/(\[])|(\_)/g,' '));
+     missingMandatoryValues.push($(this).attr('name').replace(/(\[])|(\_)/g, ' '));
      noOfRequiredFileValuesMissing++;
     }
    });
@@ -888,7 +894,7 @@ contextMenuMain.prototype.contextMenu = function ()
   }
  };
 // var menuContent = '<ul id="level1"> <li id="menu_button1" class="export_excel">Export Header</li> <li id="menu_button2" class="end_li_type export_excel">Export Line  <ul>   <li id="menu_button2_1" class="end_li_type export_excel">Second Line Form</li>  </ul></li> <li id="menu_button3" class="end_li_type print">Print Document</li> <li class="copy_doc"><span id="menu_button4"> Copy Header</span>  <ul>   <li class="copy_doc"><span id="menu_button4_1">Copy & Save Header</span></li>   <li class="copy_doc"><span id="menu_button4_2">Copy Document</span>    <ul>     <li><span id="menu_button4_2_1">Copy & Save Document</span></li>    </ul>   </li>   <li class="copy_doc"><span id="menu_button4_3">Copy Line</span>    <ul>     <li><span id="menu_button4_3_1">Copy First Line</span></li>    </ul>   </li>  </ul> </li> <li class="end_li_type copy_line"><span id="menu_button5">Select All Line</span>  <ul>   <li><span id="menu_button5_1">Un Select All</span></li>  </ul> </li> <li id="menu_button6" class="preference">Preferences</li><li id="menu_button7" class="help help">inoERP Help<ul><li id="menu_button2_1" class="end_li_type export_excel">Shortcut Keys</li>  </ul></li> <li id="menu_button8"  data-target="#document_history" data-toggle="modal"  class="doc_history">Document History</li> <li id="menu_button9" class="end_li_type custom_code">Custom Code  <ul>   <li id="menu_button9_1" class="end_li_type">Disable</li>   <li id="menu_button9_2" class="end_li_type">Enable</li>   <li id="menu_button9_3" class="end_li_type">View & Update</li>  </ul></li> <li class="end_li_type disable_menu"><span id="menu_button10">Disable Context Menu</span>  <ul>   <li><span id="menu_button10_1">Disable All</span></li>  </ul></li> <li id="menu_button11" class="about">About inoERP</li> </ul>';
-var menuContent = '<ul id="level1"><li id="menu_button1" class="export_excel"><i class="fa fa-file-excel-o"></i>Export Header</li><li id="menu_button2" class="end_li_type export_excel"><i class="fa fa-file-excel-o"></i>Export Line  <ul><li id="menu_button2_1" class="export_excel">Second Line Form</li>  </ul></li> <li id="menu_button3" class="end_li_type print"><i class="fa fa-print"></i>Print Document</li> <li class="copy_doc"><span id="menu_button4"><i class="fa fa-copy"></i>Copy Header</span>  <ul>   <li class="copy_doc"><span id="menu_button4_1">Copy & Save Header</span></li>   <li class="copy_doc"><span id="menu_button4_2">Copy Document</span>    <ul>     <li><span id="menu_button4_2_1">Copy & Save Document</span></li>    </ul>   </li>   <li class="copy_doc"><span id="menu_button4_3">Copy Line</span>    <ul>     <li><span id="menu_button4_3_1">Copy First Line</span></li>    </ul>   </li>  </ul> </li> <li class="end_li_type copy_line"><span id="menu_button5"><i class="fa fa-object-group"></i>Select All Line</span>  <ul>   <li><span id="menu_button5_1">Un Select All</span></li>  </ul> </li> <li id="menu_button6" class="preference"><i class="fa fa-gear"></i>Preferences</li><li id="menu_button7" class="help help"><i class="fa fa-support"></i>inoERP Help<ul><li id="menu_button7_1" class="shortcut_key_menu" data-target="#shortcut_keys_divId" data-toggle="modal">Shortcut Keys</li>  </ul></li> <li id="menu_button8"  data-target="#document_history" data-toggle="modal"  class="doc_history"><i class="fa fa-history"></i>Document History</li> <li id="menu_button9" class="end_li_type custom_code"><i class="fa fa-code"></i>Custom Code  <ul>   <li id="menu_button9_1" >Disable</li>   <li id="menu_button9_2">Enable</li>   <li id="menu_button9_3" >View & Update</li>  </ul></li> <li class="disable_menu"><span id="menu_button10"><i class="fa fa-toggle-off"></i>Disable Context Menu</span>  <ul>   <li><span id="menu_button10_1">Disable All</span></li>  </ul></li> <li id="menu_button11" class="about"><i class="fa fa-book"></i>About inoERP</li> </ul>';
+ var menuContent = '<ul id="level1"><li id="menu_button1" class="export_excel"><i class="fa fa-file-excel-o"></i>Export Header</li><li id="menu_button2" class="end_li_type export_excel"><i class="fa fa-file-excel-o"></i>Export Line  <ul><li id="menu_button2_1" class="export_excel">Second Line Form</li>  </ul></li> <li id="menu_button3" class="end_li_type print"><i class="fa fa-print"></i>Print Document</li> <li class="copy_doc"><span id="menu_button4"><i class="fa fa-copy"></i>Copy Header</span>  <ul>   <li class="copy_doc"><span id="menu_button4_1">Copy & Save Header</span></li>   <li class="copy_doc"><span id="menu_button4_2">Copy Document</span>    <ul>     <li><span id="menu_button4_2_1">Copy & Save Document</span></li>    </ul>   </li>   <li class="copy_doc"><span id="menu_button4_3">Copy Line</span>    <ul>     <li><span id="menu_button4_3_1">Copy First Line</span></li>    </ul>   </li>  </ul> </li> <li class="end_li_type copy_line"><span id="menu_button5"><i class="fa fa-object-group"></i>Select All Line</span>  <ul>   <li><span id="menu_button5_1">Un Select All</span></li>  </ul> </li> <li id="menu_button6" class="preference"><i class="fa fa-gear"></i>Preferences</li><li id="menu_button7" class="help help"><i class="fa fa-support"></i>inoERP Help<ul><li id="menu_button7_1" class="shortcut_key_menu" data-target="#shortcut_keys_divId" data-toggle="modal">Shortcut Keys</li>  </ul></li> <li id="menu_button8"  data-target="#document_history" data-toggle="modal"  class="doc_history"><i class="fa fa-history"></i>Document History</li> <li id="menu_button9" class="end_li_type custom_code"><i class="fa fa-code"></i>Custom Code  <ul>   <li id="menu_button9_1" >Disable</li>   <li id="menu_button9_2">Enable</li>   <li id="menu_button9_3" >View & Update</li>  </ul></li> <li class="disable_menu"><span id="menu_button10"><i class="fa fa-toggle-off"></i>Disable Context Menu</span>  <ul>   <li><span id="menu_button10_1">Disable All</span></li>  </ul></li> <li id="menu_button11" class="about"><i class="fa fa-book"></i>About inoERP</li> </ul>';
 
  rightClickMenu(menuContent);
  $('body').off('click', '#menu_button1').on('click', '#menu_button1', function () {
@@ -918,7 +924,7 @@ var menuContent = '<ul id="level1"><li id="menu_button1" class="export_excel"><i
   methods.afterCopyActions();
   $('#save').trigger('click');
  });
- $("body").off('click', '#menu_button4_2') .on('click', '#menu_button4_2', function () {
+ $("body").off('click', '#menu_button4_2').on('click', '#menu_button4_2', function () {
   methods.beforeCopyActions();
   copy_document(docHedaderId, docLineId, docDetailId);
   methods.afterCopyActions();
@@ -949,7 +955,7 @@ var menuContent = '<ul id="level1"><li id="menu_button1" class="export_excel"><i
 //	add_new_row_withDefault(trClass, tbodyClass_c, noOfTabbs, docLineId_c);
  });
 
- $('body').off('click', '#menu_button5') .on('click', '#menu_button5', function () {
+ $('body').off('click', '#menu_button5').on('click', '#menu_button5', function () {
   $('#form_line').find('input[name="line_id_cb"]').prop('checked', true);
  });
  $('body').off('click', '#menu_button5_1').on('click', '#menu_button5_1', function () {
@@ -964,20 +970,20 @@ var menuContent = '<ul id="level1"><li id="menu_button1" class="export_excel"><i
   void window.open('http://www.inoideas.org', '_blank');
  });
 
-  $('body').off('click', '#menu_button8').on('click', '#menu_button8', function () {
+ $('body').off('click', '#menu_button8').on('click', '#menu_button8', function () {
   $('#document_history').modal('toggle');
  });
 
-  $('body').off('click', '#menu_button7_1').on('click', '#menu_button7_1', function () {
+ $('body').off('click', '#menu_button7_1').on('click', '#menu_button7_1', function () {
   $('#shortcut_keys_divId').modal('toggle');
  });
- 
+
  $('body').off('click', '#menu_button10_1').on('click', '#menu_button10_1', function () {
   localStorage.setItem("disableContextMenu", true);
   $("#content").unbind("contextmenu");
  });
- 
-  $('body').on('click', '#menu_button10', function () {
+
+ $('body').on('click', '#menu_button10', function () {
   $("#content").unbind("contextmenu");
  });
 };

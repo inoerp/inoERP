@@ -159,7 +159,7 @@
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0;
+       $count = 0; 
        foreach ($ar_transaction_line_object as $ar_transaction_line) {
 //							$f->readonly2 = !empty($ar_transaction_line->ar_transaction_line_id) ? true : false;
         ?>         
@@ -173,17 +173,17 @@
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('ar_transaction_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly1); ?></td>
+         <td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type medium', '', $readonly1); ?></td>
          <td><?php
-          $f->val_field_wid2('item_number', 'item', 'item_number', '');
+          $f->val_field_wid2('item_number', 'item', 'item_number', '', 'xlarge');
           echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m, 'dont_copy_r');
           echo $f->hidden_field_withCLass('customer_ordered_cb', '1', 'popup_value');
           echo $f->hidden_field_withCLass('invoiceable_cb', '1', 'popup_value');
           ?>
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
-         <td><?php $f->text_field_wid2m('item_description'); ?></td>
+         <td><?php $f->text_field_wid2m('item_description' ,'xxlarge required'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $ar_transaction_line->uom_id); ?></td>
-         <td><?php form::number_field_wid2sm('inv_line_quantity'); ?></td>
+         <td><?php form::number_field_wid2m('inv_line_quantity'); ?></td>
          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <!--</td></tr>-->	
           <?php

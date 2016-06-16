@@ -206,3 +206,7 @@ j.img-circle{
 #chat-content .user-message{
  text-align: left;
 }
+
+.complete_msg_div:empty{
+        display: none;
+}

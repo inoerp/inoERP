@@ -4,10 +4,10 @@
    <h1 class=""><?php echo!empty($up->profile_name) ? $up->profile_name : ino_getUserName_from_email($user_ai->username); ?></h1>
    <div><?php echo $f->show_existing_image($user_ai->image_file_id, 'img-circle img-responsive', 1); ?></div>
    <br>
-   <button type="button" class="btn btn-info">Internal message  <i class="fa fa-wechat clickable"></i></button>
-   <a target="_blank" class="contact_link btn btn-info send_email " role="button"
-                                 href="form.php?class_name=web_mail&window_type=popup&<?php echo 'email=' . $user_ai->email . '&reference_table=user&reference_id='. $ino_user->user_id; ?>">
-     External eMail <i class="fa fa-envelope-o clickable"></i></a>
+
+   <a class="getAjaxForm btn btn-info send_message " role="button" href="form.php?class_name=extn_emessage_header&user_id=<?php echo $user_ai->user_id ?>">Internal Message  <i class="fa fa-wechat clickable"></i></a>
+   <a target="_blank" class="contact_link btn btn-info send_email " role="button" href="form.php?class_name=web_mail&window_type=popup&<?php echo 'email=' . $user_ai->email . '&reference_table=user&reference_id=' . $ino_user->user_id; ?>">
+    External eMail <i class="fa fa-envelope-o clickable"></i></a>
   </div>
   <br><br>
   <div class="col-sm-3">
@@ -37,20 +37,20 @@
     <div class="panel-heading"><?php echo!empty($up->profile_name) ? $up->profile_name : ino_getUserName_from_email($up->username); ?> @ <?php echo $site_info->site_name; ?></div>
     <div class="panel-body about-me"><?php echo!empty($up->about) ? $up->about : 'No User Profile'; ?></div>
    </div>
-     <div id="tabsHeader">
-      <ul class="tabMain">
-       <li><a href="#tabsHeader-1">Posts</a></li>
-       <li><a href="#tabsHeader-2">Comments</a></li>
-      </ul>
-      <div class="tabContainer"> 
-       <div id="tabsHeader-1" class="tabContent">
-        <?php echo!empty($content_string) ? $content_string : false; ?>
-       </div>
-       <div id="tabsHeader-2" class="tabContent">
-        <?php echo!empty($comment_string) ? $comment_string : false; ?>
-       </div>
-      </div>
+   <div id="tabsHeader">
+    <ul class="tabMain">
+     <li><a href="#tabsHeader-1">Posts</a></li>
+     <li><a href="#tabsHeader-2">Comments</a></li>
+    </ul>
+    <div class="tabContainer"> 
+     <div id="tabsHeader-1" class="tabContent">
+      <?php echo!empty($content_string) ? $content_string : false; ?>
      </div>
+     <div id="tabsHeader-2" class="tabContent">
+      <?php echo!empty($comment_string) ? $comment_string : false; ?>
+     </div>
+    </div>
+   </div>
 
   </div>
 

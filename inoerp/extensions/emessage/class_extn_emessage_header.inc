@@ -35,29 +35,29 @@ class extn_emessage_header extends dbObject {
  ];
  public $field_a = [
   'extn_emessage_header_id',
-  'user_id1',
-  'user_id2',
+  'from_user_id',
+  'user_id',
   'user_id_comb',
-  'user1_deleted_cb',
-  'user2_deleted_cb',
+  'user_deleted_cb',
+  'from_user_deleted_cb',
   'created_by',
   'creation_date',
   'last_update_by',
   'last_update_date',
  ];
  public $initial_search = [
-  'user_id1',
-  'user_id2',
+  'from_user_id',
+  'user_id',
  ];
  public $requiredField = [
-  'user_id1',
-  'user_id2',
+  'from_user_id',
+  'user_id',
   'user_id_comb',
  ];
  public $fields_inForm_notInDataBase = [
   'action',
-  'user_name1',
-  'user_name2'
+  'user_name',
+  'from_user_name'
  ];
 // public $search = [
 //  '_show_update_path' => 1,
@@ -65,15 +65,27 @@ class extn_emessage_header extends dbObject {
 // ];
  public $pageTitle = " Message "; //page Title
  public $extn_emessage_header_id;
- public $user_id1;
- public $user_id2;
+ public $from_user_id;
+ public $user_id;
  public $user_id_comb;
- public $user1_deleted_cb;
- public $user2_deleted_cb;
+ public $user_deleted_cb;
+ public $from_user_deleted_cb;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $user_name;
+
+ private function _create_user_id_comb() {
+  $this->user_id_comb = $this->from_user_id > $this->user_id ? $this->from_user_id . '-' . $this->user_id : $this->user_id . '-' . $this->from_user_id;
+ }
+ 
+ public function getnset_user_id_comb(){
+  if(empty($this->user_id_comb)){
+   $this->_create_user_id_comb();
+  }
+  return $this->user_id_comb;
+ }
 
  Public static function primary_service_type() {
   $option_header = option_header::find_by_name('HD_PRI_SERVICE_TYPE');
@@ -82,11 +94,22 @@ class extn_emessage_header extends dbObject {
   return $option_lines;
  }
 
- Public static function billing_type() {
-  $option_header = option_header::find_by_name('SYS_BILLING_TYPE');
-  $ol = new option_line();
-  $option_lines = $ol->findBy_parentId($option_header->option_header_id);
-  return $option_lines;
+ Public static function find_msg_listing($user_id) {
+  $sql = " SELECT  eeh.user_id, eeh.extn_emessage_header_id, eeh.user_id_comb, user.username, user.image_file_id
+FROM extn_emessage_header eeh,
+user
+WHERE user.user_id = eeh.user_id
+AND eeh.from_user_id = '{$user_id}'
+ 
+UNION
+SELECT  eeh.from_user_id, eeh.extn_emessage_header_id, eeh.user_id_comb, user.username, user.image_file_id
+FROM extn_emessage_header eeh,
+user
+WHERE user.user_id = eeh.from_user_id 
+AND eeh.user_id = '{$user_id}' ";
+
+  $result = self::find_by_sql($sql);
+   return !empty($result) ? $result : ' ';
  }
 
 }
