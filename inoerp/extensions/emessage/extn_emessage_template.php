@@ -1,11 +1,7 @@
 <div id="extn_emessage_line_divId">
- <?php
- $f = new inoform();
- echo (!empty($show_message)) ? $show_message : "";
- ?> 
+ <?php   echo (!empty($show_message)) ? $show_message : "";  ?> 
  <!--    End of place for showing error messages-->
  <div id ="form_header">
-
   <span class="heading"><?php echo gettext('Message Box'); ?></span>
   <div class="tabContainer"> 
    <div class="container bootstrap snippet">

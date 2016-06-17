@@ -22,7 +22,7 @@ if (!empty($_POST['submitLogin'])) { //form is submitted for login
  if (!empty($_POST['username']) && !empty($_POST['password'])) {
   $username = is_array($_POST['username']) ? trim(mysql_prep($_POST['username'][0])) : trim(mysql_prep($_POST['username']));
   $password = is_array($_POST['password']) ? trim(mysql_prep($_POST['password'][0])) : trim(mysql_prep($_POST['password']));
-
+  
   $loggedin_user = $$class->authenticate($username, $password);
 
   If ($loggedin_user) {
@@ -122,7 +122,6 @@ If (isset($_REQUEST["provider"])) {
 ?>
 <?php
 
-include_once('../../includes/basics/header_public.inc');
  if (!empty($_SESSION['default_theme'])) {
   $selected_theme = $_SESSION['default_theme'];
  } else {
@@ -134,7 +133,6 @@ include_once('../../includes/basics/header_public.inc');
  defined('THEME_URL') ? null : define("THEME_URL", HOME_URL . 'themes/' . $selected_theme);
 //include_once(THEME_DIR . DS. 'header.inc');
 ?>
-<script type='text/javascript' src="user.js" ></script>
 <?php
 
 if (!empty($_POST['newUser'])) {
@@ -184,7 +182,6 @@ if (!empty($_POST['resetPassword'])) {
  }
 }
 ?>
-
 <?php
 
 if (!empty($msg)) {
@@ -200,7 +197,6 @@ if (!empty($msg)) {
  $show_message .= '</div>';
 }
 ?>
-
 <?php
 
 if (file_exists(THEME_DIR . '/template/user_login_template.php')) {

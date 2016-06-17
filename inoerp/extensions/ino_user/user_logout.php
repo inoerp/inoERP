@@ -1,5 +1,5 @@
 <? ob_start(); ?>
-<?php include_once('../../includes/basics/header_simple.inc'); ?>
+<?php include_once(__DIR__.'/../../includes/template/header_simple.inc'); ?>
 <?php
 session_start();
 $bc = new block_cache();

@@ -996,7 +996,7 @@ function deleteReferences(options) {
 }
 
 function deleteData(json_url) {
- $('body').on('click', '#delete_button', function (e) {
+ $('body').off('click', '#delete_button').on('click', '#delete_button', function (e) {
   remove_unsaved_msg();
   $("#delete_button").addClass("show_loading_small");
   $("#delete_button").prop('disabled', true);

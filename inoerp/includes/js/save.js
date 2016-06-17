@@ -51,7 +51,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
 //  }
 
     var message = $(result).find('.message, .rollback_msg').html();
-    if (message && message.length > 1 && (dont_show_save_msg == 'undefined' || dont_show_save_msg == '')) {
+    if (message && message.length > 1 && (!dont_show_save_msg)) {
      $(".error").prepend(result);
      $("#accordion").accordion({active: 0});
     }
@@ -91,7 +91,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
    }
   },
   beforeSend: function () {
-   if ((dont_show_save_msg == 'undefined' || dont_show_save_msg == '')) {
+   if (!dont_show_save_msg) {
     $('#overlay').css('display', 'block');
     $('#form_top_image').css('display', 'none');
    } 

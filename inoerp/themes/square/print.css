@@ -1,0 +1,112 @@
+@media print{
+ button, .inline_action,.dropdown
+ { 
+  display:none !important;
+ }
+}
+
+button, .inline_action, .dropdown, .ino_serch_setting
+{ 
+ display:none !important;
+}
+
+#popup_print li{
+ display: inline-block;
+ width: 380px;
+ margin: 5px;
+ overflow: hidden;
+ border: 1px solid #ccc;
+
+}
+
+#print_content{
+        border: 2px solid #ccc;
+        display: block;
+        float: left;
+        padding: 20px;
+        margin: 10px;
+}
+
+
+#popup_print td, #popup_print th{
+ border-width: 0.5px;
+border-style: solid;
+padding : 2px 5px;
+border-color: #cfa9b0;
+}
+
+#popup_print th{
+background-color : #000;
+  color: #fff;
+}
+
+#popup_print table{
+   border-collapse: collapse;
+    vertical-align: top;
+}
+
+#popup_print tr{
+  border: 1px solid #ecc;
+  padding: 2px 5px;
+}
+
+#popup_print .inline_action{
+ display: none;
+}
+
+#popup_print li label {
+ background-color: #eee;
+ width: 160px;
+ display: inline-block;
+ padding: 5px;
+ margin-right: 5px;
+}
+
+
+td.blank{
+ border: none;
+ background-color : rgba(240, 240, 240, 0.4);
+}
+
+tr.detail {
+ background-color : rgba(240, 240, 240, 0.5);
+}
+
+#page_print{
+ width: 980px;
+ /*border: 2px solid rgb(221, 221, 221);*/
+ display: block;
+ float: left;
+ margin: 10px 40px;
+ /*  font-family :  courier;
+   font-size: 12px;*/
+}
+
+#page_print td{
+ padding-left: 2px;
+}
+.full_page {
+ float: left;
+ width: 100%;
+ display: block;
+ clear: both;
+}
+
+.half_page{
+ width: 50%;
+}
+
+.left, .right {
+ float: left;
+}
+
+#print_body .form_line_data_table{
+ width: 100%;
+}
+
+tr.detail_header th{
+ background-color : rgba(240,240,240,0.5);
+ color : rgba(9, 105, 158, 1);
+ line-height: 6px;
+ font-size: 10px;
+}

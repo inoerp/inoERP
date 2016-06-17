@@ -1,5 +1,6 @@
 $(document).ready(function () {
  var homeUrl = $('#home_url').val();
+ var themeUrl = $('#theme_url').val();
  $('.non_clickable').on('click', function (e) {
   e.preventDefault();
  })
@@ -533,5 +534,6 @@ $(document).ready(function () {
  $('#program_header .hideDiv_input').trigger('click');
 
 
+$.getScript( themeUrl + "/js/reload.js");
 
 });

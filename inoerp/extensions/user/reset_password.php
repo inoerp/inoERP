@@ -54,7 +54,7 @@ else { //form is not submitted
 }
 ?>
 
-<?php include_once('../../includes/basics/header_public.inc'); ?>
+<?php include_once(__DIR__.'/../../includes/template/header_public.inc'); ?>
 <link href="user.css" media="all" rel="stylesheet" type="text/css" />
 <script type='text/javascript' src="user.js" ></script>
 <div role="alert" class="alert alert-warning error alert-dismissible"><?php
