@@ -8,6 +8,11 @@ class ar_receipt_line extends dbObject {
  public static $multi_search_primary_column = "ar_receipt_header_id"; //this value is used in multi search hidden value
  public static $key_column = 'amount';
  public static $module = "ap";
+ public static $line_type_a = [
+  'invoice' => 'Invoice',
+  'write_off' => 'Write-off',
+  'refund' => 'Refund',
+ ];
  public $field_a = [
   'ar_receipt_line_id',
   'ar_receipt_header_id',

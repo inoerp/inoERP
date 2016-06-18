@@ -14,7 +14,7 @@ ul.tabMain li {
  overflow:hidden;
  position:relative;
  /*background-color: rgba(222, 221, 221, 0.94);*/
-    background-color: rgba(152, 157, 149, 0.44);
+    background-color: rgba(224, 224, 224, 0.4);
  -webkit-border-top-left-radius:4px;
  -webkit-border-top-right-radius:4px;
  -moz-border-radius-topleft:4px;
@@ -26,7 +26,7 @@ ul.tabMain li {
  /*! height: 40px; */
  /*! margin-right: 20px; */
  width: 25%;
- border-right: 1px solid #eee;
+ border-right: 1px solid #fff;
 }
 
 ul.tabMain li.ui-state-active {

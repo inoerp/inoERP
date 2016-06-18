@@ -7,13 +7,14 @@
 body {
  font-family: "Lato",sans-serif;
  font-weight: 350;
- font-size: 12px;
  color: #000;
  line-height: 175%;
  /* background-image: url("../images/body_bg_01.png");
   background-color: rgba(238, 241, 242, 0.81);*/
 }
-
+#erp_form_area{
+ font-size: 12px;
+}
 h1,h2,h3,h4,h5,h6{ 
  letter-spacing:0px;
  font-weight:normal;
@@ -4442,7 +4443,7 @@ table.document_table input{
  font: 10px "Lucida Grande",Lucida,Verdana,sans-serif;
 }*/
 
-#form_header input, #form_header select, textarea.address  , #form_header input.date{
+#form_header input, #form_header select, textarea.address  , #form_header input.date, .form_header_l input, .form_header_l select {
  width: 140px;
 }
 
@@ -4595,9 +4596,9 @@ a.show {
   position: fixed;
   z-index: 1;
  }
- #header_bottom{
+/* #header_bottom{
   margin-bottom: 100px;
- }
+ }*/
 }
 
 
@@ -4608,9 +4609,9 @@ a.show {
   position: fixed;
   z-index: 1;
  }
- #header_bottom{
+/* #header_bottom{
   margin-bottom: 90px;
- }
+ }*/
 }
 
 
