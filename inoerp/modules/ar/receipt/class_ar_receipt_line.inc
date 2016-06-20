@@ -9,15 +9,17 @@ class ar_receipt_line extends dbObject {
  public static $key_column = 'amount';
  public static $module = "ap";
  public static $line_type_a = [
-  'invoice' => 'Invoice',
-  'write_off' => 'Write-off',
-  'refund' => 'Refund',
+  'INVOICE' => 'Invoice',
+  'WF' => 'Write-off',
+  'REFUND' => 'Refund',
  ];
  public $field_a = [
   'ar_receipt_line_id',
   'ar_receipt_header_id',
   'ar_transaction_header_id',
   'line_number',
+  'line_type',
+  'ar_receivable_activity_id',
   'amount',
   'exchange_rate',
   'line_description',
@@ -63,6 +65,8 @@ class ar_receipt_line extends dbObject {
  public $ar_receipt_line_id;
  public $ar_receipt_header_id;
  public $line_number;
+ public $line_type;
+ public $ar_receivable_activity_id;
  public $amount;
  public $line_description;
  public $ar_transaction_header_id;
@@ -109,7 +113,6 @@ class ar_receipt_line extends dbObject {
    $arth->ar_transaction_header_id = $this->ar_transaction_header_id;
    $arth->receipt_amount = $this->amount + $arth_i->receipt_amount;
    if ($arth->receipt_amount <= $arth_i->header_amount) {
-    $arth->audit_trial();
     $arth->save();
    } else {
     echo "<br>Receipt amount is more than available balance. Or<br>The Transaction# $arth_i->transaction_number is fully paid ";

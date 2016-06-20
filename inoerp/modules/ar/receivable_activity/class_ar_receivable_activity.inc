@@ -18,12 +18,12 @@ class ar_receivable_activity extends dbObject {
 
  public static $table_name = "ar_receivable_activity";
  public static $primary_column = "ar_receivable_activity_id";
- public static $key_column = 'receivable_activity';
+ public static $key_column = 'activity_name';
  public static $module = "ar";
  public static $system_info = [
-  'name' => 'AR Receipt Source',
-  'number' => '1305',
-  'description' => 'Receipt Source',
+  'name' => 'AR Receivable Activity',
+  'number' => '1315',
+  'description' => 'Receivable Activity',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
@@ -31,114 +31,123 @@ class ar_receivable_activity extends dbObject {
   'module_name' => 'ar',
   'weight' => 5
  ];
- public static $template_type = [
-  'header_tab' => 1,
-  'line_tab' => 2,
-  'nooffields_header_tab1' => 5,
-  'nooffields_line_tab1' => 6,
-  'nooffields_line_tab2' => 6,
+
+ const AR_ACTIVITY_TYPE_A = [
+  '1' => 'Adjustment',
+  '2' => 'Bank Error',
+  '3' => 'Discount',
+  '4' => 'Write-Off',
  ];
- public static $creation_method_a = [
-  'MANUAL' => 'Manual',
-  'AUTOMATIC' => 'Automatic',
-  'AP_AR_NETTING' => 'AP-AR Netting',
+ 
+  const AR_ACCOUNT_SOURCE_A = [
+  '1' => 'Invoice',
+  '2' => 'Receipt',
+  '3' => 'Activity',
+  
  ];
- public static $remittance_method_a = [
-  'NO_REMITTANCE' => 'No Remittance',
-  'STANDARD' => 'Standard'
- ];
- public static $clearance_method_a = [
-  'DIRECT' => 'Direct',
-  'AUTOMATIC' => 'Automatic',
-  'MATCHING' => 'Matching',
- ];
+
  public $field_a = [
   'ar_receivable_activity_id',
-  'receivable_activity',
-  'receipt_type',
-  'creation_method',
-  'bu_org_id',
+  'activity_name',
+  'activity_type',
+  'active_cb',
+  'account_source',
   'description',
-  'remittance',
-  'clearance',
-  'bank_account_id',
-  'sync_receipt_number_cb',
-  'status',
+  'activity_ac_id',
+  'tax_code_source',
+  'tax_code_id',
+  'bu_org_id',
   'created_by',
   'creation_date',
   'last_update_by',
   'last_update_date',
  ];
  public $initial_search = [
-  'ar_receivable_activity_id',
-  'receivable_activity',
-  'receipt_type',
- ];
- public $column = [
-  'ar_receivable_activity_id',
-  'receivable_activity',
-  'receipt_type',
-  'creation_method',
-  'bu_org_id',
- ];
- public $fields_inForm_notInDataBase = [
-  'account_number',
-  'country',
-  'bank_name',
-  'bank_number',
-  'description',
-  'bank_name_short',
-  'bank_name_alt',
-  'branch_name',
-  'branch_number',
-  'ifsc_code',
-  'swift_code',
-  'routing_number',
-  'iban_code',
+  'activity_name',
+  'activity_type',
  ];
  public $requiredField = [
-  'receivable_activity',
-  'receipt_type',
-  'creation_method',
+  'activity_name',
+  'activity_type',
   'bu_org_id',
-  'remittance',
-  'clearance',
-  'bank_account_id',
  ];
  public $ar_receivable_activity_id;
- public $receivable_activity;
- public $receipt_type;
- public $creation_method;
- public $bu_org_id;
+ public $activity_name;
+ public $activity_type;
+ public $active_cb;
+ public $account_source;
  public $description;
- public $remittance;
- public $clearance;
- public $bank_account_id;
- public $sync_receipt_number_cb;
- public $status;
+ public $activity_ac_id;
+ public $tax_code_source;
+ public $tax_code_id;
+ public $bu_org_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
- public $country;
- public $account_number;
- public $bank_name;
- public $bank_number;
- public $bank_name_short;
- public $bank_name_alt;
- public $branch_name;
- public $branch_number;
- public $ifsc_code;
- public $swift_code;
- public $routing_number;
- public $iban_code;
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " AR - Receipt Source ";
+ public $pageTitle = " Receivable Activity ";
+ public static $header_tab_1 = [
+  [
+   'name' => 'activity_name',
+   'field_function' => 'l_text_field_d'
+  ],
+  [
+   'name' => 'bu_org_id',
+   'field_function' => 'l_text_field_d'
+  ],
+  [
+   'name' => 'activity_type',
+   'field_function' => 'l_select_field_from_array',
+   'function_parameters' => ['activity_type', self::AR_ACTIVITY_TYPE_A, 'activity_type', 'activity_type' ,'',1],
+  ],
+  [
+   'name' => 'description',
+   'field_function' => 'l_text_field_d'
+  ],
+//  [
+//   'name' => 'username',
+//   'field_function' => 'l_val_field_d',
+//   'function_parameters' => ['username', 'user', 'username','','always_readonly'],
+//   'hidden_fields' => ['user_id']
+//  ], 
+  ['name' => 'active_cb',
+   'field_function' => 'l_checkBox_field_d'
+  ],
+//  [
+//   'name' => 'user_id',
+//   'field_function' => 'hidden_field_d',
+//   'function_parameters' => ['user_id'],
+//  ]
+ ];
+ public static $no_ofline_tabs = 1;
+ public static $line_tab_1 = [
+  'ul_class' => 'header_field column  two_column_form',
+  'tab_heading' => 'Details',
+  [
+   'name' => 'account_source',
+   'field_function' => 'l_text_field_d'
+  ],
+  [
+   'name' => 'activity_ac_id',
+   'field_function' => 'l_text_field_d'
+  ],
+  [
+   'name' => 'tax_code_source',
+   'field_function' => 'l_text_field_d'
+  ],
+  [
+   'name' => 'tax_code',
+   'field_function' => 'l_text_field_d'
+  ]
+ ];
 
  public static function find_by_buOrgId($bu_org_id) {
+  $f = new inoform();
+  $f->l_select_field_from_array($name, $array, $value);
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE bu_org_id = '{$bu_org_id}' AND status='active'";

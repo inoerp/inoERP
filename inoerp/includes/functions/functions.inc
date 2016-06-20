@@ -2182,6 +2182,58 @@ function update_htaccessFile() {
  return $return;
 }
 
+function ino_showField_from_details_a($arr) {
+ global $f, $class, $$class;
+ $f = new inoform();
+ $ret_stmt = '';
+
+ switch ($arr['field_function']) {
+  case 'l_text_field_d':
+   $ret_stmt = $f->l_text_field_d($arr['name']);
+   break;
+
+  case 'hidden_field_d':
+   $val_f = isset($arr['function_parameters'][0]) ? $arr['function_parameters'][0] : null;
+   $ret_stmt = $f->hidden_field_d($arr['name'], $val_f);
+   break;
+
+  case 'l_checkBox_field_d':
+   $ret_stmt = $f->l_checkBox_field_d($arr['name']);
+   break;
+
+  case 'text_area':
+   echo $f->l_text_area_d($arr['name']);
+   break;
+
+  case 'l_val_field_d':
+   $val_field_n = isset($arr['function_parameters'][0]) ? $arr['function_parameters'][0] : null;
+   $val_field_v = isset($arr['function_parameters'][1]) ? $arr['function_parameters'][1] : null;
+   $val_field_value = isset($arr['function_parameters'][2]) ? $arr['function_parameters'][2] : null;
+   $dependent_field = isset($arr['function_parameters'][3]) ? $arr['function_parameters'][3] : null;
+   $div_class = isset($arr['function_parameters'][4]) ? $arr['function_parameters'][4] : null;
+   $ret_stmt = $f->l_val_field_d($val_field_n, $val_field_v, $val_field_value, '', $div_class);
+   $ret_stmt = '<i class="generic select_popup clickable fa fa-search" data-class_name="' . $val_field_v . '"></i>';
+   break;
+
+  case 'l_select_field_from_array':
+   $f_name = isset($arr['function_parameters'][0]) ? $arr['function_parameters'][0] : null;
+   $f_arr = isset($arr['function_parameters'][1]) ? $arr['function_parameters'][1] : null;
+   $f_val = isset($arr['function_parameters'][2]) ? $arr['function_parameters'][2] : null;
+   $f_id = isset($arr['function_parameters'][3]) ? $arr['function_parameters'][3] : null;
+   $f_class = isset($arr['function_parameters'][4]) ? $arr['function_parameters'][3] : null;
+   $f_req = isset($arr['function_parameters'][5]) ? $arr['function_parameters'][5] : null;
+   $f_radonly = isset($arr['function_parameters'][6]) ? $arr['function_parameters'][6] : null;
+   $f_val_i = property_exists($$class, $f_val) ? $$class->$f_val : ' ';
+   $ret_stmt = $f->l_select_field_from_array($f_name, $f_arr, $f_val_i, $f_id, $f_class, $f_req, $f_radonly);
+   break;
+
+  default:
+   $ret_stmt = $f->l_text_field_d($arr['name']);
+   break;
+ }
+ echo $ret_stmt;
+}
+
 function ino_upload_error_msg($msg_code) {
  $rtn_msg = '';
  switch ($msg_code) {
@@ -2230,6 +2282,32 @@ function ino_upload_error_msg($msg_code) {
    break;
  }
  return $rtn_msg;
+}
+
+function ino_topbar_login() {
+ if (!empty($_SESSION['login_status'])) {
+  $stmt = ' 
+         <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i> ' . ucfirst($_SESSION['username']) . ' <span class="caret"></span></button>';
+  $stmt .='<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+           <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->';
+  $stmt .='<li role="presentation"><a role="menuitem" tabindex="-1" href="' . HOME_URL . '"><i class="fa fa-home"></i> Home</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem" tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '"> My Details</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '"><i class="fa fa-tasks"></i> Activities</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="' . HOME_URL . 'search.php?class_name=sys_notification_user"><i class="fa fa-bell-slash-o"></i> Notification</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem"  tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '"><i class="fa fa-dashboard"></i> Dashboard</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem"  tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '"><i class="fa fa-cog"></i> Configure</a></li>';
+  $stmt .='<li role="presentation" class="divider"></li>';
+  $stmt .='<li role="presentation"><a role="menuitem"  tabindex="-1" href="' . HOME_URL . 'extensions/user/user_logout.php' . '"><i class="fa fa-sign-out"></i> LogOut</a></li>';
+  $stmt .='</ul></div>';
+  echo $stmt;
+ } else {
+  if (file_exists(THEME_DIR . '/template/user_popup_login_template.php')) {
+   require_once(THEME_DIR . '/template/user_popup_login_template.php');
+  } else {
+   include_once HOME_DIR . '/extensions/user/popup_login/user_popup_login_template.php';
+  }
+ }
 }
 
 ?>

@@ -3673,6 +3673,9 @@ $(document).ready(function () {
 
  //popu for selecting any generic class
  $('#content').on('click', '.generic.select_popup', function () {
+  if($(this).hasClass('readonly')){
+   return false;
+  }
   var elemenType = $(this).parent().prop('tagName');
   if (elemenType === 'TD') {
    var rowClass = $(this).closest('tr').prop('class');

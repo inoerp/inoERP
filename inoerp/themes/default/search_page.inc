@@ -65,31 +65,7 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse col-md-6 navbar-right">
      <ul class="nav navbar-nav navbar-right">
-      <li>
-       <div class="topbar-login ino_right_top">
-        <?php if (!empty($_SESSION['login_status'])) { ?>
-         <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
-           <span class="caret"></span></button>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-           <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
-           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
-           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
-           <li role="presentation" class="divider"></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
-          </ul>
-         </div>
-         <?php
-        } else {
-         include_once 'extensions/user/popup_login/user_popup_login_template.php';
-        }
-        ?>
-       </div>
-      </li>
+      <li><div class="topbar-login ino_right_top"><?php ino_topbar_login();   ?></div></li>
      </ul>
      <ul class='nav navbar-nav hidden-xs'><li>
        <?php echo $ss->entry_form($_GET); ?>
@@ -336,6 +312,7 @@
   global $f;
   echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
   echo $f->hidden_field_withId('home_url', HOME_URL);
+  echo $f->hidden_field_withId('theme_url', THEME_URL);
   ?>
   <div class="hidden">
    <?php

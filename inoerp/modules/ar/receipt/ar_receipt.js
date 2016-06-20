@@ -124,6 +124,19 @@ $(document).ready(function () {
   $('body').trigger('cash_calculateHeaderAmount');
  });
 
+ $('body').off('change', '.line_type').on('change', '.line_type', function () {
+  var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+  var lineType = $(this).val();
+  ar_receipt_setLineType(trClass, lineType);
+ });
+
+
+ $('body').find('.line_type').each(function () {
+  var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+  var lineType = $(this).val();
+  ar_receipt_setLineType(trClass, lineType);
+ });
+
 });
 
 //all actions
@@ -143,3 +156,18 @@ function create_accounting() {
   alert('No Transaction Header ID/nEnter or Save The Header Details ');
  }
 }
+
+function ar_receipt_setLineType(trClass, lineType) {
+ switch (lineType) {
+  case 'WF':
+  case 'REFUND':
+   $(trClass).find('.transaction_number,.g_select_ar_transaction_number').addClass('readonly');
+   $(trClass).find('.ar_receivable_activity_id').removeClass('readonly');
+   break;
+
+  default :
+   $(trClass).find('.ar_receivable_activity_id').addClass('readonly');
+   $(trClass).find('.transaction_number , .g_select_ar_transaction_number').removeClass('readonly');
+   break;
+ }
+} 
