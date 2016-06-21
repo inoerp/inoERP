@@ -35,15 +35,13 @@
         </div>
         <div id="content_extra"><?php
          $cont_html = content::content_by_id($content_type_name, $content->content_id);
-//          $regex = '#<code>(.*?)</code>#';
-//          preg_match($regex, $cont_html, $matches);
-         echo nl2br($cont_html);
+         echo nl2br(html_entity_decode($cont_html));
          ?></div>
         <div id="after_content_extra">
          <div id="content_navigation" class="parent-child-nav">
           <ul>
            <li class="parent_id">
-            <?php echo!(empty($parent_of_content)) ? $parent_of_content .' <i class="fa fa-level-up fa-2x"></i>' : "" ?>
+            <?php echo!(empty($parent_of_content)) ? $parent_of_content . ' <i class="fa fa-level-up fa-2x"></i>' : "" ?>
            </li>
            <li class="child_contents">
             <?php echo '<a href="' . HOME_URL . 'content.php?mode=9&amp;content_type=' . $content_type_name . '&amp;parent_id=' . $content->content_id . '"   
@@ -53,9 +51,9 @@
          </div>
          <div id='content_info'>
           <ul>
-           <li class="attachment_content"><?php echo (!empty($file)) ?  '<label>Attachments : </label>' . file::show_file_list($file) : ""; ?></li>
-           <li class="terms"><?php echo !empty($content->terms) ? '<label>Tags : </label>' . ($content->terms) : ''; ?></li>
-           <li class="categories"><?php echo!(empty($category_statement)) ?  '<label>Category : </label>'. $category_statement : ""; ?></li>
+           <li class="attachment_content"><?php echo (!empty($file)) ? '<label>Attachments : </label>' . file::show_file_list($file) : ""; ?></li>
+           <li class="terms"><?php echo!empty($content->terms) ? '<label>Tags : </label>' . ($content->terms) : ''; ?></li>
+           <li class="categories"><?php echo!(empty($category_statement)) ? '<label>Category : </label>' . $category_statement : ""; ?></li>
           </ul>
          </div>
          <div id="child_conetnt_list"><?php
@@ -69,7 +67,7 @@
           if ($comment_privilage >= 4) {
            $reference_table = 'content';
            $reference_id = $content->content_id;
-           include_once __DIR__.'/../../comment.php';
+           include_once __DIR__ . '/../../comment.php';
           } else {
            echo "<a href='" . HOME_URL . "extensions/user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
           }

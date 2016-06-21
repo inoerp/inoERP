@@ -141,6 +141,10 @@ class content extends dbObject {
  }
 
  public function _before_save() {
+  if (!empty($this->content)) {
+   $this->content = htmlentities($this->content);
+  }
+
   if (!empty($this->non_db_content_type)) {
    $ndbc = new $this->non_db_content_type;
    if (method_exists($ndbc, '_before_save')) {
@@ -200,7 +204,7 @@ class content extends dbObject {
     //Bind parameters
     foreach ($content_field_array as $key => $value) {
      if (!empty($_POST[$value][0])) {
-      $stmt->bindParam(":$value", $_POST[$value][0]);
+      $stmt->bindParam(":$value", htmlentities($_POST[$value][0]));
      } else {
       $stmt->bindvalue(":$value", null, PDO::PARAM_INT);
      }
@@ -220,7 +224,7 @@ class content extends dbObject {
 
     $field_values = '';
     foreach ($content_field_array as $key => $value) {
-     $field_values .= ':' . $value . ', ';
+     $field_values .= ':' . htmlentities($value) . ', ';
     }
     $field_values = rtrim($field_values, ', ');
 //write SQL
@@ -296,7 +300,7 @@ class content extends dbObject {
 					content.published_cb = 1 
 					AND content.show_in_fp_cb = 1 
    AND content.content_type_id != 1 ";
-    
+
   $sql .=" ORDER BY  creation_date DESC, weightage DESC";
   $sql .= " LIMIT {$no_of_articles} ";
   $result = $this->findBySql($sql);
@@ -758,8 +762,8 @@ AND content.content_id = category_reference.reference_id  ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
- 
-  public static function content_find_by_contentTypeConentId($content_type_name, $content_id) {
+
+ public static function content_find_by_contentTypeConentId($content_type_name, $content_id) {
   $table_name = 'c_' . $content_type_name;
   $sql = " SELECT * FROM " . $table_name . " where content_id={$content_id} LIMIT 1";
   $result = self::find_by_sql($sql);
@@ -908,7 +912,7 @@ AND content.content_id = category_reference.reference_id  ";
   foreach ($extra_fields as $records) {
    $content_field_array[] = $records->Field;
   }
-  $extra_content= self::content_find_by_contentTypeConentId($content_type_name, $content_id);
+  $extra_content = self::content_find_by_contentTypeConentId($content_type_name, $content_id);
   if ($extra_content) {
    foreach ($content_field_array as $key => $value) {
     if ($value != 'content_id') {

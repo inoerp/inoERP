@@ -122,7 +122,13 @@ class comment extends dbObject {
    return -90;
   }
   if (empty($this->subject)) {
-   $this->subject = substr($this->comment, 0, 50);
+   $this->subject = htmlentities(substr($this->comment, 0, 20));
+  }else{
+   $this->subject = htmlentities($this->subject);
+  }
+  
+  if (!empty($this->comment)) {
+   $this->comment = htmlentities($this->comment);
   }
  }
 
