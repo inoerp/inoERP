@@ -172,6 +172,7 @@ ORDER BY gp.gl_period_id DESC
 
  public function balance_sheet($params) {
   global $si;
+
   $org_name = $si->site_name;
   $last_period = '';
   if (!empty($params['gl_period_id'][0])) {
@@ -182,9 +183,13 @@ ORDER BY gp.gl_period_id DESC
    $current_period = $current_period_p->format('M-y');
    $period_id = '';
   }
-
+  $custom_template_name = HOME_DIR . DS . 'themes' . DS . $_SESSION['default_theme'] . '/template/gl_balance_v_balance_sheet_template.php';
   ob_start();
-  include_once __DIR__ . '/templates/balance_sheet_template.php';
+  if (file_exists($custom_template_name)) {
+   include_once $custom_template_name;
+  } else {
+   include_once __DIR__ . '/templates/balance_sheet_template.php';
+  }
   $report_date = ob_get_contents();
   ob_end_clean();
   return $report_date;
@@ -203,11 +208,16 @@ ORDER BY gp.gl_period_id DESC
    $period_id = '';
   }
 
-
+  $custom_template_name = HOME_DIR . DS . 'themes' . DS . $_SESSION['default_theme'] . '/template/gl_balance_v_balance_sheet_detail_template.php';
   ob_start();
-  include_once __DIR__ . '/templates/balance_sheet_detail_template.php';
+  if (file_exists($custom_template_name)) {
+   include_once $custom_template_name;
+  } else {
+   include_once __DIR__ . '/templates/balance_sheet_detail_template.php';
+  }
   $report_date = ob_get_contents();
   ob_end_clean();
+
   return $report_date;
  }
 
@@ -224,10 +234,16 @@ ORDER BY gp.gl_period_id DESC
    $period_id = '';
   }
 
+  $custom_template_name = HOME_DIR . DS . 'themes' . DS . $_SESSION['default_theme'] . '/template/gl_balance_v_income_statement_template.php';
   ob_start();
-  include_once __DIR__ . '/templates/income_statement_template.php';
+  if (file_exists($custom_template_name)) {
+   include_once $custom_template_name;
+  } else {
+   include_once __DIR__ . '/templates/income_statement_template.php';
+  }
   $report_date = ob_get_contents();
   ob_end_clean();
+
   return $report_date;
  }
 
@@ -244,10 +260,16 @@ ORDER BY gp.gl_period_id DESC
    $period_id = '';
   }
 
+  $custom_template_name = HOME_DIR . DS . 'themes' . DS . $_SESSION['default_theme'] . '/template/gl_balance_v_income_statement_detail_template.php';
   ob_start();
-  include_once __DIR__ . '/templates/income_statement_detail_template.php';
+  if (file_exists($custom_template_name)) {
+   include_once $custom_template_name;
+  } else {
+   include_once __DIR__ . '/templates/income_statement_detail_template.php';
+  }
   $report_date = ob_get_contents();
   ob_end_clean();
+
   return $report_date;
  }
 
@@ -871,7 +893,7 @@ ORDER BY gp.gl_period_id DESC
    }
   }
 
-  
+
   $this_data_a = [];
   if (!empty($sum_key)) {
    $this_data_a['element_type'] = 'description';

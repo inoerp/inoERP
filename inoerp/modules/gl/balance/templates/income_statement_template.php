@@ -1,4 +1,4 @@
-<h1 class="text-center">CONSOLIDATED STATEMENTS OF INCOME</h1>
+<h1 class="text-center"><?php echo gettext('CONSOLIDATED STATEMENTS OF INCOME'); ?></h1>
 <h2 class="text-center"><?php echo $org_name ?></h2>
 <table class ="balance_sheet table table-bordered simple_table">
  <thead> 
@@ -10,7 +10,7 @@
  </thead>
  <tbody>
   <tr class="label_one">
-   <td>SALES :</td><td></td><td></td>
+   <td><?php echo gettext('SALES'); ?></td><td></td><td></td>
   </tr>
   <?php
   if (!empty($_GET['org_id'][0])) {
@@ -48,13 +48,13 @@
   $total_income += $sum_amount_revn;
   ?>
   <tr class="label_three">
-   <td>Total Sales</td>
+   <td><?php echo gettext('Total Sales'); ?></td>
    <td><?php echo $sum_amount_revn ?></td>
    <td></td>
   </tr>
 
   <tr class="label_one">
-   <td>COST OF SALES :</td><td></td><td></td>
+   <td><?php echo gettext('COST OF SALES'); ?></td><td></td><td></td>
   </tr>
 
   <?php
@@ -74,18 +74,18 @@
   $total_expense += $sum_cos;
   ?>
   <tr class="label_three">
-   <td>Total Cost Of Sales</td>
+   <td><?php echo gettext('Total Cost Of Sales'); ?></td>
    <td><?php echo $sum_cos ?></td>
    <td></td>
   </tr>
 
   <tr class="label_three">
-   <td>Gross Profit</td>
+   <td><?php echo gettext('Gross Profit'); ?></td>
    <td><?php echo $total_income + $sum_cos ?></td>
    <td></td>
   </tr>
   <tr class="label_one">
-   <td>EXPENSES :</td><td></td><td></td>
+   <td><?php echo gettext('EXPENSES'); ?></td><td></td><td></td>
   </tr>
 
   <?php
@@ -102,19 +102,19 @@
   $total_expense += $sum_cos_indirect;
   ?>
   <tr class="label_three">
-   <td>Total Expenses</td>
+   <td><?php echo gettext('Total Expenses'); ?></td>
    <td><?php echo $sum_cos_indirect ?></td>
    <td></td>
   </tr>
 
   <tr class="label_three">
-   <td>Operating Income</td>
+   <td><?php echo gettext('Operating Income'); ?></td>
    <td><?php echo $total_income + $total_expense ?></td>
    <td></td>
   </tr>
 
   <tr class="label_one">
-   <td>OTHER INCOME & EXPENSE :</td><td></td><td></td>
+   <td><?php echo gettext('OTHER INCOME & EXPENSE'); ?></td><td></td><td></td>
   </tr>
   <?php
   $gbv->account_code_low_limit = $coa->field4_low = '700000';
@@ -131,13 +131,13 @@
   $total_expense += $sum_other_exp;
   ?>
   <tr class="label_three">
-   <td>Total Other Income & Expenses</td>
+   <td><?php echo gettext('Total Other Income & Expenses'); ?></td>
    <td><?php echo $sum_other_exp ?></td>
    <td></td>
   </tr>
 
   <tr class="label_three">
-   <td>PRETAX INCOME</td>
+   <td><?php echo gettext('PRETAX INCOME'); ?></td>
    <td><?php echo $total_income + $total_expense ?></td>
    <td></td>
   </tr>

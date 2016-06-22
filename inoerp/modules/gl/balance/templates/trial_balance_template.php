@@ -1,4 +1,4 @@
-<h1 class="text-center">Trial Balance</h1>
+<h1 class="text-center"><?php echo gettext('Trial Balance'); ?></h1>
 <h2 class="text-center"><?php echo $org_name ?></h2>
 <table class ="balance_sheet table table-bordered simple_table" >
  <thead> 
