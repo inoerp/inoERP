@@ -2569,3 +2569,8 @@ small, .small {
 .login-form,.topbar-login {
     font-size: 85%;
 }
+
+#popup-window #erp_form_area{
+ 
+ margin-top : 0 !important;
+}

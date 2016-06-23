@@ -50,7 +50,7 @@ class ar_transaction_header extends dbObject {
   'CREATE_RECEIPT' => 'Create Receipt',
   'CREATE_ACCOUNT' => 'Create Accounting',
   'VIEW_JOURNAL' => 'View Journal',
-  'CREDIT' => 'Credit Transaction',
+//  'CREDIT' => 'Credit Transaction',
   'CANCEL' => 'Cancel Transaction',
  ];
  public $account = [

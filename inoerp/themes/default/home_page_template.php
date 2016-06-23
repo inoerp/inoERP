@@ -232,7 +232,7 @@ include_once("includes/functions/loader.inc");
        . 'content_id=' . $contnent->content_id . '&content_type_id=' . $contnent->content_type_id . '">';
        echo substr($contnent->subject, 0, $subject_no_of_char) . "</a></h3>";
        echo '</div>';
-       echo "<div class='panel-body'>" . ino_strip_html($contnent->content_summary, $summary_no_of_char) . "</div>";
+       echo "<div class='panel-body'>" . nl2br(html_entity_decode($contnent->content_summary, $summary_no_of_char)) . "</div>";
        echo '</div></div>';
        $cont_count++;
        $fp_contnts_ai->next();

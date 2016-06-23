@@ -461,16 +461,24 @@ EOD;
   if (empty($value)) {
    return;
   }
+  $attachment_statement = '';
   $file = file::find_by_id($value);
-  if (empty($file)) {
+    if (empty($file)) {
    return;
   }
-  $attachment_statement = "<div class=\"existing-image \">";
-  $attachment_statement .= '<img class="img ' . $div_class . '" src="' . HOME_URL . $file->file_path . $file->file_name . '"/>';
-  if ($full_size_on_hover) {
-   $attachment_statement .= '<img class="img img-medium hidden-image' . '" src="' . HOME_URL . $file->file_path . $file->file_name . '"/>';
+  $file_path = HOME_URL . $file->file_path . $file->file_name;
+  $file_path_internal = HOME_DIR . DS. $file->file_path . $file->file_name;
+
+ if (file_exists($file_path_internal)) {
+   $attachment_statement .= "<div class=\"existing-image \">";
+   $attachment_statement .= '<img class="img ' . $div_class . '" src="' . $file_path . '"/>';
+   if ($full_size_on_hover) {
+    $attachment_statement .= '<img class="img img-medium hidden-image' . '" src="' . $file_path . '"/>';
+   }
+   $attachment_statement .= "</div>";
   }
-  $attachment_statement .= "</div>";
+  
+
   return $attachment_statement;
  }
 
@@ -792,7 +800,7 @@ EOD;
        <li class="new_object1">
         <label>Associate Contact </label> ';
   $contact_stmt .= $this->hidden_field_withCLass('extn_contact_id_new', '', 'extn_contact_id');
-  $contact_stmt .= $this->val_field('contact_name_new', '', '20', '', 'select_contact contact_name', '' ,'','extn_contact','contact_name');
+  $contact_stmt .= $this->val_field('contact_name_new', '', '20', '', 'select_contact contact_name', '', '', 'extn_contact', 'contact_name');
   $contact_stmt .='<i class="extn_contact_id select_popup clickable fa fa-search" data-class_name="extn_contact"></i> </li>
 <li class="clickable" id="add_new_contact" title="New contact reference field"><i class="fa fa-plus-circle"></i></li>
 </ul>
@@ -979,7 +987,7 @@ EOD;
   global $readonly, $class, $$class;
   $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
   $search_class_gt = gettext($search_class);
-  echo '<label class="big_popover">' . gettext(ucwords(str_replace(['_', 'id'], [' ', ''] , $field_name))) . '</label>';
+  echo '<label class="big_popover">' . gettext(ucwords(str_replace(['_', 'id'], [' ', ''], $field_name))) . '</label>';
   echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
                                                                   title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .

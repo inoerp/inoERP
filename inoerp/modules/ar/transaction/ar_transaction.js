@@ -151,7 +151,7 @@ $(document).ready(function () {
 
 //all actions
 //Popup for selecting match 
- $('#action').on('change', function () {
+ $('body').on('change', '#ar_transaction_header #action' , function () {
   var selected_value = $(this).val();
   switch (selected_value) {
    case 'CREATE_ACCOUNT' :
