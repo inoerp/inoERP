@@ -16,12 +16,13 @@ if (!empty($ino_user->use_personal_db_cb)) {
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Navigation') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Quick Info ') ?></a></li>
-     <li><a href="#tabsHeader-3" class="get-report-content" data-report_id="3"><?php echo gettext('On hand') ?></a></li>
-     <li><a href="#tabsHeader-4" class="get-report-content" data-report_id="5"><?php echo gettext('Open PO') ?></a></li>
-     <li><a href="#tabsHeader-5" class="get-report-content" data-report_id="4"><?php echo gettext('Sales Funnel') ?></a></li>
-     <li><a href="#tabsHeader-6"><?php echo gettext('WIP Value') ?></a></li>
-     <li><a href="#tabsHeader-7" class="get-report-content" data-report_id="1"><?php echo gettext('Supplier Liability') ?></a></li>
-     <li><a href="#tabsHeader-8" class="get-report-content" data-report_id="6"><?php echo gettext('Customer Balance') ?></a></li>
+     <li><a href="#tabsHeader-3" class="get-report-content" data-report_id="7"><?php echo gettext('P&L Snapshot') ?></a></li>
+     <li><a href="#tabsHeader-4" class="get-report-content" data-report_id="3"><?php echo gettext('On hand') ?></a></li>
+     <li><a href="#tabsHeader-5" class="get-report-content" data-report_id="5"><?php echo gettext('Open PO') ?></a></li>
+     <li><a href="#tabsHeader-6" class="get-report-content" data-report_id="4"><?php echo gettext('Sales Funnel') ?></a></li>
+     <li><a href="#tabsHeader-7"><?php echo gettext('WIP Value') ?></a></li>
+     <li><a href="#tabsHeader-8" class="get-report-content" data-report_id="1"><?php echo gettext('Supplier Liability') ?></a></li>
+     <li><a href="#tabsHeader-9" class="get-report-content" data-report_id="6"><?php echo gettext('Customer Balance') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
@@ -51,10 +52,12 @@ if (!empty($ino_user->use_personal_db_cb)) {
        </li>
       </ul>
      </div>
+     
      <div id="tabsHeader-3" class="tabContent"></div>
      <div id="tabsHeader-4" class="tabContent"></div>
      <div id="tabsHeader-5" class="tabContent"></div>
-     <div id="tabsHeader-6" class="tabContent">
+     <div id="tabsHeader-6" class="tabContent"></div>
+     <div id="tabsHeader-7" class="tabContent">
       <div>                
        <?php
        $raw = new ra_wip();
@@ -88,8 +91,8 @@ if (!empty($ino_user->use_personal_db_cb)) {
        ?>
       </div>
      </div>
-     <div id="tabsHeader-7" class="tabContent"></div>
      <div id="tabsHeader-8" class="tabContent"></div>
+     <div id="tabsHeader-9" class="tabContent"></div>
     </div>
 
    </div>

@@ -133,7 +133,6 @@ class ar_transaction_line extends dbObject {
     $trnx_details->description = 'Revenue';
     $trnx_details->amount = $this->inv_line_price;
     $trnx_details->gl_amount = $this->gl_inv_line_price;
-    $trnx_details->audit_trial();
     $trnx_details->save();
     echo "<br> Transaction detail line for revenue is Successfully created!";
     if (!empty($this->tax_amount)) {
@@ -145,7 +144,6 @@ class ar_transaction_line extends dbObject {
      $trnx_details->description = 'Tax';
      $trnx_details->amount = $this->tax_amount;
      $trnx_details->gl_amount = $this->gl_tax_amount;
-     $trnx_details->audit_trial();
      $trnx_details->save();
      echo "<br> Transaction detail line for tax is Successfully Created!";
     }
@@ -183,7 +181,7 @@ class ar_transaction_line extends dbObject {
   $sql = " SELECT SUM(inv_line_price) as total_line_amount, SUM(tax_amount) as total_tax_amount, ar_transaction_line_id
 FROM ar_transaction_line
 WHERE ar_transaction_header_id = '{$ar_transaction_header_id}'
-GROUP BY ar_transaction_line_id ";
+GROUP BY ar_transaction_header_id ";
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : null;

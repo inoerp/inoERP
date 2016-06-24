@@ -228,7 +228,7 @@ class sd_delivery_line extends dbObject {
      'onhand_id' => $onhand_all->onhand_id,
      'inv_lot_number_id' => $ln_id]);
    if ($onhand_i) {
-        $irs->onhand_id = $irs->s_reference_key_value = $onhand_i[0]->onhand_id;
+    $irs->onhand_id = $irs->s_reference_key_value = $onhand_i[0]->onhand_id;
    } else {
     $dbc->rollback = true;
     throw new Exception('No onhand found @ staging. Error @' . __FILE__ . ' @@ ' . __LINE__);
@@ -358,6 +358,11 @@ class sd_delivery_line extends dbObject {
   $sol = new sd_so_line();
   $sol->findBy_id($this->sd_so_line_id);
   $ar_ti->inv_unit_price = $sol->unit_price;
+  $sd_doc_l = new sd_document_type();
+  $sd_doc_l->findBy_id($sol->line_type);
+  if (!empty($sd_doc_l->ar_transaction_type)) {
+   $ar_ti->transaction_type = $sd_doc_l->ar_transaction_type;
+  }
   $ar_ti->inv_line_price = $ar_ti->inv_line_quantity * $ar_ti->inv_unit_price;
   if (!empty($soh->exchange_rate)) {
    $ar_ti->gl_inv_line_price = $ar_ti->inv_line_price * $soh->exchange_rate;
