@@ -62,7 +62,7 @@
      <div>
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
-       <li><?php $f->l_select_field_from_object('ledger_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'currency', 1, 1); ?></li>
+       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'currency', 1, 1); ?></li>
        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li></li>
        <li><?php $f->l_date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?></li>
        <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
@@ -138,7 +138,6 @@
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
     <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>
     <li><a href="#tabsLine-3"><?php echo gettext('References') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo gettext('Notes') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -167,7 +166,7 @@
          <td>
           <?php
           echo ino_inline_action($$class_second->ar_transaction_line_id, array('ar_transaction_header_id' => $$class->ar_transaction_header_id,
-           'transaction_type' => $$class->transaction_type));
+           'transaction_type' => $$class->transaction_type, 'revenue_ac_id' => $$class_second->revenue_ac_id));
           ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
@@ -387,31 +386,6 @@
        ?>
       </tbody>
       <!--                  Showing a blank form for new entry-->
-     </table>
-    </div>
-    <div id="tabsLine-4" class="tabContent">
-     <table class="form_line_data_table">
-      <thead> 
-       <tr>
-        <th>Comments</th>
-
-       </tr>
-      </thead>
-      <tbody class="form_data_line_tbody">
-       <?php
-       $count = 0;
-       foreach ($ar_transaction_line_object as $ar_transaction_line) {
-        ?>         
-        <tr class="ar_transaction_line<?php echo $count ?>">
-         <td></td>
-        </tr>
-        <?php
-        $count = $count + 1;
-       }
-       ?>
-      </tbody>
-      <!--                  Showing a blank form for new entry-->
-
      </table>
     </div>
    </div>

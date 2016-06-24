@@ -146,8 +146,6 @@ class ar_transaction_header extends dbObject {
   'receivable_ac_id'
  ];
  public $fields_inForm_notInDataBase = [
-//		 '', //not updatable through form
-
   "customer_name",
   "customer_number",
   "customer_site_name",

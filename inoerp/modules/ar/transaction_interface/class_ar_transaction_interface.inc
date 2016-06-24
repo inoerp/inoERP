@@ -267,6 +267,7 @@ class ar_transaction_interface extends dbObject {
    $ar_tl->gl_inv_line_price = $_POST['gl_inv_line_price'][$i];
    $ar_tl->inv_line_price = $_POST['inv_line_price'][$i];
    $ar_tl->tax_code_id = $_POST['tax_code_id'][$i];
+   $ar_tl->revenue_ac_id = $_POST['revenue_ac_id'][$i];
    $ar_tl->tax_amount = $_POST['tax_amount'][$i];
    $ar_tl->gl_tax_amount = $_POST['gl_tax_amount'][$i];
    $ar_tl->line_type = $_POST['line_type'][$i];
@@ -275,7 +276,6 @@ class ar_transaction_interface extends dbObject {
    $ar_tl->reference_type = 'table';
    $ar_tl->reference_key_name = 'sd_so_line_id';
    $ar_tl->reference_key_value = $ar_tl->sd_so_line_id = $_POST['sd_so_line_id'][$i];
-   $ar_tl->audit_trial();
    $ar_tl->save();
 
    //update transaction header amount
@@ -290,7 +290,6 @@ class ar_transaction_interface extends dbObject {
    $sol->ar_transaction_header_id = $ar_tl->ar_transaction_header_id;
    $sol->ar_transaction_line_id = $ar_tl->ar_transaction_line_id;
    $sol->line_status = 'CLOSED';
-   $sol->audit_trial();
    $sol->save();
 
    //delete interface line
@@ -329,6 +328,7 @@ class ar_transaction_interface extends dbObject {
    $ar_tl->inv_line_price = $obj->inv_line_price;
    $ar_tl->gl_inv_line_price = $obj->gl_inv_line_price;
    $ar_tl->tax_code_id = $obj->tax_code_id;
+   $ar_tl->revenue_ac_id = $obj->revenue_ac_id;
    $ar_tl->tax_amount = $obj->tax_amount;
    $ar_tl->gl_tax_amount = $obj->gl_tax_amount;
    $ar_tl->line_type = $obj->line_type;
@@ -337,7 +337,6 @@ class ar_transaction_interface extends dbObject {
    $ar_tl->reference_type = 'table';
    $ar_tl->reference_key_name = 'sd_so_line_id';
    $ar_tl->reference_key_value = $ar_tl->sd_so_line_id = $obj->sd_so_line_id;
-   $ar_tl->audit_trial();
    $ar_tl->save();
    $msg .= "<br> Line is Successfully Created. Line id id " . $ar_tl->ar_transaction_line_id;
 
@@ -346,7 +345,6 @@ class ar_transaction_interface extends dbObject {
    $sol->ar_transaction_header_id = $ar_tl->ar_transaction_header_id;
    $sol->ar_transaction_line_id = $ar_tl->ar_transaction_line_id;
    $sol->line_status = 'CLOSED';
-   $sol->audit_trial();
    $sol->save();
    $msg .= "<br> SO Line is Successfullyupdated. Line id id " . $sol->sd_so_line_id;
 

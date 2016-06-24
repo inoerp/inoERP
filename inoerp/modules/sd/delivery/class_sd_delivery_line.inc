@@ -362,6 +362,11 @@ class sd_delivery_line extends dbObject {
   $sd_doc_l->findBy_id($sol->line_type);
   if (!empty($sd_doc_l->ar_transaction_type)) {
    $ar_ti->transaction_type = $sd_doc_l->ar_transaction_type;
+   $ar_tp_i = new ar_transaction_type();
+   $ar_tp_i->findBy_id($ar_ti->transaction_type);
+   $ar_ti->receivable_ac_id = $ar_tp_i->receivable_ac_id;
+   $ar_ti->revenue_ac_id = $ar_tp_i->revenue_ac_id;
+   $ar_ti->tax_code_id = $ar_tp_i->tax_ac_id;
   }
   $ar_ti->inv_line_price = $ar_ti->inv_line_quantity * $ar_ti->inv_unit_price;
   if (!empty($soh->exchange_rate)) {
