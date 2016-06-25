@@ -2,8 +2,7 @@
  <form  method="post" id="ar_receivable_activity"  name="ar_receivable_activity">
 
   <span class="heading"><?php
-   $f = new inoform();
-   echo gettext('Receipt Source')
+   echo gettext('Receivable Activity')
    ?></span>
 
   <div id="tabsHeader">

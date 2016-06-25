@@ -17,37 +17,38 @@ class ar_transaction_adjustment extends dbObject {
 
  public static $table_name = "ar_transaction_adjustment";
  public static $primary_column = "ar_transaction_adjustment_id";
- public static $key_column = 'wip_wo_routing_detail_id';
+ public static $key_column = 'ar_transaction_line_id';
  public static $parent_primary_column = "ar_transaction_header_id";
  public static $module = "ar";
  public static $system_info = [
-  'name' => 'Resource Transaction',
+  'name' => 'Transaction Adjustments',
   'number' => '2605',
-  'description' => 'Resource Transaction',
+  'description' => 'Transaction Adjustments',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
   'primary_entity_cb' => '',
-  'module_name' => 'wip',
+  'module_name' => 'ar',
   'weight' => 5
  ];
- public static $gl_journal_category = "WIP_RESOURCE";
+ public static $gl_journal_category = "AR_ADJUSTMENT";
 //  data base variables as stored database column name
  public $field_a = [
   'ar_transaction_adjustment_id',
-  'wip_wo_routing_line_id',
-  'wip_wo_routing_detail_id',
-  'wip_wo_header_id',
-  'org_id',
-  'transaction_type',
-  'transaction_date',
-  'transaction_quantity',
+  'ar_transaction_header_id',
+  'ar_receivable_activity_id',
+  'adjustment_amount',
+  'description',
+  'adjustment_date',
+  'adjustment_ac_id',
+  'ar_transaction_line_id',
   'reason',
-  'reference',
-  'scrap_account_id',
-  'sales_order_header_id',
-  'sales_order_line_id',
-  'gl_journal_header_id',
+  'status',
+  'line_source',
+  'reference_type',
+  'reference_key_name',
+  'reference_key_value',
+  'period_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -55,49 +56,26 @@ class ar_transaction_adjustment extends dbObject {
  ];
 //variables used for showing data
  public $initial_search = [
-  'ar_transaction_adjustment_id',
-  'wip_wo_header_id',
-  'org_id',
-  'wo_number',
-  'item_number',
-  'item_id_m'
- ];
- public $column = [
-  'ar_transaction_adjustment_id',
-  'wip_wo_header_id',
-  'org_id',
-  'wo_number',
-  'item_number',
-  'item_id_m',
-  'transaction_date',
-  'transaction_quantity'
- ];
- public $account = [
-  'scrap_account_id'
+  'ar_transaction_header_id',
+  'ar_receivable_activity_id',
  ];
  public $fields_inForm_notInDataBase = [
-  'remaining_quantity',
-  'item_id_m',
-  'item_number',
-  "item_description",
-  "uom",
-  'available_quantity',
-  'total_quantity',
-  'department_id'
+  'transaction_number',
+  'line_number',
+  'transaction_status'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   'org_id',
-  'transaction_type',
-  'transaction_date'
+  'ar_transaction_header_id'
  ];
  public $requiredField = [
-  'wip_wo_routing_line_id',
-  'wip_wo_routing_detail_id',
-  'wip_wo_header_id',
-  'org_id',
-  'transaction_type',
-  'transaction_date',
-  'transaction_quantity'
+  'ar_transaction_header_id',
+  'ar_receivable_activity_id',
+  'adjustment_amount',
+  'description',
+  'adjustment_date',
+  'adjustment_ac_id',
+  'ar_transaction_line_id',
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
@@ -106,47 +84,29 @@ class ar_transaction_adjustment extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Resource Trnx - WIP Work Order  Resource Transaction "; //page Title
- public $option_lists = [
-//		 'wip_wo_type' => 'WIP_WO_TYPE',
-//		 'wip_wo_status' => 'WIP_WO_STATUS',
- ];
+ public $pageTitle = "Transaction Adjustments"; //page Title
  public $ar_transaction_adjustment_id;
- public $wip_wo_header_id;
- public $wip_wo_routing_line_id;
- public $wip_wo_routing_detail_id;
- public $org_id;
- public $transaction_type;
- public $transaction_date;
- public $transaction_quantity;
+ public $ar_transaction_header_id;
+ public $ar_receivable_activity_id;
+ public $adjustment_amount;
+ public $description;
+ public $adjustment_date;
+ public $adjustment_ac_id;
+ public $ar_transaction_line_id;
  public $reason;
- public $reference;
- public $scrap_account_id;
- public $sales_order_header_id;
- public $sales_order_line_id;
+ public $status;
+ public $line_source;
+ public $reference_type;
+ public $reference_key_name;
+ public $reference_key_value;
+ public $period_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
- public $time;
- public $msg;
- public $remaining_quantity;
- public $item_description;
- public $uom;
- public $total_quantity;
- public $available_quantity;
- public $department_id;
- public $wo_number;
- public $item_number;
- public $item_id_m;
- public $routing_sequence;
- public $gl_journal_header_id;
-
- Public static function wip_transactions() {
-  $option_header = option_header::find_by_name('WIP_TRANSACTIONS');
-  $wip_transactions = option_line::find_by_option_id($option_header->option_header_id);
-  return $wip_transactions;
- }
+ public $transaction_number;
+ public $line_number;
+ public $transaction_status;
 
  private function _save_journal_header() {
   $inv = new inventory();
@@ -168,7 +128,6 @@ class ar_transaction_adjustment extends dbObject {
   $gjh->journal_name = $gjh->journal_category . '-' . $gjh->reference_key_value;
   $gjh->description = $gjh->journal_name . '-' . current_time();
   $gjh->balance_type = 'A';
-  $gjh->audit_trial();
   $gjh->save();
   $this->gl_journal_header_id = $gjh->gl_journal_header_id;
   echo "<br> The New Journal Header Id is " . $this->gl_journal_header_id;
@@ -194,7 +153,6 @@ class ar_transaction_adjustment extends dbObject {
    $new_gjl->reference_type = 'table';
    $new_gjl->reference_key_name = 'ar_transaction_adjustment_id';
    $new_gjl->reference_key_value = $this->ar_transaction_adjustment_id;
-   $new_gjl->audit_trial();
    $new_gjl->save();
   }
  }
@@ -253,7 +211,7 @@ class ar_transaction_adjustment extends dbObject {
   if (empty($this->$primary_column)) {
    $this->create();
   } else {
-   echo '<div class="message"> You are not allowed to update a completed move transaction!</div>';
+   echo '<div class="message"> You are not allowed to update a completed adjustment!</div>';
   }
   return $this->msg;
  }
