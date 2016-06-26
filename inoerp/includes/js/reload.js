@@ -534,6 +534,9 @@ $(document).ready(function () {
  $('#program_header .hideDiv_input').trigger('click');
 
 
-$.getScript( themeUrl + "/js/reload.js");
+if(themeUrl){
+ $.getScript( themeUrl + "/js/reload.js");
+}
+
 
 });

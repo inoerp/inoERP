@@ -909,14 +909,27 @@ AND content.content_id = category_reference.reference_id  ";
   $content_type = content_type::find_by_content_type($content_type_name);
   $extra_fields = new_content_type::find_fields_by_id($content_type->content_type_id);
   $content_field_array = self::$content_field_array;
+  $fiela_label_arr = [];
   foreach ($extra_fields as $records) {
    $content_field_array[] = $records->Field;
+   array_push($fiela_label_arr, $records->field_label);
   }
   $extra_content = self::content_find_by_contentTypeConentId($content_type_name, $content_id);
   if ($extra_content) {
    foreach ($content_field_array as $key => $value) {
-    if ($value != 'content_id') {
-     $content_statemnt .= ($extra_content->$value);
+    if (key_exists($key, $fiela_label_arr)) {
+     $field_label = $fiela_label_arr[$key];
+    } else {
+     $field_label = null;
+    }
+
+    if ($value != 'content_id' && !empty(trim($extra_content->$value))) {
+     if ($value == 'content') {
+      $content_statemnt .= ($extra_content->$value);
+     }else{
+      $content_statemnt .= '<h2 class="extra_content ' . $field_label . ' ">' . $field_label . '</h2>' . ($extra_content->$value);
+     }
+     
     }
    }
   }

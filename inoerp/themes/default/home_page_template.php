@@ -125,7 +125,7 @@ include_once("includes/functions/loader.inc");
 
       <div class="col-lg-8 col-md-8 col-sm-8 ">
        <div class="topmenu">
-        <div class="topbar-login ino_right_top"><?php ino_topbar_login();   ?></div>
+        <div class="topbar-login"><?php ino_topbar_login();   ?></div>
        </div><!-- end top menu -->
        <div class="callus">
         <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>

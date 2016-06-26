@@ -32,6 +32,9 @@ class ar_transaction_adjustment extends dbObject {
   'weight' => 5
  ];
  public static $gl_journal_category = "AR_ADJUSTMENT";
+ public static $transaction_type_a = [
+  'ADJ' => 'Adjustment'
+ ];
 //  data base variables as stored database column name
  public $field_a = [
   'ar_transaction_adjustment_id',
@@ -62,7 +65,8 @@ class ar_transaction_adjustment extends dbObject {
  public $fields_inForm_notInDataBase = [
   'transaction_number',
   'line_number',
-  'transaction_status'
+  'transaction_status',
+  'transaction_type'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   'org_id',
@@ -78,7 +82,7 @@ class ar_transaction_adjustment extends dbObject {
   'ar_transaction_line_id',
  ];
  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
+  'org_id' => 'org_bu_name_default',
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -107,6 +111,7 @@ class ar_transaction_adjustment extends dbObject {
  public $transaction_number;
  public $line_number;
  public $transaction_status;
+ public $transaction_type;
 
  private function _save_journal_header() {
   $inv = new inventory();

@@ -1519,11 +1519,6 @@ a.popup {
 ul.inline_action {
  margin-top: 5px;
 }
-/*ul.inline_action .fa, #form_line .fa{
- font-size: 16px;
- color: #768D38;
- margin: 2px;
-}*/
 
 ul.inline_action .fa, #form_line .fa{
  color: #768D38;
@@ -2573,4 +2568,12 @@ small, .small {
 #popup-window #erp_form_area{
  
  margin-top : 0 !important;
+}
+
+textarea{
+        border: 1px solid rgba(180, 180, 155, 0.37);
+}
+
+.add_detail_values_img{
+  margin-left : 10px;
 }

@@ -12,9 +12,7 @@ td.search_result.action{
     display: inline-block;
 }
 
-#search_result th:first-child{
-    width: 30px;
-}
+
 
 #search_result th:nth-child(2){
     min-width: 120px;

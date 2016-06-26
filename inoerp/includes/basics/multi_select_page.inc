@@ -43,7 +43,7 @@ if (!empty($msg)) {
   classSave.saveMain(beforeSave);
 
  });</script>
-<div id="erp_form_area">
+<div id="erp_form_area_ms">
  <div id="multi_select"><span class="heading">
    <span class="heading"><?php echo ucwords(str_replace('_', ' ', $action_message)) . ' - ' . ucwords(str_replace('_', ' ', $class)); ?></span>
    <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
