@@ -54,7 +54,12 @@ if ($continue) {
    $_SESSION['recent_visit'][$request_class_name] = $current_url;
   }
  } else {
-  $_SESSION['recent_visit'][$_SERVER['QUERY_STRING']] = $current_url;
+  if(isset($_SERVER['QUERY_STRING'])){
+   $_SESSION['recent_visit'][$_SERVER['QUERY_STRING']] = $current_url;
+  }else{
+   $_SESSION['recent_visit']['QUERY_STRING'] = $current_url;
+  }
+  
  }
 
  /*
@@ -166,7 +171,7 @@ if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" || $_GET['per_page'
 $per_page = empty($per_page) ? 10 : $per_page;
 $search_order_by = !(empty($_GET['search_order_by'])) ? $_GET['search_order_by'] : '';
 $search_asc_desc = !(empty($_GET['search_asc_desc'])) ? $_GET['search_asc_desc'] : '';
-$query_string = $_SERVER['QUERY_STRING'];
+$query_string = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
 
 /*
   ---------------------------------------------------------------------------------------------------------------
@@ -204,7 +209,7 @@ if ((!empty($class_names)) && (!(is_array($class_names)))) {
 
 
 //add comment class for all if not POST
-if (empty($_POST)) {
+if (empty($_POST) && !in_array('comment', $class_names)) {
  array_push($class_names, 'comment');
 }
 
@@ -222,21 +227,25 @@ if (($continue) && (!empty($class_names))) {
    }
   }
 
+  //	$table_name = $class;
+  if (class_exists($class)) {
+   $$class = new $class;
+  } else if ($class =='index') {
+   $continue = false;
+   return;
+  }else{
+      $class = 'user_dashboard_v';
+   $class_names[0] = $class;
+   $$class = new $class;
+  }
+
   $module = property_exists($class, 'module') ? $class::$module : 'module';
   $primary_column = property_exists($class, 'primary_column') ? $class::$primary_column : false;
   $primary_column2 = property_exists($class, 'primary_column2') ? $class::$primary_column2 : false;
   $primary_column3 = property_exists($class, 'primary_column3') ? $class::$primary_column3 : false;
   $key_field = property_exists($class, 'key_column') ? $class::$key_column : $class . '_id';
   $table_name = property_exists($class, 'table_name') ? $class::$table_name : $class;
-//	$table_name = $class;
-  if (class_exists($class)) {
-   $$class = new $class;
-  } else {
-   $continue = false;
-   return;
-//   pa(get_declared_classes());
-//   redirect_to(HOME_URL);
-  }
+
 
   if (property_exists($class, 'field_a')) {
    if ((empty($$class->field_a))) {
@@ -253,7 +262,7 @@ if (($continue) && (!empty($class_names))) {
   if (empty($_POST)) {
    $class_id = property_exists($class, 'primary_column') ? $class::$primary_column : $table_name . '_id';
    if (!empty($_GET[$class_id])) {
-    $class_id_value = $_GET[$class_id];
+     $class_id_value = filter_var($_GET[$class_id], FILTER_SANITIZE_NUMBER_INT);
     $verify_web_form_allowed = false;
    } else {
     $class_id_value = null;
@@ -652,6 +661,9 @@ if ($continue && !empty($form_page)) {
    $template_file_names = [$custom_template_name];
   } else {
    $template_file_names = glob($fdir . DS . "*_template.php");
+   if(empty($template_file_names)){
+    $template_file_names = [THEME_DIR . '/template/default_template.inc'];
+   }
   }
  }
 } else {

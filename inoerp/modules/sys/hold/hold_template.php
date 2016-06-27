@@ -12,7 +12,8 @@
      <div id="tabsHeader-1" class="tabContent">
        <ul class="column header_field"> 
         <li><?php $f->l_text_field_dr_withSearch('sys_hold_id') ?>
-         <a name="show" href="form.php?class_name=sys_hold&<?php echo "mode=$mode"; ?>" class="show document_id sys_hold_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+         <a name="show" href="form.php?class_name=sys_hold&<?php echo "mode=$mode"; ?>" class="show document_id sys_hold_id">
+          <i class="fa fa-refresh"></i></a> 
         </li>
         <li><?php $f->l_text_field_dm('hold_name'); ?> 					</li>
         <li><?php $f->l_text_field_dm('hold_code'); ?> 					</li>

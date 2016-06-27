@@ -328,7 +328,7 @@ if (!empty($extension)) {
 		 }
 		} else {
 		 	 $required_field_flag = 0;
-		 $newMsg = 'Two differnt passwords are entered';
+		 $newMsg = 'Two different passwords are entered';
 		 array_push($msg, $newMsg);
 		}
 	 }

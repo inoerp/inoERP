@@ -141,14 +141,8 @@ class block extends dbObject {
  public $content;
  public $content_php_cb;
 
- public function __set($name, $value) {
-  $this->$name = $value;
- }
-
  public function _before_save() {
-  pa($this);
   $vis_a = explode(chr(10), base64_decode($this->visibility));
-  pa($vis_a);
  }
 
  public function _after_save() {
@@ -167,7 +161,6 @@ class block extends dbObject {
     $block_content->block_content_id = $_POST['block_content_id'][0];
    }
    $block_content->audit_trial();
-   pa($block_content);
    try {
     $block_content->save();
     echo "<br>Block content is sucesfully saved";
@@ -456,7 +449,7 @@ class block extends dbObject {
 
 }
 
-$block = new block();
-$blk = & $block;
+$block1 = new block();
+$blk = & $block1;
 //end of block class
 ?>

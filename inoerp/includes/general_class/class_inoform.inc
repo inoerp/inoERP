@@ -233,6 +233,104 @@ class inoform {
  public $data_arrOfObjs;
  public $action_message = 'Comments';
  public $column_array_s;
+ public static $time_a = [
+  '00:00:00' => '12:00 AM',
+  '00:15:00' => '12:15 AM',
+  '00:30:00' => '12:30 AM',
+  '00:45:00' => '12:45 AM',
+  '01:00:00' => '1:00 AM',
+  '01:15:00' => '1:15 AM',
+  '01:30:00' => '1:30 AM',
+  '01:45:00' => '1:45 AM',
+  '02:00:00' => '2:00 AM',
+  '02:15:00' => '2:15 AM',
+  '02:30:00' => '2:30 AM',
+  '02:45:00' => '2:45 AM',
+  '03:00:00' => '3:00 AM',
+  '03:15:00' => '3:15 AM',
+  '03:30:00' => '3:30 AM',
+  '03:45:00' => '3:45 AM',
+  '04:00:00' => '4:00 AM',
+  '04:15:00' => '4:15 AM',
+  '04:30:00' => '4:30 AM',
+  '04:45:00' => '4:45 AM',
+  '05:00:00' => '5:00 AM',
+  '05:15:00' => '5:15 AM',
+  '05:30:00' => '5:30 AM',
+  '05:45:00' => '5:45 AM',
+  '06:00:00' => '6:00 AM',
+  '06:15:00' => '6:15 AM',
+  '06:30:00' => '6:30 AM',
+  '06:45:00' => '6:45 AM',
+  '07:00:00' => '7:00 AM',
+  '07:15:00' => '7:15 AM',
+  '07:30:00' => '7:30 AM',
+  '07:45:00' => '7:45 AM',
+  '08:00:00' => '8:00 AM',
+  '08:15:00' => '8:15 AM',
+  '08:30:00' => '8:30 AM',
+  '08:45:00' => '8:45 AM',
+  '09:00:00' => '9:00 AM',
+  '09:15:00' => '9:15 AM',
+  '09:30:00' => '9:30 AM',
+  '09:45:00' => '9:45 AM',
+  '10:00:00' => '10:00 AM',
+  '10:15:00' => '10:15 AM',
+  '10:30:00' => '10:30 AM',
+  '10:45:00' => '10:45 AM',
+  '11:00:00' => '11:00 AM',
+  '11:15:00' => '11:15 AM',
+  '11:30:00' => '11:30 AM',
+  '11:45:00' => '11:45 AM',
+  '12:00:00' => '12:00 PM',
+  '12:15:00' => '12:15 PM',
+  '12:30:00' => '12:30 PM',
+  '12:45:00' => '12:45 PM',
+  '13:00:00' => '1:00 PM',
+  '13:15:00' => '1:15 PM',
+  '13:30:00' => '1:30 PM',
+  '13:45:00' => '1:45 PM',
+  '14:00:00' => '2:00 PM',
+  '14:15:00' => '2:15 PM',
+  '14:30:00' => '2:30 PM',
+  '14:45:00' => '2:45 PM',
+  '15:00:00' => '3:00 PM',
+  '15:15:00' => '3:15 PM',
+  '15:30:00' => '3:30 PM',
+  '15:45:00' => '3:45 PM',
+  '16:00:00' => '4:00 PM',
+  '16:15:00' => '4:15 PM',
+  '16:30:00' => '4:30 PM',
+  '16:45:00' => '4:45 PM',
+  '17:00:00' => '5:00 PM',
+  '17:15:00' => '5:15 PM',
+  '17:30:00' => '5:30 PM',
+  '17:45:00' => '5:45 PM',
+  '18:00:00' => '6:00 PM',
+  '18:15:00' => '6:15 PM',
+  '18:30:00' => '6:30 PM',
+  '18:45:00' => '6:45 PM',
+  '19:00:00' => '7:00 PM',
+  '19:15:00' => '7:15 PM',
+  '19:30:00' => '7:30 PM',
+  '19:45:00' => '7:45 PM',
+  '20:00:00' => '8:00 PM',
+  '20:15:00' => '8:15 PM',
+  '20:30:00' => '8:30 PM',
+  '20:45:00' => '8:45 PM',
+  '21:00:00' => '9:00 PM',
+  '21:15:00' => '9:15 PM',
+  '21:30:00' => '9:30 PM',
+  '21:45:00' => '9:45 PM',
+  '22:00:00' => '10:00 PM',
+  '22:15:00' => '10:15 PM',
+  '22:30:00' => '10:30 PM',
+  '22:45:00' => '10:45 PM',
+  '23:00:00' => '11:00 PM',
+  '23:15:00' => '11:15 PM',
+  '23:30:00' => '11:30 PM',
+  '23:45:00' => '11:45 PM',
+ ];
 
  public static function form_button_withImage_new1($current_page_path = "", $homeUrl = '') {
   $home_url_wos = rtrim(HOME_URL, '/');
@@ -264,6 +362,7 @@ EOD;
         <li><a class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></a></li>
         <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
         <li class='fa fa-remove clickable' id='remove_row_button' title='Remove'></li>
+        <li class='fa fa-search-plus clickable query_mode_icon' id='start_query_mode' title='Query Mode'></li>
         <li class='fa fa-print clickable print' id='print_searchResult' title='Print'></li>
 </ul>
 EOD;
@@ -309,6 +408,11 @@ EOD;
   $value = htmlentities($value);
   $element_hidden_field = "<input type=\"hidden\" name=\"$bracketName\" value=\"$value\" class=\"hidden $name\" >";
   return $element_hidden_field;
+ }
+
+ public function hidden_field_d($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo $this->hidden_field($field_name, $$class->$field_name);
  }
 
  public function hidden_field_withId($name, $value) {
@@ -357,16 +461,24 @@ EOD;
   if (empty($value)) {
    return;
   }
+  $attachment_statement = '';
   $file = file::find_by_id($value);
-  if (empty($file)) {
+    if (empty($file)) {
    return;
   }
-  $attachment_statement = "<div class=\"existing-image \">";
-  $attachment_statement .= '<img class="img ' . $div_class . '" src="' . HOME_URL . $file->file_path . $file->file_name . '"/>';
-  if ($full_size_on_hover) {
-   $attachment_statement .= '<img class="img img-medium hidden-image' . '" src="' . HOME_URL . $file->file_path . $file->file_name . '"/>';
+  $file_path = HOME_URL . $file->file_path . $file->file_name;
+  $file_path_internal = HOME_DIR . DS. $file->file_path . $file->file_name;
+
+ if (file_exists($file_path_internal)) {
+   $attachment_statement .= "<div class=\"existing-image \">";
+   $attachment_statement .= '<img class="img ' . $div_class . '" src="' . $file_path . '"/>';
+   if ($full_size_on_hover) {
+    $attachment_statement .= '<img class="img img-medium hidden-image' . '" src="' . $file_path . '"/>';
+   }
+   $attachment_statement .= "</div>";
   }
-  $attachment_statement .= "</div>";
+  
+
   return $attachment_statement;
  }
 
@@ -686,10 +798,10 @@ EOD;
   $contact_stmt = '<div>
       <ul id="new_contact_reference">
        <li class="new_object1">
-        <label><i class="fa fa-search extn_contact_id select_popup clickable" ></i> Associate Contact : </label> ';
+        <label>Associate Contact </label> ';
   $contact_stmt .= $this->hidden_field_withCLass('extn_contact_id_new', '', 'extn_contact_id');
-  $contact_stmt .= $this->text_field('contact_name_new', '', '20', '', 'select_contact contact_name');
-  $contact_stmt .=' </li>
+  $contact_stmt .= $this->val_field('contact_name_new', '', '20', '', 'select_contact contact_name', '', '', 'extn_contact', 'contact_name');
+  $contact_stmt .='<i class="extn_contact_id select_popup clickable fa fa-search" data-class_name="extn_contact"></i> </li>
 <li class="clickable" id="add_new_contact" title="New contact reference field"><i class="fa fa-plus-circle"></i></li>
 </ul>
 </div>';
@@ -784,6 +896,16 @@ EOD;
   echo $this->val_field($field_name, $$class_third->$field_name, '20', 1, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
  }
 
+ public function val_field_wid4($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_fourth, $$class_fourth;
+  echo $this->val_field($field_name, $$class_fourth->$field_name, '20', '', $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
+ public function val_field_wid4m($field_name, $val_field_n, $val_field_v, $dependent_field, $div_class = "") {
+  global $class_fourth, $$class_fourth;
+  echo $this->val_field($field_name, $$class_fourth->$field_name, '20', 1, $div_class, '', $this->readonly, $val_field_n, $val_field_v, $dependent_field);
+ }
+
  public function l_text_field_d($field_name, $div_class = "") {
   global $readonly, $class, $$class;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
@@ -865,7 +987,7 @@ EOD;
   global $readonly, $class, $$class;
   $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
   $search_class_gt = gettext($search_class);
-  echo '<label class="big_popover">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label class="big_popover">' . gettext(ucwords(str_replace(['_', 'id'], [' ', ''], $field_name))) . '</label>';
   echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
                                                                   title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .
@@ -1490,6 +1612,17 @@ EOD;
   return $element_text_field;
  }
 
+ public function text_area_d($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo $this->text_area($field_name, $$class->$field_name, '10', $field_name, $field_name . ' ' . $div_class, '', $this->readonly, '', '', '40');
+ }
+
+ public function l_text_area_d($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label class="text_area_label">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->text_area($field_name, $$class->$field_name, '6', $field_name, $field_name . ' text_area_d ' . $div_class, '', $this->readonly, '', '', '40');
+ }
+
  public function text_area_ap($array) {
   $name = array_key_exists('name', $array) ? $array['name'] : null;
   $value = array_key_exists('value', $array) ? $array['value'] : null;
@@ -1525,11 +1658,17 @@ EOD;
   return $element_text_field;
  }
 
- public function date_field($name, $value, $size = "20", $id = "", $div_class = "", $required = "", $readonly = "") {
+ public function date_field($name, $value, $size = "20", $id = "", $div_class = "", $required = "", $readonly = "", $with_time = '') {
   if ($readonly == 1) {
    $readonly = 'readonly';
   } else {
    $readonly = '';
+  }
+
+  if ($with_time == 1) {
+   $with_time = 'date_with_time';
+  } else {
+   $with_time = '';
   }
 
   if ($required == 1) {
@@ -1546,7 +1685,7 @@ EOD;
    $idvalue = "";
   }
   $element_date_field = "<input type=\"text\" name=\"$bracketName\" value=\"$value\" 	size=\"$size\" "
-   . "class=\"date $div_class $readonly $name copy copyValue\"  $required $readonly $idvalue>";
+   . "class=\"date $with_time $div_class $readonly $name copy copyValue\"  $required $readonly $idvalue>";
   return $element_date_field;
  }
 
@@ -1619,6 +1758,12 @@ EOD;
   echo $this->date_field($name, $value, '20', '', 'anyDate');
  }
 
+ public function l_date_fieldAnyDay_withTime($name, $value, $div_class = '') {
+  $div_class = $div_class . ' anyDate';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->date_field($name, $value, '20', '', 'anyDate', '', '', 1);
+ }
+
  public function l_date_fieldAnyDay_r($name, $value, $div_class = '') {
   $div_class = $div_class . ' anyDate';
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
@@ -1629,6 +1774,12 @@ EOD;
   $div_class = $div_class . ' anyDate';
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->date_field($name, $value, '20', '', 'anyDate', 1);
+ }
+
+ public function l_date_fieldAnyDay_withTime_m($name, $value, $div_class = '') {
+  $div_class = $div_class . ' anyDate';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->date_field($name, $value, '20', '', 'anyDate', 1, '', 1);
  }
 
  public function date_fieldAnyDay_r($name, $value, $readonly) {
@@ -1807,7 +1958,13 @@ EOD;
     $element_select_field .= '<option value="' . $record->$objectValueKey . '" ';
     $element_select_field .= $selected;
     if (!empty($dataname)) {
-     $element_select_field .= " data-$dataname='" . $record->$dataname . "' ";
+     if (is_array($dataname)) {
+      foreach ($dataname as $dataname_k => $dataname_v) {
+       $element_select_field .= " data-$dataname_v='" . $record->$dataname_v . "' ";
+      }
+     } else {
+      $element_select_field .= " data-$dataname='" . $record->$dataname . "' ";
+     }
     }
     $element_select_field .= '>';
     if (is_array($objectDescriptionKey)) {

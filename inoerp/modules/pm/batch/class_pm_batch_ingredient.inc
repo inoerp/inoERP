@@ -33,11 +33,12 @@ class pm_batch_ingredient extends dbObject {
   'byproduct_type',
   'consumption_type',
   'phantom_type',
-  'required_quantity',
+  'allocated_quantity',
   'actual_quantity',
   'requirement_date',
   'subinventory_id',
   'locator_id',
+  'step_no',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -53,30 +54,30 @@ class pm_batch_ingredient extends dbObject {
   'pm_batch_header_id',
   'item_id_m'
  ];
-public $pm_batch_ingredient_id;
-public $pm_batch_header_id;
-public $line_no;
-public $revision_name;
-public $item_id_m;
-public $uom_id;
-public $planned_quantity;
-public $description;
-public $wip_planned_quantity;
-public $scale_type;
-public $contribute_yield_cb;
-public $byproduct_type;
-public $consumption_type;
-public $phantom_type;
-public $required_quantity;
-public $actual_quantity;
-public $requirement_date;
-public $subinventory_id;
-public $locator_id;
-public $created_by;
-public $creation_date;
-public $last_update_by;
-public $last_update_date;
-
+ public $pm_batch_ingredient_id;
+ public $pm_batch_header_id;
+ public $line_no;
+ public $revision_name;
+ public $item_id_m;
+ public $uom_id;
+ public $planned_quantity;
+ public $description;
+ public $wip_planned_quantity;
+ public $scale_type;
+ public $step_no;
+ public $contribute_yield_cb;
+ public $byproduct_type;
+ public $consumption_type;
+ public $phantom_type;
+ public $allocated_quantity;
+ public $actual_quantity;
+ public $requirement_date;
+ public $subinventory_id;
+ public $locator_id;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
 
  public static function find_allLine_byHeaderId($header_id) {
   $sql = " SELECT 
@@ -97,6 +98,29 @@ and pfi.pm_batch_header_id = '{$header_id}'
 
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? $result_array : false;
+ }
+
+ public static function find_all_lines_for_trnx_by_headerId($header_id) {
+  $sql = "SELECT
+pbi.pm_batch_ingredient_id,   pbi.pm_batch_header_id, pbi.line_no, pbi.step_no, pbi.item_id_m, pbi.uom_id, pbi.planned_quantity,
+pbi.actual_quantity, pbi.subinventory_id, pbi.locator_id, item.item_number,
+item.item_description, item.lot_generation, item.serial_generation,
+pbh.org_id, pbh.wip_accounting_group_id
+
+from pm_batch_ingredient pbi,
+item,
+pm_batch_header pbh
+
+WHERE pbi.item_id_m = item.item_id_m
+AND item.item_id = item.item_id_m
+AND pbh.pm_batch_header_id = pbi.pm_batch_header_id
+AND pbi.pm_batch_header_id='{$header_id}'
+ "
+  ;
+
+  $result = self::find_by_sql($sql);
+
+  return !empty($result) ? $result : '';
  }
 
 }

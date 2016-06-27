@@ -67,7 +67,7 @@ function autoLoadAll($className) {
   default :
    break;
  }
-//echo $filename;
+//echo '<br>'. $filename;
  if (!empty($filename) && is_readable($filename)) {
   require $filename;
  }
@@ -250,7 +250,49 @@ function ino_validate_num($num) {
  }
 }
 
+function ino_getUserName_from_email($email) {
+ $email_a = explode('@', $email);
+ return $email_a[0];
+}
+
 function getBreadCrumb($class_first) {
+ global $$class_first;
+ if (property_exists($class_first, 'module') && !property_exists($class_first, 'dont_show_bread_crum')) {
+  if (!empty($$class_first) && is_object($$class_first) && method_exists($$class_first, 'module_code')) {
+   $module_name = call_user_func(array($$class_first, 'module_code'));
+  } else {
+   $module_name = $class_first::$module;
+  }
+
+  if (isset(user_dashboard_v::$icon_stmt_a[$module_name])) {
+   $module_icon = user_dashboard_v::$icon_stmt_a[$module_name];
+   $module_name_c = '<i class="fa ' . $module_icon['div_class'] . '"></i>';
+   $module_description = ucwords($module_icon['description']);
+  } else {
+   $module_name_c = '<i class="fa fa-backward"></i>';
+   $module_description = null;
+//   $module_line = option_line::find_by_optionId_lineCode('182', $module_name);
+//   if ($module_line) {
+//    $module_description = ucwords($module_line->description);
+//   } else {
+//    $module_description = ucwords($module_name);
+//   }
+  }
+
+  $form_bread_crum = '<ul class="btn-group-vertical vertical-list imp-link ino-breadcrumb-simple" role="group" aria-label="...">';
+  $form_bread_crum .= '<li title="Close This Form" ><j  class="ajax-link ino-close-form clickable " ><i class="fa fa-remove"></i> </j></li>';
+  $form_bread_crum .= '<li title="Minimize This Form" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable " ><i class="fa fa-minus"></i></j></li>';
+  $form_bread_crum .= "<li title=\"Navigate to Dashboard\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"><i class="fa fa-dashboard"></i> </a></li>';
+  $form_bread_crum .= '<li title="Navigate to ' . $module_description . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . $module_name_c . ' </a></li>';
+
+  $form_bread_crum .= '</ul>';
+  return $form_bread_crum;
+ } else {
+  return false;
+ }
+}
+
+function xx_getBreadCrumb($class_first) {
  global $$class_first;
  if (property_exists($class_first, 'module') && !property_exists($class_first, 'dont_show_bread_crum')) {
   if (!empty($$class_first) && is_object($$class_first) && method_exists($$class_first, 'module_code')) {
@@ -271,6 +313,10 @@ function getBreadCrumb($class_first) {
   $form_bread_crum .= "<li title=\"My Dashboard\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"> Dashboard </a></li>';
   $form_bread_crum .= '<li> &nbsp;&nbsp;<i class="fa fa-angle-double-right"></i> &nbsp;&nbsp;</li>';
   $form_bread_crum .= '<li title="' . $module_description . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">&nbsp; ' . $module_name_c . ' </a></li>';
+  $form_bread_crum .= '<li> &nbsp;&nbsp;<i class="fa fa-pause"></i> &nbsp;&nbsp;</li>';
+  $form_bread_crum .= '<li title="Close This Form" ><j  class="ajax-link ino-close-form clickable ino-nav-btn" > Close &nbsp; <i class="fa fa-file-o"></i> </j></li>';
+  $form_bread_crum .= '<li> &nbsp;&nbsp;<i class="fa fa-angle-double-right"></i> &nbsp;&nbsp;</li>';
+  $form_bread_crum .= '<li title="Minimize This Form" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable ino-nav-btn" > Minimize &nbsp; <i class="fa fa-file-o"></i></j></li>';
   $form_bread_crum .= '</ul>';
   return $form_bread_crum;
  } else {
@@ -615,8 +661,8 @@ function thisPage_url() {
 
 function select_per_page($per_page = '10') {
  $link = $_SERVER['PHP_SELF'] . '?';
- $content_string = '<div class="noOfcontents">';
- $content_string .= 'Show<select name="per_page" class="per_page small">';
+ $content_string = '<div class="noOfcontents " >';
+ $content_string .= '<select name="per_page" class="per_page small">';
  $content_string .= '<option value="3" ';
  $content_string .= ( $per_page == 3) ? ' selected > 3 </option>' : ' > 3 </option>';
  $content_string .= '<option value="5" ';
@@ -629,9 +675,9 @@ function select_per_page($per_page = '10') {
  $content_string .= ( $per_page == 50) ? ' selected > 50 </option>' : '> 50 </option>';
  $content_string .= '<option value="200" ';
  $content_string .= ( $per_page == 200) ? ' selected > 200 </option>' : '> 200 </option>';
- $content_string .= '</select>';
+ $content_string .= '</select>&nbsp;';
  $content_string .= '<a name="content_per_page" '
-  . 'href="' . $link . '" class="content_per_page button">Per Page</a>';
+  . 'href="' . $link . '" class="content_per_page">Per Page</a>';
  $content_string .= '</div>';
  return $content_string;
 }
@@ -701,6 +747,11 @@ function ino_eval($string) {
  $evaled_string = ob_get_contents();
  ob_end_clean();
  return $evaled_string;
+}
+
+function ino_validateDate($date) {
+ $d = DateTime::createFromFormat('Y-m-d', $date);
+ return $d && $d->format('Y-m-d') === $date;
 }
 
 //function ino_eval($string) {
@@ -1112,10 +1163,28 @@ function search_inv_count_entry_status() {
  return $f->select_field_from_array('status', inv_count_schedule::$status_a, '');
 }
 
-function search_depreciation_id() {
+function xxsearch_depreciation_id() {
  $stmt = '<input id="fa_depreciation_header_id" class="number fa_depreciation_header_id"  required type="text" value=" " name="fa_depreciation_header_id[]">
 <img class="fa_depreciation_header_id select_popup clickable" src="http://localhost/inoerp/themes/images/serach.png" style="display: inline-block;">';
 
+ return $stmt;
+}
+
+function search_depreciation_id() {
+ $stmt = '<input id="fa_depreciation_header_id" class="val_field textfield vf_fa_depreciation_header_id fa_depreciation_header_id" 
+                type="text" data-toggle="tooltip" title="Select fa_depreciation_header_id" data-val_field="fa_depreciation_header" data-val_value="fa_depreciation_header_id" 
+                size="20" value="" name="fa_depreciation_header_id">
+<i class="generic g_select_fa_depreciation_header_id select_popup clickable fa fa-search" data-class_name="fa_depreciation_header" style="display: inline-block;"></i>';
+//<input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
+ return $stmt;
+}
+
+function search_depreciation_description() {
+ $stmt = '<input id="description" class="val_field textfield vf_fa_depreciation_header_id description" 
+                type="text" data-toggle="tooltip" title="Select description" data-val_field="fa_depreciation_header" data-val_value="description" 
+                size="20" value="" name="description">
+<i class="generic g_select_fa_depreciation_header_id select_popup clickable fa fa-search" data-class_name="fa_depreciation_header" style="display: inline-block;"></i>';
+//<input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
  return $stmt;
 }
 
@@ -1132,7 +1201,7 @@ function search_asset_book() {
 //}
 
 function search_depreciation_period() {
- $stmt = '<input id="gl_period_id" class="number gl_period_id"  required type="text" value=" " name="gl_period_id[]">';
+ $stmt = '<input id="gl_period_id" class="number gl_period_id"  type="text" value=" " name="gl_period_id[]">';
  return $stmt;
 }
 
@@ -1590,6 +1659,18 @@ function show_download_button_inSelectFormat($result_data_query, $total_count = 
  return $return_stmt;
 }
 
+function ino_include_css() {
+ $stmt = '';
+ $stmt .= '<link href="' . HOME_URL . 'misc/ecss/pdf_print.css" rel="stylesheet">';
+ $stmt .= '<link href="' . HOME_URL . 'tparty/bootstrap/css/bootstrap.css" rel="stylesheet">';
+ $stmt .= '<link href="' . HOME_URL . 'tparty/bootstrap/css/style.css" rel="stylesheet">';
+ $stmt .= '<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic" rel="stylesheet" type="text/css">';
+ $stmt .= '<link href="https://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900" rel="stylesheet" type="text/css">';
+ $stmt .= '<link href="https://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900" rel="stylesheet" type="text/css">';
+
+ return $stmt;
+}
+
 function xxshow_download_button_inSelectFormat($result_data, $total_count = 0, $total_count_all = 0) {
  global $f;
  $return_stmt = '<div id="searchResultMessages">';
@@ -1653,7 +1734,7 @@ function array2text(array &$array) {
  return ob_get_clean();
 }
 
-function array2pdf(array &$array, $print_in_browser = true) {
+function array2pdf_list(array &$array, $print_in_browser = true) {
  if (count($array) == 0) {
   return null;
  }
@@ -1667,6 +1748,40 @@ function array2pdf(array &$array, $print_in_browser = true) {
   }
   $html .= '<br><br>';
  }
+
+ ob_start();
+ // send the captured HTML from the output buffer to the mPDF class for processing
+ $mpdf->WriteHTML($html);
+ if ($print_in_browser) {
+  download_send_headers("search_record" . date("Y-m-d") . ".pdf", 'pdf_format');
+ }
+ echo $mpdf->Output();
+ return ob_get_clean();
+}
+
+function array2pdf(array &$array, $print_in_browser = true) {
+ if (count($array) == 0) {
+  return null;
+ }
+ include(dirname(__FILE__) . "/../../tparty/mpdf/mpdf.php");
+ $mpdf = new mPDF('c');
+
+ $html = '<!doctype html><html><head>' . ino_include_css() . '</head><body>';
+ $html .= '<table id="pdf-print-tbl" class="table table-bordered">';
+ $array_1 = $array[0];
+ $html .= '<tr>';
+ foreach ($array_1 as $key_1 => $value_1) {
+  $html .= '<th>' . ucwords(str_replace('_', ' ', $key_1)) . ' </th>';
+ }
+ $html .= '</tr>';
+ foreach ($array as $data) {
+  $html .= '<tr>';
+  foreach ($data as $key => $value) {
+   $html .= "<td> $value </td>";
+  }
+  $html .= '</tr>';
+ }
+ $html .= '</table></body></html>';
 
  ob_start();
  // send the captured HTML from the output buffer to the mPDF class for processing
@@ -1737,6 +1852,7 @@ function download_send_headers($filename, $download_format = 'text_format') {
    break;
 
   case 'pdf_format':
+  case 'pdf_format_list':
    header("Content-type:application/pdf");
    break;
 
@@ -1960,6 +2076,18 @@ function ino_filter_form() {
    <button title="Remove Filter" class="btn btn-default btn-sm remove-filter"><i class="fa fa-remove text-muted"></i></button>
   </div>
  </div>
+    <div class="sorted_elements_asc">
+    <div class="btn-group">
+     <button title="Edit Sort" class="btn btn-default btn-sm toggle-sort-asc"><i class="fa fa-sort-alpha-asc"></i></button>
+     <button title="Remove Sort" class="btn btn-default btn-sm remove-sort-asc"><i class="fa fa-remove text-muted"></i></button>
+    </div>
+   </div>
+       <div class="sorted_elements_desc">
+    <div class="btn-group">
+     <button title="Edit Sort" class="btn btn-default btn-sm toggle-sort-desc"><i class="fa fa-sort-alpha-desc"></i></button>
+     <button title="Remove Sort" class="btn btn-default btn-sm remove-sort-desc"><i class="fa fa-remove text-muted"></i></button>
+    </div>
+   </div>
  ';
  // <button class="button btn btn-warning remove-filter" type="submit"  name="removeFilter">Remove</button>  
  return $ino_filter_form;
@@ -2052,6 +2180,134 @@ function update_htaccessFile() {
  fclose($hta_file);
  fclose($write_file);
  return $return;
+}
+
+function ino_showField_from_details_a($arr) {
+ global $f, $class, $$class;
+ $f = new inoform();
+ $ret_stmt = '';
+
+ switch ($arr['field_function']) {
+  case 'l_text_field_d':
+   $ret_stmt = $f->l_text_field_d($arr['name']);
+   break;
+
+  case 'hidden_field_d':
+   $val_f = isset($arr['function_parameters'][0]) ? $arr['function_parameters'][0] : null;
+   $ret_stmt = $f->hidden_field_d($arr['name'], $val_f);
+   break;
+
+  case 'l_checkBox_field_d':
+   $ret_stmt = $f->l_checkBox_field_d($arr['name']);
+   break;
+
+  case 'text_area':
+   echo $f->l_text_area_d($arr['name']);
+   break;
+
+  case 'l_val_field_d':
+   $val_field_n = isset($arr['function_parameters'][0]) ? $arr['function_parameters'][0] : null;
+   $val_field_v = isset($arr['function_parameters'][1]) ? $arr['function_parameters'][1] : null;
+   $val_field_value = isset($arr['function_parameters'][2]) ? $arr['function_parameters'][2] : null;
+   $dependent_field = isset($arr['function_parameters'][3]) ? $arr['function_parameters'][3] : null;
+   $div_class = isset($arr['function_parameters'][4]) ? $arr['function_parameters'][4] : null;
+   $ret_stmt = $f->l_val_field_d($val_field_n, $val_field_v, $val_field_value, '', $div_class);
+   $ret_stmt = '<i class="generic select_popup clickable fa fa-search" data-class_name="' . $val_field_v . '"></i>';
+   break;
+
+  case 'l_select_field_from_array':
+   $f_name = isset($arr['function_parameters'][0]) ? $arr['function_parameters'][0] : null;
+   $f_arr = isset($arr['function_parameters'][1]) ? $arr['function_parameters'][1] : null;
+   $f_val = isset($arr['function_parameters'][2]) ? $arr['function_parameters'][2] : null;
+   $f_id = isset($arr['function_parameters'][3]) ? $arr['function_parameters'][3] : null;
+   $f_class = isset($arr['function_parameters'][4]) ? $arr['function_parameters'][3] : null;
+   $f_req = isset($arr['function_parameters'][5]) ? $arr['function_parameters'][5] : null;
+   $f_radonly = isset($arr['function_parameters'][6]) ? $arr['function_parameters'][6] : null;
+   $f_val_i = property_exists($$class, $f_val) ? $$class->$f_val : ' ';
+   $ret_stmt = $f->l_select_field_from_array($f_name, $f_arr, $f_val_i, $f_id, $f_class, $f_req, $f_radonly);
+   break;
+
+  default:
+   $ret_stmt = $f->l_text_field_d($arr['name']);
+   break;
+ }
+ echo $ret_stmt;
+}
+
+function ino_upload_error_msg($msg_code) {
+ $rtn_msg = '';
+ switch ($msg_code) {
+  case '1':
+   $rtn_msg .= 'Code : UPLOAD_ERR_INI_SIZE ';
+   $rtn_msg .= '<br>The uploaded file exceeds the upload_max_filesize directive in php.ini.';
+   break;
+
+  case '1':
+   $rtn_msg .= 'Code : UPLOAD_ERR_INI_SIZE ';
+   $rtn_msg .= '<br>The uploaded file exceeds the upload_max_filesize directive in php.ini.';
+   break;
+
+  case '2':
+   $rtn_msg .= 'Code : UPLOAD_ERR_FORM_SIZE ';
+   $rtn_msg .= '<br>The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.';
+   break;
+
+  case '3':
+   $rtn_msg .= 'Code : UPLOAD_ERR_PARTIAL ';
+   $rtn_msg .= '<br>The uploaded file was only partially uploaded.';
+   break;
+
+  case '4':
+   $rtn_msg .= 'Code : UPLOAD_ERR_NO_FILE ';
+   $rtn_msg .= '<br>No file was uploaded.';
+   break;
+
+  case '6':
+   $rtn_msg .= 'Code : UPLOAD_ERR_NO_TMP_DIR ';
+   $rtn_msg .= '<br>Missing a temporary folder.';
+   break;
+
+  case '7':
+   $rtn_msg .= 'Code : UPLOAD_ERR_CANT_WRITE ';
+   $rtn_msg .= '<br>Failed to write file to disk';
+   break;
+
+  case '8':
+   $rtn_msg .= 'Code : UPLOAD_ERR_EXTENSION ';
+   $rtn_msg .= '<br> A PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop; examining the list of loaded extensions with phpinfo() may help';
+   break;
+
+  default:
+   $rtn_msg .= 'Unknown Error';
+   break;
+ }
+ return $rtn_msg;
+}
+
+function ino_topbar_login() {
+ if (!empty($_SESSION['login_status'])) {
+  $stmt = ' 
+         <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i> ' . ucfirst($_SESSION['username']) . ' <span class="caret"></span></button>';
+  $stmt .='<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+           <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->';
+  $stmt .='<li role="presentation"><a role="menuitem" tabindex="-1" href="' . HOME_URL . '"><i class="fa fa-home"></i> Home</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem" tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '"> My Details</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '"><i class="fa fa-tasks"></i> Activities</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="' . HOME_URL . 'search.php?class_name=sys_notification_user"><i class="fa fa-bell-slash-o"></i> Notification</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem"  tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '"><i class="fa fa-dashboard"></i> Dashboard</a></li>';
+  $stmt .='<li role="presentation"><a role="menuitem"  tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '"><i class="fa fa-cog"></i> Configure</a></li>';
+  $stmt .='<li role="presentation" class="divider"></li>';
+  $stmt .='<li role="presentation"><a role="menuitem"  tabindex="-1" href="' . HOME_URL . 'extensions/user/user_logout.php' . '"><i class="fa fa-sign-out"></i> LogOut</a></li>';
+  $stmt .='</ul></div>';
+  echo $stmt;
+ } else {
+  if (file_exists(THEME_DIR . '/template/user_popup_login_template.php')) {
+   require_once(THEME_DIR . '/template/user_popup_login_template.php');
+  } else {
+   include_once HOME_DIR . '/extensions/user/popup_login/user_popup_login_template.php';
+  }
+ }
 }
 
 ?>

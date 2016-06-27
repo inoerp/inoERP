@@ -363,6 +363,7 @@ class search extends dbObject {
 
 //start of the srach statement
   $search_form_statement = "";
+  
   $search_form_statement .= "<span id='search_tip' class='clickable ino-btn2'>Searching Tips</span>";
   if ((isset($_GET['window_type']) && $_GET['window_type'] == 'popover') || $this->_window_type == 'popover') {
    $search_form_statement .= '<div class="tabContainer"> ';
@@ -374,7 +375,7 @@ class search extends dbObject {
      <li><a href="#tabsHeader-2">' . gettext('eMail Details') . '</a></li>
      <li><a href="#tabsHeader-3">' . gettext('Scheduling') . '</a></li>
     </ul>';
-   $search_form_statement .= '<div class="tabContainer row"> ';
+   $search_form_statement .= '<div class="tabContainer"> ';
    $search_form_statement .='<div id="tabsHeader-1" class="tabContent col-md-12">';
   }
 
@@ -448,16 +449,7 @@ class search extends dbObject {
   $search_form_statement .= "</ul>";
 //end of first ul
 //start of second ul
-  $search_form_statement .= "<ul class=\"add_new_search form_buttons\" >";
-  $search_form_statement .= "<li><label>New column</label>";
-  $search_form_statement .= "<select  name=\"new_column[]\" class=\"$srch_div_cls new_column single_multi_select\" > ";
-  $search_form_statement .= "<option value=\"\"> </option>";
-
-  foreach ($search_array as $key => $value) {
-   $search_form_statement .= '<option value="' . htmlentities($value) . '"';
-   $search_form_statement .= '>' . $value . '</option>';
-  }
-  $search_form_statement .= '</select></li>';
+  $search_form_statement .= "<ul class=\"add_new_search form_buttons column header_field\" >";
 
   //order by
   $search_form_statement .= "<li><label>Order By</label></li>";
@@ -511,12 +503,13 @@ class search extends dbObject {
 
 
   $reset_link = "$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block";
-  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"window_type\" value=\"$window_type\" class=\"$srch_div_cls window_type\" ></li>";
-  $search_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_class_name\" value=\"Reset All\" class=\"$srch_div_cls reset button\" ></li>";
-  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"function_name\" value=\"$function_name\" class=\"$srch_div_cls function_name\" ></li>";
-  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"report_name\" value=\"$report_name\" class=\"$srch_div_cls report_name\" ></li>";
-  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"search_class_name\" value=\"$class\" class=\"$srch_div_cls class_name\" ></li>";
-  $search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"$srch_div_cls button\" value=\"Search\" id=\"search_submit_btn\"></li>";
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"window_type\" value=\"$window_type\" class=\"$srch_div_cls window_type hidden\" ></li>";
+  
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"function_name\" value=\"$function_name\" class=\"$srch_div_cls function_name hidden\" ></li>";
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"report_name\" value=\"$report_name\" class=\"$srch_div_cls report_name hidden\" ></li>";
+  $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"search_class_name\" value=\"$class\" class=\"$srch_div_cls class_name hidden\" ></li>";
+  $search_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_class_name\" value=\"Reset All\" class=\"$srch_div_cls reset btn btn-default\" ></li>";
+  $search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"$srch_div_cls btn btn-default\" value=\"Search\" id=\"search_submit_btn\"></li>";
   $search_form_statement .="</ul>";
   $search_form_statement .="</div>";
   if (isset($_GET['window_type']) && $_GET['window_type'] == 'popover' || $this->_window_type == 'popover') {
@@ -573,10 +566,10 @@ class search extends dbObject {
 
   //start of first ul
   $program_form_statement .= '<fieldset class="col-md-6 parameters"><legend class="fs-default">Program Parameters</legend>';
-  $program_form_statement .= '<ul>';
+  $program_form_statement .= '<ul class="tabContent">';
   if (!empty($this->_search_functions)) {
    foreach ($this->_search_functions as $key => $value) {
-    $program_form_statement .= "<li class='prg tabContent' id='" . $value . "' ><label class=\"label_$key\"> $key</label>";
+    $program_form_statement .= "<li class='prg' id='" . $value . "' ><label class=\"label_$key\"> $key</label>";
     if (method_exists($class_obj, $value)) {
      $program_form_statement .= call_user_func(array($class_obj, $value));
     } else if (function_exists($value)) {
@@ -625,7 +618,7 @@ class search extends dbObject {
 //$f = new inoform();
 //start of schdule details
   $program_form_statement .= '<fieldset class="col-md-4"><legend class="fs-default">Auto-Schedule Options</legend>';
-  $program_form_statement .= '<div class="hideDiv_input"></div>';
+  $program_form_statement .= '<div class="hideDiv_input fa fa-plus-circle clickable"></div>';
   $program_form_statement .= '<ul class="simple_column schdule_details hideDiv_input_element">';
   $program_form_statement .= "<li><label>Frequency UOM </label>";
   $program_form_statement .= $f->select_field_from_array('frequency_uom', sys_program_schedule::$frequency_uom_a, '', 'frequency_uom');
@@ -640,20 +633,20 @@ class search extends dbObject {
 
 //start of form button ul
   $program_form_statement .="</div><div class='row'>";
-  $program_form_statement .="<ul class=\"form_buttons\">";
+  $program_form_statement .="<ul class=\"program form_buttons\">";
   //add the hidden fields if any
-  $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_program\" class=\"reset program button\" value=\"Reset All\" id=\"reset_program\"></li>";
+  $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_program\" class=\"reset program btn btn-default\" value=\"Reset All\" id=\"reset_program\"></li>";
 //  $program_form_statement .= "<li><a href=\"$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block\" "
 //   . " class=\"reset button\" id=\"search_reset_btn\" name=\"class_name\" value=\"$class\" > Reset All</a></li>";
-  $program_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"class_name\" value=\"$class\" class=\"search class_name\" ></li>";
+  $program_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"class_name\" value=\"$class\" class=\"search class_name hidden\" ></li>";
   if ($this->_searching_class != 'convertToProd') {
    if (!empty($program_type) && ($program_type == 'download_report')) {
-    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Generate Report\" id=\"generate_report\"></li>";
+    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program btn btn-default\" value=\"Generate Report\" id=\"generate_report\"></li>";
    } else {
-    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save_program\"></li>";
+    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program btn btn-default\" value=\"Submit\" id=\"save_program\"></li>";
    }
   } else if (convertToProd::$allow_conversion) {
-   $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program button\" value=\"Submit\" id=\"save_program\"></li>";
+   $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program btn btn-default\" value=\"Submit\" id=\"save_program\"></li>";
   } else {
    $program_form_statement .="<li class='error'>The submit button is disabled for security reason.<br>Set allow_conversion variable to true in convertToProd class to use this program</li>";
   }

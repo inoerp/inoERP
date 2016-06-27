@@ -37,7 +37,7 @@ class extn_social_login extends dbObject {
   'enabled_cb',
   'sl_key',
   'description',
-  'sl_id',
+  'slid',
   'sl_secret',
   'sl_scope',
   'display_weight',
@@ -67,7 +67,7 @@ class extn_social_login extends dbObject {
  public $enabled_cb;
  public $sl_key;
  public $description;
- public $sl_id;
+ public $slid;
  public $sl_secret;
  public $sl_scope;
  public $display_weight;

@@ -1,58 +1,60 @@
-<div id ="form_header">
- <div id="tabsHeader">
-  <form action="" method="post" id="user_header" name="user_header"><span class="heading">User Activities </span>
-   <div id ="form_header">
-    <div id="tabsHeader">
-     <ul class="tabMain">
-      <li><a href="#tabsHeader-1">Basic Info</a></li>
-      <li><a href="#tabsHeader-2">Posts</a></li>
-      <li><a href="#tabsHeader-3">Comments</a></li>
-      <li><a href="#tabsHeader-4">Recent Visit</a></li>
-      <li><a href="#tabsHeader-5">Files</a></li>
-     </ul>
-     <div class="tabContainer"> 
-      <div id="tabsHeader-1" class="tabContent">
-       <div class="large_shadow_box"> 
-        <ul class="column two_column inRowLi">
-         <li><label>User Name :</label>	<?php echo $$class->username; ?></li>
-         <li><label>First Name : </label>	<?php echo $$class->first_name; ?> </li>
-         <li><label>Last Name : </label><?php echo $$class->last_name; ?>	 </li>
-         <li><label>e-Mail ID :</label> <?php echo "xxx"; ?> </li>
-         <li><label>Phone :</label> <?php echo $$class->phone; ?> </li>
-         <li><label>Joined On :</label> <?php echo $$class->creation_date; ?> </li>
-        </ul>
-       </div>
-      </div>
-      <div id="tabsHeader-2" class="tabContent">
-       <?php echo!empty($content_string) ? $content_string : false; ?>
-      </div>
-      <div id="tabsHeader-3" class="tabContent">
-       <?php echo!empty($comment_string) ? $comment_string : false; ?>
-      </div>
-      <div id="tabsHeader-4" class="tabContent">
-       <?php
-       if (!empty($_SESSION['recent_visit'])) {
-        $recent_visit = '<ul id="recent_visit">';
-        $rev_a = array_reverse($_SESSION['recent_visit']);
-        foreach ($rev_a as $k => $v) {
-         if (!is_numeric($k)) {
-          $recent_visit .= '<li><a href="' . $v . '">' . $k . '</a>';
-         } else {
-          $recent_visit .= '<li><a href="' . $v . '"> Vsiti ' . $k . '</a>';
-         }
-        }
-        $recent_visit .= '</ul>';
-       }
-       echo $recent_visit;
-       ?>
-      </div>
-      <div id="tabsHeader-5" class="tabContent">
-       <div> <?php echo ino_attachement($file) ?> </div>
-      </div>
-     </div>
+<div class="container target">
+ <div class="row">
+  <div class="col-sm-3">
+   <h1 class=""><?php echo!empty($up->profile_name) ? $up->profile_name : ino_getUserName_from_email($user_ai->username); ?></h1>
+   <div><?php echo $f->show_existing_image($user_ai->image_file_id, 'img-circle img-responsive', 1); ?></div>
+   <br>
 
+   <a class="getAjaxForm btn btn-info send_message " role="button" href="form.php?class_name=extn_emessage_header&user_id=<?php echo $user_ai->user_id ?>">Internal Message  <i class="fa fa-wechat clickable"></i></a>
+   <a target="_blank" class="contact_link btn btn-info send_email " role="button" href="form.php?class_name=web_mail&window_type=popup&<?php echo 'email=' . $user_ai->email . '&reference_table=user&reference_id=' . $ino_user->user_id; ?>">
+    External eMail <i class="fa fa-envelope-o clickable"></i></a>
+  </div>
+  <br><br>
+  <div class="col-sm-3">
+   <ul class="list-group">
+    <li class="list-group-item text-muted" contenteditable="false">Profile</li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined</strong></span><?php echo!empty($user_ai->creation_date) ? $user_ai->creation_date : ' NA '; ?></li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Last seen</strong></span> NA </li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class="">User name</strong></span><?php echo ino_getUserName_from_email($user_ai->username) ?></li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Phone</strong></span><?php echo!empty($up->phone) ? $up->phone : ' NA '; ?> </li>
+   </ul>
+  </div>
+  <div class="col-sm-3">
+   <ul class="list-group">
+    <li class="list-group-item text-muted" contenteditable="false">Social Media</li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Website</strong></span><a href="<?php echo ( $up->website) ?>"><i class="fa fa-globe"></i></a></li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Facebook</strong></span><a href="<?php echo ( $up->facebook_page) ?>"><i class="fa fa-facebook"></i></a></li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Google</strong></span><a href="<?php echo ( $up->google_page) ?>"><i class="fa fa-google-plus"></i></a></li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Linked In</strong></span><a href="<?php echo ( $up->linkedin_page) ?>"><i class="fa fa-linkedin"></i></a></li>
+   </ul>
+
+  </div>
+ </div>
+ <div class="row">
+  <div class="col-sm-12" contenteditable="false" style="">
+   <br>
+   <div class="panel panel-ino-light-grey">
+    <div class="panel-heading"><?php echo!empty($up->profile_name) ? $up->profile_name : ino_getUserName_from_email($up->username); ?> @ <?php echo $site_info->site_name; ?></div>
+    <div class="panel-body about-me"><?php echo!empty($up->about) ? $up->about : 'No User Profile'; ?></div>
+   </div>
+   <div id="tabsHeader">
+    <ul class="tabMain">
+     <li><a href="#tabsHeader-1">Posts</a></li>
+     <li><a href="#tabsHeader-2">Comments</a></li>
+    </ul>
+    <div class="tabContainer"> 
+     <div id="tabsHeader-1" class="tabContent">
+      <?php echo!empty($content_string) ? $content_string : false; ?>
+     </div>
+     <div id="tabsHeader-2" class="tabContent">
+      <?php echo!empty($comment_string) ? $comment_string : false; ?>
+     </div>
     </div>
    </div>
-  </form>
+
+  </div>
+
+
+
  </div>
-</div>  
+</div>

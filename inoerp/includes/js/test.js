@@ -592,3 +592,44 @@ XULSchoolChrome.BrowserOverlay = {
  window.addEventListener("pageshow", load, false);
 
 })();
+
+
+function file_upload() {
+
+}
+
+$('body').on('change',  '#attachments', function(){
+ var this_e = $(this);
+ $(this).files.each(function(){
+ var fileSize = this.files[0].size / 1024 / 1024;
+ var stmt = '<ul class="inRow asperWidth ready-to-upliad">';
+ stmt += '<li class="file-details">File Details : </li>';
+ stmt += '<li class="file-name">' + $(this).val() + '</a></li>';
+ stmt += '<li class="file-size">' + fileSize.toFixed(2) + " MB" + '</a></li>';
+ stmt += '</ul>';
+ $(this_e).closest('.show_attachment').find('.uploaded_file_details').append(stmt);
+ });
+
+});
+
+
+$('body').on('change',  '#attachments', function(){
+ var this_e = $(this);
+ $(this.files).each(function(k, elem){
+ var fileSize = $(elem).size / 1024 / 1024;
+ var stmt = '<ul class="inRow asperWidth ready-to-upliad">';
+ stmt += '<li class="file-details">File Details : </li>';
+ stmt += '<li class="file-name">' + $(elem).name + '</a></li>';
+ stmt += '<li class="file-size">' + fileSize.toFixed(2) + " MB" + '</a></li>';
+ stmt += '<li class="file-type">' + $(elem).type + " MB" + '</a></li>';
+ stmt += '</ul>';
+ $(this_e).closest('.show_attachment').find('.uploaded_file_details').append(stmt);
+ });
+
+});
+
+$('.tabMain').each(function(){
+var li_len_p = 100 / +($(this).find('li').length) + '%';
+  $(this).find('li').css('width', li_len_p);
+
+})

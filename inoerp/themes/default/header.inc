@@ -2,6 +2,7 @@
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php
   if (!empty($metaname_description)) {
    echo "<meta name='description' content=\"inoERP - A Open Source PHP based Enterprise Management System\">";
@@ -69,7 +70,7 @@
     <div class="container">
      <div class="row">
       <?php
-      if ($showBlock) {
+      if (!empty($showBlock)) {
        echo '<div id = "header_top" class = "clear"></div>';
       }
       ?>
@@ -86,7 +87,7 @@
        ?>
        <?php if ($show_header_links) { ?>
         <div class="social-icons">
-         <span><a class="fa fa-dashboard clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+         <span><a class="fa fa-dashboard clickable erp_dashborad" href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
         </div><!-- end social icons -->
        <?php } ?>
 
@@ -94,35 +95,7 @@
 
       <div class="col-lg-8 col-md-8 col-sm-8 ">
        <div class="topmenu">
-        <div class="topbar-login">
-         <?php if (!empty($_SESSION['login_status'])) { ?>
-          <div class="dropdown">
-           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
-            <span class="caret"></span></button>
-           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-            <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
-            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
-            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
-            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
-            <li role="presentation" class="divider"></li>
-            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
-           </ul>
-          </div>
-
-          <?php
-         } else {
-          if (file_exists(__DIR__ . '/template/user_popup_login_template.php')) {
-           require_once(__DIR__ . '/template/user_popup_login_template.php');
-          } else {
-           require_once('login/user_popup_login_template.php');
-          }
-         }
-         ?>
-        </div>
-
+        <div class="topbar-login"><?php ino_topbar_login();   ?></div>
        </div><!-- end top menu -->
        <div class="callus hidden-xs">
         <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
@@ -166,7 +139,7 @@
    </header><!-- end header-style-1 -->
   </nav>
   <?php
-  if ($showBlock) {
+  if (!empty($showBlock)) {
    echo '<div id="header_bottom"></div>';
   }
   ?>

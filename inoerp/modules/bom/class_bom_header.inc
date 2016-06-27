@@ -80,12 +80,12 @@ class bom_header extends dbObject {
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
  ];
- public $pageTitle = " BOM - Create & Update BOM "; //page Title
+ public $pageTitle = " BOM - Create | Update BOM "; //page Title
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
-  '_extra_path' => array('form.php?class_name=indented_bom&mode=9' => 'Indented BOM')
+  '_extra_path' => array('form.php?class_name=bom_indented_bom&mode=9' => 'Indented BOM')
  ];
  public $prg_varify_circular_bom_parameters = [
   'Organization' => 'search_org_name',

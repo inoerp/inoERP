@@ -102,13 +102,13 @@ inoERP
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Project') ?> #</th>
         <th><?php echo gettext('Task') ?> #</th>
-        <th><?php echo gettext($day1) ?></th>
-        <th><?php echo gettext($day2) ?></th>
-        <th><?php echo gettext($day3) ?></th>
-        <th><?php echo gettext($day4) ?></th>
-        <th><?php echo gettext($day5) ?></th>
-        <th><?php echo gettext($day6) ?></th>
-        <th><?php echo gettext($day7) ?></th>
+        <th><?php echo!empty($day1) ? gettext($day1) : gettext('Day 1') ?></th>
+        <th><?php echo!empty($day2) ? gettext($day2) : gettext('Day 2') ?></th>
+        <th><?php echo!empty($day3) ? gettext($day3) : gettext('Day 3') ?></th>
+        <th><?php echo!empty($day4) ? gettext($day4) : gettext('Day 4') ?></th>
+        <th><?php echo!empty($day5) ? gettext($day5) : gettext('Day 5') ?></th>
+        <th><?php echo!empty($day6) ? gettext($day6) : gettext('Day 6') ?></th>
+        <th><?php echo!empty($day7) ? gettext($day7) : gettext('Day 7') ?></th>
 
        </tr>
       </thead>
@@ -131,12 +131,12 @@ inoERP
          <td><?php $f->seq_field_d($count); ?></td>
          <td><?php $f->text_field_wid2s('hr_timesheet_line_id', 'always_readonly dontCopy'); ?></td>
          <td><?php
-         $f->val_field_wid2m('project_number', 'prj_project_header', 'project_number', '', 'select project_number');
-         echo $f->hidden_field('prj_project_header_id', $$class_second->prj_project_header_id);
+          $f->val_field_wid2m('project_number', 'prj_project_header', 'project_number', '', 'select project_number');
+          echo $f->hidden_field('prj_project_header_id', $$class_second->prj_project_header_id);
           ?><i class="generic select_project_number select_popup clickable fa fa-search" data-class_name="prj_project_header"></i></td>
          <td><?php
-         $f->val_field_wid2('task_number', 'prj_project_all_v', 'task_number', 'prj_project_header_id', 'select project_task_number');
-         echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
+          $f->val_field_wid2('task_number', 'prj_project_all_v', 'task_number', 'prj_project_header_id', 'select project_task_number');
+          echo $f->hidden_field('prj_project_line_id', $$class_second->prj_project_line_id);
           ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_v"></i></td>
          <td><?php echo $f->number_field('day1', $$class_second->day1, '', '', 'small'); ?></td>
          <td><?php echo $f->number_field('day2', $$class_second->day2, '', '', 'small'); ?></td>

@@ -23,7 +23,7 @@ inoERP
        </li>
        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>    </li>
        <li><?php $f->l_text_field_d('wip_accounting_group'); ?></li>
-       <li><?php $f->l_select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_id', 'option_line_code', $$class->wo_type, 'wo_type', $readonly, 'wo_type'); ?>    </li>
+       <li><?php $f->l_select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_code', 'option_line_value', $$class->wo_type, 'wo_type', $readonly, 'wo_type'); ?>    </li>
        <li><?php $f->l_status_field_d('status'); ?></li>
        <li><?php $f->l_checkBox_field_d('rev_enabled'); ?></li>
        <li><?php $f->l_text_field_d('rev_number'); ?>    </li>

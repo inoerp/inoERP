@@ -74,8 +74,8 @@ function beforeSave() {
 }
 
 $(document).ready(function () {
-var mandatoryCheck = new mandatoryFieldMain();
-  mandatoryCheck.mandatoryHeader();
+//var mandatoryCheck = new mandatoryFieldMain();
+//  mandatoryCheck.mandatoryHeader();
 
  //selecting Id
  $(".fa_asset_id.select_popup").on("click", function () {

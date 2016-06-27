@@ -1,3 +1,8 @@
+<?php  if (empty($access_level) || ($access_level < 2 )) {
+  echo '<div><div id="structure">'.  access_denied().  '</div></div>';
+  return;
+ }
+ ?>
 <div id ="form_header">
  <form action="" method="post" id="user_header" name="user_header">
   <span class="heading"><?php echo gettext('User Details') ?></span>
@@ -31,6 +36,7 @@
       <li><?php $f->l_select_field_from_object('default_theme', extn_theme::find_all_enabled_theme(), 'theme_name', 'theme_name', $$class->default_theme, 'default_theme'); ?>  </li>
       <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
       <li><?php  $f->l_checkBox_field_d('use_personal_db_cb'); ?>  </li>
+      <li><label></label><a  href="form.php?class_name=extn_uprofile&mode=9&user_id=<?php echo $$class->user_id; ?>" class="button btn btn-info"><?php echo gettext('User Profile') ?></a></li>
      </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">

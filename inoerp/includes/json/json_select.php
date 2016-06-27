@@ -26,7 +26,7 @@ if (!empty($_GET['class_name'])) {
 
  $_GET['pageno'] = $pageno;
  $_GET['class_name'] = $class;
- $_GET['per_page'] = !empty($per_page) ? $per_page : $_GET['per_page'];
+ $_GET['per_page'] = !empty($per_page) ? $per_page : '10';
 
  if (!empty($_GET['per_page'])) {
   if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" || $_GET['per_page'][0] == "all")) {

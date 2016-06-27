@@ -15,26 +15,29 @@ class pm_batch_byproduct extends dbObject {
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'pm_formula_byproduct_id',
-  'pm_formula_header_id',
+  'pm_batch_byproduct_id',
+  'pm_batch_header_id',
   'line_no',
   'line_type',
   'item_id_m',
   'uom_id',
-  'quantity',
+  'allocated_quantity',
+  'step_no',
+  'planned_quantity',
+  'actual_quantity',
   'description',
   'scale_type',
   'yield_type',
   'byproduct_type',
+  'subinventory_id',
+  'locator_id',
   'created_by',
   'creation_date',
   'last_update_by',
   'last_update_date',
  ];
 //variables used for showing data
- public $fields_inForm_notInDataBase = [
-  "member_username",
- ];
+
  public $fields_inHeader_needsToBeInserted_inPOST = [
   'pm_batch_header_id'
  ];
@@ -42,8 +45,8 @@ class pm_batch_byproduct extends dbObject {
   'pm_batch_header_id',
   'item_id_m',
  ];
- public $pm_formula_byproduct_id;
- public $pm_formula_header_id;
+ public $pm_batch_byproduct_id;
+ public $pm_batch_header_id;
  public $line_no;
  public $line_type;
  public $item_id_m;
@@ -52,7 +55,13 @@ class pm_batch_byproduct extends dbObject {
  public $description;
  public $scale_type;
  public $yield_type;
+ public $step_no;
+ public $actual_quantity;
+ public $allocated_quantity;
+ public $planned_quantity;
  public $byproduct_type;
+ public $subinventory_id;
+ public $locator_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;

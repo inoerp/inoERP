@@ -45,6 +45,7 @@ trait dbObject_t {
   'excel_format' => 'Excel',
   'text_format' => 'Text',
   'pdf_format' => 'PDF',
+  'pdf_format_list' => 'PDF List',
   'xml_format' => 'XML',
   'worddoc_format' => 'Word Doc',
  ];
@@ -223,32 +224,32 @@ trait dbObject_t {
   return $result_fetchAll;
  }
 
- public static function find_by_sql($sql = "") {
-  global $dbc;
-
-  try {
-   $prepare = $dbc->connection->prepare($sql);
-   $prepare->execute();
-   $result_fetchAll = $prepare->fetchAll(PDO::FETCH_CLASS);
-   return $result_fetchAll;
-  } catch (Exception $e) {
-//    echo "<br>Error @dbObject @@ Line " . __LINE__ . $sql;
-   return false;
-  }
- }
-
 // public static function find_by_sql($sql = "") {
 //  global $dbc;
-//  $conn = $dbc->connection;
+//
 //  try {
-//   $qry = $conn->query($sql);
-//   $result_fetchAll = $qry->fetchAll(PDO::FETCH_CLASS);
+//   $prepare = $dbc->connection->prepare($sql);
+//   $prepare->execute();
+//   $result_fetchAll = $prepare->fetchAll(PDO::FETCH_CLASS);
 //   return $result_fetchAll;
 //  } catch (Exception $e) {
 ////    echo "<br>Error @dbObject @@ Line " . __LINE__ . $sql;
 //   return false;
 //  }
 // }
+
+ public static function find_by_sql($sql = "") {
+  global $dbc;
+  $conn = $dbc->connection;
+  try {
+   $qry = $conn->query($sql);
+   $result_fetchAll = $qry->fetchAll(PDO::FETCH_CLASS);
+   return $result_fetchAll;
+  } catch (Exception $e) {
+//    echo "<br>Error @dbObject @@ Line " . __LINE__ . $sql;
+   return false;
+  }
+ }
 
 
  public static function find_by_sql_array($sql = "") {
@@ -665,7 +666,7 @@ trait dbObject_t {
 //   pa($stmt);
    $this->msg = 0;
    $dbc->rollback = 1;
-   echo "<br>Record couldnt be saved. Error @ " . __FILE__ . ' @@line' . __LINE__ . '<br>' . $e->getMessage() . "<br>";
+   echo "<br>Record couldnt be saved. Error @ " . basename(__FILE__) . ' @@line' . __LINE__ . '<br>' . $e->getMessage() . "<br>";
 //   if(isset($_SESSION['debug'])){
 //    echo "<br>The statement is <br>" . $stmt;
 //   }
@@ -1253,7 +1254,7 @@ trait dbObject_t {
    $this->currency = $fin_details->currency_code;
   } else {
    $dbc->rollback = true;
-   echo "<br>Setup in complete. No currency found. Error @ " . __FILE__ . ' @@ line ' . __LINE__;
+   echo "<br>Setup in complete. No currency found. Error @ " . basename(__FILE__) . ' @@ line ' . __LINE__;
   }
  }
 

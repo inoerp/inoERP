@@ -6,8 +6,9 @@
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Basics-2') ?></a></li>
-     <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
-     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+     
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">

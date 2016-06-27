@@ -47,6 +47,18 @@ $(document).ready(function () {
   }
  });
 
+ $('body').off('click', '#menu_button4, #menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4, #menu_button4_2, #menu_button4_2_1', function () {
+  $('#batch_name, .pm_formula_ingredient_id, .pm_formula_byproduct_id').val('');
+  $('#batch_exploded_cb').prop('checked', false);
+ });
 
-
+ //get locatot on Subinventory change
+ $('body').off('blur', '.subinventory_id').on('blur', '.subinventory_id', function () {
+  var subInventoryId = $(this).val();
+  if (subInventoryId > 0) {
+   var trClass = '.' + $(this).closest('tr').attr('class');
+   getLocator('modules/inv/locator/json_locator.php', subInventoryId, 'subinventory', trClass);
+  }
+ });
+ 
 });

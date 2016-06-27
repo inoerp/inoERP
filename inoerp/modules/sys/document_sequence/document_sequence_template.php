@@ -3,7 +3,8 @@
   <div id="form_serach_header">
    <label><?php echo gettext('Business Org') ?></label>
    <?php echo form::select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $org_id_h, 'org_id', $readonly1); ?>
-   <a name="show" href="form.php?class_name=sys_document_sequence&<?php echo "mode=$mode"; ?>" class="show document_id sys_document_sequence_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
+   <a name="show" href="form.php?class_name=sys_document_sequence&<?php echo "mode=$mode"; ?>" class="show document_id sys_document_sequence_id">
+    <i class="fa fa-refresh"></i></a> 
   </div>
   <form method="post" id="sys_document_sequence_line"  name="document_sequence_line">
    <div id="tabsLine">
@@ -36,13 +37,10 @@
          foreach ($document_sequence_object as $sys_document_sequence) {
           ?>         
           <tr class="sys_document_sequence<?php echo $count ?>">
-           <td>    
-            <ul class="inline_action">
-             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-             <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->sys_document_sequence_id); ?>"></li> 
-             <li><?php echo $f->hidden_field('bu_org_id', $org_id_h); ?></li>
-            </ul>
+           <td>
+            <?php
+            echo ino_inline_action($$class->sys_document_sequence_id, array('bu_org_id' => $org_id_h));
+            ?>
            </td>
            <td><?php $f->seq_field_d($count) ?></td>
            <td><?php $f->text_field_widsr('sys_document_sequence_id') ?></td>

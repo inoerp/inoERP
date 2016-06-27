@@ -106,20 +106,25 @@
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Line Type') ?></th>
         <th><?php echo gettext('Trnx Number') ?></th>
+        <th><?php echo gettext('Activity') ?></th>
         <th><?php echo gettext('Receipt Amount') ?></th>
         <th><?php echo gettext('Exchange Rate') ?></th>
         <th><?php echo gettext('GL Amount') ?></th>
         <th><?php echo gettext('Total Amount') ?></th>
-        <th><?php echo gettext('Cumulative Receipt') ?></th>
+        <th><?php echo gettext('Cum. Receipt') ?></th>
         <th><?php echo gettext('Remaining') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0;
+       $count = 0; $f = new inoform();
        foreach ($ar_receipt_line_object as $ar_receipt_line) {
         $f->readonly2 = !empty($ar_receipt_line->ar_receipt_line_id) ? true : false;
+        if(empty($ar_receipt_line->line_type)){
+         $ar_receipt_line->line_type = 'INVOICE';
+        }
         ?>         
         <tr class="ar_receipt_line<?php echo $count ?>">
          <td>
@@ -130,18 +135,20 @@
          <td><?php $f->seq_field_d($count); ?></td>
          <td><?php form::text_field_wid2sr('ar_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
+         <td><?php echo $f->select_field_from_array('line_type', ar_receipt_line::$line_type_a, $$class_second->line_type, '' ,'medium'); ?></td>
          <td><?php
           $f->val_field_wid2('transaction_number', 'ar_transaction_header', 'transaction_number', 'ar_customer_id');
           echo $f->hidden_field('ar_transaction_header_id', $$class_second->ar_transaction_header_id);
           echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
           ?>
           <i class="generic g_select_ar_transaction_number select_popup clickable fa fa-search" data-class_name="ar_transaction_header"></i></td>
-         <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('amount') : $f->text_field_wid2s('amount'); ?></td>
-         <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('exchange_rate') : $f->text_field_wid2s('exchange_rate'); ?></td>
-         <td><?php !empty($$class_second->ar_receipt_line_id) ? form::number_field_wid2sr('gl_amount') : $f->text_field_wid2s('gl_amount'); ?></td>
+         <td><?php echo $f->select_field_from_object('ar_receivable_activity_id', ar_receivable_activity::find_all(), 'ar_receivable_activity_id' , 'activity_name' ,$$class_second->ar_receivable_activity_id, '' ,'medium' ,'','','','','','activity_type'); ?></td>
+         <td><?php !empty($$class_second->ar_receipt_line_id) ? $f->text_field_wid2r('amount') : $f->text_field_wid2('amount'); ?></td>
+         <td><?php !empty($$class_second->ar_receipt_line_id) ? $f->text_field_wid2r('exchange_rate') : $f->text_field_wid2('exchange_rate'); ?></td>
+         <td><?php !empty($$class_second->ar_receipt_line_id) ? $f->text_field_wid2r('gl_amount') : $f->text_field_wid2s('gl_amount'); ?></td>
          <td><?php $f->text_field_wid2sr('invoice_amount' ,'header_amount'); ?></td>
          <td><?php $f->text_field_wid2sr('receipt_amount'); ?></td>
-         <td><?php $f->text_field_wid2r('remaining_amount'); ?></td>
+         <td><?php $f->text_field_wid2sr('remaining_amount'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

@@ -37,6 +37,8 @@ class ar_transaction_line extends dbObject {
   'reference_type',
   'reference_key_name',
   'reference_key_value',
+  'revenue_ac_id',
+  'tax_ac_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -99,6 +101,8 @@ class ar_transaction_line extends dbObject {
  public $sd_so_line_id;
  public $sd_so_detail_id;
  public $period_id;
+ public $revenue_ac_id;
+ public $tax_ac_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -128,24 +132,22 @@ class ar_transaction_line extends dbObject {
     $trnx_details->ar_transaction_detail_id = null;
     $trnx_details->detail_number = $detail_num;
     $detail_num++;
-    $trnx_details->detail_ac_id = $trnx_type->revenue_ac_id;
+    $trnx_details->detail_ac_id = !empty($this->revenue_ac_id) ?  $this->revenue_ac_id : $trnx_type->revenue_ac_id;
     $trnx_details->account_type = ($this->line_type == 'GOODS' || 'SERVICES' ) ? 'ITEM' : $this->line_type;
     $trnx_details->description = 'Revenue';
     $trnx_details->amount = $this->inv_line_price;
     $trnx_details->gl_amount = $this->gl_inv_line_price;
-    $trnx_details->audit_trial();
     $trnx_details->save();
     echo "<br> Transaction detail line for revenue is Successfully created!";
     if (!empty($this->tax_amount)) {
      $trnx_details->ar_transaction_detail_id = null;
      $trnx_details->detail_number = $detail_num;
      $detail_num++;
-     $trnx_details->detail_ac_id = $trnx_type->tax_ac_id;
+     $trnx_details->detail_ac_id = !empty($this->tax_ac_id) ?  $this->tax_ac_id : $trnx_type->revenue_ac_id;
      $trnx_details->account_type = 'TAX';
      $trnx_details->description = 'Tax';
      $trnx_details->amount = $this->tax_amount;
      $trnx_details->gl_amount = $this->gl_tax_amount;
-     $trnx_details->audit_trial();
      $trnx_details->save();
      echo "<br> Transaction detail line for tax is Successfully Created!";
     }
@@ -183,7 +185,7 @@ class ar_transaction_line extends dbObject {
   $sql = " SELECT SUM(inv_line_price) as total_line_amount, SUM(tax_amount) as total_tax_amount, ar_transaction_line_id
 FROM ar_transaction_line
 WHERE ar_transaction_header_id = '{$ar_transaction_header_id}'
-GROUP BY ar_transaction_line_id ";
+GROUP BY ar_transaction_header_id ";
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : null;

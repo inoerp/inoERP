@@ -102,14 +102,13 @@ inoERP
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Project') ?> #</th>
         <th><?php echo gettext('Task') ?> #</th>
-        <th><?php echo gettext($day1) ?></th>
-        <th><?php echo gettext($day2) ?></th>
-        <th><?php echo gettext($day3) ?></th>
-        <th><?php echo gettext($day4) ?></th>
-        <th><?php echo gettext($day5) ?></th>
-        <th><?php echo gettext($day6) ?></th>
-        <th><?php echo gettext($day7) ?></th>
-
+        <th><?php echo !empty($day1) ? gettext($day1) : gettext('Day 1') ?></th>
+        <th><?php echo !empty($day2) ? gettext($day2) : gettext('Day 2') ?></th>
+        <th><?php echo !empty($day3) ? gettext($day3) : gettext('Day 3') ?></th>
+        <th><?php echo !empty($day4) ? gettext($day4) : gettext('Day 4') ?></th>
+        <th><?php echo !empty($day5) ? gettext($day5) : gettext('Day 5') ?></th>
+        <th><?php echo !empty($day6) ? gettext($day6) : gettext('Day 6') ?></th>
+        <th><?php echo !empty($day7) ? gettext($day7) : gettext('Day 7') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

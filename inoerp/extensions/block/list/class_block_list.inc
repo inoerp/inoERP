@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,14 +8,15 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
  */
 class block_list extends block {
-public static $table_name = "block";
 
-   public static $system_info = [
+ public static $table_name = "block";
+ public static $system_info = [
   'name' => 'Block List',
   'number' => '10024',
   'description' => 'Block List',

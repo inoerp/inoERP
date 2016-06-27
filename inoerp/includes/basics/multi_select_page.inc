@@ -43,14 +43,14 @@ if (!empty($msg)) {
   classSave.saveMain(beforeSave);
 
  });</script>
-<div id="erp_form_area">
+<div id="erp_form_area_ms">
  <div id="multi_select"><span class="heading">
    <span class="heading"><?php echo ucwords(str_replace('_', ' ', $action_message)) . ' - ' . ucwords(str_replace('_', ' ', $class)); ?></span>
    <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
    <div id="list_contents">
     <!--			Beginning of line form-->
     <div id ="form_line" class="multi_select_line">
-     <div id="searchForm" ><div class='hideDiv_input'></div>
+     <div id="searchForm" ><div class='hideDiv_input fa fa-minus-circle clickable'></div>
       <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
      <div id="searchResult">
 

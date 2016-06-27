@@ -13,7 +13,7 @@
 
 /**
  * fp_forecast_group 
- * Forecast group is used for grouping differnt forecasts for reporting and consumption purposes
+ * Forecast group is used for grouping different forecasts for reporting and consumption purposes
  * Contains all the fp_forecast_group information, such as - forecast_group, description , consume_cb, org_id
  * 
  */

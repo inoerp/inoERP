@@ -11347,8 +11347,8 @@ msgstr "Nein viel Nummer gefunden! Den subinventory, Locator und Artikelnummer"
 msgid "No from subinventory      "
 msgstr "Keine von subinventory"
 
-msgid "Item is not defined in the organization.Select a differnt organization      "
-msgstr "Artikel wird nicht in der organization.Select a differnt Organisation definiert"
+msgid "Item is not defined in the organization.Select a different organization      "
+msgstr "Artikel wird nicht in der organization.Select a different Organisation definiert"
 
 msgid "No Receipt Header ID/nEnter or Save The Header Details       "
 msgstr "Kein Empfang Rubrik-ID / nGeben oder speichern Sie die Header-Informationen"
@@ -11356,8 +11356,8 @@ msgstr "Kein Empfang Rubrik-ID / nGeben oder speichern Sie die Header-Informatio
 msgid "Please update your terminal number!      "
 msgstr "Bitte aktualisieren Sie Ihre Terminal-Nummer!"
 
-msgid "Selected delivery is assigned to a differnt delivery number      "
-msgstr "Ausgewählte Lieferung an eine differnt Liefernummer zugeordnet"
+msgid "Selected delivery is assigned to a different delivery number      "
+msgstr "Ausgewählte Lieferung an eine different Liefernummer zugeordnet"
 
 msgid "You cant ship more than picked quantity      "
 msgstr "Du kannst nicht mehr als kommissionierte Menge versenden"

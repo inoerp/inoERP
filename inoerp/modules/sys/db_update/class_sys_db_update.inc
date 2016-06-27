@@ -124,7 +124,7 @@ class sys_db_update extends dbObject {
   $dbc2->ddlexecute($sql4);
   $dbc2->confirm();
 
-  echo "<div class='alert alert-sucess'>$old_db_table is Successfullyupdated</div>";
+  echo "<div class='alert alert-sucess'>$old_db_table is Successfully updated</div>";
  }
 
  private function _ino_isSame_tablesInTwoDataBases($tbl1) {
@@ -213,7 +213,7 @@ class sys_db_update extends dbObject {
   echo $sql;
   $dbc2->ddlexecute($sql);
   $dbc2->confirm();
-  echo "<div class='alert alert-sucess'>$drop_db_table is Successfullydropped</div>";
+  echo "<div class='alert alert-sucess'>$drop_db_table is Successfully dropped</div>";
  }
 
 }

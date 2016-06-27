@@ -18,7 +18,7 @@
       </li>
       <li><?php $f->l_text_field_d('transaction_number', 'primary_column2'); ?> </li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>       </li>
-      <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly1); ?>       </li>
+      <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', 'always_readonly', 1, $readonly1); ?>       </li>
       <li><label><?php echo gettext('Period Name') ?></label><?php
        if (!empty($period_name_stmt)) {
         echo $period_name_stmt;

@@ -1,63 +1,63 @@
-function setValFromSelectPage(inv_abc_assignment_header_id, item_id_m, item_number, item_description, uom_id,
-        inv_abc_valuation_id, valuation_name, scope_org_id) {
- this.inv_abc_assignment_header_id = inv_abc_assignment_header_id;
- this.item_id_m = item_id_m;
- this.item_number = item_number;
- this.item_description = item_description;
- this.uom_id = uom_id;
- this.inv_abc_valuation_id = inv_abc_valuation_id;
- this.valuation_name = valuation_name;
- this.scope_org_id = scope_org_id;
-}
-
-setValFromSelectPage.prototype.setVal = function () {
- var inv_abc_assignment_header_id = this.inv_abc_assignment_header_id;
- var item_id_m = this.item_id_m;
- var item_number = this.item_number;
- var item_description = this.item_description;
- var uom_id = this.uom_id;
-
- var rowClass = '.' + localStorage.getItem("row_class");
- var fieldClass = '.' + localStorage.getItem("field_class");
-
-
- if (inv_abc_assignment_header_id) {
-  $("#inv_abc_assignment_header_id").val(inv_abc_assignment_header_id);
- }
-
- var inv_abc_valuation_id = this.inv_abc_valuation_id;
- var valuation_name = this.valuation_name;
- var scope_org_id = this.scope_org_id;
-
- if (inv_abc_valuation_id) {
-  $("#inv_abc_valuation_id").val(inv_abc_valuation_id);
- }
- if (valuation_name) {
-  $("#valuation_name").val(valuation_name);
- }
- if (scope_org_id) {
-  $("#org_id").val(scope_org_id);
- }
-
- rowClass = rowClass.replace(/\s+/g, '.');
- fieldClass = fieldClass.replace(/\s+/g, '.');
- if (item_id_m) {
-  $('#content').find(rowClass).find('.item_id_m').val(item_id_m);
- }
- if (item_number) {
-  $('#content').find(rowClass).find('.item_number').val(item_number);
- }
- if (item_description) {
-  $('#content').find(rowClass).find('.item_description').val(item_description);
- }
- if (uom_id) {
-  $('#content').find(rowClass).find('.uom_id').val(uom_id);
- }
-
- localStorage.removeItem("row_class");
- localStorage.removeItem("field_class");
-
-};
+//function setValFromSelectPage(inv_abc_assignment_header_id, item_id_m, item_number, item_description, uom_id,
+//        inv_abc_valuation_id, valuation_name, scope_org_id) {
+// this.inv_abc_assignment_header_id = inv_abc_assignment_header_id;
+// this.item_id_m = item_id_m;
+// this.item_number = item_number;
+// this.item_description = item_description;
+// this.uom_id = uom_id;
+// this.inv_abc_valuation_id = inv_abc_valuation_id;
+// this.valuation_name = valuation_name;
+// this.scope_org_id = scope_org_id;
+//}
+//
+//setValFromSelectPage.prototype.setVal = function () {
+// var inv_abc_assignment_header_id = this.inv_abc_assignment_header_id;
+// var item_id_m = this.item_id_m;
+// var item_number = this.item_number;
+// var item_description = this.item_description;
+// var uom_id = this.uom_id;
+//
+// var rowClass = '.' + localStorage.getItem("row_class");
+// var fieldClass = '.' + localStorage.getItem("field_class");
+//
+//
+// if (inv_abc_assignment_header_id) {
+//  $("#inv_abc_assignment_header_id").val(inv_abc_assignment_header_id);
+// }
+//
+// var inv_abc_valuation_id = this.inv_abc_valuation_id;
+// var valuation_name = this.valuation_name;
+// var scope_org_id = this.scope_org_id;
+//
+// if (inv_abc_valuation_id) {
+//  $("#inv_abc_valuation_id").val(inv_abc_valuation_id);
+// }
+// if (valuation_name) {
+//  $("#valuation_name").val(valuation_name);
+// }
+// if (scope_org_id) {
+//  $("#org_id").val(scope_org_id);
+// }
+//
+// rowClass = rowClass.replace(/\s+/g, '.');
+// fieldClass = fieldClass.replace(/\s+/g, '.');
+// if (item_id_m) {
+//  $('#content').find(rowClass).find('.item_id_m').val(item_id_m);
+// }
+// if (item_number) {
+//  $('#content').find(rowClass).find('.item_number').val(item_number);
+// }
+// if (item_description) {
+//  $('#content').find(rowClass).find('.item_description').val(item_description);
+// }
+// if (uom_id) {
+//  $('#content').find(rowClass).find('.uom_id').val(uom_id);
+// }
+//
+// localStorage.removeItem("row_class");
+// localStorage.removeItem("field_class");
+//
+//};
 
 function invValuationDetails(rowClass, element_type, element_value, inv_abc_valuation_id, json_url) {
  json_url = (typeof json_url !== 'undefined') ? json_url : 'modules/inv/abc_valuation/json_abc_valuation.php';
@@ -122,16 +122,16 @@ $(document).ready(function () {
 // });
 
  //Popup for selecting 
- $(".inv_abc_assignment_header_id.select_popup").on("click", function () {
-  void window.open('select.php?class_name=inv_abc_assignment_header', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
-
- //Popup for selecting
- $(".inv_abc_valuation_id.select_popup, #valuation_name").on("click", function () {
-  void window.open('select.php?class_name=inv_abc_valuation', '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
- });
+// $(".inv_abc_assignment_header_id.select_popup").on("click", function () {
+//  void window.open('select.php?class_name=inv_abc_assignment_header', '_blank',
+//          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
+//
+// //Popup for selecting
+// $(".inv_abc_valuation_id.select_popup, #valuation_name").on("click", function () {
+//  void window.open('select.php?class_name=inv_abc_valuation', '_blank',
+//          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+// });
 
  $('#form_header').off('blur', '.assign_seq_number')
          .on('blur', '.assign_seq_number', function () {

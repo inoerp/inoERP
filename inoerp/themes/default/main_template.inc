@@ -2,6 +2,7 @@
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php
   if (!empty($metaname_description)) {
    echo "<meta name='description' content=\"inoERP - A Open Source PHP based Enterprise Management System\">";
@@ -46,31 +47,7 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse col-md-6 navbar-right">
      <ul class="nav navbar-nav navbar-right">
-      <li>
-       <div class="topbar-login ino_right_top">
-        <?php if (!empty($_SESSION['login_status'])) { ?>
-         <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
-           <span class="caret"></span></button>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-           <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
-           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
-           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
-           <li role="presentation" class="divider"></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
-          </ul>
-         </div>
-         <?php
-        } else {
-         include_once 'extensions/user/popup_login/user_popup_login_template.php';
-        }
-        ?>
-       </div>
-      </li>
+      <li><div class="topbar-login ino_right_top"><?php ino_topbar_login();   ?></div></li>
      </ul>
      <ul class='nav navbar-nav hidden-xs'><li>
        <?php echo $ss->entry_form($_GET); ?>
@@ -102,18 +79,8 @@
      <ul class="list-group inline_list">
       <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="Toggle Navigation Menu"></i></li>
       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
-      <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
+      <li role="presentation"><a  class="getAjaxForm" href="<?php echo HOME_URL . 'form.php?class_name=extn_emessage_header&mode=9' ?>"><i class="fa fa-info" title="Messages"></i></a></li>
       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
-      <li>
-       <div class="btn-group">
-        <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="Favourites"></i></button>
-        <button type="button" title="Favourites" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-         <span class="caret"></span>
-         <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <?php echo $fav->show_currentUser_fav(true); ?>
-       </div>
-      </li>
       <!--<li role="presentation"><i class="fa fa-gears right-click-menu clickable" title="Actions"></i></li>-->
       <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="Search & List Page"></i></a></li>
       <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="Form Page"></i></a></li>
@@ -158,38 +125,25 @@
    <div class="row">
     <div class="hidden-sm hidden-xs col-md-2 sidebar">
      <div id="accordion">
-      <h3 class="clickable nav-panel"><i class="fa fa-warning"></i> Transaction Alerts</h3>
+      <h3 class="clickable nav-panel"><i class="fa fa-warning"></i> <?php echo gettext('Transaction Alerts') ?></h3>
       <div>
        <div id="sys_msg_box">
-        <div class="error"></div><div class="loading"></div>
+        <div class="error"></div><div id="loading"></div>
        </div>
       </div>
-      <h3 class="clickable nav-panel"><i class="fa fa-navicon"></i> Navigation Menu</h3>
+      <h3 class="clickable nav-panel"><i class="fa fa-navicon"></i> <?php echo gettext('Navigation Menu') ?></h3>
       <div>
        <div id="sys_menu_left_vertical">
         <div class="btn-group-sm" role="group" aria-label="...">
-         <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
-         <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
+         <button type="button" id='expand_all_nav' class="btn btn-default"><?php echo gettext('Expand All') ?></button>
+         <button type="button" id='collapse_all_nav' class="btn btn-default"><?php echo gettext('Collapse All') ?></button>
         </div>
         <?php
         echo $menu_path;
         ?>
        </div>
       </div>
-<!--      <h3 class="clickable nav-panel document-panel"><i class="fa fa-list"></i> Document Panel</h3>
-      <div>
-       <div id="document-panel">
-
-       </div>
-      </div>-->
-      <h3 class="clickable nav-panel recent-visits"><i class="fa fa-history"></i> Recent Visits</h3>
-      <div>
-       <div id="recent-visits">
-        <?php echo ino_recent_visits(); ?>
-       </div>
-      </div>
-
-      <h3 class="clickable nav-panel clipboard-data"><i class="fa fa-clipboard"></i> Clipboard</h3>
+      <h3 class="clickable nav-panel clipboard-data"><i class="fa fa-clipboard"></i> <?php echo gettext('Clipboard') ?></h3>
       <div id="left-clipboard">
        <div id="left-clipboard-icons">
         <i class="fa fa-save save-clipboard clickable"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -197,16 +151,32 @@
        </div>
        <div id="left-clipboard-data">
        </div>
-
       </div>
-
+      <h3 class="clickable nav-panel minform-data"><i class="fa fa-file-text"></i> <?php echo gettext('Minimized Forms') ?></h3>
+      <div id="left-minform">
+       <div id="left-minform-data"><ul id="minform-list" class="list-group"></ul>
+       </div>
+      </div>
+      <h3 class="clickable nav-panel event-cal-h"><i class="fa fa-calendar"></i> <?php echo gettext('Event Calendar') ?></h3>
+      <div id="left-event-cal">
+       <div id="event-datepicker"></div>
+      </div>
+      <h3 class="clickable nav-panel favourites-h" title="Favourites"><i class="fa fa-star-o"></i> <?php echo gettext('Favourites') ?></h3>
+      <div id="left-favourites">
+       <div id="favourites-links"><?php echo $fav->show_currentUser_fav(false, 'class="btn-group-vertical" role="group" aria-label="..."', 'list-group-item'); ?></div>
+      </div>
+      <h3 class="clickable nav-panel recent-visits"><i class="fa fa-history"></i> <?php echo gettext('Recent Visits') ?></h3>
+      <div>
+       <div id="recent-visits">
+        <?php echo ino_recent_visits(); ?>
+       </div>
+      </div>
      </div>
     </div>
-
-
    </div>
-   <div id="divider-bar" class="col-m-1 hidden-sm hidden-xs"><i class="fa fa-toggle-left clickable"></i></div>
 
+   <div id="divider-bar" class="col-m-1 hidden-sm hidden-xs"><i class="fa fa-toggle-left clickable"></i></div>
+   <div class="clearfix"></div>
    <div id="erp_form_area" class="col-md-10 col-md-offset-2 mainbar" >
     <div class='visible-xs visible-sm'>
      <div class="error"></div><div id="loading"></div>
@@ -283,16 +253,17 @@
   global $f;
   echo (!empty($footer_bottom)) ? "<div id=\"footer_bottom\"> $footer_bottom </div>" : "";
   echo $f->hidden_field_withId('home_url', HOME_URL);
+  echo $f->hidden_field_withId('theme_url', THEME_URL);
   ?>
   <div class="hidden">
    <?php
    echo searching_tips();
    echo ino_filter_form();
-   echo '<div id="shortcut_keys_divId" class="hidden shortcut_keys">'.ino_shortcut_keys().'</div>';
+   echo '<div id="shortcut_keys_divId" class="hidden shortcut_keys">' . ino_shortcut_keys() . '</div>';
    ?>
-   
+   <div id="hidden-div" class="hidden"><div id="hidden-div-content"></div></div>
   </div>
-<!--  Load JavaScrips-->
+  <!--  Load JavaScrips-->
   <script src="includes/js/jquery-2.0.3.min.js"></script>
   <script src="includes/js/jquery-ui.min.js"></script>
   <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>

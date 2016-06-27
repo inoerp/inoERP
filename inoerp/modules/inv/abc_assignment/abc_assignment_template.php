@@ -1,5 +1,5 @@
 <div class="row small-left-padding">
- <div id ="form_header"><span class="heading"><?php echo gettext('ABC Assignment Header') ?></span>
+ <div id ="form_header"><span class="heading"><?php $f = new inoform(); echo gettext('ABC Assignment Header') ?></span>
   <form method="post" id="inv_abc_assignment_header"  name="inv_abc_assignment_header">
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -13,11 +13,10 @@
         <a name="show" href="form.php?class_name=inv_abc_assignment_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_abc_assignment_header_id"><i class="fa fa-refresh"></i></a> 
        </li>
        <li><?php $f->l_text_field_d('abc_assignment_name'); ?></li>
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_abc_valuation_id select_popup clickable">
-         <?php echo gettext('ABC Valuation') ?></label> <?php
+       <li><?php
+        echo $f->l_val_field_dm('valuation_name', 'inv_abc_valuation', 'valuation_name', '', 'vf_select_supplier_name');
         echo $f->hidden_field_withId('inv_abc_valuation_id', $$class->inv_abc_valuation_id);
-        $f->text_field_dm('valuation_name');
-        ?> </li>
+        ?><i class="generic g_select_valuation_name select_popup clickable fa fa-search" data-class_name="inv_abc_valuation"></i></li>
        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
        <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
@@ -110,7 +109,7 @@
            echo ino_inline_action($$class_second->inv_abc_assignment_line_id, array('inv_abc_assignment_header_id' => $$class->inv_abc_assignment_header_id));
            ?>
           </td>
-          <td><?php form::number_field_wid2sr('inv_abc_assignment_line_id' , 'always_readonly'); ?></td>
+          <td><?php form::number_field_wid2sr('inv_abc_assignment_line_id', 'always_readonly'); ?></td>
           <td><?php $f->text_field_d2sr('item_id_m'); ?></td>
           <td><?php $f->text_field_wid2('item_number', 'select_item_number');
            ?> <i class="select_item_number select_popup clickable fa fa-search"></i></td>

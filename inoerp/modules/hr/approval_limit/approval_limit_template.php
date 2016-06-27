@@ -57,7 +57,7 @@
         ?>         
         <tr class="hr_approval_limit_line<?php echo $count ?>">
          <td><?php
-          echo ino_inline_action($$class_second->hr_approval_limit_line_id, array('hr_payroll_id' => $hr_approval_limit_header->hr_approval_limit_header_id));
+          echo ino_inline_action($$class_second->hr_approval_limit_line_id, array('hr_approval_limit_header_id' => $hr_approval_limit_header->hr_approval_limit_header_id));
           ?>    
          </td>
          <td><?php $f->text_field_wid2sr('hr_approval_limit_line_id'); ?></td>

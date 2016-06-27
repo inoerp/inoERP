@@ -1,4 +1,7 @@
-
+#pdf-print-tbl td{
+ padding: 10px !important;
+ text-align: left;
+}
 
 td.blank{
  border: none;

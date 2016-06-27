@@ -11350,7 +11350,7 @@ msgstr "Nessun lotto numero trovato! \nCheck il numero subinventory, locator e v
 msgid "No from subinventory      "
 msgstr "No da subinventory"
 
-msgid "Item is not defined in the organization.Select a differnt organization      "
+msgid "Item is not defined in the organization.Select a different organization      "
 msgstr "Elemento non è definito nell"organizzazione. Selezionare una diversa organizzazione"
 
 msgid "No Receipt Header ID/nEnter or Save The Header Details       "
@@ -11359,7 +11359,7 @@ msgstr "Nessuna ricevuta intestazione ID/nEnter o salvare i dettagli dell"intest
 msgid "Please update your terminal number!      "
 msgstr "Si prega di aggiornare il tuo numero di terminale!"
 
-msgid "Selected delivery is assigned to a differnt delivery number      "
+msgid "Selected delivery is assigned to a different delivery number      "
 msgstr "Recapito selezionato è assegnato a un numero di consegna diverso"
 
 msgid "You cant ship more than picked quantity      "

@@ -22,7 +22,7 @@ $module_info = [
 $pageTitle = " PO - Print ";
 $view_path = "po_view";
 ?>
-<?php include_once("../../includes/basics/header_simple.inc"); ?> 
+<?php include_once(__DIR__.'/../../includes/template/header_simple.inc'); ?>
 <?php
 $class = $class_first = 'po_header';
 $$class = $$class_first = &$po_header;

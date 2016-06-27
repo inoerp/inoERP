@@ -7,7 +7,6 @@ class pm_batch_line extends dbObject {
  public static $parent_primary_column = "pm_batch_header_id";
  public static $key_column = 'item_id_m';
  public static $module = "pm";
-
  public $field_a = [
   'pm_batch_line_id',
   'pm_batch_header_id',
@@ -25,7 +24,7 @@ class pm_batch_line extends dbObject {
   'description',
   'scale_type',
   'yield_type',
-  'cost_allocation_cb',
+  'step_no',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -34,14 +33,21 @@ class pm_batch_line extends dbObject {
  public $requiredField = [
   'pm_batch_header_id',
   'item_id_m',
-  'uom_id',
-  'planned_quantity',
+  'uom_id'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "pm_batch_header_id"
  ];
  public $fields_inForm_notInDataBase = [
   'item_description',
+  'line_type',
+  'line_id'
+ ];
+ public static $yield_type_a = [
+  'MANUAL' => 'Manual',
+//  'INC' => 'Incremental',
+//  'AUTOBS' => 'Auto By Step',
+//  'AUTO' => 'Automatic',
  ];
  public $pm_batch_line_id;
  public $pm_batch_header_id;
@@ -54,19 +60,21 @@ class pm_batch_line extends dbObject {
  public $actual_quantity;
  public $allocated_qty;
  public $yield_date;
+ public $step_no;
  public $subinventory_id;
  public $locator_id;
  public $description;
  public $scale_type;
  public $yield_type;
- public $cost_allocation_cb;
+ public $cost_allocation;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
  public $msg;
  public $item_description;
-
+ public $batch_name;
+ public $line_id;
 
  public static function find_allLine_byHeaderId($header_id) {
   $sql = " SELECT
@@ -86,6 +94,44 @@ and pfl.pm_batch_header_id = '{$header_id}'
 
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? $result_array : false;
+ }
+
+ public static function find_all_lines_with_byProduct_by_headerId($header_id) {
+  $sql = "SELECT
+pbl.pm_batch_line_id as line_id,  'pm_batch_line' as line_type_code , pbl.pm_batch_header_id, 'Finished Goods'  as line_type,
+pbl.line_no, pbl.step_no, pbl.item_id_m, pbl.uom_id, pbl.planned_quantity,
+pbl.actual_quantity, pbl.subinventory_id, pbl.locator_id, item.item_number,
+item.item_description, item.lot_generation, item.serial_generation, pbh.org_id
+
+from pm_batch_line pbl,
+pm_batch_header pbh,
+item
+
+WHERE pbl.item_id_m = item.item_id_m
+AND item.org_id = pbh.org_id
+AND pbl.pm_batch_header_id='{$header_id}'
+AND pbl.pm_batch_header_id= pbh.pm_batch_header_id
+
+UNION
+SELECT
+pbb.pm_batch_byproduct_id as line_id,  'pm_batch_byproduct' as line_type_code , pbb.pm_batch_header_id, 'By Product'  as line_type,
+pbb.line_no, pbb.step_no, pbb.item_id_m, pbb.uom_id, pbb.planned_quantity,
+pbb.actual_quantity, pbb.subinventory_id, pbb.locator_id, item.item_number,
+item.item_description, item.lot_generation, item.serial_generation, pbh.org_id
+
+from pm_batch_byproduct pbb,
+pm_batch_header pbh,
+item
+
+WHERE pbb.item_id_m = item.item_id_m
+AND item.item_id = item.item_id_m     
+AND pbb.pm_batch_header_id='{$header_id}'    
+AND pbb.pm_batch_header_id= pbh.pm_batch_header_id "
+  ;
+
+  $result = self::find_by_sql($sql);
+
+  return !empty($result) ? $result : '';
  }
 
 }

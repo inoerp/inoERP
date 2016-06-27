@@ -113,12 +113,13 @@ $(document).ready(function () {
 //get customer details
  get_customer_detail_for_bu();
 
- $("#content").on("change", '#ar_customer_site_id', function () {
-  var customer_site_id = $("#ar_customer_site_id").val();
-  if (customer_site_id) {
-   getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id);
+  $('#ar_transaction_header').off("change", "#ar_customer_site_id").on("change", "#ar_customer_site_id", function () {
+  var ar_customer_site_id = $("#ar_customer_site_id").val();
+  if (ar_customer_site_id) {
+   getCustomerSiteDetails('modules/ar/customer/json_customer.php', ar_customer_site_id);
   }
  });
+
 
 // //selecting PO Header Id
  $(".ar_transaction_header_id.select_popup").on("click", function () {
@@ -150,7 +151,7 @@ $(document).ready(function () {
 
 //all actions
 //Popup for selecting match 
- $('#action').on('change', function () {
+ $('body').on('change', '#ar_transaction_header #action' , function () {
   var selected_value = $(this).val();
   switch (selected_value) {
    case 'CREATE_ACCOUNT' :

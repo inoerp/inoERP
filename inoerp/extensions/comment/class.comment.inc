@@ -84,7 +84,7 @@ class comment extends dbObject {
   'comment_user_name',
   'subscribe_cb'
  ];
- public $pageTitle = " Comment - Create & View differnt Comments ";
+ public $pageTitle = " Comment - Create & View different Comments ";
  public $search = [
   '_view_path' => 'form.php?class_name=',
   '_show_view_path' => 1,
@@ -117,8 +117,18 @@ class comment extends dbObject {
  public $subscribe_cb;
 
  public function _before_save() {
+  if (empty(trim($this->comment))) {
+   echo '<br>No comment to post';
+   return -90;
+  }
   if (empty($this->subject)) {
-   $this->subject = substr($this->comment, 0, 50);
+   $this->subject = htmlentities(substr($this->comment, 0, 20));
+  }else{
+   $this->subject = htmlentities($this->subject);
+  }
+  
+  if (!empty($this->comment)) {
+   $this->comment = htmlentities($this->comment);
   }
  }
 
@@ -425,9 +435,9 @@ class comment extends dbObject {
      $comment_string .= "<li class='user-profile-image'>$profile_image</li>";
     }
     if (!empty($records->username) && ($records->created_by != -99)) {
-     $comment_string .= '<li class="comment_by"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($records->created_by) . '">' . ($records->username) . '</a></li>';
+     $comment_string .= '<li class="comment_by"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($records->created_by) . '">' . ino_getUserName_from_email($records->username) . '</a></li>';
     } else if (!empty($records->username)) {
-     $comment_string .= '<li class="comment_by">' . ($records->username) . '</li>';
+     $comment_string .= '<li class="comment_by">' . ino_getUserName_from_email($records->username) . '</li>';
     } else {
      $comment_string .= '<li class="comment_by">Anonymous</li>';
     }
@@ -441,7 +451,7 @@ class comment extends dbObject {
 
     $comment_string .= '</ul>';
     $comment_string .= '</div>';
-    $comment_string .= '<div class="comment panel-body update-comment">' . nl2br($records->comment);
+    $comment_string .= '<div class="comment panel-body update-comment">' . nl2br(html_entity_decode($records->comment));
     if (count($comment_file) > 0) {
      foreach ($comment_file as $file_record) {
       $comment_string .= '<p><a href=' . HOME_URL . $file_record->file_path . $file_record->file_name . '>' . $file_record->file_name . '</a></p>';

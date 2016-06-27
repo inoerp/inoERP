@@ -25,15 +25,15 @@ inoERP
       <li><?php $f->l_text_field_dr_withSearch('pm_batch_header_id') ?>
        <a name="show" href="form.php?class_name=pm_batch_header&<?php echo "mode=$mode"; ?>" class="show document_id pm_batch_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_text_field_d('batch_name'); ?></li>
+      <li><?php $f->l_text_field_dm('batch_name'); ?></li>
       <li><?php
-       echo $f->l_val_field_dm('recipe_name', 'pm_recipe_all_v', 'recipe_name', '',  'vf_select_recipe_name');
+       echo $f->l_val_field_dm('recipe_name', 'pm_recipe_all_v', 'recipe_name', '', 'vf_select_recipe_name');
        echo $f->hidden_field_withId('pm_recipe_header_id', $$class->pm_recipe_header_id);
        ?><i class="generic g_select_recipe_name select_popup clickable fa fa-search" data-class_name="pm_recipe_all_v"></i></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
       <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_woType('PROCESS'), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
-      <li><?php $f->l_text_field_d('comment'); ?></li>
+      <li><?php $f->l_select_field_from_array('status', pm_batch_header::$status_a, $$class->status, '', 'always_readonly', '', 1); ?></li>
       <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>
        <?php echo $f->hidden_field_withId('owner_employee_id', $$class->owner_employee_id); ?>
        <i class="select_employee_name select_popup clickable fa fa-search"></i>
@@ -41,6 +41,7 @@ inoERP
       <li><?php $f->l_text_field_d('routing_name') ?></li>
       <li><?php $f->l_text_field_d('formula_name') ?></li>
       <li><?php $f->l_text_field_d('description') ?></li>
+      <li><label></label><a target="_new" href="form.php?class_name=pm_batch_operation_header&mode=9&pm_batch_header_id=<?php echo $$class->pm_batch_header_id; ?>" class="button btn btn-info ajax-link"><?php echo gettext('Operation Details') ?></a></li>
      </ul> 
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -52,6 +53,7 @@ inoERP
       <li><?php $f->l_date_fieldFromToday_d('actual_start_date', $$class->actual_start_date) ?></li>
       <li><?php $f->l_text_field_d('terminate_reason') ?></li>
       <li><?php $f->l_checkBox_field_dr('batch_exploded_cb'); ?> </li>
+      <li><?php $f->l_text_field_d('comment'); ?></li>
      </ul> 
     </div>
     <div id="tabsHeader-3" class="tabContent">
@@ -103,13 +105,14 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Line') ?> #</th>
-        <th><?php echo gettext('Item') ?>#</th>
+        <th><?php echo gettext('Item') ?> #</th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Planned Qty') ?></th>
+        <th><?php echo gettext('Actual Qty') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
-        <th><?php echo gettext('Cost Allocation') ?></th>
+        <th><?php echo gettext('Step') ?> #</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -142,10 +145,11 @@ inoERP
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid2('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('quantity', $$class_second->quantity, '', '', 'allow_change'); ?></td>
-         <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_second->yield_type, '', 'medium'); ?></td>
+         <td><?php echo $f->number_field('planned_quantity', $$class_second->planned_quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('actual_quantity', $$class_second->actual_quantity, '', '', 'always_readonly', '', 1); ?></td>
+         <td><?php echo $f->select_field_from_array('yield_type', pm_batch_line::$yield_type_a, $$class_second->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_second->scale_type, '', 'medium') ?></td>
-         <td><?php $f->text_field_wid2('cost_allocation'); ?></td>
+         <td><?php echo $f->number_field('step_no', $$class_second->step_no, '', 'always_readonly', 'small ', '', 1); ?></td>
         </tr>
         <?php
         $pm_batch_line_object_ai->next();
@@ -172,13 +176,14 @@ inoERP
         <th><?php echo gettext('Ingredient') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Planned') ?></th>
+        <th><?php echo gettext('Actual') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
-        <th><?php echo gettext('Contribute Yield') ?></th>
+        <th><?php echo gettext('Yield') ?></th>
         <th><?php echo gettext('Consumption') ?></th>
-        <th><?php echo gettext('Buffer') ?></th>
-        <th><?php echo gettext('Phantom') ?></th>
-        <th><?php echo gettext('Required Qty') ?></th>
+        <th><?php echo gettext('Sub') ?></th>
+        <th><?php echo gettext('Locator') ?></th>
+        <th><?php echo gettext('Step') ?> #</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
@@ -187,10 +192,10 @@ inoERP
        foreach ($pm_batch_ingredient_object as $pm_batch_ingredient) {
         if (!empty($pm_batch_ingredient->item_id_m)) {
          $item_ig = item::find_by_item_id_m($pm_batch_ingredient->item_id_m);
-         $$class_third->item_number = $item_f->item_number;
-         $$class_third->item_description = $item_f->item_description;
+         $$class_third->item_number = $item_ig->item_number;
+         $$class_third->item_description = $item_ig->item_description;
         } else {
-         $$class_third->item_number = $$class_second->item_description = null;
+         $$class_third->item_number = $$class_third->item_description = null;
         }
         ?>         
         <tr class="pm_batch_ingredient<?php echo $count ?>">
@@ -212,13 +217,14 @@ inoERP
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid3('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_third->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('quantity', $$class_third->quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php echo $f->number_field('planned_quantity', $$class_third->planned_quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php echo $f->number_field('actual_quantity', $$class_third->actual_quantity, '', '', 'always_readonly small', '', 1); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_third->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->checkBox_field('contribute_yield_cb', $$class_third->contribute_yield_cb); ?></td>
          <td><?php echo $f->select_field_from_array('consumption_type', pm_formula_ingredient::$consumption_type_a, $$class_third->consumption_type, '', 'medium'); ?></td>
-         <td><?php echo $f->checkBox_field('buffer_cb', $$class_third->buffer_cb); ?></td>
-         <td><?php $f->text_field_wid3('phantom_type'); ?></td>
-         <td><?php $f->text_field_wid3('required_qty'); ?></td>
+         <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id medium'); ?></td>
+         <td><?php echo $f->number_field('step_no', $$class_third->step_no, '', 'always_readonly', 'small ', '', 1); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -241,10 +247,12 @@ inoERP
         <th><?php echo gettext('By Product') ?></th>
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Planned Qty') ?></th>
+        <th><?php echo gettext('Allocated Qty') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Byproduct Type') ?></th>
+        <th><?php echo gettext('Step') ?> #</th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody3 wip_wo_bom_values" >
@@ -278,10 +286,12 @@ inoERP
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid4('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('quantity', $$class_fourth->quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('planned_quantity', $$class_fourth->planned_quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php echo $f->number_field('allocated_quantity', $$class_fourth->allocated_quantity, '', '', 'allow_change small'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_fourth->scale_type, '', 'medium') ?></td>
-         <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_fourth->yield_type, '', 'medium'); ?></td>
+         <td><?php echo $f->select_field_from_array('yield_type', pm_batch_line::$yield_type_a, $$class_fourth->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('byproduct_type', pm_formula_byproduct::$byproduct_type_a, $$class_fourth->byproduct_type, '', 'medium'); ?></td>
+         <td><?php echo $f->number_field('step_no', $$class_fourth->step_no, '', 'always_readonly', 'small ', '', 1); ?></td>
         </tr>
         <?php
         $count = $count + 1;

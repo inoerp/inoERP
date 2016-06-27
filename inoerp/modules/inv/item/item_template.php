@@ -1,4 +1,4 @@
-<form action=""  method="post" id="item"  name="item"><span class="heading">Item Master </span>
+<form  method="post" id="item"  name="item"><span class="heading">Item Master </span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -15,7 +15,7 @@
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php 
+      <li><?php  
        if (!empty($item->org_id)) {
         $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $item->org_id, 'org_id', '', 1, $readonly,'','','','item_master_cb');
        } else {
@@ -24,16 +24,13 @@
        ?> 
       </li>
       <li>
-       <label><?php echo gettext('Item Id') ?></label><?php $f->text_field_dsr('item_id') ?>
+       <label><?php echo gettext('Item Id') ?></label><?php $f->text_field_dr('item_id') ?>
        <i class="select_item_number select_popup clickable fa fa-search"></i>
        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show document_id item_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><label><?php echo gettext('Item Number') ?>&nbsp; <i class="disable_autocomplete item_number clickable fa fa-plus"></i> 
-       </label><?php echo $f->text_field('item_number', $$class->item_number, '15', 'item_number', 'select_item_number', 1, $readonly_mas, 'Enter Item Number To Serach', 'Click on the + sign before this field to enter a new item'); ?>
-       <i class="select_item_number select_popup clickable fa fa-search"></i>
+      <li><?php $f->l_text_field_dm('item_number') ?><i class="select_item_number select_popup clickable fa fa-search"></i>
        <a name="show" href="form.php?class_name=item&<?php echo "mode=$mode"; ?>" class="show2 document_id findBy_item_number">
-        <i class="fa fa-refresh"></i></a> 
-      </li>
+        <i class="fa fa-refresh"></i></a> </li>
       <li><?php $f->l_text_field('item_description', $$class->item_description, '20', 'item_description', '', 1, $readonly_mas); ?></li>
       <li><?php $f->l_select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>
      </ul>
@@ -168,7 +165,7 @@
 
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"> Item Details </span>
+ <div id ="form_line" class="form_line form_header_l"><span class="heading"> Item Details </span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>

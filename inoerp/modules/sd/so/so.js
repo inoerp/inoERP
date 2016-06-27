@@ -138,14 +138,15 @@ $(document).ready(function () {
 
  get_customer_detail_for_bu();
 
- $("#content").off("change", '#ar_customer_site_id').on("change", '#ar_customer_site_id', function () {
-  var customer_site_id = $("#ar_customer_site_id").val();
-  if (customer_site_id) {
-   $.when(getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id)).then(function () {
+ $('#sd_so_header').off("change", "#ar_customer_site_id").on("change", "#ar_customer_site_id", function () {
+  var ar_customer_site_id = $("#ar_customer_site_id").val();
+  if (ar_customer_site_id) {
+   $.when(getCustomerSiteDetails('modules/ar/customer/json_customer.php', ar_customer_site_id)).then(function () {
     getExchangeRate();
    });
   }
  });
+
 
  $("#content").off("focusout", '.ship_to_inventory').on("focusout", '.ship_to_inventory', function () {
   var ship_to_inventory = $(this).val();
@@ -170,7 +171,7 @@ $(document).ready(function () {
          .on('change', '#currency, #doc_currency, #exchange_rate_type', function () {
           getExchangeRate();
          });
-$('#currency').val()
+ $('#currency').val()
 //get tax code
  $('#content').off('change', '.shipping_org_id').on('change', '.shipping_org_id', function () {
   var org_id = $(this).val();
@@ -191,7 +192,7 @@ $('#currency').val()
  })
 
 
-  //default quantity
+ //default quantity
  $("#content").off("click", "table.form_line_data_table .add_detail_values_img")
          .on("click", "table.form_line_data_table .add_detail_values_img", function () {
           var lineQuantity = $(this).closest('tr').find('.line_quantity:first').val();

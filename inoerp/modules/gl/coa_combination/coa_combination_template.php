@@ -8,7 +8,7 @@
      <i class='fa fa-refresh'></i></a> 
    </div>
   </div>
-  <div id ="form_line" class="coa_combination"><span class="heading">Value Group Details </span>
+  <div id ="form_line" class="coa_combination"><span class="heading"><?php echo gettext('Value Group Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic - View Only') ?></a></li>
@@ -39,8 +39,8 @@
           <tr class="coa_combination<?php echo $count ?>">
            <td>    
             <ul class="inline_action">
-             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+             <li class="add_row_img"><i class="fa fa-plus-circle"  alt="add new line"></i></li>
+             <li class="remove_row_img"><i class="fa fa-minus-circle" alt="remove this line"></i></li>
              <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($coa_combination->coa_combination_id); ?>"></li>           
              <li><?php echo form::hidden_field('coa_id', $coa_id_h); ?></li>
             </ul>

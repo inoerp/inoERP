@@ -73,7 +73,7 @@ class page extends dbObject {
  ];
  public $requiredField = ["content"
  ];
- public $pageTitle = " Content - Create & View differnt contents ";
+ public $pageTitle = " Content - Create & View different contents ";
  public $search = [
 		  '_show_update_path' => 1,
 		 '_update_action_meassge' => 'Update',

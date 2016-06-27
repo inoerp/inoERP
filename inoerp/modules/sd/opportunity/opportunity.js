@@ -57,10 +57,10 @@ $(document).ready(function () {
 // });
 
 
- $('body').off("change", '#ar_customer_site_id').on("change", '#ar_customer_site_id', function () {
-  var customer_site_id = $("#ar_customer_site_id").val();
-  if (customer_site_id) {
-   getCustomerSiteDetails('modules/ar/customer/json_customer.php', customer_site_id);
+  $('#sd_opportunity').off("change", "#ar_customer_site_id").on("change", "#ar_customer_site_id", function () {
+  var ar_customer_site_id = $("#ar_customer_site_id").val();
+  if (ar_customer_site_id) {
+   getCustomerSiteDetails('modules/ar/customer/json_customer.php', ar_customer_site_id);
   }
  });
 

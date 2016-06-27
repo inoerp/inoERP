@@ -264,7 +264,7 @@ class getsvgimage extends dbObject {
       foreach ($this->_legend as $l_k => $l_v) {
        $isnull = true;
        foreach ($result1 as $data_obj) {
-        if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)) {
+        if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)&& !empty($obj->$chart_value)) {
          $row['value'][] = $obj->$chart_value;
          $isnull = false;
          break;
@@ -295,7 +295,7 @@ class getsvgimage extends dbObject {
       $return_chart .= "<li class='multi_chart_{$key_2}'>";
       $return_chart .= "<span class='multi_chart_{$this->_chart_type} view'>$val_2</span>";
       foreach ($this->result as $obj) {
-       if ($obj->$legend_name == $val_2) {
+       if ($obj->$legend_name == $val_2 && !empty($obj->$chart_value)) {
         $this->_data[$obj->$chart_label] = $obj->$chart_value;
        }
       }
@@ -1276,9 +1276,9 @@ class getsvgimage extends dbObject {
   $chart = "<div class='chart_name'>" . $this->_chart_name . '</div>';
   if ($this->_chart_type != 'donut') {
    $pie_chart_height = 2.5 * $radius;
-   $chart .= "<svg class='chart pie' width=\"$this->_chart_width_orginal\" height=\"{$pie_chart_height}\">";
+   $chart .= "<svg  preserveAspectRatio='none' class='chart pie' width=\"$this->_chart_width_orginal\" height=\"{$pie_chart_height}\">";
   } else {
-   $chart .= "<svg class='chart pie' width=\"$this->_chart_width_orginal\" height=\"$this->_chart_height_orginal\">";
+   $chart .= "<svg preserveAspectRatio='none' class='chart pie' width=\"$this->_chart_width_orginal\" height=\"$this->_chart_height_orginal\">";
   }
   $chart .= '<text x="' . $title_xaxis . '" y="' . $title_yaxis . '"     class="chart_xaxis_title" >' . $this->_x_axis_text . '   </text>';
 
@@ -1393,9 +1393,9 @@ class getsvgimage extends dbObject {
   $chart = "<div class='chart_name'>" . $this->_chart_name . '</div>';
   if ($this->_chart_type != 'donut') {
    $funnel_chart_height = $this->_chart_height_orginal;
-   $chart .= "<svg class='chart funnel' width=\"$this->_chart_width_orginal\" height=\"{$funnel_chart_height}\">";
+   $chart .= "<svg preserveAspectRatio='none' class='chart funnel' width=\"$this->_chart_width_orginal\" height=\"{$funnel_chart_height}\">";
   } else {
-   $chart .= "<svg class='chart funnel' width=\"$this->_chart_width_orginal\" height=\"$this->_chart_height_orginal\">";
+   $chart .= "<svg preserveAspectRatio='none' class='chart funnel' width=\"$this->_chart_width_orginal\" height=\"$this->_chart_height_orginal\">";
   }
   $chart .= '<text x="' . $title_xaxis . '" y="' . $title_yaxis . '"     class="chart_xaxis_title" >' . $this->_x_axis_text . '   </text>';
 

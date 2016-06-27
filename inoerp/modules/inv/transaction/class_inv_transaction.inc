@@ -78,6 +78,10 @@ class inv_transaction extends dbObject {
   'bom_config_header_id',
   'transaction_rev_enabled_cb',
   'rev_start_number',
+  'pm_batch_line_id',
+  'pm_batch_header_id',
+  'pm_batch_ingredient_id',
+  'pm_batch_byproduct_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -114,7 +118,8 @@ class inv_transaction extends dbObject {
   'lot_quantity',
   'kit_cb',
   'onhand',
-  'reservable_onhand'
+  'reservable_onhand',
+  'line_type'
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
@@ -177,6 +182,10 @@ class inv_transaction extends dbObject {
  public $bom_config_header_id;
  public $transaction_rev_enabled_cb;
  public $rev_start_number;
+ public $pm_batch_line_id;
+ public $pm_batch_header_id;
+ public $pm_batch_ingredient_id;
+ public $pm_batch_byproduct_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -227,6 +236,7 @@ class inv_transaction extends dbObject {
  public $reservable_onhand;
  public $onhand;
  public $ar_customer_site_id;
+ public $line_type;
 
  public function setProperty($property, $value) {
   if (property_exists($this, $property)) {
@@ -666,7 +676,7 @@ class inv_transaction extends dbObject {
    return $return_val;
   }
 
-  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 25, 26))) {
+  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 25, 26, 29, 30))) {
    $this->_serial_type = 'ID';
   }
 
@@ -692,7 +702,7 @@ class inv_transaction extends dbObject {
    $return_val = $return_val1 && $return_val2;
   }
 
-  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 15, 21, 24, 26))) {
+  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 15, 21, 24, 26, 29))) {
    try {
     $return_val = $this->_transact_serial_issue();
    } catch (Exception $e) {
@@ -701,7 +711,7 @@ class inv_transaction extends dbObject {
   }
 
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25 , 26))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26, 30))) {
    $return_val = $this->_transact_serial_receipt();
   }
 
@@ -729,7 +739,7 @@ class inv_transaction extends dbObject {
    return $return_val;
   }
 
-  if (in_array($this->transaction_type_id, array(1, 3, 6, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 26))) {
+  if (in_array($this->transaction_type_id, array(1, 3, 6, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 26, 29))) {
    $this->_lot_type = 'ID';
   }
 
@@ -747,11 +757,11 @@ class inv_transaction extends dbObject {
    $return_val = $return_val1 && $return_val2;
   }
 
-  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 21, 24, 26))) {
+  if (in_array($this->transaction_type_id, array(6, 18, 19, 13, 14, 21, 24, 26, 29))) {
    $return_val = $this->_transact_lot_issue();
   }
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26, 30))) {
    $return_val = $this->_transact_lot_receipt();
   }
 
@@ -790,14 +800,14 @@ class inv_transaction extends dbObject {
   global $dbc;
   $snu = new inv_serial_number();
   $snu->findBy_id($serial_id);
-  if ($this->transaction_type_id == 6) {
+  if (in_array($this->transaction_type_id, [6, 29])) {
    $snu->status = 'IN_WIP';
    $snu->current_wip_wo_header_id = $this->document_id;
   } else {
    $snu->status = 'OUT_STORE';
   }
   $snu->activation_date = current_time(1);
-  if ($this->transaction_type_id == 6) {
+  if (in_array($this->transaction_type_id, [6, 29])) {
    $snu->current_org_id = $this->org_id;
   } else {
    $snu->current_org_id = '';
@@ -857,24 +867,23 @@ class inv_transaction extends dbObject {
  }
 
  public function _before_save() {
-
+  if (method_exists($this, '_before_save_2')) {
+   $this->_before_save_2();
+  }
   try {
    $validate_before_save_r = $this->_validate_before_save();
   } catch (Exception $e) {
    echo "<br>Failed _before_save. Error @ " . __FILE__ . ' @@ ' . __LINE__ . '<br>' . $e->getMessage();
    return -90;
   }
-
   if ($validate_before_save_r < 0) {
    return $validate_before_save_r;
   }
-
   if (!empty($this->org_id)) {
    $inv = new inventory();
    $inv_i = $inv->findRelatedDetail_ByOrgId($this->org_id);
    $this->ledger_id = $this->_ledger_id = $inv_i->ledger_id;
   }
-
   if (!(empty($this->transaction_type_id))) {
    switch ($this->transaction_type_id) {
     case 1 :
@@ -910,6 +919,14 @@ class inv_transaction extends dbObject {
      array_push($this->requiredField, 'am_wo_header_id');
      $this->reference_key_name = !empty($this->reference_key_name) ? $this->reference_key_name : 'am_wo_header';
      $this->reference_key_value = !empty($this->reference_key_value) ? $this->reference_key_value : $this->am_wo_header_id;
+     break;
+
+    case 29 :
+    case 30 :
+     array_push($this->requiredField, 'pm_batch_header_id');
+     array_push($this->requiredField, 'pm_batch_ingredient_id');
+     $this->reference_key_name = !empty($this->reference_key_name) ? $this->reference_key_name : 'pm_batch_header_id';
+     $this->reference_key_value = !empty($this->reference_key_value) ? $this->reference_key_value : $this->pm_batch_header_id;
      break;
 
     default:
@@ -1267,6 +1284,7 @@ class inv_transaction extends dbObject {
    case 21 :
    case 22 :
    case 24 :
+   case 29 :
     $onhand->setProperty('_from_org_id', $this->org_id);
     $onhand->setProperty('_from_subinventory_id', $this->from_subinventory_id);
     $onhand->setProperty('_from_locator_id', $this->from_locator_id);
@@ -1288,7 +1306,7 @@ class inv_transaction extends dbObject {
     //Dr accounting
     //wip transactions
     $line_number = 1;
-    if (in_array($this->transaction_type_id, array(6, 12, 13, 24))) {
+    if (in_array($this->transaction_type_id, array(6, 12, 13, 24, 29))) {
      $line_number = 1;
      foreach ($journal_line_a as $journal_line) {
       if ($journal_line['line_number'] > $line_number) {
@@ -1297,10 +1315,14 @@ class inv_transaction extends dbObject {
      }
      $line_number++;
      //get journal lines from wip
-     if (empty($this->_wip_accounting_group_id)) {
+     if (empty($this->_wip_accounting_group_id) && !empty($this->wip_wo_header_id)) {
       $woh = new wip_wo_header();
       $woh->findBy_id($this->wip_wo_header_id);
       $this->_wip_accounting_group_id = $woh->wip_accounting_group_id;
+     } else if (empty($this->_wip_accounting_group_id) && !empty($this->pm_batch_header_id)) {
+      $pm_bh = new pm_batch_header();
+      $pm_bh->findBy_id($this->pm_batch_header_id);
+      $this->_wip_accounting_group_id = $pm_bh->wip_accounting_group_id;
      }
      $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $this->_wip_accounting_group_id, 'dr', $line_number);
      $journal_line_a = array_merge($journal_line_a, $wip_journal_line_a);
@@ -1360,6 +1382,7 @@ class inv_transaction extends dbObject {
    case 20 :
    case 23 :
    case 25 :
+   case 30 :
     $onhand->setProperty('_to_org_id', $this->org_id);
     $onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
     $onhand->setProperty('_to_locator_id', $this->to_locator_id);
@@ -1402,7 +1425,7 @@ class inv_transaction extends dbObject {
       array_push($journal_line_a, $journal_line);
      }
 
-     //PPV if the Accrual & Standard Cost Amounts are differnt
+     //PPV if the Accrual & Standard Cost Amounts are different
      if ($accural_amount - $total_amount != 0) {
       $line_number++;
       $ppv_amount = abs($accural_amount - $total_amount);
@@ -1419,7 +1442,7 @@ class inv_transaction extends dbObject {
      }
     }
 
-    if (in_array($this->transaction_type_id, array(7, 10, 11))) {
+    if (in_array($this->transaction_type_id, array(7, 10, 11, 30))) {
      $line_number = 1;
      foreach ($journal_line_a as $journal_line) {
       if ($journal_line['line_number'] > $line_number) {
@@ -1438,6 +1461,12 @@ class inv_transaction extends dbObject {
       $woh = new wip_wo_header();
       $woh->findBy_id($this->am_wo_header_id);
       $this->_wip_accounting_group_id = $woh->wip_accounting_group_id;
+     }
+
+     if (empty($this->_wip_accounting_group_id) && !empty($this->pm_batch_header_id)) {
+      $pm_bh = new pm_batch_header();
+      $pm_bh->findBy_id($this->pm_batch_header_id);
+      $this->_wip_accounting_group_id = $pm_bh->wip_accounting_group_id;
      }
 
      $wip_journal_line_a = $this->_cretae_wipJournal_line_array($element_value_a, $this->_wip_accounting_group_id, 'cr', $line_number);
@@ -1552,6 +1581,16 @@ class inv_transaction extends dbObject {
    $wo_bom->save();
   }
 
+  //update the item issue quantity on Batch
+  if (($this->transaction_type_id == 29) && (!empty($this->pm_batch_ingredient_id))) {
+   //update issued quantity
+   $pm_batch_ing_i = new pm_batch_ingredient();
+   $pm_batch_ing_j = $pm_batch_ing_i->findBy_id($this->pm_batch_ingredient_id);
+   $pm_batch_ing_i->pm_batch_ingredient_id = $this->pm_batch_ingredient_id;
+   $pm_batch_ing_i->actual_quantity = $pm_batch_ing_j->actual_quantity + $this->quantity;
+   $pm_batch_ing_i->save();
+  }
+
   //update the item return quantity on WO
   if (($this->transaction_type_id == 7) && (!empty($this->wip_wo_bom_id))) {
    //update return quantity
@@ -1561,6 +1600,16 @@ class inv_transaction extends dbObject {
    $wo_bom->issued_quantity = $wo_bom_i->issued_quantity - $this->quantity;
    $wo_bom->audit_trial();
    $wo_bom->save();
+  }
+
+  //update the item return quantity on Batch
+  if (($this->transaction_type_id == 30) && (!empty($this->pm_batch_ingredient_id))) {
+   //update issued quantity
+   $pm_batch_ing_i = new pm_batch_ingredient();
+   $pm_batch_ing_j = $pm_batch_ing_i->findBy_id($this->pm_batch_ingredient_id);
+   $pm_batch_ing_i->pm_batch_ingredient_id = $this->pm_batch_ingredient_id;
+   $pm_batch_ing_i->actual_quantity = $pm_batch_ing_j->actual_quantity - $this->quantity;
+   $pm_batch_ing_i->save();
   }
 
   //update the item issue quantity on WO
@@ -1694,6 +1743,10 @@ class inv_transaction extends dbObject {
   if ($this->_transact_lot_number() < 0) {
    return -99;
   }
+
+  if (method_exists($this, '_after_save_2')) {
+   $this->_after_save_2();
+  }
  }
 
  private function _am_wo_update_quantity() {
@@ -1731,7 +1784,7 @@ class inv_transaction extends dbObject {
    array_push($journal_line_a, $journal_line);
   }
 
-  //PPV if the Accrual & Standard Cost Amounts are differnt
+  //PPV if the Accrual & Standard Cost Amounts are different
   if ($accural_amount - $total_amount != 0) {
    $line_number++;
    $ppv_amount = $accural_amount - $total_amount;

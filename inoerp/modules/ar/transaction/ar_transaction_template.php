@@ -62,7 +62,7 @@
      <div>
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
-       <li><?php $f->l_select_field_from_object('ledger_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'currency', 1, 1); ?></li>
+       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', 'currency', 1, 1); ?></li>
        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>						 </li></li>
        <li><?php $f->l_date_fieldAnyDay('payment_term_date', $$class->payment_term_date) ?></li>
        <li><?php $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly); ?></li>
@@ -80,6 +80,10 @@
       <ul class="column header_field">
        <li><?php $f->l_text_field_dr('receipt_status'); ?></li>
        <li><?php $f->l_text_field_dr('receipt_amount'); ?></li>
+       <li><?php $f->l_text_field_dr('adjustment_amount'); ?></li>
+       <li><label></label><a href="form.php?class_name=ar_transaction_adjustment&mode=2&ar_transaction_header_id=<?php echo $$class->ar_transaction_header_id ?>" class="btn btn-default" role="button">
+        View Adjustments</a> 
+       </li>
       </ul>
      </div>
     </div>
@@ -138,7 +142,6 @@
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
     <li><a href="#tabsLine-2"><?php echo gettext('Finance') ?> </a></li>
     <li><a href="#tabsLine-3"><?php echo gettext('References') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo gettext('Notes') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -159,7 +162,7 @@
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0;
+       $count = 0; 
        foreach ($ar_transaction_line_object as $ar_transaction_line) {
 //							$f->readonly2 = !empty($ar_transaction_line->ar_transaction_line_id) ? true : false;
         ?>         
@@ -167,23 +170,23 @@
          <td>
           <?php
           echo ino_inline_action($$class_second->ar_transaction_line_id, array('ar_transaction_header_id' => $$class->ar_transaction_header_id,
-           'transaction_type' => $$class->transaction_type));
+           'transaction_type' => $$class->transaction_type, 'revenue_ac_id' => $$class_second->revenue_ac_id));
           ?>
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('ar_transaction_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type', '', $readonly1); ?></td>
+         <td><?php echo $f->select_field_from_object('line_type', ar_transaction_line::ar_transaction_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, '', 'line_type medium', '', $readonly1); ?></td>
          <td><?php
-          $f->val_field_wid2('item_number', 'item', 'item_number', '');
+          $f->val_field_wid2('item_number', 'item', 'item_number', '', 'xlarge');
           echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m, 'dont_copy_r');
           echo $f->hidden_field_withCLass('customer_ordered_cb', '1', 'popup_value');
           echo $f->hidden_field_withCLass('invoiceable_cb', '1', 'popup_value');
           ?>
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
-         <td><?php $f->text_field_wid2m('item_description'); ?></td>
+         <td><?php $f->text_field_wid2m('item_description' ,'xxlarge required'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $ar_transaction_line->uom_id); ?></td>
-         <td><?php form::number_field_wid2sm('inv_line_quantity'); ?></td>
+         <td><?php form::number_field_wid2m('inv_line_quantity'); ?></td>
          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <!--</td></tr>-->	
           <?php
@@ -387,31 +390,6 @@
        ?>
       </tbody>
       <!--                  Showing a blank form for new entry-->
-     </table>
-    </div>
-    <div id="tabsLine-4" class="tabContent">
-     <table class="form_line_data_table">
-      <thead> 
-       <tr>
-        <th>Comments</th>
-
-       </tr>
-      </thead>
-      <tbody class="form_data_line_tbody">
-       <?php
-       $count = 0;
-       foreach ($ar_transaction_line_object as $ar_transaction_line) {
-        ?>         
-        <tr class="ar_transaction_line<?php echo $count ?>">
-         <td></td>
-        </tr>
-        <?php
-        $count = $count + 1;
-       }
-       ?>
-      </tbody>
-      <!--                  Showing a blank form for new entry-->
-
      </table>
     </div>
    </div>

@@ -715,13 +715,8 @@ class view extends dbObject {
    if (!empty($this->user_sort)) {
     $user_sort = $this->_update_orderBY();
     $this->query_v .= ' ORDER BY ' . $user_sort;
-//    if (empty($view_i->order_by)) {
-//     $this->query_v .= ' ORDER BY ' . $user_sort;
-//    } else {
-//     $this->query_v .= ' , ' . $user_sort;
-//    }
    }else{
-    $this->query_v .=!empty($view_i->order_by) ? ' , ORDER BY ' . $view_i->order_by : '';
+    $this->query_v .= !empty($view_i->order_by) ? '  ORDER BY ' . $view_i->order_by : '';
    }
   }
   $this->_class_name = $view_i->custom_div_class . ' ' . $view_i->view_name;
@@ -753,7 +748,7 @@ class view extends dbObject {
    return false;
   }
 
-  $return_stmt .= show_download_button($result);
+  $return_stmt .= show_download_button_inSelectFormat($result);
   $return_stmt .= $this->header_text;
   switch ($this->display_type) {
    case 'LIST' :

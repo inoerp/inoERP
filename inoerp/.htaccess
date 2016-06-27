@@ -9,6 +9,8 @@ DirectoryIndex index.php index1.php index.html index.htm
   Order allow,deny
 </FilesMatch>
 
+
+
 #for conten url alias
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -18,3 +20,20 @@ RewriteRule    ^content/([A-Za-z0-9-]+)/?$    content.php?$1    [NC,L]
  # To redirect all users to access the site WITHOUT the 'www.' prefix,
  #RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
  #RewriteRule ^ http%{ENV:protossl}://%1%{REQUEST_URI} [L,R=301]
+
+
+# PHP error handling for development servers - Remove from production
+php_flag display_startup_errors on
+php_flag display_errors on
+php_flag html_errors on
+php_flag log_errors on
+php_flag ignore_repeated_errors off
+php_flag ignore_repeated_source off
+php_flag report_memleaks on
+php_flag track_errors on
+php_value docref_root 0
+php_value docref_ext 0
+php_value error_log /home/path/public_html/domain/PHP_errors.log
+# [see footnote 3] # php_value error_reporting 999999999
+php_value error_reporting -1
+php_value log_errors_max_len 0

@@ -8,7 +8,7 @@
       <div id="structure">
        <div id="view_content" class="<?php echo $content_type_name; ?>">
         <!--    START OF FORM HEADER-->
-        <div class="error"></div><div id="loading"></div>
+
         <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 
         <?php form::hidden_field('content_id', $content->content_id) ?>
@@ -18,7 +18,7 @@
           <li class="created_by f-right"><?php
            $content_user = user::find_by_id($content->created_by);
            if (!empty($content_user)) {
-            echo '<a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($content->created_by) . '">' . ($content_user->username) . '</a>';
+            echo '<a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($content->created_by) . '">' . ino_getUserName_from_email($content_user->username) . '</a>';
             $profile_image = $f->show_existing_image($content_user->image_file_id, 'img-vs');
             if (!empty($profile_image)) {
              echo "&nbsp; $profile_image";
@@ -35,15 +35,13 @@
         </div>
         <div id="content_extra"><?php
          $cont_html = content::content_by_id($content_type_name, $content->content_id);
-//          $regex = '#<code>(.*?)</code>#';
-//          preg_match($regex, $cont_html, $matches);
-         echo nl2br($cont_html);
+         echo nl2br(html_entity_decode($cont_html));
          ?></div>
         <div id="after_content_extra">
          <div id="content_navigation" class="parent-child-nav">
           <ul>
            <li class="parent_id">
-            <?php echo!(empty($parent_of_content)) ? $parent_of_content .' <i class="fa fa-level-up fa-2x"></i>' : "" ?>
+            <?php echo!(empty($parent_of_content)) ? $parent_of_content . ' <i class="fa fa-level-up fa-2x"></i>' : "" ?>
            </li>
            <li class="child_contents">
             <?php echo '<a href="' . HOME_URL . 'content.php?mode=9&amp;content_type=' . $content_type_name . '&amp;parent_id=' . $content->content_id . '"   
@@ -53,9 +51,9 @@
          </div>
          <div id='content_info'>
           <ul>
-           <li class="attachment_content"><?php echo (!empty($file)) ?  '<label>Attachments : </label>' . file::show_file_list($file) : ""; ?></li>
-           <li class="terms"><?php echo !empty($content->terms) ? '<label>Tags : </label>' . ($content->terms) : ''; ?></li>
-           <li class="categories"><?php echo!(empty($category_statement)) ?  '<label>Category : </label>'. $category_statement : ""; ?></li>
+           <li class="attachment_content"><?php echo (!empty($file)) ? '<label>Attachments : </label>' . file::show_file_list($file) : ""; ?></li>
+           <li class="terms"><?php echo!empty($content->terms) ? '<label>Tags : </label>' . ($content->terms) : ''; ?></li>
+           <li class="categories"><?php echo!(empty($category_statement)) ? '<label>Category : </label>' . $category_statement : ""; ?></li>
           </ul>
          </div>
          <div id="child_conetnt_list"><?php
@@ -69,7 +67,7 @@
           if ($comment_privilage >= 4) {
            $reference_table = 'content';
            $reference_id = $content->content_id;
-           include_once 'comment.php';
+           include_once __DIR__ . '/../../comment.php';
           } else {
            echo "<a href='" . HOME_URL . "extensions/user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
           }

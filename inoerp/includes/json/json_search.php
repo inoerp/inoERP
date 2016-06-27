@@ -2,7 +2,7 @@
 <?php
 
 if (!empty($_GET['class_name'])) {
-
+$mode = 2;
  $class = $class_names = $_GET['class_name'];
  $$class = new $class;
  $table_name = empty($table_name) ? $class::$table_name : $table_name;
@@ -26,7 +26,7 @@ if (!empty($_GET['class_name'])) {
 
  $_GET['pageno'] = $pageno;
  $_GET['class_name'] = $class;
- $_GET['per_page'] = !empty($per_page) ? $per_page : $_GET['per_page'];
+ $_GET['per_page'] = !empty($per_page) ? $per_page : '10';
 
  if (!empty($_GET['per_page'])) {
   if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" || $_GET['per_page'][0] == "all")) {
@@ -39,7 +39,7 @@ if (!empty($_GET['class_name'])) {
 
  $search_order_by = !(empty($_GET['search_order_by'])) ? $_GET['search_order_by'][0] : '';
  $search_asc_desc = !(empty($_GET['search_asc_desc'])) ? $_GET['search_asc_desc'][0] : '';
- echo '<div id="json_search_result">';
+ echo '<div id="json_form_data"><div id="structure"><div id="json_search_result">';
 
  //start search
  $search_array = $$class->field_a;
@@ -246,7 +246,7 @@ if (!empty($_GET['class_name'])) {
    $sql .=" LIMIT {$per_page} ";
    $sql .=" OFFSET {$pagination->offset()}";
   }
-//  echo "<br><br><br> sql is $sql";
+//  echo "<br><br><br> sql is $sql and per page is $per_page";
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);
  }
@@ -294,10 +294,13 @@ if (!empty($_GET['class_name'])) {
  }
 
 
- $search_class_obj_all = $$class->findBySql($all_download_sql);
- $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
+
+ $search_class_array_all = null;
 
  if (!empty($_GET['email_addresses'])) {
+
+  $search_class_obj_all = $$class->findBySql($all_download_sql);
+  $search_class_array_all = json_decode(json_encode($search_class_obj_all), true);
   //send email
   $im = new inomail();
   $im->FromName = $si->site_name;
@@ -341,7 +344,7 @@ if (!empty($_GET['class_name'])) {
  }
 
  include_once(__DIR__ . '/../template/json_search_template.inc');
- echo '</div>';
+ echo '</div></div></div>';
 
  $dbc->confirm();
 }

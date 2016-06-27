@@ -44,15 +44,9 @@ class user_activity_v extends dbObject {
   'category',
   'content_type',
  ];
- public $initial_search = [
-  'item_number',
- ];
- public $pageTitle = " Forecast activity "; //page Title
- public $search_functions = [
-  'Organization' => 'search_org_name',
-  'Forecast ' => 'search_forecast_name',
-  'Forecast Group ' => 'search_forecast_group',
- ];
+
+ public $pageTitle = " User activity "; //page Title
+
  public $content_id;
  public $content_type_id;
  public $subject;
@@ -71,7 +65,7 @@ class user_activity_v extends dbObject {
  public $reference_table;
  public $phone;
 
- public function user_contents() {
+ public function user_contents($user_id='') {
 
   $sql = " 
    SELECT con.content_id, con.content_type_id, con.subject, con.created_by, con.creation_date, con.published_cb,
@@ -88,9 +82,7 @@ WHERE  con.created_by = user.user_id
   if (!empty($this->user_id)) {
    $sql .= " AND user.user_id = '{$this->user_id}' ";
   }
-  if (!empty($this->username)) {
-   $sql .= " AND user.username = '{$this->username}' ";
-  }
+
   if (!empty($this->category)) {
    $sql .= " AND cat.category = '{$this->category}' ";
   }
@@ -99,10 +91,11 @@ WHERE  con.created_by = user.user_id
   }
 
   $result = $this->findBySql($sql);
+ 
   return !empty($result) ? $result : false;
  }
 
- public function user_comments() {
+ public function user_comments($user_id='') {
 
   $sql = " 
    SELECT com.comment_id, com.reference_table, com.reference_id, com.comment ,com.published_cb, com.creation_date, 

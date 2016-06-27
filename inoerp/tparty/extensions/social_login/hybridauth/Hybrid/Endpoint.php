@@ -197,6 +197,12 @@ class Hybrid_Endpoint {
 				if (!class_exists("Hybrid_Storage", false)) {
 					require_once realpath(dirname(__FILE__)) . "/Storage.php";
 				}
+				if (!class_exists("Hybrid_Exception", false)) {
+					require_once realpath(dirname(__FILE__)) . "/Exception.php";
+				}
+				if (!class_exists("Hybrid_Logger", false)) {
+					require_once realpath(dirname(__FILE__)) . "/Logger.php";
+				}
 
 				$storage = new Hybrid_Storage();
 
@@ -208,7 +214,7 @@ class Hybrid_Endpoint {
 				Hybrid_Auth::initialize($storage->config("CONFIG"));
 			} catch (Exception $e) {
 				Hybrid_Logger::error("Endpoint: Error while trying to init Hybrid_Auth: " . $e->getMessage());
-				throw new Hybrid_Exception("Oophs. Error!");
+				throw new Hybrid_Exception( "Endpoint: Error while trying to init Hybrid_Auth: " . $e->getMessage(), $e->getCode(), $e );
 			}
 		}
 	}

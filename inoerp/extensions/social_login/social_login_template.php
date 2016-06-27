@@ -13,7 +13,7 @@
      <li><?php $f->l_text_field_dm('provider_name'); ?></li>
      <li><?php $f->l_text_field_d('description'); ?></li>
      <li><?php $f->l_text_field_d('sl_key'); ?></li>
-     <li><?php $f->l_text_field_d('sl_id'); ?></li>
+     <li><?php $f->l_text_field_d('slid'); ?></li>
      <li><?php $f->l_text_field_d('sl_secret'); ?></li>
      <li><?php $f->l_text_field_d('sl_scope'); ?></li>
      <li><?php $f->l_checkBox_field_d('enabled_cb'); ?> </li>

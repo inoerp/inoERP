@@ -23,7 +23,7 @@
   <div class="col-md-6 right">
    <?php
    if (!empty($category_detials->content_block_id)) {
-    echo $block->show_block_content_by_BlockId($category_detials->content_block_id);
+    echo $blk->show_block_content_by_BlockId($category_detials->content_block_id);
    } else {
     echo '  <div class="jumbotron">
    <h1>Block Content</h1>

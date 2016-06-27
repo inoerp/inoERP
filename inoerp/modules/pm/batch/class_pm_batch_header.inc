@@ -33,17 +33,19 @@ class pm_batch_header extends dbObject {
   'module_name' => 'prj',
   'weight' => 1
  ];
- public $action_a = [
-  'APPROVE' => 'Approve',
-  'PRINT' => 'Print Estimates',
-  'CANCEL' => 'Cancel',
-  'CLOSE' => 'Close',
-  'CREATE_WO' => 'Create Work Order',
-  'COPY_ESTIMATES' => 'Copy Estimates to Actuals',
-  'COPY_WO' => 'Copy WO Charges to Actuals',
-  'PROCESS_LOGISTICS' => 'Process Logistics',
-  'PROCESS_ACTUALS' => 'Process Actuals',
+ public static $status_a = [
+  'PENDING' => 'Pending',
+  'WIP' => 'WIP',
+  'COMPLETED' => 'Completed',
+  'CLOSED' => 'Closed',
+  'CANCELLED' => 'Cancelled',
  ];
+ public $action_a = [
+  'RELEASE' => 'Release',
+  'PRINT' => 'Print',
+  'CANCEL' => 'Cancel',
+  'CLOSE' => 'Close'
+  ];
  public $field_a = [
   'pm_batch_header_id',
   'batch_name',
@@ -70,6 +72,7 @@ class pm_batch_header extends dbObject {
  public $initial_search = [
   'batch_name',
   'description',
+  'status',
  ];
  public $requiredField = [
   'org_id',
@@ -84,7 +87,8 @@ class pm_batch_header extends dbObject {
  public $fields_inForm_notInDataBase = [
   'recipe_name',
   "routing_name",
-  'formula_name'
+  'formula_name',
+  'action'
  ];
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
@@ -111,6 +115,9 @@ class pm_batch_header extends dbObject {
  public $actual_start_date;
  public $update_invnetory_cb;
  public $batch_exploded_cb;
+  public $actual_quantity;
+ public $allocated_quantity;
+ public $planned_quantity;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -118,12 +125,12 @@ class pm_batch_header extends dbObject {
  public $action;
  public $recipe_name;
  private $_pm_formula_header_id;
+ private $_pm_process_routing_header_id;
 
  private function _do_action() {
-
   switch ($this->action) {
-   case 'APPROVE':
-    $this->approval_status = 'APPROVED';
+   case 'RELEASE':
+    $this->status = 'WIP';
     break;
 
    default :
@@ -137,13 +144,13 @@ class pm_batch_header extends dbObject {
    $this->_do_action();
   }
 
-  if (empty($this->approval_status)) {
-   $this->approval_status = 'ENTERED';
+  if (empty($this->status)) {
+   $this->status = 'PENDING';
   }
  }
 
  public function _after_save() {
-
+  global $dbc, $ie;
   if ((!empty($this->pm_batch_header_id)) && empty($this->batch_name)) {
    $this->batch_name = $this->org_id . '-' . $this->pm_batch_header_id;
    echo ' System generated Batch number is ' . $this->batch_name;
@@ -152,53 +159,173 @@ class pm_batch_header extends dbObject {
 
   //copy line details
   if ((!empty($this->pm_recipe_header_id)) && (empty($this->batch_exploded_cb))) {
-   $this->_copy_batch_lines();
+   try {
+    $this->_copy_batch_lines();
+    $this->batch_exploded_cb = 1;
+    echo ' System generated Batch number is ' . $this->batch_name;
+    $this->save();
+   } catch (Exception $e) {
+    array_push($ie->user_exp, 'Unable to copy batch product details. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    $dbc->rollback = 1;
+   }
   }
  }
 
  private function _copy_batch_lines() {
   $recipe_details = pm_recipe_header::find_by_id($this->pm_recipe_header_id);
   $this->_pm_formula_header_id = $recipe_details->pm_formula_header_id;
+  $this->_pm_process_routing_header_id = $recipe_details->pm_process_routing_header_id;
 
   $this->_copy_batch_products();
   $this->_copy_batch_ingredients();
   $this->_copy_batch_byproducts();
+  $this->_copy_batch_routings();
  }
 
  private function _copy_batch_products() {
-  $all_product_lines = pm_formula_line::find_by_parent_id($this->_pm_formula_header_id);
-  
+  global $dbc, $ie;
+  $all_product_lines = pm_formula_line::find_by_headerId_recipeMaterial($this->_pm_formula_header_id);
+   //check if batch products exists
+  $bacth_lines = pm_batch_line::find_by_parent_id($this->pm_batch_header_id);
+  if (!empty($bacth_lines) || empty($all_product_lines)) {
+   return -1;
+  }
+  $pbl = new pm_batch_line();
+  foreach ($all_product_lines as $product_line) {
+   $pbl->pm_batch_line_id = null;
+   foreach ($pbl->field_a as $pbl_k => $pbl_v) {
+    if (property_exists($product_line, $pbl_v)) {
+     $pbl->$pbl_v = $product_line->$pbl_v;
+    }
+   }
+   $pbl->pm_batch_header_id = $this->pm_batch_header_id;
+   try {
+    $pbl->save();
+   } catch (Exception $e) {
+    array_push($ie->user_exp, 'Unable to copy batch product. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    $dbc->rollback = 1;
+   }
+  }
  }
 
  private function _copy_batch_byproducts() {
-  
+  global $dbc, $ie;
+  $all_byproduct_lines = pm_formula_byproduct::find_by_headerId_recipeMaterial($this->_pm_formula_header_id);
+  //check if batch products exists
+  $byproduct_lines = pm_batch_byproduct::find_by_parent_id($this->pm_batch_header_id);
+  if (!empty($byproduct_lines) || empty($all_byproduct_lines)) {
+   return -1;
+  }
+  $pbb = new pm_batch_byproduct();
+  foreach ($all_byproduct_lines as $byproduct_line) {
+   $pbb->pm_batch_byproduct_id = null;
+   foreach ($pbb->field_a as $pbb_k => $pbb_v) {
+    if (property_exists($byproduct_line, $pbb_v)) {
+     $pbb->$pbb_v = $byproduct_line->$pbb_v;
+    }
+   }
+   $pbb->pm_batch_header_id = $this->pm_batch_header_id;
+   try {
+    $pbb->save();
+   } catch (Exception $e) {
+    array_push($ie->user_exp, 'Unable to copy batch by product. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    $dbc->rollback = 1;
+   }
+  }
  }
 
  private function _copy_batch_ingredients() {
-  
+  global $dbc, $ie;
+  $all_ingredient_lines = pm_formula_ingredient::find_by_headerId_recipeMaterial($this->_pm_formula_header_id);
+  //check if batch products exists
+  $ingredient_lines = pm_batch_ingredient::find_by_parent_id($this->pm_batch_header_id);
+  if (!empty($ingredient_lines)|| empty($all_ingredient_lines)) {
+   return -1;
+  }
+    $pbi = new pm_batch_ingredient();
+  foreach ($all_ingredient_lines as $ingredient_line) {
+   $pbi->pm_batch_ingredient_id = null;
+   foreach ($pbi->field_a as $pbi_k => $pbi_v) {
+    if (property_exists($ingredient_line, $pbi_v)) {
+     $pbi->$pbi_v = $ingredient_line->$pbi_v;
+    }
+   }
+   $pbi->pm_batch_header_id = $this->pm_batch_header_id;
+   try {
+    $pbi->save();
+   } catch (Exception $e) {
+    array_push($ie->user_exp, 'Unable to copy batch ingredient. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    $dbc->rollback = 1;
+   }
+  }
  }
 
- public static function find_financial_details_from_projectHeaderId($pm_batch_header_id) {
-  $sql = " 
-         SELECT org.org_id, org.legal_org_id, legal.ledger_id,
-            gl.ledger, gl.description as ledger_description, gl.coa_id, gl.calendar_option_line_code, gl.currency_code, legal.balancing_segments,
-            org.org, org.code,org.type, org.description as org_description, pph.pm_batch_header_id, pph.project_number
-            FROM org,
-            legal,
-            gl_ledger gl,
-            pm_batch_header pph
-            WHERE org.legal_org_id = legal.org_id 
-            AND gl.gl_ledger_id = legal.ledger_id
-            AND org.org_id = pph.bu_org_id
-            AND pph.pm_batch_header_id = '{$pm_batch_header_id}'
-           LIMIT 1
- "
-  ;
-
-  $result = self::find_by_sql($sql);
-
-  return !empty($result) ? array_pop($result) : false;
+ private function _copy_batch_routings() {
+  /*
+   * 
+   */
+  global $dbc, $ie;
+  $all_routing_lines = pm_process_routing_line::find_by_parent_id($this->_pm_process_routing_header_id);
+  //check if batch products exists
+  $batch_routing_lines_check = pm_batch_operation_line::find_by_parent_id($this->pm_batch_header_id);
+  if (!empty($batch_routing_lines_check)) {
+   return -1;
+  }
+  $pbol = new pm_batch_operation_line();
+  foreach ($all_routing_lines as $routing_line) {
+   $all_operation_lines = pm_process_operation_line::find_by_parent_id($routing_line->pm_process_operation_header_id);
+//   pa($all_operation_lines);pa($pbol);
+   if (empty($all_operation_lines)) {
+    continue;
+   }
+   foreach ($all_operation_lines as $operation_line) {
+    $pbol->pm_batch_operation_line_id = null;
+    foreach ($pbol->field_a as $pbol_k => $pbol_v) {
+     if (property_exists($operation_line, $pbol_v)) {
+      $pbol->$pbol_v = $operation_line->$pbol_v;
+     }
+    }
+    $pbol->pm_batch_header_id = $this->pm_batch_header_id;
+    $pbol->step_no = $routing_line->step_no;
+    $pbol->release_type = $routing_line->release_type;
+    $pbol->pm_process_routing_header_id = $routing_line->pm_process_operation_header_id;
+    try {
+     $pbol->save();
+     $this->_copy_batch_operation_details($pbol);
+    } catch (Exception $e) {
+     array_push($ie->user_exp, 'Unable to copy batch routing line. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+     $dbc->rollback = 1;
+    }
+   }
+  }
  }
+
+ private function _copy_batch_operation_details($pbol) {
+  global $dbc, $ie;
+
+//  $pbol = new pm_batch_operation_line();
+
+  $all_detail_lines = pm_process_operation_detail::find_by_fieldVal(['pm_process_operation_header_id', $pbol->pm_process_operation_header_id]);
+  $pbod = new pm_batch_operation_detail();
+  foreach ($all_detail_lines as $routing_detail) {
+   $pbod->pm_batch_operation_line_id = null;
+   foreach ($pbod->field_a as $pbod_k => $pbod_v) {
+    if (property_exists($routing_detail, $pbod_v)) {
+     $pbod->$pbod_v = $routing_detail->$pbod_v;
+    }
+   }
+   $pbod->pm_batch_operation_line_id = $pbol->pm_batch_operation_line_id;
+   try {
+    $pbod->save();
+   } catch (Exception $e) {
+    array_push($ie->user_exp, 'Unable to copy batch detail line. Error @ ' . basename(__FILE__) . ' @@ ' . __LINE__ . ' - ' . $e->getMessage());
+    $dbc->rollback = 1;
+   }
+  }
+ }
+ 
+
+
 
 }
 

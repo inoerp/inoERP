@@ -44,7 +44,8 @@ inoERP
        <li><?php $f->l_select_field_from_object('price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->price_list_header_id); ?>       </li>
        <li><?php $f->l_select_field_from_object('default_shipfrom_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->default_shipfrom_org_id, '', '', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_array('destination_type', sd_document_type::$destination_type_a, $$class->destination_type); ?>							        </li>
-       <li><?php $f->l_select_field_from_object('ar_transaction_type', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->ar_transaction_type, 'ar_transaction_type', '', 1, $readonly); ?>	</li>       <li><label>AR Transaction Source :</label> <?php $f->text_field_wid('ar_transaction_source'); ?>	</li>
+       <li><?php $f->l_select_field_from_object('ar_transaction_type', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->ar_transaction_type, 'ar_transaction_type', '', 1, $readonly); ?>	</li>       
+       <li><?php $f->l_text_field_d('ar_transaction_source'); ?>	</li>
       </ul> 
      </div> 
     </div>

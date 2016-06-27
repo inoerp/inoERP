@@ -13,7 +13,7 @@
 
 /**
  * bom_resource
- * Used for creating differnt user defined resource elements
+ * Used for creating different user defined resource elements
  * Contains all the bom_resource information, such as - resource, description , status, org_id
  * 
  */

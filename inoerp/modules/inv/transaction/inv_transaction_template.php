@@ -1,21 +1,33 @@
 <form method="post" id="inv_transaction"  name="inv_transaction">
- <?php echo (!empty($hidden_stmt)) ? $hidden_stmt : ""; ?> 
- <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
- <span class="heading"><?php echo gettext('Inventory Transaction ') ?></span> 
- <div class='tabContainer'>
-  <ul class='column header_field'>
-   <li>
-    <?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>  </li>
-   <li>
-    <?php
-    echo!(empty($id_array)) ? $f->l_select_field_from_object('transaction_type_id', transaction_type::find_some_byIdArray($id_array), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1) :
-     $f->l_select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1);
-    ?>
-   </li>
-  </ul>
+ <?php
+ $f = new inoform();
+ echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
+ ?> 
+ <div id ="form_header"><span class="heading"><?php echo gettext('Inventory Transaction ') ?></span> 
+  <div id="tabsHeader">
+   <ul class="tabMain">
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   </ul>
+   <div class="tabContainer"> 
+    <div id="tabsHeader-1" class="tabContent">
+     <ul class="column header_field"> 
+      <li>
+       <?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>  </li>
+      <li>
+       <?php
+       echo!(empty($id_array)) ? $f->l_select_field_from_object('transaction_type_id', transaction_type::find_some_byIdArray($id_array), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1) :
+        $f->l_select_field_from_object('transaction_type_id', transaction_type::find_all(), 'transaction_type_id', 'transaction_type', $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1);
+       ?>
+      </li>
+     </ul>
+    </div>
+   </div>
+
+  </div>
  </div>
 
- <div id ="form_line" class="form_line"><span class="heading">Transaction Details </span>
+
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Transaction Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
@@ -30,6 +42,7 @@
       <thead> 
        <tr>
         <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Transaction Id') ?></th>
         <th><?php echo gettext('Item Id') ?></th>
         <th><?php echo gettext('Item Number') ?></th>
@@ -50,6 +63,7 @@
           'transaction_type_id' => $$class->transaction_type_id));
          ?>
         </td>
+        <td><?php $f->seq_field_d(99); ?></td>
         <td><?php echo $f->text_field_widsr('inv_transaction_id', 'lineId line_id'); ?></td>
         <td><?php $f->text_field_widsr('item_id_m'); ?></td>
         <td><?php
@@ -58,14 +72,14 @@
          ?>
          <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
         <td><?php $f->text_field_widsr('revision_name'); ?></td>
-        <td><?php $f->text_field_wid('item_description'); ?></td>
+        <td><?php $f->text_field_widl('item_description'); ?></td>
         <td>
-         <?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, 'uom_id', $readonly); ?>
+         <?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, ' ', 'uom_id medium', 1, 1); ?>
         </td>
         <td><?php form::text_field_widsm('quantity'); ?></td>
-        <td><?php echo $f->checkBox_field('kit_cb', $$class->kit_cb, '', 'dontCopy'); ?></td>
-        <td> <a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
-        <td><?php $f->text_field_widsr('bom_config_header_id'); ?></td>
+        <td><?php echo $f->checkBox_field('kit_cb', $$class->kit_cb, '', 'dontCopy '); ?></td>
+        <td><a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit medium"></i></a></td>
+        <td><?php $f->text_field_widr('bom_config_header_id'); ?></td>
        </tr>
       </tbody>
      </table>
@@ -73,6 +87,7 @@
     <div id="tabsLine-2" class="tabContent">
      <table class="form_line_data_table">
       <thead>
+       <th><?php echo gettext('Seq') ?>#</th>
       <th><?php echo gettext('From SubInv') ?></th>
       <th><?php echo gettext('From Locator') ?></th>
       <th><?php echo gettext('To SubInv') ?></th>
@@ -81,25 +96,26 @@
       <th><?php echo gettext('Reason') ?></th>
       <th><?php echo gettext('Onhand') ?></th>
       <th><?php echo gettext('Res. Onhand') ?></th>
-      
+
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab2_1">
-        <td><?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id', '', $readonly); ?>  </td>
+        <td><?php $f->seq_field_d(99); ?></td>
+        <td><?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id medium', '', $readonly); ?>  </td>
         <td>
-         <?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'from_locator_id', '', $readonly); ?>
+         <?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'from_locator_id medium', '', $readonly); ?>
         </td>
         <td>
-         <?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id', '', $readonly); ?>
+         <?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id medium', '', $readonly); ?>
         </td>
         <td>
-         <?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'to_locator_id', '', $readonly); ?>
+         <?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'to_locator_id medium', '', $readonly); ?>
         </td>
         <td><?php form::text_field_wid('description'); ?>							</td>
         <td><?php form::text_field_wid('reason'); ?>							</td>
         <td><?php echo $f->text_field_widr('onhand', 'always_readonly'); ?></td>
         <td><?php echo $f->text_field_widr('reservable_onhand', 'always_readonly'); ?></td>
-        
+
        </tr>
       </tbody>
      </table>
@@ -107,6 +123,7 @@
     <div id="tabsLine-3" class="tabContent">
      <table class="form_line_data_table">
       <thead>
+       <th><?php echo gettext('Seq') ?>#</th>
       <th><?php echo gettext('Document Type') ?></th>
       <th><?php echo gettext('Doc. Number') ?></th>
       <th><?php echo gettext('Doc. Id') ?></th>
@@ -120,6 +137,7 @@
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab3_1">
+        <td><?php $f->seq_field_d(99); ?></td>
         <td><?php form::text_field_wids('document_type'); ?>							</td>
         <td><?php form::text_field_wid('document_number'); ?> 							</td>
         <td><?php form::text_field_wids('document_id'); ?>							</td>
@@ -137,6 +155,7 @@
     <div id="tabsLine-4" class="tabContent">
      <table class="form_line_data_table">
       <thead>
+       <th><?php echo gettext('Seq') ?>#</th>
       <th><?php echo gettext('Account') ?></th>
       <th><?php echo gettext('Unit Cost') ?></th>
       <th><?php echo gettext('Costed Amount') ?></th>
@@ -144,6 +163,7 @@
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab4_1">
+        <td><?php $f->seq_field_d(99); ?></td>
         <td><?php $f->ac_field_widm('account_id'); ?></td>
         <td><?php form::text_field_wid('unit_cost'); ?></td>
         <td><?php form::text_field_wid('costed_amount'); ?></td>

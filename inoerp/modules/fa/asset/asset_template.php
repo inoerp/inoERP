@@ -19,7 +19,7 @@
        <li><?php $f->l_text_field_d('asset_number'); ?></li>
        <li><?php $f->l_select_field_from_object('fa_asset_category_id', fa_asset_category::find_all(), 'fa_asset_category_id', 'asset_category', $$class->fa_asset_category_id, 'fa_asset_category_id', '', 1); ?></li>
        <li><?php $f->l_select_field_from_array('status', fa_asset::$status_a, $$class->status, 'status'); ?></li>
-       <li><?php $f->l_text_field_d('units'); ?></li>
+       <li><?php $f->l_text_field_dm('units'); ?></li>
        <li><?php $f->l_select_field_from_array('type', fa_asset::$type_a, $$class->type, '', '', 1); ?></li>
        <li><?php $f->l_text_field_d('parent_asset_id'); ?></li>
        <li><?php $f->l_text_field_d('description'); ?></li>

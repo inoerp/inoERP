@@ -339,7 +339,7 @@ class extn_report extends dbObject {
   $no_of_tabs = ceil($total_columns / $no_of_columns_per_tab);
   $total_count = count($result);
   $pagination = new pagination($this->pageno, $this->per_page, $total_count);
-  $pagination->setProperty('_path', "form.php?class_name=extn_report&mode=2&extn_report_id={$this->extn_report_id}");
+  $pagination->setProperty('_path', "form.php?class_name=extn_report_result&mode=2&extn_report_id={$this->extn_report_id}");
   $pagination->setProperty('_query_string', '');
 
   $content_string = '<div class="table_container scrollElement">';
@@ -378,10 +378,12 @@ class extn_report extends dbObject {
      $count = 0;
      foreach ($result as $recod_k => $record) {
       $continue = true;
-      if (empty($recod_k)) {
+
+      if (empty($recod_k) && ($this->pageno == 1)) {
        $continue = false;
-      } else if (!empty($recod_k) && ($recod_k > ($this->pageno - 1) * $this->per_page) && ($recod_k <= (($this->pageno - 1) * $this->per_page) + $this->per_page)) {
+      } else if (!empty($recod_k) && ($recod_k > ($this->pageno - 1) * $this->per_page) && ($recod_k <= ((($this->pageno - 1) * $this->per_page) + $this->per_page))) {
        $continue = false;
+//       echo "<br> recod_k is $recod_k and page no is {$this->pageno} & per page is $this->per_page record value not shown $record->item_number ";
       }
       if ($continue) {
        continue;
@@ -426,6 +428,7 @@ class extn_report extends dbObject {
   $noof_criteria = 0;
   foreach ($this->user_filter as $key => $value) {
    $key = str_replace('__', '.', $key);
+   $key = 'temp_table.' . $key;
    if (strpos(trim($value), ',') != false) {
     $comma_sep_search_parameters = explode(',', trim($value));
     $comma_sep_search_parameters_in_str = '(\'' . implode('\', \'', $comma_sep_search_parameters) . '\')';
@@ -557,34 +560,23 @@ class extn_report extends dbObject {
  public function update_extn_report_query_by_userInputs() {
   $extn_report_i = extn_report::find_by_id($this->extn_report_id);
   $this->query_v = base64_decode($extn_report_i->query_v);
+
   if (!empty($this->user_filter) || !empty($this->user_sort)) {
-   $this->query_v = ' SELECT ' . $extn_report_i->select_v;
-   $this->query_v .= ' FROM ' . $extn_report_i->from_v;
-   if (!empty($extn_report_i->where_v)) {
-    $this->query_v .= ' WHERE ' . $extn_report_i->where_v;
-   }
+   $this->query_v = ' SELECT  * FROM ( ' . $this->query_v . ' ) AS temp_table';
+
    if (!empty($this->user_filter)) {
     $user_filter = $this->_update_queryByFilter();
-    if (empty($extn_report_i->where_v)) {
-     $this->query_v .= $user_filter;
-    } else {
-     $this->query_v .= ' AND ' . $user_filter;
+    if (!empty($user_filter)) {
+     $this->query_v .= ' WHERE ' . $user_filter;
     }
    }
 
-   $this->query_v .=!empty($extn_report_i->group_by_v) ? ' GROUP BY ' . $extn_report_i->group_by_v : '';
    if (!empty($this->user_sort)) {
     $user_sort = $this->_update_orderBY();
     $this->query_v .= ' ORDER BY ' . $user_sort;
-//    if (empty($extn_report_i->order_by)) {
-//     $this->query_v .= ' ORDER BY ' . $user_sort;
-//    } else {
-//     $this->query_v .= ' , ' . $user_sort;
-//    }
-   } else {
-    $this->query_v .=!empty($extn_report_i->order_by) ? ' , ORDER BY ' . $extn_report_i->order_by : '';
    }
   }
+
   $this->_class_name = $extn_report_i->custom_div_class . ' ' . $extn_report_i->report_name;
   $this->header_text = $extn_report_i->header_text;
   $this->footer_text = $extn_report_i->footer_text;
@@ -634,7 +626,7 @@ class extn_report extends dbObject {
 
   $return_stmt .= $this->footer_text;
   if (!empty($this->_class_name)) {
-   $return_stmt = '<div class="' . $this->_class_name . '"><div class="extn_report_display_data">' . $return_stmt . '</div></div>';
+   $return_stmt = '<div class="' . $this->_class_name . '"><div class="extn_report_display_data" id="report_id'.$this->extn_report_id.'">' . $return_stmt . '</div></div>';
   } else {
    $return_stmt = '<div class="extn_report_display_data">' . $return_stmt . '</div>';
   }
@@ -681,7 +673,7 @@ class extn_report extends dbObject {
   $class = 'extn_report_result';
   $$class = $this;
   global $f;
-  include __DIR__.DS.'result/display/display_template.php';
+  include __DIR__ . DS . 'result/display/display_template.php';
   return;
  }
 

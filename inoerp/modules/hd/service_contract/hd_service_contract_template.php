@@ -1,5 +1,5 @@
 <div id ="form_header"><span class="heading"><?php   echo gettext('Service Contract')   ?></span>
- <form action=""  method="post" id="hd_service_contract_header"  name="hd_service_contract_header">
+ <form  method="post" id="hd_service_contract_header"  name="hd_service_contract_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>

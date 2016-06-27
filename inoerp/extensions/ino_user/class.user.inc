@@ -269,7 +269,7 @@ class user extends dbObject {
     $returnedData = false;
    } else If ($this->_check_userName()) {
     echo '<div class="message error">Sorry, username is not available.<br/>
-     Please try a differnt user name</div>';
+     Please try a different user name</div>';
     $returnedData = false;
    } elseif ($this->enteredPassword == $this->enteredRePassword) {
     $this->password = $this->_codeThePassword($this->enteredPassword);

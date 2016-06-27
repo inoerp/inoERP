@@ -50,7 +50,7 @@ class ar_transaction_header extends dbObject {
   'CREATE_RECEIPT' => 'Create Receipt',
   'CREATE_ACCOUNT' => 'Create Accounting',
   'VIEW_JOURNAL' => 'View Journal',
-  'CREDIT' => 'Credit Transaction',
+//  'CREDIT' => 'Credit Transaction',
   'CANCEL' => 'Cancel Transaction',
  ];
  public $account = [
@@ -146,8 +146,7 @@ class ar_transaction_header extends dbObject {
   'receivable_ac_id'
  ];
  public $fields_inForm_notInDataBase = [
-//		 '', //not updatable through form
-
+  'adjustment_amount',
   "customer_name",
   "customer_number",
   "customer_site_name",
@@ -237,6 +236,7 @@ class ar_transaction_header extends dbObject {
  public $bill_to_country;
  public $bill_to_postal_code;
  private $_max_line_num;
+ public $adjustment_amount;
 
 // private function _update_journalHeaderId() {
 //	$arth = new ar_transaction_header();
@@ -661,15 +661,15 @@ class ar_transaction_header extends dbObject {
   }
  }
 
- public function get_details_from_om_so_header() {
+ public function get_details_from_sd_so_header() {
   if (empty($this->sd_so_header_id)) {
    return false;
   }
-  $po = new om_so_header();
+  $po = new sd_so_header();
   $om_so_i = $po->findBy_id($this->sd_so_header_id);
   $this->bu_org_id = $om_so_i->bu_org_id;
   $this->transaction_type = 'INVOICE';
-  $this->om_so_number = $om_so_i->om_so_number;
+  $this->sd_so_number = $om_so_i->sd_so_number;
   $this->ar_customer_id = $om_so_i->ar_customer_id;
   $this->ar_customer_site_id = $om_so_i->ar_customer_site_id;
   $this->doc_currency = $om_so_i->currency;

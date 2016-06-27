@@ -1,18 +1,21 @@
 #ap_transaction_line .class_detail_form{
-margin-left: -774px;
+ margin-left: -698px;
 }
 
+
 #ap_transaction_line .form_detail_data_fs{
-  width: 774px;
+ width: 850px;
 }
+
 #ap_transaction_line .class_detail_form{
-margin-top: 24px;
+ margin-top: 24px;
 }
+
 
 
 td.blank{
-    border: none;
-    background-color : rgba(240, 240, 240, 0.4);
+ border: none;
+ background-color : rgba(240, 240, 240, 0.4);
 }
 
 tr.detail {
@@ -20,34 +23,34 @@ tr.detail {
 }
 
 table.form_line_data_table{
-    font-size: 13px;
+ font-size: 13px;
 }
 
 #page_print{
-    width: 980px;
+ width: 980px;
 }
 .full_page {
-    float: left;
-    width: 100%;
-    display: block;
-    clear: both;
+ float: left;
+ width: 100%;
+ display: block;
+ clear: both;
 }
 
 .half_page{
-    width: 50%;
+ width: 50%;
 }
 
 .left, .right {
-    float: left;
+ float: left;
 }
 
 #print_body .form_line_data_table{
-    width: 100%;
+ width: 100%;
 }
 
 tr.detail_header th{
-    background-color : rgba(240,240,240,0.5);
-    color : rgba(9, 105, 158, 1);
-    line-height: 6px;
-    font-size: 10px;
+ background-color : rgba(240,240,240,0.5);
+ color : rgba(9, 105, 158, 1);
+ line-height: 6px;
+ font-size: 10px;
 }

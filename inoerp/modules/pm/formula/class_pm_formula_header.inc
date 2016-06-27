@@ -19,7 +19,7 @@ class pm_formula_header extends dbObject {
  public static $table_name = "pm_formula_header";
  public static $dependent_classes = ['pm_formula_line', 'pm_formula_ingredient', 'pm_formula_byproduct'];
  public static $primary_column = "pm_formula_header_id";
- public static $key_column = 'name';
+ public static $key_column = 'formula_name';
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Formula',

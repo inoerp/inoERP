@@ -2,7 +2,6 @@
 $f = new inoform();
 $bc = new ino_barcode();
 $trnx_a = ['SUB_INV' => 'Subinventory Transfer', 'PUR_REQ' => 'Purchase Requisition'];
-
 ?>
 <div id ="form_header" ><span class="heading">Barcoded Min Max Board </span>
  <div class="tabContainer">
@@ -36,16 +35,20 @@ $trnx_a = ['SUB_INV' => 'Subinventory Transfer', 'PUR_REQ' => 'Purchase Requisit
     $onhand_min_delta = round($recod->onhand - $recod->minmax_min_quantity);
     $onhand_max_delta = round($recod->onhand - $recod->minmax_max_quantity);
     if (!empty($recod->minmax_min_quantity)) {
-     if(empty($recod->minmax_min_quantity) && empty($recod->onhand)){
+     if (empty($recod->minmax_min_quantity) && empty($recod->onhand)) {
       $height_p = 0;
-     }else{
-      try{
-      $height_p = round(($recod->onhand / $recod->minmax_min_quantity) * 100);
-      }catch(Exception $e){
+     } else {
+      try {
+       if (empty($recod->minmax_min_quantity) || (empty($recod->onhand)) || $recod->minmax_min_quantity = '0.00000') {
+        $height_p = 0;
+       } else if ((!empty($recod->minmax_min_quantity)) && (!empty($recod->onhand))) {
+        $height_p = round(($recod->onhand / $recod->minmax_min_quantity) * 100);
+       }
+      } catch (Exception $e) {
        $height_p = 0;
       }
      }
-     
+
      $height_p = $height_p >= 100 ? 100 : $height_p;
     } else {
      $height_p = 0;
@@ -83,7 +86,7 @@ $trnx_a = ['SUB_INV' => 'Subinventory Transfer', 'PUR_REQ' => 'Purchase Requisit
 
     echo "<div class='panel panel-default {$bgcolor} parent draggable_element medium'>";
     echo '<div class="panel-heading">
-     <h3 class="panel-title"><input type="checkbox" name="data_loader_element" class="data_loader checkBox" title="Select To Transact" value="" >&nbsp;' . $recod->item_number . ' - ' . $recod->item_description  . '</h3>
+     <h3 class="panel-title"><input type="checkbox" name="data_loader_element" class="data_loader checkBox" title="Select To Transact" value="" >&nbsp;' . $recod->item_number . ' - ' . $recod->item_description . '</h3>
       <div class="progress">
   <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" 
     aria-valuenow="' . $height_p . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $height_p . '%" title="' . $height_p . '">
@@ -106,7 +109,7 @@ $trnx_a = ['SUB_INV' => 'Subinventory Transfer', 'PUR_REQ' => 'Purchase Requisit
     echo '<li>Min : ' . $recod->minmax_min_quantity . ' </li>';
     echo '<li>Max : ' . $recod->minmax_max_quantity . ' </li>';
     echo '<li>Min Delta :' . $onhand_min_delta . '</li><li>Max Delta :' . $onhand_max_delta . '</li>';
-    echo '<li>Total Supp Delta :' . round($recod->total_delta,NUM_ROUND) . '</li>';
+    echo '<li>Total Supp Delta :' . round($recod->total_delta, NUM_ROUND) . '</li>';
     echo '<li>Onhand :' . $recod->onhand . '</li>';
     echo '<li>Open PO :' . $recod->open_po . '</li>';
     echo '<li>Make/Buy :' . $recod->make_buy . '</li>';
@@ -132,7 +135,6 @@ $trnx_a = ['SUB_INV' => 'Subinventory Transfer', 'PUR_REQ' => 'Purchase Requisit
 //     echo '</li>';
     }
 //    echo '<li>Source Type :' . $recod->SOURCE_TYPE . '</li>';
-    
 //    echo '<li>Source :' . $recod->SOURCE . '</li>';
 //    echo '<li>';
 //    if (!empty($recod->SOURCE)) {

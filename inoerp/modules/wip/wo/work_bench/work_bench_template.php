@@ -100,8 +100,8 @@ inoERP
      </div>
      <div class="second_rowset">
 
-      <div class="panel panel-success">
-       <div class="panel-heading">
+      <div class="panel panel-success ino-simple-panel">
+       <div class="panel-heading ino-simple-heading">
         <h3 class="panel-title"><?php echo gettext('Move Material') ?></h3>
        </div>
        <div class="panel-body">

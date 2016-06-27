@@ -39,6 +39,7 @@ include_once("includes/functions/loader.inc");
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php
   if (!empty($metaname_description)) {
    echo "<meta name='description' content=\"inoERP - A Open Source PHP based Enterprise Management System\">";
@@ -124,35 +125,7 @@ include_once("includes/functions/loader.inc");
 
       <div class="col-lg-8 col-md-8 col-sm-8 ">
        <div class="topmenu">
-        <div class="topbar-login">
-         <?php if (!empty($_SESSION['login_status'])) { ?>
-          <div class="dropdown">
-           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i><?php echo ' ' . ucfirst($_SESSION['username']); ?>
-            <span class="caret"></span></button>
-           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-            <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
-            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
-            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
-            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
-            <li role="presentation" class="divider"></li>
-            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
-           </ul>
-          </div>
-
-          <?php
-         } else {
-          if (file_exists(__DIR__ . '/template/user_popup_login_template.php')) {
-           require_once(__DIR__ . '/template/user_popup_login_template.php');
-          } else {
-           require_once('login/user_popup_login_template.php');
-          }
-         }
-         ?>
-        </div>
-
+        <div class="topbar-login"><?php ino_topbar_login();   ?></div>
        </div><!-- end top menu -->
        <div class="callus">
         <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
@@ -259,7 +232,7 @@ include_once("includes/functions/loader.inc");
        . 'content_id=' . $contnent->content_id . '&content_type_id=' . $contnent->content_type_id . '">';
        echo substr($contnent->subject, 0, $subject_no_of_char) . "</a></h3>";
        echo '</div>';
-       echo "<div class='panel-body'>" . ino_strip_html($contnent->content_summary, $summary_no_of_char) . "</div>";
+       echo "<div class='panel-body'>" . nl2br(html_entity_decode($contnent->content_summary, $summary_no_of_char)) . "</div>";
        echo '</div></div>';
        $cont_count++;
        $fp_contnts_ai->next();

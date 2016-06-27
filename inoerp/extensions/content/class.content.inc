@@ -32,7 +32,7 @@ class content extends dbObject {
  public static $system_info = [
   'name' => 'Content',
   'number' => '10014',
-  'description' => 'Used for creating differnt type of contents. Such as Forum, Documentation, etc',
+  'description' => 'Used for creating different type of contents. Such as Forum, Documentation, etc',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
@@ -141,6 +141,10 @@ class content extends dbObject {
  }
 
  public function _before_save() {
+  if (!empty($this->content)) {
+   $this->content = htmlentities($this->content);
+  }
+
   if (!empty($this->non_db_content_type)) {
    $ndbc = new $this->non_db_content_type;
    if (method_exists($ndbc, '_before_save')) {
@@ -200,7 +204,7 @@ class content extends dbObject {
     //Bind parameters
     foreach ($content_field_array as $key => $value) {
      if (!empty($_POST[$value][0])) {
-      $stmt->bindParam(":$value", $_POST[$value][0]);
+      $stmt->bindParam(":$value", htmlentities($_POST[$value][0]));
      } else {
       $stmt->bindvalue(":$value", null, PDO::PARAM_INT);
      }
@@ -220,7 +224,7 @@ class content extends dbObject {
 
     $field_values = '';
     foreach ($content_field_array as $key => $value) {
-     $field_values .= ':' . $value . ', ';
+     $field_values .= ':' . htmlentities($value) . ', ';
     }
     $field_values = rtrim($field_values, ', ');
 //write SQL
@@ -296,7 +300,7 @@ class content extends dbObject {
 					content.published_cb = 1 
 					AND content.show_in_fp_cb = 1 
    AND content.content_type_id != 1 ";
-    
+
   $sql .=" ORDER BY  creation_date DESC, weightage DESC";
   $sql .= " LIMIT {$no_of_articles} ";
   $result = $this->findBySql($sql);
@@ -521,7 +525,7 @@ AND content.content_id = category_reference.reference_id  ";
       continue;
      }
      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
-     $user_name = empty($recod_c->username) ? 'Anonymous\SelfWeb' : $recod_c->username;
+     $user_name = empty($recod_c->username) ? 'Anonymous\SelfWeb' : ino_getUserName_from_email($recod_c->username);
      $content_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> ";
      $content_string .= '<td class="no_of_comments"><b>';
      $content_string .= '<span class="vs-right-margin">' . $recod_c->no_of_comments . '</span>';
@@ -613,7 +617,7 @@ AND content.content_id = category_reference.reference_id  ";
      $category_listing .= '<td class="no_of_replies">';
      $category_listing .= $no_of_replies . '</td>';
      $category_listing .= '<td class="created_by">';
-     $category_listing .= empty($records->username) ? 'selfWeb' : $records->username;
+     $category_listing .= empty($records->username) ? 'selfWeb' : ino_getUserName_from_email($records->username);
      $category_listing .= '</td><td class="post_date">';
      $category_listing .= $records->creation_date;
      $category_listing .= '</td>';
@@ -717,7 +721,7 @@ AND content.content_id = category_reference.reference_id  ";
      $content_string .= '<td class="no_of_replies">';
      $content_string .= $no_of_replies . '</td>';
      $content_string .= '<td class="created_by">';
-     $content_string .= empty($records->username) ? 'selfWeb' : $records->username;
+     $content_string .= empty($records->username) ? 'selfWeb' : ino_getUserName_from_email($records->username);
      $content_string .= '</td><td class="post_date">';
      $content_string .= $records->creation_date;
      $content_string .= '</td>';
@@ -758,8 +762,8 @@ AND content.content_id = category_reference.reference_id  ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
- 
-  public static function content_find_by_contentTypeConentId($content_type_name, $content_id) {
+
+ public static function content_find_by_contentTypeConentId($content_type_name, $content_id) {
   $table_name = 'c_' . $content_type_name;
   $sql = " SELECT * FROM " . $table_name . " where content_id={$content_id} LIMIT 1";
   $result = self::find_by_sql($sql);
@@ -905,14 +909,27 @@ AND content.content_id = category_reference.reference_id  ";
   $content_type = content_type::find_by_content_type($content_type_name);
   $extra_fields = new_content_type::find_fields_by_id($content_type->content_type_id);
   $content_field_array = self::$content_field_array;
+  $fiela_label_arr = [];
   foreach ($extra_fields as $records) {
    $content_field_array[] = $records->Field;
+   array_push($fiela_label_arr, $records->field_label);
   }
-  $extra_content= self::content_find_by_contentTypeConentId($content_type_name, $content_id);
+  $extra_content = self::content_find_by_contentTypeConentId($content_type_name, $content_id);
   if ($extra_content) {
    foreach ($content_field_array as $key => $value) {
-    if ($value != 'content_id') {
-     $content_statemnt .= ($extra_content->$value);
+    if (key_exists($key, $fiela_label_arr)) {
+     $field_label = $fiela_label_arr[$key];
+    } else {
+     $field_label = null;
+    }
+
+    if ($value != 'content_id' && !empty(trim($extra_content->$value))) {
+     if ($value == 'content') {
+      $content_statemnt .= ($extra_content->$value);
+     }else{
+      $content_statemnt .= '<h2 class="extra_content ' . $field_label . ' ">' . $field_label . '</h2>' . ($extra_content->$value);
+     }
+     
     }
    }
   }

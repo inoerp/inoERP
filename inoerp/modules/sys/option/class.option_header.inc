@@ -83,7 +83,7 @@ class option_header extends dbObject {
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
- public $pageTitle = " Option - Create & Update differnt option and values "; //page Title
+ public $pageTitle = " Option - Create & Update different option and values "; //page Title
  public $option_list = [
 //		 'calendar_option_line_code' => 'GL_CALENDAR_NAME',
  ]; //list of search fields which have options
