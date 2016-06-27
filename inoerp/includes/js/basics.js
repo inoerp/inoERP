@@ -3704,8 +3704,10 @@ $(document).ready(function () {
    var dataName = $(this).prop('name').replace(/\[]+/g, '');
    openUrl += '&' + dataName + '=' + $(this).val();
   });
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open(openUrl, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width='+popup_width+',height='+popup_height+',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 

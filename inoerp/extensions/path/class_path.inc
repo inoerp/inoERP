@@ -64,7 +64,6 @@ class path extends dbObject {
   "name",
   "path_link",
   "description",
-  "module_code"
  ];
  public $number_fields = ['display_weight'];
  public $pageTitle = " Path - Find All Paths "; //page Title
@@ -75,6 +74,11 @@ class path extends dbObject {
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
+ 
+  public $option_lists = [
+  'module_code' => 'SYS_MODULE'
+ ];
+  
  public $path_id;
  public $parent_id;
  public $name;

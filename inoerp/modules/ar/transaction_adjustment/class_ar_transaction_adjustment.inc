@@ -32,7 +32,7 @@ class ar_transaction_adjustment extends dbObject {
   'weight' => 5
  ];
  public static $gl_journal_category = "AR_ADJUSTMENT";
- public static $transaction_type_a = [
+ public static $adjustment_type_a = [
   'ADJ' => 'Adjustment'
  ];
 //  data base variables as stored database column name
@@ -41,6 +41,9 @@ class ar_transaction_adjustment extends dbObject {
   'ar_transaction_header_id',
   'ar_receivable_activity_id',
   'adjustment_amount',
+  'gl_adjustment_amount',
+  'exchange_rate',
+  'adjustment_quantity',
   'description',
   'adjustment_date',
   'adjustment_ac_id',
@@ -66,7 +69,8 @@ class ar_transaction_adjustment extends dbObject {
   'transaction_number',
   'line_number',
   'transaction_status',
-  'transaction_type'
+  'adjustment_type',
+  'inv_line_price'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   'org_id',
@@ -93,6 +97,9 @@ class ar_transaction_adjustment extends dbObject {
  public $ar_transaction_header_id;
  public $ar_receivable_activity_id;
  public $adjustment_amount;
+ public $adjustment_quantity;
+ public $exchange_rate;
+ public $gl_adjustment_amount;
  public $description;
  public $adjustment_date;
  public $adjustment_ac_id;
@@ -111,7 +118,8 @@ class ar_transaction_adjustment extends dbObject {
  public $transaction_number;
  public $line_number;
  public $transaction_status;
- public $transaction_type;
+ public $adjustment_type;
+ public $inv_line_price;
 
  private function _save_journal_header() {
   $inv = new inventory();

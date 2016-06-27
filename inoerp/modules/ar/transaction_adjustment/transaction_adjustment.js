@@ -2,15 +2,15 @@ $(document).ready(function () {
 
  $('body').off('click', 'a.ar_transaction_adjustment_id').on('click', 'a.ar_transaction_adjustment_id', function (e) {
   e.preventDefault();
-  var transaction_type = $('#transaction_type').val();
+  var adjustment_type = $('#adjustment_type').val();
   var ar_transaction_header_id = $('#ar_transaction_header_id').val();
   var org_id = $('#org_id').val();
-  var batch_name = $('#batch_name').val();
-  var link = '&transaction_type=' + transaction_type;
+  var transaction_number = $('#transaction_number').val();
+  var link = '&adjustment_type=' + adjustment_type;
   if (ar_transaction_header_id) {
    link += '&ar_transaction_header_id=' + ar_transaction_header_id;
-  } else if (batch_name) {
-   link += '&batch_name=' + batch_name;
+  } else if (transaction_number) {
+   link += '&transaction_number=' + transaction_number;
   }
   link += '&org_id=' + org_id;
   var urlLink = $(this).attr('href');
@@ -20,24 +20,22 @@ $(document).ready(function () {
  }).one();
 
 
- $('body').off('blur', '.bom_sequence').on('blur', '.bom_sequence', function () {
+ $('body').off('blur', '.transaction_line_seq').on('blur', '.transaction_line_seq', function () {
   var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
   if ($(this).find('option:selected').val() == 'undefined' || $(this).find('option:selected').val() == "") {
-   $(trClass).find('.pm_batch_operation_detail_id,.resource_sequence,.resource_usage,.batch_quantity, .step_no, .pm_batch_operation_line_id .pm_process_routing_header_id.activity_code,.activity_factror').val('');
+   $(trClass).find('.ar_transaction_line_id,.ar_transaction_header_id,.line_number,.item_id_m, .item_description, .inv_line_quantity .line_type.line_description').val('');
    return false;
   } else {
    var selected = $(this).find('option:selected');
-   $(trClass).find('.pm_batch_operation_detail_id').val($(selected).data('pm_batch_operation_detail_id'));
-   $(trClass).find('.resource_sequence').val($(selected).data('resource_sequence'));
-   $(trClass).find('.resource_usage').val($(selected).data('resource_usage'));
-   $(trClass).find('.process_quantity').val($(selected).data('process_quantity'));
-   $(trClass).find('.step_no').val($(selected).data('step_no'));
-   $(trClass).find('.pm_batch_operation_line_id').val($(selected).data('pm_batch_operation_line_id'));
-   $(trClass).find('.pm_process_routing_header_id').val($(selected).data('pm_process_routing_header_id'));
-   $(trClass).find('.pm_batch_operation_detail_id').val($(selected).val());
-   $(trClass).find('.activity_code').val($(selected).data('activity_code'));
-   $(trClass).find('.activity_factror').val($(selected).data('activity_factror'));
-
+   $(trClass).find('.ar_transaction_header_id').val($(selected).data('ar_transaction_header_id'));
+   $(trClass).find('.line_number').val($(selected).data('line_number'));
+   $(trClass).find('.item_id_m').val($(selected).data('item_id_m'));
+   $(trClass).find('.item_description').val($(selected).data('item_description'));
+   $(trClass).find('.inv_line_quantity').val($(selected).data('inv_line_quantity'));
+   $(trClass).find('.inv_line_price').val($(selected).data('inv_line_price'));
+   $(trClass).find('.line_type').val($(selected).data('line_type'));
+   $(trClass).find('.ar_transaction_line_id').val($(selected).val());
+   $(trClass).find('.line_description').val($(selected).data('line_description'));
   }
 
  });

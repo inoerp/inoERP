@@ -146,6 +146,7 @@ class ar_transaction_header extends dbObject {
   'receivable_ac_id'
  ];
  public $fields_inForm_notInDataBase = [
+  'adjustment_amount',
   "customer_name",
   "customer_number",
   "customer_site_name",
@@ -235,6 +236,7 @@ class ar_transaction_header extends dbObject {
  public $bill_to_country;
  public $bill_to_postal_code;
  private $_max_line_num;
+ public $adjustment_amount;
 
 // private function _update_journalHeaderId() {
 //	$arth = new ar_transaction_header();
