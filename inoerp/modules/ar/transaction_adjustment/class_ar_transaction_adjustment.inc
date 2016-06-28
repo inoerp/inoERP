@@ -70,7 +70,20 @@ class ar_transaction_adjustment extends dbObject {
   'line_number',
   'transaction_status',
   'adjustment_type',
-  'inv_line_price'
+  'inv_line_price',
+  'transaction_type',
+  'transaction_class',
+  'inv_unit_price',
+  'document_owner',
+  'trnx_description',
+  'currency',
+  'doc_currency',
+  'exchange_rate_type',
+  'trnx_exchange_rate',
+  'document_date',
+  'document_number',
+  'ledger_id',
+  'trnx_period_id',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   'org_id',
@@ -80,8 +93,6 @@ class ar_transaction_adjustment extends dbObject {
   'ar_transaction_header_id',
   'ar_receivable_activity_id',
   'adjustment_amount',
-  'description',
-  'adjustment_date',
   'adjustment_ac_id',
   'ar_transaction_line_id',
  ];
@@ -120,6 +131,19 @@ class ar_transaction_adjustment extends dbObject {
  public $transaction_status;
  public $adjustment_type;
  public $inv_line_price;
+ public $transaction_type;
+ public $transaction_class;
+ public $inv_unit_price;
+ public $document_owner;
+ public $trnx_description;
+ public $currency;
+ public $doc_currency;
+ public $exchange_rate_type;
+ public $trnx_exchange_rate;
+ public $document_date;
+ public $document_number;
+ public $ledger_id;
+ public $trnx_period_id;
 
  private function _save_journal_header() {
   $inv = new inventory();
@@ -219,6 +243,23 @@ class ar_transaction_adjustment extends dbObject {
   }
  }
 
+ public function _before_save() {
+  $ret = 1;
+  if (empty($this->adjustment_ac_id)) {
+   try{
+    $this->_get_adjustment_ac();
+   }catch(Exception $e){
+    $ret = -90;
+    echo "<br>No adjustment ac found. Error @ " .  get_class($this) . ' @@ line '. __LINE__ . '<br>' . $e->getMessage() ;
+   }
+  }
+  
+  if(empty($this->adjustment_date)){
+   $this->adjustment_date = current_time(1);
+  }
+  
+ }
+
  public function save() {
   $primary_column = static::$primary_column;
   if (empty($this->$primary_column)) {
@@ -227,6 +268,14 @@ class ar_transaction_adjustment extends dbObject {
    echo '<div class="message"> You are not allowed to update a completed adjustment!</div>';
   }
   return $this->msg;
+ }
+
+ private function _get_adjustment_ac() {
+  if (empty($this->ar_receivable_activity_id)) {
+   throw new Exception('No receivable activity found');
+  } else {
+   $this->adjustment_ac_id = ar_receivable_activity::find_by_id($this->ar_receivable_activity_id)->activity_ac_id;
+  }
  }
 
 }

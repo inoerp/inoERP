@@ -70,73 +70,75 @@ $f = new inoform();
        </div>
 
 
-       <div id="tabsLine-2" class="tabContent">
+ <div id="tabsLine-2" class="tabContent">
         <div id="create_new_user" class="col-md-8">
-         <fieldset>
-             <div class="row">
-              <div class="col-sm-12 col-md-10  col-md-offset-1 ">
-               <div class="form-group">
-                <div class="input-group">
-                 <span class="input-group-addon">
-                  <i class="glyphicon glyphicon-user"></i>
-                 </span> 
-                 <input type="text" id="first_name"  class="form-control  first_name"  value="" name="first_name[]" placeholder="First Name" required>
-                </div>
-               </div>
-               <div class="form-group">
-                <div class="input-group">
-                 <span class="input-group-addon">
-                  <i class="glyphicon glyphicon-user"></i>
-                 </span>
-                 <input type="text" id="last_name"  class="form-control  last_name"  value="" name="last_name[]" placeholder="Last Name" required>
-                </div>
-               </div>
-               <div class="form-group">
-                <div class="input-group">
-                 <span class="input-group-addon">
-                  <i class="fa fa-user"></i>
-                 </span> 
-                 <input type="text" id="username"  class="form-control  username"  value="" name="username[]" placeholder="Username" required>
-                </div>
-               </div>
-               <div class="form-group">
-                <div class="input-group">
-                 <span class="input-group-addon">
-                  <i class="fa fa-envelope"></i>
-                 </span>
-                 <input type="text" id="email"  class="form-control  email"  value="" name="email[]" placeholder="eMail" required>
-                </div>
-               </div>
-               <div class="form-group">
-                <div class="input-group">
-                 <span class="input-group-addon">
-                  <i class="fa fa-phone"></i>
-                 </span>
-                 <input type="text" id="phone"  class="form-control  phone"  value="" name="phone[]" placeholder="Phone #">
-                </div>
-               </div>
-               <div class="form-group">
-                <div class="input-group">
-                 <span class="input-group-addon">
-                  <i class="glyphicon glyphicon-lock"></i>
-                 </span>
-                 <input type="password" value="" placeholder="Password" id="enteredPassword"  name="enteredPassword[]" class="form-control" required>
-                </div>
-               </div>
-               <div class="form-group">
-                <div class="input-group">
-                 <span class="input-group-addon">
-                  <i class="glyphicon glyphicon-lock"></i>
-                 </span>
-                 <input type="password" value="" placeholder="Re-enter Password" id="enteredRePassword"  name="enteredRePassword[]" class="form-control" required>
-                </div>
-               </div>
-               <div class="form-group">
-                <input type="submit" name="newUser" class="btn  btn-lg btn-info btn-block" value="Create Account">
-               </div>
+         <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_header" name="user_header">
+          <fieldset>
+           <div class="row">
+            <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+             <div class="form-group">
+              <div class="input-group">
+               <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+               </span> 
+               <input type="text" id="first_name"  class="form-control  first_name"  value="" name="first_name[]" placeholder="First Name" required>
               </div>
              </div>
-            </fieldset>
+             <div class="form-group">
+              <div class="input-group">
+               <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+               </span>
+               <input type="text" id="last_name"  class="form-control  last_name"  value="" name="last_name[]" placeholder="Last Name" required>
+              </div>
+             </div>
+             <div class="form-group">
+              <div class="input-group">
+               <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+               </span> 
+               <input type="text" id="username"  class="form-control  username"  value="" name="username[]" placeholder="Username" required>
+              </div>
+             </div>
+             <div class="form-group">
+              <div class="input-group">
+               <span class="input-group-addon">
+                <i class="fa fa-envelope"></i>
+               </span>
+               <input type="email" id="email"  class="form-control  email"  value="" name="email[]" placeholder="eMail" required>
+              </div>
+             </div>
+             <div class="form-group">
+              <div class="input-group">
+               <span class="input-group-addon">
+                <i class="fa fa-phone"></i>
+               </span>
+               <input type="text" id="phone"  class="form-control  phone"  value="" name="phone[]" placeholder="Phone #">
+              </div>
+             </div>
+             <div class="form-group">
+              <div class="input-group">
+               <span class="input-group-addon">
+                <i class="glyphicon glyphicon-lock"></i>
+               </span>
+               <input type="password" value="" placeholder="Password" id="enteredPassword"  name="enteredPassword[]" class="form-control" required>
+              </div>
+             </div>
+             <div class="form-group">
+              <div class="input-group">
+               <span class="input-group-addon">
+                <i class="glyphicon glyphicon-lock"></i>
+               </span>
+               <input type="password" value="" placeholder="Re-enter Password" id="enteredRePassword"  name="enteredRePassword[]" class="form-control" required>
+              </div>
+             </div>
+             <div class="form-group">
+              <input type="submit" name="newUser" class="btn  btn-lg btn-info btn-block" value="Create Account">
+             </div>
+            </div>
+           </div>
+          </fieldset>
+         </form>
         </div>
         <div class="col-md-4"> 
          <?php echo extn_social_login::sl_stmt(); ?>

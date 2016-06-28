@@ -3707,7 +3707,7 @@ $(document).ready(function () {
   var popup_width = $(window).width();
   var popup_height = $(window).height();
   void window.open(openUrl, '_blank',
-          'width='+popup_width+',height='+popup_height+',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 
@@ -3736,6 +3736,12 @@ $(document).ready(function () {
 
   void window.open(ulink, '_blank',
           'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
+  void window.open(ulink, '_blank',
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+
  });
 
  //popu for selecting items
@@ -5720,6 +5726,14 @@ $(document).ready(function () {
    $(this_e).closest('#file_upload_form').find('.uploaded_file_details').append(stmt);
   });
  });
+ 
+ $('body').on('blur', '#enteredRePassword' , function(){
+  if($(this).val() != $('#enteredPassword').val()){
+    alert('You have entered two different passwords');
+    $(this).val('');
+  }
+
+});
 
 });
 

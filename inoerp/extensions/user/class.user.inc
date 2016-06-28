@@ -323,6 +323,7 @@ class user extends dbObject {
  }
 
  public function verify_user() {
+  $returnedData = false;
   //first check existing or new user 
   if (empty($this->user_id)) {
    If ($this->_check_email()) {
@@ -335,6 +336,8 @@ class user extends dbObject {
    } elseif ($this->enteredPassword == $this->enteredRePassword) {
     $this->password = $this->_codeThePassword($this->enteredPassword);
     $returnedData = true;
+   }else{
+    throw new Exception('Sorry, two different passwords are entered');
    }//nonexisting user check 
   }//end of password match
   elseif ((!empty($this->user_id)) && (!empty($this->enteredPassword))) {
@@ -370,7 +373,7 @@ class user extends dbObject {
    $im->addReplyTo($si->email, 'User Registration');
    $im->Subject = $subject;
    $im->Body = $message;
-   $im->ino_sendMail();
+   $im->ino_sendMail(true);
   }//new user registration complete
   else {
    $msg = "New user registration Failed!" . mysql_error();

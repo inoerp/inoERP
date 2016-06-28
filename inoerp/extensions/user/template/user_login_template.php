@@ -107,7 +107,7 @@
                  <span class="input-group-addon">
                   <i class="fa fa-envelope"></i>
                  </span>
-                 <input type="text" id="email"  class="form-control  email"  value="" name="email[]" placeholder="eMail" required>
+                 <input type="email" id="email"  class="form-control  email"  value="" name="email[]" placeholder="eMail" required>
                 </div>
                </div>
                <div class="form-group">

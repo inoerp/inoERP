@@ -29,19 +29,26 @@ inoERP
       <a name="show2" href="form.php?class_name=ar_transaction_adjustment&<?php echo "mode=$mode"; ?>" class="show2 document_id ar_transaction_adjustment_id">
        <i class="fa fa-refresh"></i></a> 
      </li> 
+     <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', 'always_readonly', '', 1); ?>             </li>
+     <li><?php $f->l_select_field_from_object('trnx_period_id', gl_period::find_all(), 'gl_period_id', 'period_name', $$class->trnx_period_id, 'ledger_id', 'always_readonly', '', 1); ?>             </li>
+
     </ul>
    </div>
    <div id="tabsHeader-2" class="tabContent">
     <div class="large_shadow_box"> 
      <ul class="column header_field"> 
-      <li><?php $f->l_text_field_dr('item_id_m'); ?></li>
-      <li><?php $f->l_text_field_dr('item_number'); ?></li>
-      <li><?php $f->l_text_field_dr('item_description'); ?></li>
-      <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom_id', '', '', 1); ?> </li>
-      <li><?php $f->l_number_field_dr('total_quantity'); ?></li>
-      <li><?php $f->l_number_field_dr('completed_quantity'); ?></li>
-      <li><?php $f->l_text_field_dr('sales_order_header_id'); ?></li>
-      <li><?php $f->l_text_field_dr('sales_order_line_id'); ?></li>
+      <li><?php $f->l_text_field_dr('transaction_type'); ?></li>
+      <li><?php $f->l_text_field_dr('transaction_class'); ?></li>
+      <li><?php $f->l_text_field_dr('transaction_number'); ?></li>
+      <li><?php $f->l_text_field_dr('document_owner'); ?></li>
+      <li><?php $f->l_text_field_dr('trnx_description'); ?></li>
+      <li><?php $f->l_text_field_dr('currency'); ?></li>
+      <li><?php $f->l_text_field_dr('doc_currency'); ?></li>
+      <li><?php $f->l_text_field_dr('exchange_rate_type'); ?></li>
+      <li><?php $f->l_text_field_dr('trnx_exchange_rate'); ?></li>
+      <li><?php $f->l_text_field_dr('transaction_status'); ?></li>
+      <li><?php $f->l_text_field_dr('document_date'); ?></li>
+      <li><?php $f->l_text_field_dr('document_number'); ?></li>
      </ul>
     </div>
    </div>
@@ -62,39 +69,72 @@ inoERP
        <tr>
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Seq') ?></th>
-        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Line') ?></th>
+        <th><?php echo gettext('Activity') ?></th>
         <th><?php echo gettext('Line Type') ?></th>
         <th><?php echo gettext('Line Description') ?></th>
         <th><?php echo gettext('Item Description') ?></th>
-        <th><?php echo gettext('Item Id') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
+        <th><?php echo gettext('Unit Price') ?></th>
         <th><?php echo gettext('Line Amount') ?></th>
         <th><?php echo gettext('Adj Quantity') ?></th>
         <th><?php echo gettext('Adj Amount') ?></th>
-        <th><?php echo gettext('Trnx. Id') ?></th>
+
        </tr>
       </thead>
       <tbody class="inv_transaction_values form_data_line_tbody">
+       <?php
+       $count = 0;
+       if (!empty($adjustment_line_object)) {
+        $position = 0;
+        $adjustment_line_ai = new ArrayIterator($adjustment_line_object);
+        $adjustment_line_ai->seek($position);
+        while ($adjustment_line_ai->valid()) {
+         $adjustment_line_i = $adjustment_line_ai->current();
+         $ar_trnx_line_i = ar_transaction_line::find_by_id($adjustment_line_i->ar_receivable_activity_id);
+         ?>         
+         <tr class="ar_transaction_adjustment<?php echo $count ?>">
+          <td>      </td>
+          <td><?php $f->seq_field_d($count) ?></td>
+          <td><?php $f->text_field_widr('ar_transaction_line_id', 'always_readonly'); ?></td>
+          <td><?php echo $f->select_field_from_object('ar_receivable_activity_id', ar_receivable_activity::find_all(), 'ar_receivable_activity_id', 'activity_name', $adjustment_line_i->ar_receivable_activity_id, '', 'always_readonly', 1, '', '', '', '', 'activity_ac_id'); ?></td>
+          <td><?php echo $f->text_field('line_type', $ar_trnx_line_i->line_type, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('line_description', $ar_trnx_line_i->line_description, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('item_description', $ar_trnx_line_i->item_description, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('inv_line_quantity', $ar_trnx_line_i->inv_line_quantity, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('inv_unit_price', $ar_trnx_line_i->inv_unit_price, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('inv_line_price', $ar_trnx_line_i->inv_line_price, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('adjustment_quantity', $adjustment_line_i->adjustment_quantity, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('adjustment_amount', $adjustment_line_i->adjustment_amount, '', '', 'always_readonly'); ?></td>
+         </tr>
+         <?php
+         $adjustment_line_ai->next();
+         if ($adjustment_line_ai->key() == $position + $per_page) {
+          break;
+         }
+         $count = $count + 1;
+        }
+       }
+       ?>
        <tr class="ar_transaction_adjustment">
         <td>
          <?php
-         $count = 0;
-         $f = new inoform();
-         echo ino_inline_action($$class->pm_batch_ingredient_id, array('org_id' => $$class->org_id,
-          'ar_transaction_header_id' => $$class->ar_transaction_header_id, 'transaction_type' => $$class->transaction_type, 'transaction_date' => $$class->transaction_date));
+         echo ino_inline_action($$class->ar_transaction_adjustment_id, array('org_id' => $$class->org_id,
+          'ar_transaction_header_id' => $$class->ar_transaction_header_id, 'transaction_type' => $$class->transaction_type));
          ?>
         </td>
         <td><?php $f->seq_field_d($count) ?></td>
         <td><?php echo!empty($transaction_line_stament) ? $transaction_line_stament : form::text_field_wid('line_stmt'); ?></td>
-        <td><?php $f->text_field_widsr('line_type'); ?></td>
+        <td><?php echo $f->select_field_from_object('ar_receivable_activity_id', ar_receivable_activity::find_all(), 'ar_receivable_activity_id', 'activity_name', $$class->ar_receivable_activity_id, '', '', 1, '', '', '', '', 'activity_ac_id'); ?></td>
+        <td><?php $f->text_field_widr('line_type'); ?></td>
         <td><?php $f->text_field_widr('line_description', 'always_readonly'); ?></td>
         <td><?php $f->text_field_widr('item_description', 'always_readonly'); ?></td>
-        <td><?php $f->text_field_widsr('item_id_m', 'always_readonly'); ?></td>
-        <td><?php $f->text_field_widsr('inv_line_quantity', 'always_readonly'); ?></td>
-        <td><?php $f->text_field_widsr('inv_line_price', 'always_readonly'); ?></td>
-        <td><?php $f->text_field_wids('adjustment_quantity'); ?></td>
-        <td><?php $f->text_field_wids('adjustment_amount'); ?></td>
-        <td><?php $f->text_field_widr('ar_transaction_adjustment_id', 'always_readonly'); ?></td>
+        <td><?php $f->text_field_widr('inv_line_quantity', 'always_readonly'); ?></td>
+        <td><?php $f->text_field_widr('inv_unit_price', 'always_readonly'); ?></td>
+        <td><?php $f->text_field_widr('inv_line_price', 'always_readonly'); ?></td>
+        <td><?php $f->text_field_wid('adjustment_quantity'); ?></td>
+        <td><?php $f->text_field_wid('adjustment_amount'); ?></td>
+
        </tr>
       </tbody>
      </table>
@@ -110,20 +150,58 @@ inoERP
         <th><?php echo gettext('Reason') ?></th>
         <th><?php echo gettext('Status') ?></th>
         <th><?php echo gettext('Source') ?></th>
+        <th><?php echo gettext('Rate') ?></th>
+        <th><?php echo gettext('GL Adj Amount') ?></th>
         <th><?php echo gettext('Period') ?></th>
+        <th><?php echo gettext('Trnx. Id') ?></th>
        </tr>
       </thead>
       <tbody class="inv_transaction_values form_data_line_tbody">
+       <?php
+       $count = 0;
+       $f = new inoform();
+       if (!empty($adjustment_line_object)) {
+        $position = 0;
+        $adjustment_line_ai = new ArrayIterator($adjustment_line_object);
+        $adjustment_line_ai->seek($position);
+        while ($adjustment_line_ai->valid()) {
+         $adjustment_line_i = $adjustment_line_ai->current();
+         $ar_trnx_line_i = ar_transaction_line::find_by_id($adjustment_line_i->ar_receivable_activity_id);
+         ?>         
+         <tr class="ar_transaction_adjustment<?php echo $count ?>">
+          <td><?php $f->seq_field_d($count) ?></td>
+          <td><?php echo $f->text_field('description', $adjustment_line_i->description, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('adjustment_date', $adjustment_line_i->adjustment_date, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->account_field('adjustment_ac_id', $adjustment_line_i->adjustment_ac_id); ?></td>
+          <td><?php echo $f->text_field('reason', $adjustment_line_i->reason, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('status', $adjustment_line_i->status, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('line_source', $adjustment_line_i->line_source, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('exchange_rate', $adjustment_line_i->exchange_rate, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('gl_adjustment_amount', $adjustment_line_i->gl_adjustment_amount, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->gl_period_field('period_id', $$class->ledger_id, '', 'medium', 1); ?></td>
+          <td><?php echo $f->text_field('ar_transaction_adjustment_id', $adjustment_line_i->ar_transaction_adjustment_id, '', '', 'always_readonly'); ?></td>
+         </tr>
+         <?php
+         $adjustment_line_ai->next();
+         if ($adjustment_line_ai->key() == $position + $per_page) {
+          break;
+         }
+         $count = $count + 1;
+        }
+       }
+       ?>
        <tr class="ar_transaction_adjustment">
         <td><?php $f->seq_field_d($count) ?></td>
         <td><?php $f->text_field_wid('description'); ?></td>
-        <td><?php echo $f->date_fieldAnyDay('adjustment_date' , ''); ?></td>
-        <td><?php $f->ac_field_widm('adjustment_ac_id'); ?></td>
+        <td><?php echo $f->date_fieldAnyDay('adjustment_date', ''); ?></td>
+        <td><?php $f->ac_field_wid('adjustment_ac_id'); ?></td>
         <td><?php $f->text_field_wid('reason'); ?></td>
         <td><?php $f->text_field_wid('status'); ?></td>
         <td><?php $f->text_field_wid('line_source'); ?></td>
-        <td><?php $f->text_field_wid('period_id'); ?></td>
-
+        <td><?php $f->text_field_wid('exchange_rate'); ?></td>
+        <td><?php $f->text_field_wid('gl_adjustment_amount'); ?></td>
+        <td><?php echo $f->gl_period_field('period_id', $$class->ledger_id, '', 'medium', 1); ?></td>
+        <td><?php $f->text_field_widr('ar_transaction_adjustment_id', 'always_readonly'); ?></td>
        </tr>
       </tbody>
      </table>

@@ -463,13 +463,13 @@ EOD;
   }
   $attachment_statement = '';
   $file = file::find_by_id($value);
-    if (empty($file)) {
+  if (empty($file)) {
    return;
   }
   $file_path = HOME_URL . $file->file_path . $file->file_name;
-  $file_path_internal = HOME_DIR . DS. $file->file_path . $file->file_name;
+  $file_path_internal = HOME_DIR . DS . $file->file_path . $file->file_name;
 
- if (file_exists($file_path_internal)) {
+  if (file_exists($file_path_internal)) {
    $attachment_statement .= "<div class=\"existing-image \">";
    $attachment_statement .= '<img class="img ' . $div_class . '" src="' . $file_path . '"/>';
    if ($full_size_on_hover) {
@@ -477,7 +477,7 @@ EOD;
    }
    $attachment_statement .= "</div>";
   }
-  
+
 
   return $attachment_statement;
  }
@@ -567,6 +567,46 @@ EOD;
 
  public function seq_field($value) {
   $this->text_field('seq_number', $value, '6', '', 'seq_number', '', 1);
+ }
+
+ public function gl_period_field($name, $ledger_id, $div_id = '', $div_class = 'medium', $req = '', $readonly = '') {
+  global $f, $class, $$class;
+  if (!empty($ledger_id)) {
+   $ledger = new gl_ledger();
+   $ledger_i = $ledger->findBy_id($ledger_id);
+   if ($ledger_i) {
+    $$class->currency = $ledger_i->currency_code;
+   }
+   $gp = new gl_period();
+   $all_open_periods = $gp->find_all_periods($ledger_id, 'OPEN');
+   if (empty($$class->$name)) {
+    $$class->$name = $gp->current_open_period($ledger_id, 'OPEN')->gl_period_id;
+   }
+   $period_name_stmt = $f->select_field_from_object($name, $all_open_periods, 'gl_period_id', 'period_name', $$class->$name, $div_id, $div_class, $req, $readonly);
+  } else {
+   $period_name_stmt = $f->text_field_wid($name);
+  }
+  return $period_name_stmt;
+ }
+
+ public function l_gl_period_field($name, $ledger_id, $div_id = '', $div_class = 'medium', $req = '', $readonly = '') {
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->gl_period_field($name, $ledger_id, $div_id, $div_class, $req, $readonly);
+ }
+
+ public function l_gl_period_field_d($name, $ledger_id) {
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->gl_period_field($name, $ledger_id, $name, 'medium');
+ }
+
+ public function l_gl_period_field_dm($name, $ledger_id) {
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->gl_period_field($name, $ledger_id, $name, 'medium', 1);
+ }
+
+ public function l_gl_period_field_dr($name, $ledger_id) {
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo $this->gl_period_field($name, $ledger_id, $name, 'medium always_readonly', '', 1);
  }
 
  public function seq_field_d($value) {

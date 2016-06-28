@@ -144,7 +144,6 @@ if (!empty($_POST['newUser'])) {
  $new_user->last_name = trim($_POST['last_name'][0]);
  $new_user->email = trim($_POST['email'][0]);
  if ($new_user->_before_save() == 1) {
-  $new_user->audit_trial();
   $new_user->save();
   $new_user->_after_save();
   $dbc->confirm();
