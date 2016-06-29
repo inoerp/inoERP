@@ -16,6 +16,14 @@
  * Used for generating AR Invoice, Debit Memo, Credit Memo, Deposit, Guarantee
  * Contains all the AR Transaction header level information, such as - Customer, Document Type, Currency, Trnx Number
  * 
+ * Status Update :
+ * INCOMPLETE : Not ready for accounting
+ * COMPLETE : Ready for accounting
+ *            with gl_journal_header_id means accounting is cretaed.
+ * CLOSED : Journals are posted
+ *          Status is changed by the post program and only adjustments are possible 
+ *            
+ * 
  */
 class ar_transaction_header extends dbObject {
 
@@ -128,10 +136,9 @@ class ar_transaction_header extends dbObject {
   'transaction_number',
   'document_number',
   'ar_customer_id',
-  'ar_customer_site_id',
-  'document_owner',
-  'approval_status',
-  'gl_journal_header_id'
+  'gl_journal_header_id',
+   'transaction_status',
+  'transaction_class',
  ];
  public $requiredField = [
   'bu_org_id',
@@ -376,7 +383,6 @@ class ar_transaction_header extends dbObject {
   $gjh->journal_name = $gjh->journal_category . '-' . $gjh->reference_key_value;
   $gjh->description = $gjh->journal_name . '-' . current_time();
   $gjh->balance_type = 'A';
-  $gjh->audit_trial();
   try {
    $gjh->save();
    $this->gl_journal_header_id = $gjh->gl_journal_header_id;
@@ -385,7 +391,6 @@ class ar_transaction_header extends dbObject {
    $ar_th = new ar_transaction_header();
    $ar_th->findBy_id($this->ar_transaction_header_id);
    $ar_th->gl_journal_header_id = $gjh->gl_journal_header_id;
-   $ar_th->audit_trial();
    $ar_th->save();
   } catch (Exception $e) {
    echo "<br> Failed Saving Jounral Header" . $e->getMessage();
@@ -461,7 +466,6 @@ class ar_transaction_header extends dbObject {
   $receviable_gjl->description = 'AR Trnx Receviable of ' . $this->transaction_number;
   $receviable_gjl->reference_type = 'table';
 
-  $receviable_gjl->audit_trial();
   $receviable_gjl->save();
  }
 
@@ -469,7 +473,6 @@ class ar_transaction_header extends dbObject {
   try {
    $this->findBy_id($ar_transaction_id);
    $this->transaction_status = 'CLOSED';
-   $this->audit_trial();
    $this->save();
    return 1;
   } catch (Exception $e) {

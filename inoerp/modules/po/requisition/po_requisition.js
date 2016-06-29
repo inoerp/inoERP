@@ -1,93 +1,3 @@
-function setValFromSelectPage(po_requisition_header_id, combination, supplier_id, supplier_number, supplier_name,
-        item_id_m, item_number, item_description, uom_id, address_id, address_name, address,
-        country, postal_code) {
- this.po_requisition_header_id = po_requisition_header_id;
- this.combination = combination;
- this.supplier_id = supplier_id;
- this.supplier_number = supplier_number;
- this.supplier_name = supplier_name;
- this.item_id_m = item_id_m;
- this.item_number = item_number;
- this.item_description = item_description;
- this.uom_id = uom_id;
- this.address_id = address_id;
- this.address_name = address_name;
- this.address = address;
- this.country = country;
- this.postal_code = postal_code;
-}
-
-setValFromSelectPage.prototype.setVal = function () {
- var po_requisition_header_id = this.po_requisition_header_id;
- var supplier_id = this.supplier_id;
- var supplier_number = this.supplier_number;
- var supplier_name = this.supplier_name;
- var combination = this.combination;
- var item_id_m = this.item_id_m;
- var item_number = this.item_number;
- var item_description = this.item_description;
- var uom_id = this.uom_id;
- var address_id = this.address_id;
- var address_name = this.address_name;
- var address = this.address;
- var country = this.country;
- var postal_code = this.postal_code;
- var rowClass = '.' + localStorage.getItem("row_class");
- var fieldClass = '.' + localStorage.getItem("field_class");
- if (po_requisition_header_id) {
-  $("#po_requisition_header_id").val(po_requisition_header_id);
- }
- if (supplier_id) {
-  $("#supplier_id").val(supplier_id);
- }
- if (supplier_number) {
-  $("#supplier_number").val(supplier_number);
- }
- if (supplier_name) {
-  $("#supplier_name").val(supplier_name);
- }
- rowClass = rowClass.replace(/\s+/g, '.');
- fieldClass = fieldClass.replace(/\s+/g, '.');
- if (combination) {
-  $('#content').find(rowClass).find(fieldClass).val(combination);
- }
- if (item_id_m) {
-  $('#content').find(rowClass).find('.item_id_m').val(item_id_m);
- }
- if (item_number) {
-  $('#content').find(rowClass).find('.item_number').val(item_number);
- }
- if (item_description) {
-  $('#content').find(rowClass).find('.item_description').val(item_description);
- }
- if (uom_id) {
-  $('#content').find(rowClass).find('.uom_id').val(uom_id);
- }
- var addressPopupDivClass = '.' + localStorage.getItem("addressPopupDivClass");
- addressPopupDivClass = addressPopupDivClass.replace(/\s+/g, '.');
- if (address_id) {
-  $('#form_header').find(addressPopupDivClass).find('.address_id').val(address_id);
- }
- if (address_name) {
-  $('#form_header').find(addressPopupDivClass).find('.address_name').val(address_name);
- }
- if (address) {
-  $('#form_header').find(addressPopupDivClass).find('.address').val(address);
- }
- if (country) {
-  $('#form_header').find(addressPopupDivClass).find('.country').val(country);
- }
- if (postal_code) {
-  $('#form_header').find(addressPopupDivClass).find('.postal_code').val(postal_code);
- }
-
- localStorage.removeItem("row_class");
- localStorage.removeItem("addressPopupDivClass");
-  if (this.po_requisition_header_id) {
-  $('a.show.po_requisition_header_id').trigger('click');
- }
-};
-
 function copy_line_to_details() {
  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
@@ -99,14 +9,6 @@ function copy_line_to_details() {
 }
 
 $(document).ready(function () {
-//mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'po_requisition_header_id';
- mandatoryCheck.mandatoryHeader();
-// mandatoryCheck.form_area = 'form_header';
-// mandatoryCheck.mandatory_fields = ["bu_org_id", "po_requisition_type"];
-// mandatoryCheck.mandatory_messages = ["First Select BU Org", "No Requisition Type"];
-// mandatoryCheck.mandatoryField();
 
  $('#form_line').find('.line_type').each(function (e) {
 //  e.stopPropagation();

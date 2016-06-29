@@ -7,22 +7,11 @@
    <div class="container bootstrap snippet">
     <div class="row">
      <div  id="msg-list" class="col-lg-3 col-md-3">
-      <!--       <div class="btn-group">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-               EMail <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-               <li><a href="#">Mail</a></li>
-               <li><a href="#">Contacts</a></li>
-               <li><a href="#">Tasks</a></li>
-              </ul>
-             </div>
-             <hr>-->
       <a href="#" class="btn btn-default btn-sm btn-block" role="button" id="new-emsg"><i class="glyphicon glyphicon-edit"></i> <?php echo gettext('Compose'); ?></a>
       <ul class="nav nav-pills nav-stacked">
        <li class="hidden"><input type="hidden" id="current_user_id" value="<?php echo $$class->from_user_id ?>"><li>
         <?php
-        if (!empty($msg_lists)) {
+        if (!empty($msg_lists) && is_array($msg_lists)) {
          foreach ($msg_lists as $msg_i) {
           if (!empty($msg_i->image_file_id)) {
            $profile_image = $f->show_existing_image($msg_i->image_file_id, 'img-vs media-object img-circle');

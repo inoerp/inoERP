@@ -55,6 +55,7 @@ class ar_transaction_adjustment extends dbObject {
   'reference_key_name',
   'reference_key_value',
   'period_id',
+  'gl_journal_header_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -122,6 +123,7 @@ class ar_transaction_adjustment extends dbObject {
  public $reference_key_name;
  public $reference_key_value;
  public $period_id;
+ public $gl_journal_header_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -145,18 +147,21 @@ class ar_transaction_adjustment extends dbObject {
  public $ledger_id;
  public $trnx_period_id;
 
- private function _save_journal_header() {
-  $inv = new inventory();
-  $inv_i = $inv->findRelatedDetail_ByOrgId($this->org_id);
-  $gled = new gl_ledger();
-  $gled->findBy_id($inv_i->ledger_id);
-  $gp = new gl_period();
-  $current_open_period = $gp->current_open_period($inv_i->ledger_id);
+ private function _save_journal_header($ar_trnx_h) {
   $gjh = new gl_journal_header;
-  $gjh->ledger_id = $inv_i->ledger_id;
+
+  if (empty($this->period_id)) {
+   $gp = new gl_period();
+   $current_open_period = $gp->current_open_period($ar_trnx_h->ledger_id);
+   $gjh->period_id = $current_open_period->gl_period_id;
+  } else {
+   $gjh->period_id = $this->period_id;
+  }
+
+  $gjh->ledger_id = $ar_trnx_h->ledger_id;
   $gjh->status = 'ENTERED';
-  $gjh->currency = $gled->currency_code;
-  $gjh->period_id = $current_open_period->gl_period_id;
+  $gjh->currency = $ar_trnx_h->currency;
+
   $gjh->journal_source = self::$module;
   $gjh->journal_category = self::$gl_journal_category;
   $gjh->reference_type = 'table';
@@ -167,97 +172,97 @@ class ar_transaction_adjustment extends dbObject {
   $gjh->balance_type = 'A';
   $gjh->save();
   $this->gl_journal_header_id = $gjh->gl_journal_header_id;
+  $this->update($this->ar_transaction_adjustment_id);
   echo "<br> The New Journal Header Id is " . $this->gl_journal_header_id;
   return $gjh->gl_journal_header_id;
  }
 
- private function _save_journal_lines($data) {
+ private function _save_journal_lines($ar_trnx_h) {
   global $dbc;
-  foreach ($data as $data_a) {
-   $new_gjl = new gl_journal_line();
-   $new_gjl->gl_journal_header_id = $this->gl_journal_header_id;
-   $new_gjl->line_num = $data_a['line_number'];
-   $new_gjl->status = 'U';
-   $new_gjl->code_combination_id = $data_a['account_id'];
-   if (($data_a['dr_cr']) == 'dr') {
-    $new_gjl->total_dr = $data_a['amount'];
-    $new_gjl->total_ac_dr = $data_a['amount'];
-   } else {
-    $new_gjl->total_cr = $data_a['amount'];
-    $new_gjl->total_ac_cr = $data_a['amount'];
-   }
-   $new_gjl->description = 'WIP Resource Transaction Id ' . $this->ar_transaction_adjustment_id;
-   $new_gjl->reference_type = 'table';
-   $new_gjl->reference_key_name = 'ar_transaction_adjustment_id';
-   $new_gjl->reference_key_value = $this->ar_transaction_adjustment_id;
-   $new_gjl->save();
+//create 1st line
+  $new_gjl = new gl_journal_line();
+  $new_gjl->gl_journal_header_id = $this->gl_journal_header_id;
+  $new_gjl->line_num = 1;
+  $new_gjl->status = 'U';
+
+  if ($this->adjustment_amount > 0) {
+   $new_gjl->total_dr = $this->adjustment_amount;
+   $new_gjl->total_ac_dr = $this->gl_adjustment_amount;
+   $new_gjl->code_combination_id = $ar_trnx_h->receivable_ac_id;
+  } else {
+   $new_gjl->total_cr = $this->adjustment_amount;
+   $new_gjl->total_ac_cr = $this->gl_adjustment_amount;
+   $new_gjl->code_combination_id = $this->adjustment_ac_id;
   }
+  $new_gjl->description = 'AR Transaction Adjustment ' . $this->ar_transaction_adjustment_id;
+  $new_gjl->reference_type = 'table';
+  $new_gjl->reference_key_name = 'ar_transaction_adjustment_id';
+  $new_gjl->reference_key_value = $this->ar_transaction_adjustment_id;
+  $new_gjl->save();
+
+//create2nd line
+  $new_gjl2 = new gl_journal_line();
+  $new_gjl2->gl_journal_header_id = $this->gl_journal_header_id;
+  $new_gjl2->line_num = 2;
+  $new_gjl2->status = 'U';
+
+  if ($this->adjustment_amount > 0) {
+   $new_gjl2->total_cr = $this->adjustment_amount;
+   $new_gjl2->total_ac_cr = $this->gl_adjustment_amount;
+   $new_gjl2->code_combination_id = $this->adjustment_ac_id;
+  } else {
+   $new_gjl2->total_dr = $this->adjustment_amount;
+   $new_gjl2->total_ac_dr = $this->gl_adjustment_amount;
+   $new_gjl2->code_combination_id = $ar_trnx_h->receivable_ac_id;
+  }
+  $new_gjl2->description = 'AR Transaction Adjustment ' . $this->ar_transaction_adjustment_id;
+  $new_gjl2->reference_type = 'table';
+  $new_gjl2->reference_key_name = 'ar_transaction_adjustment_id';
+  $new_gjl2->reference_key_value = $this->ar_transaction_adjustment_id;
+  $new_gjl2->save();
  }
 
  public function _after_save() {
-  global $db;
-  //Insert in WIP WO BOM - item issues for operational pull
-  if ((!empty($this->ar_transaction_adjustment_id)) && (!(empty($this->wip_wo_routing_detail_id))) && (!(empty($this->transaction_quantity)))) {
-   $wip_wo_routing_detail = new wip_wo_routing_detail();
-   $wip_wo_routing_detail_i = $wip_wo_routing_detail->findBy_id($this->wip_wo_routing_detail_id);
-   if ($wip_wo_routing_detail->charge_type != 'WIP_MOVE') {
-    return 10;
-   }
-   $wip_wo_routing_detail->wip_wo_routing_detail_id = $wip_wo_routing_detail_i->wip_wo_routing_detail_id;
-   $wip_wo_routing_detail->applied_quantity = $wip_wo_routing_detail_i->applied_quantity + $this->transaction_quantity;
+  global $dbc;
+//create journals
+  if (!empty($this->ar_transaction_adjustment_id) && empty($this->gl_journal_header_id)) {
+   $ar_trnx_h = new ar_transaction_header();
+   $ar_trnx_h->findBy_id($this->ar_transaction_header_id);
    try {
-    $wip_wo_routing_detail->audit_trial();
-    $wip_wo_routing_detail->save();
-    $resource = new bom_resource();
-    $resource->findBy_id($wip_wo_routing_detail->resource_id);
-    $bom_resource_cost = bom_resource_cost::find_by_resourceId_bomCostType($wip_wo_routing_detail->resource_id);
-    $resource_unit_cost = !empty($bom_resource_cost->resource_rate) ? $bom_resource_cost->resource_rate : 0;
-    $total_amount = $resource_unit_cost * $this->transaction_quantity;
-
-    if (!empty($total_amount)) {
-     $journal_line_a = [];
-     $journal_line = [];
-     $this->_save_journal_header();
-     $line_number = 1;
-     $woh = new wip_wo_header();
-     $woh->findBy_id($this->wip_wo_header_id);
-     $wip_accounting_group = new wip_accounting_group();
-     $wip_accounting_group->findBy_id($woh->wip_accounting_group_id);
-     $journal_line['line_number'] = $line_number;
-     $journal_line['amount'] = $total_amount;
-     $journal_line['account_id'] = $wip_accounting_group->resource_ac_id;
-     $journal_line['dr_cr'] = 'dr';
-     array_push($journal_line_a, $journal_line);
-     $line_number++;
-     $journal_line['line_number'] = $line_number;
-     $journal_line['amount'] = $total_amount;
-     $journal_line['account_id'] = $resource->absorption_ac_id;
-     $journal_line['dr_cr'] = 'cr';
-     array_push($journal_line_a, $journal_line);
-     $this->_save_journal_lines($journal_line_a);
+    $this->_save_journal_header($ar_trnx_h);
+    if (!empty($this->gl_journal_header_id)) {
+     $this->_save_journal_lines($ar_trnx_h);
     }
-    echo "<br> The resource quantity is Successfullyapplied ";
-   } catch (Exception $e) {
-    echo "<br> Resource quantity application " . $e->getMessage();
+   } Catch (Exceptio $e) {
+    echo "<br>Failed to save journals. Error @ " . get_class($this) . ' @@ line ' . __LINE__ . '<br>' . $e->getMessage();
+    $dbc->rollback = true;
    }
   }
  }
 
  public function _before_save() {
   $ret = 1;
+  $ar_trnx_h_i = ar_transaction_header::find_by_id($this->ar_transaction_header_id);
+  if ($ar_trnx_h_i->transaction_status != 'CLOSED') {
+   echo "<div class='alert alert-danger alert-dismissible' role='alert'>The transactio is not yet closed. You can directly modify the transaction</div>";
+   return 10;
+  }
+
+
   if (empty($this->adjustment_ac_id)) {
-   try{
+   try {
     $this->_get_adjustment_ac();
-   }catch(Exception $e){
+   } catch (Exception $e) {
     $ret = -90;
-    echo "<br>No adjustment ac found. Error @ " .  get_class($this) . ' @@ line '. __LINE__ . '<br>' . $e->getMessage() ;
+    echo "<br>No adjustment ac found. Error @ " . get_class($this) . ' @@ line ' . __LINE__ . '<br>' . $e->getMessage();
    }
   }
-  
-  if(empty($this->adjustment_date)){
+
+  if (empty($this->adjustment_date)) {
    $this->adjustment_date = current_time(1);
   }
-  
+
+  return $ret;
  }
 
  public function save() {
@@ -278,6 +283,18 @@ class ar_transaction_adjustment extends dbObject {
   }
  }
 
+ 
+  public static function total_adjustmentAmount_by_transactionHeaderId($ar_transaction_header_id) {
+   $sql = " SELECT SUM(adjustment_amount) as adjustment_amount FROM ";
+   $sql .= self::$table_name;
+   $sql .= " WHERE ar_transaction_header_id = '{$ar_transaction_header_id}' ";
+   
+   $result_a = self::find_by_sql($sql);
+  return !empty($result_a) ? $result_a[0]->adjustment_amount : '0.00';
+   
+   
+ }
+ 
 }
 
 //end of resource class

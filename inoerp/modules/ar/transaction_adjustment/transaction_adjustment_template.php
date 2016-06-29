@@ -20,7 +20,8 @@ inoERP
       $f->l_val_field_dm('transaction_number', 'ar_transaction_header', 'transaction_number', '', 'vf_select_transaction_number');
       echo $f->hidden_field_withId('ar_transaction_header_id', $$class->ar_transaction_header_id);
       echo $f->hidden_field_withCLass('bu_org_id', $$class->org_id, 'popup_value');
-//      echo $f->hidden_field_withCLass('status', 'COMPLETED', 'popup_value');
+      echo $f->hidden_field_withCLass('transaction_status', 'CLOSED', 'popup_value');
+      echo $f->hidden_field_withCLass('transaction_class', 'INVOICE', 'popup_value');
       ?>
       <i class="generic g_select_transaction_number select_popup clickable fa fa-search" data-class_name="ar_transaction_header"></i></li>
      <li><?php $f->l_select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
@@ -91,7 +92,7 @@ inoERP
         $adjustment_line_ai->seek($position);
         while ($adjustment_line_ai->valid()) {
          $adjustment_line_i = $adjustment_line_ai->current();
-         $ar_trnx_line_i = ar_transaction_line::find_by_id($adjustment_line_i->ar_receivable_activity_id);
+         $ar_trnx_line_i = ar_transaction_line::find_by_id($adjustment_line_i->ar_transaction_line_id);
          ?>         
          <tr class="ar_transaction_adjustment<?php echo $count ?>">
           <td>      </td>
@@ -125,7 +126,7 @@ inoERP
         </td>
         <td><?php $f->seq_field_d($count) ?></td>
         <td><?php echo!empty($transaction_line_stament) ? $transaction_line_stament : form::text_field_wid('line_stmt'); ?></td>
-        <td><?php echo $f->select_field_from_object('ar_receivable_activity_id', ar_receivable_activity::find_all(), 'ar_receivable_activity_id', 'activity_name', $$class->ar_receivable_activity_id, '', '', 1, '', '', '', '', 'activity_ac_id'); ?></td>
+        <td><?php echo $f->select_field_from_object('ar_receivable_activity_id', ar_receivable_activity::find_by_ColumnNameVal('activity_type', '1'), 'ar_receivable_activity_id', 'activity_name', $$class->ar_receivable_activity_id, '', '', 1, '', '', '', '', 'activity_ac_id'); ?></td>
         <td><?php $f->text_field_widr('line_type'); ?></td>
         <td><?php $f->text_field_widr('line_description', 'always_readonly'); ?></td>
         <td><?php $f->text_field_widr('item_description', 'always_readonly'); ?></td>
@@ -154,6 +155,7 @@ inoERP
         <th><?php echo gettext('GL Adj Amount') ?></th>
         <th><?php echo gettext('Period') ?></th>
         <th><?php echo gettext('Trnx. Id') ?></th>
+        <th><?php echo gettext('Journal') ?></th>
        </tr>
       </thead>
       <tbody class="inv_transaction_values form_data_line_tbody">
@@ -179,7 +181,8 @@ inoERP
           <td><?php echo $f->text_field('exchange_rate', $adjustment_line_i->exchange_rate, '', '', 'always_readonly'); ?></td>
           <td><?php echo $f->text_field('gl_adjustment_amount', $adjustment_line_i->gl_adjustment_amount, '', '', 'always_readonly'); ?></td>
           <td><?php echo $f->gl_period_field('period_id', $$class->ledger_id, '', 'medium', 1); ?></td>
-          <td><?php echo $f->text_field('ar_transaction_adjustment_id', $adjustment_line_i->ar_transaction_adjustment_id, '', '', 'always_readonly'); ?></td>
+          <td><?php echo $f->text_field('ar_transaction_adjustment_id', $adjustment_line_i->ar_transaction_adjustment_id, '', '' , 'small always_readonly', '' , 1); ?></td>
+          <td><a role="button" class="btn btn-sm btn-default"  href="form.php?class_name=gl_journal_header&gl_journal_header_id=<?php echo $adjustment_line_i->gl_journal_header_id; ?>"><?php echo $adjustment_line_i->gl_journal_header_id; ?></a></td>
          </tr>
          <?php
          $adjustment_line_ai->next();
@@ -199,9 +202,10 @@ inoERP
         <td><?php $f->text_field_wid('status'); ?></td>
         <td><?php $f->text_field_wid('line_source'); ?></td>
         <td><?php $f->text_field_wid('exchange_rate'); ?></td>
-        <td><?php $f->text_field_wid('gl_adjustment_amount'); ?></td>
+        <td><?php $f->text_field_widm('gl_adjustment_amount' , 'always_readonly'); ?></td>
         <td><?php echo $f->gl_period_field('period_id', $$class->ledger_id, '', 'medium', 1); ?></td>
-        <td><?php $f->text_field_widr('ar_transaction_adjustment_id', 'always_readonly'); ?></td>
+        <td><?php $f->text_field_widsr('ar_transaction_adjustment_id', 'always_readonly'); ?></td>
+        <td></td>
        </tr>
       </tbody>
      </table>

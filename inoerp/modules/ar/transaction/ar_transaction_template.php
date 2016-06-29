@@ -80,7 +80,7 @@
       <ul class="column header_field">
        <li><?php $f->l_text_field_dr('receipt_status'); ?></li>
        <li><?php $f->l_text_field_dr('receipt_amount'); ?></li>
-       <li><?php $f->l_text_field_dr('adjustment_amount'); ?></li>
+       <li><label><?php echo gettext('Adjustment Amount'); ?></label><?php echo ar_transaction_adjustment::total_adjustmentAmount_by_transactionHeaderId($$class->ar_transaction_header_id); ?></li>
        <li><label></label><a href="form.php?class_name=ar_transaction_adjustment&mode=2&ar_transaction_header_id=<?php echo $$class->ar_transaction_header_id ?>" class="btn btn-default" role="button">
         View Adjustments</a> 
        </li>
