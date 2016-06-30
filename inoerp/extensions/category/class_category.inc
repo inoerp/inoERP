@@ -74,14 +74,7 @@ class category extends dbObject {
   "description",
   "primary_cb"
  ];
- public $column = [
-  "major_category_id",
-  "category_id",
-  "parent_id",
-  "category",
-  "description",
-  "primary_cb"
- ];
+
  public $requiredField = ["category"
  ];
  public $pageTitle = " Category "; //page Title

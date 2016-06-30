@@ -14,7 +14,7 @@ ul.tabMain li {
  overflow:hidden;
  position:relative;
  /*background-color: rgba(222, 221, 221, 0.94);*/
-    background-color: rgba(152, 157, 149, 0.44);
+    /*background-color: rgba(152, 157, 149, 0.44);*/
  -webkit-border-top-left-radius:4px;
  -webkit-border-top-right-radius:4px;
  -moz-border-radius-topleft:4px;

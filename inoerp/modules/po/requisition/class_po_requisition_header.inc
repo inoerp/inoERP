@@ -66,7 +66,7 @@
    'payment_term_id',
    'exchange_rate_type',
    'exchange_rate',
-   "ef_id",
+   "supply_org_id",
    "requisition_status",
    "rev_enabled_cb",
    "rev_number",
@@ -163,7 +163,7 @@
   public $exchange_rate_type;
   public $exchange_rate;
   public $released_amount;
-  public $ef_id;
+  public $supply_org_id;
   public $requisition_status;
   public $rev_enabled_cb;
   public $rev_number;
@@ -190,19 +190,6 @@
   public $bill_to_country;
   public $bill_to_postal_code;
 
-  public function __set($name, $value) {
-   switch ($value) {
-    case $value:
-
-
-     break;
-
-    default:
-     $this->$name = $value;
-     break;
-   }
-  }
-
   public static function profile_po_requisition_type_default() {
    $line_data_array = [];
    $line_data_array['line_key'] = 'option_line_code';
@@ -216,6 +203,10 @@
     $this->requisition_status = 'ENTERED';
    } else if (empty($this->requisition_status)) {
     $this->requisition_status = po_requisition_header::find_by_id($this->po_requisition_header_id)->requisition_status;
+   }
+   
+   if(!empty($this->supply_org_id)){
+    $this->supplier_id = $this->supplier_site_id = null;
    }
 
    if ((!empty($this->po_requisition_header_id)) && !empty($this->requisition_status) && (in_array('$this->requisition_status', array('INPROCESS', 'FIN_CLOSED', 'CANCELLED')))) {

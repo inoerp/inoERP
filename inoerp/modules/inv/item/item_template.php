@@ -111,8 +111,8 @@
     <div id="tabsHeader-4" class="tabContent">
      <div class="category-div">
       <span class="heading"><?php echo gettext('Categories'); ?></span>
-      <div class="existing-category"><?php echo!empty($category) ? category::category_stmt($category) : ''; ?></div>
-      <div class="add-category"><?php echo $categoriey_select_option; ?></div>
+      <div class="existing-category"><?php echo !empty($category) ? category::category_stmt($category) : ''; ?></div>
+      <div class="add-category"><?php echo !empty($categoriey_select_option) ? $categoriey_select_option : 'No ITEM type category found'; ?></div>
      </div>
     </div>
     <div id="tabsHeader-5" class="tabContent">

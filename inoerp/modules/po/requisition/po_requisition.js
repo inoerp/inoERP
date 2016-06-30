@@ -8,6 +8,16 @@ function copy_line_to_details() {
  });
 }
 
+function po_requisition_update_supply_field(supply_type) {
+ if (supply_type == 'INTERNAL') {
+  $('#supply_org_id').removeAttr('readonly').removeClass('readonly');
+  $('#supplier_name, #supplier_id, .supplier_id.select_popup, #supplier_number, #supplier_site_id').attr('readonly', true).addClass('readonly');
+ } else {
+  $('#supply_org_id').attr('readonly', true).addClass('readonly');
+  $('#supplier_name, #supplier_id, .supplier_id.select_popup, #supplier_number, #supplier_site_id').removeAttr('readonly').removeClass('readonly');
+ }
+}
+
 $(document).ready(function () {
 
  $('#form_line').find('.line_type').each(function (e) {
@@ -128,5 +138,16 @@ $(document).ready(function () {
    });
   }
  });
+po_requisition_update_supply_field($('#po_requisition_type').val());
+
+ $('body').off('change', '#po_requisition_type').on('change', '#po_requisition_type', function () {
+  po_requisition_update_supply_field($(this).val());
+ });
+
+ $('body').off('click', '#menu_button4_1, #menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_1, #menu_button4_2, #menu_button4_2_1', function () {
+  $('#status').val('');
+  $('#po_requisition_type').removeAttr('readonly').removeClass('readonly');
+ });
 
 });
+

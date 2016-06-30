@@ -3771,8 +3771,11 @@ $(document).ready(function () {
    var dataName = $(this).prop('name').replace(/\[]+/g, '');
    openUrl += '&' + dataName + '=' + $(this).val();
   });
+
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open(openUrl, '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  $('#content').on('click', '.select_item_number_only.select_popup', function () {
@@ -3787,8 +3790,11 @@ $(document).ready(function () {
    openUrl += '&item_number=' + $(this).siblings('.item_number').val();
   }
   localStorage.setItem("set_value_for_one_field", true);
+
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open(openUrl, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
 
@@ -3819,8 +3825,11 @@ $(document).ready(function () {
    var dataName = $(this).prop('name').replace(/\[]+/g, '');
    openUrl += '&' + dataName + '=' + $(this).val();
   });
+
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open(openUrl, '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //select serial number
@@ -3864,8 +3873,11 @@ $(document).ready(function () {
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
 
-  void window.open('select.php?class_name=address&mode=2', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+  var openUrl = 'select.php?class_name=address&mode=2';
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
+  void window.open(openUrl, '_blank',
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  });
 
@@ -3880,8 +3892,11 @@ $(document).ready(function () {
    var dataName = $(this).prop('name').replace(/\[]+/g, '');
    openUrl += '&' + dataName + '=' + $(this).val();
   });
+
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open(openUrl, '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  });
 
@@ -3897,8 +3912,12 @@ $(document).ready(function () {
  $('body').on("click", '.supplier_id.select_popup', function () {
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
-  void window.open('select.php?class_name=supplier', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+
+  var openUrl = 'select.php?class_name=supplier';
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
+  void window.open(openUrl, '_blank',
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //selecting user
@@ -5726,14 +5745,14 @@ $(document).ready(function () {
    $(this_e).closest('#file_upload_form').find('.uploaded_file_details').append(stmt);
   });
  });
- 
- $('body').on('blur', '#enteredRePassword' , function(){
-  if($(this).val() != $('#enteredPassword').val()){
-    alert('You have entered two different passwords');
-    $(this).val('');
+
+ $('body').on('blur', '#enteredRePassword', function () {
+  if ($(this).val() != $('#enteredPassword').val()) {
+   alert('You have entered two different passwords');
+   $(this).val('');
   }
 
-});
+ });
 
 });
 

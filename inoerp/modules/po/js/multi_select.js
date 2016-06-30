@@ -132,36 +132,6 @@ $(document).ready(function() {
   $(this).closest('tr').find('.supplier_site_id').val($(this).val());
  });
 
-//get supplier details
-// $('body').off("blur", '.select_supplier_name, #supplier_name, #supplier_number')
-//         .on("blur", '.select_supplier_name, #supplier_name, #supplier_number' ,function() {
-//  if (($(this).closest('tr').find('.supplier_id').val()) && ($(this).closest('tr').find('.bu_org_id').val())) {
-//   var bu_org_id = $(this).closest('tr').find('.bu_org_id').val();
-//   getSupplierDetails('modules/ap/supplier/json_supplier.php', bu_org_id);
-//  }
-// });
-
-// $("#content").off("change", "#supplier_site_id")
-//         .on("change", "#supplier_site_id", function() {
-//  var supplier_site_id = $("#supplier_site_id").val();
-//  if (supplier_site_id) {
-//   getSupplierSiteDetails('modules/ap/supplier/json_supplier.php', supplier_site_id);
-//  }
-// });
-//
-// $("#content").off("focusout", '.ship_to_inventory')
-//         .on("focusout", '.ship_to_inventory', function() {
-//  var ship_to_inventory = $(this).val();
-//  var rowTrClass = $(this).closest("tr").attr("class");
-//  var classValue = "tr." + rowTrClass;
-//  var classValue1 = classValue.replace(/ /g, '.');
-//  getAllInventoryAccounts('modules/org/inventory/json_inventory.php', ship_to_inventory, classValue1);
-// });
-
-
-//item number auto complete and populate the other details
-// itemNumber_autoComplete('modules/inv/item/item_search.php');
-
 //selecting supplier
  $('body').off("click", '.select_supplier_name').on("click", '.select_supplier_name',function() {
   var rowClass = $(this).closest('tr').prop('class');
@@ -170,6 +140,13 @@ $(document).ready(function() {
    'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
+
+$('#multi_po_convert_requisition_v').find('.supply_org_id ').each(function(){
+  if($(this).val()){
+  $(this).closest('tr').find('.multi_select_input').attr('disabled', true).addClass('readonly');
+  }else{
+  }
+});
 
  //context menu
  var classContextMenu = new contextMenuMain();

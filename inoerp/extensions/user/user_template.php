@@ -37,6 +37,7 @@
       <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
       <li><?php  $f->l_checkBox_field_d('use_personal_db_cb'); ?>  </li>
       <li><label></label><a  href="form.php?class_name=extn_uprofile&mode=9&user_id=<?php echo $$class->user_id; ?>" class="button btn btn-info"><?php echo gettext('User Profile') ?></a></li>
+      <li><label></label><a  href="form.php?class_name=user_favourite&mode=9&user_id=<?php echo $$class->user_id; ?>" class="button btn btn-info"> &nbsp; <i class="fa fa-edit"></i> <?php echo gettext('Favourite') ?></a></li>
      </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">

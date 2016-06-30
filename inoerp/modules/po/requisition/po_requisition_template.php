@@ -27,18 +27,19 @@
         $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
         echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
         ?> </li>
+       <li><?php $f->l_select_field_from_object('supply_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->supply_org_id, 'supply_org_id', '', '', $readonly1); ?>        </li>
        <li><label><?php echo gettext('Status') ?></label>                      
-        <?php echo $f->select_field_from_object('requisition_status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->requisition_status, 'requisition_status', 'dont_copy', '', 1); ?>
+        <?php echo $f->select_field_from_object('requisition_status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->requisition_status, 'requisition_status', 'dont_copy'); ?>
        </li>
-       <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
-       <li><?php $f->l_text_field_d('rev_number'); ?></li>
-       <li><?php $f->l_text_field_d('buyer'); ?></li>
-       <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 
        <ul class="column header_field">
+               <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li>
+       <li><?php $f->l_text_field_d('buyer'); ?></li>
+       <li><?php $f->l_text_field_d('description'); ?></li>
+        <li><?php $f->l_text_field_d('rev_number'); ?></li>
         <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, $readonly); ?>        </li>
         <li><?php $f->l_text_field_d('exchange_rate_type'); ?></li>
         <li><?php $f->l_text_field_d('exchange_rate'); ?></li>
@@ -98,7 +99,6 @@
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
      <li><a href="#tabsLine-2"><?php echo gettext('Other Info') ?> </a></li>
-     <li><a href="#tabsLine-3"><?php echo gettext('Notes') ?> </a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsLine-1" class="tabContent">
@@ -119,6 +119,7 @@
        </thead>
        <tbody class="form_data_line_tbody">
         <?php
+        $f = new inoform(); 
         $count = 0;
         foreach ($po_requisition_line_object as $po_requisition_line) {
          ?>         
@@ -133,17 +134,15 @@
           <td><?php echo $f->select_field_from_object('receving_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->receving_org_id, '', '', 1, $readonly); ?></td>
           <td><?php echo form::select_field_from_object('line_type', po_requisition_line::po_requisition_line_types(), 'option_line_code', 'option_line_value', $$class_second->line_type, 'line_type', $readonly); ?></td>
           <td><?php
-           $f->val_field_wid2('item_number', 'item', 'item_number', 'receving_org_id');
+           $f->val_field_wid2('item_number', 'item', 'item_number', 'receving_org_id' , 'xlarge');
            echo $f->hidden_field_withCLass('item_id_m', $$class_second->item_id_m, 'dont_copy_r');
            echo $f->hidden_field_withCLass('purchased_cb', '1', 'popup_value');
            echo $f->hidden_field('processing_lt', '');
            ?>
            <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
-          <td><?php form::text_field_wid2('item_description'); ?></td>
-          <td><?php
-           echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
-           ?></td>
-          <td><?php form::number_field_wid2s('line_quantity'); ?></td>
+          <td><?php form::text_field_wid2l('item_description'); ?></td>
+          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'medium uom_id'); ?></td>
+          <td><?php echo $f->number_field('line_quantity', $$class_second->line_quantity); ?></td>
 
           <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
            <!--</td></tr>-->	
@@ -372,31 +371,6 @@
         ?>
        </tbody>
        <!--                  Showing a blank form for new entry-->
-      </table>
-     </div>
-     <div id="tabsLine-3" class="tabContent">
-      <table class="form_line_data_table">
-       <thead> 
-        <tr>
-         <th>Comments</th>
-
-        </tr>
-       </thead>
-       <tbody class="form_data_line_tbody">
-        <?php
-        $count = 0;
-        foreach ($po_requisition_line_object as $po_requisition_line) {
-         ?>         
-         <tr class="po_requisition_line<?php echo $count ?>">
-          <td></td>
-         </tr>
-         <?php
-         $count = $count + 1;
-        }
-        ?>
-       </tbody>
-       <!--                  Showing a blank form for new entry-->
-
       </table>
      </div>
     </div>

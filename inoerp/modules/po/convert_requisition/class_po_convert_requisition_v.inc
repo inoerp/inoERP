@@ -6,134 +6,136 @@ class po_convert_requisition_v extends dbObject {
  public static $table_name = "po_convert_requisition_v";
  public static $primary_column = "po_requisition_detail_id";
  public $field_a = [
-		 'po_requisition_header_id',
-		 'bu_org_id',
-		 'po_requisition_type',
-		 'po_requisition_number',
-		 'supplier_id',
-		 'supplier_site_id',
-		 'buyer',
-		 'currency',
-		 'header_amount',
-		 'requisition_status',
-		 'payment_term_id',
-		 'supplier_name',
-		 'supplier_number',
-		 'supplier_site_name',
-		 'supplier_site_number',
-		 'payment_term',
-		 'payment_term_description',
-		 'po_requisition_line_id',
-		 'line_type',
-		 'po_requisition_line_number',
-		 'item_id_m',
+  'po_requisition_header_id',
+  'bu_org_id',
+  'po_requisition_type',
+  'po_requisition_number',
+  'supplier_id',
+  'supplier_site_id',
+  'buyer',
+  'currency',
+  'header_amount',
+  'requisition_status',
+  'payment_term_id',
+  'supplier_name',
+  'supplier_number',
+  'supplier_site_name',
+  'supplier_site_number',
+  'supply_org_id',
+  'payment_term',
+  'payment_term_description',
+  'po_requisition_line_id',
+  'line_type',
+  'po_requisition_line_number',
+  'item_id_m',
   'bpa_po_line_id',
-		 'item_description',
-		 'line_description',
-		 'line_quantity',
-		 'unit_price',
-		 'line_price',
-		 'item_number',
-		 'uom_id',
-		 'item_status',
-		 'po_requisition_detail_id',
-		 'order_number',
-		 'shipment_number',
-		 'receving_org_id',
-		 'subinventory_id',
-		 'locator_id',
-		 'requestor',
-		 'quantity',
-		 'need_by_date',
-		 'promise_date',
-		 'received_quantity',
-		 'accepted_quantity',
-		 'delivered_quantity',
-		 'invoiced_quantity',
-		 'paid_quantity',
-		 'ship_to_org',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
+  'item_description',
+  'line_description',
+  'line_quantity',
+  'unit_price',
+  'line_price',
+  'item_number',
+  'uom_id',
+  'item_status',
+  'po_requisition_detail_id',
+  'order_number',
+  'shipment_number',
+  'receving_org_id',
+  'subinventory_id',
+  'locator_id',
+  'requestor',
+  'quantity',
+  'need_by_date',
+  'promise_date',
+  'received_quantity',
+  'accepted_quantity',
+  'delivered_quantity',
+  'invoiced_quantity',
+  'paid_quantity',
+  'ship_to_org',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
  ];
  public $initial_search = [
- 'po_requisition_header_id',
-		 'po_requisition_number',
-		 'buyer',
-		 'requisition_status',
-		 'supplier_name',
-		 'supplier_number',
-		 'supplier_site_name',
-		 'supplier_site_number',
-		 'item_number',
-		 'requestor',
-		  ];
+  'po_requisition_header_id',
+  'po_requisition_number',
+  'buyer',
+  'requisition_status',
+  'supplier_name',
+  'supplier_number',
+  'supplier_site_name',
+  'supplier_site_number',
+  'item_number',
+  'requestor',
+ ];
  public $column = [
-		 'po_requisition_header_id',
-		 'bu_org_id',
-		 'po_requisition_type',
-		 'po_requisition_number',
-		 'supplier_id',
-		 'supplier_site_id',
-		 'buyer',
-		 'currency',
-		 'header_amount',
-		 'requisition_status',
-		 'payment_term_id',
-		 'supplier_name',
-		 'supplier_number',
-		 'supplier_site_name',
-		 'supplier_site_number',
-		 'payment_term',
-		 'payment_term_description',
-		 'po_requisition_line_id',
-		 'line_type',
-		 'po_requisition_line_number',
-		 'item_id_m',
+  'po_requisition_header_id',
+  'bu_org_id',
+  'po_requisition_type',
+  'po_requisition_number',
+  'supplier_id',
+  'supply_org_id',
+  'buyer',
+  'currency',
+  'header_amount',
+  'supplier_site_id',
+  'requisition_status',
+  'payment_term_id',
+  'supplier_name',
+  'supplier_number',
+  'supplier_site_name',
+  'supplier_site_number',
+  'payment_term',
+  'payment_term_description',
+  'po_requisition_line_id',
+  'line_type',
+  'po_requisition_line_number',
+  'item_id_m',
   'bpa_po_line_id',
-		 'item_description',
-		 'line_description',
-		 'line_quantity',
-		 'unit_price',
-		 'line_price',
-		 'item_number',
-		 'uom_id',
-		 'item_status',
-		 'po_requisition_detail_id',
-		 'order_number',
-		 'shipment_number',
-		 'receving_org_id',
-		 'subinventory_id',
-		 'locator_id',
-		 'requestor',
-		 'quantity',
-		 'need_by_date',
-		 'promise_date',
-		 'received_quantity',
-		 'accepted_quantity',
-		 'delivered_quantity',
-		 'invoiced_quantity',
-		 'paid_quantity',
-		 'ship_to_org',
+  'item_description',
+  'line_description',
+  'line_quantity',
+  'unit_price',
+  'line_price',
+  'item_number',
+  'uom_id',
+  'item_status',
+  'po_requisition_detail_id',
+  'order_number',
+  'shipment_number',
+  'receving_org_id',
+  'subinventory_id',
+  'locator_id',
+  'requestor',
+  'quantity',
+  'need_by_date',
+  'promise_date',
+  'received_quantity',
+  'accepted_quantity',
+  'delivered_quantity',
+  'invoiced_quantity',
+  'paid_quantity',
+  'ship_to_org',
  ];
  public $dateField = [
-		 'need_by_date',
-		 'promise_date'
+  'need_by_date',
+  'promise_date'
  ];
  public $search = [
-		 '_update_path' => 'form.php?class_name=po_requisition_header',
-		 '_show_update_path' => 1,
-		 '_update_action_meassge' => 'Update',
-		 '_view_path' => 'form.php?class_name=po_requisition_header',
-		 '_show_view_path' => 1,
+  '_update_path' => 'form.php?class_name=po_requisition_header',
+  '_show_update_path' => 1,
+  '_update_action_meassge' => 'Update',
+  '_view_path' => 'form.php?class_name=po_requisition_header',
+  '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
-		 '_extra_path' => array('form.php?class_name=po_header&mode=9' => 'Convert')
+  '_extra_path' => array('form.php?class_name=po_header&mode=9' => 'Convert')
  ];
  public $pageTitle = " Convert Requistion to PO/ISO "; //page Title
  public $option_lists = [
-		 'po_requisition_type' => 'PO_REQUISITION_TYPE',
-		 'requisition_status' => 'PO_STATUS',
+  'po_requisition_type' => 'PO_REQUISITION_TYPE',
+  'requisition_status' => 'PO_STATUS',
  ];
  public $po_requisition_header_id;
  public $bu_org_id;
@@ -150,6 +152,7 @@ class po_convert_requisition_v extends dbObject {
  public $supplier_number;
  public $supplier_site_name;
  public $supplier_site_number;
+ public $supply_org_id;
  public $payment_term;
  public $payment_term_description;
  public $po_requisition_line_id;
@@ -182,17 +185,17 @@ class po_convert_requisition_v extends dbObject {
  public $order_number;
 
  public function __set($name, $value) {
-	$this->$name = $value;
+  $this->$name = $value;
  }
 
  private function create_po_convert_requisition_v() {
-	$sql = "
+  $sql = "
 CREATE OR REPLACE VIEW po_convert_requisition_v
 (
 po_requisition_header_id, bu_org_id, po_requisition_type, po_requisition_number, supplier_id, supplier_site_id, buyer, currency, header_amount, requisition_status,
 payment_term_id,
 supplier_name, supplier_number,
-supplier_site_name, supplier_site_number,
+supplier_site_name, supplier_site_number, supply_org_id,
 payment_term, payment_term_description,
 po_requisition_line_id, line_type, po_requisition_line_number,	item_id_m, bpa_po_line_id, item_description, 
 line_description, line_quantity, unit_price, line_price,  receving_org_id,
@@ -208,7 +211,7 @@ po_requisition_header.po_requisition_header_id, po_requisition_header.bu_org_id,
 po_requisition_header.supplier_site_id, po_requisition_header.buyer, po_requisition_header.currency, po_requisition_header.header_amount, po_requisition_header.requisition_status,
 IFNULL(po_requisition_header.payment_term_id, supplier_site.payment_term_id),
 supplier.supplier_name, supplier.supplier_number,
-supplier_site.supplier_site_name, supplier_site.supplier_site_number,
+supplier_site.supplier_site_name, supplier_site.supplier_site_number, po_requisition_header.supply_org_id,
 payment_term.payment_term, payment_term.description,
 po_requisition_line.po_requisition_line_id, po_requisition_line.line_type, po_requisition_line.line_number,	po_requisition_line.item_id_m,
 po_requisition_line.bpa_po_line_id, po_requisition_line.item_description, po_requisition_line.line_description, 
@@ -236,15 +239,15 @@ AND (po_requisition_detail.order_number IS NULL OR po_requisition_detail.order_n
  }
 
  public function findBy_po_requisitionDetailId() {
-	$sql = " SELECT * FROM ";
-	$sql .= self::$table_name;
-	$sql .= " WHERE po_requisition_detail_id = :po_requisition_detail_id ";
-	$sql .= " LIMIT 1 ";
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE po_requisition_detail_id = :po_requisition_detail_id ";
+  $sql .= " LIMIT 1 ";
 
-	$param_a = ['po_requisition_detail_id'];
-	$value_a = ['po_requisition_detail_id' => $this->po_requisition_detail_id];
-	$result = $this->findBy_sql($sql, $param_a, $value_a);
-	return !empty($result) ? array_po_requisitionp($result) : false;
+  $param_a = ['po_requisition_detail_id'];
+  $value_a = ['po_requisition_detail_id' => $this->po_requisition_detail_id];
+  $result = $this->findBy_sql($sql, $param_a, $value_a);
+  return !empty($result) ? array_po_requisitionp($result) : false;
  }
 
 }
