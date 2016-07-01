@@ -21,9 +21,9 @@
        <li><?php $f->l_text_field_d('last_name'); ?> 					</li>
        <li><?php $f->l_text_field_d('title'); ?> 					</li>
        <li><?php $f->l_select_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, '', 'gender', '', $readonly); ?>              </li>
-       <li><?php $f->l_select_field_from_object('person_type', hr_employee::person_type(), 'option_line_code', 'option_line_value', $$class->person_type, '', 'person_type', '', $readonly); ?>              </li>
-       <li><?php $f->l_select_field_from_object('identification_type', hr_employee::identification_type(), 'option_line_code', 'option_line_value', $$class->identification_type, '', 'identification_type', '', $readonly); ?>              </li>
-       <li><?php $f->l_text_field_d('identification_id'); ?> 					</li>
+       <li><?php $f->l_select_field_from_object('person_type', hr_employee::person_type(), 'option_line_code', 'option_line_value', $$class->person_type, '', 'person_type', 1, $readonly); ?>              </li>
+       <li><?php $f->l_select_field_from_object('identification_type', hr_employee::identification_type(), 'option_line_code', 'option_line_value', $$class->identification_type, '', 'identification_type', 1, $readonly); ?>              </li>
+       <li><?php $f->l_text_field_dm('identification_id'); ?> 					</li>
        <li><?php $f->l_text_field_d('citizen_number'); ?> 					</li>
        <li><?php $f->l_select_field_from_object('org_id', org::find_all_enterprise(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>             </li>
        <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', $readonly, '', '', 1); ?>        </li>
@@ -113,7 +113,7 @@
         <li><?php $f->l_text_field_d('social_ac_no2'); ?> 					</li>
         <li><?php $f->l_text_field_d('bank_account_id'); ?> 					</li>
         <li><?php $f->l_ac_field_d('expense_ac_id'); ?> 					</li>
-        <li><?php $f->l_ac_field_d('salary_ac_id'); ?> 					</li>
+        <li><?php $f->l_ac_field_dm('salary_ac_id'); ?> 					</li>
        </ul> 
       </div> 
      </div>
@@ -141,7 +141,7 @@
            </tr>
           </thead>
           <tbody class="form_data_line_tbody employee_education_values" >
-           <?php
+           <?php 
            $count = 0;
            $employee_education_object1 = hr_employee_education::find_by_employeeId($$class->hr_employee_id);
            $employee_education_object = empty($employee_education_object1) ? array(new hr_employee_education()) : $employee_education_object1;
@@ -161,7 +161,7 @@
              <td><?php $f->text_field_wid2sr('hr_employee_education_id') ?></td>
              <td><?php $f->text_field_wid2m('degree_name'); ?></td>
              <td><?php $f->text_field_wid2m('university'); ?></td>
-             <td><?php echo $f->date_fieldAnyDay('edu_start_date', $$class_second->edu_start_date); ?></td>
+             <td><?php echo $f->date_fieldAnyDay_m('edu_start_date', $$class_second->edu_start_date , false); ?></td>
              <td><?php echo $f->date_fieldAnyDay('edu_end_date', $$class_second->edu_end_date); ?></td>
              <td><?php $f->text_field_wid2('mode_of_education'); ?></td>
              <td><?php $f->text_field_wid2s('marks_percentage'); ?></td>

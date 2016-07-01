@@ -117,7 +117,6 @@ class hr_employee extends dbObject {
   'identification_type',
   'first_name',
   'last_name',
-  'email',
   'person_type',
  ];
  public $hr_employee_id;
