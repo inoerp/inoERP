@@ -17,10 +17,8 @@
        <a name="show" href="form.php?class_name=ar_customer&<?php echo "mode=$mode"; ?>" class="show document_id ar_customer_id">
         <i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_number_field_d('customer_number'); ?>						 </li>               
-      <li><label><?php echo gettext('Customer Name') ?><img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable"></label>
-       <?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', 1, $readonly1); ?>
-      </li>
+      <li><?php $f->l_text_field_dm('customer_name'); ?>						 </li>
+      <li><?php $f->l_number_field_d('customer_number'); ?>						 </li>
       <li><?php $f->l_select_field_from_object('customer_type', ar_customer::customer_types(), 'option_line_code', 'option_line_value', $$class->customer_type, 'customer_type'); ?>       </li>
       <li><?php echo $f->l_select_field_from_object('customer_category', ar_customer::customer_category(), 'option_line_code', 'option_line_value', $$class->customer_category, 'customer_category'); ?>       </li>
       <li><?php echo $f->l_select_field_from_object('customer_relationship', ar_customer::customer_relationship(), 'option_line_code', 'option_line_value', $$class->customer_relationship, 'customer_relationship'); ?>       </li>
@@ -76,12 +74,12 @@
  </div>
 
 </div>
-<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Customer Site Details') ?></span>
+<div id ="form_line" class="form_line form_header_l"><span class="heading"><?php echo gettext('Customer Site Details') ?></span>
  <form  method="post" id="customer_site"  name="customer_site">
    <div id='line_before_tab' class="ino-well"> 
    <ul class="column header_field "> 
     <li><?php $f->l_select_field_from_array('ar_customer_site_id', ar_customer_site::find_all_sitesOfCustomer_array($$class->ar_customer_id), $$class_second->ar_customer_site_id, 'ar_customer_site_id', 'action medium'); ?>
-     <a name="show" href="form.php?class_name=ar_customer&<?php echo "mode=$mode"; ?>" class="show document_id ar_customer_site_id" data-search_field='ar_customer_site_id'>
+     <a name="show1" href="form.php?class_name=ar_customer&<?php echo "mode=$mode"; ?>" class="show1 document_id ar_customer_site_id" data-search_field='ar_customer_site_id'>
       <i class="fa fa-refresh"></i></a>      
     </li> 
     <li class="hidden"><?php echo form::hidden_field('ar_customer_id', $$class->ar_customer_id); ?></li>

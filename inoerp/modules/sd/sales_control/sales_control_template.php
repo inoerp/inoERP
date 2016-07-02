@@ -26,15 +26,18 @@ inoERP
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div> 
-       <ul class="column header_field"> 
-        <li><?php $f->l_select_field_from_object('mdm_price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->mdm_price_list_header_id); ?>        </li>
-        <li><label><?php echo gettext('Default Order Type') ?></label><?php echo $f->select_field_from_object('h_default_document_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class->h_default_document_type_id, 'h_default_document_type_id', '', '', $readonly); ?></li>
-        <li><label><?php echo gettext('Default Line Type') ?></label><?php echo $f->select_field_from_object('l_default_document_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class->l_default_document_type_id, 'h_default_document_type_id', '', '', $readonly); ?></li>
-        <li><?php $f->l_checkBox_field_d('default_requested_date_cb') ?>  </li>
-        <li><?php $f->l_checkBox_field_d('default_schedule_ship_date_cb') ?></li>
-        <li><?php $f->l_checkBox_field_d('default_promise_date_cb') ?> </li>
-        <li><?php $f->l_checkBox_field_d('deffer_invoicing_cb') ?> </li>
-        <li><?php $f->l_select_field_from_object('ar_transaction_type_id', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->ar_transaction_type_id, 'ar_transaction_type_id', '', '', $readonly); ?>	</li>
+       <ul class="column header_field two_column_form"> 
+        <li><label><?php echo gettext('Price List') ?></label><?php echo $f->select_field_from_object('mdm_price_list_header_id', mdm_price_list_header::find_all(), 'mdm_price_list_header_id', 'price_list', $$class->mdm_price_list_header_id); ?>        </li>
+        <li><label><?php echo gettext('Order Type') ?></label><?php echo $f->select_field_from_object('h_default_document_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class->h_default_document_type_id, 'h_default_document_type_id', '', '', $readonly); ?></li>
+        <li><label><?php echo gettext('Line Type') ?></label><?php echo $f->select_field_from_object('l_default_document_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class->l_default_document_type_id, 'l_default_document_type_id', '', '', $readonly); ?></li>
+        <li><label><?php echo gettext('ISO Order Type') ?></label><?php echo $f->select_field_from_object('iso_h_default_document_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class->iso_h_default_document_type_id, 'iso_h_default_document_type_id', '', '', $readonly); ?></li>
+        <li><label><?php echo gettext('ISO Line Type') ?></label><?php echo $f->select_field_from_object('iso_l_default_document_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class->iso_l_default_document_type_id, 'iso_l_default_document_type_id', '', '', $readonly); ?></li>
+        <li><label><?php echo gettext('AR Transaction Type') ?></label><?php echo $f->select_field_from_object('ar_transaction_type_id', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->ar_transaction_type_id, 'ar_transaction_type_id', '', '', $readonly); ?>	</li>
+        <li><label><?php echo gettext('Requested Date') ?></label><?php echo $f->checkBox_field_d('default_requested_date_cb') ?>  </li>
+        <li><label><?php echo gettext('Schedule Ship Date') ?></label><?php echo $f->checkBox_field_d('default_schedule_ship_date_cb') ?></li>
+        <li><label><?php echo gettext('Promise Date') ?></label><?php echo $f->checkBox_field_d('default_promise_date_cb') ?> </li>
+        <li><label><?php echo gettext('Deffer Invoicing') ?></label><?php echo $f->checkBox_field_d('deffer_invoicing_cb') ?> </li>
+
        </ul> 
       </div> 
       <!--end of tab1 div three_column-->

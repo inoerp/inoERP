@@ -29,29 +29,10 @@
    }
   }
   ?>
-  <script src="includes/js/jquery-2.0.3.min.js"></script>
-  <script src="includes/js/jquery-ui.min.js"></script>
-  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>
-  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/menu.js"></script>
-  <script src="includes/js/custom/tinymce/tinymce.min.js"></script>
-  <script type="text/javascript" src="includes/basics/js_control.php"></script>
-  <script src="includes/js/save.js"></script>
-  <script src="includes/js/custom_plugins.js"></script>
-  <script src="includes/js/basics.js"></script>
-  <script src="themes/default/js/theme.js"></script>
-  <?php
-  if (!empty($js_file_paths)) {
-   foreach ($js_file_paths as $key => $js_file) {
-    ?>
-    <script src="<?php echo HOME_URL . $js_file; ?>"></script>
-    <?php
-   }
-  }
-  ?>
  </head>
  <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
-   <div class="container-fluid">
+   <div class="container-fluid" style="background-color:<?php echo $si->heading_color; ?>">
     <div class="navbar-header col-md-6">
      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
       <span class="sr-only">Toggle navigation</span>
@@ -141,15 +122,15 @@
   <div class="container-fluid">
 
    <div class="row">
-    <div class="hidden-sm hidden-xs col-md-2 sidebar">
+ <div class="hidden-sm hidden-xs col-md-2 sidebar">
      <div id="accordion">
-      <h3 class="clickable nav-panel"><i class="fa fa-warning"></i> <?php echo gettext('Transaction Alerts') ?></h3>
+      <h3 class="clickable nav-panel" style="background-color:<?php echo $si->heading_color; ?>"><i class="fa fa-warning"></i> <?php echo gettext('Transaction Alerts') ?></h3>
       <div>
        <div id="sys_msg_box">
         <div class="error"></div><div id="loading"></div>
        </div>
       </div>
-      <h3 class="clickable nav-panel"><i class="fa fa-navicon"></i> <?php echo gettext('Navigation Menu') ?></h3>
+      <h3 class="clickable nav-panel" style="background-color:<?php echo $si->heading_color; ?>"><i class="fa fa-navicon"></i> <?php echo gettext('Navigation Menu') ?></h3>
       <div>
        <div id="sys_menu_left_vertical">
         <div class="btn-group-sm" role="group" aria-label="...">
@@ -161,7 +142,7 @@
         ?>
        </div>
       </div>
-      <h3 class="clickable nav-panel clipboard-data"><i class="fa fa-clipboard"></i> <?php echo gettext('Clipboard') ?></h3>
+      <h3 class="clickable nav-panel clipboard-data" style="background-color:<?php echo $si->heading_color; ?>"><i class="fa fa-clipboard"></i> <?php echo gettext('Clipboard') ?></h3>
       <div id="left-clipboard">
        <div id="left-clipboard-icons">
         <i class="fa fa-save save-clipboard clickable"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -170,20 +151,20 @@
        <div id="left-clipboard-data">
        </div>
       </div>
-      <h3 class="clickable nav-panel minform-data"><i class="fa fa-file-text"></i> <?php echo gettext('Minimized Forms') ?></h3>
+      <h3 class="clickable nav-panel minform-data" style="background-color:<?php echo $si->heading_color; ?>"><i class="fa fa-file-text"></i> <?php echo gettext('Minimized Forms') ?></h3>
       <div id="left-minform">
        <div id="left-minform-data"><ul id="minform-list" class="list-group"></ul>
        </div>
       </div>
-      <h3 class="clickable nav-panel favourites-h" title="Favourites"><i class="fa fa-star-o"></i> <?php echo gettext('Favourites') ?></h3>
-      <div id="left-favourites">
-       <div id="favourites-links"><?php echo $fav->show_currentUser_fav(false, 'class="btn-group-vertical" role="group" aria-label="..."', 'list-group-item'); ?></div>
-      </div>
-      <h3 class="clickable nav-panel event-cal-h"><i class="fa fa-calendar"></i> <?php echo gettext('Event Calendar') ?></h3>
+      <h3 class="clickable nav-panel event-cal-h" style="background-color:<?php echo $si->heading_color; ?>"><i class="fa fa-calendar"></i> <?php echo gettext('Event Calendar') ?></h3>
       <div id="left-event-cal">
        <div id="event-datepicker"></div>
       </div>
-      <h3 class="clickable nav-panel recent-visits"><i class="fa fa-history"></i> <?php echo gettext('Recent Visits') ?></h3>
+      <h3 class="clickable nav-panel favourites-h" style="background-color:<?php echo $si->heading_color; ?>" title="Favourites"><i class="fa fa-star-o"></i> <?php echo gettext('Favourites') ?></h3>
+      <div id="left-favourites">
+       <div id="favourites-links"><?php echo $fav->show_currentUser_fav(false, 'class="btn-group-vertical" role="group" aria-label="..."', 'list-group-item'); ?></div>
+      </div>
+      <h3 class="clickable nav-panel recent-visits" style="background-color:<?php echo $si->heading_color; ?>"><i class="fa fa-history"></i> <?php echo gettext('Recent Visits') ?></h3>
       <div>
        <div id="recent-visits">
         <?php echo ino_recent_visits(); ?>
@@ -321,6 +302,25 @@
    ?>
   </div>
 
+    <script src="includes/js/jquery-2.0.3.min.js"></script>
+  <script src="includes/js/jquery-ui.min.js"></script>
+  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo HOME_URL; ?>tparty/bootstrap/js/menu.js"></script>
+  <script src="includes/js/custom/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript" src="includes/basics/js_control.php"></script>
+  <script src="includes/js/save.js"></script>
+  <script src="includes/js/custom_plugins.js"></script>
+  <script src="includes/js/basics.js"></script>
+  <script src="themes/default/js/theme.js"></script>
+  <?php
+  if (!empty($js_file_paths)) {
+   foreach ($js_file_paths as $key => $js_file) {
+    ?>
+    <script src="<?php echo HOME_URL . $js_file; ?>"></script>
+    <?php
+   }
+  }
+  ?>
  </body>
 </html>
 <?php

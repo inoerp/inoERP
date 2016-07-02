@@ -1588,6 +1588,14 @@ ul.column.two_column_form input, ul.column.two_column_form select{
  max-width: 250px;
 }
 
+ul.column.two_column_form .checkBox, #form_header .checkBox, .form_header_l .checkBox{
+ width: 20px !important; ;
+}
+
+.color_field{
+        border: none;
+}
+
 ul.column.one_column_form input, ul.column.one_column_form select{
  width: 80% !important;
 }
@@ -1635,13 +1643,10 @@ ul.column.one_column_form li {
 }
 
 ul.column.two_column_form li {
- margin-bottom: 10px;
+ margin-bottom: 15px;
  width: 45% !important;
 }
 
-ul.column.two_column_form li label {
- font-size: 12px !important;
-}
 
 /*#content_data div{
  margin-bottom: 20px;
@@ -2367,7 +2372,8 @@ ul.single-column li{
 }
 
 .tabContainer{
- background-color: rgba(233, 237, 237, 0.32) !important;
+ background-color: rgba(233, 237, 237, 0.32);
+ /*background-color: rgba(233, 237, 237, 0.32) !important;*/
 }
 
 #navigation_bar, .sidebar{

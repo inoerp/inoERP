@@ -15,31 +15,19 @@ class ar_customer_site extends dbObject {
   'site_tax_country',
   'site_tax_reg_no',
   'site_tax_payer_id',
-		 'primary_cb',
-//		 'customer_site_ref',
+  'primary_cb',
   'customer_site_type',
   'status',
-//		 'profile_id',
   'currency',
   'payment_term_id',
   'ar_sales_region_id',
-//		 'finance_profile_id',
-		 'payment_method_id',
-		 'order_type_id',
-		 'price_list_id',
-		 'internal_org_id',
-//		 'fob',
-//		 'freight_terms',
-//		 'transportation',
-		 'country_of_origin',
+  'payment_method_id',
+  'order_type_id',
+  'price_list_id',
+  'internal_org_id',
+  'country_of_origin',
   'ship_to_id',
   'bill_to_id',
-//		 'site_contact_id',
-//		 'customer_site_attachement_id',
-//		 'bank_id',
-//		 'bank_account_id',
-//		 'rev_enabled_cb',
-//		 'rev_number',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -106,14 +94,14 @@ class ar_customer_site extends dbObject {
  public $site_country;
  public $site_postal_code;
 
-   public function _after_save() {
+ public function _after_save() {
 
   if ((!empty($this->ar_customer_site_id)) && empty($this->customer_site_number)) {
    $this->customer_site_number = $this->ar_customer_site_id;
    $this->save();
   }
  }
- 
+
  Public static function customer_site_types() {
   $option_header = option_header::find_by_name('CUSTOMER_SITE_TYPE');
   $coa_account_types = option_line::find_by_option_id($option_header->option_header_id);
@@ -154,6 +142,15 @@ class ar_customer_site extends dbObject {
   return $result;
  }
 
+  public static function find_customerDetails_byOrgId($org_id = "") {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE internal_org_id = '{$org_id}' ";
+
+  $result = self::find_by_sql($sql);
+  return $result;
+ }
+ 
  public function copy($ar_customer_site_id) {
   global $db;
   $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM customer_site WHERE `ar_customer_site_id` = '{$ar_customer_site_id}' ";

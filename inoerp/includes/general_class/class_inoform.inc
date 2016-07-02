@@ -524,6 +524,28 @@ EOD;
   return $element_text_field;
  }
 
+ 
+  public function color_field($name, $value, $id = "", $div_class = "", $required = "", $readonly = "" ) {
+  $bracketName = $name . '[]';
+  $value = htmlentities($value);
+  $readonly_v = ($readonly == 1) ? ' readonly ' : '';
+  $required_v = ($required == 1) ? ' required ' : '';
+
+  if (!empty($id)) {
+   $idvalue = 'id="' . $id . '"';
+  } else {
+   $idvalue = "";
+  }
+  $element_text_field = "<input type=\"color\" name=\"$bracketName\" value=\"$value\"  class=\"color_field $div_class $name\"  $required_v $idvalue $readonly_v  data-toggle=\"tooltip\">";
+  return $element_text_field;
+ }
+ 
+  public function l_color_field_d($field_name, $div_class = "") {
+  global $readonly, $class, $$class;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo $this->color_field($field_name, $$class->$field_name,  $field_name, $div_class, '', $this->readonly);
+ }
+ 
  public function email_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256", $disabled = '') {
   $bracketName = $name . '[]';
   $value = htmlentities($value);

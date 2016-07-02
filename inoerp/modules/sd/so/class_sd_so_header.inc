@@ -42,6 +42,7 @@ class sd_so_header extends dbObject {
   'ECOMMERCE' => 'eCommerce',
   'SERVICE' => 'Serive',
   'INV' => 'Inventory',
+  'IR' => 'Internal Requisition',
   'QUOTE' => 'Quote',
   'COPY' => 'Copy',
  ];

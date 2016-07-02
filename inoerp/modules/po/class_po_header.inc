@@ -151,15 +151,12 @@ class po_header extends dbObject {
   'bill_to_country',
   'bill_to_postal_code',
  ];
- 
  public $fields_inDataBase_notInForm = [
   'currency'
  ];
- 
-  public $search_functions = [
+ public $search_functions = [
   'Business Org' => 'search_business_org',
  ];
-  
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update PO',
@@ -251,7 +248,7 @@ class po_header extends dbObject {
 
   if (($this->action == 'convert_requisition')) {
    echo "<br> saving before PO SAVE";
-   $this->_convert_requisition_toPO();
+   $this->_convert_requisition_toDoc();
    return 10;
   }
 
@@ -493,7 +490,133 @@ class po_header extends dbObject {
   $po_rd->save();
  }
 
- private function _convert_requisition_toPO() {
+ private function _convert_requisition_toSO_header($i, &$SO_cretaed) {
+  global $dbc;
+  $header_amt = 0;
+//   foreach($_POST['line_price'] as $amt_k => $amt_v ){
+//    $header_amt += $amt_v;
+//   }
+  $sd_so = new sd_so_header();
+  $supp_inv_org = $_POST['supply_org_id'][$i];
+  $fin_details = org::find_financial_details_from_orgId($supp_inv_org);
+  if (empty($fin_details->business_org_id)) {
+   throw new Exception('No business org id found for the source inventory org');
+  } else {
+   $sd_so->bu_org_id = $fin_details->business_org_id;
+   $sales_control_d = sd_sales_control::find_by_org_id($sd_so->bu_org_id);
+   $sd_so->order_source_type = 'IR';
+   $sd_so->document_type = $sales_control_d->iso_l_default_document_type_id;
+   $ar_customer_site_i = ar_customer_site::find_by_ColumnNameVal('internal_org_id', $_POST['receving_org_id'][$i]);
+   if (empty($ar_customer_site_i[0]->ar_customer_id)) {
+    throw new Exception('No Internal customer found for the receving organization');
+   } else {
+    $sd_so->ar_customer_id = $ar_customer_site_i[0]->ar_customer_id;
+    $sd_so->ar_customer_site_id = $ar_customer_site_i[0]->ar_customer_site_id;
+    $sd_so->doc_currency = $fin_details->currency_code;
+    $sd_so->bill_to_id = $ar_customer_site_i[0]->bill_to_id;
+    $sd_so->ship_to_id = $ar_customer_site_i[0]->ship_to_id;
+    $sd_so->header_amount = '.01';
+    $sd_so->tax_amount = null;
+    $sd_so->so_status = 'ENTERED';
+    if (!empty($fin_details->currency_code)) {
+     $sd_so->currency = $fin_details->currency_code;
+    } else {
+     throw new Exception('No default currency found for the org ');
+    }
+    $sd_so->payment_term_id = $ar_customer_site_i[0]->payment_term_id;
+    $sd_so->payment_term_date = current_time(true);
+    $sd_so->reference_doc_type = 'po_requisition_details';
+    $sd_so->reference_doc_number = $_POST['po_requisition_detail_id'][$i];
+    try {
+     $sd_so->save();
+     $sd_so->_after_save();
+    } catch (Exception $e) {
+     $this->message .= '<br> Failed to create sales order. line Error @ po_header @@ line ' . __LINE__ . ' ' . $e->getMessage();
+     $dbc->rollback = true;
+     return false;
+    }
+    echo "<br> SO header is succefully created. Header Id - " . $sd_so->sd_so_header_id;
+    $dbc->confirm();
+    $record_saved = ['ar_customer_id' => $sd_so->ar_customer_id,
+     'ar_customer_site_id' => $sd_so->ar_customer_site_id,
+     'sd_so_header_id' => $sd_so->sd_so_header_id];
+    array_push($SO_cretaed, $record_saved);
+    return $sd_so->sd_so_header_id;
+   }
+  }
+ }
+
+ private function _create_iso() {
+  echo "<br> in ISO function ";
+
+  $SO_cretaed = [];
+  $line_number = 0;
+  for ($i = 0; $i < count($_POST['po_requisition_detail_id']); $i++) {
+   $line_number ++;
+   $sd_so_header_id = null;
+
+   foreach ($SO_cretaed as $so_recods) {
+    if (array_search($_POST['supply_org_id'][$i], $so_recods)) {
+     $sd_so_header_id = $so_recods['sd_so_header_id'];
+     $line_number++;
+     break;
+    }
+   }
+   if (empty($sd_so_header_id)) {
+    if (!empty($_POST['bpa_po_line_id'][$i])) {
+     $this->_convert_requisition_toBPArelease($i, $PO_cretaed);
+    } else {
+     $sd_so_header_id = $this->_convert_requisition_toPO_header($i, $SO_cretaed);
+    }
+   }
+   if (!empty($po_header_id)) {
+    $po_rd = new po_requisition_detail();
+    $po_rd->findBy_id($_POST['po_requisition_detail_id'][$i]);
+    if (!empty($po_rd->order_number)) {
+     continue;
+    }
+    $pol = new po_line();
+    $pol->line_number = $line_number;
+    $pol->line_type = 'GOODS';
+    $pol->po_header_id = $po_header_id;
+    $pol->receving_org_id = $_POST['receving_org_id'][$i];
+    $pol->item_id_m = $_POST['item_id_m'][$i];
+    $item = new item();
+    $item->findBy_id($pol->item_id_m);
+    $pol->item_description = $item->item_description;
+    $pol->uom_id = $item->uom_id;
+    $pol->line_quantity = $_POST['line_quantity'][$i];
+    $pol->unit_price = $_POST['unit_price'][$i];
+    $pol->line_price = $pol->line_quantity * $pol->unit_price;
+    $pol->reference_doc_type = 'po_requisition_details';
+    $pol->reference_doc_number = $_POST['po_requisition_detail_id'][$i];
+    $pol->audit_trial();
+    $pol->save();
+    echo "<br> PO Line is succefully created. Line Id - " . $pol->po_line_id;
+
+    $pod = new po_detail();
+    $pod->po_header_id = $po_header_id;
+    $pod->po_line_id = $pol->po_line_id;
+    $pod->shipment_number = 1;
+    $pod->need_by_date = $_POST['need_by_date'][$i];
+    $inv = new inventory();
+    $inv_i = $inv->findBy_org_id($pol->receving_org_id);
+    //ac id needs to be modified to req accounts
+    $pod->charge_ac_id = $inv_i->material_ac_id;
+    $pod->accrual_ac_id = $inv_i->inv_ap_accrual_ac_id;
+    $pod->ppv_ac_id = $inv_i->inv_ppv_ac_id;
+    $pod->audit_trial();
+    $pod->save();
+    echo "<br> PO Detail is succefully created. Detail Id - " . $pod->po_detail_id;
+
+    $po_rd->order_number = $po_header_id;
+    $po_rd->audit_trial();
+    $po_rd->save();
+   }
+  }
+ }
+
+ private function _convert_requisition_toDoc() {
   global $dbc;
   if (empty($_POST)) {
    return;
@@ -503,6 +626,11 @@ class po_header extends dbObject {
   for ($i = 0; $i < count($_POST['po_requisition_detail_id']); $i++) {
    $line_number ++;
    $po_header_id = null;
+   if (($_POST['po_requisition_type'][$i]) == 'INTERNAL') {
+    //create ISO
+    $this->_create_iso();
+    break;
+   }
 
    foreach ($PO_cretaed as $po_recods) {
     if (array_search($_POST['supplier_site_id'][$i], $po_recods)) {

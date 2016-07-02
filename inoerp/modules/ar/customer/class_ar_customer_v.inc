@@ -71,10 +71,6 @@ class ar_customer_v extends dbObject {
  public $currency;
  public $payment_term_id;
 
- public function __set($name, $value) {
-  $this->$name = $value;
- }
-
  private function create_ar_customer_v() {
   $sql = "
 CREATE OR REPLACE VIEW ar_customer_v

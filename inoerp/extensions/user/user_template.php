@@ -1,8 +1,9 @@
-<?php  if (empty($access_level) || ($access_level < 2 )) {
-  echo '<div><div id="structure">'.  access_denied().  '</div></div>';
-  return;
- }
- ?>
+<?php
+if (empty($access_level) || ($access_level < 2 )) {
+ echo '<div><div id="structure">' . access_denied() . '</div></div>';
+ return;
+}
+?>
 <div id ="form_header">
  <form action="" method="post" id="user_header" name="user_header">
   <span class="heading"><?php echo gettext('User Details') ?></span>
@@ -35,7 +36,11 @@
       <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $$class->user_language, 'user_language'); ?>  </li>
       <li><?php $f->l_select_field_from_object('default_theme', extn_theme::find_all_enabled_theme(), 'theme_name', 'theme_name', $$class->default_theme, 'default_theme'); ?>  </li>
       <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
-      <li><?php  $f->l_checkBox_field_d('use_personal_db_cb'); ?>  </li>
+      <li><?php $f->l_checkBox_field_d('use_personal_db_cb'); ?>  </li>
+      <li><?php $f->l_checkBox_field_d('use_personal_color_cb'); ?>  </li>
+      <li><?php $f->l_color_field_d('mandatory_field_color'); ?> </li> 
+      <li><?php $f->l_color_field_d('heading_color'); ?> </li> 
+      <li><?php $f->l_color_field_d('content_color'); ?> </li> 
       <li><label></label><a  href="form.php?class_name=extn_uprofile&mode=9&user_id=<?php echo $$class->user_id; ?>" class="button btn btn-info"><?php echo gettext('User Profile') ?></a></li>
       <li><label></label><a  href="form.php?class_name=user_favourite&mode=9&user_id=<?php echo $$class->user_id; ?>" class="button btn btn-info"> &nbsp; <i class="fa fa-edit"></i> <?php echo gettext('Favourite') ?></a></li>
      </ul>
@@ -48,11 +53,11 @@
        ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
 
       <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
-       <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
+<?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
        <i class="fa fa-search supplier_id select_popup clickable"></i>
       </li>
       <li><label><?php echo gettext('Customer Name') ?></label><?php $f->text_field_d('customer_name'); ?>
-       <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
+<?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
        <i class="fa fa-search ar_customer_id select_popup clickable"></i>
       </li>
      </ul>
@@ -67,7 +72,7 @@
      <div> 
       <div id="comments">
        <div id="comment_list">
-        <?php echo!(empty($comments)) ? $comments : ""; ?>
+<?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
         <?php
@@ -88,10 +93,11 @@
     <div id="tabsHeader-8" class="tabContent">
      <div class="existing-address col-md-6">
       <label><?php echo gettext('Existing Addresses'); ?></label>
-      <?php echo!empty($existing_address_arr) ? address_reference::show_address($existing_address_arr) : ''; ?>
+<?php echo!empty($existing_address_arr) ? address_reference::show_address($existing_address_arr) : ''; ?>
      </div>
      <div class="new-address col-md-6"><label><?php echo gettext('Add New Address'); ?></label>
-      <?php $existing_address_c = !empty($existing_address_arr) ? count($existing_address_arr) : 0;
+      <?php
+      $existing_address_c = !empty($existing_address_arr) ? count($existing_address_arr) : 0;
       echo $f->add_new_address();
       ?>
      </div>

@@ -8,4 +8,5 @@ no_data_found="<?php echo gettext("No Data Found"); ?>"
 invalid_value="<?php echo gettext("Invalid Value"); ?>"
 invalid_data="<?php echo gettext("Invalid Data"); ?>"
 move_line_wo_header="<?php echo !empty($site_info->move_line_wo_header) ? $site_info->move_line_wo_header : ''; ?>"
-mandatory_field_color = 'rgba(233, 209, 234, 0.61)'
+mandatory_field_color="<?php echo !empty($site_info->mandatory_field_color) ? $site_info->mandatory_field_color : ''; ?>"
+content_color="<?php echo !empty($site_info->content_color) ? $site_info->content_color : ''; ?>"

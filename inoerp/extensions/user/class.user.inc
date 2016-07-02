@@ -51,6 +51,10 @@ class user extends dbObject {
   'default_theme',
   'auth_provider_id',
   'auth_provider_name',
+  'mandatory_field_color',
+  'heading_color',
+  'content_color',
+  'use_personal_color_cb',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -129,6 +133,10 @@ class user extends dbObject {
  Public $status;
  public $ar_customer_id;
  public $supplier_id;
+ public $heading_color;
+ public $content_color;
+ public $mandatory_field_color;
+ public $use_personal_color_cb;
  Public $date_format;
  Public $theme;
  public $default_theme;
@@ -271,7 +279,8 @@ class user extends dbObject {
   }
   $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
            default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
-            last_update_by,    last_update_date , auth_provider_id, auth_provider_name, image_file_id, use_personal_db_cb FROM ";
+            last_update_by,    last_update_date , auth_provider_id, auth_provider_name, image_file_id, use_personal_db_cb, mandatory_field_color,
+            heading_color, content_color ,  use_personal_color_cb FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";
   $sql.= " LIMIT 1 ";
@@ -336,7 +345,7 @@ class user extends dbObject {
    } elseif ($this->enteredPassword == $this->enteredRePassword) {
     $this->password = $this->_codeThePassword($this->enteredPassword);
     $returnedData = true;
-   }else{
+   } else {
     throw new Exception('Sorry, two different passwords are entered');
    }//nonexisting user check 
   }//end of password match
@@ -428,6 +437,32 @@ if (!empty($session->user_id)) {
  } catch (Exception $e) {
   echo "<br>Clear cache and try again. Error @user @@ line " . __LINE__ . '<br>' . $e->getMessage();
  }
+}
+
+
+if (!empty($ino_user) && !empty($ino_user->use_personal_color_cb)) {
+ if (!empty($ino_user->mandatory_field_color)) {
+  $si->mandatory_field_color = $ino_user->mandatory_field_color;
+ } else {
+  $si->mandatory_field_color = empty($si->mandatory_field_color) ? '#f2dcf3' : $si->mandatory_field_color;
+ }
+
+ if (!empty($ino_user->content_color)) {
+  $si->content_color = $ino_user->content_color;
+ } else {
+  $si->content_color = empty($si->content_color) ? '#f2dcf3' : $si->content_color;
+ }
+
+ if (!empty($ino_user->heading_color)) {
+  $si->heading_color = $ino_user->heading_color;
+ } else {
+  $si->heading_color = empty($si->heading_color) ? '#f2dcf3' : $si->heading_color;
+ }
+} else {
+// pa($ino_user);
+ $si->mandatory_field_color = empty($si->mandatory_field_color) ? '#f2dcf3' : $si->mandatory_field_color;
+ $si->content_color = empty($si->content_color) ? '#e9eded' : $si->content_color;
+ $si->heading_color = empty($si->heading_color) ? '#0f68a4' : $si->heading_color;
 }
 //end of resource class
 ?>

@@ -6,6 +6,8 @@
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('BU Assignment') ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
+       <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
+   <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -14,10 +16,8 @@
        <a name="show" href="form.php?class_name=supplier&<?php echo "mode=$mode"; ?>" class="show document_id supplier_id">
         <i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_number_field_d('supplier_number'); ?></li>               
-      <li><label><?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly); ?>
-       <img src="<?php echo HOME_URL; ?>themes/default/images/plus_10.png" class="disable_autocomplete supplier_name clickable">
-      </li>
+      <li><?php $f->l_text_field_d('supplier_name'); ?></li>
+      <li><?php $f->l_number_field_d('supplier_number'); ?></li>
       <li><?php $f->l_select_field_from_object('supplier_type', supplier::supplier_types(), 'option_line_code', 'option_line_value', $$class->supplier_type, 'supplier_type', '', '', $readonly); ?>       </li>
       <li><?php $f->l_select_field_from_object('supplier_category', supplier::supplier_category(), 'option_line_code', 'option_line_value', $$class->supplier_category, 'supplier_category', '', '', $readonly); ?>       </li>
       <li><label><?php echo gettext('Customer Name') ?></label><?php $f->text_field_d('customer_name', 'select_customer_name'); ?>
@@ -38,20 +38,39 @@
     <div id="tabsHeader-3" class="tabContent">
      <div class="header_address"><?php $f->address_field_d('address_id', 1, 'suplier_header'); ?></div>
     </div>
+    <div id="tabsHeader-4" class="tabContent">
+     <div class="header_address"><?php $f->address_field_d('bill_to_id', 1, 'customer_header'); ?></div>
+     <div class="shipto_address"><?php $f->address_field_d('ship_to_id', 1, 'customer_header'); ?></div>
+    </div>
+    <div id="tabsHeader-5" class="tabContent">
+     <div id="comments">
+      <div id="comment_list">
+       <?php echo!(empty($comments)) ? $comments : ""; ?>
+      </div>
+      <div id ="display_comment_form">
+       <?php
+       $reference_table = 'supplier_id';
+       $reference_id = $$class->supplier_id;
+       ?>
+      </div>
+      <div id="new_comment">
+      </div>
+     </div>
+    </div>
    </div>
 
   </div>
  </form>
 </div>
 
-<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Supplier Site Details') ?></span>
+<div id ="form_line" class="form_line form_header_l"><span class="heading"><?php echo gettext('Supplier Site Details') ?></span>
  <form  method="post" id="supplier_site"  name="supplier_site">
   <div id='line_before_tab' class="ino-well"> 
    <ul class="column header_field "> 
     <li>
      <?php // echo form::text_field('supplier_site_id', $supplier_site->supplier_site_id, '15', '25', '', 'System Number', 'supplier_site_id', $readonly) ?>
-     <?php echo $f->l_select_field_from_array('supplier_site_id', supplier_site::find_all_sitesOfSupplier_array($supplier->supplier_id), $supplier_site->supplier_site_id, 'supplier_site_id' ,'action medium'); ?>
-     <a name="show" href="form.php?class_name=supplier&<?php echo "mode=$mode"; ?>" class="show document_id supplier_site_id" data-search_field='supplier_site_id'>
+     <?php echo $f->l_select_field_from_array('supplier_site_id', supplier_site::find_all_sitesOfSupplier_array($supplier->supplier_id), $supplier_site->supplier_site_id, 'supplier_site_id', 'action medium'); ?>
+     <a name="show1" href="form.php?class_name=supplier&<?php echo "mode=$mode"; ?>" class="show1 document_id supplier_site_id" data-search_field='supplier_site_id'>
       <i class="fa fa-refresh"></i> </a> 
     </li> 
     <li class="hidden"><?php echo form::hidden_field('supplier_id', $$class->supplier_id); ?></li>

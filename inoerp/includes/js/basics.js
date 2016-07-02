@@ -4756,7 +4756,7 @@ $(document).ready(function () {
  }).one();
 
 
- $('body').on('click', '#content a.show', function (e) {
+ $('body').on('click', '#content a.show, #content a.show1', function (e) {
   e.preventDefault();
 //  var primary_column_id = $('ul#js_saving_data').find('.primary_column_id').data('primary_column_id');
 //  var header_id_h = '#' + primary_column_id;
@@ -5753,6 +5753,14 @@ $(document).ready(function () {
   }
 
  });
+
+if(typeof mandatory_field_color !== 'undefined'){
+$(':input.required').css('background-color', mandatory_field_color);
+}
+
+if(typeof content_color !== 'undefined'){
+$('.tabContainer, ul.tabMain li.ui-state-active').css('background-color', content_color);
+}
 
 });
 

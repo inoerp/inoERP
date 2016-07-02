@@ -42,6 +42,8 @@ class sd_sales_control extends dbObject {
   'default_promise_date_cb',
   'h_default_document_type_id',
   'l_default_document_type_id',
+  'iso_h_default_document_type_id',
+  'iso_l_default_document_type_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -65,7 +67,7 @@ class sd_sales_control extends dbObject {
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Shipping Control "; //page Title
+ public $pageTitle = " Sales Control "; //page Title
  public $search_functions = [
   'Inventory Org' => 'search_inventory_org',
  ];
@@ -79,6 +81,8 @@ class sd_sales_control extends dbObject {
  public $h_default_document_type_id;
  public $l_default_document_type_id;
  public $default_promise_date_cb;
+ public $iso_h_default_document_type_id;
+ public $iso_l_default_document_type_id;
  public $ef_id;
  public $rev_enabled;
  public $rev_number;
@@ -89,7 +93,6 @@ class sd_sales_control extends dbObject {
  public $staging_subinventory;
  public $staging_locator;
  public $default_picking_rule;
- 
 
  public function findBy_orgId($org_id) {
   $sql = "SELECT * FROM sd_sales_control where org_id=:org_id LIMIT 1";
@@ -101,7 +104,7 @@ class sd_sales_control extends dbObject {
  public static function find_by_org_id($org_id) {
   $sql = "SELECT * FROM sd_sales_control where org_id='{$org_id}' LIMIT 1";
   $result = self::find_by_sql($sql);
-  
+
   return !empty($result) ? array_pop($result) : false;
  }
 

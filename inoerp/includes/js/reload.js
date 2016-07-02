@@ -533,6 +533,15 @@ $(document).ready(function () {
 
  $('#program_header .hideDiv_input').trigger('click');
 
+if(typeof mandatory_field_color !== 'undefined'){
+$(':input.required').css('background-color', mandatory_field_color);
+}
+
+if(typeof content_color !== 'undefined'){
+$('.tabContainer, ul.tabMain li.ui-state-active').css('background-color', content_color);
+$('ul.tabMain li.ui-state-active').css('background-color', content_color);
+}
+
 
 if(themeUrl){
  $.getScript( themeUrl + "/js/reload.js");
