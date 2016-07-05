@@ -54,6 +54,9 @@ class user extends dbObject {
   'mandatory_field_color',
   'heading_color',
   'content_color',
+  'bg_image_file_id',
+  'show_bg_image_cb',
+  'bg_opacity',
   'use_personal_color_cb',
   "created_by",
   "creation_date",
@@ -137,6 +140,9 @@ class user extends dbObject {
  public $content_color;
  public $mandatory_field_color;
  public $use_personal_color_cb;
+ public $bg_image_file_id;
+ public $show_bg_image_cb;
+ public $bg_opacity;
  Public $date_format;
  Public $theme;
  public $default_theme;
@@ -280,7 +286,7 @@ class user extends dbObject {
   $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
            default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
             last_update_by,    last_update_date , auth_provider_id, auth_provider_name, image_file_id, use_personal_db_cb, mandatory_field_color,
-            heading_color, content_color ,  use_personal_color_cb FROM ";
+            heading_color, content_color ,  use_personal_color_cb, bg_image_file_id, show_bg_image_cb, bg_opacity FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";
   $sql.= " LIMIT 1 ";
@@ -453,6 +459,7 @@ if (!empty($ino_user) && !empty($ino_user->use_personal_color_cb)) {
   $si->content_color = empty($si->content_color) ? '#f2dcf3' : $si->content_color;
  }
 
+
  if (!empty($ino_user->heading_color)) {
   $si->heading_color = $ino_user->heading_color;
  } else {
@@ -464,5 +471,29 @@ if (!empty($ino_user) && !empty($ino_user->use_personal_color_cb)) {
  $si->content_color = empty($si->content_color) ? '#e9eded' : $si->content_color;
  $si->heading_color = empty($si->heading_color) ? '#0f68a4' : $si->heading_color;
 }
-//end of resource class
+
+if (!empty($si->show_bg_image_cb) && !empty($ino_user->show_bg_image_cb)) {
+ $si->bg_image_path = empty($si->bg_image_path) ? null : HOME_URL . $si->bg_image_path;
+
+ if (!empty($ino_user->bg_image_file_id)) {
+  require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file.inc");
+  $bg_img_file = file::find_by_id($ino_user->bg_image_file_id);
+  if (empty($bg_img_file)) {
+   return;
+  }
+  $si->bg_image_path = HOME_URL . $bg_img_file->file_path . $bg_img_file->file_name;
+ }
+ if (!empty($ino_user->bg_opacity)) {
+  $si->bg_opacity = $ino_user->bg_opacity;
+ } else if (empty($si->bg_opacity)) {
+  $si->bg_opacity = '0.8';
+ }
+} else {
+ $si->bg_image_path = null;
+ $si->bg_opacity = 1;
+}
+
+
+
+//end of user class
 ?>

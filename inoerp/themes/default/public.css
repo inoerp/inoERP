@@ -536,11 +536,11 @@ ul.commentRecord li ul.line{
 }
 
 select.per_page{
-border: none !important;
-font-size: 1em;
-border-radius: unset !important;
-height: unset !important;
-cursor: pointer;
+ border: none !important;
+ font-size: 1em;
+ border-radius: unset !important;
+ height: unset !important;
+ cursor: pointer;
 }
 
 #content_type_a{
@@ -600,10 +600,10 @@ table#category_list td.four{
 }
 
 .one_tab, .tab_0{
-font-weight: bold;
-background-color: rgba(155, 174, 152, 0.8);
-padding: 5px 2px;
-color: #fff;
+ font-weight: bold;
+ background-color: rgba(155, 174, 152, 0.8);
+ padding: 5px 2px;
+ color: #fff;
 }
 
 
@@ -966,7 +966,7 @@ ul.inline, ul.inline li{
 ul.form_top li, ul#form_top_image li{
  display:inline;
  margin-right : 15px;
- padding: 10px;         
+ padding: 5px 10px;   
 }
 
 ul#form_top_image li:hover, ul#form_top_image li a:hover{
@@ -1470,9 +1470,9 @@ table.simple_table tr{
 }
 
 @media (min-width: 770px) {
-#erp_form_area{
- margin-top: 80px;
-}
+ #erp_form_area{
+  margin-top: 80px;
+ }
 }
 
 #search_result.search_report th{
@@ -1593,7 +1593,7 @@ ul.column.two_column_form .checkBox, #form_header .checkBox, .form_header_l .che
 }
 
 .color_field{
-        border: none;
+ border: none;
 }
 
 ul.column.one_column_form input, ul.column.one_column_form select{
@@ -1803,9 +1803,14 @@ ul.free_column li{
  display: inline-block;
  width: 700px;
  margin: 10px 0;
- background-color: #D9EDF7;
- padding: 5px;
+ background-color: RGBA(237, 237, 231, 0.71);
+ padding: 10px 20px;
  border-radius: 10px;
+}
+
+.existing-image{
+ float: left;
+ margin-right: 20px;
 }
 
 .hidden-image{
@@ -2377,7 +2382,7 @@ ul.single-column li{
 }
 
 #navigation_bar, .sidebar{
- background-color: rgba(233, 237, 237, 1) !important;
+ background-color: rgba(233, 237, 237, 1);
 }
 
 .m-margin-top-20{
@@ -2541,11 +2546,11 @@ label.text_area_label{
  font-weight: bold;
 }
 ul.program.form_buttons{
-   margin-left: 200px     
+ margin-left: 200px     
 }
 
 ul.program.form_buttons li{
-   margin-right: 20px     
+ margin-right: 20px     
 }
 
 .panel-success.ino-simple-panel{
@@ -2554,14 +2559,14 @@ ul.program.form_buttons li{
 
 .panel-heading.ino-simple-heading{
  color: #aaa !important;
-background-color: rgba(239, 239, 239, 0.5) !important;
-border-color: rgba(131, 134, 135, 0.6) !important;
+ background-color: rgba(239, 239, 239, 0.5) !important;
+ border-color: rgba(131, 134, 135, 0.6) !important;
 }
 
 #header_top_quick_nav ul.inline_list li {
-    display: inline-block;
-    margin-right: 30px;
-    float: left;
+ display: inline-block;
+ margin-right: 30px;
+ float: left;
 }
 /*
 small, .small {
@@ -2570,26 +2575,26 @@ small, .small {
 
 
 .login-form,.topbar-login {
-    font-size: 85%;
+ font-size: 85%;
 }
 
 #popup-window #erp_form_area{
- 
+
  margin-top : 0 !important;
 }
 
 textarea{
-        border: 1px solid rgba(180, 180, 155, 0.37);
+ border: 1px solid rgba(180, 180, 155, 0.37);
 }
 
 .add_detail_values_img{
-  margin-left : 10px;
+ margin-left : 10px;
 }
 
 ul#recent_visit li{
-        padding: 2px 10px;
-        background: rgba(157, 206, 206, 0.19);
-        margin-bottom: 5px;
+ padding: 2px 10px;
+ background: rgba(157, 206, 206, 0.19);
+ margin-bottom: 5px;
 }
 
 #path_by_module .fa{

@@ -5759,7 +5759,14 @@ $(':input.required').css('background-color', mandatory_field_color);
 }
 
 if(typeof content_color !== 'undefined'){
-$('.tabContainer, ul.tabMain li.ui-state-active').css('background-color', content_color);
+$('.tabContainer, ul.tabMain li.ui-state-active').css('background-color', content_color) ;
+}
+
+if(typeof bg_image_path !== 'undefined'){
+//$('.container-fluid').css('background-image', 'url(' + bg_image_path + ')');
+$('body').css('background-image', 'url(' + bg_image_path + ')');
+$('.tabContainer, #path_by_module').css( 'opacity', bg_opacity);
+$('.sidebar').css('background-color', 'transparent');
 }
 
 });

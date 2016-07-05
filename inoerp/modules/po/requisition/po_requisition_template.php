@@ -213,6 +213,7 @@
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
+                   <th><?php echo gettext('Order Type') ?></th>
                    <th><?php echo gettext('Order Number') ?></th>
                    <th><?php echo gettext('Sub inventory') ?></th>
                    <th><?php echo gettext('Locator') ?></th>
@@ -227,7 +228,8 @@
                    $$class_third = &$po_requisition_detail;
                    ?>
                    <tr class="po_requisition_detail<?php echo $count . '-' . $detailCount; ?>">
-                    <td><?php form::text_field_wid3('order_number'); ?></td>
+                    <td><?php $f->text_field_wid3r('order_type'); ?></td>
+                    <td><?php $f->text_field_wid3r('order_number'); ?></td>
                     <td>
                      <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue', ''); ?>
                     </td>

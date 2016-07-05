@@ -446,7 +446,7 @@ EOD;
               <li><input type="hidden" class="hidden display_type" name="display_type[]" value="' . $display_type . '"/></li>
               <li><input type="hidden" class="hidden file_id ' . $name . '" name="' . $name . '[]" value="' . $value_file_id . '"/></li>
 							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">Upload</button></li>';
-  $stmt .= '<li role="button" class="delete_image btn btn-danger "  name="delete_image">Delete Image</li>';
+  $stmt .= '<li role="button" class="delete_image btn btn-danger "  name="delete_image" data-extn_image_reference_id="'.$value_file_id.'">Delete Image</li>';
   $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
 							</ul>
 							<div class="uploaded_file_details"></div>

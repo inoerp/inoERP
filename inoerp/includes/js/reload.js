@@ -542,6 +542,11 @@ $('.tabContainer, ul.tabMain li.ui-state-active').css('background-color', conten
 $('ul.tabMain li.ui-state-active').css('background-color', content_color);
 }
 
+if(typeof bg_image_path !== 'undefined'){
+$('.tabContainer, #path_by_module').css( 'opacity', bg_opacity);
+$('.sidebar').css('background-color', 'transparent');
+}
+
 
 if(themeUrl){
  $.getScript( themeUrl + "/js/reload.js");

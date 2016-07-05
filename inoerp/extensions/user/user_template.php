@@ -38,12 +38,15 @@ if (empty($access_level) || ($access_level < 2 )) {
       <li><?php $f->l_select_field_from_array('block_notif_count', dbObject::$position_array, $$class->block_notif_count); ?>  </li>
       <li><?php $f->l_checkBox_field_d('use_personal_db_cb'); ?>  </li>
       <li><?php $f->l_checkBox_field_d('use_personal_color_cb'); ?>  </li>
+      <li><?php $f->l_checkBox_field_d('show_bg_image_cb'); ?> </li>
       <li><?php $f->l_color_field_d('mandatory_field_color'); ?> </li> 
       <li><?php $f->l_color_field_d('heading_color'); ?> </li> 
       <li><?php $f->l_color_field_d('content_color'); ?> </li> 
+      <li><?php $f->l_number_field_d('bg_opacity'); ?> </li> 
       <li><label></label><a  href="form.php?class_name=extn_uprofile&mode=9&user_id=<?php echo $$class->user_id; ?>" class="button btn btn-info"><?php echo gettext('User Profile') ?></a></li>
       <li><label></label><a  href="form.php?class_name=user_favourite&mode=9&user_id=<?php echo $$class->user_id; ?>" class="button btn btn-info"> &nbsp; <i class="fa fa-edit"></i> <?php echo gettext('Favourite') ?></a></li>
      </ul>
+     <div class="bg-image-field"><label><?php echo gettext('Background Image'); ?></label><?php echo $f->image_field('bg_image_file_id', $$class->bg_image_file_id, '', '', 'img-vs'); ?></div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <ul class="column header_field">

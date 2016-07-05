@@ -505,7 +505,8 @@ class po_header extends dbObject {
    $sd_so->bu_org_id = $fin_details->business_org_id;
    $sales_control_d = sd_sales_control::find_by_org_id($sd_so->bu_org_id);
    $sd_so->order_source_type = 'IR';
-   $sd_so->document_type = $sales_control_d->iso_l_default_document_type_id;
+   $sd_so->document_type = $sales_control_d->iso_h_default_document_type_id;
+   $this->_iso_l_default_document_type_id = $sales_control_d->iso_l_default_document_type_id;
    $ar_customer_site_i = ar_customer_site::find_by_ColumnNameVal('internal_org_id', $_POST['receving_org_id'][$i]);
    if (empty($ar_customer_site_i[0]->ar_customer_id)) {
     throw new Exception('No Internal customer found for the receving organization');
@@ -546,8 +547,10 @@ class po_header extends dbObject {
   }
  }
 
+ private $_iso_l_default_document_type_id;
+
  private function _create_iso() {
-  echo "<br> in ISO function ";
+  global $dbc;
 
   $SO_cretaed = [];
   $line_number = 0;
@@ -563,54 +566,46 @@ class po_header extends dbObject {
     }
    }
    if (empty($sd_so_header_id)) {
-    if (!empty($_POST['bpa_po_line_id'][$i])) {
-     $this->_convert_requisition_toBPArelease($i, $PO_cretaed);
-    } else {
-     $sd_so_header_id = $this->_convert_requisition_toPO_header($i, $SO_cretaed);
-    }
+    $sd_so_header_id = $this->_convert_requisition_toSO_header($i, $SO_cretaed);
    }
-   if (!empty($po_header_id)) {
+   if (!empty($sd_so_header_id)) {
     $po_rd = new po_requisition_detail();
     $po_rd->findBy_id($_POST['po_requisition_detail_id'][$i]);
     if (!empty($po_rd->order_number)) {
      continue;
     }
-    $pol = new po_line();
-    $pol->line_number = $line_number;
-    $pol->line_type = 'GOODS';
-    $pol->po_header_id = $po_header_id;
-    $pol->receving_org_id = $_POST['receving_org_id'][$i];
-    $pol->item_id_m = $_POST['item_id_m'][$i];
-    $item = new item();
-    $item->findBy_id($pol->item_id_m);
-    $pol->item_description = $item->item_description;
-    $pol->uom_id = $item->uom_id;
-    $pol->line_quantity = $_POST['line_quantity'][$i];
-    $pol->unit_price = $_POST['unit_price'][$i];
-    $pol->line_price = $pol->line_quantity * $pol->unit_price;
-    $pol->reference_doc_type = 'po_requisition_details';
-    $pol->reference_doc_number = $_POST['po_requisition_detail_id'][$i];
-    $pol->audit_trial();
-    $pol->save();
-    echo "<br> PO Line is succefully created. Line Id - " . $pol->po_line_id;
+    $sd_so_line = new sd_so_line();
 
-    $pod = new po_detail();
-    $pod->po_header_id = $po_header_id;
-    $pod->po_line_id = $pol->po_line_id;
-    $pod->shipment_number = 1;
-    $pod->need_by_date = $_POST['need_by_date'][$i];
-    $inv = new inventory();
-    $inv_i = $inv->findBy_org_id($pol->receving_org_id);
-    //ac id needs to be modified to req accounts
-    $pod->charge_ac_id = $inv_i->material_ac_id;
-    $pod->accrual_ac_id = $inv_i->inv_ap_accrual_ac_id;
-    $pod->ppv_ac_id = $inv_i->inv_ppv_ac_id;
-    $pod->audit_trial();
-    $pod->save();
-    echo "<br> PO Detail is succefully created. Detail Id - " . $pod->po_detail_id;
 
-    $po_rd->order_number = $po_header_id;
-    $po_rd->audit_trial();
+    $item_details = item::find_by_id($_POST['item_id_m'][$i]);
+    $sd_so_line->item_id_m = $item_details->item_id_m;
+    $sd_so_line->shipping_org_id = $_POST['supply_org_id'][$i];
+    $sd_so_line->sd_so_header_id = $sd_so_header_id;
+    $sd_so_line->item_description = $item_details->item_description;
+    $sd_so_line->uom_id = $item_details->uom_id;
+    $sd_so_line->line_number = $line_number;
+    $sd_so_line->line_type = $this->_iso_l_default_document_type_id;
+    $sd_so_line->line_status = 'ENTERED';
+    $sd_so_line->line_quantity = $_POST['line_quantity'][$i];
+
+    $sd_so_line->unit_price = $_POST['unit_price'][$i];
+    $sd_so_line->line_price = $sd_so_line->unit_price * $sd_so_line->line_quantity;
+//    $sd_so_line->tax_code_id = $confirm_order_details->tax_code[$k];
+    $sd_so_line->supply_source = 'INV';
+    $sd_so_line->reference_doc_type = 'po_requisition_detail';
+    $sd_so_line->reference_doc_number = $_POST['po_requisition_detail_id'][$i];
+    $sd_so_line->line_description = 'po_requisition_details : ' . $sd_so_line->reference_doc_number;
+    $sd_so_line->requested_date = $_POST['need_by_date'][$i];
+    try {
+     $sd_so_line->save();
+    } catch (Exception $e) {
+     $this->message .= '<br> Failed to create sales order line. line Error @ po_header @@ line ' . __LINE__ . ' ' . $e->getMessage();
+     $dbc->rollback = true;
+     return false;
+    }
+
+    $po_rd->order_type = 'sd_so_header';
+    $po_rd->order_number = $sd_so_header_id;
     $po_rd->save();
    }
   }
@@ -687,7 +682,7 @@ class po_header extends dbObject {
     echo "<br> PO Detail is succefully created. Detail Id - " . $pod->po_detail_id;
 
     $po_rd->order_number = $po_header_id;
-    $po_rd->audit_trial();
+    $po_rd->order_type = 'po_header';
     $po_rd->save();
    }
   }
@@ -739,19 +734,6 @@ class po_header extends dbObject {
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result)->release_number + 1 : 1;
  }
-
-//  public static function instantiate_extra_fields(&$array_of_objects) {
-//   if (count($array_of_objects) > 0) {
-//    foreach ($array_of_objects as &$this_object) {
-//     $supplier_details = supplier::find_by_id($this_object->supplier_id);
-//     $this_object->supplier_name = $supplier_details->supplier_name;
-//     $this_object->supplier_number = $supplier_details->supplier_number;
-//     $supplier_site_details = supplier_site::find_by_id($this_object->supplier_site_id);
-//     $this_object->supplier_site_name = $supplier_site_details->supplier_site_name;
-//    }
-//   }
-//   return $array_of_objects;
-//  }
 
  Public static function po_types() {
   $option_header = option_header::find_by_name('PO_TYPE');
