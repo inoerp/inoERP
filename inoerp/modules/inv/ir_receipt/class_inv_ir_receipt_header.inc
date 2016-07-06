@@ -14,24 +14,22 @@
  * Contains all the inv_receipt_header infointerorgtion, such as - receipt_number, transaction_type_id, org_id,  receipt_date, etc.
  * 
  */
-class inv_interorg_receipt_header extends inv_receipt_header {
-public static $table_name = "inv_receipt_header";
+class inv_ir_receipt_header extends inv_receipt_header {
 
+ public static $table_name = "inv_receipt_header";
  public static $transaction_type_id_a = [
-  '20' => 'Inter-Org Receipt'
+  '33' => 'Internal Requisition Receipt'
  ];
- 
- 
-  public $search = [
+ public $search = [
   '_show_view_path' => 1,
-   '_view_path' => 'form.php?class_name=inv_interorg_receipt_header',
+  '_view_path' => 'form.php?class_name=inv_ir_receipt_header',
  ];
+
+  public $pageTitle = "IR Receipt"; //page Title
   
-  public $pageTitle = "Inter Org Receipt"; //page Title
-  
-  private function create_inv_interorg_receipt_header() {
+ private function create_inv_ir_receipt_header() {
   $sql = "
-CREATE OR REPLACE VIEW inv_interorg_receipt_header
+CREATE OR REPLACE VIEW inv_ir_receipt_header
 (
 inv_receipt_header_id,  receipt_number,   org_id,   transaction_type_id,
   receipt_date,  received_by,   carrier,   vehicle_number,   comment,   ef_id,

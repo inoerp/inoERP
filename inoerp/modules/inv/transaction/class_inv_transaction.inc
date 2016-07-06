@@ -676,7 +676,7 @@ class inv_transaction extends dbObject {
    return $return_val;
   }
 
-  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 25, 26, 29, 30))) {
+  if (in_array($this->transaction_type_id, array(1, 3, 6, 7, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 25, 26, 29, 30, 33))) {
    $this->_serial_type = 'ID';
   }
 
@@ -711,7 +711,7 @@ class inv_transaction extends dbObject {
   }
 
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26, 30))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26, 30, 33))) {
    $return_val = $this->_transact_serial_receipt();
   }
 
@@ -739,7 +739,7 @@ class inv_transaction extends dbObject {
    return $return_val;
   }
 
-  if (in_array($this->transaction_type_id, array(1, 3, 6, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 26, 29))) {
+  if (in_array($this->transaction_type_id, array(1, 3, 6, 9, 12, 13, 14, 15, 18, 19, 20, 21, 22, 24, 26, 29, 33))) {
    $this->_lot_type = 'ID';
   }
 
@@ -761,7 +761,7 @@ class inv_transaction extends dbObject {
    $return_val = $this->_transact_lot_issue();
   }
 
-  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26, 30))) {
+  if (in_array($this->transaction_type_id, array(20, 5, 7, 11, 14, 23, 25, 26, 30, 33))) {
    $return_val = $this->_transact_lot_receipt();
   }
 
@@ -1383,6 +1383,7 @@ class inv_transaction extends dbObject {
    case 23 :
    case 25 :
    case 30 :
+   case 33 :
     $onhand->setProperty('_to_org_id', $this->org_id);
     $onhand->setProperty('_to_subinventory_id', $this->to_subinventory_id);
     $onhand->setProperty('_to_locator_id', $this->to_locator_id);
@@ -1475,10 +1476,12 @@ class inv_transaction extends dbObject {
 
     //start of cr
     $cr_inv_receving_trnx_a = [2, 17, 23];
-    if (!empty($this->_cr_amount) && ($this->transaction_type_id == 20)) {
+    if (!empty($this->_cr_amount) && ($this->transaction_type_id == 20 || $this->transaction_type_id == 33)) {
      $this->_journal_line_for_cr_adjustmet_amount($journal_line_a);
     } else if ($this->transaction_type_id == 20) {
      array_push($cr_inv_receving_trnx_a, 20);
+    }else if ($this->transaction_type_id == 33) {
+     array_push($cr_inv_receving_trnx_a, 33);
     }
     if (in_array($this->transaction_type_id, $cr_inv_receving_trnx_a)) {
      $total_amount = 0;

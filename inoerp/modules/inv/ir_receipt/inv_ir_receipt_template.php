@@ -1,5 +1,4 @@
-<div id ="form_header"><span class="heading"><?php echo gettext('Inter-Org Receipt') ?></span>
-
+<div id ="form_header"><span class="heading"><?php echo gettext('Internal Requisition Receipt') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -12,16 +11,16 @@
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li>
-       <label><?php echo gettext('Inter Org Receipt Id') ?></label>
+       <label><?php echo gettext('IR Receipt Id') ?></label>
        <?php
        $f->text_field_dr('inv_receipt_header_id');
-       echo $f->hidden_field_withCLass('transaction_type_id', '20', 'popup_value');
+       echo $f->hidden_field_withCLass('transaction_type_id', '33', 'popup_value');
        ?>
        <i class="generic g_select_receipt_header select_popup clickable fa fa-search" data-class_name="inv_receipt_header"></i>
-       <a name="show" href="form.php?class_name=inv_interorg_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><i class="fa fa-refresh"></i></a> 
+       <a name="show" href="form.php?class_name=inv_ir_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><label><?php echo gettext('Inventory') ?></label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
-      <li><?php echo $f->l_select_field_from_array('transaction_type_id', inv_interorg_receipt_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1); ?>       </li>
+      <li><?php echo $f->l_select_field_from_array('transaction_type_id', inv_ir_receipt_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1); ?>       </li>
       <li><?php echo $f->l_number_field('receipt_number', $$class->receipt_number, '8', '', 'primary_column2', '', $readonly1); ?></li>
       <li><?php echo $f->l_date_fieldFromToday('receipt_date', ino_date($$class->receipt_date), $readonly1); ?></li>      
      </ul>
@@ -32,7 +31,7 @@
     <div id="tabsHeader-3" class="tabContent">
      <div id="comments">
       <div id="comment_list">
-       <?php echo!(empty($comments)) ? $comments : ""; ?>
+<?php echo!(empty($comments)) ? $comments : ""; ?>
       </div>
       <div id ="display_comment_form">
        <?php
@@ -62,11 +61,11 @@
  </div>
 
 </div>
-<div id="form_line" class="form_line"><span class="heading">Inter Org Receipt Lines</span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Internal Requisition Receipt Lines') ?></span>
  <form action=""  method="post" id="po_site"  name="inv_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Inter Org Order') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('IR & ISO Details') ?></a></li>
     <li><a href="#tabsLine-2"><?php echo gettext('Receipt') ?> </a></li>
     <li><a href="#tabsLine-3"><?php echo gettext('Lot & Serial') ?> </a></li>
    </ul>
@@ -194,7 +193,7 @@
 
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="inv_interorg_receipt_header" ></li>
+  <li class="headerClassName" data-headerClassName="inv_ir_receipt_header" ></li>
   <li class="lineClassName" data-lineClassName="inv_receipt_line" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="inv_receipt_header_id" ></li>

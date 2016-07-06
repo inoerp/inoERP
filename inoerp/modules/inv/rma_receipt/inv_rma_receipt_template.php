@@ -11,9 +11,14 @@
    <form action=""  method="post" id="inv_receipt_header"  name="inv_receipt_header">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><label> <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_receipt_header_id select_popup clickable">
-        <?php echo gettext('Receipt Header Id') ?></label><?php echo form::text_field_dsr('inv_receipt_header_id'); ?>
-       <a name="show" href="form.php?class_name=inv_rma_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><i class='fa fa-refresh'></i></a> 
+      <li>
+       <label><?php echo gettext('RMA Receipt Id') ?></label>
+       <?php
+       $f->text_field_dr('inv_receipt_header_id');
+       echo $f->hidden_field_withCLass('transaction_type_id', '23', 'popup_value');
+       ?>
+       <i class="generic g_select_receipt_header select_popup clickable fa fa-search" data-class_name="inv_receipt_header"></i>
+       <a name="show" href="form.php?class_name=inv_rma_receipt_header&<?php echo "mode=$mode"; ?>" class="show document_id inv_receipt_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><label><?php echo gettext('Inventory') ?></label><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
       <li><?php echo $f->l_select_field_from_array('transaction_type_id', inv_rma_receipt_header::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1, $readonly1); ?>       </li>
