@@ -8,7 +8,7 @@
    <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
   </ul>
   <div class="tabContainer">
-   <form action=""  method="post" id="inv_receipt_header"  name="inv_receipt_header">
+   <form method="post" id="inv_receipt_header"  name="inv_receipt_header">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li>

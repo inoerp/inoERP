@@ -38,7 +38,7 @@ inv_receipt_header_id,  receipt_number,   org_id,   transaction_type_id,
 AS
 SELECT 
 SELECT * FROM inv_receipt_header
-WHERE transaction_type_id = '20'
+WHERE transaction_type_id = '33'
 
 ";
  }

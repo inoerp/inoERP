@@ -31,7 +31,7 @@ h1,h2,h3,h4,h5,h6{
 
 .navbar-fixed-top .container-fluid{
  /*background: none repeat scroll 0% 0% rgba(29, 29, 42, 0.3);*/
- background:#2574a9;
+ background:#0f68a4;
  border-color: #080808;
  box-shadow: 1px 1px 3px 3px #B9B9B9;
 }
@@ -4429,13 +4429,13 @@ table.document_table input{
 }
 
 .required{
- background: none repeat scroll 0% 0% rgba(233, 209, 234, 0.61);
- border: 1px solid rgba(225, 208, 225, 0.61);
+ background: none repeat scroll 0% 0% rgba(242, 220, 243, 0.6);
+ /*border: 1px solid rgba(225, 208, 225, 0.61);*/
 }
 
 .readonly{
  background: none repeat scroll 0% 0% rgba(243, 243, 210, 1);
- border : 1px solid rgba(180, 180, 155, 0.37);
+ /*border : 1px solid rgba(180, 180, 155, 0.37);*/
 }
 
 /*input, select{
@@ -4695,12 +4695,15 @@ table th {
  border-width: 1px;
  padding: 4px;
  border-style: solid;
- border-color: rgba(203, 208, 209, 0.92);
+ border-color: rgba(225, 228, 228, 0.9);
  font-size: 10px;
+ background-color: hsla(0,0%,0%,.03) !important;
+ border-bottom: none !important;
+ box-shadow: 0 1px 2px hsla(0,0%,0%,.02) inset, 0 -1px 0 hsla(0,0%,100%,.25);
 }
 
 table th {
-background-color: #F2F2F2 ;
+background-color: #F2F2F2;
 }
 
 table tr {
@@ -4710,7 +4713,7 @@ table tr {
 table td {
  border-width: 1px;
  border-style: solid;
- border-color: rgba(203, 208, 209, 0.92);
+ border-color: rgba(234, 234, 234, 0.9);
 }
 
 table.normal {
@@ -4963,7 +4966,8 @@ fieldset.form_detail_data_fs {
 }
 
 h3.nav-panel{
- background-color : #3FB6DA;
+ /*background-color : #1B99BF;*/
+ background-color : #2574a9;
  padding: 10px 10px;
  margin : 10px -10px;
  font-weight: bold;
@@ -5015,4 +5019,17 @@ h3.nav-panel{
 /*overwritten*/
 .dropdown-menu {
     font-size: 12px !important;
+}
+
+input[type="submit"] {
+padding-left : 15px;
+padding-right : 15px;
+}
+
+.form_data_line_tbody td  {
+ text-align: left;
+}
+.form_data_line_tbody td input {
+        text-align: left;
+        padding-left: 5px; 
 }

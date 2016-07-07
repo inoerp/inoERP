@@ -5754,20 +5754,28 @@ $(document).ready(function () {
 
  });
 
-if(typeof mandatory_field_color !== 'undefined'){
+if(typeof mandatory_field_color !== 'undefined' && bg_image_path !==""){
 $(':input.required').css('background-color', mandatory_field_color);
 }
 
-if(typeof content_color !== 'undefined'){
+if(typeof content_color !== 'undefined' && bg_image_path !=="" ){
 $('.tabContainer, ul.tabMain li.ui-state-active').css('background-color', content_color) ;
 }
 
-if(typeof bg_image_path !== 'undefined'){
+if(typeof bg_image_path !== 'undefined' && bg_image_path !==""){
 //$('.container-fluid').css('background-image', 'url(' + bg_image_path + ')');
 $('body').css('background-image', 'url(' + bg_image_path + ')');
 $('.tabContainer, #path_by_module').css( 'opacity', bg_opacity);
 $('.sidebar').css('background-color', 'transparent');
 }
+
+var toogleLi = '<li class="ino-toggle-tab pull-right clickable"><i class="fa fa-arrow-circle-up"></i><li>';
+$('#tabsHeader ul.tabMain ').append(toogleLi);
+
+
+$('body').off('click', '.ino-toggle-tab').on('click', '.ino-toggle-tab', function(){
+$('#tabsHeader .tabContainer').toggle();
+});
 
 });
 

@@ -31,7 +31,7 @@
     <div id="tabsHeader-3" class="tabContent">
      <div id="comments">
       <div id="comment_list">
-<?php echo!(empty($comments)) ? $comments : ""; ?>
+       <?php echo!(empty($comments)) ? $comments : ""; ?>
       </div>
       <div id ="display_comment_form">
        <?php
@@ -78,12 +78,15 @@
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Receipt Line Id') ?></th>
         <th><?php echo gettext('Line Number') ?></th>
-        <th><?php echo gettext('Order') ?> #</th>
+        <th><?php echo gettext('ISO') ?> #</th>
+        <th><?php echo gettext('ISO Line') ?> #</th>
+        <th><?php echo gettext('IR') ?> #</th>
+        <th><?php echo gettext('IR Line') ?> #</th>
         <th><?php echo gettext('Header Id') ?></th>
-        <th><?php echo gettext('Order Line') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Detail Id') ?></th>
         <th><?php echo gettext('Line Qty') ?></th>
-        <th><?php echo gettext('Order Details') ?></th>
+        <!--<th><?php echo gettext('Order Details') ?></th>-->
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -105,6 +108,7 @@
         <tr class="inv_receipt_line<?php echo $count ?>">
          <td>
           <?php
+          $f = new inoform();
           echo ino_inline_action($$class_second->inv_receipt_line_id, array('org_id' => $$class->org_id,
            'transaction_type_id' => $$class->transaction_type_id, 'inv_receipt_header_id' => $$class->inv_receipt_header_id));
           ?>
@@ -113,19 +117,25 @@
          <td><?php form::text_field_wid2sr('inv_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php
-          $f->val_field_wid2m('io_order_number', 'inv_interorg_transfer_v', 'order_number', '', 'select');
-          echo $f->hidden_field_withCLass('transaction_type_id', '19', 'popup_value');
-          echo $f->hidden_field_withCLass('status', 'SHIPPED', 'popup_value');
-          echo $f->hidden_field_withCLass('to_org_id', '', 'popup_value to_org_id org_id');
-          ?><i class="generic select_io_order_number select_popup clickable fa fa-search" data-class_name="inv_interorg_transfer_v"></i></td>
-         <td><?php $f->text_field_wid2sr('inv_interorg_transfer_header_id'); ?></td>
-         <td><?php $f->text_field_wid2sr('io_line_number'); ?></td>
-         <td><?php $f->text_field_wid2r('inv_interorg_transfer_line_id'); ?></td>
+          $f->val_field_wid2m('so_number', 'po_receive_requisition_v', 'order_number', '', 'select');
+//          echo $f->hidden_field_withCLass('so_status', 'SHIPPED', 'popup_value');
+          echo $f->hidden_field_withCLass('receving_org_id', '', 'popup_value to_org_id org_id');
+          ?><i class="generic select_io_order_number select_popup clickable fa fa-search" data-class_name="po_receive_requisition_v"></i></td>
+         <td><?php
+          $f->text_field_wid2sr('so_line_number');
+          echo $f->hidden_field_withId('sd_so_header_id', '');
+          echo $f->hidden_field_withId('sd_so_line_id', '');
+          ?></td>
+         <td><?php $f->text_field_wid2sr('po_requisition_number'); ?></td>
+         <td><?php $f->text_field_wid2sr('req_line_number'); ?></td>
+         <td><?php $f->text_field_wid2r('po_requisition_header_id'); ?></td>
+         <td><?php $f->text_field_wid2r('po_requisition_line_id'); ?></td>
+         <td><?php $f->text_field_wid2r('po_requisition_detail_id'); ?></td>
          <td><?php
           echo $f->number_field('quantity', $inv_receipt_line->quantity, '12', '', 'medium', '', 1);
           echo $f->hidden_field('received_quantity', '');
           ?></td>
-         <td><a target="_blank" href="form.php?class_name=inv_interorg_transfer_header&amp;inv_interorg_transfer_header_id=<?php echo $$class_second->inv_interorg_transfer_header_id; ?>&amp;mode=2">View Doc</a></td>
+         <!--<td><a target="_blank" href="form.php?class_name=inv_interorg_transfer_header&amp;inv_interorg_transfer_header_id=<?php // echo $$class_second->inv_interorg_transfer_header_id; ?>&amp;mode=2">View Doc</a></td>-->
         </tr>
         <?php
         $count = $count + 1;

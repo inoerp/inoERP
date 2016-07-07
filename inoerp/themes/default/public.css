@@ -2600,3 +2600,7 @@ ul#recent_visit li{
 #path_by_module .fa{
  padding-top: 6px;
 }
+
+.ino-toggle-tab.pull-right{
+ margin-right: 40px !important;
+}

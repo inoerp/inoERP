@@ -33,10 +33,11 @@ $(document).ready(function () {
  });
 
 
-$('.org_id').val($('#org_id').val());
+$('.receving_org_id').val($('#org_id').val());
 
  //get Subinventory Name
  $('body').off('change', '#org_id').on("change", '#org_id', function () {
+  $('.receving_org_id').val($(this).val());
   getSubInventory({
    json_url: 'modules/inv/subinventory/json_subinventory.php',
    org_id: ($("#org_id").val())
