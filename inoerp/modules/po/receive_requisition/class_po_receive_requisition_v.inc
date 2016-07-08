@@ -12,7 +12,7 @@ class po_receive_requisition_v extends dbObject {
   'shipment_number',
   'subinventory_id',
   'locator_id',
-  'quantity',
+  'req_quantity',
   'uom_id',
   'delivered_quantity',
   'req_line_number',
@@ -29,8 +29,8 @@ class po_receive_requisition_v extends dbObject {
   'sd_so_line_id',
   'sd_so_header_id',
   'so_line_number',
-  'line_quantity',
-  'shipped_quantity',
+  'iso_line_quantity',
+  'iso_shipped_quantity',
   'so_line_status',
   'so_number',
   'document_type',
@@ -61,7 +61,7 @@ class po_receive_requisition_v extends dbObject {
  public $shipment_number;
  public $subinventory_id;
  public $locator_id;
- public $quantity;
+ public $req_quantity;
  public $uom_id;
  public $delivered_quantity;
  public $req_line_number;
@@ -78,8 +78,8 @@ class po_receive_requisition_v extends dbObject {
  public $sd_so_line_id;
  public $sd_so_header_id;
  public $so_line_number;
- public $line_quantity;
- public $shipped_quantity;
+ public $iso_line_quantity;
+ public $iso_shipped_quantity;
  public $so_line_status;
  public $so_number;
  public $document_type;
@@ -91,10 +91,10 @@ class po_receive_requisition_v extends dbObject {
 CREATE OR REPLACE VIEW po_receive_requisition_v
 (
 po_requisition_detail_id, po_requisition_line_id, po_requisition_header_id , shipment_number, subinventory_id, locator_id,  
-quantity,  delivered_quantity,
+req_quantity,  delivered_quantity,
 req_line_number , receving_org_id, item_id_m , item_number, item_description, line_description,
 bu_org_id , po_requisition_type, po_requisition_number, supply_org_id, requisition_status,
-uom_id, sd_so_line_id, sd_so_header_id , so_line_number, line_quantity, shipped_quantity, so_line_status,
+uom_id, sd_so_line_id, sd_so_header_id , so_line_number,iso_line_quantity, iso_shipped_quantity, so_line_status,
 so_number, document_type,order_source_type, so_status
 )
 AS

@@ -356,14 +356,31 @@ EOD;
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
   echo <<<EOD
 			 <ul id="form_top_image" class="draggable">
-        <li class='fa fa-refresh clickable' id='refresh_button' title='Refresh'></li>
-        <li><a class='fa fa-file-text-o clickable' Title="New Document" id="new_page_button" href="$current_page_path"></a></li>
+        <li class='fa fa-refresh clickable ' id='refresh_button' title='Refresh'></li>
+        <li class='fa fa-file-text-o clickable' Title="New Document" id="new_page_button" href="$current_page_path"></li>
     		<li class='fa fa-save clickable' id='save' title='Save'></li>
-        <li><a class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></a></li>
+        <li class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></li>
         <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
         <li class='fa fa-remove clickable' id='remove_row_button' title='Remove'></li>
         <li class='fa fa-search-plus clickable query_mode_icon' id='start_query_mode' title='Query Mode'></li>
         <li class='fa fa-print clickable print' id='print_searchResult' title='Print'></li>
+</ul>
+EOD;
+ }
+ 
+  public static function xx_btn_form_button_withImage($current_page_path = "", $homeUrl = '') {
+  global $class;
+  $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
+  echo <<<EOD
+			 <ul id="form_top_image" class="draggable">
+        <li class='fa fa-refresh clickable btn btn-default' id='refresh_button' title='Refresh'></li>
+        <li class='fa fa-file-text-o clickable btn btn-default' Title="New Document" id="new_page_button" href="$current_page_path"></li>
+    		<li class='fa fa-save clickable btn btn-default' id='save' title='Save'></li>
+        <li class='fa fa-eraser clickable btn btn-default' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></li>
+        <li class='fa fa-trash-o clickable btn btn-default' id='delete_button' title='Delete'></li>
+        <li class='fa fa-remove clickable btn btn-default' id='remove_row_button' title='Remove'></li>
+        <li class='fa fa-search-plus clickable query_mode_icon btn btn-default' id='start_query_mode' title='Query Mode'></li>
+        <li class='fa fa-print clickable print btn btn-default' id='print_searchResult' title='Print'></li>
 </ul>
 EOD;
  }

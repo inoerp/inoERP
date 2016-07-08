@@ -94,7 +94,7 @@ function saveHeader(json_url, headerData, primary_column_id, primary_column_id2,
    if (!dont_show_save_msg) {
     $('#overlay').css('display', 'block');
     $('#form_top_image').css('display', 'none');
-   } 
+   }
   },
   error: function (request, errorType, errorMessage) {
    alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
@@ -165,7 +165,13 @@ function saveLine(json_url, lineData, trclass, detailData, primary_column_id, li
   }
 
   var line_id = $(result).find('.lineId').data('trclass');
-  $('#content ' + '.' + trclass).find(".line_id").val(line_id);
+
+  if (typeof line_id == 'undefined') {
+   console.log('existing line_id is ' + line_id);
+  } else {
+   $('#content ' + '.' + trclass).find(".line_id").val(line_id);
+  }
+
   $('#overlay').css('display', 'none');
   $('#form_top_image').css('display', 'block');
   $('body').find('.remove_after_save').val('');
@@ -330,13 +336,16 @@ saveMainClass.prototype.saveMain = function (beforeSave)
   /*-----------------------------------Completion of mandator fields check & start of header save--------------------------------
    * Check if saving only header data.
    */
-  var disabledId = [];
-  if (enable_select) {
-   $('select:disabled').each(function () {
-    disabledId.push($(this).attr('id'));
-   });
-   $('select:disabled').attr('disabled', false);
+  if ($('select:disabled').length > 0) {
+   var disabledId = [];
+   if (enable_select) {
+    $('select:disabled').each(function () {
+     disabledId.push($(this).attr('id'));
+    });
+    $('select:disabled').attr('disabled', false);
+   }
   }
+
 
 
   var headerData = $(form_header_id_h + ' :input').not('.search, .text_search').serializeArray();
@@ -388,8 +397,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    }
    return;
   }
-
-  if (enable_select) {
+  if (enable_select && $('select:disabled').length > 0) {
    $(disabledId).each(function (i, v) {
     $('body').find('#' + v).attr('disabled', true);
    });

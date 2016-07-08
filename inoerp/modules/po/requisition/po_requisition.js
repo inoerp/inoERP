@@ -138,7 +138,7 @@ $(document).ready(function () {
    });
   }
  });
-po_requisition_update_supply_field($('#po_requisition_type').val());
+ po_requisition_update_supply_field($('#po_requisition_type').val());
 
  $('body').off('change', '#po_requisition_type').on('change', '#po_requisition_type', function () {
   po_requisition_update_supply_field($(this).val());
@@ -147,6 +147,19 @@ po_requisition_update_supply_field($('#po_requisition_type').val());
  $('body').off('click', '#menu_button4_1, #menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_1, #menu_button4_2, #menu_button4_2_1', function () {
   $('#status').val('');
   $('#po_requisition_type').removeAttr('readonly').removeClass('readonly');
+ });
+
+//verify Qty
+ $('#inv_ir_receipt_formid').on('blur', '.transaction_quantity', function () {
+  var transaction_quantity = +$(this).val();
+  var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
+  var ship_q = +$(trClass).find('.iso_shipped_quantity').val();
+
+  if (transaction_quantity > ship_q) {
+   $(this).val('');
+   alert('IR Receipt Quantity ' + transaction_quantity + ' is greater than ISO Shipped Qty ' + ship_q);
+  }
+
  });
 
 });

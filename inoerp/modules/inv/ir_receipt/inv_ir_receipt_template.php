@@ -1,4 +1,6 @@
-<div id ="form_header"><span class="heading"><?php echo gettext('Internal Requisition Receipt') ?></span>
+<div id="inv_ir_receipt_formid">
+ 
+ <div id ="form_header"><span class="heading"><?php echo gettext('Internal Requisition Receipt') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -80,13 +82,15 @@
         <th><?php echo gettext('Line Number') ?></th>
         <th><?php echo gettext('ISO') ?> #</th>
         <th><?php echo gettext('ISO Line') ?> #</th>
+        <th><?php echo gettext('Header Id') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('IR') ?> #</th>
         <th><?php echo gettext('IR Line') ?> #</th>
         <th><?php echo gettext('Header Id') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Detail Id') ?></th>
-        <th><?php echo gettext('Line Qty') ?></th>
-        <!--<th><?php echo gettext('Order Details') ?></th>-->
+
+<!--<th><?php echo gettext('Order Details') ?></th>-->
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -121,21 +125,16 @@
 //          echo $f->hidden_field_withCLass('so_status', 'SHIPPED', 'popup_value');
           echo $f->hidden_field_withCLass('receving_org_id', '', 'popup_value to_org_id org_id');
           ?><i class="generic select_io_order_number select_popup clickable fa fa-search" data-class_name="po_receive_requisition_v"></i></td>
-         <td><?php
-          $f->text_field_wid2sr('so_line_number');
-          echo $f->hidden_field_withId('sd_so_header_id', '');
-          echo $f->hidden_field_withId('sd_so_line_id', '');
-          ?></td>
-         <td><?php $f->text_field_wid2sr('po_requisition_number'); ?></td>
-         <td><?php $f->text_field_wid2sr('req_line_number'); ?></td>
-         <td><?php $f->text_field_wid2r('po_requisition_header_id'); ?></td>
-         <td><?php $f->text_field_wid2r('po_requisition_line_id'); ?></td>
-         <td><?php $f->text_field_wid2r('po_requisition_detail_id'); ?></td>
-         <td><?php
-          echo $f->number_field('quantity', $inv_receipt_line->quantity, '12', '', 'medium', '', 1);
-          echo $f->hidden_field('received_quantity', '');
-          ?></td>
-         <!--<td><a target="_blank" href="form.php?class_name=inv_interorg_transfer_header&amp;inv_interorg_transfer_header_id=<?php // echo $$class_second->inv_interorg_transfer_header_id; ?>&amp;mode=2">View Doc</a></td>-->
+         <td><?php $f->text_field_wid2sr('so_line_number'); ?></td>
+         <td><?php $f->text_field_wid2sr('sd_so_header_id', ''); ?></td>
+         <td><?php $f->text_field_wid2sr('sd_so_line_id', ''); ?></td>
+         <td><?php $f->text_field_wid2r('po_requisition_number'); ?></td>
+         <td><?php $f->text_field_wid2r('req_line_number'); ?></td>
+         <td><?php $f->text_field_wid2sr('po_requisition_header_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('po_requisition_line_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('po_requisition_detail_id'); ?></td>
+
+          <!--<td><a target="_blank" href="form.php?class_name=inv_interorg_transfer_header&amp;inv_interorg_transfer_header_id=<?php // echo $$class_second->inv_interorg_transfer_header_id;  ?>&amp;mode=2">View Doc</a></td>-->
         </tr>
         <?php
         $count = $count + 1;
@@ -153,8 +152,12 @@
         <th><?php echo gettext('Item Number') ?></th>
         <th><?php echo gettext('Revision') ?></th>
         <th><?php echo gettext('Item Description') ?></th>
+        <th><?php echo gettext('Req Qty') ?></th>
+        <th><?php echo gettext('ISO Qty') ?></th>
+        <th><?php echo gettext('Shipped Qty') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('New Received Quantity') ?></th>
+        <th><?php echo gettext('Line Qty') ?></th>
+        <th><?php echo gettext('New Quantity') ?></th>
         <th><?php echo gettext('Sub Inventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
        </tr>
@@ -170,10 +173,17 @@
          <td><?php $f->text_field_d2('item_number', 'select_item_number'); ?></td>
          <td><?php $f->text_field_wid2sr('revision_name'); ?></td>
          <td><?php $f->text_field_d2('item_description'); ?></td>
+         <td><?php $f->text_field_wid2sr('req_quantity'); ?></td>
+         <td><?php $f->text_field_wid2sr('iso_line_quantity'); ?></td>
+         <td><?php $f->text_field_wid2sr('iso_shipped_quantity'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $inv_receipt_line->uom_id, '', '', '', $readonly1); ?></td>
+         <td><?php
+          echo $f->number_field('quantity', $inv_receipt_line->quantity, '12', '', 'medium', '', 1);
+          echo $f->hidden_field('received_quantity', '');
+          ?></td>
          <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '8', '', '', 1, $readonly1); ?></td>
          <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', 1, $readonly1); ?></td>
-         <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', $readonly1); ?></td>
+         <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id medium', '', $readonly1); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -200,6 +210,8 @@
  </form>
 
 </div>
+</div>
+
 
 <div id="js_data">
  <ul id="js_saving_data">

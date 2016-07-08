@@ -125,7 +125,7 @@ inoERP
        <?php
        $count = 0;
        foreach ($cst_item_cost_line_object as $cst_item_cost_line) {
-        $element_id_stmt = "<select class='select cost_element_id' name='cost_element_id[]'>";
+        $element_id_stmt = "<select class='select cost_element_id large' name='cost_element_id[]'>";
         $cost_element_type = $cst_item_cost_line->cost_element_type;
         switch ($cost_element_type) {
          case 'MAT' :
@@ -161,15 +161,15 @@ inoERP
         ?>         
         <tr class="cst_item_cost_line<?php echo $count ?>">
          <td>
-          <?php
+          <?php $f = new inoform();
           echo ino_inline_action($$class_second->cst_item_cost_line_id, array('cst_item_cost_header_id' => $$class->cst_item_cost_header_id));
           ?>
          </td>
          <td><?php form::text_field_wid2sr('cst_item_cost_line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('cost_element_type', cst_item_cost_line::cost_element_types(), 'option_line_code', 'option_line_value', $$class_second->cost_element_type, '', '', 1, $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('cost_element_type', cst_item_cost_line::cost_element_types(), 'option_line_code', 'option_line_value', $$class_second->cost_element_type, '', 'large', 1, $readonly); ?></td>
          <td><?php echo $element_id_stmt; ?>	</td>
-         <td><?php echo $f->select_field_from_object('cost_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->cost_basis, '', '', 1, $readonly); ?></td>
-         <td><?php form::number_field_wid2sm('amount'); ?></td>
+         <td><?php echo $f->select_field_from_object('cost_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->cost_basis, '', 'large', 1, $readonly); ?></td>
+         <td><?php echo $f->number_field('amount', $$class_second->amount); ?></td>
          <td><?php $f->checkBox_field_wid2('this_level_cb'); ?></td>
         </tr>
         <?php

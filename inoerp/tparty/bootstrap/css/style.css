@@ -4523,6 +4523,11 @@ select {
  width: 20em;
 }
 
+#erp_form_area .select.xlarge,
+#form-modal .select.xlarge{
+ width: 30em;
+}
+
 ul.column{
  line-height: 100%; 
 }
