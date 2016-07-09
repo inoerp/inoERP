@@ -10,11 +10,14 @@
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><?php echo $f->l_date_fieldFromToday('count_date', $$class->count_date, 1) ?></li>
-      <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="inv_count_header_id select_popup clickable">
-        <?php echo gettext('Inventory Count Name') ?></label> <?php echo $f->hidden_field_withId('inv_count_header_id', $inv_count_header_id_h); ?>
-       <?php $f->text_field_dm('count_name'); ?>
-       <a name="show" href="form.php?class_name=inv_count_entries&<?php echo "mode=$mode"; ?>" class="show2 document_id inv_count_entries_id"><i class="fa fa-refresh"></i></a> 
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
+      <li><?php
+       echo $f->l_val_field_dm('count_name', 'inv_count_header', 'count_name', '', 'count_name', 'vf_select_count_name');
+       echo $f->hidden_field_withId('inv_count_header_id', $$class->inv_count_header_id);
+       echo $f->hidden_field_withCLass('org_id', $$class->org_id, 'popup_value');
+       ?><i class="generic g_select_count_name select_popup clickable fa fa-search" data-class_name="inv_count_header"></i>
+       <a name="show" href="form.php?class_name=inv_count_entries&<?php echo "mode=$mode"; ?>" class="show2 document_id inv_count_entries_id"><i class="fa fa-refresh"></i></a>
+      </li>
       <li><?php $f->l_text_field_d('description'); ?></li>
      </ul>
     </div>
@@ -55,10 +58,13 @@
         <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>
-      <tbody class="form_data_line_tbody inv_count_entries_values" >
+      <tbody class="form_data_line_tbody inv_count_schedule_values" >
        <?php
        $count = 0;
-       foreach ($inv_count_schedule_object as $inv_count_schedule) {
+       $inv_count_schedule_object_ai = new ArrayIterator($inv_count_schedule_object);
+       $inv_count_schedule_object_ai->seek($position);
+       while ($inv_count_schedule_object_ai->valid()) {
+        $inv_count_schedule = $inv_count_schedule_object_ai->current();
         ?>         
         <tr class="inv_count_entries<?php echo $count ?>">
          <td>
@@ -76,6 +82,10 @@
          <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', 1); ?></td>
         </tr>
         <?php
+        $inv_count_schedule_object_ai->next();
+        if ($inv_count_schedule_object_ai->key() == $position + $per_page) {
+         break;
+        }
         $count = $count + 1;
        }
        ?>
@@ -95,10 +105,13 @@
         <th><?php echo gettext('Adjustment Ac') ?></th>
        </tr>
       </thead>
-      <tbody class="form_data_line_tbody inv_count_entries_values" >
+      <tbody class="form_data_line_tbody inv_count_schedule_values" >
        <?php
        $count = 0;
-       foreach ($inv_count_schedule_object as $inv_count_schedule) {
+       $inv_count_schedule_object_ai = new ArrayIterator($inv_count_schedule_object);
+       $inv_count_schedule_object_ai->seek($position);
+       while ($inv_count_schedule_object_ai->valid()) {
+        $inv_count_schedule = $inv_count_schedule_object_ai->current();
         ?>         
         <tr class="inv_count_entries<?php echo $count ?>">
          <td class="text_not_tobe_copied"><?php echo $$class_second->inv_count_schedule_id; ?></td>
@@ -110,6 +123,10 @@
          <td><?php $f->ac_field_wid('adjustment_ac_id'); ?></td>
         </tr>
         <?php
+        $inv_count_schedule_object_ai->next();
+        if ($inv_count_schedule_object_ai->key() == $position + $per_page) {
+         break;
+        }
         $count = $count + 1;
        }
        ?>
@@ -127,10 +144,13 @@
         <th><?php echo gettext('Adjustment Amount') ?></th>
        </tr>
       </thead>
-      <tbody class="form_data_line_tbody inv_count_entries_values" >
+      <tbody class="form_data_line_tbody inv_count_schedule_values" >
        <?php
        $count = 0;
-       foreach ($inv_count_schedule_object as $inv_count_schedule) {
+       $inv_count_schedule_object_ai = new ArrayIterator($inv_count_schedule_object);
+       $inv_count_schedule_object_ai->seek($position);
+       while ($inv_count_schedule_object_ai->valid()) {
+        $inv_count_schedule = $inv_count_schedule_object_ai->current();
         ?>         
         <tr class="inv_count_entries<?php echo $count ?>">
          <td class="text_not_tobe_copied"><?php echo $$class_second->inv_count_schedule_id; ?></td>
@@ -140,6 +160,10 @@
          <td><?php echo $f->text_field_ap(array('name' => 'adjusted_value', 'value' => '', 'readonly' => 1)); ?></td>
         </tr>
         <?php
+        $inv_count_schedule_object_ai->next();
+        if ($inv_count_schedule_object_ai->key() == $position + $per_page) {
+         break;
+        }
         $count = $count + 1;
        }
        ?>
@@ -151,6 +175,12 @@
 
  </div>
 </div> 
+
+<div class="row small-top-margin" >
+ <div id="pagination" style="clear: both;">
+  <?php echo $pagination->show_pagination(); ?>
+ </div>
+</div>
 
 <div id="js_data">
  <ul id="js_saving_data">

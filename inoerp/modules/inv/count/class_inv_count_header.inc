@@ -95,6 +95,7 @@ class inv_count_header extends dbObject {
   'count_name',
   'count_type',
   'description',
+  'org_id',
  ];
  public $column = [
   'inv_count_header_id',
@@ -191,7 +192,7 @@ class inv_count_header extends dbObject {
     $no_of_counts_per_year = $abc_ref_obj->count_per_year;
 //    $count_start_date = new DateTime();
 //    $counting_days = $no_of_working_days = 256;
-    $inv_assignment_line = inv_abc_assignment_line::find_by_parentId_classCode($this->inv_abc_assignment_header_id, $abc_ref_obj->class_code);
+    $inv_assignment_line = inv_abc_assignment_line::find_by_parentId_classCode_forCycleCount($this->inv_abc_assignment_header_id, $abc_ref_obj->class_code, $this->org_id);
     $this->_schedule_count($inv_assignment_line, $no_of_counts_per_year, $abc_ref_obj->class_code);
    }
   }
@@ -204,12 +205,20 @@ class inv_count_header extends dbObject {
 
    foreach ($abc_ref_existing as $abc_ref_obj) {
     $no_of_counts_per_year = $abc_ref_obj->count_per_year;
-    $sql = "
-             SELECT * FROM  
-             inv_abc_assignment_line  
-             WHERE inv_abc_assignment_header_id= '{$this->inv_abc_assignment_header_id}' 
-             AND abc_class = '{$abc_ref_obj->class_code}'
-             AND item_id_m NOT IN (
+    $sql = "  SELECT 
+              ail.inv_abc_assignment_line_id, ailinv_abc_assignment_header_id , ail.item_id_m ,
+              ail.abc_class, ail.description
+
+              FROM
+              inv_abc_assignment_line ail,
+              item
+
+             WHERE ail.inv_abc_assignment_header_id= '{$this->inv_abc_assignment_header_id}' 
+             AND ail.abc_class = '{$abc_ref_obj->class_code}'
+             AND item.item_id_m = ail.item_id_m
+             AND item.org_id = '{$this->org_id}'
+             AND item.cycle_count_enabled_cb = '1'
+             AND ail.item_id_m NOT IN (
                  SELECT DISTINCT(item_id_m) FROM inv_count_schedule
                  WHERE inv_count_header_id = '{$this->inv_count_header_id}'
                 )

@@ -120,8 +120,8 @@
           <td><?php echo $f->date_fieldAnyDay('schedule_date', $$class_second->schedule_date); ?></td>
           <td><?php echo $f->select_field_from_array('status', inv_count_schedule::$status_a, $$class_second->status, '', '', '', '', 1); ?></td>
           <td><?php $f->text_field_wid2s('abc_code'); ?></td>
-          <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', '', $readonly); ?></td>
-          <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', $readonly); ?></td>
+          <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id medium', '', $readonly); ?></td>
+          <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id medium', '', $readonly); ?></td>
          </tr>
          <?php
          $inv_count_schedule_object_ai->next();

@@ -19,7 +19,7 @@
  * Status Update :
  * INCOMPLETE : Not ready for accounting
  * COMPLETE : Ready for accounting
- *            with gl_journal_header_id means accounting is cretaed.
+ *            with gl_journal_header_id means accounting is created.
  * CLOSED : Journals are posted
  *          Status is changed by the post program and only adjustments are possible 
  *            

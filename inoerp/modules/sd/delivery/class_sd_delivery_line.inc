@@ -205,10 +205,15 @@ class sd_delivery_line extends dbObject {
    try {
     $this->_create_reservation_lotItems();
    } catch (Exception $e) {
-    echo "<br>Failed to create reservation for lot at staging. Error @ " . __FILE__ . ' @@ ' . __LINE__ . $e->getMessage();
+    echo "<br>Failed to create reservation for lot at staging. Error @ " . get_class($this) . ' @@ ' . __LINE__ . $e->getMessage();
    }
   } else {
-   $this->_create_reservation_forItems();
+   try {
+    $this->_create_reservation_forItems();
+   } catch (Exception $e) {
+    echo "<br>Failed to create reservation for item at staging. Error @ " .  get_class($this) . ' @@ ' . __LINE__ . $e->getMessage();
+   }
+   
   }
  }
 

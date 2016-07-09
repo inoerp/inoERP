@@ -303,7 +303,7 @@ class sd_delivery_header extends dbObject {
   $onhand->locator_id = !empty($_POST['from_locator'][$i]) ? $_POST['from_locator'][$i] : null;
   $onhand_i = $onhand->findOnhand_byItemId();
   if (empty($onhand_i)) {
-   echo "<br>Failed to complete the inventory transaction as there is not enough onhand. Error @ sd_Delivery_header @@ line " . __LINE__;
+   echo "<br>Failed to complete the inventory transaction as there is not enough onhand. Error @ sd_delivery_header @@ line " . __LINE__;
    $dbc->rollback = true;
    return;
   }

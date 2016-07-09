@@ -117,12 +117,12 @@ class inv_count_schedule extends dbObject {
   $sql = " SELECT * from inv_count_schedule ";
   $sql .= " WHERE inv_count_header_id = '{$header_id}' ";
   $sql .= " AND status = '{$status}' ";
-  if(!empty($date)){
-  $sql .= " AND schedule_date <= '{$date}' ";
+  if (!empty($date)) {
+   $sql .= " AND schedule_date <= '{$date}' ";
   }
-  
+
   $result = self::find_by_sql($sql);
-  echo $sql; pa($result);
+//  echo $sql; pa($result);
   return !empty($result) ? $result : false;
  }
 

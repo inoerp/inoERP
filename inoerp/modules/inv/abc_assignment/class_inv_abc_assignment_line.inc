@@ -71,6 +71,25 @@ class inv_abc_assignment_line extends dbObject {
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? $result_array : false;
  }
+ 
+  public static function find_by_parentId_classCode_forCycleCount($parent_id, $class_code, $org_id) {
+  $sql = " SELECT 
+     ail.inv_abc_assignment_line_id, ailinv_abc_assignment_header_id , ail.item_id_m ,
+     ail.abc_class, ail.description
+
+     FROM
+     inv_abc_assignment_line ail,
+     item
+
+     WHERE ail.inv_abc_assignment_header_id= '{$parent_id}' 
+     AND ail.abc_class = '{$class_code}'  
+     AND item.item_id_m = ail.item_id_m
+     AND item.org_id = '{$org_id}'
+     AND item.cycle_count_enabled_cb = '1'
+ ";
+  $result_array = self::find_by_sql($sql);
+  return !empty($result_array) ? $result_array : false;
+ }
 
 }
 
