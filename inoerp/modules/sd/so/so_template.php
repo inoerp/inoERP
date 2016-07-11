@@ -26,7 +26,7 @@ inoERP
       </li>
       <li><?php $f->l_text_field_d('so_number', 'primary_column2'); ?></li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $sd_so_header->bu_org_id, 'bu_org_id', $readonly1, '', ''); ?>						 </li>
-      <li><?php $f->l_select_field_from_object('document_type', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $sd_so_header->document_type, 'document_type', 'medium', 1, $readonly1); ?>						 </li>
+      <li><?php $f->l_select_field_from_object('document_type', sd_document_type::find_all_header_levels(), 'sd_document_type_id', ['document_type_name','bu_org_id_r'], $sd_so_header->document_type, 'document_type', ' ', 1, $readonly1 ,'','','','bu_org_id_r'); ?>						 </li>
       <li><?php
        echo $f->l_val_field_dm('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name');
        echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
@@ -156,7 +156,7 @@ inoERP
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('sd_so_line_id', 'line_id always_readonly'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type, '', 'medium', 1, $readonly, '', '', '', 'process_flow_id'); ?></td>
+         <td><?php echo $f->select_field_from_object('line_type', sd_document_type::find_all_line_levels(), 'sd_document_type_id', ['document_type_name','bu_org_id_r'], $$class_second->line_type, '', 'medium', 1, $readonly, '', '', '', ['process_flow_id', 'bu_org_id_r']); ?></td>
          <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', '', 1, $readonly); ?></td>
          <td><?php
           $f->val_field_wid2('item_number', 'item', 'item_number', 'shipping_org_id');

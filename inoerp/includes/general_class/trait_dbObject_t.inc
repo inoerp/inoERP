@@ -250,6 +250,35 @@ trait dbObject_t {
    return false;
   }
  }
+ 
+  public static function find_by_sql_i($sql, $value_a = '') {
+  global $dbc;
+  if (empty($dbc->connection)) {
+   return false;
+  }
+  $stmt = $dbc->connection->prepare(" $sql ");
+  if (!empty($value_a)) {
+   foreach ($value_a as $key => $value) {
+    if (!empty($value)) {
+     if ($key == 'lmt_no_of_records' || $key == 'lmt_start_from') {
+      $stmt->bindValue(":$key", $value, PDO::PARAM_INT);
+     } else {
+      $stmt->bindValue(":$key", $value);
+     }
+    } else {
+     $stmt->bindValue(":$key", NULL);
+    }
+   }
+  }
+  try {
+   $stmt->execute();
+   $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+   return $result;
+  } catch (PDOException $e) {
+//    echo "Record couldnt be fetched !!: " . $e->getMessage();
+   return 0;
+  }
+ }
 
 
  public static function find_by_sql_array($sql = "") {

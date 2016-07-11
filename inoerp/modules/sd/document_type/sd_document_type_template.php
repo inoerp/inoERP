@@ -6,8 +6,8 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<form  method="post" id="sd_document_type"  name="sd_document_type">
- <span class="heading"><?php echo gettext('Document Type') ?></span>
+<form  method="post" id="sd_document_type"  name="sd_document_type" class="form_header_l">
+ <span class="heading"><?php echo gettext('Sales Document Type') ?></span>
  <div class="large_shadow_box tabContainer">
   <ul class="column header_field"> 
    <li><?php $f->l_text_field_dr_withSearch('sd_document_type_id') ?>

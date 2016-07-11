@@ -29,7 +29,7 @@
         ?> </li>
        <li><?php $f->l_select_field_from_object('supply_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->supply_org_id, 'supply_org_id', '', '', $readonly1); ?>        </li>
        <li><label><?php echo gettext('Status') ?></label>                      
-        <?php echo $f->select_field_from_object('requisition_status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->requisition_status, 'requisition_status', 'dont_copy'); ?>
+        <?php echo $f->select_field_from_object('requisition_status', po_header::po_status(), 'option_line_code', 'option_line_value', $$class->requisition_status, 'requisition_status', 'always_readonly' , ' ',1); ?>
        </li>
       </ul>
      </div>

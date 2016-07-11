@@ -145,7 +145,7 @@ $(document).ready(function () {
  });
 
  $('body').off('click', '#menu_button4_1, #menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_1, #menu_button4_2, #menu_button4_2_1', function () {
-  $('#status').val('');
+  $('#status, .order_type, .order_number').val('');
   $('#po_requisition_type').removeAttr('readonly').removeClass('readonly');
  });
 

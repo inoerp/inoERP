@@ -30,6 +30,9 @@ class inv_receipt_line extends dbObject {
   'po_detail_id',
   'sd_so_line_id',
   'sd_so_header_id',
+  'po_requisition_detail_id',
+  'po_requisition_line_id',
+  'po_requisition_header_id',
   'inv_interorg_transfer_line_id',
   'inv_interorg_transfer_header_id',
   "receving_account_id",
@@ -87,7 +90,6 @@ class inv_receipt_line extends dbObject {
   'received_quantity',
   'quantity',
  ];
-
  public $requiredField = [
   'inv_receipt_header_id',
   'subinventory_id',
@@ -115,6 +117,9 @@ class inv_receipt_line extends dbObject {
  public $po_detail_id;
  public $sd_so_line_id;
  public $sd_so_header_id;
+ public $po_requisition_detail_id;
+ public $po_requisition_line_id;
+ public $po_requisition_header_id;
  public $inv_interorg_transfer_line_id;
  public $inv_interorg_transfer_header_id;
  public $receving_account_id;
@@ -169,7 +174,6 @@ class inv_receipt_line extends dbObject {
  private $_po_line_id;
  private $_gl_journal_header_id;
  private $_ppv_ac_id;
- 
 
  Public static function inv_transaction_class() {
   $option_header = option_header::find_by_name('TRANSACTION_TYPE_CLASS');

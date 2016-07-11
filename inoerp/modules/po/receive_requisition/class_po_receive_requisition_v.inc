@@ -130,10 +130,20 @@ AND item.item_id_m = prl.item_id_m
   $sql .= " WHERE po_requisition_detail_id = :po_requisition_detail_id ";
   $sql .= " LIMIT 1 ";
 
-  $param_a = ['po_requisition_detail_id'];
   $value_a = ['po_requisition_detail_id' => $this->po_requisition_detail_id];
-  $result = $this->findBy_sql($sql, $param_a, $value_a);
-  return !empty($result) ? array_po_requisitionp($result) : false;
+  $result = $this->findBySql($sql, $value_a);
+  return !empty($result) ? array_pop($result) : false;
+ }
+
+ public static function find_by_po_requisitionDetailId($po_requisition_detail_id) {
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE po_requisition_detail_id = :po_requisition_detail_id ";
+  $sql .= " LIMIT 1 ";
+
+  $value_a = ['po_requisition_detail_id' => $po_requisition_detail_id];
+  $result = self::find_by_sql_i($sql, $value_a);
+  return !empty($result) ? array_pop($result) : false;
  }
 
 }

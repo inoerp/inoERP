@@ -71,6 +71,16 @@ function create_receipt() {
  }
 }
 
+ function ar_transaction_header_copy_line_to_details() {
+  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
+   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
+   if (detailExists === 0) {
+    var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
+    $(this).closest("td").find(".quantity:first").val(lineQuantity);
+   }
+  });
+ }
+
 $(document).ready(function () {
 //mandatory and field sequence
 // var mandatoryCheck = new mandatoryFieldMain();
@@ -95,9 +105,6 @@ $(document).ready(function () {
  if (!($('.detail_number:first').val())) {
   $('.detail_number:first').val('1');
  }
-
-// $('.need_by_date:first').datepicker("setDate", new Date());
-// $('.promise_date:first').datepicker("setDate", new Date());
 
 
  //default quantity
@@ -128,17 +135,9 @@ $(document).ready(function () {
  });
 
  //function to coply line to details
- function copy_line_to_details() {
-  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
-   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
-   if (detailExists === 0) {
-    var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
-    $(this).closest("td").find(".quantity:first").val(lineQuantity);
-   }
-  });
- }
 
- copy_line_to_details();
+
+ ar_transaction_header_copy_line_to_details();
 
 
 //remove po lines
@@ -171,8 +170,14 @@ $(document).ready(function () {
   }
  });
 
- $('#bu_org_id').on('change', function () {
+if($('#bu_org_id').val()){
+$('#transaction_type').find("[data-bu_org_id='" + $('#bu_org_id').val() + "']").attr('disabled', true);
+}
+
+ $('body').off('change', '#ar_transaction_header #bu_org_id').on('change', '#ar_transaction_header #bu_org_id', function () {
   getBUDetails($(this).val());
+    $('#transaction_type').find('option').removeAttr('disabled');
+  $('#transaction_type').find("[data-bu_org_id='" + $(this).val() + "']").attr('disabled', true);
  });
 
  if ($('#bu_org_id').val() && (!$('#ar_transaction_header_id').val()) && ($('#bu_org_id').attr('disabled') != 'disabled')) {

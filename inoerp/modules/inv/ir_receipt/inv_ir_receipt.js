@@ -12,12 +12,12 @@ $(document).ready(function () {
  }
 
 //verify entered qty is less than open quantity
- $('body').off('blur', '.received_quantity').on('blur', '.received_quantity', function () {
-  var newQty = $(this).val();
-  var shipmentQty = $(this).closest('tr').find('.quantity').val();
-  var poReceivedQty = $(this).closest('tr').find('.po_received_quantity').val();
-  if ((+poReceivedQty + +newQty) > shipmentQty) {
-   alert('Entered quantity is more than open quantity!');
+ $('#inv_ir_receipt_formid').off('blur', '.transaction_quantity').on('blur', '.transaction_quantity', function () {
+  var newQty = +$(this).val();
+  var shipmentQty = +$(this).closest('tr').find('.iso_shipped_quantity').val();
+  var irReceivedQty = +$(this).closest('tr').find('.quantity').val();
+  if ((irReceivedQty + newQty) > shipmentQty) {
+   alert('Entered quantity is more than ISO shipped  quantity!');
    $(this).val('');
    $(this).focus();
   }
@@ -33,7 +33,7 @@ $(document).ready(function () {
  });
 
 
-$('.receving_org_id').val($('#org_id').val());
+ $('.receving_org_id').val($('#org_id').val());
 
  //get Subinventory Name
  $('body').off('change', '#org_id').on("change", '#org_id', function () {
