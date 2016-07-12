@@ -39,6 +39,13 @@ $(document).ready(function () {
   }
  });
 
+
+ //get Subinventory Name
+ $('body').off("change", '#org_id').on("change", '#org_id', function () {
+  getWipAccountingGroup('modules/wip/accounting_group/json_accounting_group.php', $("#org_id").val());
+ });
+
+
  $('body').off('change', '#action').on('change', '#action', function () {
   if ($(this).val() == 'PROCESS_ACTUALS') {
    $('#add_to_order').prop('disabled', false);
@@ -60,5 +67,5 @@ $(document).ready(function () {
    getLocator('modules/inv/locator/json_locator.php', subInventoryId, 'subinventory', trClass);
   }
  });
- 
+
 });

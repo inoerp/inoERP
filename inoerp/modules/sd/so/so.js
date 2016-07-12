@@ -21,13 +21,14 @@ $(document).ready(function () {
  }
 
 if($('#bu_org_id').val()){
-$('#document_type, .line_type').find("[data-bu_org_id_r='" + $('#bu_org_id').val() + "']").attr('disabled', true);
+ $('#document_type, .line_type').find('option').attr('disabled', true);
+$('#document_type, .line_type').find("[data-bu_org_id_r='" + $('#bu_org_id').val() + "']").removeAttr('disabled');
 }
 
  $('body').off('change', '#sd_so_header #bu_org_id').on('change', '#sd_so_header #bu_org_id', function () {
   getBUDetails($(this).val());
-  $('#document_type, .line_type').find('option').removeAttr('disabled');
-  $('#document_type, .line_type').find("[data-bu_org_id_r='" + $(this).val() + "']").attr('disabled', true);
+  $('#document_type, .line_type').find('option').attr('disabled', true);
+  $('#document_type, .line_type').find("[data-bu_org_id_r='" + $(this).val() + "']").removeAttr('disabled');
  });
 
  if ($('#bu_org_id').val() && (!$('#sd_so_header_id').val()) && ($('#bu_org_id').attr('disabled') !== 'disabled')) {

@@ -237,7 +237,8 @@ LEFT JOIN locator ON locator.locator_id = ssc.staging_locator_id
 WHERE
 sdsh.sd_so_header_id = sdsl.sd_so_header_id
 AND sdsh.ar_customer_id = ar_customer.ar_customer_id
-AND sdsl.item_id_m = item.item_id_m AND item.org_id = sdsl.shipping_org_id
+AND sdsl.item_id_m = item.item_id_m 
+AND item.org_id = sdsl.shipping_org_id
 AND sdsl.shipping_org_id = org.org_id
 AND ssc.org_id = sdsl.shipping_org_id
 

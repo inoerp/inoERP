@@ -318,8 +318,8 @@ inoERP
          <td> <?php echo $f->select_field_from_array('destination_type', sd_document_type::$destination_type_a, $$class_second->destination_type, '', 'copyValue'); ?></td>
          <td><?php form::number_field_wid2sr('picked_quantity'); ?></td>
          <td><?php form::number_field_wid2sr('shipped_quantity'); ?></td>
-         <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
-         <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
+         <td><?php form::text_field_wid2r('reference_doc_type' ,'always_readonly'); ?></td>
+         <td><?php form::text_field_wid2r('reference_doc_number' ,'always_readonly'); ?></td>
 
         </tr>
         <?php

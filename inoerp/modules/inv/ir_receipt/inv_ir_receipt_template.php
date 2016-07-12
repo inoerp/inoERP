@@ -101,10 +101,10 @@
          if (!empty($inv_receipt_line->inv_receipt_line_id)) {
           $inv_ir_transfer_line_i = po_receive_requisition_v::find_by_po_requisitionDetailId($inv_receipt_line->po_requisition_detail_id);
           if (!empty($inv_ir_transfer_line_i)) {
-           $inv_receipt_line->io_order_number = $inv_ir_transfer_line_i->io_order_number;
-           $inv_receipt_line->io_line_number = $inv_ir_transfer_line_i->io_line_number;
+           $inv_receipt_line->so_number = $inv_ir_transfer_line_i->so_number;
+           $inv_receipt_line->so_line_number = $inv_ir_transfer_line_i->so_line_number;
            $inv_receipt_line->item_number = $inv_ir_transfer_line_i->item_number;
-           $inv_receipt_line->quantity = $inv_ir_transfer_line_i->transaction_quantity;
+           
           } else {
            $inv_receipt_line->so_number = $inv_receipt_line->so_line_number = $inv_receipt_line->io_order_number = $inv_receipt_line->io_line_number = $inv_receipt_line->item_number = $inv_receipt_line->quantity = null;
           }
@@ -175,6 +175,7 @@
            $inv_receipt_line->req_quantity = $inv_ir_transfer_line_i->req_quantity;
            $inv_receipt_line->iso_line_quantity = $inv_ir_transfer_line_i->iso_line_quantity;
            $inv_receipt_line->iso_shipped_quantity = $inv_ir_transfer_line_i->iso_shipped_quantity;
+           $inv_receipt_line->quantity = $$class_second->transaction_quantity;
           } else {
            $inv_receipt_line->req_quantity = $inv_receipt_line->iso_line_quantity = $inv_receipt_line->iso_shipped_quantity = null;
           }

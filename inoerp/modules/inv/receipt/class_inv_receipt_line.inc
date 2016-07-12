@@ -249,6 +249,16 @@ class inv_receipt_line extends dbObject {
      $dbc->rollback = true;
     }
    }
+  } else if (!empty($this->inv_receipt_line_id) && !empty($this->po_requisition_detail_id)) {
+   if (!empty($this->item_id_m)) {
+    try {
+     $this->_create_inv_transactions();
+     $this->_after_save_irReceipt();
+    } catch (Exception $e) {
+     echo "<br> Not able to complete inventory transaction. Error @ inv_receipt_line " . __LINE__ . '<br>' . $e->getMessage();
+     $dbc->rollback = true;
+    }
+   }
   }
  }
 
