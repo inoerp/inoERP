@@ -30,7 +30,7 @@ inoERP
         <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', 'popup_value', '', $readonly); ?>         </li>
         <li><?php $f->l_text_field_d('wo_number', 'primary_column2'); ?> </li>
         <li><?php $f->l_select_field_from_object('wo_type', wip_wo_header::wip_wo_type(), 'option_line_code', 'option_line_value', $$class->wo_type, 'wo_type', '', '', $readonly); ?>         </li>
-        <li><label><?php echo gettext('Accounting Group') ?></label><?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_woType(), 'wip_accounting_group_id', ['wip_accounting_group','org_id'], $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1' , '' ,'','','org_id'); ?>         </li>
+        <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_orgId($$class->org_id), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
         <li><?php
          echo $f->hidden_field_withId('item_id_m', $$class->item_id_m);
          echo $f->hidden_field_withId('processing_lt', $$class->processing_lt);

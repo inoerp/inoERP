@@ -66,15 +66,8 @@ setValFromSelectPage.prototype.setVal = function () {
 
 
 $(document).ready(function () {
-// var mandatoryCheck = new mandatoryFieldMain();
-// mandatoryCheck.mandatoryHeader();
-
-
- //get Subinventory Name
- $('body').off("change", '#org_id').on("change", '#org_id', function () {
-  getWipAccountingGroup('modules/wip/accounting_group/json_accounting_group.php', $("#org_id").val());
- });
-
+ var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.mandatoryHeader();
 
  //selecting Id
  $(".am_asset_id.select_popup").on("click", function () {
@@ -83,6 +76,13 @@ $(document).ready(function () {
  });
 
 
+ //get Subinventory Name
+ $('body').off("change", '#org_id').on("change", '#org_id', function () {
+  getSubInventory({
+   json_url: 'modules/inv/subinventory/json_subinventory.php',
+   org_id: $("#org_id").val()
+  });
+ });
 
 
  //get locatot on Subinventory change in form header

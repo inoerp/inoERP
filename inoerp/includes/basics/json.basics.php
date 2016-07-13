@@ -149,7 +149,7 @@ include_once("basics.inc");
     foreach (block::$position_array as $key => $value) {
      if ($position == $value) {
       if ($value == 'footer_top') {
-       $block_value = '<div class="col-sm-3 blog-sidebar">';
+       $block_value = '<div class="col-md-3 col-sm-6 col-xs-12 blog-sidebar">';
        $block_value .= "<div class=\"block $position $reference_table block_$block_count \">";
        if (!empty($records->show_title_cb) && $records->show_title_cb == true) {
         $block_value .= "<div class=\"headerBgColor title $reference_table\" > $title </div>";

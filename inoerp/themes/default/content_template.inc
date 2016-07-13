@@ -10,7 +10,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
 ?>
 <div class="container">
  <div class="row">
-  <div class="col-md-8 col-xs-12 blog-main">
+  <div class="col-md-8 col-sm-12 col-xs-12 blog-main">
    <div id="all_contents">
     <div id="content_top"></div>
     <div id="content">
@@ -126,7 +126,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
     <div id="content_bottom"></div>
    </div>
   </div>
-  <div class="col-md-4 col-sm-4 col-xs-4 blog-sidebar">
+  <div class="col-md-4 col-sm-12 col-xs-12 blog-sidebar">
    <div class="sidebar-module sidebar-module-inset">
     <div id="content_left"></div>
    </div>

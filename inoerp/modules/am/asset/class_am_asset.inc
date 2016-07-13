@@ -99,11 +99,6 @@ class am_asset extends dbObject {
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
  ];
- 
-  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
- ];
-  
  public $pageTitle = " Asset Maintenance "; //page Title
  public $am_asset_id;
  public $asset_number;

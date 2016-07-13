@@ -1,6 +1,6 @@
 <div class="container" id="content_<?php echo $content->content_id; ?>">
  <div class="row">
-  <div class="col-md-8 col-xs-12  blog-main">
+  <div class="col-md-8 col-xs-12 col-sm-12 blog-main">
    <div id="all_contents">
     <div id="content_top"></div>
     <div id="content">
@@ -83,7 +83,7 @@
     <div id="content_bottom"></div>
    </div>
   </div>
-  <div class="col-md-4 col-sm-4 col-xs-4 blog-sidebar">
+  <div class="col-md-4 col-sm-12 col-xs-12 blog-sidebar">
    <div class="sidebar-module ">
     <div id="content_left"></div>
    </div>

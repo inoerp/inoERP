@@ -1536,9 +1536,12 @@ ul.inline_action .fa, #form_line .fa{
 }       	
 
 .ino-label{
- font-size: 100%;
- color: #037892;
- font-weight: bold;
+font-size: 100%;
+color: #037892;
+font-weight: bold;
+width: 150px;
+text-align: right;
+float: left;
 }
 
 tr.level_2 td a{
@@ -2603,4 +2606,12 @@ ul#recent_visit li{
 
 .ino-toggle-tab.pull-right{
  margin-right: 40px !important;
+}
+
+.no-padding-imp{
+ padding: 0 !important;
+}
+
+.list-group-item{
+ padding: 5px 10px !important;
 }

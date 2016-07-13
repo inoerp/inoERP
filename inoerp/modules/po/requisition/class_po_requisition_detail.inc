@@ -40,7 +40,6 @@ class po_requisition_detail extends dbObject {
   'delivered_quantity',
   'invoiced_quantity',
   'paid_quantity',
-  'ir_status',
   "created_by",
   "creation_date",
   "last_update_by",
