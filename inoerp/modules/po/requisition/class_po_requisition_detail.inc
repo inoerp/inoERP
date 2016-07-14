@@ -1,4 +1,13 @@
 <?php
+/* Below are appllicable only for IRs
+ *  "received_quantity",
+  "accepted_quantity",
+  'delivered_quantity',
+  'invoiced_quantity',
+*
+ * 
+ *  */
+
 
 class po_requisition_detail extends dbObject {
 
@@ -7,6 +16,10 @@ class po_requisition_detail extends dbObject {
  public static $parent_primary_column = "po_requisition_line_id";
  public static $key_column = 'shipment_number';
  public static $module = "po_requisition";
+ public $ir_status_a = [
+  'PAR_RECEIVED' => 'Partially Received',
+  'FULL_RECEIVED' => 'Fully Received',
+ ];
  public $account = [
   'charge_ac_id',
   'accrual_ac_id',
@@ -40,6 +53,7 @@ class po_requisition_detail extends dbObject {
   'delivered_quantity',
   'invoiced_quantity',
   'paid_quantity',
+  'ir_status',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -53,13 +67,6 @@ class po_requisition_detail extends dbObject {
   "supplier_number",
   "supplier_site_name",
   "buyer"
- ];
- public $column = [
-  "po_requisition_header_id",
-  "po_requisition_line_id",
-  "po_requisition_detail_id",
-//		 "supplier_id",
-  "creation_date"
  ];
  public $requiredField = [
   'po_requisition_line_id',
@@ -102,6 +109,7 @@ class po_requisition_detail extends dbObject {
  public $ppv_ac_id;
  public $order_number;
  public $order_type;
+ public $ir_status;
  public $created_by;
  public $creation_date;
  public $last_update_by;

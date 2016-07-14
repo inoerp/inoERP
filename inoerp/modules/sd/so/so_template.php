@@ -351,8 +351,8 @@ inoERP
         $sd_so_line->ar_transaction_number = null;
         ?>         
         <tr class="sd_so_line<?php echo $count ?>">
-         <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php form::number_field_wid2sr('invoiced_quantity'); ?></td>
+         <td title="Seq#"><?php $f->seq_field_d($count) ?></td>
+         <td title="Invoiced Qty">><?php form::number_field_wid2sr('invoiced_quantity'); ?></td>
          <td><?php form::text_field_wid2r('ar_transaction_header_id'); ?></td>
          <td><?php form::text_field_wid2r('ar_transaction_line_id'); ?></td>
          <td><?php form::text_field_wid2r('ar_transaction_number'); ?></td>

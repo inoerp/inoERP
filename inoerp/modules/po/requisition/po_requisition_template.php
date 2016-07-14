@@ -218,6 +218,7 @@
                    <th><?php echo gettext('Sub inventory') ?></th>
                    <th><?php echo gettext('Locator') ?></th>
                    <th><?php echo gettext('Requestor') ?></th>
+                   <th><?php echo gettext('IR Receipt Status') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">
@@ -237,6 +238,7 @@
                      <?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue', ''); ?>
                     </td>
                     <td><?php $f->text_field_wid3('requestor'); ?></td>
+                    <td><?php $f->text_field_wid3('ir_status'); ?></td>
                    </tr>
                    <?php
                    $detailCount++;

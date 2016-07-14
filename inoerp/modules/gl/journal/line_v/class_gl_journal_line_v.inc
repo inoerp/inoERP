@@ -191,7 +191,6 @@ ORDER BY gp.gl_period_id DESC, cc.combination DESC
    $sql .= " AND  total_ac_cr IS NOT NULL ";
   }
 
-  echo $sql;
   
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;

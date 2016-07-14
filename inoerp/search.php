@@ -1,5 +1,6 @@
 <?php
 $hideContextMenu = true;
+$mode = 2;
 global $s;
 if (!empty($_GET['search_class_name'])) {
  $class_names = $_GET['search_class_name'];

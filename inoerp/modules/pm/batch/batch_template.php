@@ -31,7 +31,7 @@ inoERP
        echo $f->hidden_field_withId('pm_recipe_header_id', $$class->pm_recipe_header_id);
        ?><i class="generic g_select_recipe_name select_popup clickable fa fa-search" data-class_name="pm_recipe_all_v"></i></li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly1, '', ''); ?>						 </li>
-      <li><?php $f->l_select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_woType('PROCESS'), 'wip_accounting_group_id', 'wip_accounting_group', $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1'); ?>         </li>
+      <li><label><?php echo gettext('Accounting Group') ?></label><?php echo $f->select_field_from_object('wip_accounting_group_id', wip_accounting_group::find_by_woType('PROCESS'), 'wip_accounting_group_id', ['wip_accounting_group','org_id'], $$class->wip_accounting_group_id, 'wip_accounting_group_id', '', 1, 'readonly1' , '' ,'','','org_id'); ?>         </li>
       <li><?php $f->l_text_field_d('revision'); ?></li>
       <li><?php $f->l_select_field_from_array('status', pm_batch_header::$status_a, $$class->status, '', 'always_readonly', '', 1); ?></li>
       <li><label><?php echo gettext('Owner') ?></label><?php $f->text_field_d('pm_employee_name', 'employee_name'); ?>

@@ -1,4 +1,8 @@
-<div id="installation_header"><h1>inoERP installation : </h1><h2> Start Installation (Step 3) </h2></div>
+<div id="installation_header">
+ <div class="page-header">
+  <h1>inoERP installation <small>Start Installation  (Step 3)</small></h1>
+ </div>
+</div>
 <?php
 $proceed = true;
 $dbsetting_file = '<?php ';

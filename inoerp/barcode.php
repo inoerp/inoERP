@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 set_time_limit(0);
 
-include_once("includes/basics/header_public.inc");
+include_once("includes/template/header_public.inc");
 ?>
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 <?php

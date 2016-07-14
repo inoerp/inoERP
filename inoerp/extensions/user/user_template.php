@@ -56,11 +56,11 @@ if (empty($access_level) || ($access_level < 2 )) {
        ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
 
       <li><label><?php echo gettext('Supplier Name') ?></label><?php $f->text_field_d('supplier_name'); ?>
-<?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
+       <?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
        <i class="fa fa-search supplier_id select_popup clickable"></i>
       </li>
       <li><label><?php echo gettext('Customer Name') ?></label><?php $f->text_field_d('customer_name'); ?>
-<?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
+       <?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
        <i class="fa fa-search ar_customer_id select_popup clickable"></i>
       </li>
      </ul>
@@ -75,7 +75,7 @@ if (empty($access_level) || ($access_level < 2 )) {
      <div> 
       <div id="comments">
        <div id="comment_list">
-<?php echo!(empty($comments)) ? $comments : ""; ?>
+        <?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
         <?php
@@ -96,7 +96,7 @@ if (empty($access_level) || ($access_level < 2 )) {
     <div id="tabsHeader-8" class="tabContent">
      <div class="existing-address col-md-6">
       <label><?php echo gettext('Existing Addresses'); ?></label>
-<?php echo!empty($existing_address_arr) ? address_reference::show_address($existing_address_arr) : ''; ?>
+      <?php echo!empty($existing_address_arr) ? address_reference::show_address($existing_address_arr) : ''; ?>
      </div>
      <div class="new-address col-md-6"><label><?php echo gettext('Add New Address'); ?></label>
       <?php

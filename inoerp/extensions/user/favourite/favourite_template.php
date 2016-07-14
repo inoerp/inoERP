@@ -12,8 +12,7 @@
  <div id ="form_line" class="user_favourite"><span class="heading"><?php echo gettext('Favourite Links') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php $f = new inoform();
-echo gettext('Details') ?> </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Details') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">

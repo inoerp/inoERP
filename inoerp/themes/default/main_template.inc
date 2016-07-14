@@ -47,7 +47,7 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse col-md-6 navbar-right">
      <ul class="nav navbar-nav navbar-right">
-      <li><div class="topbar-login ino_right_top"><?php ino_topbar_login();   ?></div></li>
+      <li><div class="topbar-login ino_right_top"><?php ino_topbar_login(); ?></div></li>
      </ul>
      <ul class='nav navbar-nav hidden-xs'><li>
        <?php echo $ss->entry_form($_GET); ?>
@@ -85,7 +85,15 @@
       <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="Search & List Page"></i></a></li>
       <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="Form Page"></i></a></li>
       <li id="unsaved_fields" data-no_of_fields="0"></li>
-      <li class="show_loading_small"><img src="<?php echo HOME_URL ?>/themes/images/form/small_loading_bar.gif"></li>
+      <li class="show_loading_small">
+       <div class="ino-spinner ino-sm" >
+        <div class="rect1" style="background-color:<?php echo $si->heading_color; ?>"></div>
+        <div class="rect2" style="background-color:<?php echo $si->heading_color; ?>"></div>
+        <div class="rect3" style="background-color:<?php echo $si->heading_color; ?>"></div>
+        <div class="rect4" style="background-color:<?php echo $si->heading_color; ?>"></div>
+        <div class="rect5" style="background-color:<?php echo $si->heading_color; ?>"></div>
+       </div>
+      </li>
      </ul>
     </div>
     <div id="header_top_container" >
@@ -177,7 +185,7 @@
 
    <div id="divider-bar" class="col-m-1 hidden-sm hidden-xs"><i class="fa fa-toggle-left clickable"></i></div>
    <div class="clearfix"></div>
-   <div id="erp_form_area" class="col-md-10 col-md-offset-2 mainbar" >
+   <div id="erp_form_area" class="col-md-10 col-md-offset-2 mainbar col-xs-12" >
     <div class='visible-xs visible-sm'>
      <div class="error"></div><div id="loading"></div>
     </div>

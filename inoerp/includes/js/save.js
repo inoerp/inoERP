@@ -661,7 +661,7 @@ exportToExcelMain.prototype.exportToExcel = function ()
 /*------------------------------------End of Export to Excel & Sratt of Copy--------------------------------*/
 //add new line
 function add_new_rowMain(trClass, tbodyClass, noOfTabs, copyFirstLine,
-        removeDefault, divClassNotToBeCopied, divClassToBeCopied, lineNumberIncrementValue) {
+        removeDefault, divClassNotToBeCopied, divClassToBeCopied, lineNumberIncrementValue, enableUpdate) {
  this.trClass = trClass;
  this.tbodyClass = tbodyClass;
  this.copyFirstLine = copyFirstLine;
@@ -670,6 +670,7 @@ function add_new_rowMain(trClass, tbodyClass, noOfTabs, copyFirstLine,
  this.divClassNotToBeCopied = divClassNotToBeCopied;
  this.divClassToBeCopied = divClassToBeCopied;
  this.lineNumberIncrementValue = lineNumberIncrementValue;
+ this.enableUpdate = enableUpdate;
 }
 
 var objectCount = 491;
@@ -677,8 +678,10 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
  var tbodyClass = this.tbodyClass;
  var trClass = this.trClass;
  var divClassToBeCopied = this.divClassToBeCopied;
+ var enableUpdate = this.enableUpdate;
  var lineNumberIncrementValue = this.lineNumberIncrementValue;
- var divClassToBeCopied_c = '.' + divClassToBeCopied;
+ var enableUpdate_c = '.' + enableUpdate;
+ var divClassToBeCopied_c = '.' +  this.divClassToBeCopied;
  trClass = trClass.replace(/tr\./g, '');
  trClass = trClass.replace(/0/g, '');
  trClass = trClass.replace(/-/g, '');
@@ -745,6 +748,7 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
   });
  }
 
+$("tr.new_object" + objectCount).find(enableUpdate_c).removeAttr("disabled","readonly").removeClass('always_readonly readonly');
  $("tr.new_object" + objectCount).find(".class_detail_form").replaceWith("");
  $("tr.new_object" + objectCount).find(".seq_number").val(nextSeqNumber);
  $('.lines_number:last').val(nextLineSeqNumber);

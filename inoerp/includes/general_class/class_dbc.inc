@@ -9,7 +9,8 @@ class dbc {
 
  function __construct() {
   if(!(DB_SERVER)){
-   return false;
+   exit('Data base not found. Please check the dbsettings.inc file');
+//   return false;
   }
 	try {
 	 $this->connection = new PDO('mysql:host=' . DB_SERVER . '; dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);

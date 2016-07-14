@@ -241,7 +241,7 @@
                      <li class="tabLink"><a href="#tabsDetail-1-1">Basic</a></li>
                      <li class="tabLink"><a href="#tabsDetail-2-1">Delivery</a></li>
                      <li class="tabLink"><a href="#tabsDetail-3-1">Finance</a></li>
-                     <li class="tabLink"><a href="#tabsDetail-4-1">Status</a></li>
+                     <li class="tabLink"><a href="#tabsDetail-4-1">Status Quantities </a></li>
                     </ul>
                     <div class="tabContainer">
                      <div id="tabsDetail-1-1" class="tabContent">
@@ -355,7 +355,7 @@
                       </table>
                      </div>
                      <div id="tabsDetail-4-1" class="tabContent">
-                      <table class="form form_detail_data_table detail"><lable>Quantities</lable>
+                      <table class="form form_detail_data_table detail">
                        <thead>
                         <tr>
                          <th>Received</th>

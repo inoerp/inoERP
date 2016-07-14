@@ -361,14 +361,14 @@ section::after {
 #header-style-1 .yamm .dropdown.yamm-fw .dropdown-menu {
  left: 0;
  right: 0;
- background-color:#f5f5f5;
+ /*background-color:#f5f5f5;*/
  box-shadow:none;
  /*margin-top:25px;*/
  /*border-top:3px solid #fff;*/
 }
 
 .ino-top-nav{
- background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+background: rgb(255, 255, 255) none repeat scroll 0% 0%;
 border-radius: 4px;
 }
 
@@ -461,11 +461,14 @@ border-radius: 4px;
 #topbar .social-icons span.last a {
  border-right:1px solid #f2f2f2;
 }
+
+ 
 #topbar .topbar-email,
 #topbar .topbar-phone,
 #topbar .topbar-login,
 #topbar .topbar-cart {
- float:left;
+  float:right;
+  text-align: right;
  padding:0 15px;
  line-height:42px;
  border-right:1px solid #f2f2f2;
@@ -485,7 +488,7 @@ border-radius: 4px;
 #topbar .callus,
 #topbar .topmenu {
  display:block; 
- float:right
+
 }
 .yamm .dropdown-submenu{
  position:relative;
@@ -3488,7 +3491,7 @@ acronym {
  } 
 }
 
-@media (max-width: 380px) {
+/*@media (max-width: 380px) {
  #topbar .topbar-email, 
  #topbar .topbar-phone, 
  #topbar .topbar-login, 
@@ -3497,7 +3500,7 @@ acronym {
  .callus{
   display:block
  } 
-}
+}*/
 
 /* ----------------------------------------------------
   COLOR SCHEMES
@@ -4570,12 +4573,13 @@ a.show {
  position: relative;
 }
 
-@media (min-width: 320px) {
+@media (min-width: 280px) {
  #navigation_bar {
   height: 30px;
   top: 50px;
   margin-bottom: 60px;
   z-index: 999;
+   overflow:hidden;
  }
 }
 

@@ -23,9 +23,9 @@ function add_receipt_lines() {
 $(document).ready(function () {
 
 //mandatory and field sequence
-// var mandatoryCheck = new mandatoryFieldMain();
-// mandatoryCheck.header_id = 'inv_receipt_header_id';
-// mandatoryCheck.mandatoryHeader();
+ var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'inv_receipt_header_id';
+ mandatoryCheck.mandatoryHeader();
 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {

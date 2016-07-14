@@ -200,30 +200,18 @@
     </div><!-- end columns -->
    </div><!-- end container -->
   </div><!-- end topbar -->
-  <header id="header-style-1">
-   <div class="container">
-    <nav class="navbar yamm navbar-default">
+   <header id="header-style-1">
+    <div class="container ino-top-nav">
      <div class="navbar-header">
       <img src="<?php
       echo HOME_URL;
       echo!empty($si->logo_path) ? $si->logo_path : 'files/logo.png'
       ?>" class="logo_image" alt="logo"/>
       <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
-     </div><!-- end navbar-header -->
-     <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
-      <ul class="nav nav-pills">
-       <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-       <li><a href="http://inoideas.org/content/demo" >DEMO <div class="arrow-up"></div></a></li>
-       <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
-       <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
-       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-       <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
-      </ul><!-- end navbar-nav -->
-     </div><!-- #navbar-collapse-1 -->			
-    </nav><!-- end navbar yamm navbar-default -->
-   </div><!-- end container -->
-  </header>
+     </div>
+<div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right"> <?php      echo $menu_line->show_menu_list(1);    ?></div>
+    </div>
+   </header>
 
 
   <div class="container">

@@ -55,14 +55,17 @@ AND ar.reference_table = '{$ref_table}'";
  }
 
  public static function show_address($all_address, $show_addres_id = false) {
-  global $f; $f = new inoform();
+  global $f; 
   if (empty($all_address)) {
    return false;
   }
   $stmt = '<div id="existing-address-details">';
   foreach ($all_address as $address) {
    $stmt .= '<div class="panel panel-warning address-stmt">';
-   $stmt .= '<div class="panel-heading">' . $address->address_name . '&nbsp;&nbsp;&nbsp; <i class="fa fa-trash-o clickable"></i>&nbsp;&nbsp;&nbsp; <i class="fa fa-edit clickable"></i></div>';
+   $stmt .= '<div class="panel-heading">' . $address->address_name . '&nbsp;&nbsp;&nbsp;';
+   $stmt .= '<a  class="popup popup-form view-addrees medium" href="form.php?class_name=address&mode=9&window_type=popup&address_id='.$address->address_id.'"><i class="fa fa-trash-o clickable"></i></a>&nbsp;&nbsp;&nbsp;';
+   $stmt .= '<a class="popup popup-form view-addrees medium" href="form.php?class_name=address&mode=9&window_type=popup&address_id='.$address->address_id.'"><i class="fa fa-edit clickable"></i></a>';
+   $stmt .= '</div>';
    $stmt .= '<div class="panel-body"><ul>';
    $stmt .= '<li>' . $address->address . '</li>';
    $stmt .= '<li>' . $address->country . ' ' . $address->postal_code . '</li>';

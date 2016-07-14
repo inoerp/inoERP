@@ -98,13 +98,13 @@ include_once("includes/functions/loader.inc");
   <nav class="navbar navbar-default navbar-fixed-top">
    <div id="topbar" class="topbar clearfix ">
     <div class="container">
-     <div class="row">
+     <div class="row ">
       <?php
       if ($showBlock) {
        echo '<div id = "header_top" class = "clear"></div>';
       }
       ?>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-2">
+      <div class="dashborad_l col-lg-4 col-md-4 col-sm-3 col-xs-6 ">
        <?php
        $show_header_links = true;
        if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
@@ -123,50 +123,29 @@ include_once("includes/functions/loader.inc");
 
       </div><!-- end columns -->
 
-      <div class="col-lg-8 col-md-8 col-sm-8 ">
-       <div class="topmenu">
-        <div class="topbar-login"><?php ino_topbar_login();   ?></div>
-       </div><!-- end top menu -->
-       <div class="callus">
+
+       <div class="callus col-lg-6 col-md-6 col-sm-7 hidden-xs">
         <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
         <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
        </div><!-- end callus -->
-      </div><!-- end columns -->
+       <div class="topbar-login col-lg-2 col-md-2 col-sm-2 col-xs-6 "><?php ino_topbar_login(); ?></div><!-- end top menu -->
+
      </div>
     </div><!-- end container -->
    </div><!-- end topbar -->
 
    <header id="header-style-1">
-    <div class="container">
-     <nav class="navbar yamm navbar-default ">
-      <div class="navbar-header">
-       <img src="<?php
-       echo HOME_URL;
-       echo!empty($si->logo_path) ? $si->logo_path : 'files/logo.png'
-       ?>" class="logo_image" alt="logo"/>
-       <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
-      </div>
-      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
-       <ul class="nav nav-pills">
-        <li><a href="http://inoideas.org/content/demo" >Demo <div class="arrow-up"></div></a></li>
-        <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
-        <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
-        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-        <li role="presentation" class="dropdown">
-         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-          More <span class="caret"></span>
-         </a>
-         <ul class="dropdown-menu" role="menu">
-          <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-          <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
-         </ul>
-        </li>
-       </ul><!-- end navbar-nav -->
-      </div><!-- #navbar-collapse-1 -->			
-     </nav>
-    </div><!-- end container -->
-   </header><!-- end header-style-1 -->
+    <div class="container ino-top-nav">
+     <div class="navbar-header">
+      <img src="<?php
+      echo HOME_URL;
+      echo!empty($si->logo_path) ? $si->logo_path : 'files/logo.png'
+      ?>" class="logo_image" alt="logo"/>
+      <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
+     </div>
+     <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right"> <?php      echo $menu_line->show_menu_list(1);    ?></div>
+    </div>
+   </header>
   </nav>
   <?php
   if ($showBlock) {

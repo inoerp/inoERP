@@ -327,7 +327,7 @@ function xx_getBreadCrumb($class_first) {
 function show_reference_doc($class_name, $primar_column_value) {
  $primary_column = $class_name::$primary_column;
  if ((!empty($class_name)) && (!empty($primar_column_value)) && (!empty($primary_column))) {
-  return '<a  href=\'form.php?class_name=' . $class_name . '&' . $primary_column . '=' . $primar_column_value . '&mode=2\' target="_blank">View Reference Doc</a>';
+  return '<a  href=\'form.php?class_name=' . $class_name . '&' . $primary_column . '=' . $primar_column_value . '&mode=2\' target="_blank">View Doc</a>';
  } else {
   return false;
  }
@@ -435,7 +435,7 @@ function access_denied($msg = '') {
 }
 
 function access_denied_redirection($url = 'access_denied.php') {
-// redirect_to(HOME_URL . $url);
+ redirect_to(HOME_URL . $url);
 }
 
 function ino_access_denied_organizationAcess($msg = '') {
@@ -2285,21 +2285,13 @@ function ino_upload_error_msg($msg_code) {
 }
 
 function ino_topbar_login() {
+ global $menu_line;
  if (!empty($_SESSION['login_status'])) {
   $stmt = ' 
          <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i> ' . ucfirst($_SESSION['username']) . ' <span class="caret"></span></button>';
-  $stmt .='<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-           <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->';
-  $stmt .='<li role="presentation"><a role="menuitem" tabindex="-1" href="' . HOME_URL . '"><i class="fa fa-home"></i> Home</a></li>';
-  $stmt .='<li role="presentation"><a role="menuitem" tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '"> My Details</a></li>';
-  $stmt .='<li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '"><i class="fa fa-tasks"></i> Activities</a></li>';
-  $stmt .='<li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="' . HOME_URL . 'search.php?class_name=sys_notification_user"><i class="fa fa-bell-slash-o"></i> Notification</a></li>';
-  $stmt .='<li role="presentation"><a role="menuitem"  tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '"><i class="fa fa-dashboard"></i> Dashboard</a></li>';
-  $stmt .='<li role="presentation"><a role="menuitem"  tabindex="-1" href="' . HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '"><i class="fa fa-cog"></i> Configure</a></li>';
-  $stmt .='<li role="presentation" class="divider"></li>';
-  $stmt .='<li role="presentation"><a role="menuitem"  tabindex="-1" href="' . HOME_URL . 'extensions/user/user_logout.php' . '"><i class="fa fa-sign-out"></i> LogOut</a></li>';
-  $stmt .='</ul></div>';
+  $stmt .=  $menu_line->show_menu_list(2);;
+  $stmt .='</div>';
   echo $stmt;
  } else {
   if (file_exists(THEME_DIR . '/template/user_popup_login_template.php')) {

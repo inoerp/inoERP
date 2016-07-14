@@ -68,14 +68,9 @@
   <nav class="navbar navbar-default navbar-fixed-top">
    <div id="topbar" class="topbar clearfix ">
     <div class="container">
-     <div class="row">
-      <?php
-      if (!empty($showBlock)) {
-       echo '<div id = "header_top" class = "clear"></div>';
-      }
-      ?>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-       <?php
+     <div class="row ">
+      <div class="dashborad_l col-lg-4 col-md-4 col-sm-4 col-xs-6 ">
+       <?php $f = new inoform();
        $show_header_links = true;
        if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
         if (empty($current_page_path)) {
@@ -87,24 +82,22 @@
        ?>
        <?php if ($show_header_links) { ?>
         <div class="social-icons">
-         <span><a class="fa fa-dashboard clickable erp_dashborad" href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+         <span><a class="fa fa-dashboard clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
         </div><!-- end social icons -->
        <?php } ?>
 
       </div><!-- end columns -->
 
-      <div class="col-lg-8 col-md-8 col-sm-8 ">
-       <div class="topmenu">
-        <div class="topbar-login"><?php ino_topbar_login(); ?></div>
-       </div><!-- end top menu -->
-       <div class="callus hidden-xs">
+
+       <div class="callus col-lg-6 col-md-6 col-sm-6 hidden-xs">
         <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
         <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
        </div><!-- end callus -->
-      </div><!-- end columns -->
+       <div class="topbar-login col-lg-2 col-md-2 col-sm-2 col-xs-6 "><?php ino_topbar_login(); ?></div><!-- end top menu -->
+
      </div>
     </div><!-- end container -->
-   </div><!-- end topbar -->
+   </div>
 
    <header id="header-style-1">
     <div class="container ino-top-nav">
@@ -115,40 +108,7 @@
       ?>" class="logo_image" alt="logo"/>
       <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
      </div>
-     <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
-      <ul class="nav nav-pills">
-       <li><a href="<?php echo HOME_URL; ?>" >Home <div class="arrow-up"></div></a></li>
-       <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"> Demo <span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-         <li><a href="https://inoerp.stratus5.net/signUp?planCode=inoerp-basic">Cloud Service</a> </li>
-         <li><a href="http://try-inoerp.inoerp.org/extensions/user/user_login.php">Shared Demo</a> </li>
-         <li><a href="http://inoideas.org/content/demo">Other Options</a> </li>
-        </ul>
-       </li>
-       <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"> Download <span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-         <li><a href="https://github.com/inoerp/inoERP">gitHub</a> </li>
-         <li><a href="https://sourceforge.net/projects/inoerp/">Source Forge </a> </li>
-        </ul>
-       </li>
-       <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"> Documentation <span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-         <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">User Guide</a> </li>
-         <li><a href="<?php echo HOME_URL; ?>content.php?content_type=dataentity&amp;category_id=52">Database Structure</a> </li>
-        </ul>
-       </li>
-       <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"> Forum <span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-         <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">All Topics</a> </li>
-         <li><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7"> Ask a Question</a> </li>
-        </ul>
-       </li>
-      </ul>
-     </div>
+<div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right"> <?php      echo $menu_line->show_menu_list(1);    ?></div>
     </div>
    </header>
   </nav>

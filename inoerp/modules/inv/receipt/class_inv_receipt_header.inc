@@ -36,7 +36,7 @@ class inv_receipt_header extends dbObject {
   'weight' => 12
  ];
 public static $transaction_type_id_a = [
- '4' => 'PO Receipt',
+// '4' => 'PO Receipt',
  '5' => 'PO Delivery',
  '21' => 'PO Return'
 ];

@@ -220,7 +220,7 @@ class ap_payment_header extends dbObject {
  private function _confirm_payment() {
   //find all interface lines group by supplier name & invoice number
   //create interface headers for each supplier
-  echo "<br> in confirm payment";
+//  echo "<br> in confirm payment";
   $ap_int = new ap_payment_interface();
   $all_lines = $ap_int->findAll_groupBySupplier();
   pa($all_lines);

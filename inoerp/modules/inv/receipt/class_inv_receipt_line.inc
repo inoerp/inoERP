@@ -83,6 +83,7 @@ class inv_receipt_line extends dbObject {
   'so_line_number',
   'io_order_number',
   'io_line_number',
+  'po_requisition_number'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
   "inv_receipt_header_id",
@@ -170,6 +171,7 @@ class inv_receipt_line extends dbObject {
  public $so_line_number;
  public $io_order_number;
  public $io_line_number;
+ public $po_requisition_number;
  private $_standard_cost_for_all_kit_items;
  private $_po_line_id;
  private $_gl_journal_header_id;
@@ -234,11 +236,6 @@ class inv_receipt_line extends dbObject {
     $this->status = 'Error';
    }
    $this->save();
-  } else if (!empty($this->inv_receipt_line_id) && !empty($this->sd_so_line_id)) {
-   if (!empty($this->item_id_m)) {
-    $this->_create_inv_transactions();
-   }
-   $this->_after_save_rmaReceipt();
   } else if (!empty($this->inv_receipt_line_id) && !empty($this->inv_interorg_transfer_line_id)) {
    if (!empty($this->item_id_m)) {
     try {
@@ -249,6 +246,21 @@ class inv_receipt_line extends dbObject {
      $dbc->rollback = true;
     }
    }
+  } else if (!empty($this->inv_receipt_line_id) && !empty($this->po_requisition_detail_id)) {
+   if (!empty($this->item_id_m)) {
+    try {
+     $this->_create_inv_transactions();
+     $this->_after_save_irReceipt();
+    } catch (Exception $e) {
+     echo "<br> Not able to complete inventory transaction. Error @ inv_receipt_line " . __LINE__ . '<br>' . $e->getMessage();
+     $dbc->rollback = true;
+    }
+   }
+  } else if (!empty($this->inv_receipt_line_id) && !empty($this->sd_so_line_id)) {
+   if (!empty($this->item_id_m)) {
+    $this->_create_inv_transactions();
+   }
+   $this->_after_save_rmaReceipt();
   }
  }
 
@@ -282,7 +294,7 @@ class inv_receipt_line extends dbObject {
    $so_line->shipped_quantity = $newcurrent_shped_qty;
    try {
     $so_line->save();
-    echo "<br> SO Line is Successfullyupdated ";
+    echo "<br> SO Line is Successfully updated ";
    } catch (Exception $e) {
     echo "<br> Not able to find sd_so_line_id. Error @ inv_transaction " . __LINE__ . '<br>' . $e->getMessage();
     $dbc->rollback = true;
@@ -290,6 +302,35 @@ class inv_receipt_line extends dbObject {
    }
   } else {
    echo "<br> Not able to find sd_so_line_id. Error @ inv_transaction " . __LINE__;
+   $dbc->rollback = true;
+   return;
+  }
+ }
+
+ private function _after_save_irReceipt() {
+  global $dbc;
+  if (!empty($this->po_requisition_detail_id)) {
+   $req_d = new po_requisition_detail();
+   $req_d->findBy_id($this->po_requisition_detail_id);
+
+   $newcurrent_rcved_qty = !empty($req_d->received_quantity) ? ($req_d->received_quantity + $this->quantity) : $this->quantity;
+   $req_d->received_quantity = $newcurrent_rcved_qty;
+   if ($req_d->received_quantity >= $req_d->quantity) {
+    $req_d->ir_status = 'FULL_RECEIVED';
+   } else {
+    $req_d->ir_status = 'PAR_RECEIVED';
+   }
+
+   try {
+    $req_d->save();
+    echo "<br> IR details are Successfully updated ";
+   } catch (Exception $e) {
+    echo "<br> Not able to find po_requisition_detail_id. Error @ inv_transaction " . __LINE__ . '<br>' . $e->getMessage();
+    $dbc->rollback = true;
+    return;
+   }
+  } else {
+   echo "<br> Not able to find po_requisition_detail_id. Error @ inv_transaction " . __LINE__;
    $dbc->rollback = true;
    return;
   }
@@ -540,6 +581,19 @@ class inv_receipt_line extends dbObject {
     $inv_transaction->sd_so_line_id = $this->sd_so_line_id;
     $inv_transaction->document_type = 'RMA';
     $inv_transaction->document_number = $this->so_number;
+    $inv_transaction->_before_save();
+    $inv_transaction->save();
+    $update_result = $inv_transaction->_after_save();
+    break;
+    
+    case 33 :
+    $inv_transaction->to_subinventory_id = $this->subinventory_id;
+    if (!empty($this->locator_id)) {
+     $inv_transaction->to_locator_id = $this->locator_id;
+    }
+    $inv_transaction->po_requisition_detail_id = $this->po_requisition_detail_id;
+    $inv_transaction->document_type = 'IR';
+    $inv_transaction->document_number = $this->po_requisition_number;
     $inv_transaction->_before_save();
     $inv_transaction->save();
     $update_result = $inv_transaction->_after_save();

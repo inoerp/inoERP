@@ -98,11 +98,11 @@
          <td><?php form::text_field_wid2sr('inv_receipt_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php $f->text_field_wid2sr('po_header_id'); ?></td>
-         <td><?php
-          $f->val_field_wid2m('po_number', 'po_all_v', 'po_number', '', 'select');
+         <td><?php 
+          $f->val_field_wid2m('po_number', 'po_all_v', 'po_number', '', $readonly1_class . ' enable_update');
           echo $f->hidden_field_withCLass('po_status', 'approved', 'popup_value');
           echo $f->hidden_field_withCLass('receving_org_id', '', 'popup_value receving_org_id org_id');
-          ?><i class="generic select_po_number select_popup clickable fa fa-search" data-class_name="po_all_v"></i></td>
+          ?><i class="generic select_po_number select_popup clickable fa fa-search enable_update <?php echo $readonly1_class ?>" data-class_name="po_all_v"></i></td>
          <td><?php $f->text_field_wid2sr('po_line_number', 'medium'); ?></td>
          <td><?php $f->text_field_wid2s('po_line_id'); ?></td>
          <td><?php $f->text_field_wid2sr('shipment_number', 'medium'); ?></td>

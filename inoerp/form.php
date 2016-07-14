@@ -6,6 +6,7 @@ if (!empty($_GET['router'])) {
  $router_file = __DIR__ . "/includes/router/$router.php";
  if (file_exists($router_file)) {
   include_once __DIR__ . "/includes/router/$router.php";
+  return;
  } else {
   die('Access Denied');
  }

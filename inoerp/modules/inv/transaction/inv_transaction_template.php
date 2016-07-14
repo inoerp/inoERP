@@ -134,6 +134,7 @@
       <th><?php echo gettext('WO BOM Line Id') ?></th>
       <th><?php echo gettext('PO Detail Id') ?></th>
       <th><?php echo gettext('SO Line Id') ?></th>
+      <th><?php echo gettext('IR Detail Id') ?></th>
       </thead>
       <tbody class="form_data_line_tbody">
        <tr class="inv_transaction_line0" id="tab3_1">
@@ -146,8 +147,9 @@
         <td><?php form::text_field_wid('reference_key_value'); ?>							</td>
         <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : ''; ?></td>
         <td><?php form::text_field_wids('wip_wo_bom_id'); ?>							</td>
-        <td><?php form::text_field_wids('po_detail_id'); ?>							</td>
-        <td><?php form::text_field_wids('sd_so_line_id'); ?>							</td>
+        <td><?php form::text_field_wid('po_detail_id'); ?>							</td>
+        <td><?php form::text_field_wid('sd_so_line_id'); ?>							</td>
+        <td><?php form::text_field_wid('po_requisition_detail_id'); ?>							</td>
        </tr>
       </tbody>
      </table>

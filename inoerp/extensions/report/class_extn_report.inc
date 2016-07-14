@@ -374,7 +374,7 @@ class extn_report extends dbObject {
     }
     $content_string .='</tr></thead>';
     If (!empty($result)) {
-     $content_string .= '<tbody class="form_data_line_tbody search_results" >';
+     $content_string .= '<tbody class="form_data_line_tbody search_results tbody_row'.$i.' " >';
      $count = 0;
      foreach ($result as $recod_k => $record) {
       $continue = true;
@@ -389,7 +389,7 @@ class extn_report extends dbObject {
        continue;
       }
       $count++;
-      $content_string .='<tr>';
+      $content_string .='<tr class="row'.$recod_k.'">';
       $content_string .= "<td>$count</td>";
       $new_start1 = ($i * ($no_of_columns_per_tab - 1)) + $i;
       $new_end1 = $new_start1 + ($no_of_columns_per_tab - 1);

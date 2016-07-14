@@ -1,4 +1,8 @@
-<div id="installation_header"><h1>inoERP installation : </h1><h2> Complete Installation (Step 4) </h2></div>
+<div id="installation_header">
+ <div class="page-header">
+  <h1>inoERP installation <small>Complete Installation  (Step 4)</small></h1>
+ </div>
+</div>
 <?php
 
 /**
@@ -108,15 +112,18 @@ try {
  importSQL($filename, $dbc);
  // Tell user that the process is completed
  echo '<script language="javascript">document.getElementById("information").innerHTML="Process completed"</script>';
- echo '<ul class="list-unstyled">';
- echo "<li>All tables have been Successfully imported</li>";
- echo "<li>Verify that the file install.php is removed from home directory. If not, delete it.</li>";
- echo "<li><a href='" . HOME_URL . "'>Go to the home page </a> & Login to the system  with default user name/password :inoerp/inoerp and reset the password.</li>";
+ echo '<ul class="list-unstyled list-group row">';
+ echo "<li class=' alert-success list-group-item' >All tables have been Successfully imported</li>";
+ echo "<li class=' alert-success list-group-item' >Verify that the file install.php is removed from home directory. If not, delete it.</li>";
+ echo "<li class=' alert-success list-group-item' ><a href='" . HOME_URL . "'>Go to the home page </a> & Login to the system  with default user name/password :inoerp/inoerp and reset the password.</li>";
 
  echo '</ul>';
  unlink('install.php');
 } catch (Exception $e) {
- echo "<br>Tables import fialed" . $e->getMessage();
+ echo '      <div class="jumbotron">
+        <h1>Below errors occured during installation</h1>';
+      
+ echo "<br>Tables import fialed" . $e->getMessage().'</div>';
 }
 ?>
      

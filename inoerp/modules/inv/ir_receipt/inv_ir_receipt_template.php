@@ -115,7 +115,6 @@
          <tr class="inv_receipt_line<?php echo $count ?>">
           <td>
            <?php
-           $f = new inoform();
            echo ino_inline_action($$class_second->inv_receipt_line_id, array('org_id' => $$class->org_id,
             'transaction_type_id' => $$class->transaction_type_id, 'inv_receipt_header_id' => $$class->inv_receipt_header_id));
            ?>
@@ -128,14 +127,14 @@
 //          echo $f->hidden_field_withCLass('so_status', 'SHIPPED', 'popup_value');
            echo $f->hidden_field_withCLass('receving_org_id', '', 'popup_value to_org_id org_id');
            ?><i class="generic select_io_order_number select_popup clickable fa fa-search" data-class_name="po_receive_requisition_v"></i></td>
-          <td><?php $f->text_field_wid2sr('so_line_number'); ?></td>
-          <td><?php $f->text_field_wid2sr('sd_so_header_id', ''); ?></td>
-          <td><?php $f->text_field_wid2sr('sd_so_line_id', ''); ?></td>
-          <td><?php $f->text_field_wid2r('po_requisition_number'); ?></td>
-          <td><?php $f->text_field_wid2r('req_line_number'); ?></td>
-          <td><?php $f->text_field_wid2sr('po_requisition_header_id'); ?></td>
-          <td><?php $f->text_field_wid2sr('po_requisition_line_id'); ?></td>
-          <td><?php $f->text_field_wid2sr('po_requisition_detail_id'); ?></td>
+          <td><?php $f->text_field_wid2sr('so_line_number' ,'always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('sd_so_header_id', 'always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('sd_so_line_id', 'always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2r('po_requisition_number','always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2r('req_line_number','always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('po_requisition_header_id','always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('po_requisition_line_id','always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('po_requisition_detail_id','always_readonly'); ?></td>
 
               <!--<td><a target="_blank" href="form.php?class_name=inv_interorg_transfer_header&amp;inv_interorg_transfer_header_id=<?php // echo $$class_second->inv_interorg_transfer_header_id;      ?>&amp;mode=2">View Doc</a></td>-->
          </tr>
@@ -185,21 +184,21 @@
          ?>         
          <tr class="inv_receipt_line<?php echo $count ?>">
           <td><?php $f->seq_field_d($count) ?></td>
-          <td><?php $f->text_field_wid2sr('item_id_m'); ?></td>
-          <td><?php $f->text_field_d2('item_number', 'select_item_number'); ?></td>
-          <td><?php $f->text_field_wid2sr('revision_name'); ?></td>
-          <td><?php $f->text_field_d2('item_description'); ?></td>
-          <td><?php $f->text_field_wid2sr('req_quantity'); ?></td>
-          <td><?php $f->text_field_wid2sr('iso_line_quantity'); ?></td>
-          <td><?php $f->text_field_wid2sr('iso_shipped_quantity'); ?></td>
+          <td><?php $f->text_field_wid2sr('item_id_m','always_readonly'); ?></td>
+          <td><?php $f->text_field_d2('item_number', 'always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('revision_name', 'always_readonly'); ?></td>
+          <td><?php $f->text_field_d2('item_description', 'always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('req_quantity', 'always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('iso_line_quantity', 'always_readonly'); ?></td>
+          <td><?php $f->text_field_wid2sr('iso_shipped_quantity' , 'always_readonly'); ?></td>
           <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $inv_receipt_line->uom_id, '', '', '', $readonly1); ?></td>
           <td><?php
            echo $f->number_field('quantity', $inv_receipt_line->quantity, '12', '', 'medium', '', 1);
            echo $f->hidden_field('received_quantity', '');
            ?></td>
           <td><?php echo $f->number_field('transaction_quantity', $$class_second->transaction_quantity, '8', '', '', 1, $readonly1); ?></td>
-          <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', 1, $readonly1); ?></td>
-          <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id medium', '', $readonly1); ?></td>
+          <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id enable_update', 1, $readonly1); ?></td>
+          <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id enable_update', '', $readonly1); ?></td>
          </tr>
          <?php
          $count = $count + 1;

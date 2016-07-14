@@ -250,8 +250,8 @@ trait dbObject_t {
    return false;
   }
  }
- 
-  public static function find_by_sql_i($sql, $value_a = '') {
+
+ public static function find_by_sql_i($sql, $value_a = '') {
   global $dbc;
   if (empty($dbc->connection)) {
    return false;
@@ -279,7 +279,6 @@ trait dbObject_t {
    return 0;
   }
  }
-
 
  public static function find_by_sql_array($sql = "") {
   global $dbc;
@@ -357,7 +356,7 @@ trait dbObject_t {
   global $dbc;
   $sql = " SELECT * FROM ";
   $sql.= static::$table_name;
-  $sql.= " WHERE " . static::$primary_column .  ' '. $gl .  " :primary_id ";
+  $sql.= " WHERE " . static::$primary_column . ' ' . $gl . " :primary_id ";
   $stmt = $dbc->connection->prepare(" $sql ");
   $stmt->bindParam(':primary_id', $id);
   try {
@@ -370,7 +369,7 @@ trait dbObject_t {
   return !empty($result) ? $result : false;
  }
 
- public static function find_by_fieldVal(array $dieldVal_a) {
+ public static function find_by_fieldVal(array $dieldVal_a, $order_by = '', $asc_desc = 'ASC') {
   global $ie;
   global $dbc;
   $sql = " SELECT * FROM ";
@@ -382,17 +381,30 @@ trait dbObject_t {
   } else if (count($dieldVal_a) > 1) {
    $k_count = 1;
    foreach ($dieldVal_a as $k => $v) {
+    $v2 = ($v == 'NULL') ? NULL : $v;
     if ($k_count == 1) {
      if (!empty($v)) {
-      $sql.= " WHERE " . $k . "= '{$v}' ";
+      if (!empty($v2)) {
+       $sql.= " WHERE " . $k . "= '{$v2}' ";
+      } else {
+       $sql.= " WHERE " . $k . " IS NULL ";
+      }
      }
     } else if (!empty($v)) {
-     $sql.= " AND " . $k . "= '{$v}' ";
+
+     if (!empty($v2)) {
+      $sql.= " AND " . $k . "= '{$v2}' ";
+     } else {
+      $sql.= " AND " . $k . " IS NULL ";
+     }
     }
     $k_count++;
    }
   }
 // echo $sql;
+    if (!empty($order_by)) {
+   $sql .= " ORDER BY $order_by $asc_desc ";
+  }
   $stmt = $dbc->connection->prepare(" $sql ");
   try {
    $stmt->execute();

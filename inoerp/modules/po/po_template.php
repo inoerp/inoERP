@@ -103,7 +103,7 @@ inoERP
         </li>
         <li><label>Action</label>
          <?php
-         echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly, $action_readonly)
+         echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $action_readonly, $action_readonly)
          ?>
         </li>
        </ul>

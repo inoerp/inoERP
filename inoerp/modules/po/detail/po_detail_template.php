@@ -21,7 +21,7 @@ if (count($po_detail_object) == 0) {
     <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
     <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Delivery') ?></a></li>
     <li class="tabLink"><a href="#tabsDetail-3-<?php echo $count ?>"><?php echo gettext('Finance') ?></a></li>
-    <li class="tabLink"><a href="#tabsDetail-4-<?php echo $count ?>"><?php echo gettext('Status') ?></a></li>
+    <li class="tabLink"><a href="#tabsDetail-4-<?php echo $count ?>"><?php echo gettext('Status & Quantities') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
@@ -88,13 +88,13 @@ if (count($po_detail_object) == 0) {
         <tr class="po_detail<?php echo $count . '-' . $detailCount; ?> ">
          <td><?php $f->seq_field_detail_d($detailCount) ?></td>
          <td>
-          <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue', ''); ?>
+          <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue medium', ''); ?>
          </td>
          <td>
-          <?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue', ''); ?>
+          <?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue medium', ''); ?>
          </td>
-         <td><?php $f->text_field_wid3('requestor'); ?></td>
-         <td><?php echo $f->select_field_from_array('invoice_match_type', po_detail::$invoice_match_type_a, $$class_third->invoice_match_type); ?></td>
+         <td><?php $f->text_field_wid3('requestor' ,'medium'); ?></td>
+         <td><?php echo $f->select_field_from_array('invoice_match_type', po_detail::$invoice_match_type_a, $$class_third->invoice_match_type , '' ,'medium'); ?></td>
         </tr>
         <?php
         $detailCount++;
@@ -136,7 +136,7 @@ if (count($po_detail_object) == 0) {
      </table>
     </div>
     <div id="tabsDetail-4-<?php echo $count ?>" class="tabContent">
-     <table class="form form_detail_data_table detail"><label>Quantities</label>
+     <table class="form form_detail_data_table detail">
       <thead>
        <tr>
         <th><?php echo gettext('Seq') ?>#</th>

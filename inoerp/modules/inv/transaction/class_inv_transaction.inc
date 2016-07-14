@@ -82,6 +82,7 @@ class inv_transaction extends dbObject {
   'pm_batch_header_id',
   'pm_batch_ingredient_id',
   'pm_batch_byproduct_id',
+  'po_requisition_detail_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -186,6 +187,7 @@ class inv_transaction extends dbObject {
  public $pm_batch_header_id;
  public $pm_batch_ingredient_id;
  public $pm_batch_byproduct_id;
+ public $po_requisition_detail_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;

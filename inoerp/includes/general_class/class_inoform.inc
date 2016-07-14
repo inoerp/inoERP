@@ -352,18 +352,18 @@ EOD;
  }
 
  public static function form_button_withImage($current_page_path = "", $homeUrl = '') {
-  global $class;
+  global $class, $si;
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
   echo <<<EOD
 			 <ul id="form_top_image" class="draggable">
-        <li class='fa fa-refresh clickable ' id='refresh_button' title='Refresh'></li>
-        <li class='fa fa-file-text-o clickable' Title="New Document" id="new_page_button" href="$current_page_path"></li>
-    		<li class='fa fa-save clickable' id='save' title='Save'></li>
-        <li class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></li>
-        <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
-        <li class='fa fa-remove clickable' id='remove_row_button' title='Remove'></li>
-        <li class='fa fa-search-plus clickable query_mode_icon' id='start_query_mode' title='Query Mode'></li>
-        <li class='fa fa-print clickable print' id='print_searchResult' title='Print'></li>
+        <li class='fa fa-refresh clickable ino-btn2 ' id='refresh_button' title='Refresh' style="background-color: $si->heading_color" ></li>
+        <li class='fa fa-file-text-o clickable ino-btn2' Title="New Document" id="new_page_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
+    		<li class='fa fa-save clickable ino-btn2' id='save' title='Save' style="background-color: $si->heading_color" ></li>
+        <li class='fa fa-eraser clickable ino-btn2' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
+        <li class='fa fa-trash-o clickable ino-btn2' id='delete_button' title='Delete' style="background-color: $si->heading_color"></li>
+        <li class='fa fa-remove clickable ino-btn2' id='remove_row_button' title='Remove' style="background-color: $si->heading_color" ></li>
+        <li class='fa fa-search-plus clickable query_mode_icon ino-btn2' id='start_query_mode' title='Query Mode' style="background-color: $si->heading_color"></li>
+        <li class='fa fa-print clickable print ino-btn2' id='print_searchResult' title='Print' style="background-color: $si->heading_color"></li>
 </ul>
 EOD;
  }
@@ -400,13 +400,12 @@ EOD;
  }
 
  public static function form_button_withImage_minimum($current_page_path = "", $homeUrl = '') {
-  global $class;
+  global $class, $si;
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
   echo <<<EOD
 			 <ul id="form_top_image" class="draggable">
-        <li><a class='fa fa-file-text-o clickable' Title="New Document" id="new_page_button" href="$current_page_path"></a></li>
-    		<li class='fa fa-save clickable' id='save' title='Save'></li>
-        <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
+        <li class='fa fa-file-text-o clickable ino-btn2' Title="New Document" id="new_page_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
+        <li class='fa fa-trash-o clickable ino-btn2' id='delete_button' title='Delete' style="background-color: $si->heading_color"></li>
 </ul>
 EOD;
  }

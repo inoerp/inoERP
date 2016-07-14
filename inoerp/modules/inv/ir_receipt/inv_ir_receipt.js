@@ -6,6 +6,11 @@ function beforeSave() {
 
 
 $(document).ready(function () {
+ 
+  var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'inv_receipt_header_id';
+ mandatoryCheck.mandatoryHeader();
+ 
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
   $('.lines_number:first').val('1');

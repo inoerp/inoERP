@@ -451,7 +451,7 @@ class comment extends dbObject {
 
     $comment_string .= '</ul>';
     $comment_string .= '</div>';
-    $comment_string .= '<div class="comment panel-body update-comment">' . nl2br(html_entity_decode($records->comment));
+    $comment_string .= '<div class="comment panel-body update-comment">' . nl2br(html_entity_decode($records->comment, ENT_QUOTES ,'UTF-8'));
     if (count($comment_file) > 0) {
      foreach ($comment_file as $file_record) {
       $comment_string .= '<p><a href=' . HOME_URL . $file_record->file_path . $file_record->file_name . '>' . $file_record->file_name . '</a></p>';

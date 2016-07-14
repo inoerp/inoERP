@@ -35,7 +35,7 @@
         </div>
         <div id="content_extra"><?php
          $cont_html = content::content_by_id($content_type_name, $content->content_id);
-         echo nl2br(html_entity_decode($cont_html));
+         echo nl2br(html_entity_decode($cont_html , ENT_QUOTES,'UTF-8'));
          ?></div>
         <div id="after_content_extra">
          <div id="content_navigation" class="parent-child-nav">

@@ -90,6 +90,7 @@ table#forum_list td.post_date{
 
 .new_element{
  margin: 10px;
+ width: 95%;
 }
 
 #subject label, #categories label, 
@@ -112,7 +113,7 @@ table#forum_list td.post_date{
 
 #content_element, #show_attachment, #content_info{
  clear: both;
- width: 740px;
+ /*width: 740px;*/
  margin-left: 30px;
 }
 
