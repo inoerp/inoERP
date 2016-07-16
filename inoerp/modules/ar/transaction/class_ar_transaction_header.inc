@@ -52,6 +52,13 @@ class ar_transaction_header extends dbObject {
   'COMPLETE' => 'Complete',
   'CLOSED' => 'Closed'
  ];
+ 
+  public static $receivable_rule_a = [
+  'BILL_ADV' => 'Bill In Advance',
+  'BILL_ARR' => 'Bill In Arrears',
+  'BILL_PRO' => 'Bill In proportionate'
+ ];
+  
  public $action_a = [
   'COMPLETE' => 'Complete Transacion',
   'INCOMPLETE' => 'Incomplete Transacion',

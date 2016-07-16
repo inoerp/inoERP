@@ -123,13 +123,13 @@ inoERP
           <td><?php $f->text_field_d2s('routing_sequence', 'lines_number'); ?></td>
           <td><?php echo form::select_field_from_object('standard_operation_id', bom_standard_operation::find_all(), 'bom_standard_operation_id', 'standard_operation', $$class_second->standard_operation_id, '', $readonly); ?></td>
           <td><?php echo form::checkBox_field('referenced_cb', $$class_second->referenced_cb); ?></td>
-          <td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, '', $readonly, '', '', 1); ?></td>
-          <td><?php form::text_field_wid2('description'); ?></td>
+          <td><?php echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, '', $readonly, '', '', 1); ?></td>
+          <td><?php form::text_field_wid2('description' , 'large'); ?></td>
           <td><?php echo form::checkBox_field('count_point_cb', $$class_second->count_point_cb); ?></td>
           <td><?php echo form::checkBox_field('auto_charge_cb', $$class_second->auto_charge_cb); ?></td>
           <td><?php echo form::checkBox_field('backflush_cb', $$class_second->backflush_cb); ?></td>
-          <td><?php form::number_field_wid2s('minimum_transfer_quantity'); ?></td>
-          <td><?php form::number_field_wid2s('lead_time_percentage'); ?></td>
+          <td><?php form::number_field_wid2('minimum_transfer_quantity'); ?></td>
+          <td><?php form::number_field_wid2('lead_time_percentage'); ?></td>
           <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
            <?php
            $bom_routing_line_id = $bom_routing_line->bom_routing_line_id;

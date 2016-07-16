@@ -56,14 +56,14 @@ $f = new inoform();
                    </div>
                   </div>
                   <div class="form-group">
-                   <input type="submit" name="submitLogin" class="btn btn-lg btn-primary btn-block" value="Log in">
+                   <input type="submit" name="submitLogin" class="btn btn-lg btn-primary btn-block pull-left" value="Log in">
                   </div>
                  </div>
                 </div>
                </fieldset>
          </form>
         </div>
-        <div class="col-md-4"> 
+        <div class="col-md-4 pull-left"> 
          <?php echo extn_social_login::sl_stmt(); ?>
         </div>
 
@@ -133,14 +133,14 @@ $f = new inoform();
               </div>
              </div>
              <div class="form-group">
-              <input type="submit" name="newUser" class="btn  btn-lg btn-info btn-block" value="Create Account">
+              <input type="submit" name="newUser" class="btn  btn-lg btn-info btn-block pull-left" value="Create Account">
              </div>
             </div>
            </div>
           </fieldset>
          </form>
         </div>
-        <div class="col-md-4"> 
+        <div class="col-md-4 pull-left"> 
          <?php echo extn_social_login::sl_stmt(); ?>
         </div>
        </div>
@@ -173,7 +173,7 @@ $f = new inoform();
                </div>
               </div>
               <div class="form-group">
-               <input type="submit" name="resetPassword" class="btn btn-lg btn-primary btn-block" value="Send New Password">
+               <input type="submit" name="resetPassword" class="btn btn-lg btn-primary btn-block pull-left " value="Send New Password">
               </div>
              </div>
             </div>

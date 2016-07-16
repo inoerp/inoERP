@@ -151,9 +151,9 @@ inoERP
             ?>
            </td>
            <td><?php $f->text_field_wid2sr('wip_wo_routing_line_id'); ?></td>
-           <td><?php form::number_field_wid2s('routing_sequence'); ?></td>
-           <td><?php echo form::select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, 'department_id', $readonly); ?></td>
-           <td><?php $f->text_field_wid2('description'); ?></td>
+           <td><?php form::number_field_wid2('routing_sequence'); ?></td>
+           <td><?php echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, 'department_id', 'large'); ?></td>
+           <td><?php $f->text_field_wid2('description' ,'large'); ?></td>
            <td><?php echo form::checkBox_field('count_point_cb', $$class_second->count_point_cb); ?></td>
            <td><?php echo form::checkBox_field('auto_charge_cb', $$class_second->auto_charge_cb); ?></td>
            <td><?php echo form::checkBox_field('backflush_cb', $$class_second->backflush_cb); ?></td>
@@ -199,7 +199,7 @@ inoERP
                   </thead>
                   <tbody class="form_data_detail_tbody">
                    <?php
-                   $detailCount = 0;
+                   $detailCount = 0; $f = new inoform();
                    foreach ($wip_wo_routing_detail_object as $wip_wo_routing_detail) {
                     $class_third = 'wip_wo_routing_detail';
                     $$class_third = &$wip_wo_routing_detail;
@@ -213,9 +213,9 @@ inoERP
                      <td><?php $f->text_field_wid3sm('resource_sequence', 'seq_number'); ?></td>
                      <td><?php echo $f->select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_third->resource_id, '', '', 1, $readonly); ?></td>
                      <td><?php echo $f->select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->charge_basis, '', 'small', 1, $readonly); ?></td>
-                     <td><?php form::number_field_wid3sm('resource_usage') ?></td>
+                     <td><?php echo $f->number_field('resource_usage',  $$class_third->resource_usage) ?></td>
                      <td><?php echo form::select_field_from_object('resource_schedule', bom_header::bom_schedule_option(), 'option_line_code', 'option_line_value', $$class_third->resource_schedule, '', $readonly, 'default_basis', '', 1); ?></td>
-                     <td><?php form::number_field_wid3s('assigned_units') ?></td>
+                     <td><?php echo $f->number_field('assigned_units',  $$class_third->assigned_units) ?></td>
                      <td><?php echo form::checkBox_field('standard_rate_cb', $$class_third->standard_rate_cb); ?></td>
                      <td><?php echo form::select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_value', $$class_third->charge_type, '', $readonly, '', '', 1); ?></td>
                     </tr>

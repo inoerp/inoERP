@@ -4862,7 +4862,7 @@ span.heading{
 .class_detail_form{
  display: block; 
  float: left; 
- min-width: 400px;
+ /*min-width: 200px;*/
 }
 
 add_detail_values img, .add_detail_values0 img, .add_detail_values1 img{

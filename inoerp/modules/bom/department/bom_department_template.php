@@ -68,7 +68,7 @@ inoERP
        <thead> 
         <tr>
          <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Resource Assignment Id') ?>#</th>
+         <th><?php echo gettext('Assignment Id') ?>#</th>
          <th><?php echo gettext('Cost Type') ?></th>
          <th><?php echo gettext('Resource') ?></th>
          <th><?php echo gettext('Efficiency') ?>%</th>
@@ -87,16 +87,12 @@ inoERP
            echo ino_inline_action($$class_second->bom_department_resource_assignment_id, array('bom_department_id' => $$class->bom_department_id));
            ?>
           </td>
-          <td><?php $f->text_field_wid2sr('bom_department_resource_assignment_id'); ?></td>
-          <td>
-           <?php echo form::select_field_from_object('cost_type_id', bom_cost_type::find_all(), 'bom_cost_type_id', 'cost_type', $$class_second->cost_type_id, '', $readonly, 'cost_type_id'); ?>
-          </td>
-          <td>
-           <?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_second->resource_id, '', $readonly, 'resource_id'); ?>
-          </td>
-          <td><?php form::number_field_wid2s('efficiency') ?></td>
-          <td><?php form::number_field_wid2s('utilization') ?></td>
-          <td><?php form::number_field_wid2s('no_of_units') ?></td>
+          <td><?php $f->text_field_wid2r('bom_department_resource_assignment_id'); ?></td>
+          <td><?php echo $f->select_field_from_object('cost_type_id', bom_cost_type::find_all(), 'bom_cost_type_id', 'cost_type', $$class_second->cost_type_id, '', 'cost_type_id medium'); ?></td>
+          <td><?php echo $f->select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_second->resource_id, '', 'resource_id medium'); ?></td>
+          <td><?php form::number_field_wid2('efficiency') ?></td>
+          <td><?php form::number_field_wid2('utilization') ?></td>
+          <td><?php form::number_field_wid2('no_of_units') ?></td>
          </tr>
          <?php
          $count = $count + 1;

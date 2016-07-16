@@ -97,10 +97,10 @@ inoERP
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('hd_service_activity_line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class_second->bu_org_id, '', '', 1); ?>						 </td>
-         <td><?php echo $f->select_field_from_object('header_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->header_type_id, '', 'medium', 1, $readonly); ?></td>
-         <td><?php echo $f->select_field_from_object('line_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type_id, '', 'medium', 1, $readonly); ?></td>
-         <td><?php $f->text_field_wid2('description'); ?></td>
+         <td><?php echo $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class_second->bu_org_id, '', 'large', 1); ?>						 </td>
+         <td><?php echo $f->select_field_from_object('header_type_id', sd_document_type::find_all_header_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->header_type_id, '', 'large', 1, $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('line_type_id', sd_document_type::find_all_line_levels(), 'sd_document_type_id', 'document_type_name', $$class_second->line_type_id, '', 'large', 1, $readonly); ?></td>
+         <td><?php $f->text_field_wid2('description' , 'xlarge'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

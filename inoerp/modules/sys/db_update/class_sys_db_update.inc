@@ -16,7 +16,7 @@ class sys_db_update extends dbObject {
   'Old Version DB' => 'search_db_name_old',
  ];
  public $prg_db_update_details = [
-  'name' => 'Update Database from Old to New Version',
+  'name' => 'Update Database from Old to New Version ( <small>Enable dbc2 in dbsettigs and basics file<small> )',
   'description' => 'Update Database from Old to New Version',
  ];
 
@@ -35,7 +35,7 @@ class sys_db_update extends dbObject {
 
   try {
    $this->update_db($program_mode);
-   $this->message .= "<br>Update DB program is Successfullycompleted";
+   $this->message .= "<br>Update DB program is Successfully completed";
   } catch (Exception $e) {
    $this->message .= "<br>Update DB program failed!" . $e->getMessage();
   }
@@ -69,9 +69,11 @@ class sys_db_update extends dbObject {
     if ($comp_result == 'DIFFERENT') {
      $no_of_tables_updated++;
      $this->message .= "<br>Updating table  $table_name  : ";
-     if ($mode == 'FINAL') {
-      $this->_ino_update_table_in_oldDB($table_name);
-     }
+
+     $this->_ino_update_tableStructure_in_oldDB($table_name, $mode);
+//     if ($mode == 'FINAL') {
+//      $this->_ino_update_table_in_oldDB($table_name);
+//     }
     }
    } else {
     $this->message .= "<br>$table_name does not exist in old DB. Creating table Table";
@@ -94,7 +96,7 @@ class sys_db_update extends dbObject {
 
   //update views
   $this->_ino_create_views_in_oldDB($mode);
-  
+
   return $this->message;
  }
 
@@ -127,8 +129,91 @@ class sys_db_update extends dbObject {
   echo "<div class='alert alert-sucess'>$old_db_table is Successfully updated</div>";
  }
 
+ private function _ino_update_tableStructure_in_oldDB($tbl_name, $mode) {
+  global $db, $dbc;
+  $table_name = ".$tbl_name";
+  $old_db_table = DB_NAME2 . $table_name;
+
+  $sql1 = " SELECT column_name,ordinal_position,data_type,column_type, is_nullable
+     FROM information_schema.columns
+      WHERE (table_schema='" . DB_NAME . "' AND table_name='{$tbl_name}')
+    AND table_name = '{$tbl_name}'
+";
+  $result1 = $db->find_by_sql($sql1);
+
+  $sql2 = " SELECT column_name,ordinal_position,data_type,column_type , is_nullable
+     FROM information_schema.columns
+      WHERE (table_schema='" . DB_NAME2 . "' AND table_name='{$tbl_name}')
+    AND table_name = '{$tbl_name}'
+";
+  $result2 = $db->find_by_sql($sql2);
+  /*
+   * Check if coulmn exists - if yes, verify data type & column type
+   */
+  foreach ($result1 as $obj1) {
+   $new_column = true;
+   $sql_u = null;
+   $column_name = $obj1->column_name;
+   foreach ($result2 as $obj2) {
+    if ($obj2->column_name == $column_name) {
+     $new_column = false;
+     break;
+    }
+   }
+   if ($new_column) {
+    //add column
+    $sql_u = "ALTER TABLE $old_db_table ADD $column_name  $obj1->column_type  ";
+    if ($obj1->column_type) {
+     $sql_u .= "  NULL  ";
+    }
+   } else {
+    //update column
+   }
+   if ($sql_u) {
+    if ($mode == 'FINAL') {
+     $dbc->ddlexecute($sql_u);
+     $dbc->confirm();
+    } else {
+     $this->message .= "<br>sql to execute $sql_u";
+    }
+   }
+  }
+
+  /*
+   * Check if any column needs to be dropped
+   */
+
+  foreach ($result2 as $obj2) {
+   $drop_column = true;
+   $sql_d = null;
+   $column_name = $obj2->column_name;
+   foreach ($result1 as $obj1) {
+    if ($obj1->column_name == $column_name) {
+     $drop_column = false;
+     break;
+    }
+   }
+   if ($drop_column) {
+    //drop column
+    $sql_d = "ALTER TABLE $old_db_table DROP $column_name  ";
+    if ($sql_d) {
+     if ($mode == 'FINAL') {
+      $dbc->ddlexecute($sql_d);
+      $dbc->confirm();
+      $this->message .= "<br>sql $sql_d is successfully executed";
+     } else {
+      $this->message .= "<br>sql to execute $sql_d";
+     }
+    }
+   }
+  }
+
+  echo "<div class='alert alert-sucess'>$old_db_table is Successfully updated</div>";
+ }
+
  private function _ino_isSame_tablesInTwoDataBases($tbl1) {
-  $db = new dbObject();
+//  $db = new dbObject();
+  global $db;
   $sql = " SELECT IF(COUNT(1)>0,'DIFFERENT','SAME') comp_result FROM
 (
     SELECT
@@ -152,7 +237,8 @@ class sys_db_update extends dbObject {
  }
 
  private function _ino_comparetables_inTwoDataBases($tbl1) {
-  $db = new dbObject();
+//  $db = new dbObject();
+  global $db;
   $sql = " SELECT column_name,ordinal_position,data_type,column_type FROM
 (
     SELECT
@@ -187,7 +273,8 @@ class sys_db_update extends dbObject {
  }
 
  private function _ino_create_views_in_oldDB($mode = 'TEST') {
-  $db = new dbObject();
+  global $db;
+//  $db = new dbObject();
   $views_in_db1 = $db->find_all_views();
   if ($mode == 'FINAL') {
    foreach ($views_in_db1 as $obj) {
