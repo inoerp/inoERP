@@ -13,6 +13,7 @@ $dbsetting_file .= ' defined("DB_PASS") ? null : define("DB_PASS", "' . $_POST['
 $dbsetting_file .= ' ?>';
 
 $dbc = new dbc();
+
 try {
  $dbc->connection = new PDO('mysql:host=' . $_POST['db_server'][0] . '; dbname=' . $_POST['db_name'][0] . ';charset=utf8', $_POST['db_user'][0], $_POST['db_pass'][0]);
  $dbc->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -35,13 +36,17 @@ if (!update_htaccessFile()) {
 }
 
 if ($proceed) {
+ require_once(INC_CLASS . DS . "trait_dbObject_t.inc");
+ require_once(INC_CLASS . DS . "class_dbObject.inc");
+ require_once(INC_EXTENSIONS . DS . "view" . DS . "class.view.inc");
+
  //erify db version
  $db_version = $dbc->connection->getAttribute(PDO::ATTR_CLIENT_VERSION);
  pa($db_version);
  //verify if any existing data exists
  $existing_tables = view::count_all_tables();
  if (empty($existing_tables->table_count)) {
-  $db_setting_file_path = HOME_DIR . DS . 'includes' . DS . 'basics'. DS . 'settings' . DS . 'dbsettings.inc';
+  $db_setting_file_path = HOME_DIR . DS . 'includes' . DS . 'basics' . DS . 'settings' . DS . 'dbsettings.inc';
   $db_setting_file = fopen($db_setting_file_path, "w");
   $result = fwrite($db_setting_file, $dbsetting_file);
   if ($result > 0) {
@@ -76,7 +81,7 @@ if (!$proceed) {
    echo $f->select_field_from_array('db_type', $db_type_a, '');
    ?></li>
 
-<?php echo $f->hidden_field_withId('action', 'complete_install'); ?>
+  <?php echo $f->hidden_field_withId('action', 'complete_install'); ?>
   <li><input type="submit" class="button" id='complete_install' value="Start Installation" ></li>
  </ul>
 </form>

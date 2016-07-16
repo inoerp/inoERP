@@ -2,7 +2,7 @@
 
 class gl_balance_v extends dbObject {
 
- public static $form_class_name = "fp_mrp_header";
+ public static $form_class_name = "gl_balance";
  public static $table_name = "gl_balance_v";
  public static $primary_column = "gl_journal_header_id";
  public $field_a = [

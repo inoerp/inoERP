@@ -10,7 +10,7 @@
  $class_names = 'ino_install';
 
  include_once('engine/install/class_ino_install.inc');
- include_once('includes/basics/basics.inc');
+ include_once('engine/install/include/basics.inc');
 
  // Get array with the names of all modules compiled and loaded
  $php_modules = get_loaded_extensions();

@@ -4,6 +4,10 @@
  </div>
 </div>
 <?php
+echo ' DB_SERVER' .DB_SERVER;
+require_once(INC_CLASS . DS . "trait_dbObject_t.inc");
+require_once(INC_CLASS . DS . "class_dbObject.inc");
+require_once(INC_EXTENSIONS . DS . "view" . DS . "class.view.inc");
 
 /**
  * Loads an SQL stream into the database one command at a time.
@@ -122,8 +126,8 @@ try {
 } catch (Exception $e) {
  echo '      <div class="jumbotron">
         <h1>Below errors occured during installation</h1>';
-      
- echo "<br>Tables import fialed" . $e->getMessage().'</div>';
+
+ echo "<br>Tables import fialed" . $e->getMessage() . '</div>';
 }
 ?>
      
