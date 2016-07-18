@@ -1,0 +1,424 @@
+ul.tabMain {
+ list-style:none;
+ height:100%;
+ width:100%;
+ border-radius:8px 0 -50px 0;
+ clear: both;
+ text-align: left;
+}
+
+ul.tabMain li {
+ float:left;
+ line-height:24px;
+ /* border:1px solid #999;*/
+ overflow:hidden;
+ position:relative;
+ /*background-color: rgba(222, 221, 221, 0.94);*/
+    /*background-color: rgba(152, 157, 149, 0.44);*/
+ -webkit-border-top-left-radius:4px;
+ -webkit-border-top-right-radius:4px;
+ -moz-border-radius-topleft:4px;
+ -moz-border-radius-topright:4px;
+ border-top-left-radius:4px;
+ border-top-right-radius:4px;
+ margin: 2px 10px 0 0;
+ display: inline-block; 
+}
+
+ul.tabMain li.ui-state-active {
+    background-color: rgba(202, 201, 201, 0.39);
+}
+
+ul.tabMain li a{
+ text-decoration:none;
+ color:#000 !important;
+ display:block;
+ font-size:0.9em;
+ /*border:1px solid #fff;*/
+ outline:none;
+ -webkit-border-top-left-radius:8px;
+ -webkit-border-top-right-radius:8px;
+ -moz-border-radius-topleft:8px;
+ -moz-border-radius-topright:8px;
+ border-top-left-radius:8px;
+ border-top-right-radius:8px;
+ padding:0 20px;
+
+}
+
+.ui-state-active, ul.tabMain li:hover {
+ background-color:rgba(123, 207, 128, 0.77);
+ border-color:rgba(123, 207, 128, 0.77) !important;
+}
+
+.ui-datepicker-calendar .ui-state-active
+{
+  
+  background:rgb(10, 150, 19) !important;
+  color: #fff;
+}
+
+html ul.tabMain li.active, html ul.tabMain li.active a:hover {
+/* background-color:#c3dde0;
+ border-color:#c3dde0;
+ border-bottom:1px solid #fff;*/
+}
+
+.tabContainer {
+ border: 1px solid rgba(222, 221, 221, 0.94);
+ /*overflow: hidden;*/
+ padding: 8px;
+ clear: both;
+ float: left;
+ min-width: 97%;
+ max-width: 98%;
+ background-color: rgba(242, 242, 242, 0.94);
+}
+
+.tabContainer.no_tab{
+ border-radius: 8px;
+}
+.tabContent {
+ padding:5px;
+ position: relative;
+}
+
+
+/*End of origianl CSS*/
+.ui-autocomplete { position: absolute; cursor: default; }	
+.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
+
+.ui-helper-hidden-accessible {
+ display: none;
+}
+
+.ui-autocomplete{
+ z-index: 10;
+ padding : 0px 5px;
+ background: lightgrey;
+ font : white;
+ border : 1px solid;
+}
+
+.ui-autocomplete a:link {
+ font: white;
+}
+
+
+.ui-tabs-vertical { width: 1050px; }
+.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 220px; }
+.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
+.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 800px; }
+
+ul.tabVerticalMain li{
+ background:rgba(200,200,200, 0.8);
+}
+
+ul.tabVerticalMain li.ui-state-active{
+ background:rgba(210,248,12,0.2);
+}
+.tabContainer_v .large_shadow_box{
+ background:rgba(210,248,12,0.2);
+}
+
+
+ul.tabVerticalMain {
+ float:left;
+ list-style:none;
+ width:100%;
+ border-radius:8px 0 -50px 0;
+ margin:0;
+ padding:0;
+}
+
+ul.tabVerticalMain li a {
+ text-decoration:none;
+ color:#000;
+ display:block;
+ font-size: 1.1em;
+ border:1px solid #fff;
+ outline:none;
+ padding:40px 20px;
+ margin: 10px 0;
+
+}
+
+
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+
+.jspContainer
+{
+ overflow: hidden;
+ position: relative;
+}
+
+.jspPane
+{
+ position: absolute;
+}
+
+.jspVerticalBar
+{
+ position: absolute;
+ top: 0;
+ right: 0;
+ width: 16px;
+ height: 100%;
+ background: red;
+}
+
+.jspHorizontalBar
+{
+ position: absolute;
+ bottom: 0;
+ /*left: 0;*/
+ top: 0;
+ width: 100%;
+ height: 16px;
+ background: red;
+}
+
+.jspVerticalBar *,
+.jspHorizontalBar *
+{
+ margin: 0;
+ padding: 0;
+}
+
+.jspCap
+{
+ display: none;
+}
+
+.jspHorizontalBar .jspCap
+{
+ float: left;
+}
+
+.jspTrack
+{
+ background: #dde;
+ position: relative;
+}
+
+.jspDrag
+{
+ background: #bbd;
+ position: relative;
+ top: 0;
+ left: 0;
+ cursor: pointer;
+}
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag
+{
+ float: left;
+ height: 100%;
+}
+
+.jspArrow
+{
+ background: #50506d;
+ text-indent: -20000px;
+ display: block;
+ cursor: pointer;
+}
+
+.jspArrow.jspDisabled
+{
+ cursor: default;
+ background: #80808d;
+}
+
+.jspVerticalBar .jspArrow
+{
+ height: 16px;
+}
+
+.jspHorizontalBar .jspArrow
+{
+ width: 16px;
+ float: left;
+ height: 100%;
+}
+
+.jspVerticalBar .jspArrow:focus
+{
+ outline: none;
+}
+
+.jspCorner
+{
+ background: #eeeef4;
+ float: left;
+ height: 100%;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner
+{
+ margin: 0 -3px 0 0;
+}
+
+.ui-autocomplete { position: absolute; cursor: default; }	
+.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
+
+.ui-datepicker {
+ background: #EAE9D8;
+}
+
+
+
+.ui-datepicker .ui-datepicker-header {
+ position: relative;
+ background: #aaa;
+ font-weight: bold;
+  width: 202px;
+  padding: 2px 10px;
+  
+}
+
+.ui-datepicker .ui-datepicker-title {
+ text-align: center;
+ 
+}
+
+.ui-datepicker .ui-datepicker-title select {
+ font-size: 1em;
+ margin: 1px 0;
+ color: #333;
+ width: 45px;
+}
+
+.ui-datepicker-prev{
+ float: left;
+ cursor:  pointer;
+  color: #fff !important;
+}
+
+.ui-datepicker-next {
+ float: right;
+  cursor:  pointer;
+ color: #fff !important;
+
+}
+
+.ui-icon-circle-triangle-e,
+.ui-icon-circle-triangle-w{
+    padding : 0 4px;
+  border-radius: 12px;
+  border: 1px solid #fff;
+}
+
+table.ui-datepicker-calendar{
+ text-align: center;
+}
+
+table.ui-datepicker-calendar tr th{
+ background: #aaa;
+ color: #fff;
+}
+
+table.ui-datepicker-calendar tr td,
+table.ui-datepicker-calendar tr th{
+ border: 1px solid #ccc;
+  padding: 3px 7px ;
+  
+}
+
+
+/*move to animated block*/
+
+#animated_block { 
+ position: relative; 
+ width: 100%; 
+}
+
+#animated_content > div { 
+ position: absolute; 
+}
+
+.play_button{
+ position: relative;
+ float:  right;
+ margin-top: -10px;
+ z-index:  9999;
+}
+
+.accordion input{
+ height: 32px;
+}
+
+.accordion .ui-accordion-content {
+ width: 100%;
+ background-color: #f3f3f3;
+ color: #777;
+ font-size: 14px;
+ line-height: 32px;
+ box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .2),
+  inset 0px -1px 0px 0px rgba(0, 0, 0, .4);
+}
+.accordion .ui-accordion-content > * {
+ margin: 0;
+ padding: 20px;
+}
+.accordion .ui-accordion-content a {
+ color: #777;
+}
+
+.accordion .ui-accordion-header {
+ background-color: #3296B1;
+
+ margin-bottom:10px;
+ color: #fff;
+ padding: 5px 10px;
+ font-weight: bold;
+ cursor :pointer;        
+}
+
+.accordion .ui-accordion-header .fa{
+ color: #fff; 
+}
+.accordion .ui-accordion-header:first-of-type a {
+ box-shadow: 0px -1px 0px 0px #b85c0f;
+}
+.accordion .ui-accordion-content:last-of-type {
+ box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .2),
+  inset 0px 0 0px 0px rgba(0, 0, 0, .5);
+}
+
+.ui-widget-header, .ui-widget-content{
+ border: none !important;
+}
+
+.ui-autocomplete{
+ border:1px solid #fff;
+ font-size: 0.9em;
+ background-color:#3FB6DA;
+ color: #fff;
+ max-height: 200px;
+overflow: scroll;
+}
+
+.ui-autocomplete li{
+ padding: 0;
+ cursor: pointer; 
+ margin:0;
+ text-decoration: none;
+}
+
+/*input.ui-autocomplete-input{
+  width: 88% !important;
+}*/
+
+.ui-autocomplete li:hover{
+ background: #9BB3BA;
+}

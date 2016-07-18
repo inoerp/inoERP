@@ -2785,3 +2785,11 @@ ul#recent_visit li{
 		white-space: nowrap;
 	}*/
 }
+
+#select_page_body2 .sidebar{
+ top: 0px !important;
+}
+
+#select_page_body2 #erp_form_area{
+ margin-top: 0px !important;
+}

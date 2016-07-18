@@ -3648,8 +3648,10 @@ $(document).ready(function () {
   if ($(this).siblings('.employee_name').val()) {
    openUrl += '&employee_name=' + $(this).siblings('.employee_name').val();
   }
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open(openUrl, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //popu for selecting user
@@ -3673,8 +3675,10 @@ $(document).ready(function () {
   if ($(this).siblings('.username').val()) {
    openUrl += '&username=' + $(this).siblings('.username').val();
   }
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open(openUrl, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //popu for selecting any generic class
@@ -3910,8 +3914,13 @@ $(document).ready(function () {
  $('body').on("click", '.ar_customer_id.select_popup', function () {
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
-  void window.open('select.php?class_name=ar_customer', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+
+  var openUrl = 'select.php?class_name=ar_customer';
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
+  void window.open(openUrl, '_blank',
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+
  });
 
 //selecting supplier
@@ -3930,16 +3939,23 @@ $(document).ready(function () {
  $('body').on("click", '.user_id.select_popup', function () {
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
+
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open('select.php?class_name=user', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+
  });
 
  //selecting change request
  $('body').on("click", '.hd_change_request_id.select_popup', function () {
   var close_field_class = '.' + $(this).parent().find(':input').not('.hidden').prop('class').replace(/\s+/g, '.');
   localStorage.setItem("close_field_class", close_field_class);
+  
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open('select.php?class_name=hd_change_request', '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
  //selecting support request

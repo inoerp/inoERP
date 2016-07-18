@@ -1,0 +1,1 @@
+<?php$readonly = 1; $mode = 2; $ownSubmitForm = 1; ?>

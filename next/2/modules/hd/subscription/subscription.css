@@ -1,0 +1,16 @@
+#hd_subscription_line .class_detail_form{
+margin-left: -923px;
+}
+
+#hd_subscription_line .form_detail_data_fs{
+  width: 923px;
+}
+
+#hd_subscription_line .class_detail_form{
+margin-top: 24px;
+}
+
+ 
+#hd_subscription_line .class_detail_form .inline_action li.remove_row_img{
+ vertical-align: unset !important;
+}

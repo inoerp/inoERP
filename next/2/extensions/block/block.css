@@ -1,0 +1,73 @@
+#contents{
+max-width: 1010px;
+}
+
+#category_relationDiv, #contents_listDiv{
+clear: both;
+}
+
+table#category_list{
+margin-bottom: 20px;
+}
+table#category_list, table#summary_list{
+min-width: 900px;
+max-width: 1100px;
+}
+
+.new_element{
+margin: 10px;
+}
+
+#subject label, #categories label, 
+.new_element label{
+display: inline-block;
+font-size: 1.2em;
+width: 100px;
+font-weight: bold;
+margin-left: 20px;
+}
+
+/*.priority{
+margin-top: 30px;
+}*/
+
+
+#extra_form_element .text{
+float: left;
+}
+
+#content_element, #show_attachment, #content_info{
+clear: both;
+}
+
+#content_info{
+padding-top: 5px;
+}
+#content_info ul li{
+display: inline-block;
+width: 32%;
+}
+
+#content_navigation ul li{
+display: inline-block;
+}
+
+.child_contents{
+float: right;
+margin-right: 100px;
+}
+
+#page_element ul li,
+#content_element ul li{
+ display: inline-block;
+ margin-right : 36px;
+ vertical-align: top;
+}
+
+.content_heading{
+font-size: 1.4em;
+}
+
+#content_element li:not(:first-child){
+float: right;
+}

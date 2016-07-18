@@ -1,0 +1,17 @@
+.select.org{
+    min-width: 100px;
+}
+
+ #content .flaticon-add182:before, #content .flaticon-add182:after {
+    color: rgba(37, 114, 171, 0.84);
+    height: 25px;
+}
+
+ #content .delete82:before, #content .delete82:after {
+color: rgba(194, 65, 65, 0.93);
+}
+
+ul#new_contact_reference li{
+    display: inline-block;
+    margin-right: 10px;
+}

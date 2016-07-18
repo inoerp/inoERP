@@ -1,0 +1,1 @@
+<?phpif(empty($$class->status)){ $$class->status = 'WORKING';}if(in_array($$class->status, ['COSTED','REVERSED' ,'RELEASED'])){ $readonly = true; $mode =2;}$$class->project_number = !empty($$class->prj_project_header_id) ? prj_project_header::find_by_id($$class->prj_project_header_id)->project_number : '';?>

@@ -1,0 +1,1 @@
+<?phpif (!empty($po_line_object)) { foreach ($po_line_object as &$po_lines) {  if (empty($po_lines->schedule_ship_date)) {   $po_lines->schedule_ship_date = current_time(true);  }  if (empty($po_lines->promise_date)) {   $po_lines->promise_date = current_time(true);  } }}?>

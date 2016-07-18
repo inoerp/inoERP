@@ -1,0 +1,1 @@
+<?phpif (!empty($_GET['org_id'])) { $$class->org_id = ($_GET['org_id']); $class_i = $$class->findBy_orgId($_GET['org_id']); if (!empty($class_i)) {	foreach ($class_i as $key => $value) {	 if ((!empty($value)) && (property_exists($$class, $key))) {		$$class->$key = $value;	 }	}	$$class->_before_showing(); }}?>

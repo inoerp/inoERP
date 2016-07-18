@@ -1,0 +1,25 @@
+.submit_program_form fieldset{
+        border: 2px solid #39c;
+        Padding: 10px;
+        margin: 50px 0 20px 0;
+}
+
+.submit_program_form legend{
+        border: 2px solid #39c;
+        padding: 5px;
+        background-color: #39c;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1em;
+}
+
+ul.simple_column label{
+        width: 40%;
+        text-align: right;
+        padding-right: 5px;
+
+}
+
+ul.simple_column li{
+        margin-bottom: 10px;
+}

@@ -1,0 +1,1 @@
+<?phpif ((!empty($_GET["bom_header_id"])) && (!(is_array($_GET["bom_header_id"])))) { $bom_header_id = htmlentities($_GET["bom_header_id"]);} else { $bom_lines = new bom_line(); $bom_line_object = array(); array_push($bom_line_object, $bom_lines);}pa($$class);pa($$class_second);?>
