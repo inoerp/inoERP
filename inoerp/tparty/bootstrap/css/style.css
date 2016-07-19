@@ -47,9 +47,9 @@ h1.bgc {
 }
 
 h2 {
-font-size: 1.2em;
-color: #39C;
-font-weight: bold;
+ font-size: 1.2em;
+ color: #39C;
+ font-weight: bold;
 }
 
 h2.bgc {
@@ -368,8 +368,8 @@ section::after {
 }
 
 .ino-top-nav{
-background: rgb(255, 255, 255) none repeat scroll 0% 0%;
-border-radius: 4px;
+ background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+ border-radius: 4px;
 }
 
 #header-style-1 .navbar-nav > li > a {
@@ -431,24 +431,28 @@ border-radius: 4px;
  display:block; 
  overflow:hidden
 }
-.social-icons span a {
- border-left:1px solid #f2f2f2;
+
+.social-icons span a, .social-icons span i{
+ /*border-left:1px solid #f2f2f2;*/
+}
+
+.social-icons span a{
  font-size:14px;
  text-align:center;
  width:40px;
- height:42px;
- line-height:42px;
+ line-height: 34px;
  overflow:hidden;
- display:block;
- float:left
+ display:inline-block;
 }
+
 #header-style-1 .navbar-nav > li > a:hover,
 #header-style-1 .navbar-nav > li > a:focus,
 #header-style-1 .navbar-nav > li > a:active,
 #header-style-1 .navbar-default .navbar-nav > .open > a,
 #header-style-1 .navbar-default .navbar-nav > .open > a:hover,
 #header-style-1 .navbar-default .navbar-nav > .open > a:focus,
-#topbar .social-icons span:hover a {
+#topbar .social-icons span:hover a,
+#topbar .social-icons span:hover i{
  color:#fff !important;
  -webkit-border-radius: 03px;
  -moz-border-radius: 03px;
@@ -462,13 +466,13 @@ border-radius: 4px;
  border-right:1px solid #f2f2f2;
 }
 
- 
+
 #topbar .topbar-email,
 #topbar .topbar-phone,
 #topbar .topbar-login,
 #topbar .topbar-cart {
-  float:right;
-  text-align: right;
+ float:right;
+ text-align: right;
  padding:0 15px;
  line-height:42px;
  border-right:1px solid #f2f2f2;
@@ -3484,8 +3488,8 @@ acronym {
  .menu,
  .callus {
   border:none;
-/*  float:none !important;
-  clear:both !important;*/
+  /*  float:none !important;
+    clear:both !important;*/
   /*text-align:center !important;*/
   margin:auto;
  } 
@@ -4193,14 +4197,14 @@ span.ui-button-text{
  width: 100%;
  height: 100%;
  opacity: 0.8;
- 
-/* background: #808080 none repeat scroll 0% 0%;
-position: fixed;
-top: 100px;
-left: 250px;
-height: 100%;
-opacity: 0.8;
-width: 100%;*/
+
+ /* background: #808080 none repeat scroll 0% 0%;
+ position: fixed;
+ top: 100px;
+ left: 250px;
+ height: 100%;
+ opacity: 0.8;
+ width: 100%;*/
 }
 
 .ui-dialog-titlebar{
@@ -4509,10 +4513,10 @@ table.document_table input{
 }
 
 select {
-    -moz-appearance: none;
-    text-indent: 0.01px;
-    text-overflow: '';
-    -webkit-appearance: none;
+ -moz-appearance: none;
+ text-indent: 0.01px;
+ text-overflow: '';
+ -webkit-appearance: none;
 }
 
 #erp_form_area .select.medium,
@@ -4579,7 +4583,7 @@ a.show {
   top: 50px;
   margin-bottom: 60px;
   z-index: 999;
-   overflow:hidden;
+  overflow:hidden;
  }
 }
 
@@ -4608,9 +4612,9 @@ a.show {
   position: fixed;
   z-index: 1;
  }
-/* #header_bottom{
-  margin-bottom: 100px;
- }*/
+ /* #header_bottom{
+   margin-bottom: 100px;
+  }*/
 }
 
 
@@ -4621,9 +4625,9 @@ a.show {
   position: fixed;
   z-index: 1;
  }
-/* #header_bottom{
-  margin-bottom: 90px;
- }*/
+ /* #header_bottom{
+   margin-bottom: 90px;
+  }*/
 }
 
 
@@ -4715,7 +4719,7 @@ table th {
 }
 
 table th {
-background-color: #F2F2F2;
+ background-color: #F2F2F2;
 }
 
 table tr {
@@ -4818,7 +4822,7 @@ table.form_table tr:nth-child(odd) {
 }
 
 table.form_table tr:nth-child(even) {
-    background-color: rgba(191, 207, 149, 0.4);
+ background-color: rgba(191, 207, 149, 0.4);
 }
 
 table.form_table td {
@@ -5030,18 +5034,18 @@ h3.nav-panel{
 
 /*overwritten*/
 .dropdown-menu {
-    font-size: 12px !important;
+ font-size: 12px !important;
 }
 
 input[type="submit"] {
-padding-left : 15px;
-padding-right : 15px;
+ padding-left : 15px;
+ padding-right : 15px;
 }
 
 .form_data_line_tbody td  {
  text-align: left;
 }
 .form_data_line_tbody td input {
-        text-align: left;
-        padding-left: 5px; 
+ text-align: left;
+ padding-left: 5px; 
 }

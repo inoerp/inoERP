@@ -36,7 +36,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
             <?php echo $f->hidden_field_withId('content_type_id', $content_type->content_type_id); ?>
             <?php echo $f->hidden_field_withId('content_type', $content_type_name); ?>
             <div class="row">
-             <div class="col-sm-10"><?php echo $f->text_field('subject', $$class->subject, 100, 'subject', 'extra_large', 1, '', ' Subject - Required For This Post') ?></div>
+             <div class="col-sm-10 col-xs-12"><?php echo $f->text_field('subject', $$class->subject, 100, 'subject', 'extra_large', 1, '', ' Subject - Required For This Post') ?></div>
              <div class="col-sm-2">
               <a class="show2 content_id btn btn-default" role="button" href="content.php?content_id=<?php echo $$class->content_id; ?>&content_type=<?php echo $content_type_name ?>">View</a>
              </div>
