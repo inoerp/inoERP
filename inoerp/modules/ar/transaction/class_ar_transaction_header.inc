@@ -56,7 +56,7 @@ class ar_transaction_header extends dbObject {
   public static $receivable_rule_a = [
   'BILL_ADV' => 'Bill In Advance',
   'BILL_ARR' => 'Bill In Arrears',
-  'BILL_PRO' => 'Bill In proportionate'
+  'BILL_PRO' => 'Bill In Proportionate'
  ];
   
  public $action_a = [

@@ -115,7 +115,7 @@ a.navbar-brand {
  line-height: 36px;
 }
 .container-fluid a.navbar-brand {
- color: rgba(231, 231, 231, 0.86) !important;
+ color: #fff !important;
  font-size: 25px;
  font-weight: 900;
  line-height: 0 !important;

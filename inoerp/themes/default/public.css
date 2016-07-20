@@ -1359,17 +1359,32 @@ select.search_document_list option:nth-child(even) {
 #header_top_quick_nav{
  font-size: 14px;
 }
+
 #dashborad_menu li{
  display: block;
  float: left;
- margin : 15px;
- width: 110px;
- height: 110px;
+
  text-align: center;
  vertical-align: middle;
- padding-top: 20px;
  border-radius: 5px;
+}
 
+@media (max-width: 600px) {
+ #dashborad_menu li{
+  width: 95px;
+  height: 95px;
+  padding-top: 10px;
+  margin : 5px;
+ }
+}
+
+@media (min-width: 601px) {
+ #dashborad_menu li{
+  width: 110px;
+  height: 110px;
+  padding-top: 20px;
+  margin : 15px;
+ }
 }
 
 #dashborad_menu li:nth-child(n){
@@ -2748,44 +2763,7 @@ ul#recent_visit li{
 }
 
 
-@media (max-width: 500px) {
- /* Force table to not be like tables anymore */
- table, thead, tbody, th, td, tr { 
-  display: block; 
- }
 
- /* Hide table headers (but not display: none;, for accessibility) */
- thead tr { 
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
- }
-
- tr { border: 1px solid #ccc; }
-
- td { 
-  /* Behave  like a "row" */
-  border: none;
-  border-bottom: 1px solid #eee; 
-  position: relative;
-  padding-left: 50%; 
- }
-/*
- td:before { 
-  content: attr(title) ": ";
- }
- 
- 	td:before { 
-		 Now like a table header 
-		position: absolute;
-		 Top/left values mimic padding 
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-	}*/
-}
 
 #select_page_body2 .sidebar{
  top: 0px !important;
@@ -2796,33 +2774,83 @@ ul#recent_visit li{
 }
 
 #navbar-collapse-right{
-position: absolute;
-z-index: 9999;
-background-color: #39c;
-width: 9999px;
-display: block;
-overflow: hidden;
-height: 600px;        
+ position: absolute;
+ z-index: 9999;
+ background-color: #39c;
+ width: 9999px;
+ display: block;
+ overflow: hidden;
+ height: 600px;        
 }
 
 
 #navbar-collapse-right li{
-        width: 100%;
-        display: block;
-        border: none !important;
+ width: 100%;
+ display: block;
+ border: none !important;
 }
 
 
 #navbar-collapse-right a{
-        width: 100%;
-        border: none !important;
-        text-align: left;
-        color:#fff !important;
-        border: none !important;
-        
+ width: 100%;
+ border: none !important;
+ text-align: left;
+ color:#fff !important;
+ border: none !important;
+
+}
+
+#navbar-collapse-right a:hover, #navbar-collapse-right a:active, #navbar-collapse-right .open > a{
+ color:#000 !important;
+
 }
 
 #navbar-collapse-right .dropdown-menu{
-      border: none !important;  
-        background-color: rgb(59, 158, 154);
+ border: none !important;  
+ background-color: rgb(59, 158, 154);
+}
+
+td.ino-th{
+ background-color: #ddd;
+ padding-left: 10px;        
+}
+
+@media (max-width: 600px) {
+ /*Force table to not be like tables anymore*/ 
+ table, thead, tbody, tr, .form_data_detail_tbody { 
+  display: block; 
+ }
+
+ th, td { 
+  display: inline-block; 
+ }
+
+ /*Hide table headers (but not display: none;, for accessibility)*/ 
+ thead tr { 
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+ }
+
+ tr { border: 1px solid #ccc; }
+
+ td, th { 
+  /*Behave  like a "row"*/ 
+  border: none;
+  /*border-bottom: 1px solid #eee;*/ 
+  position: relative;
+  width: 49.38%;
+ }
+
+ .class_detail_form{
+  margin-left: 20px !important;        
+ }
+
+ .form_detail_data_fs{
+  width: 300px !important;        
+ }
+
+ .form_data_detail_tbody th, .form_data_detail_tbody td {
+  max-width: 145px !important;        
+ }
 }

@@ -50,6 +50,8 @@ class ar_transaction_type extends dbObject {
   'unearned_revenue_ac_id',
   'br_receivable_ac_id',
   'br_offset_ac_id',
+  'ar_revenue_rule_header_id',
+  'receivable_rule',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -95,6 +97,8 @@ class ar_transaction_type extends dbObject {
  public $unearned_revenue_ac_id;
  public $br_receivable_ac_id;
  public $br_offset_ac_id;
+ public $receivable_rule;
+ public $ar_revenue_rule_header_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;

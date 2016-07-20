@@ -79,11 +79,7 @@ inoERP
        foreach ($ar_revenue_rule_line_object as $ar_revenue_rule_line) {
         ?>         
         <tr class="ar_revenue_rule_line<?php echo $count ?>">
-         <td>
-          <?php $f = new inoform();
-          echo ino_inline_action($ar_revenue_rule_line->ar_revenue_rule_line_id, array('ar_revenue_rule_header_id' => $$class->ar_revenue_rule_header_id));
-          ?>
-         </td>
+         <td><?php echo ino_inline_action($ar_revenue_rule_line->ar_revenue_rule_line_id, array('ar_revenue_rule_header_id' => $$class->ar_revenue_rule_header_id)); ?></td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2r('ar_revenue_rule_line_id'); ?></td>
          <td><?php echo $f->number_field('period_number', $$class_second->period_number); ?></td>

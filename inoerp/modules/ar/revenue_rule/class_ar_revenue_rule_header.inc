@@ -34,13 +34,13 @@ class ar_revenue_rule_header extends dbObject {
   'weight' => 1
  ];
  public static $rule_type_a = [
+  'AUTO' => 'Automatic',
   'MANUAL' => 'Manual',
   'MONTH' => 'Monthly',
   'DATE' => 'Date Wise'
  ];
  public $field_a = [
   'ar_revenue_rule_header_id',
-  'bu_org_id',
   'rule_type',
   'rule_name',
   'description',
@@ -58,8 +58,7 @@ class ar_revenue_rule_header extends dbObject {
  ];
  public $requiredField = [
   'rule_type',
-  'rule_name',
-  'bu_org_id',
+  'rule_name'
  ];
  public $fields_inForm_notInDataBase = [
   'action',

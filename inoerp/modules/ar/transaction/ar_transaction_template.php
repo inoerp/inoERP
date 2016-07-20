@@ -21,7 +21,7 @@
       </li>
       <li><?php $f->l_text_field_d('transaction_number', 'primary_column2'); ?></li>
       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'bu_org_id', '', 1, $readonly1); ?>             </li>
-      <li><?php $f->l_select_field_from_object('transaction_type', ar_transaction_type::find_all(), 'ar_transaction_type_id', ['ar_transaction_type','bu_org_id'], $$class->transaction_type, 'transaction_type', '', 1, $readonly1 , '', '','', 'bu_org_id'); ?>             </li>
+      <li><?php $f->l_select_field_from_object('transaction_type', ar_transaction_type::find_all(), 'ar_transaction_type_id', ['ar_transaction_type', 'bu_org_id'], $$class->transaction_type, 'transaction_type', '', 1, $readonly1, '', '', '', 'bu_org_id'); ?>             </li>
       <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', '', $readonly1, 1); ?>             </li>
       <li><label><?php echo gettext('Period Name') ?></label><?php
        if (!empty($period_name_stmt)) {
@@ -51,6 +51,7 @@
       <li><?php $f->l_text_field_d('document_owner'); ?></li> 
       <li><label><?php echo gettext('Approval Status') ?></label><span class="button"><?php echo!empty($$class->approval_status) ? $$class->approval_status : " No Status "; ?></span></li>
       <li><?php $f->l_text_field_d('description'); ?></li> 
+      <li><?php $f->l_text_field_d('sales_person') ?></li>
      </ul>					 
     </div>
     <div id="tabsHeader-3" class="tabContent">
@@ -69,9 +70,11 @@
        <li><?php $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate'); ?> </li>
        <li><?php $f->l_number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
        <li><?php $f->l_number_field('tax_amount', $$class->tax_amount, '15', 'tax_amount'); ?></li>
-       <li><?php $f->l_text_field_d('sales_person') ?></li>
        <li><?php $f->l_text_field_dr('gl_journal_header_id') ?></li>
        <li><?php $f->l_ac_field_dm('receivable_ac_id'); ?></li>
+       <li><?php $f->l_select_field_from_object('ar_revenue_rule_header_id', ar_revenue_rule_header::find_all(), 'ar_revenue_rule_header_id', 'rule_name', $$class->ar_revenue_rule_header_id, 'ar_revenue_rule_header_id'); ?>        </li>
+       <li><?php $f->l_select_field_from_array('receivable_rule', ar_transaction_header::$receivable_rule_a, $$class->receivable_rule, 'receivable_rule'); ?>        </li>
+
       </ul>
      </div>
     </div>
@@ -82,7 +85,7 @@
        <li><?php $f->l_text_field_dr('receipt_amount'); ?></li>
        <li><label><?php echo gettext('Adjustment Amount'); ?></label><?php echo ar_transaction_adjustment::total_adjustmentAmount_by_transactionHeaderId($$class->ar_transaction_header_id); ?></li>
        <li><label></label><a href="form.php?class_name=ar_transaction_adjustment&mode=2&ar_transaction_header_id=<?php echo $$class->ar_transaction_header_id ?>" class="btn btn-default" role="button">
-        View Adjustments</a> 
+         View Adjustments</a> 
        </li>
       </ul>
      </div>
@@ -162,7 +165,7 @@
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0; 
+       $count = 0;
        foreach ($ar_transaction_line_object as $ar_transaction_line) {
 //							$f->readonly2 = !empty($ar_transaction_line->ar_transaction_line_id) ? true : false;
         ?>         
@@ -184,7 +187,7 @@
           echo $f->hidden_field_withCLass('invoiceable_cb', '1', 'popup_value');
           ?>
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
-         <td><?php $f->text_field_wid2m('item_description' ,'xxlarge required'); ?></td>
+         <td><?php $f->text_field_wid2m('item_description', 'xxlarge required'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $ar_transaction_line->uom_id); ?></td>
          <td><?php form::number_field_wid2m('inv_line_quantity'); ?></td>
          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>

@@ -27,6 +27,8 @@
         <li><?php $f->l_select_field_from_object('invoice_type_id', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->invoice_type_id, 'invoice_type_id'); ?>        </li>
         <li><?php $f->l_select_field_from_object('cm_type_id', ar_transaction_type::find_all(), 'ar_transaction_type_id', 'ar_transaction_type', $$class->cm_type_id, 'cm_type_id'); ?>        </li>
         <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, '', 'payment_term_id', 1, $readonly1); ?>        </li>
+        <li><?php $f->l_select_field_from_object('ar_revenue_rule_header_id', ar_revenue_rule_header::find_all(), 'ar_revenue_rule_header_id', 'rule_name', $$class->ar_revenue_rule_header_id, 'ar_revenue_rule_header_id'); ?>        </li>
+        <li><?php $f->l_select_field_from_array('receivable_rule', ar_transaction_header::$receivable_rule_a, $$class->receivable_rule, 'receivable_rule'); ?>        </li>
 
        </ul> 
       </div> 
@@ -41,6 +43,7 @@
         <li><?php $f->l_ac_field_d('clearing_ac_id'); ?></li>
         <li><?php $f->l_ac_field_d('unbilled_receivable_ac_id'); ?></li>
         <li><?php $f->l_ac_field_d('unearned_revenue_ac_id'); ?></li>
+        
        </ul> 
       </div> 
      </div>

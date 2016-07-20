@@ -552,6 +552,17 @@ $('li.ino-toggle-tab').remove();
 $('#tabsHeader ul.tabMain ').append(toogleLi);
 
 
+var last_ww = $(window).width();
+reszieTable('700');
+ $(window).on('resize', function () {
+  if ($(this).width() > 599 && last_ww < 601) {
+      $('.fa-refresh').trigger('click');
+  } else {
+   reszieTable(last_ww);
+  }
+  last_ww = $(window).width();
+ });
+
 if(themeUrl){
  $.getScript( themeUrl + "/js/reload.js");
 }

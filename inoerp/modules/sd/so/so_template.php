@@ -255,6 +255,7 @@ inoERP
     <div id="tabsLine-4" class="scrollElement tabContent">
      <table class="form_line_data_table">
       <thead>
+       <tr>
       <th><?php echo gettext('Seq') ?>#</th>
       <th><?php echo gettext('Kit Item') ?>#</th>
       <th><?php echo gettext('Configured') ?>?</th>
