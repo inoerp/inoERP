@@ -1,3 +1,0 @@
-function hideOverLay() {
- $('#overlay').hide();
-}
