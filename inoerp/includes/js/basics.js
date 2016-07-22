@@ -5821,16 +5821,13 @@ $(document).ready(function () {
   $('#navbar-collapse-right').toggleClass('hidden');
  });
 
- var last_ww = $(window).width();
- reszieTable('700');
- $(window).on('resize', function () {
-  if ($(this).width() > 599 && last_ww < 601) {
-   $('.fa-refresh').trigger('click');
-  } else {
-   reszieTable(last_ww);
-  }
-  last_ww = $(window).width();
+ var last_ww = '601';
+ localStorage.setItem("last_ww", last_ww);
+ reszieTable();
+ $(window).off('resize').on('resize', function () {
+  $('a.document_id .fa-refresh').trigger('click');
  });
+
 
  $('body').on('click', '.hide-form-row', function () {
   var trClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g, '.');
@@ -5858,8 +5855,8 @@ function remove_unsaved_msg() {
  $('#unsaved_fields').data('no_of_fields', '0');
 }
 
-var reszieTable = function (last_ww) {
- if (($(window).width() < 600) && last_ww > 600) {
+var reszieTable = function () {
+  if (($(window).width() < 600)) {
   $('table.form_line_data_table > thead').each(function () {
    var thObject = $(this).find('th');
    $(this).closest('table.form_line_data_table').find('tbody.form_data_line_tbody > tr').each(function (trk, trv) {
@@ -5869,13 +5866,13 @@ var reszieTable = function (last_ww) {
        var thObject1 = $(this).find('th');
        $(this).closest('table.form_detail_data_table').find('tbody.form_data_detail_tbody > tr').each(function () {
         $(this).children('td').each(function (k2, v2) {
-          if (k2 > 0) {
-           var objWithTd2 = '<td class="ino-th">' + $(thObject1[k2]).html() + '</td>';
-           $(this).before(objWithTd2);
-          } else {
-           var objWithFa2 = '<td class="ino-th">' + $(thObject1[k2]).html() + (' <i class="ino-control-th fa fa-arrow-circle-up clickable hide-form-row"></i>') + '</td>';
-           $(this).before(objWithFa2);
-          }
+         if (k2 > 0) {
+          var objWithTd2 = '<td class="ino-th">' + $(thObject1[k2]).html() + '</td>';
+          $(this).before(objWithTd2);
+         } else {
+          var objWithFa2 = '<td class="ino-th">' + $(thObject1[k2]).html() + (' <i class="ino-control-th fa fa-arrow-circle-up clickable hide-form-row"></i>') + '</td>';
+          $(this).before(objWithFa2);
+         }
         });
        });
       });
@@ -5892,7 +5889,9 @@ var reszieTable = function (last_ww) {
     });
    });
   });
+
  }
+ localStorage.setItem("last_ww", $(window).width());
 };
 
 
