@@ -30,6 +30,8 @@ class extn_convertToProd extends dbObject {
   'option_header',
   'option_line',
   'path',
+  'extn_menu_header',
+  'extn_menu_line',
   'product',
   'role_access',
   'site_info',
@@ -80,12 +82,16 @@ class extn_convertToProd extends dbObject {
   'prj_status_line',
   'prj_status_next',
   'prj_work_type',
+  'qa_specification_header',
+  'qa_specification_line',
  ];
  public $exclude_tables_limited_setup_mode = [
   'ap_payment_terms',
   'ar_receipt_source',
   'ar_transaction_source',
   'ar_transaction_type',
+  'ar_revenue_rule_header',
+  'ar_revenue_rule_line',
   'bom_department',
   'bom_department_resource_assignment',
   'bom_overhead',
@@ -180,6 +186,7 @@ class extn_convertToProd extends dbObject {
   'c_article',
   'c_collections',
   'c_content',
+  'c_dataentity',
   'c_documentation',
   'c_forum',
   'c_issue',
@@ -188,6 +195,7 @@ class extn_convertToProd extends dbObject {
   'comment',
   'common_bom_line',
   'content',
+  'extn_emessage_line',
   'cst_item_cost_header',
   'cst_item_cost_line',
   'cst_item_cost_line_pre',
@@ -494,6 +502,10 @@ class extn_convertToProd extends dbObject {
   'wip_wo_routing_line',
   'wip_wo_routing_v',
   'wip_wol_transaction',
+  'pm_batch_header',
+  'pm_process_operation_header',
+  'pm_process_operation_detail',
+  'pm_formula_byproduct',
  ];
  public $pageTitle = " Conver to Production "; //page Title
  public $convertToProd_id;
