@@ -2240,23 +2240,47 @@ EOD;
                                value=\"1\"  $checked $readonly>";
   return $element_extra_field;
  }
+ 
+  public function slider_checkBox_field($name, $value, $id = "", $class_name = "", $readonly = "") {
+  $bracketName = $name . '[]';
+  if ($readonly == 1) {
+   $readonly = 'onclick="return false"';
+  } else {
+   $readonly = '';
+  }
+  if ($value == 1) {
+   $checked = "checked";
+  } else {
+   $checked = "";
+  }
+  $element_extra_field =  '<label class="ino-checkbox switch">';
+  $element_extra_field .= "<input type=\"checkbox\" name=\"$bracketName\"  class=\"checkBox $name $class_name \" id=\"$id\" 
+                               value=\"1\"  $checked $readonly>";
+  $element_extra_field .=  '<div class="slider"><span class="on-color">ON</span><span class="off-color">OFF</span></div></label>';
+  return $element_extra_field;
+ }
 
  public function l_checkBox_field($name, $value, $id = "", $class_name = "", $readonly = "") {
   global $class, $$class;
-  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . ' </label>';
+  echo '<label class="switch">' . gettext(ucwords(str_replace('_', ' ', $name))) . ' </label>';
   echo $this->checkBox_field($name, $value, $id, $class_name, $readonly);
+  echo '<div class="slider"><span class="on-color">ON</span><span class="off-color">OFF</span></div></label>';
  }
 
  public function l_checkBox_field_d($field_name) {
   global $class, $$class;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label class="ino-checkbox switch">';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', $this->readonly);
+  echo '<div class="slider"><span class="on-color">ON</span><span class="off-color">OFF</span></div></label>';
  }
 
  public function l_checkBox_field_dr($field_name) {
   global $class, $$class;
-  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label class="switch">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label class="ino-checkbox switch">';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', 1);
+  echo '<div class="slider"><span class="on-color">ON</span><span class="off-color">OFF</span></div></label>';
  }
 
  public function checkBox_field_d($field_name) {

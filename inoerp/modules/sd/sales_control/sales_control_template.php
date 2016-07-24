@@ -33,10 +33,10 @@ inoERP
         <li><label><?php echo gettext('ISO Order Type') ?></label><?php echo $f->select_field_from_object('iso_h_default_document_type_id', sd_document_type::find_all_header_levels($$class->org_id), 'sd_document_type_id', 'document_type_name', $$class->iso_h_default_document_type_id, 'iso_h_default_document_type_id', '', '', $readonly); ?></li>
         <li><label><?php echo gettext('ISO Line Type') ?></label><?php echo $f->select_field_from_object('iso_l_default_document_type_id', sd_document_type::find_all_line_levels($$class->org_id), 'sd_document_type_id', 'document_type_name', $$class->iso_l_default_document_type_id, 'iso_l_default_document_type_id', '', '', $readonly); ?></li>
         <li><label><?php echo gettext('AR Transaction Type') ?></label><?php echo $f->select_field_from_object('ar_transaction_type_id', ar_transaction_type::find_by_ColumnNameVal('bu_org_id', $$class->org_id), 'ar_transaction_type_id', 'ar_transaction_type', $$class->ar_transaction_type_id, 'ar_transaction_type_id', '', '', $readonly); ?>	</li>
-        <li><label><?php echo gettext('Requested Date') ?></label><?php echo $f->checkBox_field_d('default_requested_date_cb') ?>  </li>
-        <li><label><?php echo gettext('Schedule Ship Date') ?></label><?php echo $f->checkBox_field_d('default_schedule_ship_date_cb') ?></li>
-        <li><label><?php echo gettext('Promise Date') ?></label><?php echo $f->checkBox_field_d('default_promise_date_cb') ?> </li>
-        <li><label><?php echo gettext('Deffer Invoicing') ?></label><?php echo $f->checkBox_field_d('deffer_invoicing_cb') ?> </li>
+        <li><?php $f->l_checkBox_field_d('default_requested_date_cb') ?>  </li>
+        <li><?php  $f->l_checkBox_field_d('default_schedule_ship_date_cb') ?></li>
+        <li><?php  $f->l_checkBox_field_d('default_promise_date_cb') ?> </li>
+        <li><?php  $f->l_checkBox_field_d('deffer_invoicing_cb') ?> </li>
 
        </ul> 
       </div> 

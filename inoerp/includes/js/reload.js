@@ -533,40 +533,42 @@ $(document).ready(function () {
 
  $('#program_header .hideDiv_input').trigger('click');
 
-if(typeof mandatory_field_color !== 'undefined' && bg_image_path !==""){
-$(':input.required').css('background-color', mandatory_field_color);
-}
+ if (typeof mandatory_field_color !== 'undefined' && bg_image_path !== "") {
+  $(':input.required').css('background-color', mandatory_field_color);
+ }
 
-if(typeof content_color !== 'undefined' && bg_image_path !==""){
-$('.tabContainer, ul.tabMain li.ui-state-active').css('background-color', content_color);
-$('ul.tabMain li.ui-state-active').css('background-color', content_color);
-}
+ if (typeof content_color !== 'undefined' && bg_image_path !== "") {
+  $('.tabContainer, ul.tabMain li.ui-state-active').css('background-color', content_color);
+  $('ul.tabMain li.ui-state-active').css('background-color', content_color);
+ }
 
-if(typeof bg_image_path !== 'undefined' && bg_image_path !==""){
-$('.tabContainer, #path_by_module').css( 'opacity', bg_opacity);
-$('.sidebar').css('background-color', 'transparent');
-}
+ if (typeof bg_image_path !== 'undefined' && bg_image_path !== "") {
+  $('.tabContainer, #path_by_module').css('opacity', bg_opacity);
+  $('.sidebar').css('background-color', 'transparent');
+ }
 
-var toogleLi = '<li class="ino-toggle-tab pull-right clickable"><i class="fa fa-arrow-circle-up"></i><li>';
-$('li.ino-toggle-tab').remove();
-$('#tabsHeader ul.tabMain ').append(toogleLi);
+ var toogleLi = '<li class="ino-toggle-tab pull-right clickable"><i class="fa fa-arrow-circle-up"></i><li>';
+ $('li.ino-toggle-tab').remove();
+ $('#tabsHeader ul.tabMain ').append(toogleLi);
 
-
- var last_ww = $(window).width();
- reszieTable('700');
- $(window).on('resize', function () {
-  if ($(this).width() > 599 && last_ww < 601) {
-   $('a.document_id .fa-refresh').trigger('click');
-  } else {
-   reszieTable(last_ww);
-  }
-  last_ww = $(window).width();
+ reszieTable();
+ var last_ww = localStorage.getItem("last_ww");
+ var current_ww = $(window).width();
+  $(window).resize(function () {
+  clearTimeout(window.resizedFinished);
+  window.resizedFinished = setTimeout(function () {
+   if ((last_ww > 599) && (current_ww < 600) || (last_ww < 599) && (current_ww > 600)) {
+    $('a.document_id .fa-refresh').trigger('click');
+   }
+  }, 250);
  });
 
-
-if(themeUrl){
- $.getScript( themeUrl + "/js/reload.js");
-}
+ localStorage.setItem("last_ww", current_ww);
+ 
+ 
+ if (themeUrl) {
+  $.getScript(themeUrl + "/js/reload.js");
+ }
 
 
 });

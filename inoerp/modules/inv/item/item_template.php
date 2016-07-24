@@ -44,7 +44,7 @@
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
-     <div><ul class='column header_field'><li><?php $f->l_checkBox_field('update_revision_cb', '') ?></li></ul>
+     <div><ul class='column header_field'><li><?php $f->l_checkBox_field_d('update_revision_cb', '') ?></li></ul>
       <div id="tabsDetail">
        <div>
         <div id="tabsDetail-1" class="tabContent">
@@ -60,7 +60,7 @@
             <th><?php echo gettext('ECO') ?></th>
             <th class='two_lines'><?php echo gettext('Eff. Start Date') ?></th>
             <th class='two_lines'><?php echo gettext('End Date') ?></th>
-            <th class='two_lines'><?php echo gettext('Implementation Date') ?></th>
+            <th class='two_lines'><?php echo gettext('Impl. Date') ?></th>
             <th class='two_lines'><?php echo gettext('Origination Date') ?></th>
            </tr>
           </thead>

@@ -7,7 +7,7 @@
     <li><a href="#tabsHeader-2"><?php echo gettext('Maintenance') ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Java Script Defaults') ?></a></li>
     <li><a href="#tabsHeader-4"><?php echo gettext('Colors') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Address') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Global Settings') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
@@ -15,7 +15,6 @@
       <li><?php $f->l_text_field_d('site_name'); ?> </li> 
       <li><?php $f->l_text_field_d('email'); ?> </li> 
       <li><?php $f->l_text_field_d('phone_no'); ?> </li> 
-      <li><?php $f->l_select_field_from_array('disabled_action', site_info::$disabled_action_a, $$class->disabled_action, 'disabled_action'); ?> </li> 
       <li><label><?php echo gettext('Home Page ') . ' ' . HOME_URL ?></label><?php echo $f->text_field('default_home_page', $$class->default_home_page, '20'); ?> </li>
      </ul>
 
@@ -49,6 +48,10 @@
      </ul>
     </div>
     <div id="tabsHeader-5" class="tabContent">
+     <ul class="column header_field"> 
+     <li><?php $f->l_select_field_from_array('disabled_action', site_info::$disabled_action_a, $$class->disabled_action, 'disabled_action'); ?> </li> 
+     <li><?php $f->l_checkBox_field_d('ar_revenue_schedule_cb'); ?> </li>
+     </ul>
     </div>
    </div>
 
