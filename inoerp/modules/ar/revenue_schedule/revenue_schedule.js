@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
- $('body').off('click', 'a.ar_transaction_adjustment_id').on('click', 'a.ar_transaction_adjustment_id', function (e) {
+ $('body').off('click', 'a.ar_revenue_schedule_id').on('click', 'a.ar_revenue_schedule_id', function (e) {
   e.preventDefault();
   var adjustment_type = $('#adjustment_type').val();
   var ar_transaction_header_id = $('#ar_transaction_header_id').val();

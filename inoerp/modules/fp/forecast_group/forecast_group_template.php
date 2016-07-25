@@ -1,5 +1,5 @@
 <div id ="fp_forecast_group_divId">
- <form action=""  method="post" id="fp_forecast_group"  name="fp_forecast_group">
+ <form method="post" id="fp_forecast_group"  name="fp_forecast_group">
   <span class="heading"><?php echo gettext('Forecast Group') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
@@ -46,7 +46,7 @@
    </div>
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading">Forecast Group Details </span>
+  <div id ="form_line" class="form_line form_header_l"><span class="heading"><?php echo gettext('Forecast Group Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -56,7 +56,7 @@
      <div id="tabsLine-1" class="tabContent">
       <div> 
        <ul class="column header_field"> 
-        <li><?php $f->l_select_field_from_object('bucket_type', fp_forecast_header::fp_bucket(), 'option_line_code', 'option_line_value', $$class->bucket_type, '', '', 1, $readonly); ?></li>
+        <li><?php $f->l_select_field_from_object('bucket_type', fp_forecast_header::fp_bucket(), 'option_line_code', 'option_line_value', $$class->bucket_type, 'bucket_type', '', 1, $readonly); ?></li>
         <li><?php $f->l_checkBox_field_d('consume_cb'); ?>  </li>
         <li><?php $f->l_number_field_d('backward_days'); ?> </li>
         <li><?php  $f->l_number_field_d('forward_days', $$class->forward_days); ?> </li>

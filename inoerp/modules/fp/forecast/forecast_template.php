@@ -1,7 +1,7 @@
 <div class="row small-left-padding">
  <div id='fp_forecast_header_divId'>
   <div id ="form_header"><span class="heading"><?php echo gettext('Forecast Header') ?></span>
-   <form action=""  method="post" id="fp_forecast_header"  name="fp_forecast_header">
+   <form method="post" id="fp_forecast_header"  name="fp_forecast_header">
     <div id="tabsHeader">
      <ul class="tabMain">
       <li><a href="#tabsHeader-1"><?php echo gettext('Basic') ?></a></li>
@@ -95,21 +95,18 @@
            $fp_forecast_line->uom_id = $item_i->uom_id;
           } else {
            $fp_forecast_line->item_number = $fp_forecast_line->item_description = $fp_forecast_line->uom_id = null;
-          }
+          }  
           ?>         
           <tr class="fp_forecast_line<?php echo $count ?>">
-           <td>           <?php
-            echo ino_inline_action($$class_second->fp_forecast_line_id, array('fp_forecast_header_id' => $$class->fp_forecast_header_id));
-            ?>   
-           </td>
+           <td><?php echo ino_inline_action($$class_second->fp_forecast_line_id, array('fp_forecast_header_id' => $$class->fp_forecast_header_id));  ?>  </td>
            <td><?php $f->seq_field_d($count); ?></td>
            <td><?php form::text_field_wid2sr('fp_forecast_line_id'); ?></td>
            <td><?php echo $f->hidden_field('item_id_m', $$class_second->item_id_m); ?> 
             <?php form::text_field_wid2('item_number', 'select_item_number'); ?>
             <i class="select_item_number select_popup clickable fa fa-search"></i></td>
            <td><?php form::text_field_wid2r('item_description'); ?></td>
-           <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small', '', 1); ?></td>
-           <td><?php echo $f->select_field_from_object('bucket_type', fp_forecast_header::fp_bucket(), 'option_line_code', 'option_line_value', $$class_second->bucket_type, '', '', 1, $readonly); ?></td>
+           <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'medium', '', 1); ?></td>
+           <td><?php echo $f->select_field_from_object('bucket_type', fp_forecast_header::fp_bucket(), 'option_line_code', 'option_line_value', $$class_second->bucket_type, '', 'medium', 1, $readonly); ?></td>
            <td><?php echo $f->date_fieldFromToday('start_date', $$class_second->start_date); ?></td>
            <td><?php echo $f->date_fieldFromToday('end_date', $$class_second->end_date); ?></td>
            <td><?php $f->text_field_wid2s('no_of_bucket'); ?></td>
@@ -149,15 +146,15 @@
           ?>         
           <tr class="fp_forecast_line<?php echo $count ?>">
            <td><?php $f->seq_field_d($count); ?></td>
-           <td><?php echo $f->number_field('current', $$class_second->current, '', '', '', '', 1); ?></td>
+           <td><?php echo $f->number_field('current', $$class_second->current, '', '', 'always_readonly'); ?></td>
            <td><?php echo $f->number_field('original', $$class_second->original); ?></td>
-           <td><?php echo $f->number_field('total_current', $$class_second->total_current, '', '', '', '', 1); ?></td>
-           <td><?php echo $f->number_field('total_original', $$class_second->total_original, '', '', '', '', 1); ?></td>
+           <td><?php echo $f->number_field('total_current', $$class_second->total_current, '', '', 'always_readonly'); ?></td>
+           <td><?php echo $f->number_field('total_original', $$class_second->total_original, '', '', 'always_readonly'); ?></td>
            <td><?php
             $link_fd = HOME_URL . "search.php?fp_forecast_line_id[]=%3D{$$class_second->fp_forecast_line_id}&search_order_by[]=fp_forecast_line_date_id&search_asc_desc[]=desc&per_page[]=10&search_class_name=fp_forecast_line_date_v&submit_search=Search";
             echo '<a target="_blank" window_type="popup" class=\'button\' href="' . $link_fd . '">Date Specific</a>';
             ?></td>
-           <td><?php $f->text_field_d2r('fp_consumption_id'); ?></td>
+           <td><?php $f->text_field_d2r('fp_consumption_id', 'always_readonly'); ?></td>
           </tr>
           <?php
           $fp_forecast_line_object_ai->next();

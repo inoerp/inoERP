@@ -10,20 +10,20 @@
  */
 
 /**
- * ar_transaction_adjustment 
+ * ar_revenue_schedule 
  *
  */
-class ar_transaction_adjustment extends dbObject {
+class ar_revenue_schedule extends dbObject {
 
- public static $table_name = "ar_transaction_adjustment";
- public static $primary_column = "ar_transaction_adjustment_id";
+ public static $table_name = "ar_revenue_schedule";
+ public static $primary_column = "ar_revenue_schedule_id";
  public static $key_column = 'ar_transaction_line_id';
  public static $parent_primary_column = "ar_transaction_header_id";
  public static $module = "ar";
  public static $system_info = [
-  'name' => 'Transaction Adjustments',
+  'name' => 'Revenue Schedule',
   'number' => '2605',
-  'description' => 'Transaction Adjustments',
+  'description' => 'Revenue Schedule',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
@@ -31,31 +31,27 @@ class ar_transaction_adjustment extends dbObject {
   'module_name' => 'ar',
   'weight' => 5
  ];
- public static $gl_journal_category = "AR_ADJUSTMENT";
+ public static $gl_journal_category = "AR_INVOICE";
  public static $adjustment_type_a = [
   'ADJ' => 'Adjustment'
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'ar_transaction_adjustment_id',
+  'revenue_schedule_id',
   'ar_transaction_header_id',
-  'ar_receivable_activity_id',
-  'adjustment_amount',
-  'gl_adjustment_amount',
-  'exchange_rate',
-  'adjustment_quantity',
-  'description',
-  'adjustment_date',
-  'adjustment_ac_id',
   'ar_transaction_line_id',
-  'reason',
+  'gl_date',
+  'amount',
+  'percentage',
+  'description',
+  'account_class',
+  'gl_ac_id',
   'status',
-  'line_source',
   'reference_type',
   'reference_key_name',
   'reference_key_value',
-  'period_id',
   'gl_journal_header_id',
+  'gl_journal_line_id',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -64,7 +60,7 @@ class ar_transaction_adjustment extends dbObject {
 //variables used for showing data
  public $initial_search = [
   'ar_transaction_header_id',
-  'ar_receivable_activity_id',
+  'description',
  ];
  public $fields_inForm_notInDataBase = [
   'transaction_number',
@@ -92,9 +88,8 @@ class ar_transaction_adjustment extends dbObject {
  ];
  public $requiredField = [
   'ar_transaction_header_id',
-  'ar_receivable_activity_id',
-  'adjustment_amount',
-  'adjustment_ac_id',
+  'gl_date',
+  'amount',
   'ar_transaction_line_id',
  ];
  public $profile_default = [
@@ -104,48 +99,26 @@ class ar_transaction_adjustment extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = "Transaction Adjustments"; //page Title
- public $ar_transaction_adjustment_id;
+ public $pageTitle = "Revenue Schedule"; //page Title
+ public $revenue_schedule_id;
  public $ar_transaction_header_id;
- public $ar_receivable_activity_id;
- public $adjustment_amount;
- public $adjustment_quantity;
- public $exchange_rate;
- public $gl_adjustment_amount;
- public $description;
- public $adjustment_date;
- public $adjustment_ac_id;
  public $ar_transaction_line_id;
- public $reason;
+ public $gl_date;
+ public $amount;
+ public $percentage;
+ public $description;
+ public $account_class;
  public $status;
- public $line_source;
  public $reference_type;
  public $reference_key_name;
  public $reference_key_value;
- public $period_id;
  public $gl_journal_header_id;
+ public $gl_journal_line_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
- public $transaction_number;
- public $line_number;
- public $transaction_status;
- public $adjustment_type;
- public $inv_line_price;
- public $transaction_type;
- public $transaction_class;
- public $inv_unit_price;
- public $document_owner;
- public $trnx_description;
- public $currency;
- public $doc_currency;
- public $exchange_rate_type;
- public $trnx_exchange_rate;
- public $document_date;
- public $document_number;
- public $ledger_id;
- public $trnx_period_id;
+ public $gl_ac_id;
 
  private function _save_journal_header($ar_trnx_h) {
   $gjh = new gl_journal_header;
@@ -166,13 +139,13 @@ class ar_transaction_adjustment extends dbObject {
   $gjh->journal_category = self::$gl_journal_category;
   $gjh->reference_type = 'table';
   $gjh->reference_key_name = self::$table_name;
-  $gjh->reference_key_value = $this->ar_transaction_adjustment_id;
+  $gjh->reference_key_value = $this->ar_revenue_schedule_id;
   $gjh->journal_name = $gjh->journal_category . '-' . $gjh->reference_key_value;
   $gjh->description = $gjh->journal_name . '-' . current_time();
   $gjh->balance_type = 'A';
   $gjh->save();
   $this->gl_journal_header_id = $gjh->gl_journal_header_id;
-  $this->update($this->ar_transaction_adjustment_id);
+  $this->update($this->ar_revenue_schedule_id);
   echo "<br> The New Journal Header Id is " . $this->gl_journal_header_id;
   return $gjh->gl_journal_header_id;
  }
@@ -194,10 +167,10 @@ class ar_transaction_adjustment extends dbObject {
    $new_gjl->total_ac_cr = $this->gl_adjustment_amount;
    $new_gjl->code_combination_id = $this->adjustment_ac_id;
   }
-  $new_gjl->description = 'AR Transaction Adjustment ' . $this->ar_transaction_adjustment_id;
+  $new_gjl->description = 'AR Transaction Adjustment ' . $this->ar_revenue_schedule_id;
   $new_gjl->reference_type = 'table';
-  $new_gjl->reference_key_name = 'ar_transaction_adjustment_id';
-  $new_gjl->reference_key_value = $this->ar_transaction_adjustment_id;
+  $new_gjl->reference_key_name = 'ar_revenue_schedule_id';
+  $new_gjl->reference_key_value = $this->ar_revenue_schedule_id;
   $new_gjl->save();
 
 //create2nd line
@@ -215,17 +188,17 @@ class ar_transaction_adjustment extends dbObject {
    $new_gjl2->total_ac_dr = $this->gl_adjustment_amount;
    $new_gjl2->code_combination_id = $ar_trnx_h->receivable_ac_id;
   }
-  $new_gjl2->description = 'AR Transaction Adjustment ' . $this->ar_transaction_adjustment_id;
+  $new_gjl2->description = 'AR Transaction Adjustment ' . $this->ar_revenue_schedule_id;
   $new_gjl2->reference_type = 'table';
-  $new_gjl2->reference_key_name = 'ar_transaction_adjustment_id';
-  $new_gjl2->reference_key_value = $this->ar_transaction_adjustment_id;
+  $new_gjl2->reference_key_name = 'ar_revenue_schedule_id';
+  $new_gjl2->reference_key_value = $this->ar_revenue_schedule_id;
   $new_gjl2->save();
  }
 
  public function _after_save() {
   global $dbc;
 //create journals
-  if (!empty($this->ar_transaction_adjustment_id) && empty($this->gl_journal_header_id)) {
+  if (!empty($this->ar_revenue_schedule_id) && empty($this->gl_journal_header_id)) {
    $ar_trnx_h = new ar_transaction_header();
    $ar_trnx_h->findBy_id($this->ar_transaction_header_id);
    try {
@@ -283,18 +256,15 @@ class ar_transaction_adjustment extends dbObject {
   }
  }
 
- 
-  public static function total_adjustmentAmount_by_transactionHeaderId($ar_transaction_header_id) {
-   $sql = " SELECT SUM(adjustment_amount) as adjustment_amount FROM ";
-   $sql .= self::$table_name;
-   $sql .= " WHERE ar_transaction_header_id = '{$ar_transaction_header_id}' ";
-   
-   $result_a = self::find_by_sql($sql);
+ public static function total_adjustmentAmount_by_transactionHeaderId($ar_transaction_header_id) {
+  $sql = " SELECT SUM(adjustment_amount) as adjustment_amount FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE ar_transaction_header_id = '{$ar_transaction_header_id}' ";
+
+  $result_a = self::find_by_sql($sql);
   return !empty($result_a) ? $result_a[0]->adjustment_amount : '0.00';
-   
-   
  }
- 
+
 }
 
 //end of resource class

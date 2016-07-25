@@ -39,7 +39,7 @@ if (count($po_detail_object) == 0) {
        </tr>
       </thead>
       <tbody class="form_data_detail_tbody">
-       <?php
+       <?php 
        $detailCount = 0;
        foreach ($po_detail_object as $po_detail) {
         $class_third = 'po_detail';
@@ -57,8 +57,8 @@ if (count($po_detail_object) == 0) {
          <td><?php echo $f->number_field('shipment_number', $$class_third->shipment_number, '', '', 'detail_number', 1); ?></td>
          <td><?php $f->text_field_wid3('ship_to_location_id'); ?></td>
          <td><?php echo $f->number_field('quantity', $$class_third->quantity, '', '', 'allow_change'); ?></td>
-         <td><?php echo $f->date_field('need_by_date', ($$class_third->need_by_date), '', '', 'dateFromToday copyValue', 1); ?></td>
-         <td><?php echo $f->date_field('promise_date', ($$class_third->promise_date), '', '', 'dateFromToday copyValue'); ?></td>
+         <td><?php echo $f->date_fieldFromToday('need_by_date', ($$class_third->need_by_date)); ?></td>
+         <td><?php echo $f->date_fieldFromToday('promise_date', ($$class_third->promise_date)); ?></td>
         </tr>
         <?php
         $detailCount++;
