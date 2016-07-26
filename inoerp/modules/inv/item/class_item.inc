@@ -695,10 +695,11 @@ class item extends dbObject {
  }
 
  private function _update_item_minmax() {
-  if (empty($this->item_id)) {
-   echo "<br>No Item Id found";
+  if (empty($this->item_id_m) || empty($this->org_id)) {
+   echo "<br>Item id or org id is missing";
    return;
   }
+//  pa($this);
   echo "<br>acutal minmax_min_quantity" . $this->minmax_min_quantity;
   if (!empty($this->overwrite_minmax_min_quantity)) {
    $this->minmax_min_quantity = $this->overwrite_minmax_min_quantity;
@@ -712,9 +713,16 @@ class item extends dbObject {
   if (!empty($this->overwrite_minmax_multibin_size)) {
    $this->minmax_multibin_size = $this->overwrite_minmax_multibin_size;
   }
-  echo "<br>ovwer written minmax_min_quantity" . $this->minmax_min_quantity;
+  echo "<br>over written minmax_min_quantity" . $this->minmax_min_quantity;
   $item_n = new item();
-  $item_n->findBy_id($this->item_id);
+  $item_n->org_id = $this->org_id;
+  $item_n->item_id_m = $this->item_id_m;
+  $item_n_j = $item_n->findBy_orgId_itemIdM();
+  foreach($item_n->field_a as $k => $v ){
+   if(property_exists($item_n_j, $v)){
+    $item_n->$v = $item_n_j->$v;
+   }
+  }
   switch ($item_n->rounding_option) {
    case 'ROUND_UP' :
     $this->multibin_minmax_quantity = ceil($this->multibin_minmax_quantity);
@@ -757,10 +765,10 @@ class item extends dbObject {
    $item_n->minmax_multibin_number = 0;
    $item_n->minmax_multibin_size = 0;
   }
-  $item_n->audit_trial();
   try {
    $item_n->save();
-   echo "<br>Update of Min Max numbers for " . $item_n->item_number . ' is Successfullyupdated ';
+//   pa($item_n);
+   echo "<br>Update of Min Max numbers for " . $item_n->item_number . ' is Successfully completed ';
   } catch (Exception $e) {
    echo "<br>Update of Min Max numbers for " . $item_n->item_number . ' is failed!' . $e->getMessage();
   }
@@ -796,13 +804,14 @@ class item extends dbObject {
     $mms->item_id = $item_id;
     $mms_i = $mms->findBy_planId_itemId();
     $mm_item = new item();
+    $mm_item->org_id = $org_id;
     foreach ($mms->field_a as $key => $value) {
      if (property_exists($mm_item, $value)) {
       $mm_item->$value = $mms_i->$value;
      }
     }
     $mm_item->_update_item_minmax();
-    $this->message .= "<br/> Min Max Item Update is Successfullyupdated for item_id - " . $item_id .
+    $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " .  $mm_item->item_id_m  . ' & org_id '. $mm_item->org_id.
      ' min max header id : ' . $fp_minmax_header_id;
    } catch (Exception $e) {
     $this->message .= "<br/> Min Max Item Updat fialed for Item id " . $item_id . $e->getMessage();
@@ -824,6 +833,7 @@ class item extends dbObject {
     $mms->item_id = $item_record->item_id;
     $mms_i = $mms->findBy_planId_itemId();
     $mm_item = new item();
+    $mm_item->org_id = $org_id;
     foreach ($mms->field_a as $key => $value) {
      if (property_exists($mm_item, $value)) {
       $mm_item->$value = $mms_i->$value;
@@ -831,10 +841,10 @@ class item extends dbObject {
     }
     try {
      $mm_item->_update_item_minmax();
-     $this->message .= "<br>Min Max Item Attributes is Successfullyupdated for item_id - " . $mms->plan_id .
+     $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " .  $mm_item->item_id_m  . ' & org_id '. $mm_item->org_id.
       ' fp_minmax_header_id : ' . $fp_minmax_header_id;
     } catch (Exception $e) {
-     $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
+     $this->message .= "<br>Min Max Plannerp failed for Item id " .  $mm_item->item_id_m . $e->getMessage();
     }
    }
    return $this->message;
@@ -854,6 +864,7 @@ class item extends dbObject {
     $mms->item_id = $item_record->item_id;
     $mms_i = $mms->findBy_planId_itemId();
     $mm_item = new item();
+    $mm_item->org_id = $org_id;
     foreach ($mms->field_a as $key => $value) {
      if (property_exists($mm_item, $value)) {
       $mm_item->$value = $mms_i->$value;
@@ -861,10 +872,10 @@ class item extends dbObject {
     }
     try {
      $mm_item->_update_item_minmax();
-     $this->message .= "<br>Min Max Item Attributes is Successfullyupdated for item_id - " . $mms->plan_id .
+     $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " .  $mm_item->item_id_m  . ' & org_id '. $mm_item->org_id.
       ' fp_minmax_header_id : ' . $fp_minmax_header_id;
     } catch (Exception $e) {
-     $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
+     $this->message .= "<br>Min Max Plannerp failed for Item id " .  $mm_item->item_id_m . $e->getMessage();
     }
    }
    return $this->message;
@@ -875,6 +886,7 @@ class item extends dbObject {
   $mms_all = $mms->findBy_planId();
   foreach ($mms_all as $mms_records) {
    $mm_item = new item();
+   $mm_item->org_id = $org_id;
    foreach ($mms->field_a as $key => $value) {
     if (property_exists($mm_item, $value)) {
      $mm_item->$value = $mms_records->$value;
@@ -882,10 +894,10 @@ class item extends dbObject {
    }
    try {
     $mm_item->_update_item_minmax();
-    $this->message .= "<br>Min Max Item Attributes is Successfullyupdated for item_id - " . $mms_records->item_id .
+    $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " .  $mm_item->item_id_m  . ' & org_id '. $mm_item->org_id.
      ' fp_minmax_header_id : ' . $mms->plan_id;
    } catch (Exception $e) {
-    $this->message .= "<br>Min Max Plannerp failed for Item id " . $mms_records->item_id . $e->getMessage();
+    $this->message .= "<br>Min Max Plannerp failed for Item id " .  $mm_item->item_id_m . $e->getMessage();
    }
   }
   return $this->message;

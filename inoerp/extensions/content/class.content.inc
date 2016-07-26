@@ -82,7 +82,7 @@ class content extends dbObject {
   "subject",
   'content_type_id'
  ];
- public $pageTitle = " Simple & Effective Enterprise Management System ";
+ public $pageTitle = " Content ";
  public $search = [
   '_update_path' => 'content.php?window_type=form&class_name=content',
   '_show_update_path' => 1,

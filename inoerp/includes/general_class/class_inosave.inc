@@ -97,7 +97,7 @@ class inosave extends dbObject {
    if (!empty($$class->fields_inForm_notInDataBase)) {
     foreach ($$class->fields_inForm_notInDataBase as $key => $value) {
      if (!empty($_POST[$value][$i])) {
-      $$class->$value = $_POST[$value][$i];
+      $$class->$value = trim($_POST[$value][$i]);
      } else {
       $$class->$value = NULL;
      }

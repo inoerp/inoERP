@@ -754,7 +754,7 @@ $("tr.new_object" + objectCount).find(enableUpdate_c).removeAttr("disabled","rea
  $('.lines_number:last').val(nextLineSeqNumber);
  $(".new_object" + objectCount).find(".date").each(function () {
   $(this).attr("id", "date" + dateCount);
-//	$(this).attr("class", "date");
+  $(this).removeClass('hasDatepicker');
   dateCount++;
  });
  if (typeof afterAddNewRow === 'function') {

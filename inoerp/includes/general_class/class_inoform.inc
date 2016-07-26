@@ -2256,7 +2256,7 @@ EOD;
   $element_extra_field =  '<label class="ino-checkbox switch">';
   $element_extra_field .= "<input type=\"checkbox\" name=\"$bracketName\"  class=\"checkBox $name $class_name \" id=\"$id\" 
                                value=\"1\"  $checked $readonly>";
-  $element_extra_field .=  '<div class="slider"><span class="on-color">ON</span><span class="off-color">OFF</span></div></label>';
+  $element_extra_field .=  '<div class="slider"><span class="on-color">Yes</span><span class="off-color">No</span></div></label>';
   return $element_extra_field;
  }
 
@@ -2272,7 +2272,7 @@ EOD;
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo '<label class="ino-checkbox switch">';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', $this->readonly);
-  echo '<div class="slider"><span class="on-color">ON</span><span class="off-color">OFF</span></div></label>';
+  echo '<div class="slider"><span class="on-color">Yes</span><span class="off-color">No</span></div></label>';
  }
 
  public function l_checkBox_field_dr($field_name) {
@@ -2280,7 +2280,7 @@ EOD;
   echo '<label class="switch">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo '<label class="ino-checkbox switch">';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', 1);
-  echo '<div class="slider"><span class="on-color">ON</span><span class="off-color">OFF</span></div></label>';
+  echo '<div class="slider"><span class="on-color">Yes</span><span class="off-color">No</span></div></label>';
  }
 
  public function checkBox_field_d($field_name) {

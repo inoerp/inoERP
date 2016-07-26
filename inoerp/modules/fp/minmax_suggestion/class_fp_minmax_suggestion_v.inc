@@ -7,6 +7,7 @@ public static $form_class_name = "fp_minmax_demand";
  public static $key_column = 'item_id_m';
  public static $module = "fp";
  public $field_a = [
+  'fp_minmax_header_id',
 		 'plan_name',
 		 'org_id',
 		 'planning_horizon_days',
@@ -123,6 +124,7 @@ public static $form_class_name = "fp_minmax_demand";
 		 'Item Id From' => 'search_item_id_m_from',
 		 'Item Id To' => 'search_item_id_m_to'
  ];
+ public $fp_minmax_header_id;
  public $item_id_m;
  public $item_number;
  public $total_demand;
@@ -163,9 +165,9 @@ public static $form_class_name = "fp_minmax_demand";
 	$sql = "
 CREATE OR REPLACE VIEW fp_minmax_suggestion_v
 (
-plan_name,org_id,planning_horizon_days,  org, item_id_m,item_number,
+fp_minmax_header_id, plan_name,org_id,planning_horizon_days,  org, item_id_m,item_number,
 total_demand, avg_daily_demand, saftey_stock_quantity, lead_time , saftey_stock_days,
- minimum_quantity, fix_days_supply, maximum_quantity, 
+ minmax_min_quantity, fix_days_supply, minmax_max_quantity, 
 multibin_fix_days_supply,minmax_multibin_number, minmax_multibin_size, multibin_minmax_quantity,
 forecast, forecast_description, 
  fp_minmax_demand_id, plan_id,  demand_item_id_m, toplevel_demand_item_id_m, demand_type, source, item_description, 
@@ -173,26 +175,31 @@ top_level_item_number , top_level_item_description, demand_item_number , demand_
 		 created_by, 		 creation_date, 		 last_update_by, 		 last_update_date
 )
 AS
- SELECT  mmh.plan_name, mmh.org_id, mmh.planning_horizon_days,  org.org, fmd.item_id_m,item.item_number,
+ SELECT  mmh.fp_minmax_header_id, mmh.plan_name, mmh.org_id, mmh.planning_horizon_days,  org.org, fmd.item_id_m,item.item_number,
  SUM(fmd.quantity) as total_demand,SUM(fmd.quantity)/mmh.planning_horizon_days as avg_daily_demand,
  item.saftey_stock_quantity, 
  (item.pre_processing_lt + item.post_processing_lt + item.processing_lt) as lead_time , item.saftey_stock_days,
+ 
  ((item.pre_processing_lt + item.post_processing_lt + item.processing_lt + IFNULL(item.saftey_stock_days,0)) * 
  (SUM(fmd.quantity)/mmh.planning_horizon_days)) + IFNULL(item.saftey_stock_quantity,0)  as minmax_min_quantity,
  item.fix_days_supply, 
+ 
  if(item.fix_days_supply * (SUM(fmd.quantity)/mmh.planning_horizon_days) > 
   ((item.pre_processing_lt + item.post_processing_lt + item.processing_lt + IFNULL(item.saftey_stock_days,0)) * 
  (SUM(fmd.quantity)/mmh.planning_horizon_days)) + IFNULL(item.saftey_stock_quantity,0) ,
  item.fix_days_supply * (SUM(fmd.quantity)/mmh.planning_horizon_days), 
-   ((item.pre_processing_lt + item.post_processing_lt + item.processing_lt + IFNULL(item.saftey_stock_days,0)) * 1.5 *
+    ((item.pre_processing_lt + item.post_processing_lt + item.processing_lt + IFNULL(item.saftey_stock_days,0)) * 1.5 *
  (SUM(fmd.quantity)/mmh.planning_horizon_days)) +IFNULL(item.saftey_stock_quantity,0)
  ) as minmax_max_quantity, 
+ 
  IFNULL(item.fix_days_supply, 30) as multibin_fix_days_supply, 
  CEIL((IFNULL((item.pre_processing_lt + item.post_processing_lt + item.processing_lt),0)/
   IFNULL(item.fix_days_supply, 30))) + 1 as minmax_multibin_number,
+  
 	( ((item.pre_processing_lt + item.post_processing_lt + item.processing_lt + IFNULL(item.saftey_stock_days,0)) * 
  (SUM(fmd.quantity)/mmh.planning_horizon_days)) + IFNULL(item.saftey_stock_quantity,0))/( CEIL((IFNULL((item.pre_processing_lt + item.post_processing_lt + item.processing_lt),0)/
   IFNULL(item.fix_days_supply, 30)))) as minmax_multibin_size,
+  
 		(((item.pre_processing_lt + item.post_processing_lt + item.processing_lt + IFNULL(item.saftey_stock_days,0)) * 
  (SUM(fmd.quantity)/mmh.planning_horizon_days)) + IFNULL(item.saftey_stock_quantity,0)) + 1 as multibin_minmax_quantity,
  fh.forecast,fh.description as forecast_description, 
@@ -208,8 +215,8 @@ AS
 	 LEFT JOIN fp_minmax_header mmh ON mmh.fp_minmax_header_id = fmd.plan_id
 	 LEFT JOIN fp_forecast_header fh ON fh.fp_forecast_header_id = fmd.source
 	 LEFT JOIN item ON item.item_id_m = fmd.item_id_m
-	 LEFT JOIN item item2 ON item2.item_id_m = fmd.toplevel_demand_item_id_m
-	 LEFT JOIN item item3 ON item3.item_id_m = fmd.demand_item_id_m
+	 LEFT JOIN item item2 ON item2.item_id_m = fmd.toplevel_demand_item_id_m AND item2.item_id_m = item2.item_id
+	 LEFT JOIN item item3 ON item3.item_id_m = fmd.demand_item_id_m AND item3.item_id_m = item3.item_id
 	 LEFT JOIN org ON org.org_id = mmh.org_id
 	 GROUP BY fmd.item_id_m
 

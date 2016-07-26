@@ -543,16 +543,11 @@ ul.commentRecord li ul.line{
 }
 
 #pagination .selected, .pagination .selected{
- /* color: #FFF;
-  padding: 6px 14px;
-  margin-left: 10px;
-  background: rgba(69, 156, 104, 0.95);
-  margin-left: 8px;*/
- color: #3B3737;
- padding: 5px 10px;
+color: #3B3737;
+ padding: 7px 10px;
  margin-left: 10px;
  background: rgba(239, 239, 239, 0.9);
- margin-left: 8px;
+ margin-left: 1px;
  border: 1px solid #ccc;
 }
 

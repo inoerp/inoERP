@@ -4024,27 +4024,30 @@ $(document).ready(function () {
   if ($(this).val()) {
    var newSearchCriteria = $(this).val();
    var newSearchCriteriaText = $(this).find('option:selected').prop('innerHTML');
+   var newSearchCriteriaText_label =  toUpperCase($(this).find('option:selected').prop('innerHTML').replace(/_/g,' '));
    var newSearchCriteriaName = newSearchCriteria + '[]';
    var elementToBeCloned = $('.text_search').first().closest('li');
-   var elementClass = $('.text_search').first().prop('class');
-   var elementName = $('.text_search').first().prop('name');
+   var elementClass = $('.text_search').first().attr('class');
+   var elementName = $('.text_search').first().attr('name');
    var elementLabelClass = '.label_' + elementName;
    elementLabelClass = elementLabelClass.replace('[', '');
    elementLabelClass = elementLabelClass.replace(']', '');
    var clonedElement = elementToBeCloned.clone();
-//  $('label[for="' + newSearchCriteria + '"]').text(newSearchCriteriaText);
-   clonedElement.find('label').prop('textContent', newSearchCriteriaText);
-   clonedElement.find('label').text(newSearchCriteriaText);
+   
+   
+   clonedElement.find('label').prop('textContent', newSearchCriteriaText_label);
+   clonedElement.find('label').text(newSearchCriteriaText_label);
+   clonedElement.children().removeAttr('id');
    clonedElement.children().removeClass(elementClass);
    clonedElement.children().addClass(newSearchCriteria);
    clonedElement.children().prop('name', newSearchCriteriaName);
-
+   
    clonedElement.find("input").each(function () {
     $(this).val("");
    });
 //	 clonedElement.appendTo($(this).closest("ul"));
    clonedElement.insertBefore($(this).closest("li"));
-   $(elementLabelClass + ':last').text(newSearchCriteria);
+//   $(elementLabelClass + ':last').text(newSearchCriteria);
   }
  });
 
