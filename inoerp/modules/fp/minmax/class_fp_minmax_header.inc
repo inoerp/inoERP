@@ -116,6 +116,7 @@ class fp_minmax_header extends dbObject {
  public $planning_method;
  public $order_quantity;
  public $total_order_quantity;
+ private $_created_supply_details = [];
 
  public function prepare_minmax_demand_calculator($fp_minmax_header_id) {
 	$mmd = new fp_minmax_demand();
@@ -293,7 +294,7 @@ class fp_minmax_header extends dbObject {
 	}
  }
 
- private function _get_minmax_attributes($item_id_m) {
+ private function _get_minmax_attributes($item_id_m, $org_id) {
 	global $db;
 	$sql = "
 				 SELECT item.item_number, item.item_description, item.planning_method, item.make_buy, item.uom_id,
@@ -336,29 +337,30 @@ class fp_minmax_header extends dbObject {
 				 LEFT JOIN item ON item.item_id_m = open_po_req_o.item_id_m
 				 LEFT JOIN org_v ON org_v.org_id = item.org_id
 				 LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = item.item_id_m
-				 WHERE item.item_id_m = :item_id_m 
+				 WHERE item.item_id_m = :item_id_m AND item.org_id = :org_id
 				 AND cic.bom_cost_type = 'FROZEN';
 				 LIMIT 1 
 ";
 
-	$param_a = ['item_id_m'];
-	$value_a = [ 'item_id_m' => $item_id_m];
-	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	
+	$value_a = [ 'item_id_m' => $item_id_m, 'org_id' => $org_id];
+	$result = $db->findBysql($sql, $value_a);
 	return !empty($result) ? array_pop($result) : false;
 //insert into requisition interface
  }
 
- private function _create_supply_for_minmax($item_id_m) {
+ private function _create_supply_for_minmax($item_id_m, $org_id) {
 	if (isset($all_attributes)) {
 	 unset($all_attributes);
 	}
-	$all_attributes = $this->_get_minmax_attributes($item_id_m);
+	$all_attributes = $this->_get_minmax_attributes($item_id_m, $org_id);
 	if (!$all_attributes) {
 	 return;
 	}
 	$all_attributes->total_order_quantity = null;
 	if ($all_attributes->total_supply > $all_attributes->minmax_min_quantity) {
 	 $all_attributes->order_quantity = null;
+   $this->message .= ' : Not creating any supply for '  . $all_attributes->item_number  . ' as existing supply '. $all_attributes->total_supply . ' is more than the min size ' . $all_attributes->minmax_min_quantity;
 	 return $all_attributes;
 	}
 
@@ -379,12 +381,15 @@ class fp_minmax_header extends dbObject {
 		$all_attributes->order_quantity +=!empty($reminder) ? ($all_attributes->fix_lot_multiplier - $reminder) : 0;
 	 }
 	 $all_attributes->total_order_quantity = $all_attributes->order_quantity;
-	 if ($all_attributes->make_buy == 'Buy') {
+	 if ($all_attributes->make_buy == 'BUY') {
 		//cretae requisition
 		$this->_cretae_requistion($all_attributes);
-	 } else if ($all_attributes->make_buy == 'Make') {
+    $this->message .= 'Requisition, item_number : '  . $all_attributes->item_number  . ' total_order_quantity : '. $all_attributes->total_order_quantity;
+    
+	 } else if ($all_attributes->make_buy == 'MAKE') {
 		//cretae Work Order
 		$this->_cretae_wo($all_attributes);
+    $this->message .= 'Work Order, item_number : '  . $all_attributes->item_number  . ' total_order_quantity : '. $all_attributes->total_order_quantity;
 	 }
 	 return $all_attributes;
 	} // for multi min max
@@ -415,14 +420,16 @@ class fp_minmax_header extends dbObject {
 		$no_of_orders = 0;
 	 }
   $all_attributes->total_order_quantity = $no_of_orders * $all_attributes->order_quantity;
-	 if ($all_attributes->make_buy == 'Buy') {
+	 if ($all_attributes->make_buy == 'BUY') {
 		//cretae requisition
+    $this->message .= 'Requisition, item_number : '  . $all_attributes->item_number  . ' total_order_quantity : '. $all_attributes->total_order_quantity;
 		while ($no_of_orders > 0) {
 		 $this->_cretae_requistion($all_attributes);
 		 $no_of_orders--;
 		}
-	 } else if ($all_attributes->make_buy == 'Make') {
+	 } else if ($all_attributes->make_buy == 'MAKE') {
 		//cretae Work Order
+    $this->message .= 'Work Order, item_number : '  . $all_attributes->item_number  . ' total_order_quantity : '. $all_attributes->total_order_quantity;
 		while ($no_of_orders > 0) {
 		 $this->_cretae_wo($all_attributes);
 		 $no_of_orders--;
@@ -455,7 +462,6 @@ class fp_minmax_header extends dbObject {
 		$unit_price = !empty($obj->purchase_price) ? $obj->purchase_price : $obj->standard_cost;
 		$po_req_interface->unit_price = !empty($unit_price) ? $unit_price : '0.01';
 		$po_req_interface->need_by_date = date('Y-m-d', strtotime("$obj->leadtime days"));
-		$po_req_interface->audit_trial();
 		$po_req_interface->save();
 	 }
 	 return;
@@ -473,7 +479,6 @@ class fp_minmax_header extends dbObject {
 	$unit_price = !empty($obj->purchase_price) ? $obj->purchase_price : $obj->standard_cost;
 	$po_req_interface->unit_price = !empty($unit_price) ? $unit_price : '0.01';
 	$po_req_interface->need_by_date = date('Y-m-d', strtotime("$obj->leadtime days"));
-	$po_req_interface->audit_trial();
 	$po_req_interface->save();
  }
 
@@ -516,9 +521,9 @@ class fp_minmax_header extends dbObject {
 	 $this->message .= "<br/>Using Min Max program by Item Id ";
 	 $item_id_m = $parameters['item_id_m'][0];
 	 try {
-		$op = $this->_create_supply_for_minmax($item_id_m);
+		$op = $this->_create_supply_for_minmax($item_id_m, $org_id);
 		array_push($output_a, $op);
-		$this->message .= "<br/> Min Max Planner is Successfullyupdated for item_id_m - " . $item_id_m;
+		$this->message .= "<br/> Min Max Planner is successfully completed for item_id_m - " . $item_id_m;
 	 } catch (Exception $e) {
 		$this->message .= "<br/> Min Max Planner fialed for Item id " . $item_id_m . $e->getMessage();
 	 }
@@ -537,9 +542,9 @@ class fp_minmax_header extends dbObject {
 	 $item_range = $item->findBy_itemIdRange($from_item_id_m, $to_item_id_m);
 	 foreach ($item_range as $items) {
 		try {
-		 $op = $this->_create_supply_for_minmax($items->item_id_m);
+		 $op = $this->_create_supply_for_minmax($items->item_id_m, $org_id);
 		 array_push($output_a, $op);
-		 $this->message .= "<br>Min Max Program is Successfullyupdated for item_id_m - " . $items->item_id_m;
+		 $this->message .= "<br>Min Max Program is Successfully completed for item_id_m - " . $items->item_id_m;
 		} catch (Exception $e) {
 		 $this->message .= "<br>Min Max Program failed for Item id " . $items->item_id_m . $e->getMessage();
 		}
@@ -559,9 +564,9 @@ class fp_minmax_header extends dbObject {
 
 	 foreach ($item_range as $items) {
 		try {
-		 $op = $this->_create_supply_for_minmax($items->item_id_m);
+		 $op = $this->_create_supply_for_minmax($items->item_id_m, $org_id);
 		 array_push($output_a, $op);
-		 $this->message .= "<br>Min Max Planner is Successfullyupdated for item_id_m - " . $items->item_id_m;
+		 $this->message .= "<br>Min Max Program is Successfully completed for item_id_m - " . $items->item_id_m;
 		} catch (Exception $e) {
 		 $this->message .= "<br>Min Max Program failed for Item id " . $items->item_id_m . $e->getMessage();
 		}
@@ -575,15 +580,16 @@ class fp_minmax_header extends dbObject {
 	$this->message .= "<br/>Using  Min Max Planner for All Items ";
 	foreach ($item_i as $items) {
 	 try {
-		$op = $this->_create_supply_for_minmax($items->item_id_m);
+		$op = $this->_create_supply_for_minmax($items->item_id_m, $org_id);
 		if (!empty($op)) {
 		 array_push($output_a, $op);
 		}
-		$this->message .= "<br>Min Max Program is Successfullyupdated for item_id_m - " . $items->item_id_m;
+		$this->message .= "<br>Min Max Program is Successfully completed for item_id_m - " . $items->item_id_m;
 	 } catch (Exception $e) {
 		$this->message .= "<br>Min Max Plannerp failed for Item id " . $items->item_id_m . $e->getMessage();
 	 }
 	}
+  
 
 	$return_array = [$this->message, $output_a];
 

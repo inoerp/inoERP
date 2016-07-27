@@ -7,6 +7,7 @@
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
      <li><a href="#tabsHeader-2"><?php echo gettext('Attachments') ?></a></li>
      <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ?></a></li>
+     <li><a href="#tabsHeader-4"><?php echo gettext('Actions') ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -20,25 +21,9 @@
         <li><label><?php echo gettext('Period') ?></label><?php echo $period_stmt; ?> </li>
         <li><?php $f->l_text_field_dm('description'); ?></li>
         <li><?php $f->l_select_field_from_array('status', fa_depreciation_header::$status_a, $$class->status, 'status', '', 1, 1, 1); ?> </li>
-        <li><?php $f->l_text_field_dr('gl_journal_header_id' , 'always_readonly'); ?></li>
-        <li class="action_btn"><label></label>
-         <div class="btn-group row">
-          <button type="button" class="btn btn-primary">
-           <span  aria-hidden="true"></span><i class='fa fa-tasks'></i><?php echo gettext('Actions') ?></button>
-          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-           <span class="caret"></span>
-           <span class="sr-only">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-           <li><a href="<?php echo HOME_URL; ?>program.php?class_name=fa_depreciation_header&program_name=prg_run_depreciation">
-             <?php echo gettext('Run Depreciation') ?></a></li>
-           <!--<li><a href="#"><?php // echo gettext('Confirm Depreciation')?></a></li>-->
-           <li><a id="post_depreciation" href="#"><?php echo gettext('Post Depreciation')?></a></li>
-           <li><?php echo $f->hidden_field_withId('action', '') ?></li>
-          </ul>
-         </div>
-        </li>
+        <li><?php $f->l_text_field_dr('gl_journal_header_id', 'always_readonly'); ?></li>
        </ul>
+
       </div>
      </div>
      <div id="tabsHeader-2" class="tabContent">
@@ -60,6 +45,24 @@
         </div>
        </div>
       </div>
+     </div>
+     <div id="tabsHeader-4" class="tabContent">
+      <div class="col-sm-offset-1">      <div class="btn-group row">
+        <button type="button" class="btn btn-primary">
+         <span  aria-hidden="true"></span><i class='fa fa-tasks'></i> <?php echo gettext('Actions') ?></button>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+         <span class="caret"></span>
+         <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+         <li><a href="<?php echo HOME_URL; ?>program.php?class_name=fa_depreciation_header&program_name=prg_run_depreciation">
+           <?php echo gettext('Run Depreciation') ?></a></li>
+         <!--<li><a href="#"><?php // echo gettext('Confirm Depreciation')  ?></a></li>-->
+         <li><a id="post_depreciation" href="#"><?php echo gettext('Post Depreciation') ?></a></li>
+         <li><?php echo $f->hidden_field_withId('action', '') ?></li>
+        </ul>
+       </div></div>
+
      </div>
     </div>
    </div>

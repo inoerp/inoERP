@@ -94,7 +94,7 @@
   </form>
  </div>
  <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Requisition Lines & Shipments') ?></span>
-  <form method="po_requisitionst" id="po_requisition_site"  name="po_requisition_line">
+  <form method="post" id="po_requisition_site"  name="po_requisition_line">
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>

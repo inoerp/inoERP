@@ -83,7 +83,7 @@
        <?php if ($show_header_links) { ?>
         <div class="social-icons">
          <span class="hidden-sm hidden-md hidden-lg"><a class="fa fa-navicon clickable right_navicon" href="#"></a><div id="navbar-collapse-right" class="hidden"><j class="fa fa-close ino-close-right-navbar clickable white-font-link" title="close navigation"></j><?php  echo $menu_line->show_menu_list(1);    ?></div></span>
-         <span><a class="fa fa-dashboard clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"></a></span>
+         <span><a class="fa fa-dashboard clickable erp_dashborad" href="<?php echo HOME_URL ;?>form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"></a></span>
         </div><!-- end social icons -->
        <?php } ?>
 

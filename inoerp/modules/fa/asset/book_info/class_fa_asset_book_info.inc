@@ -37,9 +37,7 @@ class fa_asset_book_info extends dbObject {
  public $account = [
   "default_ac_id"
  ];
- public $checkbox = [
-  "depriciation_cb"
- ];
+
  public $field_a = [
   'fa_asset_book_info_id',
   'fa_asset_book_id',
@@ -54,11 +52,12 @@ class fa_asset_book_info extends dbObject {
   'salvage_value_percentage',
   'fa_depreciation_method_id',
   'life_months',
-  'depriciation_cb',
+  'depreciation_cb',
+  'activated_cb',
   'date_in_service',
-  'depriciation_start_date',
-  'depriciation_limit_amount',
-  'depriciation_limit_percentage',
+  'depreciation_start_date',
+  'depreciation_limit_amount',
+  'depreciation_limit_percentage',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -68,8 +67,8 @@ class fa_asset_book_info extends dbObject {
   'fa_asset_book_info_id',
  ];
  public $numberField = [
-  'depriciation_limit_amount',
-  'depriciation_limit_percentage',
+  'deprecation_limit_amount',
+  'depreciation_limit_percentage',
   'salvage_value_amount',
   'salvage_value_percentage',
   'original_cost',
@@ -109,11 +108,12 @@ class fa_asset_book_info extends dbObject {
  public $salvage_value_percentage;
  public $fa_depreciation_method_id;
  public $life_months;
- public $depriciation_cb;
+ public $activated_cb;
+ public $depreciation_cb;
  public $date_in_service;
- public $depriciation_start_date;
- public $depriciation_limit_amount;
- public $depriciation_limit_percentage;
+ public $depreciation_start_date;
+ public $depreciation_limit_amount;
+ public $depreciation_limit_percentage;
  public $created_by;
  public $creation_date;
  public $last_update_by;

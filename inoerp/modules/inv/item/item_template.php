@@ -330,7 +330,7 @@
     <div id="tabsLine-5" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field"> 
-       <li><?php $f->l_select_field_from_object('make_buy', item::manufacturing_item_types(), 'option_line_code', 'option_line_code', $item->make_buy, 'make_buy', '', 1, $readonly); ?>       </li>
+       <li><?php $f->l_select_field_from_object('make_buy', item::manufacturing_item_types(), 'option_line_code', 'option_line_value', $item->make_buy, 'make_buy', '', 1, $readonly); ?>       </li>
        <li><?php $f->l_checkBox_field_d('bom_enabled_cb'); ?></li>
        <li><?php $f->l_select_field_from_object('bom_type', item::bom_types(), 'option_line_code', 'option_line_value', $$class->bom_type, 'bom_type'); ?>       </li>
        <li><?php $f->l_checkBox_field_d('build_in_wip_cb'); ?></li>

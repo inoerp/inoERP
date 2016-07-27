@@ -918,11 +918,10 @@ class item extends dbObject {
   global $db;
   $sql = "SELECT * FROM " . self::$table_name;
   $sql .= " WHERE org_id = :org_id ";
-  $sql .= " AND planning_method = 'MULTI_MINMAX' OR planning_method = 'MINMAX' ";
-  $param_a = ['org_id'];
+  $sql .= " AND ( planning_method = 'MULTI_MINMAX' || planning_method = 'MINMAX' )";
   $org_id_i = !empty($org_id) ? $org_id : $this->org_id;
   $value_a = ['org_id' => $org_id_i];
-  $result = $db->findBy_sql($sql, $param_a, $value_a);
+  $result = $db->findBysql($sql, $value_a);
   return !(empty($result)) ? $result : false;
  }
 

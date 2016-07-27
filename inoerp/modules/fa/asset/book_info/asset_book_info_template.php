@@ -36,11 +36,11 @@
      <ul class="column header_field">
       <li><?php $f->l_select_field_from_object('fa_depreciation_method_id', fa_depreciation_method::find_all(), 'fa_depreciation_method_id', 'depreciation_method', $$class->fa_depreciation_method_id, 'fa_depreciation_method_id', '', 1, $readonly1); ?></li>
       <li><?php $f->l_number_field_d('life_months'); ?></li>
-      <li><?php $f->l_checkBox_field_d('depriciation_cb'); ?></li>
+      <li><?php $f->l_checkBox_field_d('depreciation_cb'); ?></li>
       <li><?php $f->l_date_fieldAnyDay('date_in_service', $$class->date_in_service); ?></li>
-      <li><?php $f->l_date_fieldAnyDay('depriciation_start_date', $$class->depriciation_start_date); ?></li>
-      <li><?php $f->l_number_field('depriciation_limit_amount', $$class->depriciation_limit_amount); ?></li>
-      <li><?php $f->l_number_field('depriciation_limit_percentage', $$class->depriciation_limit_percentage); ?></li>
+      <li><?php $f->l_date_fieldAnyDay('depreciation_start_date', $$class->depreciation_start_date); ?></li>
+      <li><?php $f->l_number_field('depreciation_limit_amount', $$class->depreciation_limit_amount); ?></li>
+      <li><?php $f->l_number_field('depreciation_limit_percentage', $$class->depreciation_limit_percentage); ?></li>
      </ul>
     </div>
     <div id="tabsHeader-3" class="tabContent">
@@ -71,12 +71,11 @@
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Class Controls') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <div class="first_rowset"> 
-      <ul class="column header_field"> 
+      <ul class="column header_field two_column_form form_header_l"> 
        <li><?php $f->l_number_field_d('current_cost'); ?></li>
        <li><?php $f->l_number_field_dr('original_cost' , 'always_readonly'); ?></li>
        <li><?php $f->l_number_field_dr('ytd_depreciation' ,'always_readonly'); ?></li>
@@ -88,10 +87,6 @@
       </ul>
      </div>
     </div> 
-    <!--end of tab6 (planning)...start of lead times-->
-    <div id="tabsLine-2" class="tabContent">
-
-    </div>
    </div>
   </div>
  </div> 

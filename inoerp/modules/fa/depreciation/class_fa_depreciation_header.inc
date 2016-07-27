@@ -307,7 +307,6 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
  }
 
  private function _create_depreciation_lines() {
-  echo '<br> in  line ' . __LINE__;
   $fa_dh = new fa_depreciation_header();
   $fa_dh->findBy_id($this->fa_depreciation_header_id);
 
@@ -321,6 +320,9 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
   }
 
   foreach ($fa_ast_book_info_i as $asset_r) {
+   if(empty($asset_r->depriciation_cb)){
+    echo '<br>FA Asset Id ' . $asset_r->fafa_asset_id . ' is not available for depreciation';
+   }
    $fa_dprn_line = new fa_depreciation_line();
 
    $fa_dprn_line->fa_depreciation_header_id = $this->fa_depreciation_header_id;

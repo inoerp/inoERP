@@ -76,10 +76,12 @@
            echo ino_inline_action($$class_second->fp_source_list_line_id, array('fp_source_list_header_id' => $$class->fp_source_list_header_id));
            ?>
           </td>
-          <td><?php form::text_field_wid2sr('fp_source_list_line_id'); ?></td>
-          <td><?php echo $f->select_field_from_object('source_list_line_type', fp_source_list_line::source_list_line_type(), 'option_line_code', 'option_line_value', $$class_second->source_list_line_type, '', '', 1, $readonly); ?></td>
-          <td><?php echo $f->select_field_from_object('source_list_id', fp_forecast_header::find_all(), 'fp_forecast_header_id', 'forecast', $$class_second->source_list_id, '', '', 1, $readonly); ?></td>
-          <td><?php form::text_field_wid2('description'); ?></td>
+          <td><?php echo $f->text_field_wid2r('fp_source_list_line_id' ,'always_readonly'); ?></td>
+          <td><?php // echo $f->select_field_from_object('source_list_line_type', fp_source_list_line::source_list_line_type(), 'option_line_code', 'option_line_value', $$class_second->source_list_line_type, '', 'medium', 1, $readonly); 
+          echo $f->select_field_from_array('source_list_line_type', ['FORECAST_ENTRY' => 'Forecast Entries'], $$class_second->source_list_line_type, '', 'large', 1);
+          ?></td>
+          <td><?php echo $f->select_field_from_object('source_list_id', fp_forecast_header::find_all(), 'fp_forecast_header_id', 'forecast', $$class_second->source_list_id, '', 'medium', 1, $readonly); ?></td>
+          <td><?php echo $f->text_field_wid2('description', 'xlarge'); ?></td>
          </tr>
          <?php
          $count = $count + 1;

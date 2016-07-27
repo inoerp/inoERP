@@ -1,10 +1,10 @@
 <div id="fp_planning_control_divId">
  <span class="heading"><?php echo gettext('Planning Control Header') ?></span>
- <form action=""  method="post" id="fp_planning_control"  name="fp_planning_control">
+ <form method="post" id="fp_planning_control"  name="fp_planning_control">
   <div class="tabContainer">
    <ul class="column header_field">
     <?php echo form::hidden_field('fp_planning_control_id', $$class->fp_planning_control_id); ?>
-    <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>
+    <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', 'action medium', 1, $readonly1); ?>
      <a name="show" href="form.php?class_name=fp_planning_control&<?php echo "mode=$mode"; ?>" class="show document_id fp_planning_control_id">
       <i class="fa fa-refresh"></i></a> 
     </li>
@@ -14,12 +14,12 @@
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Planning Info') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Future') ?></a></li>
+     
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div> 
-       <ul class="column header_field"> 
+       <ul class="column header_field two_column_form form_header_l"> 
         <li><?php $f->l_select_field_from_object('auto_consumed_group_id', fp_forecast_group::find_all(), 'fp_forecast_group_id', 'forecast_group', $$class->auto_consumed_group_id, 'forecast_group_id', '', '', $readonly) ?>  </li>
         <li><?php $f->l_number_field_d('auto_consumed_frwd_days') ?> </li>
         <li><?php $f->l_number_field_d('auto_consumed_backwd_days') ?> </li>
@@ -30,11 +30,7 @@
       </div> 
       <!--end of tab1 div three_column-->
      </div> 
-     <!--              end of tab1-->
 
-     <div id="tabsLine-2"  class="tabContent">
-
-     </div>
     </div>
 
    </div> 

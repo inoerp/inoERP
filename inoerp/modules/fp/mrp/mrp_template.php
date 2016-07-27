@@ -10,7 +10,7 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-       <ul class="column header_field"> 
+       <ul class="column header_field two_column_form"> 
         <li><?php $f->l_text_field_dr_withSearch('fp_mrp_header_id', $$class->fp_mrp_header_id, '10', '', '', 'System number', 'fp_mrp_header_id', $readonly); ?>
          <a name="show" href="form.php?class_name=fp_mrp_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_mrp_header_id">
           <i class="fa fa-refresh"></i></a> 
@@ -34,8 +34,8 @@
         </div>
         <div id ="display_comment_form">
          <?php
-         $reference_table = 'org';
-         $reference_id = $$class->org_id;
+         $reference_table = 'fp_mrp_header_id';
+         $reference_id = $$class->fp_mrp_header_id;
          ?>
         </div>
         <div id="new_comment">

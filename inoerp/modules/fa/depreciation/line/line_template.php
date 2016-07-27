@@ -1,25 +1,24 @@
 <div id ="form_line" class="form_line"><span class="heading">Depreciation Lines </span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1">Asset & Amounts</a></li>
-   <li><a href="#tabsLine-2">Future</a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Asset & Amounts') ?></a></li>
   </ul>
   <div class="tabContainer"> 
-   <form action=""  method="post" id="fa_depreciation_line_line"  name="fa_depreciation_line_line">
+   <form  method="post" id="fa_depreciation_line_line"  name="fa_depreciation_line_line">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Line Id</th>
-        <th>Asset</th>
-        <th>Dprn Amount</th>
-        <th>Unscheduled Amt</th>
-        <th>Total Dprn</th>
-        <th>Account</th>
-        <th>Cost Before Dprn</th>
-        <th>NBV Before Dprn</th>
-        <th>Salvage</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Asset') ?></th>
+        <th><?php echo gettext('Dprn Amount') ?></th>
+        <th><?php echo gettext('Unscheduled Amt') ?></th>
+        <th><?php echo gettext('Total Dprn') ?></th>
+        <th><?php echo gettext('Account') ?></th>
+        <th><?php echo gettext('Cost Before Dprn') ?></th>
+        <th><?php echo gettext('NBV Before Dprn') ?></th>
+        <th><?php echo gettext('Salvage') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody fa_depreciation_line_values" >
@@ -41,8 +40,8 @@
         <tr class="fa_depreciation_line<?php echo $count ?>">
          <td>    
           <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+           <li class="add_row_img"><i class="fa fa-plus-circle"></i></li>
+           <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($fa_depreciation_line->fa_depreciation_line_id); ?>"></li>           
            <li><?php echo form::hidden_field('fa_depreciation_header_id', $$class->fa_depreciation_header_id); ?></li>
           </ul>
@@ -70,9 +69,6 @@
        ?>
       </tbody>
      </table>
-    </div>
-    <div id="tabsLine-2" class="tabContent">
-
     </div>
    </form>
   </div>
