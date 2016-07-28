@@ -2262,7 +2262,7 @@ EOD;
 
  public function l_checkBox_field($name, $value, $id = "", $class_name = "", $readonly = "") {
   global $class, $$class;
-  echo '<label class="switch">' . gettext(ucwords(str_replace('_', ' ', $name))) . ' </label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . ' </label>';
   echo $this->checkBox_field($name, $value, $id, $class_name, $readonly);
   echo '<div class="slider"><span class="on-color">ON</span><span class="off-color">OFF</span></div></label>';
  }
@@ -2277,7 +2277,7 @@ EOD;
 
  public function l_checkBox_field_dr($field_name) {
   global $class, $$class;
-  echo '<label class="switch">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo '<label class="ino-checkbox switch">';
   echo $this->checkBox_field($field_name, $$class->$field_name, $field_name, '', 1);
   echo '<div class="slider"><span class="on-color">Yes</span><span class="off-color">No</span></div></label>';

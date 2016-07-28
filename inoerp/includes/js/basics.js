@@ -4744,6 +4744,18 @@ $(document).ready(function () {
   getFormDetails(formUrl);
   history.pushState(null, null, urlLink);
  }).one();
+ 
+  $('body').on('click', 'a.show3', function (e) {
+  e.preventDefault();
+  var urlLink = $(this).attr('href');
+  var urlLink_a = urlLink.split('?');
+  var formUrl = 'includes/json/json_form.php?' + urlLink_a[1] ;
+  $(this).closest('li').find(':input').each(function(k, v){
+   formUrl += '&' +$(this).attr('name').replace(/\[]+/g, '') + '=';
+   formUrl += $(this).val() ;
+  });
+  getFormDetails(formUrl);
+ }).one();
 
  $('body').on('click', '.ajax_content a', function (e) {
   if ($(this).hasClass('non_ajax')) {

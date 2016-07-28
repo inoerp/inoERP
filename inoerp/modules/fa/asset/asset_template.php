@@ -1,5 +1,5 @@
 <div id="form_all">
- <form action=""  method="post" id="fa_asset"  name="fa_asset">
+ <form method="post" id="fa_asset"  name="fa_asset">
   <span class="heading"><?php echo gettext('Fixed Asset Details') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
@@ -62,7 +62,7 @@
    </div>
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading">Asset Line Details </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Asset Line Details') ?></span>
 
    <div id="tabsLine">
     <ul class="tabMain">
@@ -110,18 +110,18 @@
            echo ino_inline_action($fa_asset_assignment->fa_asset_assignment_id, array('fa_asset_id' => $$class->fa_asset_id));
            ?>
           </td>
-          <td><?php form::number_field_wid2sr('fa_asset_assignment_id'); ?></td>
+          <td><?php form::number_field_wid2sr('fa_asset_assignment_id', 'always_readonly'); ?></td>
           <td><?php echo $f->number_field('units', $$class_second->units, '', '', 'line_units'); ?></td>
           <td><?php
           echo $f->val_field('employee_name', $$class_second->employee_name, '', '', 'vf_select_member_employee_name', '', '', 'hr_employee_v', 'employee_name');
           echo $f->hidden_field('hr_employee_id', $$class_second->hr_employee_id);
            ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></td>
-          <td><?php $f->ac_field_d2m('expense_ac_id'); ?></td>
+          <td><?php $f->ac_field_d2m('expense_ac_id' , 'xlarge'); ?></td>
           <td><?php
           echo $f->val_field('address_name', $$class_second->address_name, '', '', 'vf_select_address_name', '', '', 'address', 'address_name');
           echo $f->hidden_field('address_id', $$class_second->address_id);
            ?><i class="generic g_select_address select_popup clickable fa fa-search" data-class_name="address"></i></td>
-          <td><?php $f->text_field_wid2('description'); ?></td>
+          <td><?php $f->text_field_wid2('description' ,'xlarge'); ?></td>
          </tr>
          <?php
          $fa_asset_assignment_object_ai->next();

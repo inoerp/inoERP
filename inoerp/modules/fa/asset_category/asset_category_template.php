@@ -49,13 +49,13 @@
   </div>
  </form>
 </div>
-<span class="heading"><?php echo gettext('Asset Book Category Association') ?></span>
-<div id ="form_line" class="form_line">
- <form action=""  method="post" id="fa_book_category_association"  name="fa_book_category_association">
-  <div class="line_before_tab"> 
-   <ul class="column five_column inline_list"> 
-    <li><?php $f->l_select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name', $$class_second->fa_asset_book_id, 'fa_asset_book_id' ,'action'); ?>
-     <a name="show2" href="form.php?class_name=fa_asset_category&<?php echo "mode=$mode"; ?>" class="show2 document_id fa_book_category_association_id">
+
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Asset Book Category Association') ?></span>
+ <form  method="post" id="fa_book_category_association"  name="fa_book_category_association">
+  <div id="line_before_tab" class="ino-well"> 
+   <ul class="column header_field "> 
+    <li><?php $f->l_select_field_from_object('fa_asset_book_id', fa_asset_book::find_all(), 'fa_asset_book_id', 'asset_book_name', $$class_second->fa_asset_book_id, 'fa_asset_book_id' ,'action medium' ); ?>
+     <a name="show1" href="form.php?class_name=fa_asset_category&<?php echo "mode=$mode"; ?>" class="show1 document_id fa_book_category_association_id">
       <i class="fa fa-refresh"></i></a> 
     </li> 
     <li class="hidden"><?php echo form::hidden_field('fa_asset_category_id', $$class->fa_asset_category_id); ?>
@@ -70,7 +70,7 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
-     <ul class="column header_field"> 
+     <ul class="column header_field two_column_form"> 
       <li><label><?php echo gettext('Cost Ac') ?></label><?php $f->ac_field_d2m('asset_cost_ac_id'); ?></li>
       <li><label><?php echo gettext('Clearing Ac') ?></label><?php $f->ac_field_d2m('asset_clearing_ac_id'); ?></li>
       <li><label><?php echo gettext('CIP Cost Ac') ?></label><?php $f->ac_field_d2m('cip_cost_ac_id'); ?></li>
@@ -79,7 +79,7 @@
     </div> 
     <!--end of tab1-->
     <div id="tabsLine-2" class="tabContent">
-     <ul class="column five_column"> 
+     <ul class="column header_field two_column_form"> 
       <li><label><?php echo gettext('Depreciation Expense') ?></label><?php $f->ac_field_d2m('depreciation_expense_ac_id'); ?></li>
       <li><label><?php echo gettext('Accumulated Depreciation') ?></label><?php $f->ac_field_d2m('accumulated_depreciation_ac_id'); ?></li>
       <li><label><?php echo gettext('Bonus Expense') ?></label><?php $f->ac_field_d2('bonus_expense_ac_id'); ?></li>

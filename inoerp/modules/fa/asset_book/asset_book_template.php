@@ -1,4 +1,4 @@
-<form action=""  method="post" id="fa_asset_book"  name="fa_asset_book">
+<form  method="post" id="fa_asset_book"  name="fa_asset_book">
  <span class="heading"><?php echo gettext('Asset Book') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
@@ -46,7 +46,7 @@
   </div>
  </div>
 
- <div id ="form_line" class="form_line"><span class="heading"> Asset Book Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Asset Book Details') ?> </span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Class Controls') ?></a></li>
@@ -55,7 +55,7 @@
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <div class="first_rowset"> 
-      <ul class="column four_column"> 
+      <ul class="column header_field form_header_l two_column_form"> 
        <li><?php $f->l_checkBox_field_d('revalue_accum_depriciation_cb'); ?></li> 
        <li><?php $f->l_checkBox_field_d('retire_revaluation_reserve_cb'); ?></li> 
        <li><?php $f->l_checkBox_field_d('revalue_ytd_depriciation_cb'); ?></li> 
@@ -66,7 +66,7 @@
     </div> 
     <!--end of tab6 (planning)...start of lead times-->
     <div id="tabsLine-2" class="tabContent">
-     <ul class="column three_column">
+     <ul class="column header_field form_header_l two_column_form">
       <li><?php $f->l_ac_field_d('default_ac_id');   ?></li>
       <li><?php $f->l_select_field_from_object('sale_proceeds_gain_id', sys_value_group_line::find_by_parent_id('4'), 'sys_value_group_line_id', array('code', 'description'), $$class->sale_proceeds_gain_id, 'sale_proceeds_gain_id', 'medium'); ?> </li>
       <li><?php $f->l_select_field_from_object('sale_proceeds_loss_id', sys_value_group_line::find_by_parent_id('4'), 'sys_value_group_line_id', array('code', 'description'), $$class->sale_proceeds_loss_id, 'sale_proceeds_loss_id', 'medium'); ?>      </li>

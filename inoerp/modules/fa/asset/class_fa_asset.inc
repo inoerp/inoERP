@@ -88,6 +88,7 @@ class fa_asset extends dbObject {
   'asset_serial_number',
   'asset_key_number',
   'asset_description',
+  'fa_asset_id'
  ];
  public $fields_inForm_notInDataBase = [
  ];
@@ -143,7 +144,7 @@ class fa_asset extends dbObject {
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = " SELECT   asset_number,
          type as asset_type, tag_number as asset_tag_number , serial_number as asset_serial_number,
-         key_number as asset_key_number , description as asset_description
+         key_number as asset_key_number , description as asset_description, fa_asset_id
             FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
   if (!empty($dependent_fields)) {
    foreach ($dependent_fields as $k => $v) {

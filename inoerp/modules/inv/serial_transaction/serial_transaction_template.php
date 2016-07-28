@@ -10,7 +10,7 @@
     <div class="large_shadow_box"> 
      <ul class="column header_field">
       <li><label><i class="inv_serial_transaction_header_id select_popup clickable fa fa-search "></i>
-        Serial Number Id : </label> <?php echo $f->text_field('inv_serial_number_id', $inv_serial_number_id_h, '', 'inv_serial_number_id') ?>
+        Serial Number Id</label> <?php echo $f->text_field('inv_serial_number_id', $inv_serial_number_id_h, '', 'inv_serial_number_id') ?>
        <a name="show" href="form.php?class_name=inv_serial_transaction_v&<?php echo "mode=$mode"; ?>" class="show document_id inv_serial_transaction_id">
         <i class='fa fa-refresh'></i></a> 
       </li>

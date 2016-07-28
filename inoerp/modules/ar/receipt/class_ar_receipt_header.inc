@@ -315,7 +315,6 @@ class ar_receipt_header extends dbObject {
   try {
    $this->findBy_id($ar_receipt_header_id);
    $this->receipt_status = 'CLOSED';
-   $this->audit_trial();
    $this->save();
    return 1;
   } catch (Exception $e) {
@@ -347,7 +346,6 @@ class ar_receipt_header extends dbObject {
    $ar_rh = new ar_receipt_header();
    $ar_rh->findBy_id($this->ar_receipt_header_id);
    $ar_rh->gl_journal_header_id = $gjh->gl_journal_header_id;
-   $ar_rh->audit_trial();
    $ar_rh->save();
   } catch (Exception $e) {
    echo "<br> Failed Saving Jounral Header" . $e->getMessage();

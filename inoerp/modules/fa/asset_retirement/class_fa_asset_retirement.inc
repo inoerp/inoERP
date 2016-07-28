@@ -233,8 +233,31 @@ class fa_asset_retirement extends dbObject implements gl_journal_int {
   }
 
   //4. Update the retirement
+  $this->_create_asset_transaction();
   $fa_ar->adjustment_amount = $retirement_adjust_amt;
   $fa_ar->save();
+ }
+
+ private function _create_asset_transaction() {
+  global $dbc;
+  $asset_trnx = new fa_asset_transaction();
+  $asset_trnx->fa_asset_id = $this->fa_asset_id;
+  $asset_trnx->fa_asset_book_id = $this->fa_asset_book_id;
+  $asset_trnx->reference_type = 'table';
+  $asset_trnx->reference_key_name = 'fa_asset_retirement';
+  $asset_trnx->reference_type = $this->fa_asset_retirement_id;
+  $asset_trnx->transaction_type = 'RET';
+  $asset_trnx->create_journal = false;
+  $asset_trnx->quantity = $this->retired_units;
+  $asset_trnx->amout = $this->retired_cost;
+  try {
+   $asset_trnx->_before_save();
+   $asset_trnx->save();
+   $asset_trnx->_after_save();
+  } catch (Exception $e) {
+   echo '<br>Failed to create asset transaction. Error @ fa_asset_retirement @@ ' . __LINE__ . ' <br> ' . $e->getMessage();
+   $dbc->rollback = true;
+  }
  }
 
  public function _after_save() {

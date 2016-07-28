@@ -37,7 +37,16 @@ class fa_asset_book_info extends dbObject {
  public $account = [
   "default_ac_id"
  ];
-
+ public static $action_a = [
+  '1' => 'Activate',
+  '2' => 'Activate WO GL Posting',
+  '3' => 'Set for Activation',
+ ];
+ public static $status_a = [
+  '1' => 'Entered',
+  '2' => 'Activated',
+  '3' => 'Set for Activation',
+ ];
  public $field_a = [
   'fa_asset_book_info_id',
   'fa_asset_book_id',
@@ -53,11 +62,12 @@ class fa_asset_book_info extends dbObject {
   'fa_depreciation_method_id',
   'life_months',
   'depreciation_cb',
-  'activated_cb',
+//  'activated_cb',
   'date_in_service',
   'depreciation_start_date',
   'depreciation_limit_amount',
   'depreciation_limit_percentage',
+  'status',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -87,7 +97,8 @@ class fa_asset_book_info extends dbObject {
   'asset_book_name',
   'current_cost',
   'recoverable_amount',
-  'recoverable_percentage'
+  'recoverable_percentage',
+  'action'
  ];
  public $search = [
   '_show_update_path' => 1,
@@ -109,6 +120,7 @@ class fa_asset_book_info extends dbObject {
  public $fa_depreciation_method_id;
  public $life_months;
  public $activated_cb;
+ public $status;
  public $depreciation_cb;
  public $date_in_service;
  public $depreciation_start_date;
@@ -122,6 +134,83 @@ class fa_asset_book_info extends dbObject {
  public $asset_number;
  public $recoverable_amount;
  public $recoverable_percentage;
+ public $action;
+
+ public function _before_save() {
+  if (empty($this->status)) {
+   $this->status = 1;
+  }
+ }
+
+ public function _after_save() {
+  if (!empty($this->action)) {
+   $this->_do_action();
+  }
+ }
+
+ private function _do_action() {
+  switch ($this->action) {
+   case 1:
+    $this->_activiate_assetBook();
+    break;
+
+   case 2:
+    $this->_activiate_assetBook_woPosting();
+    break;
+
+
+   case 3:
+    $this->_set_assetBook_forActivation();
+    break;
+  }
+ }
+
+ private function _activiate_assetBook() {
+  global $dbc;
+  if ($this->status == 1) {
+   $this->_create_asset_transaction(1);
+   $this->status = 2;
+   $this->save();
+  } else {
+   echo '<br>Asset is already activated. You can not reactivate it. ';
+   $dbc->rollback = true;
+  }
+ }
+
+ private function _activiate_assetBook_woPosting() {
+  $this->_create_asset_transaction();
+  $this->status = 2;
+  $this->save();
+ }
+
+ private function _set_assetBook_forActivation() {
+  $this->status = 3;
+  $this->save();
+ }
+
+ private function _create_asset_transaction($create_journal = false) {
+  global $dbc;
+  $asset_trnx = new fa_asset_transaction();
+  $asset_trnx->fa_asset_id = $this->fa_asset_id;
+  $asset_trnx->fa_asset_book_id = $this->fa_asset_book_id;
+  $asset_trnx->fa_asset_book_info_id = $this->fa_asset_book_info_id;
+  $asset_trnx->transaction_type = 'ADD';
+  $asset_trnx->reference_type = 'table';
+  $asset_trnx->reference_key_name = 'fa_asset_book_info';
+  $asset_trnx->reference_type = $this->fa_asset_book_info_id;
+  if ($create_journal) {
+   $asset_trnx->create_journal = 1;
+  }
+  $asset_trnx->amout = $this->current_cost;
+  try {
+   $asset_trnx->_before_save();
+   $asset_trnx->save();
+   $asset_trnx->_after_save();
+  } catch (Exception $e) {
+   echo '<br>Failed to create asset transaction. Error @ fa_asset_book_info @@ ' . __LINE__ . ' <br> ' . $e->getMessage();
+   $dbc->rollback = true;
+  }
+ }
 
  Public static function asset_book_info_type() {
   $option_header = option_header::find_by_name('FA_ASSET_CLASS_TYPE');
