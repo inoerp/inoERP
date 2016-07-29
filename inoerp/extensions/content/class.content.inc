@@ -180,8 +180,9 @@ class content extends dbObject {
     $content_field_array[] = $records->Field;
    }
    $$class->content_id = $this->content_id;
-   $checkSql = " SELECT * FROM $class WHERE content_id = $this->content_id LIMIT 1";
-   $checkResult = self::find_by_sql($checkSql);
+   $checkSql = " SELECT * FROM $class WHERE content_id = :content_id LIMIT 1";
+   $value_a = ['content_id' => $this->content_id];
+   $checkResult = self::find_by_sql_i($checkSql, $value_a);
    if (!empty($checkResult)) {
     $checkIfContentExists = true;
    } else {
@@ -758,15 +759,17 @@ AND content.content_id = category_reference.reference_id  ";
 
  public static function content_find_by_id($content_type_name, $content_id) {
   $table_name = 'c_' . $content_type_name;
-  $sql = " SELECT * FROM " . $table_name . " where content_id={$content_id} LIMIT 1";
-  $result = self::find_by_sql($sql);
+  $sql = " SELECT * FROM " . $table_name . " where content_id=:content_id LIMIT 1";
+  $value_a = ['content_id' => $content_id];
+  $result = self::find_by_sql_i($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function content_find_by_contentTypeConentId($content_type_name, $content_id) {
   $table_name = 'c_' . $content_type_name;
-  $sql = " SELECT * FROM " . $table_name . " where content_id={$content_id} LIMIT 1";
-  $result = self::find_by_sql($sql);
+  $sql = " SELECT * FROM " . $table_name . " where content_id=:content_id LIMIT 1";
+  $value_a = ['content_id' => $content_id];
+  $result = self::find_by_sql_i($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -782,8 +785,9 @@ AND content.content_id = category_reference.reference_id  ";
  }
 
  public static function find_childs_of_parent_id($parent_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where parent_id='{$parent_id}'";
-  $result = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where parent_id=:parent_id ";
+  $value_a = ['parent_id' => $parent_id];
+  $result = self::find_by_sql_i($sql, $value_a);
   return $result;
  }
 
@@ -792,9 +796,10 @@ AND content.content_id = category_reference.reference_id  ";
 //					implode(", ", $this->field_a);
   $sql = "SELECT * FROM "
    . self::$table_name . " 
-            where content_id={$content_id} LIMIT 1";
-  $result_array = self::find_by_sql($sql);
-  return !empty($result_array) ? array_shift($result_array) : false;
+            where content_id=:content_id LIMIT 1";
+  $value_a = ['content_id' => $content_id];
+  $result_array = self::find_by_sql_i($sql, $value_a);
+  return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public static function install() {
@@ -819,16 +824,16 @@ AND content.content_id = category_reference.reference_id  ";
   $sql .= " category_reference.category_reference_id, category_reference.major_category_id, 
 	        category_reference.category_id, category_reference.reference_type  ";
   $sql .= ' FROM content LEFT JOIN category_reference ON content.content_id = category_reference.reference_id ';
-  $sql .= " WHERE content.content_type_id = '{$content_type_id}' ";
-  $sql .= " AND category_reference.category_id = '{$category_id}' ";
+  $sql .= " WHERE content.content_type_id = :content_type_id ";
+  $sql .= " AND category_reference.category_id = :category_id ";
   $sql .= " AND category_reference.reference_table = 'content' ";
   $sql .= " ORDER BY content.content_id DESC ";
 
 
   $count_sql = " SELECT COUNT(content.content_id) ";
   $count_sql .= ' FROM content LEFT JOIN category_reference ON content.content_id = category_reference.reference_id ';
-  $count_sql .= " WHERE content.content_type_id = '{$content_type_id}' ";
-  $count_sql .= " AND category_reference.category_id = '{$category_id}' ";
+  $count_sql .= " WHERE content.content_type_id = :content_type_id ";
+  $count_sql .= " AND category_reference.category_id = :category_id ";
   $count_sql .= " AND category_reference.reference_table = 'content' ";
 
   $content_type_name = content_type::find_by_id($content_type_id)->content_type;
@@ -845,7 +850,8 @@ AND content.content_id = category_reference.reference_id  ";
    $sql .=" OFFSET {$pagination->offset()} ";
   }
 
-  $result = self::find_by_sql($sql);
+  $value_a = ['content_type_id' => $content_type_id, 'category_id' => $category_id];
+  $result = self::find_by_sql_i($sql, $value_a);
   if (count($result) > 0) {
    $content_string .='<table id="summary_list" class="top_margin10 form_line_data_table"><thead> 
 						 <tr>
@@ -926,10 +932,9 @@ AND content.content_id = category_reference.reference_id  ";
     if ($value != 'content_id' && !empty(trim($extra_content->$value))) {
      if ($value == 'content') {
       $content_statemnt .= ($extra_content->$value);
-     }else{
+     } else {
       $content_statemnt .= '<h2 class="extra_content ' . $field_label . ' ">' . $field_label . '</h2>' . ($extra_content->$value);
      }
-     
     }
    }
   }

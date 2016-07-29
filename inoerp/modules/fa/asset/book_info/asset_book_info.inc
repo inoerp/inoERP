@@ -23,6 +23,11 @@ if (!empty($$class->fa_asset_id)) {
  $$class->asset_number = fa_asset::find_by_id($$class->fa_asset_id)->asset_number;
 }
 
+if (!empty($$class->fa_asset_book_id) && !empty($$class->fa_asset_id)) {
+ $$class->accumulated_depreciation = fa_depreciation_header::find_depreciationSum_by_assetId_bookId($$class->fa_asset_id, $$class->fa_asset_book_id)->depreciation_amount;
+ $$class->ytd_depreciation = fa_depreciation_header::find_ytdDepreciation_by_assetId_bookId($$class->fa_asset_id, $$class->fa_asset_book_id)->depreciation_amount;
+}
+
 if (!empty($$class->current_cost)) {
  $slvg_amount = !empty($$class->salvage_value_amount) ? $$class->salvage_value_amount : 0;
  $$class->recoverable_amount = $$class->current_cost - $slvg_amount;

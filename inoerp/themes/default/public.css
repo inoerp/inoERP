@@ -1,4 +1,5 @@
 
+
 @media print{
  body, html {
   width: 1100px;
@@ -2352,7 +2353,8 @@ ul.single-column li{
  margin: 20px 20px 0px 0px;
  vertical-align: top;
  border: 2px solid #3E9CCA;
- width: 300px; 
+ min-width: 350px; 
+ min-height: 130px;
 }
 
 
@@ -2930,4 +2932,17 @@ input:checked + .slider:before {
 
 #erp_form_area  .login-form input, #erp_form_area  .login-form select{
         height: 33px !important;;
+}
+
+#comments{
+ padding: 0px 30px;
+}
+
+#path_by_module ul.list-line-ul{
+        float: left;
+        width: 350px;
+}
+
+#path_by_module ul.list-line-ul.second-level{
+        width:370px;
 }

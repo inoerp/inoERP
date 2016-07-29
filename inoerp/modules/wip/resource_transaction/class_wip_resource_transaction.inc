@@ -60,16 +60,7 @@ class wip_resource_transaction extends dbObject {
   'item_number',
   'item_id_m'
  ];
- public $column = [
-  'wip_resource_transaction_id',
-  'wip_wo_header_id',
-  'org_id',
-  'wo_number',
-  'item_number',
-  'item_id_m',
-  'transaction_date',
-  'transaction_quantity'
- ];
+
  public $account = [
   'scrap_account_id'
  ];

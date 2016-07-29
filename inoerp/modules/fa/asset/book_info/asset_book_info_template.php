@@ -78,14 +78,15 @@
  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Asset Book Information Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1"><?php echo gettext('Class Controls') ?></a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Book Values') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field two_column_form form_header_l"> 
-       <li><?php $f->l_number_field_d('current_cost'); ?></li>
        <li><?php $f->l_number_field_dr('original_cost', 'always_readonly'); ?></li>
+       <li><?php $f->l_number_field_dr('current_cost' , 'always_readonly'); ?></li>
+       <li><?php $f->l_number_field('new_current_cost' , ''); ?></li>
        <li><?php $f->l_number_field_dr('ytd_depreciation', 'always_readonly'); ?></li>
        <li><?php $f->l_number_field_dr('accumulated_depreciation', 'always_readonly'); ?></li>
        <li><?php $f->l_number_field_d('salvage_value_percentage'); ?></li>

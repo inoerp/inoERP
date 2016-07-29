@@ -80,6 +80,45 @@ class extn_report extends dbObject {
 //		 "path"
 // ];
 //variables used for showing data
+ 
+ public $column = [
+  'extn_report_id',
+  'report_name',
+  'description',
+  'custom_div_class',
+  'module_code',
+  'logical_settings',
+  'report_columns',
+  'display_type',
+  'page',
+  'page_title',
+  'page_header',
+  'page_footer',
+  'use_pager_cb',
+  'default_per_page',
+  'no_of_grid_columns',
+  'path',
+  'path_id',
+  'block_id',
+  'block_title',
+  'show_graph_only_cb',
+  'rev_enabled_cb',
+  'rev_number',
+  'header_text',
+  'footer_text',
+  'remove_default_header_cb',
+  'list_type',
+  'chart_type',
+  'chart_width',
+  'chart_height',
+  'chart_label',
+  'chart_value',
+  'chart_legend',
+  'created_by',
+  'creation_date',
+  'last_update_by',
+  'last_update_date',
+ ];
 
 
  public $initial_search = [

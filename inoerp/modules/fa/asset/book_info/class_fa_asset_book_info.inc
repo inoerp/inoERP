@@ -55,8 +55,6 @@ class fa_asset_book_info extends dbObject {
   'current_cost',
   'referece',
   'description',
-  'ytd_depreciation',
-  'accumulated_depreciation',
   'salvage_value_amount',
   'salvage_value_percentage',
   'fa_depreciation_method_id',
@@ -93,6 +91,9 @@ class fa_asset_book_info extends dbObject {
   'current_cost',
  ];
  public $fields_inForm_notInDataBase = [
+  'ytd_depreciation',
+  'new_current_cost',
+  'accumulated_depreciation',
   'asset_number',
   'asset_book_name',
   'current_cost',
@@ -122,6 +123,7 @@ class fa_asset_book_info extends dbObject {
  public $activated_cb;
  public $status;
  public $depreciation_cb;
+ public $new_current_cost;
  public $date_in_service;
  public $depreciation_start_date;
  public $depreciation_limit_amount;
@@ -137,18 +139,59 @@ class fa_asset_book_info extends dbObject {
  public $action;
 
  public function _before_save() {
+  if (!empty($this->action)) {
+   $this->_do_action();
+  }
+
   if (empty($this->status)) {
    $this->status = 1;
+  }
+
+
+  if (!empty($this->new_current_cost)) {
+   $this->_costChange_trnx();
+   $this->current_cost = $this->new_current_cost;
+  }
+ }
+
+ private function _costChange_trnx() {
+  global $dbc;
+  $asset_trnx = new fa_asset_transaction();
+  $asset_trnx->fa_asset_id = $this->fa_asset_id;
+  $asset_trnx->fa_asset_book_id = $this->fa_asset_book_id;
+  $asset_trnx->fa_asset_book_info_id = $this->fa_asset_book_info_id;
+  $asset_trnx->transaction_type = 'COST_ADJUST';
+  $asset_trnx->reference_type = 'table';
+  $asset_trnx->reference_key_name = 'fa_asset_book_info';
+  $asset_trnx->reference_type = $this->fa_asset_book_info_id;
+  $asset_trnx->create_journal = false;
+  $asset_trnx->amout = $this->current_cost;
+  try {
+   $asset_trnx->_before_save();
+   $asset_trnx->save();
+   $asset_trnx->_after_save();
+   echo '<br>Asset transaction is succesfully completed. Trnx id ' . $asset_trnx->fa_asset_transaction_id;
+  } catch (Exception $e) {
+   echo '<br>Failed to create asset transaction. Error @ fa_asset_book_info @@ ' . __LINE__ . ' <br> ' . $e->getMessage();
+   $dbc->rollback = true;
   }
  }
 
  public function _after_save() {
-  if (!empty($this->action)) {
-   $this->_do_action();
-  }
+  
  }
 
  private function _do_action() {
+  if (empty($this->fa_asset_book_info_id)) {
+   echo "<br>First save the record before taking any action";
+   return false;
+  }
+  $fa_asset_book_info_current = self::find_by_id($this->fa_asset_book_info_id);
+  if ($fa_asset_book_info_current->status == 2) {
+   echo "<br>Asset is already activated. You cant change status from action";
+   return false;
+  }
+
   switch ($this->action) {
    case 1:
     $this->_activiate_assetBook();

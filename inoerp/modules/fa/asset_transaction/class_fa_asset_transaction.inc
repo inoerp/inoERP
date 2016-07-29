@@ -8,11 +8,11 @@ class fa_asset_transaction extends dbObject {
  public static $key_column = "fa_asset_id";
  public static $module = "fa";
  public static $gl_journal_category_a = [
-  '1' => 'FA_ADITTION',
-  '2' => 'FA_RETIREMENT',
-  '3' => 'FA_ADJUSTMENT',
-  '4' => 'FA_TRANSFER',
-  '5' => 'FA_COST_ADJUSTMENT',
+  'ADD' => 'FA_ADITTION',
+  'RET' => 'FA_RETIREMENT',
+  'ADJUST' => 'FA_ADJUSTMENT',
+  'TRANSFER' => 'FA_TRANSFER',
+  'COST_ADJUST' => 'FA_COST_ADJUSTMENT',
  ];
  public static $system_info = [
   'name' => 'Asset  Transaction',

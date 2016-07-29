@@ -90,7 +90,6 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
 //  'Depreciation Id' => 'search_depreciation_id',
   'Asset Book' => 'search_asset_book',
   'Period' => 'search_depreciation_period'
-  
  ];
  public $prg_run_depreciation_details = [
   'name' => 'Run Depreciation',
@@ -320,7 +319,7 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
   }
 
   foreach ($fa_ast_book_info_i as $asset_r) {
-   if(empty($asset_r->depriciation_cb)){
+   if (empty($asset_r->depriciation_cb)) {
     echo '<br>FA Asset Id ' . $asset_r->fafa_asset_id . ' is not available for depreciation';
    }
    $fa_dprn_line = new fa_depreciation_line();
@@ -379,6 +378,118 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
 
    return $this->message;
   }
+ }
+
+ public static function find_depreciationSum_by_assetId_bookId($asset_id, $fa_asset_book_id) {
+  $sql = " SELECT
+ast.asset_number,  ast.description as asset_description,
+fab.asset_book_name, fab.bu_org_id, fab.type, fab.description,
+SUM(fdl.depreciation_amount) as depreciation_amount, SUM(fdl.unschedule_amount) as unschedule_amount, SUM(fdl.total_depreciation_amount) as total_depreciation_amount,  
+fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id 
+
+FROM
+fa_depreciation_line fdl,
+fa_depreciation_header fdh,
+fa_asset ast,
+fa_asset_book fab
+
+WHERE fdh.fa_depreciation_header_id = fdl.fa_depreciation_header_id
+AND ast.fa_asset_id = fdl.asset_id
+AND fab.fa_asset_book_id = fdh.fa_asset_book_id
+AND fdl.asset_id = :asset_id
+AND fdh.fa_asset_book_id = :fa_asset_book_id
+
+GROUP BY fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id , ast.asset_number,  ast.description, fab.asset_book_name, fab.bu_org_id, fab.type, fab.description ";
+  $value_a = ['asset_id' => $asset_id, 'fa_asset_book_id' => $fa_asset_book_id];
+  $result = self::find_by_sql_i($sql, $value_a);
+  return !empty($result) ? array_pop($result) : new fa_depreciation_line();
+ }
+
+ public static function find_ytdDepreciation_by_assetId_bookId($asset_id, $fa_asset_book_id) {
+  $sql = " SELECT
+ast.asset_number,  ast.description as asset_description,
+fab.asset_book_name, fab.bu_org_id, fab.type, fab.description,
+SUM(fdl.depreciation_amount) as depreciation_amount, SUM(fdl.unschedule_amount) as unschedule_amount, SUM(fdl.total_depreciation_amount) as total_depreciation_amount,  
+fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id, gc.year 
+
+FROM
+fa_depreciation_line fdl,
+fa_depreciation_header fdh,
+fa_asset ast,
+fa_asset_book fab,
+gl_period gp,
+gl_calendar gc
+
+WHERE fdh.fa_depreciation_header_id = fdl.fa_depreciation_header_id
+AND ast.fa_asset_id = fdl.asset_id
+AND fab.fa_asset_book_id = fdh.fa_asset_book_id
+AND gp.gl_period_id = fdh.gl_period_id
+AND gp.gl_calendar_id = gc.gl_calendar_id
+AND gc.year = YEAR(CURDATE())
+AND fdl.asset_id = :asset_id
+AND fdh.fa_asset_book_id = :fa_asset_book_id
+
+GROUP BY fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id , ast.asset_number,  ast.description, fab.asset_book_name, fab.bu_org_id, fab.type, fab.description, gc.year ";
+
+  $value_a = ['asset_id' => $asset_id, 'fa_asset_book_id' => $fa_asset_book_id];
+  $result = self::find_by_sql_i($sql, $value_a);
+  return !empty($result) ? array_pop($result) : new fa_depreciation_line();
+ }
+
+ public function report_queries() {
+  $report['ytd_depreciaition_sql'] = " SELECT
+ast.asset_number,  ast.description as asset_description,
+fab.asset_book_name, fab.bu_org_id, fab.type, fab.description, fabi.current_cost, fabi.original_cost, 
+SUM(fdl.depreciation_amount) as depreciation_amount, SUM(fdl.unschedule_amount) as unschedule_amount, SUM(fdl.total_depreciation_amount) as total_depreciation_amount,  
+fabi.life_months, fabi.depreciation_start_date,
+fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id , gc.year
+
+FROM
+fa_depreciation_line fdl,
+fa_depreciation_header fdh,
+fa_asset ast,
+fa_asset_book fab,
+fa_asset_book_info fabi,
+gl_period gp,
+gl_calendar gc
+
+WHERE fdh.fa_depreciation_header_id = fdl.fa_depreciation_header_id
+AND ast.fa_asset_id = fdl.asset_id
+AND fab.fa_asset_book_id = fdh.fa_asset_book_id
+AND fabi.fa_asset_book_id = fdh.fa_asset_book_id
+AND fabi.fa_asset_id = fdl.asset_id
+AND gp.gl_period_id = fdh.gl_period_id
+AND gp.gl_calendar_id = gc.gl_calendar_id
+AND gc.year = YEAR(CURDATE())
+
+GROUP BY fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id , ast.asset_number,  ast.description, fab.asset_book_name, fab.bu_org_id, fab.type, fab.description,
+fabi.current_cost, fabi.original_cost,fabi.life_months, fabi.depreciation_start_date ";
+  
+    $report['accumulated_depreciaition_sql'] = " SELECT
+ast.asset_number,  ast.description as asset_description,
+fab.asset_book_name, fab.bu_org_id, fab.type, fab.description, fabi.current_cost, fabi.original_cost, 
+SUM(fdl.depreciation_amount) as depreciation_amount, SUM(fdl.unschedule_amount) as unschedule_amount, SUM(fdl.total_depreciation_amount) as total_depreciation_amount,  
+fabi.life_months, fabi.depreciation_start_date,
+fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id 
+
+FROM
+fa_depreciation_line fdl,
+fa_depreciation_header fdh,
+fa_asset ast,
+fa_asset_book fab,
+fa_asset_book_info fabi
+
+WHERE fdh.fa_depreciation_header_id = fdl.fa_depreciation_header_id
+AND ast.fa_asset_id = fdl.asset_id
+AND fab.fa_asset_book_id = fdh.fa_asset_book_id
+AND fabi.fa_asset_book_id = fdh.fa_asset_book_id
+AND fabi.fa_asset_id = fdl.asset_id
+
+
+GROUP BY fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id , ast.asset_number,  ast.description, fab.asset_book_name, fab.bu_org_id, fab.type, fab.description,
+fabi.current_cost, fabi.original_cost,fabi.life_months, fabi.depreciation_start_date ";
+    
+    return $report;
  }
 
 }

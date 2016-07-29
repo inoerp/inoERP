@@ -60,7 +60,7 @@
        <thead> 
         <tr>
          <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('PeriodId') ?>#</th>
+         <th><?php echo gettext('Period Id') ?>#</th>
          <th><?php echo gettext('Period Name') ?></th>
          <th><?php echo gettext('Status') ?>#</th>
          <th><?php echo gettext('Year') ?></th>

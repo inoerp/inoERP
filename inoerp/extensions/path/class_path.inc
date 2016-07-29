@@ -74,11 +74,9 @@ class path extends dbObject {
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
- 
-  public $option_lists = [
+ public $option_lists = [
   'module_code' => 'SYS_MODULE'
  ];
-  
  public $path_id;
  public $parent_id;
  public $name;
@@ -163,7 +161,7 @@ class path extends dbObject {
 //  $sql .= " WHERE path_id IN ($path_ids_s)";
 //  return $this->findBySql(findBy_pathIds);
 // }
- 
+
  public function findBy_pathIds($path_ids_array) {
   $path_ids_s = join(',', $path_ids_array);
   $sql = " SELECT * from path , engine ";
@@ -560,14 +558,19 @@ class path extends dbObject {
   return $allPaths;
  }
 
- private function _indented_pathMenu_Child($path_id, &$allowed_path_ids, &$allPaths) {
+ private function _indented_pathMenu_Child($path_id, &$allowed_path_ids, &$allPaths, &$list_count = 0) {
   $path = new path();
+  
   $all_child = $path->findAll_childOfPartent($path_id);
   if (empty($all_child)) {
    return;
   }
   $allPaths .= '<ul class="list-line-ul">';
-  foreach ($all_child as $child_paths) {
+  foreach ($all_child as  $child_paths) {
+   if ($list_count % 3 == 0 && $list_count != 0) {
+    $allPaths .= '</ul><ul class="list-line-ul second-level">';
+   }
+   $list_count++;
    $key = array_search($child_paths->path_id, $allowed_path_ids);
    $fa_icon = ino_icon($child_paths->path_type);
    if ($key) {
@@ -575,7 +578,7 @@ class path extends dbObject {
     $path_name = gettext($child_paths->name);
     $path_description = gettext($child_paths->description);
     $allPaths .= "<li title=\"$path_description\" class='expandable {$path->name} '>&nbsp;&nbsp;" . '<a href="' . $url . '">' . $fa_icon . '&nbsp;' . $path_name . '</a>';
-    $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
+    $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths, $list_count);
     $allPaths .= '</li>';
     unset($allowed_path_ids[$key]);
    }
