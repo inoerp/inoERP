@@ -1,6 +1,6 @@
 <div id="extn_report_divId">
- <div id ="form_header"> <span class="heading"> Custom Report Builder  </span>
-  <form action=""  method="post" id="extn_report_header"  name="extn_report_header">
+ <div id ="form_header"> <span class="heading"><?php echo gettext('Custom Report Builder'); ?>  </span>
+  <form method="post" id="extn_report_header"  name="extn_report_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1">Basic Info</a></li>
@@ -24,7 +24,7 @@
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 
-       <ul class="column three_column">
+       <ul class="column header_field">
         <li><label>Path Id</label> <?php echo $f->text_field_dr('path_id'); ?></li>
         <li><label>Path Value</label><?php echo $f->text_field_dl('path'); ?></li>
         <li><label>View Report</label><a target='_blank' href="<?php echo HOME_URL . $$class->path; ?>"> Online </a></li>
@@ -48,7 +48,7 @@
      </div>
      <div id="tabsHeader-4" class="tabContent">
       <div> 
-       <ul class="column four_column">
+       <ul class="column header_field">
         <li><label>Columns in Grid</label> <?php echo $f->number_field('no_of_grid_columns', $$class->no_of_grid_columns, '', 'no_of_grid_columns', 'large'); ?></li>
         <li><label>Default Per Page</label> <?php echo $f->number_field('default_per_page', $$class->default_per_page, '', 'default_per_page', 'large'); ?></li>
         <li><label>List Type</label> 
@@ -60,7 +60,7 @@
          echo $f->hidden_field_withId('block_id', $$class->block_id);
          ?>
         </li>
-        <li><label>Show only graph in block : </label><?php echo $f->checkBox_field('show_graph_only_cb', $$class->show_graph_only_cb); ?></li>
+        <li><label>Show only graph in block</label><?php echo $f->checkBox_field('show_graph_only_cb', $$class->show_graph_only_cb); ?></li>
        </ul>
       </div>
      </div>
@@ -93,12 +93,12 @@
        <div id="basic_settings">
 
         <div> 
-         <ul class="column four_column">
-          <li><label>Chart Type : </label> 
+         <ul class="column header_field form_header_l">
+          <li><label>Chart Type</label> 
            <?php echo $f->select_field_from_array('chart_type', getsvgimage::$chart_type_a, $$class->chart_type, 'chart_type'); ?></li>
-          <li><label>Chart Width : </label><?php echo $f->number_field('chart_width', $$class->chart_width, '', 'chart_width'); ?></li>
-          <li><label>Chart Height : </label><?php echo $f->number_field('chart_height', $$class->chart_height, '', 'chart_height'); ?></li>
-          <li><label>Label Field : </label>
+          <li><label>Chart Width</label><?php echo $f->number_field('chart_width', $$class->chart_width, '', 'chart_width'); ?></li>
+          <li><label>Chart Height</label><?php echo $f->number_field('chart_height', $$class->chart_height, '', 'chart_height'); ?></li>
+          <li><label>Label Field</label>
            <?php
            if (!empty($column_list)) {
             echo $f->select_field_from_array('chart_label', $column_list, $$class->chart_label, 'chart_label');
@@ -107,7 +107,7 @@
            }
            ?>
           </li>
-          <li><label>Value Field : </label>
+          <li><label>Value Field</label>
            <?php
            if (!empty($column_list)) {
             echo $f->select_field_from_array('chart_value', $column_list, $$class->chart_value, 'chart_value');
@@ -116,12 +116,20 @@
            }
            ?>
           </li>
-          <li><label>Legend : </label>
+          <li><label>Legend</label>
            <?php
            if (!empty($column_list)) {
             echo $f->select_field_from_array('chart_legend', $column_list, $$class->chart_legend, 'chart_legend');
            } else {
             echo $f->text_field_dl('chart_legend', $$class->chart_legend);
+           }
+           ?></li>
+          <li><label>Legend 2</label>
+           <?php
+           if (!empty($column_list)) {
+            echo $f->select_field_from_array('chart_legend2', $column_list, $$class->chart_legend2, 'chart_legend2');
+           } else {
+            echo $f->text_field_dl('chart_legend2', $$class->chart_legend2);
            }
            ?></li>
          </ul>

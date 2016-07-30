@@ -36,7 +36,15 @@
         echo $f->text_field_dl('chart_legend', $$class->chart_legend);
        }
        ?></li>
-      <li><label>Graph</label><input type="button" value="Draw Chart" class="button display_result draw_svg_image" ></li>
+            <li><label>Legend 2</label>
+       <?php
+       if (!empty($column_list)) {
+        echo $f->select_field_from_array('chart_legend2', $column_list, $$class->chart_legend2, 'chart_legend2', 'medium');
+       } else {
+        echo $f->text_field_dl('chart_legend2', $$class->chart_legend2);
+       }
+       ?></li>
+      <li><label></label><input type="button" role="button" value="Draw Chart" class="btn btn-sm btn-success display_result draw_svg_image" ></li>
      </ul>
     </div>
    </div>

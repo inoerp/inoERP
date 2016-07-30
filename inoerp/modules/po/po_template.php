@@ -227,8 +227,8 @@ inoERP
           <td><?php echo $f->number_field('line_price', $$class_second->line_price); ?></td>
           <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_inTax_by_bu_org_id($$class->bu_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'input_tax medium', '', $readonly, '', '', '', 'percentage') ?></td>
           <td><?php form::number_field_wid2('tax_amount'); ?></td>
-          <td><?php $f->text_field_d2sr('gl_line_price'); ?></td>
-          <td><?php $f->text_field_d2sr('gl_tax_amount'); ?></td>
+          <td><?php $f->text_field_d2sr('gl_line_price', 'always_readonly'); ?></td>
+          <td><?php $f->text_field_d2sr('gl_tax_amount', 'always_readonly'); ?></td>
           <td><?php form::text_field_wid2('line_description'); ?></td>
 
          </tr>

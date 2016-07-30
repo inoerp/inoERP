@@ -9,6 +9,7 @@ class getsvgimage extends dbObject {
   '_chart_type',
   '_label',
   '_legend',
+  '_legend2',
   '_draw_major_grid_x',
   '_draw_minor_grid_x',
   '_draw_major_grid_y',
@@ -47,6 +48,7 @@ class getsvgimage extends dbObject {
  private $_min_val;
  private $_data_count;
  private $_legend;
+ private $_legend2;
  private $_label;
  private $_draw_major_grid_x = true;
  private $_draw_minor_grid_x = true;
@@ -69,6 +71,7 @@ class getsvgimage extends dbObject {
  private $_height_for_xaxis_chart_label;
  public $result;
  public $legend_name;
+ public $legend_name2;
  public $chart_label;
  public $chart_value;
 
@@ -233,9 +236,11 @@ class getsvgimage extends dbObject {
  public function getSvgChart_forView() {
   $result1 = $this->result;
   $legend_name = $this->legend_name;
+  $legend_name2 = $this->legend_name2;
   $chart_label = $this->chart_label;
   $chart_value = $this->chart_value;
   $this->_legend = [];
+  $this->_legend2 = [];
   $this->_label = [];
   $this->_data = [];
   $return_chart = '';
@@ -246,6 +251,12 @@ class getsvgimage extends dbObject {
      array_push($this->_legend, $obj->$legend_name);
     }
    }
+
+   if (!empty($legend_name2)) {
+    if (!in_array($obj->$legend_name2, $this->_legend2)) {
+     array_push($this->_legend2, $obj->$legend_name2);
+    }
+   }
   }
 
   switch ($this->_chart_type) {
@@ -254,33 +265,78 @@ class getsvgimage extends dbObject {
    case 'clustered_bar':
    case 'stacked_bar':
    case 'line':
-    foreach ($this->result as $obj) {
-     if (!in_array($obj->$chart_label, $this->_label)) {
-      array_push($this->_label, $obj->$chart_label);
-      $row = [];
-      $label = $row['label'] = $obj->$chart_label;
-      $row['value'] = [];
 
-      foreach ($this->_legend as $l_k => $l_v) {
-       $isnull = true;
-       foreach ($result1 as $data_obj) {
-        if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)&& !empty($obj->$chart_value)) {
-         $row['value'][] = $obj->$chart_value;
-         $isnull = false;
-         break;
+    if (!empty($this->_legend2)) {
+     foreach ($this->_legend2 as $key_3 => $val_3) {
+      $this->_data = [];
+      $return_chart .= "<div class='multi_chart_{$key_3}'>";
+      $return_chart .= "<span class='{$this->_chart_type} view'>$val_3</span>";
+      foreach ($this->result as $obj) {
+
+       if ($obj->$legend_name2 == $val_3) {
+        if ($this->_ignore_empty_value && empty($obj->$chart_value)) {
+         continue;
+        }
+        if (!in_array($obj->$chart_label, $this->_label)) {
+         array_push($this->_label, $obj->$chart_label);
+         $row = [];
+         $label = $row['label'] = $obj->$chart_label;
+         $row['value'] = [];
+
+         foreach ($this->_legend as $l_k => $l_v) {
+          $isnull = true;
+          foreach ($result1 as $result1_k => $data_obj) {
+           if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v) && !empty($obj->$chart_value)) {
+            $row['value'][] = $result1[$result1_k]->$chart_value;
+            $isnull = false;
+            break;
+           }
+          }
+          if ($isnull) {
+           $row['value'][] = null;
+          }
+         }
+         array_push($this->_data, $row);
         }
        }
-       if ($isnull) {
-        $row['value'][] = null;
-       }
       }
-      array_push($this->_data, $row);
+      try {
+       $return_chart .= $this->draw_chart();
+      } catch (Exception $e) {
+       $return_chart = "<br>Invalid chart type for this report.<br> Error @ class_getsvgimage @@ line " . __LINE__ . '<br>' . $e->getMessage();
+      }
+      $return_chart .= "</div>";
+      $this->_reset_margins();
      }
-    }
-    try {
-     $return_chart = $this->draw_chart();
-    } catch (Exception $e) {
-     $return_chart = "<br>Invalid chart type for this report.<br> Error @ class_getsvgimage @@ line " . __LINE__ . '<br>' . $e->getMessage();
+    } else {
+     foreach ($this->result as $obj) {
+      if (!in_array($obj->$chart_label, $this->_label)) {
+       array_push($this->_label, $obj->$chart_label);
+       $row = [];
+       $label = $row['label'] = $obj->$chart_label;
+       $row['value'] = [];
+
+       foreach ($this->_legend as $l_k => $l_v) {
+        $isnull = true;
+        foreach ($result1 as $result1_k => $data_obj) {
+         if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v) && !empty($obj->$chart_value)) {
+          $row['value'][] = $result1[$result1_k]->$chart_value;
+          $isnull = false;
+          break;
+         }
+        }
+        if ($isnull) {
+         $row['value'][] = null;
+        }
+       }
+       array_push($this->_data, $row);
+      }
+     }
+     try {
+      $return_chart = $this->draw_chart();
+     } catch (Exception $e) {
+      $return_chart = "<br>Invalid chart type for this report.<br> Error @ class_getsvgimage @@ line " . __LINE__ . '<br>' . $e->getMessage();
+     }
     }
     break;
 
@@ -810,8 +866,11 @@ class getsvgimage extends dbObject {
   $this->_prepare_column();
   $data_count = 0;
   $no_of_elements = count($this->_data);
+  if (empty($no_of_elements)) {
+   return false;
+  }
   $data_range = $this->_max_val - $this->_min_val;
-  $unit_height = ($this->_chart_height) / $data_range;
+  $unit_height = !empty($data_range) ? ($this->_chart_height) / $data_range : 1;
   $legend_yaxis = $this->_top_margin;
 
   $legend_xaxis = $this->_chart_width + $this->_left_margin;
@@ -890,6 +949,9 @@ class getsvgimage extends dbObject {
   $this->_prepare_column();
   $data_count = 0;
   $no_of_data = count($this->_data);
+  if (empty($no_of_data)) {
+   return false;
+  }
   $no_of_elements = count($this->_data);
   $legend_yaxis = $this->_top_margin;
   $legend_xaxis = $this->_chart_width + $this->_left_margin;
@@ -908,7 +970,7 @@ class getsvgimage extends dbObject {
   $bar_width = ($this->_chart_width / ($total_no_of_elemsts_with_gap));
   $bar_gap = 2 * $bar_width;
   $hghest_sum_of_all_element = $this->_highest_sum_of_all_elements();
-  $unit_height = ($this->_chart_height ) / $hghest_sum_of_all_element;
+  $unit_height = !empty($hghest_sum_of_all_element) ? ($this->_chart_height ) / $hghest_sum_of_all_element : 1;
 
   if ($this->_draw_major_grid_x) {
    $bar .=$this->_draw_major_grids($hghest_sum_of_all_element, 'yaxis', $this->_chart_width, $unit_height, $this->_left_margin, $this->_chart_height);
@@ -1040,6 +1102,9 @@ class getsvgimage extends dbObject {
   $this->_prepare_bar();
   $no_of_elements = count($this->_data);
   $data_range = ($this->_max_val - $this->_min_val);
+  if(empty($data_range)){
+   return false;
+  }
   $title_xaxis = $this->_chart_width / 2;
   $title_yaxis = $this->_chart_height + $this->_bottom_margin;
   $unit_width = ($this->_chart_width ) / ($data_range * 1.4);
@@ -1135,13 +1200,16 @@ class getsvgimage extends dbObject {
   }
   $this->_prepare_bar();
   $no_of_elements = count($this->_data);
+    if (empty($no_of_elements)) {
+   return false;
+  }
   $title_xaxis = $this->_chart_width / 2;
   $title_yaxis = $this->_chart_height + $this->_bottom_margin;
   $legend_yaxis = $this->_top_margin;
   $legend_xaxis = $this->_chart_width_orginal - $this->_right_margin;
 
   $hghest_sum_of_all_element = $this->_highest_sum_of_all_elements();
-  $unit_width = ($this->_chart_width ) / ($hghest_sum_of_all_element * 1.4);
+  $unit_width = !empty($hghest_sum_of_all_element) ? ($this->_chart_width ) / ($hghest_sum_of_all_element * 1.4) : 1;
 
   $total_no_of_elemsts_with_gap = 2 * $no_of_elements;
   $bar_height = $bar_gap = ($this->_chart_height / ($total_no_of_elemsts_with_gap));

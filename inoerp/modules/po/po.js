@@ -92,15 +92,6 @@ $(document).ready(function () {
  });
 
 
-//mandatory and field sequence
-// var mandatoryCheck = new mandatoryFieldMain();
-// mandatoryCheck.header_id = 'po_header_id';
-// mandatoryCheck.mandatoryHeader();
-// mandatoryCheck.form_area = 'form_header';
-// mandatoryCheck.mandatory_fields = ["bu_org_id", "po_type"];
-// mandatoryCheck.mandatory_messages = ["First Select BU Org", "No PO Type"];
-// mandatoryCheck.mandatoryField();
-
 //setting the first line & shipment number
  if (!($('.lines_number:first').val())) {
   $('.lines_number:first').val('1');
@@ -109,7 +100,7 @@ $(document).ready(function () {
  if (!($('.shipment_number:first').val())) {
   $('.shipment_number:first').val('1');
  }
- lineDetail_QuantityValidation();
+ 
 
  //default quantity
  $('#content').off("click", "table.form_line_data_table .add_detail_values_img")
@@ -183,7 +174,6 @@ $(document).ready(function () {
  }
 
 
-
 //
  //exhhnge rate
  $('body').on('change', '#doc_currency', function () {
@@ -226,43 +216,6 @@ $(document).ready(function () {
  if ($('#bu_org_id').val() && (!$('#po_header_id').val())) {
   getTaxCodes('modules/mdm/tax_code/json_tax_code.php', $('#bu_org_id').val(), 'IN');
  }
-
- //calucalte line & tax amounts
-
- $('body').off('blur', '.unit_price, .line_quantity , .line_price')
-         .on('blur', '.unit_price, .line_quantity , .line_price ', function () {
-          var trClass = '.' + $(this).closest('tr').attr('class');
-          var unitPrice = +($(this).closest('#form_line').find(trClass).find('.unit_price').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-          var lineQuantity = +($(this).closest('#form_line').find(trClass).find('.line_quantity').val().replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"));
-          var linePrice = unitPrice * lineQuantity;
-          $(this).closest('#form_line').find(trClass).find('.line_price').val(linePrice);
-          $('body').trigger('calculateTax', [trClass]);
-          $('body').trigger('getGlPrice', [trClass]);
-          $('body').trigger('calculateHeaderAmount');
-         });
-
- //calculate the tax amount
- $('body').off('blur', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id')
-         .on('blur, change', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id', function () {
-          var trClass = '.' + $(this).closest('tr').prop('class');
-          $('body').trigger('calculateTax', [trClass]);
-          $('body').trigger('getGlPrice', [trClass]);
-          $('body').trigger('calculateHeaderAmount');
-         });
-
-//total header & tax amount
- $('#content').off('blur', '.receving_org_id, .item_id_m, .item_number')
-         .on('blur', '.receving_org_id, .item_id_m, .item_number', function () {
-          var item_id_m = $(this).closest('tr').find('.item_id_m').val();
-          var receving_org_id = $(this).closest('tr').find('.receving_org_id').val();
-          if (receving_org_id && item_id_m) {
-           getItemRevision({
-            'org_id': $(this).closest('tr').find('.receving_org_id').val(),
-            'item_id_m': $(this).closest('tr').find('.item_id_m').val(),
-            'trclass': $(this).closest('tr').attr('class')
-           });
-          }
-         });
 
 
  $('#form_line .received_quantity').each(function () {
@@ -363,5 +316,36 @@ $(document).ready(function () {
   $(trClass).find('.promise_date').val(foramtedDate);
  });
 
+ $('#content').off('keyup', '.receving_org_id, .item_id_m, .item_number')
+         .on('keyup', '.receving_org_id, .item_id_m, .item_number', function () {
+          var item_id_m = $(this).closest('tr').find('.item_id_m').val();
+          var receving_org_id = $(this).closest('tr').find('.receving_org_id').val();
+          if (receving_org_id && item_id_m) {
+           getItemRevision({
+            'org_id': $(this).closest('tr').find('.receving_org_id').val(),
+            'item_id_m': $(this).closest('tr').find('.item_id_m').val(),
+            'trclass': $(this).closest('tr').attr('class')
+           });
+          }
+         });
+
+ po_calculate_all_amounts();
+ lineDetail_QuantityValidation(po_calculate_amounts_withLinePrice);
 });
 
+function po_calculate_all_amounts() {
+ //calucalte line & tax amounts
+ $('body').off('keyup', '.unit_price, .line_quantity , .line_price')
+         .on('keyup', '.unit_price, .line_quantity , .line_price ', function () {
+          po_calculate_amounts_withLinePrice($(this));
+         });
+
+ //calculate the tax amount
+ $('body').off('keyup', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id')
+         .on('keyup, change', '.line_quantity, .unit_price, .line_price, .tax_amount, .tax_code_id', function () {
+          po_calculate_amounts($(this));
+         });
+
+//total header & tax amount
+
+}

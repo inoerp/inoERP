@@ -71,6 +71,7 @@ class extn_report extends dbObject {
   'chart_label',
   'chart_value',
   'chart_legend',
+  'chart_legend2',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -114,6 +115,7 @@ class extn_report extends dbObject {
   'chart_label',
   'chart_value',
   'chart_legend',
+  'chart_legend2',
   'created_by',
   'creation_date',
   'last_update_by',
@@ -183,6 +185,7 @@ class extn_report extends dbObject {
  public $chart_label;
  public $chart_value;
  public $chart_legend;
+ public $chart_legend2;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -688,6 +691,7 @@ class extn_report extends dbObject {
    $svgimg->setProperty('_chart_type', $this->chart_type);
    $svgimg->result = $result;
    $svgimg->legend_name = str_replace('.', '__', $this->chart_legend);
+   $svgimg->legend_name2 = str_replace('.', '__', $this->chart_legend2);
    $svgimg->chart_label = str_replace('.', '__', $this->chart_label);
    $svgimg->chart_value = str_replace('.', '__', $this->chart_value);
    $svg_chart = $svgimg->getSvgChart_forView();
@@ -728,6 +732,7 @@ class extn_report extends dbObject {
    $svgimg->setProperty('_chart_type', $this->chart_type);
    $svgimg->result = $result;
    $svgimg->legend_name = str_replace('.', '__', $this->chart_legend);
+   $svgimg->legend_name2 = str_replace('.', '__', $this->chart_legend2);
    $svgimg->chart_label = str_replace('.', '__', $this->chart_label);
    $svgimg->chart_value = str_replace('.', '__', $this->chart_value);
    $svg_chart = $svgimg->getSvgChart_forextn_report();

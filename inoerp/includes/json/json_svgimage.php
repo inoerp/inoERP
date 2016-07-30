@@ -13,7 +13,9 @@ if (!empty($_GET['find_result'])) {
   $chart_height = !empty($_GET['chart_height']) ? ($_GET['chart_height']) : '450';
   $chart_type = !empty($_GET['chart_type']) ? ($_GET['chart_type']) : 'clustered_column';
   $legend_name = !empty($_GET['chart_legend']) ? ($_GET['chart_legend']) : '';
+  $legend_name2 = !empty($_GET['chart_legend2']) ? ($_GET['chart_legend2']) : '';
   $legend_name = str_replace('.', '__', $legend_name);
+  $legend_name2 = str_replace('.', '__', $legend_name2);
 
 //getSvgData($result, $legend_name, $chart_label, $chart_value, $legend, $labels, $data);
   $svgimg->setProperty('_chart_name', $chart_name);
@@ -22,6 +24,7 @@ if (!empty($_GET['find_result'])) {
   $svgimg->setProperty('_chart_type', $chart_type);
   $svgimg->result = $result;
   $svgimg->legend_name = $legend_name;
+  $svgimg->legend_name2 = $legend_name2;
   $svgimg->chart_label = $chart_label;
   $svgimg->chart_value = $chart_value;
   $svg_chart = $svgimg->getSvgChart_forView();
@@ -50,6 +53,7 @@ if (!empty($_GET['find_result'])) {
    $chart_height = !empty($_GET['chart_height']) ? ($_GET['chart_height']) : $view->chart_height;
    $chart_type = !empty($_GET['chart_type']) ? ($_GET['chart_type']) : $view->chart_type;
    $chart_legend = !empty($_GET['chart_legend']) ? ($_GET['chart_legend']) : $view->chart_legend;
+   $chart_legend2 = !empty($_GET['chart_legend2']) ? ($_GET['chart_legend2']) : $view->chart_legend2;
    $chart_label = !empty($_GET['chart_label']) ? ($_GET['chart_label']) : $view->chart_label;
    $chart_value = !empty($_GET['chart_type']) ? ($_GET['chart_value']) : $view->chart_value;
 //getSvgData($result, $legend_name, $chart_label, $chart_value, $legend, $labels, $data);
@@ -59,6 +63,7 @@ if (!empty($_GET['find_result'])) {
    $svgimg->setProperty('_chart_type', $chart_type);
    $svgimg->result = $result;
    $svgimg->legend_name = str_replace('.', '__', $chart_legend);
+   $svgimg->legend_name2 = str_replace('.', '__', $chart_legend2);
    $svgimg->chart_label = str_replace('.', '__', $chart_label);
    $svgimg->chart_value = str_replace('.', '__', $chart_value);
    $svg_chart = $svgimg->getSvgChart_forView();
@@ -90,6 +95,7 @@ if (!empty($_GET['find_result'])) {
    $chart_height = !empty($_GET['chart_height']) ? ($_GET['chart_height']) : $report->chart_height;
    $chart_type = !empty($_GET['chart_type']) ? ($_GET['chart_type']) : $report->chart_type;
    $chart_legend = !empty($_GET['chart_legend']) ? ($_GET['chart_legend']) : $report->chart_legend;
+   $chart_legend2 = !empty($_GET['chart_legend2']) ? ($_GET['chart_legend2']) : $report->chart_legend2;
    $chart_label = !empty($_GET['chart_label']) ? ($_GET['chart_label']) : $report->chart_label;
    $chart_value = !empty($_GET['chart_type']) ? ($_GET['chart_value']) : $report->chart_value;
 //getSvgData($result, $legend_name, $chart_label, $chart_value, $legend, $labels, $data);
@@ -99,6 +105,7 @@ if (!empty($_GET['find_result'])) {
    $svgimg->setProperty('_chart_type', $chart_type);
    $svgimg->result = $result;
    $svgimg->legend_name = str_replace('.', '__', $chart_legend);
+   $svgimg->legend_name2 = str_replace('.', '__', $chart_legend2);
    $svgimg->chart_label = str_replace('.', '__', $chart_label);
    $svgimg->chart_value = str_replace('.', '__', $chart_value);
    $svg_chart = $svgimg->getSvgChart_forView();
