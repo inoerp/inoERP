@@ -159,7 +159,7 @@ class extn_menu_line extends dbObject {
      $link = $menu->interanl_link;
     }
 
-    $menu_stmt .= '<li><a href="' . $link . '" title="' . $menu->link_title . '"   class="' . $menu->css_class . '" ><i class="' . $menu->icon_css_class . '"></i> &nbsp;' . $menu->link_name . ' <div class="arrow-up"></div></a></li>';
+    $menu_stmt .= '<li><a href="' . $link . '" title="' . $menu->link_title . '"   class="' . $menu->css_class . '" ><i class="' . $menu->icon_css_class . '"></i> &nbsp;' . $menu->link_name . '</a></li>';
    }
   }
 

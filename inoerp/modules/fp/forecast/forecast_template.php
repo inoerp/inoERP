@@ -58,7 +58,7 @@
   </div>
 
   <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Forecast Lines') ?></span>
-   <form action=""  method="post" id="forecast_line"  name="forecast_line">
+   <form  method="post" id="forecast_line"  name="forecast_line">
     <div id="tabsLine">
      <ul class="tabMain">
       <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>

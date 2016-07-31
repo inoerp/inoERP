@@ -18,10 +18,10 @@
    </div>
    
    <div id="commentId" class="row"><label>Comment</label>
-    <textarea name="comment" class="ed-mediumtext" rows="8" cols="100"><?php
+    <textarea name="comment" class="ed-mediumtext div-with-preview" rows="8" cols="100"><?php
      echo (!empty($comment->comment)) ? htmlentities($comment->comment) : "";
      ?> </textarea>
-
+    <div class="ino-text-preview"></div> 
    </div>
    <div id="file_upload_form" class="row small-top-margin">
     <ul class="inRow asperWidth">

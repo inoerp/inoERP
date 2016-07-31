@@ -453,7 +453,7 @@ section::after {
 #header-style-1 .navbar-default .navbar-nav > .open > a:focus,
 #topbar .social-icons span:hover a,
 #topbar .social-icons span:hover i{
- color:#fff !important;
+ /*color:#fff !important;*/
  -webkit-border-radius: 03px;
  -moz-border-radius: 03px;
  border-radius: 03px;
@@ -3707,7 +3707,7 @@ mark,
 #header-style-1 .navbar-default .navbar-nav > .open > a:hover,
 #header-style-1 .navbar-default .navbar-nav > .open > a:focus,
 #topbar .social-icons span a:hover {
- background-color:#39C;
+ background-color:#fff;
 }
 .flex-direction-nav a,
 .rsUni .rsThumb.rsNavSelected .thumbIco,

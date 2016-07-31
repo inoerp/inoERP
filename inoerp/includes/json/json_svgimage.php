@@ -9,14 +9,15 @@ if (!empty($_GET['find_result'])) {
   $chart_label = str_replace('.', '__', ($_GET['chart_label']));
   $chart_value = str_replace('.', '__', ($_GET['chart_value']));
   $chart_name = !empty($_GET['chart_name']) ? ($_GET['chart_name']) : 'Custom View Chart';
-  $chart_width = !empty($_GET['chart_width']) ? ($_GET['chart_width']) : '450';
-  $chart_height = !empty($_GET['chart_height']) ? ($_GET['chart_height']) : '450';
+  $chart_width = !empty($_GET['chart_width']) ? ino_remove_thousand_sep($_GET['chart_width']) : '450';
+  $chart_height = !empty($_GET['chart_height']) ? ino_remove_thousand_sep($_GET['chart_height']) : '450';
   $chart_type = !empty($_GET['chart_type']) ? ($_GET['chart_type']) : 'clustered_column';
   $legend_name = !empty($_GET['chart_legend']) ? ($_GET['chart_legend']) : '';
   $legend_name2 = !empty($_GET['chart_legend2']) ? ($_GET['chart_legend2']) : '';
   $legend_name = str_replace('.', '__', $legend_name);
   $legend_name2 = str_replace('.', '__', $legend_name2);
 
+  
 //getSvgData($result, $legend_name, $chart_label, $chart_value, $legend, $labels, $data);
   $svgimg->setProperty('_chart_name', $chart_name);
   $svgimg->setProperty('_chart_width', $chart_width);
@@ -49,8 +50,8 @@ if (!empty($_GET['find_result'])) {
   if (!empty($view->view_id) && !empty($view->chart_type)) {
    $svgimg = new getsvgimage();
    $result = $result1 = $view->findBySql($view->query_v);
-   $chart_width = !empty($_GET['chart_width']) ? ($_GET['chart_width']) : $view->chart_width;
-   $chart_height = !empty($_GET['chart_height']) ? ($_GET['chart_height']) : $view->chart_height;
+   $chart_width = !empty($_GET['chart_width']) ? ino_remove_thousand_sep($_GET['chart_width']) : $view->chart_width;
+   $chart_height = !empty($_GET['chart_height']) ? ino_remove_thousand_sep($_GET['chart_height']) : $view->chart_height;
    $chart_type = !empty($_GET['chart_type']) ? ($_GET['chart_type']) : $view->chart_type;
    $chart_legend = !empty($_GET['chart_legend']) ? ($_GET['chart_legend']) : $view->chart_legend;
    $chart_legend2 = !empty($_GET['chart_legend2']) ? ($_GET['chart_legend2']) : $view->chart_legend2;
@@ -91,8 +92,8 @@ if (!empty($_GET['find_result'])) {
   if (!empty($report->extn_report_id) && !empty($report->chart_type)) {
    $svgimg = new getsvgimage();
    $result = $result1 = $report->findBySql($report->query_v);
-   $chart_width = !empty($_GET['chart_width']) ? ($_GET['chart_width']) : $report->chart_width;
-   $chart_height = !empty($_GET['chart_height']) ? ($_GET['chart_height']) : $report->chart_height;
+   $chart_width = !empty($_GET['chart_width']) ? ino_remove_thousand_sep($_GET['chart_width']) : $report->chart_width;
+   $chart_height = !empty($_GET['chart_height']) ? ino_remove_thousand_sep($_GET['chart_height']) : $report->chart_height;
    $chart_type = !empty($_GET['chart_type']) ? ($_GET['chart_type']) : $report->chart_type;
    $chart_legend = !empty($_GET['chart_legend']) ? ($_GET['chart_legend']) : $report->chart_legend;
    $chart_legend2 = !empty($_GET['chart_legend2']) ? ($_GET['chart_legend2']) : $report->chart_legend2;

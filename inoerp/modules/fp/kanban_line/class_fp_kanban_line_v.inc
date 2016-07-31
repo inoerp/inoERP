@@ -46,9 +46,14 @@ class fp_kanban_line_v extends dbObject {
   'subinventory',
   'locator',
  ];
- public $search = [
-  '_view_path' => 'form.php?class_name=fp_kanban_line',
+
+ 
+  public $search = [
+  '_show_update_path' => 1,
+  '_update_action_meassge' => 'Update Card',
+   '_update_path' => 'form.php?class_name=fp_kanban_header',
  ];
+  
  public $pageTitle = " Kanban Cards "; //page Title
  public $search_functions = [
   'Organization' => 'search_org_name',

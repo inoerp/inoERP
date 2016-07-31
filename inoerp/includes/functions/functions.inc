@@ -851,6 +851,10 @@ function ino_showDecimal($number, $decimal = '.') {
  return $final_number;
 }
 
+function ino_remove_thousand_sep($num, $sep =","){
+ return str_replace($sep, '', $num);
+}
+
 function get_user_ip() {
  $ipaddress = '';
  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {

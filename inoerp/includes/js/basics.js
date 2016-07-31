@@ -5860,6 +5860,11 @@ $(document).ready(function () {
  $('body').on('click', 'a.right_navicon, .ino-close-right-navbar', function () {
   $('#navbar-collapse-right').toggleClass('hidden');
  });
+ 
+ $('body').on('keypress', '.div-with-preview' , function(){
+$(this).parent().find('.ino-text-preview').html($(this).val());
+
+});
 
  var last_ww = '601';
  localStorage.setItem("last_ww", last_ww);
