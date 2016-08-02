@@ -183,6 +183,7 @@ class getsvgimage extends dbObject {
     break;
 
    case 'line' :
+    $this->_show_elemnt_value = true;
     $this->_dataRange_inDataSet();
     $final_chart = $this->_draw_line();
     break;
@@ -631,9 +632,11 @@ class getsvgimage extends dbObject {
   $this->_left_margin += $this->_width_for_xaxis_chart_label;
 
   $this->_height_for_xaxis_chart_label = 0;
+  $no_of_rows_for_label = ceil((120 * count($this->_data)) / $this->_chart_width);
+  $this->_height_for_xaxis_chart_label = 40 * $no_of_rows_for_label;
   foreach ($this->_data as $data) {
    $value = $data['label'];
-   $height_for_xaxis_chart_label_n = strlen(strval($value)) * 5;
+   $height_for_xaxis_chart_label_n = strlen(strval($value)) * 7;
    $this->_height_for_xaxis_chart_label = ($height_for_xaxis_chart_label_n > $this->_height_for_xaxis_chart_label ) ? $height_for_xaxis_chart_label_n : $this->_height_for_xaxis_chart_label;
   }
   $this->_bottom_margin += $this->_height_for_xaxis_chart_label;
@@ -646,12 +649,15 @@ class getsvgimage extends dbObject {
   $this->_prepare_line();
   $x_cordinate = $this->_left_margin;
   $max_no_of_data = $this->_maximum_number_of_element();
+  $width_for_each_leg = 120;
 
   $this->_chart_width = $this->_chart_width - $this->_left_margin - $this->_right_margin;
   $this->_chart_height = $this->_chart_height - $this->_height_of_text - $this->_bottom_margin - $this->_height_of_legend;
-  $unit_height = ($this->_chart_height) / $this->_max_val;
+  $unit_height = !empty($this->_max_val) ? ($this->_chart_height) / $this->_max_val : 1;
   $point_gap = ($this->_chart_width / ($max_no_of_data + 1));
   //$yaxis_data = ($yaix_height / 1.5);
+  $no_of_label_inrow = ceil($this->_chart_width / $width_for_each_leg);
+
 
   $title_xaxis = $this->_chart_width / 2;
   $title_yaxis = $this->_chart_height + $this->_bottom_margin;
@@ -669,7 +675,53 @@ class getsvgimage extends dbObject {
    $chart .=$this->_draw_major_grids_data($max_no_of_data, 'yaxis', $point_gap, $this->_chart_width, $this->_left_margin, $this->_chart_height);
   }
   $line_count = 0;
-  foreach ($this->_data as $data) {
+
+//  $data_ai = new ArrayIterator($this->_data);
+//  $data_ai->seek(0);
+//  while ($data_ai->valid()) {
+//   $data_k = $data_ai->key();
+//   $data_k_previous = $data_k - 1;
+//
+//   $data = $data_ai->current();
+//   $data_ai->next();
+//   $data_next = $data_ai->current();
+//   $data_ai->seek($data_k_previous);
+//   $data_last = $data_ai->current();
+//   $data_ai->seek($data_k);
+//
+//
+//   $data_count = 0;
+//   $x1 = $y1 = 0;
+//   $xaxis = $x_cordinate;
+//   $line_class = 'line_class_' . $line_count;
+//   $value_a = $data['value'];
+//   $label = $data['label'];
+//   foreach ($value_a as $key => $value) {
+//    $xaxis += $point_gap;
+//    $x2 = $xaxis;
+//    $y2 = $yaxis = $this->_chart_height - ($unit_height * $value);
+//    $element_title = $value . ' ( ' . $label . ')';
+//    $chart .= '<g>';
+//    $chart .= "<rect x=\"$xaxis\" y=\"$yaxis\" width=\"5\" height=\"5\" class=\" $key $line_class line_chart \"  />";
+//    $chart .= '<title>' . $element_title . '</title>';
+//    if ($data_count > 0) {
+//     $chart .= "<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\"  class=\"$line_class line_chart line\" />";
+//     $chart .= '<title>' . $element_title . '</title>';
+//    }
+//    $x1 = $x2;
+//    $y1 = $y2;
+//    if ($this->_show_elemnt_value && $data_k == 0) {
+//     $yaxis_elem = $yaxis + 20;
+//     $chart .= '<text x="' . $xaxis . '" y="' . $yaxis_elem . '"  dy="-4" class="chart_value_text" >' . $this->_legend[$key] . '</text>';
+//    }
+//    $chart .= '</g>';
+//    $data_count++;
+//   }
+//   $line_count++;
+//   $data_ai->next();
+//  }
+
+  foreach ($this->_data as $data_k => $data) {
    $data_count = 0;
    $x1 = $y1 = 0;
    $xaxis = $x_cordinate;
@@ -681,32 +733,53 @@ class getsvgimage extends dbObject {
     $x2 = $xaxis;
     $y2 = $yaxis = $this->_chart_height - ($unit_height * $value);
     $element_title = $value . ' ( ' . $label . ')';
-    $chart .= "<rect x=\"$xaxis\" y=\"$yaxis\" width=\"5\" height=\"5\" class=\" $key $line_class line_chart  \"    title=\"$element_title\"  />";
+    $chart .= '<g>';
+    $chart .= "<rect x=\"$xaxis\" y=\"$yaxis\" width=\"5\" height=\"5\" class=\" $key $line_class line_chart \"  />";
+    $chart .= '<title>' . $element_title . '</title>';
     if ($data_count > 0) {
-     $chart .= "<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\"  class=\"$line_class line_chart line\" title=\"$element_title\"  />";
+     $chart .= "<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\"  class=\"$line_class line_chart line\" />";
+     $chart .= '<title>' . $element_title . '</title>';
     }
     $x1 = $x2;
     $y1 = $y2;
-    if ($this->_show_elemnt_value) {
-     $chart .= '<text x="' . $xaxis . '" y="' . $yaxis . '"  dy="-4" class="chart_value_text" >' . $value . '</text>';
+    if ($this->_show_elemnt_value && $data_k == 0) {
+     $yaxis_elem = $yaxis + 20;
+     $chart .= '<text x="' . $xaxis . '" y="' . $yaxis_elem . '"  dy="-4" class="chart_value_text" >' . $this->_legend[$key] . '</text>';
     }
+    $chart .= '</g>';
     $data_count++;
    }
    $line_count++;
   }
-
+  //show labels
+//  pa($this);
   $legend_x = $this->_left_margin;
   $line_count2 = 0;
+  $legend_yaxis_org = $legend_yaxis;
+
+  $label_k = 0;
+  $count_of_label_rows = 0;
+
   foreach ($this->_data as $line_data) {
+   $label_k++;
    $line_class = 'line_class_' . $line_count2;
-   $legend_y_axis_rect = $legend_yaxis + 10;
-   $chart .= "<rect x=\"$legend_x\" y=\"$legend_y_axis_rect\" width=\"10\" height=\"10\" class=\"$line_class line_chart legend \"/>";
+   $legend_y_axis_rect = $legend_yaxis + 30;
+   $chart .= "<g><rect x=\"$legend_x\" y=\"$legend_y_axis_rect\" width=\"10\" height=\"10\"  class=\"$line_class line_chart legend \"/>";
+   $chart .= '<title>' . $line_data['label'] . '</title></g>';
    $legend_x += 15;
    $legend_y_axis_rect += 10;
-   $chart .= '<text x="' . $legend_x . '" y="' . $legend_y_axis_rect . '"  '
-    . "transform=\"rotate(60 $legend_x,$legend_y_axis_rect)\"" . 'class="chart_legend_title" >' . $line_data['label'] . ' </text>';
+   $chart .= '<g><text x="' . $legend_x . '" y="' . $legend_y_axis_rect . '"  '
+    . 'class="chart_legend_title" >' . $line_data['label'] . ' </text>';
+   $chart .= '<title>' . $line_data['label'] . '</title></g>';
 
-   $legend_x += 30;
+   $legend_x += $width_for_each_leg;
+   if ($label_k >= $no_of_label_inrow) {
+    $label_k = 0;
+    $count_of_label_rows++;
+    $legend_x = $this->_left_margin;
+    $legend_yaxis = $legend_yaxis_org + 25 * $count_of_label_rows;
+   }
+
    $line_count2++;
   }
 
@@ -1102,7 +1175,7 @@ class getsvgimage extends dbObject {
   $this->_prepare_bar();
   $no_of_elements = count($this->_data);
   $data_range = ($this->_max_val - $this->_min_val);
-  if(empty($data_range)){
+  if (empty($data_range)) {
    return false;
   }
   $title_xaxis = $this->_chart_width / 2;
@@ -1200,7 +1273,7 @@ class getsvgimage extends dbObject {
   }
   $this->_prepare_bar();
   $no_of_elements = count($this->_data);
-    if (empty($no_of_elements)) {
+  if (empty($no_of_elements)) {
    return false;
   }
   $title_xaxis = $this->_chart_width / 2;

@@ -38,7 +38,12 @@ include_once("basics.inc");
    }
    $ulr_vars = explode("/", $url);
    $show_block_flag = 0;
-   $ulr_vars_s = array_pop($ulr_vars);
+   if(strpos($url, '?')){
+    $ulr_vars_s = end($ulr_vars);
+   }else{
+    $ulr_vars_s = array_slice($url, -2, 1, true);;
+   }
+   
    $ulr_vars_s = empty($ulr_vars_s) ? 'index' : $ulr_vars_s;
 
    if (empty($visibility_option)) {
