@@ -13,6 +13,7 @@ if (!empty($$class->extn_report_id) && !empty($$class->chart_type)) {
  $svgimg->setProperty('_chart_type', $$class->chart_type);
  $svgimg->result = $result;
  $svgimg->legend_name = str_replace('.', '__', $$class->chart_legend);
+ $svgimg->legend_name2 = str_replace('.', '__', $$class->chart_legend2);
  $svgimg->chart_label = str_replace('.', '__', $$class->chart_label);
  $svgimg->chart_value = str_replace('.', '__', $$class->chart_value);
  $svg_chart = $svgimg->getSvgChart_forView();

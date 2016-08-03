@@ -632,7 +632,11 @@ class getsvgimage extends dbObject {
   $this->_left_margin += $this->_width_for_xaxis_chart_label;
 
   $this->_height_for_xaxis_chart_label = 0;
+
   $no_of_rows_for_label = ceil((120 * count($this->_data)) / $this->_chart_width);
+  if($no_of_rows_for_label < 2 ){
+   $no_of_rows_for_label = 2;
+  }
   $this->_height_for_xaxis_chart_label = 40 * $no_of_rows_for_label;
   foreach ($this->_data as $data) {
    $value = $data['label'];
@@ -734,7 +738,8 @@ class getsvgimage extends dbObject {
     $y2 = $yaxis = $this->_chart_height - ($unit_height * $value);
     $element_title = $value . ' ( ' . $label . ')';
     $chart .= '<g>';
-    $chart .= "<rect x=\"$xaxis\" y=\"$yaxis\" width=\"5\" height=\"5\" class=\" $key $line_class line_chart \"  />";
+//    $chart .= "<rect x=\"$xaxis\" y=\"$yaxis\" width=\"5\" height=\"5\" class=\" $key $line_class line_chart \"  />";
+    $chart .= '<circle cx="'.$xaxis.'" cy="'.$yaxis.'" r="3" class=" ' .$key . ' ' .$line_class .' line circle"  />';
     $chart .= '<title>' . $element_title . '</title>';
     if ($data_count > 0) {
      $chart .= "<line x1=\"$x1\" y1=\"$y1\" x2=\"$x2\" y2=\"$y2\"  class=\"$line_class line_chart line\" />";

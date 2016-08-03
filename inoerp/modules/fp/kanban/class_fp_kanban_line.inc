@@ -98,6 +98,13 @@ class fp_kanban_line extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result[0]->max_number : 0;
  }
+ 
+  Public static function find_by_cardNum($card_num) {
+  $sql = " SELECT * from fp_kanban_line WHERE  card_number = :card_number LIMIT 1";
+  $value_a = ['card_number' => $card_num];
+  $result = self::find_by_sql_i($sql, $value_a);
+  return !empty($result) ? array_pop($result) : false;
+ }
 
  Public static function noof_active_cards($fp_kanban_header_id) {
   $sql = " SELECT COUNT(card_number) as card_count from fp_kanban_line  WHERE fp_kanban_header_id = '{$fp_kanban_header_id}' ";
@@ -170,11 +177,11 @@ class fp_kanban_line extends dbObject {
 
  private function _cretae_requistion($obj) {
   $po_req_interface = new po_requisition_interface();
+  $fin_info_of_org = org::find_financial_details_from_orgId($obj->org_id);
   if (empty($obj->supplier_id)) {
    $sourcing_rule_id = $obj->sourcing_rule_id;
    $srl = new po_sourcing_rule_line();
    $srl_i = $srl->findBy_parentId($sourcing_rule_id);
-   $fin_info_of_org = org::find_financial_details_from_orgId($obj->org_id);
    if (!empty($srl_i)) {
     foreach ($srl_i as $sourcing_rule_line) {
      $po_req_interface->po_requisition_interface_id = null;
@@ -193,7 +200,6 @@ class fp_kanban_line extends dbObject {
      $unit_price = $obj->list_price;
      $po_req_interface->unit_price = !empty($unit_price) ? $unit_price : '0.01';
      $po_req_interface->need_by_date = date('Y-m-d', strtotime("$obj->leadtime days"));
-     $po_req_interface->audit_trial();
      $po_req_interface->save();
     }
     return;
@@ -212,8 +218,8 @@ class fp_kanban_line extends dbObject {
   $po_req_interface->quantity = $obj->kanban_size;
   $unit_price = $obj->list_price;
   $po_req_interface->unit_price = !empty($unit_price) ? $unit_price : '0.01';
-  $po_req_interface->need_by_date = date('Y-m-d', strtotime("$obj->leadtime days"));
-  $po_req_interface->audit_trial();
+  $leadtime = !empty($obj->leadtime) ? $obj->leadtime : 1;
+  $po_req_interface->need_by_date = date('Y-m-d', strtotime("$leadtime days"));
   $po_req_interface->save();
  }
 

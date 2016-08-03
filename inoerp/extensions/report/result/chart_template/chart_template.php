@@ -22,7 +22,7 @@
       <li><label>Value Field</label>
        <?php
        if (!empty($column_list)) {
-        echo $f->select_field_from_array('chart_value', $column_list, $$class->chart_value, 'chart_value', 'medium');
+        echo $f->select_field_from_array('chart_value', $column_list, $$class->chart_value, 'chart_value', 'parameter medium');
        } else {
         echo $f->text_field_dl('chart_value', $$class->chart_value);
        }

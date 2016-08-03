@@ -96,11 +96,12 @@ $(document).ready(function () {
    extn_report_id: $(this).closest('div.extn_report_content').find('.extn_report_id').val(),
    chart_type: $(this).closest('div.extn_report_content').find('.chart_type').val(),
    chart_label: $(this).closest('div.extn_report_content').find('.chart_label').val(),
-   chart_value: $(this).closest('div.extn_report_content').find('.chart_value').val(),
+   chart_value: $(this).closest('div.extn_report_content').find('.parameter.chart_value').val(),
    chart_name: $(this).closest('div.extn_report_content').find('.chart_name').val(),
    chart_width: $(this).closest('div.extn_report_content').find('.chart_width').val(),
    chart_height: $(this).closest('div.extn_report_content').find('.chart_height').val(),
    chart_legend: $(this).closest('div.extn_report_content').find('.chart_legend').val(),
+   chart_legend2: $(this).closest('div.extn_report_content').find('.chart_legend2').val(),
    filterData: filterData,
    sortData: sortData,
    update_image: false

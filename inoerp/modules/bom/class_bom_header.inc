@@ -144,7 +144,7 @@ class bom_header extends dbObject {
    return -90;
   }
 
-  if (empty($this->bom_header_id) && !empty($this->common_bom_item_id_m) && !empty($this->common_bom_org_id)) {
+  if (!empty($this->common_bom_item_id_m) && !empty($this->common_bom_org_id)) {
    $common_bom_header = self::find_by_itemId_orgId($this->common_bom_item_id_m, $this->common_bom_org_id);
    $this->effective_date = $common_bom_header->effective_date;
    $this->bom_revision = $common_bom_header->bom_revision;

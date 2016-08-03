@@ -99,7 +99,11 @@ if (!empty($_GET['find_result'])) {
    $chart_legend2 = !empty($_GET['chart_legend2']) ? ($_GET['chart_legend2']) : $report->chart_legend2;
    $chart_label = !empty($_GET['chart_label']) ? ($_GET['chart_label']) : $report->chart_label;
    $chart_value = !empty($_GET['chart_type']) ? ($_GET['chart_value']) : $report->chart_value;
-//getSvgData($result, $legend_name, $chart_label, $chart_value, $legend, $labels, $data);
+   
+   if(empty($chart_value)){
+    return false;
+   }
+   
    $svgimg->setProperty('_chart_name', $report->report_name);
    $svgimg->setProperty('_chart_width', $chart_width);
    $svgimg->setProperty('_chart_height', $chart_height);
@@ -117,38 +121,38 @@ if (!empty($_GET['find_result'])) {
   }
 }
 
-  function getSvgData($result, $legend_name, $chart_label, $chart_value, &$legend, &$labels, &$data) {
-   $result1 = $result;
-   foreach ($result as $obj) {
-    if (!empty($legend_name)) {
-     if (!in_array($obj->$legend_name, $legend)) {
-      array_push($legend, $obj->$legend_name);
-     }
-    }
-   }
-
-   foreach ($result as $obj) {
-    if (!in_array($obj->$chart_label, $labels)) {
-     array_push($labels, $obj->$chart_label);
-     $row = [];
-     $label = $row['label'] = $obj->$chart_label;
-     $row['value'] = [];
-
-     foreach ($legend as $l_k => $l_v) {
-      $isnull = true;
-      foreach ($result1 as $data_obj) {
-       if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)) {
-        $row['value'][] = $obj->$chart_value;
-        $isnull = false;
-        break;
-       }
-      }
-      if ($isnull) {
-       $row['value'][] = null;
-      }
-     }
-     array_push($data, $row);
-    }
-   }
-  }
+//  function getSvgData($result, $legend_name, $chart_label, $chart_value, &$legend, &$labels, &$data) {
+//   $result1 = $result;
+//   foreach ($result as $obj) {
+//    if (!empty($legend_name)) {
+//     if (!in_array($obj->$legend_name, $legend)) {
+//      array_push($legend, $obj->$legend_name);
+//     }
+//    }
+//   }
+//
+//   foreach ($result as $obj) {
+//    if (!in_array($obj->$chart_label, $labels)) {
+//     array_push($labels, $obj->$chart_label);
+//     $row = [];
+//     $label = $row['label'] = $obj->$chart_label;
+//     $row['value'] = [];
+//
+//     foreach ($legend as $l_k => $l_v) {
+//      $isnull = true;
+//      foreach ($result1 as $data_obj) {
+//       if (($data_obj->$chart_label) == $label && ($data_obj->$legend_name == $l_v)) {
+//        $row['value'][] = $obj->$chart_value;
+//        $isnull = false;
+//        break;
+//       }
+//      }
+//      if ($isnull) {
+//       $row['value'][] = null;
+//      }
+//     }
+//     array_push($data, $row);
+//    }
+//   }
+//  }
   ?>

@@ -7,9 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id ="form_header"><span class="heading"><?php
-    echo gettext('Kanban Replenishment Strategy')
-  ?></span>
+<div id ="form_header"><span class="heading"><?php   echo gettext('Kanban Replenishment Strategy')   ?></span>
  <form method="post" id="fp_kanban_header"  name="fp_kanban_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -44,7 +42,8 @@ inoERP
      <ul class="column header_field"> 
       <li><?php $f->l_select_field_from_array('calculate', fp_kanban_header::$calculate_a, $$class->calculate, 'calculate', 'medium'); ?></li>
       <li><?php $f->l_number_field_d('card_size'); ?></li> 
-      <li><?php $f->l_number_field_d('noof_card'); ?></li> 
+      <li><?php $f->l_number_field_d('noof_card'); ?></li>
+      <li><?php $f->l_number_field_d('size_roundup'); ?></li>
       <li><?php $f->l_number_field_d('moq'); ?></li> 
       <li><?php $f->l_number_field_d('lead_time'); ?></li> 
       <li><?php $f->l_number_field_d('allocation_per'); ?></li> 

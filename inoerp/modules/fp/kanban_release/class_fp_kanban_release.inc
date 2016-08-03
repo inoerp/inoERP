@@ -88,7 +88,7 @@ class fp_kanban_release extends dbObject {
   echo "<br>Number of entered cards : " . count($card_number_list_a);
   $this->no_of_cards =  count($card_number_list_a);
   foreach ($card_number_list_a as $k => $card_num) {
-   $fp_kanban_line_i = fp_kanban_line::find_by_ColumnNameVal('card_number', $card_num);
+   $fp_kanban_line_i = fp_kanban_line::find_by_cardNum($card_num);
    if ($fp_kanban_line_i) {
     $fp_kanban_line = new fp_kanban_line();
     foreach ($fp_kanban_line->field_a as $f_k => $f_v) {

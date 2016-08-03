@@ -8,7 +8,7 @@ inoERP
 -->
 
 <div id="form_all"><span class="heading"><?php echo gettext('Over Head') ?></span>
- <form action=""  method="post" id="bom_overhead"  name="bom_overhead">
+ <form  method="post" id="bom_overhead"  name="bom_overhead">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -65,15 +65,15 @@ inoERP
   <div class="tabContainer"> 
    <div id="tabsLine-1" class="tabContent">
     <div id ="form_line" class="form_line">
-     <form action=""  method="post" id="bom_overhead_resource_assignment_line"  name="bom_overhead_resource_assignment_line">
+     <form  method="post" id="bom_overhead_resource_assignment_line"  name="bom_overhead_resource_assignment_line">
       <table class="form_line_data_table">
        <thead> 
         <tr>
          <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Resource Assignment Id') ?>#</th>
+         <th><?php echo gettext('Resource Assignment Id') ?></th>
          <th><?php echo gettext('Cost Type') ?></th>
-         <th><?php echo gettext('Description') ?>#</th>
-         <th><?php echo gettext('Resource') ?>#</th>
+         <th><?php echo gettext('Description') ?></th>
+         <th><?php echo gettext('Resource') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bom_overhead_resource_assignment_values" >
@@ -94,12 +94,10 @@ inoERP
            echo ino_inline_action($$class_second->bom_overhead_resource_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
            ?>
           </td>
-          <td><?php form::text_field_wid2('bom_overhead_resource_assignment_id'); ?></td>
-          <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', '', 1, $readonly); ?></td>
-          <td><?php $f->text_field_wid2r('bom_cost_type_description'); ?></td>
-          <td>
-           <?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_second->resource_id, '', $readonly, 'resource_id'); ?>
-          </td>
+          <td><?php form::text_field_wid2('bom_overhead_resource_assignment_id', 'always_readonly'); ?></td>
+          <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', 'large', 1, $readonly); ?></td>
+          <td><?php $f->text_field_wid2r('bom_cost_type_description' ,'xlarge'); ?></td>
+          <td><?php echo $f->select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_second->resource_id, '', 'resource_id large',  '', $readonly); ?></td>
          </tr>
          <?php
          $count = $count + 1;
@@ -113,15 +111,15 @@ inoERP
 
    <div id="tabsLine-2" class="tabContent">
     <div id ="form_line2" class="form_line2">
-     <form action=""  method="post" id="bom_overhead_rate_assignment_line"  name="bom_overhead_rate_assignment_line">
+     <form  method="post" id="bom_overhead_rate_assignment_line"  name="bom_overhead_rate_assignment_line">
       <table class="form_line_data_table">
        <thead> 
         <tr>
          <th><?php echo gettext('Action') ?></th>
-         <th><?php echo gettext('Rate Assignment Id') ?>#</th>
+         <th><?php echo gettext('Rate Assignment Id') ?></th>
          <th><?php echo gettext('Cost Type') ?></th>
-         <th><?php echo gettext('Default Basis') ?>#</th>
-         <th><?php echo gettext('Rate') ?>#</th>
+         <th><?php echo gettext('Default Basis') ?></th>
+         <th><?php echo gettext('Rate') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody2 bom_overhead_rate_assignment_values" >
@@ -137,10 +135,10 @@ inoERP
            echo ino_inline_action($$class_third->bom_overhead_rate_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
            ?>
           </td>
-          <td><?php form::text_field_wid3('bom_overhead_rate_assignment_id'); ?></td>
-          <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_third->bom_cost_type, '', '', 1, $readonly); ?></td>
-          <td><?php echo form::select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->default_basis, '', $readonly, 'default_basis'); ?> </td>
-          <td><?php form::text_field_wid3('rate'); ?></td>
+          <td><?php form::text_field_wid3('bom_overhead_rate_assignment_id' ,'always_readonly'); ?></td>
+          <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_third->bom_cost_type, '', 'large', 1, $readonly); ?></td>
+          <td><?php echo $f->select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->default_basis, '', 'default_basis large', '', $readonly); ?> </td>
+          <td><?php form::text_field_wid3('rate' , 'large'); ?></td>
          </tr>
          <?php
          $count = $count + 1;

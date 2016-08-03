@@ -1,5 +1,5 @@
 <div id ="fp_kanban_planner_header_divId">
- <form action=""  method="post" id="fp_kanban_planner_header"  name="fp_kanban_planner_header">
+ <form  method="post" id="fp_kanban_planner_header"  name="fp_kanban_planner_header">
   <span class="heading"><?php echo gettext('Kanban Planner') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
@@ -10,7 +10,7 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-       <ul class="column header_field"> 
+       <ul class="column header_field two_column_form"> 
         <li><?php $f->l_text_field_dr_withSearch('fp_kanban_planner_header_id'); ?>
          <a name="show" href="form.php?class_name=fp_kanban_planner_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_kanban_planner_header_id">
           <i class="fa fa-refresh"></i></a> 
@@ -18,6 +18,7 @@
         <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>    </li>
         <li><?php $f->l_text_field_dm('plan_name'); ?></li>
         <li><?php $f->l_number_field('planning_horizon_days', $$class->planning_horizon_days); ?>    </li>
+        <li><?php $f->l_number_field('size_roundup', $$class->size_roundup); ?>    </li>
         <li><?php $f->l_text_field_d('description'); ?></li>
         <li><?php $f->l_select_field_from_object('demand_source', fp_forecast_header::find_all(), 'fp_forecast_header_id', 'forecast', $$class->demand_source, '', '', 1, $readonly); ?>     </label>
         <li><?php $f->l_status_field_d('status'); ?>    </li>

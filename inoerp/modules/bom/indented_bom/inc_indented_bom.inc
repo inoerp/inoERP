@@ -1,7 +1,7 @@
 <!--Start of this page-->
 <?php
-
-$readonly = 1; $mode = 2;
+$readonly = 1;
+$mode = 2;
 
 if (!empty($$class->item_id_m)) {
  $item = item::find_by_id($$class->item_id_m);
@@ -80,42 +80,44 @@ function indentedBom_tab3($indetned_bom_lines) {
 }
 
 function show_indentedBom($indented_bom_lines, $tabNumber = 'tab1', $nextLevel = 1) {
- global $rowCount;
+ global $rowCount, $f;
+ $f = new inoform();
  //First line with row count zero is shown on template page
  if ($rowCount == 0) {
-	$rowCount ++;
+  $rowCount ++;
  }
 
  $level = $nextLevel;
  $i = $level;
  if ($level < 10) {
-	if (!empty($indented_bom_lines)) {
-	 ${"indentedBom" . $i} = bom_header::find_by_itemId($indented_bom_lines->component_item_id_m);
-	}
-	if (!empty(${"indentedBom" . $i})) {
-	 echo "";
-	 $bom_header_id = ${"indentedBom" . $i}->bom_header_id;
-	 ${"indented_bom_line_object" . $i} = bom_line::find_all_by_bomHeaderId($bom_header_id);
-	 foreach (${"indented_bom_line_object" . $i} as ${"indented_bom_lines" . $i}) {
-		$item = item::find_by_id(${"indented_bom_lines" . $i}->component_item_id_m);
-		${"indented_bom_lines" . $i}->component_item_number = $item->item_number;
-		${"indented_bom_lines" . $i}->component_description = $item->item_description;
-		${"indented_bom_lines" . $i}->component_uom = $item->uom_id;
-		?>
-		<tr class="bom_line<?php echo $rowCount ?>">
-		 <td> <?php echo!empty($rowCount) ? $rowCount : ''; ?> </td>
-		 <td class="<?php echo 'L' . $level; ?>"> <?php echo 'L: ' . $level; ?> </td>
-		 <?php
-		 $tabFunction = 'indentedBom_' . $tabNumber;
-		 $indented_bom_statment = $tabFunction(${"indented_bom_lines" . $i});
-		 echo $indented_bom_statment;
-		 $rowCount++;
-		 ?>
-		</tr>
-		<?php
-		show_indentedBom(${"indented_bom_lines" . $i}, $tabNumber, $level + 1);
-	 }
-	}
+  if (!empty($indented_bom_lines)) {
+   ${"indentedBom" . $i} = bom_header::find_by_itemId($indented_bom_lines->component_item_id_m);
+  }
+  if (!empty(${"indentedBom" . $i})) {
+   echo "";
+   $bom_header_id = ${"indentedBom" . $i}->bom_header_id;
+   ${"indented_bom_line_object" . $i} = bom_line::find_all_by_bomHeaderId($bom_header_id);
+   foreach (${"indented_bom_line_object" . $i} as ${"indented_bom_lines" . $i}) {
+    $item = item::find_by_id(${"indented_bom_lines" . $i}->component_item_id_m);
+    ${"indented_bom_lines" . $i}->component_item_number = $item->item_number;
+    ${"indented_bom_lines" . $i}->component_description = $item->item_description;
+    ${"indented_bom_lines" . $i}->component_uom = $item->uom_id;
+    $level_class = 'ibom_level' . $level;
+    ?>
+    <tr class="bom_line<?php echo $rowCount ?>">
+     <td> <?php echo!empty($rowCount) ? $rowCount : ''; ?> </td>
+     <td> <?php echo $f->text_field('level', $level, '', '', $level_class); ?> </td>
+     <?php
+     $tabFunction = 'indentedBom_' . $tabNumber;
+     $indented_bom_statment = $tabFunction(${"indented_bom_lines" . $i});
+     echo $indented_bom_statment;
+     $rowCount++;
+     ?>
+    </tr>
+    <?php
+    show_indentedBom(${"indented_bom_lines" . $i}, $tabNumber, $level + 1);
+   }
+  }
  }
 }
 ?>

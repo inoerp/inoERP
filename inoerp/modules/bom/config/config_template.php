@@ -32,7 +32,7 @@ inoERP
       <li><?php $f->l_text_field_dr('reference_key_name'); ?></li>
       <li><?php $f->l_text_field_dr('reference_key_value'); ?></li>
       <li><?php $f->l_text_field_dr('bom_header_id'); ?></li>
-      <li><label></label><button  class="quick_select button btn btn-success">Select Config</button></li>
+      <li><label></label><button  class="quick_select button btn btn-success <?php echo $config_button_select; ?> "><?php echo gettext('Select Config') ?></button></li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">

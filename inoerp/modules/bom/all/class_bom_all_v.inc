@@ -56,7 +56,7 @@ public static $form_class_name = "bom_header";
 		 '_show_update_path' => 1,
 		 '_view_path' => 'form.php?class_name=bom_header',
 		 '_show_view_path' => 1,
-		 '_extra_path' => array('form.php?class_name=indented_bom&mode=9' => 'Indented BOM')
+		 '_extra_path' => array('form.php?class_name=bom_indented_bom&mode=9' => 'Indented BOM')
  ];
  public $bom_header_id;
  public $item_id_m;

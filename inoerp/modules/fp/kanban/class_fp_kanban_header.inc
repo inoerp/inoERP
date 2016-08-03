@@ -75,6 +75,7 @@ class fp_kanban_header extends dbObject {
   'card_size',
   'noof_card',
   'moq',
+  'size_roundup',
   'lead_time',
   'allocation_per',
   'flm',
@@ -145,6 +146,7 @@ class fp_kanban_header extends dbObject {
  public $allocation_per;
  public $flm;
  public $ssd;
+ public $size_roundup;
  public $rfid_reference;
  public $created_by;
  public $creation_date;
@@ -209,7 +211,7 @@ class fp_kanban_header extends dbObject {
   $kbh = new fp_kanban_header();
   $kbh->findBy_id($kanban_header_id);
   $no_of_cards = !empty($kbh->noof_card) ? $kbh->noof_card : 2;
-  
+
   $no_of_act_cards = fp_kanban_line::noof_active_cards($kanban_header_id);
   if ($no_of_act_cards >= $no_of_cards) {
    $this->message = '<br> No new card required. No of existing active cards = ' . $no_of_act_cards . ' and no of requured cards ' . $no_of_cards;
@@ -221,7 +223,8 @@ class fp_kanban_header extends dbObject {
    $kbl->description = "Auto Generated Card";
    $kbl->card_status = "ACTIVE";
    $kbl->supply_status = "NEW";
-   $kbl->kanban_size = $kbh->card_size;
+   $size_roundup = !empty($kbh->size_roundup) ? ($kbh->size_roundup ) : 0;
+   $kbl->kanban_size = round($kbh->card_size, $size_roundup);
    $kbl->card_type = $kbh->source_type;
    $kbl->save();
    $kbl->_after_save();
@@ -233,7 +236,8 @@ class fp_kanban_header extends dbObject {
   $kbl->findBy_id($fp_kanban_line_id);
   $kbh = new fp_kanban_header();
   $kbh->findBy_id($kbl->fp_kanban_header_id);
-  $kbl->kanban_size = $kbh->card_size;
+  $size_roundup = !empty($kbh->size_roundup) ? ($kbh->size_roundup ) : 0;
+  $kbl->kanban_size = round($kbh->card_size, $size_roundup);
   $kbl->card_type = $kbh->source_type;
   $kbl->save();
  }
@@ -280,7 +284,7 @@ class fp_kanban_header extends dbObject {
  public function prg_generate_card($seralized_parameters) {
   $parameters = unserialize($seralized_parameters);
   $this->message = '<br> Starting Kanban Card Generation Program....<br>';
-  pa($parameters);
+//  pa($parameters);
 
   $card_gen_mode = !empty($parameters['from_item_id_m'][0]) ? $parameters['from_item_id_m'][0] : 'CREATE_UPDATE';
   $this->message = '<br> Using card generation mode ' . $card_gen_mode;

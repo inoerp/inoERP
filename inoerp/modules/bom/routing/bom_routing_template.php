@@ -7,11 +7,9 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id='bom_routing_divId'>
- <span class="heading"><?php
-  echo gettext('Routing Header');
-  echo!empty($form_name_header) ? ' - ' . gettext($form_name_header) : ' ';
-  ?></span>
- <form action=""  method="bom_routingst" id="bom_routing_header"  name="bom_routing_header">
+ <span class="heading"><?php   echo gettext('Routing Header');   echo!empty($form_name_header) ? ' - ' . gettext($form_name_header) : ' ';   ?></span>
+ <div id="form_header">
+ <form  method="bom_routingst" id="bom_routing_header"  name="bom_routing_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -26,7 +24,7 @@ inoERP
        <a name="show" href="form.php?class_name=bom_routing_header&<?php echo "mode=$mode"; ?>" class="show document_id bom_routing_header_id">
         <i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_routing_header->org_id, 'org_id', '', 1, $readonly1); ?>        </li>
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $bom_routing_header->org_id, 'org_id', ' ', 1, $readonly1); ?>        </li>
       <li><label>
         <?php echo gettext('Item Number') ?></label>
        <?php
@@ -37,7 +35,7 @@ inoERP
        ?>
        <i class="select_item_number select_popup clickable fa fa-search"></i>
       </li>
-      <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, '', '', '', $readonly); ?>        </li>
+      <li><?php $f->l_select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, '', ' ', '', $readonly); ?>        </li>
       <li><?php $f->l_text_field_d('item_description'); ?> </li>
       <li><?php $f->l_text_field_d('routing_revision'); ?> </li>
       <li><?php $f->l_date_fieldAnyDay('effective_date', $$class->effective_date); ?>              </li>
@@ -45,7 +43,7 @@ inoERP
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div> 
-      <ul class="column five_column">
+      <ul class="column header_field">
        <li><label><?php echo gettext('Item Number') ?></label><?php echo $f->hidden_field_withIdClass('common_routing_item_id_m', $$class->common_routing_item_id_m, 'item_id_m'); ?>
         <?php $f->text_field_d('commonRouting_item_number', 'select_item_number'); ?>
         <i class="select_item_number2 select_popup clickable fa fa-search"></i>
@@ -76,7 +74,7 @@ inoERP
    </div>
   </div>
  </form>
-
+</div>
 
  <div id="form_line" class="form_line"><span class="heading">Operation & Resource Details </span>
   <form method="bom_routingst" id="bom_routing_line"  name="bom_routing_line">
@@ -249,8 +247,8 @@ inoERP
           <td><?php form::text_field_wid2('eco_number'); ?></td>
 
           <td><?php echo form::checkBox_field('include_in_rollup_cb', $$class_second->include_in_rollup_cb); ?></td>
-          <td><?php form::number_field_wid2s('yield'); ?></td>
-          <td><?php form::number_field_wid2s('cumm_yield'); ?></td>
+          <td><?php form::number_field_wid2('yield'); ?></td>
+          <td><?php form::number_field_wid2('cumm_yield'); ?></td>
          </tr>
          <?php
          $count = $count + 1;

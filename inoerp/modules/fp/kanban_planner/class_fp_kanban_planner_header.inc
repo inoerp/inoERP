@@ -40,6 +40,7 @@ class fp_kanban_planner_header extends dbObject {
 		 'description',
 		 'status',
 		 'demand_source',
+  'size_roundup',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
@@ -95,6 +96,7 @@ class fp_kanban_planner_header extends dbObject {
  public $planning_horizon_days;
  public $description;
  public $status;
+ public $size_roundup;
  public $demand_source;
  public $ar_customer_id;
  public $created_by;

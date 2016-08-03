@@ -697,22 +697,15 @@ class extn_report extends dbObject {
    $svg_chart = $svgimg->getSvgChart_forView();
   }
 
+  $column_list = [];
   if (!empty($this->extn_report_id)) {
    $extn_report_i = extn_report::find_by_id($this->extn_report_id);
-   $column_list = [];
-   if (!empty($extn_report_i->select_v)) {
-    $select_v = explode(',', $this->select_v);
-    if (!empty($select_v)) {
-     foreach ($select_v as $k2 => $v2) {
-      if (strpos($v2, 'AS') !== false) {
-       $v_a = explode('AS', $v2);
-       $colmn_v = trim($v_a[1]);
-       $column_list[$colmn_v] = $colmn_v;
-      }
-     }
-    }
+   if (!empty($extn_report_i->report_columns)) {
+   $column_list_k = json_decode($extn_report_i->report_columns);
+   $column_list = array_combine($column_list_k, $column_list_k);
    }
   }
+
   $class = 'extn_report_result';
   $$class = $this;
   global $f;

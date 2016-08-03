@@ -5567,7 +5567,7 @@ $(document).ready(function () {
 
  });
 
- $('body').on('click', '.get-report-content', function () {
+ $('body').off('click', '.get-report-content').on('click', '.get-report-content', function () {
   var report_id = $(this).data('report_id');
   if ($(this).data('update_divId')) {
    var update_divId_h = '#' + $(this).data('update_divId');

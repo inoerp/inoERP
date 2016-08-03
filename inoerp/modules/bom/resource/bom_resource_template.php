@@ -8,8 +8,8 @@ inoERP
 -->
 
 <div id ="form_header">
- <form action=""  method="post" id="bom_resource"  name="bom_resource">
-  <span class="heading"><?php echo gettext('Resources') ?>
+ <form  method="post" id="bom_resource"  name="bom_resource">
+  <span class="heading"><?php echo gettext('Resources') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -91,11 +91,12 @@ inoERP
 
 
   </div>
+ 
  </form>
 </div>
 
 <div id="form_line" class="form_line"><span class="heading">Resource Cost Lines </span>
- <form action=""  method="post" id="bom_resource_cost"  name="bom_resource_cost">
+ <form   method="post" id="bom_resource_cost"  name="bom_resource_cost">
   <div id="tabsLine">
    <div class="tabContainer">
     <table class="form_line_data_table">
@@ -103,10 +104,10 @@ inoERP
       <tr>
        <th><?php echo gettext('Action') ?></th>
        <th><?php echo gettext('Seq') ?>#</th>
-       <th><?php echo gettext('Resource Cost Id') ?>#</th>
+       <th><?php echo gettext('Resource Cost Id') ?></th>
        <th><?php echo gettext('Cost Type') ?></th>
-       <th><?php echo gettext('Description') ?>#</th>
-       <th><?php echo gettext('Rate') ?>#</th>
+       <th><?php echo gettext('Description') ?></th>
+       <th><?php echo gettext('Rate') ?></th>
       </tr>
      </thead>
      <tbody class="form_data_line_tbody">
@@ -128,9 +129,9 @@ inoERP
          ?>
         </td>
         <td><?php $f->seq_field_d($count) ?></td>
-        <td><?php form::text_field_wid2sr('bom_resource_cost_id'); ?></td>
-        <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', '', 1, $readonly); ?></td>
-        <td><?php $f->text_field_wid2r('bom_cost_type_description'); ?></td>
+        <td><?php form::text_field_wid2r('bom_resource_cost_id'); ?></td>
+        <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', 'medium', 1, $readonly); ?></td>
+        <td><?php $f->text_field_wid2r('bom_cost_type_description' , 'xlarge'); ?></td>
         <td><?php echo $f->number_field('resource_rate', $$class_second->resource_rate); ?></td>
        </tr>
        <?php

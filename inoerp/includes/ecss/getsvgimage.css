@@ -16,6 +16,7 @@ ul#charts_in_report li {
 
 .line_class_0.line{
  stroke:  rgba(153, 216, 49, 0.8);
+ fill:  rgba(153, 216, 49, 0.8);
  stroke-width : 0.2em;
 }
 
@@ -25,6 +26,7 @@ rect.line_class_0 {
 
 .line_class_1.line{
  stroke: rgba(9, 195, 132, 0.7);
+ fill: rgba(9, 195, 132, 0.7);
  stroke-width : 0.2em;
 }
 
@@ -34,6 +36,7 @@ rect.line_class_1 {
 
 .line_class_2.line{
  stroke: rgba(210, 40, 90, 0.7);
+ fill:  rgba(210, 40, 90, 0.7);
  stroke-width : 0.2em;
 }
 
@@ -44,6 +47,7 @@ rect.line_class_2 {
 
 .line_class_3.line{
  stroke: rgba(211, 213, 143, 0.9);
+ fill:  rgba(211, 213, 143, 0.9);
  stroke-width : 0.2em;
 }
 
@@ -53,6 +57,7 @@ rect.line_class_3 {
 
 .line_class_4.line{
  stroke: rgba(40, 140, 90, 0.7);
+ fill:  rgba(40, 140, 90, 0.7);
  stroke-width : 0.2em;
 }
 
@@ -62,6 +67,7 @@ rect.line_class_4 {
 
 .line_class_5.line{
  stroke: rgba(10, 180, 180, 0.8);
+ fill:  rgba(10, 180, 180, 0.8);
  stroke-width : 0.2em;
 }
 
@@ -71,6 +77,7 @@ rect.line_class_5 {
 
 .line_class_6.line{
  stroke: rgba(237, 167, 5, 0.9);
+ fill:  rgba(237, 167, 5, 0.9);
  stroke-width : 0.2em;
 }
 
@@ -81,6 +88,7 @@ rect.line_class_6 {
 
 .line_class_7.line{
  stroke: rgba(5, 237, 5, 0.9);
+ fill: rgba(5, 237, 5, 0.9);
  stroke-width : 0.2em;
 }
 
@@ -90,6 +98,7 @@ rect.line_class_7 {
 
 .line_class_8.line{
  stroke: rgba(5, 206, 237, 0.9);
+ fill: rgba(5, 206, 237, 0.9);
  stroke-width : 0.2em;
 }
 
@@ -98,6 +107,7 @@ rect.line_class_7 {
 }
 
 .line_class_9.line{
+ stroke: rgba(105, 206, 237, 0.9);
  fill: rgba(105, 206, 237, 0.9);
  stroke-width : 0.2em;
 }
@@ -107,6 +117,7 @@ rect.line_class_7 {
 }
 
 .line_class_10.line{
+ stroke: rgba(105, 6, 237, 0.9);
  fill: rgba(105, 6, 237, 0.9);
  stroke-width : 0.2em;
 }
@@ -116,6 +127,7 @@ rect.line_class_7 {
 }
 
 .line_class_11.line{
+ stroke: rgba(205, 106, 27, 0.7);
  fill: rgba(205, 106, 27, 0.7);
  stroke-width : 0.2em;
 }
@@ -125,6 +137,7 @@ rect.line_class_7 {
 }
 
 .line_class_12.line{
+ stroke: rgba(105, 106, 27, 0.9);
  fill: rgba(105, 106, 27, 0.9);
  stroke-width : 0.2em;
 }
@@ -134,6 +147,7 @@ rect.line_class_7 {
 }
 
 .line_class_13.line{
+ stroke: rgba(105, 6, 237, 0.3);
  fill: rgba(105, 6, 237, 0.3);
  stroke-width : 0.2em;
 }
@@ -143,6 +157,7 @@ rect.line_class_7 {
 }
 
 .line_class_14.line{
+ stroke: rgba(105, 106, 237, 0.3);
  fill: rgba(105, 106, 237, 0.3);
  stroke-width : 0.2em;
 }

@@ -59,9 +59,9 @@ inoERP
      <div> 
       <ul class="column header_field">
        <li><?php $f->l_select_field_from_object('common_bom_org_id', org::find_all_inventory(), 'org_id', 'org', $$class->common_bom_org_id, 'common_bom_org_id', '', '', $readonly); ?>       </li>
-       <li><?php $f->hidden_field_withIdClass('common_bom_item_id_m', $$class->common_bom_item_id_m, 'item_id_m'); ?>
-        <?php $f->l_text_field_dr('commonBom_item_number', 'select_item_number'); ?>
-       <i class="select_item_number2 select_popup clickable fa fa-search"></i>
+       <li><?php echo $f->hidden_field_withIdClass('common_bom_item_id_m', $$class->common_bom_item_id_m, 'item_id_m'); ?>
+        <?php $f->l_text_field_dr('commonBom_item_number', 'item_number'); ?>
+       <i class="select_item_number select_popup clickable fa fa-search"></i>
        </li>
        <li><?php $f->l_text_field_dr('commonBom_item_description', 'item_description'); ?></li>
       </ul>
@@ -92,7 +92,7 @@ inoERP
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('BOM Lines') ?></span>
- <form action=""  method="post" id="bom_line"  name="bom_line">
+ <form  method="post" id="bom_line"  name="bom_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
@@ -118,7 +118,7 @@ inoERP
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0;
+       $count = 0; 
        foreach ($bom_line_object as $bom_line) {
         ?>         
         <tr class="bom_line<?php echo $count ?>">
@@ -130,9 +130,9 @@ inoERP
          </td>
          <td><?php form::text_field_wid2sr('bom_line_id','line_id always_readonly'); ?></td>
          <td><?php $f->text_field_d2s('bom_sequence', 'lines_number'); ?></td>
-         <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'bom_routing_line_id', 'routing_sequence', $$class_second->routing_sequence, '', $readonly, 'usage_basis', '', 1) : form::text_field_wid2sm('routing_sequence'); ?></td>
+         <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'bom_routing_line_id', 'routing_sequence', $$class_second->routing_sequence, '', $readonly, 'usage_basis', '', 1) : form::text_field_wid2s('routing_sequence'); ?></td>
          <td><?php
-          $f->text_field_wid2('component_item_number', 'select_item_number');
+          $f->text_field_wid2('component_item_number', 'select_item_number xlarge');
           echo $f->hidden_field_withCLass('component_item_id_m', $$class_second->component_item_id_m, 'item_id_m');
           ?><i class="select_item_number select_popup clickable fa fa-search"></i></td>
          <td><?php
@@ -141,13 +141,11 @@ inoERP
           } else {
            $revision_name_a = array();
           }
-          echo $f->select_field_from_object('component_revision', $revision_name_a, 'revision_name', 'revision_name', $$class_second->component_revision, '', 'small');
+          echo $f->select_field_from_object('component_revision', $revision_name_a, 'revision_name', 'revision_name', $$class_second->component_revision, '', 'medium');
           ?></td>
-         <td><?php $f->text_field_wid2('component_description', 'item_description'); ?></td>
-         <td><?php
-          echo $f->select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_second->component_uom, '', '', '', $readonly);
-          ?></td>
-         <td><?php echo form::select_field_from_object('usage_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->usage_basis, '', $readonly, 'usage_basis', '', 1); ?></td>
+         <td><?php $f->text_field_wid2('component_description', 'item_description xlarge'); ?></td>
+         <td><?php echo $f->select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_second->component_uom, '', 'medium', '', $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('usage_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->usage_basis, '', 'usage_basis medium',  '', $readonly); ?></td>
          <td><?php echo $f->number_field('usage_quantity', $$class_second->usage_quantity, '', '', 'small'); ?></td>
         </tr>
         <?php
@@ -192,7 +190,7 @@ inoERP
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th><?php echo gettext('Planning') ?>%</th>
+        <th><?php echo gettext('Planning') ?> %</th>
         <th><?php echo gettext('Yield') ?></th>
         <th><?php echo gettext('WIP Supply Type') ?></th>
         <th><?php echo gettext('Sub inventory') ?></th>
@@ -209,9 +207,9 @@ inoERP
         <tr class="bom_line<?php echo $count ?>">
          <td><?php form::text_field_wid2('planning_percentage'); ?></td>
          <td><?php form::text_field_wid2('yield'); ?></td>
-         <td><?php echo form::select_field_from_object('wip_supply_type', bom_header::wip_supply_type(), 'option_line_code', 'option_line_value', $$class_second->wip_supply_type, '', $readonly, '', '', ''); ?></td>
-         <td><?php echo form::select_field_from_object('supply_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->supply_sub_inventory, '', $readonly, 'subinventory_id', '', ''); ?></td>
-         <td><?php echo form::select_field_from_object('supply_locator', locator::find_all_of_subinventory($$class_second->supply_sub_inventory), 'locator_id', 'locator', $$class_second->supply_locator, '', $readonly, 'locator_id', '', ''); ?></td>
+         <td><?php echo $f->select_field_from_object('wip_supply_type', bom_header::wip_supply_type(), 'option_line_code', 'option_line_value', $$class_second->wip_supply_type, '', 'medium', '', $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('supply_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->supply_sub_inventory, '', 'subinventory_id medium', '', $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('supply_locator', locator::find_all_of_subinventory($$class_second->supply_sub_inventory), 'locator_id', 'locator', $$class_second->supply_locator, '',  'locator_id medium', '', $readonly); ?></td>
          <td>
           <?php echo form::checkBox_field('include_in_cost_rollup_cb', $$class_second->include_in_cost_rollup_cb, 'include_in_cost_rollup_cb', $readonly); ?>
          </td>

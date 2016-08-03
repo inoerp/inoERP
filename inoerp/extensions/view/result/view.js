@@ -87,28 +87,29 @@ $(document).ready(function() {
  });
 
 
- $('body').on('click', '.draw_svg_image', function() {
-  var thisElement = $(this);
-  var filterData = $(this).closest('div.view_content').find('.view_filters').find('.filtered_field:input').serializeArray();
-  var sortData = $(this).closest('div.view_content').find('.view_filters').find('.sorted_field:input').serializeArray();
-
-  $.when(getSvgImage({
-   view_id: $(this).closest('div.view_content').find('.view_id').val(),
-   chart_type: $(this).closest('div.view_content').find('.chart_type').val(),
-   chart_label: $(this).closest('div.view_content').find('.chart_label').val(),
-   chart_value: $(this).closest('div.view_content').find('.chart_value').val(),
-   chart_name: $(this).closest('div.view_content').find('.chart_name').val(),
-   chart_width: $(this).closest('div.view_content').find('.chart_width').val(),
-   chart_height: $(this).closest('div.view_content').find('.chart_height').val(),
-   chart_legend: $(this).closest('div.view_content').find('.chart_legend').val(),
-   filterData: filterData,
-   sortData: sortData,
-   update_image: false
-  })).then(function(data, textStatus, jqXHR) {
-   $(thisElement).closest('div.view_content').find('.svg_image').empty().append(data);
-  });
-
- });
+// $('body').on('click', '.draw_svg_image', function() {
+//  var thisElement = $(this);
+//  var filterData = $(this).closest('div.view_content').find('.view_filters').find('.filtered_field:input').serializeArray();
+//  var sortData = $(this).closest('div.view_content').find('.view_filters').find('.sorted_field:input').serializeArray();
+//
+//  $.when(getSvgImage({
+//   view_id: $(this).closest('div.view_content').find('.view_id').val(),
+//   chart_type: $(this).closest('div.view_content').find('.chart_type').val(),
+//   chart_label: $(this).closest('div.view_content').find('.chart_label').val(),
+//   chart_value: $(this).closest('div.view_content').find('.parameter.chart_value').val(),
+//   chart_name: $(this).closest('div.view_content').find('.chart_name').val(),
+//   chart_width: $(this).closest('div.view_content').find('.chart_width').val(),
+//   chart_height: $(this).closest('div.view_content').find('.chart_height').val(),
+//   chart_legend: $(this).closest('div.view_content').find('.chart_legend').val(),
+//   chart_legend2: $(this).closest('div.view_content').find('.chart_legend2').val(),
+//   filterData: filterData,
+//   sortData: sortData,
+//   update_image: false
+//  })).then(function(data, textStatus, jqXHR) {
+//   $(thisElement).closest('div.view_content').find('.svg_image').empty().append(data);
+//  });
+//
+// });
 
  $('.view_refresh_button').on('click', function() {
   $(this).getViewResult_e();
