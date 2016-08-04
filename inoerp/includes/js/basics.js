@@ -4380,12 +4380,16 @@ $(document).ready(function () {
   printContenet += '</head><body>';
   printContenet += pContent;
   printContenet += '<' + '/body' + '><' + '/html' + '>';
-  var popupWin = window.open("", "_blank", "width=1300,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no");
+  var w_width = $(window).width();
+  var w_height = $(window).height();
+  var popupWin = window.open("", "_blank", "width="+w_width+",height="+w_height+",TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no");
+  
   popupWin.document.writeln('' + printContenet + '');
   popupWin.document.close();
   popupWin.focus();
-  popupWin.print();
-  popupWin.close();
+  $.when(popupWin.print()).then(function(){
+     popupWin.close();
+  });
  });
  //all download
  $('#export_excel_allResult').on('click', function () {

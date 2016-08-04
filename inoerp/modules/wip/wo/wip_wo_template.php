@@ -128,6 +128,7 @@ inoERP
         <thead> 
          <tr>
           <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('Seq') ?> #</th>
           <th><?php echo gettext('WO Routing Id') ?></th>
           <th><?php echo gettext('BOM Sequence') ?></th>
           <th><?php echo gettext('Department') ?></th>
@@ -150,6 +151,7 @@ inoERP
             echo ino_inline_action($wip_wo_routing_line->wip_wo_routing_line_id, array('wip_wo_header_id' => $$class->wip_wo_header_id));
             ?>
            </td>
+           <td><?php $f->seq_field_d($count); ?></td>
            <td><?php $f->text_field_wid2sr('wip_wo_routing_line_id'); ?></td>
            <td><?php form::number_field_wid2('routing_sequence'); ?></td>
            <td><?php echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, 'department_id', 'large'); ?></td>
@@ -274,6 +276,7 @@ inoERP
        <table class="form_line_data_table">
         <thead> 
          <tr>
+          <th><?php echo gettext('Seq') ?> #</th>
           <th><?php echo gettext('Queue') ?></th>
           <th><?php echo gettext('Running') ?></th>
           <th><?php echo gettext('Rejected') ?></th>
@@ -285,19 +288,20 @@ inoERP
          </tr>
         </thead>
         <tbody class="form_data_line_tbody wip_wo_routing_line_values" >
-         <?php
+         <?php $f = new inoform();
          $count = 0;
          foreach ($wip_wo_routing_line_object as $wip_wo_routing_line) {
           ?>         
           <tr class="wip_wo_routing_line<?php echo $count ?>">
-           <td><?php form::text_field_wid2sr('queue_quantity'); ?></td>
-           <td><?php form::number_field_wid2sr('running_quantity'); ?></td>
-           <td><?php form::text_field_wid2sr('rejected_quantity'); ?></td>
-           <td><?php form::text_field_wid2sr('scrapped_quantity'); ?></td>
-           <td><?php form::number_field_wid2sr('tomove_quantity'); ?></td>
-           <td><?php echo form::date_fieldFromToday('start_date', ino_date($$class_second->start_date)); ?></td>
-           <td><?php echo form::date_fieldFromToday('completion_date', ino_date($$class_second->completion_date)); ?></td>
-           <td><?php form::text_field_wid2sr('completed_quantity'); ?></td>
+           <td><?php $f->seq_field_d($count); ?></td>
+           <td><?php $f->text_field_wid2r('queue_quantity', 'always_readonly'); ?></td>
+           <td><?php $f->text_field_wid2r('running_quantity', 'always_readonly'); ?></td>
+           <td><?php $f->text_field_wid2r('scrapped_quantity', 'always_readonly'); ?></td>
+           <td><?php $f->text_field_wid2r('queue_quantity', 'always_readonly'); ?></td>
+           <td><?php $f->text_field_wid2r('tomove_quantity', 'always_readonly'); ?></td>
+           <td><?php echo $f->date_fieldFromToday_r('start_date', ino_date($$class_second->start_date), 1); ?></td>
+           <td><?php echo $f->date_fieldFromToday_r('completion_date', ino_date($$class_second->completion_date), 1); ?></td>
+           <td><?php $f->text_field_wid2r('completed_quantity', 'always_readonly'); ?></td>
           </tr>
           <?php
           $count = $count + 1;
@@ -328,6 +332,7 @@ inoERP
         <thead> 
          <tr>
           <th><?php echo gettext('Action') ?></th>
+          <th><?php echo gettext('BOM Seq') ?> #</th>
           <th><?php echo gettext('WO BOM Id') ?></th>
           <th><?php echo gettext('BOM Sequence') ?></th>
           <th><?php echo gettext('Routing Seq') ?></th>
@@ -360,9 +365,10 @@ inoERP
              <li><?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?></li>
             </ul>
            </td>
-           <td><?php form::text_field_wid4s('wip_wo_bom_id'); ?></td>
-           <td><?php form::text_field_wid4sm('bom_sequence'); ?></td>
-           <td><?php echo!empty($routing_line_details) ? form::select_field_from_object('routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class_fourth->routing_sequence, 'routing_sequence') : form::text_field_wid4s('routing_sequence'); ?></td>
+           <td><?php $f->seq_field_d($count); ?></td>
+           <td><?php $f->text_field_wid4sr('wip_wo_bom_id', 'always_readonly'); ?></td>
+           <td><?php $f->text_field_wid4('bom_sequence'); ?></td>
+           <td><?php echo!empty($routing_line_details) ? $f->select_field_from_object('routing_sequence', $routing_line_details, 'routing_sequence', 'routing_sequence', $$class_fourth->routing_sequence, '', 'routing_sequence medium') : $f->text_field_wid4s('routing_sequence'); ?></td>
            <td><?php echo $f->text_field('component_item_id_m', $$class_fourth->component_item_id_m, '8', '', 'item_id_m', 1, $readonly); ?></td>
            <td><?php echo $f->text_field('component_item_number', $$class_fourth->component_item_number, '20', '', 'select_item_number', '', $readonly); ?>
             <i class="select_item_number select_popup clickable fa fa-search"></i></td>
@@ -374,7 +380,7 @@ inoERP
             }
             echo $f->select_field_from_object('component_revision', $revision_name_a, 'revision_name', 'revision_name', $$class_fourth->component_revision, '', 'small');
             ?></td>
-           <td><?php echo $f->text_field('component_description', $$class_fourth->component_description, '20', '', 'item_description', '', $readonly); ?></td>
+           <td><?php echo $f->text_field('component_description', $$class_fourth->component_description, '20', '', 'item_description xlarge', '', $readonly); ?></td>
            <td><?php echo $f->select_field_from_object('component_uom', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->component_uom, '', 'uom_id', '', $readonly); ?></td>
            <td><?php echo form::select_field_from_object('usage_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_fourth->usage_basis, '', $readonly, 'usage_basis', '', 1); ?></td>
            <td><?php form::number_field_wid4sm('usage_quantity'); ?></td>
@@ -390,6 +396,7 @@ inoERP
        <table class="form_line_data_table">
         <thead> 
          <tr>
+          <th><?php echo gettext('BOM Seq') ?> #</th>
           <th><?php echo gettext('Required') ?></th>
           <th><?php echo gettext('Issued') ?></th>
           <th><?php echo gettext('Open') ?></th>
@@ -406,13 +413,14 @@ inoERP
           $wip_wo_bom->open_quantity = $wip_wo_bom->required_quantity - $wip_wo_bom->issued_quantity;
           ?>         
           <tr class="wip_wo_bom<?php echo $count ?>">
-           <td><?php form::number_field_wid4s('required_quantity'); ?></td>
-           <td><?php form::number_field_wid4sr('issued_quantity'); ?></td>
-           <td><?php form::number_field_wid4sr('open_quantity'); ?></td>
+           <td><?php $f->seq_field_d($count); ?></td>
+           <td><?php echo $f->number_field('required_quantity' , $$class_fourth->required_quantity); ?></td>
+           <td><?php $f->text_field_wid4r('issued_quantity', 'always_readonly'); ?></td>
+           <td><?php $f->text_field_wid4r('open_quantity', 'always_readonly'); ?></td>
            <td></td>
-           <td><?php echo $f->select_field_from_object('wip_supply_type', bom_header::wip_supply_type(), 'option_line_code', 'option_line_value', $$class_fourth->wip_supply_type, '', 'wip_supply_type', '', $readonly); ?></td>
-           <td><?php echo $f->select_field_from_object('supply_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_fourth->supply_sub_inventory, '', 'subinventory_id', '', $readonly); ?></td>
-           <td><?php echo $f->select_field_from_object('supply_locator', locator::find_all_of_subinventory($$class_fourth->supply_sub_inventory), 'locator_id', 'locator', $$class_fourth->supply_locator, '', 'locator_id', '', $readonly); ?></td>
+           <td><?php echo $f->select_field_from_object('wip_supply_type', bom_header::wip_supply_type(), 'option_line_code', 'option_line_value', $$class_fourth->wip_supply_type, '', 'wip_supply_type medium', '', $readonly); ?></td>
+           <td><?php echo $f->select_field_from_object('supply_sub_inventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_fourth->supply_sub_inventory, '', 'subinventory_id medium', '', $readonly); ?></td>
+           <td><?php echo $f->select_field_from_object('supply_locator', locator::find_all_of_subinventory($$class_fourth->supply_sub_inventory), 'locator_id', 'locator', $$class_fourth->supply_locator, '', 'locator_id medium', '', $readonly); ?></td>
           </tr>
           <?php
           $count = $count + 1;

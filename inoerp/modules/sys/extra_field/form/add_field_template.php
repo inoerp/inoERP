@@ -36,12 +36,13 @@
              <th><?php echo gettext('Control Type') ?></th>
              <th><?php echo gettext('Control Value') ?></th>
              <th><?php echo gettext('Control UOM') ?></th>
-             <th><?php echo gettext('Display Weight') ?></th>
+             
              <th><?php echo gettext('Active') ?></th>
             </tr>
            </thead>
            <tbody class="form_data_detail_tbody_ln">
             <?php
+            $f = new inoform();
             $detailCount = 0;
             if (!empty($ef_refer_value_i)) {
              $extra_field_object = [];
@@ -64,12 +65,12 @@
               <td><?php $f->seq_field_detail_d($detailCount) ?></td>
               <td><?php echo $f->text_field('sys_extra_field_instance_id', $extra_field->sys_extra_field_instance_id, '8', '', '', '', 1); ?></td>
               <td><?php echo $f->select_field_from_object('sys_extra_field_id', sys_extra_field::find_all(), 'sys_extra_field_id', 'field_name', $extra_field->sys_extra_field_id, '', 'medium', '', '', '', '', '', 'field_type'); ?> </td>
-              <td><?php echo $f->text_field('label', $extra_field->label); ?></td>
-              <td><?php echo $f->text_field_ap(array('name' => 'field_type', 'value' => $extra_field->field_type, 'readonly' => true)); ?></td>
+              <td><?php echo $f->text_field('field_label', $extra_field->field_label); ?></td>
+              <td><?php echo $f->text_field('field_type', $extra_field->field_type, '' ,'' ,'always_readonly'); ?></td>
               <td><?php echo $f->select_field_from_array('control_type', dbObject::$control_type_a, $extra_field->control_type); ?></td>
               <td><?php echo $f->text_field('control_value', $extra_field->control_value); ?></td>
               <td><?php echo $f->select_field_from_object('control_uom', uom::find_all(), 'uom_id', 'uom_name', $extra_field->control_uom, '', 'uom_id small'); ?></td>
-              <td><?php echo $f->select_field_from_array('display_weight', dbObject::$position_array, $extra_field->display_weight); ?></td>
+              
               <td><?php echo $f->checkBox_field('active_cb', $extra_field->active_cb); ?></td>
              </tr>
              <?php
@@ -88,6 +89,7 @@
              <th><?php echo gettext('Upper Limit') ?></th>
              <th><?php echo gettext('List Option Type') ?></th>
              <th><?php echo gettext('Field Name') ?></th>
+             <th><?php echo gettext('Display Weight') ?></th>
             </tr>
            </thead>
            <tbody class="form_data_detail_tbody_ln">
@@ -103,8 +105,9 @@
               <td><?php
                $list_value = !empty($extra_field->list_values) ? implode(',', unserialize($extra_field->list_values)) : null;
                echo $f->text_area_ap(array('name' => 'list_values', 'value' => $list_value, 'column_size' => '60',
-                'rowsize' => '2', 'place_holder' => 'Enter comma(,) separated values'));
+                'rowsize' => '1', 'place_holder' => 'Enter comma(,) separated values'));
                ?> </td>
+              <td><?php echo $f->select_field_from_array('display_weight', dbObject::$position_array, $extra_field->display_weight); ?></td>
              </tr>
              <?php
              $detailCount++;

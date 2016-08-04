@@ -20,7 +20,7 @@
    'referece_entity',
    'reference_key_name',
    'reference_key_value',
-   'label',
+   'field_label',
    'control_type',
    'control_value',
    'control_uom',
@@ -38,7 +38,7 @@
   public $initial_search = [
    'sys_extra_field_instance_id',
    'sys_extra_field_id',
-   'label',
+   'field_label',
   ];
   public $checkbox = [
    "active_cb",
@@ -56,7 +56,7 @@
   public $referece_entity;
   public $reference_key_name;
   public $reference_key_value;
-  public $label;
+  public $field_label;
   public $control_type;
   public $control_value;
   public $control_uom;
