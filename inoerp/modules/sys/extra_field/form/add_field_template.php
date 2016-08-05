@@ -48,6 +48,7 @@
              $extra_field_object = [];
              $extra_field_object = sys_extra_field_instance::find_by_referenceKeyValue($ef_refer_key, $ef_refer_value_i);
             }
+           
             if (empty($extra_field_object)) {
              $extra_field_object = array(new sys_extra_field_instance());
             }

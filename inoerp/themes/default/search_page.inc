@@ -265,7 +265,7 @@
    <div class="col-sm-12 col-md-10 col-md-offset-2 mainbar">
     <div class="hidden" id="document_history"></div>
     <div class="footer-menu">
-     <div id="half_copyrights">
+     <div id="half_copyrights" style="background-color:<?php echo $si->heading_color; ?>">
       <?php
       global $si;
       echo nl2br($si->footer_message);

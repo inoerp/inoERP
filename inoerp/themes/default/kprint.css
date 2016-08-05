@@ -1,0 +1,178 @@
+@media print{
+ button, .inline_action,.dropdown
+ { 
+  display:none !important;
+ }
+}
+
+button, .inline_action, .dropdown, .ino_serch_setting
+{ 
+ display:none !important;
+}
+
+body{
+  font-size: 10px !important;
+  width: 795px;
+  padding: 10px;
+}
+
+input, select{
+  height: 18px !important;
+  border: none !important;
+  background: none !important;
+}
+
+#popup_print li{
+ display: inline-block;
+ width: 350px;
+ /*! margin: 5px; */
+ overflow: hidden;
+ /*! border: 1px solid #ccc; */
+
+ /*! height: 20px; */
+ /*! padding: 2px 10px; */
+}
+
+#print_content{
+        border: 2px solid #ccc;
+        display: block;
+        float: left;
+        padding: 20px;
+        margin: 10px;
+}
+
+
+#popup_print td, #popup_print th{
+ border-width: 0.5px;
+border-style: solid;
+padding : 2px;
+border-color: #cfa9b0;
+  vertical-align: top !important;
+}
+
+#popup_print th{
+background-color : #6E8181;
+  color: #fff;
+}
+
+#popup_print table{
+   border-collapse: collapse;
+    vertical-align: top;
+}
+
+.table_0 th:first-child,
+.table_0 tbody td:first-child {
+  display: none;
+}
+
+#popup_print tr{
+  border: 1px solid #ecc;
+  padding: 2px 5px;
+}
+
+#popup_print .inline_action{
+ display: none;
+}
+
+#popup_print li label {
+ width: 160px !important;
+ display: inline-block !important;
+ /*! padding: 4px; */
+ margin-right: 5px;
+ /*! border-right: 1px solid #ccc; */
+ float: left;
+ font-weight: bold;
+  
+}
+
+#popup_print li::nth-last-child(2n){
+  display: none;
+}
+
+
+td.blank{
+ border: none;
+ background-color : rgba(240, 240, 240, 0.4);
+}
+
+tr.detail {
+ background-color : rgba(240, 240, 240, 0.5);
+}
+
+#page_print{
+ width: 980px;
+ /*border: 2px solid rgb(221, 221, 221);*/
+ display: block;
+ float: left;
+ margin: 10px 40px;
+ /*  font-family :  courier;
+   font-size: 12px;*/
+}
+
+#page_print td{
+ padding-left: 2px;
+}
+.full_page {
+ float: left;
+ width: 100%;
+ display: block;
+ clear: both;
+}
+
+.half_page{
+ width: 50%;
+}
+
+.left, .right {
+ float: left;
+}
+
+#print_body .form_line_data_table{
+ width: 100%;
+}
+
+tr.detail_header th{
+ background-color : rgba(240,240,240,0.5);
+ color : rgba(9, 105, 158, 1);
+ line-height: 6px;
+ font-size: 10px;
+}
+
+.form_data_line_tbody tr {
+  vertical-align: top !important;
+}
+
+/*.class_detail_form{
+margin-left: -832px;
+}*/
+
+.class_detail_form .tabMain{
+  display: none;
+}
+
+
+.form_detail_data_fs{
+  /*width: 1150px;*/
+  display: block !important;;
+}
+
+
+.class_detail_form{
+margin-top: 22px;
+  
+/*! border: none; */
+background-color: #eee;
+}
+
+.slider, .checkbox{
+  display: none !important;
+}
+
+#popup_print{
+ padding: 10px;
+}
+
+#print-header{
+ border: 10px solid rgb(108, 133, 135);
+  padding: 10px;
+}

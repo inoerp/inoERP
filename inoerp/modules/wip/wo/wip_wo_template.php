@@ -154,7 +154,7 @@ inoERP
            <td><?php $f->seq_field_d($count); ?></td>
            <td><?php $f->text_field_wid2sr('wip_wo_routing_line_id'); ?></td>
            <td><?php form::number_field_wid2('routing_sequence'); ?></td>
-           <td><?php echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, 'department_id', 'large'); ?></td>
+           <td><?php echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, 'department_id', 'medium'); ?></td>
            <td><?php $f->text_field_wid2('description' ,'large'); ?></td>
            <td><?php echo form::checkBox_field('count_point_cb', $$class_second->count_point_cb); ?></td>
            <td><?php echo form::checkBox_field('auto_charge_cb', $$class_second->auto_charge_cb); ?></td>

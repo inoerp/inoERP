@@ -9,8 +9,8 @@ body {
  font-weight: 350;
  color: #000;
  line-height: 175%;
- /* background-image: url("../images/body_bg_01.png");
-  background-color: rgba(238, 241, 242, 0.81);*/
+
+ overflow-y: scroll;
 }
 #erp_form_area{
  font-size: 12px;
@@ -533,12 +533,16 @@ section::after {
 }
 
 #half_copyrights{
- background-color: rgba(69, 58, 58, 0.57);
- color: #FFF;
- display: block;
- padding: 2px 10px;
- position: absolute;
- width: 98%;
+color: #FFF;
+display: block;
+padding: 2px 10px;
+position: fixed;
+width: 100%;
+bottom: 0px;
+right: 0;
+z-index: 9999;
+font-size: 9px !important;
+box-shadow: 1px 1px 3px 3px #042A2D;
 }
 
 #half_copyrights a{

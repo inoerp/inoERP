@@ -999,9 +999,8 @@ trait dbObject_t {
     $ef_i->reference_type = $reference_type;
     $ef_i->reference_key_name = $reference_key_name;
     $ef_i->reference_key_value = $reference_key_value;
-    $ef_i->audit_trial();
     try {
-     $ef_i->save();
+      $ef_i->save();
     } catch (Exception $e) {
      $dbc->rollback = true;
      echo "<br>Failed to save extra field data. Error @ bom_routing_line @@ line " . __LINE__ . $e->getMessage();

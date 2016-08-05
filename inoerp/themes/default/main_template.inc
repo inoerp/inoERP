@@ -162,8 +162,7 @@
       </div>
       <h3 class="clickable nav-panel minform-data" style="background-color:<?php echo $si->heading_color; ?>"><i class="fa fa-file-text"></i> <?php echo gettext('Minimized Forms') ?></h3>
       <div id="left-minform">
-       <div id="left-minform-data"><ul id="minform-list" class="list-group"></ul>
-       </div>
+       <div id="left-minform-data"><ul id="minform-list" class="list-group"></ul></div>
       </div>
       <h3 class="clickable nav-panel event-cal-h" style="background-color:<?php echo $si->heading_color; ?>"><i class="fa fa-calendar"></i> <?php echo gettext('Event Calendar') ?></h3>
       <div id="left-event-cal">
@@ -225,11 +224,14 @@
    <div class="col-sm-12 col-md-10 col-md-offset-2 mainbar">
     <div class="hidden" id="document_history"></div>
     <div class="footer-menu">
-     <div id="half_copyrights">
+     <div id="half_copyrights" style="background-color:<?php echo $si->heading_color; ?>">
       <?php
       global $si;
       echo nl2br($si->footer_message);
       ?>
+      <ul id="minform-list-bottom" class="list-group">
+       <li></li>
+      </ul>
       <ul>
        <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
        <li><a href="http://inoerp.org/extensions/user/user_login.php">Demo</a></li>
@@ -239,6 +241,7 @@
        <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
        <li><a href="#">Cookie</a></li>
        <li class="active"><a href="#">TOU</a></li>
+       <li class="label label-pill label-danger"><i class="fa fa-close close-footer-menu clickable"></i></li>
       </ul>
      </div>
     </div><!-- end large-7 --> 
