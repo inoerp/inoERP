@@ -195,6 +195,13 @@ class wip_wo_header extends dbObject {
   if ($this->_validate_before_save() < 0) {
    return -90;
   }
+  if (empty($this->wo_status)) {
+   $this->wo_status = 'UN_RELEASED';
+  } 
+  
+  if ((empty($this->released_date) || ($this->released_date == '0000-00-00') ) && ($this->wo_status == 'RELEASED' )) {
+   $this->released_date = current_time(1);
+  }
  }
 
  private function _copy_extra_fields($routing_line_id, $wip_wo_routing_line_id) {

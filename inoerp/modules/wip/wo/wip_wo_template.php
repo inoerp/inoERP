@@ -50,7 +50,7 @@ inoERP
       <div id="tabsHeader-2" class="tabContent">
        <div> 
         <ul class="column header_field">
-         <li id="document_status"><?php 
+         <li id="document_status"><?php  $f = new inoform();
          $f->l_select_field_from_object('wo_status', wip_wo_header::wip_wo_status(), 'option_line_code', 'option_line_value', $$class->wo_status, 'set_wo_status', '', '', $readonly); ?>         </li>
          <li><?php $f->l_date_fieldFromToday_dm('start_date', $$class->start_date, 'start_date', 'default_date') ?></li>
          <li><?php $f->l_date_fieldFromToday_d('completion_date', $$class->completion_date, 'completion_date') ?></li>
@@ -69,9 +69,9 @@ inoERP
          <li><?php $f->l_number_field_dr('remaining_quantity'); ?> </li>
          <li><?php $f->l_number_field_dr('completed_quantity'); ?> </li>
          <li><?php $f->l_number_field_dr('scrapped_quantity'); ?> </li>
-         <li><?php $f->l_text_field_d('released_date', $$class->released_date) ?></li>
-         <li><?php $f->l_text_field_d('first_unit_completed_date') ?></li>
-         <li><?php $f->l_text_field_d('last_unit_completed_date') ?></li>
+         <li><?php $f->l_text_field_dr('released_date', 'always_readonly') ?></li>
+         <li><?php $f->l_text_field_dr('first_unit_completed_date', 'always_readonly') ?></li>
+         <li><?php $f->l_text_field_dr('last_unit_completed_date', 'always_readonly') ?></li>
         </ul>
        </div>
       </div>

@@ -42,8 +42,8 @@ require_once(INC_CLASS . DS . "class_dbObject.inc");
 require_once(INC_PATH . DS . 'interface' . DS . "gl_int.inc");
 require_once(INC_PATH . DS . 'interface' . DS . "hr_int.inc");
 
-//require_once(INC_CLASS . DS . "class_dbc2.inc");
-//require_once(INC_CLASS . DS . "class_dbObject2.inc");
+require_once(INC_CLASS . DS . "class_dbc2.inc");
+require_once(INC_CLASS . DS . "class_dbObject2.inc");
 require_once(INC_EXTENSIONS . DS . "site_info" . DS . "class_site_info.inc");
 require_once(INC_CLASS . DS . "class.form.inc");
 require_once(INC_CLASS . DS . "class_inoform.inc");

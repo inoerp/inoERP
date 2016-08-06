@@ -4,14 +4,18 @@
   SKELETON
 ------------------------------------------------------- */
 
+
 body {
  font-family: "Lato",sans-serif;
  font-weight: 350;
  color: #000;
  line-height: 175%;
-
  overflow-y: scroll;
+ background-color: #fff;
 }
+
+
+
 #erp_form_area{
  font-size: 12px;
 }
@@ -2863,7 +2867,7 @@ acronym {
 .btn-primary:active,
 .btn-primary.active {
  color: #ffffff;
- background-color: #222222;
+ background-color: rgba(33,180,226,1);
 }
 .arrow-up {
  border-bottom: 5px solid #FFFFFF;

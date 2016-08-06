@@ -4348,7 +4348,7 @@ $(document).ready(function () {
      var table_no = 'table_' + k;
      $(this).find('.class_detail_form').css({
       'margin-left': '-' + class_detail_form_w,
-      'width' : class_detail_form_w
+      'width': class_detail_form_w
      });
      pContent += '<table class="table ' + table_no + ' ">' + $(this).html() + '</table>';
     });
@@ -5866,7 +5866,7 @@ $(document).ready(function () {
 
  if (typeof bg_image_path !== 'undefined' && bg_image_path != "") {
 //$('.container-fluid').css('background-image', 'url(' + bg_image_path + ')');
-  $('body').css('background-image', 'url(' + bg_image_path + ')');
+  $('#ino-body, body').css('background-image', 'url(' + bg_image_path + ')');
   $('.tabContainer, #path_by_module').css('opacity', bg_opacity);
   $('.sidebar').css('background-color', 'transparent');
  }
@@ -5919,9 +5919,44 @@ $(document).ready(function () {
 
  });
 
-$('body').on('click', '.close-footer-menu' , function(){
-$('#half_copyrights').remove();
-});
+ $('body').on('change', '#bg_opacity_user', function () {
+  opvalue = $(this).val() / 100;
+  bg_opacity = opvalue;
+  $('.tabContainer').css({
+   'opacity': opvalue
+  });
+ });
+
+ $('body').on('click', '.close-footer-menu', function () {
+  $('#half_copyrights').remove();
+ });
+
+ $('.enlarge-window').on('click', function () {
+  var i = document.getElementById("ino-body");
+
+  if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+   if (document.exitFullscreen) {
+    document.exitFullscreen();
+   } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+   } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+   } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+   }
+  } else {
+   if (i.requestFullscreen) {
+    i.requestFullscreen();
+   } else if (i.webkitRequestFullscreen) {
+    i.webkitRequestFullscreen();
+   } else if (i.mozRequestFullScreen) {
+    i.mozRequestFullScreen();
+   } else if (i.msRequestFullscreen) {
+    i.msRequestFullscreen();
+   }
+  }
+ });
+
 });
 
 function remove_unsaved_msg() {

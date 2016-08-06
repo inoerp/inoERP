@@ -546,6 +546,14 @@ $(document).ready(function () {
   $('.tabContainer, #path_by_module').css('opacity', bg_opacity);
   $('.sidebar').css('background-color', 'transparent');
  }
+ 
+  $('body').on('change', '#bg_opacity_user', function () {
+  opvalue = $(this).val() / 100;
+  bg_opacity = opvalue;
+  $('.tabContainer').css({
+   'opacity': opvalue
+  });
+ });
 
  var toogleLi = '<li class="ino-toggle-tab pull-right clickable"><i class="fa fa-arrow-circle-up"></i><li>';
  $('li.ino-toggle-tab').remove();

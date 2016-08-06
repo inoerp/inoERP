@@ -4,7 +4,6 @@
  </div>
 </div>
 <?php
-echo ' DB_SERVER' .DB_SERVER;
 require_once(INC_CLASS . DS . "trait_dbObject_t.inc");
 require_once(INC_CLASS . DS . "class_dbObject.inc");
 require_once(INC_EXTENSIONS . DS . "view" . DS . "class.view.inc");

@@ -51,7 +51,7 @@
   ?>
  </head>
  <body>
-
+<div id="ino-body">
   <?php
   if ($showBlock) {
    echo '<div id="header_bottom"></div>';
@@ -171,6 +171,7 @@
   ?>
   <div class="row">
    <?php echo searching_tips(); ?>
+  </div>
   </div>
  </body>
 </html>
