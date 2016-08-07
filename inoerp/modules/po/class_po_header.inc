@@ -165,7 +165,17 @@ class po_header extends dbObject {
   '_extra_path' => array('form.php?class_name=ap_transaction_header&mode=9' => 'Invoice',
    'form.php?class_name=receipt_header&mode=9' => 'Receive')
  ];
- public $pageTitle = " PO - Purchase Orders "; //page Title
+ public static $json_label_fields = [
+  'po_number',
+  'release_number',
+  'bu_org_id',
+  'po_type',
+  'buyer',
+  "description",
+  'doc_currency',
+  "po_status",
+ ];
+ public $pageTitle = "Purchase Order"; //page Title
  public $option_lists = [
   'po_type' => 'PO_TYPE',
   'po_status' => 'PO_STATUS',

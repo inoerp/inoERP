@@ -16,13 +16,15 @@ inoERP
   <div class="tabContainer"> 
    <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><label><i class="wo_number select_popup clickable fa fa-search"></i>
-        <?php echo gettext('WO Number') ?></label><?php
-       $f->text_field_d('wo_number');
-       echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
-       echo $f->hidden_field_withCLass('wo_status', 'RELEASED', 'popup_value');
-       ?>
-      </li>
+       <li><?php
+        $f->l_val_field_d('wo_number' ,'wip_wo_header', 'wo_number' ,'org_id', '');
+        echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
+        echo $f->hidden_field_withCLass('wo_status','RELEASED','popup_value');
+        ?>
+        <i class="generic g_select_wo_number select_popup clickable fa fa-search" data-class_name="wip_wo_header"></i>
+        <a name="show2" href="form.php?class_name=wip_resource_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wo_header_id">
+         <i class="fa fa-refresh"></i></a> 
+       </li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
       <li><?php $f->l_date_fieldFromToday_m('transaction_date', ($$class->transaction_date)); ?>       </li>
       <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', '', 1, 1, 1); ?>       

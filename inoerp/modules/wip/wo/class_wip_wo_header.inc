@@ -108,7 +108,16 @@ class wip_wo_header extends dbObject {
    'form.php?class_name=wip_material_transaction&mode=9' => 'Material Tnx',
    'form.php?class_name=wip_resource_transaction&mode=9' => 'Resource Tnx',)
  ];
- public $pageTitle = " WO - WIP Work Order "; //page Title
+ public static $json_label_fields = [
+  'wo_number',
+  'item_id_m',
+  'org_id',
+  'wo_type',
+  'wo_status',
+  'start_date',
+  'quantity',
+ ];
+ public $pageTitle = "Work Order "; //page Title
  public $option_lists = [
   'wip_wo_type' => 'WIP_WO_TYPE',
   'wip_wo_status' => 'WIP_WO_STATUS',
@@ -197,8 +206,8 @@ class wip_wo_header extends dbObject {
   }
   if (empty($this->wo_status)) {
    $this->wo_status = 'UN_RELEASED';
-  } 
-  
+  }
+
   if ((empty($this->released_date) || ($this->released_date == '0000-00-00') ) && ($this->wo_status == 'RELEASED' )) {
    $this->released_date = current_time(1);
   }

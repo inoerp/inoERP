@@ -16,14 +16,13 @@ inoERP
   <div id="form_serach_header" class="tabContainer">
    <div class="tabContent">
     <ul class="column header_field">
-     <li><label><i class="wo_number select_popup clickable fa fa-search"></i>
-       <?php echo gettext('WO Number') ?></label><?php
-      $f->text_field_d('wo_number');
+     <li><?php
+      $f->l_val_field_d('wo_number', 'wip_wo_header', 'wo_number', 'org_id', '');
       echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
       echo $f->hidden_field_withCLass('wo_status', 'RELEASED', 'popup_value');
       ?>
+      <i class="generic g_select_wo_number select_popup clickable fa fa-search" data-class_name="wip_wo_header"></i>
      </li>
-
      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>    </li>
      <li><?php $f->l_select_field_from_array('transaction_type_id', wip_material_transaction::$transaction_type_id_a, $$class->transaction_type_id, 'transaction_type_id', '', 1); ?>
       <a name="show" href="form.php?class_name=wip_material_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_material_transaction_id">          
@@ -91,18 +90,10 @@ inoERP
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
         <tr class="wip_material_transaction0" id="tab2_1">
-         <td>
-          <?php echo form::select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', $readonly, 'subinventory_id'); ?>
-         </td>
-         <td>
-          <?php echo form::select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', $readonly, 'subinventory_id'); ?>
-         </td>
-         <td>
-          <?php echo form::select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', $readonly, 'subinventory_id'); ?>
-         </td>
-         <td>
-          <?php echo form::select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', $readonly, 'subinventory_id'); ?>
-         </td>
+         <td><?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id medium', '', $readonly); ?>  </td>
+         <td><?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'from_locator_id medium', '', $readonly); ?>        </td>
+         <td><?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id medium', '', $readonly); ?>       </td>
+         <td><?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'to_locator_id medium', '', $readonly); ?>        </td>
         </tr>
        </tbody>
       </table>
@@ -194,3 +185,4 @@ inoERP
   <li class="noOfTabbs" data-noOfTabbs="5" ></li>
  </ul>
 </div>
+

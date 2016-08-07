@@ -6,8 +6,8 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<form action=""  method="post" id="wip_move_transaction"  name="wip_move_transaction">
- <span class="heading"><?php echo gettext('WIP Move Transaction') ?></span>
+<form  method="post" id="wip_move_transaction"  name="wip_move_transaction">
+ <span class="heading"><?php $f=  new inoform(); echo gettext('WIP Move Transaction') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -17,12 +17,12 @@ inoERP
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field">
-       <li><label><i class="wo_number select_popup clickable fa fa-search"></i>
-         <?php echo gettext('WO Number') ?></label><?php
-        $f->text_field_d('wo_number');
+       <li><?php
+        $f->l_val_field_d('wo_number' ,'wip_wo_header', 'wo_number' ,'org_id', '');
         echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
         echo $f->hidden_field_withCLass('wo_status','RELEASED','popup_value');
         ?>
+        <i class="generic g_select_wo_number select_popup clickable fa fa-search" data-class_name="wip_wo_header"></i>
         <a name="show2" href="form.php?class_name=wip_move_transaction&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wo_header_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
