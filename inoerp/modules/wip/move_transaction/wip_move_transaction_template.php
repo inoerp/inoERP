@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <form  method="post" id="wip_move_transaction"  name="wip_move_transaction">
- <span class="heading"><?php $f=  new inoform(); echo gettext('WIP Move Transaction') ?></span>
+ <span class="heading"><?php echo gettext('WIP Move Transaction') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -16,7 +16,7 @@ inoERP
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field">
+      <ul class="column header_field ">
        <li><?php
         $f->l_val_field_d('wo_number' ,'wip_wo_header', 'wo_number' ,'org_id', '');
         echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
@@ -28,7 +28,7 @@ inoERP
        </li>
        <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
        <li><?php $f->l_date_fieldFromToday_m('transaction_date', ($$class->transaction_date)); ?>       </li>
-       <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', '', 1, $readonly1); ?>       </li> 
+       <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', 'always_readonly action', 1, $readonly1); ?>       </li> 
        <li><?php $f->l_text_field_dr('wip_move_transaction_id'); ?></li>
       </ul>
     </div>
@@ -82,14 +82,14 @@ inoERP
         foreach ($wip_wo_routing_line_object as $wip_wo_routing_line) {
          ?>         
          <tr class="wip_wo_routing<?php echo $count ?>">
-          <td><?php form::number_field_wid2sr('routing_sequence'); ?></td>
+          <td><?php $f->text_field_wid2r('routing_sequence'); ?></td>
           <td><?php echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, '', '', '', 1); ?></td>
-          <td><?php form::text_field_wid2r('description'); ?></td>
-          <td><?php form::number_field_wid2sr('queue_quantity'); ?></td>
-          <td><?php form::number_field_wid2sr('running_quantity'); ?></td>
-          <td><?php form::number_field_wid2sr('rejected_quantity'); ?></td>
-          <td><?php form::number_field_wid2sr('scrapped_quantity'); ?></td>
-          <td><?php form::number_field_wid2sr('tomove_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('description'); ?></td>
+          <td><?php $f->text_field_wid2r('queue_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('running_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('rejected_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('scrapped_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('tomove_quantity'); ?></td>
          </tr>
          <?php
          $count = $count + 1;

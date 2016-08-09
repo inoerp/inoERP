@@ -102,15 +102,9 @@
        <tr class="inv_transaction_line0" id="tab2_1">
         <td><?php $f->seq_field_d(99); ?></td>
         <td><?php echo $f->select_field_from_object('from_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->from_subinventory_id, '', 'subinventory_id medium', '', $readonly); ?>  </td>
-        <td>
-         <?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'from_locator_id medium', '', $readonly); ?>
-        </td>
-        <td>
-         <?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id medium', '', $readonly); ?>
-        </td>
-        <td>
-         <?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'to_locator_id medium', '', $readonly); ?>
-        </td>
+        <td><?php echo $f->select_field_from_object('from_locator_id', locator::find_all_of_subinventory($$class->from_subinventory_id), 'locator_id', 'locator', $$class->from_locator_id, '', 'from_locator_id medium', '', $readonly); ?>        </td>
+        <td><?php echo $f->select_field_from_object('to_subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->to_subinventory_id, '', 'subinventory_id medium', '', $readonly); ?>        </td>
+        <td><?php echo $f->select_field_from_object('to_locator_id', locator::find_all_of_subinventory($$class->to_subinventory_id), 'locator_id', 'locator', $$class->to_locator_id, '', 'to_locator_id medium', '', $readonly); ?>        </td>
         <td><?php form::text_field_wid('description'); ?>							</td>
         <td><?php form::text_field_wid('reason'); ?>							</td>
         <td><?php echo $f->text_field_widr('onhand', 'always_readonly'); ?></td>

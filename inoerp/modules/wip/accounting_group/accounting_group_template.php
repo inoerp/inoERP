@@ -64,7 +64,7 @@ inoERP
 
      <div id="tabsLine-1" class="tabContent">
       <div> 
-       <ul class="column four_column"> 
+       <ul class="column header_field two_column_form"> 
         <li><?php $f->l_ac_field_d('material_ac_id'); ?></li>
         <li><?php $f->l_ac_field_d('material_oh_ac_id'); ?></li>
         <li><?php $f->l_ac_field_d('overhead_ac_id'); ?></li>
@@ -78,7 +78,7 @@ inoERP
 
      <div id="tabsLine-2" class="tabContent">
       <div> 
-       <ul class="column four_column">
+       <ul class="column header_field two_column_form">
         <li><?php $f->l_ac_field_d('var_material_ac_id'); ?></li>
         <li><?php $f->l_ac_field_d('var_material_oh_ac_id'); ?></li>
         <li><?php $f->l_ac_field_d('var_overhead_ac_id'); ?></li>

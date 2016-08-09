@@ -1,12 +1,12 @@
 <?php
 
  class wip_wo_work_bench_line extends wip_wo_routing_line {
+public static $key_column = 'wip_wo_routing_line_id';
 
   public function _before_save() {
-//   pa($this);
    $existing_data_array = ['wip_wo_header_id', 'routing_sequence', 'wip_wo_routing_line_id', 'file_id_values'];
    $this->_save_extra_field($existing_data_array);
-   return -1;
+   return 10;
   }
 
   public function _save_extra_field($existing_data_array) {

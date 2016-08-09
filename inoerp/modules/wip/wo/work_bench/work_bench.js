@@ -2,11 +2,15 @@
 $(document).ready(function() {
  //mandatory and field sequence
  var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'wip_wo_header_id';
-// mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", "transaction_type_id"];
- mandatoryCheck.mandatory_messages = ["First Select Org", "No Transaction Type"];
+// mandatoryCheck.header_id = 'wip_wo_header_id';
+//// mandatoryCheck.mandatoryHeader();
+// mandatoryCheck.form_area = 'form_header';
+// mandatoryCheck.mandatory_fields = ["org_id", "transaction_type_id"];
+// mandatoryCheck.mandatory_messages = ["First Select Org", "No Transaction Type"];
+
+$('body').on('click', '#wip_wo_work_bench #tabsLine-2' , function(){
+$('#wip_wo_work_bench #tabsLine-1').find(':required').removeAttr('required');
+});
 
  $('#wip_wo_work_bench').off("change", '#transaction_type_id').on("change", '#transaction_type_id', function() {
 	$("tr.transfer_info").find("td select").each(function() {

@@ -100,7 +100,7 @@
        <li><?php $f->l_text_field('site_tax_reg_no', $$class_second->site_tax_reg_no); ?></li>
        <li><?php $f->l_text_field('bank_id', $$class_second->bank_id); ?></li>
        <li><?php $f->l_text_field('bank_account_id', $$class_second->bank_account_id); ?></li>
-       <li><?php $f->l_checkBox_field('primary_cb', $$class_second->primary_cb); ?></li>
+       <li><?php $f->l_checkBox_field_d_ws('primary_cb', $$class_second->primary_cb); ?></li>
       </ul>
      </div>
      <div class="second_rowset">

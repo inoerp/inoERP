@@ -1646,7 +1646,6 @@ class inv_transaction extends dbObject {
    $last_wo_routing_line = wip_wo_routing_line::find_lastOperation_by_wip_wo_headerId($this->document_id);
    $update_wo_routing_line = new wip_wo_routing_line;
    $update_wo_routing_line->wip_wo_routing_line_id = $last_wo_routing_line->wip_wo_routing_line_id;
-   $update_wo_routing_line->audit_trial();
    $update_wo_routing_line->tomove_quantity = $last_wo_routing_line->tomove_quantity - $this->quantity;
    $update_wo_routing_line->save();
 
@@ -1673,7 +1672,7 @@ class inv_transaction extends dbObject {
      $inv_transaction->reference = 'wip_wo_header_id';
      $inv_transaction->wip_wo_bom_id = $bomline->wip_wo_bom_id;
      $inv_transaction->document_id = $document_id;
-     $inv_transaction->audit_trial();
+     $inv_transaction->_before_save();
      $inv_transaction->save();
      $inv_transaction->_after_save();
     }
@@ -1732,7 +1731,7 @@ class inv_transaction extends dbObject {
      $inv_transaction->reference = 'wip_wo_header_id';
      $inv_transaction->wip_wo_bom_id = $bomline->wip_wo_bom_id;
      $inv_transaction->document_id = $document_id;
-     $inv_transaction->audit_trial();
+     $inv_transaction->_before_save();
      $inv_transaction->save();
      $inv_transaction->_after_save();
     }

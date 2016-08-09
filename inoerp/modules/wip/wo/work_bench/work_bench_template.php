@@ -17,18 +17,18 @@ inoERP
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><label><i class="wo_number select_popup clickable fa fa-search"></i>
-        <?php echo gettext('WO Number') ?></label><?php
-       $f->text_field_d('wo_number');
+      <li><?php
+       $f->l_val_field_d('wo_number', 'wip_wo_header', 'wo_number', 'org_id', '');
        echo $f->hidden_field_withId('wip_wo_header_id', $$class->wip_wo_header_id);
        echo $f->hidden_field_withCLass('wo_status', 'RELEASED', 'popup_value');
        ?>
+       <i class="generic g_select_wo_number select_popup clickable fa fa-search" data-class_name="wip_wo_header"></i>
        <a name="show2" href="form.php?class_name=wip_wo_work_bench&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wo_header_id">
         <i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
       <li><?php $f->l_date_fieldFromToday_m('transaction_date', ($$class->transaction_date)); ?>       </li>
-      <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', '', 1, $readonly1); ?>       </li> 
+      <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', 'always_readonly action', 1, $readonly1); ?>       </li> 
       <li><?php $f->l_text_field_dr('wip_move_transaction_id'); ?></li>
      </ul>
     </div>
@@ -82,14 +82,14 @@ inoERP
         foreach ($wip_wo_routing_line_object as $wip_wo_routing_line) {
          ?>         
          <tr class="wip_wo_routing<?php echo $count ?>">
-          <td><?php form::number_field_wid2sr('routing_sequence'); ?></td>
+          <td><?php $f->text_field_wid2r('routing_sequence'); ?></td>
           <td><?php echo $f->select_field_from_object('department_id', bom_department::find_all(), 'bom_department_id', 'department', $$class_second->department_id, '', '', '', 1); ?></td>
-          <td><?php form::text_field_wid2r('description'); ?></td>
-          <td><?php form::number_field_wid2sr('queue_quantity'); ?></td>
-          <td><?php form::number_field_wid2sr('running_quantity'); ?></td>
-          <td><?php form::number_field_wid2sr('rejected_quantity'); ?></td>
-          <td><?php form::number_field_wid2sr('scrapped_quantity'); ?></td>
-          <td><?php form::number_field_wid2sr('tomove_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('description'); ?></td>
+          <td><?php $f->text_field_wid2r('queue_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('running_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('rejected_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('scrapped_quantity'); ?></td>
+          <td><?php $f->text_field_wid2r('tomove_quantity'); ?></td>
          </tr>
          <?php
          $count = $count + 1;
@@ -155,8 +155,8 @@ inoERP
         $tab_count = 0;
         foreach ($wip_wo_routing_line_object as $routing_line) {
          $tab_count++;
-         echo "<div id=\"tabsVertical-$tab_count\" class='tabContent'><div class='large_shadow_box'> ";
-         echo '<ul class="column five_column">';
+         echo "<div id=\"tabsVertical-$tab_count\" class='tabContent form_header_l'><div class='large_shadow_box'> ";
+         echo '<ul class="column header_field">';
          echo $f->hidden_field('wip_wo_header_id', $routing_line->wip_wo_header_id);
          echo $f->hidden_field('routing_sequence', $routing_line->routing_sequence);
          echo $f->hidden_field('wip_wo_routing_line_id', $routing_line->wip_wo_routing_line_id);
@@ -179,8 +179,9 @@ inoERP
            $ef_value = null;
           }
 
-          $lable = !empty($ef->label) ? $ef->label : $ef->sys_field_name;
-          echo "<li><label>$lable : </label>";
+          $lable_x = !empty($ef->label) ? $ef->label : $ef->sys_field_name;
+          $lable = ucwords(str_replace('_', ' ', $lable_x));
+          echo "<li><label>$lable </label>";
           switch ($ef->field_type) {
            case 'LIST':
             if (!empty($ef->list_values)) {
