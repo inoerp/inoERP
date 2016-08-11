@@ -12547,7 +12547,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (143, 85, 'Issue Logs', 'content.php?content_type=issue&category_id=8', 'All Issues', 'da', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 00:00:00', 34, '2015-05-05 15:21:43'),
 (144, 85, 'Read Documentation', 'content.php?content_type=documentation&category_id=30', 'All Documentations', 'da', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-04 00:00:00', 34, '2015-05-05 15:21:35'),
 (145, 85, 'Read Articles', 'content.php?content_type=content&category_id=21', 'All Contents', 'da', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-12 00:00:00', 34, '2015-05-05 15:21:33'),
-(146, 155, 'Json User', 'extensions/user/json.user.php', 'Json user', 'adm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-19 00:00:00', 0, '2010-06-14 00:00:00'),
+(146, 155, 'Json User', 'extensions/ino_user/json.user.php', 'Json user', 'adm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2014-02-19 00:00:00', 0, '2010-06-14 00:00:00'),
 (147, 520, 'Value Group', 'form.php?class_name=sys_value_group_header&mode=9', 'Value Group Header', 'sys', 'sys_value_group_header', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-06-20 00:00:00', 34, '2014-12-27 11:51:02'),
 (148, 147, 'Search Value Groups', 'search.php?class_name=sys_value_group_header', 'Create & Update Value Groups', 'sys', 'sys_value_group_header', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-18 00:00:00', 34, '2014-12-27 11:51:38'),
 (149, 31, 'Search Calendar', 'search.php?class_name=gl_calendar', 'All Calendars', 'gl', 'gl_calendar', NULL, NULL, NULL, NULL, 1, NULL, 0, '2014-02-25 00:00:00', 0, '2010-06-14 00:00:00'),
@@ -17893,7 +17893,7 @@ CREATE TABLE IF NOT EXISTS `system_path` (
 
 INSERT INTO `system_path` (`path_id`, `path_name`, `path_description`, `path_value`, `path_sec_id`, `path_revision_number`, `path_revision_enabled`, `path_creation_date`, `path_created_by`, `path_last_update_date`, `path_last_updated_by`) VALUES
 (1, 'supplier', 'Supplier List', 'modules/ap/suppliers/supplier.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'user registration', 'new user registration', 'extensions/user/user_registration.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'user registration', 'new user registration', 'extensions/ino_user/user_registration.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 'paths', 'all the paths', 'extensions/path/path.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
