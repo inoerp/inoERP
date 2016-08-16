@@ -175,7 +175,16 @@ class am_planned_wo extends dbObject {
  Public static function find_by_woNumber($wo_number) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE wo_number = '{$wo_number}' LIMIT 1";
+  $sql .= " WHERE wo_number = '{$wo_number}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
 
   $result = self::find_by_sql($sql);
 
