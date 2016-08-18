@@ -160,7 +160,16 @@ class cst_item_cost_header extends dbObject {
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
   $sql .= " WHERE bom_cost_type =:bom_cost_type AND item_id_m = :item_id_m AND org_id = :org_id ";
-  $sql .= " LIMIT 1 ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
+
   $value_a = ['bom_cost_type' => $this->bom_cost_type,
    'item_id_m' => $this->item_id_m, 'org_id' => $this->org_id];
   $result = $this->findBySql($sql, $value_a);
@@ -311,7 +320,7 @@ class cst_item_cost_header extends dbObject {
   $new_records_a = [];
   $icl = new cst_item_cost_line();
   $all_cost_lines = $icl->findBy_parentId($this->cst_item_cost_header_id);
-  
+
   if (empty($all_cost_lines)) {
    $message = "<br/>Leaving Standard cost update as no cost line exists";
    return;

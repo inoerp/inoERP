@@ -183,7 +183,7 @@ class ec_paid_order extends dbObject {
 
  public function _create_sales_order($ecp_order, $ec_con_details) {
   global $dbc;
-  $order_user = new user();
+  $order_user = new ino_user();
   $order_user->findBy_id($ecp_order->user_id);
 
   $confirm_order_details = json_decode($ecp_order->confirm_order_details);
@@ -275,8 +275,8 @@ class ec_paid_order extends dbObject {
   $cust->bill_to_id = $_SESSION['confirm_order']['bill_to_id'];
   $cust->save();
 
-  $user = new user();
-  $user->user_id = $order_user->user_id;
+  $user = new ino_user();
+  $user->ino_user_id = $order_user->user_id;
   $user->ar_customer_id = $cust->ar_customer_id;
   $user->save();
 

@@ -6,7 +6,7 @@ class bc_label_auto_trigger extends dbObject {
  public static $primary_column = "bc_label_auto_trigger_id";
  public static $key_column = "association_level_value";
  public static $module = "sys";
-  public static $system_info = [
+ public static $system_info = [
   'name' => 'BC Auto-trigger',
   'number' => '9220',
   'description' => 'Barcode label auto trigger',
@@ -17,7 +17,7 @@ class bc_label_auto_trigger extends dbObject {
   'module_name' => 'bc',
   'weight' => 1
  ];
- public static $association_level_a  = [
+ public static $association_level_a = [
   'SITE' => 'Site',
   'BUSINESS' => 'Business Org',
   'INVENTORY' => 'Inventory Org',
@@ -98,8 +98,8 @@ class bc_label_auto_trigger extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
- 
-  public static function find_by_transactionTypId($trnx_obj) {
+
+ public static function find_by_transactionTypId($trnx_obj) {
 //   pa($trnx_obj);
 //   return false;
   $sql = " SELECT * FROM ";
@@ -126,7 +126,17 @@ class bc_label_auto_trigger extends dbObject {
 
  public static function find_by_optionId_lineCode($header_id, $code) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where code={$code} AND sys_profile_header_id={$header_id} LIMIT 1 ";
+   " where code={$code} AND sys_profile_header_id={$header_id} ";
+
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_push($result) : $result;
  }

@@ -190,7 +190,8 @@ VAR;
  }
 
  private function create_onhand_v() {
-  $sql = "CREATE OR REPLACE VIEW onhand_v
+  $sql = "
+   CREATE OR REPLACE VIEW onhand_v
 (onhand_id, item_number, item_description, org_name, subinventory, locator,
 uom_id,onhand, item_id_m, org_id, subinventory_id, 
 locator_id, lot_id, serial_id, reservable_onhand, 
@@ -199,7 +200,7 @@ secondary_uom_id, onhand_status, ef_id, created_by,
 creation_date, last_update_by, last_update_date)
 AS
 SELECT onhand.onhand_id, 
-item.item_number, item.description, org.org, subinventory.subinventory, locator.locator,
+item.item_number, item.item_description, org.org, subinventory.subinventory, locator.locator,
 onhand.uom_id,onhand.onhand,
 onhand.item_id_m, onhand.org_id, onhand.subinventory_id, 
 onhand.locator_id, onhand.lot_id, onhand.serial_id, onhand.reservable_onhand, 
@@ -211,7 +212,7 @@ FROM onhand
 LEFT JOIN item ON onhand.item_id_m = item.item_id_m
 LEFT JOIN org ON onhand.org_id = org.org_id
 LEFT JOIN subinventory ON onhand.subinventory_id = subinventory.subinventory_id
-LEFT JOIN locator ON onhand.locator_id = locator.locator_id
+LEFT JOIN locator ON onhand.locator_id = locator.locator_id;
 ";
  }
 
@@ -242,7 +243,16 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   if (!empty($this->_from_locator_id)) {
    $from_onhand_sql .= " AND locator_id = '{$this->_from_locator_id}' ";
   }
-  $from_onhand_sql .= " LIMIT 1 ";
+
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $from_onhand_sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $from_onhand_sql .= ino_perPageSql(1);
+    break;
+  }
 
   $from_onhand_result_a = $this->findBy_sql($from_onhand_sql);
   $from_onhand_result = !empty($from_onhand_result_a) ? array_pop($from_onhand_result_a) : false;
@@ -311,7 +321,17 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   if (!empty($this->_to_locator_id)) {
    $to_onhand_sql .= " AND  	locator_id = '{$this->_to_locator_id}' ";
   }
-  $to_onhand_sql .= " LIMIT 1 ";
+
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $to_onhand_sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $to_onhand_sql .= ino_perPageSql(1);
+    break;
+  }
+
   $to_onhand_result_a = $this->findBy_sql($to_onhand_sql);
   $to_onhand_result = !empty($to_onhand_result_a) ? array_pop($to_onhand_result_a) : false;
   if ($to_onhand_result) {

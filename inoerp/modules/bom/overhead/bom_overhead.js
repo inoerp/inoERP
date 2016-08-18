@@ -52,7 +52,7 @@ $(document).ready(function() {
  
   $("#content tbody.form_data_line_tbody2").off("click", ".add_row_img").on("click", ".add_row_img", function() {
 	var addNewRow = new add_new_rowMain();
-	addNewRow.trClass = 'bom_overhead_rate_assignment';
+	addNewRow.trClass = 'bom_oh_rate_assignment';
 	addNewRow.tbodyClass = 'form_data_line_tbody2';
 	addNewRow.noOfTabs = 1;
 	addNewRow.removeDefault = true;

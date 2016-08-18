@@ -6,10 +6,10 @@ class bom_overhead_v extends dbObject {
  public static $table_name = "bom_overhead_v";
  public static $primary_column = "bom_overhead_id";
  public $field_a = [
-  'bom_overhead_resource_assignment_id',
+  'bom_oh_res_assignment_id',
   'resource_bom_cost_type',
   'resource_id',
-  'bom_overhead_rate_assignment_id',
+  'bom_oh_rate_assignment_id',
   'bom_overhead_id',
   'rate_bom_cost_type',
   'default_basis',
@@ -39,10 +39,10 @@ class bom_overhead_v extends dbObject {
   '_view_path' => 'form.php?class_name=bom_overhead',
   '_show_view_path' => 1,
  ];
- public $bom_overhead_resource_assignment_id;
+ public $bom_oh_res_assignment_id;
  public $resource_bom_cost_type;
  public $resource_id;
- public $bom_overhead_rate_assignment_id;
+ public $bom_oh_rate_assignment_id;
  public $bom_overhead_id;
  public $rate_bom_cost_type;
  public $default_basis;
@@ -72,17 +72,17 @@ class bom_overhead_v extends dbObject {
   $sql = "
 CREATE OR REPLACE VIEW bom_overhead_v
 (
-bom_overhead_resource_assignment_id,resource_bom_cost_type, resource_id,
-bom_overhead_rate_assignment_id, bom_overhead_id, rate_bom_cost_type, default_basis, rate ,
+bom_oh_res_assignment_id,resource_bom_cost_type, resource_id,
+bom_oh_rate_assignment_id, bom_overhead_id, rate_bom_cost_type, default_basis, rate ,
 overhead, description, org_id, overhead_type, absorption_ac_id
 )
 AS
-SELECT res.bom_overhead_resource_assignment_id,res.bom_cost_type, res.resource_id,
-ora.bom_overhead_rate_assignment_id, ora.bom_overhead_id, ora.bom_cost_type, ora.default_basis, ora.rate ,
+SELECT res.bom_oh_res_assignment_id,res.bom_cost_type, res.resource_id,
+ora.bom_oh_rate_assignment_id, ora.bom_overhead_id, ora.bom_cost_type, ora.default_basis, ora.rate ,
 bo.overhead, bo.description, bo.org_id, bo.overhead_type, bo.absorption_ac_id
-FROM bom_overhead_rate_assignment ora
+FROM bom_oh_rate_assignment ora
 LEFT JOIN bom_overhead bo ON bo.bom_overhead_id = ora.bom_overhead_id
-LEFT JOIN bom_overhead_resource_assignment res ON res.bom_overhead_id = ora.bom_overhead_id
+LEFT JOIN bom_oh_res_assignment res ON res.bom_overhead_id = ora.bom_overhead_id
 WHERE res.bom_cost_type = ora.bom_cost_type
 
 ";

@@ -140,7 +140,7 @@ class ec_payment_method extends dbObject {
     $stmt .= '<p>'.$pm->user_message .'</p>';
    }
    if (!empty($pm->image_file_id)) {
-    $img_file = file::find_by_id($pm->image_file_id);
+    $img_file = extn_file::find_by_id($pm->image_file_id);
     $stmt .= '<input type="image" class="img-height-120" name="submit" src="' . HOME_URL . $img_file->file_path . $img_file->file_name . '" border="0" alt="Submit" />';
    } else {
     $stmt .= '<input class="btn btn-warning ino-btn" type="submit" value="' . $pm->submit_button_name . '" name="submit" role="button">';

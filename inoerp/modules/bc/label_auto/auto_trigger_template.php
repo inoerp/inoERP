@@ -109,7 +109,7 @@
              break;
 
             case 'USER' :
-             echo $f->select_field_from_object('association_level_value', user::find_all(), 'user_id', 'username', $$class->association_level_value, '', '', 1);
+             echo $f->select_field_from_object('association_level_value', ino_user::find_all(), 'user_id', 'username', $$class->association_level_value, '', '', 1);
              break;
            }
            ?>

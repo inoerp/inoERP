@@ -6,21 +6,21 @@
    <div id="accordion0" class="accordion">
     <h3><i class="fa fa-minus-circle"></i> Customer Information</h3>
     <div>
-     <p><?php if (!empty($ino_user->user_id)) { ?>
+     <p><?php if (!empty($ino_user->ino_user_id)) { ?>
      <ul class="column header_field">
       <li><?php
-        echo $f->hidden_field('user_id', $ino_user->user_id);
+        echo $f->hidden_field('user_id', $ino_user->ino_user_id);
         $f->l_text_field('username', $ino_user->username, '', '', '', 1, 1);
         ?></li>
        <li><?php $f->l_text_field('first_name', $ino_user->first_name, '', '', '', 1, 1); ?></li>
        <li><?php $f->l_text_field('last_name', $ino_user->last_name, '', '', '', 1, 1); ?></li>
        <li><?php $f->l_text_field('email', $ino_user->email, '', '', '', 1, 1); ?></li>
        <li><?php $f->l_text_field('phone', $ino_user->phone, '', '', '', '', 1); ?></li>
-       <li><label>Update</label><a role="button" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $ino_user->user_id; ?>"><i class="fa fa-edit"></i> Details</a></li>
+       <li><label>Update</label><a role="button" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $ino_user->ino_user_id; ?>"><i class="fa fa-edit"></i> Details</a></li>
       </ul>
       <?php
      } else {
-      include_once __DIR__ . '/../../../extensions/user/page_login/user_login_template.php';
+      include_once __DIR__ . '/../../../extensions/ino_user/page_login/user_login_template.php';
      }
      ?>
      </p>
@@ -28,7 +28,7 @@
     <h3><i class="fa fa-plus-circle"></i> Delivery Details</h3>
     <div>
      <?php
-     $all_address = address_reference::find_by_reference_detailts('user', $ino_user->user_id);
+     $all_address = address_reference::find_by_reference_detailts('ino_user', $ino_user->ino_user_id);
      if ($all_address) {
       $ship_add = $bill_add = $all_address[0];
       $ship_to_id = $bill_to_id = $all_address[0]->address_id;

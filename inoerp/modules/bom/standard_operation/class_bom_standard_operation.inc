@@ -21,7 +21,7 @@ class bom_standard_operation extends dbObject {
 
  public static $table_name = "bom_standard_operation";
  public static $primary_column = "bom_standard_operation_id";
- public static $dependent_classes = ['bom_standard_operation_resource_assignment'];
+ public static $dependent_classes = ['bom_stnd_op_res_assignment'];
  public static $key_column = 'department_id';
  public static $module = "bom";
  public static $system_info = [
@@ -31,7 +31,7 @@ class bom_standard_operation extends dbObject {
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
-		 'dependent_class' => array('bom_standard_operation_resource_assignment'),
+		 'dependent_class' => array('bom_stnd_op_res_assignment'),
   'primary_entity_cb' => '',
   'module_name' => 'bom',
   'weight' => 7

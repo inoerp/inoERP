@@ -106,7 +106,7 @@ class bc_label_request extends dbObject {
  }
 
  public function print_XMLlabel($xml_content) {
-  $comment = new comment();
+  $comment = new extn_comment();
   $comment->reference_table = 'bc_label_label_request';
   $comment->reference_id = 'bc_label_label_request';
 
