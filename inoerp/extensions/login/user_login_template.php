@@ -20,7 +20,7 @@
 
        <div id="tabsHeader-1" class="tabContent">
         <div class="col-md-8">
-         <form name="user_login_onPage" action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_login_onPage">
+         <form name="user_login_onPage" action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_login_onPage">
           <ul class="single-column">
            <span id="username_tip" maxlength="50" size="30"  ></span>
            <li><label>User Name</label>
@@ -31,7 +31,7 @@
             <input type="password" name="password" maxlength="50" size="30" id="password" placeholder="example : uVrt@%35"
                    value="<?php echo ($user->password); ?>" >
            </li>
-           <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $user->user_language, 'user_language'); ?>  </li>
+           <li><?php $f->l_select_field_from_object('user_language', ino_user::all_languages(), 'option_line_code', 'description', $user->user_language, 'user_language'); ?>  </li>
            <li><label></label><input type="submit" name="submitLogin" class="button btn btn-success" value="Log in"></li>
           </ul>
 
@@ -45,7 +45,7 @@
 
        <div id="tabsHeader-2" class="tabContent">
         <div id="create_new_user" class="col-md-8">
-         <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_header_onPage" name="user_header_onPage">
+         <form action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_header_onPage" name="user_header_onPage">
           <ul class="single-column"><li><label>First Name</label><?php echo form::text_field('first_name', $user->first_name); ?></li>
            <li><label>Last Name</label><?php echo form::text_field('last_name', $user->last_name); ?></li>
            <li><label>Username</label><?php echo form::text_field('username', $user->username); ?></li>
@@ -69,7 +69,7 @@
        </div>
 
        <div id="tabsHeader-3" class="tabContent">
-        <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
+        <form action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
          <ul class="single-column">
           <li><label>Username</label><?php echo form::text_field('username', $user_password_reset->username, 35, 200, '', 'Login User Name', 'reset_password_user_name', '', 'reset_password_user_name'); ?>         </li>
           <li><label></label> Or </li>

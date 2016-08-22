@@ -1,18 +1,18 @@
 <?php
 
-class user_role extends user {
+class user_role extends ino_user {
 
  public static $table_name = "user_role";
- public static $parent_primary_column = "user_id";
+ public static $parent_primary_column = "ino_user_id";
  public static $primary_column = "user_role_id";
- public static $key_column = 'user_id';
+ public static $key_column = 'ino_user_id';
  public static $module = "extension";
  public static $system_info = [
  ];
 //  data base variables as stored database column name
  public $field_a = [
 		 "user_role_id",
-		 "user_id",
+		 "ino_user_id",
 		 "role_code",
 		 "created_by",
 		 "creation_date",
@@ -20,10 +20,10 @@ class user_role extends user {
 		 "last_update_date"
  ];
  public $requiredField = [
-		 "user_id",
+		 "ino_user_id",
 		 "role_code"
  ];
- public $user_id;
+ public $ino_user_id;
  public $user_role_id;
  public $role_code;
  public $created_by;
@@ -36,7 +36,7 @@ class user_role extends user {
  public static function find_by_userId($user_id) {
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE user_id='{$user_id}' ";
+	$sql .= " WHERE ino_user_id='{$user_id}' ";
 	$result = self::find_by_sql($sql);
 	return $result;
  }
@@ -44,11 +44,16 @@ class user_role extends user {
  public function findBy_userId() {
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE user_id= :user_id ";
-	$value_a = ['user_id' => $this->user_id];
+	$sql .= " WHERE ino_user_id= :user_id ";
+	$value_a = ['user_id' => $this->ino_user_id];
 	$result = $this->findBySql($sql, $value_a);
 	return !empty($result) ? $result : false;
  }
+ 
+  public function _after_save(){
+  
+ }
+
 
 }
 

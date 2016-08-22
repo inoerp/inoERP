@@ -92,7 +92,8 @@ class mdm_price_list_detail extends dbObject {
 
  public static function find_taxLine_by_lineId($mdm_price_list_line_id) {
   $sql = "SELECT * FROM " . self::$table_name . " where mdm_price_list_line_id = '{$mdm_price_list_line_id}'"
-   . "  AND account_type = 'TAX'  LIMIT 1";
+   . "  AND account_type = 'TAX'  ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -100,7 +101,8 @@ class mdm_price_list_detail extends dbObject {
  public function findTaxLine_byLineId($mdm_price_list_line_id = '') {
   $mdm_price_list_line_id = !empty($mdm_price_list_line_id) ? $mdm_price_list_line_id : $this->mdm_price_list_line_id;
   $sql = "SELECT * FROM " . self::$table_name . " where mdm_price_list_line_id = :mdm_price_list_line_id "
-   . "  AND account_type = 'TAX'  LIMIT 1";
+   . "  AND account_type = 'TAX' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $value_a = [ 'mdm_price_list_line_id' => $mdm_price_list_line_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;

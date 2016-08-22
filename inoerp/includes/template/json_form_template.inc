@@ -72,8 +72,8 @@
   $primary_column_h = $class::$primary_column;
 
   if (!empty($$class->$primary_column_h)) {
-   $user_creationBy = user::find_by_id($$class->created_by);
-   $user_lastUpdateBy = user::find_by_id($$class->last_update_by);
+   $user_creationBy = ino_user::find_by_id($$class->created_by);
+   $user_lastUpdateBy = ino_user::find_by_id($$class->last_update_by);
    echo '<div id="document_history" ><ul id="document_history_ul">';
    if (!empty($user_creationBy)) {
     echo '<li id="created_by">Created By : ' . $user_creationBy->username . '</li>';

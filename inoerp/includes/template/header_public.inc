@@ -100,13 +100,13 @@ check_browser(); ?>
        <a href = "' . HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '">Configure</a>
        </li>';
         echo '<li class = "divider" role = "presentation"></li>';
-        echo '<li><a href = "' . HOME_URL . 'extensions/user/user_logout.php"> Logout</a></li>';
+        echo '<li><a href = "' . HOME_URL . 'extensions/ino_user/user_logout.php"> Logout</a></li>';
         echo '</ul>
        </li>
        </ul>
        ';
        } else {
-        include_once __DIR__ . '/../../extensions/user/popup_login/user_popup_login_template.php';
+        include_once __DIR__ . '/../../extensions/ino_user/popup_login/user_popup_login_template.php';
        }
        ?>
       </div>
@@ -132,7 +132,7 @@ check_browser(); ?>
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
       <ul class="nav navbar-nav">
        <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-       <li class="active"><a href="http://demo.inoideas.org/extensions/user/user_login.php" >DEMO <div class="arrow-up"></div></a></li>
+       <li class="active"><a href="http://demo.inoideas.org/extensions/ino_user/user_login.php" >DEMO <div class="arrow-up"></div></a></li>
        <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>

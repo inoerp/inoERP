@@ -3,7 +3,7 @@
 
  if (!empty($_GET['find_result'])) {
   if (!empty($_GET['query_v'])) {
-   $view = new view();
+   $view = new extn_view();
    $view->pageno = !empty($_GET['pageno']) ? ($_GET['pageno']) : 1;
    $view->per_page = !empty($_GET['per_page']) ? ($_GET['per_page']) : 20;
    $view->query_v = ($_GET['query_v']);
@@ -11,7 +11,7 @@
    $view->no_of_grid_columns = !empty($_GET['no_of_grid_columns']) ? ($_GET['no_of_grid_columns']) : 0;
    echo '<div id="return_divId">' . $view->show_viewResult() . '</div>';
   } else if (!empty($_GET['view_id'])) {
-   $view = new view();
+   $view = new extn_view();
    $view->pageno = !empty($_GET['pageno']) ? ($_GET['pageno']) : 1;
    $view->per_page = !empty($_GET['per_page']) ? ($_GET['per_page']) : 20;
    $view->view_id = ($_GET['view_id']);
@@ -57,7 +57,7 @@
   echo '<div id="json_filed_names">';
   $tableName = $_GET['tableName'];
 
-  $column_names = view::find_columns_of_table($tableName);
+  $column_names = extn_view::find_columns_of_table($tableName);
 
   if (count($column_names) == 0) {
    return false;

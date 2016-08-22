@@ -2585,7 +2585,7 @@ function getItemRevision(options) {
 
 function getDBReportList(options) {
  var defaults = {
-  json_url: 'extensions/user/dashboard/config/json_dbconfig.php',
+  json_url: 'extensions/ino_user/dashboard/config/json_dbconfig.php',
   report_type: 'block',
   update_data: true
  };

@@ -97,7 +97,7 @@
        $count = 0;
        $f = new inoform();
        foreach ($hr_event_line_object as $hr_event_line) {
-        $$class_second->username = !empty($hr_event_line->user_id) ? user::find_by_id($hr_event_line->user_id)->username : '';
+        $$class_second->username = !empty($hr_event_line->user_id) ? ino_user::find_by_id($hr_event_line->user_id)->username : '';
         ?>         
         <tr class="hr_event_line<?php echo $count ?>">
          <td><?php

@@ -119,8 +119,17 @@ AND fac.fa_asset_category_id = bca.fa_asset_category_id
 AND ast.fa_asset_id = '{$fa_asset_id}'
 AND bca.fa_asset_book_id = '{$fa_asset_book_id}'
 
-LIMIT 1
  ";
+
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
 
 //echo $sql;
 

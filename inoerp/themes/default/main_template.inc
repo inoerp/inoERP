@@ -245,7 +245,7 @@
        <ul class="pull-right">
         <li> | </li>
         <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
-        <li><a href="http://inoerp.org/extensions/user/user_login.php">Demo</a></li>
+        <li><a href="http://inoerp.org/extensions/ino_user/user_login.php">Demo</a></li>
         <li><a href="https://github.com/inoerp/inoERP">Download</a></li>
         <li><a href="http://localhost/inoerp/content.php?content_type=documentation&category_id=30">Documentation</a></li>
         <li><a href="http://localhost/inoerp/content.php?content_type=forum&category_id=1">Forum</a></li>

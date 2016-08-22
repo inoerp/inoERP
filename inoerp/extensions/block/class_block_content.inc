@@ -43,7 +43,8 @@ class block_content extends dbObject {
 
  //dont delete below
  public static function find_by_block_id($id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where block_id='{$id}'  LIMIT 1";
+  $sql = "SELECT * FROM " . self::$table_name . " where block_id='{$id}'  ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }

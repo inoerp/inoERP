@@ -117,7 +117,7 @@ include_once("includes/functions/loader.inc");
        ?>
        <?php if ($show_header_links) { ?>
         <div class="social-icons">
-         <span class="hidden-sm hidden-md hidden-lg"><a class="fa fa-navicon clickable right_navicon" href="#"></a><div id="navbar-collapse-right" class="hidden"><j class="fa fa-close ino-close-right-navbar clickable white-font-link" title="close navigation"></j><?php  echo $menu_line->show_menu_list(1);    ?></div></span>
+         <span class="hidden-sm hidden-md hidden-lg"><a class="fa fa-navicon clickable right_navicon" href="#"></a><div id="navbar-collapse-right" class="hidden"><j class="fa fa-close ino-close-right-navbar clickable white-font-link" title="close navigation"></j><?php echo $menu_line->show_menu_list(1); ?></div></span>
          <span><a class="fa fa-dashboard clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"></a></span>
         </div><!-- end social icons -->
        <?php } ?>
@@ -125,11 +125,11 @@ include_once("includes/functions/loader.inc");
       </div><!-- end columns -->
 
 
-       <div class="callus col-lg-6 col-md-6 col-sm-7 hidden-xs">
-        <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
-        <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
-       </div><!-- end callus -->
-       <div class="topbar-login col-lg-2 col-md-2 col-sm-2 col-xs-6 "><?php ino_topbar_login(); ?></div><!-- end top menu -->
+      <div class="callus col-lg-6 col-md-6 col-sm-7 hidden-xs">
+       <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
+       <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
+      </div><!-- end callus -->
+      <div class="topbar-login col-lg-2 col-md-2 col-sm-2 col-xs-6 "><?php ino_topbar_login(); ?></div><!-- end top menu -->
 
      </div>
     </div><!-- end container -->
@@ -144,7 +144,7 @@ include_once("includes/functions/loader.inc");
       ?>" class="logo_image" alt="logo"/>
       <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
      </div>
-     <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right"> <?php      echo $menu_line->show_menu_list(1);    ?></div>
+     <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right"> <?php echo $menu_line->show_menu_list(1); ?></div>
     </div>
    </header>
   </nav>
@@ -189,36 +189,37 @@ include_once("includes/functions/loader.inc");
       $pagination = new pagination($pageno, $per_page, $total_count);
       $pagination->setProperty('_path', 'index.php?');
       $position = ($pageno - 1) * $per_page;
-
-      $fp_contnts_ai = new ArrayIterator($fp_contnts);
-      if ($position > 0) {
-       $fp_contnts_ai->seek($position);
-      }
-      $cont_count = 1;
-      while ($fp_contnts_ai->valid()) {
-       $contnent = $fp_contnts_ai->current();
-       if ($cont_count == 1 || $cont_count == 4) {
-        $count_class_val = ' first ';
-       } else if ($cont_count == 2 || $cont_count == 5) {
-        $count_class_val = ' last ';
-       } else {
-        $count_class_val = '';
+      if (!empty($fp_contnts)) {
+       $fp_contnts_ai = new ArrayIterator($fp_contnts);
+       if ($position > 0) {
+        $fp_contnts_ai->seek($position);
        }
-       echo '<div class="col-lg-4 col-md-4' . $count_class_val . ' ">
+       $cont_count = 1;
+       while ($fp_contnts_ai->valid()) {
+        $contnent = $fp_contnts_ai->current();
+        if ($cont_count == 1 || $cont_count == 4) {
+         $count_class_val = ' first ';
+        } else if ($cont_count == 2 || $cont_count == 5) {
+         $count_class_val = ' last ';
+        } else {
+         $count_class_val = '';
+        }
+        echo '<div class="col-lg-4 col-md-4' . $count_class_val . ' ">
               <div class="panel panel-success">
                 <div class="panel-heading">';
-       echo "<h3 class='panel-title'>";
-       echo '<a href="' . HOME_URL . 'content.php?mode=2&'
-       . 'content_id=' . $contnent->content_id . '&content_type_id=' . $contnent->content_type_id . '">';
-       echo substr($contnent->subject, 0, $subject_no_of_char) . "</a></h3>";
-       echo '</div>';
-       echo "<div class='panel-body'>" . nl2br(html_entity_decode($contnent->content_summary, $summary_no_of_char)) . "</div>";
-       echo '</div></div>';
-       $cont_count++;
-       $fp_contnts_ai->next();
-       if ($fp_contnts_ai->key() == $position + $per_page) {
-        $cont_count = 1;
-        break;
+        echo "<h3 class='panel-title'>";
+        echo '<a href="' . HOME_URL . 'content.php?mode=2&'
+        . 'content_id=' . $contnent->content_id . '&content_type_id=' . $contnent->content_type_id . '">';
+        echo substr($contnent->subject, 0, $subject_no_of_char) . "</a></h3>";
+        echo '</div>';
+        echo "<div class='panel-body'>" . nl2br(html_entity_decode($contnent->content_summary, $summary_no_of_char)) . "</div>";
+        echo '</div></div>';
+        $cont_count++;
+        $fp_contnts_ai->next();
+        if ($fp_contnts_ai->key() == $position + $per_page) {
+         $cont_count = 1;
+         break;
+        }
        }
       }
       ?>

@@ -109,7 +109,17 @@ class fp_forecast_header extends dbObject {
  public function findBy_itemId() {
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where item_id_m= :item_id_m LIMIT 1 ";
+   " where item_id_m= :item_id_m";
+
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $param_a = ['item_id_m'];
   $value_a = ['item_id_m' => $this->item_id_m];
   $result_array = $this->findBy_sql($sql, $param_a, $value_a);

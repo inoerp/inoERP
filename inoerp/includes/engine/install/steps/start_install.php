@@ -35,7 +35,7 @@ if ($proceed) {
  $db_version = $dbc->connection->getAttribute(PDO::ATTR_CLIENT_VERSION);
  pa($db_version);
  //verify if any existing data exists
- $existing_tables = view::count_all_tables();
+ $existing_tables = extn_view::count_all_tables();
  if (empty($existing_tables->table_count)) {
   $db_setting_file_path = HOME_DIR . DS . 'includes' . DS . 'basics'. DS . 'settings' . DS . 'dbsettings.inc';
   $db_setting_file = fopen($db_setting_file_path, "w");

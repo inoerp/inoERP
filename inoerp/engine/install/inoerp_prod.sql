@@ -2565,11 +2565,11 @@ CREATE TABLE IF NOT EXISTS `bom_department` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bom_department_resource_assignment`
+-- Table structure for table `bom_dept_res_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `bom_department_resource_assignment` (
-  `bom_department_resource_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `bom_dept_res_assignment` (
+  `bom_dept_res_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
   `bom_department_id` int(12) NOT NULL,
   `cost_type_id` int(12) NOT NULL,
   `resource_id` int(12) NOT NULL,
@@ -2580,7 +2580,7 @@ CREATE TABLE IF NOT EXISTS `bom_department_resource_assignment` (
   `no_of_units` int(12) DEFAULT NULL,
   `efficiency` int(12) DEFAULT NULL,
   `utilization` int(12) DEFAULT NULL,
-  PRIMARY KEY (`bom_department_resource_assignment_id`)
+  PRIMARY KEY (`bom_dept_res_assignment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -2745,11 +2745,11 @@ CREATE TABLE IF NOT EXISTS `bom_overhead` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bom_overhead_rate_assignment`
+-- Table structure for table `bom_oh_rate_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `bom_overhead_rate_assignment` (
-  `bom_overhead_rate_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `bom_oh_rate_assignment` (
+  `bom_oh_rate_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
   `bom_overhead_id` int(12) NOT NULL,
   `bom_cost_type` varchar(25) NOT NULL,
   `default_basis` varchar(25) NOT NULL,
@@ -2758,18 +2758,18 @@ CREATE TABLE IF NOT EXISTS `bom_overhead_rate_assignment` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`bom_overhead_rate_assignment_id`),
+  PRIMARY KEY (`bom_oh_rate_assignment_id`),
   UNIQUE KEY `bom_overhead_id` (`bom_overhead_id`,`bom_cost_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bom_overhead_resource_assignment`
+-- Table structure for table `bom_oh_res_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `bom_overhead_resource_assignment` (
-  `bom_overhead_resource_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `bom_oh_res_assignment` (
+  `bom_oh_res_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
   `bom_overhead_id` int(12) NOT NULL,
   `bom_cost_type` varchar(25) NOT NULL,
   `resource_id` int(12) NOT NULL,
@@ -2777,7 +2777,7 @@ CREATE TABLE IF NOT EXISTS `bom_overhead_resource_assignment` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`bom_overhead_resource_assignment_id`),
+  PRIMARY KEY (`bom_oh_res_assignment_id`),
   UNIQUE KEY `bom_overhead_id` (`bom_overhead_id`,`bom_cost_type`,`resource_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -2787,10 +2787,10 @@ CREATE TABLE IF NOT EXISTS `bom_overhead_resource_assignment` (
 -- Stand-in structure for view `bom_overhead_v`
 --
 CREATE TABLE IF NOT EXISTS `bom_overhead_v` (
-`bom_overhead_resource_assignment_id` int(12)
+`bom_oh_res_assignment_id` int(12)
 ,`resource_bom_cost_type` varchar(25)
 ,`resource_id` int(12)
-,`bom_overhead_rate_assignment_id` int(12)
+,`bom_oh_rate_assignment_id` int(12)
 ,`bom_overhead_id` int(12)
 ,`rate_bom_cost_type` varchar(25)
 ,`default_basis` varchar(25)
@@ -3043,11 +3043,11 @@ CREATE TABLE IF NOT EXISTS `bom_standard_operation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bom_standard_operation_resource_assignment`
+-- Table structure for table `bom_stnd_op_res_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `bom_standard_operation_resource_assignment` (
-  `bom_standard_operation_resource_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `bom_stnd_op_res_assignment` (
+  `bom_stnd_op_res_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
   `resource_sequence` int(12) DEFAULT NULL,
   `bom_standard_operation_id` int(12) DEFAULT NULL,
   `charge_basis` int(12) NOT NULL,
@@ -3062,7 +3062,7 @@ CREATE TABLE IF NOT EXISTS `bom_standard_operation_resource_assignment` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`bom_standard_operation_resource_assignment_id`)
+  PRIMARY KEY (`bom_stnd_op_res_assignment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -3749,7 +3749,7 @@ CREATE TABLE IF NOT EXISTS `cc_co_process_flow_action` (
 --
 
 CREATE TABLE IF NOT EXISTS `cc_co_process_flow_action_value` (
-  `sys_process_flow_action_value_id` int(12) NOT NULL AUTO_INCREMENT,
+  `sys_pflow_action_val_id` int(12) NOT NULL AUTO_INCREMENT,
   `sys_process_flow_action_id` int(12) NOT NULL,
   `value` varchar(256) NOT NULL,
   `comment` varchar(256) DEFAULT NULL,
@@ -3759,7 +3759,7 @@ CREATE TABLE IF NOT EXISTS `cc_co_process_flow_action_value` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`sys_process_flow_action_value_id`),
+  PRIMARY KEY (`sys_pflow_action_val_id`),
   UNIQUE KEY `document_type_name` (`sys_process_flow_action_id`,`comment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -15812,11 +15812,11 @@ CREATE TABLE IF NOT EXISTS `prj_burden_list_line` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prj_burden_structure_costcode`
+-- Table structure for table `prj_burden_struct_costcode`
 --
 
-CREATE TABLE IF NOT EXISTS `prj_burden_structure_costcode` (
-  `prj_burden_structure_costcode_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `prj_burden_struct_costcode` (
+  `prj_burden_struct_costcode_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `prj_burden_structure_header_id` int(12) NOT NULL,
   `burden_cost_code_id` int(12) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -15826,15 +15826,15 @@ CREATE TABLE IF NOT EXISTS `prj_burden_structure_costcode` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`prj_burden_structure_costcode_id`),
+  PRIMARY KEY (`prj_burden_struct_costcode_id`),
   UNIQUE KEY `prj_burden_structure_header_id` (`prj_burden_structure_header_id`,`burden_cost_code_id`,`burden_cost_base_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Project burden structure cost code information' AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `prj_burden_structure_costcode`
+-- Dumping data for table `prj_burden_struct_costcode`
 --
 
-INSERT INTO `prj_burden_structure_costcode` (`prj_burden_structure_costcode_id`, `prj_burden_structure_header_id`, `burden_cost_code_id`, `description`, `burden_cost_base_id`, `priority`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `prj_burden_struct_costcode` (`prj_burden_struct_costcode_id`, `prj_burden_structure_header_id`, `burden_cost_code_id`, `description`, `burden_cost_base_id`, `priority`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 1, 1, NULL, 1, 1, 34, NULL, 34, NULL),
 (3, 1, 2, NULL, 1, NULL, 34, NULL, 34, NULL),
 (4, 1, 1, NULL, 2, NULL, 34, NULL, 34, NULL),
@@ -15843,11 +15843,11 @@ INSERT INTO `prj_burden_structure_costcode` (`prj_burden_structure_costcode_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prj_burden_structure_expendituretype`
+-- Table structure for table `prj_burden_struct_exptype`
 --
 
-CREATE TABLE IF NOT EXISTS `prj_burden_structure_expendituretype` (
-  `prj_burden_structure_expendituretype_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `prj_burden_struct_exptype` (
+  `prj_burden_struct_exptype_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `prj_burden_structure_header_id` int(12) NOT NULL,
   `prj_expenditure_type_id` int(12) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -15856,15 +15856,15 @@ CREATE TABLE IF NOT EXISTS `prj_burden_structure_expendituretype` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`prj_burden_structure_expendituretype_id`),
+  PRIMARY KEY (`prj_burden_struct_exptype_id`),
   UNIQUE KEY `prj_burden_structure_header_id` (`prj_burden_structure_header_id`,`prj_expenditure_type_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Project burden expenditure type information' AUTO_INCREMENT=13 ;
 
 --
--- Dumping data for table `prj_burden_structure_expendituretype`
+-- Dumping data for table `prj_burden_struct_exptype`
 --
 
-INSERT INTO `prj_burden_structure_expendituretype` (`prj_burden_structure_expendituretype_id`, `prj_burden_structure_header_id`, `prj_expenditure_type_id`, `description`, `burden_cost_base_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `prj_burden_struct_exptype` (`prj_burden_struct_exptype_id`, `prj_burden_structure_header_id`, `prj_expenditure_type_id`, `description`, `burden_cost_base_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (6, 2, 1, NULL, 1, 34, NULL, 34, NULL),
 (10, 2, 2, NULL, 2, 34, NULL, 34, NULL),
 (11, 1, 1, NULL, 1, 34, NULL, 34, NULL),
@@ -19190,11 +19190,11 @@ CREATE TABLE IF NOT EXISTS `sys_pd_process_flow_action` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_pd_process_flow_action_value`
+-- Table structure for table `sys_pd_pflow_action_val`
 --
 
-CREATE TABLE IF NOT EXISTS `sys_pd_process_flow_action_value` (
-  `sys_pd_process_flow_action_value_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `sys_pd_pflow_action_val` (
+  `sys_pd_pflow_action_val_id` int(12) NOT NULL AUTO_INCREMENT,
   `sys_process_flow_action_id` int(12) NOT NULL,
   `value` varchar(256) NOT NULL,
   `comment` varchar(256) DEFAULT NULL,
@@ -19204,7 +19204,7 @@ CREATE TABLE IF NOT EXISTS `sys_pd_process_flow_action_value` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`sys_pd_process_flow_action_value_id`),
+  PRIMARY KEY (`sys_pd_pflow_action_val_id`),
   UNIQUE KEY `document_type_name` (`sys_process_flow_action_id`,`comment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -19279,11 +19279,11 @@ CREATE TABLE IF NOT EXISTS `sys_process_flow_action` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_process_flow_action_value`
+-- Table structure for table `sys_pflow_action_val`
 --
 
-CREATE TABLE IF NOT EXISTS `sys_process_flow_action_value` (
-  `sys_process_flow_action_value_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `sys_pflow_action_val` (
+  `sys_pflow_action_val_id` int(12) NOT NULL AUTO_INCREMENT,
   `sys_process_flow_action_id` int(12) NOT NULL,
   `value` varchar(256) NOT NULL,
   `comment` varchar(256) DEFAULT NULL,
@@ -19293,7 +19293,7 @@ CREATE TABLE IF NOT EXISTS `sys_process_flow_action_value` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`sys_process_flow_action_value_id`),
+  PRIMARY KEY (`sys_pflow_action_val_id`),
   UNIQUE KEY `document_type_name` (`sys_process_flow_action_id`,`comment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -22381,7 +22381,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `bom_overhead_v`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select `res`.`bom_overhead_resource_assignment_id` AS `bom_overhead_resource_assignment_id`,`res`.`bom_cost_type` AS `resource_bom_cost_type`,`res`.`resource_id` AS `resource_id`,`ora`.`bom_overhead_rate_assignment_id` AS `bom_overhead_rate_assignment_id`,`ora`.`bom_overhead_id` AS `bom_overhead_id`,`ora`.`bom_cost_type` AS `rate_bom_cost_type`,`ora`.`default_basis` AS `default_basis`,`ora`.`rate` AS `rate`,`bo`.`overhead` AS `overhead`,`bo`.`description` AS `description`,`bo`.`org_id` AS `org_id`,`bo`.`overhead_type` AS `overhead_type`,`bo`.`absorption_ac_id` AS `absorption_ac_id` from ((`bom_overhead_rate_assignment` `ora` left join `bom_overhead` `bo` on((`bo`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) left join `bom_overhead_resource_assignment` `res` on((`res`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) where (`res`.`bom_cost_type` = `ora`.`bom_cost_type`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select `res`.`bom_oh_res_assignment_id` AS `bom_oh_res_assignment_id`,`res`.`bom_cost_type` AS `resource_bom_cost_type`,`res`.`resource_id` AS `resource_id`,`ora`.`bom_oh_rate_assignment_id` AS `bom_oh_rate_assignment_id`,`ora`.`bom_overhead_id` AS `bom_overhead_id`,`ora`.`bom_cost_type` AS `rate_bom_cost_type`,`ora`.`default_basis` AS `default_basis`,`ora`.`rate` AS `rate`,`bo`.`overhead` AS `overhead`,`bo`.`description` AS `description`,`bo`.`org_id` AS `org_id`,`bo`.`overhead_type` AS `overhead_type`,`bo`.`absorption_ac_id` AS `absorption_ac_id` from ((`bom_oh_rate_assignment` `ora` left join `bom_overhead` `bo` on((`bo`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) left join `bom_oh_res_assignment` `res` on((`res`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) where (`res`.`bom_cost_type` = `ora`.`bom_cost_type`);
 
 -- --------------------------------------------------------
 

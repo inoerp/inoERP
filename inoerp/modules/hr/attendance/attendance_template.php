@@ -9,7 +9,7 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field"> 
+      <ul class="column header_field two_column_form"> 
        <li><?php $f->l_text_field_dr_withSearch('hr_attendance_id'); ?>
         <a name="show" href="form.php?class_name=hr_attendance&<?php echo "mode=$mode"; ?>" class="show document_id hr_attendance_id"><i class='fa fa-refresh'></i></a> 
        </li>

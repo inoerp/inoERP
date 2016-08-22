@@ -14,7 +14,7 @@
   <?php if ($show_header_links) { ?>
    <div class="header_info">
     <ul class="inRow asperWidth"> 
-     <li><a href="http://demo.inoideas.org/extensions/user/user_login.php">Demo</a></li>
+     <li><a href="http://demo.inoideas.org/extensions/ino_user/user_login.php">Demo</a></li>
      <li><a href="https://github.com/inoerp/inoerp_v1">Download</a></li>
      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation</a></li>
      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum</a></li>
@@ -55,7 +55,7 @@
          </ul>
         </li>
         <li class="expandable" data-path_description="Logout">
-         <a  href="<?php echo HOME_URL; ?>extensions/user/user_logout.php">Logout</a> 
+         <a  href="<?php echo HOME_URL; ?>extensions/ino_user/user_logout.php">Logout</a> 
         </li>
        </ul>
       </li>
@@ -66,9 +66,9 @@
    <div id="registration_info">
     <ul class="inRow asperWidth">
      <li class>
-      <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php">Sign In</a>
+      <a class="login_button" href="<?php echo HOME_URL; ?>extensions/ino_user/user_login.php">Sign In</a>
      <li>
-      <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-2">Register</a>
+      <a class="login_button" href="<?php echo HOME_URL; ?>extensions/ino_user/user_login.php#tabsLine-2">Register</a>
      </li>
     </ul>
    </div>	

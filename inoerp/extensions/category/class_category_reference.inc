@@ -64,8 +64,8 @@ class category_reference extends dbObject {
 	$sql .= " WHERE major_category_id = '{$major_category_id}'
        AND reference_table = '{$reference_table}' 
        AND reference_id = '{$reference_id}'
-       LIMIT 1";
-
+       ";
+$sql = ino_perPageSql_i($sql, 1);
 	$result = self::find_by_sql($sql);
 
 

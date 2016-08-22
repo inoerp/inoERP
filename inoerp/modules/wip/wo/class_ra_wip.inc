@@ -105,9 +105,8 @@ SELECT item.item_number,
             LEFT JOIN item ON item.item_id_m = wh.item_id_m
 			WHERE wh.wo_status = 'RELEASED'
 			GROUP BY wh.item_id_m, Past_Due
-			ORDER BY Remaining_Quantity DESC
-			LIMIT 8
  ";
+  $sql = ino_perPageSql_i($sql, 8);
 	$result = $this->findBySql($sql);
 	$result_f = ra_conevrt_data_bar_column($result, $legend);
 	$this->ra_report_wip_pastDue_orders_settings['_legend'] = $legend;

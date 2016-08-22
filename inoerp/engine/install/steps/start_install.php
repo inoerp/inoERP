@@ -6,7 +6,10 @@
 <?php
 $proceed = true;
 $dbsetting_file = '<?php ';
+$dbsetting_file .= ' defined("DB_TYPE") ? null : define("DB_TYPE", "' . $_POST['db_type'][0] . '");';
 $dbsetting_file .= ' defined("DB_SERVER") ? null : define("DB_SERVER", "' . $_POST['db_server'][0] . '");';
+$dbsetting_file .= ' defined("DB_SID") ? null : define("DB_SID", "' . $_POST['db_sid'][0] . '");';
+$dbsetting_file .= ' defined("DB_PORT") ? null : define("DB_PORT", "' . $_POST['db_port'][0] . '");';
 $dbsetting_file .= ' defined("DB_USER") ? null : define("DB_USER", "' . $_POST['db_user'][0] . '");';
 $dbsetting_file .= ' defined("DB_NAME") ? null : define("DB_NAME", "' . $_POST['db_name'][0] . '");';
 $dbsetting_file .= ' defined("DB_PASS") ? null : define("DB_PASS", "' . $_POST['db_pass'][0] . '");';
@@ -15,11 +18,27 @@ $dbsetting_file .= ' ?>';
 $dbc = new dbc();
 
 try {
- $dbc->connection = new PDO('mysql:host=' . $_POST['db_server'][0] . '; dbname=' . $_POST['db_name'][0] . ';charset=utf8', $_POST['db_user'][0], $_POST['db_pass'][0]);
+ switch ($_POST['db_type'][0]) {
+  case 'ORACLE':
+   $tns = '  
+  (DESCRIPTION=
+    (ADDRESS = (PROTOCOL = tcp)(HOST = ' . $_POST['db_server'][0] . ')(PORT=' . $_POST['db_port'][0] . '))
+    (CONNECT_DATA=(SID=' . $_POST['db_sid'][0] . '))
+  ) ';
+   $this->connection = new PDO("oci:dbname=" . $tns, DB_NAME, DB_PASS);
+   break;
+
+  default:
+   $dbc->connection = new PDO('mysql:host=' . $_POST['db_server'][0] . '; dbname=' . $_POST['db_name'][0] . ';charset=utf8', $_POST['db_user'][0], $_POST['db_pass'][0]);
+ }
+
  $dbc->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  $dbc->connection->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
 } catch (PDOException $e) {
  $proceed = false;
+ if ($_POST['db_type'][0] == 'ORACLE') {
+  die('DB Oracle file not found. inoERP with mySQL and MariaDB are released with open source license. Contact <a href="www.inoideas.org">inoERP</a> team for Oracle database');
+ }
  print "Data Base Connection Error!: "
   . "<br><span class='error'>" . $e->getMessage() . "</span><h2> Enter the correct database information</h2> ";
 }
@@ -36,15 +55,30 @@ if (!update_htaccessFile()) {
 }
 
 if ($proceed) {
- require_once(INC_CLASS . DS . "trait_dbObject_t.inc");
- require_once(INC_CLASS . DS . "class_dbObject.inc");
+
+ switch ($_POST['db_type'][0]) {
+  case 'ORACLE':
+   $ora_db_file = HOME_DIR . DS . "assets" . DS . "vendor" . DS . "ino-oracle" . DS . "class_dbObject.inc";
+   if (file_exists($ora_db_file)) {
+    require_once($ora_db_file);
+   } else {
+    die('DB Oracle file not found. inoERP with mySQL and MariaDB are released with open source license. Contact inoERP team for Oracle database');
+   }
+   break;
+
+  default:
+   require_once(INC_CLASS . DS . "trait_dbObject_t.inc");
+   require_once(INC_CLASS . DS . "class_dbObject.inc");
+ }
+
+
  require_once(INC_EXTENSIONS . DS . "view" . DS . "class.view.inc");
 
  //erify db version
  $db_version = $dbc->connection->getAttribute(PDO::ATTR_CLIENT_VERSION);
  pa($db_version);
  //verify if any existing data exists
- $existing_tables = view::count_all_tables();
+ $existing_tables = extn_view::count_all_tables();
  if (empty($existing_tables->table_count)) {
   $db_setting_file_path = HOME_DIR . DS . 'includes' . DS . 'basics' . DS . 'settings' . DS . 'dbsettings.inc';
   $db_setting_file = fopen($db_setting_file_path, "w");

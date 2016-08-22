@@ -99,8 +99,8 @@ prj_event_header peh
 WHERE peh.prj_event_header_id = pel.prj_event_header_id
 AND peh.prj_project_header_id = '{$prj_project_header_id}'
  AND pel.billed_cb = NULL
-LIMIT 1 
 ";
+$sql = ino_perPageSql_i($sql, 1);
 
   $result = self::find_by_sql($sql);
 
@@ -120,8 +120,8 @@ prj_event_header peh
 WHERE peh.prj_event_header_id = pel.prj_event_header_id
 AND peh.prj_project_header_id = '{$prj_project_header_id}'
  AND pel.revenue_distributed_cb = NULL
-LIMIT 1 
 ";
+$sql = ino_perPageSql_i($sql, 1);
 
   $result = self::find_by_sql($sql);
 

@@ -298,7 +298,7 @@
      return;
     }
     $supr_employee_requirements = hr_employee::find_by_id($position_approval_requirements[0]->supervisor_employee_id);
-    $supr_user_requirements = user::find_by_employeeId($position_approval_requirements[0]->supervisor_employee_id);
+    $supr_user_requirements = ino_user::find_by_employeeId($position_approval_requirements[0]->supervisor_employee_id);
     $notif->to_user_id = $supr_user_requirements->user_id;
     $notif->to_user = $supr_employee_requirements->first_name . ' ' . $supr_employee_requirements->last_name;
     $notif->to_email = $supr_employee_requirements->email;

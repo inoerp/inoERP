@@ -166,7 +166,7 @@ if (!empty($extension)) {
 	 $$extension_id = $_GET[$extension_id];
 //   echo '<br><br>$table_name, $$extension_id'. $table_name. $$extension_id;
 	 $$extension = $extension::find_by_id($$extension_id);
-	 $file = file::find_by_reference_table_and_id($table_name, $$extension_id);
+	 $file = extn_file::find_by_reference_table_and_id($table_name, $$extension_id);
 
 	 if ($extension != 'category') {
 		$category = category::find_by_reference_table_and_id($table_name, $$extension_id);
@@ -314,7 +314,7 @@ if (!empty($extension)) {
 
 
 	 //applicable only for user extension
-	 if ($extension == 'user') {
+	 if ($extension == 'ino_user') {
 				if ($_POST['enteredRePassword'][0] == $_POST['enteredPassword'][0]) {
 //		 		 $user->password = hash("sha256", $_POST['enteredPassword'][0]);
 				 $user->password = crypt($_POST['enteredPassword'][0], 'xjkhrwq$@323sqjheq51234$$');

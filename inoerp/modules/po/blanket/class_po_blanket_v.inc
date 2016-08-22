@@ -335,7 +335,7 @@ WHERE po_header.po_type IN ( 'BLANKET', 'BLANKET_RELEASE')
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
    $sql .= " WHERE po_detail_id = :po_detail_id ";
-   $sql .= " LIMIT 1 ";
+   $sql = ino_perPageSql_i($sql, 1);
 
    $param_a = ['po_detail_id'];
    $value_a = ['po_detail_id' => $this->po_detail_id];
@@ -357,7 +357,7 @@ WHERE po_header.po_type IN ( 'BLANKET', 'BLANKET_RELEASE')
    $sql .= self::$table_name;
    $sql .= " GROUP BY supplier_name ";
    $sql .= " ORDER BY quantity desc ";
-   $sql .= " LIMIT 5 ";
+   $sql = ino_perPageSql_i($sql, 5);
    $result = $this->findBySql($sql);
    $result_f = ra_conevrt_data($result, 'supplier_name', $legend);
    $this->ra_open_po_by_supplier_settings['_legend'] = $legend;
@@ -370,7 +370,7 @@ WHERE po_header.po_type IN ( 'BLANKET', 'BLANKET_RELEASE')
    $sql .= self::$table_name;
    $sql .= " GROUP BY po_status ";
    $sql .= " ORDER BY quantity desc ";
-   $sql .= " LIMIT 5 ";
+   $sql = ino_perPageSql_i($sql, 1);
    $result = $this->findBySql($sql);
    $result_f = ra_conevrt_data_pie($result);
    return !empty($result_f) ? ($result_f) : false;

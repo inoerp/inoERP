@@ -13,7 +13,7 @@
  */
 class user_activity_v extends dbObject {
 
- public static $table_name = "user";
+ public static $table_name = "ino_user";
  public static $primary_column = "user_id";
  public static $key_column = 'item_id_m';
  public static $module = "fp";
@@ -44,15 +44,9 @@ class user_activity_v extends dbObject {
   'category',
   'content_type',
  ];
- public $initial_search = [
-  'item_number',
- ];
- public $pageTitle = " Forecast activity "; //page Title
- public $search_functions = [
-  'Organization' => 'search_org_name',
-  'Forecast ' => 'search_forecast_name',
-  'Forecast Group ' => 'search_forecast_group',
- ];
+
+ public $pageTitle = " User activity "; //page Title
+
  public $content_id;
  public $content_type_id;
  public $subject;
@@ -71,26 +65,24 @@ class user_activity_v extends dbObject {
  public $reference_table;
  public $phone;
 
- public function user_contents() {
+ public function user_contents($user_id='') {
 
   $sql = " 
    SELECT con.content_id, con.content_type_id, con.subject, con.created_by, con.creation_date, con.published_cb,
-   user.user_id, user.username, user.first_name, user.phone,
+   user.ino_user_id, user.username, user.first_name, user.phone,
 user.last_name, cr.major_category_id, maj_cat.category as major_category,cat.category, ct.content_type
-FROM user, 
+FROM ino_user as user, 
 content con LEFT JOIN category_reference cr ON cr.reference_id = con.content_id AND reference_table ='content'
 LEFT JOIN category maj_cat ON maj_cat.category_id = cr.major_category_id
 LEFT JOIN category cat ON cat.category_id = cr.category_id
 LEFT JOIN content_type ct ON ct.content_type_id = con.content_type_id
-WHERE  con.created_by = user.user_id
+WHERE  con.created_by = user.ino_user_id
 ";
 
   if (!empty($this->user_id)) {
-   $sql .= " AND user.user_id = '{$this->user_id}' ";
+   $sql .= " AND user.ino_user_id = '{$this->user_id}' ";
   }
-  if (!empty($this->username)) {
-   $sql .= " AND user.username = '{$this->username}' ";
-  }
+
   if (!empty($this->category)) {
    $sql .= " AND cat.category = '{$this->category}' ";
   }
@@ -99,25 +91,26 @@ WHERE  con.created_by = user.user_id
   }
 
   $result = $this->findBySql($sql);
+ 
   return !empty($result) ? $result : false;
  }
 
- public function user_comments() {
+ public function user_comments($user_id='') {
 
   $sql = " 
    SELECT com.comment_id, com.reference_table, com.reference_id, com.comment ,com.published_cb, com.creation_date, 
-   user.user_id, user.username, user.first_name,
+   user.ino_user_id, user.username, user.first_name,
 user.last_name, con.content_type_id
-FROM user, 
+FROM ino_user as user, 
 comment com,
 content con 
-WHERE  com.created_by = user.user_id
+WHERE  com.created_by = user.ino_user_id
 AND com.reference_table = 'content'
 AND con.content_id =  com.reference_id
 ";
 
   if (!empty($this->user_id)) {
-   $sql .= " AND user.user_id = '{$this->user_id}' ";
+   $sql .= " AND user.ino_user_id = '{$this->user_id}' ";
   }
   if (!empty($this->username)) {
    $sql .= " AND user.username = '{$this->username}' ";

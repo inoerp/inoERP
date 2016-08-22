@@ -61,7 +61,8 @@ class gl_balance_v extends dbObject {
  }
 
  public function create_gl_balance_v() {
-  $SQL = "SELECT  cc.combination, gjl.code_combination_id,
+  $SQL = "
+   SELECT  cc.combination, gjl.code_combination_id,
 cc.coa_id, sum(gjl.total_cr), sum(gjl.total_dr),
 sum(gjl.total_ac_dr), sum(gjl.total_ac_cr) ,
 cc.description, gjl.gl_journal_line_id,
@@ -74,7 +75,7 @@ gjh.gl_journal_header_id, gjh.period_name, gjh.balance_type, gjh.post_date
 FROM gl_journal_line gjl 
 LEFT JOIN gl_journal_header gjh ON gjl.gl_journal_header_id = gjh.gl_journal_header_id
 LEFT JOIN coa_combination cc ON gjl.code_combination_id=cc.coa_combination_id
-group by gjl.code_combination_id";
+group by gjl.code_combination_id  ";
 
   $sql = "
 CREATE OR REPLACE VIEW gl_unposted_journal_lines_v

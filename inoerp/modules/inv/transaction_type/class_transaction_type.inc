@@ -134,7 +134,8 @@ class transaction_type extends dbObject {
  public static function find_by_transactionNumber($number) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE transaction_type_number = '{$number}' LIMIT 1";
+  $sql .= " WHERE transaction_type_number = '{$number}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }

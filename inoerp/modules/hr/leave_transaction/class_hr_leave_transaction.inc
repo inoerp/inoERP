@@ -130,7 +130,7 @@
     $notif->from_user_id = $_SESSION['user_id'];
     $employee_details = hr_employee::find_by_id($this->employee_id);
     $supr_employee_details = hr_employee::find_by_id($employee_details->supervisor_employee_id);
-    $supr_user_details = user::find_by_employeeId($employee_details->supervisor_employee_id);
+    $supr_user_details = ino_user::find_by_employeeId($employee_details->supervisor_employee_id);
     $notif->to_user_id = $supr_user_details->user_id;
     $notif->from_user = $employee_details->first_name . ' ' . $employee_details->last_name;
     $notif->to_user = $supr_employee_details->first_name . ' ' . $supr_employee_details->last_name;

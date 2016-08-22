@@ -113,8 +113,7 @@ class page extends dbObject {
 	if (!empty($per_page)) {
 	 $total_count = self::count_all();
 	 $pagination = new pagination($page_no, $per_page, $total_count);
-	 $sql .=" LIMIT {$per_page} ";
-	 $sql .=" OFFSET {$pagination->offset()}";
+   $sql = ino_perPageSql_i($sql, $per_page, $pagination->offset());
 	}
 	$result = self::find_by_sql($sql);
 

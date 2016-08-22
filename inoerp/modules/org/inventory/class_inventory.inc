@@ -238,7 +238,8 @@
 
   public function findBy_org_id($org_id) {
    global $db;
-   $sql = "SELECT * FROM inventory where org_id=:org_id LIMIT 1";
+   $sql = "SELECT * FROM inventory where org_id=:org_id ";
+   $sql = ino_perPageSql_i($sql, 1);
    $param_a = ['org_id'];
    $value_a = ['org_id' => $org_id];
    $result = $db->findBy_sql($sql, $param_a, $value_a);
@@ -270,10 +271,8 @@ inventory.inv_ipv_ac_id,   inventory.sales_ac_id,   inventory.cogs_ac_id,   inve
       LEFT JOIN gl_ledger ON gl_ledger.gl_ledger_id = legal.ledger_id
    
 WHERE org.org_id = '{$orgid}' 
-LIMIT 1 
-"
-   ;
-
+"  ;
+$sql = ino_perPageSql_i($sql, 1);
    $result = $this->findBySql($sql);
    return !empty($result) ? array_pop($result) : false;
   }

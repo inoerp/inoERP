@@ -266,7 +266,7 @@ inoERP
        $count = 0;
        foreach ($prj_project_member_object as $prj_project_member) {
         if (!empty($prj_project_member->user_id)) {
-         $mem_user_i = user::find_by_id($prj_project_member->user_id);
+         $mem_user_i = ino_user::find_by_id($prj_project_member->user_id);
          $$class_third->member_username = $mem_user_i->username;
         }
         ?>         
@@ -281,7 +281,7 @@ inoERP
          </td>
          <td><?php form::text_field_wid3sr('prj_project_member_id'); ?></td>
          <td><?php
-          $f->val_field_wid3('member_username',  'user' ,  'username' , '', 'select user username');
+          $f->val_field_wid3('member_username',  'ino_user' ,  'username' , '', 'select user username');
           echo $f->hidden_field('user_id', $$class_third->user_id);
           ?><i class="select_username select_popup clickable fa fa-search"></i></td>
          <td><?php echo $f->select_field_from_object('prj_role_id', prj_role::find_all(), 'prj_role_id', 'role_name', $$class_third->prj_role_id, '', 'medium'); ?></td>

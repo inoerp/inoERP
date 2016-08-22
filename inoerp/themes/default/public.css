@@ -2966,9 +2966,9 @@ input:checked + .slider:before {
 
 .video-message{
  position: absolute;
-left: 30%;
-top: 20%;
-background-color: rgba(79, 87, 86, 0.7);
+left: 40%;
+top: 40%;
+background-color: rgba(85, 98, 114, 0.8);
 padding: 10px;
 }
 
@@ -2983,6 +2983,37 @@ h1.message1{
 }
 
 .video-display{
- opacity: 0.3;
+ opacity: 0.4;
 }
 
+#ino-home .navbar-collapse{
+ background-color: #fff;
+}
+
+#ino-home #topbar, #ino-home #topbar a {
+    color: #000;
+    background-color: #fff !important;
+}
+
+#ino-home .navbar-default{
+ background-color:transparent ;
+}
+
+#ino-home .topbar{
+ box-shadow: none;
+}
+
+section section{
+    margin: 70px 10px;
+}
+
+section p{
+    margin: 5px !important;
+    border-bottom: 4px solid rgba(33,180,226,1);
+    padding: 10px;
+}
+
+.class_detail_form.lot_serial_form{
+        width: 350px !important;
+        margin-left: 0 !important;
+}

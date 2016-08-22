@@ -70,7 +70,8 @@
     <div class="container">
      <div class="row ">
       <div class="dashborad_l col-lg-4 col-md-4 col-sm-4 col-xs-6 ">
-       <?php $f = new inoform();
+       <?php
+       $f = new inoform();
        $show_header_links = true;
        if ((!empty($mode)) && ($mode > 8) && !empty($access_level) && $access_level > 3) {
         if (empty($current_page_path)) {
@@ -80,21 +81,21 @@
         $show_header_links = false;
        }
        ?>
-       <?php if ($show_header_links) { ?>
+<?php if ($show_header_links) { ?>
         <div class="social-icons">
-         <span class="hidden-sm hidden-md hidden-lg"><a class="fa fa-navicon clickable right_navicon" href="#"></a><div id="navbar-collapse-right" class="hidden"><j class="fa fa-close ino-close-right-navbar clickable white-font-link" title="close navigation"></j><?php  echo $menu_line->show_menu_list(1);    ?></div></span>
-         <span><a class="fa fa-dashboard clickable erp_dashborad" href="<?php echo HOME_URL ;?>form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"></a></span>
+         <span class="hidden-sm hidden-md hidden-lg"><a class="fa fa-navicon clickable right_navicon" href="#"></a><div id="navbar-collapse-right" class="hidden"><j class="fa fa-close ino-close-right-navbar clickable white-font-link" title="close navigation"></j><?php echo $menu_line->show_menu_list(1); ?></div></span>
+         <span><a class="fa fa-dashboard clickable erp_dashborad" href="<?php echo HOME_URL; ?>form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"></a></span>
         </div><!-- end social icons -->
-       <?php } ?>
+<?php } ?>
 
       </div><!-- end columns -->
 
 
-       <div class="callus col-lg-6 col-md-6 col-sm-6 hidden-xs">
-        <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
-        <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
-       </div><!-- end callus -->
-       <div class="topbar-login col-lg-2 col-md-2 col-sm-2 col-xs-6 "><?php ino_topbar_login(); ?></div><!-- end top menu -->
+      <div class="callus col-lg-6 col-md-6 col-sm-6 hidden-xs">
+       <span class="topbar-email"><i class="fa fa-envelope"></i> <a href="<?php echo HOME_URL . 'content.php?mode=9&content_type=web_contact' ?>"><?php echo!empty($si->email) ? $si->email : 'contact@site.org' ?></a></span>
+       <span class="topbar-phone"><i class="fa fa-phone"></i> <a href="#"><?php echo!empty($si->phone_no) ? $si->phone_no : '1-111-1111' ?></a></span>
+      </div><!-- end callus -->
+      <div class="topbar-login col-lg-2 col-md-2 col-sm-2 col-xs-6 "><?php ino_topbar_login(); ?></div><!-- end top menu -->
 
      </div>
     </div><!-- end container -->
@@ -109,7 +110,7 @@
       ?>" class="logo_image" alt="logo"/>
       <a href="<?php echo HOME_URL; ?>" class="navbar-brand"><?php echo!empty($si->site_name) ? $si->site_name : 'inoERP'; ?></a>
      </div>
-<div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right"> <?php      echo $menu_line->show_menu_list(1);    ?></div>
+     <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right"> <?php echo $menu_line->show_menu_list(1); ?></div>
     </div>
    </header>
   </nav>

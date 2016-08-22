@@ -73,7 +73,7 @@ $extension_id = $extension.'_id';
 if (!empty($_GET[$extension_id])) {
  $$extension_id = $_GET[$extension_id];
  $$extension = $extension::find_by_id($$extension_id);
- $file = file::find_by_reference_table_and_id($table_name, $$extension_id);
+ $file = extn_file::find_by_reference_table_and_id($table_name, $$extension_id);
 // $comment = comment::find_by_reference_table_and_id($table_name, $$extension_id);
  $comments = comment::comment_list($table_name,$$extension_id,$per_page,$pageno,$query_string,$$extension_id);
   
@@ -132,8 +132,7 @@ if (!empty($_GET['submit_search'])) {
 
  if (!empty($per_page)) {
   $pagination = new pagination($pageno, $per_page, $total_count);
-  $sql .=" LIMIT {$per_page} ";
-  $sql .=" OFFSET {$pagination->offset()}";
+  $sql = ino_perPageSql_i($sql, $per_page, $pagination->offset());
  }
  
  $result = $extension::find_by_sql($sql);

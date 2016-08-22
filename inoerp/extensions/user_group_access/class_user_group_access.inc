@@ -131,14 +131,14 @@ class user_group_access extends dbObject {
  }
 
  public static function find_by_user_id($user_id) {
-  $sql = " SELECT ug.user_id, ug.user_group_code, uga.org_id, uga.access_level
-FROM user_group ug,
-user,
-user_group_access uga
-WHERE user.user_id = ug.user_id
-AND uga.user_group_code = ug.user_group_code
-AND user.user_id = '{$user_id}'
+  $sql = " SELECT ug.ino_user_id, ug.user_group_code, uga.org_id, uga.access_level 
+   FROM user_group ug, ino_user, user_group_access uga 
+   WHERE ino_user.ino_user_id = ug.ino_user_id 
+   AND uga.user_group_code = ug.user_group_code
+    AND ino_user.ino_user_id = '{$user_id}'
  ";
+
+
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }

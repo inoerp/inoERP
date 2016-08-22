@@ -116,7 +116,7 @@ el.status,   el.purpose,   el.start_date,   el.exchange_rate, user.supplier_id
 
 FROM hr_expense_header eh,
 hr_expense_line el,
-user
+ino_user as user
   
 WHERE 
 el.hr_expense_header_id = eh.hr_expense_header_id

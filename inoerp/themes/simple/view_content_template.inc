@@ -16,7 +16,7 @@
          <ul>
           <li><span class='content_heading'> <?php echo ($content->subject); ?></span></li>
           <li class="created_by f-right"><?php
-           $content_user = user::find_by_id($content->created_by);
+           $content_user = ino_user::find_by_id($content->created_by);
            if (!empty($content_user)) {
            echo '<a href="' . HOME_URL . 'form.php?class_name=user_activity_v&mode=2&user_id=' . ($content->created_by) . '">' . ($content_user->username) . '</a>';
             $profile_image = $f->show_existing_image($content_user->image_file_id, 'img-vs');
@@ -40,7 +40,7 @@
         <div id="after_content_extra">
          <div id='content_info'>
           <ul>
-           <li class="attachment_content"><label>Attachments : </label><?php echo (!empty($file)) ? file::show_file_list($file) : ""; ?></li>
+           <li class="attachment_content"><label>Attachments : </label><?php echo (!empty($file)) ? extn_file::show_file_list($file) : ""; ?></li>
            <li class="terms"><label>Tags : </label><?php echo ($content->terms); ?></li>
            <li class="categories"><label>Category : </label><?php echo!(empty($category_statement)) ? $category_statement : ""; ?></li>
           </ul>
@@ -70,7 +70,7 @@
            $reference_id = $content->content_id;
            include_once 'comment.php';
           } else {
-           echo "<a href='".HOME_URL."extensions/user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
+           echo "<a href='".HOME_URL."extensions/ino_user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
           }
           ?>
           <div id="new_comment">

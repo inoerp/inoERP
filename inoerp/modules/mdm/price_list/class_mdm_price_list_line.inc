@@ -70,7 +70,8 @@ class mdm_price_list_line extends dbObject {
  public $item_number;
  public $item_description;
  public $quantity;
-public $price_date;
+ public $price_date;
+
  public static function find_all_lines() {
   $sql = " SELECT * FROM " . self::$table_name;
   $result = self::find_by_sql($sql);
@@ -84,7 +85,8 @@ public $price_date;
 
  public static function find_by_optionId_lineCode($header_id, $code) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where code={$code} AND mdm_price_list_header_id={$header_id} LIMIT 1 ";
+   " where code={$code} AND mdm_price_list_header_id={$header_id}  ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_push($result) : $result;
  }
@@ -104,8 +106,8 @@ public $price_date;
 		AND item_id_m = '{$item_id_m}'
 		AND effective_start_date < '{$price_date}'
 		AND(effective_end_date IS NULL OR effective_end_date > '{$price_date}')
-		 LIMIT 1
 ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -120,7 +122,9 @@ public $price_date;
 		AND effective_start_date < '{$this->price_date}'
 		AND(effective_end_date IS NULL OR effective_end_date > '{$this->price_date}')
     AND use_price_break_cb IS NULL
-		LIMIT 1
+";
+  $sql = ino_perPageSql_i($sql, 1);
+  $sql.= "
     UNION
     SELECT pll.mdm_price_list_line_id, pll.item_id_m, pll.mdm_price_list_header_id, pll.uom_id, pld.unit_price
 		FROM mdm_price_list_line  pll,
@@ -133,9 +137,9 @@ public $price_date;
      AND pld.qty_from <= '{$this->quantity}'
 		AND(pld.qty_to IS NULL OR pld.qty_to >= '{$this->quantity}')
     AND pll.use_price_break_cb IS NOT NULL
-		LIMIT 1
 ";
-    
+    $sql = ino_perPageSql_i($sql, 1);
+
 //    echo $sql;
   $result = $this->findBySql($sql);
   return !empty($result) ? array_pop($result) : false;

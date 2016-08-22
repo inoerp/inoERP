@@ -257,7 +257,16 @@ AND coa.coa_id = :coa_id
  public static function find_coa_fields_option($coa_id) {
   $sql = "SELECT balancing, cost_center, 	natural_account, inter_company,
       segment1, segment2, segment3, segment4 FROM "
-   . self::$table_name . " where coa_id={$coa_id} LIMIT 1";
+   . self::$table_name . " where coa_id={$coa_id} ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -265,7 +274,16 @@ AND coa.coa_id = :coa_id
  public static function find_coa_fields_by_id($coa_id) {
   $sql = "SELECT balancing, cost_center, 	natural_account, inter_company,
       segment1, segment2, segment3, segment4 FROM "
-   . self::$table_name . " where coa_id={$coa_id} LIMIT 1";
+   . self::$table_name . " where coa_id={$coa_id} ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -274,17 +292,35 @@ AND coa.coa_id = :coa_id
   global $db;
   $sql = "SELECT balancing, cost_center, 	natural_account, inter_company,
       segment1, segment2, segment3, segment4 FROM "
-   . self::$table_name . " where coa_id={$coa_id} LIMIT 1";
+   . self::$table_name . " where coa_id={$coa_id} ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result_set = $db->query($sql);
   $row = mysql_fetch_row($result_set);
   return $row;
  }
 
- public static function find_coa_from_orgId($org_id) {
+ public static function find_coa_from_orgId($coa_id) {
   global $db;
   $sql = "SELECT balancing, cost_center, 	natural_account, inter_company,
       segment1, segment2, segment3, segment4 FROM "
-   . self::$table_name . " where coa_id={$coa_id} LIMIT 1";
+   . self::$table_name . " where coa_id={$coa_id} ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result_set = $db->query($sql);
   $row = mysql_fetch_row($result_set);
   return $row;

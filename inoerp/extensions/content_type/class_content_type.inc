@@ -225,7 +225,8 @@ class content_type extends dbObject {
  }
 
  public static function find_by_content_type($content_type) {
-  $sql = "SELECT * FROM " . self::$table_name . " where content_type='{$content_type}' LIMIT 1";
+  $sql = "SELECT * FROM " . self::$table_name . " where content_type='{$content_type}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -235,7 +236,8 @@ class content_type extends dbObject {
    implode(", ", self::$field_array);
   $sql = "SELECT " . $selectFields . " FROM "
    . self::$table_name . " 
-            where content_type_id={$content_type_id} LIMIT 1";
+            where content_type_id={$content_type_id} ";
+            $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }

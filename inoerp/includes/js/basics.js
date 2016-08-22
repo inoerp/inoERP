@@ -179,7 +179,7 @@ $('body').on('click', '#comment_button', function () {
 
 function deleteComment() {
  var homeUrl = $('#home_url').val();
- var daletePath = homeUrl + 'form.php?class_name=comment';
+ var daletePath = homeUrl + 'form.php?class_name=extn_comment';
  $("body").on('click', '.delete_button', function (e) {
   var headerId = $(this).val();
   var this_dce = $(this);
@@ -311,7 +311,7 @@ function updateComment(comment_id, ulId) {
  return $.ajax({
   url: savePath,
   data: {update: '1',
-   comment_id: comment_id},
+   extn_comment_id: comment_id},
   type: 'get'
  }).done(function (result) {
   var div = '<div class="temp-update-form">' + $(result).filter('div#commentForm').html() + '</div>';
@@ -2787,7 +2787,7 @@ function getItemRevision(options) {
 
 function getDBReportList(options) {
  var defaults = {
-  json_url: 'extensions/user/dashboard/config/json_dbconfig.php',
+  json_url: 'extensions/ino_user/dashboard/config/json_dbconfig.php',
   report_type: 'block',
   update_data: true
  };
@@ -4911,8 +4911,8 @@ $(document).ready(function () {
   $(this).prop('disabled', true);
   var headerData = $(this).closest('form').serializeArray();
   var homeUrl = $('#home_url').val();
-  var savePath = homeUrl + 'form.php?class_name=comment';
-  $.when(saveHeader(savePath, headerData, '#comment_id', '', '', true, 'comment')).then(function () {
+  var savePath = homeUrl + 'form.php?class_name=extn_comment';
+  $.when(saveHeader(savePath, headerData, '#comment_id', '', '', true, 'extn_comment')).then(function () {
    var msg = '<div class="panel panel-info commentRecord"><div class="panel-heading"><ul class="header_li">';
    msg += '</ul></div>';
    msg += '<div class="comment panel-body new-comment update-comment">';
@@ -5283,10 +5283,7 @@ $(document).ready(function () {
    alert('No Subject Entered. Subject is required!');
    return false;
   }
-//  if (!$(this).closest('ul').find('.content_by').val()) {
-//   alert('Please enter your name in Post As.\n\Or Login to the site');
-//   return false;
-//  }
+
   $(".error").append('<div class="alert alert-warning alert-dismissible" role="alert">Saving Post ...</div>');
   var form_header_id = '#content_data';
   if ($('.mce-tinymce').length >= 1) {

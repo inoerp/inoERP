@@ -97,17 +97,17 @@ class extn_emessage_header extends dbObject {
  Public static function find_msg_listing($user_id) {
   $sql = " SELECT  eeh.user_id, eeh.extn_emessage_header_id, eeh.user_id_comb, user.username, user.image_file_id
 FROM extn_emessage_header eeh,
-user
-WHERE user.user_id = eeh.user_id
+ino_user as user
+WHERE user.ino_user_id = eeh.user_id
 AND eeh.from_user_id = '{$user_id}'
  
 UNION
 SELECT  eeh.from_user_id, eeh.extn_emessage_header_id, eeh.user_id_comb, user.username, user.image_file_id
 FROM extn_emessage_header eeh,
-user
-WHERE user.user_id = eeh.from_user_id 
+ino_user as user
+WHERE user.ino_user_id = eeh.from_user_id 
 AND eeh.user_id = '{$user_id}' ";
-
+//echo $sql;
   $result = self::find_by_sql($sql);
    return !empty($result) ? $result : ' ';
  }

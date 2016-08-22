@@ -1,120 +1,100 @@
-<script src="<?php echo HOME_URL; ?>includes/js/report.js"></script>
+<?php
+if (!empty($ino_user->use_personal_db_cb)) {
+ include_once __DIR__ . DS . 'templates/user_dashboard_template.php';
+ return;
+}
+?>
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
-<div id ="form_header">
+<div id ="user_dashboard_divId">
  <div id="tabsHeader">
-  <form action="" method="post" id="user_header" name="user_header"><span class="heading">User Dashboard 
+  <form method="post" id="user_header" name="user_header"><span class="heading"><?php echo gettext('User Dashboard ') ?>
     <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $user_id ?>" 
-       class='fa fa-cog'></a>
+       class='fa fa-cog getAjaxForm'></a>
+    <a href="<?php echo HOME_URL ?>form.php?class_name=user&mode=9&user_id=<?php echo $user_id ?>#tabsHeader-2" class='getAjaxForm pull-right'>[using  <?php echo $selected_theme; ?> theme]</a>
    </span>
-   <div id ="form_header">
-    <div id="tabsHeader">
-     <ul class="tabMain">
-      <li><a href="#tabsHeader-1">Navigation</a></li>
-      <li><a href="#tabsHeader-2">Quick Info</a></li>
-      <li><a href="#tabsHeader-3">On hand</a></li>
-      <li><a href="#tabsHeader-4">Purchasing</a></li>
-      <li><a href="#tabsHeader-5">WIP Value</a></li>
-     </ul>
-     <div class="tabContainer"> 
-      <div id="tabsHeader-1" class="tabContent">
-       <ul id='dashborad_menu'>
-        <li><a href="form.php?module_code=inv"><i class="fa fa-bank"></i> Inventory</a></li>
-        <li><a href="form.php?module_code=sd"><i class="fa fa-truck"></i> Sales & Distribution </a></li>
-        <li><a href="form.php?module_code=sys"><i class="fa fa-file-text-o"></i> Purchasing</a></li>
-        <li><a href="form.php?module_code=bom"><i class="fa fa-sitemap"></i> Bills Of Material</a></li>
-        <li><a href="form.php?module_code=cst"><i class="fa fa-cubes"></i> Cost Management </a></li>
-        <li><a href="form.php?module_code=wip"><i class="fa fa-tasks"></i> WIP & MES </a></li>
-        <li><a href="form.php?module_code=fp"><i class="fa fa-th-large"></i>Forecast & Planning </a></li>
-        <li class="Point Of Sale"><a href="form.php?module_code=pos"><i class="fa fa-shopping-cart"></i>Point Of Sale </a></li>
-        <li><a href="form.php?module_code=ec"><i class="fa fa-sitemap"></i>eCommerce </a></li>
-        <li><a href="form.php?module_code=gl"><i class="fa fa-money"></i> General Ledger</a></li>
-        <li><a href="form.php?module_code=sys"><span class='inline'><j class="fa fa-dollar"></j><i class="fa fa-arrow-circle-right"></i></span>Accounts Payable</a></li>
-        <li><a href="form.php?module_code=sys"><span class='inline'><j class="fa fa-dollar"></j><i class="fa fa-arrow-circle-left"></i></span>Accounts Receivable</a></li>
-        <li><a href="form.php?module_code=fa"><i class="fa fa-building"></i> Fixed Asset </a></li>
-        <li><a href="form.php?module_code=hr"><i class="fa fa-users"></i> Human Resource </a></li>
-        <li><a href="form.php?module_code=sys"><i class="fa fa-database"></i> Admin</a></li>
-        <li><a href="form.php?module_code=sys"><i class="fa fa-cogs"></i> Global Setup</a></li>
-        <li><a href="form.php?module_code=sys"><i class="fa fa-book"></i> Document & Analysis </a></li>
-       </ul>
-
-      </div>
-      <div id="tabsHeader-2" class="tabContent">
-       <ul class="column three_column">
-        <li>
-         <h2>Notifications</h2>
-         <?php
-         echo block::show_block_content_by_BlockId('55');
-         ?>
-        </li>
-        <li>
-         <h2>Recent Comments</h2>
-         <?php
-         echo block::show_block_content_by_BlockId('52');
-//                include_once HOME_URL.'report.php?class_name=ra_item&report_name=ra_report_set_item_leadtime';
-         ?>
-        </li>
-        <li>
-         <span class="button"><a href="<?php echo HOME_URL ?>form.php?class_name=user_favourite&mode=9">Favourites 
-           <img src="<?php echo THEME_URL; ?>/images/edit.png" alt=" update favourite" title='Update Favourite'/>
-          </a></span>
-         <?php
-         echo $fav->show_currentUser_fav();
-         echo block::show_block_content_by_BlockId('57');
-         ?>
-        </li>               
-       </ul>
-      </div>
-      <div id="tabsHeader-3" class="tabContent">
-       <?php
-       $view_i = new view();
-       $view_i->view_id = 11;
-       $view_i->viewResultById();
-       ?>
-      </div>
-      <div id="tabsHeader-4" class="tabContent">
-       <?php
-       $view_i->view_id = 12;
-       $view_i->viewResultById();
-       ?>
-      </div>
-
-      <div id="tabsHeader-5" class="tabContent">
-       <div>                
+   <div id="tabsHeader">
+    <ul class="tabMain">
+     <li><a href="#tabsHeader-1"><?php echo gettext('Navigation') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Quick Info ') ?></a></li>
+     <li><a href="#tabsHeader-3" class="get-report-content" data-report_id="7"><?php echo gettext('P&L Snapshot') ?></a></li>
+     <li><a href="#tabsHeader-4" class="get-report-content" data-report_id="3"><?php echo gettext('On hand') ?></a></li>
+     <li><a href="#tabsHeader-5" class="get-report-content" data-report_id="5"><?php echo gettext('Open PO') ?></a></li>
+     <li><a href="#tabsHeader-6" class="get-report-content" data-report_id="4"><?php echo gettext('Sales Funnel') ?></a></li>
+     <li><a href="#tabsHeader-7"><?php echo gettext('WIP Value') ?></a></li>
+     <li><a href="#tabsHeader-8" class="get-report-content" data-report_id="1"><?php echo gettext('Supplier Liability') ?></a></li>
+     <li><a href="#tabsHeader-9" class="get-report-content" data-report_id="6"><?php echo gettext('Customer Balance') ?></a></li>
+    </ul>
+    <div class="tabContainer"> 
+     <div id="tabsHeader-1" class="tabContent">
+      <?php echo!empty($module_icons) ? $module_icons : '' ?>
+     </div>
+     <div id="tabsHeader-2" class="tabContent">
+      <ul class="column three_column">
+       <li>
+        <h2>Notifications</h2>
         <?php
-        $raw = new ra_wip();
-        $legend_w = [];
-        $chart_a_w = [];
-        $reports_w = $raw->ra_report_set_wip();
-        $chart_settings_w = $raw->ra_report_wip_value_byItem_settings;
-        foreach ($reports_w as $key => $report_data_w) {
-         $key_name_setting = $key . '_settings';
-         $svgimage = new getsvgimage();
-         $svgimage->setProperty('_settings', $chart_settings_w);
-         if (property_exists($raw, $key_name_setting)) {
-          $this_chart_settings = $raw->$key_name_setting;
-          $svgimage->setProperty('_settings', $this_chart_settings);
-         }
-
-         $svgimage->setProperty('_data', $report_data_w);
-         $chart = $svgimage->draw_chart();
-         array_push($chart_a_w, $chart);
-        }
-
-        if (is_array($chart_a_w)) {
-         echo "<ul id='charts_in_report'>";
-         foreach ($chart_a_w as $key => $chart_image) {
-          echo "<li class=\"chart_no_$key\">$chart_image</li>";
-         }
-         echo '</ul>';
-        } else {
-         echo $chart_a_w;
-        }
+        echo block::show_block_content_by_BlockId('55');
         ?>
-       </div>
+       </li>
+       <li>
+        <h2>Recent Comments</h2>
+        <?php
+        echo block::show_block_content_by_BlockId('52');
+//                include_once HOME_URL.'report.php?class_name=ra_item&report_name=ra_report_set_item_leadtime';
+        ?>
+       </li>
+       <li>
+        <a title='Update Favourite' href="<?php echo HOME_URL ?>form.php?class_name=user_favourite&mode=9"><h2>Favourites 
+          <i class="fa fa-edit"> </i></h2></a>
+        <?php
+        echo $fav->show_currentUser_fav();
+        ?>
+       </li>
+      </ul>
+     </div>
+     
+     <div id="tabsHeader-3" class="tabContent"></div>
+     <div id="tabsHeader-4" class="tabContent"></div>
+     <div id="tabsHeader-5" class="tabContent"></div>
+     <div id="tabsHeader-6" class="tabContent"></div>
+     <div id="tabsHeader-7" class="tabContent">
+      <div>                
+       <?php
+       $raw = new ra_wip();
+       $legend_w = [];
+       $chart_a_w = [];
+       $reports_w = $raw->ra_report_set_wip();
+       $chart_settings_w = $raw->ra_report_wip_value_byItem_settings;
+       foreach ($reports_w as $key => $report_data_w) {
+        $key_name_setting = $key . '_settings';
+        $svgimage = new getsvgimage();
+        $svgimage->setProperty('_settings', $chart_settings_w);
+        if (property_exists($raw, $key_name_setting)) {
+         $this_chart_settings = $raw->$key_name_setting;
+         $svgimage->setProperty('_settings', $this_chart_settings);
+        }
+
+        $svgimage->setProperty('_data', $report_data_w);
+        $chart = $svgimage->draw_chart();
+        array_push($chart_a_w, $chart);
+       }
+
+       if (is_array($chart_a_w)) {
+        echo "<ul id='charts_in_report'>";
+        foreach ($chart_a_w as $key => $chart_image) {
+         echo "<li class=\"chart_no_$key\">$chart_image</li>";
+        }
+        echo '</ul>';
+       } else {
+        echo $chart_a_w;
+       }
+       ?>
       </div>
      </div>
-
+     <div id="tabsHeader-8" class="tabContent"></div>
+     <div id="tabsHeader-9" class="tabContent"></div>
     </div>
+
    </div>
   </form>
  </div>

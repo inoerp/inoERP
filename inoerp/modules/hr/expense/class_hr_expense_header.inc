@@ -187,7 +187,7 @@ class hr_expense_header extends dbObject implements hr_approval_int {
    return;
   }
   $supr_employee_details = hr_employee::find_by_id($emp_i->supervisor_employee_id);
-  $supr_user_details = user::find_by_employeeId($emp_i->supervisor_employee_id);
+  $supr_user_details = ino_user::find_by_employeeId($emp_i->supervisor_employee_id);
   $notif->to_user_id = $supr_user_details->user_id;
   $notif->to_user = $supr_employee_details->first_name . ' ' . $supr_employee_details->last_name;
   $notif->to_email = $supr_employee_details->email;
@@ -251,7 +251,7 @@ class hr_expense_header extends dbObject implements hr_approval_int {
     return;
    }
    $supr_employee_details = hr_employee::find_by_id($position_approval_details[0]->supervisor_employee_id);
-   $supr_user_details = user::find_by_employeeId($position_approval_details[0]->supervisor_employee_id);
+   $supr_user_details = ino_user::find_by_employeeId($position_approval_details[0]->supervisor_employee_id);
    $notif->to_user_id = $supr_user_details->user_id;
    $notif->to_user = $supr_employee_details->first_name . ' ' . $supr_employee_details->last_name;
    $notif->to_email = $supr_employee_details->email;

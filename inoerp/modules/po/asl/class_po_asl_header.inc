@@ -98,7 +98,7 @@ class po_asl_header extends dbObject {
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " where asl = '{$asl}' ";
-  $sql .= " LIMIT 1 ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = $db->find_by_sql($sql);
   return !(empty($result)) ? array_pop($result) : false;
  }
@@ -106,7 +106,8 @@ class po_asl_header extends dbObject {
  public function findBy_itemId() {
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where item_id_m= :item_id_m LIMIT 1 ";
+   " where item_id_m= :item_id_m  ";
+  $sql = ino_perPageSql_i($sql, 1);
   $param_a = ['item_id_m'];
   $value_a = ['item_id_m' => $this->item_id_m];
   $result_array = $this->findBy_sql($sql, $param_a, $value_a);

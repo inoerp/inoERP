@@ -13,7 +13,7 @@
  * 
  *
  */
-class extn_image extends file {
+class extn_image extends extn_file {
 
  public static $table_name = "extn_image";
  public static $system_info = [

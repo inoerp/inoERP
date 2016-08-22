@@ -211,8 +211,8 @@ VAR;
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
- 
-  public static function find_by_itemIdm_location($item_id_m, $org_id, $subinventory_id, $locator_id = '') {
+
+ public static function find_by_itemIdm_location($item_id_m, $org_id, $subinventory_id, $locator_id = '') {
   $sql = "SELECT * FROM " . self::$table_name;
   $sql .= " WHERE item_id_m = '{$item_id_m}' ";
   $sql .= " AND org_id = '{$org_id}' ";
@@ -228,7 +228,8 @@ VAR;
  }
 
  private function create_onhand_v() {
-  $sql = "CREATE OR REPLACE VIEW onhand_v
+  $sql = "
+   CREATE OR REPLACE VIEW onhand_v
 (onhand_id, item_number, item_description, org_name, subinventory, locator,
 uom_id,onhand, item_id_m, org_id, subinventory_id, 
 locator_id, lot_id, serial_id, reservable_onhand, 
@@ -281,8 +282,8 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   if (!empty($this->_from_locator_id)) {
    $from_onhand_sql .= " AND locator_id = '{$this->_from_locator_id}' ";
   }
-  $from_onhand_sql .= " LIMIT 1 ";
 
+  $from_onhand_sql = ino_perPageSql_i($from_onhand_sql, 1);
   $from_onhand_result_a = $oh_v->findBy_sql($from_onhand_sql);
   $from_onhand_result = !empty($from_onhand_result_a) ? array_pop($from_onhand_result_a) : false;
 //  pa($this);
@@ -338,7 +339,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
    case 'sd_delivery_line':
     $res = inv_reservation::find_by_demandReference_onhandReference($this->d_reference_key_name, $this->d_reference_key_value, $onhand_id);
     if ($res) {
-     foreach($res as $k => $res_i){
+     foreach ($res as $k => $res_i) {
       $this->_reserved_quantity += $res_i->demand_quantity;
      }
     }
@@ -376,7 +377,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   if (!empty($this->_to_locator_id)) {
    $to_onhand_sql .= " AND  	locator_id = '{$this->_to_locator_id}' ";
   }
-  $to_onhand_sql .= " LIMIT 1 ";
+  $to_onhand_sql = ino_perPageSql_i($to_onhand_sql, 1);
   $to_onhand_result_a = $this->findBy_sql($to_onhand_sql);
   $to_onhand_result = !empty($to_onhand_result_a) ? array_pop($to_onhand_result_a) : false;
   if ($to_onhand_result) {
@@ -409,7 +410,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
 
  public function updateOnhand() {
   global $dbc;
-  
+
 //verify all the mandatory fields exists
   $mandatory_fields = $this->_validate_mandatory_fields();
   if ($mandatory_fields < 0) {
@@ -486,12 +487,12 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   if (!empty($this->not_subinventory_id)) {
    $sql .= " AND subinventory_id != '{$this->not_subinventory_id}' ";
   }
-  
+
   if (!empty($this->subinventory_id)) {
    $sql .= " AND subinventory_id = '{$this->subinventory_id}' ";
   }
-  
-    if (!empty($this->locator_id)) {
+
+  if (!empty($this->locator_id)) {
    $sql .= " AND locator_id = '{$this->locator_id}' ";
   }
 

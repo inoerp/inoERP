@@ -6,7 +6,7 @@ if (isset($_FILES)) {
   $file = new extn_image();
   $temp_dir = 'temp_images';
  }else{
-  $file = new file();
+  $file = new extn_file();
   $temp_dir = 'temp';
  }
  

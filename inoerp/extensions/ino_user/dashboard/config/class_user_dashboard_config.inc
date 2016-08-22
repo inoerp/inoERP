@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -35,7 +37,8 @@ class user_dashboard_config extends dbObject {
  ];
  public static $report_type_a = [
   'block' => 'Block',
-  'view' => 'View'
+  'view' => 'View',
+  'report' => 'Reports'
  ];
  public $field_a = [
   'user_dashboard_config_id',
@@ -45,6 +48,7 @@ class user_dashboard_config extends dbObject {
   'report_group',
   'report_type',
   'report_id',
+  'report_label',
   'priority',
   'created_by',
   'creation_date',
@@ -73,11 +77,19 @@ class user_dashboard_config extends dbObject {
  public $report_id;
  public $priority;
  public $fav_group;
+ public $report_label;
  public $created_by;
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
  public $username;
+
+ public function _before_save() {
+  global $ino_user;
+  if ($this->config_level == 'USER' && empty($this->user_id)) {
+   $this->user_id = $ino_user->ino_user_id;
+  }
+ }
 
  Public static function report_group() {
   $option_type = option_header::find_by_name('USER_REPORT_GROUP');
@@ -85,9 +97,22 @@ class user_dashboard_config extends dbObject {
   return $option_line;
  }
 
- public function findBy_userId() {
-  $sql = "SELECT * FROM " . self::$table_name . " where user_id='{$this->user_id}' ";
+ public function findBy_userId($user_id) {
+  $sql = "SELECT * FROM " . self::$table_name . " where user_id='{$user_id}' and user_id IS NOT NULL ";
   $result = $this->findBySql($sql);
+  return !empty($result) ? $result : false;
+ }
+ 
+  public function findBy_userIdForAdmin($user_id) {
+  $sql = "SELECT * FROM " . self::$table_name . " where user_id='{$user_id}' and user_id IS NOT NULL OR config_level = 'GLOBAL' ";
+  $result = $this->findBySql($sql);
+  return !empty($result) ? $result : false;
+ }
+ 
+   public static function findBy_userIdNconfigLevel($user_id, $config_level = 'GLOBAL') {
+  $sql = "SELECT * FROM " . self::$table_name . " where user_id='{$user_id}' and user_id IS NOT NULL OR config_level = '{$config_level}' ";
+  $sql .= " ORDER BY priority ASC ";
+  $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
 

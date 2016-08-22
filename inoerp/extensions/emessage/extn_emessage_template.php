@@ -39,7 +39,7 @@
           <h4><i class="fa fa-circle text-green"></i> 
            <?php
            echo '<ul class="inline_action"><li>';
-           $f->l_val_field_d('user_name', 'user', 'username', '', 'select user username');
+           $f->l_val_field_d('user_name', 'ino_user', 'username', '', 'select user username');
            echo $f->hidden_field_withId('user_id', $$class->user_id);
            echo '</li></ul>';
            ?>

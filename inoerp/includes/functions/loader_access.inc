@@ -28,8 +28,8 @@ switch ($access_level) {
 }
 
 //for user class - allow user to change their own settings
-if($class_first == 'user'){
- if($_SESSION['user_id'] == $$class_first->user_id){
+if($class_first == 'ino_user'){
+ if($_SESSION['user_id'] == $$class_first->ino_user_id){
 	$update_access = true;
  }else{
 	$access_level = null;

@@ -138,7 +138,7 @@ class role_access extends dbObject {
 //	$url = $_SERVER['REQUEST_URI'];
 //	$path = path::get_path_from_url($url);
 //
-//	if (($path == 'index.php' || $path == 'extensions/user/user_login.php' || $path == 'extensions/user/user_logout.php' || $path == 'include/basics/json.basics.php')) {
+//	if (($path == 'index.php' || $path == 'extensions/ino_user/user_login.php' || $path == 'extensions/ino_user/user_logout.php' || $path == 'include/basics/json.basics.php')) {
 //	 $path_allowed = 1;
 //	} else {
 //	 $path_id = path::get_path_id_from_url($url);

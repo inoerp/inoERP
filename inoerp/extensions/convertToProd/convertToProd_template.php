@@ -126,7 +126,7 @@
 
 								 case 'USER' :
 									echo '<td>';
-                  echo $f->select_field_from_object('level_name', user::find_all(), 'user_id', 'username', $$class_second->level_name, '', '', 1) . "</td><td>";
+                  echo $f->select_field_from_object('level_name', ino_user::find_all(), 'user_id', 'username', $$class_second->level_name, '', '', 1) . "</td><td>";
 									break;
 								}
 								if (empty($line_values)) {

@@ -2,10 +2,10 @@
 
 require_once __DIR__ . "/../functions/functions.inc";
 require_once __DIR__ . '/../../define_const.inc';
-const DS = DIRECTORY_SEPARATOR;
+ const DS = DIRECTORY_SEPARATOR;
 
 defined('SHOW_COTENT_LIST') ? null : define('SHOW_COTENT_LIST', 0); //show content list when requested content not found 1 for true 2 for false
-
+defined('INO_SESSION_NAME') ? null : define('INO_SESSION_NAME', 'INOERP81718');
 /* ---------------------Dont Update anything Below-------------------------------------- */
 //Basic Paths 
 defined('INC_PATH') ? null : define('INC_PATH', HOME_DIR . DS . 'includes');
@@ -26,24 +26,25 @@ defined('INC_ORGS') ? null : define('INC_ORGS', HOME_DIR . DS . 'modules' . DS .
 defined('INC_INV') ? null : define('INC_INV', HOME_DIR . DS . 'modules' . DS . 'inv');
 
 
-
-//load core objects
-require_once(INC_BASICS . DS . 'settings' . DS . "dbsettings.inc");
-defined('DB_SERVER') ? null : define("DB_SERVER", "");
-defined('DB_USER') ? null : define("DB_USER", "");
-defined('DB_PASS') ? null : define("DB_PASS", "");
-defined('DB_NAME') ? null : define("DB_NAME", "");
-
-
 require_once(INC_CLASS . DS . "class.session.inc");
+
+////load core objects
+require_once(INC_BASICS . DS . 'settings' . DS . "dbsettings.inc");
 require_once(INC_CLASS . DS . "class_dbc.inc");
-require_once(INC_CLASS . DS . "trait_dbObject_t.inc");
-require_once(INC_CLASS . DS . "class_dbObject.inc");
+
+//ORACLE or MYSQL
+if (DB_TYPE == 'MYSQL') {
+ require_once(INC_CLASS . DS . "trait_dbObject_t.inc");
+ require_once(INC_CLASS . DS . "class_dbObject.inc");
+} else if (DB_TYPE == 'ORACLE') {
+require_once(HOME_DIR . DS ."assets". DS ."vendor". DS ."ino-oracle". DS. "class_dbObject.inc");
+}
+
 require_once(INC_PATH . DS . 'interface' . DS . "gl_int.inc");
 require_once(INC_PATH . DS . 'interface' . DS . "hr_int.inc");
 
-require_once(INC_CLASS . DS . "class_dbc2.inc");
-require_once(INC_CLASS . DS . "class_dbObject2.inc");
+//require_once(INC_CLASS . DS . "class_dbc2.inc");
+//require_once(INC_CLASS . DS . "class_dbObject2.inc");
 require_once(INC_EXTENSIONS . DS . "site_info" . DS . "class_site_info.inc");
 require_once(INC_CLASS . DS . "class.form.inc");
 require_once(INC_CLASS . DS . "class_inoform.inc");
@@ -56,14 +57,14 @@ require_once(INC_CLASS . DS . "class_inosave.inc");
 require_once(INC_CLASS . DS . "class_downloads.inc");
 require_once(INC_CLASS . DS . "class_getsvgimage.inc");
 require_once(INC_EXTENSIONS . DS . "engine" . DS . "class_engine.inc");
-require_once(INC_EXTENSIONS . DS . "user" . DS . "class.user.inc");
-require_once(INC_EXTENSIONS . DS . "user" . DS . "class.user_role.inc");
-require_once(INC_EXTENSIONS . DS . "user" . DS . "class_user_group.inc");
-require_once(INC_EXTENSIONS . DS . "user" . DS . "class.user_password_reset.inc");
-require_once(INC_EXTENSIONS . DS . "user" . DS . "activity" . DS . "class_user_activity_v.inc");
-require_once(INC_EXTENSIONS . DS . "user" . DS . "dashboard" . DS . "class_user_dashboard_v.inc");
-require_once(INC_EXTENSIONS . DS . "user" . DS . "dashboard" . DS . "config" . DS . "class_user_dashboard_config.inc");
-require_once(INC_EXTENSIONS . DS . "user" . DS . "favourite" . DS . "class_user_favourite.inc");
+require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "class_ino_user.inc");
+require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "class.user_role.inc");
+require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "class_user_group.inc");
+require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "class.user_password_reset.inc");
+require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "activity" . DS . "class_user_activity_v.inc");
+require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "dashboard" . DS . "class_user_dashboard_v.inc");
+require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "dashboard" . DS . "config" . DS . "class_user_dashboard_config.inc");
+require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "favourite" . DS . "class_user_favourite.inc");
 require_once(INC_EXTENSIONS . DS . "role_access" . DS . "class_role_access.inc");
 require_once(INC_EXTENSIONS . DS . "user_group_access" . DS . "class_user_group_access.inc");
 require_once(INC_EXTENSIONS . DS . "role_path" . DS . "class_role_path.inc");
@@ -78,8 +79,8 @@ require_once(INC_SYS . DS . "option" . DS . "class.option_detail.inc");
 //require_once(INC_SYS . DS . "value_group" . DS . "class_sys_value_group_line.inc");
 require_once(INC_SYS . DS . "profile" . DS . "class_sys_profile_header.inc");
 require_once(INC_SYS . DS . "profile" . DS . "class_sys_profile_line.inc");
-require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file.inc");
-require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file_reference.inc");
+//require_once(INC_EXTENSIONS . DS . "file" . DS . "class_extn_file.inc");
+require_once(INC_EXTENSIONS . DS . "file" . DS . "class_file_reference.inc");
 require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image.inc");
 require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image_reference.inc");
 require_once(INC_EXTENSIONS . DS . "file" . DS . "class_massupload.inc");
@@ -87,7 +88,7 @@ require_once(INC_EXTENSIONS . DS . "ino_generic" . DS . "class_ino_generic.inc")
 require_once(INC_EXTENSIONS . DS . "page" . DS . "class_page.inc");
 require_once(INC_EXTENSIONS . DS . "social_login" . DS . "class_extn_social_login.inc");
 require_once(INC_EXTENSIONS . DS . "theme" . DS . "class_extn_theme.inc");
-require_once(INC_EXTENSIONS . DS . "comment" . DS . "class.comment.inc");
+
 require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block.inc");
 require_once(INC_EXTENSIONS . DS . "block" . DS . "list" . DS . "class_block_list.inc");
 require_once(INC_EXTENSIONS . DS . "block" . DS . "class_block_content.inc");
@@ -126,6 +127,8 @@ require_once(INC_MODULE . DS . 'ap' . DS . "supplier" . DS . "class_supplier_sit
 require_once(INC_MODULE . DS . 'ap' . DS . "supplier_bu" . DS . "class_supplier_bu.inc");
 require_once(INC_MODULE . DS . 'ap' . DS . "supplier" . DS . "class_supplier_all_v.inc");
 require_once(INC_MODULE . DS . "wip" . DS . "wo" . DS . "class_ra_wip.inc");
+require_once(INC_MODULE . DS . "wip" . DS . "wo" . DS . "work_bench" . DS . "class_wip_wo_work_bench.inc");
+require_once(INC_MODULE . DS . "wip" . DS . "wo" . DS . "work_bench" . DS . "class_wip_wo_work_bench_line.inc");
 require_once(INC_MODULE . DS . "fp" . DS . "mrp_existing" . DS . "class_fp_mrp_existing_supply_v.inc");
 
 
@@ -142,7 +145,7 @@ require_once(INC_EXTENSIONS . DS . "content" . DS . "class.content.inc");
 require_once(INC_EXTENSIONS . DS . "category" . DS . "class_category.inc");
 require_once(INC_EXTENSIONS . DS . "category_relation" . DS . "class_category_relation.inc");
 require_once(INC_EXTENSIONS . DS . "category" . DS . "class_category_reference.inc");
-require_once(INC_EXTENSIONS . DS . "view" . DS . "class.view.inc");
+require_once(INC_EXTENSIONS . DS . "view" . DS . "class_extn_view.inc");
 require_once(INC_EXTENSIONS . DS . "view" . DS . "result" . DS . "class_view_result.inc");
 require_once(INC_EXTENSIONS . DS . "report" . DS . "class_extn_report.inc");
 require_once(INC_EXTENSIONS . DS . "report" . DS . "class_extn_report_path.inc");

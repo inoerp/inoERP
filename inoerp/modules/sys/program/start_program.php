@@ -11,6 +11,9 @@ function start_next_program() {
   foreach ($p->field_a as $key => $value) {
    $p->$value = $p_toStart->$value;
   }
+  if (DB_TYPE == 'ORACLE') {
+   $p->parameters = stream_get_contents($p->parameters);
+  }
   //update the status to inprogress
   $p->status = 'inprogress';
   $p->save();
@@ -74,6 +77,7 @@ function start_next_program() {
    }
   } else {
    try {
+
     $result = call_user_func(array($$class, $p->program_name), $p->parameters);
     $result_message = is_array($result) ? $result[0] : $result;
     $result_output = is_array($result) ? $result[1] : null;

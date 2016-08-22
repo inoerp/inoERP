@@ -99,12 +99,12 @@ class extn_social_login extends dbObject {
    switch ($sp->provider_name) {
     case 'Facebook':
      $stmt .='<li><a class="btn btn-default" role="button" '
-      . 'href="' . HOME_URL . 'extensions/user/user_login.php?provider=facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>';
+      . 'href="' . HOME_URL . 'extensions/ino_user/user_login.php?provider=facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>';
      break;
 
     case 'Google':
      $stmt .='<li><a class="btn btn-default" role="button" '
-      . 'href="' . HOME_URL . 'extensions/user/user_login.php?provider=google"><i class="fa fa-google-plus-square"></i> Google</a></li>';
+      . 'href="' . HOME_URL . 'extensions/ino_user/user_login.php?provider=google"><i class="fa fa-google-plus-square"></i> Google</a></li>';
      break;
 
     default:

@@ -7,7 +7,6 @@ class hr_element_entry_tpl_header extends dbObject {
  public static $dependent_classes = ['hr_element_entry_tpl_line'];
  public static $key_column = 'template_name';
  public static $module = "hr";
- 
  public $field_a = [
   'hr_element_entry_tpl_header_id',
   'template_name',
@@ -21,18 +20,15 @@ class hr_element_entry_tpl_header extends dbObject {
 
  public $initial_search = [
   'template_name',
-
  ];
  public $requiredField = [
   'template_name',
  ];
-
  public $pageTitle = " Cost Element Entry Template "; //page Title
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- 
  public $hr_element_entry_tpl_header_id;
  public $template_name;
  public $description;
@@ -42,7 +38,6 @@ class hr_element_entry_tpl_header extends dbObject {
  public $last_update_date;
  public $employee_name;
  public $identification_id;
-
 
  public function _before_showing() {
   
@@ -86,12 +81,11 @@ class hr_element_entry_tpl_header extends dbObject {
   $sql = " SELECT * 
        FROM hr_element_entry_tpl_header eeh 
        WHERE eeh.hr_employee_id = '{$employee_id}'   
-        LIMIT 1
 ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
-
 
 }
 

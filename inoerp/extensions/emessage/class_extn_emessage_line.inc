@@ -62,7 +62,7 @@ class extn_emessage_line extends dbObject {
    $sql .= " AND extn_emessage_line_id < '{$extn_emessage_line_id}' ";
   }
   $sql .= " ORDER BY extn_emessage_line_id DESC ";
-  $sql .= " LIMIT 30 ";
+  $sql = ino_perPageSql_i($sql, 30);
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : ' ';

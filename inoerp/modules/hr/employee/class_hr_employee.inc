@@ -252,9 +252,10 @@ class hr_employee extends dbObject {
  public static function find_by_userId($user_id) {
   $sql = " SELECT * 
             FROM hr_employee hre, 
-                 user 
+                 ino_user as user 
             WHERE user.hr_employee_id = hre.hr_employee_id
-            AND user.user_id = '{$user_id}' LIMIT 1";
+            AND user.ino_user_id = '{$user_id}' ";
+            $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

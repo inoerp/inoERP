@@ -1,7 +1,7 @@
 <?php
 include_once __DIR__ . '/../../../includes/basics/basics.inc';
-$user = new user();
-$class = 'user';
+$user = new ino_user();
+$class = 'ino_user';
 $user_role = new user_role();
 $user_password_reset = new user_password_reset();
 $f = new inoform();
@@ -27,7 +27,7 @@ $f = new inoform();
 
        <div id="tabsLine-1" class="tabContent">
         <div class="col-md-8"> 
-         <form name="user_login" action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_login">
+         <form name="user_login" action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_login">
           <fieldset>
                 <div class="row">
                  <div class="col-sm-12 col-md-10  col-md-offset-1 ">
@@ -52,7 +52,7 @@ $f = new inoform();
                     <span class="input-group-addon">
                      <i class="fa fa-language"></i>
                     </span>
-                    <?php echo $f->select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $user->user_language, 'user_language', 'form-control'); ?>
+                    <?php echo $f->select_field_from_object('user_language', ino_user::all_languages(), 'option_line_code', 'description', $user->user_language, 'user_language', 'form-control'); ?>
                    </div>
                   </div>
                   <div class="form-group">
@@ -72,7 +72,7 @@ $f = new inoform();
 
  <div id="tabsLine-2" class="tabContent">
         <div id="create_new_user" class="col-md-8">
-         <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_header" name="user_header">
+         <form action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_header" name="user_header">
           <fieldset>
            <div class="row">
             <div class="col-sm-12 col-md-10  col-md-offset-1 ">
@@ -146,7 +146,7 @@ $f = new inoform();
        </div>
 
        <div id="tabsLine-3" class="tabContent">
-        <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
+        <form action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
          <fieldset>
             <div class="row">
              <div class="col-sm-12 col-md-10  col-md-offset-1 ">

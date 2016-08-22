@@ -75,7 +75,7 @@ class search extends dbObject {
  }
 
  private function _readPath_forComments($comment_id) {
-  $cc = new comment();
+  $cc = new extn_comment();
 //	$cc->findBy_id($record->{$this->primary_column_s});
   $cc->findBy_id($comment_id);
   $class_of_comment = $cc->reference_table;
@@ -716,8 +716,7 @@ class search extends dbObject {
    $pagination->setProperty('_query_string', $this->_query_string);
    $pagination_statement = $pagination->show_pagination();
    $return_a['pagination'] = $pagination_statement;
-   $sql .=" LIMIT {$this->_per_page} ";
-   $sql .=" OFFSET {$pagination->offset()}";
+   $sql = ino_perPageSql_i($sql, $this->_per_page, $pagination->offset());
   }
   $search_result = $class::find_by_sql($sql);
   $return_a['search_result'] = $search_result;

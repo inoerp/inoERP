@@ -20,8 +20,8 @@
         <li><label>Option Name</label><?php echo $f->text_field_d('option_type', $readonly1_class); ?></li>
         <li><?php $f->l_select_field_from_array('access_level', option_header::$access_level_a, $option_header->access_level, 'access_level', '', '', $readonly); ?>					</li>
         <li><?php $f->l_text_field_d('description'); ?></li>
-        <li><?php $f->l_select_field_from_object('module_code', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?>				</li>
-        <li><?php $f->l_select_field_from_object('option_assignments', option_header::option_assignments(), 'option_line_code', 'option_line_value', $option_header->option_assignments, 'option_assignments', $readonly); ?>					</li>
+        <li><?php $f->l_select_field_from_object('module_code', option_header::find_options_byName('SYS_MODULE'), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?>				</li>
+        <li><?php $f->l_select_field_from_object('option_assignments', option_header::find_options_byName('OPTION_ASSIGNMENT', $order_by_field), 'option_line_code', 'option_line_value', $option_header->option_assignments, 'option_assignments', $readonly); ?>					</li>
         <li><?php $f->l_status_field_d('status'); ?></li>
         <li><?php $f->l_checkBox_field_d('rev_enabled'); ?></li>
         <li><?php $f->l_text_field_d('rev_number'); ?></li>

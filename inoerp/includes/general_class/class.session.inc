@@ -10,9 +10,14 @@ class session {
  public $login_status;
 
  function __construct() {
-  //disblaed for wamp local host
-//	session_name('inoerporjrjdsd_27hu');
-//	session_set_cookie_params(0, '/', '.' . str_replace('www.', 'inoideas.org', $_SERVER['HTTP_HOST']));
+  $secure = false; //change it as per your settings
+  ini_set('session.use_only_cookies', 1); 
+  ini_set('session.entropy_file', '/dev/urandom'); 
+  ini_set('session.entropy_length', '512'); 
+  
+  $cookieParams = session_get_cookie_params(); 
+  session_set_cookie_params($cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"], $secure, true);
+  session_name('INOERP123123'); 
   session_start();
 
   if (isset($_SESSION['orginal_page'])) {
@@ -51,12 +56,12 @@ class session {
    $_SESSION['role_access'] = null;
    $_SESSION['allowed_path_ids'] = null;
    //session_regenerate_id(true);
-   $_SESSION['user_id'] = $this->user_id = $user->user_id;
+   $_SESSION['user_id'] = $_SESSION['ino_user_id'] = $this->user_id = $user->ino_user_id;
    $_SESSION['username'] = $this->username = $user->username;
    $_SESSION['login_status'] = $this->login_status = true;
    if (!empty($_POST['user_language'][0])) {
     $_SESSION['lang'] = $_POST['user_language'][0];
-   } else if(!empty($user->user_language)){
+   } else if (!empty($user->user_language)) {
     $_SESSION['lang'] = $user->user_language;
    } else {
     $_SESSION['lang'] = DEFAULT_LOCALE;
@@ -70,12 +75,13 @@ class session {
 //	 if (!empty($this->user_roles)) {
 //		$this->assign_role_access();
 //	 }
+//   pa($this); pa($_SESSION); echo 'session name '. session_name() . ' - ' . session_id();sdfsfds();
   }
  }
 
  public function assign_role() {
   $ur = new user_role();
-  $ur->user_id = $this->user_id;
+  $ur->ino_user_id = $this->user_id;
   $ur_i = $ur->findBy_userId();
   $user_roles = [];
   $_SESSION['is_admin'] = false;
@@ -112,7 +118,7 @@ class session {
   if (!$this->login_flag) {
    $_SESSION['orginal_page'] = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
    $this->orginal_page = $_SESSION['orginal_page'];
-   redirect_to(HOME_URL . "extensions/user/user_login.php");
+   redirect_to(HOME_URL . "extensions/ino_user/user_login.php");
   }
  }
 

@@ -143,7 +143,7 @@
                    <td><?php echo $f->select_field_from_object('role_code', role_access::roles(), 'option_line_code', 'option_line_value', $$class_third->role_code, 'role_code'); ?></td>
                    <td><?php
                     echo $f->hidden_field('user_id', $$class_third->user_id);
-                    $$class_third->username = !empty($$class_third->user_id) ? user::find_by_id($$class_third->user_id)->username : null;
+                    $$class_third->username = !empty($$class_third->user_id) ? ino_user::find_by_id($$class_third->user_id)->username : null;
                     echo $f->text_field('username', $$class_third->username);
                     ?>
                     <img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="user_id select_popup clickable">

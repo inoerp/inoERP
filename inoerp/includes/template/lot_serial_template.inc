@@ -1,4 +1,4 @@
-<table class="form_line_data_table">
+<table class="form_line_data_table lot_serial_data_table">
  <thead> 
   <tr>
    <th><?php echo gettext('Seq') ?>#</th>
@@ -26,7 +26,7 @@
      echo!empty($$line_class_name_sl->lot_generation) ? $f->hidden_field('lot_generation', $$line_class_name_sl->lot_generation) : $f->hidden_field('lot_generation', '');
      ?>
      <i class="fa fa-arrow-circle-down add_detail_values_img" alt="View/Add Lot Numbers"></i>
-     <div class="class_detail_form">
+     <div class="class_detail_form lot_serial_form">
       <fieldset class="form_detail_data_fs">
        <div class="tabsDetail">
         <ul class="tabMain">
@@ -100,7 +100,7 @@
      echo!empty($$line_class_name_sl->serial_generation) ? $f->hidden_field('serial_generation', $$line_class_name_sl->serial_generation) : $f->hidden_field('serial_generation', '');
      ?>
      <i class="fa fa-arrow-circle-down add_detail_values_img" alt="View/Add Serial Numbers"></i>
-     <div class="class_detail_form">
+     <div class="class_detail_form lot_serial_form">
       <fieldset class="form_detail_data_fs">
        <div class="tabsDetail">
         <ul class="tabMain">

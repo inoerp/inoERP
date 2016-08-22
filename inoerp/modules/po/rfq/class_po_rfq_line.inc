@@ -168,7 +168,8 @@
   }
 
   public static function find_by_poHeaderId_itemId($po_rfq_header_id, $item_id) {
-   $sql = "SELECT * FROM " . self::$table_name . " where po_rfq_header_id = '{$po_rfq_header_id}' AND item_id_m = '{$item_id}' LIMIT 1 ";
+   $sql = "SELECT * FROM " . self::$table_name . " where po_rfq_header_id = '{$po_rfq_header_id}' AND item_id_m = '{$item_id}' ";
+   $sql = ino_perPageSql_i($sql, 1);
    $result = self::find_by_sql($sql);
    return !empty($result) ? array_pop($result) : false;
   }

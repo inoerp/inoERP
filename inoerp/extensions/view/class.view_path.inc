@@ -50,7 +50,8 @@ class view_path extends dbObject{
    public static function find_by_columnName_viewId($column_name,$view_id) {
   $sql = " SELECT * FROM " . self::$table_name;
 	$sql .= " WHERE view_id = '{$view_id}'";
-	$sql .= " AND column_name = '{$column_name}' LIMIT 1";
+	$sql .= " AND column_name = '{$column_name}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }

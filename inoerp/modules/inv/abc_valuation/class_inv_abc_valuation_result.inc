@@ -89,14 +89,16 @@ WHERE inv_abc_valuation_id = '{$header_id}' ";
 
  public static function find_by_orgId($org_id) {
   $sql = "SELECT * FROM " . self::$table_name . " 
-      where org_id={$org_id} LIMIT 1";
+      where org_id={$org_id} ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
  public static function find_by_parentId_seqNumber($parent_id, $seq_number) {
   $sql = "SELECT * FROM " . self::$table_name . " 
-      where inv_abc_valuation_id= '{$parent_id}' AND seq_number = '{$seq_number}' LIMIT 1";
+      where inv_abc_valuation_id= '{$parent_id}' AND seq_number = '{$seq_number}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -104,7 +106,8 @@ WHERE inv_abc_valuation_id = '{$header_id}' ";
  public static function find_by_parentId_cumValue($parent_id, $cum_value) {
   $sql = "SELECT * FROM " . self::$table_name . " 
       where inv_abc_valuation_id= '{$parent_id}' AND cum_value >= '{$cum_value}' "
-   . " ORDER BY  cum_value ASC LIMIT 1";
+   . " ORDER BY  cum_value ASC ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }

@@ -53,7 +53,8 @@ class extn_menu_line extends dbObject {
  public static function find_by_headerId_and_buOrgId($extn_menu_header_id, $bu_org_id) {
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where extn_menu_header_id= '{$extn_menu_header_id}' AND bu_org_id= '{$bu_org_id}' LIMIT 1 ";
+   " where extn_menu_header_id= '{$extn_menu_header_id}' AND bu_org_id= '{$bu_org_id}'  ";
+   $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -106,6 +107,9 @@ class extn_menu_line extends dbObject {
 
  public function menu_explosion($extn_menu_header_id) {
   $all_child_first_l = self::find_by_fieldVal(['extn_menu_header_id' => $extn_menu_header_id, 'parent_id' => 'NULL'], 'extn_menu_line_id' , 'ASC');
+  if(empty($all_child_first_l)){
+   return;
+  }
   $menu_ids_f = [];
 
   $key_count = 0;
@@ -130,6 +134,9 @@ class extn_menu_line extends dbObject {
 
  public function show_menu_list($extn_menu_header_id) {
   $menu_h = extn_menu_header::find_by_id($extn_menu_header_id);
+  if(empty($menu_h)){
+   return false;
+  }
   $menu_a = $this->menu_explosion($extn_menu_header_id);
   $menu_stmt = '<ul class="' . $menu_h->css_class . '">';
   foreach ($menu_a as $menu) {

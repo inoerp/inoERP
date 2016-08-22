@@ -1,7 +1,7 @@
 <?php
 include_once __DIR__ . '/../../../includes/basics/basics.inc';
-$user = new user();
-$class = 'user';
+$user = new ino_user();
+$class = 'ino_user';
 $user_role = new user_role();
 $user_password_reset = new user_password_reset();
 $f = new inoform();
@@ -27,14 +27,14 @@ $f = new inoform();
 
        <div id="tabsLine-1" class="tabContent">
         <div class="col-md-8"> 
-         <form name="user_login" action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_login">
+         <form name="user_login" action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_login">
           <ul class="single-column">
            <li><?php $f->l_text_field('username', $user->username,'','username' , '' , 1 , '', 'Sachin.God'); ?></li> 
            <li><label>Password</label>
             <input type="password" name="password" maxlength="50" size="30" id="password"  required placeholder="example : uVrt@%35"
                    value="<?php echo ($user->password); ?>" >
            </li>
-           <li><?php $f->l_select_field_from_object('user_language', user::all_languages(), 'option_line_code', 'description', $user->user_language, 'user_language'); ?>  </li>
+           <li><?php $f->l_select_field_from_object('user_language', ino_user::all_languages(), 'option_line_code', 'description', $user->user_language, 'user_language'); ?>  </li>
            <li><label></label><input type="submit" name="submitLogin" class="button btn btn-success" value="Log in"> </li>
           </ul>
          </form>
@@ -48,7 +48,7 @@ $f = new inoform();
 
        <div id="tabsLine-2" class="tabContent">
         <div id="create_new_user" class="col-md-8">
-         <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_header" name="user_header">
+         <form action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_header" name="user_header">
           <ul class="single-column">
            <li><?php $f->l_text_field_dm('first_name'); ?></li>
            <li><?php $f->l_text_field_dm('last_name'); ?></li>
@@ -73,7 +73,7 @@ $f = new inoform();
        </div>
 
        <div id="tabsLine-3" class="tabContent">
-        <form action="<?php echo HOME_URL ?>extensions/user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
+        <form action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
          <ul class="single-column">
           <li><label>User Name</label>
            <input type="text" name="username" maxlength="50" size="30" id="username" placeholder="example : sachin.god"

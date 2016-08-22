@@ -475,7 +475,7 @@ class cst_item_cost_header extends dbObject {
 
  public function prg_standard_cost_update($seralized_parameters) {
   $parameters = unserialize($seralized_parameters);
-  $this->message .= '<br> Start of standard cost update program';
+   $this->message .= '<br> Start of standard cost update program';
   if (!empty($parameters['adjustment_ac_id'][0])) {
    $adjustment_ac_id = $parameters['adjustment_ac_id'][0];
    $this->message .= '<br> Entered Adjustment AC Id is : ' . $adjustment_ac_id;

@@ -1,5 +1,4 @@
 <?php
-
 $form_page = true;
 if (!empty($_GET['router'])) {
  $router = $_GET['router'];

@@ -95,14 +95,16 @@ class sd_sales_control extends dbObject {
  public $default_picking_rule;
 
  public function findBy_orgId($org_id) {
-  $sql = "SELECT * FROM sd_sales_control where org_id=:org_id LIMIT 1";
+  $sql = "SELECT * FROM sd_sales_control where org_id=:org_id ";
+  $sql = ino_perPageSql_i($sql, 1);
   $value_a = ['org_id' => $org_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_org_id($org_id) {
-  $sql = "SELECT * FROM sd_sales_control where org_id='{$org_id}' LIMIT 1";
+  $sql = "SELECT * FROM sd_sales_control where org_id='{$org_id}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
 
   return !empty($result) ? array_pop($result) : false;

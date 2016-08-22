@@ -138,7 +138,8 @@ class category extends dbObject {
  public function findBy_categoryId() {
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where category_id = :category_id LIMIT 1 ";
+   " where category_id = :category_id  ";
+  $sql = ino_perPageSql_i($sql, 1);
   $value_a = ['category_id' => $this->category_id];
   $result_array = $this->findBySql($sql, $value_a);
   return !empty($result_array) ? array_pop($result_array) : false;
@@ -440,7 +441,8 @@ class category extends dbObject {
        AND category_reference.reference_table = '{$reference_table}' 
        AND category_reference.reference_id = '{$reference_id}'
        AND category.category_id = category_reference.category_id
-       LIMIT 1";
+       ";
+       $sql = ino_perPageSql_i($sql, 1);
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_shift($result) : false;
@@ -462,7 +464,8 @@ class category extends dbObject {
        AND category_reference.reference_table = '{$reference_table}' 
        AND category_reference.reference_id = '{$reference_id}'
        AND category.category_id = category_reference.category_id
-       LIMIT 1";
+       ";
+       $sql = ino_perPageSql_i($sql, 1);
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_shift($result) : false;
@@ -473,7 +476,8 @@ class category extends dbObject {
    implode(", ", self::$field_array);
   $sql = "SELECT " . $selectFields . " FROM "
    . self::$table_name . " 
-            where category_id={$category_id} LIMIT 1";
+            where category_id={$category_id} ";
+            $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -494,7 +498,7 @@ class category extends dbObject {
   $sql .= " WHERE parent_id IS NULL ";
   $sql .= " AND primary_cb = '1' ";
   $sql .= " AND category_type = '{$category_type}' ";
-  $sql .= " LIMIT 1 ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -513,7 +517,7 @@ class category extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE category_id ='{$category_id}' ";
-  $sql .= " LIMIT 1 ";
+  $sql = ino_perPageSql_i($sql, 1);
 //	echo "sql1 is $sql ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_shift($result) : false;
@@ -682,7 +686,7 @@ class category extends dbObject {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
    $sql .= " WHERE category ='{$category}' ";
-   $sql .= " LIMIT 0,1 ";
+   $sql = ino_perPageSql_i($sql, 1);
 
    $all_major_categories = self::find_by_sql($sql);
   }

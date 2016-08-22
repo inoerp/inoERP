@@ -88,14 +88,14 @@ if (!empty($dont_check_login)) {
 			 <ul class="inRow asperWidth"><li class="white_link">
 				 Hello <a  href="<?php echo HOME_URL; ?>form.php?class_name=user&mode=9&user_id=<?php echo $_SESSION['user_id']; ?>">
 					<?php echo $_SESSION['username'] . '!'; ?></a>
-				<li><a class="login_button"  href="<?php echo HOME_URL; ?>extensions/user/user_logout.php">Logout</a> </li>
+				<li><a class="login_button"  href="<?php echo HOME_URL; ?>extensions/ino_user/user_logout.php">Logout</a> </li>
 			 </ul>
 			<?php } else { ?>
 			 <ul class="inRow asperWidth">
 				<li class>
-				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-1">Sign In</a>
+				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/ino_user/user_login.php#tabsLine-1">Sign In</a>
 				<li>
-				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-2">Register</a>
+				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/ino_user/user_login.php#tabsLine-2">Register</a>
 				</li>
 			 </ul>
 

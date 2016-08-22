@@ -103,13 +103,13 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                <?php
                echo form::hidden_field('class_name', $class);
                echo $f->hidden_field_withId('upload_type', 'only_server');
-               echo $f->hidden_field_withId('user_id', $ino_user->user_id);
+               echo $f->hidden_field_withId('user_id', $ino_user->ino_user_id);
                ?>
 
               </ul>
               <div class="uploaded_file_details"></div>
              </div>
-             <?php echo file::attachment_statement($file); ?>
+             <?php echo extn_file::attachment_statement($file); ?>
             </div>
 
 

@@ -309,8 +309,8 @@ class po_line extends dbObject {
           AND bpa.po_header_id = bpa_line.po_header_id
           AND bpa_line.item_id_m = rd.item_id_m
           AND bpa_line.po_line_id = '{$bpa_line_id}'
-           LIMIT 1
 ";
+          $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
 //   pa($result);
 //   echo "<br>going out $sql";

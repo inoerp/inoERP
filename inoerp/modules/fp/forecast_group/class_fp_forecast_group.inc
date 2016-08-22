@@ -120,7 +120,17 @@ class fp_forecast_group extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE scope_org_id = '{$org_id}' AND"
-   . " valuation_name = '{$valuation_name}' AND status='active'   LIMIT 1 ";
+   . " valuation_name = '{$valuation_name}' AND status='active'   ";
+
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
 
   $result = $this->findBySql($sql);
   return !empty($result) ? array_pop($result) : false;

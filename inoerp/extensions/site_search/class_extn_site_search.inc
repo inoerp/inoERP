@@ -361,7 +361,7 @@ class extn_site_search extends dbObject {
      . " FROM 	supplier  WHERE 				supplier_name LIKE '%" .
      $this->_searched_data . "%' OR 			supplier_number LIKE '%" . $this->_searched_data . "%') 
       UNION
-      (SELECT 'user' as class_name, 			username as	name  , 		hr_employee_id as number , 	last_name,  status, user_id as primary_id , 'User' as data_type "
+      (SELECT 'ino_user' as class_name, 			username as	name  , 		hr_employee_id as number , 	last_name,  status, user_id as primary_id , 'User' as data_type "
      . " FROM 	user  WHERE 				username LIKE '%" .
      $this->_searched_data . "%' OR 			last_name LIKE '%" . $this->_searched_data . "%')  
 

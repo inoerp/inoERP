@@ -1,4 +1,4 @@
-<form action=""  method="post" id="site_info"  name="site_info">
+<form  method="post" id="site_info"  name="site_info">
  <span class="heading"><?php echo gettext('Site Information') ?></span>
  <div id ="form_header">
   <div id="tabsHeader">

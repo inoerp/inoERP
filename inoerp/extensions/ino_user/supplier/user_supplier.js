@@ -48,8 +48,6 @@ $(document).ready(function() {
 
  onClick_add_new_row('tr.user_supplier_line0', 'tbody.user_supplier_values', 2);
 
-
-
  //context menu
  var classContextMenu = new contextMenuMain();
  classContextMenu.docLineId = 'user_supplier_id';

@@ -117,7 +117,7 @@ class hr_timesheet_header extends dbObject implements hr_approval_int {
    return;
   }
   $supr_employee_details = hr_employee::find_by_id($emp_i->supervisor_employee_id);
-  $supr_user_details = user::find_by_employeeId($emp_i->supervisor_employee_id);
+  $supr_user_details = ino_user::find_by_employeeId($emp_i->supervisor_employee_id);
   $notif->to_user_id = $supr_user_details->user_id;
   $notif->to_user = $supr_employee_details->first_name . ' ' . $supr_employee_details->last_name;
   $notif->to_email = $supr_employee_details->email;
@@ -144,7 +144,7 @@ class hr_timesheet_header extends dbObject implements hr_approval_int {
   $ts_h = new hr_timesheet_header();
   $ts_h->findBy_id($this->hr_timesheet_header_id);
 
-  $user_i = user::find_by_id($approving_user_id);
+  $user_i = ino_user::find_by_id($approving_user_id);
 
   $ts_h->status = 'APPROVED';
   $comment_msg = " Timesheet is Approved By $approving_user_id ";

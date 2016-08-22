@@ -1669,7 +1669,7 @@ function ino_attachement($file, $file_name = 'attachments') {
    <div class="uploaded_file_details"></div>
   </div>';
 
- $stmt .= file::attachment_statement($file);
+ $stmt .= extn_file::attachment_statement($file);
  $stmt .= '</div>';
  return $stmt;
 }

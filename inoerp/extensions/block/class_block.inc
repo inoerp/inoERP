@@ -160,7 +160,7 @@ class block extends dbObject {
    if (!empty($_POST['block_content_id'][0])) {
     $block_content->block_content_id = $_POST['block_content_id'][0];
    }
-   $block_content->audit_trial();
+   
    try {
     $block_content->save();
     echo "<br>Block content is sucesfully saved";
@@ -193,11 +193,13 @@ class block extends dbObject {
   if ($block_i->reference_table === 'block_content') {
    $block_content_details = block_content::find_by_block_id($block_id);
    $block_content = $block_content_details->content;
-  } else {
+  } else if (!empty($block_i->reference_table)) {
    $class_containg_block = new $block_i->reference_table;
    $method_name = $block_i->name . '_block';
    $parameters['block_id'] = $block_i->block_id;
    $block_content = call_user_func(array($class_containg_block, $method_name), $parameters);
+  } else {
+   $block_content = null;
   }
 
   return $block_content;
@@ -238,7 +240,8 @@ class block extends dbObject {
    implode(", ", self::$field_array);
   $sql = "SELECT " . $selectFields . " FROM "
    . self::$table_name . " 
-            where block_id={$block_id} LIMIT 1";
+            where block_id={$block_id} ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -263,9 +266,9 @@ class block extends dbObject {
    $sql .= self::$table_name;
    $sql .= " WHERE  enabled_cb = 1 ";
    $sql .= " AND restrict_to_role IN ('{$roles}')  ";
-   $sql .= " ORDER BY weight ASC  ";
+   $sql .= " ORDER BY 15 ASC  ";
   } else {
-   $sql .= " ORDER BY weight ASC  ";
+   $sql .= " ORDER BY 15 ASC  ";
   }
 
   $result = $this->findBySql($sql);
@@ -339,8 +342,7 @@ class block extends dbObject {
   if (!empty($per_block)) {
    $total_count = self::count_all();
    $pagination = new pagination($block_no, $per_block, $total_count);
-   $sql .=" LIMIT {$per_block} ";
-   $sql .=" OFFSET {$pagination->offset()}";
+   $sql = ino_perPageSql_i($sql, $per_block, $pagination->offset());
   }
   $result = self::find_by_sql($sql);
 
@@ -380,8 +382,7 @@ class block extends dbObject {
    $block_string .= '</div>';
    $total_count = self::count_all();
    $pagination = new pagination($block_no, $per_block, $total_count);
-   $sql .=" LIMIT {$per_block} ";
-   $sql .=" OFFSET {$pagination->offset()}";
+   $sql = ino_perPageSql_i($sql, $per_block, $pagination->offset());
   }
   $result = self::find_by_sql($sql);
 

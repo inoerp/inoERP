@@ -1,18 +1,15 @@
 <?php include_once __DIR__ . '/../../includes/basics/basics.inc'; ?>
 <?php
-
 if ($session->login_status()) {
  redirect_to(HOME_URL);
 }
 ?>
 <?php
 
-global $dbc;
-global $session;
 if (!isset($msg)) {
  $msg = '';
 }
-$class = $class_first = 'user';
+$class = $class_first = 'ino_user';
 $$class = new $class;
 $class_second = 'user_role';
 $$class_second = new $class_second;
@@ -23,25 +20,23 @@ $$class_third = new $class_third;
 if (!empty($_POST['submitLogin'])) { //form is submitted for login
  //check use credentials if username & provided 
  if (!empty($_POST['username']) && !empty($_POST['password'])) {
-  $username = trim(mysql_prep($_POST['username']));
-  $password = trim(mysql_prep($_POST['password']));
-
+  $username = is_array($_POST['username']) ? trim(mysql_prep($_POST['username'][0])) : trim(mysql_prep($_POST['username']));
+  $password = is_array($_POST['password']) ? trim(mysql_prep($_POST['password'][0])) : trim(mysql_prep($_POST['password']));
+  
   $loggedin_user = $$class->authenticate($username, $password);
 
   If ($loggedin_user) {
    $session->login($loggedin_user);
-//	$session->assign_role($_SESSION['user_id']);
-   if (!empty($_SESSION['orginal_page'])) {
+   set_default_theme($loggedin_user);
+
+   if (!empty($_SESSION['orginal_page']) && (strpos($session->orginal_page, 'json_form') == false)) {
 //   redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
     header('Location: http://' . $session->orginal_page);
-//	 unset($_SESSION['orginal_page']);
-//	 unset($session->orginal_page);
    } else {
     redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
    }
   } else {
    $msg .= "<div class='message error'> Username or password is incorrect <br/> </div>";
-   //        echo "Actual password is ".$login_status;
   }//en of if else  
  }
 }
@@ -53,8 +48,8 @@ If (isset($_REQUEST["provider"])) {
  try {
   // inlcude HybridAuth library
   // change the following paths if necessary 
-  $config = __DIR__ . '/../../tparty/extensions/social_login/hybridauth/config.php';
-  require_once( __DIR__ . "/../../tparty/extensions/social_login/hybridauth/Hybrid/Auth.php" );
+  $config = HOME_DIR . '/tparty/extensions/social_login/hybridauth/config.php';
+  require_once( HOME_DIR . "/tparty/extensions/social_login/hybridauth/Hybrid/Auth.php" );
 
   // initialize Hybrid_Auth class with the config file
   $hybridauth = new Hybrid_Auth($config);
@@ -72,6 +67,8 @@ If (isset($_REQUEST["provider"])) {
  }
 
  // check if the current user already have authenticated using this provider before 
+
+ 
  $$class->auth_provider_name = $provider_name;
  $$class->auth_provider_id = $user_profile->identifier;
  $user_exist = $$class->findBy_providerName_and_provierId();
@@ -80,27 +77,26 @@ If (isset($_REQUEST["provider"])) {
  if (!empty($user_exist)) {
   $loggedin_user = $user_exist;
  } else {
-  $new_user = new user();
-  $new_user->username = $user_profile->displayName;
+  $new_user = new ino_user();
+  $new_user->username = $user_profile->email;
   $new_user->email = $user_profile->email;
   $new_user->enteredPassword = $new_user->enteredRePassword = $new_user->auth_provider_id = $user_profile->identifier;
   $new_user->auth_provider_name = $provider_name;
   $new_user->first_name = $user_profile->firstName;
   $new_user->last_name = $user_profile->lastName;
-
   if ($new_user->_before_save() == 1) {
    $new_user->save();
    $new_user->_after_save();
    $dbc->confirm();
-  }else{
+  } else {
    $msg .= '<div class="message error"> Account creation failed!. Contact the admin. </div>';
-   redirect_to(HOME_URL . "extensions/user/user_login.php?error_message=email_error");
+   redirect_to(HOME_URL . "extensions/ino_user/user_login.php?error_message=email_error");
   }
 
-  if (!empty($new_user->user_id)) {
+  if (!empty($new_user->ino_user_id)) {
    //Assign basic role
    $user_role = new user_role();
-   $user_role->user_id = $new_user->user_id;
+   $user_role->ino_user_id = $new_user->ino_user_id;
    $user_role->role_code = 'BASIC';
    $user_role->save();
    $dbc->confirm();
@@ -121,12 +117,23 @@ If (isset($_REQUEST["provider"])) {
  //Social login
 }//end of if post submit
 ?>
-<?php include_once('../../includes/basics/header_public.inc'); ?>
-<script type='text/javascript' src="user.js" ></script>
+<?php
+
+ if (!empty($_SESSION['default_theme'])) {
+  $selected_theme = $_SESSION['default_theme'];
+ } else {
+  set_default_theme();
+  $selected_theme = $_SESSION['default_theme'];
+ }
+
+ defined('THEME_DIR') ? null : define('THEME_DIR', HOME_DIR . DS . 'themes' . DS . $selected_theme);
+ defined('THEME_URL') ? null : define("THEME_URL", HOME_URL . 'themes/' . $selected_theme);
+//include_once(THEME_DIR . DS. 'header.inc');
+?>
 <?php
 
 if (!empty($_POST['newUser'])) {
- $new_user = new user();
+ $new_user = new ino_user();
  $new_user->username = trim($_POST['username'][0]);
  $new_user->enteredPassword = trim($_POST['enteredPassword'][0]);
  $new_user->enteredRePassword = trim($_POST['enteredRePassword'][0]);
@@ -134,16 +141,15 @@ if (!empty($_POST['newUser'])) {
  $new_user->last_name = trim($_POST['last_name'][0]);
  $new_user->email = trim($_POST['email'][0]);
  if ($new_user->_before_save() == 1) {
-  $new_user->audit_trial();
   $new_user->save();
   $new_user->_after_save();
   $dbc->confirm();
  }
 
- if (!empty($new_user->user_id)) {
+ if (!empty($new_user->ino_user_id)) {
   //Assign basic role
   $user_role = new user_role();
-  $user_role->user_id = $new_user->user_id;
+  $user_role->ino_user_id = $new_user->ino_user_id;
   $user_role->role_code = 'BASIC';
   $user_role->save();
   $dbc->confirm();
@@ -155,7 +161,7 @@ if (!empty($_POST['newUser'])) {
 
 if (!empty($_POST['resetPassword'])) {
  $pr = new user_password_reset();
- $ru = new user();
+ $ru = new ino_user();
  if (!empty($_POST['username'][0])) {
   $username = $_POST['username'][0];
   $resetUser = $ru->findBy_userName($username);
@@ -172,7 +178,6 @@ if (!empty($_POST['resetPassword'])) {
  }
 }
 ?>
-
 <?php
 
 if (!empty($msg)) {
@@ -188,5 +193,11 @@ if (!empty($msg)) {
  $show_message .= '</div>';
 }
 ?>
+<?php
 
-<?php require_once('login/user_login_template.php') ?>
+if (file_exists(THEME_DIR . '/template/user_login_template.php')) {
+ require_once(THEME_DIR . '/template/user_login_template.php');
+} else {
+ require_once('login/user_login_template.php');
+}
+?>

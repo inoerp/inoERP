@@ -2,24 +2,10 @@
 Options -Indexes
 
 #Make index.php as home page
-DirectoryIndex index.php index1.php index.html index.htm
-
-# Protect files and directories.
-<FilesMatch "\.(files|engine|includes|modules|extensions|themes|custom|tparty|inc|.*sql|.*inc|template(\.php)?|xtmpl)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\..*|Entries.*|Repository|Root|Tag|Template)$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig\.save)$">
-  Order allow,deny
-</FilesMatch>
-
-
+DirectoryIndex index.php 
 
 #for conten url alias
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule    ^content/([A-Za-z0-9-]+)/?$    content.php?$1    [NC,L]   
-
- # To redirect all users to access the site WITHOUT the 'www.' prefix,
- #RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
- #RewriteRule ^ http%{ENV:protossl}://%1%{REQUEST_URI} [L,R=301]
-
-# Max upload file size
-php_value upload_max_filesize 128M
+RewriteRule    ^content/([A-Za-z0-9-]+)/?$    content.php?$1    [NC,L]    

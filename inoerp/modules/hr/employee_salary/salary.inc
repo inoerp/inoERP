@@ -3,7 +3,7 @@
 $mode = 2;
 $readonly = 1;
 
-$user_details = user::find_by_id($_SESSION['user_id']);
+$user_details = ino_user::find_by_id($_SESSION['user_id']);
 $emp_details = hr_employee::find_by_id($user_details->hr_employee_id);
 $$class->hr_employee_id = $emp_details->hr_employee_id;
 $$class->identification_id = $emp_details->identification_id;

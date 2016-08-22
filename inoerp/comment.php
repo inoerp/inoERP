@@ -1,7 +1,7 @@
 <?php
 $dont_check_login = true;
 $class_names = [
-		'comment'
+		'extn_comment'
 ];
 ?>
 <?php require_once("includes/functions/loader.inc"); ?>

@@ -11,7 +11,7 @@
  * 
  *
  */
- class view_result extends view {
+ class view_result extends extn_view {
      public static $system_info = [
   'name' => 'View  Result',
   'number' => '10025',

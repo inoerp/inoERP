@@ -47,7 +47,7 @@ class web_mail extends dbObject {
    try {
     $im->ino_sendMail();
     if (!empty($_POST['create_comment_cb'][0])) {
-     $this->_write_comment($ino_user->user_id, $_POST['message'][0], $_POST['subject'][0]);
+     $this->_write_comment($ino_user->ino_user_id, $_POST['message'][0], $_POST['subject'][0]);
     }
     echo self::$after_save_message;
    } catch (Exception $e) {
@@ -63,7 +63,7 @@ class web_mail extends dbObject {
 
  protected function _write_comment($comment_by, $comment_msg, $comment_sub = '') {
   global $dbc;
-  $comment = new comment();
+  $comment = new extn_comment();
   $comment->reference_table = $this->reference_table;
   $comment->reference_id = $this->reference_id;
   $comment->comment_by = $comment_by;

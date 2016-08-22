@@ -25,7 +25,7 @@
  $module_array = array('gl','ap','ar','inv','org','sys','hr', 'wip','bom');
  
  // Extension Directories to check
- $extensions_array = array('user','block','comment','content','content_type','file','path', 'site_info');
+ $extensions_array = array('ino_user','block','comment','content','content_type','file','path', 'site_info');
 
  // Write Directories to check
  $dir_array = array('files');

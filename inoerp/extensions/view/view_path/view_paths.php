@@ -24,7 +24,7 @@ $table_name = 'view';
 //print_r($view);
 //echo '<pre>';
 if((!empty($view->query))){
- $view_result = view::result_list_in_table(base64_decode($view->query), $view->view_id ,$pageno, $per_page, $query_string);
+ $view_result = extn_view::result_list_in_table(base64_decode($view->query), $view->view_id ,$pageno, $per_page, $query_string);
 }else{
  $view_result="";
 }

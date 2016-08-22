@@ -232,8 +232,8 @@ GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator
 				FROM ";
   $sql .= self::$table_name;
   $sql .= " GROUP BY subinventory_type ";
-  $sql .= " ORDER BY onhand desc ";
-  $sql .= " LIMIT 5 ";
+//  $sql .= " ORDER BY onhand desc ";
+  $sql = ino_perPageSql_i($sql, $limit_no);
   $result = $this->findBySql($sql);
 //	$ret_result = ra_conevrt_data_woarray($result, 'subinventory_type', $legend);
 //	$settings = &$this->ra_onhand_by_subinventoryType_settings;
@@ -246,8 +246,8 @@ GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator
 				FROM ";
   $sql1 .= self::$table_name;
   $sql1 .= " GROUP BY subinventory_type ";
-  $sql1 .= " ORDER BY onhand_value desc ";
-  $sql1 .= " LIMIT 5 ";
+//  $sql1 .= " ORDER BY onhand_value desc ";
+  $sql = ino_perPageSql_i($sql, 5);
   $result1 = $this->findBySql($sql1);
   return !empty($result1) ? $result1 : false;
  }
@@ -256,8 +256,8 @@ GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator
   $sql = " SELECT product_line, SUM(onhand) as 'Onhand' FROM ";
   $sql .= self::$table_name;
   $sql .= " GROUP BY product_line ";
-  $sql .= " ORDER BY onhand_value desc ";
-  $sql .= " LIMIT $limit_no ";
+//  $sql .= " ORDER BY onhand_value desc ";
+  $sql = ino_perPageSql_i($sql, $limit_no);
   $result = $this->findBySql($sql);
   return !empty($result) ? $result : false;
  }
@@ -266,8 +266,8 @@ GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator
   $sql = " SELECT product_line, SUM(onhand_value) as 'Onhand Value' FROM ";
   $sql .= self::$table_name;
   $sql .= " GROUP BY product_line ";
-  $sql .= " ORDER BY onhand_value desc ";
-  $sql .= " LIMIT $limit_no ";
+//  $sql .= " ORDER BY onhand_value desc ";
+  $sql = ino_perPageSql_i($sql, $limit_no);
   $result = $this->findBySql($sql);
   return !empty($result) ? $result : false;
  }
@@ -277,7 +277,7 @@ GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator
   $sql = " SELECT  subinventory_type, product_line , SUM(onhand)
 	  FROM onhand_v
 		GROUP BY subinventory_type, product_line
-		ORDER BY subinventory_type, product_line ";
+		";
   $result = $this->findBySql($sql);
   $result_f = ra_conevrt_data_bar_column($result, $legend);
   $this->ra_onhand_by_productLine_subinventoryType_settings['_legend'] = $legend;

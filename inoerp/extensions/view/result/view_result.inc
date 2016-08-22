@@ -17,7 +17,7 @@
  }
 
  if (!empty($$class->view_id)) {
-  $view_i = view::find_by_id($$class->view_id);
+  $view_i = extn_view::find_by_id($$class->view_id);
   $column_list = [];
   if (!empty($view_i->select_v)) {
    $select_v = explode(',', $$class->select_v);

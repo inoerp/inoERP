@@ -83,22 +83,25 @@ class user_favourite extends dbObject {
   }
  }
 
- public function show_currentUser_fav($show_as_menu = false ) {
+ public function show_currentUser_fav($show_as_menu = false, $ul_details='' , $li_class= '' ) {
   $favs = $this->findBy_currentUser();
   if (!$favs) {
    return false;
   }
-  $ul_divClass = ($show_as_menu == true ) ? ' class="dropdown-menu" role="menu" ' : '';
+  $ul_divClass = ($show_as_menu == true ) ? ' class="dropdown-menu" role="menu" ' : $ul_details;
   $fav_stmt = '<ul id="favourite" '.$ul_divClass.' >';
   $count = 0;
   foreach ($favs as $links) {
-   $divClass = ($count % 2 ) == 0 ? 'even' : 'odd';
+   $divClass = ($count % 2 ) == 0 ? ' even ' : ' odd ';
+   $divClass .= $li_class;
    $fav_stmt .= '<li class="' . $divClass . '">';
    if (!empty($links->path_id)) {
     $path = path::find_by_id($links->path_id);
-    $fav_stmt .= '<a href="' . HOME_URL . $path->path_link . '">' . $links->fav_name . '</a>';
+    $url_1 = htmlspecialchars(HOME_URL . $path->path_link);
+    $fav_stmt .= '<a class="getAjaxForm" href="' . $url_1 . '">' . $links->fav_name . '</a>';
    } else {
-    $fav_stmt .= '<a href="http://' . $links->external_link . '">' . $links->fav_name . '</a>';
+    $url_1 = htmlspecialchars($links->external_link);
+    $fav_stmt .= '<a target="_new" href="http://' . $url_1 . '">' . $links->fav_name . '</a>';
    }
    $fav_stmt .= '</li>';
   }
