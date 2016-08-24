@@ -3,9 +3,9 @@
  <div id="form_all">
   <span class="heading"><?php echo gettext('Approval Limit Assignment') ?></span>
   <div id="form_serach_header" class="tabContainer"><ul class="inline_list">
-    <li><?php $f->l_select_field_from_object('position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $position_id_h, 'position_id', $readonly1); ?>   </li>
-    <li><?php $f->l_select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $job_id_h, 'job_id', $readonly1); ?>   </li>
-    <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $bu_org_id_h, 'bu_org_id', $readonly1); ?>   </li>
+    <li><?php $f->l_select_field_from_object('position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $position_id_h, 'position_id', 'medium' , $readonly1); ?>   </li>
+    <li><?php $f->l_select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $job_id_h, 'job_id', 'medium' ,$readonly1); ?>   </li>
+    <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $bu_org_id_h, 'bu_org_id', 'medium' ,$readonly1); ?>   </li>
     <li><a name="show" href="form.php?class_name=hr_approval_limit_assignment&<?php echo "mode=$mode"; ?>" 
            class="show2 document_id hr_approval_limit_assignment_id"><i class="fa fa-refresh"></i></a> </li>
    </ul>
@@ -66,8 +66,8 @@
             <td><?php echo $f->select_field_from_object('hr_approval_limit_header_id', hr_approval_limit_header::find_all(), 'hr_approval_limit_header_id', 'limit_name', $$class->hr_approval_limit_header_id, '', '', 1, $readonly); ?></td>
             <td><?php echo $f->date_fieldAnyDay('start_date', $$class->start_date); ?></td>
             <td><?php echo $f->date_fieldAnyDay('end_date', $$class->end_date); ?></td>
-            <td><?php echo $f->select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $job_id_crnt, 'job_id', '', '', 1); ?>   </td>
-            <td><?php echo $f->select_field_from_object('position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $position_id_crnt, 'position_id', '', '', 1); ?></td>
+            <td><?php echo $f->select_field_from_object('job_id', hr_job::find_all(), 'hr_job_id', 'job_name', $job_id_crnt, '', 'job_id medium', '', 1); ?>   </td>
+            <td><?php echo $f->select_field_from_object('position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $position_id_crnt, '', 'position_id medium', '', 1); ?></td>
 
            </tr>
            <?php

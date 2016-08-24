@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_approval_limit_header"  name="hr_approval_limit_header">
+ <form   method="post" id="hr_approval_limit_header"  name="hr_approval_limit_header">
   <span class="heading"><?php echo gettext('Approval Limit Header') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -7,16 +7,16 @@
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field">
-       <li><?php $f->l_text_field_dr_withSearch('hr_approval_limit_header_id') ?>
-        <a name="show" href="form.php?class_name=hr_approval_limit_header&<?php echo "mode=$mode"; ?>" 
-           class="show document_id hr_approval_limit_header_id"><i class="fa fa-refresh"></i></a> 
-       </li>
-       <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'org_id', '', 1, $readonly1); ?>       </li>
-       <li><?php $f->l_text_field_d('limit_name'); ?></li>
-       <li><?php $f->l_status_field_d('status'); ?></li>
-       <li><?php $f->l_text_field_d('description'); ?></li>
-      </ul>
+     <ul class="column header_field">
+      <li><?php $f->l_text_field_dr_withSearch('hr_approval_limit_header_id') ?>
+       <a name="show" href="form.php?class_name=hr_approval_limit_header&<?php echo "mode=$mode"; ?>" 
+          class="show document_id hr_approval_limit_header_id"><i class="fa fa-refresh"></i></a> 
+      </li>
+      <li><?php $f->l_select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', $$class->bu_org_id, 'org_id', '', 1, $readonly1); ?>       </li>
+      <li><?php $f->l_text_field_d('limit_name'); ?></li>
+      <li><?php $f->l_status_field_d('status'); ?></li>
+      <li><?php $f->l_text_field_d('description'); ?></li>
+     </ul>
     </div>
    </div>
   </div>
@@ -24,7 +24,7 @@
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Approval Limit Lines') ?></span>
- <form action=""  method="post" id="hr_approval_limit_line"  name="hr_approval_limit_line">
+ <form   method="post" id="hr_approval_limit_line"  name="hr_approval_limit_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
@@ -50,6 +50,9 @@
        foreach ($hr_approval_limit_line_object as $hr_approval_limit_line) {
         if (!empty($$class_second->limit_object)) {
          $appr_obj = hr_approval_object::find_by_keyColumn($$class_second->limit_object);
+         if (DB_TYPE == 'ORACLE') {
+          $appr_obj->object_value = stream_get_contents($appr_obj->object_value);
+         }
          $appr_obj_val = $appr_obj->object_value;
          $value_result = ($appr_obj->value_type == 'DYNAMIC') ? dbObject::find_by_sql_array($appr_obj_val) : null;
 //                pa($value_result);
@@ -61,9 +64,9 @@
           ?>    
          </td>
          <td><?php $f->text_field_wid2sr('hr_approval_limit_line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('limit_object', hr_approval_object::find_all(), 'object_code', 'object_name', $$class_second->limit_object, '', '', 1, $readonly); ?></td>
-         <td><?php echo $f->select_field_from_array('limit_type', hr_approval_limit_line::$limit_type_a, $$class_second->limit_type); ?></td>
-         <td><select class="status select" name="limit_range_low[]" class="limit_range_low">
+         <td><?php echo $f->select_field_from_object('limit_object', hr_approval_object::find_all(), 'object_code', 'object_name', $$class_second->limit_object, '', 'medium', 1, $readonly); ?></td>
+         <td><?php echo $f->select_field_from_array('limit_type', hr_approval_limit_line::$limit_type_a, $$class_second->limit_type, '', 'medium'); ?></td>
+         <td><select class="status select" name="limit_range_low[]" class="limit_range_low medium">
            <?php
            if (!empty($value_result)) {
             foreach ($value_result as $arr) {
@@ -73,7 +76,7 @@
             }
            }
            ?> </select></td>
-         <td><select class="status select" name="limit_range_high[]" class="limit_range_high">
+         <td><select class="status select" name="limit_range_high[]" class="limit_range_high medium">
            <?php
            if (!empty($value_result)) {
             foreach ($value_result as $arr) {

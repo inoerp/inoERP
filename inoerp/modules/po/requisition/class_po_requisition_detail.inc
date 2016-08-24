@@ -68,7 +68,11 @@ class po_requisition_detail extends dbObject {
   "supplier_site_name",
   "buyer"
  ];
- public $requiredField = [
+ public $dateFields = [
+  'need_by_date'
+ ];
+ 
+  public $requiredField = [
   'po_requisition_line_id',
   'po_requisition_header_id',
   'shipment_number',
@@ -76,6 +80,7 @@ class po_requisition_detail extends dbObject {
   'accrual_ac_id',
   'ppv_ac_id',
  ];
+  
  public $dateField = [
   'need_by_date',
   'promise_date'

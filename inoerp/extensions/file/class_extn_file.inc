@@ -73,6 +73,7 @@ class extn_file extends dbObject {
   'application/excel',
   'text/plain',
   'audio/mpeg',
+  'text/csv',
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   'application/vnd.openxmlformats-officedocument.presentationml.presentation',
   'application/vnd.ms-excel'
