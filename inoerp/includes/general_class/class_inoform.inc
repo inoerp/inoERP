@@ -75,10 +75,10 @@ class inoform {
   'ar_transaction_source',
   'ar_transaction_type',
   'bom_department',
-  'bom_dept_res_assignment',
+  'bom_department_resource_assignment',
   'bom_overhead',
-  'bom_oh_rate_assignment',
-  'bom_oh_res_assignment',
+  'bom_overhead_rate_assignment',
+  'bom_overhead_resource_assignment',
   'bom_resource',
   'bom_resource_cost',
   'business',
@@ -136,7 +136,7 @@ class inoform {
   'bom_routing_header',
   'bom_routing_line',
   'bom_standard_operation',
-  'bom_stnd_op_res_assignment',
+  'bom_standard_operation_resource_assignment',
   'common_bom_line',
   'cst_item_cost_header',
   'cst_item_cost_line',
@@ -478,7 +478,7 @@ EOD;
    return;
   }
   $attachment_statement = '';
-  $file = extn_file::find_by_id($value);
+  $file = file::find_by_id($value);
   if (empty($file)) {
    return;
   }
@@ -772,7 +772,7 @@ EOD;
   $add_field .= '<li><label>' . gettext('Coutry') . '</label>' . $f->text_field('addr_country', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $f->text_field('addr_postal_code', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Default') . '</label>' . $f->checkBox_field('addr_default_cb', '') . '</li>';
-  $add_field .= '<li><label>' . gettext('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', option_header::find_options_byName('ADDRESS_USAGE_TYPE'), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';
+  $add_field .= '<li><label>' . gettext('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', address::address_usage_type(), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';
   $add_field .= '<li><label>' . gettext('Address') . '</label>' . form::text_area('addr_address', '', '3', '22', '', 'Complete Address', 'address') . '</li>';
   $add_field .= '<li class="hidden">' . $f->hidden_field('address_id', '') . '</li>';
   $add_field .= '</ul>
@@ -2001,7 +2001,6 @@ EOD;
  }
 
  public function select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
- $objectValueKey = strtolower($objectValueKey);
   if ($nonArrayName == 1) {
    $bracketName = $name;
   } else {
@@ -2034,7 +2033,6 @@ EOD;
     } else {
      $selected = '';
     }
-    
     $element_select_field .= '<option value="' . $record->$objectValueKey . '" ';
     $element_select_field .= $selected;
     if (!empty($dataname)) {
@@ -2054,7 +2052,6 @@ EOD;
      }
      $newValue = rtrim($newValue1, ' | ');
     } else {
-     $objectDescriptionKey = strtolower($objectDescriptionKey);
      $newValue = $record->$objectDescriptionKey;
     }
     $element_select_field .= $newValue;

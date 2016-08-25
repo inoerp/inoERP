@@ -98,18 +98,9 @@ class fp_kanban_line extends dbObject {
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result[0]->max_number : 0;
  }
-
- Public static function find_by_cardNum($card_num) {
-  $sql = " SELECT * from fp_kanban_line WHERE  card_number = :card_number ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+ 
+  Public static function find_by_cardNum($card_num) {
+  $sql = " SELECT * from fp_kanban_line WHERE  card_number = :card_number LIMIT 1";
   $value_a = ['card_number' => $card_num];
   $result = self::find_by_sql_i($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;

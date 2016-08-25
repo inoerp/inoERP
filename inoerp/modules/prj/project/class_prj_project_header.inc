@@ -310,9 +310,10 @@ class prj_project_header extends dbObject {
             AND gl.gl_ledger_id = legal.ledger_id
             AND org.org_id = pph.bu_org_id
             AND pph.prj_project_header_id = '{$prj_project_header_id}'
+           LIMIT 1
  "
   ;
-$sql = ino_perPageSql_i($sql, 1);
+
   $result = self::find_by_sql($sql);
 
   return !empty($result) ? array_pop($result) : false;

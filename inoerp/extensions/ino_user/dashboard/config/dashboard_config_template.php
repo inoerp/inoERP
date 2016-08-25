@@ -45,7 +45,7 @@
               break;
 
              case 'view' :
-              $view_i = extn_view::find_all();
+              $view_i = view::find_all();
               foreach ($view_i as $view_data) {
                $view_id = $view_data->view_id;
                $report_a[$view_id] = $view_data->view_name;

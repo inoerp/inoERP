@@ -190,16 +190,7 @@ class bom_header extends dbObject {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where item_id_m= '{$item_id_m}'  ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+   " where item_id_m= '{$item_id_m}' LIMIT 1 ";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -208,16 +199,7 @@ class bom_header extends dbObject {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where item_id_m= '{$item_id_m}'  AND org_id = '{$org_id}'  ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+   " where item_id_m= '{$item_id_m}'  AND org_id = '{$org_id}' LIMIT 1 ";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -226,21 +208,13 @@ class bom_header extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where item_id_m= :item_id_m ";
-  $value_a['item_id_m'] = $this->item_id_m;
-  if (!empty($this->org_id)) {
+  $value_a['item_id_m'] =  $this->item_id_m;
+  if(!empty($this->org_id)){
    $sql .= " AND org_id= :org_id  ";
-   $value_a['org_id'] = $this->org_id;
+   $value_a['org_id'] =  $this->org_id;
   }
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
-
+  $sql .= " LIMIT 1 ";
+  
   $result_array = $this->findBySql($sql, $value_a);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -257,7 +231,7 @@ class bom_header extends dbObject {
   return !empty($result_array) ? $result_array : false;
  }
 
- private function _explosion($item_id_m, $org_id, &$level_array, $level = 0) {
+ private function _explosion($item_id_m,  $org_id ,&$level_array, $level = 0) {
   $boh = new bom_header();
   $boh->item_id_m = $item_id_m;
   $boh->org_id = $org_id;
@@ -416,7 +390,7 @@ class bom_header extends dbObject {
   }
  }
 
- public function BOM_Explosion($item_id_m, $org_id = '') {
+ public function BOM_Explosion($item_id_m, $org_id='') {
   $level_array = [];
   $l = 0;
   $array_level = 'array_' . $l;

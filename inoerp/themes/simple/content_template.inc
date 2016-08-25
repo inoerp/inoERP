@@ -107,7 +107,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
               </ul>
               <div class="uploaded_file_details"></div>
              </div>
-             <?php echo extn_file::attachment_statement($file); ?>
+             <?php echo file::attachment_statement($file); ?>
             </div>
 
 

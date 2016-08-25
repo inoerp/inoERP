@@ -238,7 +238,7 @@ AND ssc.org_id = sdsl.shipping_org_id
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
 	$sql .= " WHERE hd_ro_line_id = :hd_ro_line_id ";
-	$sql = ino_perPageSql_i($sql, 1);
+	$sql .= " LIMIT 1 ";
 	$value_a = ['hd_ro_line_id' => $line_id];
 	$result = $this->findBySql($sql, $value_a);
 	return !empty($result) ? array_pop($result) : false;

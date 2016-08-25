@@ -87,8 +87,8 @@ class prj_burden_list_line extends dbObject {
 		AND item_id_m = '{$item_id_m}'
 		AND effective_start_date < '{$price_date}'
 		AND(effective_end_date IS NULL OR effective_end_date > '{$price_date}')
+		 LIMIT 1
 ";
-    $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

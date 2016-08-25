@@ -109,8 +109,7 @@
 
    $sql = " SELECT * FROM ";
    $sql .= $ef_table;
-   $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' ";
-   $sql = ino_perPageSql_i($sql, 1);
+   $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' LIMIT 1";
    $result = self::find_by_sql($sql);
    return !empty($result) ? array_pop($result) : false;
   }

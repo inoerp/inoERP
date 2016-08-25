@@ -133,11 +133,11 @@ echo '----------Ressut by array -------------';
 //echo result_list_in_table($sql, $pageno, $per_page, $query_string)
 
 //echo '----------All Table Name -------------';
-//  $table_name_array = extn_view::find_all_tables();
+//  $table_name_array = view::find_all_tables();
 //  echo '----------End All Table Name -------------';
 //  
 //  echo '----------All Coumns Names of view -------------';
-//  $column_name_array = extn_view::find_columns_of_table('view');
+//  $column_name_array = view::find_columns_of_table('view');
 
 //  echo '----------End All Table Name -------------';
 //

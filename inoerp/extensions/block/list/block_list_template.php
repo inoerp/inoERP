@@ -57,7 +57,7 @@
                  <tr class="block_number<?php echo $count ?>">
                   <td>    
                    <ul class="inline_action">
-                    <li class="edit"><a class="ajax-link" href="form.php?class_name=block&mode=9&block_id=<?php
+                    <li class="edit"><a href="form.php?class_name=block&mode=9&block_id=<?php
                      echo htmlentities($block->block_id);
                      echo ($is_custom_block == 1) ? '&custom_block=1' : "";
                      ?>"><i class="fa fa-edit" title="update this block"></i></a></li>

@@ -70,7 +70,7 @@
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php echo $f->text_field_wid2sr('bc_label_format_line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('object_name', extn_view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', $$class_second->object_name, '', 'medium', 1); ?> </td>
+         <td><?php echo $f->select_field_from_object('object_name', view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', $$class_second->object_name, '', 'medium', 1); ?> </td>
          <td><?php echo $f->select_field_from_array('sys_field_name', $sys_field_name_a, $$class_second->sys_field_name, '', 'medium', 1); ?> </td>
          <td><?php echo $f->text_field_wid2l('field_name'); ?></td>
          <td><?php echo $f->text_field_wid2l('description'); ?></td>

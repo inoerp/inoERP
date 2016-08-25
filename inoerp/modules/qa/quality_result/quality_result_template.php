@@ -66,7 +66,7 @@
 
          case 'FILE' :
           $qa_cp_element_file_name = $qa_cp_element->sys_element_name . '_file';
-          $file_routing = extn_file::find_by_fieldName_referenceTable_and_id($qa_cp_element->sys_element_name, 'wip_wo_routing_line', $routing_line->wip_wo_routing_line_id);
+          $file_routing = file::find_by_fieldName_referenceTable_and_id($qa_cp_element->sys_element_name, 'wip_wo_routing_line', $routing_line->wip_wo_routing_line_id);
           echo ino_attachement($file_routing, $qa_cp_element_file_name);
           echo $f->hidden_field($qa_cp_element->sys_element_name, $qa_cp_element_value);
           break;

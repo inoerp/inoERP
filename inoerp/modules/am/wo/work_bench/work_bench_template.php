@@ -198,7 +198,7 @@ inoERP
 
            case 'FILE' :
             $ef_file_name = $ef->sys_field_name . '_file';
-            $file_routing = extn_file::find_by_fieldName_referenceTable_and_id($ef->sys_field_name, 'am_wo_routing_line', $routing_line->am_wo_routing_line_id);
+            $file_routing = file::find_by_fieldName_referenceTable_and_id($ef->sys_field_name, 'am_wo_routing_line', $routing_line->am_wo_routing_line_id);
             echo ino_attachement($file_routing, $ef_file_name);
             echo $f->hidden_field($ef->sys_field_name, $ef_value);
             break;

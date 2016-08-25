@@ -115,8 +115,8 @@ class hr_leave_entitlement_header extends dbObject {
   $sql = " SELECT * 
        FROM hr_leave_entitlement_header eeh 
        WHERE eeh.employee_id = '{$employee_id}'   
+        LIMIT 1
 ";
-       $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

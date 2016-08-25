@@ -27,16 +27,13 @@ inoERP
       </li>
       <li><?php $f->l_text_field_d('quote_number', 'primary_column2'); ?></li>
       <li><?php $f->l_text_field_dr('sd_opportunity_id'); ?>						 </li>
-      <li><?php
-       echo $f->l_val_field_d('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name');
-       echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
-       ?><i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
-      <li><?php
-       echo $f->l_val_field_d('customer_number', 'ar_customer', 'customer_number', '', '', 'vf_select_customer_number');
-       ?><i class="generic g_select_customer_number select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
-      <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id'); ?> </li>      
+      <li><?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="ar_customer_id select_popup clickable">
+        <?php echo gettext('Customer Name') ?></label><?php echo $f->text_field('customer_name', $$class->customer_name, '20', 'customer_name', 'select_customer_name', '', $readonly1); ?></li>
+      <li><label class="auto_complete"><?php echo gettext('Customer Number') ?></label><?php $f->text_field_d('customer_number'); ?></li>
+      <li><?php $f->l_select_field_from_object('ar_customer_site_id', $customer_site_obj, 'ar_customer_site_id', 'customer_site_name', $$class->ar_customer_site_id, 'ar_customer_site_id', 'ar_customer_site_id', '', $readonly1); ?> </li>
+      
       <li><?php $f->l_text_field_dr('quote_status', 'always_readonly'); ?> </li> 
-      <li><?php $f->l_checkBox_field_d('rev_enabled_cb'); ?></li> 
+      <li><?php $f->l_checkBox_field('rev_enabled_cb', $$class->rev_enabled_cb, 'rev_enabled_cb', $readonly); ?></li> 
       <li><?php $f->l_text_field_d('rev_number'); ?> </li> 
       <li><?php $f->l_text_field_d('description'); ?></li> 
      </ul>
@@ -103,7 +100,7 @@ inoERP
  </form>
 </div>
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Quote Lines & Shipments') ?></span>
- <form  method="post" id="quote_site"  name="sd_quote_line">
+ <form action=""  method="post" id="quote_site"  name="sd_quote_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
@@ -130,7 +127,7 @@ inoERP
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0;
+       $count = 0; 
        foreach ($sd_quote_line_object as $sd_quote_line) {
         ?>         
         <tr class="sd_quote_line<?php echo $count ?>">
@@ -140,7 +137,7 @@ inoERP
           ?>    
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php $f->text_field_wid2sr('sd_quote_line_id', 'always_readonly'); ?></td>
+         <td><?php $f->text_field_wid2sr('sd_quote_line_id' , 'always_readonly'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
          <td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', 'medium', 1, $readonly); ?></td>
          <td><?php

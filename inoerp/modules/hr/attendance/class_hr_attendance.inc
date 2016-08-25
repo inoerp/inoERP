@@ -90,8 +90,7 @@ class hr_attendance extends dbObject {
  public static function find_by_fromDate($date) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE from_date = '{$date}'  ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " WHERE from_date = '{$date}'  LIMIT 1";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

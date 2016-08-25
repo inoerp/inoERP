@@ -31,7 +31,7 @@
   $all_site = supplier_site::find_all_sitesOfSupplier($supplier_id);
   $data['supplier_site_id'] = $f->select_field_from_object('supplier_site_id', supplier_site::find_all_sitesOfSupplier($supplier_id), 'supplier_site_id', 'supplier_site_name', '', 'supplier_site_id');
   $supplier_details = supplier::find_by_id($supplier_id);
-  $supplier_file = extn_file::find_by_reference_table_and_id('supplier', $supplier_id);
+  $supplier_file = file::find_by_reference_table_and_id('supplier', $supplier_id);
   $data = array_merge($data,(array)$supplier_file, (array)$supplier_details);
   if (count($supplier_details) == 0) {
    return false;

@@ -34,7 +34,7 @@ $all_reports = user_dashboard_config::findBy_userIdNconfigLevel($ino_user->ino_u
       <?php echo!empty($module_icons) ? $module_icons : '' ?>
      </div>
      <?php
-     $view_i = new extn_view();
+     $view_i = new view();
      foreach ($all_reports as $tab_c => $db_r) {
       $tab_c += 2;
       echo '<div id="tabsHeader-' . $tab_c . '" class="tabContent">';

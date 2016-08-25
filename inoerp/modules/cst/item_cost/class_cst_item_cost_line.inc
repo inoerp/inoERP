@@ -78,16 +78,7 @@ class cst_item_cost_line extends dbObject {
    $sql .= " AND this_level_cb = :this_level_cb ";
    $value_a['this_level_cb'] = $this->this_level_cb;
   }
-
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+  $sql .= " LIMIT 1 ";
 
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -98,6 +89,8 @@ class cst_item_cost_line extends dbObject {
   $lines = option_line::find_by_option_id($option_header->option_header_id);
   return $lines;
  }
+ 
+
 
 }
 

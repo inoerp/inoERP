@@ -130,7 +130,7 @@ GROUP BY onhand.item_id_m, onhand.org_id
     $sql .= " AND locator_id = '{$this->locator_id}' ";
    }
    
-   $sql = ino_perPageSql_i($sql, 1);
+   $sql .= " LIMIT 1 ";
 
    $result = $this->findBySql($sql);
    return !empty($result) ? array_pop($result) : false;

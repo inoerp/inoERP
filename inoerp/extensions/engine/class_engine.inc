@@ -130,7 +130,7 @@ class engine extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE obj_class_name = :obj_class_name ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
 
   $value_a = ['obj_class_name' => $obj_class_name];
   $result = $this->findBySql($sql, $value_a);
@@ -141,7 +141,7 @@ class engine extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE obj_class_name = '{$obj_class_name}' ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;

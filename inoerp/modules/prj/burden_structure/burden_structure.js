@@ -2,7 +2,7 @@ $(document).ready(function () {
  //add new lines
  $("#content tbody.form_data_line_tbody2").on("click", ".add_row_img", function () {
   var addNewRow = new add_new_rowMain();
-  addNewRow.trClass = 'prj_burden_struct_exptype';
+  addNewRow.trClass = 'prj_burden_structure_expendituretype';
   addNewRow.tbodyClass = 'form_data_line_tbody2';
   addNewRow.noOfTabs = 1;
   addNewRow.removeDefault = true;

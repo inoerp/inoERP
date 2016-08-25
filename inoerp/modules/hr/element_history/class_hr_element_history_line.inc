@@ -100,8 +100,8 @@ class hr_element_history_line extends dbObject {
        FROM hr_element_history_line eel 
        WHERE eel.hr_element_history_header_id = '{$headerId}'   
         AND eel.element_id = '{$elementId}'
+        LIMIT 1
 ";
-        $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

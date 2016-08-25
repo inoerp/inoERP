@@ -81,7 +81,7 @@ class extn_report extends dbObject {
 //		 "path"
 // ];
 //variables used for showing data
-
+ 
  public $column = [
   'extn_report_id',
   'report_name',
@@ -121,6 +121,8 @@ class extn_report extends dbObject {
   'last_update_by',
   'last_update_date',
  ];
+
+
  public $initial_search = [
   "extn_report_id",
   "report_name",
@@ -226,8 +228,7 @@ class extn_report extends dbObject {
  public static function find_by_blockId($block_id) {
   $sql = " SELECT * from ";
   $sql .= self::$table_name;
-  $sql .= " WHERE block_id = '{$block_id}' ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " WHERE block_id = '{$block_id}' LIMIT 1";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -342,8 +343,8 @@ class extn_report extends dbObject {
     $column_name = $values . '_id';
     $query = "SHOW COLUMNS FROM $values WHERE Field = '{$column_name}' ";
     $result = $db->find_by_sql($query);
-    if ((count($result) > 0) && (!empty($result[0]->field))) {
-     $all_id_columns_array[] = $result[0]->field;
+    if ((count($result) > 0) && (!empty($result[0]->Field))) {
+     $all_id_columns_array[] = $result[0]->Field;
     }
    }
   }
@@ -358,8 +359,8 @@ class extn_report extends dbObject {
     $column_name = $values . '_id';
     $query = "SHOW COLUMNS FROM $values WHERE Field = '{$column_name}' ";
     $result = self::find_by_sql($query);
-    if ((count($result) > 0) && (!empty($result[0]->field))) {
-     yield $result[0]->field;
+    if ((count($result) > 0) && (!empty($result[0]->Field))) {
+     yield $result[0]->Field;
     }
    }
   }
@@ -415,7 +416,7 @@ class extn_report extends dbObject {
     }
     $content_string .='</tr></thead>';
     If (!empty($result)) {
-     $content_string .= '<tbody class="form_data_line_tbody search_results tbody_row' . $i . ' " >';
+     $content_string .= '<tbody class="form_data_line_tbody search_results tbody_row'.$i.' " >';
      $count = 0;
      foreach ($result as $recod_k => $record) {
       $continue = true;
@@ -430,7 +431,7 @@ class extn_report extends dbObject {
        continue;
       }
       $count++;
-      $content_string .='<tr class="row' . $recod_k . '">';
+      $content_string .='<tr class="row'.$recod_k.'">';
       $content_string .= "<td>$count</td>";
       $new_start1 = ($i * ($no_of_columns_per_tab - 1)) + $i;
       $new_end1 = $new_start1 + ($no_of_columns_per_tab - 1);
@@ -600,18 +601,6 @@ class extn_report extends dbObject {
 
  public function update_extn_report_query_by_userInputs() {
   $extn_report_i = extn_report::find_by_id($this->extn_report_id);
-  if (DB_TYPE == 'ORACLE') {
-   $extn_report_i->query_v = !empty($extn_report_i->query_v) ?  stream_get_contents($extn_report_i->query_v) : null ;
-   $extn_report_i->logical_settings = !empty($extn_report_i->logical_settings) ?  stream_get_contents($extn_report_i->logical_settings) : null;
-   $extn_report_i->report_columns = !empty($extn_report_i->report_columns)?  stream_get_contents($extn_report_i->report_columns): null;
-   $extn_report_i->page_header = !empty($extn_report_i->page_header) ?  stream_get_contents($extn_report_i->page_header) : null;
-   $extn_report_i->page_footer = !empty($extn_report_i->page_footer) ? stream_get_contents($extn_report_i->page_footer) : null;
-   $extn_report_i->header_text =  !empty($extn_report_i->header_text) ? stream_get_contents($extn_report_i->header_text) : null ;
-   $extn_report_i->footer_text =  !empty($extn_report_i->footer_text) ? stream_get_contents($extn_report_i->footer_text) : null;
-  }
-
-
-
   $this->query_v = base64_decode($extn_report_i->query_v);
 
   if (!empty($this->user_filter) || !empty($this->user_sort)) {
@@ -679,7 +668,7 @@ class extn_report extends dbObject {
 
   $return_stmt .= $this->footer_text;
   if (!empty($this->_class_name)) {
-   $return_stmt = '<div class="' . $this->_class_name . '"><div class="extn_report_display_data" id="report_id' . $this->extn_report_id . '">' . $return_stmt . '</div></div>';
+   $return_stmt = '<div class="' . $this->_class_name . '"><div class="extn_report_display_data" id="report_id'.$this->extn_report_id.'">' . $return_stmt . '</div></div>';
   } else {
    $return_stmt = '<div class="extn_report_display_data">' . $return_stmt . '</div>';
   }
@@ -689,15 +678,14 @@ class extn_report extends dbObject {
  public function reportResultById($extn_report_id = '') {
   $this->extn_report_id = !empty($extn_report_id) ? $extn_report_id : $this->extn_report_id;
   $this->findBy_id($this->extn_report_id);
-
-  if (DB_TYPE == 'ORACLE') {
-   $this->query_v = stream_get_contents($this->query_v);
-  }
+//   echo '<link href="' . HOME_URL . 'includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />';
+//   echo '<link href="' . HOME_URL . 'extensions/extn_report/result/extn_report.css" media="all" rel="stylesheet" type="text/css" />';
+//   echo '<script src="' . HOME_URL . 'extensions/extn_report/result/extn_report.js"></script>';
 
   if (!empty($this->extn_report_id) && !empty($this->chart_type)) {
    $svgimg = new getsvgimage();
    $result = $result1 = dbObject::find_by_sql(base64_decode($this->query_v));
-   $svgimg->setProperty('_chart_name', $this->report_name);
+   $svgimg->setProperty('_chart_name', $this->extn_report_name);
    $svgimg->setProperty('_chart_width', $this->chart_width);
    $svgimg->setProperty('_chart_height', $this->chart_height);
    $svgimg->setProperty('_chart_type', $this->chart_type);
@@ -712,13 +700,9 @@ class extn_report extends dbObject {
   $column_list = [];
   if (!empty($this->extn_report_id)) {
    $extn_report_i = extn_report::find_by_id($this->extn_report_id);
-   if (DB_TYPE == 'ORACLE') {
-    $extn_report_i->report_columns = !empty($extn_report_i->report_columns) ? stream_get_contents($extn_report_i->report_columns) : null;
-   }
-
    if (!empty($extn_report_i->report_columns)) {
-    $column_list_k = json_decode($extn_report_i->report_columns);
-    $column_list = array_combine($column_list_k, $column_list_k);
+   $column_list_k = json_decode($extn_report_i->report_columns);
+   $column_list = array_combine($column_list_k, $column_list_k);
    }
   }
 

@@ -162,12 +162,12 @@ trait dbObject_t {
  }
 
  protected function write_comment($comment_by, $comment_msg, $comment_sub = '') {
-  $comment = new extn_comment();
+  $comment = new comment();
   $comment->reference_table = static::$table_name;
   $pc = static::$primary_column;
   $comment->reference_id = $this->$pc;
   $comment->comment_by = $comment_by;
-  $comment->extn_comment = $comment_msg;
+  $comment->comment = $comment_msg;
   $comment->subject = $comment_sub;
   $comment->published_cb = 1;
   $comment->save();
@@ -238,15 +238,6 @@ trait dbObject_t {
 //  }
 // }
 
- 
- public function findAll_singleRecord_db() {
-  $sql = " SELECT * FROM  ";
-  $sql .= static::$table_name;
-  $sql .= " LIMIT 1";
-  $result = $this->findBySql($sql);
-  return !empty($result) ? array_pop($result) : $this;
- }
- 
  public static function find_by_sql($sql = "") {
   global $dbc;
   $conn = $dbc->connection;
@@ -1063,7 +1054,7 @@ trait dbObject_t {
    $value_column = $class . '_value';
    $field_name = $sf->sys_field_name;
    $$class = new stdClass();
-   $secondary_fields = extn_view::find_columns_of_table($class);
+   $secondary_fields = view::find_columns_of_table($class);
 //    pa($secondary_fields);
    //check if record already exists
    $checkSql = " SELECT * FROM $class WHERE reference_type = 'table' AND reference_key_name='{$sf->reference_key_name}' "
@@ -1214,7 +1205,7 @@ trait dbObject_t {
 
   $table_name_array = array();
   foreach ($result as $object) {
-   $table_name_array [] = $object->table_name;
+   $table_name_array [] = $object->TABLE_NAME;
   }
   return $table_name_array;
  }
@@ -1258,7 +1249,7 @@ trait dbObject_t {
   $result = $db->find_by_sql($query);
 
   foreach ($result as $object) {
-   yield $object->table_name;
+   yield $object->TABLE_NAME;
   }
  }
 
@@ -1268,7 +1259,7 @@ trait dbObject_t {
   $result = $this->findBySql($query);
   $table_name_array = array();
   foreach ($result as $object) {
-   $table_name_array [] = $object->table_name;
+   $table_name_array [] = $object->TABLE_NAME;
   }
   return $table_name_array;
  }
@@ -1281,7 +1272,7 @@ trait dbObject_t {
 
    $column_name_array = array();
    foreach ($result as $object) {
-    $column_name_array [] = $object->field;
+    $column_name_array [] = $object->Field;
    }
    return $column_name_array;
   }

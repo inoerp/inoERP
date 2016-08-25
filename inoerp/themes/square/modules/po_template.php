@@ -147,7 +147,7 @@
 					 <div> 
 						<div id="show_attachment" class="show_attachment">
 						 <input type="button" class="attachment_button button" value="Attachements" id="attachment_button" name="">
-						 <?php echo extn_file::attachment_statement($po_file); ?>
+						 <?php echo file::attachment_statement($po_file); ?>
 						 <div id="supplier_header_level_attachement" >
 						 </div>
 						 <div id="supplier_line_level_attachement" >

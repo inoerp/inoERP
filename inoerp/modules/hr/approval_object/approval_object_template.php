@@ -52,6 +52,7 @@
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Object Value') ?></a></li>
+     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
@@ -61,6 +62,9 @@
        ?> 	
       </div> 
      </div> 
+     <div id="tabsLine-2"  class="tabContent">
+
+     </div>
     </div>
    </div> 
   </div> 

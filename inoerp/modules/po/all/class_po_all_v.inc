@@ -381,7 +381,7 @@ LEFT JOIN org ON po_line.receving_org_id = org.org_id
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE po_detail_id = :po_detail_id ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
 
   $param_a = ['po_detail_id'];
   $value_a = ['po_detail_id' => $this->po_detail_id];
@@ -402,8 +402,8 @@ LEFT JOIN org ON po_line.receving_org_id = org.org_id
 					sum(open_quantity) as 'Open'  FROM ";
   $sql .= self::$table_name;
   $sql .= " GROUP BY supplier_name ";
-//  $sql .= " ORDER BY quantity desc ";
-  $sql = ino_perPageSql_i($sql, 5);
+  $sql .= " ORDER BY quantity desc ";
+  $sql .= " LIMIT 5 ";
   $result = $this->findBySql($sql);
   $result_f = ra_conevrt_data($result, 'supplier_name', $legend);
   $this->ra_open_po_by_supplier_settings['_legend'] = $legend;
@@ -415,8 +415,8 @@ LEFT JOIN org ON po_line.receving_org_id = org.org_id
   $sql = " SELECT po_status, sum(quantity) FROM ";
   $sql .= self::$table_name;
   $sql .= " GROUP BY po_status ";
-//  $sql .= " ORDER BY quantity desc ";
-  $sql = ino_perPageSql_i($sql, 5);
+  $sql .= " ORDER BY quantity desc ";
+  $sql .= " LIMIT 5 ";
   $result = $this->findBySql($sql);
   $result_f = ra_conevrt_data_pie($result);
   return !empty($result_f) ? ($result_f) : false;

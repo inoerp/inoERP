@@ -62,7 +62,7 @@ inoERP
   <li><a href="#tabsLine-2"><?php echo gettext('Expenditure Type') ?></a></li>
  </ul>
  <div class="tabContainer">
-  <form action=""  method="post" id="prj_burden_struct_costcode"  name="prj_burden_struct_costcode" class="m-margin-top-20">
+  <form action=""  method="post" id="prj_burden_structure_costcode"  name="prj_burden_structure_costcode" class="m-margin-top-20">
    <div id="form_line" class="form_line">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
@@ -79,19 +79,19 @@ inoERP
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-       foreach ($prj_burden_struct_costcode_object as $prj_burden_struct_costcode) {
+       foreach ($prj_burden_structure_costcode_object as $prj_burden_structure_costcode) {
 //        if (!empty($$class_second->prj_category_header_id)) {
 //         $$class_second->category_description = prj_category_header::find_by_id($$class_second->prj_category_header_id)->description;
 //        }
         ?>         
-        <tr class="prj_burden_struct_costcode<?php echo $count ?>">
+        <tr class="prj_burden_structure_costcode<?php echo $count ?>">
          <td>
           <?php
-          echo ino_inline_action($prj_burden_struct_costcode->prj_burden_struct_costcode_id, array('prj_burden_structure_header_id' => $prj_burden_structure_header->prj_burden_structure_header_id));
+          echo ino_inline_action($prj_burden_structure_costcode->prj_burden_structure_costcode_id, array('prj_burden_structure_header_id' => $prj_burden_structure_header->prj_burden_structure_header_id));
           ?>
          </td>
 
-         <td><?php form::text_field_wid2sr('prj_burden_struct_costcode_id'); ?></td>
+         <td><?php form::text_field_wid2sr('prj_burden_structure_costcode_id'); ?></td>
          <td><?php echo $f->select_field_from_object('burden_cost_code_id', prj_burden_costcode::find_all(), 'prj_burden_costcode_id', 'costcode', $$class_second->burden_cost_code_id, '', 'large', 1, $readonly); ?></td>
          <td><?php echo $f->select_field_from_object('burden_cost_base_id', prj_burden_cost_base::find_all(), 'prj_burden_cost_base_id', 'cost_base', $$class_second->burden_cost_base_id, '', 'large', 1, $readonly); ?></td>
          <td><?php form::text_field_wid2r('description'); ?></td>
@@ -107,7 +107,7 @@ inoERP
    </div>
   </form>
   <div id ="form_line2" class="form_line2">
-   <form action=""  method="post" id="prj_burden_struct_exptype"  name="prj_burden_struct_exptype">
+   <form action=""  method="post" id="prj_burden_structure_expendituretype"  name="prj_burden_structure_expendituretype">
     <div id="tabsLine-2" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
@@ -122,18 +122,18 @@ inoERP
       <tbody class="form_data_line_tbody2 wip_wo_bom_values" >
        <?php
        $count = 0;
-       foreach ($prj_burden_struct_exptype_object as $prj_burden_struct_exptype) {
+       foreach ($prj_burden_structure_expendituretype_object as $prj_burden_structure_expendituretype) {
         ?>         
-        <tr class="prj_burden_struct_exptype<?php echo $count ?>">
+        <tr class="prj_burden_structure_expendituretype<?php echo $count ?>">
          <td>    
           <ul class="inline_action">
            <li class="add_row_img"><i class="fa fa-plus-circle"></i></li>
            <li class="remove_row_img"><i class="fa fa-minus-circle"></i></li>
-           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($prj_burden_struct_exptype->prj_burden_struct_exptype_id); ?>"></li>           
+           <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($prj_burden_structure_expendituretype->prj_burden_structure_expendituretype_id); ?>"></li>           
            <li><?php echo form::hidden_field('prj_burden_structure_header_id', $$class->prj_burden_structure_header_id); ?></li>
           </ul>
          </td>
-         <td><?php form::text_field_wid3sr('prj_burden_struct_exptype_id'); ?></td>
+         <td><?php form::text_field_wid3sr('prj_burden_structure_expendituretype_id'); ?></td>
          <td><?php echo $f->select_field_from_object('prj_expenditure_type_id', prj_expenditure_type_header::find_all(), 'prj_expenditure_type_header_id', 'expenditure_type', $$class_third->prj_expenditure_type_id, '', 'large', 1, ''); ?></td>
          <td><?php echo $f->select_field_from_object('burden_cost_base_id', prj_burden_cost_base::find_all(), 'prj_burden_cost_base_id', 'cost_base', $$class_third->burden_cost_base_id, '', 'large', 1, ''); ?></td>
          <td><?php form::text_field_wid3('description'); ?></td>        </tr>
@@ -152,18 +152,18 @@ inoERP
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="prj_burden_structure_header" ></li>
-  <li class="lineClassName" data-lineClassName="prj_burden_struct_costcode" ></li>
-  <li class="lineClassName2" data-lineClassName2="prj_burden_struct_exptype" ></li>
+  <li class="lineClassName" data-lineClassName="prj_burden_structure_costcode" ></li>
+  <li class="lineClassName2" data-lineClassName2="prj_burden_structure_expendituretype" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="prj_burden_structure_header_id" ></li>
   <li class="form_header_id" data-form_header_id="prj_burden_structure_header" ></li>
   <li class="line_key_field" data-line_key_field="item_description" ></li>
   <li class="single_line" data-single_line="false" ></li>
-  <li class="form_line_id" data-form_line_id="prj_burden_struct_costcode" ></li>
+  <li class="form_line_id" data-form_line_id="prj_burden_structure_costcode" ></li>
  </ul>
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="prj_burden_structure_header_id" ></li>
-  <li class="docLineId" data-docLineId="prj_burden_struct_costcode_id" ></li>
+  <li class="docLineId" data-docLineId="prj_burden_structure_costcode_id" ></li>
   <li class="btn1DivId" data-btn1DivId="prj_burden_structure_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>

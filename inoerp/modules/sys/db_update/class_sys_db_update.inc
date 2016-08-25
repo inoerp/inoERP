@@ -282,7 +282,7 @@ class sys_db_update extends dbObject {
     $sql = "
  CREATE or REPLACE 
  ALGORITHM = UNDEFINED
- VIEW {$obj->table_name}
+ VIEW {$obj->TABLE_NAME}
  AS {$obj->VIEW_DEFINITION} ";
     $dbc2->ddlexecute($sql);
     $dbc2->confirm();

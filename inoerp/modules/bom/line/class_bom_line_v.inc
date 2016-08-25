@@ -1,89 +1,88 @@
 <?php
 
-class bom_line_v extends dbObject {
+ class bom_line_v extends dbObject {
+public static $form_class_name = "bom_header";
+  public static $table_name = "bom_line_v";
+  public static $primary_column = "bom_line_id";
+  public $field_a = [
+   'bom_header_id_h',
+   'item_id_m',
+   'org_id',
+   'alternate_bom',
+   'effective_date',
+   'common_bom_item_id_m',
+   'common_bom_org_id',
+   'h_created_by',
+   'h_creation_date',
+   'h_last_update_by',
+   'h_last_update_date',
+   'bom_header_id',
+   'bom_line_id',
+   'bom_sequence',
+   'routing_sequence',
+   'component_item_id_m',
+   'usage_basis',
+   'usage_quantity',
+   'auto_request_material_cb',
+   'effective_start_date',
+   'effective_end_date',
+   'eco_number',
+   'eco_implemented_cb',
+   'planning_percentage',
+   'yield',
+   'include_in_cost_rollup_cb',
+   'wip_supply_type',
+   'supply_sub_inventory',
+   'supply_locator',
+   'created_by',
+   'creation_date',
+   'last_update_by',
+   'last_update_date',
+  ];
+  public $initial_search = [
+   'item_id_m',
+   'org_id',
+   'alternate_bom',
+  ];
+  public $search = [
+  ];
+  public $pageTitle = " BOM Lines "; //page Title
+  public $bom_header_id_h;
+  public $item_id_m;
+  public $org_id;
+  public $alternate_bom;
+  public $effective_date;
+  public $common_bom_item_id_m;
+  public $common_bom_org_id;
+  public $h_created_by;
+  public $h_creation_date;
+  public $h_last_update_by;
+  public $h_last_update_date;
+  public $bom_header_id;
+  public $bom_line_id;
+  public $bom_sequence;
+  public $routing_sequence;
+  public $component_item_id_m;
+  public $usage_basis;
+  public $usage_quantity;
+  public $auto_request_material_cb;
+  public $effective_start_date;
+  public $effective_end_date;
+  public $eco_number;
+  public $eco_implemented_cb;
+  public $planning_percentage;
+  public $yield;
+  public $include_in_cost_rollup_cb;
+  public $wip_supply_type;
+  public $supply_sub_inventory;
+  public $supply_locator;
+  public $created_by;
+  public $creation_date;
+  public $last_update_by;
+  public $last_update_date;
 
- public static $form_class_name = "bom_header";
- public static $table_name = "bom_line_v";
- public static $primary_column = "bom_line_id";
- public $field_a = [
-  'bom_header_id_h',
-  'item_id_m',
-  'org_id',
-  'alternate_bom',
-  'effective_date',
-  'common_bom_item_id_m',
-  'common_bom_org_id',
-  'h_created_by',
-  'h_creation_date',
-  'h_last_update_by',
-  'h_last_update_date',
-  'bom_header_id',
-  'bom_line_id',
-  'bom_sequence',
-  'routing_sequence',
-  'component_item_id_m',
-  'usage_basis',
-  'usage_quantity',
-  'auto_request_material_cb',
-  'effective_start_date',
-  'effective_end_date',
-  'eco_number',
-  'eco_implemented_cb',
-  'planning_percentage',
-  'yield',
-  'include_in_cost_rollup_cb',
-  'wip_supply_type',
-  'supply_sub_inventory',
-  'supply_locator',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
- ];
- public $initial_search = [
-  'item_id_m',
-  'org_id',
-  'alternate_bom',
- ];
- public $search = [
- ];
- public $pageTitle = " BOM Lines "; //page Title
- public $bom_header_id_h;
- public $item_id_m;
- public $org_id;
- public $alternate_bom;
- public $effective_date;
- public $common_bom_item_id_m;
- public $common_bom_org_id;
- public $h_created_by;
- public $h_creation_date;
- public $h_last_update_by;
- public $h_last_update_date;
- public $bom_header_id;
- public $bom_line_id;
- public $bom_sequence;
- public $routing_sequence;
- public $component_item_id_m;
- public $usage_basis;
- public $usage_quantity;
- public $auto_request_material_cb;
- public $effective_start_date;
- public $effective_end_date;
- public $eco_number;
- public $eco_implemented_cb;
- public $planning_percentage;
- public $yield;
- public $include_in_cost_rollup_cb;
- public $wip_supply_type;
- public $supply_sub_inventory;
- public $supply_locator;
- public $created_by;
- public $creation_date;
- public $last_update_by;
- public $last_update_date;
-
- private function create_bom_line_v() {
-  $sql = "
+  private function create_bom_line_v() {
+   $sql = "
 CREATE OR REPLACE VIEW bom_line_v
 (
 bom_header_id_h, item_id_m, org_id, alternate_bom, effective_date,common_bom_item_id_m,
@@ -197,24 +196,24 @@ AND (bhc.common_bom_item_id_m IS NOT NULL OR bhc.common_bom_item_id_m = 0)
 AND bhc.common_bom_item_id_m = bh.item_id_m
 
 ";
- }
+  }
 
- public static function find_by_bomHeaderId($bom_headerId) {
-  $sql = " Select * from ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE bom_header_id_h = '{$bom_headerId}'";
-
-  $all_bom_lines = self::find_by_sql($sql);
-  return !empty($all_bom_lines) ? $all_bom_lines : false;
- }
-
- public static function find_by_bomHeaderId_revNumber($bom_headerId, $rev_num = '') {
-  if (empty($rev_num)) {
+  public static function find_by_bomHeaderId($bom_headerId) {
    $sql = " Select * from ";
    $sql .= self::$table_name;
    $sql .= " WHERE bom_header_id_h = '{$bom_headerId}'";
-  } else {
-   $sql = " SELECT bl.bom_line_id, 	bl.bom_header_id, 	bl.bom_sequence, 	bl.routing_sequence, 	
+
+   $all_bom_lines = self::find_by_sql($sql);
+   return !empty($all_bom_lines) ? $all_bom_lines : false;
+  }
+
+  public static function find_by_bomHeaderId_revNumber($bom_headerId, $rev_num = '') {
+   if (empty($rev_num)) {
+    $sql = " Select * from ";
+    $sql .= self::$table_name;
+    $sql .= " WHERE bom_header_id_h = '{$bom_headerId}'";
+   } else {
+    $sql = " SELECT bl.bom_line_id, 	bl.bom_header_id, 	bl.bom_sequence, 	bl.routing_sequence, 	
      bl.component_item_id_m, 	bl.usage_basis, 	bl.usage_quantity, 	bl.auto_request_material_cb, 	
      bl.effective_start_date, 	bl.effective_end_date, 	bl.eco_number, 	bl.eco_implemented_cb, 	
      bl.planning_percentage, 	bl.yield, 	bl.include_in_cost_rollup_cb, 	bl.wip_supply_type, 	
@@ -230,26 +229,26 @@ AND bhc.common_bom_item_id_m = bh.item_id_m
      AND bl.org_id = iir.org_id
      AND  bl.effective_start_date <= iir.effective_end_date
       ORDER BY bl.bom_sequence ASC";
+   }
+   $all_bom_lines = self::find_by_sql($sql);
+   return !empty($all_bom_lines) ? $all_bom_lines : false;
   }
-  $all_bom_lines = self::find_by_sql($sql);
-  return !empty($all_bom_lines) ? $all_bom_lines : false;
- }
 
- public static function find_by_itemIdM_OrgId($item_id_m, $org_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " "
-   . " where item_id_m = '{$item_id_m}' "
-   . " AND org_id = '{$org_id}' ";
-  $result = self::find_by_sql($sql);
-  return !empty($result) ? $result : false;
- }
-
- public static function find_by_itemIdM_OrgId_revNumber($item_id_m, $org_id, $rev_number = '') {
-  if (empty($rev_number)) {
+  public static function find_by_itemIdM_OrgId($item_id_m, $org_id) {
    $sql = "SELECT * FROM " . self::$table_name . " "
-    . " where item_id_m = '{$item_id_m}' "
-    . " AND org_id = '{$org_id}' AND bl.effective_end_date IS NULL ";
-  } else {
-   $sql = " SELECT bl.bom_line_id, 	bl.bom_header_id, 	bl.bom_sequence, 	bl.routing_sequence, 	
+     . " where item_id_m = '{$item_id_m}' "
+     . " AND org_id = '{$org_id}' ";
+   $result = self::find_by_sql($sql);
+   return !empty($result) ? $result : false;
+  }
+
+  public static function find_by_itemIdM_OrgId_revNumber($item_id_m, $org_id, $rev_number = '') {
+   if (empty($rev_number)) {
+    $sql = "SELECT * FROM " . self::$table_name . " "
+      . " where item_id_m = '{$item_id_m}' "
+      . " AND org_id = '{$org_id}' AND bl.effective_end_date IS NULL ";
+   } else {
+    $sql = " SELECT bl.bom_line_id, 	bl.bom_header_id, 	bl.bom_sequence, 	bl.routing_sequence, 	
      bl.component_item_id_m, 	bl.usage_basis, 	bl.usage_quantity, 	bl.auto_request_material_cb, 	
      bl.effective_start_date, 	bl.effective_end_date, 	bl.eco_number, 	bl.eco_implemented_cb, 	
      bl.planning_percentage, 	bl.yield, 	bl.include_in_cost_rollup_cb, 	bl.wip_supply_type, 	
@@ -266,35 +265,27 @@ AND bhc.common_bom_item_id_m = bh.item_id_m
      AND bl.org_id = '{$org_id}'
      AND  bl.effective_start_date <= iir.effective_end_date
     ORDER BY bl.bom_sequence ASC";
+   }
+
+   $result = self::find_by_sql($sql);
+
+
+   return !empty($result) ? $result : false;
   }
 
-  $result = self::find_by_sql($sql);
+  public function findBy_poDetailId() {
+   $sql = " SELECT * FROM ";
+   $sql .= self::$table_name;
+   $sql .= " WHERE po_detail_id = :po_detail_id ";
+   $sql .= " LIMIT 1 ";
 
-
-  return !empty($result) ? $result : false;
- }
-
- public function findBy_poDetailId() {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE po_detail_id = :po_detail_id ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
+   $param_a = ['po_detail_id'];
+   $value_a = ['po_detail_id' => $this->po_detail_id];
+   $result = $this->findBy_sql($sql, $param_a, $value_a);
+   return !empty($result) ? array_pop($result) : false;
   }
 
-  $param_a = ['po_detail_id'];
-  $value_a = ['po_detail_id' => $this->po_detail_id];
-  $result = $this->findBy_sql($sql, $param_a, $value_a);
-  return !empty($result) ? array_pop($result) : false;
  }
-
-}
 
 //end of inv_transaction class
 ?>

@@ -188,16 +188,7 @@ class am_wo_header extends dbObject {
  Public static function find_by_woNumber($wo_number) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE wo_number = '{$wo_number}' ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+  $sql .= " WHERE wo_number = '{$wo_number}' LIMIT 1";
 
   $result = self::find_by_sql($sql);
 
@@ -491,7 +482,7 @@ class am_wo_header extends dbObject {
      } else {
       //check date rule
       $date_rule = am_ms_date_rule::find_by_maintenance_schedule_id($am_schedule_fl->am_maintenance_schedule_id);
-      if (empty($date_rule)) {
+      if(empty($date_rule)){
        return;
       }
       $wo_date = $am_schedule_fl->schedule_basis_date;
@@ -522,7 +513,8 @@ class am_wo_header extends dbObject {
   }
  }
 
- private function _verify_create_WO($am_asset_id, $activity_item_id_m, $date, $am_maintenance_schedule_id, $wo_status = 'UN_RELEASED', $cycle = '', $cycle_interval = '') {
+ private function _verify_create_WO($am_asset_id, $activity_item_id_m, $date, $am_maintenance_schedule_id,
+  $wo_status = 'UN_RELEASED', $cycle = '', $cycle_interval = '') {
   global $dbc;
   $asset_details = am_asset::find_by_id($am_asset_id);
   $existing_wo = self::find_by_asset_activity_date($am_asset_id, $activity_item_id_m, $date);

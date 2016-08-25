@@ -235,16 +235,8 @@ class supplier_bu extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where supplier_id= :supplier_id " .
-   " AND org_id = :org_id ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+   " AND org_id = :org_id " .
+   " LIMIT 1 ";
   $param_a = ['supplier_id', 'org_id'];
   $value_a = [ 'supplier_id' => $supplier_id, 'org_id' => $org_id];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
@@ -255,16 +247,7 @@ class supplier_bu extends dbObject {
   global $db;
   $sql = " SELECT * FROM "
    . self::$table_name
-   . " where supplier_name LIKE :supplier_name";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql($limit);
-    break;
-
-   default:
-    $sql .= ino_perPageSql($limit);
-    break;
-  }
+   . " where supplier_name LIKE :supplier_name LIMIT $limit";
   $param_a = ['supplier_name'];
   $supplier_name = '%' . $this->supplier_name . '%';
   $value_a = [ 'supplier_name' => $supplier_name];

@@ -97,8 +97,7 @@ class hr_location extends dbObject {
   global $db;
   $sql = " SELECT combination FROM "
    . self::$table_name
-   . " where combination LIKE '%{$hr_location}%' ";
-   $sql = ino_perPageSql_i($sql, 1);
+   . " where combination LIKE '%{$hr_location}%' LIMIT 0, 30";
   $result = $db->find_by_sql($sql);
   $data = array();
   foreach ($result as $obj) {
@@ -130,7 +129,7 @@ class hr_location extends dbObject {
    }
   }
 
-  $sql = ino_perPageSql_i($sql, $limit);
+  $sql .= "  LIMIT 0, $limit  ";
 
   $combination = '%' . $this->combination . '%';
   $value_a = [ 'coa_id' => $this->coa_id, 'combination' => $combination];
@@ -160,18 +159,38 @@ class hr_location extends dbObject {
    }
   }
 
- $sql = ino_perPageSql_i($sql, $limit);
+  $sql .= "  LIMIT 0, $limit  ";
+
+//  echo $sql;
   $result = self::find_by_sql($sql);
 
   return !(empty($result)) ? $result : false;
  }
 
+//  public function findBy_coaId_description($limit = 30) {
+//  $sql = " SELECT * FROM "
+//   . self::$table_name
+//   . " where coa_id = :coa_id AND description LIKE :description ";
+//  if(!empty($this->ac_type)){
+//   $ac_type = trim($this->ac_type);
+//   $sql .= " AND ac_type = '{$ac_type}'  ";
+//  }
+//  
+//  $sql .= "  LIMIT 0, $limit  ";
+//  
+//  echo $sql;
+//  $description = '%' . $this->description . '%';
+//  $value_a = [ 'coa_id' => $this->coa_id, 'combination' => $description];
+//  $result = $this->findBySql($sql, $value_a);
+//  
+//  return !(empty($result)) ? $result : false;
+// }
+
  public function findBy_exactCombination($combination) {
   global $db;
   $sql = " SELECT * FROM "
    . self::$table_name
-   . " where  combination = :combination ";
-  $sql = ino_perPageSql_i($sql, 1);
+   . " where  combination = :combination LIMIT 1";
   $param_a = ['combination'];
   $value_a = ['combination' => $combination];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
@@ -181,8 +200,7 @@ class hr_location extends dbObject {
  public static function find_by_exactCombination($combination) {
   $sql = " SELECT * FROM "
    . self::$table_name
-   . " where  combination = '{$combination}' ";
-   $sql = ino_perPageSql_i($sql, 1);
+   . " where  combination = '{$combination}' LIMIT 1";
   $result = self::find_by_sql($sql);
   return !(empty($result)) ? array_pop($result) : false;
  }
@@ -229,8 +247,8 @@ class hr_location extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where coa_id='{$coa_id}' " .
-   " AND combination='{$hr_location}' ";
-   $sql = ino_perPageSql_i($sql, 1);
+   " AND combination='{$hr_location}' " .
+   "LIMIT 1";
   $result_set = $db->find_by_sql($sql);
   return !(empty($result_set)) ? true : false;
  }

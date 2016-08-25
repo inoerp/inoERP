@@ -4,7 +4,7 @@
   <span class="heading"><?php echo gettext('Secondary Field For Objects') ?></span>
   <div id="form_serach_header" class="tabContainer">
    <label><?php echo gettext('Object Name') ?></label></label>
-   <?php echo $f->select_field_from_object('obj_class_name', extn_view::find_all_tables(), 'TABLE_NAME', 'TABLE_NAME', $obj_class_name_h, 'obj_class_name'); ?>
+   <?php echo $f->select_field_from_object('obj_class_name', view::find_all_tables(), 'TABLE_NAME', 'TABLE_NAME', $obj_class_name_h, 'obj_class_name'); ?>
    <a name="show" href="form.php?class_name=sys_secondary_field_instance&<?php echo "mode=$mode"; ?>" class="show document_id sys_secondary_field_id">
     <i class="fa fa-refresh"></i></a> 
   </div>

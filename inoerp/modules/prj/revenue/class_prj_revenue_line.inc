@@ -219,7 +219,7 @@ AND prh.prj_revenue_header_id  = '{$prj_revenue_header_id}' ";
 //
 //FROM prj_revenue_line pel,
 //prj_burden_structure_revenuetype pbse,
-//prj_burden_struct_costcode pbsc,
+//prj_burden_structure_costcode pbsc,
 //prj_burden_list_line pbll,
 //prj_project_header pph,
 //prj_burden_list_header bplh

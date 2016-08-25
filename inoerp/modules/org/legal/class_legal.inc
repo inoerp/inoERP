@@ -116,8 +116,7 @@ class legal extends dbObject {
  public static function find_by_orgId($org_id) {
 	global $db;
 	$sql = "SELECT * FROM " . self::$table_name . " 
-      where org_id={$org_id} ";
-      $sql = ino_perPageSql_i($sql, 1);
+      where org_id={$org_id} LIMIT 1";
 	$result_array = self::find_by_sql($sql);
 	return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -132,7 +131,7 @@ class legal extends dbObject {
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
 	$sql .= " WHERE org_id = :org_id ";
-	$sql = ino_perPageSql_i($sql, 1);
+	$sql .= " LIMIT 1 ";
 	$value_a = ['org_id' => $orgid];
 	$result = $db->findBySql($sql, $value_a);
 	return !empty($result) ? array_pop($result) : false;

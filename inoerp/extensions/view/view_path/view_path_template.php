@@ -49,7 +49,7 @@
                           <select name="parent_id" id="parent_id"> 
                             <option value="" ></option> 
                             <?php
-                            $coumn_name = extn_view::find_all_idColumns();
+                            $coumn_name = view::find_all_idColumns();
                             foreach ($coumn_name as $key=>$value) {
                               echo '<option value="' . $value . '" ';
                               echo $value == $view_path->column_name ? 'selected' : 'none ';

@@ -48,17 +48,8 @@ LEFT JOIN cc_co_line_value cclv ON cclv.cc_co_line_id = ccl.cc_co_line_id
 
 WHERE cclv.cc_co_template_line_id = '{$cc_co_template_line_id}'
  AND cclv.cc_co_line_id = '{$cc_co_line_id}'
+  LIMIT 1
 ";
- 
-   switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
 
   $result = self::find_by_sql($sql);
 // echo $sql;

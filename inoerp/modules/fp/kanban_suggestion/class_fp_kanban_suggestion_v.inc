@@ -51,6 +51,7 @@ class fp_kanban_suggestion_v extends dbObject {
   'top_level_item_number',
   'demand_item_number',
  ];
+
  public $multi_select_column = [
   'item_number',
   'kanban_multibin_number',
@@ -60,7 +61,7 @@ class fp_kanban_suggestion_v extends dbObject {
   'avg_daily_demand',
   'fp_kanban_header_id',
   'fix_days_supply',
-  'kanban_min_quantity',
+    'kanban_min_quantity',
   'kanban_max_quantity',
   'multibin_fix_days_supply',
   'plan_name',
@@ -225,16 +226,7 @@ AS
  public function findBy_planId_itemId() {
   global $db;
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " where plan_id = :plan_id AND item_id_m =:item_id_m ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+  $sql .= " where plan_id = :plan_id AND item_id_m =:item_id_m LIMIT 1 ";
   $param_a = ['plan_id', 'item_id_m'];
   $value_a = ['plan_id' => $this->plan_id, 'item_id_m' => $this->item_id_m];
   $result = $db->findBy_sql($sql, $param_a, $value_a);

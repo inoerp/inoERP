@@ -110,13 +110,10 @@ class option_header extends dbObject {
   $this->$name = $value;
  }
 
- Public static function find_options_byName($name, $order_by_field = 'priority', $order_by_seq = 'ASC') {
+ Public static function find_options_byName($name, $order_by_field = 'priority' , $order_by_seq = 'ASC') {
   $option_header = self::find_by_name($name);
-  if ($option_header) {
-   return option_line::find_by_parent_id($option_header->option_header_id, $order_by_field, $order_by_seq);
-  } else {
-   return null;
-  }
+  return option_line::find_by_parent_id($option_header->option_header_id, $order_by_field ,$order_by_seq);
+
  }
 
  Public static function countries() {
@@ -171,25 +168,14 @@ class option_header extends dbObject {
 
  public static function find_by_name($option_types) {
   global $db;
-  $sql = "SELECT * FROM " . self::$table_name . " where option_type LIKE '%{$option_types}%' ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .=  ino_perPageSql(1);
-    break;
-  }
+  $sql = "SELECT * FROM " . self::$table_name . " where option_type LIKE '%{$option_types}%' LIMIT 1";
   $result_array = self::find_by_sql($sql);
-
-  return !empty($result_array) ? array_pop($result_array) : false;
+  return !empty($result_array) ? array_shift($result_array) : false;
  }
 
  public static function find_by_exact_name($option_types) {
   global $db;
-  $sql = "SELECT * FROM " . self::$table_name . " WHERE option_type = '$option_types' ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql = "SELECT * FROM " . self::$table_name . " WHERE option_type = '$option_types' LIMIT 1";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }

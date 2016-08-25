@@ -46,8 +46,7 @@ class extn_report_path extends dbObject {
  public static function find_by_columnName_extn_reportId($column_name, $extn_report_id) {
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE extn_report_id = '{$extn_report_id}'";
-  $sql .= " AND column_name = '{$column_name}' ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " AND column_name = '{$column_name}' LIMIT 1";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }

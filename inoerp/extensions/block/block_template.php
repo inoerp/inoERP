@@ -1,7 +1,7 @@
 <div id="form_all">
  <div id ="form_header">
   <span class="heading"><?php echo gettext('Block Information') ?></span>
-  <form method="post" id="block_header"  name="block_content_header">
+  <form action=""  method="post" id="block_header"  name="block_content_header">
    <!--create empty form or a single id when search is not clicked and the id is referred from other block_content -->
    <div id="tabsHeader">
     <ul class="tabMain">
@@ -11,7 +11,7 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field two_column_form">
+      <ul class="column header_field">
        <li><?php $f->l_text_field_dr_withSearch('block_id') ?>
         <a name="show" href="form.php?class_name=block&<?php echo "mode=$mode"; ?>" class="show document_id block_id">
          <i class="fa fa-refresh"></i></a> 

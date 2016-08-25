@@ -19,12 +19,12 @@ public static $key_column = 'wip_wo_routing_line_id';
     $key_column = $class . '_id';
     $value_column = $class . '_value';
     $$class = new stdClass();
-    $extra_fields = extn_view::find_columns_of_table($class);
+    $extra_fields = view::find_columns_of_table($class);
 //    pa($extra_fields);
     //check if record already exists
     $checkSql = " SELECT * FROM $class WHERE reference_type = 'table' AND reference_key_name='wip_wo_routing_line' "
-      . "  AND reference_key_value='{$this->wip_wo_routing_line_id}' ";
-$checkSql = ino_perPageSql_i($checkSql, 1);
+      . "  AND reference_key_value='{$this->wip_wo_routing_line_id}' LIMIT 1";
+
     $checkResult = self::find_by_sql($checkSql);
 
     //if $checkResult is not empty update the existing data else create record
@@ -121,7 +121,110 @@ $checkSql = ino_perPageSql_i($checkSql, 1);
    }
   }
 
-  
+  public function _xxafter_save() {
+   global $db;
+   global $dbc;
+   if ((!empty($this->content_type_id)) && (!empty($this->content_id))) {
+    $content_type = content_type::find_by_id($this->content_type_id);
+    $class = content::$content_table_name = 'c_' . $content_type->content_type;
+
+    $$class = new stdClass();
+    $extra_fields = new_content_type::find_fields_by_id($content_type->content_type_id);
+
+    $content_field_array = content::$content_field_array;
+    foreach ($extra_fields as $records) {
+     $content_field_array[] = $records->Field;
+    }
+    $$class->content_id = $this->content_id;
+    $checkSql = " SELECT * FROM $class WHERE content_id = $this->content_id LIMIT 1";
+    $checkResult = self::find_by_sql($checkSql);
+    if (!empty($checkResult)) {
+     $checkIfContentExists = true;
+    } else {
+     $checkIfContentExists = false;
+    }
+    if ($checkIfContentExists) {
+     //Update the existing content
+     $field_stmt = '';
+     foreach ($content_field_array as $key => $value) {
+      $field_stmt .= $value . ' = :' . $value . ', ';
+     }
+     $field_stmt = rtrim($field_stmt, ', ');
+//write SQL
+     $sql = " UPDATE ";
+     $sql.= $class;
+     $sql .= " SET ";
+     $sql.= $field_stmt;
+     $sql.= " WHERE content_id = :content_id ";
+     $stmt = $dbc->connection->prepare(" $sql ");
+     //Bind parameters
+     foreach ($content_field_array as $key => $value) {
+      if (!empty($_POST[$value][0])) {
+       $stmt->bindParam(":$value", $_POST[$value][0]);
+      } else {
+       $stmt->bindvalue(":$value", null, PDO::PARAM_INT);
+      }
+     }
+     try {
+      $stmt->execute();
+      $newMsg = "Record is Successfully Saved in $class";
+     } catch (PDOException $e) {
+      print "Record couldnt be saved!!: " . $e->getMessage() . "<br/>";
+     }
+    } else {
+     $field_colums = '';
+     foreach ($content_field_array as $key => $value) {
+      $field_colums .= $value . ', ';
+     }
+     $field_colums = rtrim($field_colums, ', ');
+
+     $field_values = '';
+     foreach ($content_field_array as $key => $value) {
+      $field_values .= ':' . $value . ', ';
+     }
+     $field_values = rtrim($field_values, ', ');
+//write SQL
+     $sql = " INSERT INTO ";
+     $sql.= $class;
+     $sql.= ' ( ';
+     $sql.= $field_colums;
+     $sql.= ' ) ';
+     $sql.= 'VALUES';
+     $sql.= ' ( ';
+     $sql.= $field_values;
+     $sql.= ' ) ';
+//		print_r($_POST);
+     $stmt = $dbc->connection->prepare(" $sql ");
+     //Bind parameters
+     foreach ($content_field_array as $key => $value) {
+      if (!empty($_POST[$value][0])) {
+       $stmt->bindParam(":$value", $_POST[$value][0]);
+      } else {
+       $stmt->bindvalue(":$value", null, PDO::PARAM_INT);
+      }
+     }
+     $stmt->bindParam(':content_id', $$class->content_id);
+     try {
+      $stmt->execute();
+      $$class->content_id = $dbc->connection->lastInsertId();
+      $newMsg = "Record is Successfully Saved in $class";
+     } catch (PDOException $e) {
+      print "Record couldnt be saved!!: " . $e->getMessage() . "<br/>";
+     }
+    }
+   }
+
+   //url alias
+   if ((!empty($content_type)) && (!empty($this->url_alias) || $content_type->auto_url_alias_cb == 1 )) {
+    $url_alias = new ext_url_alias();
+    $url_alias->alias = !empty($this->url_alias) ? $this->url_alias : $this->subject;
+    $url_alias->content_id = $this->content_id;
+    $url_alias->original_url = "content_id=$this->content_id&content_type=$content_type->content_type";
+    $url_alias->ext_url_alias_id = !empty($this->ext_url_alias_id) ? $this->ext_url_alias_id : null;
+    $url_alias->audit_trial();
+    $url_alias->save();
+   }
+  }
 
  }
 

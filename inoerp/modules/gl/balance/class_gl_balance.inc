@@ -184,7 +184,7 @@ class gl_balance extends dbObject {
   $sql .= " AND  period_id = :period_id ";
   $sql .= " AND  balance_type = :balance_type ";
   $sql .= " AND  coa_combination_id = :coa_combination_id ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
   $param_a = ['ledger_id', 'period_id', 'balance_type', 'coa_combination_id'];
   $value_a = [ 'ledger_id' => $this->ledger_id,
    'period_id' => $this->period_id,

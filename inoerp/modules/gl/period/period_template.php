@@ -97,9 +97,9 @@
            echo form::select_field_from_object_ap(array('name' => 'status', 'ob' => gl_period::gl_period_status(),
             'ob_value' => 'option_line_code', 'ob_desc' => 'option_line_value', 'value' => $gl_period->status, 'disabled' => $gl_period->en_dis));
            ?></td>
-          <td class="yearPicker"><?php echo $f->text_field_ap(['name' => 'c_year', 'value' => $cal_i->c_year, 'class_name' => 'small', 'readonly' => true]); ?></td>
-          <td><?php echo $f->text_field_ap(['name' => 'c_quarter', 'value' => $cal_i->c_quarter, 'class_name' => 'small', 'readonly' => true]); ?></td>
-          <td><?php echo $f->text_field_ap(['name' => 'c_number', 'value' => $cal_i->c_number, 'class_name' => 'small', 'readonly' => true]); ?></td>
+          <td class="yearPicker"><?php echo $f->text_field_ap(['name' => 'year', 'value' => $cal_i->year, 'class_name' => 'small', 'readonly' => true]); ?></td>
+          <td><?php echo $f->text_field_ap(['name' => 'quarter', 'value' => $cal_i->quarter, 'class_name' => 'small', 'readonly' => true]); ?></td>
+          <td><?php echo $f->text_field_ap(['name' => 'number', 'value' => $cal_i->number, 'class_name' => 'small', 'readonly' => true]); ?></td>
           <td><?php echo $f->date_fieldAnyDay('from_date', $cal_i->from_date, 'medium'); ?></td>
           <td><?php echo $f->date_fieldAnyDay('to_date', $cal_i->to_date, 'medium'); ?></td>
           <td><?php echo $f->text_field_ap(['name' => 'cal_period_name', 'value' => $cal_i->name, 'class_name' => 'medium', 'readonly' => true]); ?><?php // echo form::text_field('cal_period_name', $gl_period->name, 15, '', 1, '', '', 1);     ?></td>

@@ -10,7 +10,7 @@
     </ul>
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
-      <ul class="column header_field two_column_form"> 
+      <ul class="column header_field"> 
        <li><?php $f->l_text_field_dr_withSearch('sys_printer_id') ?>
         <a name="show" href="form.php?class_name=sys_printer&<?php echo "mode=$mode"; ?>" class="show document_id sys_printer_id">
          <i class="fa fa-refresh"></i></a> 

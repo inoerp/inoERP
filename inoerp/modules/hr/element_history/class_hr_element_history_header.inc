@@ -1,5 +1,4 @@
 <?php
-
 /**
  * inoERP - Version 0.1.1
  *
@@ -12,7 +11,7 @@
 /**
  * hr_element_history_header
  * Compensation Element defines all the compensation elements used in payslip and payroll.
- * hr_element_history_header stores all the archived information of hr_element_entry_header. 
+ *hr_element_history_header stores all the archived information of hr_element_entry_header. 
  * When the salary of an employee changes all the existing salary information is archived in hr_element_entry_header table. 
  * You can change the salary information by changing the grade of an employee. 
  * If you manually override any hr_element_entry_header information then you have to enable the archive check box to archive the details.
@@ -82,6 +81,7 @@ class hr_element_history_header extends dbObject {
  public $multi_action_class_pc;
  public $multi_action_class_pc_value;
  public $action;
+ 
 
  public function _before_save() {
   if (($this->action == 'multi_element_history')) {
@@ -167,8 +167,8 @@ class hr_element_history_header extends dbObject {
   $sql = " SELECT * 
        FROM hr_element_history_header eeh 
        WHERE eeh.hr_employee_id = '{$employee_id}'   
+        LIMIT 1
 ";
-  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -177,8 +177,8 @@ class hr_element_history_header extends dbObject {
   $sql = " SELECT * 
        FROM hr_element_history_header eeh 
        WHERE eeh.hr_employee_id = '{$employee_id}'   
+        LIMIT 1
 ";
-  $sql = ino_perPageSql_i($sql, 1);
   $result = $this->findBySql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

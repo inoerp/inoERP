@@ -65,7 +65,7 @@ inoERP
   <div class="tabContainer"> 
    <div id="tabsLine-1" class="tabContent">
     <div id ="form_line" class="form_line">
-     <form  method="post" id="bom_oh_res_assignment_line"  name="bom_oh_res_assignment_line">
+     <form  method="post" id="bom_overhead_resource_assignment_line"  name="bom_overhead_resource_assignment_line">
       <table class="form_line_data_table">
        <thead> 
         <tr>
@@ -76,25 +76,25 @@ inoERP
          <th><?php echo gettext('Resource') ?></th>
         </tr>
        </thead>
-       <tbody class="form_data_line_tbody bom_oh_res_assignment_values" >
+       <tbody class="form_data_line_tbody bom_overhead_resource_assignment_values" >
         <?php
         $count = 0;
-        foreach ($bom_oh_res_assignment_object as $bom_oh_res_assignment) {
-         if (!empty($bom_oh_res_assignment->bom_cost_type)) {
+        foreach ($bom_overhead_resource_assignment_object as $bom_overhead_resource_assignment) {
+         if (!empty($bom_overhead_resource_assignment->bom_cost_type)) {
           $bcy = new bom_cost_type();
-          $bcy_i = $bcy->find_by_keyColumn($bom_oh_res_assignment->bom_cost_type);
-          $bom_oh_res_assignment->bom_cost_type_description = $bcy_i->description;
+          $bcy_i = $bcy->find_by_keyColumn($bom_overhead_resource_assignment->bom_cost_type);
+          $bom_overhead_resource_assignment->bom_cost_type_description = $bcy_i->description;
          } else {
-          $bom_oh_res_assignment->bom_cost_type_description = null;
+          $bom_overhead_resource_assignment->bom_cost_type_description = null;
          }
          ?>         
-         <tr class="bom_oh_res_assignment<?php echo $count ?>">
+         <tr class="bom_overhead_resource_assignment<?php echo $count ?>">
           <td>
            <?php
-           echo ino_inline_action($$class_second->bom_oh_res_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
+           echo ino_inline_action($$class_second->bom_overhead_resource_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
            ?>
           </td>
-          <td><?php form::text_field_wid2('bom_oh_res_assignment_id', 'always_readonly'); ?></td>
+          <td><?php form::text_field_wid2('bom_overhead_resource_assignment_id', 'always_readonly'); ?></td>
           <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_second->bom_cost_type, '', 'large', 1, $readonly); ?></td>
           <td><?php $f->text_field_wid2r('bom_cost_type_description' ,'xlarge'); ?></td>
           <td><?php echo $f->select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_second->resource_id, '', 'resource_id large',  '', $readonly); ?></td>
@@ -111,7 +111,7 @@ inoERP
 
    <div id="tabsLine-2" class="tabContent">
     <div id ="form_line2" class="form_line2">
-     <form  method="post" id="bom_oh_rate_assignment_line"  name="bom_oh_rate_assignment_line">
+     <form  method="post" id="bom_overhead_rate_assignment_line"  name="bom_overhead_rate_assignment_line">
       <table class="form_line_data_table">
        <thead> 
         <tr>
@@ -122,20 +122,20 @@ inoERP
          <th><?php echo gettext('Rate') ?></th>
         </tr>
        </thead>
-       <tbody class="form_data_line_tbody2 bom_oh_rate_assignment_values" >
+       <tbody class="form_data_line_tbody2 bom_overhead_rate_assignment_values" >
         <?php
         $count = 0;
-        foreach ($bom_oh_rate_assignment_object as $bom_oh_rate_assignment) {
-         $class_third = 'bom_oh_rate_assignment';
-         $$class_third = & $bom_oh_rate_assignment;
+        foreach ($bom_overhead_rate_assignment_object as $bom_overhead_rate_assignment) {
+         $class_third = 'bom_overhead_rate_assignment';
+         $$class_third = & $bom_overhead_rate_assignment;
          ?>         
-         <tr class="bom_oh_rate_assignment<?php echo $count ?>">
+         <tr class="bom_overhead_rate_assignment<?php echo $count ?>">
           <td>
            <?php
-           echo ino_inline_action($$class_third->bom_oh_rate_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
+           echo ino_inline_action($$class_third->bom_overhead_rate_assignment_id, array('bom_overhead_id' => $$class->bom_overhead_id));
            ?>
           </td>
-          <td><?php form::text_field_wid3('bom_oh_rate_assignment_id' ,'always_readonly'); ?></td>
+          <td><?php form::text_field_wid3('bom_overhead_rate_assignment_id' ,'always_readonly'); ?></td>
           <td><?php echo $f->select_field_from_object('bom_cost_type', bom_cost_type::find_all(), 'cost_type_code', 'cost_type', $$class_third->bom_cost_type, '', 'large', 1, $readonly); ?></td>
           <td><?php echo $f->select_field_from_object('default_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_third->default_basis, '', 'default_basis large', '', $readonly); ?> </td>
           <td><?php form::text_field_wid3('rate' , 'large'); ?></td>
@@ -159,8 +159,8 @@ inoERP
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="bom_overhead" ></li>
-  <li class="lineClassName" data-lineClassName="bom_oh_res_assignment" ></li>
-  <li class="lineClassName2" data-lineClassName2="bom_oh_rate_assignment" ></li>
+  <li class="lineClassName" data-lineClassName="bom_overhead_resource_assignment" ></li>
+  <li class="lineClassName2" data-lineClassName2="bom_overhead_rate_assignment" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="bom_overhead_id" ></li>
   <li class="form_header_id" data-form_header_id="bom_overhead" ></li>
@@ -169,7 +169,7 @@ inoERP
  </ul>
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="bom_overhead_id" ></li>
-  <li class="docLineId" data-docLineId="bom_oh_res_assignment_id" ></li>
+  <li class="docLineId" data-docLineId="bom_overhead_resource_assignment_id" ></li>
   <li class="btn1DivId" data-btn1DivId="bom_overhead" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="trClass" data-docHedaderId="bom_overhead" ></li>

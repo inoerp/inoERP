@@ -53,7 +53,7 @@
 
         <?php
         if (!empty($sql)) {
-         $view_obj = extn_view::find_by_sql($sql);
+         $view_obj = view::find_by_sql($sql);
          $view_array = json_decode(json_encode($view_obj), true);
         }
         ?>
@@ -66,7 +66,7 @@
         <!--download page creation for all records-->
         <?php
         if (!empty($all_download_sql)) {
-         $view_obj_all = extn_view::find_by_sql($all_download_sql);
+         $view_obj_all = view::find_by_sql($all_download_sql);
          $view_array_all = json_decode(json_encode($view_obj_all), true);
         }
         ?>

@@ -138,8 +138,9 @@ class pm_formula_header extends dbObject {
             AND gl.gl_ledger_id = legal.ledger_id
             AND org.org_id = pph.bu_org_id
             AND pph.pm_formula_header_id = '{$pm_formula_header_id}'
- " ;
-            $sql = ino_perPageSql_i($sql, 1);
+           LIMIT 1
+ "
+  ;
 
   $result = self::find_by_sql($sql);
 

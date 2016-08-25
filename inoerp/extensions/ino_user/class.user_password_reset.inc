@@ -45,8 +45,7 @@ class user_password_reset extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE user_id = :user_id ";
   $sql .= " AND status IS NULL"
-   . " ORDER BY user_password_reset_id ";
-  $sql = ino_perPageSql_i($sql, 1);
+   . " ORDER BY user_password_reset_id LIMIT 1";
   $value_a = ['user_id' => $user_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;

@@ -50,8 +50,7 @@ class content_type_reference extends dbObject {
  public static function find_by_contentTypeId_fieldName($content_type_id, $field_name) {
 	$sql = "SELECT * FROM " . self::$table_name;
 	$sql .= " where content_type_id ='{$content_type_id}' ";
-	$sql .= " AND field_name= '{$field_name}' ";
-  $sql = ino_perPageSql_i($sql, 1);
+	$sql .= " AND field_name= '{$field_name}' LIMIT 1";
 //	echo "sql is $sql ";
 	$result_array = self::find_by_sql($sql);
 	return !empty($result_array) ? array_shift($result_array) : false;

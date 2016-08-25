@@ -150,7 +150,7 @@ LEFT JOIN org ON org.org_id = ice.org_id
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
   $sql .= " WHERE bom_cost_type =:bom_cost_type AND item_id_m = :item_id_m ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
 
   $param_a = ['bom_cost_type', 'item_id_m'];
   $value_a = ['bom_cost_type' => $this->bom_cost_type, 'item_id_m' => $this->item_id_m];
@@ -162,7 +162,7 @@ LEFT JOIN org ON org.org_id = ice.org_id
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
   $sql .= " WHERE bom_cost_type = '{$bom_cost_type}' AND org_id = '{$org_id}'  AND item_id_m = '{$item_id}' ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

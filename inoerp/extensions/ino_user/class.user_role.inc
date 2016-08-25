@@ -5,7 +5,7 @@ class user_role extends ino_user {
  public static $table_name = "user_role";
  public static $parent_primary_column = "ino_user_id";
  public static $primary_column = "user_role_id";
- public static $key_column = 'ino_user_id';
+ public static $key_column = 'user_id';
  public static $module = "extension";
  public static $system_info = [
  ];

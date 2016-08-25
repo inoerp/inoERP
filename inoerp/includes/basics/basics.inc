@@ -5,7 +5,6 @@ require_once __DIR__ . '/../../define_const.inc';
  const DS = DIRECTORY_SEPARATOR;
 
 defined('SHOW_COTENT_LIST') ? null : define('SHOW_COTENT_LIST', 0); //show content list when requested content not found 1 for true 2 for false
-defined('INO_SESSION_NAME') ? null : define('INO_SESSION_NAME', 'INOERP81718');
 /* ---------------------Dont Update anything Below-------------------------------------- */
 //Basic Paths 
 defined('INC_PATH') ? null : define('INC_PATH', HOME_DIR . DS . 'includes');
@@ -30,6 +29,11 @@ require_once(INC_CLASS . DS . "class.session.inc");
 
 ////load core objects
 require_once(INC_BASICS . DS . 'settings' . DS . "dbsettings.inc");
+defined('DB_TYPE') ? null : define("DB_TYPE", "MYSQL");
+defined('DB_SERVER') ? null : define("DB_SERVER", "");
+defined('DB_USER') ? null : define("DB_USER", "");
+defined('DB_PASS') ? null : define("DB_PASS", "");
+defined('DB_NAME') ? null : define("DB_NAME", "");
 require_once(INC_CLASS . DS . "class_dbc.inc");
 
 //ORACLE or MYSQL

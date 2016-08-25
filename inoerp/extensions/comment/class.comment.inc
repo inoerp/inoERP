@@ -198,7 +198,7 @@ class comment extends dbObject {
   $sub_i = new extn_subscribe();
   $sub_i->reference_key_name = $this->reference_table;
   $sub_i->reference_key_value = $this->reference_id;
-  $sub_i->user_id = $ino_user->user_id;
+  $sub_i->ino_user_id = $ino_user->ino_user_id;
   $sub_i->username = $ino_user->username;
   $sub_i->user_email = $ino_user->email;
   try {
@@ -213,7 +213,7 @@ class comment extends dbObject {
 	         content.content_id, content.content_type_id,
            comment.reference_table, comment.reference_id, comment.comment ,comment.published_cb, comment.creation_date,
           IFNULL(user.username, comment.comment_by) as username
-					FROM comment LEFT JOIN user ON comment.created_by = user.user_id ,
+					FROM comment LEFT JOIN ino_user as user ON comment.created_by = user.ino_user_id ,
             content 
 					WHERE comment.reference_table = 'content'
           AND content.content_id = comment.reference_id 
@@ -407,7 +407,7 @@ class comment extends dbObject {
   $comment_string = " ";
   $sql = "SELECT comment.comment_id, comment.comment, comment.created_by,  comment.creation_date, "
    . "  comment.creation_date, IFNULL(user.username, comment.comment_by) as username, user.image_file_id as image_file_id "
-   . " FROM comment left JOIN user ON user.user_id = comment.created_by" .
+   . " FROM comment left JOIN ino_user user ON user.ino_user_id = comment.created_by" .
    " WHERE reference_table = '{$reference_table}'
            AND reference_id = '{$reference_id}' ";
   if (!empty($per_page)) {

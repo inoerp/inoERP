@@ -131,8 +131,7 @@ VAR;
 	global $db;
 	$sql = "SELECT uom_name, description FROM "
 					. self::$table_name
-					. " where uom_name LIKE '%{$uom}%' ";
-          $sql = ino_perPageSql_i($sql, 30);
+					. " where uom_name LIKE '%{$uom}%' LIMIT 0, 30";
 	$result = $db->find_by_sql($sql);
 	$data = array();
 	if ($result) {

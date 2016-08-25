@@ -40,7 +40,7 @@
         <div id="after_content_extra">
          <div id='content_info'>
           <ul>
-           <li class="attachment_content"><label>Attachments : </label><?php echo (!empty($file)) ? extn_file::show_file_list($file) : ""; ?></li>
+           <li class="attachment_content"><label>Attachments : </label><?php echo (!empty($file)) ? file::show_file_list($file) : ""; ?></li>
            <li class="terms"><label>Tags : </label><?php echo ($content->terms); ?></li>
            <li class="categories"><label>Category : </label><?php echo!(empty($category_statement)) ? $category_statement : ""; ?></li>
           </ul>

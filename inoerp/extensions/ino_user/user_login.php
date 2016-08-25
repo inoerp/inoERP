@@ -28,15 +28,18 @@ if (!empty($_POST['submitLogin'])) { //form is submitted for login
   If ($loggedin_user) {
    $session->login($loggedin_user);
    set_default_theme($loggedin_user);
-
+//	$session->assign_role($_SESSION['user_id']);
    if (!empty($_SESSION['orginal_page']) && (strpos($session->orginal_page, 'json_form') == false)) {
 //   redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
     header('Location: http://' . $session->orginal_page);
+//	 unset($_SESSION['orginal_page']);
+//	 unset($session->orginal_page);
    } else {
     redirect_to(HOME_URL . "form.php?class_name=user_dashboard_v");
    }
   } else {
    $msg .= "<div class='message error'> Username or password is incorrect <br/> </div>";
+   //        echo "Actual password is ".$login_status;
   }//en of if else  
  }
 }

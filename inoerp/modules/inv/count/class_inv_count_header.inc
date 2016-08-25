@@ -251,7 +251,8 @@ class inv_count_header extends dbObject {
    $items_already_scheduled += $no_of_items_to_be_counted_per_day;
    $sql = " SELECT * FROM inv_abc_assignment_line WHERE inv_abc_assignment_header_id = '{$this->inv_abc_assignment_header_id}' "
     . " AND abc_class = '{$class_code}' ";
-   $sql = ino_perPageSql_i($sql, $no_of_items_to_be_counted_per_day, $offset);
+   $sql .=" LIMIT {$no_of_items_to_be_counted_per_day} ";
+   $sql .=" OFFSET {$offset} ";
    $result = $this->findBySql($sql);
    foreach ($result as $new_schedule) {
     $count_schedule->inv_count_header_id = $this->inv_count_header_id;

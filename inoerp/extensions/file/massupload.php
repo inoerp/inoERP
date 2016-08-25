@@ -43,28 +43,14 @@ if (!empty($class_names)) {
  $ignored_fields = ['created_by', 'creation_date', 'last_update_by', 'last_update_date'];
  $few_records = $class::find_few(5);
  $dataArray = [];
- if (!empty($few_records)) {
-  foreach ($few_records as $rows) {
-   $datarow = [];
-   foreach ($data_headers as $columns) {
-    if (!in_array($columns, $ignored_fields)) {
-     $datarow[$columns] = $rows->$columns;
-    }
-   }
-   array_push($dataArray, $datarow);
-  }
- } else {
-  $data_headers = get_dbColumns($class);
-  if(empty($data_headers)){
-   die('No Database Structure Found. Check the class /table name');
-  }
-  $datarow = [];
-  foreach ($data_headers as $k => $columns) {
-   if (!in_array($columns, $ignored_fields)) {
-    $datarow[$columns] = $rows->$columns;
-   }
-  }
-  array_push($dataArray, $datarow);
+ foreach ($few_records as $rows) {
+	$datarow = [];
+	foreach ($data_headers as $columns) {
+	 if (!in_array($columns, $ignored_fields)) {
+		$datarow[$columns] = $rows->$columns;
+	 }
+	}
+	array_push($dataArray, $datarow);
  }
 
  $dl = new downloads();

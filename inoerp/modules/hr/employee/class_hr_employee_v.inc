@@ -132,13 +132,13 @@ currency_code, org
 )
 AS
  SELECT 
-user.ino_user_id, user.username, user.first_name,user.last_name,user.email,user.hr_employee_id,user.status,
+user.user_id, user.username, user.first_name,user.last_name,user.email,user.hr_employee_id,user.status,
 he.identification_id,he.start_date,he.citizen_number,he.first_name as emp_first_name,he.last_name as emp_last_name,he.phone, 
 CONCAT(he.last_name, ', ' , he.first_name) as employee_name,
 he.email,he.gender,he.person_type, he.org_id, he.job_id, he.position_id, he.expense_ac_id,he.supervisor_employee_id,
 org_v.currency_code, org_v.org
 FROM hr_employee he
-LEFT JOIN ino_user user ON he.hr_employee_id = user.hr_employee_id
+LEFT JOIN user  ON he.hr_employee_id = user.hr_employee_id
 LEFT JOIN org_v ON org_v.org_id =  he.org_id
 
 

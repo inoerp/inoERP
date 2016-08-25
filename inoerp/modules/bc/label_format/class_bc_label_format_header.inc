@@ -74,16 +74,8 @@ class bc_label_format_header extends dbObject {
   $sql = " SELECT * 
        FROM bc_label_format_header eeh 
        WHERE eeh.employee_id = '{$employee_id}'   
+        LIMIT 1
 ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

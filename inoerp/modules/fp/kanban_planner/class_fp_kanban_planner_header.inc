@@ -327,17 +327,8 @@ class fp_kanban_planner_header extends dbObject {
 				 LEFT JOIN cst_item_cost_v cic ON cic.item_id_m = item.item_id_m
 				 WHERE item.item_id_m = :item_id_m 
 				 AND cic.bom_cost_type = 'FROZEN';
+				 LIMIT 1 
 ";
-  
-    switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
 
 	$param_a = ['item_id_m'];
 	$value_a = [ 'item_id_m' => $item_id_m];

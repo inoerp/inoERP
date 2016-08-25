@@ -1,113 +1,113 @@
 <?php
 
 class fp_minmax_order_v extends dbObject {
-
- public static $form_class_name = "fp_minmax_demand";
+public static $form_class_name = "fp_minmax_demand";
  public static $table_name = "fp_minmax_order_v";
  public static $primary_column = "fp_minmax_demand_id";
  public static $key_column = 'item_id_m';
  public static $module = "fp";
  public $field_a = [
-  'plan_name',
-  'org_id',
-  'planning_horizon_days',
-  'org',
-  'item_id_m',
-  'item_number',
-  'total_demand',
-  'avg_daily_demand',
-  'saftey_stock_quantity',
-  'lead_time',
-  'saftey_stock_days',
-  'minmax_min_quantity',
-  'fix_days_supply',
-  'minmax_max_quantity',
-  'multibin_fix_days_supply',
-  'minmax_multibin_number',
-  'minmax_multibin_size',
-  'multibin_minmax_quantity',
-  'forecast',
-  'forecast_description',
-  'fp_minmax_demand_id',
-  'plan_id',
-  'demand_item_id_m',
-  'toplevel_demand_item_id_m',
-  'demand_type',
-  'source',
-  'item_description',
-  'top_level_item_number',
-  'top_level_item_description',
-  'demand_item_number',
-  'demand_item_description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+		 'plan_name',
+		 'org_id',
+		 'planning_horizon_days',
+		 'org',
+		 'item_id_m',
+		 'item_number',
+		 'total_demand',
+		 'avg_daily_demand',
+		 'saftey_stock_quantity',
+		 'lead_time',
+		 'saftey_stock_days',
+		 'minmax_min_quantity',
+		 'fix_days_supply',
+		 'minmax_max_quantity',
+		 'multibin_fix_days_supply',
+		 'minmax_multibin_number',
+		 'minmax_multibin_size',
+		 'multibin_minmax_quantity',
+		 'forecast',
+		 'forecast_description',
+		 'fp_minmax_demand_id',
+		 'plan_id',
+		 'demand_item_id_m',
+		 'toplevel_demand_item_id_m',
+		 'demand_type',
+		 'source',
+		 'item_description',
+		 'top_level_item_number',
+		 'top_level_item_description',
+		 'demand_item_number',
+		 'demand_item_description',
+		 'created_by',
+		 'creation_date',
+		 'last_update_by',
+		 'last_update_date',
  ];
  public $initial_search = [
-  'forecast',
-  'item_number',
-  'top_level_item_number',
-  'demand_item_number',
+		 'forecast',
+		 'item_number',
+		 'top_level_item_number',
+		 'demand_item_number',
  ];
  public $column = [
-  'plan_name',
-  'planning_horizon_days',
-  'org',
-  'item_number',
-  'total_demand',
-  'avg_daily_demand',
-  'saftey_stock_quantity',
-  'lead_time',
-  'saftey_stock_days',
-  'minmax_min_quantity',
-  'fix_days_supply',
-  'minmax_max_quantity',
-  'multibin_fix_days_supply',
-  'minmax_multibin_number',
-  'minmax_multibin_size',
-  'multibin_minmax_quantity',
-  'forecast',
-  'top_level_item_number',
-  'demand_item_number',
+		 'plan_name',
+		 'planning_horizon_days',
+		 'org',
+		 'item_number',
+		 'total_demand',
+		 'avg_daily_demand',
+		 'saftey_stock_quantity',
+		 'lead_time',
+		 'saftey_stock_days',
+		 'minmax_min_quantity',
+		 'fix_days_supply',
+		 'minmax_max_quantity',
+		 'multibin_fix_days_supply',
+		 'minmax_multibin_number',
+		 'minmax_multibin_size',
+		 'multibin_minmax_quantity',
+		 'forecast',
+		 'top_level_item_number',
+		 'demand_item_number',
  ];
  public $multi_select_column = [
-  'item_number',
-  'minmax_min_quantity',
-  'minmax_max_quantity',
-  'minmax_multibin_number',
-  'minmax_multibin_size',
-  'multibin_minmax_quantity',
-  'org',
-  'fix_days_supply',
-  'multibin_fix_days_supply',
-  'plan_name',
-  'org_id',
-  'planning_horizon_days',
-  'item_id_m',
-  'total_demand',
-  'avg_daily_demand',
-  'saftey_stock_quantity',
-  'lead_time',
-  'saftey_stock_days',
-  'forecast',
-  'forecast_description',
-  'fp_minmax_demand_id',
-  'plan_id',
-  'demand_item_id_m',
-  'toplevel_demand_item_id_m',
-  'demand_type',
-  'source',
-  'item_description',
-  'top_level_item_number',
-  'top_level_item_description',
-  'demand_item_number',
-  'demand_item_description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+		 'item_number',
+		 'minmax_min_quantity',
+		 'minmax_max_quantity',
+		 'minmax_multibin_number',
+		 'minmax_multibin_size',
+		 'multibin_minmax_quantity',
+		 'org',
+		 'fix_days_supply',
+		 'multibin_fix_days_supply',
+		 'plan_name',
+		 'org_id',
+		 'planning_horizon_days',
+		 'item_id_m',
+		 'total_demand',
+		 'avg_daily_demand',
+		 'saftey_stock_quantity',
+		 'lead_time',
+		 'saftey_stock_days',
+		 'forecast',
+		 'forecast_description',
+		 'fp_minmax_demand_id',
+		 'plan_id',
+		 'demand_item_id_m',
+		 'toplevel_demand_item_id_m',
+		 'demand_type',
+		 'source',
+		 'item_description',
+		 'top_level_item_number',
+		 'top_level_item_description',
+		 'demand_item_number',
+		 'demand_item_description',
+		 'created_by',
+		 'creation_date',
+		 'last_update_by',
+		 'last_update_date',
  ];
+
  public $search = [
 //		 '_view_path' => 'form.php?class_name=fp_minmax_order',
 //		 '_show_view_path' => 1,
@@ -116,12 +116,12 @@ class fp_minmax_order_v extends dbObject {
  ];
  public $pageTitle = " Min Max Suggestions "; //page Title
  public $search_functions = [
-  'Organization' => 'search_org_name',
-  'MM Planner' => 'search_minmax_planner',
-  'Item Number From' => 'search_item_number_from',
-  'Item Number To' => 'search_item_number_to',
-  'Item Id From' => 'search_item_id_m_from',
-  'Item Id To' => 'search_item_id_m_to'
+		 'Organization' => 'search_org_name',
+		 'MM Planner' => 'search_minmax_planner',
+		 'Item Number From' => 'search_item_number_from',
+		 'Item Number To' => 'search_item_number_to',
+		 'Item Id From' => 'search_item_id_m_from',
+		 'Item Id To' => 'search_item_id_m_to'
  ];
  public $item_id_m;
  public $item_number;
@@ -160,7 +160,7 @@ class fp_minmax_order_v extends dbObject {
  public $overwrite_minmax_multibin_size;
 
  private function create_fp_minmax_order_v() {
-  $sql = "
+	$sql = "
 CREATE OR REPLACE VIEW fp_minmax_order_v
 (
 item_number, item_description, planning_method, make_buy,
@@ -207,35 +207,26 @@ LEFT JOIN item ON item.item_id_m = open_po_req_o.item_id_m
  }
 
  public function findBy_planId($plan_id = '') {
-  global $db;
-  if (!empty($plan_id)) {
-   $this->plan_id = $plan_id;
-  }
-  $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " where plan_id = :plan_id ";
-  $param_a = ['plan_id'];
-  $value_a = ['plan_id' => $this->plan_id];
-  $result = $db->findBy_sql($sql, $param_a, $value_a);
-  return !(empty($result)) ? $result : false;
+	global $db;
+	if (!empty($plan_id)) {
+	 $this->plan_id = $plan_id;
+	}
+	$sql = " SELECT * FROM " . self::$table_name;
+	$sql .= " where plan_id = :plan_id ";
+	$param_a = ['plan_id'];
+	$value_a = ['plan_id' => $this->plan_id];
+	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return !(empty($result)) ? $result : false;
  }
 
  public function findBy_planId_itemId() {
-  global $db;
-  $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " where plan_id = :plan_id AND item_id_m =:item_id_m ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
-  $param_a = ['plan_id', 'item_id_m'];
-  $value_a = ['plan_id' => $this->plan_id, 'item_id_m' => $this->item_id_m];
-  $result = $db->findBy_sql($sql, $param_a, $value_a);
-  return !(empty($result)) ? array_pop($result) : false;
+	global $db;
+	$sql = " SELECT * FROM " . self::$table_name;
+	$sql .= " where plan_id = :plan_id AND item_id_m =:item_id_m LIMIT 1 ";
+	$param_a = ['plan_id', 'item_id_m'];
+	$value_a = ['plan_id' => $this->plan_id, 'item_id_m' => $this->item_id_m];
+	$result = $db->findBy_sql($sql, $param_a, $value_a);
+	return !(empty($result)) ? array_pop($result) : false;
  }
 
 }

@@ -53,7 +53,7 @@
          </div>
          <div id='content_info'>
           <ul>
-           <li class="attachment_content"><?php echo (!empty($file)) ?  '<label>Attachments : </label>' . extn_file::show_file_list($file) : ""; ?></li>
+           <li class="attachment_content"><?php echo (!empty($file)) ?  '<label>Attachments : </label>' . file::show_file_list($file) : ""; ?></li>
            <li class="terms"><?php echo !empty($content->terms) ? '<label>Tags : </label>' . ($content->terms) : ''; ?></li>
            <li class="categories"><?php echo!(empty($category_statement)) ?  '<label>Category : </label>'. $category_statement : ""; ?></li>
           </ul>

@@ -92,8 +92,7 @@
   public function findBy_lotID_invOnhandId() {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE onhand_id = :onhand_id AND inv_lot_number_id = :inv_lot_number_id ";
-   $sql = ino_perPageSql_i($sql, 1);
+   $sql .= " WHERE onhand_id = :onhand_id AND inv_lot_number_id = :inv_lot_number_id LIMIT 1";
    $value_a = ['onhand_id' => $this->onhand_id, 'inv_lot_number_id' => $this->inv_lot_number_id];
    $result = $this->findBySql($sql, $value_a);
    return !empty($result) ? array_pop($result) : false;
@@ -102,8 +101,7 @@
   public static function find_by_lotID_invOnhandId($onhand_id, $inv_lot_number_id) {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE onhand_id = '{$onhand_id}' AND inv_lot_number_id = '{$inv_lot_number_id}' ";
-   $sql = ino_perPageSql_i($sql, 1);
+   $sql .= " WHERE onhand_id = '{$onhand_id}' AND inv_lot_number_id = '{$inv_lot_number_id}' LIMIT 1";
    $result = self::find_by_sql($sql);
    return !empty($result) ? ($result) : false;
   }

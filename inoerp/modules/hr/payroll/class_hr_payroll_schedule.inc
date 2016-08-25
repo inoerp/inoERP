@@ -97,16 +97,14 @@ class hr_payroll_schedule extends dbObject {
  public static function find_latest_open_schedule_by_headerId($header_id) {
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE hr_payroll_id = '{$header_id}' AND status = 'OPEN' ";
-  $sql .= " ORDER BY scheduled_date  ASC ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " ORDER BY scheduled_date  ASC LIMIT 1";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_optionId_lineCode($header_id, $code) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where code={$code} AND hr_payroll_id={$header_id}  ";
-   $sql = ino_perPageSql_i($sql, 1);
+   " where code={$code} AND hr_payroll_id={$header_id} LIMIT 1 ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_push($result) : $result;
  }

@@ -129,29 +129,12 @@ GROUP BY onhand.item_id_m, onhand.org_id
   }
 
   $sql = $this->_supply_analysis_sql($parameters);
-//  $sql .= " $order_by_i ";
+  $sql .= " $order_by_i ";
   if (!empty($per_page)) {
    $offset = ($pageno - 1 ) * $per_page;
    $offset_i = $offset <= 0 ? 1 : $offset;
-//   $sql .=" LIMIT {$per_page} ";
-//   $sql .=" OFFSET {$offset_i} ";
-
-   $per_page_sql = ino_perPageSql($per_page, $offset_i);
-   if (!empty($per_page_sql)) {
-    switch (DB_TYPE) {
-     case 'ORACLE' :
-      if (stripos($sql, 'WHERE') !== false) {
-       $sql .= ' AND ' . $per_page_sql . ' ' . $order_by_i;
-      } else {
-       $sql .= ' WHERE ' . $per_page_sql . ' ' . $order_by_i;
-      }
-      break;
-
-     default:
-      $sql .= $order_by_i . '  ' . $per_page_sql;
-      break;
-    }
-   }
+   $sql .=" LIMIT {$per_page} ";
+   $sql .=" OFFSET {$offset_i} ";
   }
 
   $result = self::find_by_sql($sql);

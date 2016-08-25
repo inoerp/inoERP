@@ -125,7 +125,7 @@ class extn_subscribe extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE subscribe_name = :subscribe_name ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
 
   $value_a = ['obj_class_name' => $subscribe_name];
   $result = $this->findBySql($sql, $value_a);
@@ -136,7 +136,7 @@ class extn_subscribe extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE subscribe_name = '{$subscribe_name}' ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
@@ -146,7 +146,7 @@ class extn_subscribe extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE default_cb = 1 ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;

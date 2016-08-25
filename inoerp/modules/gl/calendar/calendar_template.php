@@ -49,9 +49,9 @@
              <td><?php form::number_field_drs('gl_calendar_id') ?></td>
              <td><?php echo form::select_field_from_object('calendar_type', gl_calendar::period_types(), 'option_line_code', 'option_line_value', $$class->calendar_type, '', $readonly); ?></td>
              <td><?php form::text_field_widm('name_prefix'); ?></td>
-             <td class="yearPicker"><?php form::number_field_wid('c_year'); ?></td>
-             <td><?php form::number_field_wids('c_quarter'); ?></td>
-             <td><?php form::number_field_wids('c_number'); ?></td>
+             <td class="yearPicker"><?php form::number_field_wid('year'); ?></td>
+             <td><?php form::number_field_wids('quarter'); ?></td>
+             <td><?php form::number_field_wids('number'); ?></td>
              <td><?php echo $f->date_fieldAnyDay_m('from_date', $$class->from_date, ''); ?></td>
              <td><?php echo $f->date_fieldAnyDay_m('to_date', $$class->to_date, ''); ?></td>
              <td><?php $f->text_field_widr('name','always_readonly'); ?></td>

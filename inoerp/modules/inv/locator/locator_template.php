@@ -57,7 +57,7 @@
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <div> 
-      <ul class="column header_field two_column_form"> 
+      <ul class="column four_column"> 
        <li><?php $f->l_select_field_from_object('dimension_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->dimension_uom_id, 'dimension_uom_id');        ?></li>
        <li><?php $f->l_number_field('height', $$class->height); ?></li> 
        <li><?php $f->l_number_field('length', $$class->length); ?></li> 
@@ -73,7 +73,7 @@
 
     <div id="tabsLine-2" class="tabContent">
      <div> 
-      <ul class="column header_field two_column_form"> 
+      <ul class="column four_column"> 
        <li><?php echo $f->l_number_field('max_units', $$class->max_units, '', 'max_units', 'medium'); ?></li> 
        <li><?php echo $f->l_select_field_from_object('max_volume_uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->max_volume_uom_id, 'max_volume_uom_id'); ?></li>
        <li><?php echo $f->l_number_field('max_volume', $$class->max_volume, '', 'max_volume', 'medium'); ?></li> 

@@ -34,7 +34,7 @@
          </ul>
         </div>
         <div id="content_extra"><?php
-         $cont_html =  content::content_by_id($content_type_name, $content->content_id);
+         $cont_html = content::content_by_id($content_type_name, $content->content_id);
          echo nl2br(html_entity_decode($cont_html , ENT_QUOTES,'UTF-8'));
          ?></div>
         <div id="after_content_extra">
@@ -51,7 +51,7 @@
          </div>
          <div id='content_info'>
           <ul>
-           <li class="attachment_content"><?php echo (!empty($file)) ? '<label>Attachments : </label>' . extn_file::show_file_list($file) : ""; ?></li>
+           <li class="attachment_content"><?php echo (!empty($file)) ? '<label>Attachments : </label>' . file::show_file_list($file) : ""; ?></li>
            <li class="terms"><?php echo!empty($content->terms) ? '<label>Tags : </label>' . ($content->terms) : ''; ?></li>
            <li class="categories"><?php echo!(empty($category_statement)) ? '<label>Category : </label>' . $category_statement : ""; ?></li>
           </ul>

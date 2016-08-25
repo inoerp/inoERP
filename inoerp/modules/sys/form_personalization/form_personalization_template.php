@@ -5,7 +5,7 @@
     <div id="tabsHeader-1" class="tabContent">
      <div id="form_serach_header" class="tabContainer">
       <label><?php        echo gettext('Object Name')     ?></label></label>
-      <?php echo $f->select_field_from_object('obj_class_name', extn_view::find_all_tables(), 'TABLE_NAME', 'TABLE_NAME', $obj_class_name_h, 'obj_class_name'); ?>
+      <?php echo $f->select_field_from_object('obj_class_name', view::find_all_tables(), 'TABLE_NAME', 'TABLE_NAME', $obj_class_name_h, 'obj_class_name'); ?>
       <a name="show" href="form.php?class_name=sys_form_personalization&<?php echo "mode=$mode"; ?>" class="show document_id sys_form_personalization_id">
        <i class="fa fa-refresh"></i></a> 
      </div>

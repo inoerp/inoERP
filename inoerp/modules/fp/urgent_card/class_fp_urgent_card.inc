@@ -1,5 +1,4 @@
 <?php
-
 /**
  * inoERP - Version 0.1.1
  *
@@ -15,13 +14,14 @@
  * Contains all the fp_mds_header information, such as - fp_urgent_card_id, card_details , created_by etc
  * 
  */
+
 class fp_urgent_card extends dbObject {
 
  public static $table_name = "fp_urgent_card";
  public static $primary_column = "fp_urgent_card_id";
  public static $key_column = 'card_details';
  public static $module = "fp";
- public static $system_info = [
+  public static $system_info = [
   'name' => 'Urgent Card',
   'number' => '2509',
   'description' => 'FP Urgent Card',
@@ -61,16 +61,7 @@ class fp_urgent_card extends dbObject {
  public $last_update_date;
 
  public static function find_current_cardList() {
-  $sql = "SELECT card_details from  fp_urgent_card ORDER BY fp_urgent_card_id DESC  ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+  $sql = "SELECT card_details from  fp_urgent_card ORDER BY fp_urgent_card_id DESC LIMIT 1 ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result[0]->card_details : false;
  }

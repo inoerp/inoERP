@@ -1,15 +1,15 @@
 <?php
 
-class prj_burden_struct_costcode extends dbObject {
+class prj_burden_structure_costcode extends dbObject {
 
- public static $table_name = "prj_burden_struct_costcode";
- public static $primary_column = "prj_burden_struct_costcode_id";
+ public static $table_name = "prj_burden_structure_costcode";
+ public static $primary_column = "prj_burden_structure_costcode_id";
  public static $parent_primary_column = "prj_burden_structure_header_id";
  public static $key_column = 'burden_cost_code_id';
  public static $module = "prj";
 //  data base variables as stored database column name
  public $field_a = [
-  'prj_burden_struct_costcode_id',
+  'prj_burden_structure_costcode_id',
   'prj_burden_structure_header_id',
   'burden_cost_code_id',
   'description',
@@ -29,7 +29,7 @@ class prj_burden_struct_costcode extends dbObject {
   'burden_cost_code_id',
   'burden_cost_base_id',
  ];
- public $prj_burden_struct_costcode_id;
+ public $prj_burden_structure_costcode_id;
  public $prj_burden_structure_header_id;
  public $burden_cost_code_id;
  public $description;
@@ -42,5 +42,5 @@ class prj_burden_struct_costcode extends dbObject {
 
 }
 
-//end of prj_burden_struct_costcode class
+//end of prj_burden_structure_costcode class
 ?>

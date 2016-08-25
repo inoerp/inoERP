@@ -50,8 +50,7 @@ class pm_process_routing_line extends dbObject {
  public static function find_by_headerId_and_buOrgId($pm_process_routing_header_id, $bu_org_id) {
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where pm_process_routing_header_id= '{$pm_process_routing_header_id}' AND bu_org_id= '{$bu_org_id}'  ";
-   $sql = ino_perPageSql_i($sql, 1);
+   " where pm_process_routing_header_id= '{$pm_process_routing_header_id}' AND bu_org_id= '{$bu_org_id}' LIMIT 1 ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

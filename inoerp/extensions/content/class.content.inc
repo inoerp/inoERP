@@ -171,19 +171,16 @@ class content extends dbObject {
   if ((!empty($this->content_type_id)) && (!empty($this->content_id))) {
    $content_type = content_type::find_by_id($this->content_type_id);
    $class = content::$content_table_name = 'c_' . $content_type->content_type;
-   $table_name = DB_TYPE == 'ORACLE' ? strtoupper($class) : $class;
 
    $$class = new stdClass();
    $extra_fields = new_content_type::find_fields_by_id($content_type->content_type_id);
 
    $content_field_array = content::$content_field_array;
-
    foreach ($extra_fields as $records) {
-    $content_field_array[] = $records->field_name;
+    $content_field_array[] = $records->Field;
    }
    $$class->content_id = $this->content_id;
-   $checkSql = " SELECT * FROM $table_name WHERE content_id = :content_id ";
-//   $checkSql = ino_perPageSql_i($checkSql, 1);
+   $checkSql = " SELECT * FROM $class WHERE content_id = :content_id LIMIT 1";
    $value_a = ['content_id' => $this->content_id];
    $checkResult = self::find_by_sql_i($checkSql, $value_a);
    if (!empty($checkResult)) {
@@ -200,25 +197,15 @@ class content extends dbObject {
     $field_stmt = rtrim($field_stmt, ', ');
 //write SQL
     $sql = " UPDATE ";
-    $sql.= $table_name;
+    $sql.= $class;
     $sql .= " SET ";
     $sql.= $field_stmt;
-
-    switch (DB_TYPE) {
-     case 'ORACLE' :
-      $sql.= " WHERE CONTENT_ID = :CONTENT_ID ";
-      break;
-
-     default:
-      $sql.= " WHERE content_id = :content_id ";
-      break;
-    }
+    $sql.= " WHERE content_id = :content_id ";
     $stmt = $dbc->connection->prepare(" $sql ");
     //Bind parameters
     foreach ($content_field_array as $key => $value) {
-     $value_post = strtolower($value);
-     if (!empty($_POST[$value_post][0])) {
-      $stmt->bindvalue(":$value", htmlentities($_POST[$value_post][0]));
+     if (!empty($_POST[$value][0])) {
+      $stmt->bindParam(":$value", htmlentities($_POST[$value][0]));
      } else {
       $stmt->bindvalue(":$value", null, PDO::PARAM_INT);
      }
@@ -243,7 +230,7 @@ class content extends dbObject {
     $field_values = rtrim($field_values, ', ');
 //write SQL
     $sql = " INSERT INTO ";
-    $sql.= $table_name;
+    $sql.= $class;
     $sql.= ' ( ';
     $sql.= $field_colums;
     $sql.= ' ) ';
@@ -262,25 +249,9 @@ class content extends dbObject {
      }
     }
     $stmt->bindParam(':content_id', $$class->content_id);
-
-    //get next id
-    switch (DB_TYPE) {
-     case 'ORACLE' :
-      $next_seq = $class . '_seq.NEXTVAL';
-      $sh = $dbc->connection->prepare("SELECT $next_seq AS next_seq_id FROM DUAL");
-      $sh->execute();
-      $nextInsertId = $sh->fetchColumn(0);
-      $stmt->bindParam(":content_id", $nextInsertId);
-      $$class->content_id = $nextInsertId;
-      break;
-    }
-
-
     try {
      $stmt->execute();
-     if (DB_TYPE == 'MYSQL') {
-      $$class->content_id = $dbc->connection->lastInsertId();
-     }
+     $$class->content_id = $dbc->connection->lastInsertId();
      $newMsg = "Record is Successfully saved in $class";
     } catch (PDOException $e) {
      print "Record couldnt be saved!!: " . $e->getMessage() . "<br/>";
@@ -295,6 +266,7 @@ class content extends dbObject {
    $url_alias->content_id = $this->content_id;
    $url_alias->original_url = "content_id=$this->content_id&content_type=$content_type->content_type";
    $url_alias->ext_url_alias_id = !empty($this->ext_url_alias_id) ? $this->ext_url_alias_id : null;
+   $url_alias->audit_trial();
    $url_alias->save();
   }
 
@@ -330,39 +302,17 @@ class content extends dbObject {
 					AND content.show_in_fp_cb = 1 
    AND content.content_type_id != 1 ";
 
-  $orderby_sql = " ORDER BY  creation_date DESC, weightage DESC";
-  $sql = ino_perPageOrderBySql_i($sql, $orderby_sql, $no_of_articles, 0);
-
+  $sql .=" ORDER BY  creation_date DESC, weightage DESC";
+  $sql .= " LIMIT {$no_of_articles} ";
   $result = $this->findBySql($sql);
-  
   $result_a = &$result;
-  if (!empty($result_a)) {
-   foreach ($result_a as $cont) {
-    $cont_tableName = 'c_' . $cont->content_type;
-    if (DB_TYPE == 'ORACLE') {
-     $cont_tableName = strtoupper($cont_tableName);
-    }
-    $sql_c = "SELECT content  AS content_summary " .
-     "FROM " . $cont_tableName . " where content_id='{$cont->content_id}' ";
-    $sql_c = ino_perPageSql_i($sql_c, 1);
-    $result_cont = $this->findBySql($sql_c);
-    if (!empty($result_cont[0])) {
-     switch (DB_TYPE) {
-      case 'ORACLE' :
-       $cont->content_summary = stream_get_contents($result_cont[0]->content_summary);
-       break;
-
-      default:
-       $cont->content_summary = ($result_cont[0]->content_summary);
-       break;
-     }
-     $cont->content_summary = substr($cont->content_summary, 0, $noOfCharacters);
-    } else {
-     $cont->content_summary = '';
-    }
-   }
+  foreach ($result_a as $cont) {
+   $cont_tableName = 'c_' . $cont->content_type;
+   $sql_c = "SELECT SUBSTRING(content,1,$noOfCharacters) AS content_summary " .
+    "FROM " . $cont_tableName . " where content_id='{$cont->content_id}' LIMIT 1";
+   $result_cont = $this->findBySql($sql_c);
+   $cont->content_summary = !empty($result_cont[0]) ? $result_cont[0]->content_summary : '';
   }
-
 
   return $result;
  }
@@ -388,7 +338,7 @@ class content extends dbObject {
 
   $sql .= " ORDER BY content.weightage DESC, content.creation_date DESC";
   if (!empty($no_of_articles)) {
-   $sql = ino_perPageSql_i($sql, $no_of_articles);
+   $sql .= " LIMIT {$no_of_articles} ";
   }
   $result = $this->findBySql($sql);
   if (empty($result)) {
@@ -398,8 +348,7 @@ class content extends dbObject {
   foreach ($result_a as $cont) {
    $cont_tableName = 'c_' . $cont->content_type;
    $sql_c = "SELECT SUBSTRING(content,1,$noOfCharacters) AS content_summary, content " .
-    "FROM " . $cont_tableName . " where content_id='{$cont->content_id}' ";
-   $sql_c = ino_perPageSql_i($sql_c, 1);
+    "FROM " . $cont_tableName . " where content_id='{$cont->content_id}' LIMIT 1";
    $result_cont = $this->findBySql($sql_c);
    $cont->content_summary = !empty($result_cont[0]) ? $result_cont[0]->content_summary : '';
    $cont->content_full = !empty($result_cont[0]) ? $result_cont[0]->content : '';
@@ -486,7 +435,8 @@ AND content.content_id = category_reference.reference_id  ";
    $this->_pagination = new pagination($pageno, $per_page, $total_count);
    $this->_pagination->setProperty('_path', 'content');
    $this->_pagination->setProperty('_query_string', $query_string);
-   $sql = ino_perPageSql_i($sql, $per_page, $this->_pagination->offset());
+   $sql .=" LIMIT {$per_page} ";
+   $sql .=" OFFSET {$this->_pagination->offset()} ";
   }
   $result = $this->findBySql($sql);
   $result_a = &$result;
@@ -496,8 +446,7 @@ AND content.content_id = category_reference.reference_id  ";
   foreach ($result_a as $cont) {
    $cont_tableName = 'c_' . $cont->content_type;
    $sql_c = "SELECT SUBSTRING(content,1,$this->_summary_noof_char) AS content_summary " .
-    "FROM " . $cont_tableName . " where content_id='{$cont->content_id}' ";
-   $sql_c = ino_perPageSql_i($sql_c, 1);
+    "FROM " . $cont_tableName . " where content_id='{$cont->content_id}' LIMIT 1";
    $result_cont = $this->findBySql($sql_c);
    $cont->content_summary = !empty($result_cont[0]) ? $result_cont[0]->content_summary : '';
   }
@@ -726,7 +675,7 @@ AND content.content_id = category_reference.reference_id  ";
   //end of first tab
   //start of second tab
   $content_string .= '<div id="tabsHeader-2" class="tabContent">';
-  $comment = new extn_comment();
+  $comment = new comment();
   $content_string .= $comment->view_page();
   $content_string .= '</div>';
   //snd of second tab
@@ -810,18 +759,7 @@ AND content.content_id = category_reference.reference_id  ";
 
  public static function content_find_by_id($content_type_name, $content_id) {
   $table_name = 'c_' . $content_type_name;
-
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $table_name = strtoupper($table_name);
-    $sql = " SELECT * FROM " . $table_name . " where content_id=:content_id ";
-    break;
-
-   default:
-    $sql = " SELECT * FROM " . $table_name . " where content_id=:content_id ";
-    break;
-  }
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql = " SELECT * FROM " . $table_name . " where content_id=:content_id LIMIT 1";
   $value_a = ['content_id' => $content_id];
   $result = self::find_by_sql_i($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -829,17 +767,7 @@ AND content.content_id = category_reference.reference_id  ";
 
  public static function content_find_by_contentTypeConentId($content_type_name, $content_id) {
   $table_name = 'c_' . $content_type_name;
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $table_name = strtoupper($table_name);
-    $sql = " SELECT * FROM " . $table_name . " where content_id=:content_id ";
-    break;
-
-   default:
-    $sql = " SELECT * FROM " . $table_name . " where content_id=:content_id ";
-    break;
-  }
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql = " SELECT * FROM " . $table_name . " where content_id=:content_id LIMIT 1";
   $value_a = ['content_id' => $content_id];
   $result = self::find_by_sql_i($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -849,8 +777,7 @@ AND content.content_id = category_reference.reference_id  ";
   global $dbc;
   $table_name = 'c_' . $content_type_name;
   $sql = "SELECT SUBSTRING(content,1,2000) AS content_summary " .
-   "FROM " . $table_name . " where content_id={$content_id} ";
-  $sql = ino_perPageSql_i($sql, 1);
+   "FROM " . $table_name . " where content_id={$content_id} LIMIT 1";
   $prepare = $dbc->connection->prepare($sql);
   $prepare->execute();
   $result_array = $prepare->fetchAll(PDO::FETCH_CLASS);
@@ -869,8 +796,7 @@ AND content.content_id = category_reference.reference_id  ";
 //					implode(", ", $this->field_a);
   $sql = "SELECT * FROM "
    . self::$table_name . " 
-            where content_id=:content_id ";
-  $sql = ino_perPageSql_i($sql, 1);
+            where content_id=:content_id LIMIT 1";
   $value_a = ['content_id' => $content_id];
   $result_array = self::find_by_sql_i($sql, $value_a);
   return !empty($result_array) ? array_pop($result_array) : false;
@@ -920,7 +846,8 @@ AND content.content_id = category_reference.reference_id  ";
    $pagination = new pagination($pageno, $per_page, $total_count);
    $pagination->setProperty('_path', 'content');
    $pagination->setProperty('_query_string', $query_string);
-   $sql = ino_perPageSql_i($sql, $per_page, $pagination->offset());
+   $sql .=" LIMIT {$per_page} ";
+   $sql .=" OFFSET {$pagination->offset()} ";
   }
 
   $value_a = ['content_type_id' => $content_type_id, 'category_id' => $category_id];
@@ -990,25 +917,16 @@ AND content.content_id = category_reference.reference_id  ";
   $content_field_array = self::$content_field_array;
   $fiela_label_arr = [];
   foreach ($extra_fields as $records) {
-   $content_field_array[] = strtolower($records->field_name);
-   array_push($fiela_label_arr, strtolower($records->field_label));
+   $content_field_array[] = $records->Field;
+   array_push($fiela_label_arr, $records->field_label);
   }
   $extra_content = self::content_find_by_contentTypeConentId($content_type_name, $content_id);
-
   if ($extra_content) {
    foreach ($content_field_array as $key => $value) {
     if (key_exists($key, $fiela_label_arr)) {
      $field_label = $fiela_label_arr[$key];
     } else {
      $field_label = null;
-    }
-
-    if ($value == 'content') {
-     switch (DB_TYPE) {
-      case 'ORACLE' :
-       $extra_content->$value = stream_get_contents($extra_content->$value);
-       break;
-     }
     }
 
     if ($value != 'content_id' && !empty(trim($extra_content->$value))) {

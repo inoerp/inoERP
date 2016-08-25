@@ -198,16 +198,7 @@ class gl_journal_line extends dbObject {
   global $db;
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE gl_journal_header_id= :gl_journal_header_id AND  line_num = :line_num";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
-
+  $sql .= " LIMIT 1 ";
   $param_a = ['gl_journal_header_id', 'line_num'];
   $value_a = ['gl_journal_header_id' => $this->gl_journal_header_id,
    'line_num' => $this->line_num];
@@ -218,16 +209,7 @@ class gl_journal_line extends dbObject {
  public function findBy_reference_keyName_keyValue() {
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE reference_key_name= :reference_key_name AND  reference_key_value = :reference_key_value";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
-
+  $sql .= " LIMIT 1 ";
   $value_a = ['reference_key_name' => $this->reference_key_name,
    'reference_key_value' => $this->reference_key_value];
   $result = $this->findBySql($sql, $value_a);

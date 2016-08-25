@@ -259,8 +259,7 @@ class path extends dbObject {
  public static function find_by_path($path) {
   $sql = "SELECT * FROM " . self::$table_name . " where path_link=' {
 	 $path
-	}' ";
-  $sql = ino_perPageSql_i($sql, 1);
+	}' LIMIT 1";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -268,8 +267,7 @@ class path extends dbObject {
  public static function find_by_idColumn_name($idColumn_name) {
   $sql = "SELECT * FROM " . self::$table_name . " where id_column_name=' {
 	 $idColumn_name
-	}' ";
-  $sql = ino_perPageSql_i($sql, 1);
+	}' LIMIT 1";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -277,8 +275,7 @@ class path extends dbObject {
  public static function find_by_name($name) {
   $sql = "SELECT * FROM " . self::$table_name . " where path_link REGEXP ' {
 	 $name
-	}$' ";
-  $sql = ino_perPageSql_i($sql, 1);
+	}$' LIMIT 1";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }

@@ -128,7 +128,7 @@ AND item.item_id_m = prl.item_id_m
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE po_requisition_detail_id = :po_requisition_detail_id ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
 
   $value_a = ['po_requisition_detail_id' => $this->po_requisition_detail_id];
   $result = $this->findBySql($sql, $value_a);
@@ -139,7 +139,7 @@ AND item.item_id_m = prl.item_id_m
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE po_requisition_detail_id = :po_requisition_detail_id ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql .= " LIMIT 1 ";
 
   $value_a = ['po_requisition_detail_id' => $po_requisition_detail_id];
   $result = self::find_by_sql_i($sql, $value_a);

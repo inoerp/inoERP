@@ -12,7 +12,7 @@ if (!empty($_GET['find_report_list']) && !empty($_GET['report_type'])) {
   }
   echo '</div>';
  } else if ($report_type == 'view') {
-  $view = new extn_view();
+  $view = new view();
   $view_i = $view->findAll();
   echo '<div id="return_divId">';
   foreach ($view_i as $b) {

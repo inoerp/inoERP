@@ -5,21 +5,21 @@
   <!--    START OF FORM HEADER-->
   <div class="comment_error"></div><div id="comment_loading" class="loading"></div>
   <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
-  <form action="<?php echo HOME_URL . 'extensions/comment/post_comment.php'; ?>"  method="post" class="extn_comment"  name="extn_comment" >
+  <form action="<?php echo HOME_URL . 'extensions/comment/post_comment.php'; ?>"  method="post" class="comment"  name="comment" >
    <!--create empty form or a single id when search is not clicked and the id is referred from other comment -->
    <div class="hidden"><input type="hidden"
-                              name="extn_comment_id" value="<?php echo ($extn_comment->extn_comment_id); ?>">
+                              name="comment_id" value="<?php echo htmlentities($comment->comment_id); ?>">
    </div>
    <div class="hidden"><input type="hidden" name="reference_table" 
-                              value="<?php echo empty($extn_comment->reference_table) ? htmlentities($reference_table) : htmlentities($extn_comment->reference_table); ?>">
+                              value="<?php echo empty($comment->reference_table) ? htmlentities($reference_table) : htmlentities($comment->reference_table); ?>">
    </div>
    <div class="hidden"><input type="hidden" name="reference_id" 
-                              value="<?php echo empty($extn_comment->reference_id) ? htmlentities($reference_id) : htmlentities($extn_comment->reference_id); ?>">
+                              value="<?php echo empty($comment->reference_id) ? htmlentities($reference_id) : htmlentities($comment->reference_id); ?>">
    </div>
    
    <div id="commentId" class="row"><label>Comment</label>
-    <textarea name="extn_comment" class="ed-mediumtext div-with-preview" rows="8" cols="100"><?php
-     echo (!empty($extn_comment->extn_comment)) ? htmlentities($extn_comment->extn_comment) : "";
+    <textarea name="comment" class="ed-mediumtext div-with-preview" rows="8" cols="100"><?php
+     echo (!empty($comment->comment)) ? htmlentities($comment->comment) : "";
      ?> </textarea>
     <div class="ino-text-preview"></div> 
    </div>
@@ -45,7 +45,7 @@
     <div class="uploaded_file_details"></div>
    </div>
    <div id="uploaded_file_details">		</div>
-<?php echo extn_file::attachment_statement($file); ?>
+<?php echo file::attachment_statement($file); ?>
   </form>
  </div>
  <!--END OF FORM HEADER-->  

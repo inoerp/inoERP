@@ -237,63 +237,6 @@ function set_default_theme(&$loggedin_user = '') {
  }
 }
 
-function ino_perPageSql($per_page, $offset = 0) {
- $sql = '';
- switch (DB_TYPE) {
-  case 'ORACLE' :
-   $lessthan_v = $offset + $per_page;
-   $sql .=" rownum >= $offset ";
-   $sql .=" AND rownum <= $lessthan_v ";
-   break;
-
-  default:
-   $sql .=" LIMIT {$per_page} ";
-   $sql .=" OFFSET {$offset}";
-   break;
- }
-
- return $sql;
-}
-
-function ino_perPageSql_i($sql, $per_page, $offset = 0) {
-
- switch (DB_TYPE) {
-  case 'ORACLE' :
-   $lessthan_v = $offset + $per_page;
-   $sql .=" AND rownum >= $offset ";
-   $sql .=" AND rownum <= $lessthan_v ";
-   break;
-
-  default:
-   $sql .=" LIMIT {$per_page} ";
-   $sql .=" OFFSET {$offset}";
-   break;
- }
-
- return $sql;
-}
-
-function ino_perPageOrderBySql_i($sql, $order_by_sql, $per_page, $offset = 0) {
- $per_page_sql = ino_perPageSql($per_page, $offset);
- if (!empty($per_page_sql)) {
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    if (stripos($sql, 'WHERE') !== false) {
-     $sql .= ' AND ' . $per_page_sql . ' ' . $order_by_sql;
-    } else {
-     $sql .= ' WHERE ' . $per_page_sql . ' ' . $order_by_sql;
-    }
-    break;
-
-   default:
-    $sql .= $order_by_sql . '  ' . $per_page_sql;
-    break;
-  }
- }
-
- return $sql;
-}
-
 function ino_protocol() {
  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
  return $protocol;
@@ -780,27 +723,13 @@ function ino_dateTime($date, $format = 'Y-m-d H:m:s') {
  }
 }
 
-function current_time($only_date = "", $format = '') {
+function current_time($only_date = "") {
  $date = new DateTime('NOW');
- $date_i = '';
- switch ($format) {
-  case 'ORACLE':
-   if ($only_date) {
-    $date_i = strtoupper($date->format('d-M-Y'));
-   } else {
-    $date_i = strtoupper($date->format('d-M-Y H:i:s'));
-   }
-   break;
-
-  default:
-   if ($only_date) {
-    $date_i = $date->format('Y-m-d');
-   } else {
-    $date_i = $date->format('Y-m-d H:i:s');
-   }
-   break;
+ if ($only_date) {
+  return $date->format('Y-m-d');
+ } else {
+  return $date->format('Y-m-d H:i:s');
  }
- return $date_i;
 }
 
 // function current_time($only_date = "") {
@@ -908,7 +837,7 @@ function ino_showDecimal($number, $decimal = '.') {
   $is_neg = ($number < 0 ) ? true : false;
   $exploded_number = explode($decimal, $number);
   if ((!empty($exploded_number[1])) && ((int) $exploded_number[1] > 0 )) {
-   $final_number = rtrim(number_format((int) $exploded_number[0]) . $decimal . (int) $exploded_number[1], '0');
+   $final_number = rtrim(number_format($exploded_number[0]) . $decimal . $exploded_number[1], '0');
 //	 echo ' in 1 ';
   } else {
    $final_number = !empty($exploded_number[0]) && is_numeric($exploded_number[0]) ? number_format($exploded_number[0]) : 0;
@@ -922,7 +851,7 @@ function ino_showDecimal($number, $decimal = '.') {
  return $final_number;
 }
 
-function ino_remove_thousand_sep($num, $sep = ",") {
+function ino_remove_thousand_sep($num, $sep =","){
  return str_replace($sep, '', $num);
 }
 
@@ -1669,7 +1598,7 @@ function ino_attachement($file, $file_name = 'attachments') {
    <div class="uploaded_file_details"></div>
   </div>';
 
- $stmt .= extn_file::attachment_statement($file);
+ $stmt .= file::attachment_statement($file);
  $stmt .= '</div>';
  return $stmt;
 }
@@ -2365,8 +2294,7 @@ function ino_topbar_login() {
   $stmt = ' 
          <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i> ' . ucfirst($_SESSION['username']) . ' <span class="caret"></span></button>';
-  $stmt .= $menu_line->show_menu_list(2);
-  ;
+  $stmt .=  $menu_line->show_menu_list(2);;
   $stmt .='</div>';
   echo $stmt;
  } else {

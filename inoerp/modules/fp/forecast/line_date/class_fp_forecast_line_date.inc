@@ -52,16 +52,7 @@
   public function findBy_lineId_date() {
    $sql = " SELECT * FROM  ";
    $sql .= self::$table_name;
-   $sql .= " WHERE fp_forecast_line_id =:fp_forecast_line_id AND forecast_date = :forecast_date ";
-     switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+   $sql .= " WHERE fp_forecast_line_id =:fp_forecast_line_id AND forecast_date = :forecast_date LIMIT 1 ";
 
    $param_a = ['fp_forecast_line_id', 'forecast_date'];
    $value_a = ['fp_forecast_line_id' => $this->fp_forecast_line_id, 'forecast_date' => $this->forecast_date];

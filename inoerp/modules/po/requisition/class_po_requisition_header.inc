@@ -229,6 +229,7 @@
     $pur_control = po_purchasing_control::find_by_org_id($this->bu_org_id);
     if (empty($pur_control->req_approval_hierarchy)) {
      $this->po_status = 'APPROVED';
+     $this->audit_trial();
      $this->save();
     } else {
      $this->_approve_doc($pur_control->req_approval_hierarchy);
@@ -265,6 +266,7 @@
    }
    $comment_msg = $check_approval['message'];
    $this->write_comment($approving_user_id, $comment_msg);
+   $req_header_after_rev->audit_trial();
    $req_header_after_rev->save();
   }
 

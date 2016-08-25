@@ -31,7 +31,7 @@ if (!empty($_GET['find_result'])) {
   $svg_chart = $svgimg->getSvgChart_forView();
   echo '<div id="return_divId">' . $svg_chart . '</div>';
  } else if (!empty($_GET['view_id'])) {
-  $view = new extn_view();
+  $view = new view();
   $view->pageno = !empty($_GET['pageno']) ? ($_GET['pageno']) : 1;
   $view->per_page = !empty($_GET['per_page']) ? ($_GET['per_page']) : 20;
   $view->view_id = ($_GET['view_id']);

@@ -190,8 +190,7 @@ class sys_profile_line extends dbObject {
 
  public static function find_by_optionId_lineCode($header_id, $code) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where code={$code} AND sys_profile_header_id={$header_id} ";
-   $sql = ino_perPageSql_i($sql, 1);
+   " where code={$code} AND sys_profile_header_id={$header_id} LIMIT 1 ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_push($result) : $result;
  }

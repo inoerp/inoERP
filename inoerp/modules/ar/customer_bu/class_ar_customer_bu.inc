@@ -149,16 +149,8 @@ class ar_customer_bu extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where ar_customer_id= :ar_customer_id " .
-   " AND org_id = :org_id ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+   " AND org_id = :org_id " .
+   " LIMIT 1 ";
   $param_a = ['ar_customer_id', 'org_id'];
   $value_a = ['ar_customer_id' => $this->ar_customer_id, 'org_id' => $this->org_id];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
@@ -170,16 +162,8 @@ class ar_customer_bu extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where ar_customer_id= '{$ar_customer_id}' " .
-   " AND org_id = '{$org_id}' ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+   " AND org_id = '{$org_id}' " .
+   " LIMIT 1 ";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }

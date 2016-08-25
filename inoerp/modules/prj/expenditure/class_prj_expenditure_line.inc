@@ -193,8 +193,8 @@ pbse.prj_burden_structure_header_id, pbse.burden_cost_base_id, pbsc.burden_cost_
 pbll.burden_value, pbll.prj_burden_list_header_id
 
 FROM prj_expenditure_line pel,
-prj_burden_struct_exptype pbse,
-prj_burden_struct_costcode pbsc,
+prj_burden_structure_expendituretype pbse,
+prj_burden_structure_costcode pbsc,
 prj_burden_list_line pbll,
 prj_project_header pph,
 prj_burden_list_header bplh
@@ -360,8 +360,7 @@ pel.line_amount,(IFNULL(pel.burden_amount,0) + pel.line_amount) as total_expn_am
 FROM 
 prj_expenditure_line pel
 WHERE pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' 
-";
-$sql = ino_perPageSql_i($sql, 1);
+ LIMIT 1";
 
   $result = self::find_by_sql($sql);
 

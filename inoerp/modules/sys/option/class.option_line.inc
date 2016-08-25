@@ -89,8 +89,7 @@ class option_line extends dbObject {
 
  public static function find_by_optionId_lineCode($option_id, $line_code) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where option_line_code='{$line_code}' AND option_header_id='{$option_id}' ";
-   $sql = ino_perPageSql_i($sql, 1);
+   " where option_line_code='{$line_code}' AND option_header_id='{$option_id}' LIMIT 1";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -99,8 +98,8 @@ class option_line extends dbObject {
   $sql = "SELECT * FROM option_line ol, option_header oh 
     where ol.option_line_code='{$line_code}' 
     AND oh.option_type='{$option_type}' 
-    AND oh.option_header_id = ol.option_header_id ";
-    $sql = ino_perPageSql_i($sql, 1);
+    AND oh.option_header_id = ol.option_header_id
+    LIMIT 1";
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }

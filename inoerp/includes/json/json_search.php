@@ -2,7 +2,8 @@
 <?php
 
 if (!empty($_GET['class_name'])) {
- $mode = 2; $class = $class_names = $_GET['class_name'];
+$mode = 2;
+ $class = $class_names = $_GET['class_name'];
  $$class = new $class;
  $table_name = empty($table_name) ? $class::$table_name : $table_name;
  $primary_column = property_exists($$class, 'primary_column') ? $class::$primary_column : $table_name . '_id';
@@ -28,7 +29,7 @@ if (!empty($_GET['class_name'])) {
  $_GET['per_page'] = !empty($per_page) ? $per_page : '10';
 
  if (!empty($_GET['per_page'])) {
-  if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" OR $_GET['per_page'][0] == "all")) {
+  if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" || $_GET['per_page'][0] == "all")) {
    $per_page = 50000;
   } else if (!empty($_GET['per_page'])) {
    $per_page = (is_array($_GET['per_page'])) ? $_GET['per_page'][0] : $_GET['per_page'];
@@ -96,9 +97,9 @@ if (!empty($_GET['class_name'])) {
     $entered_search_criteria_1s = substr($entered_search_criteria, 0, 1); //1 character
     $entered_search_criteria_2s = substr($entered_search_criteria, 0, 2); //2 characters
     $entered_search_criteria_m1s = substr($entered_search_criteria, 1); //minus 1 string
-    $is_id_eq_search = !(in_array($entered_search_criteria_1s, ['=', '>', '<']) OR in_array($entered_search_criteria_2s, ['!=', '>=', '<=']));
+    $is_id_eq_search = !(in_array($entered_search_criteria_1s, ['=', '>', '<']) || in_array($entered_search_criteria_2s, ['!=', '>=', '<=']));
 
-    if (($is_id_eq_search) && (strpos($value, '_ID') !== false OR strpos($value, '_id') !== false)) {
+    if (($is_id_eq_search) && (strpos($value, '_ID') !== false || strpos($value, '_id') !== false)) {
      if ($entered_search_criteria == 'null') {
       $whereFields[] = " $value IS NULL ";
      } else {
@@ -177,14 +178,13 @@ if (!empty($_GET['class_name'])) {
     $no_organization_access = true;
     return;
    }
-   
-   $all_orgs_in_cls = " BU_ORG_ID IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')   OR   BU_ORG_ID IS NULL ";
+   $all_orgs_in_cls = "bu_org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')  ||  bu_org_id IS NULL ";
   } else if (property_exists($$class, 'org_id') && in_array('org_id', $$class->field_a)) {
    if (empty($_SESSION['user_org_access'])) {
     $no_organization_access = true;
     return;
    }
-   $all_orgs_in_cls = " ORG_ID IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')  OR   ORG_ID IS NULL ";
+   $all_orgs_in_cls = "org_id IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "') ||  org_id IS NULL ";
   }
 
   if (count($whereFields) > 0) {
@@ -219,47 +219,33 @@ if (!empty($_GET['class_name'])) {
    $all_download_sql .= " GROUP BY " . $_GET['group_by'][0];
   }
 
-  $total_count = $class::count_all_by_sql($count_sql);
-  $total_count_all = $class::count_all_by_sql($count_sql_all_records);
-
-  $order_by_sql = '';
   if ((!empty($search_order_by)) && (!empty($search_asc_desc))) {
    if (is_array($search_order_by)) {
-    $order_by_sql .= ' ORDER BY ';
+    $sql .= ' ORDER BY ';
+    $all_download_sql .= ' ORDER BY ';
     foreach ($search_order_by as $key_oby => $value_oby) {
      if (empty($search_asc_desc[$key_oby])) {
       $search_asc_desc[$key_oby] = ' DESC ';
      }
-     $order_by_sql .= strtoupper($value_oby) . ' ' . $search_asc_desc[$key_oby] . ' ,';
+     $sql .= $value_oby . ' ' . $search_asc_desc[$key_oby] . ' ,';
+     $all_download_sql .= $value_oby . ' ' . $search_asc_desc[$key_oby] . ' ,';
     }
-    $order_by_sql = rtrim($sql, ',');
+    $sql = rtrim($sql, ',');
+    $all_download_sql = rtrim($all_download_sql, ',');
    } else {
-    $order_by_sql .= ' ORDER BY ' . strtoupper($search_order_by) . ' ' . $search_asc_desc;
+    $sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
+    $all_download_sql .= ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
    }
   }
-  $all_download_sql .= $order_by_sql;
+  $total_count = $class::count_all_by_sql($count_sql);
+  $total_count_all = $class::count_all_by_sql($count_sql_all_records);
 
   if (!empty($per_page)) {
    $pagination = new pagination($pageno, $per_page, $total_count);
    $pagination_statement = $pagination->show_pagination();
-   $per_page_sql = ino_perPageSql($per_page, $pagination->offset());
-   if (!empty($per_page_sql)) {
-    switch (DB_TYPE) {
-     case 'ORACLE' :
-      if (stripos($sql, 'WHERE') !== false) {
-       $sql .= ' AND ' . $per_page_sql . ' ' . $order_by_sql;
-      } else {
-       $sql .= ' WHERE ' . $per_page_sql . ' ' . $order_by_sql;
-      }
-      break;
-
-     default:
-      $sql .= $order_by_sql . '  ' . $per_page_sql;
-      break;
-    }
-   }
+   $sql .=" LIMIT {$per_page} ";
+   $sql .=" OFFSET {$pagination->offset()}";
   }
-
 //  echo "<br><br><br> sql is $sql and per page is $per_page";
   $search_result = $class::find_by_sql($sql);
 //  pa($search_result);

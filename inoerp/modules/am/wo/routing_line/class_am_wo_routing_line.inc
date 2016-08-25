@@ -105,16 +105,7 @@ class am_wo_routing_line extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where am_wo_header_id= '{$wi_wo_header_id}' 
-					AND routing_sequence = '{$routing_sequence}'";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+					AND routing_sequence = '{$routing_sequence}' LIMIT 1";
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_shift($result) : false;
  }
@@ -124,15 +115,7 @@ class am_wo_routing_line extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE am_wo_header_id = :am_wo_header_id ";
   $sql .= " AND routing_sequence = :routing_sequence ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+  $sql .= " LIMIT 1 ";
 
   $param_a = ['am_wo_header_id', 'routing_sequence'];
   $value_a = ['am_wo_header_id' => $this->am_wo_header_id, 'routing_sequence' => $this->routing_sequence];

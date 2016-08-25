@@ -229,8 +229,8 @@ class prj_revenue_header extends dbObject {
   $sql = " SELECT *
 FROM prj_revenue_header 
 WHERE prj_project_header_id = '{$prj_project_header_id}'
+LIMIT 1 
 ";
-$sql = ino_perPageSql_i($sql, 1);
 
   $result = self::find_by_sql($sql);
 

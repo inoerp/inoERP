@@ -117,8 +117,7 @@ public $item_number;
 
  public function findBy_orgId($org_id) {
   global $db;
-  $sql = "SELECT * FROM pos_inv_control where org_id=:org_id ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql = "SELECT * FROM pos_inv_control where org_id=:org_id LIMIT 1";
   $param_a = ['org_id'];
   $value_a = ['org_id' => $org_id];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
@@ -127,8 +126,7 @@ public $item_number;
 
  public static function find_by_org_id($org_id) {
   global $dbc;
-  $sql = "SELECT * FROM pos_inv_control where org_id=:org_id ";
-  $sql = ino_perPageSql_i($sql, 1);
+  $sql = "SELECT * FROM pos_inv_control where org_id=:org_id LIMIT 1";
   $stmt = $dbc->connection->prepare(" $sql ");
   try {
    $stmt->execute();

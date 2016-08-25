@@ -60,12 +60,13 @@ class ar_customer extends dbObject {
   "last_update_by",
   "last_update_date"
  ];
+ 
  public static $json_label_fields = [
   "customer_number",
   "customer_name",
   'customer_category',
   "tax_country",
-  "alt_name",
+   "alt_name",
  ];
  public $initial_search = [
   "ar_customer_id",
@@ -200,18 +201,7 @@ class ar_customer extends dbObject {
   global $db;
   $sql = " SELECT * FROM "
    . self::$table_name
-   . " where customer_name LIKE :customer_name ";
-
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql($limit);
-    break;
-
-   default:
-    $sql .= ino_perPageSql($limit);
-    break;
-  }
-
+   . " where customer_name LIKE :customer_name LIMIT $limit";
   $param_a = ['customer_name'];
   $customer_name = '%' . $this->customer_name . '%';
   $value_a = [ 'customer_name' => $customer_name];
@@ -249,17 +239,7 @@ class ar_customer extends dbObject {
   global $db;
   $sql = "SELECT * FROM "
    . self::$table_name
-   . " where customer_number LIKE '%{$customer_number}%' ";
-
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(30);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(30);
-    break;
-  }
+   . " where customer_number LIKE '%{$customer_number}%' LIMIT 0, 30";
   $result = $db->query($sql);
   $data = array();
   if ($result && mysql_num_rows($result)) {
@@ -305,16 +285,9 @@ class ar_customer extends dbObject {
   $sql = "SELECT ar_customer_id FROM " .
    self::$table_name .
    " where customer_number= '{$customer_number}' " .
-   " AND org_id= '{$org_id }'";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
+   " AND org_id= '{$org_id }'" .
+   " LIMIT 1";
 
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
   $result = $db->query($sql);
   if ($result && mysql_num_rows($result)) {
    while ($row = $db->fetch_array($result)) {
@@ -329,16 +302,8 @@ class ar_customer extends dbObject {
  public static function find_by_customerNumber($customer_number) {
   $sql = "SELECT ar_customer_id FROM " .
    self::$table_name .
-   " where customer_number= '{$customer_number}' ";
-  switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
+   " where customer_number= '{$customer_number}' " .
+   " LIMIT 1";
 
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
@@ -396,14 +361,14 @@ class ar_customer extends dbObject {
   }
   return $this->msg;
  }
-
- public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+ 
+  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = "SELECT  ar_customer_id,   customer_number,   customer_name,
   supplier_id,   customer_type,   customer_category,
   customer_relationship,  tax_country,   tax_reg_no,
   tax_payer_id,   bill_to_id,   ship_to_id,
   customer_credit_class,   profile_name,   alt_name FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
-
+  
 //  if(!empty($_GET['hidden_fields']['receving_org_id'])){
 //   $rec_org_id = $_GET['hidden_fields']['receving_org_id'];
 //   $sql .= " AND receving_org_id = '{$rec_org_id}' ";
