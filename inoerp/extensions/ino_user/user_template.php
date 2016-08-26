@@ -43,8 +43,8 @@ if (empty($access_level) || ($access_level < 2 )) {
       <li><?php $f->l_color_field_d('heading_color'); ?> </li> 
       <li><?php $f->l_color_field_d('content_color'); ?> </li> 
       <li><?php $f->l_number_field_d('bg_opacity'); ?> </li> 
-      <li><label></label><a  href="form.php?class_name=extn_uprofile&mode=9&user_id=<?php echo $$class->user_id; ?>" class="button btn btn-info"><?php echo gettext('User Profile') ?></a></li>
-      <li><label></label><a  href="form.php?class_name=user_favourite&mode=9&user_id=<?php echo $$class->user_id; ?>" class="button btn btn-info"> &nbsp; <i class="fa fa-edit"></i> <?php echo gettext('Favourite') ?></a></li>
+      <li><label></label><a  href="form.php?class_name=extn_uprofile&mode=9&user_id=<?php echo $$class->ino_user_id; ?>" class="button btn btn-info"><?php echo gettext('User Profile') ?></a></li>
+      <li><label></label><a  href="form.php?class_name=user_favourite&mode=9&user_id=<?php echo $$class->ino_user_id; ?>" class="button btn btn-info"> &nbsp; <i class="fa fa-edit"></i> <?php echo gettext('Favourite') ?></a></li>
      </ul>
      <div class="bg-image-field"><label><?php echo gettext('Background Image'); ?></label><?php echo $f->image_field('bg_image_file_id', $$class->bg_image_file_id, '', '', 'img-vs'); ?></div>
     </div>
@@ -138,11 +138,11 @@ if (empty($access_level) || ($access_level < 2 )) {
          <tr class="user_role<?php echo $linecount; ?>">
           <td>
            <?php
-           echo ino_inline_action($form_line_array->user_role_id, array('user_id' => $$class->ino_user_id));
+           echo ino_inline_action($form_line_array->user_role_id, array('ino_user_id' => $$class->ino_user_id));
            ?>
           </td>
           <td><?php echo form::text_field('user_role_id', $form_line_array->user_role_id, '8', '12', '', '', '', '1'); ?></td>
-          <td><?php echo $f->select_field_from_object('role_code', role_access::roles(), 'option_line_code', 'option_line_value', $form_line_array->role_code, '', '', '', $readonly); ?> 					 </td>
+          <td><?php echo $f->select_field_from_object('role_code', option_header::find_options_byName('USER_ROLES'), 'option_line_code', 'option_line_value', $form_line_array->role_code, '', ' large', '', $readonly); ?> 					 </td>
          </tr>
          <?php
          $linecount++;
@@ -154,7 +154,7 @@ if (empty($access_level) || ($access_level < 2 )) {
           <td>   
            <ul class="inline_action">
             <li class="remove_row_img">No Access </li>
-            <li><?php echo form::hidden_field('user_id', $$class->ino_user_id); ?></li>
+            <li><?php echo form::hidden_field('ino_user_id', $$class->ino_user_id); ?></li>
            </ul>
           </td>
           <td><?php echo $form_line_array->user_role_id; ?></td>
@@ -175,7 +175,7 @@ if (empty($access_level) || ($access_level < 2 )) {
 
   <div id="tabsLine-2" class="tabContent">
    <div id ="form_line2" class="form_line2">
-    <form action=""  method="post" id="user_group_line"  name="user_group_line">
+    <form   method="post" id="user_group_line"  name="user_group_line">
      <table class="form_line_data_table">
       <thead> 
        <tr>
@@ -196,7 +196,7 @@ if (empty($access_level) || ($access_level < 2 )) {
           ?>
          </td>
          <td><?php echo $f->text_field_ap(array('name' => 'user_group_id', 'value' => $user_group->user_group_id, 'readonly' => 1)); ?></td>
-         <td><?php echo $f->select_field_from_object('user_group_code', user_group_access::user_groups(), 'option_line_code', 'option_line_value', $user_group->user_group_code, '', '', '', $readonly); ?></td>
+         <td><?php echo $f->select_field_from_object('user_group_code', option_header::find_options_byName('USER_GROUPS'), 'option_line_code', 'option_line_value', $user_group->user_group_code, '', 'large', '', $readonly); ?></td>
         </tr>
         <?php
         $count = $count + 1;

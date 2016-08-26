@@ -183,7 +183,16 @@ class ino_user extends dbObject {
  Public function findBy_userName($username) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE username = :username LIMIT 1";
+  $sql .= " WHERE username = :username ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $value_a = ['username' => $username];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -192,7 +201,16 @@ class ino_user extends dbObject {
  Public function findBy_employeeId($employee_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE hr_employee_id = :hr_employee_id LIMIT 1";
+  $sql .= " WHERE hr_employee_id = :hr_employee_id ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $value_a = ['hr_employee_id' => $employee_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -201,7 +219,16 @@ class ino_user extends dbObject {
  Public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE hr_employee_id = '{$employee_id}' LIMIT 1";
+  $sql .= " WHERE hr_employee_id = '{$employee_id}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -209,7 +236,16 @@ class ino_user extends dbObject {
  public function findBy_providerName_and_provierId() {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE auth_provider_name = :auth_provider_name AND auth_provider_id = :auth_provider_id LIMIT 1";
+  $sql .= " WHERE auth_provider_name = :auth_provider_name AND auth_provider_id = :auth_provider_id ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $value_a = ['auth_provider_name' => $this->auth_provider_name, 'auth_provider_id' => $this->auth_provider_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -218,7 +254,16 @@ class ino_user extends dbObject {
  Public static function find_by_user_name($username) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE username = '{$username}' LIMIT 1";
+  $sql .= " WHERE username = '{$username}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -226,7 +271,16 @@ class ino_user extends dbObject {
  Public function findBy_eMail($email) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE email = :email LIMIT 1";
+  $sql .= " WHERE email = :email ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $value_a = ['email' => $email];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -235,7 +289,16 @@ class ino_user extends dbObject {
  Public static function find_by_email($email) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE email = '{$email}' LIMIT 1";
+  $sql .= " WHERE email = '{$email}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -249,7 +312,16 @@ class ino_user extends dbObject {
 //  $password_final = $this->_codeThePassword($password);
   $ret = false;
   $sql = "SELECT * from ino_user 
-            WHERE username=:username  LIMIT 1";
+            WHERE username=:username ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $value_a = ['username' => $username];
   $result_array = $this->findBySql($sql, $value_a);
   if ($result_array) {
@@ -275,7 +347,15 @@ class ino_user extends dbObject {
   $sql = " SELECT * FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE ino_user_id = :primary_id ";
-  $sql.= " LIMIT 1 ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $value_a = ['primary_id' => $this->ino_user_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -292,7 +372,15 @@ class ino_user extends dbObject {
             heading_color, content_color ,  use_personal_color_cb, bg_image_file_id, show_bg_image_cb, bg_opacity FROM ";
   $sql.= static::$table_name;
   $sql.= " WHERE " . static::$primary_column . "= :primary_id ";
-//  $sql.= " LIMIT 1 ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $stmt = $dbc->connection->prepare(" $sql ");
   $stmt->bindParam(':primary_id', $id);
 
@@ -302,7 +390,7 @@ class ino_user extends dbObject {
   } catch (PDOException $e) {
    return "No Records Found!" . $e->getMessage();
   }
-  
+
 
   return !empty($result) ? array_pop($result) : null;
  }
@@ -395,7 +483,7 @@ class ino_user extends dbObject {
   }// registraion failed
   //verify & create new address
 
-  if ((!empty($_POST['addr_address'][0]))) {
+  if ((!empty($_POST['addr_usage_type'][0]))) {
    $this->_create_address();
   }
   return $this->msg;
@@ -437,9 +525,10 @@ class ino_user extends dbObject {
 }
 
 $ino_user = new ino_user();
-if (!empty($session->user_id)) {
+if (!empty( $_SESSION['user_id'])) {
  try {
-  $ino_user->findBy_id($session->user_id);
+  $ino_user_i = $ino_user->findBy_id($_SESSION['user_id']);
+  $ino_user = $ino_user_i;
  } catch (Exception $e) {
   echo "<br>Clear cache and try again. Error @user @@ line " . __LINE__ . '<br>' . $e->getMessage();
  }
@@ -476,8 +565,8 @@ if (!empty($si->show_bg_image_cb) && !empty($ino_user->show_bg_image_cb)) {
  $si->bg_image_path = empty($si->bg_image_path) ? null : HOME_URL . $si->bg_image_path;
 
  if (!empty($ino_user->bg_image_file_id)) {
-  require_once(INC_EXTENSIONS . DS . "file" . DS . "class.file.inc");
-  $bg_img_file = file::find_by_id($ino_user->bg_image_file_id);
+  require_once(INC_EXTENSIONS . DS . "file" . DS . "class_extn_file.inc");
+  $bg_img_file = extn_file::find_by_id($ino_user->bg_image_file_id);
   if (empty($bg_img_file)) {
    return;
   }

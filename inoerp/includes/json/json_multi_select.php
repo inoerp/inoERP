@@ -290,7 +290,7 @@ $_GET = $search_param_values;
   $sql .=" OFFSET {$pagination->offset()}";
  }
  
- echo $sql;
+// echo $sql;
  $search_result = $class::find_by_sql($sql);
 
  if (method_exists($class, 'search_add_extra_fields')) {

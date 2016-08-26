@@ -201,7 +201,7 @@ class fa_asset_retirement extends dbObject implements gl_journal_int {
 
   $sav_jrnl['acc_deprication_amt'] = $acc_dprn_adjust_amt;
   $sav_jrnl['asset_cost_amt'] = $fa_ar->retired_cost;
-  $all_asset_book_accounts = fa_book_category_association::find_all_accounts_byAssetBookId($fa_ar->fa_asset_id, $fa_ar->fa_asset_book_id);
+  $all_asset_book_accounts = fa_book_category_assoc::find_all_accounts_byAssetBookId($fa_ar->fa_asset_id, $fa_ar->fa_asset_book_id);
   if (empty($all_asset_book_accounts)) {
    echo "<br>No accumulated depreciation account found. Exiting save journal. Error @ " . __FILE__ . ' @@ ' . __LINE__;
    $dbc->rollback = true;

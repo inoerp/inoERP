@@ -63,7 +63,7 @@ class web_mail extends dbObject {
 
  protected function _write_comment($comment_by, $comment_msg, $comment_sub = '') {
   global $dbc;
-  $comment = new comment();
+  $comment = new extn_comment();
   $comment->reference_table = $this->reference_table;
   $comment->reference_id = $this->reference_id;
   $comment->comment_by = $comment_by;

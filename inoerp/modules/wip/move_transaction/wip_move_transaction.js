@@ -41,18 +41,19 @@ $(document).ready(function() {
  });
 
 //validation of entered quantity
- $('#content').off('focusout', '#from_operation_step').on('focusout', '#from_operation_step', function() {
+  $('body').off('blur', '#wip_move_transaction #from_operation_step').on('blur', '#wip_move_transaction #from_operation_step', function() {
 	var fromStep = '.' + $(this).val() + '_quantity';
 	var fromSeq = $('#from_routing_sequence').val();
 	var rowClass = '';
 	$('.routing_sequence').each(function() {
-	 if ($(this).val() == fromSeq) {
-		rowClass = '.' + $(this).closest('tr').attr('class');
+    if ($(this).val() == fromSeq) {
+		rowClass = '.' + $(this).closest('tr').attr('class').replace(/\s+/g,'.');
+    return false;
 	 }
 	});
   
 	var availableQuantity = $(rowClass).find(fromStep).val();
-	if (availableQuantity) {
+  if (availableQuantity) {
 	 $('#available_quantity').val(availableQuantity);
 	} else {
 	 $('#available_quantity').val('0')
@@ -60,7 +61,7 @@ $(document).ready(function() {
 	}
  });
 
- $("#content").off('focusout', '#move_quantity').on('focusout', '#move_quantity', function() {
+ $('body').off('blur', '#wip_move_transaction #move_quantity').on('blur', '#wip_move_transaction #move_quantity', function() {
 	if (+($(this).val()) > +($('#available_quantity')).val()) {
 	 $(this).val('');
 	 alert('Error!! : Entered move quantity is more than available quantity');

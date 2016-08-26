@@ -53,12 +53,11 @@
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Readings') ?></a></li>
-     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div > 
-       <ul class="column header_field"> 
+       <ul class="column header_field form_header_l"> 
         <li><?php $f->l_number_field('initial_reading', $$class->initial_reading); ?></li>
         <li><?php $f->l_date_fieldAnyDay('initial_reading_date', $$class->initial_reading_date); ?></li>
         <li><?php $f->l_number_field('rate_per_day', $$class->rate_per_day,'','','',1); ?></li>
@@ -68,14 +67,7 @@
       </div> 
       <!--end of tab1 div three_column-->
      </div> 
-     <div id="tabsLine-2"  class="tabContent">
-      <div> 
-      </div> 
-      <!--                end of tab2 div three_column-->
-     </div>
-     <!--end of tab5-->
     </div>
-
    </div> 
   </div> 
  </form>

@@ -129,7 +129,16 @@ class ap_payable_control extends dbObject {
 
  public function findBy_orgId($org_id) {
   global $db;
-  $sql = "SELECT * FROM ap_payable_control where org_id=:org_id LIMIT 1";
+  $sql = "SELECT * FROM ap_payable_control where org_id=:org_id ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $param_a = ['org_id'];
   $value_a = ['org_id' => $org_id];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
@@ -137,7 +146,16 @@ class ap_payable_control extends dbObject {
  }
 
  public static function find_by_org_id($org_id) {
-  $sql = "SELECT * FROM ap_payable_control where org_id='{$org_id}' LIMIT 1";
+  $sql = "SELECT * FROM ap_payable_control where org_id='{$org_id}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

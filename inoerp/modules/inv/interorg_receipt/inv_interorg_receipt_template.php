@@ -92,13 +92,13 @@
        $count = 0;
        foreach ($inv_receipt_line_object as &$inv_receipt_line) {
         $f->readonly2 = !empty($inv_receipt_line->inv_receipt_line_id) ? true : false;
-        if (!empty($inv_receipt_line->inv_interorg_transfer_line_id)) {
-         $inv_interorg_transfer_line_i = inv_interorg_transfer_v::find_by_id($inv_receipt_line->inv_interorg_transfer_line_id);
-//         pa($inv_interorg_transfer_line_i);
-         $inv_receipt_line->io_order_number = $inv_interorg_transfer_line_i->io_order_number;
-         $inv_receipt_line->io_line_number = $inv_interorg_transfer_line_i->io_line_number;
-         $inv_receipt_line->item_number = $inv_interorg_transfer_line_i->item_number;
-         $inv_receipt_line->quantity = $inv_interorg_transfer_line_i->transaction_quantity;
+        if (!empty($inv_receipt_line->inv_intorg_transfer_line_id)) {
+         $inv_intorg_transfer_line_i = inv_interorg_transfer_v::find_by_id($inv_receipt_line->inv_intorg_transfer_line_id);
+//         pa($inv_intorg_transfer_line_i);
+         $inv_receipt_line->io_order_number = $inv_intorg_transfer_line_i->io_order_number;
+         $inv_receipt_line->io_line_number = $inv_intorg_transfer_line_i->io_line_number;
+         $inv_receipt_line->item_number = $inv_intorg_transfer_line_i->item_number;
+         $inv_receipt_line->quantity = $inv_intorg_transfer_line_i->transaction_quantity;
         } else {
          $inv_receipt_line->io_order_number = $inv_receipt_line->io_line_number = $inv_receipt_line->item_number = $inv_receipt_line->quantity = null;
         }
@@ -119,14 +119,14 @@
           echo $f->hidden_field_withCLass('status', 'SHIPPED', 'popup_value');
           echo $f->hidden_field_withCLass('to_org_id', '', 'popup_value to_org_id org_id');
           ?><i class="generic select_io_order_number select_popup clickable fa fa-search" data-class_name="inv_interorg_transfer_v"></i></td>
-         <td><?php $f->text_field_wid2sr('inv_interorg_transfer_header_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('inv_intorg_transfer_header_id'); ?></td>
          <td><?php $f->text_field_wid2sr('io_line_number'); ?></td>
-         <td><?php $f->text_field_wid2r('inv_interorg_transfer_line_id'); ?></td>
+         <td><?php $f->text_field_wid2r('inv_intorg_transfer_line_id'); ?></td>
          <td><?php
           echo $f->number_field('quantity', $inv_receipt_line->quantity, '12', '', 'medium', '', 1);
           echo $f->hidden_field('received_quantity', '');
           ?></td>
-         <td><a target="_blank" href="form.php?class_name=inv_interorg_transfer_header&amp;inv_interorg_transfer_header_id=<?php echo $$class_second->inv_interorg_transfer_header_id; ?>&amp;mode=2">View Doc</a></td>
+         <td><a target="_blank" href="form.php?class_name=inv_intorg_transfer_header&amp;inv_intorg_transfer_header_id=<?php echo $$class_second->inv_intorg_transfer_header_id; ?>&amp;mode=2">View Doc</a></td>
         </tr>
         <?php
         $count = $count + 1;

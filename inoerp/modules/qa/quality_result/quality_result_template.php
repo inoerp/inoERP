@@ -52,9 +52,9 @@
         echo "<li><label>$label </label>";
         switch ($qa_cp_element->data_type) {
          case 'LIST':
-          $qa_ce_lines = qa_collection_element_line::find_by_parent_id($qa_cp_element->qa_collection_element_header_id);
+          $qa_ce_lines = qa_ce_line::find_by_parent_id($qa_cp_element->qa_ce_header_id);
           if (!empty($qa_ce_lines)) {
-           echo $f->select_field_from_object($qa_cp_element->sys_element_name, $qa_ce_lines, 'qa_collection_element_line_id', 'element_value', $qa_cp_element_value);
+           echo $f->select_field_from_object($qa_cp_element->sys_element_name, $qa_ce_lines, 'qa_ce_line_id', 'element_value', $qa_cp_element_value);
           } else {
            echo $f->text_field($qa_cp_element->sys_element_name, $qa_cp_element_value);
           }
@@ -66,7 +66,7 @@
 
          case 'FILE' :
           $qa_cp_element_file_name = $qa_cp_element->sys_element_name . '_file';
-          $file_routing = file::find_by_fieldName_referenceTable_and_id($qa_cp_element->sys_element_name, 'wip_wo_routing_line', $routing_line->wip_wo_routing_line_id);
+          $file_routing = extn_file::find_by_fieldName_referenceTable_and_id($qa_cp_element->sys_element_name, 'wip_wo_routing_line', $routing_line->wip_wo_routing_line_id);
           echo ino_attachement($file_routing, $qa_cp_element_file_name);
           echo $f->hidden_field($qa_cp_element->sys_element_name, $qa_cp_element_value);
           break;

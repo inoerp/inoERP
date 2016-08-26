@@ -107,7 +107,7 @@
          <td>
           <?php
           $content_type_reference_id = !empty($content_type_reference) ? $$class_third->content_type_reference_id : '';
-          echo ino_inline_action($$class_second->Field, array('content_type_reference_id' => $content_type_reference_id));
+          echo ino_inline_action($$class_second->field, array('content_type_reference_id' => $content_type_reference_id));
           ?>
          </td>
          <td><?php form::text_field_wid3('field_label') ?></td>

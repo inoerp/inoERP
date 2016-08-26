@@ -332,7 +332,7 @@ class extn_file extends dbObject {
 
  public static function find_by_fieldName_referenceTable_and_id($field_name, $reference_table, $reference_id) {
   global $db;
-  $table_name = 'extra_field_' . $field_name;
+  $table_name = 'ef_' . $field_name;
   $value_colum = $table_name . '_value';
   $id_colum = $table_name . '_id';
   $sql = "SELECT extn_file.extn_file_id as extn_file_id, 

@@ -128,7 +128,8 @@ class inv_abc_valuation extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE scope_org_id = '{$org_id}'  "
-   . " AND valuation_name = '{$valuation_name}' AND status='active'  LIMIT 1 ";
+   . " AND valuation_name = '{$valuation_name}' AND status='active'  ";
+   $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -139,8 +140,8 @@ class inv_abc_valuation extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE scope_org_id = '{$org_id}' AND"
-   . " valuation_name = '{$valuation_name}' AND status='active'   LIMIT 1 ";
-
+   . " valuation_name = '{$valuation_name}' AND status='active'    ";
+$sql = ino_perPageSql_i($sql, 1);
   $result = $this->findBySql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

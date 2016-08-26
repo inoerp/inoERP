@@ -117,9 +117,8 @@ AND inv.org_id = '{$org_id}'
 AND pll.item_id_m = '{$Item_id_m}'
 AND pll.effective_start_date <= NOW()
 AND ( pll.effective_end_date >= NOW() OR  pll.effective_end_date IS NULL)
-LIMIT 1
-
 ";
+$sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : '';
  }

@@ -98,7 +98,8 @@
 
   public function findBy_employeeId_leaveType($employee_id, $leave_type) {
    $sql = " SELECT * FROM " . self::$table_name;
-   $sql .= " WHERE employee_id= :employee_id AND leave_type = :leave_type LIMIT 1";
+   $sql .= " WHERE employee_id= :employee_id AND leave_type = :leave_type ";
+   $sql = ino_perPageSql_i($sql, 1);
    $value_a = ['employee_id' => $employee_id, 'leave_type' => $leave_type];
    $result = $this->findBySql($sql, $value_a);
    return !empty($result) ? array_pop($result) : null;

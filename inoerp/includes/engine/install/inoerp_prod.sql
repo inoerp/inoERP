@@ -2432,11 +2432,11 @@ INSERT INTO `bom_department` (`bom_department_id`, `department`, `description`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bom_department_resource_assignment`
+-- Table structure for table `bom_dept_res_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `bom_department_resource_assignment` (
-  `bom_department_resource_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `bom_dept_res_assignment` (
+  `bom_dept_res_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
   `bom_department_id` int(12) NOT NULL,
   `cost_type_id` int(12) NOT NULL,
   `resource_id` int(12) NOT NULL,
@@ -2447,14 +2447,14 @@ CREATE TABLE IF NOT EXISTS `bom_department_resource_assignment` (
   `no_of_units` int(12) DEFAULT NULL,
   `efficiency` int(12) DEFAULT NULL,
   `utilization` int(12) DEFAULT NULL,
-  PRIMARY KEY (`bom_department_resource_assignment_id`)
+  PRIMARY KEY (`bom_dept_res_assignment_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
--- Dumping data for table `bom_department_resource_assignment`
+-- Dumping data for table `bom_dept_res_assignment`
 --
 
-INSERT INTO `bom_department_resource_assignment` (`bom_department_resource_assignment_id`, `bom_department_id`, `cost_type_id`, `resource_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `no_of_units`, `efficiency`, `utilization`) VALUES
+INSERT INTO `bom_dept_res_assignment` (`bom_dept_res_assignment_id`, `bom_department_id`, `cost_type_id`, `resource_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`, `no_of_units`, `efficiency`, `utilization`) VALUES
 (1, 1, 1, 1, 0, '2013-12-19 00:00:00', 0, '2013-12-19 00:00:00', 5, 100, 95),
 (2, 1, 1, 3, 0, '2013-12-19 00:00:00', 0, '2013-12-19 00:00:00', 2, 90, 90),
 (3, 2, 1, 1, 0, '2014-02-19 00:00:00', 19, '0000-00-00 00:00:00', 5, 10, 10),
@@ -2645,11 +2645,11 @@ INSERT INTO `bom_overhead` (`bom_overhead_id`, `overhead`, `description`, `org_i
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bom_overhead_rate_assignment`
+-- Table structure for table `bom_oh_rate_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `bom_overhead_rate_assignment` (
-  `bom_overhead_rate_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `bom_oh_rate_assignment` (
+  `bom_oh_rate_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
   `bom_overhead_id` int(12) NOT NULL,
   `bom_cost_type` varchar(25) NOT NULL,
   `default_basis` varchar(25) NOT NULL,
@@ -2658,15 +2658,15 @@ CREATE TABLE IF NOT EXISTS `bom_overhead_rate_assignment` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`bom_overhead_rate_assignment_id`),
+  PRIMARY KEY (`bom_oh_rate_assignment_id`),
   UNIQUE KEY `bom_overhead_id` (`bom_overhead_id`,`bom_cost_type`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `bom_overhead_rate_assignment`
+-- Dumping data for table `bom_oh_rate_assignment`
 --
 
-INSERT INTO `bom_overhead_rate_assignment` (`bom_overhead_rate_assignment_id`, `bom_overhead_id`, `bom_cost_type`, `default_basis`, `rate`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `bom_oh_rate_assignment` (`bom_oh_rate_assignment_id`, `bom_overhead_id`, `bom_cost_type`, `default_basis`, `rate`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 1, 'PENDING', 'ITEM', 22, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (2, 1, 'GLOBAL', 'ITEM', 22, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (4, 3, 'PENDING', 'ITEM', 650, 0, '2014-09-26 00:00:00', 34, '2015-06-22 17:17:26'),
@@ -2676,11 +2676,11 @@ INSERT INTO `bom_overhead_rate_assignment` (`bom_overhead_rate_assignment_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bom_overhead_resource_assignment`
+-- Table structure for table `bom_oh_res_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `bom_overhead_resource_assignment` (
-  `bom_overhead_resource_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `bom_oh_res_assignment` (
+  `bom_oh_res_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
   `bom_overhead_id` int(12) NOT NULL,
   `bom_cost_type` varchar(25) NOT NULL,
   `resource_id` int(12) NOT NULL,
@@ -2688,15 +2688,15 @@ CREATE TABLE IF NOT EXISTS `bom_overhead_resource_assignment` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`bom_overhead_resource_assignment_id`),
+  PRIMARY KEY (`bom_oh_res_assignment_id`),
   UNIQUE KEY `bom_overhead_id` (`bom_overhead_id`,`bom_cost_type`,`resource_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
--- Dumping data for table `bom_overhead_resource_assignment`
+-- Dumping data for table `bom_oh_res_assignment`
 --
 
-INSERT INTO `bom_overhead_resource_assignment` (`bom_overhead_resource_assignment_id`, `bom_overhead_id`, `bom_cost_type`, `resource_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `bom_oh_res_assignment` (`bom_oh_res_assignment_id`, `bom_overhead_id`, `bom_cost_type`, `resource_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 2, 'PENDING', 1, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (2, 2, 'FROZEN', 1, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
 (3, 1, 'PENDING', 1, 0, '2014-04-30 00:00:00', 0, '2030-04-14 00:00:00'),
@@ -2711,10 +2711,10 @@ INSERT INTO `bom_overhead_resource_assignment` (`bom_overhead_resource_assignmen
 -- Stand-in structure for view `bom_overhead_v`
 --
 CREATE TABLE IF NOT EXISTS `bom_overhead_v` (
-`bom_overhead_resource_assignment_id` int(12)
+`bom_oh_res_assignment_id` int(12)
 ,`resource_bom_cost_type` varchar(25)
 ,`resource_id` int(12)
-,`bom_overhead_rate_assignment_id` int(12)
+,`bom_oh_rate_assignment_id` int(12)
 ,`bom_overhead_id` int(12)
 ,`rate_bom_cost_type` varchar(25)
 ,`default_basis` varchar(25)
@@ -2992,11 +2992,11 @@ CREATE TABLE IF NOT EXISTS `bom_standard_operation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bom_standard_operation_resource_assignment`
+-- Table structure for table `bom_stnd_op_res_assignment`
 --
 
-CREATE TABLE IF NOT EXISTS `bom_standard_operation_resource_assignment` (
-  `bom_standard_operation_resource_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `bom_stnd_op_res_assignment` (
+  `bom_stnd_op_res_assignment_id` int(12) NOT NULL AUTO_INCREMENT,
   `resource_sequence` int(12) DEFAULT NULL,
   `bom_standard_operation_id` int(12) DEFAULT NULL,
   `charge_basis` int(12) NOT NULL,
@@ -3011,7 +3011,7 @@ CREATE TABLE IF NOT EXISTS `bom_standard_operation_resource_assignment` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`bom_standard_operation_resource_assignment_id`)
+  PRIMARY KEY (`bom_stnd_op_res_assignment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -3400,7 +3400,7 @@ CREATE TABLE IF NOT EXISTS `cc_co_process_flow_action` (
 --
 
 CREATE TABLE IF NOT EXISTS `cc_co_process_flow_action_value` (
-  `sys_process_flow_action_value_id` int(12) NOT NULL AUTO_INCREMENT,
+  `sys_pflow_action_val_id` int(12) NOT NULL AUTO_INCREMENT,
   `sys_process_flow_action_id` int(12) NOT NULL,
   `value` varchar(256) NOT NULL,
   `comment` varchar(256) DEFAULT NULL,
@@ -3410,7 +3410,7 @@ CREATE TABLE IF NOT EXISTS `cc_co_process_flow_action_value` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`sys_process_flow_action_value_id`),
+  PRIMARY KEY (`sys_pflow_action_val_id`),
   UNIQUE KEY `document_type_name` (`sys_process_flow_action_id`,`comment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -4253,7 +4253,7 @@ INSERT INTO `engine` (`engine_id`, `obj_class_name`, `number`, `type`, `enabled_
 (47, 'payment_term', 1108, 'modules', 1, '1001', NULL, 'gl', NULL, NULL, NULL, 34, '2014-12-13 19:22:08', 34, '2014-12-13 19:22:08'),
 (48, 'gl_period', 1109, 'modules', 1, '1001', NULL, 'gl', NULL, NULL, NULL, 34, '2014-12-13 19:22:09', 34, '2014-12-13 19:22:09'),
 (49, 'hr_approval_limit_header', 3101, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:09', 34, '2014-12-13 19:22:09'),
-(50, 'hr_approval_limit_assignment', 3102, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:09', 34, '2014-12-13 19:22:09'),
+(50, 'hr_approval_limit_assign', 3102, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:09', 34, '2014-12-13 19:22:09'),
 (51, 'hr_approval_object', 3103, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:10', 34, '2014-12-13 19:22:10'),
 (52, 'hr_approval_validation', 3104, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:10', 34, '2014-12-13 19:22:10'),
 (53, 'hr_compensation_element', 3105, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:10', 34, '2014-12-13 19:22:10'),
@@ -4270,7 +4270,7 @@ INSERT INTO `engine` (`engine_id`, `obj_class_name`, `number`, `type`, `enabled_
 (64, 'hr_payslip_header', 3304, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:13', 34, '2014-12-13 19:22:13'),
 (65, 'hr_payslip_user', 3305, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:14', 34, '2014-12-13 19:22:14'),
 (66, 'hr_position', 3111, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:14', 34, '2014-12-13 19:22:14'),
-(67, 'hr_position_hierarchy_header', 3112, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:14', 34, '2014-12-13 19:22:14'),
+(67, 'hr_pos_hierarchy_header', 3112, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:14', 34, '2014-12-13 19:22:14'),
 (68, 'hr_team_header', 3113, 'modules', 1, '1001', NULL, 'hr', NULL, NULL, NULL, 34, '2014-12-13 19:22:15', 34, '2014-12-13 19:22:15'),
 (69, 'inv_abc_assignment_header', 2103, 'modules', 1, '1001', NULL, 'inv', NULL, NULL, NULL, 34, '2014-12-13 19:22:15', 34, '2014-12-13 19:22:15'),
 (70, 'inv_abc_valuation', 2102, 'modules', 1, '1001', NULL, 'inv', NULL, NULL, NULL, 34, '2014-12-13 19:22:15', 34, '2014-12-13 19:22:15'),
@@ -5240,11 +5240,11 @@ CREATE TABLE IF NOT EXISTS `fa_asset_trasaction` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fa_book_category_association`
+-- Table structure for table `fa_book_category_assoc`
 --
 
-CREATE TABLE IF NOT EXISTS `fa_book_category_association` (
-  `fa_book_category_association_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `fa_book_category_assoc` (
+  `fa_book_category_assoc_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `fa_asset_category_id` int(12) DEFAULT NULL,
   `fa_asset_book_id` int(12) DEFAULT NULL,
   `asset_cost_ac_id` int(12) DEFAULT NULL,
@@ -5263,7 +5263,7 @@ CREATE TABLE IF NOT EXISTS `fa_book_category_association` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`fa_book_category_association_id`),
+  PRIMARY KEY (`fa_book_category_assoc_id`),
   UNIQUE KEY `fa_asset_category_id` (`fa_asset_category_id`,`fa_asset_book_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -7541,11 +7541,11 @@ CREATE TABLE IF NOT EXISTS `hd_task_type` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hr_approval_limit_assignment`
+-- Table structure for table `hr_approval_limit_assign`
 --
 
-CREATE TABLE IF NOT EXISTS `hr_approval_limit_assignment` (
-  `hr_approval_limit_assignment_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `hr_approval_limit_assign` (
+  `hr_approval_limit_assign_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `hr_approval_limit_header_id` int(12) NOT NULL,
   `bu_org_id` int(12) DEFAULT NULL,
   `job_id` int(12) DEFAULT NULL,
@@ -7557,15 +7557,15 @@ CREATE TABLE IF NOT EXISTS `hr_approval_limit_assignment` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`hr_approval_limit_assignment_id`),
+  PRIMARY KEY (`hr_approval_limit_assign_id`),
   UNIQUE KEY `hr_approval_limit_header_id` (`hr_approval_limit_header_id`,`bu_org_id`,`job_id`,`document_type`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
--- Dumping data for table `hr_approval_limit_assignment`
+-- Dumping data for table `hr_approval_limit_assign`
 --
 
-INSERT INTO `hr_approval_limit_assignment` (`hr_approval_limit_assignment_id`, `hr_approval_limit_header_id`, `bu_org_id`, `job_id`, `position_id`, `document_type`, `start_date`, `end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `hr_approval_limit_assign` (`hr_approval_limit_assign_id`, `hr_approval_limit_header_id`, `bu_org_id`, `job_id`, `position_id`, `document_type`, `start_date`, `end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 1, 5, 1, 1, 'PUR_STANDRAD_PO', '2000-08-02', NULL, 0, '2014-08-19 00:00:00', 34, '2015-06-23 09:23:09'),
 (2, 1, 8, NULL, 1, 'PUR_REQUISITION_EXTERN', '2000-08-01', NULL, 0, '2014-08-19 00:00:00', 0, '2019-08-14 00:00:00'),
 (3, 2, 8, NULL, 4, 'PUR_STANDRAD_PO', '2004-08-01', NULL, 0, '2014-08-19 00:00:00', 0, '2014-08-19 00:00:00'),
@@ -8890,11 +8890,11 @@ INSERT INTO `hr_position` (`hr_position_id`, `position_name`, `job_id`, `org_id`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hr_position_hierarchy_header`
+-- Table structure for table `hr_pos_hierarchy_header`
 --
 
-CREATE TABLE IF NOT EXISTS `hr_position_hierarchy_header` (
-  `hr_position_hierarchy_header_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `hr_pos_hierarchy_header` (
+  `hr_pos_hierarchy_header_id` int(12) NOT NULL AUTO_INCREMENT,
   `starting_position_id` int(12) NOT NULL,
   `hierarchy_name` varchar(50) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
@@ -8904,28 +8904,28 @@ CREATE TABLE IF NOT EXISTS `hr_position_hierarchy_header` (
   `creation_date` datetime NOT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
-  PRIMARY KEY (`hr_position_hierarchy_header_id`),
+  PRIMARY KEY (`hr_pos_hierarchy_header_id`),
   UNIQUE KEY `item_id` (`starting_position_id`),
   UNIQUE KEY `item_id_2` (`starting_position_id`,`hierarchy_name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `hr_position_hierarchy_header`
+-- Dumping data for table `hr_pos_hierarchy_header`
 --
 
-INSERT INTO `hr_position_hierarchy_header` (`hr_position_hierarchy_header_id`, `starting_position_id`, `hierarchy_name`, `description`, `revision`, `effective_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `hr_pos_hierarchy_header` (`hr_pos_hierarchy_header_id`, `starting_position_id`, `hierarchy_name`, `description`, `revision`, `effective_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 4, 'SPG_Hirearchy', 'SPG_Hirearchy', '1', NULL, 0, '2014-08-09 09:31:00', 0, '2009-08-14 09:31:00'),
 (2, 3, 'SPG_Hirearchy', NULL, '1', NULL, 0, '2014-08-09 09:31:51', 0, '2009-08-14 09:31:51');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hr_position_hierarchy_line`
+-- Table structure for table `hr_pos_hierarchy_line`
 --
 
-CREATE TABLE IF NOT EXISTS `hr_position_hierarchy_line` (
-  `hr_position_hierarchy_line_id` int(12) NOT NULL AUTO_INCREMENT,
-  `hr_position_hierarchy_header_id` int(12) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `hr_pos_hierarchy_line` (
+  `hr_pos_hierarchy_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `hr_pos_hierarchy_header_id` int(12) unsigned NOT NULL,
   `position_id` int(12) unsigned NOT NULL,
   `description` varchar(256) NOT NULL,
   `effective_start_date` date DEFAULT NULL,
@@ -8934,15 +8934,15 @@ CREATE TABLE IF NOT EXISTS `hr_position_hierarchy_line` (
   `creation_date` datetime NOT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
-  PRIMARY KEY (`hr_position_hierarchy_line_id`),
-  UNIQUE KEY `hr_position_hierarchy_header_id` (`hr_position_hierarchy_header_id`,`position_id`)
+  PRIMARY KEY (`hr_pos_hierarchy_line_id`),
+  UNIQUE KEY `hr_pos_hierarchy_header_id` (`hr_pos_hierarchy_header_id`,`position_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `hr_position_hierarchy_line`
+-- Dumping data for table `hr_pos_hierarchy_line`
 --
 
-INSERT INTO `hr_position_hierarchy_line` (`hr_position_hierarchy_line_id`, `hr_position_hierarchy_header_id`, `position_id`, `description`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `hr_pos_hierarchy_line` (`hr_pos_hierarchy_line_id`, `hr_pos_hierarchy_header_id`, `position_id`, `description`, `effective_start_date`, `effective_end_date`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 1, 3, '', NULL, NULL, 0, '2014-08-09 09:31:01', 0, '2014-08-09 09:31:01'),
 (2, 2, 1, '', NULL, NULL, 0, '2014-08-09 09:31:40', 0, '2014-08-09 09:31:40'),
 (3, 2, 2, '', NULL, NULL, 0, '2014-08-09 09:31:40', 0, '2014-08-09 09:31:40');
@@ -9411,11 +9411,11 @@ CREATE TABLE IF NOT EXISTS `inv_interorg_receipt_header` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `inv_interorg_transfer_header`
+-- Table structure for table `inv_intorg_transfer_header`
 --
 
-CREATE TABLE IF NOT EXISTS `inv_interorg_transfer_header` (
-  `inv_interorg_transfer_header_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `inv_intorg_transfer_header` (
+  `inv_intorg_transfer_header_id` int(12) NOT NULL AUTO_INCREMENT,
   `order_number` varchar(25) DEFAULT NULL,
   `comment` varchar(256) DEFAULT NULL,
   `from_org_id` int(12) NOT NULL,
@@ -9431,19 +9431,19 @@ CREATE TABLE IF NOT EXISTS `inv_interorg_transfer_header` (
   `creation_date` datetime NOT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
-  PRIMARY KEY (`inv_interorg_transfer_header_id`),
+  PRIMARY KEY (`inv_intorg_transfer_header_id`),
   UNIQUE KEY `order_number` (`order_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `inv_interorg_transfer_line`
+-- Table structure for table `inv_intorg_transfer_line`
 --
 
-CREATE TABLE IF NOT EXISTS `inv_interorg_transfer_line` (
-  `inv_interorg_transfer_line_id` int(12) NOT NULL AUTO_INCREMENT,
-  `inv_interorg_transfer_header_id` int(12) NOT NULL,
+CREATE TABLE IF NOT EXISTS `inv_intorg_transfer_line` (
+  `inv_intorg_transfer_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `inv_intorg_transfer_header_id` int(12) NOT NULL,
   `transaction_type_id` int(12) NOT NULL,
   `line_number` int(12) DEFAULT NULL,
   `from_subinventory_id` int(12) NOT NULL,
@@ -9468,7 +9468,7 @@ CREATE TABLE IF NOT EXISTS `inv_interorg_transfer_line` (
   `creation_date` datetime NOT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime NOT NULL,
-  PRIMARY KEY (`inv_interorg_transfer_line_id`)
+  PRIMARY KEY (`inv_intorg_transfer_line_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -9477,14 +9477,14 @@ CREATE TABLE IF NOT EXISTS `inv_interorg_transfer_line` (
 -- Stand-in structure for view `inv_interorg_transfer_v`
 --
 CREATE TABLE IF NOT EXISTS `inv_interorg_transfer_v` (
-`inv_interorg_transfer_header_id` int(12)
+`inv_intorg_transfer_header_id` int(12)
 ,`order_number` varchar(25)
 ,`io_order_number` varchar(25)
 ,`line_number` int(12)
 ,`io_line_number` int(12)
 ,`item_number` varchar(50)
 ,`status` varchar(25)
-,`inv_interorg_transfer_line_id` int(12)
+,`inv_intorg_transfer_line_id` int(12)
 ,`comment` varchar(256)
 ,`from_org_id` int(12)
 ,`transaction_type_id` int(12)
@@ -9835,8 +9835,8 @@ CREATE TABLE IF NOT EXISTS `inv_receipt_line` (
   `po_detail_id` int(12) DEFAULT NULL,
   `sd_so_line_id` int(12) DEFAULT NULL,
   `sd_so_header_id` int(12) DEFAULT NULL,
-  `inv_interorg_transfer_header_id` int(12) DEFAULT NULL,
-  `inv_interorg_transfer_line_id` int(12) DEFAULT NULL,
+  `inv_intorg_transfer_header_id` int(12) DEFAULT NULL,
+  `inv_intorg_transfer_line_id` int(12) DEFAULT NULL,
   `country_of_origin` int(12) DEFAULT NULL,
   `lot_number` varchar(256) DEFAULT NULL,
   `serial_number` varchar(256) DEFAULT NULL,
@@ -12786,8 +12786,8 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (372, 370, 'Search Count Schedule', 'search.php?class_name=inv_count_schedule', 'Search Count Schedule', 'inv', 'inv_count_schedule', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-07-27 00:00:00', 0, '2014-07-27 00:00:00'),
 (373, 371, 'Search Count Entries', 'search.php?class_name=inv_count_entries_v', 'Search Count Entries', 'inv', 'inv_count_entries', 2, NULL, '', 'SEARCH', 1, NULL, 0, '2014-07-28 00:00:00', 0, '2028-07-14 00:00:00'),
 (374, 370, 'Approve Count Entries', 'multi_select.php?action_class_name=inv_count_entries&action=approve_count_entries&mode=9&show_block=1&search_class_name=inv_count_entries_v&status[]=PENDING_APPROVAL', 'Approve Count Entries', 'inv', 'inv_count_entries', 9, NULL, '', 'FORM', 0, NULL, 0, '2014-07-29 00:00:00', 0, '2029-07-14 00:00:00'),
-(375, 56, 'Inter Org Transfer', 'form.php?class_name=inv_interorg_transfer_header&mode=9', 'Inter Org Transfer', 'inv', 'inv_interorg_transfer_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-07-31 00:00:00', 0, '2014-07-31 00:00:00'),
-(376, 375, 'Search Inter Org Transfer', 'search.php?class_name=inv_interorg_transfer_header', 'Search Inter Org Transfer', 'inv', 'inv_interorg_transfer_header', 2, NULL, NULL, 'TRANSACTION', NULL, NULL, 0, '2014-08-01 00:00:00', 0, '2014-08-01 00:00:00'),
+(375, 56, 'Inter Org Transfer', 'form.php?class_name=inv_intorg_transfer_header&mode=9', 'Inter Org Transfer', 'inv', 'inv_intorg_transfer_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-07-31 00:00:00', 0, '2014-07-31 00:00:00'),
+(376, 375, 'Search Inter Org Transfer', 'search.php?class_name=inv_intorg_transfer_header', 'Search Inter Org Transfer', 'inv', 'inv_intorg_transfer_header', 2, NULL, NULL, 'TRANSACTION', NULL, NULL, 0, '2014-08-01 00:00:00', 0, '2014-08-01 00:00:00'),
 (377, 150, 'Setup', 'form.php?module_code=gl&type=setup', 'GL Setup', 'gl', 'gl', 9, NULL, NULL, 'SETUP', NULL, 90, 0, '2014-08-02 00:00:00', 34, '2015-09-30 10:36:37'),
 (378, 377, 'Currency Conversion', 'form.php?class_name=gl_currency_conversion&mode=9', 'Currency Conversion', 'gl', 'gl_currency_conversion', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-02 00:00:00', 0, '2014-08-02 00:00:00'),
 (379, 378, 'View Currency Conversion', 'form.php?class_name=gl_currency_conversion&mode=2', 'View Currency Conversion', 'gl', 'gl_currency_conversion', 2, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-02 00:00:00', 0, '2014-08-02 00:00:00'),
@@ -12799,8 +12799,8 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (385, 384, 'Search Job', 'search.php?class_name=hr_job', 'Search Job', 'hr', 'hr_job', 2, NULL, NULL, 'SEARCH', NULL, NULL, 0, '2014-08-08 00:00:00', 0, '2014-08-08 00:00:00'),
 (386, 821, 'Position', 'form.php?class_name=hr_position&mode=9', 'HR Positions', 'hr', 'hr_position', 9, NULL, NULL, 'FORM', NULL, 3, 0, '2014-08-08 00:00:00', 34, '2015-09-05 05:07:49'),
 (387, 386, 'Search Position', 'search.php?class_name=hr_position', 'Search Position', 'hr', 'hr_position', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-08 00:00:00', 0, '2014-08-08 00:00:00'),
-(388, 386, 'Hierarchy', 'form.php?class_name=hr_position_hierarchy_header&mode=9', 'Position Hierarchy', 'hr', 'hr_position_hierarchy_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-09 00:00:00', 0, '2014-08-09 00:00:00'),
-(389, 388, 'Search Hierarchy', 'search.php?class_name=hr_position_hierarchy_header', 'Search Hierarchy', 'hr', 'hr_position_hierarchy_header', 9, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-09 00:00:00', 0, '2014-08-09 00:00:00'),
+(388, 386, 'Hierarchy', 'form.php?class_name=hr_pos_hierarchy_header&mode=9', 'Position Hierarchy', 'hr', 'hr_pos_hierarchy_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-09 00:00:00', 0, '2014-08-09 00:00:00'),
+(389, 388, 'Search Hierarchy', 'search.php?class_name=hr_pos_hierarchy_header', 'Search Hierarchy', 'hr', 'hr_pos_hierarchy_header', 9, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-09 00:00:00', 0, '2014-08-09 00:00:00'),
 (390, 382, 'Compensation Element', 'form.php?class_name=hr_compensation_element&mode=9', 'Compensation Element', 'hr', 'hr_compensation_element', 9, NULL, NULL, 'FORM', NULL, 10, 0, '2014-08-11 00:00:00', 34, '2015-08-25 04:17:59'),
 (391, 390, 'Search Element', 'search.php?class_name=hr_compensation_element', 'Search Compensation Element', 'hr', 'hr_compensation_element', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-11 00:00:00', 0, '2014-08-11 00:00:00'),
 (392, 390, 'Element Entry / Assignment', 'form.php?class_name=hr_element_entry_header&mode=9', 'Employee Element Entry Assignment', 'hr', 'hr_element_entry_header', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-12 00:00:00', 96, '2014-11-20 03:12:53'),
@@ -12822,7 +12822,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (408, 407, 'Search Approval Limit', 'search.php?class_name=hr_approval_limit_header&mode=9', 'Search Approval Limit', 'hr', 'hr_approval_limit_header', 9, NULL, NULL, 'SEARCH', NULL, NULL, 0, '2014-08-18 00:00:00', 0, '2014-08-18 00:00:00'),
 (409, 407, 'Approval Object', 'form.php?class_name=hr_approval_object&mode=9', 'Approval Object', 'hr', 'hr_approval_object', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-18 00:00:00', 0, '2014-08-18 00:00:00'),
 (410, 409, 'Search Approval Object', 'search.php?class_name=hr_approval_object', 'Search Approval Object', 'hr', 'hr_approval_object', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-18 00:00:00', 0, '2014-08-18 00:00:00'),
-(411, 407, 'Approval Limit Assignment', 'form.php?class_name=hr_approval_limit_assignment&mode=9', 'Approval Limit Assignment', 'hr', 'hr_approval_limit_assignment', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-19 00:00:00', 0, '2014-08-19 00:00:00'),
+(411, 407, 'Approval Limit Assignment', 'form.php?class_name=hr_approval_limit_assign&mode=9', 'Approval Limit Assignment', 'hr', 'hr_approval_limit_assign', 9, NULL, NULL, NULL, NULL, NULL, 0, '2014-08-19 00:00:00', 0, '2014-08-19 00:00:00'),
 (412, 59, 'Notifications', 'form.php?class_name=sys_notification&mode=9', 'Notifications', 'adm', 'sys_notification', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-22 00:00:00', 0, '2022-08-14 00:00:00'),
 (413, 412, 'Search Notification', 'search.php?class_name=sys_notification', 'Search Notification', 'hr', 'sys_notification', 2, NULL, NULL, 'SEARCH', 1, NULL, 0, '2014-08-22 00:00:00', 0, '2022-08-14 00:00:00'),
 (414, 505, 'Apply Leave - SS', 'form.php?class_name=hr_leave_transaction_user&mode=9', 'Apply Leave Self Service', 'hr', 'hr_leave_transaction_user', 9, NULL, NULL, 'FORM', NULL, NULL, 0, '2014-08-21 00:00:00', 34, '2014-11-28 09:49:50'),
@@ -12886,7 +12886,7 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (478, 44, 'Item Revision', 'search.php?class_name=inv_item_revision', 'Item Revision', 'inv', 'inv_item_revision', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-03 06:14:39', 34, '2014-11-03 06:14:39'),
 (479, 105, 'Secondary Field', 'form.php?class_name=sys_secondary_field&mode=9', 'Secondary Field', 'sys', 'sys_secondary_field', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-06 16:10:57', 34, '2014-11-06 16:10:57'),
 (480, 479, 'Search Secondary Field', 'search.php?class_name=sys_secondary_field', 'Search Secondary Field', 'sd', 'sys_secondary_field', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-06 16:12:32', 34, '2014-11-06 16:12:32'),
-(481, 479, 'Secondary Field Instance', 'form.php?class_name=sys_secondary_field_instance&mode=9', 'Secondary Field Instance', 'sys', 'sys_secondary_field_instance', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-06 16:13:25', 34, '2014-11-06 16:13:25'),
+(481, 479, 'Secondary Field Instance', 'form.php?class_name=sys_secondary_field_inst&mode=9', 'Secondary Field Instance', 'sys', 'sys_secondary_field_inst', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-06 16:13:25', 34, '2014-11-06 16:13:25'),
 (482, 487, 'Change Control', 'form.php?module_code=da&path_id=482', 'Change Control - ECO, MCO and Other Changes requests', 'da', 'da', 2, NULL, NULL, 'CONTAINER', NULL, 3, 34, '2014-11-08 12:00:36', 34, '2015-05-25 04:58:18'),
 (483, 482, 'CO Template', 'form.php?class_name=cc_co_template_header&mode=9', 'Change Order Template', 'da', 'cc_co_template_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2014-11-08 14:15:29', 34, '2015-05-05 15:26:33'),
 (484, 483, 'Search Template', 'search.php?class_name=cc_co_template_header', 'Search Change Order Template', 'cc', 'cc_co_template_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2014-11-08 14:53:39', 34, '2014-11-08 14:53:39'),
@@ -13247,8 +13247,8 @@ INSERT INTO `path` (`path_id`, `parent_id`, `name`, `path_link`, `description`, 
 (851, 55, 'Onhand Summary', 'form.php?class_name=extn_report_result&mode=2&extn_report_id=3', 'Onhand Summary', 'inv', 'extn_report_result', 2, NULL, NULL, 'REPORT', NULL, NULL, 34, '2015-10-31 11:46:03', 34, '2015-10-31 11:46:03'),
 (852, NULL, 'Quality', 'form.php?module_code=qa', 'Quality', 'qa', 'qa', 2, NULL, NULL, NULL, NULL, 38, 34, '2015-11-02 04:24:12', 34, '2015-11-02 04:24:12'),
 (853, 858, 'Element Type', 'form.php?class_name=option_header&option_header_id=264&mode=9', 'Element Type', 'qa', 'option_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-02 04:26:18', 34, '2015-11-06 03:24:29'),
-(854, 852, 'Collection Element', 'form.php?class_name=qa_collection_element_header&mode=9', 'Collection Element', 'qa', 'qa_collection_element_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-02 10:25:15', 34, '2015-11-02 10:25:15'),
-(855, 854, 'Search Collection Element', 'search.php?class_name=qa_collection_element_header', 'Search Collection Element Header', 'qa', 'qa_collection_element_header', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-02 10:25:48', 34, '2015-11-02 10:25:48'),
+(854, 852, 'Collection Element', 'form.php?class_name=qa_ce_header&mode=9', 'Collection Element', 'qa', 'qa_ce_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-02 10:25:15', 34, '2015-11-02 10:25:15'),
+(855, 854, 'Search Collection Element', 'search.php?class_name=qa_ce_header', 'Search Collection Element Header', 'qa', 'qa_ce_header', 2, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-02 10:25:48', 34, '2015-11-02 10:25:48'),
 (856, 852, 'Specification', 'form.php?class_name=qa_specification_header&mode=9', 'Specification', 'qa', 'qa_specification_header', 9, NULL, NULL, 'FORM', NULL, NULL, 34, '2015-11-03 10:22:05', 34, '2015-11-03 10:22:05'),
 (857, 856, 'Search Specification', 'search.php?class_name=qa_specification_header&mode=9', 'Search Specification', 'qa', 'qa_specification_header', 2, NULL, NULL, 'SEARCH', NULL, NULL, 34, '2015-11-03 10:22:44', 34, '2015-11-03 10:22:44'),
 (858, 852, 'Setup', 'form.php?module_code=qa&type=setup', 'Quality Setup', 'qa', 'qa', 2, NULL, NULL, 'SETUP', NULL, 90, 34, '2015-11-06 03:24:00', 34, '2015-11-06 03:24:00'),
@@ -14854,11 +14854,11 @@ INSERT INTO `prj_burden_list_line` (`prj_burden_list_line_id`, `prj_burden_list_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prj_burden_structure_costcode`
+-- Table structure for table `prj_burden_struct_costcode`
 --
 
-CREATE TABLE IF NOT EXISTS `prj_burden_structure_costcode` (
-  `prj_burden_structure_costcode_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `prj_burden_struct_costcode` (
+  `prj_burden_struct_costcode_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `prj_burden_structure_header_id` int(12) NOT NULL,
   `burden_cost_code_id` int(12) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -14868,15 +14868,15 @@ CREATE TABLE IF NOT EXISTS `prj_burden_structure_costcode` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`prj_burden_structure_costcode_id`),
+  PRIMARY KEY (`prj_burden_struct_costcode_id`),
   UNIQUE KEY `prj_burden_structure_header_id` (`prj_burden_structure_header_id`,`burden_cost_code_id`,`burden_cost_base_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Project burden structure cost code information' AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `prj_burden_structure_costcode`
+-- Dumping data for table `prj_burden_struct_costcode`
 --
 
-INSERT INTO `prj_burden_structure_costcode` (`prj_burden_structure_costcode_id`, `prj_burden_structure_header_id`, `burden_cost_code_id`, `description`, `burden_cost_base_id`, `priority`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `prj_burden_struct_costcode` (`prj_burden_struct_costcode_id`, `prj_burden_structure_header_id`, `burden_cost_code_id`, `description`, `burden_cost_base_id`, `priority`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (1, 1, 1, NULL, 1, 1, 34, '2015-06-29 04:02:37', 34, '2015-06-29 04:02:37'),
 (3, 1, 2, NULL, 1, NULL, 34, '2015-06-29 04:04:54', 34, '2015-06-29 04:04:54'),
 (4, 1, 1, NULL, 2, NULL, 34, '2015-06-29 04:14:44', 34, '2015-06-29 04:14:44'),
@@ -14885,11 +14885,11 @@ INSERT INTO `prj_burden_structure_costcode` (`prj_burden_structure_costcode_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prj_burden_structure_expendituretype`
+-- Table structure for table `prj_burden_struct_exptype`
 --
 
-CREATE TABLE IF NOT EXISTS `prj_burden_structure_expendituretype` (
-  `prj_burden_structure_expendituretype_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `prj_burden_struct_exptype` (
+  `prj_burden_struct_exptype_id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `prj_burden_structure_header_id` int(12) NOT NULL,
   `prj_expenditure_type_id` int(12) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -14898,15 +14898,15 @@ CREATE TABLE IF NOT EXISTS `prj_burden_structure_expendituretype` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`prj_burden_structure_expendituretype_id`),
+  PRIMARY KEY (`prj_burden_struct_exptype_id`),
   UNIQUE KEY `prj_burden_structure_header_id` (`prj_burden_structure_header_id`,`prj_expenditure_type_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Project burden expenditure type information' AUTO_INCREMENT=13 ;
 
 --
--- Dumping data for table `prj_burden_structure_expendituretype`
+-- Dumping data for table `prj_burden_struct_exptype`
 --
 
-INSERT INTO `prj_burden_structure_expendituretype` (`prj_burden_structure_expendituretype_id`, `prj_burden_structure_header_id`, `prj_expenditure_type_id`, `description`, `burden_cost_base_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
+INSERT INTO `prj_burden_struct_exptype` (`prj_burden_struct_exptype_id`, `prj_burden_structure_header_id`, `prj_expenditure_type_id`, `description`, `burden_cost_base_id`, `created_by`, `creation_date`, `last_update_by`, `last_update_date`) VALUES
 (6, 2, 1, NULL, 1, 34, '2015-06-29 04:04:54', 34, '2015-09-26 14:21:32'),
 (10, 2, 2, NULL, 2, 34, '2015-06-29 04:19:23', 34, '2015-06-29 04:21:44'),
 (11, 1, 1, NULL, 1, 34, '2015-06-29 04:24:01', 34, '2015-06-29 04:28:08'),
@@ -16435,12 +16435,12 @@ CREATE TABLE IF NOT EXISTS `qa_ce_spectrum_range` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `qa_collection_element_action`
+-- Table structure for table `qa_ce_action`
 --
 
-CREATE TABLE IF NOT EXISTS `qa_collection_element_action` (
-  `qa_collection_element_action_id` int(12) NOT NULL AUTO_INCREMENT,
-  `qa_collection_element_header_id` int(12) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qa_ce_action` (
+  `qa_ce_action_id` int(12) NOT NULL AUTO_INCREMENT,
+  `qa_ce_header_id` int(12) NOT NULL,
   `action_condition` varchar(5) NOT NULL,
   `comparison` varchar(10) DEFAULT NULL,
   `value_from` varchar(50) DEFAULT NULL,
@@ -16453,17 +16453,17 @@ CREATE TABLE IF NOT EXISTS `qa_collection_element_action` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`qa_collection_element_action_id`)
+  PRIMARY KEY (`qa_ce_action_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `qa_collection_element_header`
+-- Table structure for table `qa_ce_header`
 --
 
-CREATE TABLE IF NOT EXISTS `qa_collection_element_header` (
-  `qa_collection_element_header_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `qa_ce_header` (
+  `qa_ce_header_id` int(12) NOT NULL AUTO_INCREMENT,
   `element_name` varchar(50) NOT NULL,
   `sys_element_name` varchar(50) NOT NULL,
   `description` varchar(256) DEFAULT NULL,
@@ -16489,7 +16489,7 @@ CREATE TABLE IF NOT EXISTS `qa_collection_element_header` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`qa_collection_element_header_id`),
+  PRIMARY KEY (`qa_ce_header_id`),
   UNIQUE KEY `element_name` (`element_name`),
   UNIQUE KEY `sys_element_name` (`sys_element_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -16497,12 +16497,12 @@ CREATE TABLE IF NOT EXISTS `qa_collection_element_header` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `qa_collection_element_line`
+-- Table structure for table `qa_ce_line`
 --
 
-CREATE TABLE IF NOT EXISTS `qa_collection_element_line` (
-  `qa_collection_element_line_id` int(12) NOT NULL AUTO_INCREMENT,
-  `qa_collection_element_header_id` int(12) NOT NULL,
+CREATE TABLE IF NOT EXISTS `qa_ce_line` (
+  `qa_ce_line_id` int(12) NOT NULL AUTO_INCREMENT,
+  `qa_ce_header_id` int(12) NOT NULL,
   `element_value` varchar(50) NOT NULL,
   `description` varchar(256) DEFAULT NULL,
   `end_date` date DEFAULT NULL,
@@ -16510,7 +16510,7 @@ CREATE TABLE IF NOT EXISTS `qa_collection_element_line` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`qa_collection_element_line_id`)
+  PRIMARY KEY (`qa_ce_line_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -16590,7 +16590,7 @@ CREATE TABLE IF NOT EXISTS `qa_cp_header` (
 CREATE TABLE IF NOT EXISTS `qa_cp_line` (
   `qa_cp_line_id` int(12) NOT NULL AUTO_INCREMENT,
   `qa_cp_header_id` int(12) NOT NULL,
-  `qa_collection_element_header_id` int(12) NOT NULL,
+  `qa_ce_header_id` int(12) NOT NULL,
   `description` varchar(256) DEFAULT NULL,
   `sequence` int(4) DEFAULT NULL,
   `prompt` varchar(25) DEFAULT NULL,
@@ -16640,7 +16640,7 @@ CREATE TABLE IF NOT EXISTS `qa_specification_header` (
 CREATE TABLE IF NOT EXISTS `qa_specification_line` (
   `qa_specification_line_id` int(12) NOT NULL AUTO_INCREMENT,
   `qa_specification_header_id` int(12) NOT NULL,
-  `qa_collection_element_header_id` int(12) NOT NULL,
+  `qa_ce_header_id` int(12) NOT NULL,
   `description` varchar(256) DEFAULT NULL,
   `uom_id` int(12) DEFAULT NULL,
   `enabled_cb` tinyint(1) DEFAULT NULL,
@@ -18510,11 +18510,11 @@ INSERT INTO `sys_pd_process_flow_action` (`sys_pd_process_flow_action_id`, `sys_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_pd_process_flow_action_value`
+-- Table structure for table `sys_pd_pflow_action_val`
 --
 
-CREATE TABLE IF NOT EXISTS `sys_pd_process_flow_action_value` (
-  `sys_pd_process_flow_action_value_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `sys_pd_pflow_action_val` (
+  `sys_pd_pflow_action_val_id` int(12) NOT NULL AUTO_INCREMENT,
   `sys_process_flow_action_id` int(12) NOT NULL,
   `value` varchar(256) NOT NULL,
   `comment` varchar(256) DEFAULT NULL,
@@ -18524,7 +18524,7 @@ CREATE TABLE IF NOT EXISTS `sys_pd_process_flow_action_value` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`sys_pd_process_flow_action_value_id`),
+  PRIMARY KEY (`sys_pd_pflow_action_val_id`),
   UNIQUE KEY `document_type_name` (`sys_process_flow_action_id`,`comment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -18612,11 +18612,11 @@ INSERT INTO `sys_process_flow_action` (`sys_process_flow_action_id`, `sys_proces
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_process_flow_action_value`
+-- Table structure for table `sys_pflow_action_val`
 --
 
-CREATE TABLE IF NOT EXISTS `sys_process_flow_action_value` (
-  `sys_process_flow_action_value_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `sys_pflow_action_val` (
+  `sys_pflow_action_val_id` int(12) NOT NULL AUTO_INCREMENT,
   `sys_process_flow_action_id` int(12) NOT NULL,
   `value` varchar(256) NOT NULL,
   `comment` varchar(256) DEFAULT NULL,
@@ -18626,7 +18626,7 @@ CREATE TABLE IF NOT EXISTS `sys_process_flow_action_value` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`sys_process_flow_action_value_id`),
+  PRIMARY KEY (`sys_pflow_action_val_id`),
   UNIQUE KEY `document_type_name` (`sys_process_flow_action_id`,`comment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -18972,11 +18972,11 @@ CREATE TABLE IF NOT EXISTS `sys_secondary_field` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_secondary_field_instance`
+-- Table structure for table `sys_secondary_field_inst`
 --
 
-CREATE TABLE IF NOT EXISTS `sys_secondary_field_instance` (
-  `sys_secondary_field_instance_id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `sys_secondary_field_inst` (
+  `sys_secondary_field_inst_id` int(12) NOT NULL AUTO_INCREMENT,
   `sys_secondary_field_id` int(12) NOT NULL,
   `reference_type` varchar(25) DEFAULT NULL,
   `referece_entity` varchar(25) DEFAULT NULL,
@@ -18996,7 +18996,7 @@ CREATE TABLE IF NOT EXISTS `sys_secondary_field_instance` (
   `creation_date` datetime DEFAULT NULL,
   `last_update_by` int(12) NOT NULL,
   `last_update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`sys_secondary_field_instance_id`),
+  PRIMARY KEY (`sys_secondary_field_inst_id`),
   UNIQUE KEY `sys_extra_field_id` (`sys_secondary_field_id`,`reference_type`,`reference_key_name`,`reference_key_value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -21811,7 +21811,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_line_v` AS select `bh
 --
 DROP TABLE IF EXISTS `bom_overhead_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select `res`.`bom_overhead_resource_assignment_id` AS `bom_overhead_resource_assignment_id`,`res`.`bom_cost_type` AS `resource_bom_cost_type`,`res`.`resource_id` AS `resource_id`,`ora`.`bom_overhead_rate_assignment_id` AS `bom_overhead_rate_assignment_id`,`ora`.`bom_overhead_id` AS `bom_overhead_id`,`ora`.`bom_cost_type` AS `rate_bom_cost_type`,`ora`.`default_basis` AS `default_basis`,`ora`.`rate` AS `rate`,`bo`.`overhead` AS `overhead`,`bo`.`description` AS `description`,`bo`.`org_id` AS `org_id`,`bo`.`overhead_type` AS `overhead_type`,`bo`.`absorption_ac_id` AS `absorption_ac_id` from ((`bom_overhead_rate_assignment` `ora` left join `bom_overhead` `bo` on((`bo`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) left join `bom_overhead_resource_assignment` `res` on((`res`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) where (`res`.`bom_cost_type` = `ora`.`bom_cost_type`);
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `bom_overhead_v` AS select `res`.`bom_oh_res_assignment_id` AS `bom_oh_res_assignment_id`,`res`.`bom_cost_type` AS `resource_bom_cost_type`,`res`.`resource_id` AS `resource_id`,`ora`.`bom_oh_rate_assignment_id` AS `bom_oh_rate_assignment_id`,`ora`.`bom_overhead_id` AS `bom_overhead_id`,`ora`.`bom_cost_type` AS `rate_bom_cost_type`,`ora`.`default_basis` AS `default_basis`,`ora`.`rate` AS `rate`,`bo`.`overhead` AS `overhead`,`bo`.`description` AS `description`,`bo`.`org_id` AS `org_id`,`bo`.`overhead_type` AS `overhead_type`,`bo`.`absorption_ac_id` AS `absorption_ac_id` from ((`bom_oh_rate_assignment` `ora` left join `bom_overhead` `bo` on((`bo`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) left join `bom_oh_res_assignment` `res` on((`res`.`bom_overhead_id` = `ora`.`bom_overhead_id`))) where (`res`.`bom_cost_type` = `ora`.`bom_cost_type`);
 
 -- --------------------------------------------------------
 
@@ -21991,7 +21991,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `gl_unposted_journal_lines
 --
 DROP TABLE IF EXISTS `hr_employee_position_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `hr_employee_position_v` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username`,`user`.`first_name` AS `first_name`,`user`.`last_name` AS `last_name`,`user`.`email` AS `email`,`user`.`hr_employee_id` AS `hr_employee_id`,`user`.`status` AS `status`,`he`.`identification_id` AS `identification_id`,`he`.`start_date` AS `emp_start_date`,`he`.`citizen_number` AS `citizen_number`,`he`.`first_name` AS `emp_first_name`,`he`.`last_name` AS `emp_last_name`,`he`.`phone` AS `phone`,`he`.`email` AS `emp_email`,`he`.`gender` AS `gender`,`he`.`person_type` AS `person_type`,`he`.`org_id` AS `org_id`,`he`.`job_id` AS `job_id`,`he`.`position_id` AS `position_id`,`he`.`expense_ac_id` AS `expense_ac_id`,`he`.`supervisor_employee_id` AS `supervisor_employee_id`,`hp`.`position_name` AS `position_name`,`he`.`org_id` AS `emp_org_id`,`hala`.`hr_approval_limit_header_id` AS `hr_approval_limit_header_id`,`hala`.`document_type` AS `document_type`,`hala`.`start_date` AS `limit_start_date`,`hall`.`limit_type` AS `limit_type`,`hall`.`limit_range_low` AS `limit_range_low`,`hall`.`limit_range_high` AS `limit_range_high`,`hall`.`amount_limit` AS `amount_limit`,`hall`.`limit_object` AS `limit_object`,`halh`.`bu_org_id` AS `bu_org_id`,`org_v`.`currency_code` AS `currency_code` from (((((((`user` left join `hr_employee` `he` on((`he`.`hr_employee_id` = `user`.`hr_employee_id`))) left join `hr_position` `hp` on((`hp`.`hr_position_id` = `he`.`position_id`))) left join `hr_approval_limit_assignment` `hala` on((`he`.`position_id` = `hala`.`position_id`))) left join `hr_approval_limit_line` `hall` on((`hala`.`hr_approval_limit_header_id` = `hall`.`hr_approval_limit_header_id`))) left join `hr_approval_object` `hao` on((`hao`.`hr_approval_object_id` = `hall`.`limit_object`))) left join `hr_approval_limit_header` `halh` on((`hall`.`hr_approval_limit_header_id` = `halh`.`hr_approval_limit_header_id`))) left join `org_v` on((`org_v`.`org_id` = `halh`.`bu_org_id`)));
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `hr_employee_position_v` AS select `user`.`user_id` AS `user_id`,`user`.`username` AS `username`,`user`.`first_name` AS `first_name`,`user`.`last_name` AS `last_name`,`user`.`email` AS `email`,`user`.`hr_employee_id` AS `hr_employee_id`,`user`.`status` AS `status`,`he`.`identification_id` AS `identification_id`,`he`.`start_date` AS `emp_start_date`,`he`.`citizen_number` AS `citizen_number`,`he`.`first_name` AS `emp_first_name`,`he`.`last_name` AS `emp_last_name`,`he`.`phone` AS `phone`,`he`.`email` AS `emp_email`,`he`.`gender` AS `gender`,`he`.`person_type` AS `person_type`,`he`.`org_id` AS `org_id`,`he`.`job_id` AS `job_id`,`he`.`position_id` AS `position_id`,`he`.`expense_ac_id` AS `expense_ac_id`,`he`.`supervisor_employee_id` AS `supervisor_employee_id`,`hp`.`position_name` AS `position_name`,`he`.`org_id` AS `emp_org_id`,`hala`.`hr_approval_limit_header_id` AS `hr_approval_limit_header_id`,`hala`.`document_type` AS `document_type`,`hala`.`start_date` AS `limit_start_date`,`hall`.`limit_type` AS `limit_type`,`hall`.`limit_range_low` AS `limit_range_low`,`hall`.`limit_range_high` AS `limit_range_high`,`hall`.`amount_limit` AS `amount_limit`,`hall`.`limit_object` AS `limit_object`,`halh`.`bu_org_id` AS `bu_org_id`,`org_v`.`currency_code` AS `currency_code` from (((((((`user` left join `hr_employee` `he` on((`he`.`hr_employee_id` = `user`.`hr_employee_id`))) left join `hr_position` `hp` on((`hp`.`hr_position_id` = `he`.`position_id`))) left join `hr_approval_limit_assign` `hala` on((`he`.`position_id` = `hala`.`position_id`))) left join `hr_approval_limit_line` `hall` on((`hala`.`hr_approval_limit_header_id` = `hall`.`hr_approval_limit_header_id`))) left join `hr_approval_object` `hao` on((`hao`.`hr_approval_object_id` = `hall`.`limit_object`))) left join `hr_approval_limit_header` `halh` on((`hall`.`hr_approval_limit_header_id` = `halh`.`hr_approval_limit_header_id`))) left join `org_v` on((`org_v`.`org_id` = `halh`.`bu_org_id`)));
 
 -- --------------------------------------------------------
 
@@ -22036,7 +22036,7 @@ CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_interorg_receipt_head
 --
 DROP TABLE IF EXISTS `inv_interorg_transfer_v`;
 
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_interorg_transfer_v` AS select `ith`.`inv_interorg_transfer_header_id` AS `inv_interorg_transfer_header_id`,`ith`.`order_number` AS `order_number`,`ith`.`order_number` AS `io_order_number`,`itl`.`line_number` AS `line_number`,`itl`.`line_number` AS `io_line_number`,`item`.`item_number` AS `item_number`,`itl`.`status` AS `status`,`itl`.`inv_interorg_transfer_line_id` AS `inv_interorg_transfer_line_id`,`ith`.`comment` AS `comment`,`ith`.`from_org_id` AS `from_org_id`,`ith`.`transaction_type_id` AS `transaction_type_id`,`ith`.`to_org_id` AS `to_org_id`,`ith`.`carrier` AS `carrier`,`ith`.`vehicle_number` AS `vehicle_number`,`ith`.`waybill` AS `waybill`,`itl`.`uom_id` AS `uom_id`,`itl`.`from_subinventory_id` AS `from_subinventory_id`,`itl`.`from_locator_id` AS `from_locator_id`,`itl`.`item_id_m` AS `item_id_m`,`itl`.`item_description` AS `item_description`,`itl`.`to_subinventory_id` AS `to_subinventory_id`,`itl`.`to_locator_id` AS `to_locator_id`,`itl`.`transaction_quantity` AS `transaction_quantity`,`itl`.`serial_number` AS `serial_number`,`itl`.`lot_number` AS `lot_number` from ((`inv_interorg_transfer_header` `ith` join `inv_interorg_transfer_line` `itl`) join `item`) where ((`ith`.`inv_interorg_transfer_header_id` = `itl`.`inv_interorg_transfer_header_id`) and (`item`.`item_id_m` = `itl`.`item_id_m`) and (`item`.`org_id` = `ith`.`from_org_id`));
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `inv_interorg_transfer_v` AS select `ith`.`inv_intorg_transfer_header_id` AS `inv_intorg_transfer_header_id`,`ith`.`order_number` AS `order_number`,`ith`.`order_number` AS `io_order_number`,`itl`.`line_number` AS `line_number`,`itl`.`line_number` AS `io_line_number`,`item`.`item_number` AS `item_number`,`itl`.`status` AS `status`,`itl`.`inv_intorg_transfer_line_id` AS `inv_intorg_transfer_line_id`,`ith`.`comment` AS `comment`,`ith`.`from_org_id` AS `from_org_id`,`ith`.`transaction_type_id` AS `transaction_type_id`,`ith`.`to_org_id` AS `to_org_id`,`ith`.`carrier` AS `carrier`,`ith`.`vehicle_number` AS `vehicle_number`,`ith`.`waybill` AS `waybill`,`itl`.`uom_id` AS `uom_id`,`itl`.`from_subinventory_id` AS `from_subinventory_id`,`itl`.`from_locator_id` AS `from_locator_id`,`itl`.`item_id_m` AS `item_id_m`,`itl`.`item_description` AS `item_description`,`itl`.`to_subinventory_id` AS `to_subinventory_id`,`itl`.`to_locator_id` AS `to_locator_id`,`itl`.`transaction_quantity` AS `transaction_quantity`,`itl`.`serial_number` AS `serial_number`,`itl`.`lot_number` AS `lot_number` from ((`inv_intorg_transfer_header` `ith` join `inv_intorg_transfer_line` `itl`) join `item`) where ((`ith`.`inv_intorg_transfer_header_id` = `itl`.`inv_intorg_transfer_header_id`) and (`item`.`item_id_m` = `itl`.`item_id_m`) and (`item`.`org_id` = `ith`.`from_org_id`));
 
 -- --------------------------------------------------------
 

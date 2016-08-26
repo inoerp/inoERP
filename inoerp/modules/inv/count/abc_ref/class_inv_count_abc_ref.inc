@@ -49,7 +49,8 @@ class inv_count_abc_ref extends dbObject {
 
  public static function find_by_parentId_abcCode($parent_id, $abc_code) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE inv_count_header_id = '{$parent_id}' AND class_code = '{$abc_code}' LIMIT 1 " ;
+  $sql .= " WHERE inv_count_header_id = '{$parent_id}' AND class_code = '{$abc_code}' " ;
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

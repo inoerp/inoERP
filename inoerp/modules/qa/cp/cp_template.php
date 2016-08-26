@@ -92,7 +92,7 @@ inoERP
          </td>
          <td><?php $f->text_field_wid2sr('qa_cp_line_id', 'always_readonly dontCopy line_id'); ?></td>
          <td><?php echo $f->number_field('sequence', $$class_second->sequence); ?></td>
-         <td><?php echo $f->select_field_from_object('qa_collection_element_header_id', qa_collection_element_header::find_all(), 'qa_collection_element_header_id', 'element_name', $$class_second->qa_collection_element_header_id); ?></td>
+         <td><?php echo $f->select_field_from_object('qa_ce_header_id', qa_ce_header::find_all(), 'qa_ce_header_id', 'element_name', $$class_second->qa_ce_header_id); ?></td>
          <td><?php $f->text_field_wid2('prompt'); ?></td>
          <td><?php $f->checkBox_field_wid2('enabled_cb'); ?></td>
          <td><?php $f->checkBox_field_wid2('mandatory_cb'); ?></td>

@@ -625,7 +625,8 @@ class item extends dbObject {
  public static function find_by_orgId_item_id_m($item_id, $org_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE item_id_m = '{$item_id}' AND org_id = '{$org_id}'  LIMIT 1";
+  $sql .= " WHERE item_id_m = '{$item_id}' AND org_id = '{$org_id}'  ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -634,7 +635,8 @@ class item extends dbObject {
   global $db;
   $sql = "SELECT * FROM "
    . self::$table_name
-   . " where item_number LIKE '%{$item_number}%' LIMIT 0, 30";
+   . " where item_number LIKE '%{$item_number}%' ";
+  $sql = ino_perPageSql_i($sql, 30);
   $result = $db->query($sql);
   $data = array();
   if ($result && mysql_num_rows($result)) {
@@ -658,7 +660,7 @@ class item extends dbObject {
   $sql .= self::$table_name;
   $sql .= " where item_number LIKE '%{$item_number}%' ";
   $sql .= " AND org_id  = '{$org_id}' ";
-  $sql .= " LIMIT 1 ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = $db->find_by_sql($sql);
   return !(empty($result)) ? array_pop($result) : false;
  }
@@ -669,7 +671,7 @@ class item extends dbObject {
   $sql .= self::$table_name;
   $sql .= " where item_number LIKE '%{$item_number}%' ";
   $sql .= " AND item_id_m  = item_id ";
-  $sql .= " LIMIT 1 ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = $db->find_by_sql($sql);
   return !(empty($result)) ? array_pop($result) : false;
  }
@@ -688,7 +690,8 @@ class item extends dbObject {
   $org_id = empty($org_id) ? $this->org_id : $org_id;
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE item_id_m = :item_id_m AND org_id = :org_id  LIMIT 1";
+  $sql .= " WHERE item_id_m = :item_id_m AND org_id = :org_id  ";
+  $sql = ino_perPageSql_i($sql, 1);
   $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -718,8 +721,8 @@ class item extends dbObject {
   $item_n->org_id = $this->org_id;
   $item_n->item_id_m = $this->item_id_m;
   $item_n_j = $item_n->findBy_orgId_itemIdM();
-  foreach($item_n->field_a as $k => $v ){
-   if(property_exists($item_n_j, $v)){
+  foreach ($item_n->field_a as $k => $v) {
+   if (property_exists($item_n_j, $v)) {
     $item_n->$v = $item_n_j->$v;
    }
   }
@@ -811,7 +814,7 @@ class item extends dbObject {
      }
     }
     $mm_item->_update_item_minmax();
-    $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " .  $mm_item->item_id_m  . ' & org_id '. $mm_item->org_id.
+    $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " . $mm_item->item_id_m . ' & org_id ' . $mm_item->org_id .
      ' min max header id : ' . $fp_minmax_header_id;
    } catch (Exception $e) {
     $this->message .= "<br/> Min Max Item Updat fialed for Item id " . $item_id . $e->getMessage();
@@ -841,10 +844,10 @@ class item extends dbObject {
     }
     try {
      $mm_item->_update_item_minmax();
-     $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " .  $mm_item->item_id_m  . ' & org_id '. $mm_item->org_id.
+     $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " . $mm_item->item_id_m . ' & org_id ' . $mm_item->org_id .
       ' fp_minmax_header_id : ' . $fp_minmax_header_id;
     } catch (Exception $e) {
-     $this->message .= "<br>Min Max Plannerp failed for Item id " .  $mm_item->item_id_m . $e->getMessage();
+     $this->message .= "<br>Min Max Plannerp failed for Item id " . $mm_item->item_id_m . $e->getMessage();
     }
    }
    return $this->message;
@@ -872,10 +875,10 @@ class item extends dbObject {
     }
     try {
      $mm_item->_update_item_minmax();
-     $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " .  $mm_item->item_id_m  . ' & org_id '. $mm_item->org_id.
+     $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " . $mm_item->item_id_m . ' & org_id ' . $mm_item->org_id .
       ' fp_minmax_header_id : ' . $fp_minmax_header_id;
     } catch (Exception $e) {
-     $this->message .= "<br>Min Max Plannerp failed for Item id " .  $mm_item->item_id_m . $e->getMessage();
+     $this->message .= "<br>Min Max Plannerp failed for Item id " . $mm_item->item_id_m . $e->getMessage();
     }
    }
    return $this->message;
@@ -894,10 +897,10 @@ class item extends dbObject {
    }
    try {
     $mm_item->_update_item_minmax();
-    $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " .  $mm_item->item_id_m  . ' & org_id '. $mm_item->org_id.
+    $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " . $mm_item->item_id_m . ' & org_id ' . $mm_item->org_id .
      ' fp_minmax_header_id : ' . $mms->plan_id;
    } catch (Exception $e) {
-    $this->message .= "<br>Min Max Plannerp failed for Item id " .  $mm_item->item_id_m . $e->getMessage();
+    $this->message .= "<br>Min Max Plannerp failed for Item id " . $mm_item->item_id_m . $e->getMessage();
    }
   }
   return $this->message;
@@ -930,7 +933,7 @@ class item extends dbObject {
   $sql = "SELECT * FROM " . self::$table_name;
   $sql .= " where item_number = :item_number ";
   $sql .= " AND org_id = :org_id ";
-  $sql .= " LIMIT 1 ";
+  $sql = ino_perPageSql_i($sql, 1);
   $param_a = ['item_number', 'org_id'];
   $org_id_i = !empty($org_id) ? $org_id : $this->org_id;
   $value_a = ['item_number' => $this->item_number, 'org_id' => $org_id_i];
@@ -989,7 +992,7 @@ class item extends dbObject {
  public static function find_item_number_by_itemNumber_OrgId($item_number, $org_id = "", $options = '') {
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " where  ( item_number LIKE '%{$item_number}%' || item_description LIKE '%{$item_number}%'  )";
+  $sql .= " where  ( item_number LIKE '%{$item_number}%' OR item_description LIKE '%{$item_number}%'  )";
   if (!empty($org_id)) {
    $sql .= " AND org_id  = '{$org_id}' ";
   }
@@ -999,8 +1002,11 @@ class item extends dbObject {
     $sql .= " AND $key  = '{$val}' ";
    }
   }
-
+  
   $result = self::find_by_sql($sql);
+    if(empty($result)){
+   return false;
+  }
   $data = array();
   foreach ($result as $row) {
    $data[] = array(
@@ -1086,7 +1092,6 @@ class item extends dbObject {
   return $result;
  }
 
- 
  public static function find_itemCategory_byItemIdm_and_orgId($item_id_m, $org_id) {
 
   $sql = "SELECT category.category_id as category_id,
@@ -1107,7 +1112,7 @@ class item extends dbObject {
   $result = self::find_by_sql($sql);
   return $result;
  }
- 
+
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = "SELECT * FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
   $show_only_master_items = true;

@@ -44,7 +44,7 @@
      </div>
     </div>
     <div id="tabsHeader-3" class="tabContent">
-     <div><ul class='column header_field'><li><?php $f->l_checkBox_field('update_revision_cb', '') ?></li></ul>
+     <div><ul class='column header_field'><li><?php $f = new inoform(); $f->l_checkBox_field_d('update_revision_cb') ?></li></ul>
       <div id="tabsDetail">
        <div>
         <div id="tabsDetail-1" class="tabContent">
@@ -87,9 +87,9 @@
              <td><?php $f->text_field_wid2('reason'); ?></td>
              <td><?php
               if ($reaonly_ir) {
-               $f->text_field_wid2r('eco_number');
+               $f->text_field_wid2sr('eco_number');
               } else {
-               $f->text_field_wid2('eco_number');
+               $f->text_field_wid2s('eco_number');
               }
               ?></td>
              <td><?php echo ($reaonly_ir == true) ? $f->date_fieldAnyDay_r('effective_start_date', $$class_second->effective_start_date, 1) : $f->date_fieldAnyDay('effective_start_date', $$class_second->effective_start_date); ?></td>
@@ -142,7 +142,7 @@
 
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"> Item Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Item Details') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
@@ -158,7 +158,7 @@
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <div class="first_rowset"> 
-      <ul class="column five_column"> 
+      <ul class="column header_field form_header_l"> 
        <li><?php $f->l_select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_value', $$class->item_type, 'item_type', '', 1, $readonly); ?>       </li> 
        <li><?php echo $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, 'uom_id', '', 1, $readonly); ?>       </li>
        <li><?php echo $f->l_number_field('product_line_percentage', $$class->product_line_percentage, '8'); ?></li>
@@ -287,12 +287,12 @@
        <li><?php $f->l_text_field_d('invoice_matching'); ?></li>
        <li><?php $f->l_text_field_d('default_buyer'); ?></li>
        <li><?php $f->l_text_field_d('list_price'); ?></li>
-       <li><?php $f->l_text_field_d('un_number'); ?></li>
+       <li><?php // $f->l_text_field_d('un_number'); ?></li>
       </ul>
      </div>
      <div class="second_rowset">
       <div class="panel panel-collapse panel-ino-classy extra_large_box">
-       <div class="panel-heading"><div class="panel-title">Receipt Information</div></div>
+       <div class="panel-heading"><div class="panel-title"><?php gettext('Receipt Information'); ?></div></div>
        <div class="panel-body">
         <ul class="column header_field">
          <li><?php $f->l_text_field_d('receipt_routing'); ?></li>
@@ -311,13 +311,13 @@
     <div id="tabsLine-5" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field"> 
-       <li><?php $f->l_select_field_from_object('make_buy', item::manufacturing_item_types(), 'option_line_code', 'option_line_code', $$class->make_buy, 'make_buy', '', 1, $readonly); ?>       </li>
+       <li><?php $f->l_select_field_from_object('make_buy', item::manufacturing_item_types(), 'option_line_code', 'option_line_code', $$class->make_buy, 'make_buy', 'medium', 1, $readonly); ?>       </li>
        <li><?php $f->l_checkBox_field_d('bom_enabled_cb'); ?></li>
        <li><?php $f->l_select_field_from_object('bom_type', item::bom_types(), 'option_line_code', 'option_line_value', $$class->bom_type, 'bom_type'); ?>       </li>
        <li><?php $f->l_checkBox_field_d('build_in_wip_cb'); ?></li>
-       <li><?php $f->l_select_field_from_object('wip_supply_type', bom_header::wip_supply_type(), 'option_line_code', 'option_line_value', $$class->wip_supply_type, 'wip_supply_type', '', $readonly); ?>       </li>
-       <li><?php $f->l_select_field_from_object('wip_supply_subinventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->wip_supply_subinventory, 'wip_supply_subinventory', 'subinventory_id', '', $readonly); ?>       </li>
-       <li><?php $f->l_select_field_from_object('wip_supply_locator', locator::find_all_of_subinventory($$class->wip_supply_subinventory), 'locator_id', 'locator', $$class->wip_supply_locator, 'wip_supply_locator', 'locator_id', '', $readonly); ?>       </li>
+       <li><?php $f->l_select_field_from_object('wip_supply_type', bom_header::wip_supply_type(), 'option_line_code', 'option_line_value', $$class->wip_supply_type, 'wip_supply_type', 'medium', $readonly); ?>       </li>
+       <li><?php $f->l_select_field_from_object('wip_supply_subinventory', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->wip_supply_subinventory, 'wip_supply_subinventory', 'subinventory_id medium', '', $readonly); ?>       </li>
+       <li><?php $f->l_select_field_from_object('wip_supply_locator', locator::find_all_of_subinventory($$class->wip_supply_subinventory), 'locator_id', 'locator', $$class->wip_supply_locator, 'wip_supply_locator', 'locator_id medium', '', $readonly); ?>       </li>
       </ul>
      </div>
      <div class="second_rowset">

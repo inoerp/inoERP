@@ -136,14 +136,14 @@ class fa_asset_transaction extends dbObject {
 
  private function _create_journal_lines() {
   global $dbc;
-  $fa_book_category_association_i = fa_book_category_association::find_all_accounts_byAssetBookId($this->fa_asset_id, $this->fa_asset_book_id);
-  if (empty($fa_book_category_association_i)) {
+  $fa_book_category_assoc_i = fa_book_category_assoc::find_all_accounts_byAssetBookId($this->fa_asset_id, $this->fa_asset_book_id);
+  if (empty($fa_book_category_assoc_i)) {
    $dbc->rollback = 1;
-   echo "<br>fa_book_category_association is missing";
+   echo "<br>fa_book_category_assoc is missing";
    return;
-  } else if (empty($fa_book_category_association_i->asset_cost_ac_id) || empty($fa_book_category_association_i->asset_clearing_ac_id)) {
+  } else if (empty($fa_book_category_assoc_i->asset_cost_ac_id) || empty($fa_book_category_assoc_i->asset_clearing_ac_id)) {
    $dbc->rollback = 1;
-   echo "<br>cost or clearing account is missing for fa_book_category_association";
+   echo "<br>cost or clearing account is missing for fa_book_category_assoc";
    return;
   }
 
@@ -151,7 +151,7 @@ class fa_asset_transaction extends dbObject {
   $new_gjl->gl_journal_header_id = $this->gl_journal_header_id;
   $new_gjl->line_num = 1;
   $new_gjl->status = 'U';
-  $new_gjl->code_combination_id = $fa_book_category_association_i->asset_cost_ac_id;
+  $new_gjl->code_combination_id = $fa_book_category_assoc_i->asset_cost_ac_id;
   $new_gjl->total_dr = $new_gjl->total_ac_dr = $this->amout;
   $new_gjl->description = 'Transaction ' . $this->transaction_type . ' for asset id ' . $this->fa_asset_id;
   $new_gjl->reference_type = 'table';
@@ -163,7 +163,7 @@ class fa_asset_transaction extends dbObject {
   $new_gjl1->gl_journal_header_id = $this->gl_journal_header_id;
   $new_gjl1->line_num = 2;
   $new_gjl1->status = 'U';
-  $new_gjl1->code_combination_id = $fa_book_category_association_i->asset_clearing_ac_id;
+  $new_gjl1->code_combination_id = $fa_book_category_assoc_i->asset_clearing_ac_id;
   $new_gjl1->total_cr = $new_gjl1->total_ac_cr = $this->amout;
   $new_gjl1->description = 'Transaction ' . $this->transaction_type . ' for asset id ' . $this->fa_asset_id;
   $new_gjl1->reference_type = 'table';

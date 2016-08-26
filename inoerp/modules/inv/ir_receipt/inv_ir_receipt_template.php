@@ -136,7 +136,7 @@
           <td><?php $f->text_field_wid2sr('po_requisition_line_id','always_readonly'); ?></td>
           <td><?php $f->text_field_wid2sr('po_requisition_detail_id','always_readonly'); ?></td>
 
-              <!--<td><a target="_blank" href="form.php?class_name=inv_interorg_transfer_header&amp;inv_interorg_transfer_header_id=<?php // echo $$class_second->inv_interorg_transfer_header_id;      ?>&amp;mode=2">View Doc</a></td>-->
+              <!--<td><a target="_blank" href="form.php?class_name=inv_intorg_transfer_header&amp;inv_intorg_transfer_header_id=<?php // echo $$class_second->inv_intorg_transfer_header_id;      ?>&amp;mode=2">View Doc</a></td>-->
          </tr>
          <?php
          $count = $count + 1;

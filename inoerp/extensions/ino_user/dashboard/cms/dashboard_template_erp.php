@@ -64,7 +64,7 @@
       </div>
       <div id="tabsHeader-3" class="tabContent">
        <?php
-       $view_i = new view();
+       $view_i = new extn_view();
        $view_i->view_id = 11;
        $view_i->viewResultById();
        ?>

@@ -19,7 +19,7 @@
 
  public static $table_name = "fa_asset_category";
  public static $primary_column = "fa_asset_category_id";
- public static $dependent_classes = ['fa_book_category_association'];
+ public static $dependent_classes = ['fa_book_category_assoc'];
  public static $key_column = 'asset_category';
  public static $module = "fa";
 // public static $js_fileName = 'modules/inv/fa_asset_category/js/multi_select.js';

@@ -126,7 +126,8 @@ class mdm_bank_header extends dbObject {
   global $db;
   $sql = "SELECT * FROM "
    . self::$table_name
-   . " where mdm_bank_header_number LIKE '%{$mdm_bank_header_number}%' LIMIT 0, 30";
+   . " where mdm_bank_header_number LIKE '%{$mdm_bank_header_number}%'";
+   $sql = ino_perPageSql_i($sql, 1);
   $result = $db->query($sql);
   $data = array();
   if ($result && mysql_num_rows($result)) {
@@ -156,7 +157,8 @@ class mdm_bank_header extends dbObject {
   global $db;
   $sql = " SELECT * FROM "
    . self::$table_name
-   . " where mdm_bank_header_name LIKE :mdm_bank_header_name LIMIT $limit";
+   . " where mdm_bank_header_name LIKE :mdm_bank_header_name ";
+  $sql = ino_perPageSql_i($sql, $limit);
   $param_a = ['mdm_bank_header_name'];
   $mdm_bank_header_name = '%' . $this->mdm_bank_header_name . '%';
   $value_a = [ 'mdm_bank_header_name' => $mdm_bank_header_name];

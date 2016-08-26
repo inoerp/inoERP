@@ -92,7 +92,8 @@ class form {
  }
 
  public static function find_by_id($form_id) {
-	$sql = "SELECT * FROM " . self::$table_name . " where form_id={$form_id} LIMIT 1";
+	$sql = "SELECT * FROM " . self::$table_name . " where form_id={$form_id} ";
+  $sql = ino_perPageSql_i($sql, 1);
 	$result_array = self::find_by_sql($sql);
 	return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -255,21 +256,21 @@ EOD;
 
  public static function hidden_field($name, $value) {
 	$bracketName = $name . '[]';
-	$value = htmlentities($value);
+	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	$element_hidden_field = "<input type=\"hidden\" name=\"$bracketName\" value=\"$value\" class=\"hidden $name\" >";
 	return $element_hidden_field;
  }
 
  public static function hidden_field_withId($name, $value) {
 	$bracketName = $name . '[]';
-	$value = htmlentities($value);
+	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	$element_hidden_field = "<input type=\"hidden\" id=\"hidden_$name \" name=\"$bracketName\" value=\"$value\" class=\"hidden $name\" >";
 	return $element_hidden_field;
  }
 
  public static function text_field($name, $value, $size = "15", $maxlength = "256", $required = "", $place_holder = "", $id = "", $readonly = "", $class_name = "", $title = "") {
 	$bracketName = $name . '[]';
-	$value = htmlentities($value);
+	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	if ($readonly == 1) {
 	 $readonly = 'readonly';
 	} else {
@@ -294,6 +295,7 @@ EOD;
  public static function text_field_ap($array) {
 	$name = array_key_exists('name', $array) ? $array['name'] : null;
 	$value = array_key_exists('value', $array) ? $array['value'] : null;
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	$size = array_key_exists('size', $array) ? $array['size'] : null;
 	$maxlength = array_key_exists('maxlength', $array) ? $array['maxlength'] : null;
 	$required = array_key_exists('required', $array) ? $array['required'] : null;
@@ -329,6 +331,8 @@ EOD;
 	$bracketName = $name . '[]';
 	$valueAfterDecimal = ino_showDecimal(htmlentities($value));
 //	echo "$value : $valueAfterDecimal";
+  $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+  
 
 	if ($readonly == 1) {
 	 $readonly = 'readonly';
@@ -749,6 +753,7 @@ EOD;
 	}else{
 	 $value = null;
 	}
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	echo self::text_field($field_name, $value, '30', '', '', '', $field_name, $readonly, 'select_account');
 	echo self::accpup_stmt();
  }
@@ -760,6 +765,7 @@ EOD;
 	}else{
 	 $value = null;
 	}
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	echo self::text_field($field_name, $value, '30', '', 1, '', $field_name, $readonly, 'select_account');
 	echo self::accpup_stmt();
  }
@@ -998,7 +1004,7 @@ EOD;
 
  public static function text_area($name, $value, $rowsize = "5", $columnsize = "20", $required = "", $place_holder = "", $id = "", $readonly = "") {
 	$bracketName = $name . '[]';
-	$value = htmlentities($value);
+//	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	if ($readonly == 1) {
 	 $readonly = 'readonly';
 	} else {
@@ -1015,7 +1021,7 @@ EOD;
 	 $idvalue = "";
 	}
 	$element_text_field = "<textarea name=\"$bracketName\" 
-	 cols=\"$columnsize\" rows=\"$rowsize\" class=\"textfield $name\" placeholder=\"$place_holder\" $required $idvalue $readonly>$value</textarea>";
+	 cols=\"$columnsize\" rows=\"$rowsize\" class=\"textfield $name\" placeholder=\"$place_holder\" $required $idvalue $readonly> ".  ($value)." </textarea>";
 	return $element_text_field;
  }
 
@@ -1033,7 +1039,7 @@ EOD;
 	}
 
 	$bracketName = $name . '[]';
-	$value = ino_date(htmlentities($value));
+	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	if (!empty($id)) {
 	 $idvalue = 'id="' . $id . '"';
 	} else {
@@ -1064,6 +1070,7 @@ EOD;
  }
 
  public static function select_field_from_array($name, $array, $value, $id = "", $readonly = "") {
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	if ($readonly == 1) {
 	 $readonly = 'disabled';
 	} else {
@@ -1090,7 +1097,8 @@ EOD;
  }
 
  public static function select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $readonly = "", $divClass = "", $convertToText = "", $required = "", $nonArrayName = "", $disabled = "") {
-	if ($nonArrayName == 1) {
+	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+  if ($nonArrayName == 1) {
 	 $bracketName = $name;
 	} else {
 	 $bracketName = $name . '[]';
@@ -1153,6 +1161,7 @@ EOD;
 	$ob_value = array_key_exists('ob_value', $array) ? $array['ob_value'] : null;
 	$ob_desc = array_key_exists('ob_desc', $array) ? $array['ob_desc'] : null;
 	$value = array_key_exists('value', $array) ? $array['value'] : null;
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	$id = array_key_exists('id', $array) ? $array['id'] : null;
 	$readonly = array_key_exists('readonly', $array) ? $array['readonly'] : null;
 	$divClass = array_key_exists('divClass', $array) ? $array['divClass'] : null;
@@ -1225,13 +1234,14 @@ EOD;
 	} else {
 	 $readonly = '';
 	}
-	$value = htmlentities($value);
+	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	$element_extra_field = "<input type=\"text\" name=\"efid[]\" value=\"$value\" maxlength=\"200\" 
 										size=\"$size\" class=\"efid\" $readonly \>";
 	return $element_extra_field;
  }
 
  public static function checkBox_field($name, $value, $id = "", $readonly = "") {
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	$bracketName = $name . '[]';
 	if ($readonly == 1) {
 	 $readonly = 'onclick="return false"';
@@ -1288,7 +1298,7 @@ EOD;
 	 $readonly = '';
 	}
 
-	$value = htmlentities($value);
+	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	$element_text_field = "<Select name=\"status[]\" class=\"status select\" $readonly >";
 	$element_text_field .= "<option value=\"\" ></option>";
 	$element_text_field .= "<option value=\"ACTIVE\" $active > Active </option>";
@@ -1321,7 +1331,7 @@ EOD;
 	 $readonly = '';
 	}
 
-	$value = htmlentities($value);
+	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	$element_text_field = "<Select name=\"rev_enabled[]\" class=\"rev_enabled select\" $readonly >";
 	$element_text_field .= "<option value=\"\" ></option>";
 	$element_text_field .= "<option value=\"enabled\" $enabled > Enabled </option>";

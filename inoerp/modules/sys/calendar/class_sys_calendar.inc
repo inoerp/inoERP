@@ -78,15 +78,16 @@ class sys_calendar extends dbObject {
    if (empty($field_value_a[0]) || in_array($field_name, sys_calendar::$common_fields_a)) {
     continue;
    } else {
-    $class = qa_collection_element_header::tableName_from_elementName($field_name);
+    $class = qa_ce_header::tableName_from_elementName($field_name);
     $key_column = $class . '_id';
     $value_column = $class . '_value';
 //    $$class = new stdClass();
-    $extra_fields = view::find_columns_of_table($class);
+    $extra_fields = extn_view::find_columns_of_table($class);
 //    pa($extra_fields);
 
     $checkSql = " SELECT * FROM $class WHERE reference_type = 'table' AND reference_key_name='{$this->reference_key_name}' "
-     . "  AND reference_key_value='{$this->reference_key_value}' LIMIT 1";
+     . "  AND reference_key_value='{$this->reference_key_value}' ";
+     $sql = ino_perPageSql_i($sql, 1);
 
     $checkResult = self::find_by_sql($checkSql);
 
@@ -188,11 +189,12 @@ class sys_calendar extends dbObject {
  }
 
  public static function find_by_fieldName_referenceDetails($field_name, $ref_key, $ref_value) {
-  $table_i = qa_collection_element_header::tableName_from_elementName($field_name);
+  $table_i = qa_ce_header::tableName_from_elementName($field_name);
 
   $sql = " SELECT * FROM ";
   $sql .= $table_i;
-  $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' LIMIT 1";
+  $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -247,7 +249,7 @@ AND table_name LIKE 'qa_ce%' ";
 
   while ($all_tables_ai->valid()) {
    $table_name = $all_tables_ai->current();
-   $sql .= " SELECT * FROM $table_name->TABLE_NAME ";
+   $sql .= " SELECT * FROM $table_name->table_name ";
    if (!empty($reference_key_name)) {
     $sql .= " WHERE reference_key_name = '{$reference_key_name}' ";
    }

@@ -37,17 +37,26 @@
     ?>
     <span class="heading"><?php echo gettext('Parameters') ?> </span>
     <?php
+    if (DB_TYPE == 'ORACLE' && !empty($$class->parameters)) {
+     $$class->parameters = stream_get_contents($$class->parameters);
+    }
     echo '<pre>';
     print_r(unserialize($$class->parameters));
     echo '</pre>';
     ?>
-    <span class="heading"><?php echo gettext('Message Details') ?></span><?php echo $$class->message; ?>
+    <span class="heading"><?php echo gettext('Message Details') ?></span>
+    <?php
+    if (DB_TYPE == 'ORACLE' && !empty($$class->message)) {
+     $$class->message = stream_get_contents($$class->message);
+    }
+    echo $$class->message;
+    ?>
    </div>
    <div id="tabsLine-2" class="tabContent"><label>SQL Query</label>
     <?php echo form::text_area('parameter', base64_decode($$class->report_query), '10', '150', '', '', '', 1); ?>
    </div>
    <div id="tabsLine-3" class="tabContent">
-    <?php echo form::text_area('email_addresses', $$class->op_email_address, '3', '120', '', 'Separate each email address by comma(,) or a new line','',1) ?>
+    <?php echo form::text_area('email_addresses', $$class->op_email_address, '3', '120', '', 'Separate each email address by comma(,) or a new line', '', 1) ?>
    </div>
   </div>
  </div>

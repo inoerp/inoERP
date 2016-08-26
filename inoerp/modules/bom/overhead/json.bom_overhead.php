@@ -2,8 +2,8 @@
 <script src="bom_overhead.js"></script>
 
 <div id="json_save_header"> <?php json_save('bom', 'bom_overhead', 'overhead', 'bom_overhead_id'); ?></div>
-<div id="json_save_line"><?php json_saveLineData('bom', 'bom_overhead_resource_assignment', 'resource_id', 'bom_overhead_resource_assignment_id'); ?></div>
-<div id="json_save_line2"><?php json_saveLineData2('bom', 'bom_overhead_rate_assignment', 'department_id', 'bom_overhead_rate_assignment_id'); ?></div>
+<div id="json_save_line"><?php json_saveLineData('bom', 'bom_oh_res_assignment', 'resource_id', 'bom_oh_res_assignment_id'); ?></div>
+<div id="json_save_line2"><?php json_saveLineData2('bom', 'bom_oh_rate_assignment', 'department_id', 'bom_oh_rate_assignment_id'); ?></div>
 <div id="json_delete_line"> <?php  json_delete('bom_overhead'); ?> </div>
 <div id="json_bom_overhead_find_all">
   <?php

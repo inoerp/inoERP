@@ -126,7 +126,7 @@ inoERP
           <td><?php echo form::checkBox_field('count_point_cb', $$class_second->count_point_cb); ?></td>
           <td><?php echo form::checkBox_field('auto_charge_cb', $$class_second->auto_charge_cb); ?></td>
           <td><?php echo form::checkBox_field('backflush_cb', $$class_second->backflush_cb); ?></td>
-          <td><?php form::number_field_wid2('minimum_transfer_quantity'); ?></td>
+          <td><?php form::number_field_wid2s('minimum_transfer_quantity'); ?></td>
           <td><?php form::number_field_wid2('lead_time_percentage'); ?></td>
           <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
            <?php

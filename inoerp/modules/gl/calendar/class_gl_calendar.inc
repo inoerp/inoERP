@@ -37,14 +37,15 @@ class gl_calendar extends dbObject {
  public $fields_inHeader_needsToBeInserted_inPOST = [
   'option_line_code'
  ];
- public $field_a = ['gl_calendar_id',
+ public $field_a = [
+  'gl_calendar_id',
   'option_line_code',
   'adjustment_period_cb',
   'name',
   'calendar_type',
-  'year',
-  'quarter',
-  'number',
+  'c_year',
+  'c_quarter',
+  'c_number',
   'from_date',
   'to_date',
   'name_prefix',
@@ -55,20 +56,21 @@ class gl_calendar extends dbObject {
   'last_update_date',
  ];
  public $initial_search = [
-  'name',
-  'year',
-  'quarter',
+  'c_name',
+  'c_year',
+  'c_quarter',
   'name_prefix'
  ];
- 
  public $number_fields = [
-  'year'
+  'c_year',
+  'c_quarter',
+  'c_number',
  ];
  public $column = [
   'name',
-  'year',
-  'quarter',
-  'number',
+  'c_year',
+  'c_quarter',
+  'c_number',
   'from_date',
   'to_date',
   'name_prefix'
@@ -77,8 +79,8 @@ class gl_calendar extends dbObject {
   'option_line_code',
   'name',
   'calendar_type',
-  'year',
-  'quarter',
+  'c_year',
+  'c_quarter',
   'from_date',
   'to_date',
   'name_prefix'
@@ -101,17 +103,24 @@ class gl_calendar extends dbObject {
   'option_line_code' => 'GL_CALENDAR_NAME',
   'calendar_type' => 'GL_PERIOD_TYPE'
  ]; //list of search fields wh
-
  //gl_calendar name is stored in OP
 
- function __construct() {
-  if (!empty(static::$table_name)) {
-   $this->field_a = get_dbColumns(static::$table_name);
-   foreach ($this->field_a as $key => $value) {
-    $this->$value = '';
-   }
-  }
- }
+ public $gl_calendar_id;
+ public $option_line_code;
+ public $adjustment_period_cb;
+ public $name;
+ public $calendar_type;
+ public $c_year;
+ public $c_quarter;
+ public $c_number;
+ public $from_date;
+ public $to_date;
+ public $name_prefix;
+ public $ef_id;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
 
  Public static function gl_calendar_names() {
   $option_header = option_header::find_by_name('GL_CALENDAR_NAME');
@@ -139,7 +148,7 @@ class gl_calendar extends dbObject {
  public function find_all_ofyear($year) {
   global $db;
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE year= :year ";
+  $sql .= " WHERE c_year= :year ";
   $param_a = ['year'];
   $value_a = ['year' => $year];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
@@ -150,7 +159,7 @@ class gl_calendar extends dbObject {
   $numbers_in_the_year = [];
   $periods_of_year = $this->find_all_ofyear($year);
   foreach ($periods_of_year as $period) {
-   array_push($numbers_in_the_year, $period->number);
+   array_push($numbers_in_the_year, $period->c_number);
   }
   return max($numbers_in_the_year);
  }
@@ -158,8 +167,8 @@ class gl_calendar extends dbObject {
  public function find_next_period_after_calendarId($calendar_id) {
   global $db;
   $current_cal = $this->findBy_id($calendar_id);
-  $current_year = $current_cal->year;
-  $current_number = $current_cal->number;
+  $current_year = $current_cal->c_year;
+  $current_number = $current_cal->c_number;
   $option_line_code = $current_cal->option_line_code;
 
   $highest_number_of_year = $this->find_highest_number_inaYear($current_year);
@@ -177,7 +186,15 @@ class gl_calendar extends dbObject {
   global $db;
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE year= :year AND number= :number AND option_line_code= :option_line_code";
-  $sql .= " LIMIT 1 ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $param_a = ['year', 'number', 'option_line_code'];
   $value_a = ['year' => $year, 'number' => $number, 'option_line_code' => $option_line_code];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
@@ -190,11 +207,11 @@ class gl_calendar extends dbObject {
   $result = self::find_by_sql($sql);
   return $result;
  }
- 
-  public static function find_by_optionLineCode($option_line_code) {
+
+ public static function find_by_optionLineCode($option_line_code) {
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE option_line_code='{$option_line_code}'";
-  $sql .= " ORDER BY year DESC, number DESC ";
+  $sql .= " ORDER BY c_year DESC, c_number DESC ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
@@ -211,7 +228,8 @@ class gl_calendar extends dbObject {
   global $db;
   $sql = " SELECT combination FROM "
    . self::$table_name
-   . " where combination LIKE '%{$gl_calendar}%' LIMIT 0, 30";
+   . " where combination LIKE '%{$gl_calendar}%' ";
+  $sql = ino_perPageSql_i($sql, 30);
   $result = $db->find_by_sql($sql);
   $data = array();
   foreach ($result as $obj) {
@@ -228,8 +246,8 @@ class gl_calendar extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where coa_id='{$coa_id}' " .
-   " AND combination='{$gl_calendar}' " .
-   "LIMIT 1";
+   " AND combination='{$gl_calendar}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_set = $db->find_by_sql($sql);
   return !(empty($result_set)) ? true : false;
  }
@@ -239,8 +257,8 @@ class gl_calendar extends dbObject {
   $sql = "SELECT gl_calendar_id FROM " .
    self::$table_name .
    " where coa_id={$coa_id}" .
-   " AND combination='{$gl_calendar}' " .
-   " LIMIT 1";
+   " AND combination='{$gl_calendar}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = $db->find_by_sql($sql);
   return !(empty($result)) ? array_shift($result) : false;
  }

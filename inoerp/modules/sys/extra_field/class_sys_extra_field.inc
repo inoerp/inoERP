@@ -91,7 +91,8 @@ class sys_extra_field extends dbObject {
  public static function find_by_transactionNumber($number) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE sys_extra_field_number = '{$number}' LIMIT 1";
+  $sql .= " WHERE sys_extra_field_number = '{$number}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
@@ -205,7 +206,7 @@ class sys_extra_field extends dbObject {
    /* verify that table exists 
      -If not create the table
     */
-   $table_name = 'extra_field_' . $this->sys_field_name;
+   $table_name = 'ef_' . $this->sys_field_name;
    $existing_table_info = $this->_verify_table_exists($table_name);
 
    if (empty($existing_table_info)) {

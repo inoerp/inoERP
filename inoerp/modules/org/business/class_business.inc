@@ -112,7 +112,8 @@ class business extends org {
  public static function find_by_orgId($org_id) {
   global $db;
   $sql = "SELECT * FROM " . self::$table_name . " 
-      where org_id={$org_id} LIMIT 1";
+      where org_id={$org_id}  ";
+      $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
@@ -121,7 +122,7 @@ class business extends org {
   global $db;
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE org_id= :org_id ";
-  $sql .= " LIMIT 1 ";
+  $sql = ino_perPageSql_i($sql, 1);
   $param_a = ['org_id'];
   $value_a = ['org_id' => $this->org_id];
   $result = $db->findBy_sql($sql, $param_a, $value_a);

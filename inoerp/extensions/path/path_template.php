@@ -15,9 +15,9 @@
      <li><?php $f->l_text_field_dm('name'); ?></li>
      <li><?php $f->l_text_field_d('description'); ?></li>
      <li><?php $f->l_text_field_d('obj_class_name'); ?></li>
-     <li><?php $f->l_text_field_d('mode'); ?></li>
+     <li><?php $f->l_text_field_d('pmode'); ?></li>
      <li><?php $f->l_select_field_from_object('module_code', option_header::modules(), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?></li>
-      <!--<li><?php // $f->l_select_field_from_array('id_column_name', view::find_all_idColumns_gen(), $$class->id_column_name, 'id_column_name', '', '') ?>     </li>-->
+      <!--<li><?php // $f->l_select_field_from_array('id_column_name', extn_view::find_all_idColumns_gen(), $$class->id_column_name, 'id_column_name', '', '') ?>     </li>-->
       <li><?php $f->l_text_field_d('id_column_name') ?>     </li>
      <li><?php $f->l_select_field_from_object('path_type', path::path_types(), 'option_line_code', 'option_line_value', $$class->path_type, 'path_type') ?></li>
      <li><?php $f->l_checkBox_field_d('search_path_cb'); ?> </li>

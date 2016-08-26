@@ -106,7 +106,7 @@ eh.doc_currency,   eh.department_id,   eh.reason,   eh.currency,   eh.exchange_r
 user.supplier_id , he.first_name, he.last_name, he.identification_id
 
 FROM hr_expense_header eh,
-ino_user as user,
+ino_user  user,
 hr_employee he
   
 WHERE eh.status = 'APPROVED'

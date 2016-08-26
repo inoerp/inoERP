@@ -1849,7 +1849,8 @@ class inv_transaction extends dbObject {
  public static function find_by_refName_refValue($refname, $refvalue) {
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE   reference_key_name = '{$refname}' AND  reference_key_value ='{$refvalue}' LIMIT 1";
+  $sql .= " WHERE   reference_key_name = '{$refname}' AND  reference_key_value ='{$refvalue}' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? ($result) : false;
  }

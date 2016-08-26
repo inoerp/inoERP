@@ -18,6 +18,9 @@ include_once("basics.inc");
    if (empty(trim($v, chr(10)))) {
     continue;
    }
+   if(is_array($ulr_vars_s)){
+    return 1;
+   }
    if (strpos($ulr_vars_s, trim($v)) !== false) {
     $show_block_flag = 1;
     break;
@@ -38,13 +41,14 @@ include_once("basics.inc");
    }
    $ulr_vars = explode("/", $url);
    $show_block_flag = 0;
+   $ulr_vars_s1 = null;
    if(strpos($url, '?')){
-    $ulr_vars_s = end($ulr_vars);
+    $ulr_vars_s1 = end($ulr_vars);
    }else{
-    $ulr_vars_s = array_slice($url, -2, 1, true);;
+    $ulr_vars_s1 = array_slice($ulr_vars, -2, 1, true);
    }
    
-   $ulr_vars_s = empty($ulr_vars_s) ? 'index' : $ulr_vars_s;
+   $ulr_vars_s1 = empty($ulr_vars_s1) ? 'index' : $ulr_vars_s1;
 
    if (empty($visibility_option)) {
     $show_block_flag = 1;
@@ -56,9 +60,9 @@ include_once("basics.inc");
      $show_block_flag = 1;
     } else if (count($block_visibility_a) == 1 && $block_visibility_a[0] == chr(10)) {
      $show_block_flag = 1;
-    } else if (block_check($block_visibility_a, $ulr_vars_s)) {
+    } else if (block_check($block_visibility_a, $ulr_vars_s1)) {
      $show_block_flag = 1;
-    } elseif (!empty($url) && !empty($block_visibility) && (block_check($block_visibility_a, $ulr_vars_s))) {
+    } elseif (!empty($url) && !empty($block_visibility) && (block_check($block_visibility_a, $ulr_vars_s1))) {
      $show_block_flag = 1;
     } else {
      $show_block_flag = 0;
@@ -68,9 +72,9 @@ include_once("basics.inc");
    if ($visibility_option == 2) {
     if (empty(trim($block_visibility, chr(10)))) {
      $show_block_flag = 0;
-    } if (block_check($block_visibility_a, $ulr_vars_s)) {
+    } if (block_check($block_visibility_a, $ulr_vars_s1)) {
      $show_block_flag = 0;
-    } elseif (!empty($url) && !empty($block_visibility) && (block_check($block_visibility_a, $ulr_vars_s))) {
+    } elseif (!empty($url) && !empty($block_visibility) && (block_check($block_visibility_a, $ulr_vars_s1))) {
      $show_block_flag = 0;
     } else {
      $show_block_flag = 1;
@@ -128,6 +132,9 @@ include_once("basics.inc");
 
    if (empty($block_content) && ($reference_table == 'block_content')) {
     $custom_block = block_content::find_by_block_id($records->block_id);
+    if(DB_TYPE == 'ORACLE'){
+     $custom_block->content = stream_get_contents($custom_block->content);
+    }
     if (!empty($custom_block)) {
      if (($custom_block->content_php_cb) == 1) {
       $block_content_deocded = base64_decode($custom_block->content);
@@ -145,10 +152,10 @@ include_once("basics.inc");
     $block_content = call_user_func(array($class_containg_block, $method_name), $parameters);
    }
 
-   if (($block_cache) && (!empty($block_content))) {
-    $bc->block_data = serialize($block_content);
-    $bc->create();
-   }
+//   if (($block_cache) && (!empty($block_content))) {
+//    $bc->block_data = serialize($block_content);
+//    $bc->create();
+//   }
 
    if ((!empty($block_content)) && ($show_block_flag == 1)) {
     foreach (block::$position_array as $key => $value) {

@@ -232,7 +232,7 @@ LEFT JOIN org ON po_requisition_detail.ship_to_inventory = org.org_id
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
 	$sql .= " WHERE po_requisition_detail_id = :po_requisition_detail_id ";
-	$sql .= " LIMIT 1 ";
+	$sql = ino_perPageSql_i($sql, 1);
 
 	$param_a = ['po_requisition_detail_id'];
 	$value_a = ['po_requisition_detail_id' => $this->po_requisition_detail_id];

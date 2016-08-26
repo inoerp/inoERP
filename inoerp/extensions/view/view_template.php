@@ -1,6 +1,6 @@
 <div id="view_divId">
  <div id ="form_header"> <span class="heading"> View - Dynamic Query Builder  </span>
-  <form action=""  method="post" id="view_header"  name="view_header">
+  <form  method="post" id="view_header"  name="view_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1">Basic Info</a></li>
@@ -11,24 +11,24 @@
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field"> 
-       <li><?php $f->l_text_field_dr_withSearch('view_id'); ?>
-        <a name="show" href="form.php?class_name=view&<?php echo "mode=$mode"; ?>" class="show document_id view_id"><i class="fa fa-refresh"></i></a> 
+       <li><?php $f->l_text_field_dr_withSearch('extn_view_id'); ?>
+        <a name="show" href="form.php?class_name=extn_view&<?php echo "mode=$mode"; ?>" class="show document_id view_id"><i class="fa fa-refresh"></i></a> 
        </li>
-       <li><label>View Name : </label> <?php $f->text_field_dm('view_name'); ?> </li> 
-       <li><label>Description : </label> <?php $f->text_field_dl('description'); ?> </li> 
+       <li><label>View Name</label> <?php $f->text_field_dm('view_name'); ?> </li> 
+       <li><label>Description</label> <?php $f->text_field_dl('description'); ?> </li> 
        <li class="display_type"><label> Display Type: </label> 
-        <?php echo $f->select_field_from_object('display_type', view::view_display_type(), 'option_line_code', 'option_line_value', $$class->display_type, 'display_type'); ?>
+        <?php echo $f->select_field_from_object('display_type', extn_view::view_display_type(), 'option_line_code', 'option_line_value', $$class->display_type, 'display_type'); ?>
        </li>
       </ul> 
      </div>
      <div id="tabsHeader-2" class="tabContent">
       <div> 
        <ul class="column three_column">
-        <li><label>Path Id : </label> <?php echo $f->text_field_dr('path_id'); ?></li>
-        <li><label>Path Value : </label><?php echo $f->text_field_dl('path'); ?></li>
-        <li><label>View  : </label><a target='_blank' href="<?php echo HOME_URL . $$class->path; ?>"> Online </a></li>
-        <li><label>Update Parent : </label> <?php echo $f->checkBox_field('update_parent_id_cb', $$class->update_parent_id_cb); ?></li>
-        <li><label>Add to menu with parent :</label> 
+        <li><label>Path Id</label> <?php echo $f->text_field_dr('path_id'); ?></li>
+        <li><label>Path Value</label><?php echo $f->text_field_dl('path'); ?></li>
+        <li><label>View </label><a target='_blank' href="<?php echo HOME_URL . $$class->path; ?>"> Online </a></li>
+        <li><label>Update Parent</label> <?php echo $f->checkBox_field('update_parent_id_cb', $$class->update_parent_id_cb); ?></li>
+        <li><label>Add to menu with parent</label> 
          <?php echo $f->select_field_from_object('parent_id', path::find_all('name'), 'path_id', array('name', 'module_code'), $$class->parent_id, 'parent_id', '', '', 1) ?>
         </li>
 
@@ -38,22 +38,22 @@
      <div id="tabsHeader-3" class="tabContent">
       <div> 
        <ul class="column four_column">
-        <li><label>Custom Div Class : </label> <?php echo $f->text_field_dl('custom_div_class'); ?></li>
-        <li><label>Header Text : </label><?php echo $f->text_area('header_text', $$class->header_text); ?></li>
-        <li><label>Footer Text : </label> <?php echo $f->text_area('footer_text', $$class->footer_text); ?></li>
-        <li><label>Remove Default Header  : </label> <?php echo $f->checkBox_field('remove_default_header_cb', $$class->remove_default_header_cb); ?></li>
+        <li><label>Custom Div Class</label> <?php echo $f->text_field_dl('custom_div_class'); ?></li>
+        <li><label>Header Text</label><?php echo $f->text_area('header_text', $$class->header_text); ?></li>
+        <li><label>Footer Text</label> <?php echo $f->text_area('footer_text', $$class->footer_text); ?></li>
+        <li><label>Remove Default Header </label> <?php echo $f->checkBox_field('remove_default_header_cb', $$class->remove_default_header_cb); ?></li>
        </ul>
       </div>
      </div>
      <div id="tabsHeader-4" class="tabContent">
       <div> 
        <ul class="column four_column">
-        <li><label>Columns in Grid: </label> <?php echo $f->number_field('no_of_grid_columns', $$class->no_of_grid_columns, '', 'no_of_grid_columns', 'large'); ?></li>
-        <li><label>Default Per Page : </label> <?php echo $f->number_field('default_per_page', $$class->default_per_page, '', 'default_per_page', 'large'); ?></li>
-        <li><label>List Type : </label> 
+        <li><label>Columns in Grid</label> <?php echo $f->number_field('no_of_grid_columns', $$class->no_of_grid_columns, '', 'no_of_grid_columns', 'large'); ?></li>
+        <li><label>Default Per Page</label> <?php echo $f->number_field('default_per_page', $$class->default_per_page, '', 'default_per_page', 'large'); ?></li>
+        <li><label>List Type</label> 
          <?php echo $f->select_field_from_array('list_type', dbObject::$list_type_a, $$class->list_type); ?></li>
         <li><label>Create/Update Block : </label><?php echo $f->checkBox_field('create_block_cb', ''); ?></li>
-        <li><label>View Block : </label>
+        <li><label>View Block</label>
          <?php
          echo!empty($$class->block_id) ? "<a href='form.php?class_name=block&mode=9&block_id=" . $$class->block_id . "'>Configure Block</a>" : 'No Block';
          echo $f->hidden_field_withId('block_id', $$class->block_id);
@@ -101,12 +101,12 @@
              ?>
              <ul class="display_records table_object<?php echo $tbl_count; ?>">
               <li id="table_records"><label>Table Names </label>
-               <?php echo $f->select_field_from_object('all_table_names', view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', $tbl_k); ?>
+               <?php echo $f->select_field_from_object('all_table_names', extn_view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', $tbl_k); ?>
               </li>
               <?php
               foreach ($tbl_v as $column_k => $column_v) {
                echo '<li class="field_records record_no0">';
-               echo $f->select_field_from_object('column_name', view::find_columns_of_table_obj($tbl_k), 'Field', 'Field', $column_v, '', 'table_fields');
+               echo $f->select_field_from_object('column_name', extn_view::find_columns_of_table_obj($tbl_k), 'Field', 'Field', $column_v, '', 'table_fields');
                echo '</li>';
               }
               ?>
@@ -118,7 +118,7 @@
             ?>
             <ul class="display_records table_object0">
              <li id="table_records"><label>Table Names </label>
-              <?php echo $f->select_field_from_object('all_table_names', view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', '', '', 'all_table_names') ?>
+              <?php echo $f->select_field_from_object('all_table_names', extn_view::find_all_tables_and_views(), 'TABLE_NAME', 'TABLE_NAME', '', '', 'all_table_names') ?>
              </li>
              <li class="field_records record_no0"><Label>Field</label>
               <select class="table_fields">
@@ -156,7 +156,7 @@
               <td class="condition_row_parameter">      </td>
               <td class="condition_row_condition">
                <ul>
-                <li><?php echo $f->select_field_from_array('condition_operator_type', view::$condition_operator_type_a, $$class->condition_operator_type); ?></li>
+                <li><?php echo $f->select_field_from_array('condition_operator_type', extn_view::$condition_operator_type_a, $$class->condition_operator_type); ?></li>
                 <li><?php echo $f->select_field_from_array('condition_operator', dbObject::$db_control_type_a, '', 'condition_operator'); ?>  </li>
                </ul>
               </td>
@@ -325,13 +325,13 @@
 </div>
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="view" ></li>
+  <li class="headerClassName" data-headerClassName="extn_view" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="true" ></li>
-  <li class="primary_column_id" data-primary_column_id="view_id" ></li>
+  <li class="primary_column_id" data-primary_column_id="extn_view_id" ></li>
   <li class="form_header_id" data-form_header_id="view_header" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedaderId" data-docHedaderId="view_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="view_id" ></li>
+  <li class="docHedaderId" data-docHedaderId="extn_view_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="extn_view_id" ></li>
  </ul>
 </div>

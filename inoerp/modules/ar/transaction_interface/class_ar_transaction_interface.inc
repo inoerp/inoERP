@@ -371,7 +371,7 @@ class ar_transaction_interface extends dbObject {
 
  private function create_ar_transaction_interface() {
   $sql = "
-CREATE OR REPLACE VIEW ar_transaction_interface
+CREATE OR REPLACE VIEW ar_transaction_interface_v
 (
 po_requisition_header_id, bu_org_id, po_requisition_type, po_requisition_number, supplier_id, supplier_site_id, buyer, currency, header_amount, po_requisition_status,
 payment_term_id,

@@ -58,10 +58,10 @@
               $detailCount = 0;
               if (!empty($ef_refer_value_i)) {
                $secondary_field_object = [];
-               $secondary_field_object = sys_secondary_field_instance::find_by_referenceKeyValue($ef_refer_key, $ef_refer_value_i);
+               $secondary_field_object = sys_secondary_field_inst::find_by_referenceKeyValue($ef_refer_key, $ef_refer_value_i);
               }
               if (empty($secondary_field_object)) {
-               $secondary_field_object = array(new sys_secondary_field_instance());
+               $secondary_field_object = array(new sys_secondary_field_inst());
               }
               foreach ($secondary_field_object as $secondary_field) {
                ?>
@@ -70,12 +70,12 @@
                  <ul class="inline_action">
                   <li class="add_row_detail_img3"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
                   <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-                  <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($secondary_field->sys_secondary_field_instance_id); ?>">
+                  <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($secondary_field->sys_secondary_field_inst_id); ?>">
                   </li>           
                  </ul>
                 </td>
                 <td><?php $f->seq_field_detail_d($detailCount) ?></td>
-                <td><?php echo $f->text_field('sys_secondary_field_instance_id', $secondary_field->sys_secondary_field_instance_id, '8', '', '', '', 1); ?></td>
+                <td><?php echo $f->text_field('sys_secondary_field_inst_id', $secondary_field->sys_secondary_field_inst_id, '8', '', '', '', 1); ?></td>
                 <td><?php echo $f->select_field_from_object('sys_secondary_field_id', sys_secondary_field::find_all(), 'sys_secondary_field_id', 'field_name', $secondary_field->sys_secondary_field_id, '', 'medium', '', '', '', '', '', 'field_type'); ?> </td>
                 <td><?php echo $f->text_field('label', $secondary_field->label); ?></td>
                 <td><?php echo $f->text_field_ap(array('name' => 'field_type', 'value' => $secondary_field->field_type, 'readonly' => true)); ?></td>

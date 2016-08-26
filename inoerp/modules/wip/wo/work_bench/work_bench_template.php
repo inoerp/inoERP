@@ -170,7 +170,7 @@ inoERP
           if (empty($ef->field_name)) {
            continue;
           }
-          $ef_table = 'extra_field_' . $ef->sys_field_name;
+          $ef_table = 'ef_' . $ef->sys_field_name;
           $ef_all_value = sys_extra_field_instance::find_by_fieldName_referenceDetails($ef->sys_field_name, 'wip_wo_routing_line', $routing_line->wip_wo_routing_line_id);
           if ($ef_all_value) {
            $ef_value_key = $ef_table . '_value';
@@ -198,7 +198,7 @@ inoERP
 
            case 'FILE' :
             $ef_file_name = $ef->sys_field_name . '_file';
-            $file_routing = file::find_by_fieldName_referenceTable_and_id($ef->sys_field_name, 'wip_wo_routing_line', $routing_line->wip_wo_routing_line_id);
+            $file_routing = extn_file::find_by_fieldName_referenceTable_and_id($ef->sys_field_name, 'wip_wo_routing_line', $routing_line->wip_wo_routing_line_id);
             echo ino_attachement($file_routing, $ef_file_name);
             echo $f->hidden_field($ef->sys_field_name, $ef_value);
             break;

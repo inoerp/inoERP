@@ -69,7 +69,8 @@
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
    $sql .= " WHERE item_id_m ='{$item_id_m}' AND org_id = '{$org_id}' AND '{$eff_date}' > effective_start_date "
-   . " ORDER BY effective_start_date DESC LIMIT 1 ";
+   . " ORDER BY effective_start_date DESC  ";
+   $sql = ino_perPageSql_i($sql, 1);
 
    $result = self::find_by_sql($sql);
 

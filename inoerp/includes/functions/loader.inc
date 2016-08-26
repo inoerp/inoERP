@@ -148,7 +148,7 @@ if ((isset($hideBlock)) && ($hideBlock)) {
  * If the page need login, redirect users to login page
  */
 
-if (!empty($_REQUEST['className']) && $_REQUEST['className'] == 'comment') {
+if (!empty($_REQUEST['className']) && $_REQUEST['className'] == 'extn_comment') {
  $dont_check_login = true;
 }
 if (!empty($dont_check_login)) {
@@ -182,7 +182,7 @@ if (!empty($_POST['className'])) {
  unset($class_names);
  $class_names[] = $_POST['className'];
 }
-
+ 
 //if class names comes as a single value then convert it to an array and all dependent class names
 if ((!empty($class_names)) && (!(is_array($class_names)))) {
  $class_names_str = $class_names;
@@ -209,8 +209,8 @@ if ((!empty($class_names)) && (!(is_array($class_names)))) {
 
 
 //add comment class for all if not POST
-if (empty($_POST) && !in_array('comment', $class_names)) {
- array_push($class_names, 'comment');
+if (empty($_POST) && !in_array('extn_comment', $class_names)) {
+ array_push($class_names, 'extn_comment');
 }
 
 /* --------------------------------------------------------------------------------------------------------------
@@ -320,13 +320,13 @@ if (($continue) && (!empty($class_names))) {
     }
 
     try {
-     $file = file::find_by_reference_table_and_id($table_name, $class_id_value);
+     $file = extn_file::find_by_reference_table_and_id($table_name, $class_id_value);
     } catch (Exception $e) {
      
     }
 
     try {
-     $comments = comment::comment_list($table_name, $class_id_value, $class_id_value);
+     $comments = extn_comment::comment_list($table_name, $class_id_value, $class_id_value);
     } catch (Exception $e) {
      
     }
@@ -342,10 +342,10 @@ if (($continue) && (!empty($class_names))) {
    }
 
    /* --------------------------------Check for Secondary Fields------------------------------------------------------ */
-   $sec_field_i = new sys_secondary_field_instance();
-   $secondary_field_object = sys_secondary_field_instance::find_by_referenceKey($class);
+   $sec_field_i = new sys_secondary_field_inst();
+   $secondary_field_object = sys_secondary_field_inst::find_by_referenceKey($class);
    if ($secondary_field_object) {
-    $secondary_field_stmt = sys_secondary_field_instance::secondary_field_stmt($secondary_field_object, $class_id_value);
+    $secondary_field_stmt = sys_secondary_field_inst::secondary_field_stmt($secondary_field_object, $class_id_value);
    }
 
    /* --------------------------------End of Secondary Fields------------------------------------------------------ */

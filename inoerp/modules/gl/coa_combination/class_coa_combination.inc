@@ -141,7 +141,18 @@ class coa_combination extends dbObject {
   global $db;
   $sql = " SELECT combination FROM "
    . self::$table_name
-   . " where combination LIKE '%{$coa_combination}%' LIMIT 0, 30";
+   . " where combination LIKE '%{$coa_combination}%' ";
+
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(30);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(30);
+    break;
+  }
+
   $result = $db->find_by_sql($sql);
   $data = array();
   foreach ($result as $obj) {
@@ -173,7 +184,16 @@ class coa_combination extends dbObject {
    }
   }
 
-  $sql .= "  LIMIT 0, $limit  ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql($limit);
+    break;
+
+   default:
+    $sql .= ino_perPageSql($limit);
+    break;
+  }
+
 
   $combination = '%' . $this->combination . '%';
   $value_a = [ 'coa_id' => $this->coa_id, 'combination' => $combination];
@@ -203,7 +223,16 @@ class coa_combination extends dbObject {
    }
   }
 
-  $sql .= "  LIMIT 0, $limit  ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql($limit);
+    break;
+
+   default:
+    $sql .= ino_perPageSql($limit);
+    break;
+  }
+
 
 //  echo $sql;
   $result = self::find_by_sql($sql);
@@ -211,30 +240,21 @@ class coa_combination extends dbObject {
   return !(empty($result)) ? $result : false;
  }
 
-//  public function findBy_coaId_description($limit = 30) {
-//  $sql = " SELECT * FROM "
-//   . self::$table_name
-//   . " where coa_id = :coa_id AND description LIKE :description ";
-//  if(!empty($this->ac_type)){
-//   $ac_type = trim($this->ac_type);
-//   $sql .= " AND ac_type = '{$ac_type}'  ";
-//  }
-//  
-//  $sql .= "  LIMIT 0, $limit  ";
-//  
-//  echo $sql;
-//  $description = '%' . $this->description . '%';
-//  $value_a = [ 'coa_id' => $this->coa_id, 'combination' => $description];
-//  $result = $this->findBySql($sql, $value_a);
-//  
-//  return !(empty($result)) ? $result : false;
-// }
-
  public function findBy_exactCombination($combination) {
   global $db;
   $sql = " SELECT * FROM "
    . self::$table_name
-   . " where  combination = :combination LIMIT 1";
+   . " where  combination = :combination ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
+
   $param_a = ['combination'];
   $value_a = ['combination' => $combination];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
@@ -244,7 +264,17 @@ class coa_combination extends dbObject {
  public static function find_by_exactCombination($combination) {
   $sql = " SELECT * FROM "
    . self::$table_name
-   . " where  combination = '{$combination}' LIMIT 1";
+   . " where  combination = '{$combination}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
+
   $result = self::find_by_sql($sql);
   return !(empty($result)) ? array_pop($result) : false;
  }
@@ -291,8 +321,17 @@ class coa_combination extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where coa_id='{$coa_id}' " .
-   " AND combination='{$coa_combination}' " .
-   "LIMIT 1";
+   " AND combination='{$coa_combination}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
+
   $result_set = $db->find_by_sql($sql);
   return !(empty($result_set)) ? true : false;
  }

@@ -34,7 +34,7 @@
       </ul>
       <div class="uploaded_file_details"></div>
      </div>
-     <?php echo file::attachment_statement($file); ?>
+     <?php echo extn_file::attachment_statement($file); ?>
     </div>
     <div id="content_element">
      <ul>

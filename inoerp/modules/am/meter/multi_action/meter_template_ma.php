@@ -45,27 +45,13 @@
                <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($subinventory->subinventory_id); ?>"></li>           
               </ul>
              </td>
-             <td>
-              <?php form::text_field_widsr('subinventory_id'); ?>
-             </td>
-             <td>
-              <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?>
-             </td>
-             <td>
-              <?php echo form::select_field_from_object('type', subinventory::subinventory_type(), 'option_line_code', 'option_line_code', $$class->type, 'type', $readonly); ?>
-             </td>
-             <td>
-              <?php form::text_field_wid('subinventory'); ?>
-             </td>
-             <td>
-              <?php form::text_field_wid('description'); ?>
-             </td>
-             <td>  
-              <?php echo form::select_field_from_object('locator_control', subinventory::locator_control(), 'option_line_code', 'option_line_code', $$class->locator_control, 'locator_control', $readonly); ?>	 
-             </td>
-             <td>
-              <?php echo form::checkBox_field('allow_negative_balance_cb' . $count, $$class->allow_negative_balance_cb, 'allow_negative_balance_cb', $readonly); ?>
-             </td>
+             <td><?php $f->text_field_widsr('subinventory_id'); ?></td>
+             <td><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', $readonly); ?></td>
+             <td><?php echo $f->select_field_from_object('type', subinventory::subinventory_type(), 'option_line_code', 'option_line_code', $$class->type, 'type', $readonly); ?></td>
+             <td><?php echo $f->text_field_wid('subinventory'); ?></td>
+             <td><?php form::text_field_wid('description'); ?></td>
+             <td><?php echo form::select_field_from_object('locator_control', subinventory::locator_control(), 'option_line_code', 'option_line_code', $$class->locator_control, 'locator_control', $readonly); ?>	              </td>
+             <td><?php echo form::checkBox_field('allow_negative_balance_cb' . $count, $$class->allow_negative_balance_cb, 'allow_negative_balance_cb', $readonly); ?> </td>
              <td><?php form::text_field_wids('default_cost_group'); ?></td>
             </tr>
             <?php

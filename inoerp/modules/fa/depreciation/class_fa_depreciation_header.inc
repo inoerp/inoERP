@@ -181,7 +181,7 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
     continue;
    }
    $new_gjl = new gl_journal_line();
-   $all_asset_book_accounts = fa_book_category_association::find_all_accounts_byAssetBookId($lines->asset_id, $this->fa_asset_book_id);
+   $all_asset_book_accounts = fa_book_category_assoc::find_all_accounts_byAssetBookId($lines->asset_id, $this->fa_asset_book_id);
    if (empty($all_asset_book_accounts)) {
     echo "<br>No accumulated depreciation account found. Exiting save journal. Error @ " . __FILE__ . ' @@ ' . __LINE__;
     $dbc->rollback = true;

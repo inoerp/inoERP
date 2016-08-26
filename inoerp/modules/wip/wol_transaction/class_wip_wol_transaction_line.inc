@@ -60,7 +60,7 @@ class wip_wol_transaction_line extends dbObject {
  public $org_id;
 
 // public function _after_save() {
-//  if (!empty($this->inv_interorg_transfer_line_id)) {
+//  if (!empty($this->inv_intorg_transfer_line_id)) {
 //   $update_satus = 0;
 //   try {
 //    if (!empty($this->item_id_m)) {
@@ -69,7 +69,7 @@ class wip_wol_transaction_line extends dbObject {
 //      echo "<br>INV Transaction Lines are Successfully Created ";
 //     } catch (Exception $e) {
 //      $update_satus = -99;
-//      echo "<br>Creating the transaction lines failed @ inv_interorg_transfer_line after save" . $e->getMessage();
+//      echo "<br>Creating the transaction lines failed @ inv_intorg_transfer_line after save" . $e->getMessage();
 //     }
 //    }
 //   } catch (Exception $e) {
@@ -205,7 +205,7 @@ class wip_wol_transaction_line extends dbObject {
   $multi_select_hidden = [
    'action_class_name',
    'org_id',
-   'inv_interorg_transfer_header_id',
+   'inv_intorg_transfer_header_id',
    'mode',
    'action',
    'po_status',
@@ -217,5 +217,5 @@ class wip_wol_transaction_line extends dbObject {
 
 }
 
-//end of inv_interorg_transfer_line class
+//end of inv_intorg_transfer_line class
 ?>

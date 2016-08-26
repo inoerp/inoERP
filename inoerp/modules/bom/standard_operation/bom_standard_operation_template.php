@@ -63,7 +63,7 @@ inoERP
     <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
-    <form action=""  method="post" id="bom_standard_operation_resource_assignment_line"  name="bom_standard_operation_resource_assignment_line">
+    <form action=""  method="post" id="bom_stnd_op_res_assignment_line"  name="bom_stnd_op_res_assignment_line">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
@@ -81,18 +81,18 @@ inoERP
          <th><?php echo gettext('Charge Type') ?>#</th>
         </tr>
        </thead>
-       <tbody class="form_data_line_tbody bom_standard_operation_resource_assignment_values" >
+       <tbody class="form_data_line_tbody bom_stnd_op_res_assignment_values" >
         <?php
         $count = 0;
-        foreach ($bom_standard_operation_resource_assignment_object as $bom_standard_operation_resource_assignment) {
+        foreach ($bom_stnd_op_res_assignment_object as $bom_stnd_op_res_assignment) {
          ?>         
-         <tr class="bom_standard_operation_resource_assignment<?php echo $count ?>">
+         <tr class="bom_stnd_op_res_assignment<?php echo $count ?>">
           <td>
            <?php
-           echo ino_inline_action($$class_second->bom_standard_operation_resource_assignment_id, array('bom_standard_operation_id' => $$class->bom_standard_operation_id));
+           echo ino_inline_action($$class_second->bom_stnd_op_res_assignment_id, array('bom_standard_operation_id' => $$class->bom_standard_operation_id));
            ?>
           </td>
-          <td><?php form::text_field_wid2sr('bom_standard_operation_resource_assignment_id'); ?></td>
+          <td><?php form::text_field_wid2sr('bom_stnd_op_res_assignment_id'); ?></td>
           <td><?php form::number_field_wid2s('resource_sequence') ?></td>
           <td>
            <?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_second->resource_id, '', $readonly, 'resource_id'); ?>
@@ -122,7 +122,7 @@ inoERP
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="headerClassName" data-headerClassName="bom_standard_operation" ></li>
-  <li class="lineClassName" data-lineClassName="bom_standard_operation_resource_assignment" ></li>
+  <li class="lineClassName" data-lineClassName="bom_stnd_op_res_assignment" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="bom_standard_operation_id" ></li>
   <li class="form_header_id" data-form_header_id="bom_standard_operation" ></li>
@@ -131,7 +131,7 @@ inoERP
  </ul>
  <ul id="js_contextMenu_data">
   <li class="docHedaderId" data-docHedaderId="bom_standard_operation_id" ></li>
-  <li class="docLineId" data-docLineId="bom_standard_operation_resource_assignment_id" ></li>
+  <li class="docLineId" data-docLineId="bom_stnd_op_res_assignment_id" ></li>
   <li class="btn1DivId" data-btn1DivId="bom_standard_operation" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="trClass" data-docHedaderId="bom_standard_operation" ></li>

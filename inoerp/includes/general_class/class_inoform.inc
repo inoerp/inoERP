@@ -75,14 +75,14 @@ class inoform {
   'ar_transaction_source',
   'ar_transaction_type',
   'bom_department',
-  'bom_department_resource_assignment',
+  'bom_dept_res_assignment',
   'bom_overhead',
-  'bom_overhead_rate_assignment',
-  'bom_overhead_resource_assignment',
+  'bom_oh_rate_assignment',
+  'bom_oh_res_assignment',
   'bom_resource',
   'bom_resource_cost',
   'business',
-  'hr_approval_limit_assignment',
+  'hr_approval_limit_assign',
   'hr_approval_limit_header',
   'hr_approval_limit_line',
   'hr_approval_object',
@@ -98,8 +98,8 @@ class inoform {
   'hr_payroll_payment_method',
   'hr_payroll_schedule',
   'hr_position',
-  'hr_position_hierarchy_header',
-  'hr_position_hierarchy_line',
+  'hr_pos_hierarchy_header',
+  'hr_pos_hierarchy_line',
   'inventory',
   'item_status',
   'legal',
@@ -136,7 +136,7 @@ class inoform {
   'bom_routing_header',
   'bom_routing_line',
   'bom_standard_operation',
-  'bom_standard_operation_resource_assignment',
+  'bom_stnd_op_res_assignment',
   'common_bom_line',
   'cst_item_cost_header',
   'cst_item_cost_line',
@@ -148,7 +148,7 @@ class inoform {
   'fa_asset_book',
   'fa_asset_book_info',
   'fa_asset_category',
-  'fa_book_category_association',
+  'fa_book_category_assoc',
   'fa_depreciation_method',
   'fa_depreciation_method_rate',
   'fp_forecast_group',
@@ -202,7 +202,7 @@ class inoform {
   'supplier_site',
   'sys_printer',
   'sys_secondary_field',
-  'sys_secondary_field_instance',
+  'sys_secondary_field_inst',
   'user_dashboard_config',
   'user_group',
   'user_group_access',
@@ -478,7 +478,7 @@ EOD;
    return;
   }
   $attachment_statement = '';
-  $file = file::find_by_id($value);
+  $file = extn_file::find_by_id($value);
   if (empty($file)) {
    return;
   }
@@ -524,7 +524,7 @@ EOD;
 
  public function text_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256", $disabled = '') {
   $bracketName = $name . '[]';
-  $value = htmlentities($value);
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $readonly_v = ($readonly == 1) ? ' readonly ' : '';
   $required_v = ($required == 1) ? ' required ' : '';
   $disabled_v = ($disabled == 1) ? ' disabled ' : '';
@@ -543,7 +543,7 @@ EOD;
  
   public function color_field($name, $value, $id = "", $div_class = "", $required = "", $readonly = "" ) {
   $bracketName = $name . '[]';
-  $value = htmlentities($value);
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $readonly_v = ($readonly == 1) ? ' readonly ' : '';
   $required_v = ($required == 1) ? ' required ' : '';
 
@@ -564,7 +564,7 @@ EOD;
  
  public function email_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256", $disabled = '') {
   $bracketName = $name . '[]';
-  $value = htmlentities($value);
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $readonly_v = ($readonly == 1) ? ' readonly ' : '';
   $required_v = ($required == 1) ? ' required ' : '';
   $disabled_v = ($disabled == 1) ? ' disabled ' : '';
@@ -582,7 +582,7 @@ EOD;
 
  public function phone_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $maxlength = "256", $disabled = '') {
   $bracketName = $name . '[]';
-  $value = htmlentities($value);
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $readonly_v = ($readonly == 1) ? ' readonly ' : '';
   $required_v = ($required == 1) ? ' required ' : '';
   $disabled_v = ($disabled == 1) ? ' disabled ' : '';
@@ -658,6 +658,7 @@ EOD;
  public function text_field_ap($array) {
   $name = array_key_exists('name', $array) ? $array['name'] : null;
   $value = array_key_exists('value', $array) ? $array['value'] : null;
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $size = array_key_exists('size', $array) ? $array['size'] : "15";
   $maxlength = array_key_exists('maxlength', $array) ? $array['maxlength'] : null;
   $required = array_key_exists('required', $array) ? $array['required'] : null;
@@ -693,7 +694,7 @@ EOD;
   $bracketName = $name . '[]';
   $valueAfterDecimal = ino_showDecimal($value);
 //	echo "$value : $valueAfterDecimal";
-
+$valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($readonly == 1) {
    $readonly = 'readonly';
   } else {
@@ -772,7 +773,7 @@ EOD;
   $add_field .= '<li><label>' . gettext('Coutry') . '</label>' . $f->text_field('addr_country', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $f->text_field('addr_postal_code', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Default') . '</label>' . $f->checkBox_field('addr_default_cb', '') . '</li>';
-  $add_field .= '<li><label>' . gettext('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', address::address_usage_type(), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';
+  $add_field .= '<li><label>' . gettext('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', option_header::find_options_byName('ADDRESS_USAGE_TYPE'), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';
   $add_field .= '<li><label>' . gettext('Address') . '</label>' . form::text_area('addr_address', '', '3', '22', '', 'Complete Address', 'address') . '</li>';
   $add_field .= '<li class="hidden">' . $f->hidden_field('address_id', '') . '</li>';
   $add_field .= '</ul>
@@ -1456,7 +1457,7 @@ EOD;
 
  public function account_field($name, $value, $size = "15", $id = "", $div_class = "", $required = "", $readonly = "", $ac_type = '', $place_holder = "", $title = "", $maxlength = "256") {
   $bracketName = $name . '[]';
-  $value = htmlentities($value);
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($readonly == 1) {
    $readonly = 'readonly';
   } else {
@@ -1669,7 +1670,8 @@ EOD;
 
  public function text_area($name, $value, $rowsize = "1", $id = "", $div_class = "", $required = "", $readonly = "", $place_holder = "", $title = "", $columnsize = "17") {
   $bracketName = $name . '[]';
-  $value = htmlentities($value);
+  
+//  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($readonly == 1) {
    $readonly = 'readonly';
   } else {
@@ -1704,6 +1706,7 @@ EOD;
  public function text_area_ap($array) {
   $name = array_key_exists('name', $array) ? $array['name'] : null;
   $value = array_key_exists('value', $array) ? $array['value'] : null;
+  
   $columnsize = array_key_exists('column_size', $array) ? $array['column_size'] : "15";
   $rowsize = array_key_exists('row_size', $array) ? $array['row_size'] : null;
   $required = array_key_exists('required', $array) ? $array['required'] : null;
@@ -1715,7 +1718,7 @@ EOD;
 
 
   $bracketName = $name . '[]';
-  $value_html = htmlentities($value);
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($readonly == 1) {
    $readonly = 'readonly';
   } else {
@@ -1756,7 +1759,8 @@ EOD;
   }
 
   $bracketName = $name . '[]';
-  $value = ino_date(htmlentities($value));
+  $value = ino_date($value);
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if (!empty($id)) {
    $idvalue = 'id="' . $id . '"';
   } else {
@@ -1869,6 +1873,7 @@ EOD;
  }
 
  public function select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($readonly == 1) {
    $readonly = 'readonly';
   } else {
@@ -1910,6 +1915,7 @@ EOD;
  }
 
  public function multi_select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($readonly == 1) {
    $readonly = 'readonly';
   } else {
@@ -1951,6 +1957,7 @@ EOD;
  }
 
  public function radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $divClass = "", $required = "", $readonly = "", $nonArrayName = "", $disabled = "") {
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($nonArrayName == 1) {
    $bracketName = $name;
   } else {
@@ -2001,6 +2008,8 @@ EOD;
  }
 
  public function select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
+ $value = htmlentities($value, ENT_QUOTES, 'UTF-8');
+  $objectValueKey = strtolower($objectValueKey);
   if ($nonArrayName == 1) {
    $bracketName = $name;
   } else {
@@ -2033,6 +2042,7 @@ EOD;
     } else {
      $selected = '';
     }
+    
     $element_select_field .= '<option value="' . $record->$objectValueKey . '" ';
     $element_select_field .= $selected;
     if (!empty($dataname)) {
@@ -2052,6 +2062,7 @@ EOD;
      }
      $newValue = rtrim($newValue1, ' | ');
     } else {
+     $objectDescriptionKey = strtolower($objectDescriptionKey);
      $newValue = $record->$objectDescriptionKey;
     }
     $element_select_field .= $newValue;
@@ -2078,6 +2089,7 @@ EOD;
  }
 
  public function multi_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "") {
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($nonArrayName == 1) {
    $bracketName = $name;
   } else {
@@ -2141,6 +2153,7 @@ EOD;
   $ob_value = array_key_exists('ob_value', $array) ? $array['ob_value'] : null;
   $ob_desc = array_key_exists('ob_desc', $array) ? $array['ob_desc'] : null;
   $value = array_key_exists('value', $array) ? $array['value'] : null;
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $id = array_key_exists('id', $array) ? $array['id'] : null;
   $readonly = array_key_exists('readonly', $array) ? $array['readonly'] : null;
   $div_class = array_key_exists('div_class', $array) ? $array['div_class'] : null;
@@ -2217,7 +2230,7 @@ EOD;
   } else {
    $readonly = '';
   }
-  $value = htmlentities($value);
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $element_extra_field = "<input type=\"text\" name=\"efid[]\" value=\"$value\" maxlength=\"200\" 
                                size=\"$size\" class=\"efid\" $readonly \>";
   return $element_extra_field;
@@ -2242,6 +2255,7 @@ EOD;
  }
  
   public function slider_checkBox_field($name, $value, $id = "", $class_name = "", $readonly = "") {
+   $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $bracketName = $name . '[]';
   if ($readonly == 1) {
    $readonly = 'onclick="return false"';
@@ -2311,6 +2325,7 @@ EOD;
  }
 
  public function status_field($value, $readonly = "") {
+  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   $active = "";
   $inactive = "";
   if ($value == 'ACTIVE') {
@@ -2324,7 +2339,6 @@ EOD;
    $readonly = '';
   }
 
-  $value = htmlentities($value);
   $element_text_field = "<Select name=\"status[]\" class=\"status select\" $readonly >";
   $element_text_field .= "<option value=\"\" ></option>";
   $element_text_field .= "<option value=\"ACTIVE\" $active > Active </option>";

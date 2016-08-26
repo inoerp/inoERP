@@ -140,7 +140,8 @@ class sys_catalog_value extends dbObject {
        WHERE scv.reference_table = '{$reference_table}'
        AND scv.reference_id = '{$reference_id}'
         AND scv.sys_catalog_line_id = '{$sys_catalog_line_id}'
-       AND scv.sys_catalog_line_id = sci.sys_catalog_line_id LIMIT 1";
+       AND scv.sys_catalog_line_id = sci.sys_catalog_line_id ";
+        $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
 //  echo $sql;
   return !empty($result) ? array_pop($result) : false;

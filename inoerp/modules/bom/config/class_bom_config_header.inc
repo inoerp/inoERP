@@ -109,7 +109,16 @@ class bom_config_header extends dbObject {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where item_id_m= '{$item_id_m}' LIMIT 1 ";
+   " where item_id_m= '{$item_id_m}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -118,16 +127,34 @@ class bom_config_header extends dbObject {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where item_id_m= '{$item_id_m}'  AND org_id = '{$org_id}' LIMIT 1 ";
+   " where item_id_m= '{$item_id_m}'  AND org_id = '{$org_id}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
- 
-  public static function find_by_referenceData($reference_key_name, $reference_key_value) {
+
+ public static function find_by_referenceData($reference_key_name, $reference_key_value) {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where reference_key_name= '{$reference_key_name}'  AND reference_key_value = '{$reference_key_value}' LIMIT 1 ";
+   " where reference_key_name= '{$reference_key_name}'  AND reference_key_value = '{$reference_key_value}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -135,7 +162,16 @@ class bom_config_header extends dbObject {
  public function findBy_itemId() {
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where item_id_m= :item_id_m LIMIT 1 ";
+   " where item_id_m= :item_id_m ";
+    switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $param_a = ['item_id_m'];
   $value_a = ['item_id_m' => $this->item_id_m];
   $result_array = $this->findBy_sql($sql, $param_a, $value_a);

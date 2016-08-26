@@ -4409,7 +4409,7 @@ $(document).ready(function () {
   getFormDetails(formUrl);
  }).one();
 
- $('body').on('click', 'a.hr_approval_limit_assignment_id', function (e) {
+ $('body').on('click', 'a.hr_approval_limit_assign_id', function (e) {
   var position_id_v = $('#position_id').val();
   var job_id_v = $('#job_id').val();
   var bu_org_id_v = $('#bu_org_id').val();

@@ -132,7 +132,7 @@ LEFT JOIN item ON item.item_id_m = wwh.item_id_m and item.org_id = wwh.org_id
 	$sql .= self::$table_name;
 	$sql .= " WHERE wip_wo_header_id = :wip_wo_header_id ";
 	$sql .= " AND resource_sequence = :resource_sequence ";
-	$sql .= " LIMIT 1 ";
+	$sql = ino_perPageSql_i($sql, 1);
 
 	$param_a = ['wip_wo_header_id', 'resource_sequence'];
 	$value_a = ['wip_wo_header_id' => $this->wip_wo_header_id, 'resource_sequence' => $this->resource_sequence];
@@ -144,7 +144,7 @@ LEFT JOIN item ON item.item_id_m = wwh.item_id_m and item.org_id = wwh.org_id
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
 	$sql .= " WHERE wip_wo_routing_detail_id = :wip_wo_routing_detail_id ";
-	$sql .= " LIMIT 1 ";
+	$sql = ino_perPageSql_i($sql, 1);
 
 	$param_a = ['wip_wo_routing_detail_id'];
 	$value_a = ['wip_wo_routing_detail_id' => $this->wip_wo_routing_detail_id];

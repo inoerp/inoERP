@@ -33,8 +33,8 @@ class inv_receipt_line extends dbObject {
   'po_requisition_detail_id',
   'po_requisition_line_id',
   'po_requisition_header_id',
-  'inv_interorg_transfer_line_id',
-  'inv_interorg_transfer_header_id',
+  'inv_intorg_transfer_line_id',
+  'inv_intorg_transfer_header_id',
   "receving_account_id",
   "accrual_account_id",
   'country_of_origin',
@@ -121,8 +121,8 @@ class inv_receipt_line extends dbObject {
  public $po_requisition_detail_id;
  public $po_requisition_line_id;
  public $po_requisition_header_id;
- public $inv_interorg_transfer_line_id;
- public $inv_interorg_transfer_header_id;
+ public $inv_intorg_transfer_line_id;
+ public $inv_intorg_transfer_header_id;
  public $receving_account_id;
  public $accrual_account_id;
  public $country_of_origin;
@@ -236,7 +236,7 @@ class inv_receipt_line extends dbObject {
     $this->status = 'Error';
    }
    $this->save();
-  } else if (!empty($this->inv_receipt_line_id) && !empty($this->inv_interorg_transfer_line_id)) {
+  } else if (!empty($this->inv_receipt_line_id) && !empty($this->inv_intorg_transfer_line_id)) {
    if (!empty($this->item_id_m)) {
     try {
      $this->_create_inv_transactions();
@@ -266,20 +266,20 @@ class inv_receipt_line extends dbObject {
 
  private function _after_save_interOrgReceipt() {
   global $dbc;
-  if (!empty($this->inv_interorg_transfer_line_id)) {
-   $iitl = new inv_interorg_transfer_line();
-   $iitl->findBy_id($this->inv_interorg_transfer_line_id);
+  if (!empty($this->inv_intorg_transfer_line_id)) {
+   $iitl = new inv_intorg_transfer_line();
+   $iitl->findBy_id($this->inv_intorg_transfer_line_id);
    try {
     $iitl->status = 'RECEIVED';
     $iitl->save();
     echo "<br> Inter Org Transfer Line is Successfully updated ";
    } catch (Exception $e) {
-    echo "<br> Not able to find inv_interorg_transfer_line_id. Error @ inv_transaction " . __LINE__ . '<br>' . $e->getMessage();
+    echo "<br> Not able to find inv_intorg_transfer_line_id. Error @ inv_transaction " . __LINE__ . '<br>' . $e->getMessage();
     $dbc->rollback = true;
     return;
    }
   } else {
-   echo "<br> Not able to find inv_interorg_transfer_line_id. Error @ inv_transaction " . __LINE__;
+   echo "<br> Not able to find inv_intorg_transfer_line_id. Error @ inv_transaction " . __LINE__;
    $dbc->rollback = true;
    return;
   }
@@ -561,8 +561,8 @@ class inv_receipt_line extends dbObject {
     if (!empty($this->locator_id)) {
      $inv_transaction->to_locator_id = $this->locator_id;
     }
-//    $inv_transaction->reference_key_name = 'inv_interorg_transfer_line';
-//    $inv_transaction->reference_key_value = $this->inv_interorg_transfer_line_id;
+//    $inv_transaction->reference_key_name = 'inv_intorg_transfer_line';
+//    $inv_transaction->reference_key_value = $this->inv_intorg_transfer_line_id;
     $to_org = inventory::find_by_org_id($this->org_id);
 //    pa($to_org);
     $inv_transaction->account_id = $to_org->inter_org_payable_ac_id;

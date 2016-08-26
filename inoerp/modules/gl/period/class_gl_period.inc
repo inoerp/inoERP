@@ -86,11 +86,11 @@ class gl_period extends dbObject {
  public $current_open_period;
  public $next_open_period;
  public $name;
- public $year;
- public $number;
+ public $c_year;
+ public $c_number;
  public $from_date;
  public $to_date;
- public $quarter;
+ public $c_quarter;
  public $en_dis;
 
  public function _before_save() {
@@ -148,11 +148,13 @@ class gl_period extends dbObject {
  public function current_open_period($ledger_id, $status = 'OPEN') {
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE ledger_id= :ledger_id  AND status = :status";
-  $sql .= " ORDER BY gl_period_id DESC ";
-  $sql .= " LIMIT 1 ";
+  $order_sql = " ORDER BY gl_period_id DESC ";
+  $sql = ino_perPageOrderBySql_i($sql, $order_sql, 1);
+
   $value_a = [
    'ledger_id' => $ledger_id,
    'status' => $status];
+
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -186,8 +188,8 @@ class gl_period extends dbObject {
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
- 
-  public static function find_all_periods($ledger_id, $status = '') {
+
+ public static function find_all_periods($ledger_id, $status = '') {
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE ledger_id= '{$ledger_id}'  ";
   if (!empty($status)) {
@@ -195,7 +197,7 @@ class gl_period extends dbObject {
   }
   $sql .= " ORDER BY gl_period_id DESC ";
   $result = self::find_by_sql($sql);
-    return !empty($result) ? $result : false;
+  return !empty($result) ? $result : false;
  }
 
  public static function current_open_period_st($ledger_id) {
@@ -218,7 +220,16 @@ class gl_period extends dbObject {
   $sql .= " WHERE ledger_id= :ledger_id  ";
   $sql .= " AND gl_period_id < :gl_period_id  ";
   $sql .= " ORDER BY gl_period_id DESC ";
-  $sql .= " LIMIT 1 ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
+
   $param_a = ['ledger_id', 'gl_period_id'];
   $value_a = [ 'ledger_id' => $current_period->ledger_id,
    'gl_period_id' => $current_period->gl_period_id
@@ -234,7 +245,16 @@ class gl_period extends dbObject {
   $sql .= " WHERE ledger_id= :ledger_id  ";
   $sql .= " AND gl_period_id > :gl_period_id  ";
   $sql .= " ORDER BY gl_period_id ASC ";
-  $sql .= " LIMIT 1 ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
+
   $param_a = ['ledger_id', 'gl_period_id'];
   $value_a = [ 'ledger_id' => $current_period->ledger_id,
    'gl_period_id' => $current_period->gl_period_id
@@ -243,51 +263,6 @@ class gl_period extends dbObject {
   return !empty($result) ? array_pop($result) : false;
  }
 
-// public static function find_gl_period_by_coa_id($coa_id) {
-//	$sql = "SELECT * FROM "
-//					. self::$table_name
-//					. " where coa_id={$coa_id}";
-//	$result = self::find_by_sql($sql);
-//	return $result;
-// }
-//
-// public static function find_gl_period_by_gl_period($gl_period) {
-//	global $db;
-//	$sql = " SELECT combination FROM "
-//					. self::$table_name
-//					. " where combination LIKE '%{$gl_period}%' LIMIT 0, 30";
-//	$result = $db->find_by_sql($sql);
-//	$data = array();
-//	foreach ($result as $obj) {
-//	 $data[] = array(
-//			 'label' => $obj->combination,
-//			 'value' => $obj->combination
-//	 );
-//	}
-//	return $data;
-// }
-//
-// public static function validate_gl_period($coa_id, $gl_period) {
-//	global $db;
-//	$sql = "SELECT * FROM " .
-//					self::$table_name .
-//					" where coa_id='{$coa_id}' " .
-//					" AND combination='{$gl_period}' " .
-//					"LIMIT 1";
-//	$result_set = $db->find_by_sql($sql);
-//	return !(empty($result_set)) ? true : false;
-// }
-//
-// public static function find_combination_id_from_combination($coa_id, $gl_period) {
-//	global $db;
-//	$sql = "SELECT gl_period_id FROM " .
-//					self::$table_name .
-//					" where coa_id={$coa_id}" .
-//					" AND combination='{$gl_period}' " .
-//					" LIMIT 1";
-//	$result = $db->find_by_sql($sql);
-//	return !(empty($result)) ? array_shift($result) : false;
-// }
 }
 
 //end of gl_period class

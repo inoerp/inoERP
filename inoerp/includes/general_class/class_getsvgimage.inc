@@ -245,6 +245,10 @@ class getsvgimage extends dbObject {
   $this->_label = [];
   $this->_data = [];
   $return_chart = '';
+  
+  if(empty($this->result)){
+   return false;
+  }
 
   foreach ($this->result as $obj) {
    if (!empty($legend_name)) {

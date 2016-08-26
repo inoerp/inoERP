@@ -68,7 +68,8 @@ class pos_barcode_list_line extends dbObject {
 
  public static function find_by_optionId_lineCode($header_id, $code) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where code={$code} AND pos_barcode_list_header_id={$header_id} LIMIT 1 ";
+   " where code={$code} AND pos_barcode_list_header_id={$header_id} ";
+   $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_push($result) : $result;
  }
@@ -82,8 +83,8 @@ class pos_barcode_list_line extends dbObject {
 		AND item_id_m = '{$item_id_m}'
 		AND effective_start_date < '{$price_date}'
 		AND(effective_end_date IS NULL OR effective_end_date > '{$price_date}')
-		 LIMIT 1
 ";
+    $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

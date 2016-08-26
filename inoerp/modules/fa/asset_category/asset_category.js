@@ -19,7 +19,7 @@ $(document).ready(function () {
           'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
  });
 
- $('body').off('click', 'a.fa_book_category_association_id').on('click', 'a.fa_book_category_association_id', function (e) {
+ $('body').off('click', 'a.fa_book_category_assoc_id').on('click', 'a.fa_book_category_assoc_id', function (e) {
   e.preventDefault();
   var fa_asset_book_id = $('#fa_asset_book_id').val();
   var fa_asset_category_id = $('#fa_asset_category_id').val();

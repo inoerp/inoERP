@@ -123,7 +123,7 @@ public static   function co_field_stmt($field_object, $lin_val_obj) {
 
    case 'FILE' :
     $field_object_file_name = $field_object->field_name . '_file';
-    $file_details = file::find_by_fieldName_referenceTable_and_id($field_object->field_name, 'cc_co_line', $field_value);
+    $file_details = extn_file::find_by_fieldName_referenceTable_and_id($field_object->field_name, 'cc_co_line', $field_value);
     $field_stmt .= ino_attachement($file_details, $field_object_file_name);
     $field_stmt .= $f->hidden_field($field_object->field_name, $field_value);
     break;

@@ -139,15 +139,15 @@ limit_type, limit_range_low, limit_range_high, amount_limit,limit_object, bu_org
 )
 AS
  SELECT 
-user.user_id, user.username, user.first_name,user.last_name,user.email,user.hr_employee_id,user.status,
+user.ino_user_id, user.username, user.first_name,user.last_name,user.email,user.hr_employee_id,user.status,
 he.identification_id,he.start_date,he.citizen_number,he.first_name as emp_first_name,he.last_name as emp_last_name,he.phone, 
 he.email,he.gender,he.person_type, he.org_id, he.job_id, he.position_id, he.expense_ac_id,he.supervisor_employee_id,
 hp.position_name, he.org_id, hala.hr_approval_limit_header_id, hala.document_type, hala.start_date,
 hall.limit_type, hall.limit_range_low, hall.limit_range_high, hall.amount_limit,hall.limit_object, halh.bu_org_id, org_v.currency_code
-FROM user
+FROM ino_user user
 LEFT JOIN hr_employee he ON he.hr_employee_id = user.hr_employee_id
 LEFT JOIN hr_position hp ON hp.hr_position_id = he.position_id
-LEFT JOIN hr_approval_limit_assignment hala ON he.position_id = hala.position_id
+LEFT JOIN hr_approval_limit_assign hala ON he.position_id = hala.position_id
 LEFT JOIN hr_approval_limit_line hall ON  hala.hr_approval_limit_header_id =  hall.hr_approval_limit_header_id
 LEFT JOIN hr_approval_object hao ON  hao.hr_approval_object_id =  hall.limit_object
 LEFT JOIN hr_approval_limit_header halh ON hall.hr_approval_limit_header_id = halh.hr_approval_limit_header_id

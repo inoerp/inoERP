@@ -11,7 +11,7 @@
 /**
  * hr_compensation_element
  * Compensation Element defines all the compensation elements used in payslip and payroll.
- * Contains all the hr_approval_limit_assignment information, such as - element_type, element_name , description, etc
+ * Contains all the hr_approval_limit_assign information, such as - element_type, element_name , description, etc
  * 
  */
  class hr_compensation_element extends dbObject {

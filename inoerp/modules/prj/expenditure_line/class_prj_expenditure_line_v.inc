@@ -103,7 +103,7 @@ AND pel.prj_project_line_id = ppl.prj_project_line_id
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE hd_ro_line_id = :hd_ro_line_id ";
-  $sql .= " LIMIT 1 ";
+  $sql = ino_perPageSql_i($sql, 1);
   $value_a = ['hd_ro_line_id' => $line_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;

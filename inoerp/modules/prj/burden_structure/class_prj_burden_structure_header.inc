@@ -17,7 +17,7 @@
 class prj_burden_structure_header extends dbObject {
 
  public static $table_name = "prj_burden_structure_header";
- public static $dependent_classes = ['prj_burden_structure_costcode', 'prj_burden_structure_expendituretype'];
+ public static $dependent_classes = ['prj_burden_struct_costcode', 'prj_burden_struct_exptype'];
  public static $primary_column = "prj_burden_structure_header_id";
  public static $key_column = 'structure';
  public static $module = "prj";
@@ -28,7 +28,7 @@ class prj_burden_structure_header extends dbObject {
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',
-  'dependent_class' => array('prj_burden_structure_costcode', 'prj_burden_structure_expendituretype'),
+  'dependent_class' => array('prj_burden_struct_costcode', 'prj_burden_struct_exptype'),
   'primary_entity_cb' => '',
   'module_name' => 'hd',
   'weight' => 1

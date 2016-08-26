@@ -178,7 +178,16 @@ class supplier extends dbObject {
   global $db;
   $sql = "SELECT * FROM "
    . self::$table_name
-   . " where supplier_number LIKE '%{$supplier_number}%' LIMIT 0, 30";
+   . " where supplier_number LIKE '%{$supplier_number}%' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(30);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(30);
+    break;
+  }
   $result = $db->query($sql);
   $data = array();
   if ($result && mysql_num_rows($result)) {
@@ -208,7 +217,8 @@ class supplier extends dbObject {
   global $db;
   $sql = " SELECT * FROM "
    . self::$table_name
-   . " where supplier_name LIKE :supplier_name LIMIT $limit";
+   . " where supplier_name LIKE :supplier_name ";
+  $sql = ino_perPageSql_i($sql, $limit);
   $param_a = ['supplier_name'];
   $supplier_name = '%' . $this->supplier_name . '%';
   $value_a = [ 'supplier_name' => $supplier_name];
@@ -367,8 +377,8 @@ LEFT JOIN supplier_bu sb ON su.supplier_id = sb.supplier_id
     }
    }
   }
-  
-  
+
+
   $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? ($result_array) : false;
  }

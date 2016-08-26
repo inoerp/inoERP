@@ -99,7 +99,7 @@
        </ul>
       </div>
       <div id="uploaded_file_details"></div>
-      <?php echo file::attachment_statement($file); ?>
+      <?php echo extn_file::attachment_statement($file); ?>
      </div>
     </div>	
    </div>

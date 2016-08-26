@@ -156,7 +156,8 @@ class address extends dbObject {
  }
 
  public static function find_by_address_name($address_name) {
-  $sql = "SELECT * FROM " . self::$table_name . " where address_name REGEXP '{$address_name}$' LIMIT 1";
+  $sql = "SELECT * FROM " . self::$table_name . " where address_name REGEXP '{$address_name}$' ";
+  $sql = ino_perPageSql_i($sql, 1);
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_shift($result_array) : false;
  }

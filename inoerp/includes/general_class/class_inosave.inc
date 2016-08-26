@@ -69,6 +69,8 @@ class inosave extends dbObject {
     if (isset($_POST[$value][$i])) {
      if (substr($value, -3) == '_id') {
       $$class->$value = str_replace(array(',', '.'), '', $_POST[$value][$i]);
+     } else if (substr($value, -5) == '_date') {
+      $$class->$value = ino_date($_POST[$value][$i]);
      } else {
       $$class->$value = $_POST[$value][$i];
      }
@@ -109,15 +111,15 @@ class inosave extends dbObject {
    }
 
 
-   if (!empty($$class->dateFields)) {
-    foreach ($$class->dateFields as $key => $value) {
-     if (!empty($_POST[$value][$i])) {
-      $$class->$value = date('Y-m-d', strtotime($_POST[$value][$i]));
-     } else {
-      $$class->$value = NUll;
-     }
-    }
-   }
+//   if (!empty($$class->dateFields)) {
+//    foreach ($$class->dateFields as $key => $value) {
+//     if (!empty($_POST[$value][$i])) {
+//      $$class->$value = ino_date($_POST[$value][$i]);
+//     } else {
+//      $$class->$value = NUll;
+//     }
+//    }
+//   }
 
    if (!empty($$class->serializedFields)) {
     foreach ($$class->serializedFields as $key => $value) {
@@ -229,7 +231,7 @@ class inosave extends dbObject {
     }
    }
 
-   
+
 
    $required_field_flag = true;
    foreach ($$class->requiredField as $key => $value) {
@@ -257,7 +259,7 @@ class inosave extends dbObject {
      if (method_exists($$class, '_after_save')) {
       $$class->_after_save();
      }
-     $secondary_fields = sys_secondary_field_instance::find_by_referenceKey($class);
+     $secondary_fields = sys_secondary_field_inst::find_by_referenceKey($class);
      if ($secondary_fields) {
       $this->_save_secondary_field($secondary_fields, $$class->$primaryColumn);
 //      pa($secondary_fields);

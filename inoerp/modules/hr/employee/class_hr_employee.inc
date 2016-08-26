@@ -12,7 +12,7 @@
 /**
  * hr_employee
  * All employee information
- * Contains all the hr_approval_limit_assignment information, such as - hr_employee_id, identification_id , last_name, etc
+ * Contains all the hr_approval_limit_assign information, such as - hr_employee_id, identification_id , last_name, etc
  * 
  */
 class hr_employee extends dbObject {
@@ -254,7 +254,8 @@ class hr_employee extends dbObject {
             FROM hr_employee hre, 
                  ino_user as user 
             WHERE user.hr_employee_id = hre.hr_employee_id
-            AND user.ino_user_id = '{$user_id}' LIMIT 1";
+            AND user.ino_user_id = '{$user_id}' ";
+            $sql = ino_perPageSql_i($sql, 1);
   $result = self::find_by_sql($sql);
   return !empty($result) ? array_pop($result) : false;
  }

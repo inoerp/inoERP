@@ -179,7 +179,16 @@ class bom_line extends dbObject {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where item_id_m= '{$item_id_m}'  AND org_id = '{$org_id}' LIMIT 1 ";
+   " where item_id_m= '{$item_id_m}'  AND org_id = '{$org_id}' ";
+  switch (DB_TYPE) {
+   case 'ORACLE' :
+    $sql .= ' AND ' . ino_perPageSql(1);
+    break;
+
+   default:
+    $sql .= ino_perPageSql(1);
+    break;
+  }
   $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? array_pop($result_array) : false;
  }

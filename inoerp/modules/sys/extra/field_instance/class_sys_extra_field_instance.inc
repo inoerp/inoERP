@@ -105,11 +105,12 @@
   }
 
   public static function find_by_fieldName_referenceDetails($extra_field_name, $ref_key, $ref_value) {
-   $ef_table = 'extra_field_' . $extra_field_name;
+   $ef_table = 'ef_' . $extra_field_name;
 
    $sql = " SELECT * FROM ";
    $sql .= $ef_table;
-   $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' LIMIT 1";
+   $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' ";
+   $sql = ino_perPageSql_i($sql, 1);
    $result = self::find_by_sql($sql);
    return !empty($result) ? array_pop($result) : false;
   }

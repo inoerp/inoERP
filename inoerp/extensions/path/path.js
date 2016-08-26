@@ -36,7 +36,7 @@ deleteHeader('form.php?class_name=path', $('#path_id').val());
   } else {
    var mode = 2;
   }
-  $('#mode').val(mode);
+  $('#pmode').val(mode);
   if (className.indexOf("&") >= 0) {
    className_v = className.substr(0, className.indexOf('&'));
    $('#obj_class_name').val(className_v);
