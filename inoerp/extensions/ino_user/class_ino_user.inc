@@ -525,7 +525,7 @@ class ino_user extends dbObject {
 }
 
 $ino_user = new ino_user();
-if (!empty( $_SESSION['user_id'])) {
+if (!empty( $_SESSION['user_id']) && empty($_GET['ino_user_id'])) {
  try {
   $ino_user_i = $ino_user->findBy_id($_SESSION['user_id']);
   $ino_user = $ino_user_i;

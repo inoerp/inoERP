@@ -166,7 +166,7 @@ class role_access extends dbObject {
   return !empty($result) ? $result : false;
  }
 
- public function find_by_roleCode($role_code) {
+ public static function find_by_roleCode($role_code) {
   $sql = "SELECT * FROM " . self::$table_name . " where role_code='{$role_code}' ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
