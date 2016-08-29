@@ -383,16 +383,16 @@ class ino_user extends dbObject {
   }
   $stmt = $dbc->connection->prepare(" $sql ");
   $stmt->bindParam(':primary_id', $id);
-
+  $stmt->setFetchMode(PDO::FETCH_INTO, $this);
   try {
    $stmt->execute();
-   $result = $stmt->fetchAll(PDO::FETCH_CLASS, self::$table_name);
+   $result = $stmt->fetch();
+//   $result = $stmt->fetchAll(PDO::FETCH_CLASS, self::$table_name);
   } catch (PDOException $e) {
    return "No Records Found!" . $e->getMessage();
   }
 
-
-  return !empty($result) ? array_pop($result) : null;
+  return !empty($result) ? $result : null;
  }
 
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {

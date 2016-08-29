@@ -54,12 +54,11 @@ if ($continue) {
    $_SESSION['recent_visit'][$request_class_name] = $current_url;
   }
  } else {
-  if(isset($_SERVER['QUERY_STRING'])){
+  if (isset($_SERVER['QUERY_STRING'])) {
    $_SESSION['recent_visit'][$_SERVER['QUERY_STRING']] = $current_url;
-  }else{
+  } else {
    $_SESSION['recent_visit']['QUERY_STRING'] = $current_url;
   }
-  
  }
 
  /*
@@ -182,7 +181,7 @@ if (!empty($_POST['className'])) {
  unset($class_names);
  $class_names[] = $_POST['className'];
 }
- 
+
 //if class names comes as a single value then convert it to an array and all dependent class names
 if ((!empty($class_names)) && (!(is_array($class_names)))) {
  $class_names_str = $class_names;
@@ -230,11 +229,11 @@ if (($continue) && (!empty($class_names))) {
   //	$table_name = $class;
   if (class_exists($class)) {
    $$class = new $class;
-  } else if ($class =='index') {
+  } else if ($class == 'index') {
    $continue = false;
    return;
-  }else{
-      $class = 'user_dashboard_v';
+  } else {
+   $class = 'user_dashboard_v';
    $class_names[0] = $class;
    $$class = new $class;
   }
@@ -262,14 +261,15 @@ if (($continue) && (!empty($class_names))) {
   if (empty($_POST)) {
    $class_id = property_exists($class, 'primary_column') ? $class::$primary_column : $table_name . '_id';
    if (!empty($_GET[$class_id])) {
-     $class_id_value = filter_var($_GET[$class_id], FILTER_SANITIZE_NUMBER_INT);
+    $class_id_value = filter_var($_GET[$class_id], FILTER_SANITIZE_NUMBER_INT);
     $verify_web_form_allowed = false;
+   } else if ($class == 'ino_user' && !empty($_SESSION['ino_user_id'])) {
+    $class_id_value = $_SESSION['ino_user_id'];
    } else {
     $class_id_value = null;
     if (property_exists($$class, 'profile_default')) {
      if (!empty($$class->profile_default) && (is_array($$class->profile_default))) {
       foreach ($$class->profile_default as $field_name => $profile_name) {
-//        pa($prl->find_default_profile($profile_name));
        $$class->$field_name = $prl->find_default_profile($profile_name)->level_value;
       }
      }
@@ -279,11 +279,7 @@ if (($continue) && (!empty($class_names))) {
    //-------------------------------------------------------------------------------------
    if (!empty($class_id_value) && (!is_array($class_id_value))) {
     $$class->findBy_id($class_id_value);
-//    foreach ($$class as $key => $value) {
-//     if ((!empty($value)) && (property_exists($$class, $key))) {
-//      $$class->$key = $value;
-//     }
-//    }
+
     //catalog statement
     if (!empty($class_id_value)) {
      $cat_val = new sys_catalog_value();
@@ -593,7 +589,6 @@ if (!empty($_SESSION['user_roles'])) {
      break;
     }
    }
-//    echo "<br> class is $class access_level is $access_level ";
   }
  }
 
@@ -605,6 +600,8 @@ if (!empty($_SESSION['user_roles'])) {
 } else {
  $mode = 2;
 }
+
+// echo "<br> class_first is $class_first access_level is $access_level .line ".__LINE__; pa($$class_first);
 
 /* -----------------------------------------include all include files -------------------------------------- */
 if ($continue && !empty($form_page)) {
@@ -651,7 +648,7 @@ if ($continue && !empty($form_page)) {
  if (empty($template_file_names)) {
   $custom_template_name = THEME_DIR . '/template/' . $class . '_template.php';
   $role_custom_template_name = '';
-  if (isset($_SESSION['user_roles'])) {
+  if (isset($_SESSION['user_roles']) && !empty($_SESSION['user_roles'])) {
    $primary_user_role = $_SESSION['user_roles'][0];
    $role_custom_template_name = THEME_DIR . '/template/' . $primary_user_role . '_' . $class . '_template.php';
   }
@@ -661,7 +658,7 @@ if ($continue && !empty($form_page)) {
    $template_file_names = [$custom_template_name];
   } else {
    $template_file_names = glob($fdir . DS . "*_template.php");
-   if(empty($template_file_names)){
+   if (empty($template_file_names)) {
     $template_file_names = [THEME_DIR . '/template/default_template.inc'];
    }
   }

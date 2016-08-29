@@ -239,12 +239,12 @@ class path extends dbObject {
   global $dbc;
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE obj_class_name = :obj_class_name AND mode <= :mode ";
+  $sql .= " WHERE obj_class_name = :obj_class_name AND pmode <= :pmode ";
 //	$sql .= " UNION SELECT * FROM ";
 //	$sql .= self::$table_name;
 //	$sql .= " WHERE mode IS NULL ";
 
-  $value_a = ['obj_class_name' => $obj_class_name, 'mode' => $mode];
+  $value_a = ['obj_class_name' => $obj_class_name, 'pmode' => $mode];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
@@ -313,7 +313,7 @@ class path extends dbObject {
   foreach ($all_class_a as $data) {
    if (!empty($data['path_id'])) {
     $path->findBy_id($data['path_id']);
-    $path->mode = isset($data['mode']) ? $data['mode'] : null;
+    $path->pmode = isset($data['mode']) ? $data['mode'] : null;
     $path->obj_class_name = isset($data['class_name']) ? $data['class_name'] : null;
     $path->audit_trial();
     $path->save();
