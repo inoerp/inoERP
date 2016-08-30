@@ -10,7 +10,7 @@
   <div class="tabContainer">
    <div id="tabsDetailD-1" class="tabContent">
     <div id ="form_header">
-     <form action=""  method="post" id="cc_co_header"  name="cc_co_header">
+     <form method="post" id="cc_co_header"  name="cc_co_header">
       <div id="tabsHeader">
        <ul class="tabMain">
         <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -92,7 +92,7 @@
    </div>
    <div id="tabsDetailD-2" class="tabContent">
     <div id ="form_line2" class="form_line2">
-     <form action=""  method="post" id="process_flow_action_form"  name="process_flow_action_form">
+     <form method="post" id="process_flow_action_form"  name="process_flow_action_form">
       <div >
        <table class="form_line_data_table">
         <thead> 
@@ -117,9 +117,9 @@
             ?>        
            </td>
            <td><?php echo $f->text_field_ap(array('name' => 'sys_process_flow_line_id', 'value' => $sys_process_flow_line->sys_process_flow_line_id, 'readonly' => true)); ?></td>
-           <td><?php echo $f->text_field_ap(array('name' => 'line_number', 'value' => $sys_process_flow_line->line_number, 'class_name' => 'lines_number')); ?></td>
+           <td><?php echo $f->text_field_ap(array('name' => 'line_number', 'value' => $sys_process_flow_line->value, 'class_name' => 'lines_number')); ?></td>
            <td><?php echo $f->text_field_ap(array('name' => 'line_name', 'value' => $sys_process_flow_line->line_name, 'readonly' => true)); ?></td>
-           <td><?php echo $f->select_field_from_array('line_type', sys_process_flow_line::$line_type_a, $sys_process_flow_line->line_type); ?></td>
+           <td><?php echo $f->select_field_from_array('line_type', sys_process_flow_line::$line_type_a, $sys_process_flow_line->line_type, '','large'); ?></td>
            <td><?php echo $f->text_field_ap(array('name' => 'description', 'value' => $sys_process_flow_line->description, 'readonly' => true, 'class_name' => 'medium')); ?></td>
            <td class="add_detail_values">
             <i class="fa fa-arrow-circle-down add_detail_values_img"></i>
@@ -141,7 +141,7 @@
             }
             ?>
             <div class="class_detail_form">
-             <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+             <fieldset class="form_detail_data_fs">
               <div class="tabsDetail">
                <ul class="tabMain">
                 <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
@@ -183,8 +183,8 @@
                      <td><?php form::text_field_wid3sr('cc_co_process_flow_action_id'); ?></td>
                      <td><?php form::text_field_wid3sr('sys_process_flow_line_id'); ?></td>
                      <td><?php echo $f->number_field('action_number', $$class_third->action_number, '', '', 'detail_number'); ?></td>
-                     <td><?php echo $f->select_field_from_array('pf_action_type', sys_process_flow_action::$pf_action_type_a, $$class_third->pf_action_type); ?></td>
-                     <td><?php echo $f->select_field_from_object('role_code', role_access::roles(), 'option_line_code', 'option_line_value', $$class_third->role_code, 'role_code'); ?></td>
+                     <td><?php echo $f->select_field_from_array('pf_action_type', sys_process_flow_action::$pf_action_type_a, $$class_third->pf_action_type, '', 'medium'); ?></td>
+                     <td><?php echo $f->select_field_from_object('role_code', role_access::roles(), 'option_line_code', 'option_line_value', $$class_third->role_code, '' , 'medium' ); ?></td>
                      <td><?php
                       echo $f->hidden_field('user_id', $$class_third->user_id);
                       $$class_third->username = !empty($$class_third->user_id) ? ino_user::find_by_id($$class_third->user_id)->username : null;
@@ -204,11 +204,11 @@
                  <table class="form form_detail_data_table detail">
                   <thead>
                    <tr>
-                    <th>Action Id</th>
-                    <th>Value</th>
-                    <th>Comment</th>
-                    <th>By User</th>
-                    <th>Duration</th>
+                    <th><?php echo gettext('Action Id') ?></th>
+                    <th><?php echo gettext('Value') ?></th>
+                    <th><?php echo gettext('Comment') ?></th>
+                    <th><?php echo gettext('By User') ?></th>
+                    <th><?php echo gettext('Duration') ?></th>
                    </tr>
                   </thead>
                   <tbody class="form_data_detail_tbody">
@@ -278,8 +278,8 @@
 
  </div>
  <!--    End of place for showing error messages-->
- <div id="form_line" class="form_line"><span class="heading">Change Lines </span>
-  <form action=""  method="post" id="cc_co_line"  name="cc_co_line">
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Change Lines') ; ?></span>
+  <form method="post" id="cc_co_line"  name="cc_co_line">
    <div id="tabsLine">
     <ul class="tabMain">
      <?php
@@ -302,12 +302,12 @@
           if ($tlc == 1) {
            $no_of_fields_in_tab = NO_OF_SEEDED_FIELDS;
            ?>
-           <th>Action</th>
-           <th>Seq#</th>
-           <th>Line Id</th>
-           <th>Item</th>
-           <th>New Revision</th>
-           <th>Item Description</th>
+           <th><?php echo gettext('Action') ; ?></th>
+           <th><?php echo gettext('Seq#') ; ?></th>
+           <th><?php echo gettext('Line Id') ; ?></th>
+           <th><?php echo gettext('Item') ; ?></th>
+           <th><?php echo gettext('Change Lines') ; ?></th>
+           <th><?php echo gettext('Item Description') ; ?></th>
            <?php
            foreach ($template_lines_ia as $fields) {
             if ($no_of_fields_in_tab >= NO_OF_FIELDS_IN_TAB) {
@@ -354,10 +354,10 @@
             <td><?php echo $f->text_field('cc_co_line_id', $$class_second->cc_co_line_id, '8', '', '', '', 1); ?></td>
             <td><?php
              echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
-             form::text_field_wid2('item_number', 'select_item_number_all_fm2');
+             form::text_field_wid2('item_number', 'select_item_number_all_fm2 xlarge');
              ?>
              <i class="select_item_number select_popup clickable fa fa-search"></i></td>
-            <td><?php echo $f->text_field_wid2s('new_revision'); ?></td>
+            <td><?php echo $f->text_field_wid2('new_revision'); ?></td>
             <td><?php echo $f->text_field('item_description', $$class_second->item_description); ?></td>
             <?php
             if (!empty($template_lines)) {

@@ -1,8 +1,5 @@
 <form method="post" id="inv_transaction"  name="inv_transaction">
- <?php
- $f = new inoform();
- echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
- ?> 
+ <?php  echo (!empty($hidden_stmt)) ? $hidden_stmt : "";  ?> 
  <div id ="form_header"><span class="heading"><?php echo gettext('Inventory Transaction ') ?></span> 
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -72,7 +69,7 @@
          ?>
          <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
         <td><?php $f->text_field_widsr('revision_name'); ?></td>
-        <td><?php $f->text_field_widl('item_description'); ?></td>
+        <td><?php $f->text_field_wid('item_description'); ?></td>
         <td>
          <?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class->uom_id, ' ', 'uom_id medium', 1, 1); ?>
         </td>

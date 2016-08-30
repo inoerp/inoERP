@@ -1735,7 +1735,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
    $idvalue = "";
   }
   $element_text_field = "<textarea name=\"$bracketName\" 
-                                 cols=\"$columnsize\" rows=\"$rowsize\" class=\"textfield $name $div_class \" title=\"$title\" placeholder=\"$place_holder\" $required $idvalue $readonly>$value_html</textarea>";
+                                 cols=\"$columnsize\" rows=\"$rowsize\" class=\"textfield $name $div_class \" title=\"$title\" placeholder=\"$place_holder\" $required $idvalue $readonly>$value</textarea>";
   return $element_text_field;
  }
 

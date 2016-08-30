@@ -139,7 +139,7 @@
            echo $f->hidden_field('processing_lt', '');
            ?>
            <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
-          <td><?php $f->text_field_wid2l('item_description' , 'large'); ?></td>
+          <td><?php $f->text_field_wid2('item_description' , 'large'); ?></td>
           <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', ' medium uom_id'); ?></td>
           <td><?php echo $f->number_field('line_quantity', $$class_second->line_quantity ); ?></td>
 

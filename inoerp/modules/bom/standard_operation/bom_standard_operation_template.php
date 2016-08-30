@@ -71,14 +71,14 @@ inoERP
          <th><?php echo gettext('Action') ?></th>
          <th><?php echo gettext('Assignment Id') ?>#</th>
          <th><?php echo gettext('Resource Seq') ?></th>
-         <th><?php echo gettext('Resource') ?>#</th>
-         <th><?php echo gettext('Basis') ?>#</th>
-         <th><?php echo gettext('Usage') ?>#</th>
+         <th><?php echo gettext('Resource') ?></th>
+         <th><?php echo gettext('Basis') ?></th>
+         <th><?php echo gettext('Usage') ?></th>
          <th><?php echo gettext('Schedule') ?></th>
-         <th><?php echo gettext('Units') ?>#</th>
-         <th><?php echo gettext('24 Hours') ?>#</th>
-         <th><?php echo gettext('Stnd. Rate') ?>#</th>
-         <th><?php echo gettext('Charge Type') ?>#</th>
+         <th><?php echo gettext('Units') ?></th>
+         <th><?php echo gettext('24 Hours') ?></th>
+         <th><?php echo gettext('Stnd. Rate') ?></th>
+         <th><?php echo gettext('Charge Type') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bom_stnd_op_res_assignment_values" >
@@ -92,18 +92,18 @@ inoERP
            echo ino_inline_action($$class_second->bom_stnd_op_res_assignment_id, array('bom_standard_operation_id' => $$class->bom_standard_operation_id));
            ?>
           </td>
-          <td><?php form::text_field_wid2sr('bom_stnd_op_res_assignment_id'); ?></td>
+          <td><?php $f->text_field_wid2sr('bom_stnd_op_res_assignment_id' ,'always_readonly'); ?></td>
           <td><?php form::number_field_wid2s('resource_sequence') ?></td>
           <td>
            <?php echo form::select_field_from_object('resource_id', bom_resource::find_all(), 'bom_resource_id', 'resource', $$class_second->resource_id, '', $readonly, 'resource_id'); ?>
           </td>
-          <td><?php echo form::select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_id', 'option_line_code', $$class_second->charge_basis, 'charge_basis', $readonly, 'default_basis'); ?></td>
+          <td><?php echo $f->select_field_from_object('charge_basis', bom_header::bom_charge_basis(), 'option_line_code', 'option_line_value', $$class_second->charge_basis, '', ' default_basis medium' , '' , $readonly); ?></td>
           <td><?php form::number_field_wid2s('resource_usage') ?></td>
-          <td><?php echo form::select_field_from_object('resource_schedule', bom_header::bom_schedule_option(), 'option_line_id', 'option_line_code', $$class_second->resource_schedule, 'resource_schedule', $readonly, 'default_basis'); ?></td>
-          <td><?php form::number_field_wid2s('assigned_units') ?></td>
+          <td><?php echo $f->select_field_from_object('resource_schedule', bom_header::bom_schedule_option(), 'option_line_code', 'option_line_value', $$class_second->resource_schedule, '',  'medium', '' , $readonly); ?></td>
+          <td><?php form::number_field_wid2('assigned_units') ?></td>
           <td><?php echo form::checkBox_field('twenty_four_hr_cb', $$class_second->twenty_four_hr_cb); ?></td>
           <td><?php echo form::checkBox_field('standard_rate_cb', $$class_second->standard_rate_cb); ?></td>
-          <td><?php echo form::select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_code', $$class_second->charge_type, 'charge_type', $readonly); ?></td>
+          <td><?php echo $f->select_field_from_object('charge_type', bom_resource::charge_type(), 'option_line_code', 'option_line_value', $$class_second->charge_type, '', 'medium' , '' , $readonly); ?></td>
          </tr>
          <?php
          $count = $count + 1;
