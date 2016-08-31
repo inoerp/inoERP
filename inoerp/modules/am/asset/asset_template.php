@@ -45,7 +45,7 @@
         ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
        <li><?php $f->l_select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->subinventory_id, '', 'subinventory_id', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('locator_id', locator::find_all_of_subinventory($$class->subinventory_id), 'locator_id', 'locator', $$class->locator_id, '', 'locator_id', '', $readonly); ?>       </li>
-       <li><?php $f->l_checkBox_field('maintainable_cb', $$class->maintainable_cb); ?></li>
+       <li><?php $f->l_checkBox_field_d('maintainable_cb'); ?></li>
       </ul>
      </div>
      <div id="tabsHeader-3" class="tabContent">

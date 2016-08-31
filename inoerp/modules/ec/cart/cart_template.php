@@ -5,7 +5,7 @@
     <span class="heading"><?php echo gettext('Cart'); ?></span>
     <div id="form_serach_header" class="tabContainer">
      <label><?php echo gettext('User Name') ?></label>
-     <?php echo $f->select_field_from_object('user_id', ino_user::find_all(), 'user_id', 'username', $user_id_h, 'user_id'); ?>
+     <?php echo $f->select_field_from_object('user_id', ino_user::find_all(), 'ino_user_id', 'username', $user_id_h, 'user_id' ,'xlarge'); ?>
      <a name="show" href="form.php?class_name=ec_cart&<?php echo "mode=$mode"; ?>" class="show document_id ec_cart_id">
       <i class="fa fa-refresh"></i></a> 
     </div>
@@ -39,10 +39,7 @@
            $ec_cart = $cart_object_ai->current();
            ?>         
            <tr class="ec_cart<?php echo $count ?>">
-            <td><?php
-             echo ino_inline_action($$class->ec_cart_id, array('user_id' => $user_id_h));
-             ?>    
-            </td>
+            <td><?php   echo ino_inline_action($$class->ec_cart_id, array('user_id' => $user_id_h));        ?>                </td>
             <td><?php $f->seq_field_d($count) ?></td>
             <td><?php $f->text_field_dsr('ec_cart_id') ?></td>
             <td><?php $f->text_field_dsr('ec_product_id'); ?></td>

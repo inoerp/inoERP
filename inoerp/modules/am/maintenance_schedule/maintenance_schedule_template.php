@@ -46,8 +46,8 @@
        <li><?php $f->l_number_field_d('intervals_per_cycle'); ?></li>
        <li><?php $f->l_number_field_d('current_cycle'); ?></li>
        <li><?php $f->l_number_field_d('current_cycle_interval'); ?></li>
-       <li><?php $f->l_checkBox_field('create_wo_cb', $$class->create_wo_cb); ?></li>
-       <li><?php $f->l_checkBox_field('reschedule_wo_cb', $$class->reschedule_wo_cb); ?></li>
+       <li><?php $f->l_checkBox_field_d('create_wo_cb'); ?></li>
+       <li><?php $f->l_checkBox_field_d('reschedule_wo_cb'); ?></li>
         <li><?php $f->l_select_field_from_array('status', am_maintenance_schedule::$status_a, $$class->status,'status'); ?></li>
       </ul>
      </div>

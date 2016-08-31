@@ -9,12 +9,12 @@
       <!--    START OF FORM HEADER-->
       <div class="error"></div><div id="loading"></div>
       <?php
-       echo (!empty($show_message)) ? $show_message : "";
+      echo (!empty($show_message)) ? $show_message : "";
       ?> 
       <!--    End of place for showing error messages-->
       <div id="form_all">
-       <div id="form_headerDiv">
-        <form action=""  method="post" id="user_supplier_line"  name="user_supplier_line"><span class="heading">User Basic Info </span>
+       <div id="form_headerDiv"><h1 class="error">Not availabe for your product. Use supplier @ user level</h1>
+        <form method="post" id="user_supplier_line"  name="user_supplier_line"><span class="heading">User Basic Info </span>
          <div id="tabsHeader">
           <ul class="tabMain">
            <li><a href="#tabsHeader-1">Basic Info</a></li>
@@ -22,13 +22,14 @@
           <div class="tabContainer">
            <div id="tabsHeader-1" class="tabContent">
             <div class="large_shadow_box"> 
-             <ul class="column five_column">
-              <li><label><img src="<?php echo HOME_URL; ?>themes/default/images/serach.png" class="user_id select_popup clickable">
-                User Name :</label>	<?php echo $f->text_field_d('username'); ?>
-              <?php echo $f->hidden_field_withId('user_id', $user_id_h); ?><a name="show" class="show user_id clickable"> <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
-              </li>
-              <li><label>First Name : </label>	<?php echo $f->text_field_d('first_name'); ?> </li>
-              <li><label>Last Name : </label><?php echo $f->text_field_d('last_name'); ?>	 </li> 
+             <ul class="column header_field">
+              <li><?php
+               echo $f->l_val_field_d('username', 'ino_user', 'username', '', 'vf_select_user username');
+               echo $f->hidden_field_withId('user_id', $user_id_h);
+               ?><i class="generic g_select_lead_employee_name select_popup clickable fa fa-search" data-class_name="ino_user"></i>
+              <i class="fa fa-refresh"></i></li>
+              <li><label>First Name</label>	<?php echo $f->text_field_d('first_name'); ?> </li>
+              <li><label>Last Name</label><?php echo $f->text_field_d('last_name'); ?>	 </li> 
              </ul>
             </div>
            </div>
@@ -57,46 +58,38 @@
               </thead>
               <tbody class="form_data_line_tbody user_supplier_values" >
                <?php
-                $count = 0;
-                foreach ($user_supplier_object as $user_supplier) {
-                 if (!empty($$class->supplier_id)) {
-                  $sup = new supplier();
-                  $sup->findBy_id($$class->supplier_id);
-                  $$class->supplier_name = $sup->supplier_name;
-                  $supplier_site = supplier_site::find_by_id($$class->supplier_site_id);
-                  $supplier_site_obj = [];
-                  if($supplier_site){
+               $count = 0;
+               foreach ($user_supplier_object as $user_supplier) {
+                if (!empty($$class->supplier_id)) {
+                 $sup = new supplier();
+                 $sup->findBy_id($$class->supplier_id);
+                 $$class->supplier_name = $sup->supplier_name;
+                 $supplier_site = supplier_site::find_by_id($$class->supplier_site_id);
+                 $supplier_site_obj = [];
+                 if ($supplier_site) {
                   array_push($supplier_site_obj, $supplier_site);
                   $supplier_site_name_statement = $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, '', 'supplier_site_id', '', $readonly);
-                  }else{
-                   $supplier_site_obj = supplier_site::find_by_parent_id($$class->supplier_id);
-                   $supplier_site_name_statement = $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, '', 'supplier_site_id', '', $readonly);
-                  }
-                  
                  } else {
-                  $$class->supplier_name = null;
-                  $supplier_site_name_statement = form::text_field('supplier_site_id', $$class->supplier_site_id);
+                  $supplier_site_obj = supplier_site::find_by_parent_id($$class->supplier_id);
+                  $supplier_site_name_statement = $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, '', 'supplier_site_id', '', $readonly);
                  }
-                 ?>         
-                 <tr class="user_supplier_line<?php echo $count ?>">
-                  <td>    
-                   <ul class="inline_action">
-                    <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                    <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
-                    <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->user_supplier_id); ?>"></li> 
-                    <li><?php echo form::hidden_field('user_id', $user_id_h); ?></li>
-                   </ul>
-                  </td>
-                  <td><?php $f->seq_field_d($count) ?></td>
-                  <td><?php $f->text_field_widsr('user_supplier_id') ?></td>
-                  <td><?php $f->text_field_widr('supplier_id'); ?></td>
-                  <td><?php $f->text_field_widm('supplier_name', 'select_supplier_name'); ?>
-                   <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_supplier_name select_popup clickable"></td>
-                  <td><?php echo $supplier_site_name_statement; ?></td>
-                 </tr>
-                 <?php
-                 $count = $count + 1;
+                } else {
+                 $$class->supplier_name = null;
+                 $supplier_site_name_statement = form::text_field('supplier_site_id', $$class->supplier_site_id);
                 }
+                ?>         
+                <tr class="user_supplier_line<?php echo $count ?>">
+                 <td><?php echo ino_inline_action($$class->user_supplier_id, array('user_id' => $user_id_h)); ?>  </td>
+                 <td><?php $f->seq_field_d($count) ?></td>
+                 <td><?php $f->text_field_widsr('user_supplier_id') ?></td>
+                 <td><?php $f->text_field_widr('supplier_id'); ?></td>
+                 <td><?php $f->text_field_widm('supplier_name', 'select_supplier_name'); ?>
+                  <img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_supplier_name select_popup clickable"></td>
+                 <td><?php echo $supplier_site_name_statement; ?></td>
+                </tr>
+                <?php
+                $count = $count + 1;
+               }
                ?>
               </tbody>
              </table>
@@ -121,5 +114,3 @@
  </div>
 
 </div>
-
-<?php include_template('footer.inc') ?>
