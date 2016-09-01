@@ -22,7 +22,7 @@ class ar_revenue_schedule extends dbObject {
  public static $module = "ar";
  public static $system_info = [
   'name' => 'Revenue Schedule',
-  'number' => '2605',
+  'number' => '1309',
   'description' => 'Revenue Schedule',
   'version' => '0.1.1',
   'db_version' => '1001',

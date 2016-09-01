@@ -22,7 +22,7 @@ class pm_batch_operation_header extends pm_process_operation_header {
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Operation Batch',
-  'number' => '5108',
+  'number' => '2802',
   'description' => 'Create & Mainten Process Batch',
   'version' => '0.1.1',
   'db_version' => '1001',

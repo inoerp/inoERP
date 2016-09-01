@@ -17,9 +17,9 @@
 class hd_subscription_user extends hd_subscription_header {
 
  public static $system_info = [
-  'name' => 'Subscription',
-  'number' => '2301',
-  'description' => 'Create & Mainten Subscription',
+  'name' => 'Subscription User',
+  'number' => '5110',
+  'description' => 'Create & Mainten Subscription User',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',

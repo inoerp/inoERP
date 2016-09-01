@@ -24,7 +24,7 @@ class sys_rfid_interface extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'RFID Interface',
-  'number' => '2125',
+  'number' => '9113',
   'description' => 'RFID Interface',
   'version' => '0.1.1',
   'db_version' => '1001',

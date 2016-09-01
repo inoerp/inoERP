@@ -28,7 +28,7 @@ class hd_subscription_header extends dbObject {
  ];
  public static $system_info = [
   'name' => 'Subscription',
-  'number' => '2301',
+  'number' => '5109',
   'description' => 'Create & Mainten Subscription',
   'version' => '0.1.1',
   'db_version' => '1001',

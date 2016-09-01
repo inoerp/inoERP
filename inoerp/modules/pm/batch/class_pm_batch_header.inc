@@ -23,7 +23,7 @@ class pm_batch_header extends dbObject {
  public static $module = "pm";
  public static $system_info = [
   'name' => 'batch',
-  'number' => '6214',
+  'number' => '2801',
   'description' => 'Create & Mainten Process Batch',
   'version' => '0.1.1',
   'db_version' => '1001',

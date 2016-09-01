@@ -24,7 +24,7 @@ class inv_reservation extends dbObject {
 // public static $js_fileName = 'modules/inv/reservation/multi_action/ma_reservation.js';
  public static $system_info = [
   'name' => 'Inventory Reservation',
-  'number' => '6004',
+  'number' => '2121',
   'description' => 'inv_reservation',
   'version' => '0.1.1',
   'db_version' => '1001',

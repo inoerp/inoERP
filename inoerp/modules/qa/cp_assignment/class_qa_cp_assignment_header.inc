@@ -22,7 +22,7 @@ class qa_cp_assignment_header extends dbObject {
  public static $module = "qa";
  public static $system_info = [
   'name' => 'Collection Plan Assignment',
-  'number' => '6003',
+  'number' => '2903',
   'description' => 'Quality Collection Plan Assignment',
   'version' => '0.1.1',
   'db_version' => '1001',

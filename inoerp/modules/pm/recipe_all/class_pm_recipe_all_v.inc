@@ -7,7 +7,7 @@ class pm_recipe_all_v extends dbObject {
  public static $form_class_name = "pm_recipe_header";
  public static $system_info = [
   'name' => 'PO All View',
-  'number' => '2220',
+  'number' => '2810',
   'description' => 'View for all PO Information',
   'version' => '0.1.1',
   'db_version' => '1001',

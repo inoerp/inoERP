@@ -23,7 +23,7 @@ class extn_view extends dbObject {
  //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'View',
-  'number' => '10023',
+  'number' => '10047',
   'description' => 'Create & Update View',
   'version' => '0.1.1',
   'db_version' => '1001',

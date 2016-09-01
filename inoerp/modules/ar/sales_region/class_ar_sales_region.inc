@@ -17,12 +17,12 @@
 class ar_sales_region extends dbObject {
 
  public static $table_name = "ar_sales_region";
- public static $module = "mdm";
+ public static $module = "ar";
  public static $primary_column = "ar_sales_region_id";
  public static $key_column = "sales_region_name";
  public static $system_info = [
   'name' => 'Sales Region',
-  'number' => '3205',
+  'number' => '1310',
   'description' => 'Define and mainten Sales Region',
   'version' => '0.1.1',
   'db_version' => '1001',

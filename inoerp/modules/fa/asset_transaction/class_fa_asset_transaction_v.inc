@@ -7,7 +7,7 @@ class fa_asset_transaction_v extends dbObject {
  public static $primary_column = "fa_asset_transaction_id";
  public static $system_info = [
   'name' => 'Asset Transaction View',
-  'number' => '2137',
+  'number' => '1414',
   'description' => 'Fixed Asset Transaction View',
   'version' => '0.1.1',
   'db_version' => '1001',

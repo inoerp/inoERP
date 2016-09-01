@@ -3,7 +3,7 @@
  class inv_serial_transaction_v extends dbObject {
   public static $system_info = [
   'name' => 'Serial Transaction View',
-  'number' => '2137',
+  'number' => '2140',
   'description' => 'Inventory Serial Transaction  View',
   'version' => '0.1.1',
   'db_version' => '1001',

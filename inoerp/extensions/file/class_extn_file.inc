@@ -18,7 +18,7 @@ class extn_file extends dbObject {
  public static $table_name = "extn_file";
  public static $system_info = [
   'name' => 'File',
-  'number' => '10016',
+  'number' => '10042',
   'description' => 'File System',
   'version' => '0.1.1',
   'db_version' => '1001',

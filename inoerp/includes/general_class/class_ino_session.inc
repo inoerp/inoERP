@@ -1,57 +1,52 @@
 <?php
 
-class ino_session  extends dbObject{
+class ino_session extends dbObject {
 
  private $login_flag = false;
+ private $_session_token ;
  public $user_id;
  public $username;
  public $user_roles;
  public $orginal_page;
  public $login_status;
- 
-  public $field_a = [
-  'cst_item_cost_header_id',
-  'org_id',
-  'bom_cost_type',
-  'item_id_m',
-  'based_on_rollup_cb',
-  'include_in_rollup_cb',
-  'sales_price',
-  'purchase_price',
-  'created_by',
+ public static $table_name = "ino_session";
+ public static $primary_column = "ino_session_id";
+ public static $key_column = 'ino_user_id';
+ public static $module = "sys";
+ public $field_a = [
+  'ino_session_id',
+  'ino_user_id',
+  'session_token',
+  'php_session_id',
+  'hostname',
+  'session_data',
   'creation_date',
+  'created_by',
   'last_update_by',
-  'last_update_date'
+  'last_update_date',
  ];
-  
+ public $ino_session_id;
+ public $ino_user_id;
+ public $session_token;
+ public $php_session_id;
+ public $hostname;
+ public $session_data;
+ public $creation_date;
+ public $created_by;
+ public $last_update_by;
+ public $last_update_date;
 
- function __construct() {
-  $secure = false; //change it as per your settings
-  ini_set('session.use_only_cookies', 1); 
-  ini_set('session.entropy_file', '/dev/urandom'); 
-  ini_set('session.entropy_length', '512'); 
-  
-  $cookieParams = session_get_cookie_params(); 
-  session_set_cookie_params($cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"], $secure, true);
-  session_name('INOERP123123'); 
-  session_start();
-
-  if (isset($_SESSION['orginal_page'])) {
-   $this->orginal_page = $_SESSION['orginal_page'];
-  }
-  if (!isset($_SESSION['recent_visit'])) {
-   $_SESSION['recent_visit'] = [];
-  } else if (!is_array($_SESSION['recent_visit'])) {
-   $_SESSION['recent_visit'] = [];
-  }
-  $this->check_login();
- }
-
- private function check_login() {
+ 
+ public function check_login() {
   if (isset($_SESSION['user_id'])) {
-   $this->login_flag = true;
-   $this->user_id = $_SESSION['user_id'];
-   $this->username = $_SESSION['username'];
+   $ino_sess_i = ino_session::find_by_keyColumn($_SESSION['user_id']);
+   if ((!empty($ino_sess_i)) && (isset($_SESSION['session_token'])) && ($ino_sess_i->session_token == $_SESSION['session_token'])) {
+    $this->login_flag = true;
+    $this->user_id = $_SESSION['user_id'];
+    $this->username = $_SESSION['username'];
+   } else {
+//    $this->logout();
+   }
   } else {
    $this->login_flag = false;
    $_SESSION['user_roles'] = ['ANONYMOUS'];
@@ -87,10 +82,47 @@ class ino_session  extends dbObject{
    }
    $this->assign_role();
    $this->_assign_user_groups();
+   
+   $this->_session_token = md5(uniqid(mt_srand(), true));
+   $_SESSION['lang'] = $this->_session_token;
+
+   //create session details
+   try {
+    $this->_create_sesssion();
+   } catch (Exception $e) {
+    echo $e->getMessage();
+   }
 
 //   pa($this); pa($_SESSION); echo 'session name '. session_name() . ' - ' . session_id();sdfsfds();
   }
  }
+
+ private function _create_sesssion() {
+  global $dbc;
+  $ino_see = new ino_session();
+  $ino_see->ino_user_id = $this->user_id;
+
+  //delete if session exists
+  $exist_session = $this->find_by_keyColumn($this->user_id);
+  if ($exist_session) {
+   $ino_see->ino_session_id = $exist_session->ino_session_id;
+   $ino_see->delete();
+  }
+
+
+  $ino_see->php_session_id = session_id();
+  $ino_see->session_token =  $this->_session_token;
+  $_SESSION['session_token'] = $ino_see->session_token;
+  $ino_see->hostname = $_SERVER['REMOTE_ADDR'];
+  try {
+   $ino_see->save();
+   $dbc->confirm();
+  } catch (Exception $e) {
+   throw new Exception('Unable to create session', 'INO_SESSION_01');
+  }
+ }
+
+
 
  public function assign_role() {
   $ur = new user_role();
@@ -138,4 +170,24 @@ class ino_session  extends dbObject{
 }
 
 $session = new ino_session();
+$secure = false; //change it as per your settings
+ini_set('session.use_only_cookies', 1);
+ini_set('session.entropy_file', '/dev/urandom');
+ini_set('session.entropy_length', '512');
+
+$cookieParams = session_get_cookie_params();
+session_set_cookie_params($cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"], $secure, true);
+session_name('INOERP123123');
+session_start();
+
+if (isset($_SESSION['orginal_page'])) {
+ $session->orginal_page = $_SESSION['orginal_page'];
+}
+if (!isset($_SESSION['recent_visit'])) {
+ $_SESSION['recent_visit'] = [];
+} else if (!is_array($_SESSION['recent_visit'])) {
+ $_SESSION['recent_visit'] = [];
+}
+$session->check_login();
+$si = &$session;
 ?>

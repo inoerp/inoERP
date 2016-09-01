@@ -22,7 +22,7 @@ class pm_resource_transaction extends dbObject {
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Resource Transaction',
-  'number' => '2605',
+  'number' => '2809',
   'description' => 'Resource Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -21,7 +21,7 @@ class user_group_access extends dbObject {
  public static $module = "extensions";
  public static $system_info = [
   'name' => 'User Group Access',
-  'number' => '10040',
+  'number' => '10044',
   'description' => 'Define and mainten user froup access',
   'version' => '0.1.1',
   'db_version' => '1001',

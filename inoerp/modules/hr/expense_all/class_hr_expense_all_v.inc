@@ -9,7 +9,7 @@ class hr_expense_all_v extends dbObject {
  public static $key_column = 'hr_expense_line_id';
  public static $system_info = [
   'name' => 'Transaction Interface',
-  'number' => '1306',
+  'number' => '3129',
   'description' => 'AP Import Claim',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -8,7 +8,7 @@ class prj_default_account extends dbObject {
  public static $key_column = "document_type";
  public static $system_info = [
   'name' => 'Project Accounts',
-  'number' => '9404',
+  'number' => '6027',
   'description' => 'Define and Mainten Default Project Accountig',
   'version' => '0.1.1',
   'db_version' => '1001',

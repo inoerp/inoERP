@@ -20,7 +20,7 @@ class hr_control extends dbObject {
  public static $module = "hr";
  public static $system_info = [
   'name' => 'HR Control',
-  'number' => '2201',
+  'number' => '3118',
   'description' => 'Create & Mainten HR Controls',
   'version' => '0.1.1',
   'db_version' => '1001',

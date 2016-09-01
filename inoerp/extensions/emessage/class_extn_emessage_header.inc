@@ -23,7 +23,7 @@ class extn_emessage_header extends dbObject {
  public static $module = "extn";
  public static $system_info = [
   'name' => 'E Message',
-  'number' => '5107',
+  'number' => '10041',
   'description' => 'Create & Mainten Message',
   'version' => '0.1.1',
   'db_version' => '1001',

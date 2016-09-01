@@ -18,6 +18,20 @@ class qa_quality_result extends dbObject {
 
  public static $key_column = 'reference_key_name';
  public static $table_name = 'qa_quality_result';
+ 
+  public static $system_info = [
+  'name' => 'Quality Result',
+  'number' => '2908',
+  'description' => 'Quality Result',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'qa',
+  'weight' => 11
+ ];
+  
+  
  public $field_a = [
   'reference_type',
   'reference_entity',

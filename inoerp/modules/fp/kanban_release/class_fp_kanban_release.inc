@@ -23,7 +23,7 @@ class fp_kanban_release extends dbObject {
  public static $module = "fp";
  public static $system_info = [
   'name' => 'Kanban Release',
-  'number' => '3108',
+  'number' => '2525',
   'description' => 'Kanban Release',
   'version' => '0.1.1',
   'db_version' => '1001',

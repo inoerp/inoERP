@@ -7,6 +7,19 @@ class qa_ce_action extends dbObject {
  public static $parent_primary_column = "qa_ce_header_id";
  public static $key_column = 'action_condition';
  public static $module = "qa";
+ 
+ public static $system_info = [
+  'name' => 'CE Action',
+  'number' => '2907',
+  'description' => 'Collection Element Action',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'qa',
+  'weight' => 11
+ ];
+  
  public static $comparison_a = [
   'VALUE' => 'Value',
   'SPEC_LIMIT' => 'Specification Limit'

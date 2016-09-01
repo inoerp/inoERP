@@ -24,7 +24,7 @@ class hr_grade extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'HR Grade',
-  'number' => '6004',
+  'number' => '3127',
   'description' => 'hr_grade',
   'version' => '0.1.1',
   'db_version' => '1001',

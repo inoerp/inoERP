@@ -55,7 +55,7 @@ $all_data_ai->seek($position);
         }
 //        $stmt .= "<br> $count|".$modules['name'].'|'.$modules['number'].'|'.$modules['description'] .'|' .$enabled_cb_v ;
         ?>         
-        <tr class="engine_line line_no<?php echo $count ?>">
+        <tr class="engine_line line_no<?php $f = new inoform(); echo $count ?>">
          <td>    
           <ul class="inline_action">
            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>

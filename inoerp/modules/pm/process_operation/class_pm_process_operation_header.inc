@@ -23,7 +23,7 @@ class pm_process_operation_header extends dbObject {
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Service Activity',
-  'number' => '5108',
+  'number' => '2806',
   'description' => 'Create & Mainten Process operation',
   'version' => '0.1.1',
   'db_version' => '1001',

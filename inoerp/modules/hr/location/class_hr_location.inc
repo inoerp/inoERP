@@ -23,7 +23,7 @@ class hr_location extends dbObject {
  public static $module = "hr";
  public static $system_info = [
   'name' => 'Location',
-  'number' => '1104',
+  'number' => '3121',
   'description' => 'HR Location',
   'version' => '0.1.1',
   'db_version' => '1001',

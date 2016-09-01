@@ -25,7 +25,7 @@ class hr_timesheet_period extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'HR Timesheet Period',
-  'number' => '6004',
+  'number' => '3123',
   'description' => 'hr_timesheet_period',
   'version' => '0.1.1',
   'db_version' => '1001',

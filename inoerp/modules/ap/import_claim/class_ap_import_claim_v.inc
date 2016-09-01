@@ -8,8 +8,8 @@ class ap_import_claim_v extends dbObject {
 // public static $js_fileName = 'modules/ar/transaction/js/multi_select_ar.js';
  public static $key_column = 'hr_expense_header_id';
  public static $system_info = [
-  'name' => 'Transaction Interface',
-  'number' => '1306',
+  'name' => 'Import Claim',
+  'number' => '1205',
   'description' => 'AP Import Claim',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -25,7 +25,7 @@ class prj_percent_header extends dbObject {
  public static $module = "prj"; //same as gl_journal_source
  public static $system_info = [
   'name' => 'Project Percent ',
-  'number' => '1203',
+  'number' => '6030',
   'description' => 'Create & Mainten Project Status Percent ',
   'version' => '0.1.1',
   'db_version' => '1001',

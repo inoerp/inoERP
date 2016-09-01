@@ -8,7 +8,7 @@ class hr_perdiem_rate extends dbObject {
  public static $key_column = "hr_location_id";
  public static $system_info = [
   'name' => 'Per Diem Rate',
-  'number' => '9404',
+  'number' => '3126',
   'description' => 'Per Diem Rate',
   'version' => '0.1.1',
   'db_version' => '1001',

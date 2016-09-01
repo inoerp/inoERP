@@ -26,7 +26,7 @@ class prj_revenue_header extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Project Revenue',
-  'number' => '6011',
+  'number' => '6032',
   'description' => 'prj_revenue_header',
   'version' => '0.1.1',
   'db_version' => '1001',

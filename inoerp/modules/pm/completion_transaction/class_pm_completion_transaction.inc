@@ -21,7 +21,7 @@ class pm_completion_transaction extends inv_transaction {
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Completion Transaction',
-  'number' => '2603',
+  'number' => '2803',
   'description' => 'Process Manufacturing Completion Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',

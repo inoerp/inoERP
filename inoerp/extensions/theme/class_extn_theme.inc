@@ -21,7 +21,7 @@ class extn_theme extends dbObject {
  public static $key_column = "theme_name";
  public static $system_info = [
   'name' => 'extn_theme',
-  'number' => '10039',
+  'number' => '10045',
   'description' => 'System extn_theme',
   'version' => '0.1.1',
   'db_version' => '1001',

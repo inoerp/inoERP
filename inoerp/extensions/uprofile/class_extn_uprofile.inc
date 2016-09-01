@@ -22,7 +22,7 @@ class extn_uprofile extends dbObject {
  public static $allow_search = false;
  public static $system_info = [
   'name' => 'User Profile',
-  'number' => '10029',
+  'number' => '10046',
   'description' => 'Define and mainten user profile',
   'version' => '0.1.1',
   'db_version' => '1001',

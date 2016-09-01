@@ -25,7 +25,7 @@ class prj_invoice_header extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'Project invoice',
-  'number' => '6011',
+  'number' => '6029',
   'description' => 'prj_invoice_header',
   'version' => '0.1.1',
   'db_version' => '1001',

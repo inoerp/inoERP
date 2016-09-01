@@ -22,7 +22,7 @@ class qa_specification_header extends dbObject {
  public static $module = "qa";
  public static $system_info = [
   'name' => 'Specification',
-  'number' => '6003',
+  'number' => '2904',
   'description' => 'Project Specification',
   'version' => '0.1.1',
   'db_version' => '1001',

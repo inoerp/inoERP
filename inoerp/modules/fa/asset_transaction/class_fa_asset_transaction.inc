@@ -16,7 +16,7 @@ class fa_asset_transaction extends dbObject {
  ];
  public static $system_info = [
   'name' => 'Asset  Transaction',
-  'number' => '2136',
+  'number' => '1413',
   'description' => 'FA Asset Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',

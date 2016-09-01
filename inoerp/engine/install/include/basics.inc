@@ -36,7 +36,7 @@ defined('DB_NAME') ? null : define("DB_NAME", "");
 require_once(INC_CLASS . DS . "class_dbc.inc");
 
  
-require_once(INC_CLASS . DS . "class.session.inc");
+//require_once(INC_CLASS . DS . "class.session.inc");
 require_once(INC_CLASS . DS . "class.form.inc");
 require_once(INC_CLASS . DS . "class_inoform.inc");
 

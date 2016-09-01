@@ -23,7 +23,7 @@ class qa_ce_header extends dbObject {
  public static $module = "qa";
  public static $system_info = [
   'name' => 'Collection Element',
-  'number' => '6015',
+  'number' => '2901',
   'description' => 'Create & Mainten Collection Element',
   'version' => '0.1.1',
   'db_version' => '1001',

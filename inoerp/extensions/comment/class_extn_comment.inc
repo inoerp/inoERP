@@ -29,7 +29,7 @@ class extn_comment extends dbObject {
  public static $module = "extension";
  public static $system_info = [
   'name' => 'Comment',
-  'number' => '10012',
+  'number' => '10040',
   'description' => 'Comments for all type of content types and documents',
   'version' => '0.1.1',
   'db_version' => '1001',

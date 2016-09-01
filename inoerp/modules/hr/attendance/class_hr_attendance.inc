@@ -25,7 +25,7 @@ class hr_attendance extends dbObject {
 //  data base variables as stored database column name
  public static $system_info = [
   'name' => 'HR Attendance',
-  'number' => '6004',
+  'number' => '3130',
   'description' => 'HR Attendance',
   'version' => '0.1.1',
   'db_version' => '1001',

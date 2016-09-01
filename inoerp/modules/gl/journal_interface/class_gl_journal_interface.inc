@@ -8,7 +8,7 @@ class gl_journal_interface extends dbObject {
  public static $key_column = 'gl_journal_line_id';
  public static $system_info = [
   'name' => 'Journal Interface',
-  'number' => '1306',
+  'number' => '110',
   'description' => 'GL Journal Interface',
   'version' => '0.1.1',
   'db_version' => '1001',

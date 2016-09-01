@@ -23,7 +23,7 @@ class pm_process_routing_header extends dbObject {
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Process Routing',
-  'number' => '5108',
+  'number' => '2807',
   'description' => 'Create & Mainten Process Routing',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -22,7 +22,7 @@ class ar_transaction_adjustment extends dbObject {
  public static $module = "ar";
  public static $system_info = [
   'name' => 'Transaction Adjustments',
-  'number' => '2605',
+  'number' => '2610',
   'description' => 'Transaction Adjustments',
   'version' => '0.1.1',
   'db_version' => '1001',

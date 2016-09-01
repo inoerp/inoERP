@@ -22,7 +22,7 @@ class qa_cp_header extends dbObject {
  public static $module = "qa";
  public static $system_info = [
   'name' => 'Collection Plan',
-  'number' => '6003',
+  'number' => '2902',
   'description' => 'Quality Collection Plan',
   'version' => '0.1.1',
   'db_version' => '1001',

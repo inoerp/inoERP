@@ -23,7 +23,7 @@ class hr_approval_limit_assign extends dbObject {
  public static $module = "hr";
  public static $system_info = [
   'name' => 'Limit Assignment',
-  'number' => '3102',
+  'number' => '3124',
   'description' => 'HR Approval Limit Assignment',
   'version' => '0.1.1',
   'db_version' => '1001',

@@ -20,7 +20,7 @@ class hr_pos_hierarchy_header extends dbObject {
  public static $module = "hr";
  public static $system_info = [
   'name' => 'Position Hierarchy',
-  'number' => '3112',
+  'number' => '3125',
   'description' => 'HR Position Hierarchy',
   'version' => '0.1.1',
   'db_version' => '1001',

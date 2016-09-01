@@ -6,6 +6,19 @@ class sys_secondary_field_inst extends dbObject {
  public static $primary_column = "sys_secondary_field_inst_id";
  public static $key_column = 'reference_key_name';
  public static $module = "sys"; //same as gl_journal_source
+ 
+ public static $system_info = [
+  'name' => 'Secondary Field Instance',
+  'number' => '2906',
+  'description' => 'Secondary Field Instance',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'qa',
+  'weight' => 11
+ ];
+ 
  public static $display_type_a = [
   'TEXT' => 'Text',
   'SELECT' => 'Select',

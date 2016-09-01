@@ -23,7 +23,7 @@ class extn_menu_header extends dbObject {
  public static $module = "extn";
  public static $system_info = [
   'name' => 'Menu',
-  'number' => '5108',
+  'number' => '10043',
   'description' => 'Create & Mainten Menu',
   'version' => '0.1.1',
   'db_version' => '1001',

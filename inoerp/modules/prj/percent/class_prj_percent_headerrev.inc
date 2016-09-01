@@ -23,8 +23,8 @@ class prj_percent_headerrev extends dbObject {
  public static $key_column = 'prj_project_header_id';
  public static $module = "prj"; //same as gl_journal_source
  public static $system_info = [
-  'name' => 'Project Percent ',
-  'number' => '1203',
+  'name' => 'Project Percent Revision',
+  'number' => '6031',
   'description' => 'Create & Mainten Project Status Percent ',
   'version' => '0.1.1',
   'db_version' => '1001',

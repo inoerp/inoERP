@@ -15,6 +15,19 @@
  * 
  */
 class inv_interorg_receipt_header extends inv_receipt_header {
+ 
+  public static $system_info = [
+  'name' => 'InterOrg Receipt',
+  'number' => '2138',
+  'description' => 'Inventory InterOrg Receipt',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'inv',
+  'weight' => 6
+ ];
+  
 public static $table_name = "inv_receipt_header";
 
  public static $transaction_type_id_a = [

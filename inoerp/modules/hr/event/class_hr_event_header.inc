@@ -23,7 +23,7 @@ class hr_event_header extends dbObject {
  public static $module = "hr";
  public static $system_info = [
   'name' => 'HR Event',
-  'number' => '6004',
+  'number' => '3119',
   'description' => 'HR Event',
   'version' => '0.1.1',
   'db_version' => '1001',

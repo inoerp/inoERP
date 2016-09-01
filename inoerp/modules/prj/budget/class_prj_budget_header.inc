@@ -22,7 +22,7 @@ class prj_budget_header extends dbObject {
  public static $module = "prj";
  public static $system_info = [
   'name' => 'Project Budget',
-  'number' => '6003',
+  'number' => '6025',
   'description' => 'Project Budget',
   'version' => '0.1.1',
   'db_version' => '1001',

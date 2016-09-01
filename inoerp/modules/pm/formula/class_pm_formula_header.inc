@@ -23,7 +23,7 @@ class pm_formula_header extends dbObject {
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Formula',
-  'number' => '6014',
+  'number' => '2804',
   'description' => 'Create & Mainten Formula',
   'version' => '0.1.1',
   'db_version' => '1001',

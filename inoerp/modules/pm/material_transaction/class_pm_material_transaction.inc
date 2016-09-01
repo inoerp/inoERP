@@ -21,7 +21,7 @@ class pm_material_transaction extends inv_transaction {
  public static $module = "pm";
  public static $system_info = [
   'name' => 'Material Transaction',
-  'number' => '2603',
+  'number' => '2805',
   'description' => 'Process Manufacturing Material Transaction',
   'version' => '0.1.1',
   'db_version' => '1001',

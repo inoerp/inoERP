@@ -23,7 +23,7 @@ class pm_recipe_header extends dbObject {
  public static $module = "pm";
  public static $system_info = [
   'name' => 'recipe',
-  'number' => '6014',
+  'number' => '2808',
   'description' => 'Create & Mainten recipe',
   'version' => '0.1.1',
   'db_version' => '1001',
