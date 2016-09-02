@@ -358,7 +358,7 @@ class extn_comment extends dbObject {
      $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
       . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '#comment_id_' . $recod_c->extn_comment_id . '">';
      $comment_string .= "<i class='fa fa-comment'></i> &nbsp;";
-     $comment_string .= substr(strip_tags($recod_c->comment), 0, $this->subject_noof_char);
+     $comment_string .= substr(strip_tags($recod_c->extn_comment), 0, $this->subject_noof_char);
      $comment_string .= ' </a>';
      $comment_string .= '</td>';
      $comment_string .= '<td class="created_by">';

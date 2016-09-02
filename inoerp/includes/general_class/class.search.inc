@@ -80,7 +80,7 @@ class search extends dbObject {
   $cc->findBy_id($comment_id);
   $class_of_comment = $cc->reference_table;
   if (property_exists($class_of_comment, 'primary_column')) {
-   $primary_col = $class_of_comment::$primary_column;
+   $primary_col = $class_of_extn_comment::$primary_column;
   } else {
    return;
   }

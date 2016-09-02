@@ -74,8 +74,8 @@ if (!empty($_GET[$extension_id])) {
  $$extension_id = $_GET[$extension_id];
  $$extension = $extension::find_by_id($$extension_id);
  $file = extn_file::find_by_reference_table_and_id($table_name, $$extension_id);
-// $comment = comment::find_by_reference_table_and_id($table_name, $$extension_id);
- $comments = comment::comment_list($table_name,$$extension_id,$per_page,$pageno,$query_string,$$extension_id);
+// $comment = extn_comment::find_by_reference_table_and_id($table_name, $$extension_id);
+ $comments = extn_comment::comment_list($table_name,$$extension_id,$per_page,$pageno,$query_string,$$extension_id);
   
  foreach ($extension::$checkbox_array as $key => $value) {
   $value_cb = $value . '_cb';

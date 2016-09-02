@@ -657,7 +657,7 @@ AND content.content_id = category_reference.reference_id  ";
 						 </tr>
 						</thead>';
     foreach ($result_category as $records) {
-     $no_of_replies = comment::count_by_reference_table_and_id('content', $records->content_id);
+     $no_of_replies = extn_comment::count_by_reference_table_and_id('content', $records->content_id);
      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
      $category_listing .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
       . " <td class='subject_summary'>";
@@ -761,7 +761,7 @@ AND content.content_id = category_reference.reference_id  ";
 						 </tr>
 						</thead>';
     foreach ($result as $records) {
-     $no_of_replies = comment::count_by_reference_table_and_id('content', $records->content_id);
+     $no_of_replies = extn_comment::count_by_reference_table_and_id('content', $records->content_id);
      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
      $content_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
       . " <td class='subject_summary'>";

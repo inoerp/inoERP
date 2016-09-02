@@ -171,7 +171,7 @@ if (!empty($extension)) {
 	 if ($extension != 'category') {
 		$category = category::find_by_reference_table_and_id($table_name, $$extension_id);
 	 }
-	 $comments = comment::comment_list($table_name, $$extension_id, $per_page, $pageno, $query_string, $$extension_id);
+	 $comments = extn_comment::comment_list($table_name, $$extension_id, $per_page, $pageno, $query_string, $$extension_id);
 
 	 foreach ($extension::$checkbox_array as $key => $value) {
 //  $value_cb = $value . '_cb';
