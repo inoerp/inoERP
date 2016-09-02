@@ -1,7 +1,7 @@
 inoERP
 =========================
 
-Demo: <http://inoerp.org/extensions/user/user_login.php>
+Demo: <http://demo.inoideas.org/extensions/ino_user/user_login.php>
 
 Homepage: <http://inoideas.org/>
 
@@ -9,7 +9,7 @@ Introduction
 ------------
 
 inoERP is an open source php based enterprise management system. 
-The ERP system contains all the required modules for running any small to mid-size businesses.
+The ERP systems contain all the required modules for running any small to mid-size businesses.
 The features are very similar to Oracle R12/ Fusion Application and SAP. 
 It also contains a light weight CMS which seamlessly integrates with the ERP
 

@@ -24,8 +24,12 @@ switch ($access_level) {
 	break;
 
  default:
+  if($class != 'ino_generic'){
+   $access_denied_msg = 'You dont have acess to the requested object' . $class;
+  }
 	break;
 }
+
 
 //for user class - allow user to change their own settings
 if($class_first == 'ino_user'){

@@ -1,6 +1,6 @@
 <?php
 if (empty($access_level) || ($access_level < 2 )) {
- echo '<div><div id="structure">' . access_denied() . '</div></div>';
+ echo '<div><div id="structure">' . access_denied("You can only view & update your own user details") . '</div></div>';
  return;
 }
 ?>
@@ -192,7 +192,7 @@ if (empty($access_level) || ($access_level < 2 )) {
         <tr class="user_group<?php echo $count ?>">
          <td>
           <?php
-          echo ino_inline_action($user_group->user_group_id, array('user_id' => $$class->ino_user_id));
+          echo ino_inline_action($user_group->user_group_id, array('ino_user_id' => $$class->ino_user_id));
           ?>
          </td>
          <td><?php echo $f->text_field_ap(array('name' => 'user_group_id', 'value' => $user_group->user_group_id, 'readonly' => 1)); ?></td>

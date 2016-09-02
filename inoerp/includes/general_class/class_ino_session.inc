@@ -3,7 +3,7 @@
 class ino_session extends dbObject {
 
  private $login_flag = false;
- private $_session_token ;
+ private $_session_token;
  public $user_id;
  public $username;
  public $user_roles;
@@ -36,11 +36,16 @@ class ino_session extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
- 
+ public function __construct() {
+  session_set_save_handler(
+   array($this, "session_open"), array($this, "session_close"), array($this, "session_read"), array($this, "session_write"), array($this, "session_destroy"), array($this, "session_gc")
+  );
+ }
+
  public function check_login() {
   if (isset($_SESSION['user_id'])) {
    $ino_sess_i = ino_session::find_by_keyColumn($_SESSION['user_id']);
-   if ((!empty($ino_sess_i)) && (isset($_SESSION['session_token'])) && ($ino_sess_i->session_token == $_SESSION['session_token'])) {
+   if ((!empty($ino_sess_i)) && (isset($_SESSION['session_token'])) && ($ino_sess_i->session_token == $_SESSION['session_token']) && (HOME_URL == $ino_sess_i->hostname)) {
     $this->login_flag = true;
     $this->user_id = $_SESSION['user_id'];
     $this->username = $_SESSION['username'];
@@ -82,13 +87,13 @@ class ino_session extends dbObject {
    }
    $this->assign_role();
    $this->_assign_user_groups();
-   
-   $this->_session_token = md5(uniqid(mt_srand(), true));
-   $_SESSION['lang'] = $this->_session_token;
 
+   $this->_session_token = md5(uniqid(mt_srand(), true));
+   $_SESSION['session_token'] = $this->_session_token;
+   
    //create session details
    try {
-    $this->_create_sesssion();
+    $this->_create_sesssion(true);
    } catch (Exception $e) {
     echo $e->getMessage();
    }
@@ -97,8 +102,17 @@ class ino_session extends dbObject {
   }
  }
 
- private function _create_sesssion() {
+ private function _create_sesssion($new_session = false) {
   global $dbc;
+
+  if (empty($this->user_id) && empty($_SESSION['user_id'])) {
+   return false;
+  }
+  
+  if(!$new_session){
+   return false;
+  }
+  
   $ino_see = new ino_session();
   $ino_see->ino_user_id = $this->user_id;
 
@@ -109,20 +123,20 @@ class ino_session extends dbObject {
    $ino_see->delete();
   }
 
-
   $ino_see->php_session_id = session_id();
-  $ino_see->session_token =  $this->_session_token;
+  $ino_see->session_token = $this->_session_token;
   $_SESSION['session_token'] = $ino_see->session_token;
-  $ino_see->hostname = $_SERVER['REMOTE_ADDR'];
+  $ino_see->hostname = HOME_URL;
+  $ino_see->session_data = serialize($_SESSION);
   try {
    $ino_see->save();
    $dbc->confirm();
   } catch (Exception $e) {
    throw new Exception('Unable to create session', 'INO_SESSION_01');
   }
+  
+
  }
-
-
 
  public function assign_role() {
   $ur = new user_role();
@@ -167,6 +181,86 @@ class ino_session extends dbObject {
   }
  }
 
+ /* PHP SESSION Handler */
+
+ private function _session_delete_cookie($name, $secure = NULL) {
+  global $is_https;
+  if (isset($_COOKIE[$name]) || (!$is_https && $secure === TRUE)) {
+   $params = session_get_cookie_params();
+   if ($secure !== NULL) {
+    $params['secure'] = $secure;
+   }
+   setcookie($name, '', time() - 4200, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+   unset($_COOKIE[$name]);
+  }
+ }
+
+ public function session_open() {
+  return true;
+ }
+
+ public function session_close() {
+  return true;
+ }
+
+ public function session_read($php_sid) {
+
+  $user_a = $this->find_by_ColumnNameVal('php_session_id', $php_sid);
+ 
+  if ($user_a) {
+   $user_i = $user_a[0];
+  } else {
+   return false;
+  }
+
+  if ($user_i && $user_i->ino_user_id > 0 && !empty($php_sid)) {
+   // This is done to unserialize the data member of $user.
+   $user_i->session_data = unserialize($user_i->session_data);
+   $_SESSION = $user_i->session_data;
+  } elseif ($user_i) {
+   $this->redirect_login();
+  } else {
+   $this->logout();
+  }
+
+
+  return true;
+ }
+
+ public function session_write() {
+  try {
+   $this->_create_sesssion();
+   return true;
+  } catch (Exception $e) {
+   return false;
+  }
+ }
+
+ public function session_destroy($php_sid) {
+  $ino_see = new ino_session();
+//  $ino_see->ino_user_id = $this->user_id;
+
+  //delete if session exists
+  $user_a = $this->find_by_ColumnNameVal('php_session_id', $php_sid);
+  if ($user_a) {
+   $user_i = $user_a[0];
+  }
+
+  if ($user_i) {
+   $ino_see->ino_session_id = $user_i->ino_session_id;
+   $ino_see->delete();
+  }
+
+  $_SESSION = array();
+//  $user = ino_anonymous_user();
+  // Unset the session cookies.
+  $this->_session_delete_cookie(session_name());
+ }
+
+ function session_gc($lifetime) {
+  return TRUE;
+ }
+
 }
 
 $session = new ino_session();
@@ -189,5 +283,5 @@ if (!isset($_SESSION['recent_visit'])) {
  $_SESSION['recent_visit'] = [];
 }
 $session->check_login();
-$si = &$session;
+$is = &$session;
 ?>

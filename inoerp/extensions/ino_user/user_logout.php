@@ -1,7 +1,7 @@
 <? ob_start(); ?>
 <?php include_once(__DIR__.'/../../includes/template/header_simple.inc'); ?>
 <?php
-session_start();
+//session_start();
 $bc = new block_cache();
 $bc->session_id = session_id();
 $bc->delete_allBy_sessionId();

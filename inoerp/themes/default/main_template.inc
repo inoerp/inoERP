@@ -208,7 +208,7 @@
         '</div>';
        }
        if (!empty($access_denied_msg)) {
-        echo ino_access_denied($access_denied_msg);
+        echo access_denied($access_denied_msg);
        } else if (!empty($template_file_names)) {
         echo getBreadCrumb($class_first);
         foreach ($template_file_names as $key => $tmpl_file) {

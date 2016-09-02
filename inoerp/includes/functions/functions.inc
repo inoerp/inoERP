@@ -481,7 +481,7 @@ function access_denied($msg = '') {
  $stmt = '<div class="alert alert-danger">
         <div class="jumbotron">
         <h1>Access Denied</h1>
-        <p class="lead">ou dont have enough privillage to access the requested page.</p>
+        <p class="lead">you don\'t have enough privillage to access the requested page.</p>
         <p><a class="btn btn-success" role="button" href="javascript:history.go(-1)"><span class="button">Click Here </a> to go back to the previous page </p>
 ';
  if (!empty($msg)) {
@@ -2230,6 +2230,10 @@ function ino_showWarning_message($msg) {
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
  echo gettext($msg);
  echo '</div>';
+}
+
+function ino_plain_text($text) {
+  return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 }
 
 function update_htaccessFile() {

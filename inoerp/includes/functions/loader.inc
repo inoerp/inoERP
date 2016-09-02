@@ -592,11 +592,7 @@ if (!empty($_SESSION['user_roles'])) {
   }
  }
 
- if ((!empty($access_level)) && ($access_level != 9)) {
-  require_once 'loader_access.inc';
- } else if (!empty($access_level) && $access_level == 9) {
-  $read_access = $write_access = $update_access = true;
- }
+ require_once 'loader_access.inc';
 } else {
  $mode = 2;
 }
