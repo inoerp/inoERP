@@ -84,6 +84,7 @@ class extn_convertToProd extends dbObject {
   'prj_work_type',
   'qa_specification_header',
   'qa_specification_line',
+  'extn_report'
  ];
  public $exclude_tables_limited_setup_mode = [
   'ap_payment_terms',

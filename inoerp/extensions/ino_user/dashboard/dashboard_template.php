@@ -20,7 +20,7 @@ if (!empty($ino_user->use_personal_db_cb)) {
      <li><a href="#tabsHeader-4" class="get-report-content" data-report_id="3"><?php echo gettext('On hand') ?></a></li>
      <li><a href="#tabsHeader-5" class="get-report-content" data-report_id="5"><?php echo gettext('Open PO') ?></a></li>
      <li><a href="#tabsHeader-6" class="get-report-content" data-report_id="4"><?php echo gettext('Sales Funnel') ?></a></li>
-     <li><a href="#tabsHeader-7"><?php echo gettext('WIP Value') ?></a></li>
+     <li><a href="#tabsHeader-7" class="get-report-content" data-report_id="10"><?php echo gettext('WIP Value') ?></a></li>
      <li><a href="#tabsHeader-8" class="get-report-content" data-report_id="1"><?php echo gettext('Supplier Liability') ?></a></li>
      <li><a href="#tabsHeader-9" class="get-report-content" data-report_id="6"><?php echo gettext('Customer Balance') ?></a></li>
     </ul>
@@ -57,40 +57,7 @@ if (!empty($ino_user->use_personal_db_cb)) {
      <div id="tabsHeader-4" class="tabContent"></div>
      <div id="tabsHeader-5" class="tabContent"></div>
      <div id="tabsHeader-6" class="tabContent"></div>
-     <div id="tabsHeader-7" class="tabContent">
-      <div>                
-       <?php
-       $raw = new ra_wip();
-       $legend_w = [];
-       $chart_a_w = [];
-       $reports_w = $raw->ra_report_set_wip();
-       $chart_settings_w = $raw->ra_report_wip_value_byItem_settings;
-       foreach ($reports_w as $key => $report_data_w) {
-        $key_name_setting = $key . '_settings';
-        $svgimage = new getsvgimage();
-        $svgimage->setProperty('_settings', $chart_settings_w);
-        if (property_exists($raw, $key_name_setting)) {
-         $this_chart_settings = $raw->$key_name_setting;
-         $svgimage->setProperty('_settings', $this_chart_settings);
-        }
-
-        $svgimage->setProperty('_data', $report_data_w);
-        $chart = $svgimage->draw_chart();
-        array_push($chart_a_w, $chart);
-       }
-
-       if (is_array($chart_a_w)) {
-        echo "<ul id='charts_in_report'>";
-        foreach ($chart_a_w as $key => $chart_image) {
-         echo "<li class=\"chart_no_$key\">$chart_image</li>";
-        }
-        echo '</ul>';
-       } else {
-        echo $chart_a_w;
-       }
-       ?>
-      </div>
-     </div>
+     <div id="tabsHeader-7" class="tabContent"></div>
      <div id="tabsHeader-8" class="tabContent"></div>
      <div id="tabsHeader-9" class="tabContent"></div>
     </div>
