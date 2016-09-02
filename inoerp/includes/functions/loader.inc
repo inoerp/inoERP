@@ -322,7 +322,7 @@ if (($continue) && (!empty($class_names))) {
     }
 
     try {
-     $comments = extn_extn_comment::comment_list($table_name, $class_id_value, $class_id_value);
+     $comments = extn_comment::comment_list($table_name, $class_id_value, $class_id_value);
     } catch (Exception $e) {
      
     }
