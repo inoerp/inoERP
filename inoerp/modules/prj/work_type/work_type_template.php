@@ -18,9 +18,7 @@
        <li><?php $f->l_date_fieldAnyDay('effective_from', $$class->effective_from); ?></li>
        <li><?php $f->l_date_fieldAnyDay('effective_to', $$class->effective_to); ?></li>
        <li><?php $f->l_checkBox_field_d('billable_cb'); ?>   </li>
-       <li><?php $f->l_checkBox_field_d('capitalizable_cb'); ?>   </li>
-       <li><?php $f->l_checkBox_field_d('training_cb'); ?>   </li>
-       <li><?php $f->l_checkBox_field_d('shadow_resource_cb'); ?>         </li>
+
 
       </ul>
      </div>
@@ -57,12 +55,15 @@
     <div class="tabContainer"> 
      <div id="tabsLine-1" class="tabContent">
       <div > 
-       <ul class="column header_field"> 
+       <ul class="column header_field two_column_form"> 
         <li><?php $f->l_checkBox_field_d('unassigned_cb'); ?>         </li>
         <li><?php $f->l_checkBox_field_d('non_worked_cb'); ?>         </li>
         <li><?php $f->l_text_field_d('utilization_type'); ?></li>
         <li><?php $f->l_text_field_d('utilization_percentage'); ?></li>
         <li><?php $f->l_select_field_from_array('tp_amount_type', prj_work_type::$tp_amount_type_a , $$class->tp_amount_type ,'tp_amount_type' ); ?></li>
+               <li><?php $f->l_checkBox_field_d('capitalizable_cb'); ?>   </li>
+       <li><?php $f->l_checkBox_field_d('training_cb'); ?>   </li>
+       <li><?php $f->l_checkBox_field_d('shadow_resource_cb'); ?>         </li>
        </ul> 
       </div> 
       <!--end of tab1 div three_column-->

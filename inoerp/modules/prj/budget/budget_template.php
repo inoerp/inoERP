@@ -11,7 +11,7 @@ inoERP
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Basic-2') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Finance Info') ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
     <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
     <li><a href="#tabsHeader-5"><?php echo gettext('Actions') ?></a></li>
@@ -89,7 +89,6 @@ inoERP
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Amounts') ?></a></li>
-    <li><a href="#tabsLine-2"><?php echo gettext('Future') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -142,9 +141,6 @@ inoERP
        ?>
       </tbody>
      </table>
-    </div>
-    <div id="tabsLine-2" class="tabContent">
-
     </div>
    </div>
   </div>
