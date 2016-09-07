@@ -19,6 +19,17 @@ class sd_pick_list_v extends dbObject {
 // public static $form_class_name = "sd_so_header";
  public static $table_name = "sd_pick_list_v";
  public static $primary_column = "so_number";
+ public static $system_info = [
+  'name' => 'Pick List',
+  'number' => '2325',
+  'description' => 'Sales Order Picking',
+  'version' => '0.1.1',
+  'db_version' => '1001',
+  'mod_version' => '1.1.1',
+  'primary_entity_cb' => '',
+  'module_name' => 'sd',
+  'weight' => 7
+ ];
  public $field_a = [
   'sd_so_header_id',
   'bu_org_id',
@@ -275,8 +286,8 @@ AND sdsl.line_status IN ('AWAITING_PICKING', 'PARTIAL_PICKED','PARTIAL_SHIPPED')
  }
 
  public static function multi_select_field_lot_number($data) {
-   $f = new inoform();
-  $stmt = $f->val_field('lot_numer', '','','','','','', 'inv_lot_onhand_v', 'lot_numer', 'item_id_m');
+  $f = new inoform();
+  $stmt = $f->val_field('lot_numer', '', '', '', '', '', '', 'inv_lot_onhand_v', 'lot_numer', 'item_id_m');
   $stmt .= $f->hidden_field_withCLass('inv_lot_numer_id', '', 'dontCopy');
   $stmt .= $f->hidden_field_withCLass('org_id', $data->shipping_org_id, 'popup_value');
   $stmt .= $f->hidden_field_withCLass('item_id_m', $data->item_id_m, 'popup_value item_id_m');

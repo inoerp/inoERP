@@ -12,11 +12,19 @@ Process Routing
 Recipe
 Resource Transaction
 
+- Accounts Receivable Improvements
+Revenue recognition & differed  recognition
+Revenue Schedule
+Revenue Rule
+
 - DB Improvement
 Fully compatible with Oracle 12c
+Database upgrade with a single program
 
 - New Extensions
 e message - chat and offline messaging platform
+user profile
+report extension with graph features
 
 
 - Extension Improvements
