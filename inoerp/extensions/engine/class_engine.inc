@@ -51,15 +51,7 @@ class engine extends dbObject {
   'type',
   'status',
  ];
- public $column = [
-  'engine_id',
-  'obj_class_name',
-  'type',
-  'status',
-  'db_version',
-  'primary_entity_cb',
-  'module_name',
- ];
+
  public $requiredField = [
   'type',
   'obj_class_name',

@@ -54,13 +54,14 @@
         <li><label>List Type</label> 
          <?php echo $f->select_field_from_array('list_type', dbObject::$list_type_a, $$class->list_type); ?></li>
         <li><label>Create/Update Block</label><?php echo $f->checkBox_field('create_block_cb', ''); ?></li>
+        <li><label>Show only graph in block</label><?php echo $f->checkBox_field('show_graph_only_cb', $$class->show_graph_only_cb); ?></li>
+        <li><label>Dont show graph</label><?php echo $f->checkBox_field('dont_show_graph_cb', $$class->dont_show_graph_cb); ?></li>
         <li><label>View Block</label>
          <?php
          echo!empty($$class->block_id) ? "<a href='form.php?class_name=block&mode=9&block_id=" . $$class->block_id . "'>Configure Block</a>" : 'No Block';
          echo $f->hidden_field_withId('block_id', $$class->block_id);
          ?>
         </li>
-        <li><label>Show only graph in block</label><?php echo $f->checkBox_field('show_graph_only_cb', $$class->show_graph_only_cb); ?></li>
        </ul>
       </div>
      </div>

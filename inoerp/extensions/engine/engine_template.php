@@ -23,6 +23,7 @@ $all_data_ai->seek($position);
         <th>Number</th>
         <th>Id</th>
         <th>Class Name</th>
+        <th>Module</th>
         <th>Description</th>
         <th>File DB Ver</th>
         <th>DB Ver</th>
@@ -55,7 +56,7 @@ $all_data_ai->seek($position);
         }
 //        $stmt .= "<br> $count|".$modules['name'].'|'.$modules['number'].'|'.$modules['description'] .'|' .$enabled_cb_v ;
         ?>         
-        <tr class="engine_line line_no<?php $f = new inoform(); echo $count ?>">
+        <tr class="engine_line line_no<?php  echo $count ?>">
          <td>    
           <ul class="inline_action">
            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
@@ -70,6 +71,7 @@ $all_data_ai->seek($position);
          <td><?php echo $f->text_field_ap(['name' => 'number', 'value' => $modules['number'], 'size' => '10', 'readonly' => 1]) ?></td>
          <td><?php echo $f->text_field_ap(['name' => 'existing_engine_id', 'value' => $engine_id_v, 'size' => '3', 'readonly' => 1]) ?></td>
          <td><?php echo $f->text_field_ap(['name' => 'obj_class_name', 'value' => $modules['obj_class_name'], 'size' => '25', 'readonly' => 1]) ?></td>
+         <td><?php echo $f->text_field_ap(['name' => 'module_name', 'value' => $modules['module_name'], 'size' => '15', 'readonly' => 1]) ?></td>
          <td><?php echo $f->text_field_ap(['name' => 'description', 'value' => $modules['description'], 'size' => '55', 'readonly' => 1]) ?></td>
          <td><?php echo $f->text_field_ap(['name' => 'db_version', 'value' => $modules['db_version'], 'size' => '6', 'readonly' => 1]) ?></td>
          <td><?php echo $f->text_field_ap(['name' => 'db_version_db', 'value' => $db_version_v, 'size' => '6', 'readonly' => 1]) ?></td>

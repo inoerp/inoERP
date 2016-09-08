@@ -60,6 +60,7 @@ class extn_report extends dbObject {
   'block_title',
   'show_graph_only_cb',
   'rev_enabled_cb',
+  'dont_show_graph_cb',
   'rev_number',
   'header_text',
   'footer_text',
@@ -149,6 +150,11 @@ class extn_report extends dbObject {
   '_show_update_path' => 1,
   '_show_extn_report_path' => 1,
  ];
+ 
+  public $option_lists = [
+  'module_code' => 'SYS_MODULE'
+ ];
+  
  public $pageTitle = " Report Builder "; //page Title
  public $extn_report_id;
  public $report_name;
@@ -171,6 +177,7 @@ class extn_report extends dbObject {
  public $block_id;
  public $block_title;
  public $show_graph_only_cb;
+ public $dont_show_graph_cb;
  public $rev_enabled_cb;
  public $rev_number;
  public $header_text;

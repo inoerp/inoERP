@@ -20,10 +20,13 @@
       <li><?php echo $f->l_select_field_from_object('payment_type', ap_payment_header::payment_types(), 'option_line_code', 'option_line_value', $ap_payment_header->payment_type, 'payment_type', '', 1, $readonly1); ?> </li>
       <li><?php $f->l_date_fieldFromToday_d('document_date', $$class->document_date) ?>              </li>
       <li><?php $f->l_text_field_d('document_number') ?>      </li>
-      <li><?php echo $f->hidden_field_withId('supplier_id', $$class->supplier_id); ?>
-       <label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="supplier_id select_popup clickable">
-        <?php echo gettext('Supplier Name') ?></label><?php echo $f->text_field('supplier_name', $$class->supplier_name, '20', 'supplier_name', 'select_supplier_name', 1, $readonly1); ?> </li>
-      <li><label class="auto_complete"><?php echo gettext('Supplier Number') ?></label><?php $f->text_field_d('supplier_number'); ?></li>
+      <li><?php
+       echo $f->l_val_field_dm('supplier_name', 'supplier', 'supplier_name', '', 'supplier_name', 'vf_select_supplier_name');
+       echo $f->hidden_field_withId('supplier_id', $$class->supplier_id);
+       ?><i class="generic g_select_supplier_name select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
+      <li><?php
+       echo $f->l_val_field_d('supplier_number', 'supplier', 'supplier_number', '', '', 'vf_select_supplier_number');
+       ?><i class="generic g_select_supplier_number select_popup clickable fa fa-search" data-class_name="supplier"></i></li>
       <li><label>Supplier Site</label><?php
        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
@@ -49,8 +52,8 @@
        <li><?php $f->l_number_field('header_amount', $$class->header_amount, '15', 'header_amount'); ?></li>
        <li><?php $f->l_text_field_dr('gl_journal_header_id', 'dont_copy'); ?> </li>
        <li><?php echo $f->hidden_field_withCLass('doc_currency', $$class->doc_currency, 'doc_currency always_readonly'); ?></li>
-       <li><?php // $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly);   ?></li>
-       <li><?php // $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate');   ?> </li>
+       <li><?php // $f->l_select_field_from_object('exchange_rate_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_code', $$class->exchange_rate_type, 'exchange_rate_type', '', 1, $readonly);     ?></li>
+       <li><?php // $f->l_number_field('exchange_rate', $$class->exchange_rate, '', 'exchange_rate');     ?> </li>
       </ul>
      </div>
     </div>

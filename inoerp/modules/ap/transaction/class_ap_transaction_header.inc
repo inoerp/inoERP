@@ -77,7 +77,7 @@ class ap_transaction_header extends dbObject {
   'payment_term_id',
   'exchange_rate_type',
   'exchange_rate',
-  'ef_id',
+  'due_date',
   'transaction_status',
   'document_date',
   'document_number',
@@ -190,7 +190,7 @@ class ap_transaction_header extends dbObject {
  public $payment_term_id;
  public $exchange_rate_type;
  public $exchange_rate;
- public $ef_id;
+ public $due_date;
  public $transaction_status;
  public $document_date;
  public $document_number;
@@ -267,6 +267,16 @@ class ap_transaction_header extends dbObject {
   }
   if (empty($this->ap_transaction_header_id) && !empty($this->bu_org_id)) {
    $this->_do_initial_defaults();
+  }
+ }
+ 
+ private function _do_initial_defaults_i(){
+  if(empty($this->payment_term_date)){
+   $this->payment_term_date = current_time(1);
+  }
+  
+  if( empty($this->due_date) && !empty($this->payment_term_id) && !empty($this->payment_term_date)){
+   
   }
  }
 

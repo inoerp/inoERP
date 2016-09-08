@@ -75,7 +75,8 @@ class path extends dbObject {
 //		 '_extra_path' => '',
  ];
  public $option_lists = [
-  'module_code' => 'SYS_MODULE'
+  'module_code' => 'SYS_MODULE',
+  'path_type' => 'EXT_PATH_TYPE',
  ];
  public $path_id;
  public $parent_id;
