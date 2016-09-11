@@ -22,12 +22,12 @@
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-     <div class="large_shadow_box"> 
-      <ul class="column three_column">
+     
+      <ul class="column header_field">
        <li><?php $f->l_ac_field_dm('adjustment_ac_id'); ?></li>
        <li><?php $f->l_text_field_d('counted_by'); ?></li>
       </ul>
-     </div>
+     
     </div>
    </div>
   </div>
@@ -78,8 +78,8 @@
          <td><?php $f->text_field_wid2('item_description'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small', '', 1); ?></td>
          <td><?php echo $f->date_fieldAnyDay('schedule_date', $$class_second->schedule_date); ?></td>
-         <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id', '', 1); ?></td>
-         <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id', '', 1); ?></td>
+         <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class_second->subinventory_id, '', 'subinventory_id medium', '', 1); ?></td>
+         <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_second->subinventory_id), 'locator_id', 'locator', $$class_second->locator_id, '', 'locator_id medium', '', 1); ?></td>
         </tr>
         <?php
         $inv_count_schedule_object_ai->next();
