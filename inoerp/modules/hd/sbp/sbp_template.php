@@ -53,7 +53,7 @@ inoERP
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Business Process Details') ?></span>
- <form action=""  method="post" id="hd_sbp_line"  name="hd_sbp_line">
+ <form method="post" id="hd_sbp_line"  name="hd_sbp_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Service Activities') ?></a></li>
@@ -84,7 +84,7 @@ inoERP
          <td><?php echo $f->select_field_from_object('hd_service_activity_header_id', hd_service_activity_header::find_all(), 'hd_service_activity_header_id', 'activity_name', $$class_second->hd_service_activity_header_id); ?></td>
          <td><?php echo $f->date_fieldAnyDay('start_date', $$class_second->start_date); ?></td>
          <td><?php echo $f->date_fieldAnyDay('end_date', $$class_second->end_date); ?></td>
-         <td><?php $f->text_field_wid2('description'); ?></td>
+         <td><?php $f->text_field_wid2('description' ,'xlarge'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

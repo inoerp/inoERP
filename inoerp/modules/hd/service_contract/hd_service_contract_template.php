@@ -160,14 +160,14 @@
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('hd_service_contract_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-         <td><?php echo $f->select_field_from_array('line_type', hd_service_contract_line::$line_type_a, $$class_second->line_type); ?></td>
+         <td><?php echo $f->select_field_from_array('line_type', hd_service_contract_line::$line_type_a, $$class_second->line_type , '' , 'medium'); ?></td>
          <td><?php
           echo $f->hidden_field('item_id_m', $$class_second->item_id_m);
           $f->text_field_wid2('item_number', 'select_item_number');
           ?>
           <i class="select_item_number select_popup clickable fa fa-search"></i></td>
-         <td><?php $f->text_field_wid2m('item_description'); ?></td>
-         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $hd_service_contract_line->uom_id); ?></td>
+         <td><?php $f->text_field_wid2m('item_description' ,'xlarge'); ?></td>
+         <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $hd_service_contract_line->uom_id , '' , 'medium'); ?></td>
          <td><?php form::number_field_wid2sm('line_quantity'); ?></td>
          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <!--</td></tr>-->	
@@ -229,7 +229,7 @@
                    <td><?php $f->seq_field_detail_d($detailCount) ?></td>
                    <td><?php $f->text_field_wid3sr('hd_service_contract_detail_id'); ?></td>
                    <td><?php $f->text_field_wid3s('detail_number'); ?></td>
-                   <td><?php echo $f->select_field_from_array('level', hd_service_contract_detail::$level_a, $$class_third->level); ?></td>
+                   <td><?php echo $f->select_field_from_array('level', hd_service_contract_detail::$level_a, $$class_third->level , '' , 'medium'); ?></td>
                    <td><?php
                     echo $f->hidden_field('item_id_m', $$class_third->item_id_m);
                     $f->text_field_wid3('item_number', 'select_item_number');

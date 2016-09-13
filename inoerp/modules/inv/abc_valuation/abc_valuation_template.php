@@ -38,7 +38,7 @@
        <ul class="column header_field">
         <li><label><?php echo gettext('Program') ?></label>
          <a class="button" target="_blank"
-            href="program.php?class_name=inv_abc_valuation&program_name=prg_abc_valuation" >New Valuation</a>
+            href="program.php?class_name=inv_abc_valuation&program_name=prg_abc_valuation" ><?php echo gettext('New Valuation') ?></a>
         </li>
         <li id="document_print"><label><?php echo gettext('View') ?></label> <?php echo $result_stmt; ?>	</li>
        </ul>
