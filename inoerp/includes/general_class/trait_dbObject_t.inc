@@ -904,7 +904,7 @@ trait dbObject_t {
   return $this->msg;
  }
 
- public function delete() {
+ public function delete($show_msg = true) {
   global $dbc;
   $primary_column = static::$primary_column;
   $sql = " DELETE FROM ";
@@ -919,7 +919,10 @@ trait dbObject_t {
   try {
    $stmt->execute();
    $this->msg = 1;
-   echo "<div class='message'>Record is Successfully deleted.</div>";
+   if($show_msg){
+       echo "<div class='message'>Record is Successfully deleted.</div>";
+   }
+   
    $dbc->confirm();
   } catch (PDOException $e) {
    $this->msg = 0;

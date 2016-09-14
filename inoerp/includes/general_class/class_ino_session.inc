@@ -120,7 +120,7 @@ class ino_session extends dbObject {
   $exist_session = $this->find_by_keyColumn($this->user_id);
   if ($exist_session) {
    $ino_see->ino_session_id = $exist_session->ino_session_id;
-   $ino_see->delete();
+   $ino_see->delete(false);
   }
 
   $ino_see->php_session_id = session_id();
