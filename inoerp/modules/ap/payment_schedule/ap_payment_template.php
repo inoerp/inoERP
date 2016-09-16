@@ -141,8 +141,6 @@ inoERP
        <tr>
         <th><?php echo gettext('Seq') ?></th>
         <th><?php echo gettext('Description') ?></th>
-        
-        
         <th><?php echo gettext('Reason') ?></th>
         <th><?php echo gettext('Status') ?></th>
         <th><?php echo gettext('Source') ?></th>
@@ -189,8 +187,6 @@ inoERP
        <tr class="ar_revenue_schedule">
         <td><?php $f->seq_field_d($count) ?></td>
         <td><?php $f->text_field_wid('description'); ?></td>
-        
-        
         <td><?php $f->text_field_wid('reason'); ?></td>
         <td><?php $f->text_field_wid('status'); ?></td>
         <td><?php $f->text_field_wid('line_source'); ?></td>

@@ -43,16 +43,11 @@
        <li><?php $f->l_number_field_dr('payment_amount_limit') ?></li>
       </ul>
      </div>
-     <div class="second_rowset">
-
-     </div>
-     <!--end of tab1 div three_column-->
     </div> 
     <div id="tabsLine-2" class="tabContent">
       <div class="shipto_address"><?php $f->address_field_d('org_shipto_id'); ?></div>
       <div class="billto_address"><?php $f->address_field_d('org_billto_id'); ?></div>
     </div> 
-    <!--end of tab1-->
     <div id="tabsLine-3" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field">
@@ -69,8 +64,6 @@
       </ul>
      </div>
     </div>
-    <!--end of tab3 (purchasing)!!!! start of sales tab-->
-
     <div id="tabsLine-4" class="tabContent">
      <ul class="column header_field">
       <li><?php $f->l_text_field_d('bu_bank_id'); ?> </li>

@@ -33,14 +33,11 @@ inoERP
         <li><?php $f->l_select_field_from_object('expense_pay_group', option_header::find_options_byName('AP_PAY_GROUP'), 'option_line_code', 'option_line_value', $$class->expense_pay_group, '', 'medium', '', $readonly); ?>        </li>
         <li><?php $f->l_text_field_d('expense_template_id'); ?></li> 
         <li><?php $f->l_select_field_from_array('expense_payment_priority', dbObject::$position_array, $$class->expense_payment_priority); ?></li>
-        <li><?php $f->l_address_field_d('ship_to_id') ?> 							</li>
-        <li><?php $f->l_address_field_d('bill_to_id') ?> 							</li>
+        <li><?php $f->l_address_field_d('ship_to_id') ?> </li>
+        <li><?php $f->l_address_field_d('bill_to_id') ?> </li>
        </ul> 
       </div> 
-      <!--end of tab1 div three_column-->
      </div> 
-     <!--              end of tab1-->
-
      <div id="tabsLine-2"  class="tabContent">
       <ul class="column header_field"> 
        <li><?php $f->l_ac_field_d('tax_ac_id'); ?></li> 
