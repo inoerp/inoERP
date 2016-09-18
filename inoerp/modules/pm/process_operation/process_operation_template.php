@@ -108,7 +108,7 @@ inoERP
          <td><?php form::text_field_wid2sr('pm_process_operation_line_id'); ?></td>
          <td><?php echo $f->select_field_from_object('activity_code', option_header::find_options_byName('PM_OPERATION_ACTIVITY'), 'option_line_code', 'option_line_value', $$class_second->activity_code, '', 'medium'); ?></td>
          <td><?php $f->text_field_wid2('description', 'xlarge'); ?></td>
-         <td><?php $f->text_field_wid2('activity_factror'); ?></td>
+         <td><?php $f->text_field_wid2s('activity_factror'); ?></td>
          <td><?php $f->checkBox_field_wid2('sequence_dependency_cb'); ?></td>
          <td><?php $f->text_field_wid2('offset_interval'); ?></td>
          <td><?php $f->checkBox_field_wid2('breakable_cb'); ?></td>

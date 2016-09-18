@@ -6,9 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php $f = new inoform();
-echo gettext('Formula')
-?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Formula') ?></span>
  <form method="post" id="pm_formula_header"  name="pm_formula_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -201,8 +199,8 @@ echo gettext('Formula')
          <td><?php echo $f->checkBox_field('contribute_yield_cb', $$class_third->contribute_yield_cb); ?></td>
          <td><?php echo $f->select_field_from_array('consumption_type', pm_formula_ingredient::$consumption_type_a, $$class_third->consumption_type, '', 'medium'); ?></td>
          <td><?php echo $f->checkBox_field('buffer_cb', $$class_third->buffer_cb); ?></td>
-         <td><?php $f->text_field_wid3('phantom_type'); ?></td>
-         <td><?php $f->text_field_wid3('required_qty'); ?></td>
+         <td><?php $f->text_field_wid3s('phantom_type'); ?></td>
+         <td><?php $f->text_field_wid3s('required_qty'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
@@ -229,7 +227,7 @@ echo gettext('Formula')
         <th><?php echo gettext('Allocated Qty') ?></th>
         <th><?php echo gettext('Sclae Type') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
-        <th><?php echo gettext('Byproduct Type') ?></th>
+        <th><?php echo gettext('Byproduct') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody3 wip_wo_bom_values" >
@@ -263,8 +261,8 @@ echo gettext('Formula')
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php form::text_field_wid4('item_description'); ?></td>
          <td><?php echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_fourth->uom_id, '', '', 'uom_id'); ?></td>
-         <td><?php echo $f->number_field('planned_quantity', $$class_fourth->planned_quantity, '', '', 'allow_change'); ?></td>
-         <td><?php echo $f->number_field('allocated_quantity', $$class_fourth->allocated_quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('planned_quantity', $$class_fourth->planned_quantity, '', '', 'allow_change small'); ?></td>
+         <td><?php echo $f->number_field('allocated_quantity', $$class_fourth->allocated_quantity, '', '', 'allow_change small'); ?></td>
          <td><?php echo $f->select_field_from_array('scale_type', pm_formula_line::$scale_type_a, $$class_fourth->scale_type, '', 'medium') ?></td>
          <td><?php echo $f->select_field_from_array('yield_type', pm_formula_line::$yield_type_a, $$class_fourth->yield_type, '', 'medium'); ?></td>
          <td><?php echo $f->select_field_from_array('byproduct_type', pm_formula_byproduct::$byproduct_type_a, $$class_fourth->byproduct_type, '', 'medium'); ?></td>

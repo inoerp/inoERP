@@ -8,7 +8,7 @@ inoERP
 -->
 <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="po_asl_document"  name="po_asl_document">
+  <form   method="post" id="po_asl_document"  name="po_asl_document">
    <span class="heading"><?php echo gettext('ASL Basic Info') ?></span>
    <div id="tabsHeader">
     <ul class="tabMain">
