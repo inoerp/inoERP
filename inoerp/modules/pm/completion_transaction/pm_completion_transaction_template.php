@@ -7,13 +7,6 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id="pm_completion_transaction_divId">
- <?php
- // echo (!empty($hidden_stmt)) ? $hidden_stmt : "";
- $f = new inoform()
- ?> 
- <!--    End of place for showing error messages-->
-
-
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
  <div id ="form_header"><span class="heading"><?php echo gettext('Process Completion Transaction') ?></span> 
   <div id="form_serach_header" class="tabContainer">
@@ -140,7 +133,6 @@ inoERP
          <td><?php echo $f->text_field('reference_key_name', 'pm_batch_header', '20', '', 'copyValue', 1, 1); ?>							</td>
          <td><?php echo $f->text_field('reference_key_value', $$class->pm_batch_header_id, '8', '', 'copyValue', 1, 1); ?>							</td>
          <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : ''; ?></td>
-         <!--<td><?php // $f->text_field_widsr('pm_wo_bom_id','copyValue');    ?></td>-->
         </tr>
        </tbody>
       </table>
@@ -158,9 +150,9 @@ inoERP
        <tbody class="inv_transaction_values form_data_line_tbody">
         <tr class="pm_completion_transaction0" id="tab4_1">
          <td><?php $f->ac_field_widr('account_id', 'always_readonly'); ?></td>
-         <td><?php form::text_field_wid('unit_cost'); ?></td>
-         <td><?php form::text_field_wid('costed_amount'); ?></td>
-         <td><?php form::text_field_wid('gl_journal_header_id'); ?></td>
+         <td><?php $f->text_field_wid('unit_cost'); ?></td>
+         <td><?php $f->text_field_wid('costed_amount'); ?></td>
+         <td><?php $f->text_field_wid('gl_journal_header_id'); ?></td>
         </tr>
        </tbody>
       </table>
