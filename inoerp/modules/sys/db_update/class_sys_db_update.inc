@@ -11,13 +11,13 @@ class sys_db_update extends dbObject {
  public $db_update_mode;
  public $message = '';
  public $prg_db_update_parameters = [
-  'Program Mode' => 'search_program_mode',
-  'New Version DB' => 'search_db_name',
-  'Old Version DB' => 'search_db_name_old',
+     'Program Mode' => 'search_program_mode',
+     'New Version DB' => 'search_db_name',
+     'Old Version DB' => 'search_db_name_old',
  ];
  public $prg_db_update_details = [
-  'name' => 'Update Database from Old to New Version ( <small>Enable dbc2 in dbsettigs and basics file<small> )',
-  'description' => 'Update Database from Old to New Version',
+     'name' => 'Update Database from Old to New Version ( <small>Enable dbc2 in dbsettigs and basics file<small> )',
+     'description' => 'Update Database from Old to New Version',
  ];
 
  public function prg_db_update($seralized_parameters) {
@@ -114,7 +114,7 @@ class sys_db_update extends dbObject {
   $columns = $db->get_dbColumns($tbl_name);
   $inst_str = implode(',', $columns);
   $sql_inst = " INSERT INTO $old_db_table_temp ($inst_str) "
-   . " SELECT $inst_str FROM $old_db_table ";
+          . " SELECT $inst_str FROM $old_db_table ";
   $dbc2->ddlexecute($sql_inst);
   $dbc2->confirm();
 
@@ -283,7 +283,8 @@ class sys_db_update extends dbObject {
  CREATE or REPLACE 
  ALGORITHM = UNDEFINED
  VIEW {$obj->table_name}
- AS {$obj->VIEW_DEFINITION} ";
+ AS {$obj->view_definition} ";
+// AS {$obj->VIEW_DEFINITION} ";
     $dbc2->ddlexecute($sql);
     $dbc2->confirm();
    }

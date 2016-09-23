@@ -1,7 +1,6 @@
 <?php
-$f = new inoform();
  echo $f->hidden_field_withId('home_url', HOME_URL);
- echo $si->analytics_code;
+ echo '<div class="hidden">' .$si->analytics_code .'</div>';
 ?>
 </body>
 </html>

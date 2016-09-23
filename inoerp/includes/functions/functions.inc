@@ -396,19 +396,24 @@ function get_class_name_from_path($path) {
  } else {
   $arr = explode('\\', $path);
  }
- $last_el = array_pop($arr);
- if (strpos($last_el, 'class') === false) {
+ $last_3el = array_values( array_slice($arr, -3, 3, true)) ;
+ if (strpos($last_3el[2], 'class') === false) {
   return false;
  }
- $class = str_replace('class_', '', $last_el);
+ $class = str_replace('class_', '', $last_3el[2]);
  $class1 = str_replace('class.', '', $class);
+ 
  $data['class_name'] = str_replace('.inc', '', $class1);
- $data['module_name'] = isset($arr[1]) ? $arr[1] : '';
+ $data['module_name'] = isset($last_3el[0]) ? $last_3el[0] : '';
  return $data;
 }
 
 function ino_arrayObj_to_array($array_obj, $keyname) {
  $ret_a = [];
+// pa($array_obj);
+ if(DB_TYPE == 'MYSQL'){
+     $keyname = strtolower($keyname);
+ }
  foreach ($array_obj as $obj) {
   $ret_a[] = $obj->$keyname;
  }
