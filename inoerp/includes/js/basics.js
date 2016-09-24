@@ -482,8 +482,7 @@ function magnifier() {
    image_object.src = image_src;
    native_width = image_object.width;
    native_height = image_object.height;
-  }
-  else
+  } else
   {
    var magnify_offset = $(this).offset();
    var mx = e.pageX - magnify_offset.left;
@@ -493,8 +492,7 @@ function magnifier() {
    if (mx < $(this).width() && my < $(this).height() && mx > 0 && my > 0)
    {
     $(".large").fadeIn(100);
-   }
-   else
+   } else
    {
     $(".large").fadeOut(100);
     $.magnifier().one();
@@ -653,8 +651,7 @@ function select_mandatory_fields_all(form_area, Mandatory_Fields) {
    if ($(fieldId).val().length === 0) {
     alert(msg);
     $(fieldId).focus();
-   }
-   else if (Mandatory_Fields.length >= 2) {
+   } else if (Mandatory_Fields.length >= 2) {
     Mandatory_Fields.splice(0, 2);
     if (Mandatory_Fields.length >= 2) {
      select_mandatory_fields(Mandatory_Fields);
@@ -958,31 +955,35 @@ function deleteHeader(json_url, headerId) {
   $("#delete_button").prop('disabled', true);
   e.preventDefault();
   if (confirm("Do you really want to delete ?\n" + headerId)) {
-   $.ajax({
-    url: json_url,
-    data: {
-     delete_id: headerId,
-     deleteType: 'header',
-     delete: '1'
-    },
-    type: 'get',
-    beforeSend: function () {
-     $('.show_loading_small').show();
-    },
-    complete: function () {
-     $('.show_loading_small').hide();
-    }
-   }).done(function (result) {
-//		var div = $(result).filter('div#json_delete_header').html();
-    $(".error").append(result);
-    $("#delete_button").removeClass("show_loading_small");
-    $("#delete_button").prop('disabled', false);
-   }).fail(function (error, textStatus, xhr) {
-    alert("delete failed \n" + error + textStatus + xhr);
-    $("#delete_button").removeClass("show_loading_small");
-    $("#delete_button").prop('disabled', false);
-   });
+   deleteHeaderAjax(json_url, headerId);
   }
+ });
+}
+
+function deleteHeaderAjax(json_url, headerId) {
+ $.ajax({
+  url: json_url,
+  data: {
+   delete_id: headerId,
+   deleteType: 'header',
+   delete: '1'
+  },
+  type: 'get',
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  }
+ }).done(function (result) {
+//		var div = $(result).filter('div#json_delete_header').html();
+  $(".error").append(result);
+  $("#delete_button").removeClass("show_loading_small");
+  $("#delete_button").prop('disabled', false);
+ }).fail(function (error, textStatus, xhr) {
+  alert("delete failed \n" + error + textStatus + xhr);
+  $("#delete_button").removeClass("show_loading_small");
+  $("#delete_button").prop('disabled', false);
  });
 }
 
@@ -5956,6 +5957,16 @@ $(document).ready(function () {
    }
   }
  });
+
+//delete category
+ $("body").on('click', '.delete-category', function (e) {
+  var headerId = $(this).data('category_reference_id');
+  if (confirm("Do you really want to delete ?\n" + headerId)) {
+   var daletePath = $('#home_url').val() + 'form.php?class_name=category_reference';
+   deleteHeaderAjax(daletePath, headerId);
+  }
+ });
+
 
 });
 

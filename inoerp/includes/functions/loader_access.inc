@@ -25,8 +25,8 @@ switch ($access_level) {
   break;
 
  default:
-  if ($class != 'ino_generic') {
-   $access_denied_msg = 'You dont have acess to the requested object' . $class;
+  if ( !in_array($class, ['ino_generic','ec_product_view'])) {
+   $access_denied_msg = 'You dont have acess to the requested object ' . $class;
   }
   break;
 }

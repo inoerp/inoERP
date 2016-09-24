@@ -40,7 +40,7 @@ if (!empty($category)) {
  }
 }else if(!empty($_GET['category_id'])){
  $priority_category = $_GET['category_id'];
-}else{
+}else if(!empty($item_category)){
  $priority_category = $item_category->category_id;
  $category_detials = $cat->findBy_id($priority_category);
 }

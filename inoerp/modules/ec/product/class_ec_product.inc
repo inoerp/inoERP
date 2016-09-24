@@ -23,75 +23,75 @@ class ec_product extends dbObject {
  public static $module = "ec";
 // public static $js_fileName = 'modules/inv/ec_product/js/multi_select.js';
  public static $system_info = [
-  'name' => 'eComm Product',
-  'number' => '4208',
-  'description' => 'eCommerce Products',
-  'version' => '0.1.4',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'am',
-  'weight' => 1
+     'name' => 'eComm Product',
+     'number' => '4208',
+     'description' => 'eCommerce Products',
+     'version' => '0.1.4',
+     'db_version' => '1001',
+     'mod_version' => '1.1.1',
+     'primary_entity_cb' => '',
+     'module_name' => 'am',
+     'weight' => 1
  ];
  public static $visibility_a = [
-  'NOT_STAND_ALONE' => 'Not As a Sigle Product',
-  'NOT_STAND_ALONE' => 'Only As a Single Product',
-  'ALL' => 'Always',
-  'FREE_OFFER' => 'Free Offer',
-  'NONE' => 'Not Visible For Sale',
+     'NOT_STAND_ALONE' => 'Not As a Sigle Product',
+     'NOT_STAND_ALONE' => 'Only As a Single Product',
+     'ALL' => 'Always',
+     'FREE_OFFER' => 'Free Offer',
+     'NONE' => 'Not Visible For Sale',
  ];
  public static $status_a = [
-  'HOLD' => 'Hold',
-  'ENABLED' => 'Enabled',
-  'DISABLED' => 'Disabled'
+     'HOLD' => 'Hold',
+     'ENABLED' => 'Enabled',
+     'DISABLED' => 'Disabled'
  ];
  public $checkbox = [
-  "physical_inventory_cb"
+     "physical_inventory_cb"
  ];
  public $field_a = [
-  'ec_product_id',
-  'item_id_m',
-  'org_id',
-  'product_name',
-  'product_description',
-  'new_date_trom',
-  'new_date_to',
-  'status',
-  'visibility',
-  'tax_code_id',
-  'meta_title',
-  'meta_keywords',
-  'meta_description',
-  'price_list_id',
-  'list_price',
-  'sales_price',
-  'sp_from_date',
-  'sp_to_date',
-  'no_of_view',
-  'featured_product_cb',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+     'ec_product_id',
+     'item_id_m',
+     'org_id',
+     'product_name',
+     'product_description',
+     'new_date_trom',
+     'new_date_to',
+     'status',
+     'visibility',
+     'tax_code_id',
+     'meta_title',
+     'meta_keywords',
+     'meta_description',
+     'price_list_id',
+     'list_price',
+     'sales_price',
+     'sp_from_date',
+     'sp_to_date',
+     'no_of_view',
+     'featured_product_cb',
+     'created_by',
+     'creation_date',
+     'last_update_by',
+     'last_update_date',
  ];
  public $initial_search = [
-  'product_name',
-  'item_id_m',
+     'product_name',
+     'item_id_m',
  ];
  public $requiredField = [
-  'item_id_m',
-  'org_id',
-  'product_name',
+     'item_id_m',
+     'org_id',
+     'product_name',
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  "item_description",
+     "item_number",
+     "item_description",
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
-  '_view_path' => 'product.php?'
+     '_show_update_path' => 1,
+     '_update_action_meassge' => 'Update',
+     '_show_view_path' => 1,
+     '_view_path' => 'product.php?'
  ];
  public $pageTitle = " eComm Product "; //page Title
  public $ec_product_id;
@@ -133,8 +133,8 @@ class ec_product extends dbObject {
  public static function find_all_assigned_orgs($ec_product_number) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where ec_product_number= '{$ec_product_number}' ";
+          self::$table_name .
+          " where ec_product_number= '{$ec_product_number}' ";
   $result = $db->find_by_sql($sql);
   return $result;
  }
@@ -142,8 +142,8 @@ class ec_product extends dbObject {
  public static function find_by_orgId($org_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where org_id= '{$org_id}' ";
+          self::$table_name .
+          " where org_id= '{$org_id}' ";
   $result = self::find_by_sql($sql);
   return !empty($result) ? $result : false;
  }
@@ -229,40 +229,45 @@ class ec_product extends dbObject {
 
  public static function category_menu() {
   $cat = new category();
-  $all_categories_arr = $cat->category_explosion_withPCRelation('38');
+  $all_categories_arr = $cat->category_explosion_withPCRelation('86');
+//  $all_categories = category::parent_category_ofType('PRODUCT');
   $all_categories = array_pop($all_categories_arr);
+//  pa($all_categories);
   $stmt = '<div id="hf-nav-1">
       <div class="hf-nav">';
-  foreach ($all_categories as $k1 => $v1) {
-   $catg_d = category::find_by_id($k1);
-   $stmt .= '<ul class="hf-menu">
+  if (!empty($all_categories)) {
+   foreach ($all_categories as $k1 => $v1) {
+    $catg_d = category::find_by_id($k1);
+    $stmt .= '<ul class="hf-menu">
           <li class="top-li p3">';
-   $stmt .= '<a href="' . HOME_URL . 'product.php?ec_product_id=' . $k1 . '" title="' . $catg_d->description . '">' . $catg_d->category . '</a>';
-   if (is_array($v1)) {
-    $stmt .= '<ul class="sub sub-ul">';
-    foreach ($v1 as $k2 => $v2) {
-     $catg_d2 = category::find_by_id($k2);
-     $stmt .= '<li class="sub">';
-     $stmt .= '<h2><a href="' . HOME_URL . 'product.php?ec_product_id=' . $k2 . '" title="' . $catg_d2->description . '">' . $catg_d2->category . '</a></h2>';
-     if (is_array($v2)) {
-      $stmt .= '<ul>';
-      foreach ($v2 as $k3 => $v3) {
-       $catg_d3 = category::find_by_id($k3);
-       $stmt .= '<li><a href="' . HOME_URL . 'product.php?ec_product_id=' . $k3 . '" title="' . $catg_d3->description . '">' . $catg_d3->category . '</a></li>';
+    $stmt .= '<a href="' . HOME_URL . 'product.php?ec_product_id=' . $k1 . '" title="' . $catg_d->description . '">' . $catg_d->category . '</a>';
+    if (is_array($v1)) {
+     $stmt .= '<ul class="sub sub-ul">';
+     foreach ($v1 as $k2 => $v2) {
+      $catg_d2 = category::find_by_id($k2);
+      $stmt .= '<li class="sub">';
+      $stmt .= '<h2><a href="' . HOME_URL . 'product.php?ec_product_id=' . $k2 . '" title="' . $catg_d2->description . '">' . $catg_d2->category . '</a></h2>';
+      if (is_array($v2)) {
+       $stmt .= '<ul>';
+       foreach ($v2 as $k3 => $v3) {
+        $catg_d3 = category::find_by_id($k3);
+        $stmt .= '<li><a href="' . HOME_URL . 'product.php?ec_product_id=' . $k3 . '" title="' . $catg_d3->description . '">' . $catg_d3->category . '</a></li>';
+       }
+       $stmt .='</ul>';
+       $stmt .='</li>';
+      } else {
+       $stmt .='</li>';
       }
-      $stmt .='</ul>';
-      $stmt .='</li>';
-     } else {
-      $stmt .='</li>';
      }
+     $stmt .='</ul>';
+     $stmt .='</li>';
+    } else {
+     $stmt .='</li>';
     }
     $stmt .='</ul>';
-    $stmt .='</li>';
-   } else {
-    $stmt .='</li>';
    }
-   $stmt .='</ul>';
   }
+
 
   $stmt .= '</div></div>';
 
