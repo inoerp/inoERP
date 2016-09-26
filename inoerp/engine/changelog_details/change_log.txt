@@ -1,4 +1,4 @@
-inoERP 0.5.1 | 10-Sep-2016
+inoERP 0.5.1 | 13-Sep-2016
 ----------------------------- 
 - A new module for process manufacturing
 Batch
