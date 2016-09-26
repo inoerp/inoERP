@@ -76,6 +76,7 @@ if (!empty($$class->list_price)) {
  $sales_price = $save_p = null;
 }
 
+
 if (!empty($$class->ec_product_id)) {
  $custom_template_name = __DIR__ . DS . 'product_view_template.php';
  if (file_exists($custom_template_name)) {
@@ -87,6 +88,7 @@ if (!empty($$class->ec_product_id)) {
   $template_file_names = [$custom_template_name];
  }
 }
+
 
 //check if user is allowed to update the content
 $allow_content_update = false;

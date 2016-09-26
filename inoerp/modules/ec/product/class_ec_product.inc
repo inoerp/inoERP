@@ -240,18 +240,18 @@ class ec_product extends dbObject {
     $catg_d = category::find_by_id($k1);
     $stmt .= '<ul class="hf-menu">
           <li class="top-li p3">';
-    $stmt .= '<a href="' . HOME_URL . 'product.php?ec_product_id=' . $k1 . '" title="' . $catg_d->description . '">' . $catg_d->category . '</a>';
+    $stmt .= '<a href="' . HOME_URL . 'product.php?category_id=' . $k1 . '" title="' . $catg_d->description . '">' . $catg_d->category . '</a>';
     if (is_array($v1)) {
      $stmt .= '<ul class="sub sub-ul">';
      foreach ($v1 as $k2 => $v2) {
       $catg_d2 = category::find_by_id($k2);
       $stmt .= '<li class="sub">';
-      $stmt .= '<h2><a href="' . HOME_URL . 'product.php?ec_product_id=' . $k2 . '" title="' . $catg_d2->description . '">' . $catg_d2->category . '</a></h2>';
+      $stmt .= '<h2><a href="' . HOME_URL . 'product.php?category_id=' . $k2 . '" title="' . $catg_d2->description . '">' . $catg_d2->category . '</a></h2>';
       if (is_array($v2)) {
        $stmt .= '<ul>';
        foreach ($v2 as $k3 => $v3) {
         $catg_d3 = category::find_by_id($k3);
-        $stmt .= '<li><a href="' . HOME_URL . 'product.php?ec_product_id=' . $k3 . '" title="' . $catg_d3->description . '">' . $catg_d3->category . '</a></li>';
+        $stmt .= '<li><a href="' . HOME_URL . 'product.php?category_id=' . $k3 . '" title="' . $catg_d3->description . '">' . $catg_d3->category . '</a></li>';
        }
        $stmt .='</ul>';
        $stmt .='</li>';

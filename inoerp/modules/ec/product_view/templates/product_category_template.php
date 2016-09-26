@@ -1,10 +1,6 @@
 <div id='product-category-view-divId'>
 
- <div class="row">
-  <?php
-    category::breadCrum_by_category($priority_category);
-  ?>
- </div>
+ <div class="row"><?php  category::breadCrum_by_category($priority_category);   ?> </div>
  <div class="row product level-1">
   <div class="col-md-6 left">
    <div>
