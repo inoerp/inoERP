@@ -1,0 +1,6 @@
+ORA-39000: bad dump file specification
+ORA-31641: unable to create dump file "c:\ade\aime_v\oracle/admin/seeddata/dpdump/INO_EXPDAT01.DMP"
+ORA-27040: file create error, unable to create file
+OSD-04002: unable to open file
+O/S-Error: (OS 3) The system cannot find the path specified.
+ORA-39012: Client detached before the job started.

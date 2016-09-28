@@ -202,6 +202,11 @@ $(document).ready(function () {
  });
  onClick_add_new_row('tr.inv_item_revision0', 'tbody.form_data_line_tbody', 1);
 
+ $('body').off('change', '#assign_to_org').on('change', '#assign_to_org', function () {
+  $('#org_id').val($(this).val());
+  $('#item_id').val('');
+ });
+
  $('body').off('click', '#menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_2, #menu_button4_2_1', function () {
   $('#org_id, #item_id_m').val('');
   $('.disable_autocomplete').trigger('click');
