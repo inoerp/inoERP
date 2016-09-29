@@ -15108,3 +15108,27 @@ msgstr "Total records"
 
 msgid "Process Manufacturing"
 msgstr "Process Manufacturing"
+
+msgid "Create New"
+msgstr "Create New"
+
+msgid "Save Line"
+msgstr "Save Line"
+
+msgid "Paths"
+msgstr "Paths"
+
+msgid "Go Back"
+msgstr "Go Back"
+
+msgid "New View Path Entry!"
+msgstr "New View Path Entry!"
+
+msgid "System Generated No"
+msgstr "System Generated No"
+
+msgid "Enter a valid path"
+msgstr "Enter a valid path"
+
+msgid "Enter view_path descrip. Limit 100 characters"
+msgstr "Enter view_path descrip. Limit 100 characters"
