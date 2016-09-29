@@ -92,7 +92,7 @@ class extn_social_login extends dbObject {
   }
   $stmt = '<fieldset>
           <ul>
-           <li>Connect With</li>';
+           <li>' . gettext( 'Connect With' ) . '</li>';
 
   foreach ($all_providers as $k => $sp) {
 

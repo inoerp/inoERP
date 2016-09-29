@@ -20,7 +20,7 @@
            <th><?php echo gettext('Expenditure Type') ?></th>
            <th><?php echo gettext('Expn Category') ?></th>
            <th><?php echo gettext('Revenue Category') ?></th>
-           <th<?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Description') ?></th>
            <th><?php echo gettext('Eff. From') ?></th>
            <th><?php echo gettext('Eff. To') ?></th>
            <th><?php echo gettext('UOM') ?></th>

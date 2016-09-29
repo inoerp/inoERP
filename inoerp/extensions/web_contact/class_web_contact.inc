@@ -45,7 +45,7 @@ class web_contact extends dbObject {
   $entry_form .= "<label for='message'>Message</label>" . $f->text_area('message', '', '5', 'message', 'form-control', 1);
   $entry_form .= "</div>";
   $entry_form .= '<div class="form-group">';
-  $entry_form .= "<label for='message'>Select a category to help us route your request</label>"
+  $entry_form .= "<label for='message'>" . gettext('Select a category to help us route your request') . "</label>"
    . $f->select_field_from_object('contact_category', self::web_contact_category(), 'option_line_code', 'description', '', 'contact_category', 'form-control');
   $entry_form .= "</div>";
   return $entry_form;

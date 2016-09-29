@@ -137,8 +137,8 @@ if (!empty($_GET['class_name'])) {
   $report_name = $_GET['report_name'][0];
   $search_result_statement = call_user_func(array($$class, $report_name), $_GET);
   echo '<div id="searchResult"><div id="search_result" class="search_report">';
-  echo '<ul class="inline-block"> <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
-              <li id="print_searchResult" class=" print clickable" title="Print"><i class="fa fa-print"></i></li>
+  echo '<ul class="inline-block"> <li id="export_excel_searchResult" class="clickable" title="' . gettext('Export to Excel') . '"><i class="fa fa-file-excel-o"></i></li>
+              <li id="print_searchResult" class=" print clickable" title="' . gettext('Print') . '"><i class="fa fa-print"></i></li>
              </ul>';
   echo $search_result_statement;
   echo '</div></div></div>';

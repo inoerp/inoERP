@@ -338,76 +338,76 @@ class inoform {
   if (empty($current_page_path)) {
    $current_page_path = thisPage_url();
   }
-  echo <<<EOD
+  echo '
 			 <ul id="form_top_image" class="draggable">
-      	<li id='refresh_buttonsave' title='Refresh & Reload The Page'><button type="button" class="img-button"><i class='fa fa-refresh'></i>Refresh</button></li>
-        <li><a class='img-button clickable' Title="Create a New Document" id="new_page_button" href="$current_page_path"><i class="fa fa-file-text-o"></i> New</a></li>
-    		<li id='save' title='Save The Form'><button type="button" class="img-button"><i class='fa fa-save'></i> Save</button></li>
-        <li><a class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></a></li>
-        <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
-        <li class='fa fa-remove clickable' id='remove_row_button' title='Remove'></li>
-        <li class='fa fa-print clickable print' id='print_searchResult' title='Print'></li>
+      	<li id="refresh_buttonsave" title="' . gettext('Refresh & Reload The Page') . '"><button type="button" class="img-button"><i class="fa fa-refresh"></i>' . gettext('Refresh') . '</button></li>
+        <li><a class="img-button clickable" Title="' . gettext('Create a New Document') . '" id="new_page_button" href="$current_page_path"><i class="fa fa-file-text-o"></i> ' . gettext('New') . '</a></li>
+    		<li id="save" title="' . gettext('Save The Form') . '"><button type="button" class="img-button"><i class="fa fa-save"></i> ' . gettext('Save') . '</button></li>
+        <li><a class="fa fa-eraser clickable" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="$current_page_path"></a></li>
+        <li class="fa fa-trash-o clickable" id="delete_button" title="' . gettext('Delete') . '"></li>
+        <li class="fa fa-remove clickable" id="remove_row_button" title="' . gettext('Remove') . '"></li>
+        <li class="fa fa-print clickable print" id="print_searchResult" title="' . gettext('Print') . '"></li>
 </ul>
-EOD;
+';
  }
 
  public static function form_button_withImage($current_page_path = "", $homeUrl = '') {
   global $class, $si;
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
-  echo <<<EOD
+  echo '
 			 <ul id="form_top_image" class="draggable">
-        <li class='fa fa-refresh clickable ino-btn2 ' id='refresh_button' title='Refresh' style="background-color: $si->heading_color" ></li>
-        <li class='fa fa-file-text-o clickable ino-btn2' Title="New Document" id="new_page_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
-    		<li class='fa fa-save clickable ino-btn2' id='save' title='Save' style="background-color: $si->heading_color" ></li>
-        <li class='fa fa-eraser clickable ino-btn2' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
-        <li class='fa fa-trash-o clickable ino-btn2' id='delete_button' title='Delete' style="background-color: $si->heading_color"></li>
-        <li class='fa fa-remove clickable ino-btn2' id='remove_row_button' title='Remove' style="background-color: $si->heading_color" ></li>
-        <li class='fa fa-search-plus clickable query_mode_icon ino-btn2' id='start_query_mode' title='Query Mode' style="background-color: $si->heading_color"></li>
-        <li class='fa fa-print clickable print ino-btn2' id='print_searchResult' title='Print' style="background-color: $si->heading_color"></li>
+        <li class="fa fa-refresh clickable ino-btn2 " id="refresh_button" title="' . gettext('Refresh') . '" style="background-color: $si->heading_color" ></li>
+        <li class="fa fa-file-text-o clickable ino-btn2" Title="' . gettext('New Document') . '" id="new_page_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
+    		<li class="fa fa-save clickable ino-btn2" id="save" title="' . gettext('Save') . '" style="background-color: $si->heading_color" ></li>
+        <li class="fa fa-eraser clickable ino-btn2" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
+        <li class="fa fa-trash-o clickable ino-btn2" id="delete_button" title="' . gettext('Delete') . '" style="background-color: $si->heading_color"></li>
+        <li class="fa fa-remove clickable ino-btn2" id="remove_row_button" title="' . gettext('Remove') . '" style="background-color: $si->heading_color" ></li>
+        <li class="fa fa-search-plus clickable query_mode_icon ino-btn2" id="start_query_mode" title="' . gettext('Query Mode') . '" style="background-color: $si->heading_color"></li>
+        <li class="fa fa-print clickable print ino-btn2" id="print_searchResult" title="' . gettext('Print') . '" style="background-color: $si->heading_color"></li>
 </ul>
-EOD;
+';
  }
  
   public static function xx_btn_form_button_withImage($current_page_path = "", $homeUrl = '') {
   global $class;
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
-  echo <<<EOD
+  echo '
 			 <ul id="form_top_image" class="draggable">
-        <li class='fa fa-refresh clickable btn btn-default' id='refresh_button' title='Refresh'></li>
-        <li class='fa fa-file-text-o clickable btn btn-default' Title="New Document" id="new_page_button" href="$current_page_path"></li>
-    		<li class='fa fa-save clickable btn btn-default' id='save' title='Save'></li>
-        <li class='fa fa-eraser clickable btn btn-default' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></li>
-        <li class='fa fa-trash-o clickable btn btn-default' id='delete_button' title='Delete'></li>
-        <li class='fa fa-remove clickable btn btn-default' id='remove_row_button' title='Remove'></li>
-        <li class='fa fa-search-plus clickable query_mode_icon btn btn-default' id='start_query_mode' title='Query Mode'></li>
-        <li class='fa fa-print clickable print btn btn-default' id='print_searchResult' title='Print'></li>
+        <li class="fa fa-refresh clickable btn btn-default" id="refresh_button" title="' . gettext('Refresh') . '"></li>
+        <li class="fa fa-file-text-o clickable btn btn-default" Title="' . gettext('New Document') . '" id="new_page_button" href="$current_page_path"></li>
+    		<li class="fa fa-save clickable btn btn-default" id="save" title="' . gettext('Save') . '"></li>
+        <li class="fa fa-eraser clickable btn btn-default" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="$current_page_path"></li>
+        <li class="fa fa-trash-o clickable btn btn-default" id="delete_button" title="' . gettext('Delete') . '"></li>
+        <li class="fa fa-remove clickable btn btn-default" id="remove_row_button" title="' . gettext('Remove') . '"></li>
+        <li class="fa fa-search-plus clickable query_mode_icon btn btn-default" id="start_query_mode" title="' . gettext('Query Mode') . '"></li>
+        <li class="fa fa-print clickable print btn btn-default" id="print_searchResult" title="' . gettext('Print') . '"></li>
 </ul>
-EOD;
+';
  }
 
  public static function form_button_withImage_less($current_page_path = "", $homeUrl = '') {
   global $class;
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
-  echo <<<EOD
+  echo '
 			 <ul id="form_top_image" class="draggable">
-        <li class='fa fa-refresh clickable' id='refresh_button' title='Refresh'></li>
-        <li><a class='fa fa-file-text-o clickable' Title="New Document" id="new_page_button" href="$current_page_path"></a></li>
-    		<li class='fa fa-save clickable' id='save' title='Save'></li>
-        <li><a class='fa fa-eraser clickable' Title="Clear All, Quick Entry" id="new_object_button" href="$current_page_path"></a></li>
-        <li class='fa fa-trash-o clickable' id='delete_button' title='Delete'></li>
+        <li class="fa fa-refresh clickable" id="refresh_button" title="' . gettext('Refresh') . '"></li>
+        <li><a class="fa fa-file-text-o clickable" Title="' . gettext('New Document') . '" id="new_page_button" href="$current_page_path"></a></li>
+    		<li class="fa fa-save clickable" id="save" title="' . gettext('Save') . '"></li>
+        <li><a class="fa fa-eraser clickable" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="$current_page_path"></a></li>
+        <li class="fa fa-trash-o clickable" id="delete_button" title="' . gettext('Delete') . '"></li>
 </ul>
-EOD;
+';
  }
 
  public static function form_button_withImage_minimum($current_page_path = "", $homeUrl = '') {
   global $class, $si;
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
-  echo <<<EOD
+  echo '
 			 <ul id="form_top_image" class="draggable">
-        <li class='fa fa-file-text-o clickable ino-btn2' Title="New Document" id="new_page_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
-        <li class='fa fa-trash-o clickable ino-btn2' id='delete_button' title='Delete' style="background-color: $si->heading_color"></li>
+        <li class="fa fa-file-text-o clickable ino-btn2" Title="' . gettext('New Document') . '" id="new_page_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
+        <li class="fa fa-trash-o clickable ino-btn2" id="delete_button" title="' . gettext('Delete') . '" style="background-color: $si->heading_color"></li>
 </ul>
-EOD;
+';//Added gettext to translate 20160927 Sytech
  }
 
  private function _convert_id($id = "") {
@@ -1895,7 +1895,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $bracketName = $name . '[]';
   $idvalue = $this->_convert_id($id);
   $element_select_field = "<Select name=\"$bracketName\" class=\"from_array select $class_name $name\" $idvalue $required $readonly $disabled >";
-  $element_select_field .= "<option value=\"\" >Select</option>";
+  $element_select_field .= "<option value=\"\" >" . gettext('Select') . "</option>";
   foreach ($array as $key => $arraValue) {
    if ($key == $value) {
     $selected = 'selected';
@@ -2034,7 +2034,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
    $disabled = '';
   }
   $element_select_field = "<Select name=\"$bracketName\" class=\"select $divClass $name\" $idvalue $readonly $required $disabled>";
-  $element_select_field .= "<option value=\"\" >Select</option>";
+  $element_select_field .= "<option value=\"\" >" . gettext('Select') . "</option>";
   if ((is_array($object)) && (count($object) > 0 )) {
    foreach ($object as $record) {
     if ((!empty($value)) && ($record->$objectValueKey == $value)) {

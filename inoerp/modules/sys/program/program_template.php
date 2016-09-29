@@ -56,7 +56,7 @@
     <?php echo form::text_area('parameter', base64_decode($$class->report_query), '10', '150', '', '', '', 1); ?>
    </div>
    <div id="tabsLine-3" class="tabContent">
-    <?php echo form::text_area('email_addresses', $$class->op_email_address, '3', '120', '', 'Separate each email address by comma(,) or a new line', '', 1) ?>
+    <?php echo form::text_area('email_addresses', $$class->op_email_address, '3', '120', '', gettext('Separate each email address by comma(,) or a new line'),'',1) ?>
    </div>
   </div>
  </div>

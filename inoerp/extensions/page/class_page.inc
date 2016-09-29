@@ -185,7 +185,7 @@ class page extends dbObject {
 	if (!empty($per_page)) {
 	 $page_string .= '<div id="noOfpages">';
 	 $page_string .= '<form action="" method="POST">';
-	 $page_string .= 'Show<select name="per_page">';
+	 $page_string .= gettext('Show') . '<select name="per_page">';
 	 $page_string .= '<option value="3"> 3 </option>';
 	 $page_string .= '<option value="5"> 5 </option>';
 	 $page_string .= '<option value="10"> 10 </option>';
@@ -193,7 +193,7 @@ class page extends dbObject {
 	 $page_string .= '<option value="50"> 50 </option>';
 	 $page_string .= '</select>';
 //   $page_string .= '<input type="hidden" value="' . $extension_id . '" name="page_id">';
-	 $page_string .= '<input type="submit" class="button" value="Per Page" >';
+	 $page_string .= '<input type="submit" class="button" value=\"' . gettext('Per Page') . '\" >';
 	 $page_string .= '</form>';
 	 $page_string .= '</div>';
 	 $total_count = self::count_all();
@@ -226,7 +226,7 @@ class page extends dbObject {
 	 if ($pagination->has_previous_page()) {
 		$page_string .= "<a href=\"pages.php?pageno=";
 		$page_string .= $pagination->previous_page() . '&' . $query_string;
-		$page_string .= "> &laquo; Previous </a> ";
+		$page_string .= "> &laquo; " . gettext('Previous') . " </a> ";
 	 }
 
 	 for ($i = 1; $i <= $pagination->total_pages(); $i++) {
@@ -241,7 +241,7 @@ class page extends dbObject {
 	 if ($pagination->has_next_page()) {
 		$page_string .= " <a href=\"pages.php?pageno=";
 		$page_string .= $pagination->next_page() . '&' . remove_querystring_var($query_string, 'pageno');
-		$page_string .= "\">Next &raquo;</a> ";
+		$page_string .= "\">" . gettext('Next') . " &raquo;</a> ";
 	 }
 	}
 	$page_string .= '</div>';

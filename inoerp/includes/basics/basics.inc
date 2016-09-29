@@ -160,8 +160,15 @@ require_once(INC_CLASS . DS . "class_downloads.inc");
 
 require_once __DIR__ . '/../../locale/gettext.inc';
 $locale = (isset($_SESSION['lang'])) ? $_SESSION['lang'] : DEFAULT_LOCALE;
-$encoding = 'UTF-8';
-T_setlocale(LC_MESSAGES, $locale);
+if( substr(php_uname(), 0, strpos(php_uname()," ") ) == "Windows" ) {
+ $locale = str_replace('_','-',$locale ); }
+$encoding = 'UTF-8'; 
+if( substr(php_uname(), 0, strpos(php_uname()," ") ) == "Windows" ) {
+ putenv("LC_ALL=$locale");
+ T_setlocale(LC_MESSAGES, $locale); } 
+else {
+ putenv("LC_ALL=$locale" . "." . "$encoding"); 
+ T_setlocale(LC_MESSAGES, $locale . "." . $encoding); };
 $domain = 'messages';
 T_bindtextdomain($domain, LOCALE_DIR);
 T_bind_textdomain_codeset($domain, $encoding);

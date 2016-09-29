@@ -120,7 +120,7 @@ VAR;
      $pagination_statement .= "<li><a aria-label=\"Previous\" href=\"$this->_path.php?pageno=";
     }
     $pagination_statement .= $this->previous_page() . '&amp;' . $this->_query_string;
-    $pagination_statement .= "\"> <span aria-hidden='true'>&laquo; Previous</span></a></li> ";
+    $pagination_statement .= "\"> <span aria-hidden='true'>&laquo; " . gettext('Previous') . "</span></a></li> ";
    }
 
    if (($this->current_page > 5 ) && ($this->_total_pages > 10 )) {
@@ -157,7 +157,7 @@ VAR;
     }
 
     $pagination_statement .= $this->next_page() . '&amp;' . $this->_query_string;
-    $pagination_statement .= "\"><span aria-hidden='true'>Next &raquo;</span></a> </li>";
+    $pagination_statement .= "\"><span aria-hidden='true'>" . gettext('Next') . " &raquo;</span></a> </li>";
    }
 
    if ($this->_total_pages > $pagination_count) {
@@ -167,7 +167,7 @@ VAR;
      $pagination_statement .= "<li> <a href=\"$this->_path.php?pageno=";
     }
     $pagination_statement .= $this->_total_pages . '&amp;' . $this->_query_string;
-    $pagination_statement .= "\">Last</a> </li>";
+    $pagination_statement .= "\">" . gettext('Last') . "</a> </li>";
    }
 
    $pagination_statement .= '</ul></nav></div>';

@@ -11,7 +11,7 @@
        <div id ="form_header">
         <ul id="form_box"> 
          <li>
-          <div id="loading"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/loading.gif"/></div>
+          <div id="loading"><img alt="<?php echo gettext('Loading...') ?>" src="<?php echo HOME_URL; ?>themes/images/loading.gif"/></div>
          </li>
          <li> 
           <div class="error"></div>
@@ -30,7 +30,7 @@
 
         <?php
         if (!empty($total_count)) {
-         echo '<h3>Total records : ' . $total_count . '</h3>';
+         echo '<h3>' . gettext('Total records') . ' : ' . $total_count . '</h3>';
         }
         ?>
         <div id="scrollElement">
@@ -44,11 +44,11 @@
         </div>
         <!--download page creation-->
         <ul class="data_export">
-         <li> <input type="submit" class="download button excel" value="<?php echo $per_page ?> Records" form="download"></li>
-         <li> <input type="submit" class="download button excel" value="All Records" form="download_all"></li>
-         <li> <input type="button" class="download button print" value="Print"></li>
-         <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
-         <li id="print_searchResult" class=" print clickable" title="Print"><i class="fa fa-print"></i></li>
+         <li> <input type="submit" class="download button excel" value="<?php echo $per_page . ' ' . gettext('Records'); ?>" form="download"></li>
+         <li> <input type="submit" class="download button excel" value="<?php echo gettext('All Records'); ?>" form="download_all"></li>
+         <li> <input type="button" class="download button print" value="<?php echo gettext('Print'); ?>"></li>
+         <li id="export_excel_searchResult" class="clickable" title="<?php echo gettext('Export to Excel'); ?>"><i class="fa fa-file-excel-o"></i></li>
+         <li id="print_searchResult" class=" print clickable" title="<?php echo gettext('Print'); ?>><i class="fa fa-print"></i></li>
         </ul>
 
         <?php

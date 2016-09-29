@@ -45,7 +45,7 @@ class dbc {
   if ($this->rollback) {
    $this->connection->rollBack();
    echo '<div><div class="alert alert-danger alert-dismissible" role="alert">
-<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+<button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>';
    echo "<div class='rollback_msg message'>All the transactions have been rolled back because of the above specified reasons."
    . "<br>Fix all the issues before trying the transaction again! </div></div></div>";
   } else {

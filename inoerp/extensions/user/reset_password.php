@@ -59,6 +59,6 @@ else { //form is not submitted
 <script type='text/javascript' src="user.js" ></script>
 <div role="alert" class="alert alert-warning error alert-dismissible"><?php
  if (!empty($message)) {
-  echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' . $message;
+  echo '<button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>' . $message;
  }
  ?></div>

@@ -212,6 +212,10 @@ function _setlocale($category, $locale) {
             return _setlocale($category, $CURRENTLOCALE);
     } else {
         if (function_exists('setlocale')) {
+	  if( substr(php_uname(), 0, strpos(php_uname()," ") ) == "Windows" ) {
+	      $ret = setlocale( LC_ALL, $locale ); } 
+	  else {
+	      $ret = setlocale( LC_ALL, $locale . '.UTF-8' ); }
           $ret = setlocale($category, $locale);
           if (($locale == '' and !$ret) or // failed setting it by env
               ($locale != '' and $ret != $locale)) { // failed setting it

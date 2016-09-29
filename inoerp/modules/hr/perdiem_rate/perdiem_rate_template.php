@@ -25,7 +25,7 @@
            <th><?php echo gettext('Rate') ?></th>
            <th><?php echo gettext('Description') ?></th>
            <th><?php echo gettext('From Date') ?></th>
-           <th><?php echo gettext('To Date') ?></th
+           <th><?php echo gettext('To Date') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody perdiem_rate_values" >

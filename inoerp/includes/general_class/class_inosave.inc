@@ -375,7 +375,7 @@ class inosave extends dbObject {
  private function save_header() {
   echo '<div id="json_save_header">';
   echo '<div class="alert alert-success alert-dismissible" role="alert">
-       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+       <button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>';
   $class = $this->_classname;
   $keyField = $this->_key_field;
   $primaryColumn = $this->_primary_column;
@@ -438,7 +438,7 @@ class inosave extends dbObject {
  private function save_line($linedata, $json_data) {
   echo '<div id="json_save_line">';
   echo '<div class="alert alert-success alert-dismissible" role="alert">
-<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+<button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>';
   $class = $this->_classname;
   $keyField = $this->_key_field;
   $primaryColumn = $this->_primary_column;
@@ -477,7 +477,7 @@ class inosave extends dbObject {
  private function save_line_withDetails($lineDetail_data) {
   echo '<div id="json_save_line">';
   echo '<div class="alert alert-success alert-dismissible" role="alert">
-<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+<button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>';
   $class = $this->_classname;
   $keyField = $this->_key_field;
   $primaryColumn = $this->_primary_column;

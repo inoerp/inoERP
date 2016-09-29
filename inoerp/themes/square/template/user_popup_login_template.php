@@ -18,10 +18,10 @@ $f = new inoform();
     <div id ="form_header">
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">User Login</a></li>
-       <li><a href="#tabsLine-2">New Account</a></li>
-       <li><a href="#tabsLine-3">Password Reset</a></li>
-       <li><a href="#tabsLine-4">Role Request</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('User Login'); ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('New Account'); ?></a></li>
+       <li><a href="#tabsLine-3"><?php echo gettext('Password Reset'); ?></a></li>
+       <li><a href="#tabsLine-4"><?php echo gettext('Role Request'); ?></a></li>
       </ul>
       <div class="tabContainer"> 
 
@@ -36,7 +36,7 @@ $f = new inoform();
                     <span class="input-group-addon">
                      <i class="glyphicon glyphicon-user"></i>
                     </span> 
-                    <input type="text" id="username"  class="form-control  username"  value="" name="username[]" placeholder="Username" autofocus>
+                    <input type="text" id="username"  class="form-control  username"  value="" name="username[]" placeholder="<?php echo gettext('Username'); ?>" autofocus>
                    </div>
                   </div>
                   <div class="form-group">
@@ -44,7 +44,7 @@ $f = new inoform();
                     <span class="input-group-addon">
                      <i class="glyphicon glyphicon-lock"></i>
                     </span>
-                    <input type="password" value="" placeholder="Password" id="password"  name="password" class="form-control">
+                    <input type="password" value="" placeholder="<?php echo gettext('Password'); ?>" id="password"  name="password" class="form-control">
                    </div>
                   </div>
                   <div class="form-group">
@@ -56,7 +56,7 @@ $f = new inoform();
                    </div>
                   </div>
                   <div class="form-group">
-                   <input type="submit" name="submitLogin" class="btn btn-lg btn-primary btn-block" value="Log in">
+                   <input type="submit" name="submitLogin" class="btn btn-lg btn-primary btn-block" value="<?php echo gettext('Log in'); ?>">
                   </div>
                  </div>
                 </div>
@@ -80,7 +80,7 @@ $f = new inoform();
                  <span class="input-group-addon">
                   <i class="glyphicon glyphicon-user"></i>
                  </span> 
-                 <input type="text" id="first_name"  class="form-control  first_name"  value="" name="first_name[]" placeholder="First Name" required>
+                 <input type="text" id="first_name"  class="form-control  first_name"  value="" name="first_name[]" placeholder="<?php echo gettext('First Name'); ?>" required>
                 </div>
                </div>
                <div class="form-group">
@@ -88,7 +88,7 @@ $f = new inoform();
                  <span class="input-group-addon">
                   <i class="glyphicon glyphicon-user"></i>
                  </span>
-                 <input type="text" id="last_name"  class="form-control  last_name"  value="" name="last_name[]" placeholder="Last Name" required>
+                 <input type="text" id="last_name"  class="form-control  last_name"  value="" name="last_name[]" placeholder="<?php echo gettext('Last Name'); ?>" required>
                 </div>
                </div>
                <div class="form-group">
@@ -96,7 +96,7 @@ $f = new inoform();
                  <span class="input-group-addon">
                   <i class="fa fa-user"></i>
                  </span> 
-                 <input type="text" id="username"  class="form-control  username"  value="" name="username[]" placeholder="Username" required>
+                 <input type="text" id="username"  class="form-control  username"  value="" name="username[]" placeholder="<?php echo gettext('Username'); ?>" required>
                 </div>
                </div>
                <div class="form-group">
@@ -104,7 +104,7 @@ $f = new inoform();
                  <span class="input-group-addon">
                   <i class="fa fa-envelope"></i>
                  </span>
-                 <input type="text" id="email"  class="form-control  email"  value="" name="email[]" placeholder="eMail" required>
+                 <input type="text" id="email"  class="form-control  email"  value="" name="email[]" placeholder="<?php echo gettext('eMail'); ?>"" required>
                 </div>
                </div>
                <div class="form-group">
@@ -112,7 +112,7 @@ $f = new inoform();
                  <span class="input-group-addon">
                   <i class="fa fa-phone"></i>
                  </span>
-                 <input type="text" id="phone"  class="form-control  phone"  value="" name="phone[]" placeholder="Phone #">
+                 <input type="text" id="phone"  class="form-control  phone"  value="" name="phone[]" placeholder="<?php echo gettext('Phone #'); ?>">
                 </div>
                </div>
                <div class="form-group">
@@ -120,7 +120,7 @@ $f = new inoform();
                  <span class="input-group-addon">
                   <i class="glyphicon glyphicon-lock"></i>
                  </span>
-                 <input type="password" value="" placeholder="Password" id="enteredPassword"  name="enteredPassword[]" class="form-control" required>
+                 <input type="password" value="" placeholder="<?php echo gettext('Password'); ?>" id="enteredPassword"  name="enteredPassword[]" class="form-control" required>
                 </div>
                </div>
                <div class="form-group">
@@ -128,11 +128,11 @@ $f = new inoform();
                  <span class="input-group-addon">
                   <i class="glyphicon glyphicon-lock"></i>
                  </span>
-                 <input type="password" value="" placeholder="Re-enter Password" id="enteredRePassword"  name="enteredRePassword[]" class="form-control" required>
+                 <input type="password" value="" placeholder="<?php echo gettext('Re-enter Password'); ?>" id="enteredRePassword"  name="enteredRePassword[]" class="form-control" required>
                 </div>
                </div>
                <div class="form-group">
-                <input type="submit" name="newUser" class="btn  btn-lg btn-info btn-block" value="Create Account">
+                <input type="submit" name="newUser" class="btn  btn-lg btn-info btn-block" value="<?php echo gettext('Create Account'); ?>">
                </div>
               </div>
              </div>
@@ -153,7 +153,7 @@ $f = new inoform();
                 <span class="input-group-addon">
                  <i class="glyphicon glyphicon-user"></i>
                 </span> 
-                <input type="text" id="reset_password_user_name"  class="form-control  username"  value="" name="username[]" placeholder="Username" autofocus>
+                <input type="text" id="reset_password_user_name"  class="form-control  username"  value="" name="username[]" placeholder="<?php echo gettext('Username'); ?>" autofocus>
                </div>
               </div>
               <div class="form-group">
@@ -167,11 +167,11 @@ $f = new inoform();
                 <span class="input-group-addon">
                  <i class="fa fa-envelope"></i>
                 </span>
-                <input type="text" id="reset_password_email"  class="form-control  email"  value="" name="email[]" placeholder="eMail">
+                <input type="text" id="reset_password_email"  class="form-control  email"  value="" name="email[]" placeholder="<?php echo gettext('eMail'); ?>">
                </div>
               </div>
               <div class="form-group">
-               <input type="submit" name="resetPassword" class="btn btn-lg btn-primary btn-block" value="Send New Password">
+               <input type="submit" name="resetPassword" class="btn btn-lg btn-primary btn-block" value="<?php echo gettext('Send New Password'); ?>">
               </div>
              </div>
             </div>
@@ -187,7 +187,7 @@ $f = new inoform();
     </div>    
    </div>
    <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo gettext('Close'); ?></button>
     <!--    <button type="button" class="btn btn-primary">Save changes</button>-->
    </div>
   </div>

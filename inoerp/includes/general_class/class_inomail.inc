@@ -30,7 +30,7 @@ class inomail extends PHPMailer {
   if (!$this->send() && (!$igonre_error)) {
    echo '<div role="alert" class="alert alert-warning error alert-dismissible">'
    . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-   . 'Message could not be sent.';
+   . gettext('Message could not be sent.');
    echo 'Mailer Error: ' . $this->ErrorInfo . '</div>';
   } else {
    $this->SmtpClose();

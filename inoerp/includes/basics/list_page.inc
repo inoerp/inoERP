@@ -32,9 +32,9 @@ if (!empty($msg)) {
  					<li>
 						<?php echo '<h3>Total records : ' . $total_count . '</h3>'; ?>
  					</li>
- 					<li id="export_excel_searchResult"> <img src="<?php echo THEME_URL; ?>/images/excel.png" alt="Export to Excel" /></li>
- 					<li id="print_searchResult" class="print"> <img src="<?php echo THEME_URL; ?>/images/print.png" alt="Print" /></li>
- 					<li id="export_excel_allResult"> <img src="<?php echo THEME_URL; ?>/images/excel_all.png" alt="Export to Excel ALL" /></li>
+ 					<li id="export_excel_searchResult"> <img src="<?php echo THEME_URL; ?>/images/excel.png" alt="<?php echo gettext('Export to Excel')?>" /></li>
+ 					<li id="print_searchResult" class="print"> <img src="<?php echo THEME_URL; ?>/images/print.png" alt="<?php echo gettext('Print')?>" /></li>
+ 					<li id="export_excel_allResult"> <img src="<?php echo THEME_URL; ?>/images/excel_all.png" alt="<?php echo gettext('Export to Excel ALL')?>" /></li>
  				 </ul>
  				</div>
 				<?php } ?>

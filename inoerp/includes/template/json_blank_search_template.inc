@@ -3,9 +3,9 @@
   <div class="heading search-top-msg">
    <?php
    if (!empty($_GET['function_name'])) {
-    echo '<span>' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</span>';
+    echo '<span>' . gettext(ucwords(str_replace('_', ' ', $_GET['function_name']))) . ' ' . gettext('Report') . '</span>';
    } else {
-    echo '<span>Search ' . ucwords(str_replace('_', ' ', $class)) . '</span>';
+    echo '<span>' . gettext('Search') . ' ' . gettext(ucwords(str_replace('_', ' ', $class))) . '</span>';
    }
    ?>
   </div>
@@ -32,9 +32,9 @@
          ?>
          <!--download page completion-->	 
         </li>
-        <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
-        <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
-        <li><button class="btn btn-primary" type="button">Total records <span class="badge"><?php echo $total_count; ?></span></button></li>
+        <li id="export_excel_searchResult" class="clickable" title="<?php echo gettext('Export to Excel')?>"><i class="fa fa-file-excel-o"></i></li>
+        <li id="print_searchResult" class="print clickable" title="<?php echo gettext('Print')?>"><i class="fa fa-print"></i></li>
+        <li><button class="btn btn-primary" type="button"><?php echo gettext('Total records')?> <span class="badge"><?php echo $total_count; ?></span></button></li>
        </ul>
       </div>
      <?php } ?>

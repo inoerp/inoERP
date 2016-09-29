@@ -128,7 +128,7 @@ VAR;
      $pagination_statement .= "<a href=\"$this->_path.php?pageno=";
     }
     $pagination_statement .= $this->previous_page() . '&amp;' . $this->_query_string;
-    $pagination_statement .= "\"> &laquo; Previous </a> ";
+    $pagination_statement .= "\"> &laquo; " . gettext('Previous') . " </a> ";
    }
 
    if (($this->current_page > 5 ) && ($this->_total_pages > 10 )) {
@@ -169,7 +169,7 @@ VAR;
     }
 
     $pagination_statement .= $this->next_page() . '&amp;' . $this->_query_string;
-    $pagination_statement .= "\">Next &raquo;</a> ";
+    $pagination_statement .= "\">" . gettext('Next') . " &raquo;</a> ";
    }
 
    if ($this->_total_pages >= $pagination_count) {
@@ -181,7 +181,7 @@ VAR;
      $pagination_statement .= " <a href=\"$this->_path.php?pageno=";
     }
     $pagination_statement .= $this->_total_pages . '&amp;' . $this->_query_string;
-    $pagination_statement .= "\">Last</a> ";
+    $pagination_statement .= "\">" . gettext('Last') . "</a> ";
    }
 //   $pagination_statement .= '<span class="show_loading_small"><img src="'.HOME_URL .'/themes/images/form/small_loading_bar.gif"></li>';
    $pagination_statement .= '</div>';

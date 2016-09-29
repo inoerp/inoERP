@@ -16,7 +16,7 @@ if (!empty($_POST)) {
    $dbc->confirm();
    echo "<div id='json_save_header'>";
    echo '<div class="alert alert-success alert-dismissible" role="alert">
-   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+   <button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>';
    echo "<div class='message'>The program is sucessfully saved; Program Id is " . $p->sys_program_id . '</div>'
    . '</div></div>';
   } catch (Exception $e) {

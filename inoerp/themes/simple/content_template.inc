@@ -86,8 +86,8 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
              <div id="file_upload_form" class="row small-top-margin">
               <ul class="inRow asperWidth">
                <li class="btn btn-info active inline input_file clickable"  role="button"><input type="file" id="comment_attachments"  class="input_file_btn" name="attachments[]" multiple/>
-                <i class="fa fa-paperclip clickable"></i>&nbsp;&nbsp;Select File</li>
-               <li><input type="button"  role="button" value="Attach"  name="attach_submit" id="comment_attach_submit" class="btn btn-info active comment_attach_submit"></li>
+                <i class="fa fa-paperclip clickable"></i>&nbsp;&nbsp;<?php echo gettext('Select File'); ?></li>
+               <li><input type="button"  role="button" value="<?php echo gettext('Attach'); ?>"  name="attach_submit" id="comment_attach_submit" class="btn btn-info active comment_attach_submit"></li>
                <?php $user_name = isset($_SESSION['username']) ? $_SESSION['username'] : 'Anonymous'; ?>
                <li><div class="input-group">
                  <span class="input-group-addon" id="basic-addon1">Post As </span>

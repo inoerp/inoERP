@@ -66,7 +66,7 @@ echo '----------Ressut by array -------------';
 //	$page_string .= '<option value="20"> 20 </option>';
 //	$page_string .= '<option value="50"> 50 </option>';
 //	$page_string .= '</select>';
-//	$page_string .= '<input type="submit" class="button" value="Per Page" >';
+//	$page_string .= '<input type="submit" class="button" value=\"' . gettext('Per Page') . '\" >';
 //	$page_string .= '</form>';
 //	$page_string .= '</div>';
 //	$total_count = count($count_result);
@@ -104,7 +104,7 @@ echo '----------Ressut by array -------------';
 //	if ($pagination->has_previous_page()) {
 //	 $page_string .= "<a href=\"$view_page_name.php?view_name=$view_name&pageno=";
 //	 $page_string .= $pagination->previous_page() . '&' . $query_string;
-//	 $page_string .= "> &laquo; Previous </a> ";
+//	 $page_string .= "> &laquo; " . gettext('Previous') . " </a> ";
 //	}
 //
 //	for ($i = 1; $i <= $pagination->total_pages(); $i++) {
@@ -119,7 +119,7 @@ echo '----------Ressut by array -------------';
 //	if ($pagination->has_next_page()) {
 //	 $page_string .= " <a href=\"$view_page_name.php?view_name=$view_name&pageno=";
 //	 $page_string .= $pagination->next_page() . '&' . remove_querystring_var($query_string, 'pageno');
-//	 $page_string .= "\">Next &raquo;</a> ";
+//	 $page_string .= "\">" . gettext('Next') . " &raquo;</a> ";
 //	}
 // }
 // $page_string .= '</div>';

@@ -475,9 +475,9 @@ class extn_site_search extends dbObject {
             <div class="input-group">';
   $entry_form .= '<span class="input-group-btn left-side">'
    . $f->select_field_from_array('search_document_list', self::$search_document_list_a, 'all', '', 'form-control fa-select') . '</span>';
-  $entry_form .= ' <input type="text" class="form-control search-element" name="search_text" placeholder="Data To Search...">
+  $entry_form .= ' <input type="text" class="form-control search-element" name="search_text" placeholder="' . gettext('Data To Search...') . '">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button"  id="site_search_submit">Go!</button>
+                <button class="btn btn-default" type="button"  id="site_search_submit">' . gettext('Go!') . '</button>
               </span>
             </div>
             </div>';

@@ -73,14 +73,14 @@
            <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
            <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
-           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
-           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> <?php echo gettext('Home')?></a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"> <?php echo gettext('My Details')?></a></li>
+           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> <?php echo gettext('Activities')?></a></li>
+           <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> <?php echo gettext('Notification')?></a></li>
+           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> <?php echo gettext('Dashboard')?></a></li>
+           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> <?php echo gettext('Configure')?></a></li>
            <li role="presentation" class="divider"></li>
-           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/ino_user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
+           <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/ino_user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> <?php echo gettext('LogOut')?></a></li>
           </ul>
          </div>
          <?php
@@ -119,12 +119,12 @@
    <div id="navigation_bar"   class="col-sm-12 col-xs-12 col-md-10 col-md-offset-2 mainbar">
     <div id="header_top_quick_nav" class='hidden-xs' >
      <ul class="list-group inline_list">
-      <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="Toggle Navigation Menu"></i></li>
-      <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
-      <li role="presentation"><a  class="getAjaxForm" href="<?php echo HOME_URL . 'form.php?class_name=extn_emessage_header&mode=9' ?>"><i class="fa fa-info" title="Messages"></i></a></li>
-      <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
-      <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="Search & List Page"></i></a></li>
-      <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="Form Page"></i></a></li>
+      <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="<?php echo gettext('Toggle Navigation Menu')?>"></i></li>
+      <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="<?php echo gettext('Home')?>"></i></a></li>
+      <li role="presentation"><a  class="getAjaxForm" href="<?php echo HOME_URL . 'form.php?class_name=extn_emessage_header&mode=9' ?>"><i class="fa fa-info" title="<?php echo gettext('Messages')?>"></i></a></li>
+      <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="<?php echo gettext('Dashborad')?>"></i></a></li>
+      <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="<?php echo gettext('Search & List Page')?>"></i></a></li>
+      <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="<?php echo gettext('Form Page')?>"></i></a></li>
       <li id="unsaved_fields" data-no_of_fields="0"></li>
       <li class="show_loading_small"><img src="<?php echo HOME_URL ?>/themes/images/form/small_loading_bar.gif"></li>
      </ul>
@@ -228,9 +228,9 @@
       <div class="heading search-top-msg">
        <?php
        if (!empty($_GET['function_name'])) {
-        echo '<span>' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</span>';
+        echo '<span>' . gettext(ucwords(str_replace('_', ' ', $_GET['function_name']))) . ' ' . gettext('Report') . '</span>';
        } else {
-        echo '<span>Search ' . ucwords(str_replace('_', ' ', $class)) . '</span>';
+        echo '<span>' . gettext('Search') . ' ' . gettext(ucwords(str_replace('_', ' ', $class))) . '</span>';
        }
        ?>
       </div>
@@ -271,9 +271,9 @@
              ?>
              <!--download page completion-->	 
             </li>
-            <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
-            <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
-            <li><button class="btn btn-primary" type="button">Total records <span class="badge"><?php echo $total_count; ?></span></button></li>
+            <li id="export_excel_searchResult" class="clickable" title="<?php echo gettext('Export to Excel')?>"><i class="fa fa-file-excel-o"></i></li>
+            <li id="print_searchResult" class="print clickable" title="<?php echo gettext('Print')?>"><i class="fa fa-print"></i></li>
+            <li><button class="btn btn-primary" type="button"><?php echo gettext('Total records')?> <span class="badge"><?php echo $total_count; ?></span></button></li>
            </ul>
           </div>
          <?php } ?>
@@ -306,14 +306,14 @@
       echo nl2br($si->footer_message);
       ?>
       <ul>
-       <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
-       <li><a href="http://inoerp.org/extensions/ino_user/user_login.php">Demo</a></li>
-       <li><a href="https://github.com/inoerp/inoERP">Download</a></li>
-       <li><a href="http://localhost/inoerp/content.php?content_type=documentation&category_id=30">Documentation</a></li>
-       <li><a href="http://localhost/inoerp/content.php?content_type=forum&category_id=1">Forum</a></li>
-       <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
-       <li><a href="#">Cookie</a></li>
-       <li class="active"><a href="#">TOU</a></li>
+       <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact"><?php echo gettext('Contact')?></a></li>
+       <li><a href="http://inoerp.org/extensions/ino_user/user_login.php"><?php echo gettext('Demo')?></a></li>
+       <li><a href="https://github.com/inoerp/inoERP"><?php echo gettext('Download')?></a></li>
+       <li><a href="http://localhost/inoerp/content.php?content_type=documentation&category_id=30"><?php echo gettext('Documentation')?></a></li>
+       <li><a href="http://localhost/inoerp/content.php?content_type=forum&category_id=1"><?php echo gettext('Forum')?></a></li>
+       <li><a href="https://www.mozilla.org/MPL/2.0/"><?php echo gettext('MPL 2')?></a></li>
+       <li><a href="#"><?php echo gettext('Cookie')?></a></li>
+       <li class="active"><a href="#"><?php echo gettext('TOU')?></a></li>
       </ul>
      </div>
     </div><!-- end large-7 --> 

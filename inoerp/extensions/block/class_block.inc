@@ -369,7 +369,7 @@ class block extends dbObject {
   if (!empty($per_block)) {
    $block_string .= '<div id="noOfblocks">';
    $block_string .= '<form action="" method="GET">';
-   $block_string .= 'Show<select name="per_block">';
+   $block_string .= gettext('Show') . '<select name="per_block">';
    $block_string .= '<option value="3"> 3 </option>';
    $block_string .= '<option value="5"> 5 </option>';
    $block_string .= '<option value="10"> 10 </option>';
@@ -377,7 +377,7 @@ class block extends dbObject {
    $block_string .= '<option value="50"> 50 </option>';
    $block_string .= '</select>';
 //   $block_string .= '<input type="hidden" value="' . $extension_id . '" name="block_id">';
-   $block_string .= '<input type="submit" class="button" value="Per Page" >';
+   $block_string .= '<input type="submit" class="button" value=\"' . gettext('Per Page') . '\" >';
    $block_string .= '</form>';
    $block_string .= '</div>';
    $total_count = self::count_all();
@@ -409,7 +409,7 @@ class block extends dbObject {
    if ($pagination->has_previous_block()) {
     $block_string .= "<a href=\"blocks.php?blockno=";
     $block_string .= $pagination->previous_block() . '&' . $query_string;
-    $block_string .= "> &laquo; Previous </a> ";
+    $block_string .= "> &laquo; " . gettext('Previous') . " </a> ";
    }
 
    for ($i = 1; $i <= $pagination->total_blocks(); $i++) {
@@ -424,7 +424,7 @@ class block extends dbObject {
    if ($pagination->has_next_block()) {
     $block_string .= " <a href=\"blocks.php?blockno=";
     $block_string .= $pagination->next_block() . '&' . remove_querystring_var($query_string, 'blockno');
-    $block_string .= "\">Next &raquo;</a> ";
+    $block_string .= "\">" . gettext('Next') . " &raquo;</a> ";
    }
   }
   $block_string .= '</div>';
