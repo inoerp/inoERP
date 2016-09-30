@@ -8,7 +8,7 @@ $f = new inoform();
 ?>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"> <i class="fa fa-user"></i> Login / Register</button>
+<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"> <i class="fa fa-user"></i> <?php echo gettext('Login / Register'); ?></button>
 
 <div class="modal fade login-form" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
  <div class="modal-dialog">
