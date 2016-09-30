@@ -39,14 +39,14 @@
      <div class="row">    
       <div class="col-md-6">
        <div><h3>Shipping Address</h3>
-        <?php echo address_reference::show_address(array($ship_add), true); ?>
+        <?php echo address_reference::show_address(array($ship_add), true, 'ec_confirm_order'); ?>
         <label>Select a different shipping address</label>
         <?php echo $f->select_field_from_object('ship_to_address_id', $all_address, 'address_id', 'address', '', 'ship_to_address_id'); ?>
        </div>
       </div>
       <div class="col-md-6">
        <div><h3>Billing Address | <span >  Same as shipping  <?php $f = new inoform();  echo $f->checkBox_field('bill_same_as_ship', '' ,'' ,'small') ?>  </span></h3>
-        <?php echo address_reference::show_address(array($bill_add), true); ?>
+        <?php echo address_reference::show_address(array($bill_add), true, 'ec_confirm_order'); ?>
         <label>Select a different billing address</label>
         <?php echo $f->select_field_from_object('bill_to_address_id', $all_address, 'address_id', 'address', '', 'bill_to_address_id'); ?>
 
