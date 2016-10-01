@@ -1,1 +1,1 @@
-<?php$show_id = true;if(!empty($_GET['window_type']) && ($_GET['window_type'] == 'popup')){ $show_id = false; $$class->address_name = current_time(1). ' - ' . $_SESSION['user_id'];} ?>
+<?php$show_id = true; ?>

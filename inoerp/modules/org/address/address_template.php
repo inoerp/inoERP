@@ -1,7 +1,19 @@
+	<?php
+	if (!empty($_GET['ref_class_name']) && ($_GET['ref_class_name'] == 'ec_confirm_order')) {
+	 $show_id = false;
+	 $$class->address_name = current_time(1) . ' - ' . $_SESSION['user_id'];
+	 include_once __DIR__.'/templates/ec_confirm_order_template.php';
+	 return;
+	}
+	if(empty($$class->address_category)){
+	 $$class->address_category = 'GEN';
+	}
+	?>
+
 <div id ="form_header">
- <form action=""  method="post" id="address"  name="address">
+ <form  method="post" id="address"  name="address">
   <span class="heading"><?php echo gettext('Address Header') ?></span>
-  <div id ="form_header">
+	<div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -18,6 +30,7 @@
  			 </li>			 
 			 <?php } ?>
 			 <li><?php $f->l_select_field_from_object('type', address::address_types(), 'option_line_code', 'option_line_code', $address->type, 'type', '', '', $readonly); ?>    </li>
+			 <li><?php $f->l_select_field_from_array('address_category', address::$address_category_a, $$class->address_category, 'address_category', 'always_Readonly'); ?>    </li>
 			 <li><?php $f->l_text_field_dm('address_name'); ?>    </li>
 			 <li><label><?php echo gettext('Tax Region') ?></label><?php $f->text_field_d('tax_region_name') ?>
         <i class="fa fa-search tax_region_id select_popup clickable"></i></li>
@@ -26,7 +39,7 @@
 			 <li><?php $f->l_checkBox_field_d('default_cb'); ?></li>
 			 <li><?php $f->l_select_field_from_object('usage_type', address::address_usage_type(), 'option_line_code', 'option_line_value', $address->usage_type, 'usage_type', '', '', $readonly); ?>    </li>
 			 <?php
-			 if ((!empty($_GET) && isset($_GET['window_type']) && $_GET['window_type'] = 'popup')) {
+			 if ((!empty($_GET) && isset($_GET['window_type']) && $_GET['window_type'] == 'popup')) {
 				echo $f->hidden_field_withId('window_type', 'popup');
 				echo '<li><label></label><button  class="quick_select button btn btn-success">Select Address</button></li>';
 			 }
