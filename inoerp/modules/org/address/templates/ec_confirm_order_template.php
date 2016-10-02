@@ -1,3 +1,4 @@
+<?php $existing_address_arr = address_reference::find_by_reference_detailts('ino_user', $ino_user->ino_user_id); ?>
 <div id ="form_header">
  <form  method="post" id="address"  name="address">
   <span class="heading"><?php $f = new inoform(); echo gettext('Address Header') ?></span>
@@ -9,6 +10,7 @@
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
 			<ul class="column header_field">
+			 <li><?php $f->l_select_field_from_object('existing_address', $existing_address_arr, 'address_id', 'address_name', '', 'existing_address','','','','','','address'); ?>    </li>
 			 <li><?php $f->l_text_field('address_category', 'USER', '', 'address_category', 'always_readonly', 1, 1); ?>    </li>
 			 <li><?php $f->l_select_field_from_object('type', address::address_types(), 'option_line_code', 'option_line_code', $address->type, 'type', '', '', $readonly); ?>    </li>
 			 <li><?php $f->l_text_field_dm('address_name'); ?>    </li>
@@ -24,6 +26,7 @@
 			 ?>
 			 <?php  ?>
 			 <?php echo $f->hidden_field_withId('address_id', $$class->address_id); ?>
+			 <?php echo $f->hidden_field_withId('address_user_id', $_SESSION['user_id']); ?>
 			</ul>
      </div>
     </div>

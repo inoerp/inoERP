@@ -54,7 +54,7 @@ AND ar.reference_table = '{$ref_table}'";
   $stmt .= '</div>';
  }
 
- public static function show_address($all_address, $show_addres_id = false, $ref_class_name = null) {
+ public static function show_address($all_address, $show_addres_id_name = false, $ref_class_name = null) {
   global $f; 
   if (empty($all_address)) {
    return false;
@@ -72,8 +72,8 @@ AND ar.reference_table = '{$ref_table}'";
    $stmt .= '<li>' . $address->phone . '</li>';
    $stmt .= '<li>' . $address->email . '</li>';
    $stmt .= '<li>' . $address->website . '</li>';
-   if ($show_addres_id) {
-    $stmt .= '<li class="hidden">' . $f->hidden_field('address_id', $address->address_id) . '</li>';
+   if ($show_addres_id_name) {
+    $stmt .= '<li class="hidden">' . $f->hidden_field($show_addres_id_name, $address->address_id) . '</li>';
    }
    $stmt .= '</ul></div>';
 

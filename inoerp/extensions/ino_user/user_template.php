@@ -96,7 +96,7 @@ if (empty($access_level) || ($access_level < 2 )) {
     <div id="tabsHeader-8" class="tabContent">
      <div class="existing-address col-md-6">
       <label><?php echo gettext('Existing Addresses'); ?></label>
-      <?php echo!empty($existing_address_arr) ? address_reference::show_address($existing_address_arr) : ''; ?>
+      <?php  echo !empty($existing_address_arr) ? address_reference::show_address($existing_address_arr) : ''; ?>
      </div>
      <div class="new-address col-md-6"><label><?php echo gettext('Add New Address'); ?></label>
       <?php

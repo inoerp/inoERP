@@ -78,7 +78,8 @@ class address extends dbObject {
  ];
  public $fields_inForm_notInDataBase = [
 		 "tax_region_name",
-		 'window_type'
+		 'window_type',
+		 'address_user_id'
  ];
  public static $json_label_fields = [
 		 "address_name",
@@ -123,10 +124,35 @@ class address extends dbObject {
  public $msg;
  public $tax_region_name;
  public $window_type;
+ public $address_user_id;
 
  public function _before_save() {
 	if (!empty($this->tax_region_name)) {
 	 $this->mdm_tax_region_id = mdm_tax_region::find_by_keyColumn($this->tax_region_name)->mdm_tax_region_id;
+	}
+ }
+
+ public function _after_save() {
+	if (!empty($this->address_user_id) && !empty($this->address_id)) {
+	 $this->_create_update_address_reference();
+	}
+ }
+
+ private function _create_update_address_reference() {
+	//check if addrees reference exists
+	$add_ref_e = address_reference::find_by_ColumnNameVal('address_id', $this->address_id);
+	if (!empty($add_ref_e)) {
+	 return false;
+	}
+	$add_ref = new address_reference();
+	$add_ref->reference_table = 'ino_user';
+	$add_ref->reference_id = $_SESSION['user_id'];
+	$add_ref->address_id = $this->address_id;
+	try {
+	 $add_ref->save();
+	 echo "<br> New address reference is successfully added";
+	} catch (Exception $e) {
+	 echo "<br>Unable to add new address. Error @ user @@ " . __LINE__ . $e->getMessage();
 	}
  }
 
