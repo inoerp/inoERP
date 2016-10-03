@@ -77,12 +77,12 @@
     <div id="navigation_bar"   class="col-sm-12 col-xs-12 col-md-10 col-md-offset-2 mainbar">
      <div id="header_top_quick_nav" class='hidden-xs' >
       <ul class="list-group inline_list">
-       <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="Toggle Navigation Menu"></i></li>
-       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
-       <li role="presentation"><a  class="getAjaxForm" href="<?php echo HOME_URL . 'form.php?class_name=extn_emessage_header&mode=9' ?>"><i class="fa fa-info" title="Messages"></i></a></li>
-       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
-       <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="Search & List Page"></i></a></li>
-       <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="Form Page"></i></a></li>
+       <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="<?php echo gettext('Toggle Navigation Menu')?>"></i></li>
+       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="<?php echo gettext('Home')?>"></i></a></li>
+       <li role="presentation"><a  class="getAjaxForm" href="<?php echo HOME_URL . 'form.php?class_name=extn_emessage_header&mode=9' ?>"><i class="fa fa-info" title="<?php echo gettext('Messages')?>"></i></a></li>
+       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="<?php echo gettext('Dashborad')?>"></i></a></li>
+       <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="<?php echo gettext('Search & List Page')?>"></i></a></li>
+       <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="<?php echo gettext('Form Page')?>"></i></a></li>
        <li id="unsaved_fields" data-no_of_fields="0"></li>
        <li class="show_loading_small">
         <div class="ino-spinner ino-sm">
@@ -108,7 +108,7 @@
       ?>
       <?php if ($show_header_links) { ?>
        <!--       <div class="social-icons">
-               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> <?php //echo gettext( 'ERP Dashboard' ); ?> </a></span>
               </div> end social icons -->
       <?php } ?>
      </div>
@@ -194,9 +194,9 @@
        <div class="heading search-top-msg">
         <?php
         if (!empty($_GET['function_name'])) {
-         echo '<span>' . ucwords(str_replace('_', ' ', $_GET['function_name'])) . ' Report</span>';
+         echo '<span>' . gettext(ucwords(str_replace('_', ' ', $_GET['function_name']))) . ' ' . gettext('Report') . '</span>';
         } else {
-         echo '<span>Search ' . ucwords(str_replace('_', ' ', $class)) . '</span>';
+         echo '<span>' . gettext('Serch') . ' ' . gettext(ucwords(str_replace('_', ' ', $class))) . '</span>';
         }
         ?>
        </div>
@@ -237,9 +237,9 @@
               ?>
               <!--download page completion-->	 
              </li>
-             <li id="export_excel_searchResult" class="clickable" title="Export to Excel"><i class="fa fa-file-excel-o"></i></li>
-             <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
-             <li><button class="btn btn-primary" type="button">Total records <span class="badge"><?php echo $total_count; ?></span></button></li>
+             <li id="export_excel_searchResult" class="clickable" title="<?php echo gettext('Export to Excel')?>"><i class="fa fa-file-excel-o"></i></li>
+             <li id="print_searchResult" class="print clickable" title="<?php echo gettext('Print')?>"><i class="fa fa-print"></i></li>
+             <li><button class="btn btn-primary" type="button"><?php echo gettext('Total records')?> <span class="badge"><?php echo $total_count; ?></span></button></li>
             </ul>
            </div>
           <?php } ?>
@@ -285,14 +285,14 @@
        </ul>
        <ul class="pull-right">
         <li> | </li>
-        <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
-        <li><a href="http://inoerp.org/extensions/ino_user/user_login.php">Demo</a></li>
-        <li><a href="https://github.com/inoerp/inoERP">Download</a></li>
-        <li><a href="http://localhost/inoerp/content.php?content_type=documentation&category_id=30">Documentation</a></li>
-        <li><a href="http://localhost/inoerp/content.php?content_type=forum&category_id=1">Forum</a></li>
-        <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
-        <li><a href="#">Cookie</a></li>
-        <li class="active"><a href="#">TOU</a></li>
+        <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact"><?php echo gettext('Contact')?></a></li>
+        <li><a href="http://inoerp.org/extensions/ino_user/user_login.php"><?php echo gettext('Demo')?></a></li>
+        <li><a href="https://github.com/inoerp/inoERP"><?php echo gettext('Download')?></a></li>
+        <li><a href="http://localhost/inoerp/content.php?content_type=documentation&category_id=30"><?php echo gettext('Documentation')?></a></li>
+        <li><a href="http://localhost/inoerp/content.php?content_type=forum&category_id=1"><?php echo gettext('Forum')?></a></li>
+        <li><a href="https://www.mozilla.org/MPL/2.0/"><?php echo gettext('MPL 2')?></a></li>
+        <li><a href="#"><?php echo gettext('Cookie')?></a></li>
+        <li class="active"><a href="#"><?php echo gettext('TOU')?></a></li>
         <li class="label label-pill label-danger"><i class="fa fa-close close-footer-menu clickable"></i></li>
        </ul>
       </div>

@@ -17,7 +17,7 @@
          <a name="show" href="form.php?class_name=option_header&<?php echo "mode=$mode"; ?>" class="show document_id option_header_id">
           <i class="fa fa-refresh"></i></a>  
         </li>
-        <li><label>Option Name</label><?php echo $f->text_field_d('option_type', $readonly1_class); ?></li>
+        <li><label><?php echo gettext('Option Name') ?></label><?php echo $f->text_field_d('option_type', $readonly1_class); ?></li>
         <li><?php $f->l_select_field_from_array('access_level', option_header::$access_level_a, $option_header->access_level, 'access_level', '', '', $readonly); ?>					</li>
         <li><?php $f->l_text_field_d('description'); ?></li>
         <li><?php $f->l_select_field_from_object('module_code', option_header::find_options_byName('SYS_MODULE'), 'option_line_code', 'option_line_value', $$class->module_code, 'module_code', '', 1) ?>				</li>

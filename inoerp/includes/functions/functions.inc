@@ -337,10 +337,10 @@ function getBreadCrumb($class_first) {
   }
 
   $form_bread_crum = '<ul class="btn-group-vertical vertical-list imp-link ino-breadcrumb-simple" role="group" aria-label="...">';
-  $form_bread_crum .= '<li title="Close This Form" ><j  class="ajax-link ino-close-form clickable " ><i class="fa fa-remove"></i> </j></li>';
-  $form_bread_crum .= '<li title="Minimize This Form" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable " ><i class="fa fa-minus"></i></j></li>';
-  $form_bread_crum .= "<li title=\"Navigate to Dashboard\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"><i class="fa fa-dashboard"></i> </a></li>';
-  $form_bread_crum .= '<li title="Navigate to ' . $module_description . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . $module_name_c . ' </a></li>';
+  $form_bread_crum .= '<li title="' . gettext('Close This Form') . '" ><j  class="ajax-link ino-close-form clickable " ><i class="fa fa-remove"></i> </j></li>';
+  $form_bread_crum .= '<li title="' . gettext('Minimize This Form') . '" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable " ><i class="fa fa-minus"></i></j></li>';
+  $form_bread_crum .= "<li title=\"" . gettext('Navigate to') . ' ' . gettext('Dashboard') . "\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"><i class="fa fa-dashboard"></i> </a></li>';
+  $form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . gettext($module_description) . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>';
 
   $form_bread_crum .= '</ul>';
   return $form_bread_crum;
@@ -367,13 +367,13 @@ function xx_getBreadCrumb($class_first) {
   }
 
   $form_bread_crum = '<ul class="inline-list imp-link ino-breadcrumb-simple">';
-  $form_bread_crum .= "<li title=\"My Dashboard\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"> Dashboard </a></li>';
+  $form_bread_crum .= "<li title=\"" . gettext('My Dashboard') . "\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"> ' .  gettext( 'Dashboard' ) . ' </a></li>';
   $form_bread_crum .= '<li> &nbsp;&nbsp;<i class="fa fa-angle-double-right"></i> &nbsp;&nbsp;</li>';
-  $form_bread_crum .= '<li title="' . $module_description . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">&nbsp; ' . $module_name_c . ' </a></li>';
+  $form_bread_crum .= '<li title="' . gettext($module_description) . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">&nbsp; ' . gettext( $module_name_c ) . ' </a></li>';
   $form_bread_crum .= '<li> &nbsp;&nbsp;<i class="fa fa-pause"></i> &nbsp;&nbsp;</li>';
-  $form_bread_crum .= '<li title="Close This Form" ><j  class="ajax-link ino-close-form clickable ino-nav-btn" > Close &nbsp; <i class="fa fa-file-o"></i> </j></li>';
+  $form_bread_crum .= '<li title="' . gettext('Close This Form') . '" ><j  class="ajax-link ino-close-form clickable ino-nav-btn" > ' . gettext('Close') . ' &nbsp; <i class="fa fa-file-o"></i> </j></li>';
   $form_bread_crum .= '<li> &nbsp;&nbsp;<i class="fa fa-angle-double-right"></i> &nbsp;&nbsp;</li>';
-  $form_bread_crum .= '<li title="Minimize This Form" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable ino-nav-btn" > Minimize &nbsp; <i class="fa fa-file-o"></i></j></li>';
+  $form_bread_crum .= '<li title="' . gettext('Minimize This Form') . '" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable ino-nav-btn" > ' . gettext('Minimize') . ' &nbsp; <i class="fa fa-file-o"></i></j></li>';
   $form_bread_crum .= '</ul>';
   return $form_bread_crum;
  } else {
@@ -384,7 +384,7 @@ function xx_getBreadCrumb($class_first) {
 function show_reference_doc($class_name, $primar_column_value) {
  $primary_column = $class_name::$primary_column;
  if ((!empty($class_name)) && (!empty($primar_column_value)) && (!empty($primary_column))) {
-  return '<a  href=\'form.php?class_name=' . $class_name . '&' . $primary_column . '=' . $primar_column_value . '&mode=2\' target="_blank">View Doc</a>';
+  return '<a  href=\'form.php?class_name=' . $class_name . '&' . $primary_column . '=' . $primar_column_value . '&mode=2\' target="_blank">' . gettext('View Doc') . '</a>';
  } else {
   return false;
  }
@@ -739,7 +739,7 @@ function select_per_page($per_page = '10') {
  $content_string .= ( $per_page == 200) ? ' selected > 200 </option>' : '> 200 </option>';
  $content_string .= '</select>&nbsp;';
  $content_string .= '<a name="content_per_page" '
-  . 'href="' . $link . '" class="content_per_page">Per Page</a>';
+  . 'href="' . $link . '" class="content_per_page button">' . gettext('Per Page') . '</a>';
  $content_string .= '</div>';
  return $content_string;
 }
@@ -1673,8 +1673,8 @@ function ino_attachement($file, $file_name = 'attachments') {
    <ul class="inRow asperWidth">
     <li class="btn btn-info active inline input_file clickable" role="button">
      <input id="attachments" class="input_file_btn clickable" type="file" multiple="" name="' . $file_name . '[]"></input>
-     <i class="fa fa-paperclip clickable"> &nbsp;&nbsp;&nbsp;</i>Select File </li>
-    <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="btn btn-info active submit button">Attach</button></li>';
+     <i class="fa fa-paperclip clickable"> &nbsp;&nbsp;&nbsp;</i>' . gettext('Select File') . ' </li>
+    <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="btn btn-info active submit button">' . gettext('Attach') . '</button></li>';
  $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
    </ul>
    <div class="uploaded_file_details"></div>
@@ -2232,7 +2232,7 @@ function ino_noOfItems_inCart() {
 function ino_showWarning_message($msg) {
 
  echo '<div class="alert alert-danger alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+  <button type="button" class="close" data-dismiss="alert" aria-label=\"' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>';
  echo gettext($msg);
  echo '</div>';
 }

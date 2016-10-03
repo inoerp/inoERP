@@ -915,7 +915,7 @@ trait dbObject_t {
   $stmt = $dbc->connection->prepare($sql);
   $stmt->bindParam(':primary_column', $this->$primary_column);
   echo '<div class="alert alert-danger alert-dismissible" role="alert">
-       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+       <button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>';
   try {
    $stmt->execute();
    $this->msg = 1;
@@ -945,7 +945,7 @@ trait dbObject_t {
   $stmt = $dbc->connection->prepare($sql);
   $stmt->bindParam(':primary_id', $id);
   echo '<div class="alert alert-danger alert-dismissible" role="alert">
-       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+       <button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>';
   try {
    $stmt->execute();
 //	 $dbc->connection->commit();
@@ -973,7 +973,7 @@ trait dbObject_t {
   $stmt = $dbc->connection->prepare($sql);
   $stmt->bindParam(':org_id', $org_id);
   echo '<div class="alert alert-danger alert-dismissible" role="alert">
-       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+       <button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>';
   try {
    $stmt->execute();
 //	 $dbc->connection->commit();

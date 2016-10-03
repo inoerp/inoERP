@@ -27,7 +27,7 @@
        <li><?php $f->l_text_field_d('description'); ?> 					</li>
        <li><?php $f->l_status_field_d('status'); ?> 					</li>
        <li><?php $f->l_text_field_d('output_path'); ?> 					</li>
-       <li><label>Email Format</label><?php echo $f->select_field_from_array('email_format', dbObject::$download_format, 'excel_format') ?> </li>
+       <li><label><?php echo gettext('Email Format'); ?></label><?php echo $f->select_field_from_array('email_format', dbObject::$download_format, 'excel_format') ?> </li>
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">
@@ -70,7 +70,7 @@
       <?php echo form::text_area('parameter', base64_decode($$class->report_query), '10', '150', '', '', '', 1); ?>
      </div>
      <div id="tabsLine-3" class="tabContent">
-      <?php echo form::text_area('email_addresses', $$class->op_email_address, '3', '120', '', 'Separate each email address by comma(,) or a new line', '', 1) ?>
+      <?php echo form::text_area('email_addresses', $$class->op_email_address, '3', '120', '', gettext('Separate each email address by comma(,) or a new line'), '', 1) ?>
      </div>
     </div>
    </div>

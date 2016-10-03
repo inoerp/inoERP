@@ -87,7 +87,7 @@
          <table class="find_page normal">
           <thead> 
            <tr>
-            <th>Click Select</th>
+            <th><?php echo gettext('Click Select'); ?></th>
             <?php
             if (property_exists($class, 'column')) {
              $column_array = $$class->column;

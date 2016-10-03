@@ -166,7 +166,7 @@ class user extends dbObject {
    return 1;
   } catch (Exception $e) {
 //   echo '<div role="alert" class="alert alert-warning error alert-dismissible">'
-//   . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' . $e->getMessage().'</div>';
+//   . '<button type="button" class="close" data-dismiss="alert" aria-label="' . gettext('Close') . '"><span aria-hidden="true">&times;</span></button>' . $e->getMessage().'</div>';
    return -99;
   }
  }

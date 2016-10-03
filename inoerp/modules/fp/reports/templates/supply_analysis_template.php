@@ -1,4 +1,4 @@
-<h1 class="text-center">Supply Analysis Report</h1>
+<h1 class="text-center"><?php echo gettext('Supply Analysis Report')?></h1>
 <table class ="supply_analysis table table-bordered simple_table">
  <thead> 
   <tr>

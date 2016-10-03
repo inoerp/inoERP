@@ -101,7 +101,7 @@ class user_password_reset extends dbObject {
     $im = new inomail();
     $im->FromName = $si->site_name;
     $im->addAddress($email, $username);
-    $im->addReplyTo($si->email, 'Password Reset');
+    $im->addReplyTo($si->email, gettext('Password Reset'));
     $im->Subject = $subject;
     $im->Body = $message;
 //    pa($im);

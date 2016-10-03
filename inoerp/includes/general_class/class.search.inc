@@ -248,7 +248,7 @@ class search extends dbObject {
    $search_result .= "<table class=\"normal\"><thead><tr>";
    $search_result .= '<th>' . gettext(ucwords(str_replace('_', ' ', $primary_column))) . '</th>';
    if ($i == 0) {
-    $search_result .= "<th>Click Select</th>";
+    $search_result .= "<th>" . gettext('Click Select') . "</th>";
    }
    $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
    $new_end = $new_start + ($no_of_columns_per_tab - 1);
@@ -364,7 +364,7 @@ class search extends dbObject {
 //start of the srach statement
   $search_form_statement = "";
   
-  $search_form_statement .= "<span id='search_tip' class='clickable ino-btn2'>Searching Tips</span>";
+  $search_form_statement .= "<span id='search_tip' class='clickable ino-btn2'>" . gettext('Searching Tips') . "</span>";
   if ((isset($_GET['window_type']) && $_GET['window_type'] == 'popover') || $this->_window_type == 'popover') {
    $search_form_statement .= '<div class="tabContainer"> ';
   } else {
@@ -435,7 +435,7 @@ class search extends dbObject {
    $search_form_statement .= '</li>';
   }
 
-  $search_form_statement .= "<li><label>Dynamic Criteria </label>";
+  $search_form_statement .= "<li><label>" . gettext('Dynamic Criteria') . "</label>";
   $search_form_statement .= "<select name=\"new_search_criteria\" id=\"new_search_criteria\" class=\"new_search_criteria $srch_div_cls\">";
   foreach ($search_array as $key => $search_value) {
    $search_form_statement .= '<option value="' . htmlentities($search_value) . '"';
@@ -452,7 +452,7 @@ class search extends dbObject {
   $search_form_statement .= "<ul class=\"add_new_search form_buttons column header_field\" >";
 
   //order by
-  $search_form_statement .= "<li><label>Order By</label></li>";
+  $search_form_statement .= "<li><label>" . gettext('Order By') . "</label></li>";
   $search_form_statement .= "<li><select name=\"search_order_by[]\" class=\"$srch_div_cls search_order_by\" > ";
 //	$search_form_statement .= "<option value=\"\"> </option>";
 
@@ -498,7 +498,7 @@ class search extends dbObject {
   }
 
   //Records per page
-  $search_form_statement .= '<li><label> Per page</label>';
+  $search_form_statement .= '<li><label> ' . gettext('Per page') . '</label>';
   $search_form_statement .= $f->select_field_from_array('per_page', $this->_per_page_a, $this->_per_page, 'per_page');
 
 
@@ -508,8 +508,8 @@ class search extends dbObject {
   $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"function_name\" value=\"$function_name\" class=\"$srch_div_cls function_name hidden\" ></li>";
   $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"report_name\" value=\"$report_name\" class=\"$srch_div_cls report_name hidden\" ></li>";
   $search_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"search_class_name\" value=\"$class\" class=\"$srch_div_cls class_name hidden\" ></li>";
-  $search_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_class_name\" value=\"Reset All\" class=\"$srch_div_cls reset btn btn-default\" ></li>";
-  $search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"$srch_div_cls btn btn-default\" value=\"Search\" id=\"search_submit_btn\"></li>";
+  $search_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_class_name\" value=\"" . gettext('Reset All') . "\" class=\"$srch_div_cls reset btn btn-default\" ></li>";
+  $search_form_statement .="<li><input type=\"submit\" form=\"$this->_form_name\" name=\"submit_search\" class=\"$srch_div_cls btn btn-default\" value=\"" . gettext('Search') . "\" id=\"search_submit_btn\"></li>";
   $search_form_statement .="</ul>";
   $search_form_statement .="</div>";
   if (isset($_GET['window_type']) && $_GET['window_type'] == 'popover' || $this->_window_type == 'popover') {
@@ -519,21 +519,21 @@ class search extends dbObject {
 
    $search_form_statement .= '<div id="tabsHeader-2" class="tabContent col-md-12">';
    $search_form_statement .='<ul>';
-   $search_form_statement .= '<li><label>Email Address</label> ' . form::text_area('email_addresses', '', '3', '120', '', 'Separate each email address by comma(,) or a new line') . ' </li>';
-   $search_form_statement .='<li><label>Email Format</label> ' . $f->select_field_from_array('email_format', dbObject::$download_format, 'excel_format') . '</li>';
+   $search_form_statement .= '<li><label>' . gettext('Email Address') . '</label> ' . form::text_area('email_addresses', '', '3', '120', '', gettext('Separate each email address by comma(,) or a new line')) . ' </li>';
+   $search_form_statement .='<li><label>' . gettext('Email Format') . '</label> ' . $f->select_field_from_array('email_format', dbObject::$download_format, 'excel_format') . '</li>';
    $search_form_statement .='</ul>';
    $search_form_statement .="</div> "; //end of tabsHeader-2
 
    $search_form_statement .= '<div id="tabsHeader-3" class="tabContent col-md-12">';
    $search_form_statement .= '<ul class="simple_column full-width">';
-   $search_form_statement .= "<li><label>Frequency UOM </label>";
+   $search_form_statement .= "<li><label>" . gettext('Frequency UOM') . " </label>";
    $search_form_statement .= $f->select_field_from_array('frequency_uom', sys_program_schedule::$frequency_uom_a, '', 'frequency_uom');
    $search_form_statement .= '</li>';
-   $search_form_statement .= '<li><label>Frequency </label>';
+   $search_form_statement .= '<li><label>' . gettext('Frequency') . ' </label>';
    $search_form_statement .= $f->text_field('frequency_value', '');
    $search_form_statement .= '</li>';
-   $search_form_statement .= '<li><label>Start DateTime </label>' . $f->dateTime_field('start_date_time', '') . '</li>';
-   $search_form_statement .= '<li><label>Increase Date Parameter </label>' . $f->checkBox_field('increase_date_parameter_cb', '') . '</li>';
+   $search_form_statement .= '<li><label>' . gettext('Start DateTime') . ' </label>' . $f->dateTime_field('start_date_time', '') . '</li>';
+   $search_form_statement .= '<li><label>' . gettext('Increase Date Parameter') . ' </label>' . $f->checkBox_field('increase_date_parameter_cb', '') . '</li>';
    $search_form_statement .= '</ul>';
    $search_form_statement .="</div> "; //end of tabsHeader-2
 
@@ -600,7 +600,7 @@ class search extends dbObject {
    $program_form_statement .='<li><label>Download Format</label>' . $f->select_field_from_array('download_format', dbObject::$download_format, '') . '</li>';
   }
 
-  $program_form_statement .= "<li><label>Dynamic Criteria </label>";
+  $program_form_statement .= "<li><label>" . gettext('Dynamic Criteria') . "</label>";
   $program_form_statement .= "<select name=\"new_search_criteria\" id=\"new_search_criteria\" class=\"new_search_criteria\">";
   if (!empty($search_array)) {
    foreach ($search_array as $key => $search_value) {
@@ -620,14 +620,14 @@ class search extends dbObject {
   $program_form_statement .= '<fieldset class="col-md-4"><legend class="fs-default">Auto-Schedule Options</legend>';
   $program_form_statement .= '<div class="hideDiv_input fa fa-plus-circle clickable"></div>';
   $program_form_statement .= '<ul class="simple_column schdule_details hideDiv_input_element">';
-  $program_form_statement .= "<li><label>Frequency UOM </label>";
+  $program_form_statement .= "<li><label>" . gettext('Frequency UOM') . " </label>";
   $program_form_statement .= $f->select_field_from_array('frequency_uom', sys_program_schedule::$frequency_uom_a, '', 'frequency_uom');
   $program_form_statement .= '</li>';
-  $program_form_statement .= '<li><label>Frequency </label>';
+  $program_form_statement .= '<li><label>' . gettext('Frequency') . ' </label>';
   $program_form_statement .= $f->text_field('frequency_value', '');
   $program_form_statement .= '</li>';
-  $program_form_statement .= '<li><label>Start DateTime </label>' . $f->dateTime_field('start_date_time', '') . '</li>';
-  $program_form_statement .= '<li><label>Increase Date Parameter </label>' . $f->checkBox_field('increase_date_parameter_cb', '') . '</li>';
+  $program_form_statement .= '<li><label>' . gettext('Start DateTime') . ' </label>' . $f->dateTime_field('start_date_time', '') . '</li>';
+  $program_form_statement .= '<li><label>' . gettext('Increase Date Parameter') . ' </label>' . $f->checkBox_field('increase_date_parameter_cb', '') . '</li>';
   $program_form_statement .= '</ul>';
   $program_form_statement .= '</fieldset>';
 
@@ -635,18 +635,18 @@ class search extends dbObject {
   $program_form_statement .="</div><div class='row'>";
   $program_form_statement .="<ul class=\"program form_buttons\">";
   //add the hidden fields if any
-  $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_program\" class=\"reset program btn btn-default\" value=\"Reset All\" id=\"reset_program\"></li>";
+  $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"reset_program\" class=\"reset program btn btn-default\" value=\"" . gettext('Reset All') . "\" id=\"reset_program\"></li>";
 //  $program_form_statement .= "<li><a href=\"$this->_form_post_link.php?class_name=$class&mode=$this->_search_mode&show_block=$this->_show_block\" "
 //   . " class=\"reset button\" id=\"search_reset_btn\" name=\"class_name\" value=\"$class\" > Reset All</a></li>";
   $program_form_statement .="<li><input type=\"hidden\" form=\"$this->_form_name\" name=\"class_name\" value=\"$class\" class=\"search class_name hidden\" ></li>";
   if ($this->_searching_class != 'convertToProd') {
    if (!empty($program_type) && ($program_type == 'download_report')) {
-    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program btn btn-default\" value=\"Generate Report\" id=\"generate_report\"></li>";
+    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program btn btn-default\" value=\"" . gettext('Generate Report') . "\" id=\"generate_report\"></li>";
    } else {
-    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program btn btn-default\" value=\"Submit\" id=\"save_program\"></li>";
+    $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program btn btn-default\" value=\"" . gettext('Submit') . "\" id=\"save_program\"></li>";
    }
   } else if (convertToProd::$allow_conversion) {
-   $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program btn btn-default\" value=\"Submit\" id=\"save_program\"></li>";
+   $program_form_statement .="<li><input type=\"button\" form=\"$this->_form_name\" name=\"submit_program\" class=\"program btn btn-default\" value=\"" . gettext('Submit') . "\" id=\"save_program\"></li>";
   } else {
    $program_form_statement .="<li class='error'>The submit button is disabled for security reason.<br>Set allow_conversion variable to true in convertToProd class to use this program</li>";
   }

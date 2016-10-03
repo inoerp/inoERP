@@ -5618,7 +5618,10 @@ $(document).ready(function () {
 //   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">'+ noof_field_changes+' Unsaved Changes</span>');
 //  }
   noof_field_changes++;
-  $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + noof_field_changes + ' Unsaved Changes</span>');
+  if ( noof_field_changes == 1 ) {
+   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + noof_field_changes + ' Unsaved Change</span>'); }
+  else {
+   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + noof_field_changes + ' Unsaved Changes</span>'); }
   $('#unsaved_fields').data('no_of_fields', noof_field_changes);
  });
 

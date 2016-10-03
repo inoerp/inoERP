@@ -139,7 +139,7 @@ inoERP
       <thead> 
        <tr>
         <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('action Id') ?></th>
+        <th><?php echo gettext('Action Id') ?></th>
         <th><?php echo gettext('Condition') ?></th>
         <th><?php echo gettext('Comparison') ?></th>
         <th><?php echo gettext('Value From') ?></th>

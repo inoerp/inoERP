@@ -136,7 +136,7 @@
                    </li>
                    <li class="field_records record_no0"><Label>Field</label>
                     <select class="table_fields">
-                     <option value=" " disabled>Select Table</option>
+                     <option value=" " disabled><?php echo gettext('Select Table'); ?></option>
                     </select>
                    </li>
                   </ul>

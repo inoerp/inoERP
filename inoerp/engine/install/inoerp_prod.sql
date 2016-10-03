@@ -12915,8 +12915,8 @@ INSERT INTO `option_line` (`option_line_id`, `option_header_id`, `option_line_co
 (1396, 142, 'PROCESS', 'Process', 'Process Batch', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2016-04-02', '2016-04-02', 34, '2016-04-02 15:03:56', 34, '2016-04-02 15:03:56'),
 (1397, 86, 'PM', 'PM', 'Process Manufacturing', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2016-05-17 04:17:57', 34, '2016-05-17 04:17:57'),
 (1398, 157, 'AR_ADJUSTMENT', 'AR Adjustments', 'AR Adjustments', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2016-06-25 17:25:56', 34, '2016-06-25 17:25:56'),
-(1399, 143, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-01-03', '2014-01-03', 1, '2016-08-06 10:19:50', 1, '2016-08-06 10:19:50');
-
+(1399, 143, 'CANCELLED', 'Cancelled', 'Cancelled', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2014-01-03', '2014-01-03', 1, '2016-08-06 10:19:50', 1, '2016-08-06 10:19:50'),
+(1400, 224, 'es_MX', 'Spanish - Mexico', 'Español - Spanish', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 34, '2016-09-30 09:18:28', 34, '2016-09-30 09:25:01');
 -- --------------------------------------------------------
 
 --

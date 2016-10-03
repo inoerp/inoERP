@@ -90,10 +90,10 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                <li><input type="button"  role="button" value="Attach"  name="attach_submit" id="comment_attach_submit" class="btn btn-info active ino-80 comment_attach_submit"></li>
                <?php $user_name = isset($_SESSION['username']) ? $_SESSION['username'] : 'Anonymous'; ?>
                <li><div class="input-group">
-                 <span class="input-group-addon" id="basic-addon1">Post As </span>
+                 <span class="input-group-addon" id="basic-addon1"><?php echo gettext('Post As'); ?> </span>
                  <input type="text" name="content_by" class="form-control content_by height-unset ino-100" placeholder="<?php echo $user_name ?>" aria-describedby="basic-addon1" >
                 </div></li>
-                <li class="ino-70"><input name="subscribe_cb[]" class="checkBox subscribe_cb ino-10" id="subscribe_cb" value="1" type="checkbox">&nbsp; Subscribe</li>
+                <li class="ino-70"><input name="subscribe_cb[]" class="checkBox subscribe_cb ino-10" id="subscribe_cb" value="1" type="checkbox">&nbsp; <?php echo gettext('Subscribe'); ?></li>
                <?php
                if ($mode == 9) {
                 echo '<li><input type="button" id="save_content" role="button" name="submit_content" class="btn btn-warning ino-btn save_content submit_content ino-80" Value="Post"></li>';

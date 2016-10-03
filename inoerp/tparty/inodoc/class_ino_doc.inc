@@ -249,7 +249,7 @@ class ino_doc {
    if ($this->has_previous_page()) {
     $ino_doc_statement .= "<a href=\"$this->_path.php?pageno=";
     $ino_doc_statement .= $this->previous_page() . '&' . $this->_query_string;
-    $ino_doc_statement .= "\"> &laquo; Previous </a> ";
+    $ino_doc_statement .= "\"> &laquo; " . gettext('Previous') . " </a> ";
    }
 
    if (($this->current_page > 5 ) && ($this->total_pages() > 10 )) {
@@ -277,7 +277,7 @@ class ino_doc {
    if ($this->has_next_page()) {
     $ino_doc_statement .= " <a href=\"$this->_path.php?pageno=";
     $ino_doc_statement .= $this->next_page() . '&' . $this->_query_string;
-    $ino_doc_statement .= "\">Next &raquo;</a> ";
+    $ino_doc_statement .= "\">" . gettext('Next') . " &raquo;</a> ";
    }
   }
   return $ino_doc_statement;
@@ -304,7 +304,7 @@ class ino_doc {
    if ($ino_doc->has_next_page()) {
     $ino_doc_statement .= " <a href=\"$path.php?pageno=";
     $ino_doc_statement .= $ino_doc->next_page() . '&' . $query_string;
-    $ino_doc_statement .= "\">Next &raquo;</a> ";
+    $ino_doc_statement .= "\">" . gettext('Next') . " &raquo;</a> ";
    }
   }
   return $ino_doc_statement;

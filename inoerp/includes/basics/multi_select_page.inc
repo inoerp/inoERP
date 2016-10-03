@@ -101,7 +101,7 @@ if (!empty($msg)) {
             <tr>
              <?php
              if ($i == 0) {
-              echo "<th>Select</th>";
+              echo "<th>" . gettext('Select') . "</th>";
              }
              echo "<th>Seq#</th>";
              if (($i == 0) && (!empty($multi_selct_input_fields) && !is_array($multi_selct_input_fields))) {

@@ -18,7 +18,7 @@
        <li><?php $f->l_text_field_d('asset_book_name'); ?></li>
        <li><?php $f->l_text_field_d('description'); ?></li>
        <li><?php $f->l_select_field_from_object('type', fa_asset_book::asset_book_type(), 'option_line_code', 'option_line_value', $$class->type, 'type', '', 1); ?></li>
-       <li<?php $f->select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, '', '', '', $readonly) ?>        </li> 
+       <li><?php $f->select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, '', '', '', $readonly) ?>        </li>
        <li><?php $f->l_checkBox_field_d('allow_gl_posting_cb'); ?></li>
       </ul>
     </div>
