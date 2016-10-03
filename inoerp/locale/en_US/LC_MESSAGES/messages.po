@@ -15132,3 +15132,15 @@ msgstr "Enter a valid path"
 
 msgid "Enter view_path descrip. Limit 100 characters"
 msgstr "Enter view_path descrip. Limit 100 characters"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Multi Select"
+msgstr "Multi Select"
+
+msgid "Text Area"
+msgstr "Text Area"
+
+msgid "Check Box"
+msgstr "Check Box"
