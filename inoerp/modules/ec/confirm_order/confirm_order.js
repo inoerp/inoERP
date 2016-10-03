@@ -23,5 +23,19 @@ $(document).ready(function() {
 	name += '-' + $(this).val();
 	$(this).closest('tr').find('.name').val(name);
  });
+ 
+ $('#ship_to_address_id').on('change', function(){
+  var new_Address = '<div class="panel-body">';
+  var new_Address_text = $(this).find(':selected').text();
+  var new_Address_text_a = new_Address_text.split('|');
+  $(new_Address_text_a).each(function(k, v){
+    if(v.length > 2){
+    new_Address += '<li>' + v + '</li>';
+    } 
+  });
+  new_Address += '<li class="hidden"><input class="hidden address_id ship_to_address_id" name="ship_to_address_id[]" value="'+$(this).val()+'" type="hidden"></li>';
+  new_Address += '</div>';
+  $('#selected_ship_to_address').find('.panel-body').replaceWith(new_Address);
+});
 
 });  

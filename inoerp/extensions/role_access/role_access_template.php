@@ -44,7 +44,7 @@
 
           <td><?php form::number_field_drs('role_access_id') ?></td>
           <td><?php
-           $eng_all = engine::find_all();
+           $eng_all = engine::find_all('obj_class_name');
            foreach ($eng_all as $k => $v) {
             $v->obj_class_name_fn = ucwords(str_replace('_', ' ', $v->obj_class_name));
            }

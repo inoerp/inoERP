@@ -54,7 +54,7 @@ AND ar.reference_table = '{$ref_table}'";
   $stmt .= '</div>';
  }
 
- public static function show_address($all_address, $show_addres_id = false) {
+ public static function show_address($all_address, $show_addres_id_name = false, $ref_class_name = null) {
   global $f; 
   if (empty($all_address)) {
    return false;
@@ -63,8 +63,8 @@ AND ar.reference_table = '{$ref_table}'";
   foreach ($all_address as $address) {
    $stmt .= '<div class="panel panel-warning address-stmt">';
    $stmt .= '<div class="panel-heading">' . $address->address_name . '&nbsp;&nbsp;&nbsp;';
-   $stmt .= '<a  class="popup popup-form view-addrees medium" href="form.php?class_name=address&mode=9&window_type=popup&address_id='.$address->address_id.'"><i class="fa fa-trash-o clickable"></i></a>&nbsp;&nbsp;&nbsp;';
-   $stmt .= '<a class="popup popup-form view-addrees medium" href="form.php?class_name=address&mode=9&window_type=popup&address_id='.$address->address_id.'"><i class="fa fa-edit clickable"></i></a>';
+   $stmt .= '<a  class="popup popup-form view-addrees medium" href="form.php?class_name=address&mode=9&window_type=popup&ref_class_name='.$ref_class_name.'&address_id='.$address->address_id.'"><i class="fa fa-trash-o clickable"></i></a>&nbsp;&nbsp;&nbsp;';
+   $stmt .= '<a class="popup popup-form view-addrees medium" href="form.php?class_name=address&mode=9&window_type=popup&ref_class_name='.$ref_class_name.'&address_id='.$address->address_id.'"><i class="fa fa-edit clickable"></i></a>';
    $stmt .= '</div>';
    $stmt .= '<div class="panel-body"><ul>';
    $stmt .= '<li>' . $address->address . '</li>';
@@ -72,8 +72,8 @@ AND ar.reference_table = '{$ref_table}'";
    $stmt .= '<li>' . $address->phone . '</li>';
    $stmt .= '<li>' . $address->email . '</li>';
    $stmt .= '<li>' . $address->website . '</li>';
-   if ($show_addres_id) {
-    $stmt .= '<li class="hidden">' . $f->hidden_field('address_id', $address->address_id) . '</li>';
+   if ($show_addres_id_name) {
+    $stmt .= '<li class="hidden">' . $f->hidden_field($show_addres_id_name, $address->address_id) . '</li>';
    }
    $stmt .= '</ul></div>';
 

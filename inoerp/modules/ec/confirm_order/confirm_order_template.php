@@ -38,15 +38,16 @@
      ?>
      <div class="row">    
       <div class="col-md-6">
-       <div><h3>Shipping Address</h3>
-        <?php echo address_reference::show_address(array($ship_add), true); ?>
+       <div><h3>Shipping Address | Add a new address <a class="popup popup-form view-addrees medium" href="form.php?class_name=address&mode=9&window_type=popup&ref_class_name=ec_confirm_order">
+               <i class="fa fa-plus-circle clickable"></i></a></h3>
+				<div id="selected_ship_to_address"> <?php echo address_reference::show_address(array($ship_add), 'ship_to_address_id', 'ec_confirm_order'); ?> </div>
         <label>Select a different shipping address</label>
-        <?php echo $f->select_field_from_object('ship_to_address_id', $all_address, 'address_id', 'address', '', 'ship_to_address_id'); ?>
+        <?php echo $f->select_field_from_object('ship_to_address_id', $all_address, 'address_id', ['address','country','postal_code','phone'], '', 'ship_to_address_id'); ?>
        </div>
       </div>
       <div class="col-md-6">
        <div><h3>Billing Address | <span >  Same as shipping  <?php $f = new inoform();  echo $f->checkBox_field('bill_same_as_ship', '' ,'' ,'small') ?>  </span></h3>
-        <?php echo address_reference::show_address(array($bill_add), true); ?>
+        <div id="selected_bill_to_address"> <?php echo address_reference::show_address(array($bill_add), 'bill_to_address_id', 'ec_confirm_order'); ?> </div>
         <label>Select a different billing address</label>
         <?php echo $f->select_field_from_object('bill_to_address_id', $all_address, 'address_id', 'address', '', 'bill_to_address_id'); ?>
 
