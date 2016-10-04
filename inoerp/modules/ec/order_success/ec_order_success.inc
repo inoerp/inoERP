@@ -1,4 +1,5 @@
 <?php
+
 if (!empty($_SESSION['ec_product_id'])) {
  $cart_object = [];
  foreach ($_SESSION['confirm_order']['ec_product_id'] as $key => $ec_prd_id) {
@@ -27,11 +28,17 @@ $total_count = count($cart_object);
 $pagination = new pagination($pageno, $per_page, $total_count);
 $pagination->setProperty('_path', 'form');
 $position = ($pageno - 1) * $per_page;
+//pa($_SESSION);
 
 $total_amount = $_SESSION['confirm_order']['total_amount'][0];
 $tax_amount = $_SESSION['confirm_order']['tax_amount'][0];
 
 unset($_SESSION['confirm_order']);
 unset($_SESSION['ec_product_id']);
+
+ //update session
+ $is->session_data = serialize($_SESSION);
+ $is->save();
+ $dbc->confirm();
 
 ?>

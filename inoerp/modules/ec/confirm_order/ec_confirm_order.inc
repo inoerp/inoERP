@@ -2,6 +2,11 @@
 //pa($_POST);
 if (!empty($_POST['ec_product_id'][0]) && !empty($_POST['total_amount'][0])) {
  $_SESSION['confirm_order'] = $_POST;
+ 
+ //update session
+ $is->session_data = serialize($_SESSION);
+ $is->save();
+ $dbc->confirm();
 }
 
 if (empty($_SESSION['confirm_order'])) {
@@ -38,4 +43,6 @@ $total_count = count($cart_object);
 $pagination = new pagination($pageno, $per_page, $total_count);
 $pagination->setProperty('_path', 'form');
 $position = ($pageno - 1) * $per_page;
+
+//pa($_SESSION);
 ?>
