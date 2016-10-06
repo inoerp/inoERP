@@ -255,6 +255,12 @@ class po_header extends dbObject {
    echo "You cant make changes to PO in process/re approval status. First get the PO approved";
    return -99;
   }
+	
+	  if (($this->action == 'CANCEL')) {
+   echo "<br> Cancelling Purchase Order ";
+   $this->_cancel_po();
+   return 10;
+  }
 
   if (($this->action == 'convert_requisition')) {
    echo "<br> saving before PO SAVE";
@@ -267,6 +273,12 @@ class po_header extends dbObject {
   }
  }
 
+ 
+ private function _cancel_po(){
+	$this->status = 'CANCELLED';
+	$this->save();
+ }
+ 
  public function _after_save() {
 
   if ((!empty($this->po_header_id)) && empty($this->po_number)) {
@@ -274,13 +286,11 @@ class po_header extends dbObject {
    $bu_org_id = $this->bu_org_id;
    $this->po_number = $bu_org_id . '-' . $po_header_id;
    echo ' System generated PO number is ' . $this->po_number;
-   $this->audit_trial();
    $this->save();
   }
 
   if ((!empty($this->ref_po_header_id)) && empty($this->release_number) && !empty($this->po_header_id) && ($this->po_type == 'BLANKET_RELEASE')) {
    $this->release_number = $this->_find_relNumber();
-   $this->audit_trial();
    $this->save();
   }
 
@@ -295,7 +305,6 @@ class po_header extends dbObject {
    if (empty($pur_control->po_approval_hierarchy)) {
     $this->po_status = 'APPROVED';
     $this->audit_trial();
-    $this->save();
    } else {
     $this->_approve_po($_SESSION['user_id'], $pur_control->po_approval_hierarchy);
    }
@@ -454,7 +463,6 @@ class po_header extends dbObject {
   $po_rls->release_number = $po_rls->_find_relNumber($po_rls->po_header_id);
   $po_rls->po_type = 'BLANKET_RELEASE';
   $po_rls->po_status = 'ENTERED';
-  $po_rls->audit_trial();
   $po_rls->save();
   echo "<br> PO Header is succefully created. Header Id - " . $po_rls->po_header_id;
   $line_number = 1;
@@ -476,7 +484,6 @@ class po_header extends dbObject {
   $pol->line_price = $pol->line_quantity * $pol->unit_price;
   $pol->reference_doc_type = 'po_requisition_details';
   $pol->reference_doc_number = $_POST['po_requisition_detail_id'][$i];
-  $pol->audit_trial();
   $pol->save();
   echo "<br> PO Line is succefully created. Line Id - " . $pol->po_line_id;
 
@@ -491,7 +498,6 @@ class po_header extends dbObject {
   $pod->charge_ac_id = $inv_i->material_ac_id;
   $pod->accrual_ac_id = $inv_i->inv_ap_accrual_ac_id;
   $pod->ppv_ac_id = $inv_i->inv_ppv_ac_id;
-  $pod->audit_trial();
   $pod->save();
   echo "<br> PO Detail is succefully created. Detail Id - " . $pod->po_detail_id;
 

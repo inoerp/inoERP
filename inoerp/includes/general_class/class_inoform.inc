@@ -1873,7 +1873,8 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
  }
 
  public function select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
-  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+//  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+	
   if ($readonly == 1) {
    $readonly = 'readonly';
   } else {
@@ -1897,7 +1898,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $element_select_field = "<Select name=\"$bracketName\" class=\"from_array select $class_name $name\" $idvalue $required $readonly $disabled >";
   $element_select_field .= "<option value=\"\" >" . gettext('Select') . "</option>";
   foreach ($array as $key => $arraValue) {
-   if ($key == $value) {
+   if (trim($key) == trim($value)) {
     $selected = 'selected';
    } else {
     $selected = '';
@@ -1915,7 +1916,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
  }
 
  public function multi_select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
-  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+//  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($readonly == 1) {
    $readonly = 'readonly';
   } else {
@@ -1957,7 +1958,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
  }
 
  public function radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $divClass = "", $required = "", $readonly = "", $nonArrayName = "", $disabled = "") {
-  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+//  $value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   if ($nonArrayName == 1) {
    $bracketName = $name;
   } else {
@@ -2084,7 +2085,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
  }
 
  public function l_select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
-  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>' ;
   echo $this->select_field_from_array($name, $array, $value, $id, $class_name, $required, $readonly, $disabled, $convertToText);
  }
 
