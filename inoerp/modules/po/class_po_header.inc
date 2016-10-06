@@ -262,6 +262,7 @@ class po_header extends dbObject {
    return 10;
   }
 
+	
   if (($this->action == 'convert_requisition')) {
    echo "<br> saving before PO SAVE";
    $this->_convert_requisition_toDoc();
@@ -275,8 +276,8 @@ class po_header extends dbObject {
 
  
  private function _cancel_po(){
-	$this->status = 'CANCELLED';
-	$this->save();
+	$this->po_status = 'CANCELLED';
+	$this->update($this->po_header_id);
  }
  
  public function _after_save() {
