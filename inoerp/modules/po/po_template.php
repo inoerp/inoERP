@@ -125,7 +125,7 @@ inoERP
  }
  ?>
  <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('PO Lines & Shipments') ?></span>
-  <form action=""  method="post" id="po_line"  name="po_line">
+  <form  method="post" id="po_line"  name="po_line">
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
