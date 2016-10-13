@@ -72,7 +72,7 @@ inoERP
  				 </ul>
  				</td>
  				<td><?php form::number_field_wid('gl_budget_entry_id'); ?></td>
- 				<td><?php echo $f->text_field_wid('gl_ac_id'); ?></td>
+ 				<td><?php $f->ac_field_widm('gl_account_id'); ?></td>
  				<td><?php echo $f->text_field_wid('budget_amount'); ?></td>
  				<td><?php echo $f->text_field_wid('description'); ?></td>
  				<td><?php echo $f->text_field_wid('reference_type'); ?></td>

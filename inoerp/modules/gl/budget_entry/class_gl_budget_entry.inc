@@ -16,10 +16,10 @@
 class gl_budget_entry extends dbObject {
 
  public static $table_name = "gl_budget_entry";
- public static $dependent_classes = ['wip_wo_bom', 'wip_wo_routing_line', 'wip_wo_routing_detail'];
+ 
  public static $primary_column = "gl_budget_entry_id";
- public static $key_column = 'wip_wo_routing_detail_id';
- public static $module = "wip";
+ public static $key_column = 'gl_budget_ac_line_id';
+ public static $module = "gl";
  public static $system_info = [
 		 'name' => 'Budget Entry',
 		 'number' => '1111',
@@ -58,26 +58,20 @@ class gl_budget_entry extends dbObject {
  ];
  public $fields_inForm_notInDataBase = [
 		 'remaining_quantity',
-		 'item_id_m',
-		 'item_number',
-		 "item_description",
-		 "uom",
-		 'available_quantity',
-		 'total_quantity',
-		 'department_id'
  ];
+
  public $fields_inHeader_needsToBeInserted_inPOST = [
-		 'org_id',
-		 'transaction_type',
-		 'transaction_date'
+		 'gl_budget_ac_header_id',
+		 'status',
+		 'gl_budget_ac_line_id',
+		 
  ];
  public $requiredField = [
 		 'gl_budget_ac_line_id',
-		 'gl_budget_ac_header_id'
+		 'gl_budget_ac_header_id',
+		 'gl_ac_id'
  ];
- public $profile_default = [
-		 'org_id' => 'org_inv_name_default',
- ];
+
  public $search = [
 		 '_show_update_path' => 1,
 		 '_show_view_path' => 1,
