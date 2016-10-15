@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-
+<?php $f = new inoform(); ?>
 <div id ="form_header"><span class="heading"><?php echo gettext('Budget Entry') ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
@@ -15,15 +15,13 @@ inoERP
   <div class="tabContainer"> 
    <div id="tabsHeader-1" class="tabContent">
 		<ul class="column header_field">
+		 <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', '', $readonly1, 1); ?>             </li>
 		 <li><?php
-				 $f->budget_name('wo_number', 'gl_budget', 'budget_name', 'ledger_id', '');
-				 echo $f->hidden_field_withId('gl_budget_entry_id', $$class->gl_budget_entry_id);
-//				 echo $f->hidden_field_withCLass('wo_status', 'RELEASED', 'popup_value');
+				 $f->l_val_field_d('budget_name', 'gl_budget', 'budget_name', 'gl_ledger_id', '');
+				 echo $f->hidden_field_withId('gl_budget_id', $$class->gl_budget_id);
 				 ?>
-			<i class="generic g_select_wo_number select_popup clickable fa fa-search" data-class_name="wip_wo_header"></i>
-			<a name="show2" href="form.php?class_name=gl_budget_entry&<?php echo "mode=$mode"; ?>" class="show2 document_id wip_wo_header_id">
-			 <i class="fa fa-refresh"></i></a> 
-		 </li>
+      <i class="generic g_select_budget_name select_popup clickable fa fa-search" data-class_name="gl_budget"></i>
+     </li>
 		 <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly); ?>       </li>
 		 <li><?php $f->l_date_fieldFromToday_m('transaction_date', ($$class->transaction_date)); ?>       </li>
 		 <li><?php $f->l_select_field_from_object('transaction_type', wip_move_transaction::wip_transactions(), 'option_line_code', 'option_line_value', $$class->transaction_type, 'transaction_type', '', 1, 1, 1); ?>       

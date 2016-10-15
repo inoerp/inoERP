@@ -35,6 +35,8 @@ class gl_budget_entry extends dbObject {
 //  data base variables as stored database column name
  public $field_a = [
 		 'gl_budget_entry_id',
+		 'gl_budget_id',
+		 'ledger_id',
 		 'gl_budget_ac_line_id',
 		 'gl_budget_ac_header_id',
 		 'status',
@@ -78,6 +80,7 @@ class gl_budget_entry extends dbObject {
  ];
  public $pageTitle = " GL Budget Entry "; //page Title
  public $gl_budget_entry_id;
+ public $gl_budget_id;
  public $gl_budget_ac_line_id;
  public $gl_budget_ac_header_id;
  public $status;
