@@ -60,6 +60,7 @@ class gl_budget_entry extends dbObject {
  ];
  public $fields_inForm_notInDataBase = [
 		 'remaining_quantity',
+		 'first_period_id'
  ];
 
  public $fields_inHeader_needsToBeInserted_inPOST = [
@@ -96,6 +97,7 @@ class gl_budget_entry extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
+ public $first_period_id;
 
  
 

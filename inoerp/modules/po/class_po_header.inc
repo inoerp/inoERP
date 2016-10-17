@@ -395,7 +395,6 @@ class po_header extends dbObject {
    $notif->text_field1 .= "<br>PO Number : $this->po_number &nbsp;&nbsp; Amount : $this->header_amount";
    $notif->text_field1 .= "<br>Supplier : $this->supplier_name (Supplier Id : $this->supplier_id) ";
    $notif->text_field1 .= "<br>Description : $this->description ";
-   $notif->audit_trial();
    $notif->save();
    $notif->_after_save();
   }
@@ -718,7 +717,7 @@ class po_header extends dbObject {
    $this->po_status = 'REJECTED';
    $this->approved_by = $obj->to_user;
    $this->approved_date = current_time();
-   $this->audit_trial();
+   
    $this->update($this->po_header_id);
   }
  }
