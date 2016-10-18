@@ -56,6 +56,7 @@ if (!empty(DB_TYPE)) {
  require_once(INC_CLASS . DS . "class_getsvgimage.inc");
  require_once(INC_EXTENSIONS . DS . "engine" . DS . "class_engine.inc");
  require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "class_ino_user.inc");
+ require_once(INC_EXTENSIONS . DS . "ino_user". DS . "reg" . DS . "class_user_reg.inc");
  require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "class.user_role.inc");
  require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "class_user_group.inc");
  require_once(INC_EXTENSIONS . DS . "ino_user" . DS . "class.user_password_reset.inc");
