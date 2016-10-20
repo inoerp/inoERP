@@ -74,6 +74,10 @@ class gl_budget_entry extends dbObject {
 		 'gl_budget_ac_header_id',
 		 'gl_ac_id'
  ];
+ 
+  public $profile_default = [
+  'ledger_id' => 'gl_ledger_id_default',
+ ];
 
  public $search = [
 		 '_show_update_path' => 1,
