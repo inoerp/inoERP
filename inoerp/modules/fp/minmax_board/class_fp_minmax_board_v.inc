@@ -50,7 +50,7 @@ class fp_minmax_board_v extends dbObject {
  ];
  public $dateField = [
  ];
- public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
+ public $pageTitle = " Min Max Board"; //page Title
  public $search = [
   '_view_path' => 'form.php?class_name=inv_onhand_serial',
   '_show_view_path' => 1,
