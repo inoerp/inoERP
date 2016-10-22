@@ -100,7 +100,10 @@
    $line_obj = $class_second . '_object';
    $$line_obj = $class::find_by_ColumnNameVal($class_id, $class_i->$class_id);
   }
-  $$class = $class_i;
+	if(!empty($class_i)){
+	 $$class = $class_i;
+	}
+  
   if (isset($class_names[2])) {
    $class_third = $class_names[2];
    //$$class_third = $$class_names[2];

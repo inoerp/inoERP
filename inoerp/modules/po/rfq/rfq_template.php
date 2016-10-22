@@ -21,7 +21,7 @@
        <li><?php $f->l_select_field_from_array('rfq_type', po_rfq_header::$po_rfq_type_a, $$class->rfq_type, 'rfq_type', '', 1); ?>       </li>
        <li><?php $f->l_text_field_d('rfq_name'); ?></li> 
        <li><?php $f->l_text_field_d('rfq_number', 'primary_column2'); ?> </li>
-       <li><?php $f->l_select_field_from_array('rfq_status', po_rfq_header::$po_rfq_status_a, $$class->rfq_status, 'rfq_status'); ?>       </li>
+       <li><?php $f->l_select_field_from_array('rfq_status', po_rfq_header::$po_rfq_status_a, $$class->rfq_status, 'rfq_status' ,'always_readonly'); ?>       </li>
        <li><?php $f->l_text_field_d('buyer'); ?></li> 
        <li><?php $f->l_date_fieldAnyDay('effective_start_date', $$class->effective_start_date) ?>       </li>
        <li><?php $f->l_date_fieldAnyDay('effective_end_date', $$class->effective_end_date) ?> </li>

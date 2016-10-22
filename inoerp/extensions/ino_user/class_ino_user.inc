@@ -32,6 +32,12 @@ class ino_user extends dbObject {
   'module_name' => 'extn',
   'weight' => 22
  ];
+ 
+ public static $debug_mode_a = [
+		 '1' => 'Disable',
+		 '2' => 'Enable',
+		 '3' => 'Enable With Details',
+ ];
 //  data base variables as stored database column name
  public $field_a = [
   "ino_user_id",
@@ -49,7 +55,7 @@ class ino_user extends dbObject {
   'use_personal_db_cb',
   'image_file_id',
   'default_theme',
-  'auth_provider_id',
+		 'auth_provider_id',
   'auth_provider_name',
   'mandatory_field_color',
   'heading_color',
@@ -58,6 +64,7 @@ class ino_user extends dbObject {
   'show_bg_image_cb',
   'bg_opacity',
   'use_personal_color_cb',
+		 'debug_mode',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -85,7 +92,7 @@ class ino_user extends dbObject {
   'use_personal_db_cb',
   'image_file_id',
   'default_theme',
-  'default_theme',
+  'debug_mode',
  ];
  public $requiredField = [
   "username",
@@ -146,6 +153,7 @@ class ino_user extends dbObject {
  Public $date_format;
  Public $theme;
  public $default_theme;
+ public $debug_mode;
  public $time;
  public $msg;
  public $employee_name;
@@ -367,7 +375,7 @@ class ino_user extends dbObject {
    return false;
   }
   $sql = " SELECT ino_user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
-           default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
+           default_theme, debug_mode, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
             last_update_by,    last_update_date , auth_provider_id, auth_provider_name, image_file_id, use_personal_db_cb, mandatory_field_color,
             heading_color, content_color ,  use_personal_color_cb, bg_image_file_id, show_bg_image_cb, bg_opacity FROM ";
   $sql.= static::$table_name;
@@ -397,7 +405,7 @@ class ino_user extends dbObject {
 
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = "SELECT ino_user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
-           default_theme, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
+           default_theme, debug_mode, block_notif_count,  ar_customer_id, supplier_id,  created_by,    creation_date, 
             last_update_by,    last_update_date , image_file_id , use_personal_db_cb FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
   $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? ($result_array) : false;

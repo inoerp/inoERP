@@ -5969,6 +5969,10 @@ $(document).ready(function () {
    deleteHeaderAjax(daletePath, headerId);
   }
  });
+ 
+ $('body').on('change', '#ledger_id, #gl_ledger_id', function(){
+  $('.ledger_currency').val($(this).find('option:selected').data('currency_code'));
+ });
 
 
 });

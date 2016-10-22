@@ -56,6 +56,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                 <li><label>Weight</label><?php form::text_field_ds('weightage'); ?> </li>
                 <li><label>Rev Number</label><?php form::text_field_ds('rev_number'); ?></li>
                 <li><label>Parent</label><?php form::text_field_ds('parent_id'); ?></li>
+								<li><?php $f->l_select_field_from_array('comment_status', content::$comment_status_a, $$class->comment_status); ?></li>
                 <li><label>URL Alias</label><?php echo $f->text_field('url_alias', $$class->url_alias, '40', ''); ?> 
                  <?php echo $f->hidden_field('ext_url_alias_id', $$class->ext_url_alias_id); ?>
                 </li> 

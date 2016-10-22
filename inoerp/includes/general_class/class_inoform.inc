@@ -357,7 +357,7 @@ class inoform {
   echo '
 			 <ul id="form_top_image" class="draggable">
         <li class="fa fa-refresh clickable ino-btn2 " id="refresh_button" title="' . gettext('Refresh') . '" style="background-color: $si->heading_color" ></li>
-        <li class="fa fa-file-text-o clickable ino-btn2" Title="' . gettext('New Document') . '" id="new_page_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
+        <li class="fa fa-file-text-o clickable ino-btn2" Title="' . gettext('New Document') . '" id="new_page_button" href="'.$current_page_path.'" style="background-color: $si->heading_color"></li>
     		<li class="fa fa-save clickable ino-btn2" id="save" title="' . gettext('Save') . '" style="background-color: $si->heading_color" ></li>
         <li class="fa fa-eraser clickable ino-btn2" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
         <li class="fa fa-trash-o clickable ino-btn2" id="delete_button" title="' . gettext('Delete') . '" style="background-color: $si->heading_color"></li>

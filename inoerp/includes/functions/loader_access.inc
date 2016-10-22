@@ -14,7 +14,7 @@ switch ($access_level) {
  case 4:
   $read_access = true;
   $write_access = true;
-  $update_access = (!empty($$class) && ($$class->created_by == $_SESSION['username'])) ? true : false;
+  $update_access = (!empty($$class) && !empty($class->created_by ) && ($$class->created_by == $_SESSION['username'])) ? true : false;
   break;
 
  case 5:

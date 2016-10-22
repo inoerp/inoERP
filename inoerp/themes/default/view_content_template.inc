@@ -61,14 +61,16 @@
           ?></div>
          <div id="comments">
           <div id="comment_list">
-           <?php echo!(empty($comments) && $comment_privilage >= 2) ? $comments : ""; ?>
+           <?php echo (!(empty($comments)) && $comment_privilage >= 2 && $content->comment_status > 1) ? $comments : ""; ?>
           </div>
           <?php
-          if ($comment_privilage >= 4) {
+          if ($comment_privilage >= 4 && $content->comment_status == 3) {
            $reference_table = 'content';
            $reference_id = $content->content_id;
            include_once __DIR__ . '/../../comment.php';
-          } else {
+          } else if(empty($content->comment_status) || $content->comment_status < 3) {
+           echo "<j  class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'> Comment is disabled </j>";
+          }else {
            echo "<a href='" . HOME_URL . "extensions/ino_user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
           }
           ?>

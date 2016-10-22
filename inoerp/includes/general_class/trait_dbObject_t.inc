@@ -782,8 +782,7 @@ trait dbObject_t {
   } catch (PDOException $e) {
    $this->msg = 0;
    $dbc->rollback = 1;
-   echo "<div class='message'>failing for sql is $sql</div>";
-   echo "<br>Record couldnt be updated!!: Error Code : DBO01 . Error @dbObject @@ Line " . __LINE__ . '<br>' . $e->getMessage() . "<br>";
+	 echo ino_show_debug_msg('Failed to save the record', $e->getMessage(), $sql, ' Error @dbObject @@ Line " '.__LINE__);
   }
   return $this->msg;
  }
@@ -804,7 +803,7 @@ trait dbObject_t {
    if (in_array($value, array('created_by', 'creation_date'))) {
     continue;
    }
-   if (isset($this->$value)) {
+   if (!empty($this->$value)) {
     $field_stmt .= $value . ' = :' . $value . ', ';
     array_push($bind_params_a, $value);
    }
@@ -819,7 +818,7 @@ trait dbObject_t {
   $stmt = $dbc->connection->prepare(" $sql ");
 
 //Bind parameters
-  foreach ($field_array as $key => $value) {
+  foreach ($bind_params_a as $value) {
    if (in_array($value, self::$audit_trial)) {
     continue;
    }

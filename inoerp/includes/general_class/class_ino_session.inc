@@ -47,8 +47,11 @@ class ino_session extends dbObject {
    $ino_sess_i = ino_session::find_by_keyColumn($_SESSION['user_id']);
    if ((!empty($ino_sess_i)) && (isset($_SESSION['session_token'])) && ($ino_sess_i->session_token == $_SESSION['session_token']) && (HOME_URL == $ino_sess_i->hostname)) {
     $this->login_flag = true;
-    $this->user_id = $_SESSION['user_id'];
-    $this->username = $_SESSION['username'];
+		foreach($this->field_a as $k => $v ){
+		 $this->$v = $ino_sess_i->$v;
+		}
+//    $this->user_id = $_SESSION['user_id'];
+//    $this->username = $_SESSION['username'];
    } else {
 //    $this->logout();
    }

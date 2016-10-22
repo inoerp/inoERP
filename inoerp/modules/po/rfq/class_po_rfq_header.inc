@@ -39,7 +39,7 @@
    'PUBLISHED' => 'Publish',
    'VIEW_HISTORY' => 'View History',
    'CANCEL' => 'Cancel',
-   'CREATE_QUOTE' => 'Create Quote'
+//   'CREATE_QUOTE' => 'Create Quote'
   ];
   public static $po_rfq_type_a = [
    'BID' => 'Bid',
@@ -201,13 +201,11 @@
     $bu_org_id = $this->bu_org_id;
     $this->rfq_number = $bu_org_id . '-' . $po_rfq_header_id;
     echo ' System generated RFQ number is ' . $this->rfq_number;
-    $this->audit_trial();
     $this->save();
    }
 
    if ((!empty($this->ref_po_rfq_header_id)) && empty($this->release_number) && !empty($this->po_rfq_header_id) && ($this->po_rfq_type == 'BLANKET_RELEASE')) {
     $this->release_number = $this->_find_relNumber();
-    $this->audit_trial();
     $this->save();
    }
 
