@@ -344,6 +344,7 @@ class po_quote_header extends dbObject {
    }
   }
   $po_purchasing_control_i = po_purchasing_control::find_by_org_id($this->bu_org_id);
+	
   $poh->bill_to_id = $po_purchasing_control_i->ship_to_id;
   $poh->ship_to_id = $po_purchasing_control_i->bill_to_id;
   if (!empty($poh->supplier_site_id)) {

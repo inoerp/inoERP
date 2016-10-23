@@ -140,7 +140,7 @@
            ?>
            <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
           <td><?php $f->text_field_wid2('item_description' , 'large'); ?></td>
-          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', ' medium uom_id'); ?></td>
+          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', ' small uom_id'); ?></td>
           <td><?php echo $f->number_field('line_quantity', $$class_second->line_quantity ); ?></td>
 
           <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
@@ -365,7 +365,7 @@
 
           <td><?php form::text_field_wid2('line_description'); ?></td>
           <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
-          <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
+          <td><?php form::text_field_wid2s('reference_doc_number'); ?></td>
           <td><?php echo $f->select_field_from_array('bpa_po_line_id', $document_number_a, $$class_second->bpa_po_line_id); ?></td>
          </tr>
          <?php
