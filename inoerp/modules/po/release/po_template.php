@@ -6,7 +6,7 @@
  * @source code https://github.com/inoerp/inoERP
 -->
 <div id ="form_header"><span class="heading"><?php echo gettext('Blanket Agreement & Releases') ?></span>
- <form action=""  method="post" id="po_header"  name="po_header">
+ <form  method="post" id="po_header"  name="po_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -20,7 +20,7 @@
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
       <li><label><?php echo gettext('PO Header Id') ?></label><?php
-       echo $f->text_field_dsr('po_header_id');
+       echo $f->text_field_dr('po_header_id');
        echo $f->hidden_field_withCLass('po_type', 'BLANKET', 'popup_value');
        ?>
        <a name="show" href="form.php?class_name=po_release&<?php echo "mode=$mode"; ?>" class="show document_id po_header_id"><i class="fa fa-refresh"></i></a> 
@@ -137,7 +137,7 @@
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('PO Lines & Shipments') ?></span>
- <form action=""  method="post" id="po_site"  name="po_line">
+ <form  method="post" id="po_site"  name="po_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
@@ -171,11 +171,7 @@
        foreach ($po_line_object as $po_line) {
         ?>         
         <tr class="po_line<?php echo $count ?>">
-         <td>    
-          <?php
-          echo ino_inline_action($$class_second->po_line_id, array('po_header_id' => $$class->po_header_id));
-          ?>
-         </td>
+         <td><?php  echo ino_inline_action($$class_second->po_line_id, array('po_header_id' => $$class->po_header_id));     ?>  </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('po_line_id'); ?></td>
          <td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
@@ -196,7 +192,7 @@
           echo $f->select_field_from_object('revision_name', $revision_name_a, 'revision_name', 'revision_name', $$class_second->revision_name, '', 'small');
           ?></td>
          <td><?php form::text_field_wid2('item_description'); ?></td>
-         <td><?php echo $f->number_field('line_quantity', $$class_second->line_quantity, '', '', 'allow_change'); ?></td>
+         <td><?php echo $f->number_field('line_quantity', $$class_second->line_quantity, '', '', 'allow_change small'); ?></td>
          <td><?php
           echo form::select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id');
           ?></td>
@@ -217,7 +213,7 @@
           ?>
     <!--						 <tr><td>-->
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+           <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
