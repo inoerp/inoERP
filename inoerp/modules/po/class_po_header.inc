@@ -263,6 +263,10 @@ class po_header extends dbObject {
 	 return 10;
 	}
 
+	
+	if($this->po_type =='BLANKET' && array_key_exists(1, $_POST['po_type'])){
+	 $this->po_type = 'BLANKET_RELEASE';
+	}
 
 	if (($this->action == 'convert_requisition')) {
 	 echo "<br> saving before PO SAVE";

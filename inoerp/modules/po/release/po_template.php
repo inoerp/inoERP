@@ -285,12 +285,9 @@
                   $$class_third = &$po_detail;
                   ?>
                   <tr class="po_detail<?php echo $count . '-' . $detailCount; ?> ">
-                   <td>
-  <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue', ''); ?>
-                   </td>
-                   <td>
-  <?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue', ''); ?>
-                   </td>
+									 <td><?php $f->seq_field_detail_d($detailCount) ?></td>
+                   <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class_second->receving_org_id), 'subinventory_id', 'subinventory', $$class_third->subinventory_id, '', 'subinventory_id copyValue', ''); ?>                   </td>
+                   <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class_third->subinventory_id), 'locator_id', 'locator', $$class_third->locator_id, '', 'locator_id copyValue', ''); ?>                   </td>
                    <td><?php $f->text_field_wid3('requestor'); ?></td>
                    <td><?php echo $f->select_field_from_array('invoice_match_type', po_detail::$invoice_match_type_a, $$class_third->invoice_match_type); ?></td>
                   </tr>

@@ -194,8 +194,8 @@ mandatoryCheck.mandatoryHeader();
   }
  });
 
- $("#content").off("change", '.receving_org_id')
-         .on("change", '.receving_org_id', function () {
+ $('body').off("blur", '.receving_org_id')
+         .on("blur", '.receving_org_id', function () {
           var receving_org_id = $(this).val();
           var rowTrClass = $(this).closest("tr").attr("class");
           var classValue = "tr." + rowTrClass;
