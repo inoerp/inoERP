@@ -1,4 +1,4 @@
-<form   method="post" id="sys_message_format"  name="sys_message_format"><span class="heading">Message Format </span>
+<form   method="post" id="sys_message_format"  name="sys_message_format"><span class="heading"><?php echo gettext('Message Format') ?> </span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">

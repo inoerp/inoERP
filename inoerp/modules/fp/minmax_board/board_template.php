@@ -3,19 +3,19 @@ $f = new inoform();
 $bc = new ino_barcode();
 $trnx_a = ['SUB_INV' => 'Subinventory Transfer', 'PUR_REQ' => 'Purchase Requisition'];
 ?>
-<div id ="form_header" ><span class="heading">Barcoded Min Max Board </span>
+<div id ="form_header" ><span class="heading"><?php echo gettext('Barcoded Min Max Board') ?> </span>
  <div class="tabContainer">
   <ul class="inRow asperWidth headerBgColor">
-   <li><lable>Inventory Org </lable>
+   <li><label>Inventory Org </label>
    <?php echo form::select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $org_id, 'org_id'); ?>
    </li>
-   <li><lable>Sub Inventory </lable>
+   <li><label>Subinventory </label>
    <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($org_id), 'subinventory_id', 'subinventory', $subinventory_id, 'subinventory_id'); ?>
    </li>
-   <li><lable>Planner </lable>
+   <li><label>Planner </label>
    <?php echo $f->text_field('planner', ''); ?>
    </li>
-   <li><lable>Type </lable>
+   <li><label>Type </label>
    <?php echo $f->select_field_from_object('make_buy', item::manufacturing_item_types(), 'option_line_code', 'option_line_value', '', 'make_buy'); ?> 
    </li>
    <li>  <a name="show" href="form.php?class_name=fp_minmax_barcode_board_v" class="show onhand_id">	
@@ -106,13 +106,13 @@ $trnx_a = ['SUB_INV' => 'Subinventory Transfer', 'PUR_REQ' => 'Purchase Requisit
      unset($bc);
     }
     echo '</li>';
-    echo '<li>Min : ' . $recod->minmax_min_quantity . ' </li>';
-    echo '<li>Max : ' . $recod->minmax_max_quantity . ' </li>';
-    echo '<li>Min Delta :' . $onhand_min_delta . '</li><li>Max Delta :' . $onhand_max_delta . '</li>';
-    echo '<li>Total Supp Delta :' . round($recod->total_delta, NUM_ROUND) . '</li>';
-    echo '<li>Onhand :' . $recod->onhand . '</li>';
-    echo '<li>Open PO :' . $recod->open_po . '</li>';
-    echo '<li>Make/Buy :' . $recod->make_buy . '</li>';
+    echo '<li>' . gettext('Min') . ' : ' . $recod->minmax_min_quantity . ' </li>';
+    echo '<li>' . gettext('Max') . ' : ' . $recod->minmax_max_quantity . ' </li>';
+    echo '<li>' . gettext('Min Delta') . ' :' . $onhand_min_delta . '</li><li>Max Delta :' . $onhand_max_delta . '</li>';
+    echo '<li>' . gettext('Total Supp Delta') . ' :' . round($recod->total_delta, NUM_ROUND) . '</li>';
+    echo '<li>' . gettext('On Hand') . ' :' . $recod->onhand . '</li>';
+    echo '<li>' . gettext('Open PO') . ' :' . $recod->open_po . '</li>';
+    echo '<li>' . gettext('Make/Buy') . ' :' . $recod->make_buy . '</li>';
     if (!empty($recod->subinventory)) {
      echo '<li>Dest. SubInv :' . $recod->subinventory . '</li>';
      echo '<li>';

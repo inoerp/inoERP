@@ -51,7 +51,7 @@
         <th><?php echo gettext('Type') ?>#</th>
         <th><?php echo gettext('Period') ?></th>
         <th><?php echo gettext('Leave/Period') ?></th>
-        <th><?php echo gettext('Default no of Period') ?></th>
+        <th><?php echo gettext('Default No Of Period') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody leave_entitlement_values" >

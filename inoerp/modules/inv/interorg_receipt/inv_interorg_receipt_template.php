@@ -48,9 +48,9 @@
        <li><label><?php echo gettext('Action') ?></label>
         <select name="transaction_action[]" class=" select  transaction_action" id="transaction_action" >
          <option value="" ></option>
-         <option value="CREATE_ACCOUNT" >Create Accounting</option>
-         <option value="ADD_LINES" >Add Receipt Lines</option>
-         <option value="PRINT_TRAVELLER" >Receipt Traveller</option>
+         <option value="CREATE_ACCOUNT" ><?php echo gettext('Create Accounting') ?></option>
+         <option value="ADD_LINES" ><?php echo gettext('Add Receipt Lines') ?></option>
+         <option value="PRINT_TRAVELLER" ><?php echo gettext('Receipt Traveller') ?></option>
         </select>
        </li>
       </ul>
@@ -62,7 +62,7 @@
  </div>
 
 </div>
-<div id="form_line" class="form_line"><span class="heading">Inter Org Receipt Lines</span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Inter Org Receipt Lines') ?></span>
  <form action=""  method="post" id="po_site"  name="inv_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
@@ -146,7 +146,7 @@
         <th><?php echo gettext('Item Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('New Received Quantity') ?></th>
-        <th><?php echo gettext('Sub Inventory') ?></th>
+        <th><?php echo gettext('Subinventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>

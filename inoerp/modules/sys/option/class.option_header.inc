@@ -220,7 +220,14 @@ class option_header extends dbObject {
   return $this->msg;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+  	self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of path class
+option_header::staticVar_init('access_level_a');
 ?>

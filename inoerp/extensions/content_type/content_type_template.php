@@ -45,12 +45,12 @@
        <?php
        if ((isset($category)) && (count($category) > 0)) {
         foreach ($category as $obj) {
-         echo '<li><label><span class="clickable delete_category" title="Delete Category"><i class="fa fa-trash-o"></i></span></label>';
+         echo '<li><label><span class="clickable delete_category" title="' . gettext('Delete Category') . '"><i class="fa fa-trash-o"></i></span></label>';
          echo $f->select_field_from_object('category_id', category::major_categories(), 'category_id', 'category', $obj->category_id, '', 'category_id', '', 1);
          echo '</li>';
         }
        }
-       echo '<li><label>Category : </label>';
+       echo '<li><label>' . gettext('Category') . ' : </label>';
        echo $f->select_field_from_object('category_id', category::major_categories(), 'category_id', 'category', 'category_id', '', '', 'category_id');
        echo '</li>';
        ?> 
@@ -60,7 +60,7 @@
     <div id="tabsHeader-4" class="tabContent">
      <div> 
       <ul class="column header_field">
-       <li><input type="button" class="button drop_table btn btn-danger" role="button" name="drop_table" id="drop_table" value="Delete Content Type"></li>
+       <li><input type="button" class="button drop_table btn btn-danger" role="button" name="drop_table" id="drop_table" value="<?php echo gettext('Delete Content Type') ?>"></li>
       </ul>
      </div>
     </div>

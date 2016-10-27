@@ -319,9 +319,9 @@ class category extends dbObject {
   $statement .= "<table  class='table table-striped table-hover'>
 	        <thead>
           <tr class='headerBgColor2'>
-           <th>Category</th>
-           <th>Description</th>" .
-//           <th>Posts</th>
+           <th>" . gettext('Category') . "</th>
+           <th>" . gettext('Description') . "</th>" .
+//           <th>" . gettext('Posts') . "</th>
    "</tr>
          </thead><tbody>
 				 ";
@@ -379,8 +379,8 @@ class category extends dbObject {
   $statement = "<table id='forum_type_category_list' class='normal'>
 	        <thead>
           <tr class='headerBgColor'>
-           <th>Category</th>
-           <th>Starting Chapters</th>
+           <th>" . gettext('Category') . "</th>
+           <th>" . gettext('Starting Chapters') . "</th>
           </tr>
          </thead>
 				 ";
@@ -764,10 +764,10 @@ class category extends dbObject {
   $statement = "<table id='category_list' class='normal'>
 	        <thead>
           <tr>
-           <th>Category</th>
-           <th>Description</th>
-           <th>Posts</th>
-					 <th>Last Post</th>
+           <th>" . gettext('Category') . "</th>
+           <th>" . gettext('Description') . "</th>
+           <th>" . gettext('Posts') . "</th>
+	   <th>" . gettext('Last Post') . "</th>
           </tr>
          </thead>
 				 ";
@@ -898,13 +898,13 @@ class category extends dbObject {
   foreach ($bcElements as $key => $value) {
    $bc_statement = '>>' . $value . $bc_statement;
   }
-  $bc_statement = '<a class="home_link non_ajax" href="' . HOME_URL . '">Home</a>' . $bc_statement;
+  $bc_statement = '<a class="home_link non_ajax" href="' . HOME_URL . '">' . gettext('Home') . '</a>' . $bc_statement;
   return $bc_statement;
  }
 
  public static function breadCrum_by_category($category_id, &$element_a = '', $content_type = '') {
   if (empty($category_id)) {
-   $bc_statement = '<ol class="ino-breadcrumb"><li><a class="home_link non_ajax" href="' . HOME_URL . '">Home</a></li></ol>';
+   $bc_statement = '<ol class="ino-breadcrumb"><li><a class="home_link non_ajax" href="' . HOME_URL . '">' . gettext('Home') . '</a></li></ol>';
    return $bc_statement;
   }
 
@@ -923,7 +923,7 @@ class category extends dbObject {
    array_push($element_a, $linkFor_parent);
    //end of category class
    $element_a_r = array_reverse($element_a);
-   $bc_statement = '<ol class="ino-breadcrumb"><li><a href="' . HOME_URL . '">Home</a></li>';
+   $bc_statement = '<ol class="ino-breadcrumb"><li><a href="' . HOME_URL . '">' . gettext('Home') . '</a></li>';
    foreach ($element_a_r as $key => $value) {
     $bc_statement .= '<li>' . $value . '</li>';
    }

@@ -73,11 +73,11 @@ if (!empty($dont_check_login)) {
 		<?php if($show_header_links) { ?>
  		<div class="header_info">
  		 <ul class="inRow asperWidth"> 
- 			<li><a href="http://demo.inoideas.org/">Demo</a></li>
-			<li><a href="https://github.com/inoerp/inoerp_v1">Download</a></li>
- 			<li><a href="<?php echo HOME_URL ?>content.php?content_type=documentation&category_id=30">Documentation</a></li>
- 			<li><a href="<?php echo HOME_URL ?>content.php?content_type=forum&category_id=1">Forum</a></li>
- 			<li><a href="http://inoideas.org/content.php?mode=2&content_id=197&content_type_id=47">About</a></li>
+ 			<li><a href="http://demo.inoideas.org/"><?php echo gettext('Demo') ?></a></li>
+			<li><a href="https://github.com/inoerp/inoerp_v1"><?php echo gettext('Download') ?></a></li>
+ 			<li><a href="<?php echo HOME_URL ?>content.php?content_type=documentation&category_id=30"><?php echo gettext('Documentation') ?></a></li>
+ 			<li><a href="<?php echo HOME_URL ?>content.php?content_type=forum&category_id=1"><?php echo gettext('Forum') ?></a></li>
+ 			<li><a href="http://inoideas.org/content.php?mode=2&content_id=197&content_type_id=47"><?php echo gettext('About') ?></a></li>
  		 </ul>
  		</div>
 		<?php } ?>
@@ -88,14 +88,14 @@ if (!empty($dont_check_login)) {
 			 <ul class="inRow asperWidth"><li class="white_link">
 				 Hello <a  href="<?php echo HOME_URL; ?>form.php?class_name=user&mode=9&user_id=<?php echo $_SESSION['user_id']; ?>">
 					<?php echo $_SESSION['username'] . '!'; ?></a>
-				<li><a class="login_button"  href="<?php echo HOME_URL; ?>extensions/user/user_logout.php">Logout</a> </li>
+				<li><a class="login_button"  href="<?php echo HOME_URL; ?>extensions/user/user_logout.php"><?php echo gettext('LogOut') ?></a> </li>
 			 </ul>
 			<?php } else { ?>
 			 <ul class="inRow asperWidth">
 				<li class>
-				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-1">Sign In</a>
+				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-1"><?php echo gettext('Sign In'); ?></a>
 				<li>
-				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-2">Register</a>
+				 <a class="login_button" href="<?php echo HOME_URL; ?>extensions/user/user_login.php#tabsLine-2"><?php echo gettext('Register'); ?></a>
 				</li>
 			 </ul>
 

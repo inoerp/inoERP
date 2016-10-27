@@ -104,7 +104,7 @@ $f = new inoform();
                  <span class="input-group-addon">
                   <i class="fa fa-envelope"></i>
                  </span>
-                 <input type="text" id="email"  class="form-control  email"  value="" name="email[]" placeholder="<?php echo gettext('eMail'); ?>"" required>
+                 <input type="text" id="email"  class="form-control  email"  value="" name="email[]" placeholder="<?php echo gettext('Email'); ?>"" required>
                 </div>
                </div>
                <div class="form-group">
@@ -167,7 +167,7 @@ $f = new inoform();
                 <span class="input-group-addon">
                  <i class="fa fa-envelope"></i>
                 </span>
-                <input type="text" id="reset_password_email"  class="form-control  email"  value="" name="email[]" placeholder="<?php echo gettext('eMail'); ?>">
+                <input type="text" id="reset_password_email"  class="form-control  email"  value="" name="email[]" placeholder="<?php echo gettext('Email'); ?>">
                </div>
               </div>
               <div class="form-group">

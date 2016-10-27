@@ -85,7 +85,7 @@
        <li><?php $f->l_text_field_dr('receipt_amount'); ?></li>
        <li><label><?php echo gettext('Adjustment Amount'); ?></label><?php echo ar_transaction_adjustment::total_adjustmentAmount_by_transactionHeaderId($$class->ar_transaction_header_id); ?></li>
        <li><label></label><a href="form.php?class_name=ar_transaction_adjustment&mode=2&ar_transaction_header_id=<?php echo $$class->ar_transaction_header_id ?>" class="btn btn-default" role="button">
-         View Adjustments</a> 
+         <?php echo gettext('View Adjustments') ?></a> 
        </li>
       </ul>
      </div>
@@ -210,8 +210,8 @@
            <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
-              <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>">References</a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
+              <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('References') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
@@ -363,7 +363,7 @@
         <th><?php echo gettext('Is Asset') ?>#</th>
         <th><?php echo gettext('Asset Category') ?></th>
         <th><?php echo gettext('Project Header Id') ?></th>
-        <th><?php echo gettext('Project Line Idt') ?></th>
+        <th><?php echo gettext('Project Line Id') ?></th>
         <th><?php echo gettext('Ref Key Name') ?></th>
         <th><?php echo gettext('Ref Key Value') ?></th>
         <th><?php echo gettext('View Ref Doc') ?></th>

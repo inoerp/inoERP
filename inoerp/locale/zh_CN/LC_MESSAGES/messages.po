@@ -161,7 +161,7 @@ msgstr "生产组织结构图 Id"
 msgid "Ap Payment Header Id"
 msgstr "Ap 付款标题 Id"
 
-msgid "Bu Org Id"
+msgid "BU Org Id"
 msgstr "埠 Org Id"
 
 msgid "Payment Type"
@@ -263,8 +263,8 @@ msgstr "汇率类型"
 msgid "Exchange Rate"
 msgstr "汇率"
 
-msgid "Ef Id"
-msgstr "Ef Id"
+msgid "EF Id"
+msgstr "EF Id"
 
 msgid "Document Date"
 msgstr "单据日期"
@@ -299,7 +299,7 @@ msgstr "Ap 支付接口 Id"
 msgid "Document Currency"
 msgstr "文档货币"
 
-msgid "Gl Amount"
+msgid "GL Amount"
 msgstr "Gl 金额"
 
 msgid "Line Source"
@@ -317,10 +317,10 @@ msgstr "术语说明"
 msgid "Payment Term Id"
 msgstr "付款期限 Id"
 
-msgid "Po Number"
+msgid "PO Number"
 msgstr "采购订单编号"
 
-msgid "Po Type"
+msgid "PO Type"
 msgstr "Po 类型"
 
 msgid "Buyer"
@@ -350,13 +350,13 @@ msgstr "Inv 行价格"
 msgid "Gl Inv Line Price"
 msgstr "Gl Inv 行价格"
 
-msgid "Po Header Id"
+msgid "PO Header Id"
 msgstr "大埔头 Id"
 
-msgid "Po Line Id"
+msgid "PO Line Id"
 msgstr "大埔行 Id"
 
-msgid "Po Detail Id"
+msgid "PO Detail Id"
 msgstr "大埔详细 Id"
 
 msgid "Ref Transaction Header Id"
@@ -392,10 +392,10 @@ msgstr "单位价格"
 msgid "Line Price"
 msgstr "线路报价"
 
-msgid "Gl Line Price"
+msgid "GL Line Price"
 msgstr "Gl 线价格"
 
-msgid "Gl Tax Amount"
+msgid "GL Tax Amount"
 msgstr "Gl 税额"
 
 msgid "Tax Amount"
@@ -722,7 +722,7 @@ msgstr "创建结算 Cb"
 msgid "Ar Transaction Type Id"
 msgstr "应收帐款交易记录类型 Id"
 
-msgid "Ar Transaction Type"
+msgid "AR Transaction Type"
 msgstr "应收帐款交易记录类型"
 
 msgid "Br Receivable Ac Id"
@@ -908,7 +908,7 @@ msgstr "组织结构图的代码"
 msgid "Bom Commonbom Line Id"
 msgstr "物料清单 Commonbom 行 Id"
 
-msgid "Bom Line Id"
+msgid "BOM Line Id"
 msgstr "物料清单行 Id"
 
 msgid "Routing Sequence"
@@ -923,10 +923,10 @@ msgstr "产量"
 msgid "Include In Cost Rollup Cb"
 msgstr "列入成本的汇总 Cb"
 
-msgid "Wip Supply Type"
+msgid "WIP Supply Type"
 msgstr "Wip 供应类型"
 
-msgid "Supply Sub Inventory"
+msgid "Supply Subinventory"
 msgstr "供应子库存"
 
 msgid "Supply Locator"
@@ -938,7 +938,7 @@ msgstr "Bom 配置标题 Id"
 msgid "Bom Config Line Id"
 msgstr "Bom 配置行 Id"
 
-msgid "Bom Sequence"
+msgid "BOM Sequence"
 msgstr "物料清单序列"
 
 msgid "Component Item Id M"
@@ -1022,7 +1022,7 @@ msgstr "有效开始日期"
 msgid "Effective End Date"
 msgstr "有效结束日期"
 
-msgid "Eco Number"
+msgid "ECO Number"
 msgstr "生态数量"
 
 msgid "Eco Implemented Cb"
@@ -1091,7 +1091,7 @@ msgstr "资源类型"
 msgid "Charge Type"
 msgstr "电荷类型"
 
-msgid "Uom"
+msgid "UOM"
 msgstr "计量单位"
 
 msgid "Basis"
@@ -1400,7 +1400,7 @@ msgstr "控件类型"
 msgid "Control Value"
 msgstr "控件的值"
 
-msgid "Control Uom"
+msgid "Control UOM"
 msgstr "控制计量单位"
 
 msgid "Active Cb"
@@ -1700,7 +1700,7 @@ msgstr "时区"
 msgid "Time To Contact"
 msgstr "联系时间"
 
-msgid "Job Titile"
+msgid "Job Title"
 msgstr "作业题目"
 
 msgid "Extn Contact Reference Id"
@@ -1778,9 +1778,6 @@ msgstr "Ap 供应商 Id"
 msgid "Ap Supplier Site Id"
 msgstr "Ap 供应商站点 Id"
 
-msgid "Warrranty Number"
-msgstr "保修数量"
-
 msgid "Lease Number"
 msgstr "租赁数量"
 
@@ -1817,13 +1814,13 @@ msgstr "允许过帐 Cb 的 Gl"
 msgid "Fa Calendar Code"
 msgstr "Fa 日历代码"
 
-msgid "Revalue Accum Depriciation Cb"
+msgid "Revalue Accum Depreciation Cb"
 msgstr "重估博鑫电子减值 Cb"
 
 msgid "Retire Revaluation Reserve Cb"
 msgstr "退休重估储备 Cb"
 
-msgid "Revalue Ytd Depriciation Cb"
+msgid "Revalue Ytd Depreciation Cb"
 msgstr "重估 Ytd 减值 Cb"
 
 msgid "Sale Proceeds Gain Id"
@@ -1856,13 +1853,13 @@ msgstr "Reval 储备退休的增益 Id"
 msgid "Reval Reserve Retired Loss Id"
 msgstr "Reval 储备退休的损失 Id"
 
-msgid "Deff Depriciation Reserve Id"
+msgid "Deff Depreciation Reserve Id"
 msgstr "肯定减值准备金 Id"
 
-msgid "Deff Depriciation Expense Id"
+msgid "Deff Depreciation Expense Id"
 msgstr "肯定减值费用 Id"
 
-msgid "Deff Depriciation Adjustment Id"
+msgid "Deff Depreciation Adjustment Id"
 msgstr "肯定减值调整 Id"
 
 msgid "Default Ac Id"
@@ -1901,19 +1898,19 @@ msgstr "Fa 折旧方法 Id"
 msgid "Life Months"
 msgstr "几个月的生活"
 
-msgid "Depriciation Cb"
+msgid "Depreciation Cb"
 msgstr "减值 Cb"
 
 msgid "Date In Service"
 msgstr "服务日期"
 
-msgid "Depriciation Start Date"
+msgid "Depreciation Start Date"
 msgstr "减值开始日期"
 
-msgid "Depriciation Limit Amount"
+msgid "Depreciation Limit Amount"
 msgstr "减值额度金额"
 
-msgid "Depriciation Limit Percentage"
+msgid "Depreciation Limit Percentage"
 msgstr "减值限制百分比"
 
 msgid "Asset Category"
@@ -2162,7 +2159,7 @@ msgstr "源标题 Id"
 msgid "Source Line Id"
 msgstr "源行 Id"
 
-msgid "Fp Minmax Demand Id"
+msgid "Fp Min Max Demand Id"
 msgstr "Fp 极小极大需求 Id"
 
 msgid "Plan Id"
@@ -2198,13 +2195,13 @@ msgstr "需求的物料编号"
 msgid "Demand Item Description"
 msgstr "需求物料描述"
 
-msgid "Fp Minmax Header Id"
+msgid "Fp Min Max Header Id"
 msgstr "Fp 极小极大标题 Id"
 
 msgid "Demand Source"
 msgstr "需求源"
 
-msgid "Fp Minmax Line Id"
+msgid "Fp Min Max Line Id"
 msgstr "Fp 极小极大行 Id"
 
 msgid "Min Quantity"
@@ -2249,13 +2246,13 @@ msgstr "最大数量"
 msgid "Multibin Fix Days Supply"
 msgstr "多纸盒修复天的供应量"
 
-msgid "Minmax Multibin Number"
+msgid "Min Max Multibin Number"
 msgstr "极小极大多纸盒数目"
 
-msgid "Minmax Multibin Size"
+msgid "Min Max Multibin Size"
 msgstr "极小极大多纸盒大小"
 
-msgid "Multibin Minmax Quantity"
+msgid "Multibin Min Max Quantity"
 msgstr "多纸盒的极小极大数量"
 
 msgid "Fp Mrp Demand Id"
@@ -2936,8 +2933,8 @@ msgstr "默认没有的时期"
 msgid "Hr Leave Transaction Id"
 msgstr "Hr 留下交易记录 Id"
 
-msgid "Requsted Date"
-msgstr "请求日期"
+msgid "Requested Date"
+msgstr "请求的日期"
 
 msgid "Approved Date"
 msgstr "批准的日期"
@@ -3119,7 +3116,7 @@ msgstr "Inv Abc 估价 Id"
 msgid "Inv Abc Assignment Line Id"
 msgstr "Inv Abc 工作分配行 Id"
 
-msgid "Abc Class"
+msgid "ABC Class"
 msgstr "Abc 类"
 
 msgid "Valuation Name"
@@ -3128,7 +3125,7 @@ msgstr "估价名称"
 msgid "Scope Org Id"
 msgstr "组织结构图的作用域 Id"
 
-msgid "Scope Sub Inventory Id"
+msgid "Scope Subinventory Id"
 msgstr "作用域子库存 Id"
 
 msgid "Scope Org Hirearchy Id"
@@ -3242,9 +3239,6 @@ msgstr "交易记录日期"
 msgid "Carrier"
 msgstr "承运人"
 
-msgid "Vechile Number"
-msgstr "汽车数量"
-
 msgid "Waybill"
 msgstr "运单"
 
@@ -3323,10 +3317,10 @@ msgstr "原始的 Wip 窝标题 Id"
 msgid "Last Inv Transaction Id"
 msgstr "最后 Inv 事务 Id"
 
-msgid "Inv Lot Onhand Id"
+msgid "Inv Lot On Hand Id"
 msgstr "Inv 许多现有 Id"
 
-msgid "Onhand Id"
+msgid "On Hand Id"
 msgstr "现有 Id"
 
 msgid "Lot Quantity"
@@ -3599,7 +3593,7 @@ msgstr "联合国编号"
 msgid "Hazard Classs"
 msgstr "危害舞台"
 
-msgid "Receipt Sub Inventory"
+msgid "Receipt Subinventory"
 msgstr "收到子库存"
 
 msgid "Over Receipt Percentage"
@@ -3665,10 +3659,10 @@ msgstr "最小订单数量"
 msgid "Maximum Order Quantity"
 msgstr "最大订单数量"
 
-msgid "Minmax Min Quantity"
+msgid "Min Max Min Quantity"
 msgstr "极小的订货量"
 
-msgid "Minmax Max Quantity"
+msgid "Min Max Max Quantity"
 msgstr "极小极大最大数量"
 
 msgid "Forecast Method"
@@ -3692,7 +3686,7 @@ msgstr "预加工 Lt"
 msgid "Post Processing Lt"
 msgstr "后加工 Lt"
 
-msgid "Processing Lt"
+msgid "Processing LT"
 msgstr "处理"
 
 msgid "Cumulative Mfg Lt"
@@ -3746,7 +3740,7 @@ msgstr "应收帐款付款期限"
 msgid "Rounding Option"
 msgstr "舍入选项"
 
-msgid "Onhand With Rev Cb"
+msgid "On Hand With Rev Cb"
 msgstr "现有与冯 Cb"
 
 msgid "Item Rev Number"
@@ -4028,13 +4022,13 @@ msgstr "批次 Id"
 msgid "Serial Id"
 msgstr "串行 Id"
 
-msgid "Onhand"
-msgstr "现有"
+msgid "On Hand"
+msgstr "在手上"
 
-msgid "Reservable Onhand"
+msgid "Reservable On Hand"
 msgstr "保留现有"
 
-msgid "Transactable Onhand"
+msgid "Transactable On Hand"
 msgstr "Transactable 现有"
 
 msgid "Lot Status"
@@ -4046,13 +4040,13 @@ msgstr "串行状态"
 msgid "Secondary Uom Id"
 msgstr "辅助 Uom Id"
 
-msgid "Onhand Status"
+msgid "On Hand Status"
 msgstr "现有状态"
 
 msgid "Org Name"
 msgstr "组织结构图的名称"
 
-msgid "Onhand Value"
+msgid "On Hand Value"
 msgstr "现有值"
 
 msgid "Subinventory Type"
@@ -4316,13 +4310,13 @@ msgstr "要求名称"
 msgid "Requirement Type"
 msgstr "需求类型"
 
-msgid "Max Evaludation Points"
-msgstr "Max Evaludation 点"
+msgid "Max Evaluation Points"
+msgstr "马克斯评估点"
 
 msgid "Target Value"
 msgstr "目标值"
 
-msgid "Rfq Number"
+msgid "RFQ Number"
 msgstr "询价编号"
 
 msgid "Rfq Name"
@@ -4409,7 +4403,7 @@ msgstr "返回 Subinventory Id"
 msgid "Return Locator Id"
 msgstr "返回定位器 Id"
 
-msgid "Allow Negative Onhand Cb"
+msgid "Allow Negative On Hand Cb"
 msgstr "允许负现有 Cb"
 
 msgid "Customer Site Id"
@@ -4667,9 +4661,6 @@ msgstr "分期 Subinventory"
 msgid "Staging Locator"
 msgstr "分期定位器"
 
-msgid "Requested Date"
-msgstr "请求的日期"
-
 msgid "Sd Quote Header Id"
 msgstr "Sd 报价单标题 Id"
 
@@ -4678,9 +4669,6 @@ msgstr "新的客户名称"
 
 msgid "New Customer Address"
 msgstr "新客户地址"
-
-msgid "Aggrement End Date"
-msgstr "您看一下结束日期"
 
 msgid "Sd Quote Line Id"
 msgstr "Sd 报价单行 Id"
@@ -5036,7 +5024,7 @@ msgstr "用户 Id 的所有"
 msgid "To Email"
 msgstr "以电子邮件"
 
-msgid "Cc Email"
+msgid "CC Email"
 msgstr "抄送的电子邮件"
 
 msgid "Notification Subject"
@@ -5261,7 +5249,7 @@ msgstr "事务操作"
 msgid "Account Id"
 msgstr "帐户 Id"
 
-msgid "Primary Uom Id"
+msgid "Primary UOM Id"
 msgstr "主 Uom Id"
 
 msgid "Primary Relation"
@@ -5492,7 +5480,7 @@ msgstr "Wip 会计组 Id"
 msgid "Wo Type"
 msgstr "窝类型"
 
-msgid "Wip Accounting Group"
+msgid "WIP Accounting Group"
 msgstr "Wip 会计组"
 
 msgid "Var Material Ac Id"
@@ -5609,7 +5597,7 @@ msgstr "路由爆炸的 Cb"
 msgid "Reference Routing Item Id M"
 msgstr "引用路由项 Id M"
 
-msgid "Completion Sub Inventory"
+msgid "Completion Subinventory"
 msgstr "完成子库存"
 
 msgid "Completed Quantity"
@@ -5720,8 +5708,8 @@ msgstr "路径-创建、 更新和删除"
 msgid "Create & Update Address"
 msgstr "创建和更新地址"
 
-msgid "Char of Account"
-msgstr "烧焦的帐户"
+msgid "Chart Of Account"
+msgstr "会计科目表"
 
 msgid "Chart Of Accounts"
 msgstr "会计科目表"
@@ -5735,7 +5723,7 @@ msgstr "所有的会计科目表"
 msgid "Search Ac Combinations"
 msgstr "搜索 Ac 的组合"
 
-msgid "Char of account combinations"
+msgid "Chart Of Account Combinations"
 msgstr "烧焦的帐户组合"
 
 msgid "Account Combination"
@@ -5783,7 +5771,7 @@ msgstr "搜索所有项目"
 msgid "Search Items"
 msgstr "搜索项目"
 
-msgid "Unit of mesaures"
+msgid "Unit of measures"
 msgstr "冻土的单位"
 
 msgid "View Unit of Measures"
@@ -5801,9 +5789,6 @@ msgstr "交易记录类型的列表"
 msgid "Search Transaction Type"
 msgstr "搜索交易记录类型"
 
-msgid "Sub Inventory"
-msgstr "子库存"
-
 msgid "Search All Sub Inventories"
 msgstr "搜索所有子清单"
 
@@ -5819,11 +5804,8 @@ msgstr "库存"
 msgid "Search Locator"
 msgstr "搜索定位程序"
 
-msgid "On hand Quantities"
+msgid "On Hand Quantities"
 msgstr "一方面数量"
-
-msgid "On Hand"
-msgstr "在手上"
 
 msgid "Inventory Transaction"
 msgstr "库存交易记录"
@@ -6008,7 +5990,7 @@ msgstr "搜索库存收货"
 msgid "Search Inv Receipts"
 msgstr "搜索 Inv 收据"
 
-msgid "Bill of materials"
+msgid "Bill Of Materials"
 msgstr "物料清单"
 
 msgid "Search All BOMs"
@@ -6041,7 +6023,7 @@ msgstr "材料的搜索元素"
 msgid "Overhead - Resource & Material"
 msgstr "开销--资源与材料"
 
-msgid "All Over heads"
+msgid "All Overheads"
 msgstr "所有的头顶"
 
 msgid "Search Overhead"
@@ -6184,9 +6166,6 @@ msgstr "总分类账"
 
 msgid "Create update & ledger"
 msgstr "创建更新与分类帐"
-
-msgid "Serach Ledgers"
-msgstr "搜索分类帐"
 
 msgid "Search Ledgers"
 msgstr "搜索分类帐"
@@ -6566,7 +6545,7 @@ msgstr "大规模 Uplaod 定位器"
 msgid "Upload Locators"
 msgstr "上载定位器"
 
-msgid "View Sub Inventory"
+msgid "View Subinventory"
 msgstr "查看子库存量"
 
 msgid "Search UOM"
@@ -6623,7 +6602,7 @@ msgstr "查看物料清单物料元素"
 msgid "View Material Element"
 msgstr "查看材料元素"
 
-msgid "View Over Head"
+msgid "View Overhead"
 msgstr "查看头顶"
 
 msgid "Mass Upload Department"
@@ -6827,7 +6806,7 @@ msgstr "Min Max 规划师"
 msgid "Search Min Max Planner"
 msgstr "搜索 Min Max 规划师"
 
-msgid "Search MinMax Planner"
+msgid "Search Min Max Planner"
 msgstr "搜索极小极大规划师"
 
 msgid "Min Max Demand"
@@ -6845,10 +6824,10 @@ msgstr "更新项目 Min Max 参数"
 msgid "Min Max Planner Work Bench"
 msgstr "Min Max 策划人工作台"
 
-msgid "Create Supply - MinMax Program"
+msgid "Create Supply - Min Max Program"
 msgstr "创建供应-极小极大程序"
 
-msgid "Create Supply - MinMax"
+msgid "Create Supply - Min Max"
 msgstr "创建供应-极小极大"
 
 msgid "View Requisition Interface Lines"
@@ -6923,10 +6902,10 @@ msgstr "报告和分析"
 msgid "RA"
 msgstr "RA"
 
-msgid "Onhand By Subinventory"
+msgid "On Hand By Subinventory"
 msgstr "现有的 Subinventory"
 
-msgid "Onhand Analysis"
+msgid "On Hand Analysis"
 msgstr "现有分析"
 
 msgid "Purchasing Analysis"
@@ -6947,10 +6926,10 @@ msgstr "船舶销售订单"
 msgid "Ship Sales Order"
 msgstr "船舶销售订单"
 
-msgid "TAX Codes & Rates"
+msgid "Tax Codes & Rates"
 msgstr "税码和费率"
 
-msgid "TAX Codes"
+msgid "Tax Codes"
 msgstr "税码"
 
 msgid "Tax Regions"
@@ -7310,11 +7289,8 @@ msgstr "Definen 块"
 msgid "My Notifications"
 msgstr "我的通知"
 
-msgid "User Leave Blalance"
-msgstr "用户离开 Blalance"
-
-msgid "Leave Blalance"
-msgstr "离开 Blalance"
+msgid "User Leave Balance"
+msgstr "用户离开 Balance"
 
 msgid "Search All Leave"
 msgstr "搜索所有休假"
@@ -7475,16 +7451,16 @@ msgstr "自定义报告 option_type-选项类型"
 msgid "Custom report option_type"
 msgstr "自定义报表 option_type"
 
-msgid "Custom report Onhand - Curret Onhand"
+msgid "Custom report On Hand - Curret On Hand"
 msgstr "目前现有的自定义报表现有-"
 
-msgid "Custom report Onhand"
+msgid "Custom report On Hand"
 msgstr "现有的自定义报表"
 
-msgid "Custom Report - Onhand Inventory Wise"
+msgid "Custom Report - On Hand Inventory Wise"
 msgstr "自定义报表-现有库存智者"
 
-msgid "Custom Report - Onhand"
+msgid "Custom Report - On Hand"
 msgstr "自定义报表-现有"
 
 msgid "Secondary Field"
@@ -7526,7 +7502,7 @@ msgstr "文档与分析"
 msgid "Search Process Flow"
 msgstr "搜索流程"
 
-msgid "Minmax Board"
+msgid "Min Max Board"
 msgstr "极小极大板"
 
 msgid "Programs for Document Administrator"
@@ -8294,9 +8270,6 @@ msgstr "所以标题 Id"
 msgid "SO Line Id"
 msgstr "如此行 Id"
 
-msgid "Project Line Idt"
-msgstr "项目行内幕交易审裁处"
-
 msgid "Receivable Transaction Source"
 msgstr "应收帐款交易记录来源"
 
@@ -8345,10 +8318,7 @@ msgstr "资源分配"
 msgid "Overhead Rate"
 msgstr "间接费用分配率"
 
-msgid "Over Head"
-msgstr "在头上"
-
-msgid "Over Head Details"
+msgid "Overhead Details"
 msgstr "在头的详细信息"
 
 msgid "Rate Assignment"
@@ -8458,9 +8428,6 @@ msgstr "已配置物料清单标题"
 
 msgid "BOMLine Id"
 msgstr "BOMLine Id"
-
-msgid "Routing Sequenceg"
-msgstr "路由 Sequenceg"
 
 msgid "Usage Qty"
 msgstr "使用数量"
@@ -8663,9 +8630,6 @@ msgstr "前缀"
 msgid "Adjusting Period"
 msgstr "调整期"
 
-msgid "Chart Of Account"
-msgstr "会计科目表"
-
 msgid "Chart of Account Details"
 msgstr "帐户详细信息的图表"
 
@@ -8762,9 +8726,6 @@ msgstr "目前开放的时期"
 msgid "Next Period"
 msgstr "下一期"
 
-msgid "PeriodId"
-msgstr "PeriodId"
-
 msgid "Cal Name"
 msgstr "Cal 名称"
 
@@ -8840,7 +8801,7 @@ msgstr "解雇员工"
 msgid "Requirements"
 msgstr "要求"
 
-msgid "job Details & Responsibility"
+msgid "Job Details & Responsibility"
 msgstr "作业详细信息和责任"
 
 msgid "Leave Details"
@@ -8963,7 +8924,7 @@ msgstr "调整"
 msgid "Count By"
 msgstr "计数"
 
-msgid "Adjustment Ac"
+msgid "Adjustment AC"
 msgstr "调整交流"
 
 msgid "System Quantity"
@@ -9010,9 +8971,6 @@ msgstr "添加批号"
 
 msgid "Add Serial Numbers"
 msgstr "添加序列号"
-
-msgid "Inventory Transaction "
-msgstr "库存交易记录"
 
 msgid "Lot & Serial"
 msgstr "很多和序列号"
@@ -9125,9 +9083,6 @@ msgstr "交易记录"
 msgid "Relations"
 msgstr "关系"
 
-msgid "From Sub Inventory"
-msgstr "从子库存"
-
 msgid "Transaction Details"
 msgstr "交易记录详细信息"
 
@@ -9139,9 +9094,6 @@ msgstr "从定位器 Id"
 
 msgid "To SubInv Id"
 msgstr "到 SubInv Id"
-
-msgid "To Locator Id "
-msgstr "到定位器 Id"
 
 msgid "Receipt Header Id"
 msgstr "收到标题 Id"
@@ -9265,9 +9217,6 @@ msgstr "地址标头"
 
 msgid "BO Details"
 msgstr "博详细信息"
-
-msgid "Type of Business Org"
-msgstr "类型的业务组织结构图"
 
 msgid "Enterprise Name"
 msgstr "企业名称"
@@ -9422,9 +9371,6 @@ msgstr "因素"
 msgid "Requirement Id"
 msgstr "要求 Id"
 
-msgid "Max Evaluation Points"
-msgstr "马克斯评估点"
-
 msgid "Supplier Value"
 msgstr "供应商的价值"
 
@@ -9462,7 +9408,7 @@ msgid "Sourcing Lines"
 msgstr "采购行"
 
 msgid "Allocation % "
-msgstr "分配 %"
+msgstr "分配 % "
 
 msgid "POS Barcode List"
 msgstr "POS 条形码清单"
@@ -9589,9 +9535,6 @@ msgstr "窝标题 Id"
 
 msgid "Config Details"
 msgstr "配置详细信息"
-
-msgid "Destination Typet"
-msgstr "目的地 Typet"
 
 msgid "Shipped /Received Quantity"
 msgstr "装运 / 接收的数量"

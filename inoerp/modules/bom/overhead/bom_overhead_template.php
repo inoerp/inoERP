@@ -7,7 +7,7 @@ inoERP
  * @source code https://github.com/inoerp/inoERP
 -->
 
-<div id="form_all"><span class="heading"><?php echo gettext('Over Head') ?></span>
+<div id="form_all"><span class="heading"><?php echo gettext('Overhead') ?></span>
  <form  method="post" id="bom_overhead"  name="bom_overhead">
   <div id ="form_header">
    <div id="tabsHeader">
@@ -56,7 +56,7 @@ inoERP
    </div>
   </div>
  </form>
- <span class="heading"><?php echo gettext('Over Head Details') ?></span>
+ <span class="heading"><?php echo gettext('Overhead Details') ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
    <li><a href="#tabsLine-1"><?php echo gettext('Resource Assignment') ?></a></li>

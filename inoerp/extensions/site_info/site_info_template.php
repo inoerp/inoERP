@@ -15,7 +15,7 @@
       <li><?php $f->l_text_field_d('site_name'); ?> </li> 
       <li><?php $f->l_text_field_d('email'); ?> </li> 
       <li><?php $f->l_text_field_d('phone_no'); ?> </li> 
-      <li><label><?php echo gettext('Home Page ') . ' ' . HOME_URL ?></label><?php echo $f->text_field('default_home_page', $$class->default_home_page, '20'); ?> </li>
+      <li><label><?php echo gettext('Home Page') . '  ' . HOME_URL ?></label><?php echo $f->text_field('default_home_page', $$class->default_home_page, '20'); ?> </li>
      </ul>
 
     </div>

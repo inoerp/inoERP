@@ -71,7 +71,7 @@ inoERP
          <th><?php echo gettext('Op Routing Id') ?></th>
          <th><?php echo gettext('Activity Code') ?></th>
          <th><?php echo gettext('Activity Factor') ?></th>
-         <th><?php echo gettext('Trnx. Id') ?></th>
+         <th><?php echo gettext('Trnx Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">

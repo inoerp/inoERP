@@ -76,7 +76,7 @@ inoERP
  </form>
 </div>
 
- <div id="form_line" class="form_line"><span class="heading">Operation & Resource Details </span>
+ <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Operation & Resource Details') ?> </span>
   <form method="bom_routingst" id="bom_routing_line"  name="bom_routing_line">
    <div id="tabsLine">
     <ul class="tabMain">

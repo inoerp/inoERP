@@ -304,12 +304,12 @@
     $notif->reference_key_value = $this->po_rfq_header_id;
     $notif->status = 'OPEN';
     $notif->start_date = current_time(true);
-    $notif->notification_subject = "PO Approval From " . $notif->from_user . ' PO#' . $this->po_rfq_number;
-    $notif->notification_subject .=!empty($this->release_number) ? " Release #" . $this->release_number : '';
-    $notif->text_field1 = "<br>PO Type : $this->po_rfq_type ";
-    $notif->text_field1 .= "<br>PO Number : $this->po_rfq_number &nbsp;&nbsp; Amount : $this->header_amount";
-    $notif->text_field1 .= "<br>Supplier : $this->supplier_name (Supplier Id : $this->supplier_id) ";
-    $notif->text_field1 .= "<br>Description : $this->description ";
+    $notif->notification_subject = "PO Approval From " . $notif->from_user . ' ' . gettext('PO') . '#' . $this->po_rfq_number;
+    $notif->notification_subject .=!empty($this->release_number) ? ' ' . gettext('Release') . ' #' . $this->release_number : '';
+    $notif->text_field1 = "<br>" . gettext('PO Type') . " : $this->po_rfq_type ";
+    $notif->text_field1 .= "<br>" . gettext('PO Number') . " : $this->po_rfq_number &nbsp;&nbsp; " . gettext('Amount') . " : $this->header_amount";
+    $notif->text_field1 .= "<br>" . gettext('Supplier') . " : $this->supplier_name (" . gettext('Supplier Id') . " : $this->supplier_id) ";
+    $notif->text_field1 .= "<br>" . gettext('Description') . " : $this->description ";
     $notif->audit_trial();
     $notif->save();
     $notif->_after_save();

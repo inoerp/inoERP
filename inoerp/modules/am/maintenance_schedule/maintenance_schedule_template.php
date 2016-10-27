@@ -139,15 +139,15 @@
       <ul class='column four_column'>
        <li><a class="popup popup-form view-date-rule btn btn-default btn-lg" id="date_rule" role="button"
               href="form.php?class_name=am_ms_date_rule&mode=9&window_type=popup&am_maintenance_schedule_id=<?php echo $$class->am_maintenance_schedule_id ?>">
-         <i class="fa fa-list-alt"></i> Date Rule</a>
+         <i class="fa fa-list-alt"></i> <?php echo gettext('Date Rule') ?></a>
        </li>
        <li><a class="popup popup-form view-meter-rule btn btn-default btn-lg" id="meter_rule" role="button"
               href="form.php?class_name=am_ms_meter_rule&mode=9&window_type=popup&am_maintenance_schedule_id=<?php echo $$class->am_maintenance_schedule_id ?>">
-         <i class="fa fa-bar-chart-o"></i> Meter Rule</a>
+         <i class="fa fa-bar-chart-o"></i> <?php echo gettext('Meter Rule') ?></a>
        </li>
        <li><a class="popup popup-form view-calendar-date btn btn-default btn-lg" id="calendar-date" role="button"
               href="form.php?class_name=am_ms_calendar_date&mode=9&window_type=popup&am_maintenance_schedule_id=<?php echo $$class->am_maintenance_schedule_id ?>">
-         <i class="fa fa-calendar"></i> Calendar Date</a>
+         <i class="fa fa-calendar"></i> <?php echo gettext('Calendar Date') ?></a>
        </li>
       </ul>
      </div>

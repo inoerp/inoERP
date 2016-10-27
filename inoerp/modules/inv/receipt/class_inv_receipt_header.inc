@@ -205,6 +205,13 @@ public $action_a = [
   return $multi_select_hidden;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
+inv_receipt_header::staticVar_init('transaction_type_id_a');
 ?>

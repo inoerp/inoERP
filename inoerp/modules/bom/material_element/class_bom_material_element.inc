@@ -13,7 +13,7 @@
 
 /**
  * bom_material_element
- * Used for creating different user defined material elements, such Material, Material Over Head, Over Head, Resource, OSP
+ * Used for creating different user defined material elements, such Material, Material Overhead, Overhead, Resource, OSP
  * Contains all the bom_material_element information, such as - material_element, description , status
  * 
  */

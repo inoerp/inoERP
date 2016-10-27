@@ -5,27 +5,27 @@
       <div class="show_loading_small"></div>
       <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
       <!--    End of place for showing error messages-->
-      <form action=""  method="post" id="user_dashboard_config"  name="user_dashboard_config"><span class="heading">Dashboard Configuration </span>
+      <form action=""  method="post" id="user_dashboard_config"  name="user_dashboard_config"><span class="heading"><?php echo gettext('Dashboard Configuration') ?> </span>
        <!--END OF FORM HEADER-->
        <div id ="form_line" class="user_dashboard_config">
         <div id="tabsLine">
          <ul class="tabMain">
-          <li><a href="#tabsLine-1">Details </a></li>
+          <li><a href="#tabsLine-1"><?php echo gettext('Details') ?> </a></li>
          </ul>
          <div class="tabContainer"> 
           <div id="tabsLine-1" class="tabContent">
            <table class="form_table">
             <thead> 
              <tr>
-              <th>Action</th>
-              <th>Id</th>
-              <th>Config Level</th>
-              <th>User Role</th>
-              <th>User Name</th>
-              <th>Group</th>
-              <th>Report Type</th>
-              <th>Report Name </th>
-              <th>Priority</th>
+              <th><?php echo gettext('Action') ?></th>
+              <th><?php echo gettext('Id') ?></th>
+              <th><?php echo gettext('Config Level') ?></th>
+              <th><?php echo gettext('User Role') ?></th>
+              <th><?php echo gettext('User Name') ?></th>
+              <th><?php echo gettext('Group') ?></th>
+              <th><?php echo gettext('Report Type') ?></th>
+              <th><?php echo gettext('Report Name') ?> </th>
+              <th><?php echo gettext('Priority') ?></th>
              </tr>
             </thead>
             <tbody class="form_data_line_tbody user_dashboard_config_values" >
@@ -64,8 +64,8 @@
                <tr class="user_dashboard_config_line<?php echo $count ?>">
                 <td>    
                  <ul class="inline_action">
-                  <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                  <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                  <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('add new line') ?>" /></li>
+                  <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('remove this line') ?>" /> </li>
                   <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->user_dashboard_config_id); ?>"></li>           
                  </ul>
                 </td>

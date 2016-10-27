@@ -193,7 +193,7 @@ inoERP
         <th><?php echo gettext('Planning') ?> %</th>
         <th><?php echo gettext('Yield') ?></th>
         <th><?php echo gettext('WIP Supply Type') ?></th>
-        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Subinventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
         <th><?php echo gettext('In cost Rollup') ?></th>
 

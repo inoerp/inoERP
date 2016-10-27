@@ -54,7 +54,7 @@
      <div id="tabsLine-1" class="tabContent">
       <div> 
        <ul class="column header_field"> 
-        <li><label><?php echo gettext('Type of Business Org') ?></label> 
+        <li><label><?php echo gettext('Business Org Type') ?></label> 
          <input type="text" name="business_org_type" value="<?php
          echo (!empty($business->business_org_type)) ? htmlentities($business->business_org_type) : "";
          ?>" maxlength="50" id="business_org_type"> 

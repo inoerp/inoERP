@@ -37,7 +37,7 @@
     <div class="container-fluid" style="background-color:<?php echo $si->heading_color; ?>">
      <div class="navbar-header col-md-6">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-       <span class="sr-only">Toggle navigation</span>
+       <span class="sr-only"><?php echo gettext('Toggle navigation'); ?></span>
        <span class="icon-bar"></span>
       </button>
       <img src="<?php
@@ -81,7 +81,7 @@
        <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="<?php echo gettext('Toggle Navigation Menu')?>"></i></li>
        <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="<?php echo gettext('Home')?>"></i></a></li>
        <li role="presentation"><a  class="getAjaxForm" href="<?php echo HOME_URL . 'form.php?class_name=extn_emessage_header&mode=9' ?>"><i class="fa fa-info" title="<?php echo gettext('Messages')?>"></i></a></li>
-       <li role="presentation"><a   class="getAjaxForm" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="<?php echo gettext('Dashborad')?>"></i></a></li>
+       <li role="presentation"><a   class="getAjaxForm" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="<?php echo gettext('Dashboard')?>"></i></a></li>
        <!--<li role="presentation"><i class="fa fa-gears right-click-menu clickable" title="Actions"></i></li>-->
        <li role="presentation"><a  class="erp-links search-list-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-search" title="<?php echo gettext('Search & List Page')?>"></i></a></li>
        <li role="presentation"><a  class="erp-links form-page" href="<?php echo HOME_URL; ?>"><i class="fa fa-list-alt" title="<?php echo gettext('Form Page')?>"></i></a></li>
@@ -110,7 +110,7 @@
       ?>
       <?php if ($show_header_links) { ?>
        <!--       <div class="social-icons">
-               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> <?php //echo gettext( 'ERP Dashboard' ); ?> </a></span>
+               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="<?php //echo gettext('ERP Dashboard') ?>"> <?php //echo gettext('ERP Dashboard') ?> </a></span>
               </div> end social icons -->
       <?php } ?>
      </div>

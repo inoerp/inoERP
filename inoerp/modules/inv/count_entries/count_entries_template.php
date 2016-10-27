@@ -102,7 +102,7 @@
         <th><?php echo gettext('Serial Number') ?></th>
         <th><?php echo gettext('Count By') ?></th>
         <th><?php echo gettext('Count Date') ?></th>
-        <th><?php echo gettext('Adjustment Ac') ?></th>
+        <th><?php echo gettext('Adjustment AC') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody inv_count_schedule_values" >

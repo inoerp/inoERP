@@ -43,7 +43,7 @@ inoERP
    </div>
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"> Operation Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"> <?php echo gettext('Operation Details') ?> </span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Operation') ?></a></li>
@@ -160,7 +160,7 @@ inoERP
         <th><?php echo gettext('Required') ?></th>
         <th><?php echo gettext('Issued') ?></th>
         <th><?php echo gettext('Supply Type') ?></th>
-        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Subinventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>

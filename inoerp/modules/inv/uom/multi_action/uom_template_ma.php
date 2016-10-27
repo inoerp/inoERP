@@ -4,27 +4,27 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form action=""  method="post" id="uom"  name="uom">
-    <div id ="form_line" class="form_line"><span class="heading">Unit Of Measure Details </span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Unit Of Measure Details')?> </span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Basic Info</a></li>
-       <li><a href="#tabsLine-2">UOM Relation</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basic Info')?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('UOM Relation')?></a></li>
 
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <tr>
-          <th>Action</th>
-          <th>UOM Id</th>
-          <th>UOM</th>
-          <th>Class</th>
-          <th>Description</th>
-          <th>Primary</th>
-          <th>EF Id</th>
-          <th>Status</th>
-          <th>Rev Enabled</th>
-          <th>Rev#</th>
+          <th><?php echo gettext('Action')?></th>
+          <th><?php echo gettext('UOM Id')?></th>
+          <th><?php echo gettext('UOM')?></th>
+          <th><?php echo gettext('Class')?></th>
+          <th><?php echo gettext('Description')?></th>
+          <th><?php echo gettext('Primary')?></th>
+          <th><?php echo gettext('EF Id')?></th>
+          <th><?php echo gettext('Status')?></th>
+          <th><?php echo gettext('Rev Enabled')?></th>
+          <th><?php echo gettext('Rev')?>#</th>
          </tr>
          <tbody class="form_data_line_tbody">
           <?php
@@ -60,10 +60,10 @@
        <div id="tabsLine-2" class="scrollElement" class="tabContent">
         <table class="form_table">
          <tr>
-          <th> Primary UOM Id</th>
-          <th> Primary UOM</th>
-          <th> Operator </th>
-          <th> Primary Relation </th>
+          <th> <?php echo gettext('Primary UOM Id')?></th>
+          <th> <?php echo gettext('Primary UOM')?></th>
+          <th> <?php echo gettext('Operator')?> </th>
+          <th> <?php echo gettext('Primary Relation')?> </th>
          </tr>
          <tbody class="form_data_line_tbody">
           <?php

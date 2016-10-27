@@ -140,7 +140,14 @@ AND cr.reference_table = '{$ref_obj}'
   return !empty($result) ? ($result) : false;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of sys_program_schedule class
+sys_program_schedule::staticVar_init('frequency_uom_a');
 ?>

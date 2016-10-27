@@ -160,8 +160,8 @@ msgstr "Produktions Org Id"
 msgid "Ap Payment Header Id"
 msgstr "Ap Payment-Header ID"
 
-msgid "Bu Org Id"
-msgstr "Bu Org Id"
+msgid "BU Org Id"
+msgstr "BU Org Id"
 
 msgid "Payment Type"
 msgstr "Zahlungsart"
@@ -262,8 +262,8 @@ msgstr "Kurstyp"
 msgid "Exchange Rate"
 msgstr "Tauschrate"
 
-msgid "Ef Id"
-msgstr "Ef Id"
+msgid "EF Id"
+msgstr "EF Id"
 
 msgid "Document Date"
 msgstr "Belegdatum"
@@ -298,7 +298,7 @@ msgstr "Ap Payment-Schnittstellen-ID"
 msgid "Document Currency"
 msgstr "Belegwährung"
 
-msgid "Gl Amount"
+msgid "GL Amount"
 msgstr "Gl Betrag"
 
 msgid "Line Source"
@@ -316,10 +316,10 @@ msgstr "Begriff Beschreibung"
 msgid "Payment Term Id"
 msgstr "Zahlungs-Ausdruck Id"
 
-msgid "Po Number"
+msgid "PO Number"
 msgstr "Bestellnummer"
 
-msgid "Po Type"
+msgid "PO Type"
 msgstr "Po-Typ"
 
 msgid "Buyer"
@@ -349,13 +349,13 @@ msgstr "Inv Line Preis"
 msgid "Gl Inv Line Price"
 msgstr "Gl Inv Line Preis"
 
-msgid "Po Header Id"
+msgid "PO Header Id"
 msgstr "Po-Header ID"
 
-msgid "Po Line Id"
+msgid "PO Line Id"
 msgstr "Po-Linie Id"
 
-msgid "Po Detail Id"
+msgid "PO Detail Id"
 msgstr "Po Details Id"
 
 msgid "Ref Transaction Header Id"
@@ -367,7 +367,7 @@ msgstr "Ref Transaktion Linie Id"
 msgid "Item Number"
 msgstr "Artikelnummer"
 
-msgid "Uom Id"
+msgid "UOM Id"
 msgstr "ME Id"
 
 msgid "Item Status"
@@ -391,10 +391,10 @@ msgstr "Einzelpreis"
 msgid "Line Price"
 msgstr "Line Preis"
 
-msgid "Gl Line Price"
+msgid "GL Line Price"
 msgstr "Gl Line Preis"
 
-msgid "Gl Tax Amount"
+msgid "GL Tax Amount"
 msgstr "Gl Steuerbetrag"
 
 msgid "Tax Amount"
@@ -721,7 +721,7 @@ msgstr "Erstellen Clearing Cb"
 msgid "Ar Transaction Type Id"
 msgstr "Ar Transaktionsart Id"
 
-msgid "Ar Transaction Type"
+msgid "AR Transaction Type"
 msgstr "Ar Art der Transaktion"
 
 msgid "Br Receivable Ac Id"
@@ -907,7 +907,7 @@ msgstr "Org-Code"
 msgid "Bom Commonbom Line Id"
 msgstr "Bom Commonbom Linie Id"
 
-msgid "Bom Line Id"
+msgid "BOM Line Id"
 msgstr "Bom Linie Id"
 
 msgid "Routing Sequence"
@@ -922,10 +922,10 @@ msgstr "Ausbeute"
 msgid "Include In Cost Rollup Cb"
 msgstr "In Kostenwälzung Cb"
 
-msgid "Wip Supply Type"
+msgid "WIP Supply Type"
 msgstr "Wip Versorgungstyp"
 
-msgid "Supply Sub Inventory"
+msgid "Supply Subinventory"
 msgstr "Versorgungsunter Inventar"
 
 msgid "Supply Locator"
@@ -937,8 +937,8 @@ msgstr "Bom Config-Header ID"
 msgid "Bom Config Line Id"
 msgstr "Bom Config Linie Id"
 
-msgid "Bom Sequence"
-msgstr "Bom Sequence"
+msgid "BOM Sequence"
+msgstr "BOM Sequence"
 
 msgid "Component Item Id M"
 msgstr "Komponenten Artikel-Nummer M"
@@ -1021,7 +1021,7 @@ msgstr "Effektive Startdatum"
 msgid "Effective End Date"
 msgstr "Effektive Enddatum"
 
-msgid "Eco Number"
+msgid "ECO Number"
 msgstr "Eco Anzahl"
 
 msgid "Eco Implemented Cb"
@@ -1090,7 +1090,7 @@ msgstr "Ressourcentyp"
 msgid "Charge Type"
 msgstr "Aufladungsart"
 
-msgid "Uom"
+msgid "UOM"
 msgstr "ME"
 
 msgid "Basis"
@@ -1399,7 +1399,7 @@ msgstr "Steuerungstyp"
 msgid "Control Value"
 msgstr "Steuerwert"
 
-msgid "Control Uom"
+msgid "Control UOM"
 msgstr "Steuer ME"
 
 msgid "Active Cb"
@@ -1699,8 +1699,8 @@ msgstr "Zeitzone"
 msgid "Time To Contact"
 msgstr "Zeit bis zum Kontakt"
 
-msgid "Job Titile"
-msgstr "Job titile"
+msgid "Job Title"
+msgstr "Job title"
 
 msgid "Extn Contact Reference Id"
 msgstr "Nst Kontakt Referenz-ID"
@@ -1777,9 +1777,6 @@ msgstr "Ap Lieferant Id"
 msgid "Ap Supplier Site Id"
 msgstr "Ap Lieferant Website-ID"
 
-msgid "Warrranty Number"
-msgstr "Warrranty Anzahl"
-
 msgid "Lease Number"
 msgstr "Lease Anzahl"
 
@@ -1816,13 +1813,13 @@ msgstr "Erlauben Gl Veröffentlichung Cb"
 msgid "Fa Calendar Code"
 msgstr "Fa Kalender-Code"
 
-msgid "Revalue Accum Depriciation Cb"
+msgid "Revalue Accum Depreciation Cb"
 msgstr "Aufzuwerten Accum Wertverminderung Cb"
 
 msgid "Retire Revaluation Reserve Cb"
 msgstr "Rente gehen Neubewertungsrücklage Cb"
 
-msgid "Revalue Ytd Depriciation Cb"
+msgid "Revalue Ytd Depreciation Cb"
 msgstr "Neubewertung lfd Wertverminderung Cb"
 
 msgid "Sale Proceeds Gain Id"
@@ -1855,13 +1852,13 @@ msgstr "Reval Reserve Retired Gain-Id"
 msgid "Reval Reserve Retired Loss Id"
 msgstr "Reval Reserve Retired Loss Id"
 
-msgid "Deff Depriciation Reserve Id"
+msgid "Deff Depreciation Reserve Id"
 msgstr "Deff Wertverminderung Reserve Id"
 
-msgid "Deff Depriciation Expense Id"
+msgid "Deff Depreciation Expense Id"
 msgstr "Deff Wertverminderung Expense Id"
 
-msgid "Deff Depriciation Adjustment Id"
+msgid "Deff Depreciation Adjustment Id"
 msgstr "Deff Wertverminderung Adjustment Id"
 
 msgid "Default Ac Id"
@@ -1900,19 +1897,19 @@ msgstr "Fa Abschreibungsmethode Id"
 msgid "Life Months"
 msgstr "Lebens Monate"
 
-msgid "Depriciation Cb"
+msgid "Depreciation Cb"
 msgstr "Wertverminderung Cb"
 
 msgid "Date In Service"
 msgstr "Datum In Service"
 
-msgid "Depriciation Start Date"
+msgid "Depreciation Start Date"
 msgstr "Wertverminderung Startdatum"
 
-msgid "Depriciation Limit Amount"
+msgid "Depreciation Limit Amount"
 msgstr "Wertverminderung Limitbetrag"
 
-msgid "Depriciation Limit Percentage"
+msgid "Depreciation Limit Percentage"
 msgstr "Wertverminderung Grenzprozent"
 
 msgid "Asset Category"
@@ -2161,8 +2158,8 @@ msgstr "Source-Header ID"
 msgid "Source Line Id"
 msgstr "Quelle Line-Id"
 
-msgid "Fp Minmax Demand Id"
-msgstr "Fp Minmax Demand-Id"
+msgid "Fp Min Max Demand Id"
+msgstr "Fp Min Max Demand-Id"
 
 msgid "Plan Id"
 msgstr "Plan Id"
@@ -2197,14 +2194,14 @@ msgstr "Demand-Artikelnummer"
 msgid "Demand Item Description"
 msgstr "Demand Artikelbeschreibung"
 
-msgid "Fp Minmax Header Id"
-msgstr "Fp Minmax Header ID"
+msgid "Fp Min Max Header Id"
+msgstr "Fp Min Max Header ID"
 
 msgid "Demand Source"
 msgstr "Anforderungsquelle"
 
-msgid "Fp Minmax Line Id"
-msgstr "Fp Minmax Linie Id"
+msgid "Fp Min Max Line Id"
+msgstr "Fp Min Max Linie Id"
 
 msgid "Min Quantity"
 msgstr "Min Menge"
@@ -2248,14 +2245,14 @@ msgstr "Höchstmenge"
 msgid "Multibin Fix Days Supply"
 msgstr "Multibin Fix Tage Versorgung"
 
-msgid "Minmax Multibin Number"
-msgstr "Minmax Multibin Anzahl"
+msgid "Min Max Multibin Number"
+msgstr "Min Max Multibin Anzahl"
 
-msgid "Minmax Multibin Size"
-msgstr "Minmax Multibin Größe"
+msgid "Min Max Multibin Size"
+msgstr "Min Max Multibin Größe"
 
-msgid "Multibin Minmax Quantity"
-msgstr "Multibin Minmax Menge"
+msgid "Multibin Min Max Quantity"
+msgstr "Multibin Min Max Menge"
 
 msgid "Fp Mrp Demand Id"
 msgstr "Fp Mrp Demand-Id"
@@ -2935,8 +2932,8 @@ msgstr "Standard Anzahl Der Zeitraum"
 msgid "Hr Leave Transaction Id"
 msgstr "Hr Leave Transaction Id"
 
-msgid "Requsted Date"
-msgstr "Requsted Datum"
+msgid "Requested Date"
+msgstr "Wunschtermin"
 
 msgid "Approved Date"
 msgstr "Genehmigt Datum"
@@ -3118,7 +3115,7 @@ msgstr "Inv Abc Bewertungs Id"
 msgid "Inv Abc Assignment Line Id"
 msgstr "Inv Abc Zuordnungslinie Id"
 
-msgid "Abc Class"
+msgid "ABC Class"
 msgstr "ABC-Klasse"
 
 msgid "Valuation Name"
@@ -3127,7 +3124,7 @@ msgstr "Bewertungs Namen"
 msgid "Scope Org Id"
 msgstr "Scope Org Id"
 
-msgid "Scope Sub Inventory Id"
+msgid "Scope Subinventory Id"
 msgstr "Scope Sub Inventar Id"
 
 msgid "Scope Org Hirearchy Id"
@@ -3241,9 +3238,6 @@ msgstr "Transaktionsdatum"
 msgid "Carrier"
 msgstr "Träger"
 
-msgid "Vechile Number"
-msgstr "Vechile Anzahl"
-
 msgid "Waybill"
 msgstr "Frachtbrief"
 
@@ -3322,11 +3316,11 @@ msgstr "Original Wip Wo Header ID"
 msgid "Last Inv Transaction Id"
 msgstr "Letzte Inv Transaction Id"
 
-msgid "Inv Lot Onhand Id"
-msgstr "Inv Lot OnHand Id"
+msgid "Inv Lot On Hand Id"
+msgstr "Inv Lot On Hand Id"
 
-msgid "Onhand Id"
-msgstr "OnHand Id"
+msgid "On Hand Id"
+msgstr "On Hand Id"
 
 msgid "Lot Quantity"
 msgstr "Lot Menge"
@@ -3598,7 +3592,7 @@ msgstr "UN-Nummer"
 msgid "Hazard Classs"
 msgstr "Hazard Classs"
 
-msgid "Receipt Sub Inventory"
+msgid "Receipt Subinventory"
 msgstr "Receipt Sub Inventar"
 
 msgid "Over Receipt Percentage"
@@ -3664,11 +3658,11 @@ msgstr "Mindestbestellmenge"
 msgid "Maximum Order Quantity"
 msgstr "Maximale Bestellmenge"
 
-msgid "Minmax Min Quantity"
-msgstr "Minmax Min Menge"
+msgid "Min Max Min Quantity"
+msgstr "Min Max Min Menge"
 
-msgid "Minmax Max Quantity"
-msgstr "Minmax Max Menge"
+msgid "Min Max Max Quantity"
+msgstr "Min Max Max Menge"
 
 msgid "Forecast Method"
 msgstr "Forecast Method"
@@ -3691,7 +3685,7 @@ msgstr "Pre Verarbeitung Lt"
 msgid "Post Processing Lt"
 msgstr "Post Processing Lt"
 
-msgid "Processing Lt"
+msgid "Processing LT"
 msgstr "Verarbeitungs Lt"
 
 msgid "Cumulative Mfg Lt"
@@ -3745,8 +3739,8 @@ msgstr "Ar Zahlungs-Ausdruck"
 msgid "Rounding Option"
 msgstr "Abgerundet Option"
 
-msgid "Onhand With Rev Cb"
-msgstr "Onhand Mit Rev CB"
+msgid "On Hand With Rev Cb"
+msgstr "On Hand Mit Rev CB"
 
 msgid "Item Rev Number"
 msgstr "Artikel Rev Anzahl"
@@ -4027,14 +4021,14 @@ msgstr "Lot Id"
 msgid "Serial Id"
 msgstr "Serien-ID"
 
-msgid "Onhand"
-msgstr "Onhand"
+msgid "On Hand"
+msgstr "An Hand"
 
-msgid "Reservable Onhand"
-msgstr "Reservierbar OnHand"
+msgid "Reservable On Hhand"
+msgstr "Reservierbar On Hand"
 
-msgid "Transactable Onhand"
-msgstr "Transactable OnHand"
+msgid "Transactable On Hand"
+msgstr "Transactable On Hand"
 
 msgid "Lot Status"
 msgstr "LOT Status"
@@ -4045,14 +4039,14 @@ msgstr "Serienstand"
 msgid "Secondary Uom Id"
 msgstr "Sekundär ME Id"
 
-msgid "Onhand Status"
-msgstr "OnHand Stand"
+msgid "On Hand Status"
+msgstr "On Hand Stand"
 
 msgid "Org Name"
 msgstr "Org Namen"
 
-msgid "Onhand Value"
-msgstr "OnHand Wert"
+msgid "On Hand Value"
+msgstr "On Hand Wert"
 
 msgid "Subinventory Type"
 msgstr "Subinventory Typ"
@@ -4315,13 +4309,13 @@ msgstr "Pflichtigen Name"
 msgid "Requirement Type"
 msgstr "Anforderungstyp"
 
-msgid "Max Evaludation Points"
-msgstr "Max Evaludation Punkte"
+msgid "Max Evaluaation Points"
+msgstr "Max Bewertungspunkten"
 
 msgid "Target Value"
 msgstr "Zielwert"
 
-msgid "Rfq Number"
+msgid "RFQ Number"
 msgstr "Anfragenummer"
 
 msgid "Rfq Name"
@@ -4408,8 +4402,8 @@ msgstr "Return Subinventory Id"
 msgid "Return Locator Id"
 msgstr "Return Locator Id"
 
-msgid "Allow Negative Onhand Cb"
-msgstr "Lassen Sie Negative OnHand Cb"
+msgid "Allow Negative On Hand Cb"
+msgstr "Lassen Sie Negative On Hand Cb"
 
 msgid "Customer Site Id"
 msgstr "Kunden Website-ID"
@@ -4666,9 +4660,6 @@ msgstr "Staging Subinventory"
 msgid "Staging Locator"
 msgstr "Staging Locator"
 
-msgid "Requested Date"
-msgstr "Wunschtermin"
-
 msgid "Sd Quote Header Id"
 msgstr "Sd-Zitat-Header ID"
 
@@ -4677,9 +4668,6 @@ msgstr "Neue Kundenname"
 
 msgid "New Customer Address"
 msgstr "Neuer Kunde Adresse"
-
-msgid "Aggrement End Date"
-msgstr "Aggrement Enddatum"
 
 msgid "Sd Quote Line Id"
 msgstr "Sd Quote Linie Id"
@@ -5035,7 +5023,7 @@ msgstr "Um User Id All"
 msgid "To Email"
 msgstr "Eine E-Mail schicken"
 
-msgid "Cc Email"
+msgid "CC Email"
 msgstr "Cc E-Mail"
 
 msgid "Notification Subject"
@@ -5260,7 +5248,7 @@ msgstr "Transaktionsaktions"
 msgid "Account Id"
 msgstr "Account ID"
 
-msgid "Primary Uom Id"
+msgid "Primary UOM Id"
 msgstr "Primäre ME Id"
 
 msgid "Primary Relation"
@@ -5488,8 +5476,8 @@ msgstr "Wip Accounting Group Id"
 msgid "Wo Type"
 msgstr "Wo Typ"
 
-msgid "Wip Accounting Group"
-msgstr "Wip Accounting Group"
+msgid "WIP Accounting Group"
+msgstr "WIP Accounting Group"
 
 msgid "Var Material Ac Id"
 msgstr "Var Werkstoff Ac Id"
@@ -5605,7 +5593,7 @@ msgstr "Routing Explosions Cb"
 msgid "Reference Routing Item Id M"
 msgstr "Referenz Routing Artikel-Nummer M"
 
-msgid "Completion Sub Inventory"
+msgid "Completion Subinventory"
 msgstr "Fertigstellung Sub Inventar"
 
 msgid "Completed Quantity"
@@ -5716,8 +5704,8 @@ msgstr "Path - Erstellen, Aktualisieren und Löschen"
 msgid "Create & Update Address"
 msgstr "Erstellen & Aktualisieren Adresse"
 
-msgid "Char of Account"
-msgstr "Char von Konto"
+msgid "Chart Of Account"
+msgstr "Konto"
 
 msgid "Chart Of Accounts"
 msgstr "Konten"
@@ -5731,7 +5719,7 @@ msgstr "Alle Konten"
 msgid "Search Ac Combinations"
 msgstr "Suchen Ac Kombinationen"
 
-msgid "Char of account combinations"
+msgid "Chart Of Account Combinations"
 msgstr "Char Rechnungskombinationen"
 
 msgid "Account Combination"
@@ -5779,7 +5767,7 @@ msgstr "Suche alle Elemente"
 msgid "Search Items"
 msgstr "Suche Artikel"
 
-msgid "Unit of mesaures"
+msgid "Unit of measures"
 msgstr "Einheit mesaures"
 
 msgid "View Unit of Measures"
@@ -5797,9 +5785,6 @@ msgstr "Liste der Transaktionstypen"
 msgid "Search Transaction Type"
 msgstr "Suche nach Art der Transaktion"
 
-msgid "Sub Inventory"
-msgstr "Sub Inventar"
-
 msgid "Search All Sub Inventories"
 msgstr "Suchen Alle Sub Vorräte"
 
@@ -5815,11 +5800,8 @@ msgstr "Inventar"
 msgid "Search Locator"
 msgstr "Suche Locator"
 
-msgid "On hand Quantities"
+msgid "On Hand Quantities"
 msgstr "Auf der Hand Mengen"
-
-msgid "On Hand"
-msgstr "An Hand"
 
 msgid "Inventory Transaction"
 msgstr "Inventar Transaktion"
@@ -6004,7 +5986,7 @@ msgstr "Suche nach Inventar Receipt"
 msgid "Search Inv Receipts"
 msgstr "Suchen Inv Receipts"
 
-msgid "Bill of materials"
+msgid "Bill Of Materials"
 msgstr "Stückliste"
 
 msgid "Search All BOMs"
@@ -6037,7 +6019,7 @@ msgstr "Suchen materiellen Elemente"
 msgid "Overhead - Resource & Material"
 msgstr "Overhead - Ressource & Material"
 
-msgid "All Over heads"
+msgid "All Overheads"
 msgstr "All Over Köpfe"
 
 msgid "Search Overhead"
@@ -6180,9 +6162,6 @@ msgstr "Hauptbuch"
 
 msgid "Create update & ledger"
 msgstr "Erstellen Update & Ledger"
-
-msgid "Serach Ledgers"
-msgstr "Serach Ledgers"
 
 msgid "Search Ledgers"
 msgstr "Suche nach Ledgers"
@@ -6562,7 +6541,7 @@ msgstr "Massen uplaod Locators"
 msgid "Upload Locators"
 msgstr "Hochladen Locators"
 
-msgid "View Sub Inventory"
+msgid "View Subinventory"
 msgstr "Ansicht Sub Inventar"
 
 msgid "Search UOM"
@@ -6619,7 +6598,7 @@ msgstr "Informieren Sie sich über Stücklistenmaterial Element"
 msgid "View Material Element"
 msgstr "Ansicht Material Element"
 
-msgid "View Over Head"
+msgid "View Overhead"
 msgstr "Blick über Kopf"
 
 msgid "Mass Upload Department"
@@ -6823,8 +6802,8 @@ msgstr "Min Max Planner"
 msgid "Search Min Max Planner"
 msgstr "Suchen Min Max Planner"
 
-msgid "Search MinMax Planner"
-msgstr "Suche MinMax Planner"
+msgid "Search Min Max Planner"
+msgstr "Suche Min Max Planner"
 
 msgid "Min Max Demand"
 msgstr "Min Max Nachfrage"
@@ -6841,10 +6820,10 @@ msgstr "Update Artikel Min Max Parameter"
 msgid "Min Max Planner Work Bench"
 msgstr "Min Max Planner Work Bench"
 
-msgid "Create Supply - MinMax Program"
-msgstr "Erstellen Versorgung - MinMax-Programm"
+msgid "Create Supply - Min Max Program"
+msgstr "Erstellen Versorgung - Min Max-Programm"
 
-msgid "Create Supply - MinMax"
+msgid "Create Supply - Min Max"
 msgstr "Erstellen Versorgung - MinMax"
 
 msgid "View Requisition Interface Lines"
@@ -6919,11 +6898,11 @@ msgstr "Berichte & Analysen"
 msgid "RA"
 msgstr "RA"
 
-msgid "Onhand By Subinventory"
-msgstr "Onhand Durch Subinventory"
+msgid "On Hand By Subinventory"
+msgstr "On Hand Durch Subinventory"
 
-msgid "Onhand Analysis"
-msgstr "OnHand Analysis"
+msgid "On Hand Analysis"
+msgstr "On Hand Analysis"
 
 msgid "Purchasing Analysis"
 msgstr "Kauf Analysis"
@@ -6943,10 +6922,10 @@ msgstr "Schiffskundenaufträge"
 msgid "Ship Sales Order"
 msgstr "Schiffs Sales Order"
 
-msgid "TAX Codes & Rates"
+msgid "Tax Codes & Rates"
 msgstr "Steuerkennzeichen & Preise"
 
-msgid "TAX Codes"
+msgid "Tax Codes"
 msgstr "Steuerkennzeichen"
 
 msgid "Tax Regions"
@@ -7306,11 +7285,8 @@ msgstr "Definen blockieren"
 msgid "My Notifications"
 msgstr "Meine Benachrichtigungen"
 
-msgid "User Leave Blalance"
-msgstr "User-Leave Blalance"
-
-msgid "Leave Blalance"
-msgstr "Lassen Blalance"
+msgid "User Leave Balance"
+msgstr "User-Leave Balance"
 
 msgid "Search All Leave"
 msgstr "Suchen Alle Leave"
@@ -7471,17 +7447,17 @@ msgstr "Benutzerdefinierten Bericht option_type - Optionstypen"
 msgid "Custom report option_type"
 msgstr "Benutzerdefinierten Bericht option_type"
 
-msgid "Custom report Onhand - Curret Onhand"
-msgstr "Benutzerdefinierten Bericht OnHand - Curret OnHand"
+msgid "Custom report On Hand - Current On Hand"
+msgstr "Benutzerdefinierten Bericht On Hand - Current On Hand"
 
-msgid "Custom report Onhand"
-msgstr "Benutzerdefinierten Bericht OnHand"
+msgid "Custom report On Hand"
+msgstr "Benutzerdefinierten Bericht On Hand"
 
-msgid "Custom Report - Onhand Inventory Wise"
-msgstr "Custom Report - OnHand Inventar Wise"
+msgid "Custom Report - On Hand Inventory Wise"
+msgstr "Custom Report - On Hand Inventar Wise"
 
-msgid "Custom Report - Onhand"
-msgstr "Custom Report - OnHand"
+msgid "Custom Report - On Hand"
+msgstr "Custom Report - On Hand"
 
 msgid "Secondary Field"
 msgstr "Sekundärfeld"
@@ -7522,8 +7498,8 @@ msgstr "Document & Analysis"
 msgid "Search Process Flow"
 msgstr "Suche nach Ablauf"
 
-msgid "Minmax Board"
-msgstr "Minmax Foren"
+msgid "Min Max Board"
+msgstr "Min Max Foren"
 
 msgid "Programs for Document Administrator"
 msgstr "Programme für Document Administrator"
@@ -8290,9 +8266,6 @@ msgstr "SO-Header ID"
 msgid "SO Line Id"
 msgstr "SO Linie Id"
 
-msgid "Project Line Idt"
-msgstr "Project Line Idt"
-
 msgid "Receivable Transaction Source"
 msgstr "Forderungen Transaktion Quelle"
 
@@ -8341,11 +8314,8 @@ msgstr "Ressourcenzuordnung"
 msgid "Overhead Rate"
 msgstr "Overhead-Rate"
 
-msgid "Over Head"
-msgstr "Over Head"
-
-msgid "Over Head Details"
-msgstr "Over Head-Details"
+msgid "Overhead Details"
+msgstr "Overhead-Details"
 
 msgid "Rate Assignment"
 msgstr "Bewerten Zuordnung"
@@ -8454,9 +8424,6 @@ msgstr "Konfigurierte Stücklistenkopf"
 
 msgid "BOMLine Id"
 msgstr "BOMLine Id"
-
-msgid "Routing Sequenceg"
-msgstr "Routing Sequenceg"
 
 msgid "Usage Qty"
 msgstr "Nutzungs Menge"
@@ -8659,9 +8626,6 @@ msgstr "Präfix"
 msgid "Adjusting Period"
 msgstr "Einstellen Zeitraum"
 
-msgid "Chart Of Account"
-msgstr "Konten"
-
 msgid "Chart of Account Details"
 msgstr "Chart of Account Details"
 
@@ -8758,9 +8722,6 @@ msgstr "Aktuelle Freizeitraum"
 msgid "Next Period"
 msgstr "Nächste Periode"
 
-msgid "PeriodId"
-msgstr "PeriodId"
-
 msgid "Cal Name"
 msgstr "Cal-Name"
 
@@ -8836,7 +8797,7 @@ msgstr "Mitarbeiter Kündigung"
 msgid "Requirements"
 msgstr "Bedarf"
 
-msgid "job Details & Responsibility"
+msgid "Job Details & Responsibility"
 msgstr "Job-Details & Verantwortung"
 
 msgid "Leave Details"
@@ -8959,8 +8920,8 @@ msgstr "Anpassungen"
 msgid "Count By"
 msgstr "Graf von"
 
-msgid "Adjustment Ac"
-msgstr "Adjustment Ac"
+msgid "Adjustment AC"
+msgstr "Adjustment AC"
 
 msgid "System Quantity"
 msgstr "System Menge"
@@ -9006,9 +8967,6 @@ msgstr "In Chargennummer"
 
 msgid "Add Serial Numbers"
 msgstr "In Seriennummern"
-
-msgid "Inventory Transaction "
-msgstr "Inventar Transaktion"
 
 msgid "Lot & Serial"
 msgstr "Lot & Seifen"
@@ -9121,9 +9079,6 @@ msgstr "Geschäfte"
 msgid "Relations"
 msgstr "Beziehungen"
 
-msgid "From Sub Inventory"
-msgstr "Von Sub Inventar"
-
 msgid "Transaction Details"
 msgstr "Details der Transaktion"
 
@@ -9135,9 +9090,6 @@ msgstr "Von Locator Id"
 
 msgid "To SubInv Id"
 msgstr "Um SubInv Id"
-
-msgid "To Locator Id "
-msgstr "Um Id Locator"
 
 msgid "Receipt Header Id"
 msgstr "Receipt-Header ID"
@@ -9261,9 +9213,6 @@ msgstr "Adresskopf"
 
 msgid "BO Details"
 msgstr "BO-Details"
-
-msgid "Type of Business Org"
-msgstr "Art der Geschäfts Org"
 
 msgid "Enterprise Name"
 msgstr "Unternehmensnamen"
@@ -9418,9 +9367,6 @@ msgstr "Faktoren"
 msgid "Requirement Id"
 msgstr "Anforderungs-ID"
 
-msgid "Max Evaluation Points"
-msgstr "Max Bewertungspunkten"
-
 msgid "Supplier Value"
 msgstr "Lieferant Wert"
 
@@ -9458,7 +9404,7 @@ msgid "Sourcing Lines"
 msgstr "Sourcing-Linien"
 
 msgid "Allocation % "
-msgstr "Zuweisung %"
+msgstr "Zuweisung % "
 
 msgid "POS Barcode List"
 msgstr "POS Barcode Liste"
@@ -9585,9 +9531,6 @@ msgstr "WO ID-Header"
 
 msgid "Config Details"
 msgstr "Config-Details"
-
-msgid "Destination Typet"
-msgstr "Destination Typet"
 
 msgid "Shipped /Received Quantity"
 msgstr "Versendet / Empfangene Menge"
@@ -9916,8 +9859,8 @@ msgstr "Konsolidieren"
 msgid "Last Service"
 msgstr "Letzter Service"
 
-msgid "Mainteance WO  Material Transaction"
-msgstr "Mainteance WO Material Transaktions"
+msgid "Maintenance WO Material Transaction"
+msgstr "Maintenance WO Material Transaktions"
 
 msgid "Meter"
 msgstr "Meter"
@@ -9939,9 +9882,6 @@ msgstr "Kalender Datum [Für Maintenance Schedule]"
 
 msgid "Schedule Info"
 msgstr "Planer Info"
-
-msgid "Sehedule ID"
-msgstr "Sehedule ID"
 
 msgid "Calendar Date"
 msgstr "Kalenderdatum"
@@ -9982,8 +9922,8 @@ msgstr "Zyklusintervall"
 msgid "Maintenance Work Order"
 msgstr "Wartung Work Order"
 
-msgid "Mainteance WO Resource Transaction"
-msgstr "Mainteance WO Transaktion Hilfsmittel"
+msgid "Maintenance WO Resource Transaction"
+msgstr "Maintenance WO Transaktion Hilfsmittel"
 
 msgid "Payable Control"
 msgstr "Vor Ort Steuerung"
@@ -10417,9 +10357,6 @@ msgstr "Verkäufer"
 msgid "Vendor Details"
 msgstr "Vendor-Details"
 
-msgid "Locaion"
-msgstr "Locaion"
-
 msgid "Daily Rate"
 msgstr "Tagesrate"
 
@@ -10564,8 +10501,8 @@ msgstr "Kauftransaktion - Empfang / Return"
 msgid "Quality Details"
 msgstr "Wahl Details"
 
-msgid "Onhand Reservation"
-msgstr "OnHand Reservation"
+msgid "On Hand Reservation"
+msgstr "On Hand Reservation"
 
 msgid "Demand & Supply"
 msgstr "Nachfrage Angebot"
@@ -10597,8 +10534,8 @@ msgstr "Serien"
 msgid "Lot"
 msgstr "Los"
 
-msgid "Res. Onhand"
-msgstr "Res. Onhand"
+msgid "Res. On Hand"
+msgstr "Res. On Hand"
 
 msgid "Key Name"
 msgstr "Schlüsselname"
@@ -10681,7 +10618,7 @@ msgstr "Burden Cost Code"
 msgid "Burden Expenditure"
 msgstr "Burden Ausgaben"
 
-msgid "Burden  List"
+msgid "Burden List"
 msgstr "Burden Liste"
 
 msgid "Cost Code"
@@ -10801,11 +10738,11 @@ msgstr "Rechnungs Kategorie"
 msgid "invoice Source"
 msgstr "Rechnungs Quelle"
 
-msgid "Trasnfer Date"
-msgstr "Trasnfer Datum"
+msgid "Transfer Date"
+msgstr "Übertragungsstichtag"
 
 msgid "Reject Reason"
-msgstr "Reject Reason"
+msgstr "Ablehnungsgrund"
 
 msgid "Reference Key"
 msgstr "Referenz Key"
@@ -11149,9 +11086,6 @@ msgstr "Globale Setup-"
 msgid "Rating Values Header"
 msgstr "Rating Werte Kopf"
 
-msgid "Home Page : "
-msgstr "Homepage:"
-
 msgid "Hidden Texts"
 msgstr "Versteckte Texte"
 
@@ -11167,13 +11101,13 @@ msgstr "Abonnementdetails"
 msgid "Theme List"
 msgstr "Nach Themen"
 
-msgid "User Dashboard "
+msgid "User Dashboard"
 msgstr "Benutzer-Dashboard"
 
 msgid "Navigation"
 msgstr "Navigation"
 
-msgid "Quick Info "
+msgid "Quick Info"
 msgstr "Quick Info"
 
 msgid "Open PO"
@@ -11248,8 +11182,8 @@ msgstr "Artikel ist nicht seriell gesteuert. Es Serien informatio wird in der Da
 msgid "value      "
 msgstr "Wert"
 
-msgid "readonly field      "
-msgstr "Readonly-Feld"
+msgid "Read Only Field"
+msgstr "Nur-Lese-Feld"
 
 msgid "No period avaibale to open      "
 msgstr "Keine Periode avaibale zu öffnen"
@@ -11259,9 +11193,6 @@ msgstr "Sie können die letzte Filterelement Klicken Sie nicht entfernen, auf Fe
 
 msgid "No Subject Entered. Subject is required!      "
 msgstr "Kein Betreff eingetragen. Betreff ist erforderlich!"
-
-msgid "Read Only Field      "
-msgstr "Nur-Lese-Feld"
 
 msgid "Sum of line amounts  + totalAmount +  is more than header amount  + header_amount +  Re-enter Header Amount!      "
 msgstr "Summe der Linie beträgt + TotalAmount + ist mehr als Kopfbetrag + header_amount +  erneut eingeben Kopfbetrag!"
@@ -11368,8 +11299,8 @@ msgstr "Keine Zeile klicken Für Shipment Remove / Kehren Sie die erforderlichen
 msgid "You can only search lines which are not picked      "
 msgstr "Sie können nur zu suchen Linien, die nicht abgeholt werden"
 
-msgid "Available Onhand is less than line quantity      "
-msgstr "Erhältlich OnHand weniger als Leitungsmenge"
+msgid "Available On Hand is less than line quantity      "
+msgstr "Erhältlich On Hand weniger als Leitungsmenge"
 
 msgid "All line quantities are in picked status!      "
 msgstr "Alle Leitungsmengen in abgeholt Status!"
@@ -11572,17 +11503,17 @@ msgstr "Info-2"
 msgid "Move Order Header"
 msgstr "Bewegen Sie Auftragskopf"
 
-msgid "From Current Onhand"
-msgstr "Aus aktueller OnHand"
+msgid "From Current On Hand"
+msgstr "Aus aktueller On Hand"
 
-msgid "From Future Onhand"
-msgstr "Von Future OnHand"
+msgid "From Future On Hand"
+msgstr "Von Future On Hand"
 
-msgid "To Current Onhand"
-msgstr "Um aktuelle OnHand"
+msgid "To Current On Hand"
+msgstr "Um aktuelle On Hand"
 
-msgid "To Future Onhand"
-msgstr "Future OnHand"
+msgid "To Future On Hand"
+msgstr "Future On Hand"
 
 msgid "Org Assignment"
 msgstr "Org Zuordnung"
@@ -12262,10 +12193,10 @@ msgstr "fp Kanban-Nachfrage-ID"
 msgid "fp kanban header id"
 msgstr "fp Kanban-Header-ID"
 
-msgid "effective from"
+msgid "Effective From"
 msgstr "gültig ab"
 
-msgid "effective to"
+msgid "Effective To"
 msgstr "wirksam ist, um"
 
 msgid "planning only cb"
@@ -12481,7 +12412,7 @@ msgstr "rewnew Preisliste ID"
 msgid "counter instance id"
 msgstr "Gegen Instanz-ID"
 
-msgid "event id"
+msgid "Event Id"
 msgstr "Ereignis-ID"
 
 msgid "hd service contract schedule id"
@@ -13027,11 +12958,8 @@ msgstr "prj Belastung Kostenbasis id"
 msgid "prj burden costcode id"
 msgstr "prj Belastung costcode id"
 
-msgid "costcode"
-msgstr "costcode"
-
-msgid "prj exependiture type id"
-msgstr "prj exependiture Typ-ID"
+msgid "prj expenditure type id"
+msgstr "prj Ausgabentyp-ID"
 
 msgid "prj burden expenditure id"
 msgstr "prj Belastung Ausgaben id"
@@ -13051,9 +12979,6 @@ msgstr "prj Belastung Struktur-Header-ID"
 msgid "burden value"
 msgstr "Last-Wert"
 
-msgid "burden list"
-msgstr "Last Liste"
-
 msgid "prj burden list line id"
 msgstr "prj Belastung Listenzeile id"
 
@@ -13069,10 +12994,7 @@ msgstr "Last Kostenbasis id"
 msgid "prj burden structure expendituretype id"
 msgstr "prj Belastung Struktur expendituretype id"
 
-msgid "prj expenditure type id"
-msgstr "prj Ausgabentyp-ID"
-
-msgid "structure"
+msgid "Structure"
 msgstr "Struktur"
 
 msgid "structure type"
@@ -13084,7 +13006,7 @@ msgstr "ermöglichen Override cb"
 msgid "prj category header id"
 msgstr "prj Kategorie Header-ID"
 
-msgid "mandatory cb"
+msgid "Mandatory Cb"
 msgstr "Pflicht cb"
 
 msgid "one code only cb"
@@ -13141,7 +13063,7 @@ msgstr "Einnahmen verteilt cb"
 msgid "prj event type id"
 msgstr "prj Ereignistyp-ID"
 
-msgid "event class"
+msgid "Event Class"
 msgstr "Ereignisklasse"
 
 msgid "prj expenditure header id"
@@ -13237,11 +13159,8 @@ msgstr "Forderungsbetrag"
 msgid "invoice number"
 msgstr "Rechnungsnummer"
 
-msgid "rejection reason"
+msgid "Rejection Reason"
 msgstr "Ablehnungsgrund"
-
-msgid "transfer date"
-msgstr "Übertragungsstichtag"
 
 msgid "prj invoice line id"
 msgstr "prj Rechnungszeile id"
@@ -13540,7 +13459,7 @@ msgstr "Nicht arbeitete cb"
 msgid "qa ce action type id"
 msgstr "qa ce Aktionstyp-ID"
 
-msgid "qa cp header id"
+msgid "Qa Cp Header Id"
 msgstr "qa cp-Header-ID"
 
 msgid "qa ce action type value"
@@ -13597,7 +13516,7 @@ msgstr "qa ce Spektralbereich Wert"
 msgid "qa collection element action id"
 msgstr "qa Sammelelement Aktion id"
 
-msgid "qa collection element header id"
+msgid "Qa Collection Element Header Id"
 msgstr "qa Sammelelement-Header-ID"
 
 msgid "action condition"
@@ -13606,49 +13525,49 @@ msgstr "Action Zustand"
 msgid "quality action"
 msgstr "Qualitätsaktions"
 
-msgid "sys element name"
+msgid "Sys Element Name"
 msgstr "sys Elementname"
 
-msgid "data type"
+msgid "Data Type"
 msgstr "Dateityp"
 
-msgid "data length"
+msgid "Data Length"
 msgstr "Datenlänge"
 
-msgid "element label"
+msgid "Element Label"
 msgstr "Element-Label"
 
-msgid "hint"
+msgid "Hint"
 msgstr "Hinweis"
 
-msgid "decimal position"
+msgid "Decimal Position"
 msgstr "Dezimalstelle"
 
-msgid "default value"
+msgid "Default Value"
 msgstr "Standardwert"
 
-msgid "user range low"
+msgid "User Range Low"
 msgstr "Benutzerbereich niedrig"
 
-msgid "user range high"
+msgid "User Range High"
 msgstr "Benutzerbereich Hoch"
 
-msgid "specification range high"
+msgid "Specification Range High"
 msgstr "Spezifikationsbereich Hoch"
 
-msgid "specification range low"
+msgid "Specification Range Low"
 msgstr "Spezifikationsbereich niedrig"
 
-msgid "reasonable range high"
+msgid "Reasonable Range High"
 msgstr "vernünftigen Bereich Hoch"
 
-msgid "reasonable range low"
+msgid "Reasonable Range Low"
 msgstr "angemessenen Strecke niedriger"
 
 msgid "qa collection element line id"
 msgstr "qa Sammelelement Zeile id"
 
-msgid "qa cp assignment header id"
+msgid "Qa Cp Assignment Header Id"
 msgstr "qa cp Zuordnung Header-ID"
 
 msgid "qa cp assignment line id"
@@ -13657,13 +13576,13 @@ msgstr "qa cp Zuordnungslinie ID"
 msgid "trigger condition"
 msgstr "Triggerbedingung"
 
-msgid "plan type"
+msgid "Plan Type"
 msgstr "Plantyp"
 
-msgid "qa specification header id"
+msgid "Qa Specification Header Id"
 msgstr "qa Spezifikation Header-ID"
 
-msgid "specification type"
+msgid "Specification Type"
 msgstr "Spezifikationsart"
 
 msgid "qa cp line id"
@@ -13678,10 +13597,7 @@ msgstr "angezeigt cb"
 msgid "information cb"
 msgstr "Informationen cb"
 
-msgid "dafault value"
-msgstr "dafault Wert"
-
-msgid "specification name"
+msgid "Specification Name"
 msgstr "Beschreibung Name"
 
 msgid "ap customer id"
@@ -13801,7 +13717,7 @@ msgstr "op Email Format"
 msgid "sys program schedule id"
 msgstr "sys Programmplan-ID"
 
-msgid "frequency uom"
+msgid "Frequency UOM"
 msgstr "Frequenz uom"
 
 msgid "frequency value"
@@ -13837,8 +13753,8 @@ msgstr "Zeitstempel"
 msgid "user data"
 msgstr "Benutzerdaten"
 
-msgid "readcount"
-msgstr "Readcount"
+msgid "Read Count"
+msgstr "Read Count"
 
 msgid "sys spd process flow action id"
 msgstr "sys spd Prozessablauf Aktion id"

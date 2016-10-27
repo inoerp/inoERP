@@ -229,6 +229,13 @@ class inv_moveorder_header extends dbObject {
   }
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
+inv_moveorder_header::staticVar_init('transaction_type_id_a');
 ?>

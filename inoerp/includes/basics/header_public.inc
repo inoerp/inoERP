@@ -72,7 +72,7 @@ check_browser(); ?>
      ?>
 <?php if ($show_header_links) { ?>
       <div class="social-icons">
-       <span><a class="clickable erp_dashborad" href="<?php  echo HOME_URL ?>form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"><i class="fa fa-dashboard"></i> ERP Dashboard </a></span>     
+       <span><a class="clickable erp_dashborad" href="<?php  echo HOME_URL ?>form.php?class_name=user_dashboard_v&mode=2" title="<?php echo gettext('ERP Dashboard') ?>"><i class="fa fa-dashboard"></i> <?php echo gettext('ERP Dashboard') ?> </a></span>     
       </div><!-- end social icons -->
 <?php } ?>
 

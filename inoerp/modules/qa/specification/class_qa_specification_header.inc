@@ -110,7 +110,15 @@ class qa_specification_header extends dbObject {
 //  $lines = $option_line->findBy_parentId($header->option_header_id);
 //  return $lines;
 // }
+
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of path class
+qa_specification_header::staticVar_init('specification_type_a');
 ?>

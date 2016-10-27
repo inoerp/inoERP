@@ -12,7 +12,7 @@ inoERP
 
 
  <!--create empty form or a single id when search is not clicked and the id is referred from other page -->
- <div id ="form_header"><span class="heading"><?php echo gettext('Mainteance WO  Material Transaction') ?></span> 
+ <div id ="form_header"><span class="heading"><?php echo gettext('Maintenance WO Material Transaction') ?></span> 
   <div id="form_serach_header" class="tabContainer">
    <ul class="column header_field">
     <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>    </li>
@@ -166,10 +166,10 @@ inoERP
           ?> 
           <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>lot</legend>
+           <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Lot') ?></legend>
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-1"> <?php echo gettext('Numbers') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-1" class="tabContent">
@@ -240,10 +240,10 @@ inoERP
           ?>
           <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>Serial</legend>
+           <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Serial') ?></legend>
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-2-1"> Numbers</a></li>
+              <li class="tabLink"><a href="#tabsDetail-2-1"> <?php echo gettext('Numbers') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-2-1" class="tabContent">

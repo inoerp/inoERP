@@ -1855,7 +1855,14 @@ class inv_transaction extends dbObject {
   return !empty($result) ? ($result) : false;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of inv_transaction class
+inv_transaction::staticVar_init('allowed_inv_transactions');
 ?>

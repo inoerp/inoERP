@@ -114,7 +114,14 @@ class po_asl_header extends dbObject {
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of asl class
+po_asl_header::staticVar_init('asl_type_a');
 ?>

@@ -162,7 +162,7 @@ msgstr "معرف Org الإنتاج"
 msgid "Ap Payment Header Id"
 msgstr "Ap دفع رأس معرف"
 
-msgid "Bu Org Id"
+msgid "BU Org Id"
 msgstr "معرف Org بو"
 
 msgid "Payment Type"
@@ -264,7 +264,7 @@ msgstr "نوع سعر الصرف"
 msgid "Exchange Rate"
 msgstr "سعر الصرف"
 
-msgid "Ef Id"
+msgid "EF Id"
 msgstr "معرف ef"
 
 msgid "Document Date"
@@ -300,7 +300,7 @@ msgstr "معرف الواجهة الدفع Ap"
 msgid "Document Currency"
 msgstr "العملة المستند"
 
-msgid "Gl Amount"
+msgid "GL Amount"
 msgstr "المبلغ Gl"
 
 msgid "Line Source"
@@ -318,10 +318,10 @@ msgstr "وصف مصطلح"
 msgid "Payment Term Id"
 msgstr "معرف الدفع الأجل"
 
-msgid "Po Number"
+msgid "PO Number"
 msgstr "رقم طلب الشراء"
 
-msgid "Po Type"
+msgid "PO Type"
 msgstr "نوع Po"
 
 msgid "Buyer"
@@ -351,13 +351,13 @@ msgstr "سعر الخط للاستثمارات"
 msgid "Gl Inv Line Price"
 msgstr "سعر خط Gl للاستثمارات"
 
-msgid "Po Header Id"
+msgid "PO Header Id"
 msgstr "بو رأس معرف"
 
-msgid "Po Line Id"
+msgid "PO Line Id"
 msgstr "معرف خط بو"
 
-msgid "Po Detail Id"
+msgid "PO Detail Id"
 msgstr "معرف تفاصيل بو"
 
 msgid "Ref Transaction Header Id"
@@ -369,7 +369,7 @@ msgstr "معرف خط المعاملات ref"
 msgid "Item Number"
 msgstr "رقم الصنف"
 
-msgid "Uom Id"
+msgid "UOM Id"
 msgstr "معرف Uom"
 
 msgid "Item Status"
@@ -393,10 +393,10 @@ msgstr "سعر الوحدة"
 msgid "Line Price"
 msgstr "سعر الخط"
 
-msgid "Gl Line Price"
+msgid "GL Line Price"
 msgstr "سعر خط Gl"
 
-msgid "Gl Tax Amount"
+msgid "GL Tax Amount"
 msgstr "مبلغ الضريبة Gl"
 
 msgid "Tax Amount"
@@ -723,7 +723,7 @@ msgstr "إنشاء مركز سي بي"
 msgid "Ar Transaction Type Id"
 msgstr "معرف نوع المعاملات Ar"
 
-msgid "Ar Transaction Type"
+msgid "AR Transaction Type"
 msgstr "نوع الحركة Ar"
 
 msgid "Br Receivable Ac Id"
@@ -909,7 +909,7 @@ msgstr "Org التعليمات البرمجية"
 msgid "Bom Commonbom Line Id"
 msgstr "معرف خط شجرة كومونبوم"
 
-msgid "Bom Line Id"
+msgid "BOM Line Id"
 msgstr "معرف خط شجرة المواد"
 
 msgid "Routing Sequence"
@@ -924,10 +924,10 @@ msgstr "العائد"
 msgid "Include In Cost Rollup Cb"
 msgstr "وتشمل في Cb التكلفة التراكمية"
 
-msgid "Wip Supply Type"
+msgid "WIP Supply Type"
 msgstr "نوع العرض Wip"
 
-msgid "Supply Sub Inventory"
+msgid "Supply Subinventory"
 msgstr "إمداد المخزون Sub"
 
 msgid "Supply Locator"
@@ -939,7 +939,7 @@ msgstr "تكوين شجرة رأس معرف"
 msgid "Bom Config Line Id"
 msgstr "معرف خط التكوين شجرة المواد"
 
-msgid "Bom Sequence"
+msgid "BOM Sequence"
 msgstr "شجرة التسلسل"
 
 msgid "Component Item Id M"
@@ -1023,7 +1023,7 @@ msgstr "تاريخ البدء الفعلي"
 msgid "Effective End Date"
 msgstr "تاريخ الانتهاء الفعلي"
 
-msgid "Eco Number"
+msgid "ECO Number"
 msgstr "عدد منظمة التعاون الاقتصادي"
 
 msgid "Eco Implemented Cb"
@@ -1092,8 +1092,8 @@ msgstr "نوع المورد"
 msgid "Charge Type"
 msgstr "نوع التهمة"
 
-msgid "Uom"
-msgstr "Uom"
+msgid "UOM"
+msgstr "UOM"
 
 msgid "Basis"
 msgstr "أساس"
@@ -1401,7 +1401,7 @@ msgstr "نوع عنصر التحكم"
 msgid "Control Value"
 msgstr "قيمة عنصر التحكم"
 
-msgid "Control Uom"
+msgid "Control UOM"
 msgstr "Uom التحكم"
 
 msgid "Active Cb"
@@ -1701,7 +1701,7 @@ msgstr "المنطقة الزمنية"
 msgid "Time To Contact"
 msgstr "الوقت المناسب للاتصال"
 
-msgid "Job Titile"
+msgid "Job Title"
 msgstr "تيتيلي الوظيفة"
 
 msgid "Extn Contact Reference Id"
@@ -1779,9 +1779,6 @@ msgstr "معرف المورد Ap"
 msgid "Ap Supplier Site Id"
 msgstr "معرف موقع المورد Ap"
 
-msgid "Warrranty Number"
-msgstr "عدد واررانتي"
-
 msgid "Lease Number"
 msgstr "رقم التأجير"
 
@@ -1818,13 +1815,13 @@ msgstr "السماح بنشر سي بي جي"
 msgid "Fa Calendar Code"
 msgstr "رمز التقويم فا"
 
-msgid "Revalue Accum Depriciation Cb"
+msgid "Revalue Accum Depreciation Cb"
 msgstr "إعادة تقييم Cb ديبريسييشن أككوم"
 
 msgid "Retire Revaluation Reserve Cb"
 msgstr "اعتزال Cb احتياطي إعادة التقييم"
 
-msgid "Revalue Ytd Depriciation Cb"
+msgid "Revalue Ytd Depreciation Cb"
 msgstr "إعادة تقييم Cb ديبريسييشن منذ بداية السنة"
 
 msgid "Sale Proceeds Gain Id"
@@ -1857,13 +1854,13 @@ msgstr "معرف مكسب المتقاعد الاحتياطي رفال"
 msgid "Reval Reserve Retired Loss Id"
 msgstr "رفال احتياطي فقدان المتقاعد معرف"
 
-msgid "Deff Depriciation Reserve Id"
+msgid "Deff Depreciation Reserve Id"
 msgstr "بالتأكي ياطي معرف"
 
-msgid "Deff Depriciation Expense Id"
+msgid "Deff Depreciation Expense Id"
 msgstr "بالتأكيد  المصاري"
 
-msgid "Deff Depriciation Adjustment Id"
+msgid "Deff Depreciation Adjustment Id"
 msgstr "بالتأكيديل معرف"
 
 msgid "Default Ac Id"
@@ -1902,19 +1899,19 @@ msgstr "معرف طريقة الإهلاك fa"
 msgid "Life Months"
 msgstr "أشهر الحياة"
 
-msgid "Depriciation Cb"
+msgid "Depreciation Cb"
 msgstr "Cb ديبريسييشن"
 
 msgid "Date In Service"
 msgstr "التاريخ في خدمة"
 
-msgid "Depriciation Start Date"
+msgid "Depreciation Start Date"
 msgstr "تاريخ بدء ديبريسييشن"
 
-msgid "Depriciation Limit Amount"
+msgid "Depreciation Limit Amount"
 msgstr "مبلغ الحد ديبريسييشن"
 
-msgid "Depriciation Limit Percentage"
+msgid "Depreciation Limit Percentage"
 msgstr "نسبة الحد الأقصى ديبريسييشن"
 
 msgid "Asset Category"
@@ -2163,8 +2160,8 @@ msgstr "مصدر رأس معرف"
 msgid "Source Line Id"
 msgstr "معرف خط المصدر"
 
-msgid "Fp Minmax Demand Id"
-msgstr "معرف الطلب fp Minmax"
+msgid "Fp Min Max Demand Id"
+msgstr "معرف الطلب fp Min Max"
 
 msgid "Plan Id"
 msgstr "معرف الخطة"
@@ -2199,14 +2196,14 @@ msgstr "رقم الصنف الطلب"
 msgid "Demand Item Description"
 msgstr "وصف عنصر الطلب"
 
-msgid "Fp Minmax Header Id"
-msgstr "معرف رأس fp Minmax"
+msgid "Fp Min Max Header Id"
+msgstr "معرف رأس fp Min Max"
 
 msgid "Demand Source"
 msgstr "مصدر الطلب"
 
-msgid "Fp Minmax Line Id"
-msgstr "معرف خط fp Minmax"
+msgid "Fp Min Max Line Id"
+msgstr "معرف خط fp Min Max"
 
 msgid "Min Quantity"
 msgstr "كمية دقيقة"
@@ -2250,14 +2247,14 @@ msgstr "الحد الأقصى للكمية"
 msgid "Multibin Fix Days Supply"
 msgstr "إمداد أيام إصلاح الحاويات المتعددة"
 
-msgid "Minmax Multibin Number"
+msgid "Min Max Multibin Number"
 msgstr "عدد الحاويات المتعددة مينماكس"
 
-msgid "Minmax Multibin Size"
+msgid "Min Max Multibin Size"
 msgstr "حجم الحاويات المتعددة مينماكس"
 
-msgid "Multibin Minmax Quantity"
-msgstr "الحاويات المتعددة Minmax كمية"
+msgid "Multibin Min Max Quantity"
+msgstr "الحاويات المتعددة Min Max كمية"
 
 msgid "Fp Mrp Demand Id"
 msgstr "معرف الطلب fp Mrp"
@@ -2937,8 +2934,8 @@ msgstr "لا الافتراضي للفترة"
 msgid "Hr Leave Transaction Id"
 msgstr "الموارد البشرية ترك معرف المعاملة"
 
-msgid "Requsted Date"
-msgstr "تاريخ إتلاف"
+msgid "Requested Date"
+msgstr "لتاريخ المطلوب"
 
 msgid "Approved Date"
 msgstr "التاريخ الموافق عليها"
@@ -3120,7 +3117,7 @@ msgstr "أي بي سي للاستثمارات المقومة معرف"
 msgid "Inv Abc Assignment Line Id"
 msgstr "معرف خط تعيين أي بي سي للاستثمارات"
 
-msgid "Abc Class"
+msgid "ABC Class"
 msgstr "فئة سي"
 
 msgid "Valuation Name"
@@ -3129,7 +3126,7 @@ msgstr "اسم التقييم"
 msgid "Scope Org Id"
 msgstr "معرف نطاق Org"
 
-msgid "Scope Sub Inventory Id"
+msgid "Scope Subinventory Id"
 msgstr "معرف النطاق الفرعي المخزون"
 
 msgid "Scope Org Hirearchy Id"
@@ -3243,9 +3240,6 @@ msgstr "تاريخ الحركة"
 msgid "Carrier"
 msgstr "الناقل"
 
-msgid "Vechile Number"
-msgstr "عدد مركبات"
-
 msgid "Waybill"
 msgstr "بوليصة الشحن"
 
@@ -3324,11 +3318,11 @@ msgstr "الأصلي Wip Wo رأس معرف"
 msgid "Last Inv Transaction Id"
 msgstr "آخر معرف المعاملات للاستثمارات"
 
-msgid "Inv Lot Onhand Id"
-msgstr "معرف Onhand الكثير من الاستثمارات"
+msgid "Inv Lot On Hand Id"
+msgstr "معرف On Hand الكثير من الاستثمارات"
 
-msgid "Onhand Id"
-msgstr "معرف Onhand"
+msgid "On Hand Id"
+msgstr "معرف On Hand"
 
 msgid "Lot Quantity"
 msgstr "الكمية الكثير"
@@ -3600,7 +3594,7 @@ msgstr "رقم الأمم المتحدة"
 msgid "Hazard Classs"
 msgstr "المخاطر كلاسس"
 
-msgid "Receipt Sub Inventory"
+msgid "Receipt Subinventory"
 msgstr "استلام المخزون Sub"
 
 msgid "Over Receipt Percentage"
@@ -3666,10 +3660,10 @@ msgstr "الحد الأدنى لكمية"
 msgid "Maximum Order Quantity"
 msgstr "الحد الأقصى لكمية"
 
-msgid "Minmax Min Quantity"
+msgid "Min Max Min Quantity"
 msgstr "كمية دقيقة مينماكس"
 
-msgid "Minmax Max Quantity"
+msgid "Min Max Max Quantity"
 msgstr "الكمية ماكس مينماكس"
 
 msgid "Forecast Method"
@@ -3693,7 +3687,7 @@ msgstr "ما قبل المعالجة Lt"
 msgid "Post Processing Lt"
 msgstr "وظيفة تجهيز الملازم"
 
-msgid "Processing Lt"
+msgid "Processing LT"
 msgstr "تجهيز الملازم"
 
 msgid "Cumulative Mfg Lt"
@@ -3747,8 +3741,8 @@ msgstr "Ar الدفع الأجل"
 msgid "Rounding Option"
 msgstr "خيار التقريب"
 
-msgid "Onhand With Rev Cb"
-msgstr "Onhand مع القس سي بي"
+msgid "On Hand With Rev Cb"
+msgstr "On Hand مع القس سي بي"
 
 msgid "Item Rev Number"
 msgstr "رقم الصنف Rev"
@@ -4029,13 +4023,13 @@ msgstr "معرف الكثير"
 msgid "Serial Id"
 msgstr "معرف المسلسل"
 
-msgid "Onhand"
-msgstr "Onhand"
+msgid "On Hand"
+msgstr "ومن ناحية"
 
-msgid "Reservable Onhand"
-msgstr "Onhand المحجوز"
+msgid "Reservable On Hand"
+msgstr "On Hand المحجوز"
 
-msgid "Transactable Onhand"
+msgid "Transactable On Hand"
 msgstr "Onhand ترانساكتابل"
 
 msgid "Lot Status"
@@ -4047,14 +4041,14 @@ msgstr "حالة المسلسل"
 msgid "Secondary Uom Id"
 msgstr "الثانوي Uom معرف"
 
-msgid "Onhand Status"
-msgstr "مركز Onhand"
+msgid "On Hand Status"
+msgstr "مركز On hand"
 
 msgid "Org Name"
 msgstr "اسم المؤسسة"
 
-msgid "Onhand Value"
-msgstr "قيمة Onhand"
+msgid "On Hand Value"
+msgstr "قيمة On Hand"
 
 msgid "Subinventory Type"
 msgstr "نوع سوبينفينتوري"
@@ -4317,13 +4311,13 @@ msgstr "اسم الشرط"
 msgid "Requirement Type"
 msgstr "نوع الشرط"
 
-msgid "Max Evaludation Points"
-msgstr "ماكس افالوديشن النقاط"
+msgid "Max Evaluation Points"
+msgstr "ماكس نقاط التقييم"
 
 msgid "Target Value"
 msgstr "القيمة المستهدفة"
 
-msgid "Rfq Number"
+msgid "RFQ Number"
 msgstr "رقم طلب عرض الأسعار"
 
 msgid "Rfq Name"
@@ -4410,8 +4404,8 @@ msgstr "إرجاع معرف سوبينفينتوري"
 msgid "Return Locator Id"
 msgstr "إرجاع معرف محدد موقع المعلومات"
 
-msgid "Allow Negative Onhand Cb"
-msgstr "السماح بالسلبية Onhand Cb"
+msgid "Allow Negative On Hand Cb"
+msgstr "السماح بالسلبية On Hand Cb"
 
 msgid "Customer Site Id"
 msgstr "معرف موقع العميل"
@@ -4668,9 +4662,6 @@ msgstr "سوبينفينتوري التدريج"
 msgid "Staging Locator"
 msgstr "محدد موقع التدريج"
 
-msgid "Requested Date"
-msgstr "التاريخ المطلوب"
-
 msgid "Sd Quote Header Id"
 msgstr "Sd اقتبس رأس معرف"
 
@@ -4679,9 +4670,6 @@ msgstr "اسم العميل الجديد"
 
 msgid "New Customer Address"
 msgstr "عنوان العميل الجديد"
-
-msgid "Aggrement End Date"
-msgstr "تاريخ نهاية أجريمينت"
 
 msgid "Sd Quote Line Id"
 msgstr "معرف خط الاقتباس Sd"
@@ -5037,7 +5025,7 @@ msgstr "لمعرف المستخدم كافة"
 msgid "To Email"
 msgstr "للبريد الإلكتروني"
 
-msgid "Cc Email"
+msgid "CC Email"
 msgstr "البريد الإلكتروني cc"
 
 msgid "Notification Subject"
@@ -5262,7 +5250,7 @@ msgstr "عمل الحركة"
 msgid "Account Id"
 msgstr "معرف الحساب"
 
-msgid "Primary Uom Id"
+msgid "Primary UOM Id"
 msgstr "الابتدائي Uom معرف"
 
 msgid "Primary Relation"
@@ -5493,7 +5481,7 @@ msgstr "معرف المجموعة حساب الأعمال تحت التنفيذ"
 msgid "Wo Type"
 msgstr "نوع Wo"
 
-msgid "Wip Accounting Group"
+msgid "WIP Accounting Group"
 msgstr "مجموعة حساب الأعمال تحت التنفيذ"
 
 msgid "Var Material Ac Id"
@@ -5610,7 +5598,7 @@ msgstr "Cb انفجرت التوجيه"
 msgid "Reference Routing Item Id M"
 msgstr "مرجع معرف عنصر التوجيه M"
 
-msgid "Completion Sub Inventory"
+msgid "Completion Subinventory"
 msgstr "إنجاز جرد Sub"
 
 msgid "Completed Quantity"
@@ -5721,8 +5709,8 @@ msgstr "المسار--إنشاء وتحديث وحذف"
 msgid "Create & Update Address"
 msgstr "إنشاء وتحديث عنوان"
 
-msgid "Char of Account"
-msgstr "شار للحساب"
+msgid "Chart Of Account"
+msgstr "التخطيط لحساب"
 
 msgid "Chart Of Accounts"
 msgstr "مخطط الحسابات"
@@ -5736,7 +5724,7 @@ msgstr "كل مخطط الحسابات"
 msgid "Search Ac Combinations"
 msgstr "البحث عن تركيبات Ac"
 
-msgid "Char of account combinations"
+msgid "Chart Of Account Combinations"
 msgstr "شار لحساب مجموعات"
 
 msgid "Account Combination"
@@ -5784,7 +5772,7 @@ msgstr "البحث في كافة عناصر"
 msgid "Search Items"
 msgstr "البحث عن العناصر"
 
-msgid "Unit of mesaures"
+msgid "Unit of measures"
 msgstr "وحدة ميسوريس"
 
 msgid "View Unit of Measures"
@@ -5802,9 +5790,6 @@ msgstr "قائمة بأنواع المعاملات"
 msgid "Search Transaction Type"
 msgstr "البحث عن نوع الحركة"
 
-msgid "Sub Inventory"
-msgstr "جرد sub"
-
 msgid "Search All Sub Inventories"
 msgstr "البحث في جميع القوائم الفرعية"
 
@@ -5820,11 +5805,8 @@ msgstr "المخزون"
 msgid "Search Locator"
 msgstr "مواقع البحث"
 
-msgid "On hand Quantities"
+msgid "On Hand Quantities"
 msgstr "ومن ناحية كميات"
-
-msgid "On Hand"
-msgstr "ومن ناحية"
 
 msgid "Inventory Transaction"
 msgstr "حركة المخزون"
@@ -6009,7 +5991,7 @@ msgstr "البحث عن استلام المخزون"
 msgid "Search Inv Receipts"
 msgstr "البحث عن إيصالات للاستثمارات"
 
-msgid "Bill of materials"
+msgid "Bill Of Materials"
 msgstr "شجرة المواد"
 
 msgid "Search All BOMs"
@@ -6042,7 +6024,7 @@ msgstr "البحث عن العناصر المادية"
 msgid "Overhead - Resource & Material"
 msgstr "النفقات العامة-الموارد والمواد"
 
-msgid "All Over heads"
+msgid "All Overheads"
 msgstr "جميع أنحاء رؤساء"
 
 msgid "Search Overhead"
@@ -6185,9 +6167,6 @@ msgstr "دفتر الأستاذ العام"
 
 msgid "Create update & ledger"
 msgstr "إنشاء تحديث & دفتر الأستاذ"
-
-msgid "Serach Ledgers"
-msgstr "دفاتر Serach"
 
 msgid "Search Ledgers"
 msgstr "دفاتر البحث"
@@ -6567,7 +6546,7 @@ msgstr "أوبلاود الشامل لتحديد المواقع"
 msgid "Upload Locators"
 msgstr "تحميل محدد موقع"
 
-msgid "View Sub Inventory"
+msgid "View Subinventory"
 msgstr "يستخدم لعرض المخزون Sub"
 
 msgid "Search UOM"
@@ -6624,7 +6603,7 @@ msgstr "عرض شجرة العنصر المادي"
 msgid "View Material Element"
 msgstr "عرض العنصر المادي"
 
-msgid "View Over Head"
+msgid "View Overhead"
 msgstr "عرض ما يزيد على رأسها"
 
 msgid "Mass Upload Department"
@@ -6828,7 +6807,7 @@ msgstr "مخطط ماكس دقيقة"
 msgid "Search Min Max Planner"
 msgstr "البحث عن مخطط ماكس دقيقة"
 
-msgid "Search MinMax Planner"
+msgid "Search Min Max Planner"
 msgstr "البحث عن مخطط مينماكس"
 
 msgid "Min Max Demand"
@@ -6846,10 +6825,10 @@ msgstr "تحديث البند Min Max المعلمات"
 msgid "Min Max Planner Work Bench"
 msgstr "مين ماكس مخطط عمل مقاعد البدلاء"
 
-msgid "Create Supply - MinMax Program"
+msgid "Create Supply - Min Max Program"
 msgstr "إنشاء العرض-برنامج مينماكس"
 
-msgid "Create Supply - MinMax"
+msgid "Create Supply - Min Max"
 msgstr "إنشاء العرض--مينماكس"
 
 msgid "View Requisition Interface Lines"
@@ -6924,11 +6903,11 @@ msgstr "التقارير والتحليل"
 msgid "RA"
 msgstr "جمهورية أرمينيا"
 
-msgid "Onhand By Subinventory"
-msgstr "Onhand قبل سوبينفينتوري"
+msgid "On Hand By Subinventory"
+msgstr "On Hand قبل سوبينفينتوري"
 
-msgid "Onhand Analysis"
-msgstr "تحليل Onhand"
+msgid "On Hand Analysis"
+msgstr "تحليل On Hand"
 
 msgid "Purchasing Analysis"
 msgstr "شراء التحليل"
@@ -6948,10 +6927,10 @@ msgstr "سفينة أوامر التوريد"
 msgid "Ship Sales Order"
 msgstr "السفينة أمر التوريد"
 
-msgid "TAX Codes & Rates"
+msgid "Tax Codes & Rates"
 msgstr "أكواد الضرائب والأسعار"
 
-msgid "TAX Codes"
+msgid "Tax Codes"
 msgstr "القوانين الضريبية"
 
 msgid "Tax Regions"
@@ -7311,11 +7290,8 @@ msgstr "كتلة ديفينين"
 msgid "My Notifications"
 msgstr "بلدي الإخطارات"
 
-msgid "User Leave Blalance"
+msgid "User Leave Balance"
 msgstr "المستخدم إجازة بلالانسي"
-
-msgid "Leave Blalance"
-msgstr "ترك بلالانسي"
 
 msgid "Search All Leave"
 msgstr "البحث عن جميع الإجازات"
@@ -7476,17 +7452,17 @@ msgstr "تقرير مخصص option_type-أنواع الخيار"
 msgid "Custom report option_type"
 msgstr "Option_type تقرير مخصص"
 
-msgid "Custom report Onhand - Curret Onhand"
-msgstr "تقرير مخصص Onhand-Onhand كورت"
+msgid "Custom report On Hand - Current On Hand"
+msgstr "تقرير مخصص On Hand-On Hand كورت"
 
-msgid "Custom report Onhand"
-msgstr "تقرير مخصص Onhand"
+msgid "Custom report On Hand"
+msgstr "تقرير مخصص On Hand"
 
-msgid "Custom Report - Onhand Inventory Wise"
-msgstr "تقرير مخصص-المخزون Onhand الحكمة"
+msgid "Custom Report - On Hand Inventory Wise"
+msgstr "تقرير مخصص-المخزون On Hand الحكمة"
 
-msgid "Custom Report - Onhand"
-msgstr "تقرير مخصص-Onhand"
+msgid "Custom Report - On Hand"
+msgstr "تقرير مخصص-On Hand"
 
 msgid "Secondary Field"
 msgstr "الحقل الثانوي"
@@ -7527,7 +7503,7 @@ msgstr "الوثيقة والتحليل"
 msgid "Search Process Flow"
 msgstr "تدفق عملية البحث"
 
-msgid "Minmax Board"
+msgid "Min Max Board"
 msgstr "المجلس مينماكس"
 
 msgid "Programs for Document Administrator"
@@ -8295,9 +8271,6 @@ msgstr "حتى رأس معرف"
 msgid "SO Line Id"
 msgstr "حتى سطر معرف"
 
-msgid "Project Line Idt"
-msgstr "مشروع خط الصندوق الاستئماني المستقل"
-
 msgid "Receivable Transaction Source"
 msgstr "مصدر المعاملة قيد التحصيل"
 
@@ -8346,10 +8319,7 @@ msgstr "تعيين الموارد"
 msgid "Overhead Rate"
 msgstr "معدل النفقات العامة"
 
-msgid "Over Head"
-msgstr "فوق رأسه"
-
-msgid "Over Head Details"
+msgid "Overhead Details"
 msgstr "عبر رئيس تفاصيل"
 
 msgid "Rate Assignment"
@@ -8459,9 +8429,6 @@ msgstr "رأس شجرة المواد المكونة"
 
 msgid "BOMLine Id"
 msgstr "معرف بومليني"
-
-msgid "Routing Sequenceg"
-msgstr "سيكوينسيج التوجيه"
 
 msgid "Usage Qty"
 msgstr "استخدام الكمية"
@@ -8664,9 +8631,6 @@ msgstr "بادئة"
 msgid "Adjusting Period"
 msgstr "ضبط الفترة"
 
-msgid "Chart Of Account"
-msgstr "التخطيط لحساب"
-
 msgid "Chart of Account Details"
 msgstr "الرسم البياني لتفاصيل الحساب"
 
@@ -8763,9 +8727,6 @@ msgstr "الفترة المفتوحة الحالية"
 msgid "Next Period"
 msgstr "الفترة القادمة"
 
-msgid "PeriodId"
-msgstr "بيريوديد"
-
 msgid "Cal Name"
 msgstr "اسم وحدة حرارية"
 
@@ -8841,7 +8802,7 @@ msgstr "إنهاء الموظف"
 msgid "Requirements"
 msgstr "متطلبات"
 
-msgid "job Details & Responsibility"
+msgid "Job Details & Responsibility"
 msgstr "تفاصيل الوظيفة والمسؤولية"
 
 msgid "Leave Details"
@@ -8964,8 +8925,8 @@ msgstr "التعديلات"
 msgid "Count By"
 msgstr "عد من"
 
-msgid "Adjustment Ac"
-msgstr "التكيف Ac"
+msgid "Adjustment AC"
+msgstr "التكيف AC"
 
 msgid "System Quantity"
 msgstr "نظام الكمية"
@@ -9011,9 +8972,6 @@ msgstr "إضافة أرقام الكثير"
 
 msgid "Add Serial Numbers"
 msgstr "إضافة الأرقام التسلسلية"
-
-msgid "Inventory Transaction "
-msgstr "حركة المخزون "
 
 msgid "Lot & Serial"
 msgstr "الكثير & المسلسل"
@@ -9126,9 +9084,6 @@ msgstr "المعاملات"
 msgid "Relations"
 msgstr "العلاقات"
 
-msgid "From Sub Inventory"
-msgstr "من المخزون Sub"
-
 msgid "Transaction Details"
 msgstr "تفاصيل الصفقة"
 
@@ -9140,9 +9095,6 @@ msgstr "من معرف محدد موقع المعلومات "
 
 msgid "To SubInv Id"
 msgstr "لمعرف سوبينف"
-
-msgid "To Locator Id "
-msgstr "لمعرف موقع المعلومات "
 
 msgid "Receipt Header Id"
 msgstr "استلام رأس معرف"
@@ -9266,9 +9218,6 @@ msgstr "عنوان رأس"
 
 msgid "BO Details"
 msgstr "تفاصيل بو"
-
-msgid "Type of Business Org"
-msgstr "نوع من الأعمال Org"
 
 msgid "Enterprise Name"
 msgstr "اسم المؤسسة"
@@ -9422,9 +9371,6 @@ msgstr "العوامل"
 
 msgid "Requirement Id"
 msgstr "معرف شرط"
-
-msgid "Max Evaluation Points"
-msgstr "ماكس نقاط التقييم"
 
 msgid "Supplier Value"
 msgstr "قيمة المورد"
@@ -9590,9 +9536,6 @@ msgstr "معرف رأس WO"
 
 msgid "Config Details"
 msgstr "تفاصيل التكوين"
-
-msgid "Destination Typet"
-msgstr "تايبيه الوجهة"
 
 msgid "Shipped /Received Quantity"
 msgstr "الكمية التي تم شحنها/المستلمة"
@@ -9851,4 +9794,3 @@ msgstr "أمر التوريد "
 
 msgid "SO Line "
 msgstr "حتى خط"
-

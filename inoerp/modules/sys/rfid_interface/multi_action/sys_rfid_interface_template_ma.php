@@ -4,26 +4,26 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="sys_rfid_interface"  name="sys_rfid_interface">
-    <div id ="form_line" class="form_line"><span class="heading">RFID Interface</span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('RFID Interface') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Basics</a></li>
-       <li><a href="#tabsLine-2">Basics-2</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Basics-2') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Action</th>
-           <th>RFID Interface Id</th>
-           <th>EPC</th>
-           <th>Tag Number</th>
-           <th>Antena Number</th>
-           <th>Time Stamp</th>
-           <th>Description</th>
-           <th>Read Count</th>
-           <th>Org Id</th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('RFID Interface Id') ?></th>
+           <th><?php echo gettext('EPC') ?></th>
+           <th><?php echo gettext('Tag Number') ?></th>
+           <th><?php echo gettext('Antena Number') ?></th>
+           <th><?php echo gettext('Time Stamp') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Read Count') ?></th>
+           <th><?php echo gettext('Org Id') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">
@@ -62,15 +62,15 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th>RFID Interface Id</th>
-           <th>Item Id</th>
-           <th>From Subinventory Id</th>
-           <th>From Subinventory</th>
-           <th>Transaction Type Id</th>
-           <th>Transaction Type</th>
-           <th>Quantity</th>
-           <th>Item Description</th>
-           <th>Status</th>
+           <th><?php echo gettext('RFID Interface Id') ?></th>
+           <th><?php echo gettext('Item Id') ?></th>
+           <th><?php echo gettext('From Subinventory Id') ?></th>
+           <th><?php echo gettext('From Subinventory') ?></th>
+           <th><?php echo gettext('Transaction Type Id') ?></th>
+           <th><?php echo gettext('Transaction Type') ?></th>
+           <th><?php echo gettext('Quantity') ?></th>
+           <th><?php echo gettext('Item Description') ?></th>
+           <th><?php echo gettext('Status') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

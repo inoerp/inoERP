@@ -13,11 +13,11 @@
       ?> 
       <!--    End of place for showing error messages-->
       <div id="form_all">
-       <div id="form_headerDiv"><h1 class="error">Not availabe for your product. Use supplier @ user level</h1>
-        <form method="post" id="user_supplier_line"  name="user_supplier_line"><span class="heading">User Basic Info </span>
+       <div id="form_headerDiv"><h1 class="error"><?php echo gettext('Not availabe for your product. Use supplier @ user level') ?></h1>
+        <form method="post" id="user_supplier_line"  name="user_supplier_line"><span class="heading"><?php echo gettext('User Basic Info') ?> </span>
          <div id="tabsHeader">
           <ul class="tabMain">
-           <li><a href="#tabsHeader-1">Basic Info</a></li>
+           <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
           </ul>
           <div class="tabContainer">
            <div id="tabsHeader-1" class="tabContent">
@@ -28,8 +28,8 @@
                echo $f->hidden_field_withId('user_id', $user_id_h);
                ?><i class="generic g_select_lead_employee_name select_popup clickable fa fa-search" data-class_name="ino_user"></i>
               <i class="fa fa-refresh"></i></li>
-              <li><label>First Name</label>	<?php echo $f->text_field_d('first_name'); ?> </li>
-              <li><label>Last Name</label><?php echo $f->text_field_d('last_name'); ?>	 </li> 
+              <li><label><?php echo gettext('First Name') ?></label>	<?php echo $f->text_field_d('first_name'); ?> </li>
+              <li><label><?php echo gettext('Last Name') ?></label><?php echo $f->text_field_d('last_name'); ?>	 </li> 
              </ul>
             </div>
            </div>
@@ -37,10 +37,10 @@
 
          </div>
          <div id="tabsLine">
-          <div id ="form_line" class="user_supplier"><span class="heading">User Supplier Association </span>
+          <div id ="form_line" class="user_supplier"><span class="heading"><?php echo gettext('User Supplier Association') ?> </span>
            <ul class="tabMain">
-            <li><a href="#tabsLine-1">Basic </a></li>
-            <li><a href="#tabsLine-2">Future </a></li>
+            <li><a href="#tabsLine-1"><?php echo gettext('Basic') ?> </a></li>
+            <li><a href="#tabsLine-2"><?php echo gettext('Future') ?> </a></li>
            </ul>
            <div class="tabContainer"> 
 
@@ -48,12 +48,12 @@
              <table class="form_table">
               <thead> 
                <tr>
-                <th>Action</th>
-                <th>Seq#</th>
-                <th>User Supplier Id</th>
-                <th>Supplier Id</th>
-                <th>Supplier Name</th>
-                <th>Supplier Site</th>
+                <th><?php echo gettext('Action') ?></th>
+                <th><?php echo gettext('Seq') ?>#</th>
+                <th><?php echo gettext('User Supplier Id') ?></th>
+                <th><?php echo gettext('Supplier Id') ?></th>
+                <th><?php echo gettext('Supplier Name') ?></th>
+                <th><?php echo gettext('Supplier Site') ?></th>
                </tr>
               </thead>
               <tbody class="form_data_line_tbody user_supplier_values" >

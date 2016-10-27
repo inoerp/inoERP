@@ -4,7 +4,7 @@
   <div class="half_page left logo">
    <div class="logo">
     <img src="<?php echo HOME_URL . $si->logo_path ?>" class="logo_image" /></div>
-   <h2><?php echo $si->site_name; ?> Invoice</h2> 
+   <h2><?php echo $si->site_name; ?> <?php echo gettext('Invoice') ?></h2> 
   </div>
   <div class="half_page right bu_details"><?php echo!(empty($$class->bu_org_id)) ? org::print_orgDetails_inLine($$class->bu_org_id) : ""; ?> </div>
  </div>
@@ -12,62 +12,62 @@
   <div class="full_page">
    <div class="half_page left header_info">
     <ul class="column header_field">
-     <li><label>Transaction Number : </label><?php echo $$class->transaction_number; ?> </li>
-     <li><label>Type : </label><?php echo $$class->transaction_class; ?> </li>
-     <li><label>Description : </label><?php echo $$class->description; ?> </li>
-     <li><label>Currency : </label><?php echo $$class->doc_currency; ?> </li>
-     <li><label>Header Amount : </label><?php echo $$class->header_amount; ?> </li>
-     <li><label>Tax Amount : </label><?php echo $$class->tax_amount; ?> </li>
+     <li><label><?php echo gettext('Transaction Number') ?> : </label><?php echo $$class->transaction_number; ?> </li>
+     <li><label><?php echo gettext('Type') ?> : </label><?php echo $$class->transaction_class; ?> </li>
+     <li><label><?php echo gettext('Description') ?> : </label><?php echo $$class->description; ?> </li>
+     <li><label><?php echo gettext('Currency') ?> : </label><?php echo $$class->doc_currency; ?> </li>
+     <li><label><?php echo gettext('Header Amount') ?> : </label><?php echo $$class->header_amount; ?> </li>
+     <li><label><?php echo gettext('Tax Amount') ?> : </label><?php echo $$class->tax_amount; ?> </li>
     </ul>
    </div>
    <div class="half_page right external_entiry_info">
     <ul class="column header_field">
-     <li><label>Customer : </label><?php echo $$class->customer_name; ?> </li>
-     <li><label>Customer Number: </label><?php echo $$class->customer_number; ?> </li>
-     <li><label>Site Name : </label><?php echo $$class->customer_site_name; ?> </li>
-     <li><label>Site Number</label><?php echo $$class->customer_site_number; ?> </li>
-     <li><label>Payment Term : </label><?php echo $$class->payment_term; ?> </li>
+     <li><label><?php echo gettext('Customer') ?> : </label><?php echo $$class->customer_name; ?> </li>
+     <li><label><?php echo gettext('Customer Number') ?>: </label><?php echo $$class->customer_number; ?> </li>
+     <li><label><?php echo gettext('Site Name') ?> : </label><?php echo $$class->customer_site_name; ?> </li>
+     <li><label><?php echo gettext('Site Number') ?></label><?php echo $$class->customer_site_number; ?> </li>
+     <li><label><?php echo gettext('Payment Term') ?> : </label><?php echo $$class->payment_term; ?> </li>
      <li><?php echo $$class->payment_term_description; ?> </li>
     </ul>
    </div>
   </div>
   <div class="full_page">
-   <div class="half_page left header_info"><span class="heading">Shipping Address</span>
+   <div class="half_page left header_info"><span class="heading"><?php echo gettext('Shipping Address') ?></span>
     <ul class="column header_field">
-     <li><label>Address : </label><?php echo $$class->address; ?> </li>
-     <li><label>Country: </label><?php echo $$class->country; ?> </li>
-     <li><label>Postal Code : </label><?php echo $$class->postal_code; ?> </li>
-     <li><label>Phone</label><?php echo $$class->phone; ?> </li>
-     <li><label>Email : </label><?php echo $$class->email; ?> </li>
-     <li><label>Web Site : </label><?php echo $$class->website; ?> </li>
+     <li><label><?php echo gettext('Address') ?> : </label><?php echo $$class->address; ?> </li>
+     <li><label><?php echo gettext('Country') ?>: </label><?php echo $$class->country; ?> </li>
+     <li><label><?php echo gettext('Postal Code') ?> : </label><?php echo $$class->postal_code; ?> </li>
+     <li><label><?php echo gettext('Phone') ?></label><?php echo $$class->phone; ?> </li>
+     <li><label><?php echo gettext('Email') ?> : </label><?php echo $$class->email; ?> </li>
+     <li><label><?php echo gettext('Website') ?> : </label><?php echo $$class->website; ?> </li>
     </ul>
    </div>
-   <div class="half_page right external_entiry_info"><span class="heading">Billing Address</span>
+   <div class="half_page right external_entiry_info"><span class="heading"><?php echo gettext('Billing Address') ?></span>
     <ul class="column header_field">
-     <li><label>Address : </label><?php echo $$class->address_b; ?> </li>
-     <li><label>Country: </label><?php echo $$class->country_b; ?> </li>
-     <li><label>Postal Code : </label><?php echo $$class->postal_code_b; ?> </li>
-     <li><label>Phone</label><?php echo $$class->phone_b; ?> </li>
-     <li><label>Email : </label><?php echo $$class->email_b; ?> </li>
-     <li><label>Web Site : </label><?php echo $$class->website_b; ?> </li>
+     <li><label><?php echo gettext('Address') ?> : </label><?php echo $$class->address_b; ?> </li>
+     <li><label><?php echo gettext('Country') ?>: </label><?php echo $$class->country_b; ?> </li>
+     <li><label><?php echo gettext('Postal Code') ?> : </label><?php echo $$class->postal_code_b; ?> </li>
+     <li><label><?php echo gettext('Phone') ?></label><?php echo $$class->phone_b; ?> </li>
+     <li><label><?php echo gettext('Email') ?> : </label><?php echo $$class->email_b; ?> </li>
+     <li><label><?php echo gettext('Website') ?> : </label><?php echo $$class->website_b; ?> </li>
     </ul>
    </div>
   </div>
   <div class="full_page"></div>
   <div class="full_page">
-    <!--<span class="heading">PO Lines & Shipments </span>-->
+    <!--<span class="heading"><?php //echo gettext('PO Lines & Shipments') ?> </span>-->
    <table class="form_line_data_table">
     <thead> 
      <tr class="line_header">
-      <th>Line #</th>
-      <th>Item Number</th>
-      <th>Description</th>
-      <th>Unit Price</th>
-      <th>Line Quantity</th>
-      <th>Line Price</th>
-      <th>Line Description</th>
-      <th>SO #</th>
-      <th>SO Line#</th>
+      <th><?php echo gettext('Line') ?> #</th>
+      <th><?php echo gettext('Item Number') ?></th>
+      <th><?php echo gettext('Description') ?></th>
+      <th><?php echo gettext('Unit Price') ?></th>
+      <th><?php echo gettext('Line Quantity') ?></th>
+      <th><?php echo gettext('Line Price') ?></th>
+      <th><?php echo gettext('Line Description') ?></th>
+      <th><?php echo gettext('SO') ?> #</th>
+      <th><?php echo gettext('SO Line') ?>#</th>
      </tr>
     </thead>
     <tbody>

@@ -97,7 +97,7 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Sub Inventories') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Subinventories') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
@@ -110,7 +110,7 @@
         <tr>
          <th><?php echo gettext('Action') ?></th>
          <th><?php echo gettext('Line Id') ?></th>
-         <th><?php echo gettext('Sub Inventory') ?>#</th>
+         <th><?php echo gettext('Subinventory') ?>#</th>
          <th><?php echo gettext('Building') ?></th>
          <th><?php echo gettext('Floor') ?></th>
          <th><?php echo gettext('Wing') ?></th>

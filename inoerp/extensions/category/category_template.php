@@ -58,7 +58,7 @@
   </div>
 
  </div>
- <div id ="form_line" class="form_line"><span class="heading">Category Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Category Details') ?> </span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Long Description') ?></a></li>

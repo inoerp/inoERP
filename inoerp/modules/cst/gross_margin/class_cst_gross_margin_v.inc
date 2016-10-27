@@ -68,10 +68,10 @@ class cst_gross_margin_v extends dbObject {
   'Customer Name' => 'search_customer_name',
  ];
  public $pageTitle = " Gross Margin "; //page Title
- public $search_groupBy = [
+ public static $search_groupBy = [
   'item_number' => 'Item Number',
   'period_name' => 'Period Name'
-//		 'subinventory' => 'Sub Inventory',
+//		 'subinventory' => 'Subinventory',
 //		 'org_id' => 'Inventory Org',
  ];
  public $search_groupBy_sum = 'gross_margin';
@@ -215,7 +215,14 @@ AS
   return !empty($result) ? $result : false;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of po_detail class
+cst_gross_margin_v::staticVar_init('search_groupBy');
 ?>

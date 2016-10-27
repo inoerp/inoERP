@@ -50,10 +50,10 @@
     </div>
    </div>
   </form>
-  <div id ="form_line" class="form_line"><span class="heading">Sales Items </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Sales Items') ?> </span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1">Lines</a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('Lines') ?></a></li>
     </ul>
     <div class="tabContainer"> 
      <form action=""  method="post" id="pos_transaction_line_line"  name="pos_transaction_line_line">

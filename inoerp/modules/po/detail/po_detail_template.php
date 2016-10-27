@@ -72,7 +72,7 @@ if (count($po_detail_object) == 0) {
       <thead>
        <tr>
         <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Subinventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
         <th><?php echo gettext('Requestor') ?></th>
         <th><?php echo gettext('Invoice Match Type') ?></th>

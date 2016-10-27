@@ -25,7 +25,7 @@ inoERP
        <a name="show" href="form.php?class_name=fp_kanban_header&<?php echo "mode=$mode"; ?>" class="show document_id fp_kanban_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', $readonly); ?>         </li>
-      <li><label>Item Number</label><?php
+      <li><label><?php echo gettext('Item Number') ?></label><?php
        $f->val_field_dm('item_number', 'item', 'item_number', 'org_id');
        echo $f->hidden_field_withCLass('item_id_m', $$class->item_id_m, 'dont_copy_r');
        echo $f->hidden_field_withCLass('stockable_cb', '1', 'popup_value');

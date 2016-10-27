@@ -1,6 +1,6 @@
 <hr>
 <div class="row featurette product">
- <h2 class="featurette-heading bgc"><span class="text-muted"> Category Browser</span></h2>
+ <h2 class="featurette-heading bgc"><span class="text-muted"> <?php echo gettext('Category Browser') ?></span></h2>
  <div class="category-browser">
   <?php
   

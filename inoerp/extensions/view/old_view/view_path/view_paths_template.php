@@ -30,7 +30,7 @@
 
 				<?php
 				if (!empty($total_count)) {
-				 echo '<h3>' . gettext('Total records') . ' : ' . $total_count . '</h3>';
+				 echo '<h3>' . gettext('Total Records') . ' : ' . $total_count . '</h3>';
 				}
 				?>
 				<div id="scrollElement">

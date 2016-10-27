@@ -29,7 +29,7 @@
           <?php
           if ($allow_content_update) {
            ?>
-           <li><a href="<?php echo HOME_URL; ?>content.php?mode=9&amp;content_id=<?php echo ($content->content_id); ?>&amp;content_type=<?php echo ($content_type_name); ?>"><img src="<?php echo HOME_URL; ?>themes/images/edit.png" alt="update" /> </a></li>
+           <li><a href="<?php echo HOME_URL; ?>content.php?mode=9&amp;content_id=<?php echo ($content->content_id); ?>&amp;content_type=<?php echo ($content_type_name); ?>"><img src="<?php echo HOME_URL; ?>themes/images/edit.png" alt="<?php echo gettext('Update'); ?>" /> </a></li>
           <?php } ?>
          </ul>
         </div>
@@ -51,13 +51,13 @@
          </div>
          <div id='content_info'>
           <ul>
-           <li class="attachment_content"><?php echo (!empty($file)) ? '<label>Attachments : </label>' . extn_file::show_file_list($file) : ""; ?></li>
-           <li class="terms"><?php echo!empty($content->terms) ? '<label>Tags : </label>' . ($content->terms) : ''; ?></li>
-           <li class="categories"><?php echo!(empty($category_statement)) ? '<label>Category : </label>' . $category_statement : ""; ?></li>
+           <li class="attachment_content"><?php echo (!empty($file)) ? '<label>' . gettext('Attachments') . ' : </label>' . extn_file::show_file_list($file) : ""; ?></li>
+           <li class="terms"><?php echo!empty($content->terms) ? '<label>' . gettext('Tags') . ' : </label>' . ($content->terms) : ''; ?></li>
+           <li class="categories"><?php echo!(empty($category_statement)) ? '<label>' . gettext('Category') . ' : </label>' . $category_statement : ""; ?></li>
           </ul>
          </div>
          <div id="child_conetnt_list"><?php
-          echo!(empty($childs_of_parent_id)) ? '<span class="heading">Next Read</span>' . $childs_of_parent_id : "";
+          echo!(empty($childs_of_parent_id)) ? '<span class="heading">' . gettext('Next Read') . '</span>' . $childs_of_parent_id : "";
           ?></div>
          <div id="comments">
           <div id="comment_list">
@@ -69,9 +69,9 @@
            $reference_id = $content->content_id;
            include_once __DIR__ . '/../../comment.php';
           } else if(empty($content->comment_status) || $content->comment_status < 3) {
-           echo "<j  class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'> Comment is disabled </j>";
+           echo "<j  class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'> " . gettext('Comment is disabled') . " </j>";
           }else {
-           echo "<a href='" . HOME_URL . "extensions/ino_user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
+           echo "<a href='" . HOME_URL . "extensions/ino_user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>" . gettext('Login To Comment') . " </a>";
           }
           ?>
           <div id="new_comment">

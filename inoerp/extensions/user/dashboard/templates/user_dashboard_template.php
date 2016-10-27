@@ -9,7 +9,7 @@ $all_reports = user_dashboard_config::findBy_userIdNconfigLevel($ino_user->user_
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 <div id ="user_dashboard_divId">
  <div id="tabsHeader">
-  <form method="post" id="user_header" name="user_header"><span class="heading"><?php echo gettext('User Dashboard ') ?>
+  <form method="post" id="user_header" name="user_header"><span class="heading"><?php echo gettext('User Dashboard') ?> 
     <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $user_id ?>" 
        class='fa fa-cog'></a>
    </span>

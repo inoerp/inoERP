@@ -22,9 +22,9 @@ class fa_depreciation_method extends dbObject {
  public static $key_column = "depreciation_method";
  public static $module = "fa";
  public static $system_info = [
-  'name' => 'depriciation',
+  'name' => 'depreciation',
   'number' => '1403',
-  'description' => 'Define and mainten Depriciation Method',
+  'description' => 'Define and mainten Depreciation Method',
   'version' => '0.1.1',
   'db_version' => '1001',
   'mod_version' => '1.1.1',

@@ -14,4 +14,9 @@ $(document).ready(function () {
 
  get_customer_detail_for_bu(true);
 
+ $('body').off('click', '#menu_button4').on('click', '#menu_button4', function () {
+  $('#status').val('ENTERED');
+  $('#sd_lead_id, #lead_number').val('');
+ });
+
 });

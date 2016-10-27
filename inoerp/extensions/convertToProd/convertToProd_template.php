@@ -10,30 +10,30 @@
 			<div class="error"></div><div id="loading"></div>
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
-			<div id="form_all"><span class="heading">Profile Header </span>
+			<div id="form_all"><span class="heading"><?php echo gettext('Profile Header') ?> </span>
 			 <form action=""  method="post" id="sys_profile_header"  name="sys_profile_header">
 				<div id ="form_header">
 				 <div id="tabsHeader">
 					<ul class="tabMain">
-					 <li><a href="#tabsHeader-1">Basic Info</a></li>
+					 <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
 					</ul>
 					<div class="tabContainer">
 					 <div id="tabsHeader-1" class="tabContent">
 						<div class="large_shadow_box"> 
 						 <ul class="column four_column">
 							<li> <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sys_profile_header_id select_popup clickable">
-								Profile Id : </label>
+								<?php echo gettext('Profile Id') ?> : </label>
 							 <?php
 							 echo form::number_field_drs('sys_profile_header_id');
 							 ?>
 							</li>
-							<li><label>Access Level : </label>
+							<li><label><?php echo gettext('Access Level') ?> : </label>
 							 <?php echo $f->select_field_from_array('access_level', sys_profile_header::$access_level_a, $$class->access_level); ?>
 							</li>
-							<li><label>Profile Name : </label> <?php $f->text_field_dlm('profile_name'); ?> </li>
-              <li><label>Class Name : </label> <?php $f->text_field_dlm('class_name'); ?> </li>
-							<li><label>Description : </label> <?php $f->text_field_d('description'); ?></li>
-							<li><label>Profile Level : </label>
+							<li><label><?php echo gettext('Profile Name') ?> : </label> <?php $f->text_field_dlm('profile_name'); ?> </li>
+              <li><label><?php echo gettext('Class Name') ?> : </label> <?php $f->text_field_dlm('class_name'); ?> </li>
+							<li><label><?php echo gettext('Description') ?> : </label> <?php $f->text_field_d('description'); ?></li>
+							<li><label><?php echo gettext('Profile Level') ?> : </label>
 							 <?php echo $f->select_field_from_array('profile_level', sys_profile_header::$profile_level_a, $$class->profile_level, 'profile_level'); ?>
 							 <a name="show" class="show sys_profile_header_id"> <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 							</li>
@@ -44,11 +44,11 @@
 				 </div>
 				</div>
 			 </form>
-			 <div id ="form_line" class="form_line"><span class="heading">Profile Values </span>
+			 <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Profile Values') ?> </span>
 				<div id="tabsLine">
 				 <ul class="tabMain">
-					<li><a href="#tabsLine-1">Values</a></li>
-					<li><a href="#tabsLine-2">Custom Query</a></li>
+					<li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
+					<li><a href="#tabsLine-2"><?php echo gettext('Custom Query') ?></a></li>
 				 </ul>
 				 <div class="tabContainer"> 
 					<form action=""  method="post" id="sys_profile_line_line"  name="sys_profile_line_line">
@@ -56,34 +56,34 @@
 						<table class="form_table">
 						 <thead> 
 							<tr>
-							 <th>Action</th>
-							 <th>Line Id</th> 
+							 <th><?php echo gettext('Action') ?></th>
+							 <th><?php echo gettext('Line Id') ?></th> 
 							 <?php
 							 switch ($profile_level) {
 								case 'SITE' :
-								 echo "<th>Site</th>";
-								 echo "<th>Value</th>";
+								 echo "<th>" . gettext('Site') . "</th>";
+								 echo "<th>" . gettext('Value') . "</th>";
 								 break;
 
 								case 'BUSINESS' :
-								 echo "<th>Business Org</th>";
-								 echo "<th>Value</th>";
+								 echo "<th>" . gettext('Business Org') . "</th>";
+								 echo "<th>" . gettext('Value') . "</th>";
 								 break;
 
 								case 'INVENTORY' :
-								 echo "<th>Inventory Org</th>";
-								 echo "<th>Value</th>";
+								 echo "<th>" . gettext('Inventory Org') . "</th>";
+								 echo "<th>" . gettext('Value') . "</th>";
 								 break;
 
 								case 'USER' :
-								 echo "<th>User Name</th>";
-								 echo "<th>Value</th>";
+								 echo "<th>" . gettext('User Name') . "</th>";
+								 echo "<th>" . gettext('Value') . "</th>";
 								 break;
 
 
 								case 'default':
-								 echo "<th>Site</th>";
-								 echo "<th>Value</th>";
+								 echo "<th>" . gettext('Site') . "</th>";
+								 echo "<th>" . gettext('Value') . "</th>";
 								 break;
 							 }
 							 ?>

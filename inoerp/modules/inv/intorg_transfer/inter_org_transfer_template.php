@@ -56,7 +56,7 @@
     <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
     <li><a href="#tabsLine-2"><?php echo gettext('Transfer') ?> </a></li>
     <li><a href="#tabsLine-3"><?php echo gettext('Lot Serial') ?> </a></li>
-    <li><a href="#tabsLine-4"><?php echo gettext('On hand') ?> </a></li>
+    <li><a href="#tabsLine-4"><?php echo gettext('On Hand') ?> </a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
@@ -178,10 +178,10 @@
       <thead> 
        <tr>
         <th><?php echo gettext('Seq') ?>#</th>
-        <th>From Current Onhand</th>
-        <th>From Future Onhand </th>
-        <th>To Current Onhand</th>
-        <th>To Future Onhand</th>
+        <th><?php echo gettext('From Current On Hand') ?></th>
+        <th><?php echo gettext('From Future On Hand') ?> </th>
+        <th><?php echo gettext('To Current On Hand') ?></th>
+        <th><?php echo gettext('To Future On Hand') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

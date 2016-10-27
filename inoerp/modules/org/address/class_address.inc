@@ -213,12 +213,12 @@ class address extends dbObject {
  public static function show_adrees_details(&$address = "") {
 	$show_adrees_details = "";
 	$show_adrees_details .= "<ul class=\"address inline_list\">";
-	$show_adrees_details .= "<li><label>Phone  : </label>" . self::address_field($address, 'phone') . "</li>";
-	$show_adrees_details .= "<li><label>Email  : </label>" . self::address_field($address, 'email') . "</li>";
-	$show_adrees_details .= "<li><label>Web-site  : </label>" . self::address_field($address, 'website') . "</li>";
-	$show_adrees_details .= "<li><label>Country  : </label>" . self::address_field($address, 'country') . "</li>";
-	$show_adrees_details .= "<li><label>Postal Code  : </label>" . self::address_field($address, 'postal_code') . "</li>";
-	$show_adrees_details .= "<li><label>Address :</label>" . form::text_area('address', $address->address) . "</li>";
+	$show_adrees_details .= "<li><label>" . gettext('Phone') . "  : </label>" . self::address_field($address, 'phone') . "</li>";
+	$show_adrees_details .= "<li><label>" . gettext('Email') . "  : </label>" . self::address_field($address, 'email') . "</li>";
+	$show_adrees_details .= "<li><label>" . gettext('Website') . "  : </label>" . self::address_field($address, 'website') . "</li>";
+	$show_adrees_details .= "<li><label>" . gettext('Country') . "  : </label>" . self::address_field($address, 'country') . "</li>";
+	$show_adrees_details .= "<li><label>" . gettext('Postal Code') . "  : </label>" . self::address_field($address, 'postal_code') . "</li>";
+	$show_adrees_details .= "<li><label>" . gettext('Address') . " :</label>" . form::text_area('address', $address->address) . "</li>";
 	$show_adrees_details .= "</ul>";
 	return $show_adrees_details;
  }

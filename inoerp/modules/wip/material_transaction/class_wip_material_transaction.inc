@@ -135,7 +135,14 @@ class wip_material_transaction extends inv_transaction {
  public $bom_sequence;
  public $wip_wo_header_id;
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of inv_transaction class
+wip_material_transaction::staticVar_init('transaction_type_id_a');
 ?>

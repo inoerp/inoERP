@@ -25,7 +25,7 @@
           <th><?php echo gettext('Id') ?></th>
           <th><?php echo gettext('Item') ?></th>
           <th><?php echo gettext('Default Type') ?></th>
-          <th><?php echo gettext('Sub inventory') ?></th>
+          <th><?php echo gettext('Subinventory') ?></th>
           <th><?php echo gettext('Locator') ?></th>
          </tr>
         </thead>

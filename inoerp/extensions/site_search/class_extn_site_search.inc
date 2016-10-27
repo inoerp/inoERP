@@ -386,17 +386,17 @@ class extn_site_search extends dbObject {
   $pagination->setProperty('_path', 'content');
   $position = ($pageno - 1) * $per_page;
 
-  $result_stmt = "<h1>Searched Text : " . $this->_searched_data . '<small> ( Use any <a href="search.php">advanced search </a> for filter & data export ) </smal></h1>';
+  $result_stmt = "<h1>" . gettext('Searched Text') . " : " . $this->_searched_data . '<small> ( Use any <a href="search.php">advanced search </a> for filter & data export ) </smal></h1>';
   $result_stmt .= '<table class="table ">
        <thead> 
         <tr>
-         <th>Data Type</th>
-         <th>Name</th>
-         <th>Number</th>
-         <th>Description</th>
-         <th>Status</th>
-         <th>Primary Id</th>
-         <th>Action</th>
+         <th>' . gettext('Data Type') . '</th>
+         <th>' . gettext('Name') . '</th>
+         <th>' . gettext('Number') . '</th>
+         <th>' . gettext('Description') . '</th>
+         <th>' . gettext('Status') . '</th>
+         <th>' . gettext('Primary Id') . '</th>
+         <th>' . gettext('Action') . '</th>
         </tr>
        </thead>
        <tbody class="search_result" >';
@@ -415,10 +415,10 @@ class extn_site_search extends dbObject {
    if (!empty($result_data->primary_id) && property_exists($result_data->class_name, 'primary_column')) {
     $result_data_className = $result_data->class_name;
     $primary_column = $result_data_className::$primary_column;
-    $result_stmt .= '<td><a href="' . HOME_URL . 'form.php?mode=2&class_name=' . $result_data->class_name . '&' . $primary_column . '=' . $result_data->primary_id . '" class="btn btn-default" >View</a>';
-    $result_stmt .= '<a href="' . HOME_URL . 'form.php?mode=9&class_name=' . $result_data->class_name . '&' . $primary_column . '=' . $result_data->primary_id . '" class="btn btn-default" >Update</a></td>';
+    $result_stmt .= '<td><a href="' . HOME_URL . 'form.php?mode=2&class_name=' . $result_data->class_name . '&' . $primary_column . '=' . $result_data->primary_id . '" class="btn btn-default" >' . gettext('View') . '</a>';
+    $result_stmt .= '<a href="' . HOME_URL . 'form.php?mode=9&class_name=' . $result_data->class_name . '&' . $primary_column . '=' . $result_data->primary_id . '" class="btn btn-default" >' . gettext('Update') . '</a></td>';
    } else {
-    $result_stmt .= '<td><button type="button" class="btn btn-default" >No Action</button></td>';
+    $result_stmt .= '<td><button type="button" class="btn btn-default" >' . gettext('No Action') . '</button></td>';
    }
    $result_ai->next();
    if ($result_ai->key() == $position + $per_page) {
@@ -522,8 +522,15 @@ class extn_site_search extends dbObject {
   return $show_adrees_details;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = substr($value,0,strpos($value,";")+2) . gettext(substr($value,strpos($value,";")+2));
+  }
+ }
+
 }
 
+extn_site_search::staticVar_init('search_document_list_a');
 $extn_site_search = new extn_site_search();
 $ss = &$extn_site_search;
 ?>

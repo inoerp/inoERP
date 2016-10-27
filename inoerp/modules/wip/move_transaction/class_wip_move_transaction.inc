@@ -561,7 +561,14 @@ class wip_move_transaction extends dbObject {
   }
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of resource class
+wip_move_transaction::staticVar_init('allowed_inv_transactions');
 ?>

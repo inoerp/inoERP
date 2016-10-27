@@ -6,7 +6,7 @@
   if (!empty($_GET['category_id'])) {
    $category_id = $_GET['category_id'];
   } else {
-   return '<br>No Category Selected';
+   return '<br>' . gettext('No Category Selected');
   }
   $content_type_id = $_GET['content_type_id'];
 
@@ -17,7 +17,7 @@
   $result = $cr->delete();
 
   if ($result == 1) {
-   echo '<div>Category is removed!</div>';
+   echo '<div>' . gettext('Category is removed!') . '</div>';
   } else {
    echo " <div>Error code: $result ! </div>";
   }

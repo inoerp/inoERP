@@ -59,7 +59,7 @@ inoERP
          <th><?php echo gettext('Quantity') ?></th>
          <th><?php echo gettext('Planned Quantity') ?></th>
          <th><?php echo gettext('Actual Quantity') ?></th>
-         <th><?php echo gettext('Trnx. Id') ?></th>
+         <th><?php echo gettext('Trnx Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">
@@ -178,10 +178,10 @@ inoERP
           ?> 
           <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>lot</legend>
+           <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Lot') ?></legend>
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-1"> <?php echo gettext('Numbers') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-1" class="tabContent">
@@ -252,10 +252,10 @@ inoERP
           ?>
           <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>Serial</legend>
+           <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Serial') ?></legend>
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-2-1"> Numbers</a></li>
+              <li class="tabLink"><a href="#tabsDetail-2-1"> <?php echo gettext('Numbers') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-2-1" class="tabContent">

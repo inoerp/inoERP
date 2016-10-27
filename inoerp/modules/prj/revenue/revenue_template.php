@@ -117,7 +117,7 @@ inoERP
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('Amount') ?></th>
         <th><?php echo gettext('Release Date') ?></th>
-        <th><?php echo gettext('Trasnfer Date') ?></th>
+        <th><?php echo gettext('Transfer Date') ?></th>
 
        </tr>
       </thead>

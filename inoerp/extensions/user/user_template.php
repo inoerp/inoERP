@@ -153,7 +153,7 @@ if (empty($access_level) || ($access_level < 2 )) {
          <tr class="user_role<?php echo $linecount; ?>">
           <td>   
            <ul class="inline_action">
-            <li class="remove_row_img">No Access </li>
+            <li class="remove_row_img"><?php echo gettext('No Access') ?> </li>
             <li><?php echo form::hidden_field('user_id', $$class->user_id); ?></li>
            </ul>
           </td>

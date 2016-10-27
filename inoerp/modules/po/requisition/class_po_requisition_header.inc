@@ -238,11 +238,11 @@
 
   private function _approve_doc($approval_hierarchy) {
    $approving_user_id = $_SESSION['user_id'];
-   $notification_subject = "Requisition Approval From " . $approving_user_id . ' Req#' . $this->po_requisition_number;
-   $notif_text_field1 = "<br>Requisition Type : $this->po_requisition_type ";
-   $notif_text_field1 .= "<br>Requisition Number : $this->po_requisition_number &nbsp;&nbsp; Amount : $this->header_amount";
-   $notif_text_field1 .= "<br>Supplier : $this->supplier_name (Supplier Id : $this->supplier_id) ";
-   $notif_text_field1 .= "<br>Description : $this->description ";
+   $notification_subject = gettext('Requisition Approval From') . " " . $approving_user_id . ' ' . gettext('Req') . '#' . $this->po_requisition_number;
+   $notif_text_field1 = "<br>" . gettext('Requisition Type') ." : $this->po_requisition_type ";
+   $notif_text_field1 .= "<br>" . gettext('Requisition Number') . " : $this->po_requisition_number &nbsp;&nbsp; " . gettext('Amount') . " : $this->header_amount";
+   $notif_text_field1 .= "<br>" . gettext('Supplier') . " : $this->supplier_name (" . gettext('Supplier Id') . " : $this->supplier_id) ";
+   $notif_text_field1 .= "<br>" . gettext('Description') . " : $this->description ";
    $hr_appr_val = new hr_approval_validation();
    $hr_appr_val->approval_hierarchy = $approval_hierarchy;
    $hr_appr_val->approving_doc_name = $this->_req_type_document_mapping[$this->po_requisition_type];

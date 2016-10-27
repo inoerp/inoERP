@@ -34,12 +34,12 @@
         <li class="<?php echo $star_3 ?> clickable ratings_stars" data-rating="3" title="3 Stars"></li>
         <li class="<?php echo $star_4 ?> clickable ratings_stars" data-rating="4" title="4 Stars"></li>
         <li class="<?php echo $star_5 ?> clickable ratings_stars" data-rating="5" title="5 Stars"></li>
-        <li class="no-of-votes" data-no_of_votes="" title="<?php echo "Average $rating_avg "; ?>"><?php echo "($rating_count Votes )"; ?></li>
+        <li class="no-of-votes" data-no_of_votes="" title="<?php echo gettext('Average') . " $rating_avg "; ?>"><?php echo "($rating_count Votes )"; ?></li>
        </ul>
       </div>
      </div>
      <div class="col-md-4">
-      <div class="no-of-comments"><a href="#comment_list"> <?php echo!empty($comments) ? count($comments) . ' Comment(s)' : 'No Comments'; ?>  </a></div>
+      <div class="no-of-comments"><a href="#comment_list"> <?php echo!empty($comments) ? count($comments) . ' ' . gettext('Comment') . '(s)' : gettext('No Comments'); ?>  </a></div>
      </div>
      <div class="col-md-4">
 
@@ -56,9 +56,9 @@
    </div>
    <div class="row product-buttons">
     <ul class="button-lists inline">
-     <li><a href="#" role="button" class="btn btn-lg btn-default add-to-cart" role="button">Add To Cart </a></li>
-     <li><a href="#" role="button" class="btn btn-lg btn-default add-to-wl"  role="button">Add To Wish List</a></li>
-     <li><a href="<?php echo HOME_URL ?>?dtype=product&class_name=ec_user_cart&ec_product_id=<?php echo $$class->ec_product_id ?>" role="button" class="btn btn-lg  btn-success buy-now" role="button">Buy Now </a></li>
+     <li><a href="#" role="button" class="btn btn-lg btn-default add-to-cart" role="button"><?php echo gettext('Add To Cart') ?> </a></li>
+     <li><a href="#" role="button" class="btn btn-lg btn-default add-to-wl"  role="button"><?php echo gettext('Add To Wish List') ?></a></li>
+     <li><a href="<?php echo HOME_URL ?>?dtype=product&class_name=ec_user_cart&ec_product_id=<?php echo $$class->ec_product_id ?>" role="button" class="btn btn-lg  btn-success buy-now" role="button"><?php echo gettext('Buy Now') ?> </a></li>
     </ul>
    </div>
    <div class="row product-description">
@@ -101,7 +101,7 @@
  </div>
 
  <div class="row featurette product level-3">
-  <h2 class="featurette-heading bgc">Product Description</h2>
+  <h2 class="featurette-heading bgc"><?php echo gettext('Product Description'); ?></h2>
   <div id="product-description-details" class="product-summary">
    <?php
    echo nl2br($$class->product_description);
@@ -111,7 +111,7 @@
  </div>
 
  <div class="row featurette product level-3">
-  <h2 class="featurette-heading bgc">YOU MAY ALSO BE INTERESTED IN THE FOLLOWING <span class="text-muted"> PRODUCT(S).</span></h2>
+  <h2 class="featurette-heading bgc"><?php echo gettext('YOU MAY ALSO BE INTERESTED IN THE FOLLOWING'); ?> <span class="text-muted"> <?php echo gettext('PRODUCT'); ?>(S).</span></h2>
   <div id="product-summary-cs" class="product-summary">
    <?php
    $result = ec_product::find_similar_products($$class->ec_product_id);

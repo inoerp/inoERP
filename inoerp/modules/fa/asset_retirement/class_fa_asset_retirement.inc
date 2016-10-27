@@ -185,7 +185,7 @@ class fa_asset_retirement extends dbObject implements gl_journal_int {
    $fa_asb->$k = $v;
   }
   if (empty($fa_asb->accumulated_depreciation)) {
-   echo '<br>No depriciation found. You dont need retire assets without any depriciation';
+   echo '<br>No depreciation found. You dont need retire assets without any depreciation';
    $dbc->rollback = true;
    return -90;
   }

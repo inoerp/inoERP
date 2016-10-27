@@ -3,9 +3,9 @@
 <table class ="balance_sheet table table-bordered simple_table">
  <thead> 
   <tr>
-   <th>Elements</th>
-   <th>As of <?php echo $current_period; ?></th>
-   <th>As of <?php echo $last_period; ?></th>
+   <th><?php echo gettext('Elements')?></th>
+   <th><?php echo gettext('As of') . ' ' . $current_period; ?></th>
+   <th><?php echo gettext('As of') . ' ' . $last_period; ?></th>
   </tr>
  </thead>
  <tbody>

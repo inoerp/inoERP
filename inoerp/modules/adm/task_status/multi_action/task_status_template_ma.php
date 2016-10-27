@@ -62,7 +62,7 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Task status Id') ?></th>
+           <th><?php echo gettext('Task Status Id') ?></th>
            <th><?php echo gettext('Auto Notification') ?></th>
            <th><?php echo gettext('Schedule') ?></th>
            <th><?php echo gettext('Primary Task Type') ?></th>

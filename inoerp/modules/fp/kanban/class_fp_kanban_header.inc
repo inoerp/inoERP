@@ -45,7 +45,7 @@ class fp_kanban_header extends dbObject {
  ];
  public static $source_type_a = [
   'SUPPLIER' => 'Supplier',
-  'SUBINV' => 'Sub Inventory',
+  'SUBINV' => 'Subinventory',
   'PRODUCTION' => 'Production',
   'ORG' => 'Organization',
   'LOGICAL' => 'Logical'
@@ -373,7 +373,14 @@ class fp_kanban_header extends dbObject {
   return $multi_select_hidden;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of fp_kanban_header class
+fp_kanban_header::staticVar_init('source_type_a');
 ?>

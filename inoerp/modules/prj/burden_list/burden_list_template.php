@@ -1,7 +1,7 @@
 <div class="row small-left-padding">
  <div id="form_all">
   <form method="post" id="prj_burden_list_header"  name="prj_burden_list_header">
-   <span class="heading"><?php echo gettext('Burden  List') ?></span>
+   <span class="heading"><?php echo gettext('Burden List') ?></span>
    <div id ="form_header">
     <div id="tabsHeader">
      <ul class="tabMain">

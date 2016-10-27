@@ -15,14 +15,14 @@
     <li class="list-group-item text-muted" contenteditable="false"><?php echo gettext('Profile'); ?></li>
     <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('Joined'); ?></strong></span><?php echo!empty($user_ai->creation_date) ? $user_ai->creation_date : ' NA '; ?></li>
     <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('Last seen'); ?></strong></span> NA </li>
-    <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('User name'); ?></strong></span><?php echo ino_getUserName_from_email($user_ai->username) ?></li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('User Name'); ?></strong></span><?php echo ino_getUserName_from_email($user_ai->username) ?></li>
     <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('Phone'); ?></strong></span><?php echo!empty($up->phone) ? $up->phone : ' NA '; ?> </li>
    </ul>
   </div>
   <div class="col-sm-3">
    <ul class="list-group">
     <li class="list-group-item text-muted" contenteditable="false"><?php echo gettext('Social Media'); ?></li>
-    <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('Websit'); ?></strong></span><a href="<?php echo ( $up->website) ?>"><i class="fa fa-globe"></i></a></li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('Website'); ?></strong></span><a href="<?php echo ( $up->website) ?>"><i class="fa fa-globe"></i></a></li>
     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Facebook</strong></span><a href="<?php echo ( $up->facebook_page) ?>"><i class="fa fa-facebook"></i></a></li>
     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Google</strong></span><a href="<?php echo ( $up->google_page) ?>"><i class="fa fa-google-plus"></i></a></li>
     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Linked In</strong></span><a href="<?php echo ( $up->linkedin_page) ?>"><i class="fa fa-linkedin"></i></a></li>

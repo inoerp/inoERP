@@ -168,11 +168,11 @@ inoERP
             }
             ?>
             <div class="class_detail_form">
-             <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+             <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Detail Data') ?></legend>
               <div class="tabsDetail">
                <ul class="tabMain">
-                <li class="tabLink"><a href="#tabsDetail-1-1">Resource</a></li>
-                <li class="tabLink"><a href="#tabsDetail-2-1">Quantities</a></li>
+                <li class="tabLink"><a href="#tabsDetail-1-1"><?php echo gettext('Resource') ?></a></li>
+                <li class="tabLink"><a href="#tabsDetail-2-1"><?php echo gettext('Quantities') ?></a></li>
                </ul>
                <div class="tabContainer">
                 <div id="tabsDetail-1-1" class="tabContent">
@@ -385,9 +385,9 @@ inoERP
           <th><?php echo gettext('Required') ?></th>
           <th><?php echo gettext('Issued') ?></th>
           <th><?php echo gettext('Open') ?></th>
-          <th><?php echo gettext('Onhand') ?></th>
+          <th><?php echo gettext('On Hand') ?></th>
           <th><?php echo gettext('Supply Type') ?></th>
-          <th><?php echo gettext('Sub inventory') ?></th>
+          <th><?php echo gettext('Subinventory') ?></th>
           <th><?php echo gettext('Locator') ?></th>
          </tr>
         </thead>

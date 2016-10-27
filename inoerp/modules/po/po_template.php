@@ -101,7 +101,7 @@ inoERP
          <a class="button" target="_blank"
             href="<?php echo HOME_URL ?>form.php?class_name=po_header&amp;router=pdf_print&amp;po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" >Print PO</a>
         </li>
-        <li><label>Action</label>
+        <li><label><?php echo gettext('Action') ?></label>
          <?php
          echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $action_readonly, $action_readonly)
          ?>

@@ -21,7 +21,7 @@ class bc_static_label extends dbObject {
   'GENERIC' => 'Generic',
   'ORG' => 'Organization',
   'INV' => 'Inventory',
-  'SUBINV' => 'Sub Inventory',
+  'SUBINV' => 'Subinventory',
   'LOCATOR' => 'Locator',
   'ITEM' => 'Item',
   'POS_LIST' => 'POS List'
@@ -87,28 +87,28 @@ public $no_of_copies;
   $stmt = '<ul class="column one_column">';
   switch ($this->label_type) {
    case 'LOCATOR':
-    $stmt .='<li><label>Organization : </label>' . $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1) . '</li>';
-    $stmt .='<li><label>Sub Inventory : </label>' . $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($org_id), 'subinventory_id', 'subinventory', '', 'subinventory_id') . '</li>';
-    $stmt .='<li><label>Locator : </label>' . $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($subinventory_id), 'locator_id', 'locator', '', 'locator_id') . '</li>';
+    $stmt .='<li><label>' . gettext('Organization') . ' : </label>' . $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1) . '</li>';
+    $stmt .='<li><label>' . gettext('Subinventory') . ' : </label>' . $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($org_id), 'subinventory_id', 'subinventory', '', 'subinventory_id') . '</li>';
+    $stmt .='<li><label>' . gettext('Locator') . ' : </label>' . $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($subinventory_id), 'locator_id', 'locator', '', 'locator_id') . '</li>';
     break;
 
    case 'SUBINV':
-    $stmt .='<li><label>Organization : </label>' . $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1) . '</li>';
-    $stmt .='<li><label>Sub Inventory : </label>' . $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($org_id), 'subinventory_id', 'subinventory', '', 'subinventory_id') . '</li>';
+    $stmt .='<li><label>' . gettext('Organization') . ' : </label>' . $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1) . '</li>';
+    $stmt .='<li><label>' . gettext('Subinventory') . ' : </label>' . $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($org_id), 'subinventory_id', 'subinventory', '', 'subinventory_id') . '</li>';
     break;
 
    case 'ORG':
    case 'INV':
-    $stmt .='<li><label>Organization : </label>' . $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1) . '</li>';
+    $stmt .='<li><label>' . gettext('Organization') . ' : </label>' . $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', 1) . '</li>';
     break;
 
    case 'ITEM':
-    $stmt .='<li><label>Item : </label>' . $f->text_field('item_number', '', '15', 'item_number', 'select_item_number', 1) . 
+    $stmt .='<li><label>' . gettext('Item') . ' : </label>' . $f->text_field('item_number', '', '15', 'item_number', 'select_item_number', 1) . 
     '<i class="select_item_number select_popup clickable fa fa-search"></i></li>';
     break;
    
    case 'POS_LIST':
-    $stmt .='<li><label>POS List Name : </label>' .
+    $stmt .='<li><label>' . gettext('POS List Name') . ' : </label>' .
     $f->select_field_from_object('pos_barcode_list_header_id', pos_barcode_list_header::find_all(), 'pos_barcode_list_header_id', 'list_name', '', 'pos_barcode_list_header_id', '', 1) . '</li>';
     break;
 
@@ -119,6 +119,13 @@ public $no_of_copies;
   return $stmt;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
+bc_static_label::staticVar_init('label_type_a');
 ?>

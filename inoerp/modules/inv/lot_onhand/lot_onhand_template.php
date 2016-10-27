@@ -1,8 +1,8 @@
-      <div id ="form_line" class="form_line"><span class="heading">Lot On Hand </span>
+      <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Lot On Hand') ?> </span>
        <div id="tabsDetail">
         <ul class="tabMain">
-         <li><a href="#tabsDetail-1">Info-1 </a></li>
-         <li><a href="#tabsDetail-2">Info-2 </a></li>
+         <li><a href="#tabsDetail-1"><?php echo gettext('Info-1') ?> </a></li>
+         <li><a href="#tabsDetail-2"><?php echo gettext('Info-2') ?> </a></li>
         </ul>
         <div class="tabContainer"> 
          <form action=""  method="post" id="inv_lot_transaction_entries_line"  name="inv_lot_transaction_entries_line">
@@ -10,16 +10,16 @@
            <table class="form_table">
             <thead> 
              <tr>
-              <th>Item Number</th>
-              <th>lot Number</th>
-              <th>Quantity</th>
-              <th>Origination Type</th>
-              <th>Origination Date</th>
-              <th>Activation Date </th>
-              <th>Current Inventory</th>
-              <th>Sub inventory</th>
-              <th>Locator</th>
-              <th>Inventory Id </th>
+              <th><?php echo gettext('Item Number') ?></th>
+              <th><?php echo gettext('Lot Number') ?></th>
+              <th><?php echo gettext('Quantity') ?></th>
+              <th><?php echo gettext('Origination Type') ?></th>
+              <th><?php echo gettext('Origination Date') ?></th>
+              <th><?php echo gettext('Activation Date') ?> </th>
+              <th><?php echo gettext('Current Inventory') ?></th>
+              <th><?php echo gettext('Subinventory') ?></th>
+              <th><?php echo gettext('Locator') ?></th>
+              <th><?php echo gettext('Inventory Id') ?> </th>
              </tr>
             </thead>
             <tbody class="form_data_line_tbody inv_lot_transaction_entries_values" >
@@ -51,11 +51,11 @@
            <table class="form_table">
             <thead> 
              <tr>
-              <th>COO</th>
-              <th>Org Id </th>
-              <th>Item Description </th>
-              <th>Lot Status</th>
-              <th>lot Details</th>
+              <th><?php echo gettext('COO') ?></th>
+              <th><?php echo gettext('Org Id') ?> </th>
+              <th><?php echo gettext('Item Description') ?> </th>
+              <th><?php echo gettext('Lot Status') ?></th>
+              <th><?php echo gettext('Lot Details') ?></th>
              </tr>
             </thead>
             <tbody class="form_data_line_tbody inv_lot_transaction_entries_values" >
@@ -69,7 +69,7 @@
                 <td><?php echo $f->text_field('org_id', $inv_onhand_lot->org_id); ?></td>
                 <td><?php echo $f->text_field('item_description', $inv_onhand_lot->item_description); ?></td>
                 <td><?php echo $f->text_field('lot_number', $inv_onhand_lot->status); ?></td>
-                <td><a class="button" href="form.php?class_name=inv_lot_number&mode=9&inv_lot_number_id=<?php echo $inv_onhand_lot->inv_lot_number_id; ?>">View</a></td>
+                <td><a class="button" href="form.php?class_name=inv_lot_number&mode=9&inv_lot_number_id=<?php echo $inv_onhand_lot->inv_lot_number_id; ?>"><?php echo gettext('View') ?></a></td>
                </tr>
                <?php
                $count = $count + 1;

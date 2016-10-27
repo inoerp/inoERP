@@ -52,7 +52,7 @@
          <span  aria-hidden="true"></span><i class='fa fa-tasks'></i> <?php echo gettext('Actions') ?></button>
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
          <span class="caret"></span>
-         <span class="sr-only">Toggle Dropdown</span>
+         <span class="sr-only"><?php echo gettext('Toggle Dropdown')?></span>
         </button>
         <ul class="dropdown-menu" role="menu">
          <li><a href="<?php echo HOME_URL; ?>program.php?class_name=fa_depreciation_header&program_name=prg_run_depreciation">

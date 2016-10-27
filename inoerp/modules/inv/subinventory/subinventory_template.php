@@ -1,4 +1,4 @@
-<div id ="form_all"><span class="heading"><?php echo gettext('Sub Inventory') ?></span>
+<div id ="form_all"><span class="heading"><?php echo gettext('Subinventory') ?></span>
  <form action=""  method="post" id="subinventory"  name="subinventory">
   <div id ="form_header">
    <div id="tabsHeader">

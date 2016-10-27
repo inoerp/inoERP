@@ -41,10 +41,10 @@
     <div id="tabsHeader-3" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label>Customer Profile : </label>
+       <li><label><?php echo gettext('Customer Profile') ?> : </label>
         <?php echo form::text_field_d('profile_name'); ?>
        </li>
-       <li><label>Credit Class : </label>
+       <li><label><?php echo gettext('Credit Class') ?> : </label>
         <?php echo form::select_field_from_object('customer_credit_class', ar_customer::customer_credit_class(), 'option_line_code', 'option_line_value', $$class->customer_credit_class, 'customer_credit_class', $readonly, '', ''); ?>
        </li>
       </ul>

@@ -90,7 +90,7 @@ inoERP
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
-        <th><?php echo gettext('Sclae Type') ?></th>
+        <th><?php echo gettext('Scale Type') ?></th>
         <th><?php echo gettext('Cost Allocation') ?></th>
        </tr>
       </thead>
@@ -155,7 +155,7 @@ inoERP
         <th><?php echo gettext('Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Sclae Type') ?></th>
+        <th><?php echo gettext('Scale Type') ?></th>
         <th><?php echo gettext('Yield') ?></th>
         <th><?php echo gettext('Consumption') ?></th>
         <th><?php echo gettext('Buffer') ?></th>
@@ -225,7 +225,7 @@ inoERP
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Planned Qty') ?></th>
         <th><?php echo gettext('Allocated Qty') ?></th>
-        <th><?php echo gettext('Sclae Type') ?></th>
+        <th><?php echo gettext('Scale Type') ?></th>
         <th><?php echo gettext('Yield Type') ?></th>
         <th><?php echo gettext('Byproduct') ?></th>
        </tr>

@@ -57,10 +57,10 @@ class fp_minmax_board_v extends dbObject {
   '_view_action_meassge' => 'Serial Numbers',
   '_extra_path' => array('form.php?class_name=inv_lot_onhand&mode=2' => 'Lot Numbers')
  ];
- public $search_groupBy = [
+ public static $search_groupBy = [
   'item_number' => 'Item Number'
 //		 'locator' => 'Locator',
-//		 'subinventory' => 'Sub Inventory',
+//		 'subinventory' => 'Subinventory',
 //		 'org_id' => 'Inventory Org',
  ];
  public $search_groupBy_sum = 'onhand';
@@ -94,7 +94,7 @@ class fp_minmax_board_v extends dbObject {
   '_legend' => ''
  ];
  public $ra_report_set_onhand_by_subinventoryType_settings = [
-  '_chart_name' => 'Onhand By Subinventory Type',
+  '_chart_name' => 'On Hand By Subinventory Type',
   '_chart_width' => '350',
   '_chart_height' => '350',
   '_x_axis_text' => 'Sub Invnetory Type',
@@ -393,7 +393,14 @@ item_id_m, revision_name, org_id, subinventory_id, (minmax_min_quantity-onhand) 
   return !empty($result_f) ? $result_f : false;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of po_detail class
+fp_minmax_board_v::staticVar_init('search_groupBy');
 ?>

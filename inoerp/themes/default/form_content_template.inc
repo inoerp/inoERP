@@ -17,7 +17,7 @@
        <a name="show" href="content.php?content_id=<?php echo $$class->content_id; ?>&content_type_id=<?php echo $content_type->content_type_id; ?>&<?php echo "mode=$mode"; ?>" class="show document_id ap_payment_header_id">
         <i class="fa fa-refresh"></i></a> 
       </div>-->
-      <div><label>Subject</label>
+      <div><label><?php echo gettext('Subject'); ?></label>
        <?php $f->text_field_d('subject'); ?>
       </div>
           
@@ -29,8 +29,8 @@
      <div id="file_upload_form">
       <ul class="inRow asperWidth">
        <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
-       <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
-       <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
+       <li> <input type="button" value="<?php echo gettext('Attach'); ?>" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
+       <li class="show_loading_small"><img alt="<?php echo gettext('Loading'); ?>..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
       </ul>
       <div class="uploaded_file_details"></div>
      </div>
@@ -42,13 +42,13 @@
        <?php
        if (!empty($category_select_statement_array)) {
         foreach ($category_select_statement_array as $category_select_statement) {
-         echo '<label>Category : </label>';
+         echo '<label>' . gettext('Category') . ' : </label>';
          echo $category_select_statement;
         }
        } else {
         if (!empty($categories_of_content_type_select_option_array)) {
          foreach ($categories_of_content_type_select_option_array as $records) {
-          echo '<label>Category : </label>';
+          echo '<label>' . gettext('Category') . ' : </label>';
           echo $records;
          }
         }
@@ -59,7 +59,7 @@
     </div>
     <?php
     if ($access_level <= 3 & $mode == 9) {
-     echo '<div id="save" class="submit"><input type="button" value="Save Post" name="submit_content" class="button"></div>';
+     echo '<div id="save" class="submit"><input type="button" value="' . gettext('Save Post') . '" name="submit_content" class="button"></div>';
     }
     ?>
      </div> 
