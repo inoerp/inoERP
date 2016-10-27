@@ -15552,3 +15552,6 @@ msgstr "View More"
 
 msgid "UOM Id"
 msgstr "UOM Id"
+
+msgid "No Records Found!"
+msgstr "No Records Found!"
