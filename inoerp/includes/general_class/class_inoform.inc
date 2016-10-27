@@ -2436,7 +2436,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
     }
     $stmt_rtn .= '</tbody>';
    } else {
-    $stmt_rtn .= 'No Records Found!';
+    $stmt_rtn .= gettext('No Records Found!');
    }
    $stmt_rtn .= '</table> </div>';
   }

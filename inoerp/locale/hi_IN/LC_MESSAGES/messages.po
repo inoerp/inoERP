@@ -13601,7 +13601,7 @@ msgstr "जानकारी सीबी"
 msgid "Specification Name"
 msgstr "विनिर्देश नाम"
 
-msgid "ap customer id"
+msgid "Ap Customer Id"
 msgstr "एपी ग्राहक आईडी"
 
 msgid "qa specification line id"
@@ -13768,3 +13768,6 @@ msgstr "व्यक्तिगत DB सीबी उपयोग"
 
 msgid "Printing array/object"
 msgstr "मुद्रण सरणी / वस्तु"
+
+msgid "UOM Id"
+msgstr "UoM पहचान पत्र"

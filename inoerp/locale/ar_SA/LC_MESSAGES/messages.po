@@ -369,7 +369,7 @@ msgstr "معرف خط المعاملات ref"
 msgid "Item Number"
 msgstr "رقم الصنف"
 
-msgid "UOM Id"
+msgid "Uom Id"
 msgstr "معرف Uom"
 
 msgid "Item Status"
@@ -9794,3 +9794,6 @@ msgstr "أمر التوريد "
 
 msgid "SO Line "
 msgstr "حتى خط"
+
+msgid "UOM Id"
+msgstr "معرف UOM"

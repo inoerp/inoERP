@@ -367,8 +367,8 @@ msgstr "Ref Transaction Line Id"
 msgid "Item Number"
 msgstr "Item Number"
 
-msgid "UOM Id"
-msgstr "UOM Id"
+msgid "Uom Id"
+msgstr "Uom Id"
 
 msgid "Item Status"
 msgstr "Item Status"
@@ -13600,8 +13600,8 @@ msgstr "information cb"
 msgid "Specification Name"
 msgstr "Specification Name"
 
-msgid "ap customer id"
-msgstr "ap customer id"
+msgid "Ap Customer Id"
+msgstr "Ap Customer Id"
 
 msgid "qa specification line id"
 msgstr "qa specification line id"
@@ -15549,3 +15549,6 @@ msgstr "Comment is disabled"
 
 msgid "View More"
 msgstr "View More"
+
+msgid "UOM Id"
+msgstr "UOM Id"

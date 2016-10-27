@@ -367,7 +367,7 @@ msgstr "Ref Transaktion Linie Id"
 msgid "Item Number"
 msgstr "Artikelnummer"
 
-msgid "UOM Id"
+msgid "Uom Id"
 msgstr "ME Id"
 
 msgid "Item Status"
@@ -13600,7 +13600,7 @@ msgstr "Informationen cb"
 msgid "Specification Name"
 msgstr "Beschreibung Name"
 
-msgid "ap customer id"
+msgid "Ap Customer Id"
 msgstr "ap Kundennummer"
 
 msgid "qa specification line id"
@@ -13767,3 +13767,6 @@ msgstr "verwenden personenbezogene db cb"
 
 msgid "Printing array/object"
 msgstr "Druckarray / object"
+
+msgid "UOM Id"
+msgstr "ME Id"

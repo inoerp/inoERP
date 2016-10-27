@@ -365,13 +365,13 @@ msgid "Ref Transaction Line Id"
 msgstr "Identificazione linea di riferimento transazione"
 
 msgid "Item Number"
-msgstr "Numero dell"elemento"
+msgstr "Numero dell\"elemento"
 
 msgid "Uom Id"
-msgstr "Id di unità di misura"
+msgstr "Id di Udm"
 
 msgid "Item Status"
-msgstr "Stato dell"elemento"
+msgstr "Stato dell\"elemento"
 
 msgid "Po Status"
 msgstr "Status di po"
@@ -11391,3 +11391,6 @@ msgstr "Selezionare l\"organizzazione o la Query di item_id"
 
 msgid "First save header or select an Option Type"
 msgstr "In primo luogo salvare intestazione o selezionare un tipo di opzione"
+
+msgid "UOM Id"
+msgstr "Id di unità di misura"

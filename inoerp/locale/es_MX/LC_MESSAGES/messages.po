@@ -367,8 +367,8 @@ msgstr "Id Linea de Transacción de Ref"
 msgid "Item Number"
 msgstr "Núm de Art"
 
-msgid "UOM Id"
-msgstr "Id de UDM"
+msgid "Uom Id"
+msgstr "Id UDM"
 
 msgid "Item Status"
 msgstr "Estado del Artículo"
@@ -13600,8 +13600,8 @@ msgstr "Cv Información"
 msgid "Specification Name"
 msgstr "Nombre Especificación"
 
-msgid "ap customer id"
-msgstr "Id Cliente de CP"
+msgid "Ap Customer Id"
+msgstr "Id Cliente CP"
 
 msgid "qa specification line id"
 msgstr "Id la Linea de Especificación de AC"
@@ -15549,3 +15549,6 @@ msgstr "Comentar Deshabilitado"
 
 msgid "View More"
 msgstr "Ver Mas"
+
+msgid "UOM Id"
+msgstr "Id UDM"

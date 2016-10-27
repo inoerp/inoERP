@@ -130,7 +130,7 @@ public function _before_showing() {
 	 $stmt->execute();
 	 $result = $stmt->fetchObject();
 	} catch (PDOException $e) {
-	 echo "No Records Found!. Error @ PO Purchasing Control " . __LINE__ . $e->getMessage();
+	 echo gettext("No Records Found!") . ". Error @ PO Purchasing Control " . __LINE__ . $e->getMessage();
 	}
 	return !empty($result) ? array_pop($result) : false;
  }

@@ -501,7 +501,7 @@ class extn_view extends dbObject {
      }
      $content_string .= '</tbody>';
     } else {
-     $content_string .= 'No Records Found!';
+     $content_string .= gettext('No Records Found!');
     }
     $content_string .= '</table> </div>';
    }

@@ -397,7 +397,7 @@ class ino_user extends dbObject {
    $result = $stmt->fetch();
 //   $result = $stmt->fetchAll(PDO::FETCH_CLASS, self::$table_name);
   } catch (PDOException $e) {
-   return "No Records Found!" . $e->getMessage();
+   return gettext("No Records Found!") . $e->getMessage();
   }
 
   return !empty($result) ? $result : null;

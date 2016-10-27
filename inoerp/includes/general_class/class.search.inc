@@ -209,7 +209,7 @@ class search extends dbObject {
     }
     $search_result .= '</tbody>';
    } else {
-    $search_result .= 'No Records Found!';
+    $search_result .= gettext('No Records Found!');
    }
    $search_result .= '</table> </div>';
   }
@@ -288,7 +288,7 @@ class search extends dbObject {
     }
     $search_result .= '</tbody>';
    } else {
-    $search_result .= 'No Records Found!';
+    $search_result .= gettext('No Records Found!');
    }
    $search_result .= '</table> </div>';
   }

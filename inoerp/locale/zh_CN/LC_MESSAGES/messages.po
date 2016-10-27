@@ -9794,3 +9794,5 @@ msgstr "销售订单"
 msgid "SO Line "
 msgstr "如此行"
 
+msgid "UOM Id"
+msgstr "UOM Id"
