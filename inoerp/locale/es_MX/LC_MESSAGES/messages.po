@@ -2855,7 +2855,7 @@ msgid "Project Details"
 msgstr "Detalles de Proyecto"
 
 msgid "Username"
-msgstr "Nom Usuario"
+msgstr "Nombre Usuario"
 
 msgid "Emp Start Date"
 msgstr "Fecha Inicial Emp"
