@@ -340,8 +340,11 @@ function getBreadCrumb($class_first) {
 	$form_bread_crum .= '<li title="' . gettext('Close This Form') . '" ><j  class="ajax-link ino-close-form clickable " ><i class="fa fa-remove"></i> </j></li>';
 	$form_bread_crum .= '<li title="' . gettext('Minimize This Form') . '" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable " ><i class="fa fa-minus"></i></j></li>';
 	$form_bread_crum .= "<li title=\"" . gettext('Navigate to') . ' ' . gettext('Dashboard') . "\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"><i class="fa fa-dashboard"></i> </a></li>';
-	$form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . gettext($module_description) . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>';
-
+	if ($module_description != null) {//The ino_user module_name is not listed in user_dashvoard_v::$icon_stmt_a, so due to $module_description being null, gettext retrieves garbage.
+	 $form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . gettext($module_description) . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>'; }
+	else {
+	 $form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . '' . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>';
+	}
 	$form_bread_crum .= '</ul>';
 	return $form_bread_crum;
  } else {

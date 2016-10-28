@@ -461,8 +461,8 @@ class inoform {
 							 <li><input type="file" id="attachments" class="attachments" value="" name="uploaded_file[]" multiple/></li>
               <li><input type="hidden" class="hidden display_type" name="display_type[]" value="' . $display_type . '"/></li>
               <li><input type="hidden" class="hidden file_id ' . $name . '" name="' . $name . '[]" value="' . $value_file_id . '"/></li>
-							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">Upload</button></li>';
-  $stmt .= '<li role="button" class="delete_image btn btn-danger "  name="delete_image" data-extn_image_reference_id="'.$value_file_id.'">Delete Image</li>';
+							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">' . gettext('Upload') . '</button></li>';
+  $stmt .= '<li role="button" class="delete_image btn btn-danger "  name="delete_image" data-extn_image_reference_id="'.$value_file_id.'">' . gettext('Delete Image') . '</li>';
   $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
 							</ul>
 							<div class="uploaded_file_details"></div>
@@ -770,7 +770,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $add_field .= '<li><label>' . gettext('Phone') . '</label>' . $f->text_field('addr_phone', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Email') . '</label>' . $f->text_field('addr_email', $email) . '</li>';
   $add_field .= '<li><label>' . gettext('Website') . '</label>' . $f->text_field('addr_website', '') . '</li>';
-  $add_field .= '<li><label>' . gettext('Coutry') . '</label>' . $f->text_field('addr_country', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Country') . '</label>' . $f->text_field('addr_country', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $f->text_field('addr_postal_code', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Default') . '</label>' . $f->checkBox_field('addr_default_cb', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', option_header::find_options_byName('ADDRESS_USAGE_TYPE'), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';

@@ -11728,8 +11728,8 @@ msgstr "HELLO_WORLD"
 msgid "Custom Template for ADMIN"
 msgstr "Custom Template for ADMIN"
 
-msgid "usage type"
-msgstr "usage type"
+msgid "Usage Type"
+msgstr "Usage Type"
 
 msgid "address reference id"
 msgstr "address reference id"
@@ -13759,11 +13759,11 @@ msgstr "Read Count"
 msgid "sys spd process flow action id"
 msgstr "sys spd process flow action id"
 
-msgid "default theme"
-msgstr "default theme"
+msgid "Default Theme"
+msgstr "Default Theme"
 
-msgid "use personal db cb"
-msgstr "use personal db cb"
+msgid "Use Personal Db Cb"
+msgstr "Use Personal Db Cb"
 
 msgid "Printing array/object"
 msgstr "Printing array/object"
@@ -15558,3 +15558,33 @@ msgstr "No Records Found!"
 
 msgid "Unsaved Change"
 msgstr "Unsaved Change"
+
+msgid "Use Personal Color Cb"
+msgstr "Use Personal Color Cb"
+
+msgid "Show Bg Image Cb"
+msgstr "Show Bg Image Cb"
+
+msgid "Mandatory Field Color"
+msgstr "Mandatory Field Color"
+
+msgid "Heading Color"
+msgstr "Heading Color"
+
+msgid "Content Color"
+msgstr "Content Color"
+
+msgid "Bg Opacity"
+msgstr "Bg Opacity"
+
+msgid "Select Image"
+msgstr "Select Image"
+
+msgid "Upload"
+msgstr "Upload"
+
+msgid "Delete Image"
+msgstr "Delete Image"
+
+msgid "Ino User Id"
+msgstr "Ino User Id"

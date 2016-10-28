@@ -7532,7 +7532,7 @@ msgid "Payslip Header"
 msgstr "Encabezado Recibo Sueldo"
 
 msgid "Search All Paths"
-msgstr "Busca Todas las Caminos"
+msgstr "Busca Todos los Caminos"
 
 msgid "Search Payslip"
 msgstr "Busca Recibos de Sueldo"
@@ -8471,7 +8471,7 @@ msgid "Template Fields"
 msgstr "Campos de Plantilla"
 
 msgid "Mandatory Field"
-msgstr "Campo Mandatorio"
+msgstr "Campo Obligatorio"
 
 msgid "List Option Type"
 msgstr "Lista Tipos de Opción"
@@ -10946,7 +10946,7 @@ msgid "Prompt"
 msgstr "Indicación"
 
 msgid "Mandatory"
-msgstr "Mandatorio"
+msgstr "Obligatorio"
 
 msgid "Readonly"
 msgstr "Solo Lect"
@@ -11728,7 +11728,7 @@ msgstr "HOLA_MUNDO"
 msgid "Custom Template for ADMIN"
 msgstr "Plantila Personalizada para ADMIN"
 
-msgid "usage type"
+msgid "Usage Type"
 msgstr "Tipo de Uso"
 
 msgid "address reference id"
@@ -13759,10 +13759,10 @@ msgstr "Conteo Lect"
 msgid "sys spd process flow action id"
 msgstr "Id Acción de Flujo Proceso de DPS de Sis"
 
-msgid "default theme"
+msgid "Default Theme"
 msgstr "Tema Estándar"
 
-msgid "use personal db cb"
+msgid "Use Personal Db Cb"
 msgstr "Cv Use BD Personal"
 
 msgid "Printing array/object"
@@ -14492,7 +14492,7 @@ msgid "Clipboard"
 msgstr "Portapapeles"
 
 msgid "Unsaved Changes"
-msgstr "Cambios sin Guardar"
+msgstr "Cambios Sin Guardar"
 
 msgid "Quality"
 msgstr "Calidad"
@@ -15557,4 +15557,34 @@ msgid "No Records Found!"
 msgstr "¡No Encontré Registros!"
 
 msgid "Unsaved Change"
-msgstr "Cambio sin Guardar"
+msgstr "Cambio Sin Guardar"
+
+msgid "Use Personal Color Cb"
+msgstr "Cv Use Color Personal"
+
+msgid "Show Bg Image Cb"
+msgstr "Cv Muestra Imag Fo"
+
+msgid "Mandatory Field Color"
+msgstr "Color Campo Obligatorio"
+
+msgid "Heading Color"
+msgstr "Color de Encab"
+
+msgid "Content Color"
+msgstr "Color Contenido"
+
+msgid "Bg Opacity"
+msgstr "Opacidad Fo"
+
+msgid "Select Image"
+msgstr "Selec Imagen"
+
+msgid "Upload"
+msgstr "Cargar"
+
+msgid "Delete Image"
+msgstr "Borra Imagen"
+
+msgid "Ino User Id"
+msgstr "Id Usuario Ino"
