@@ -150,7 +150,7 @@ $(document).ready(function () {
 
 //all actions
 //Popup for selecting match 
- $('body').on('change', '#ar_transaction_header #action' , function () {
+ $('body').off('change', '#ar_transaction_header #action' ).on('change', '#ar_transaction_header #action' , function () {
   var selected_value = $(this).val();
   switch (selected_value) {
    case 'CREATE_ACCOUNT' :
@@ -170,14 +170,19 @@ $(document).ready(function () {
   }
  });
 
+$('#transaction_type').find('option').attr('disabled', true);
+
 if($('#bu_org_id').val()){
-$('#transaction_type').find("[data-bu_org_id='" + $('#bu_org_id').val() + "']").attr('disabled', true);
+$('#transaction_type').find("[data-bu_org_id='" + $('#bu_org_id').val() + "']").removeAttr('disabled');
 }
 
  $('body').off('change', '#ar_transaction_header #bu_org_id').on('change', '#ar_transaction_header #bu_org_id', function () {
   getBUDetails($(this).val());
-    $('#transaction_type').find('option').removeAttr('disabled');
-  $('#transaction_type').find("[data-bu_org_id='" + $(this).val() + "']").attr('disabled', true);
+$('#transaction_type').find('option').attr('disabled', true);
+if($('#bu_org_id').val()){
+$('#transaction_type').find("[data-bu_org_id='" + $('#bu_org_id').val() + "']").removeAttr('disabled');
+}
+
  });
 
  if ($('#bu_org_id').val() && (!$('#ar_transaction_header_id').val()) && ($('#bu_org_id').attr('disabled') != 'disabled')) {
