@@ -15555,3 +15555,6 @@ msgstr "UOM Id"
 
 msgid "No Records Found!"
 msgstr "No Records Found!"
+
+msgid "Unsaved Change"
+msgstr "Unsaved Change"

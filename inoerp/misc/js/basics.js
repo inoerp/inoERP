@@ -4919,10 +4919,14 @@ $(document).ready(function () {
 //tracking unsaved changes
  $('#erp_form_area').on('change', 'form[method="post"] :input', function (e) {
   var noof_field_changes = $('#unsaved_fields').data('no_of_fields');
-  if (noof_field_changes < 1) {
-   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">Unsaved Changes</span>');
-  }
+  //if (noof_field_changes < 1) {
+  // $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + unsaved_changes + '</span>');
+  //}
   noof_field_changes++;
+  if ( noof_field_changes == 1 ) {
+   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + noof_field_changes + ' ' + unsaved_change + '</span>'); }
+  else {
+   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + noof_field_changes + ' ' + unsaved_changes + '</span>'); }
   $('#unsaved_fields').data('no_of_fields', noof_field_changes);
  });
 

@@ -15555,3 +15555,6 @@ msgstr "Id UDM"
 
 msgid "No Records Found!"
 msgstr "¡No Encontré Registros!"
+
+msgid "Unsaved Change"
+msgstr "Cambio sin Guardar"
