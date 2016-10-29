@@ -34,8 +34,9 @@ function match_transaction() {
   localStorage.setItem("reset_link", link);
   localStorage.removeItem("jsfile");
   localStorage.setItem("jsfile", "modules/ar/ar_transaction/extra_ar_transaction.js");
+
   void window.open(link, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' +  $(window).width() + ',height=' + $(window).height() + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  } else {
   alert('No Transaction Header ID/nEnter or Save The Header Details ');
@@ -50,8 +51,10 @@ function create_accounting() {
   localStorage.setItem("reset_link", link);
   localStorage.removeItem("jsfile");
   localStorage.setItem("jsfile", "modules/ar/ar_transaction/extra_ar_transaction.js");
+  var popup_width = $(window).width();
+  var popup_height = $(window).height();
   void window.open(link, '_blank',
-          'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + popup_width + ',height=' + popup_height + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  } else {
   alert('No Transaction Header ID/nEnter or Save The Header Details ');
@@ -63,23 +66,24 @@ function create_receipt() {
  if (ar_transaction_header_id) {
   var link = 'form.php?window_type=popup&class_name=ar_receipt_header&action=create_receipt&mode=9'
   link += '&ar_transaction_header_id=' + ar_transaction_header_id;
+  
   void window.open(link, '_blank',
-          'width=1300,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' +  $(window).width() + ',height=' +  $(window).height() + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  } else {
   alert('No Transaction Header ID/nEnter or Save The Header Details ');
  }
 }
 
- function ar_transaction_header_copy_line_to_details() {
-  $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
-   var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
-   if (detailExists === 0) {
-    var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
-    $(this).closest("td").find(".quantity:first").val(lineQuantity);
-   }
-  });
- }
+function ar_transaction_header_copy_line_to_details() {
+ $("#content").on("click", "table.form_line_data_table .add_detail_values_img", function () {
+  var detailExists = $(this).closest("td").find(".form_detail_data_fs").length;
+  if (detailExists === 0) {
+   var lineQuantity = $(this).closest('tr').find('.inv_line_quantity').val();
+   $(this).closest("td").find(".quantity:first").val(lineQuantity);
+  }
+ });
+}
 
 $(document).ready(function () {
 //mandatory and field sequence
@@ -120,7 +124,7 @@ $(document).ready(function () {
 //get customer details
  get_customer_detail_for_bu();
 
-  $('#ar_transaction_header').off("change", "#ar_customer_site_id").on("change", "#ar_customer_site_id", function () {
+ $('#ar_transaction_header').off("change", "#ar_customer_site_id").on("change", "#ar_customer_site_id", function () {
   var ar_customer_site_id = $("#ar_customer_site_id").val();
   if (ar_customer_site_id) {
    getCustomerSiteDetails('modules/ar/customer/json_customer.php', ar_customer_site_id);
@@ -150,7 +154,7 @@ $(document).ready(function () {
 
 //all actions
 //Popup for selecting match 
- $('body').off('change', '#ar_transaction_header #action' ).on('change', '#ar_transaction_header #action' , function () {
+ $('body').off('change', '#ar_transaction_header #action').on('change', '#ar_transaction_header #action', function () {
   var selected_value = $(this).val();
   switch (selected_value) {
    case 'CREATE_ACCOUNT' :
@@ -170,18 +174,18 @@ $(document).ready(function () {
   }
  });
 
-$('#transaction_type').find('option').attr('disabled', true);
+ $('#transaction_type').find('option').attr('disabled', true);
 
-if($('#bu_org_id').val()){
-$('#transaction_type').find("[data-bu_org_id='" + $('#bu_org_id').val() + "']").removeAttr('disabled');
-}
+ if ($('#bu_org_id').val()) {
+  $('#transaction_type').find("[data-bu_org_id='" + $('#bu_org_id').val() + "']").removeAttr('disabled');
+ }
 
  $('body').off('change', '#ar_transaction_header #bu_org_id').on('change', '#ar_transaction_header #bu_org_id', function () {
   getBUDetails($(this).val());
-$('#transaction_type').find('option').attr('disabled', true);
-if($('#bu_org_id').val()){
-$('#transaction_type').find("[data-bu_org_id='" + $('#bu_org_id').val() + "']").removeAttr('disabled');
-}
+  $('#transaction_type').find('option').attr('disabled', true);
+  if ($('#bu_org_id').val()) {
+   $('#transaction_type').find("[data-bu_org_id='" + $('#bu_org_id').val() + "']").removeAttr('disabled');
+  }
 
  });
 

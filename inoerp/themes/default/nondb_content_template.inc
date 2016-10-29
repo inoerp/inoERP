@@ -17,13 +17,14 @@
          <div id ="form_header">
           <div class='heading'> <?php echo !empty($content_type->description) ? $content_type->description : '' ; ?></div>
           <?php
-          $view_page = false;
+          $view_page = false; $show_submit_button = true;
           if (method_exists($content_type, 'entry_form')) {
            $non_db_page = call_user_func(array($content_type, 'entry_form'), $_GET);
           } else if (method_exists($content_type, 'view_page')) {
            $non_db_page = call_user_func(array($content_type, 'view_page'), $_GET);
           } else {
            $non_db_page = ' <h1> No data found for the content type </h1>';
+					 $show_submit_button = false;
           }
           if (!empty($ownSubmitForm)) {
            echo $non_db_page;
@@ -45,7 +46,9 @@
             } else {
              $after_save_message = 'Action Comleted';
             }
-            echo '<div id="generic_save" class="submit" data-save_message="' . $after_save_message . '"><input type="button" value="Submit" name="submit_content" class="button"></div>';
+						if($show_submit_button){
+						 echo '<div id="generic_save" class="submit" data-save_message="' . $after_save_message . '"><input type="button" value="Submit" name="submit_content" class="button"></div>';
+						}
            }
            ?>
           </form>

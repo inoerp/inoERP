@@ -30,7 +30,7 @@
       <li><?php $f->l_date_fieldFromToday_m('document_date', $$class->document_date, 1) ?></li>
       <li><?php $f->l_text_field_d('document_number') ?></li>
       <li><?php
-       echo $f->l_val_field_d('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name');
+       echo $f->l_val_field_dm('customer_name', 'ar_customer', 'customer_name', '', 'customer_name', 'vf_select_customer_name');
        echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id);
        ?><i class="generic g_select_customer_name select_popup clickable fa fa-search" data-class_name="ar_customer"></i></li>
       <li><?php

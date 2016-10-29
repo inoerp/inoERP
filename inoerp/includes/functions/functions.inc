@@ -465,9 +465,9 @@ function check_browser() {
 function ino_inline_action($line_id_cb_val, $hidden_field_a = '', $add_image_class = 'add_row_img', $line_id_cb = 'line_id_cb') {
  global $f;
  $ret_stmt = ' <ul class="inline_action">
-           <li class="' . $add_image_class . ' clickable"> <i class="fa fa-plus-circle"></i> </li>
-           <li class="remove_row_img clickable"> <i class="fa fa-minus-circle"></i> </li>';
- $ret_stmt .= '<li><input type="checkbox" name="' . $line_id_cb . '" value="' . $line_id_cb_val . '"></li>';
+           <li class="' . $add_image_class . ' clickable"> <i class="fa fa-plus-circle" title="'.  gettext('Add New Line').'"></i> </li>
+           <li class="remove_row_img clickable"> <i class="fa fa-minus-circle" title="'.  gettext('Remove This Line').'"></i> </li>';
+ $ret_stmt .= '<li><input class="clickable" type="checkbox" name="' . $line_id_cb . '" value="' . $line_id_cb_val . '" title="'.  gettext('Process This Line').'"></li>';
  $ret_stmt .= '<li class="hidden">';
  if (!empty($hidden_field_a)) {
 	foreach ($hidden_field_a as $k => $v) {

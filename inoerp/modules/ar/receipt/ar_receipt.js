@@ -150,7 +150,7 @@ function create_accounting() {
   localStorage.removeItem("jsfile");
   localStorage.setItem("jsfile", "modules/ar/receipt/extra_ar_receipt.js");
   void window.open(link, '_blank',
-          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' +  $(window).width() + ',height=' +  $(window).height() + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  } else {
   alert('No Transaction Header ID/nEnter or Save The Header Details ');

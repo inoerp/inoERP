@@ -189,7 +189,7 @@
           <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item"></i></td>
          <td><?php $f->text_field_wid2m('item_description', 'xxlarge required'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $ar_transaction_line->uom_id); ?></td>
-         <td><?php form::number_field_wid2m('inv_line_quantity'); ?></td>
+         <td><?php form::number_field_wid2sm('inv_line_quantity'); ?></td>
          <td class="add_detail_values"><i class="fa fa-arrow-circle-down add_detail_values_img"></i>
           <!--</td></tr>-->	
           <?php

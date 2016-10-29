@@ -9,10 +9,10 @@
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php echo $f->l_date_fieldFromToday('count_date', $$class->count_date, 1) ?></li>
-      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>       </li>
+      <li><?php $f = new inoform(); echo $f->l_date_fieldFromToday_dm('count_date', $$class->count_date, 'count_date', 'action') ?></li>
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', 'action', 1, $readonly1); ?>       </li>
       <li><?php
-       echo $f->l_val_field_dm('count_name', 'inv_count_header', 'count_name', '', 'count_name', 'vf_select_count_name');
+       echo $f->l_val_field_dm('count_name', 'inv_count_header', 'count_name', 'count_name', 'vf_select_count_name action');
        echo $f->hidden_field_withId('inv_count_header_id', $$class->inv_count_header_id);
        echo $f->hidden_field_withCLass('org_id', $$class->org_id, 'popup_value');
        ?><i class="generic g_select_count_name select_popup clickable fa fa-search" data-class_name="inv_count_header"></i>
@@ -69,7 +69,7 @@
         <tr class="inv_count_entries<?php echo $count ?>">
          <td>
           <?php
-          echo ino_inline_action($$class_second->inv_count_schedule_id, array('inv_count_header_id' => $inv_count_header_id_h));
+          echo ino_inline_action($$class_second->inv_count_schedule_id, array('inv_count_header_id' => $inv_count_header_id_h, 'org_id' => $$class->org_id));
           ?>
          </td>
          <td><?php $f->text_field_d2srm('inv_count_schedule_id'); ?></td>
@@ -118,7 +118,7 @@
          <td><?php $f->text_field_wid2('description'); ?></td>
          <td><?php $f->text_field_wid2('lot_number'); ?></td>
          <td><?php $f->text_field_wid2('serial_number'); ?></td>
-         <td><?php echo $f->text_field('counted_by', ''); ?></td>
+         <td><?php echo $f->text_field('counted_by', '' ,'' ,'', 'required', 1); ?></td>
          <td><?php echo $f->date_fieldFromToday_d('count_date', ''); ?></td>
          <td><?php $f->ac_field_wid('adjustment_ac_id'); ?></td>
         </tr>

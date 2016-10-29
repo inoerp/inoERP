@@ -405,11 +405,17 @@ class ar_transaction_header extends dbObject {
  }
 
  private function _save_journal_lines() {
+	global $dbc;
   $artl = new ar_transaction_line();
   $all_lines = $artl->findBy_parentId($this->ar_transaction_header_id);
   foreach ($all_lines as $lines) {
    $artd = new ar_transaction_detail();
    $all_details = $artd->findBy_parentId($lines->ar_transaction_line_id);
+	 if(empty($all_details)){
+		echo gettext('No invoice details found. Process the transaction line');
+		$dbc->rollback = true;
+		return false;
+	 }
    foreach ($all_details as $deatils) {
     $new_gjl = new gl_journal_line();
     $artd->findBy_id($deatils->ar_transaction_detail_id);

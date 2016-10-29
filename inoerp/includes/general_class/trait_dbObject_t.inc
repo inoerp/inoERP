@@ -713,10 +713,9 @@ trait dbObject_t {
    }
    $this->msg = 1;
   } catch (PDOException $e) {
-//   pa($stmt);
    $this->msg = 0;
    $dbc->rollback = 1;
-   echo "<br>Record couldnt be saved. Error @ " . basename(__FILE__) . ' @@line' . __LINE__ . '<br>' . $e->getMessage() . "<br>";
+	 echo ino_show_debug_msg('Failed to save the record', $e->getMessage(), $sql, ' Error '. basename(__FILE__) .' @@ Line " '.__LINE__);
 //   if(isset($_SESSION['debug'])){
 //    echo "<br>The statement is <br>" . $stmt;
 //   }
@@ -1057,9 +1056,9 @@ trait dbObject_t {
 //   pa($secondary_fields_a);
 //   pa($_POST);
   foreach ($secondary_fields_a as $sf) {
-   if (empty($_POST[$sf->sys_field_name])) {
+   if (empty($sf->sys_field_name) || empty($_POST[$sf->sys_field_name]) || empty($_POST[$sf->sys_field_name][0])) {
     continue;
-   }
+	 }
    $class = 'sf_' . $sf->sys_field_name;
    $key_column = $class . '_id';
    $value_column = $class . '_value';
