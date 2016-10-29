@@ -2932,6 +2932,9 @@ msgstr "Default No Of Period"
 msgid "Hr Leave Transaction Id"
 msgstr "Hr Leave Transaction Id"
 
+msgid "Requested Date"
+msgstr "Requested Date"
+
 msgid "Approved Date"
 msgstr "Approved Date"
 
@@ -3244,8 +3247,8 @@ msgstr "Inv Interorg Transfer Line Id"
 msgid "From Subinventory Id"
 msgstr "From Subinventory Id"
 
-msgid "From Locator Id "
-msgstr "From Locator Id "
+msgid "From Locator Id"
+msgstr "From Locator Id"
 
 msgid "Revision Name"
 msgstr "Revision Name"
@@ -4657,9 +4660,6 @@ msgstr "Staging Subinventory"
 msgid "Staging Locator"
 msgstr "Staging Locator"
 
-msgid "Requested Date"
-msgstr "Requested Date"
-
 msgid "Sd Quote Header Id"
 msgstr "Sd Quote Header Id"
 
@@ -5662,8 +5662,8 @@ msgstr "Search Users"
 msgid "New user registration"
 msgstr "New user registration"
 
-msgid "Registraion"
-msgstr "Registraion"
+msgid "Registration"
+msgstr "Registration"
 
 msgid "Supplier"
 msgstr "Supplier"
@@ -5788,8 +5788,8 @@ msgstr "List of transaction types"
 msgid "Search Transaction Type"
 msgstr "Search Transaction Type"
 
-msgid "Search All Sub Inventories"
-msgstr "Search All Sub Inventories"
+msgid "Search All Subinventories"
+msgstr "Search All Subinventories"
 
 msgid "Search Subinventories"
 msgstr "Search Subinventories"
@@ -9535,8 +9535,8 @@ msgstr "Config Details"
 msgid "Shipped /Received Quantity"
 msgstr "Shipped /Received Quantity"
 
-msgid "Sub Inventories"
-msgstr "Sub Inventories"
+msgid "Subinventories"
+msgstr "Subinventories"
 
 msgid "Building"
 msgstr "Building"
@@ -11647,8 +11647,8 @@ msgstr "Message Details"
 msgid "Any Data"
 msgstr "Any Data"
 
-msgid "User eMail"
-msgstr "User eMail"
+msgid "User Email"
+msgstr "User Email"
 
 msgid "Site eMail"
 msgstr "Site eMail"
@@ -12124,8 +12124,8 @@ msgstr "sl scope"
 msgid "extn subscribe id"
 msgstr "extn subscribe id"
 
-msgid "unsubscribe reason"
-msgstr "unsubscribe reason"
+msgid "Unsubscribe Reason"
+msgstr "Unsubscribe Reason"
 
 msgid "extn theme id"
 msgstr "extn theme id"
@@ -14537,7 +14537,7 @@ msgid "Scheduling"
 msgstr "Scheduling"
 
 msgid "Frequency"
-msgstr "Frecuencia"
+msgstr "Frequency"
 
 msgid "Start DateTime"
 msgstr "Start DateTime"
@@ -14723,7 +14723,7 @@ msgid "Message could not be sent."
 msgstr "Message could not be sent."
 
 msgid "Cum. Receipt"
-msgstr "Recibo Acum."
+msgstr "Cum. Receipt"
 
 msgid "contact@site.org"
 msgstr "contact@site.org"
@@ -14732,7 +14732,7 @@ msgid "Qa Ce Header "
 msgstr "Qa Ce Header "
 
 msgid "Qa Ce Header"
-msgstr "Encabezado ER AC"
+msgstr "Qa Ce Header"
 
 msgid "Minimized Forms"
 msgstr "Minimized Forms"
@@ -15588,3 +15588,12 @@ msgstr "Delete Image"
 
 msgid "Ino User Id"
 msgstr "Ino User Id"
+
+msgid "Search Subscribe"
+msgstr "Search Subscribe"
+
+msgid "Extn Subscribe"
+msgstr "Extn Subscribe"
+
+msgid "Select Address Id"
+msgstr "Select Address Id"

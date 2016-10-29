@@ -1702,7 +1702,7 @@ msgstr "Horario para Contactar"
 msgid "Job Title"
 msgstr "Título de Empleo"
 
-msgid "Id Referencia de Contacto Extn"
+msgid "Extn Contact Reference Id"
 msgstr "Id Referencia de Contacto Extn"
 
 msgid "Extn Web Tracking Id"
@@ -3247,8 +3247,8 @@ msgstr "Id Linea Transfer Interorg Inv"
 msgid "From Subinventory Id"
 msgstr "Id De Subinventario"
 
-msgid "From Locator Id "
-msgstr "De Id Localizador "
+msgid "From Locator Id"
+msgstr "De Id Localizador"
 
 msgid "Revision Name"
 msgstr "Nombre de Revisión"
@@ -5662,7 +5662,7 @@ msgstr "Busca Usuarios"
 msgid "New user registration"
 msgstr "Registro de Usuario Nuevo"
 
-msgid "Registraion"
+msgid "Registration"
 msgstr "Registro"
 
 msgid "Supplier"
@@ -10901,7 +10901,7 @@ msgid "Project Role"
 msgstr "Rol de Proyecto"
 
 msgid "Control Options"
-msgstr "Control Options"
+msgstr "Opciones Control"
 
 msgid "Project Work Type"
 msgstr "Tipo de Trabajo del Proyecto"
@@ -11647,8 +11647,8 @@ msgstr "Detalles del Mensaje"
 msgid "Any Data"
 msgstr "Cualquier Dato"
 
-msgid "User eMail"
-msgstr "Correo del Usuario"
+msgid "User Email"
+msgstr "Correo Usuario"
 
 msgid "Site eMail"
 msgstr "Correo del Sitio"
@@ -12124,7 +12124,7 @@ msgstr "Alcance del ACS"
 msgid "extn subscribe id"
 msgstr "Id Suscrito Extn"
 
-msgid "unsubscribe reason"
+msgid "Unsubscribe Reason"
 msgstr "Motivo de Baja"
 
 msgid "extn theme id"
@@ -12958,9 +12958,6 @@ msgstr "Id Base Costo Gravamen de Pry"
 msgid "prj burden costcode id"
 msgstr "Id Código Costo Gravamen de Pry"
 
-msgid "prj expenditure type id"
-msgstr "Id Tipo de Gasto del Pry"
-
 msgid "prj burden expenditure id"
 msgstr "Id Gasto de Gravamen del Pry"
 
@@ -12993,6 +12990,9 @@ msgstr "Id Base Costo Gravamen"
 
 msgid "prj burden structure expendituretype id"
 msgstr "Id Tipo de Gasto Estructura Gravamen de Pry"
+
+msgid "prj expenditure type id"
+msgstr "Id Tipo de Gasto del Pry"
 
 msgid "Structure"
 msgstr "Estructura"
@@ -14162,7 +14162,7 @@ msgid "Operating Income"
 msgstr "Ingresos Operativos"
 
 msgid "Operation Lines"
-msgstr "Operation Lines"
+msgstr "Lineas Operación"
 
 msgid "OTHER INCOME & EXPENSE"
 msgstr "OTROS INGRESOS Y GASTOS"
@@ -15588,3 +15588,12 @@ msgstr "Borra Imagen"
 
 msgid "Ino User Id"
 msgstr "Id Usuario Ino"
+
+msgid "Search Subscribe"
+msgstr "Busca Suscripción"
+
+msgid "Extn Subscribe"
+msgstr "Suscribir Extn"
+
+msgid "Select Address Id"
+msgstr "Selec Id Dirección"

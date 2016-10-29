@@ -156,7 +156,7 @@
              <th><?php echo gettext('Transaction Id') ?></th>
              <th><?php echo gettext('Transaction Type Id') ?></th>
              <th><?php echo gettext('From SubInv Id') ?></th>
-             <th><?php echo gettext('From Locator Id ') ?></th>
+             <th><?php echo gettext('From Locator Id') ?> </th>
              <th><?php echo gettext('To SubInv Id') ?></th>
              <th><?php echo gettext('To Locator Id') ?> </th>
             </tr>

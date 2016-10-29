@@ -67,7 +67,7 @@
       <li><label><?php echo gettext('Any Data') ?>: </label> {{table_name.field_name}}</li>
       <li><label><?php echo gettext('User Name') ?> : </label> {{user.username}}</li>
       <li><label><?php echo gettext('User Id') ?> : </label> {{user.user_id}}</li>
-      <li><label><?php echo gettext('User eMail') ?> : </label> {{user.email}}</li>
+      <li><label><?php echo gettext('User Email') ?> : </label> {{user.email}}</li>
       <li><label><?php echo gettext('Site Name') ?> : </label> {{site_info.site_name}}</li>
       <li><label><?php echo gettext('Site eMail') ?> : </label> {{site_info.email}}</li>
      </ul>

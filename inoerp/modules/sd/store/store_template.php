@@ -51,7 +51,7 @@
        <li><?php echo $f->l_text_field('country', $address->country, '', '', '', '', 1); ?></li>
        <li><?php echo $f->l_text_field('postal_code', $address->postal_code, '', '', '', '', 1); ?></li>
        <li><label><?php echo gettext('Address') ?></label>  
-        <textarea readonly name="address" id="address" cols="22" rows="3" placeholder="Select address Id"><?php echo trim(htmlentities($address->address)); ?></textarea>
+        <textarea readonly name="address" id="address" cols="22" rows="3" placeholder="<?php echo gettext('Select Address Id')?>"><?php echo trim(htmlentities($address->address)); ?></textarea>
        </li>
       </ul>
      </div>

@@ -50,7 +50,7 @@
 
 
 			<!--END OF FORM HEADER-->
-			<div id ="form_line" class="form_line"><span class="heading">Address Details </span>
+			<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Address Details') ? </span>
 			 <ul class="address inline_list">
 				<li><label><?php echo gettext('Phone') ?>  : </label> <?php $f->text_field_d2r('phone'); ?></li>
 				<li><label><?php echo gettext('Email') ?>  : </label> <?php $f->text_field_d2r('website'); ?></li>
@@ -58,7 +58,7 @@
 				<li><label><?php echo gettext('Country') ?>  : </label><?php $f->text_field_d2r('country'); ?></li>
 				<li><label><?php echo gettext('Postal Code') ?>  : </label> <?php $f->text_field_d2r('postal_code'); ?></li>
 				<li><label><?php echo gettext('Address') ?> :</label>  
-				 <textarea readonly name="address" id="address" cols="22" rows="3" placeholder="Select address Id"><?php echo trim(htmlentities($address->address)); ?></textarea>
+				 <textarea readonly name="address" id="address" cols="22" rows="3" placeholder="<?php echo gettext('Select Address Id')?>"><?php echo trim(htmlentities($address->address)); ?></textarea>
 				</li>
 			 </ul>
 			</div>     

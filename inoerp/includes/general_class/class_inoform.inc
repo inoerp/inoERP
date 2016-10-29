@@ -794,14 +794,14 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
    }
   }
   $text_field = '<ul class="column header_field ' . $div_class . '">';
-  $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
+  $text_field .= '<li><label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   $field_class_name = $field_name . ' ' . $div_class;
   $text_field .= $this->val_field('address_name', $field_val, '15', '', $field_class_name, '', '', 'address', 'address_name');
   $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
   if ($show_all_fields) {
-   $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '15', '', 'country', '', 1) . '</li>';
-   $text_field .= '<li><label>Postal Code</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '15', '', 'postal_code', '', 1) . '</li>';
-   $text_field .= '<li><label>Details</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Country') . '</label>' . $this->text_field('xxcountry', $addr->country, '15', '', 'country', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '15', '', 'postal_code', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Details') . '</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
   }
   $text_field .= '<li>' . $this->hidden_field_withIdClass($field_name, $$class->$field_name, 'address_id') . '</li>';
   $text_field .= '</ul>';
@@ -823,15 +823,15 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   }
 
   $text_field = '<ul class="column header_field ' . $div_class . '">';
-  $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
+  $text_field .= '<li><label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   $text_field .= $this->hidden_field_withId($field_name, $$class_second->$field_name);
   $field_class_name = $field_name . ' ' . $div_class;
   $text_field .= $this->text_field('address_name', $field_val, '', '', $field_class_name, '', 1, '', $ttl);
   $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
   if ($show_all_fields) {
-   $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '', '', 'country', '', 1) . '</li>';
-   $text_field .= '<li><label>Postal Code</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '', '', 'postal_code', '', 1) . '</li>';
-   $text_field .= '<li><label>Details</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Country') . '</label>' . $this->text_field('xxcountry', $addr->country, '', '', 'country', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '', '', 'postal_code', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Details') . '</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
   }
   $text_field .= '</ul>';
 
@@ -877,7 +877,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $contact_stmt = '<div>
       <ul id="new_contact_reference">
        <li class="new_object1">
-        <label>Associate Contact </label> ';
+        <label>' . gettext('Associate Contact') .' </label> ';
   $contact_stmt .= $this->hidden_field_withCLass('extn_contact_id_new', '', 'extn_contact_id');
   $contact_stmt .= $this->val_field('contact_name_new', '', '20', '', 'select_contact contact_name', '', '', 'extn_contact', 'contact_name');
   $contact_stmt .='<i class="extn_contact_id select_popup clickable fa fa-search" data-class_name="extn_contact"></i> </li>
