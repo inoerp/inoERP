@@ -4,7 +4,7 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form method="post" id="prj_expenditure_type"  name="prj_expenditure_type">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Basic Info') ?>Expenditure Type </span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Basic Info') ?><?php echo gettext('Expenditure Type') ?> </span>
      <div id="tabsLine">
       <ul class="tabMain">
        <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>

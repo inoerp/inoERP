@@ -94,7 +94,7 @@ class search extends dbObject {
   } else {
    $search_result = "&nbsp;&nbsp;<a href=\"form.php?class_name=$cc->reference_table&mode=2&$primary_col=" . $cc->reference_id;
   }
-  $search_result .= '">' . $this->_view_action_meassge . '</a>';
+  $search_result .= '">' . gettext($this->_view_action_meassge) . '</a>';
   return $search_result;
  }
 
@@ -135,7 +135,7 @@ class search extends dbObject {
    $search_result .= "<table class=\"normal\"><thead ><tr class='ino-sort'>";
    $search_result .= '<th>' . gettext(ucwords(str_replace('_', ' ', $this->primary_column_s))) . '</th>';
    if ($i == 0 && $show_action_msg) {
-    $search_result .= "<th>Action<span id='copy_clipboard' title='Copy To Clipboard'>&nbsp;&nbsp;&nbsp;<i class='fa fa-clipboard clickable'></i></span></th>";
+    $search_result .= "<th>" . gettext('Action') . "<span id='copy_clipboard' title='" . gettext('Copy To Clipboard') . "'>&nbsp;&nbsp;&nbsp;<i class='fa fa-clipboard clickable'></i></span></th>";
    }
    $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
    $new_end = $new_start + ($no_of_columns_per_tab - 1);
@@ -161,9 +161,9 @@ class search extends dbObject {
        if ($this->_searching_class == 'comment') {
         $search_result .= $this->_readPath_forComments($record->{$this->primary_column_s});
        } else if ($this->_searching_class == 'content') {
-        $search_result .= "&nbsp;&nbsp;<a class=\"view ino-btn2\" href=\"content.php?" . $window_type . "mode=2&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a> ';
+        $search_result .= "&nbsp;&nbsp;<a class=\"view ino-btn2\" href=\"content.php?" . $window_type . "mode=2&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . gettext($this->_view_action_meassge) . '</a> ';
        } else {
-        $search_result .= "&nbsp;&nbsp;<a class=\"view ino-btn2\" href=\"$this->_view_path&mode=2&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_view_action_meassge . '</a>';
+        $search_result .= "&nbsp;&nbsp;<a class=\"view ino-btn2\" href=\"$this->_view_path&mode=2&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . gettext($this->_view_action_meassge) . '</a>';
        }
       }
       if (!empty($this->_extra_path)) {
@@ -184,10 +184,10 @@ class search extends dbObject {
       if ($this->_show_update_path) {
        if ($this->_searching_class == 'content') {
         $search_result .= "&nbsp;&nbsp;<a class=\"update ino-btn2\" "
-         . "href=\"content.php?mode=9" . $window_type . "&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
+         . "href=\"content.php?mode=9" . $window_type . "&content_type_id=" . $record->content_type_id . "&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . gettext($this->_update_action_meassge) . '</a> ';
        } else {
         $search_result .= "&nbsp;&nbsp;<a class=\"update ino-btn2\" "
-         . "href=\"$this->_update_path&mode=9&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . $this->_update_action_meassge . '</a> ';
+         . "href=\"$this->_update_path&mode=9&$this->primary_column_s=" . $record->{$this->primary_column_s} . '">' . gettext($this->_update_action_meassge) . '</a> ';
        }
       }
       $search_result .= '</td>';
@@ -209,7 +209,7 @@ class search extends dbObject {
     }
     $search_result .= '</tbody>';
    } else {
-    $search_result .= 'No Records Found!';
+    $search_result .= gettext('No Records Found!');
    }
    $search_result .= '</table> </div>';
   }
@@ -288,7 +288,7 @@ class search extends dbObject {
     }
     $search_result .= '</tbody>';
    } else {
-    $search_result .= 'No Records Found!';
+    $search_result .= gettext('No Records Found!');
    }
    $search_result .= '</table> </div>';
   }
@@ -482,8 +482,8 @@ class search extends dbObject {
   } else {
    $selected_desc = ' selected ';
   }
-  $search_form_statement .= "<option value=\"asc\"" . $selected_asc . $selected_desc . ">Ascending</option>";
-  $search_form_statement .= "<option value=\"desc\"" . $selected_asc . $selected_desc . ">Descending</option>";
+  $search_form_statement .= "<option value=\"asc\"" . $selected_asc . $selected_desc . ">" . gettext('Ascending') . "</option>";
+  $search_form_statement .= "<option value=\"desc\"" . $selected_asc . $selected_desc . ">" . gettext('Descending') . "</option>";
   $search_form_statement .= '</select></li>';
 
   //Records group by
@@ -498,7 +498,7 @@ class search extends dbObject {
   }
 
   //Records per page
-  $search_form_statement .= '<li><label> ' . gettext('Per page') . '</label>';
+  $search_form_statement .= '<li><label> ' . gettext('Per Page') . '</label>';
   $search_form_statement .= $f->select_field_from_array('per_page', $this->_per_page_a, $this->_per_page, 'per_page');
 
 
@@ -597,7 +597,7 @@ class search extends dbObject {
   }
 
   if (!empty($program_type) && ($program_type == 'download_report')) {
-   $program_form_statement .='<li><label>Download Format</label>' . $f->select_field_from_array('download_format', dbObject::$download_format, '') . '</li>';
+   $program_form_statement .='<li><label>' . gettext('Download Format') . '</label>' . $f->select_field_from_array('download_format', dbObject::$download_format, '') . '</li>';
   }
 
   $program_form_statement .= "<li><label>" . gettext('Dynamic Criteria') . "</label>";

@@ -51,7 +51,7 @@ $(document).ready(function () {
 
  $('body').on('click', '.invoice_amount,.paid_amount,.remaining_amount', function () {
   $(this).prop('readonly', true).css('background', 'none repeat scroll 0 0 rgba(243, 243, 210, 1)');
-  alert('Readonly Field!');
+  alert('Read Only Field!');
  })
  //selecting Header Id
  $(".ap_payment_header_id.select_popup").on("click", function () {

@@ -42,7 +42,7 @@
          <thead> 
           <tr>
            <th><?php echo gettext('Id') ?></th>
-           <th><?php echo gettext('Compensation ELement') ?>#</th>
+           <th><?php echo gettext('Compensation Element') ?>#</th>
            <th><?php echo gettext('Amount') ?></th>
           </tr>
          </thead>

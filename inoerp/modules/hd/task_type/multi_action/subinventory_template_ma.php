@@ -5,7 +5,7 @@
    
   <div id ="searchResult">
    <form method="post" id="subinventory"  name="subinventory">
-    <div id ="form_line" class="form_line"><span class="heading">Sub Inventory Details </span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Subinventory Details') ?> </span>
      <div id="tabsLine">
       <?php echo subinventory::$tab_header ?>
       <div class="tabContainer">

@@ -74,8 +74,8 @@
         <form action="<?php echo HOME_URL ?>extensions/ino_user/user_login.php" method="post" id="user_reset_password_onPage" name="user_reset_password_onPage">
          <ul class="single-column">
           <li><label><?php echo gettext('Username'); ?></label><?php echo form::text_field('username', $user_password_reset->username, 35, 200, '', 'Login User Name', 'reset_password_user_name', '', 'reset_password_user_name'); ?>         </li>
-          <li><label></label> <?php echo gettext('Or'); ?> </li><!-- //Added gettext to translate 20160923 Sytech -->
-          <li><label><?php echo gettext('e-Mail'); ?></label><?php echo form::text_field('email', $user_password_reset->email, 35, 200, '', 'Registered email id', 'reset_password_email', '', 'reset_password_email'); ?>           </li>
+          <li><label></label> <?php echo gettext('Or'); ?> </li>
+          <li><label><?php echo gettext('Email'); ?></label><?php echo form::text_field('email', $user_password_reset->email, 35, 200, '', 'Registered email id', 'reset_password_email', '', 'reset_password_email'); ?>           </li>
           <li><label></label><input type="submit" name="resetPassword" class="button btn btn-success" value="<?php echo gettext('Send New Password'); ?>"></li>
          </ul>
          <!--<input type="hidden" class="hidden" name='submit_user' value='1'>-->

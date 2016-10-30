@@ -143,7 +143,7 @@
           <span  aria-hidden="true"></span><i class='fa fa-book white-font-link'></i> Asset Books</button>
          <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-toggle="dropdown" aria-expanded="false">
           <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
+          <span class="sr-only"><?php echo gettext('Toggle Dropdown')?></span>
          </button>
          <ul class="dropdown-menu" role="menu">
           <?php

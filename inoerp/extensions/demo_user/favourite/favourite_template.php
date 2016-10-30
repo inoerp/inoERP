@@ -1,31 +1,31 @@
-<div id ="form_header"><span class="heading">User Favourite </span>
+<div id ="form_header"><span class="heading"><?php echo gettext('User Favourite') ?> </span>
  <div class="large_shadow_box">
   <ul class="column four_column">
-   <li><label> User Name: </label><?php echo $f->text_field_ap(array('name' => 'username', 'value' => $user->username, 'readonly' => 1)); ?></li>
-   <li><label> First Name: </label><?php echo $f->text_field_ap(array('name' => 'first_name', 'value' => $user->first_name, 'readonly' => 1)); ?></li>
-   <li><label> Last Name: </label><?php echo $f->text_field_ap(array('name' => 'last_name', 'value' => $user->last_name, 'readonly' => 1)); ?></li>
+   <li><label> <?php echo gettext('User Name') ?>: </label><?php echo $f->text_field_ap(array('name' => 'username', 'value' => $user->username, 'readonly' => 1)); ?></li>
+   <li><label> <?php echo gettext('First Name') ?>: </label><?php echo $f->text_field_ap(array('name' => 'first_name', 'value' => $user->first_name, 'readonly' => 1)); ?></li>
+   <li><label> <?php echo gettext('Last Name') ?>: </label><?php echo $f->text_field_ap(array('name' => 'last_name', 'value' => $user->last_name, 'readonly' => 1)); ?></li>
   </ul>
  </div>
 </div>
 <form action=""  method="post" id="user_favourite"  name="user_favourite">
  <!--END OF FORM HEADER-->
- <div id ="form_line" class="user_favourite"><span class="heading">Favourite Links</span>
+ <div id ="form_line" class="user_favourite"><span class="heading"><?php echo gettext('Favourite Links') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Details </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Details') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsLine-1" class="tabContent">
      <table class="form_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Id</th>
-        <th>Path</th>
-        <th>External Link</th>
-        <th>Name </th>
-        <th>Priority</th>
-        <th>Group</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Id') ?></th>
+        <th><?php echo gettext('Path') ?></th>
+        <th><?php echo gettext('External Link') ?></th>
+        <th><?php echo gettext('Name') ?> </th>
+        <th><?php echo gettext('Priority') ?></th>
+        <th><?php echo gettext('Group') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody user_favourite_values" >
@@ -36,8 +36,8 @@
         <tr class="user_favourite<?php echo $count ?>">
          <td>    
           <ul class="inline_action">
-           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+           <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('add new line') ?>" /></li>
+           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('remove this line') ?>" /> </li>
            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->user_favourite_id); ?>"></li>           
            <li><?php echo $f->hidden_field_withCLass('user_id', $user->user_id, 'copyData'); ?></li>
           </ul>

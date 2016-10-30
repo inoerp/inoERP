@@ -12,24 +12,24 @@ if (empty($all_contacts)) {
 ?>
 <div class="tabsDetail">
  <ul class="tabMain">
-  <li class="tabLink"><a href="#tabsDetail-1">Basic</a></li>
-  <li class="tabLink"><a href="#tabsDetail-2">Others</a></li>
+  <li class="tabLink"><a href="#tabsDetail-1"><?php echo gettext('Basic')?></a></li>
+  <li class="tabLink"><a href="#tabsDetail-2"><?php echo gettext('Others')?></a></li>
  </ul>
  <div class="tabContainer">
   <div id="tabsDetail-1" class="tabContent">
    <table class="form form_detail_data_table detail">
     <thead>
      <tr>
-      <th>Action</th>
-      <th>Seq#</th>
-      <th>Contact Name</th>
-      <th>Last Name</th>
-      <th>First Name</th>
-      <th>Middle Name</th>
-      <th>e-Mail</th>
-      <th>Job Title</th>
-      <th>Contact Type</th>
-      <th>Mobile</th>
+      <th><?php echo gettext('Action')?></th>
+      <th><?php echo gettext('Seq')?>#</th>
+      <th><?php echo gettext('Contact Name')?></th>
+      <th><?php echo gettext('Last Name')?></th>
+      <th><?php echo gettext('First Name')?></th>
+      <th><?php echo gettext('Middle Name')?></th>
+      <th><?php echo gettext('Email')?></th>
+      <th><?php echo gettext('Job Title')?></th>
+      <th><?php echo gettext('Contact Type')?></th>
+      <th><?php echo gettext('Mobile')?></th>
      </tr>
     </thead>
     <tbody class="form_data_detail_tbody">
@@ -71,13 +71,13 @@ if (empty($all_contacts)) {
    <table class="form form_detail_data_table detail">
     <thead>
      <tr>
-      <th>Seq#</th>
-      <th>Office</th>
-      <th>Phone 2</th>
-      <th>Fax</th>
-      <th>Alternate e-Mail</th>
-      <th>Time Zone</th>
-      <th>Preferred Time</th>
+      <th><?php echo gettext('Seq')?>#</th>
+      <th><?php echo gettext('Office')?></th>
+      <th><?php echo gettext('Phone 2')?></th>
+      <th><?php echo gettext('Fax')?></th>
+      <th><?php echo gettext('Alternate e-Mail')?></th>
+      <th><?php echo gettext('Time Zone')?></th>
+      <th><?php echo gettext('Preferred Time')?></th>
      </tr>
     </thead>
     <tbody class="form_data_detail_tbody">

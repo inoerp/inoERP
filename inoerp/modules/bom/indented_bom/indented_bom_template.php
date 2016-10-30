@@ -1,14 +1,14 @@
-<div id ="form_header"><span class="heading">Indented BOM </span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Indented BOM') ?> </span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1">Basic Info</a></li>
-   <li><a href="#tabsHeader-2">Details</a></li>
-   <li><a href="#tabsHeader-3">Common BOM</a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Details') ?></a></li>
+   <li><a href="#tabsHeader-3"><?php echo gettext('Common BOM') ?></a></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsHeader-1" class="tabContent">
     <ul class="column header_field">
-     <li><label>Org Name</label>
+     <li><label><?php echo gettext('Org Name') ?></label>
       <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id', '', '', 1); ?>
      </li>
      <li><?php echo $f->l_val_field_d('bom_header_id', 'bom_header', 'bom_header_id', 'org_id') ?>
@@ -16,16 +16,16 @@
       <a name="show" href="form.php?class_name=bom_indented_bom&<?php echo "mode=$mode"; ?>" class="show document_id bom_header_id">
        <i class='fa fa-refresh'></i></a> 
      </li>
-     <li><label>Item Id</label>
+     <li><label><?php echo gettext('Item Id') ?></label>
       <?php form::text_field_drm('item_id_m'); ?>
      </li>
-     <li><label>Item Number</label>
+     <li><label><?php echo gettext('Item Number') ?></label>
       <?php form::text_field_dm('item_number'); ?>
      </li>
-     <li><label>Description</label>
+     <li><label><?php echo gettext('Description') ?></label>
       <?php form::text_field_widr('item_description'); ?>
      </li>
-     <li><label>UOM</label>
+     <li><label><?php echo gettext('UOM') ?></label>
       <?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom_name', $$class->uom, 'uom'); ?>
      </li>
     </ul>
@@ -33,13 +33,13 @@
    <div id="tabsHeader-2" class="tabContent">
     <div> 
      <ul class="column header_field">
-      <li><label>Alternate Bom</label>
+      <li><label><?php echo gettext('Alternate Bom') ?></label>
        <?php echo form::text_field_d('alternate_bom'); ?>
       </li>
-      <li><label>Revision</label>
+      <li><label><?php echo gettext('Revision') ?></label>
        <?php form::text_field_dm('bom_revision'); ?>
       </li>
-      <li><label>Effective Date</label>
+      <li><label><?php echo gettext('Effective Date') ?></label>
        <?php echo form::date_fieldAnyDay_m('effective_date', $$class->effective_date); ?>
       </li>
      </ul>
@@ -48,13 +48,13 @@
    <div id="tabsHeader-3" class="tabContent">
     <div> 
      <ul class="column header_field">
-      <li><label>Common BOM Item Id</label>
+      <li><label><?php echo gettext('Common BOM Item Id') ?></label>
        <?php form::text_field_widsr('item_id_m'); ?>
       </li>
-      <li><label>Item Number</label>
+      <li><label><?php echo gettext('Item Number') ?></label>
        <?php form::text_field_wid('commonBom_item_number'); ?>
       </li>
-      <li><label>Description</label>
+      <li><label><?php echo gettext('Description') ?></label>
        <?php form::text_field_wid('commonBom_item_description'); ?>
       </li>
      </ul>
@@ -65,29 +65,29 @@
  </div>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">BOM Lines </span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('BOM Lines') ?> </span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1">Main</a></li>
-   <li><a href="#tabsLine-2">Effectivity</a></li>
-   <li><a href="#tabsLine-3">Control</a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Effectivity') ?></a></li>
+   <li><a href="#tabsLine-3"><?php echo gettext('Control') ?></a></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsLine-1" class="tabContent">
     <table class="form_line_data_table">
      <thead> 
       <tr>
-       <th>Row#</th>
-       <th>Level</th>
-       <th>BOM Line Id</th>
-       <th>BOM Sequence</th>
-       <th>Op. Sequence</th>
-       <th>Item Id</th>
-       <th>Item Number</th>
-       <th>Item Description</th>
-       <th>UOM</th>
-       <th>Usage Basis</th>
-       <th>Quantity</th>
+       <th><?php echo gettext('Row') ?>#</th>
+       <th><?php echo gettext('Level') ?></th>
+       <th><?php echo gettext('BOM Line Id') ?></th>
+       <th><?php echo gettext('BOM Sequence') ?></th>
+       <th><?php echo gettext('Op. Sequence') ?></th>
+       <th><?php echo gettext('Item Id') ?></th>
+       <th><?php echo gettext('Item Number') ?></th>
+       <th><?php echo gettext('Item Description') ?></th>
+       <th><?php echo gettext('UOM') ?></th>
+       <th><?php echo gettext('Usage Basis') ?></th>
+       <th><?php echo gettext('Quantity') ?></th>
       </tr>
      </thead>
      <tbody class="form_data_line_tbody">
@@ -126,12 +126,12 @@
     <table class="form_line_data_table">
      <thead> 
       <tr>
-       <th>Row#</th>
-       <th>Level</th>
-       <th>Start Date</th>
-       <th>End Date</th>
-       <th>ECO Number</th>
-       <th>ECO implemented</th>
+       <th><?php echo gettext('Row') ?>#</th>
+       <th><?php echo gettext('Level') ?></th>
+       <th><?php echo gettext('Start Date') ?></th>
+       <th><?php echo gettext('End Date') ?></th>
+       <th><?php echo gettext('ECO Number') ?></th>
+       <th><?php echo gettext('ECO implemented') ?></th>
       </tr>
      </thead>
      <tbody class="form_data_line_tbody">
@@ -161,14 +161,14 @@
     <table class="form_line_data_table">
      <thead> 
       <tr>
-       <th>Row#</th>
-       <th>Level</th>
-       <th>Planning %</th>
-       <th>Yield</th>
-       <th>WIP Supply Type</th>
-       <th>Sub inventory</th>
-       <th>Locator</th>
-       <th>In cost rollup</th>
+       <th><?php echo gettext('Row') ?>#</th>
+       <th><?php echo gettext('Level') ?></th>
+       <th><?php echo gettext('Planning') ?> %</th>
+       <th><?php echo gettext('Yield') ?></th>
+       <th><?php echo gettext('WIP Supply Type') ?></th>
+       <th><?php echo gettext('Subinventory') ?></th>
+       <th><?php echo gettext('Locator') ?></th>
+       <th><?php echo gettext('In cost Rollup') ?></th>
       </tr>
      </thead>
      <tbody class="form_data_line_tbody">

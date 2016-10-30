@@ -1,4 +1,4 @@
-<form   method="post" id="sys_message_format"  name="sys_message_format"><span class="heading">Message Format </span>
+<form   method="post" id="sys_message_format"  name="sys_message_format"><span class="heading"><?php echo gettext('Message Format') ?> </span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -67,7 +67,7 @@
       <li><label><?php echo gettext('Any Data') ?>: </label> {{table_name.field_name}}</li>
       <li><label><?php echo gettext('User Name') ?> : </label> {{user.username}}</li>
       <li><label><?php echo gettext('User Id') ?> : </label> {{user.user_id}}</li>
-      <li><label><?php echo gettext('User eMail') ?> : </label> {{user.email}}</li>
+      <li><label><?php echo gettext('User Email') ?> : </label> {{user.email}}</li>
       <li><label><?php echo gettext('Site Name') ?> : </label> {{site_info.site_name}}</li>
       <li><label><?php echo gettext('Site eMail') ?> : </label> {{site_info.email}}</li>
      </ul>

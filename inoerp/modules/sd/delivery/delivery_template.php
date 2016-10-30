@@ -149,7 +149,7 @@ inoERP
         <th><?php echo gettext('Item Number') ?></th>
         <th><?php echo gettext('Item Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Sub Inventory') ?></th>
+        <th><?php echo gettext('Subinventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>

@@ -51,7 +51,7 @@
        <li><?php echo $f->l_text_field('country', $address->country, '', '', '', '', 1); ?></li>
        <li><?php echo $f->l_text_field('postal_code', $address->postal_code, '', '', '', '', 1); ?></li>
        <li><label><?php echo gettext('Address') ?></label>  
-        <textarea readonly name="address" id="address" cols="22" rows="3" placeholder="Select address Id"><?php echo trim(htmlentities($address->address)); ?></textarea>
+        <textarea readonly name="address" id="address" cols="22" rows="3" placeholder="<?php echo gettext('Select Address Id')?>"><?php echo trim(htmlentities($address->address)); ?></textarea>
        </li>
       </ul>
      </div>
@@ -97,7 +97,7 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Sub Inventories') ?></span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Subinventories') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Values') ?></a></li>
@@ -110,7 +110,7 @@
         <tr>
          <th><?php echo gettext('Action') ?></th>
          <th><?php echo gettext('Line Id') ?></th>
-         <th><?php echo gettext('Sub Inventory') ?>#</th>
+         <th><?php echo gettext('Subinventory') ?>#</th>
          <th><?php echo gettext('Building') ?></th>
          <th><?php echo gettext('Floor') ?></th>
          <th><?php echo gettext('Wing') ?></th>

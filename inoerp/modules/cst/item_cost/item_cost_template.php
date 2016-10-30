@@ -78,16 +78,16 @@ inoERP
     <div id="tabsHeader-5" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label>Action</label>
+       <li><label><?php echo gettext('Action') ?></label>
         <?php echo $f->select_field_from_object('cost_action', cst_item_cost_header::transaction_action(), 'option_line_code', 'option_line_value', '', 'cost_action', '', '', $readonly); ?>
        </li>
-       <li id="document_print"><label>Document Print : </label>
+       <li id="document_print"><label><?php echo gettext('Document Print') ?> : </label>
         <a class="button disabled" target="_blank"
-           disabled href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >Indented BOM</a>
+           disabled href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" ><?php echo gettext('Indented BOM') ?></a>
        </li>
-       <li id="document_print"><label>Document Print : </label>
+       <li id="document_print"><label><?php echo gettext('Document Print') ?> : </label>
         <a class="button disabled" target="_blank"
-          disabled href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" >BOM Cost</a>
+          disabled href="po_print.php?cst_item_cost_header_id=<?php echo!(empty($$class->cst_item_cost_header_id)) ? $$class->cst_item_cost_header_id : ""; ?>" ><?php echo gettext('BOM Cost') ?></a>
        </li>
       </ul>
       <div id="comment" class="shoe_comments">

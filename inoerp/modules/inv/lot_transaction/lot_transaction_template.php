@@ -2,8 +2,8 @@
  <span class="heading"><?php echo gettext("Lot Number Details"); ?></span>
  <div id="tabsHeader">
   <ul class="tabMain">
-   <li><a href="#tabsHeader-1">Basic Info</a></li>
-   <li><a href="#tabsHeader-2">lot Details</a></li>
+   <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info'); ?></a></li>
+   <li><a href="#tabsHeader-2"><?php echo gettext('Lot Details'); ?></a></li>
   </ul>
   <div class="tabContainer">
    <div id="tabsHeader-1" class="tabContent">
@@ -25,9 +25,9 @@
    <div id="tabsHeader-2" class="tabContent">
     <div class="large_shadow_box"> 
      <ul class="column five_column">
-      <li><label>Current Org Id : </label> <?php echo $f->text_field_dr('current_org_id'); ?></li>
-      <li><label>Current Sub Inventory Id : </label> <?php echo $f->text_field_dr('current_org_id'); ?></li>
-      <li><label>Current Locator Id : </label> <?php echo $f->text_field_dr('current_org_id'); ?></li>
+      <li><label><?php echo gettext('Current Org Id'); ?> : </label> <?php echo $f->text_field_dr('current_org_id'); ?></li>
+      <li><label><?php echo gettext('Current Subinventory Id'); ?> : </label> <?php echo $f->text_field_dr('current_org_id'); ?></li>
+      <li><label><?php echo gettext('Current Locator Id'); ?> : </label> <?php echo $f->text_field_dr('current_org_id'); ?></li>
      </ul>
     </div>
    </div>
@@ -36,11 +36,11 @@
 
 </div>
 
-<div id ="form_line" class="form_line"><span class="heading">Lot Transactions </span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Lot Transactions'); ?> </span>
  <div id="tabsLine">
   <ul class="tabMain">
-   <li><a href="#tabsLine-1">Info-1 </a></li>
-   <li><a href="#tabsLine-2">Info-2 </a></li>
+   <li><a href="#tabsLine-1"><?php echo gettext('Info-1'); ?> </a></li>
+   <li><a href="#tabsLine-2"><?php echo gettext('Info-2'); ?> </a></li>
   </ul>
   <div class="tabContainer"> 
    <form action=""  method="post" id="inv_lot_transaction_entries_line"  name="inv_lot_transaction_entries_line">
@@ -48,14 +48,14 @@
      <table class="form_table">
       <thead> 
        <tr>
-        <th>lot Number</th>
-        <th>Item Number</th>
-        <th>Item Description</th>
-        <th>Org Id</th>
-        <th>Transaction Type</th>
-        <th>From Sub Inventory </th>
-        <th>From Locator </th>
-        <th>Item Id M </th>
+        <th><?php echo gettext('Lot Number'); ?></th>
+        <th><?php echo gettext('Item Number'); ?></th>
+        <th><?php echo gettext('Item Description'); ?></th>
+        <th><?php echo gettext('Org Id'); ?></th>
+        <th><?php echo gettext('Transaction Type'); ?></th>
+        <th><?php echo gettext('From Subinventory'); ?> </th>
+        <th><?php echo gettext('From Locator'); ?> </th>
+        <th><?php echo gettext('Item Id M'); ?> </th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody inv_lot_transaction_entries_values" >
@@ -84,14 +84,14 @@
      <table class="form_table">
       <thead> 
        <tr>
-        <th>To Sub Inventory </th>
-        <th>To Locator </th>
-        <th>Transaction Id</th>
-        <th>Transaction Type Id</th>
-        <th>From Sub Inventory Id</th>
-        <th>From Locator Id</th>
-        <th>To Sub Inventory Id</th>
-        <th>To Locator Id</th>
+        <th><?php echo gettext('To Subinventory'); ?> </th>
+        <th><?php echo gettext('To Locator'); ?> </th>
+        <th><?php echo gettext('Transaction Id'); ?></th>
+        <th><?php echo gettext('Transaction Type Id'); ?></th>
+        <th><?php echo gettext('From Subinventory Id'); ?></th>
+        <th><?php echo gettext('From Locator Id'); ?></th>
+        <th><?php echo gettext('To Subinventory Id'); ?></th>
+        <th><?php echo gettext('To Locator Id'); ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody inv_lot_transaction_entries_values" >

@@ -7,7 +7,7 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="hr_attendance"  name="hr_attendance">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('HR attendance') ?></span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('HR Attendance') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
        <li><a href="#tabsLine-1">Basics</a></li>

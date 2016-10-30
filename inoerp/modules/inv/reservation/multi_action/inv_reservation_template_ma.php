@@ -8,7 +8,7 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="inv_reservation"  name="inv_reservation">
-    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Onhand Reservation') ?></span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('On Hand Reservation') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
        <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>
@@ -137,9 +137,9 @@
            <th><?php echo gettext('Locator') ?></th>
            <th><?php echo gettext('Serial') ?> #</th>
            <th><?php echo gettext('Lot') ?> #</th>
-           <th><?php echo gettext('Onhand') ?></th>
-           <th><?php echo gettext('Res. Onhand') ?></th>
-           <th><?php echo gettext('Onhand Id') ?></th>
+           <th><?php echo gettext('On Hand') ?></th>
+           <th><?php echo gettext('Res. On Hand') ?></th>
+           <th><?php echo gettext('On Hand Id') ?></th>
 
            <th><?php echo gettext('Key Name') ?></th>
            <th><?php echo gettext('Key Value') ?></th>

@@ -564,7 +564,7 @@ class cst_item_cost_header extends dbObject {
   }
 
   if (!empty($parameters['from_item_number'][0])) {
-   $this->message .= "<br>Using Standard cost update by Item Number Range ";
+   $this->message .= "<br>" . gettext('Using Standard cost update by Item Number Range') . " ";
    $from_item_number = $parameters['from_item_number'][0];
    if (!empty($parameters['to_item_number'][0])) {
     $to_item_number = $parameters['to_item_number'][0];
@@ -769,9 +769,9 @@ class cst_item_cost_header extends dbObject {
     if ($item->make_buy == 'MAKE') {
      try {
       $this->_cost_rollup_forItem($level_items_item_id_m, $cost_type, $org_id);
-      $this->message .= "<br>Cost roll up is Successfullycompleted for Item Number : $item->item_number & Cost Type : $cost_type";
+      $this->message .= "<br>" . gettext('Cost roll up is Successfully completed for Item Number') . " : $item->item_number & " . gettext('Cost Type') . " : $cost_type";
      } catch (Exception $e) {
-      $this->message .= "<br>Cost roll up failed for Item Number : $item->item_number & Cost Type : $cost_type. Error @ " . __LINE__
+      $this->message .= "<br>" . gettext('Cost roll up failed for Item Number') . " : $item->item_number & " . gettext('Cost Type') . " : $cost_type. Error @ " . __LINE__
        . '<br>' . $e->getMessage();
      }
     }

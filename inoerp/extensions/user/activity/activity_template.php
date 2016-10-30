@@ -15,7 +15,7 @@
     <li class="list-group-item text-muted" contenteditable="false"><?php echo gettext('Profile'); ?></li>
     <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('Joined'); ?></strong></span><?php echo!empty($user_ai->creation_date) ? $user_ai->creation_date : ' NA '; ?></li>
     <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('Last seen'); ?></strong></span> NA </li>
-    <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('User name'); ?></strong></span><?php echo ino_getUserName_from_email($user_ai->username) ?></li>
+    <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('User Name'); ?></strong></span><?php echo ino_getUserName_from_email($user_ai->username) ?></li>
     <li class="list-group-item text-right"><span class="pull-left"><strong class=""><?php echo gettext('Phone'); ?></strong></span><?php echo!empty($up->phone) ? $up->phone : ' NA '; ?> </li>
    </ul>
   </div>

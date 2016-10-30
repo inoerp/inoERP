@@ -45,7 +45,7 @@
           <ul class="two_column"><li><label><?php echo gettext('First Name'); ?></label><?php echo form::text_field('first_name', $user->first_name); ?></li>
            <li><label><?php echo gettext('Last Name'); ?></label><?php echo form::text_field('last_name', $user->last_name); ?></li>
            <li><label><?php echo gettext('Username'); ?></label><?php echo form::text_field('username', $user->username); ?></li>
-           <li><label><?php echo gettext('e-Mail ID'); ?></label><?php echo form::text_field('email', $user->email); ?></li>
+           <li><label><?php echo gettext('Email Id'); ?></label><?php echo form::text_field('email', $user->email); ?></li>
            <li><label><?php echo gettext('Password'); ?></label><input type="password" name="enteredPassword[]" maxlength="50" id="enteredPassword" size="30" >
             <!--<span class="hint">(Min 8 letter, 1 small, 1 CAP, 1 <i>Special</i>)</span>
             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" 
@@ -65,7 +65,7 @@
           <ul class="column four_column">
            <li><label><?php echo gettext('Username'); ?></label><?php echo form::text_field('username', $user_password_reset->username, 35, 200, '', 'Login User Name', 'reset_password_user_name', '', 'reset_password_user_name'); ?>         </li>
            <li> <?php echo gettext('Or'); ?> </li>
-           <li><label><?php echo gettext('e-Mail'); ?></label><?php echo form::text_field('email', $user_password_reset->email, 35, 200, '', 'Registered email id', 'reset_password_email', '', 'reset_password_email'); ?>           </li>
+           <li><label><?php echo gettext('Email'); ?></label><?php echo form::text_field('email', $user_password_reset->email, 35, 200, '', 'Registered email id', 'reset_password_email', '', 'reset_password_email'); ?>           </li>
            <li><input  disabled type="submit" name="resetPassword" class="button btn btn-success" value="<?php echo gettext('Send New Password'); ?>"></li>
           </ul>
           <!--<input type="hidden" class="hidden" name='submit_user' value='1'>-->

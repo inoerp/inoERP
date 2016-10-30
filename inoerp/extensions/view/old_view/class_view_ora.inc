@@ -480,7 +480,7 @@ WHERE table_name = '{$table_name}'  ";
       }
       $content_string .= '</tbody>';
      } else {
-      $content_string .= 'No Records Found!';
+      $content_string .= gettext('No Records Found!');
      }
      $content_string .= '</table> </div>';
     }

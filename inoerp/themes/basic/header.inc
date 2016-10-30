@@ -87,7 +87,7 @@
        ?>
        <?php if ($show_header_links) { ?>
         <div class="social-icons">
-         <span><a class="fa fa-dashboard clickable erp_dashborad" href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+         <span><a class="fa fa-dashboard clickable erp_dashborad" href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_v&mode=2" title="<?php echo gettext('ERP Dashboard'); ?>"> <?php echo gettext('ERP Dashboard'); ?> </a></span>
         </div><!-- end social icons -->
        <?php } ?>
 
@@ -102,14 +102,14 @@
             <span class="caret"></span></button>
            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
             <!--<li role="presentation" class="dropdown-header">Dropdown header 1</li>-->
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> Home</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> My Details</a></li>
-            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> Activities</a></li>
-            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> Notification</a></li>
-            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> Configure</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL; ?>"><i class="fa fa-home"></i> <?php echo gettext('Home'); ?></a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id']; ?>"> <?php echo gettext('My Details'); ?></a></li>
+            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-tasks"></i> <?php echo gettext('Activities'); ?></a></li>
+            <li role="presentation"><a role="menuitem" class="pull-right" tabindex="-1" href="<?php echo HOME_URL . 'search.php?class_name=sys_notification_user'; ?>"><i class="fa fa-bell-slash-o"></i> <?php echo gettext('Notification'); ?></a></li>
+            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard"></i> <?php echo gettext('Dashboard'); ?></a></li>
+            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-cog"></i> <?php echo gettext('Configure'); ?></a></li>
             <li role="presentation" class="divider"></li>
-            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/ino_user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> LogOut</a></li>
+            <li role="presentation"><a role="menuitem"  tabindex="-1" href="<?php echo HOME_URL . 'extensions/ino_user/user_logout.php'; ?>"><i class="fa fa-sign-out"></i> <?php echo gettext('LogOut'); ?></a></li>
            </ul>
           </div>
 
@@ -146,18 +146,18 @@
       </div>
       <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
        <ul class="nav nav-pills">
-        <li><a href="http://inoideas.org/content/demo" >Demo <div class="arrow-up"></div></a></li>
-        <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
-        <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
-        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
+        <li><a href="http://inoideas.org/content/demo" ><?php echo gettext('Demo'); ?> <div class="arrow-up"></div></a></li>
+        <li><a href="https://github.com/inoerp/inoERP" ><?php echo gettext('Download'); ?> <div class="arrow-up"></div></a></li>
+        <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> <?php echo gettext('Ask a Question'); ?> <div class="arrow-up"></div></a></li>
+        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30"><?php echo gettext('Documentation'); ?> <div class="arrow-up"></div></a></li><!-- end standard drop down -->
+        <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1"><?php echo gettext('Forum'); ?> <div class="arrow-up"></div></a></li>
         <li role="presentation" class="dropdown">
          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
           More <span class="caret"></span>
          </a>
          <ul class="dropdown-menu" role="menu">
-          <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-          <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+          <li><a href="<?php echo HOME_URL; ?>"><?php echo gettext('Home'); ?> <div class="arrow-up"></div></a></li>
+          <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47"><?php echo gettext('About'); ?> <div class="arrow-up"></div></a> </li><!-- end drop down -->
          </ul>
         </li>
        </ul><!-- end navbar-nav -->

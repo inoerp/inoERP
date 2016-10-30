@@ -211,7 +211,7 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
     $this->_acc_dep_ac[$acc_deprn_acc] = $lines->depreciation_amount;
    }
 
-   $new_gjl->description = 'Depriciation of line id #' . $lines->fa_depreciation_line_id;
+   $new_gjl->description = 'Depreciation of line id #' . $lines->fa_depreciation_line_id;
    $new_gjl->reference_type = 'table';
    $new_gjl->save();
   }
@@ -236,7 +236,7 @@ class fa_depreciation_header extends dbObject implements gl_journal_int {
     $acc_dep_gjl->status = 'U';
     $acc_dep_gjl->code_combination_id = $acc_id;
     $acc_dep_gjl->total_ac_cr = $acc_dep_gjl->total_cr = $amount;
-    $acc_dep_gjl->description = 'Acc Depriciation for fa_depreciation_header_id ' . $this->fa_depreciation_header_id . ' & acc_id ' . $acc_id;
+    $acc_dep_gjl->description = 'Acc Depreciation for fa_depreciation_header_id ' . $this->fa_depreciation_header_id . ' & acc_id ' . $acc_id;
     $acc_dep_gjl->reference_type = 'table';
     $acc_dep_gjl->save();
    }

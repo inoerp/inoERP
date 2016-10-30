@@ -46,16 +46,16 @@
           </li>
          </ul>
         </li>
-        <li class="expandable" data-path_description="Dashborad">
+        <li class="expandable" data-path_description="Dashboard">
          <a href="<?php echo HOME_URL; ?>form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=<?php echo $_SESSION['user_id']; ?>"><?php echo gettext('Dashboard')?></a>
          <ul>
-          <li class="expandable" data-path_description="Dashborad Configuration">
+          <li class="expandable" data-path_description="Dashboard Configuration">
            <a href="<?php echo HOME_URL; ?>form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=<?php echo $_SESSION['user_id']; ?>"><?php echo gettext('Configure')?></a>
           </li>
          </ul>
         </li>
         <li class="expandable" data-path_description="Logout">
-         <a  href="<?php echo HOME_URL; ?>extensions/ino_user/user_logout.php"><?php echo gettext('Logout')?></a>
+         <a  href="<?php echo HOME_URL; ?>extensions/ino_user/user_logout.php"><?php echo gettext('LogOut')?></a> 
         </li>
        </ul>
       </li>

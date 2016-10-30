@@ -1,4 +1,4 @@
-<form  method="post" id="item"  name="item"><span class="heading">Item Master </span>
+<form  method="post" id="item"  name="item"><span class="heading"><?php echo gettext('Item Master') ?> </span>
  <div id ="form_header">
 	<div id="tabsHeader">
 	 <ul class="tabMain">
@@ -52,7 +52,7 @@
 		 </div>
 		</div>
 		<div id="tabsHeader-3" class="tabContent">
-		 <div><ul class='column header_field'><li><label>Update Revision</label><?php echo $f->checkBox_field('update_revision_cb', '', 'update_revision_cb') ?></li></ul>
+		 <div><ul class='column header_field'><li><label><?php echo gettext('Update Revision') ?></label><?php echo $f->checkBox_field('update_revision_cb', '', 'update_revision_cb') ?></li></ul>
 			<div id="tabsDetail">
 			 <div>
 				<div id="tabsDetail-1" class="tabContent">
@@ -120,7 +120,7 @@
 		 <div class="category-div">
 			<span class="heading"><?php echo gettext('Categories'); ?></span>
 			<div class="existing-category"><?php echo!empty($category) ? category::category_stmt($category) : ''; ?></div>
-			<div class="add-category"><?php echo!empty($categoriey_select_option) ? $categoriey_select_option : 'No ITEM type category found'; ?></div>
+			<div class="add-category"><?php echo!empty($categoriey_select_option) ? $categoriey_select_option : gettext('No ITEM type category found'); ?></div>
 		 </div>
 		</div>
 		<div id="tabsHeader-5" class="tabContent">
@@ -128,7 +128,7 @@
 		 <ul class='column four_column'>
 			<li><a class="popup popup-form view-catalog btn btn-default btn-lg" id="product_catalog" role="button"
 						 href="form.php?class_name=sys_catalog_value&mode=9&window_type=popup&reference_table=item&reference_id=<?php echo $$class->item_id ?>">
-				<i class="fa fa-list-alt"></i> Add/Update Catalog Values</a>
+				<i class="fa fa-list-alt"></i> <?php echo gettext('Add/Update Catalog Values') ?></a>
 			</li>
 		 </ul>
 		 <!--                end of tab2 div three_column-->
@@ -164,7 +164,7 @@
 			 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="select_item_template select_popup clickable">
 				 <?php echo gettext('Item/Template') ?>: </label><input type="text" class="text_field select_item_template item_template" id="item_template">
 				 <?php echo $f->hidden_field_withId('template_item_id', '') ?>
-				<button class="button non_clickable apply_item_template btn btn-warning" id="apply_item_template">Apply</button>
+				<button class="button non_clickable apply_item_template btn btn-warning" id="apply_item_template"><?php echo gettext('Apply') ?></button>
 			 </li>
 			</ul>
 		 </div>
@@ -173,7 +173,7 @@
 
 	</div>
  </div>
- <div id ="form_line" class="form_line form_header_l"><span class="heading"> Item Details </span>
+ <div id ="form_line" class="form_line form_header_l"><span class="heading"> <?php echo gettext('Item Details') ?> </span>
 	<div id="tabsLine">
 	 <ul class="tabMain">
 		<li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
@@ -319,7 +319,7 @@
 		 </div>
 		 <div class="second_rowset">
 			<div class="panel panel-collapse panel-ino-classy extra_large_box">
-			 <div class="panel-heading"><div class="panel-title font-medium">Receipt Information</div></div>
+			 <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Receipt Information') ?></div></div>
 			 <div class="panel-body">
 				<ul class="column header_field">
 				 <li><?php $f->l_text_field_d('receipt_routing'); ?></li>
@@ -470,7 +470,7 @@
 		 </div> 
 		 <div class="second_rowset">
 			<div class="panel panel-collapse panel-ino-classy extra_large_box">
-			 <div class="panel-heading"><div class="panel-title font-medium">Account</div></div>
+			 <div class="panel-heading"><div class="panel-title font-medium"><?php echo gettext('Account') ?></div></div>
 			 <div class="panel-body">
 				<ul class="column line_field">
 				 <li><?php $f->l_ac_field_d('material_ac_id'); ?></li>

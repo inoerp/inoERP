@@ -62,7 +62,7 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('job Details & Responsibility') ?></span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Job Details & Responsibility') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Job Details') ?></a></li>

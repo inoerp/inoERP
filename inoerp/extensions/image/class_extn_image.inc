@@ -127,7 +127,7 @@ class extn_image extends extn_file {
       $attachment_statement .= '<li><img class="img img-large hidden-image" src="' . HOME_URL. $records->file_path . $records->file_name . '"/></li>';
       $attachment_statement .= '<li class="image-with-text inline"><img  class="img img-medium pos-relative" src="' .HOME_URL. $records->file_path . $records->file_name . '"/>';
       $attachment_statement .= '<span role="button" data-extn_image_reference_id="' . $records->extn_image_reference_id . '" '
-       . 'class="delete_image btn btn-danger "  name="delete_extn_image">Delete Image</span></li>';
+       . 'class="delete_image btn btn-danger "  name="delete_extn_image">' . gettext('Delete Image') . '</span></li>';
       $attachment_statement .= '<li>'.$f->text_field('img_description1', $records->img_description1,'','','extra_large','','','Image Description 1').'</li>';
       $attachment_statement .= '<li>'.$f->text_field('img_description2', $records->img_description2,'','','extra_large','','','Image Description 2').'</li>';
       break;
@@ -148,7 +148,7 @@ $stmt = "<div class='existing-image'>" . self::show_existing_images($images) . '
 							<ul class="inRow asperWidth"><label for="exampleInputFile">' . gettext($label) . '</label>
 							 <li><input type="file" class="images" value="" name="uploaded_file[]" multiple/></li>
               <li><input type="hidden" class="hidden display_type" name="display_type[]" value="' . $display_type . '"/></li>
-							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">Upload</button></li>';
+							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">' . gettext('Upload') . '</button></li>';
   $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
 							</ul>
 							<div class="uploaded_file_details"></div>

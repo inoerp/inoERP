@@ -38,32 +38,32 @@
          <?php
          switch ($association_level) {
           case 'SITE' :
-           echo "<th>Site</th>";
+           echo "<th>" . gettext('Site') . "</th>";
            break;
 
           case 'BUSINESS' :
-           echo "<th>Business Org</th>";
+           echo "<th>" . gettext('Business Org') . "</th>";
            break;
 
           case 'INVENTORY' :
-           echo "<th>Inventory Org</th>";
+           echo "<th>" . gettext('Inventory Org') . "</th>";
            break;
 
           case 'FROM_SUBINV' :
-           echo "<th>Inventory Org</th>";
-           echo "<th>From Sub Inventory</th>";
+           echo "<th>" . gettext('Inventory Org') . "</th>";
+           echo "<th>" . gettext('From Subinventory') . "</th>";
            break;
 
           case 'USER' :
-           echo "<th>User Name</th>";
+           echo "<th>" . gettext('User Name') . "</th>";
            break;
 
           default :
-           echo "<th>Multi Level</th>";
+           echo "<th>" . gettext('Multi Level') . "</th>";
            break;
          }
          ?>
-         <th>Label Format </th> 
+         <th><?php echo gettext('Label Format') ?> </th> 
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bc_label_auto_trigger_values" >

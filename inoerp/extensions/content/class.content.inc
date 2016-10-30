@@ -433,7 +433,7 @@ class content extends dbObject {
 						 . 'content_id=' . $records->content_id . '&content_type_id=' . $records->content_type_id . '">';
 		}
 
-		$page_string .= 'Read More.. </a>';
+		$page_string .= gettext('Read More') . '.. </a>';
 		$page_string .= '</span>';
 		$page_string .= '</span>';
 		$page_string .= '<span class="content_summary">';
@@ -530,7 +530,7 @@ AND content.content_id = category_reference.reference_id  ";
 		}
 
 		$content_string .= '<a href="' . htmlspecialchars($link_read) . '">';
-		$content_string .= 'Read More.. </a>';
+		$content_string .= gettext('Read More') . '.. </a>';
 		$content_string .= '</span>';
 		$content_string .= '</div>';
 		$content_string .= '<div class="content_summary">';
@@ -568,10 +568,10 @@ AND content.content_id = category_reference.reference_id  ";
 	 if (count($content_result) > 0) {
 		$content_string .='<table id="content_list" class="table table-striped table-hover"><thead> 
 						 <tr class="headerBgColor">
-             <th class="post_date">Replies</th>
-							<th class="topics">Subject</th>
-							<th class="created_by">Created By</th>
-							<th class="post_date">Post Date</th>
+							<th class="post_date">' . gettext('Replies') . '</th>
+							<th class="topics">' . gettext('Subject') . '</th>
+							<th class="created_by">' . gettext('Created By') . '</th>
+							<th class="post_date">' . gettext('Post Date') . '</th>
 						 </tr>
 						</thead>';
 		foreach ($content_result as $recod_c_k => $recod_c) {
@@ -636,9 +636,9 @@ AND content.content_id = category_reference.reference_id  ";
 	$content_string .='<div>';
 	$content_string .='<div id="tabsHeader">';
 	$content_string .= '<ul class="tabMain">
-     <li><a href="#tabsHeader-1">All Topics</a></li>
-      <li><a href="content.php?content_type=comment">All Comments</a></li>
-     <li><a href="#tabsHeader-2">Category Listing</a></li>
+     <li><a href="#tabsHeader-1">' . gettext('All Topics') . '</a></li>
+      <li><a href="content.php?content_type=comment">' . gettext('All Comments') . '</a></li>
+     <li><a href="#tabsHeader-2">' . gettext('Category Listing') . '</a></li>
     </ul>';
 	$content_string .='<div class="tabContainer">';
 
@@ -656,10 +656,10 @@ AND content.content_id = category_reference.reference_id  ";
 		$category_listing .=!empty($result[0]->category) ? '<span class="heading">' . $result_category[0]->category . '</span>' : '';
 		$category_listing .='<table class="table table-striped table-hover"><thead> 
 						 <tr class="headerBgColor">
-							<th class="topics">Topics</th>
-							<th class="replies">Replies</th>
-							<th class="created_by">Created By</th>
-							<th class="post_date">Post Date</th>
+							<th class="topics">' . gettext('Topics') . '</th>
+							<th class="replies">' . gettext('Replies') . '</th>
+							<th class="created_by">' . gettext('Created By') . '</th>
+							<th class="post_date">' . gettext('Post Date') . '</th>
 						 </tr>
 						</thead>';
 		foreach ($result_category as $records) {
@@ -714,9 +714,9 @@ AND content.content_id = category_reference.reference_id  ";
 	$content_string .='<div>';
 	$content_string .='<div id="tabsHeader">';
 	$content_string .= '<ul class="tabMain">
-     <li><a href="#tabsHeader-1" class="non_ajax">All Topics</a></li>
-     <li><a href="#tabsHeader-2" class="non_ajax">All Comments</a></li>
-     <li><a href="#tabsHeader-3" class="non_ajax">Category Listing</a></li>
+     <li><a href="#tabsHeader-1" class="non_ajax">' . gettext('All Topics') . '</a></li>
+     <li><a href="#tabsHeader-2" class="non_ajax">' . gettext('All Comments') . '</a></li>
+     <li><a href="#tabsHeader-3" class="non_ajax">' . gettext('Category Listing') . '</a></li>
     </ul>';
 	$content_string .='<div class="tabContainer">';
 
@@ -760,10 +760,10 @@ AND content.content_id = category_reference.reference_id  ";
 		$content_string .=!empty($result[0]->category) ? '<span class="heading">' . $result[0]->category . '</span>' : '';
 		$content_string .='<table class="table table-striped table-hover"><thead> 
 						 <tr class="headerBgColor">
-							<th class="topics">Topics</th>
-							<th class="replies">Replies</th>
-							<th class="created_by">Created By</th>
-							<th class="post_date">Post Date</th>
+							<th class="topics">' . gettext('Topics') . '</th>
+							<th class="replies">' . gettext('Replies') . '</th>
+							<th class="created_by">' . gettext('Created By') . '</th>
+							<th class="post_date">' . gettext('Post Date') . '</th>
 						 </tr>
 						</thead>';
 		foreach ($result as $records) {
@@ -934,8 +934,8 @@ AND content.content_id = category_reference.reference_id  ";
 	if (count($result) > 0) {
 	 $content_string .='<table id="summary_list" class="top_margin10 form_line_data_table"><thead> 
 						 <tr>
-							<th>Summary</th>
-							<th>Creation Date/Created By</th>
+							<th>' . gettext('Summary') . '</th>
+							<th>' . gettext('Creation Date/Created By') . '</th>
 						 </tr>
 						</thead>';
 
@@ -949,7 +949,7 @@ AND content.content_id = category_reference.reference_id  ";
 		$content_string .=!empty($content_summary->content_summary) ? $content_summary->content_summary : '';
 		$content_string .= '<span class="more_page">';
 		$content_string .= '<a href="' . HOME_URL . 'content.php?content_id=' . $content->content_id . '&content_type_id=' . $content_type_id . '">';
-		$content_string .= 'Read more.. </a>';
+		$content_string .= gettext('Read more') . '.. </a>';
 		$content_string .= '</span>';
 		$content_string .= '</td>';
 		$content_string .= '<td class="other_info">';
@@ -983,7 +983,7 @@ AND content.content_id = category_reference.reference_id  ";
 	echo '</div>';
 	echo '<div class="more_content">';
 	echo '<a href="' . HOME_URL . 'content.php?content_id="' . $content_summary->content_id . '>';
-	echo 'Read more.. </a>';
+	echo gettext('Read more') . '.. </a>';
 	echo '</div>';
 	echo '</div>';
  }

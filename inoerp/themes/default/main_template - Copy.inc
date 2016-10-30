@@ -51,7 +51,7 @@
    <div class="container-fluid">
     <div class="navbar-header">
      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-      <span class="sr-only">Toggle navigation</span>
+      <span class="sr-only"><?php echo gettext('Toggle navigation'); ?></span>
       <span class="icon-bar"></span>
 
      </button>
@@ -63,12 +63,12 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
      <ul class="nav navbar-nav navbar-right">
-      <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-      <li><a href="http://demo.inoideas.org/extensions/user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
-      <li><a href="https://github.com/inoerp/inoERP/fork" >Download <div class="arrow-up"></div></a></li>
-      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-      <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+      <li><a href="<?php echo HOME_URL; ?>"><?php echo gettext('Home'); ?> <div class="arrow-up"></div></a></li>
+      <li><a href="http://demo.inoideas.org/extensions/user/user_login.php" ><?php echo gettext('Demo'); ?> <div class="arrow-up"></div></a></li>
+      <li><a href="https://github.com/inoerp/inoERP/fork" ><?php echo gettext('Download'); ?> <div class="arrow-up"></div></a></li>
+      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30"><?php echo gettext('Documentation'); ?> <div class="arrow-up"></div></a></li><!-- end standard drop down -->
+      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1"><?php echo gettext('Forum'); ?> <div class="arrow-up"></div></a></li>
+      <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47"><?php echo gettext('About'); ?> <div class="arrow-up"></div></a> </li><!-- end drop down -->
       <li>
        <span class="topbar-login ino_right_top">
         <?php if (!empty($_SESSION['login_status'])) { ?>
@@ -117,7 +117,7 @@
   }
 
   if (!empty($access_deined)) {
-   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='Go Back' onclick='history.go(-1);
+   exit("Access denied ! <br> $msg <input action='action' class='button' type='button' value='" . gettext('Go Back') . "' onclick='history.go(-1);
        ' />");
   }
   ?>
@@ -127,8 +127,8 @@
     <div class="col-sm-3 col-md-2 sidebar">
      <div id="sys_menu_left_vertical">
       <div class="btn-group-sm" role="group" aria-label="...">
-       <button type="button" id='expand_all_nav' class="btn btn-default">Expand All</button>
-       <button type="button" id='collapse_all_nav' class="btn btn-default">Collapse All</button>
+       <button type="button" id='expand_all_nav' class="btn btn-default"><?php echo gettext('Expand All'); ?></button>
+       <button type="button" id='collapse_all_nav' class="btn btn-default"><?php echo gettext('Collapse All'); ?></button>
       </div>
       <?php
       $pat = new path();
@@ -142,15 +142,15 @@
     <div id="navigation_bar"   class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 mainbar">
      <div id="header_top_quick_nav" >
       <ul class="list-group inline_list">
-       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="Home"></i></a></li>
-       <li role="presentation"><a  href="#"><i class="fa fa-info" title="Messages"></i></a></li>
-       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="Dashborad"></i></a></li>
+       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="<?php echo gettext('Home'); ?>"></i></a></li>
+       <li role="presentation"><a  href="#"><i class="fa fa-info" title="<?php echo gettext('Messages'); ?>"></i></a></li>
+       <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="<?php echo gettext('Dashboard'); ?>"></i></a></li>
        <li>
         <div class="btn-group">
-         <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="Favourites"></i></button>
-         <button type="button" title="Favourites" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+         <button type="button" class="btn btn-xs btn-info"  title="Favourites"><i class="fa fa-star-o" title="<?php echo gettext('Favourites'); ?>"></i></button>
+         <button type="button" title="<?php echo gettext('Favourites'); ?>" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
+          <span class="sr-only"><?php echo gettext('Toggle Dropdown'); ?></span>
          </button>
          <?php echo $fav->show_currentUser_fav(true); ?>
         </div>
@@ -170,7 +170,7 @@
       ?>
       <?php if ($show_header_links) { ?>
        <!--       <div class="social-icons">
-               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+               <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="<?php //echo gettext('ERP Dashboard') ?>"> <?php //echo gettext('ERP Dashboard') ?> </a></span>
               </div> end social icons -->
       <?php } ?>
      </div>
@@ -207,11 +207,11 @@
        echo nl2br($si->footer_message);
        ?>
        <ul>
-        <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
-        <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
-        <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
-        <li><a href="#">Cookie Preferences</a></li>
-        <li class="active"><a href="#">Terms of Use</a></li>
+        <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact"><?php echo gettext('Contact'); ?></a></li>
+        <li><a href="https://github.com/inoerp/inoERP/releases"><?php echo gettext('Releases'); ?></a></li>
+        <li><a href="https://www.mozilla.org/MPL/2.0/"><?php echo gettext('MPL 2'); ?></a></li>
+        <li><a href="#"><?php echo gettext('Cookie Preferences'); ?></a></li>
+        <li class="active"><a href="#"><?php echo gettext('Terms of Use'); ?></a></li>
        </ul>
       </div>
      </div><!-- end large-7 --> 

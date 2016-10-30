@@ -12,16 +12,16 @@
        <div class="show_loading_small"></div>
        <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
        <!--    End of place for showing error messages-->
-       <span class="heading">Object/Class Details </span>
+       <span class="heading"><?php echo gettext('Object/Class Details') ?> </span>
        <div class="large_shadow_box">
         <ul class="column four_column">
          <li>
-          <label> Object Name : </label>
+          <label> <?php echo gettext('Object Name') ?> : </label>
           <?php echo $f->select_field_from_object('obj_class_name', engine::find_all(), 'obj_class_name', 'obj_class_name', $obj_class_name_h); ?>
           <a name="show" href="form.php?class_name=secondary_field&role_code=" class="show role_code">
            <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
          </li>						
-         <li><label>Description : </label>
+         <li><label><?php echo gettext('Description') ?> : </label>
           <?php echo $f->text_field('description', '', '50'); ?>
          </li>
         </ul>
@@ -29,28 +29,28 @@
       </div>
       <form action=""  method="post" id="secondary_field"  name="secondary_field">
        <!--END OF FORM HEADER-->
-       <div id ="form_line" class="secondary_field"><span class="heading">Secondary Details </span>
+       <div id ="form_line" class="secondary_field"><span class="heading"><?php echo gettext('Secondary Details') ?> </span>
         <div id="tabsLine">
          <ul class="tabMain">
-          <li><a href="#tabsLine-1">Basic Info </a></li>
-          <li><a href="#tabsLine-2">List Values </a></li>
+          <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?> </a></li>
+          <li><a href="#tabsLine-2"><?php echo gettext('List Values') ?> </a></li>
          </ul>
          <div class="tabContainer"> 
           <div id="tabsLine-1" class="tabContent">
            <table class="form form_detail_data_table detail">
             <thead>
              <tr>
-              <th>Action</th>
-              <th>Seq#</th>
-              <th>Instance Id</th>
-              <th>Field Name</th>
-              <th>Label</th>
-              <th>Type</th>
-              <th>Control Type</th>
-              <th>Control Value</th>
-              <th>Control UOM</th>
-              <th>Display Weight</th>
-              <th>Active</th>
+              <th><?php echo gettext('Action') ?></th>
+              <th><?php echo gettext('Seq') ?>#</th>
+              <th><?php echo gettext('Instance Id') ?></th>
+              <th><?php echo gettext('Field Name') ?></th>
+              <th><?php echo gettext('Label') ?></th>
+              <th><?php echo gettext('Type') ?></th>
+              <th><?php echo gettext('Control Type') ?></th>
+              <th><?php echo gettext('Control Value') ?></th>
+              <th><?php echo gettext('Control UOM') ?></th>
+              <th><?php echo gettext('Display Weight') ?></th>
+              <th><?php echo gettext('Active') ?></th>
              </tr>
             </thead>
             <tbody class="form_data_detail_tbody_ln">
@@ -68,8 +68,8 @@
                <tr class="sys_secondary_field<?php echo $count . '-' . $detailCount; ?>">
                 <td>   
                  <ul class="inline_action">
-                  <li class="add_row_detail_img3"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                  <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                  <li class="add_row_detail_img3"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('add new line') ?>" /></li>
+                  <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('remove this line') ?>" /> </li>
                   <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($secondary_field->sys_secondary_field_inst_id); ?>">
                   </li>           
                  </ul>
@@ -96,11 +96,11 @@
            <table class="form form_detail_data_table detail">
             <thead>
              <tr>
-              <th>Seq#</th>
-              <th>Lower Limit</th>
-              <th>Upper Limit</th>
-              <th>List Option Type</th>
-              <th>Field Name</th>
+              <th><?php echo gettext('Seq') ?>#</th>
+              <th><?php echo gettext('Lower Limit') ?></th>
+              <th><?php echo gettext('Upper Limit') ?></th>
+              <th><?php echo gettext('List Option Type') ?></th>
+              <th><?php echo gettext('Field Name') ?></th>
              </tr>
             </thead>
             <tbody class="form_data_detail_tbody_ln">

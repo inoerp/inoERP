@@ -15,8 +15,8 @@
         ?>
         <div id="searchResultMessages">
          <ul class="inline_list">
-          <li><button class="btn btn-primary" type="button">Accessible Records <span class="badge"><?php echo $total_count; ?></span></button></li>
-          <li><button class="btn btn-warning" type="button">Total Records <span class="badge"><?php echo $total_count_all; ?></span></button></li>
+          <li><button class="btn btn-primary" type="button"><?php echo gettext('Accessible Records'); ?> <span class="badge"><?php echo $total_count; ?></span></button></li>
+          <li><button class="btn btn-warning" type="button"><?php echo gettext('Total Records'); ?> <span class="badge"><?php echo $total_count_all; ?></span></button></li>
          </ul>
         </div>
         <?php

@@ -29,7 +29,7 @@
           <?php
           if ($allow_content_update) {
            ?>
-           <li><a href="<?php echo HOME_URL; ?>content.php?mode=9&amp;content_id=<?php echo ($content->content_id); ?>&amp;content_type=<?php echo ($content_type_name); ?>"><img src="<?php echo HOME_URL; ?>themes/images/edit.png" alt="update" /> </a></li>
+           <li><a href="<?php echo HOME_URL; ?>content.php?mode=9&amp;content_id=<?php echo ($content->content_id); ?>&amp;content_type=<?php echo ($content_type_name); ?>"><img src="<?php echo HOME_URL; ?>themes/images/edit.png" alt="<?php echo gettext('Update'); ?>" /> </a></li>
           <?php } ?>
          </ul>
         </div>
@@ -40,20 +40,20 @@
         <div id="after_content_extra">
          <div id='content_info'>
           <ul>
-           <li class="attachment_content"><label>Attachments : </label><?php echo (!empty($file)) ? extn_file::show_file_list($file) : ""; ?></li>
-           <li class="terms"><label>Tags : </label><?php echo ($content->terms); ?></li>
-           <li class="categories"><label>Category : </label><?php echo!(empty($category_statement)) ? $category_statement : ""; ?></li>
+           <li class="attachment_content"><label><?php echo gettext('Attachments'); ?> : </label><?php echo (!empty($file)) ? extn_file::show_file_list($file) : ""; ?></li>
+           <li class="terms"><label><?php echo gettext('Tags'); ?> : </label><?php echo ($content->terms); ?></li>
+           <li class="categories"><label><?php echo gettext('Category'); ?> : </label><?php echo!(empty($category_statement)) ? $category_statement : ""; ?></li>
           </ul>
          </div>
          <div id="content_navigation">
           <ul>
-           <li class="parent_id"><label>Parent Content : </label>
+           <li class="parent_id"><label><?php echo gettext('Parent Content'); ?> : </label>
             <?php echo!(empty($parent_of_content)) ? $parent_of_content : "" ?>
            </li>
-           <li class="child_contents"><label>Child Content : </label>
+           <li class="child_contents"><label><?php echo gettext('Child Content'); ?> : </label>
 
             <?php echo '<a href="' . HOME_URL . 'content.php?mode=9&amp;content_type=' . $content_type_name . '&amp;parent_id=' . $content->content_id . '"   
-               class="button add_child_content">Add Child Content </a>'; ?>
+               class="button add_child_content">' . gettext('Add Child Content') . ' </a>'; ?>
            </li>
           </ul>
          </div>
@@ -70,7 +70,7 @@
            $reference_id = $content->content_id;
            include_once 'comment.php';
           } else {
-           echo "<a href='".HOME_URL."extensions/ino_user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>Login To Comment </a>";
+           echo "<a href='".HOME_URL."extensions/ino_user/user_login.php' class='comment post button btn btn-info active btn-lg' role='button' id='commentForm'>" . gettext('Login To Comment') . " </a>";
           }
           ?>
           <div id="new_comment">

@@ -156,7 +156,29 @@ VAR;
 	return $multi_select_hidden;
  }
 
+ public static function staticVar_init($staticvar) {
+  $lines = explode("\n", self::${$staticvar});
+  self::${$staticvar} = '';
+  foreach ($lines as $key => $line) {
+   if(strpos($line,'<th>') !== FALSE) {
+ 	$left = substr($line,0,strpos($line,'>')+1);
+ 	$text = trim(rtrim(trim(substr($line,strpos($line,'>')+1,strpos($line,'/')-strpos($line,'>')-2)),'#'));
+ 	$right = substr($line,strpos($line,'/')-1);
+ 	if(substr(trim(substr($line,strpos($line,'>')+1,strpos($line,'/')-strpos($line,'>')-2)),-1) == '#') {
+ 	 $line =  $left . gettext($text) . '#' . $right;
+ 	} else {
+ 	 $line =  $left . gettext($text) . $right;
+ 	}
+   }
+   self::${$staticvar} = self::${$staticvar} . $line;
+   if($line != end($lines)) {
+    self::${$staticvar} = self::${$staticvar} . "\n";
+   }
+  }
+ }
+
 }
 
 //end of uom class
+uom::staticVar_init('table_line_tr');
 ?>

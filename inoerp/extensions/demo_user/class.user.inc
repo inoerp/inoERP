@@ -239,7 +239,7 @@ class user extends dbObject {
   if (!empty($result)) { //should not be used. Use only when a copy of the class is required
    return $result;
   } else {
-   return "No Records Found!";
+   return gettext("No Records Found!");
   }
  }
 

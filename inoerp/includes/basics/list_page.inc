@@ -30,7 +30,7 @@ if (!empty($msg)) {
  				<div id="searchResultMessages">
  				 <ul class="inline_list">
  					<li>
-						<?php echo '<h3>Total records : ' . $total_count . '</h3>'; ?>
+						<?php echo '<h3>' . gettext('Total Records') . ' : ' . $total_count . '</h3>'; ?>
  					</li>
  					<li id="export_excel_searchResult"> <img src="<?php echo THEME_URL; ?>/images/excel.png" alt="<?php echo gettext('Export to Excel')?>" /></li>
  					<li id="print_searchResult" class="print"> <img src="<?php echo THEME_URL; ?>/images/print.png" alt="<?php echo gettext('Print')?>" /></li>

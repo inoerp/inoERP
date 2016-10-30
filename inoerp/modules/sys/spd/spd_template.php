@@ -136,11 +136,11 @@
            }
            ?>
            <div class="class_detail_form">
-            <fieldset class="form_detail_data_fs"><legend>Detail Data</legend>
+            <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Detail Data') ?></legend>
              <div class="tabsDetail">
               <ul class="tabMain">
-               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
-               <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>">Value</a></li>
+               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
+               <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Value') ?></a></li>
               </ul>
               <div class="tabContainer">
                <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
@@ -199,13 +199,13 @@
                 <table class="form form_detail_data_table detail">
                  <thead>
                   <tr>
-                   <th>Action Id</th>
-                   <th>Value</th>
-                   <th>Comment</th>
-                   <th>By User</th>
-                   <th>Duration</th>
-                   <th>Primary Object</th>
-                   <th>Object Id</th>
+                   <th><?php echo gettext('Action Id') ?></th>
+                   <th><?php echo gettext('Value') ?></th>
+                   <th><?php echo gettext('Comment') ?></th>
+                   <th><?php echo gettext('By User') ?></th>
+                   <th><?php echo gettext('Duration') ?></th>
+                   <th><?php echo gettext('Primary Object') ?></th>
+                   <th><?php echo gettext('Object Id') ?></th>
                   </tr>
                  </thead>
                  <tbody class="form_data_detail_tbody">

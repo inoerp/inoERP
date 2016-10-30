@@ -1301,8 +1301,8 @@ EOD;
 	$value = htmlentities($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	$element_text_field = "<Select name=\"status[]\" class=\"status select\" $readonly >";
 	$element_text_field .= "<option value=\"\" ></option>";
-	$element_text_field .= "<option value=\"ACTIVE\" $active > Active </option>";
-	$element_text_field .= "<option value=\"INACTIVE\" $inactive > Inactive </option>";
+	$element_text_field .= "<option value=\"ACTIVE\" $active > " . gettext('Active') . " </option>";
+	$element_text_field .= "<option value=\"INACTIVE\" $inactive > " . gettext('Inactive') . " </option>";
 	$element_text_field .= "</select>";
 	return $element_text_field;
  }

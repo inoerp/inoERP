@@ -67,11 +67,11 @@ $payment_term = payment_term::find_by_id($$class->$document_showVar3);
 $header_info_statement = "";
 $header_info_statement .= "<ul>";
 $header_info_statement .= "<li>$document_type : " . $ar_transaction_header->$document_type_number .  "</li>";
-$header_info_statement .= "<li>Revision : " . $ar_transaction_header->$document_revision_number . "</li>";
-$header_info_statement .= "<li>Sales Person : " . $ar_transaction_header->$document_showVar1 . "</li>";
-$header_info_statement .= "<li>Currency : " . $ar_transaction_header->$document_showVar2 . "</li>";
-$header_info_statement .= "<li>Payment Term : " . $ar_transaction_header->payment_term_id . "</li>";
-$header_info_statement .= "<li>Amount : " . $ar_transaction_header->$document_showVar4 . " & Tax : " . $ar_transaction_header->tax_amount . "</li>";
+$header_info_statement .= "<li>" . gettext('Revision') . " : " . $ar_transaction_header->$document_revision_number . "</li>";
+$header_info_statement .= "<li>" . gettext('Sales Person') . " : " . $ar_transaction_header->$document_showVar1 . "</li>";
+$header_info_statement .= "<li>" . gettext('Currency') . " : " . $ar_transaction_header->$document_showVar2 . "</li>";
+$header_info_statement .= "<li>" . gettext('Payment Term') . " : " . $ar_transaction_header->payment_term_id . "</li>";
+$header_info_statement .= "<li>" . gettext('Amount') . " : " . $ar_transaction_header->$document_showVar4 . " & " . gettext('Tax') . " : " . $ar_transaction_header->tax_amount . "</li>";
 $header_info_statement .= "</ul>";
 
 
@@ -88,9 +88,9 @@ if (!empty($$class->$external_entity_lineId)) {
 
  $external_entiry_info .= "<ul>";
  $external_entiry_info .= "<li>$external_entity_type : " . $external_entity_headerDetails->$external_entity_headerName . " </li>";
- $external_entiry_info .= "<li>  Number  : " . $external_entity_headerDetails->$external_entity_headerNumber . " </li>";
- $external_entiry_info .= "<li>  Site Name  : " . $external_entity_lineDetails->$external_entity_lineName . "</li>";
- $external_entiry_info .= "<li>  Site Number  : " . $external_entity_lineDetails->$external_entity_lineNumber . "</li>";
+ $external_entiry_info .= "<li>  " . gettext('Number') . "  : " . $external_entity_headerDetails->$external_entity_headerNumber . " </li>";
+ $external_entiry_info .= "<li>  " . gettext('Site Name') . "  : " . $external_entity_lineDetails->$external_entity_lineName . "</li>";
+ $external_entiry_info .= "<li>  " . gettext('Site Number') . "  : " . $external_entity_lineDetails->$external_entity_lineNumber . "</li>";
 // $external_entiry_info .= "<li> $address_value </li>";
  $external_entiry_info .= "</ul>";
 }
@@ -115,15 +115,15 @@ if (!empty($$class->$external_entity_lineId)) {
 	 <table class="form_line_data_table">
 		<thead> 
 		 <tr class="line_header">
-			<th>Line #</th>
-			<th>Type</th>
-			<th>Item Number/Description</th>
-			<th>Unit Price</th>
-			<th>Line Quantity</th>
-			<th>Line Price</th>
-			<th>Tax Amount</th>
-			<th>Order Number</th>
-			<th>Order Line#</th>
+			<th><?php echo gettext('Line') ?> #</th>
+			<th><?php echo gettext('Type') ?></th>
+			<th><?php echo gettext('Item Number/Description') ?></th>
+			<th><?php echo gettext('Unit Price') ?></th>
+			<th><?php echo gettext('Line Quantity') ?></th>
+			<th><?php echo gettext('Line Price') ?></th>
+			<th><?php echo gettext('Tax Amount') ?></th>
+			<th><?php echo gettext('Order Number') ?></th>
+			<th><?php echo gettext('Order Line') ?>#</th>
 		 </tr>
 		</thead>
 		<tbody>

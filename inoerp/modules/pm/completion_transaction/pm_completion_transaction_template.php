@@ -46,7 +46,7 @@ inoERP
          <th><?php echo gettext('Action') ?></th>
          <th><?php echo gettext('Seq') ?></th>
          <th><?php echo gettext('Line Id') ?></th>
-         <th><?php echo gettext('Line TYpe') ?></th>
+         <th><?php echo gettext('Line Type') ?></th>
          <th><?php echo gettext('Item Id') ?></th>
          <th><?php echo gettext('Item Number') ?></th>
          <th><?php echo gettext('Item Description') ?></th>
@@ -54,7 +54,7 @@ inoERP
          <th><?php echo gettext('Quantity') ?></th>
          <th><?php echo gettext('Planned Qty') ?></th>
          <th><?php echo gettext('Actual Qty') ?></th>
-         <th><?php echo gettext('Trnx. Id') ?></th>
+         <th><?php echo gettext('Trnx Id') ?></th>
         </tr>
        </thead>
        <tbody class="inv_transaction_values form_data_line_tbody">

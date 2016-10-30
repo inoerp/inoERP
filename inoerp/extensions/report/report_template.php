@@ -99,7 +99,7 @@
            <?php echo $f->select_field_from_array('chart_type', getsvgimage::$chart_type_a, $$class->chart_type, 'chart_type'); ?></li>
           <li><label><?php echo getttext('Chart Width')?></label><?php echo $f->number_field('chart_width', $$class->chart_width, '', 'chart_width'); ?></li>
           <li><label><?php echo getttext('Chart Height')?></label><?php echo $f->number_field('chart_height', $$class->chart_height, '', 'chart_height'); ?></li>
-          <li><label><?php echo getttext('Label Field')?></label><!-- //Added to support Windows 20160926 Sytech -->
+          <li><label><?php echo getttext('Label Field')?></label>
            <?php
            if (!empty($column_list)) {
             echo $f->select_field_from_array('chart_label', $column_list, $$class->chart_label, 'chart_label');
@@ -135,9 +135,9 @@
            ?></li>
          </ul>
         </div>
-        <div id="draw_chart"><label><?php echo getttext('Live Chart')?>
+        <div id="draw_chart"><label><?php echo getttext('Live Chart')?></label>
          <div id="draw_chart_data" class="scrollElement">
-          <span class="heading"><input type="button" value="Draw Chart" class="button display_result" id="draw_svg_image"></span>
+          <span class="heading"><input type="button" value="<?php echo getttext('Draw Chart')?>" class="button display_result" id="draw_svg_image"></span>
           <div class="svg_image">
           </div>
          </div>

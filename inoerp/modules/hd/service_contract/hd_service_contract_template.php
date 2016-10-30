@@ -190,9 +190,9 @@
            <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
-              <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>">Price</a></li>
-              <li class="tabLink"><a href="#tabsDetail-3-<?php echo $count ?>">References</a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
+              <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Price') ?></a></li>
+              <li class="tabLink"><a href="#tabsDetail-3-<?php echo $count ?>"><?php echo gettext('References') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">
@@ -206,7 +206,7 @@
                   <th><?php echo gettext('Level') ?></th>
                   <th><?php echo gettext('Item') ?></th>
                   <th><?php echo gettext('Serial') ?></th>
-                  <th><?php echo gettext('Start date') ?></th>
+                  <th><?php echo gettext('Start Date') ?></th>
                   <th><?php echo gettext('End Date') ?></th>
                  </tr>
                 </thead>
@@ -379,7 +379,7 @@
        <tr>
         <th><?php echo gettext('Seq') ?></th>
         <th><?php echo gettext('Source') ?></th>
-        <th><?php echo gettext('Start date') ?></th>
+        <th><?php echo gettext('Start Date') ?></th>
         <th><?php echo gettext('End Date') ?></th>
         <th><?php echo gettext('Duration UOM') ?></th>
         <th><?php echo gettext('Duration') ?></th>

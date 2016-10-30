@@ -341,9 +341,9 @@ class inoform {
   echo '
 			 <ul id="form_top_image" class="draggable">
       	<li id="refresh_buttonsave" title="' . gettext('Refresh & Reload The Page') . '"><button type="button" class="img-button"><i class="fa fa-refresh"></i>' . gettext('Refresh') . '</button></li>
-        <li><a class="img-button clickable" Title="' . gettext('Create a New Document') . '" id="new_page_button" href="$current_page_path"><i class="fa fa-file-text-o"></i> ' . gettext('New') . '</a></li>
+        <li><a class="img-button clickable" Title="' . gettext('Create a New Document') . '" id="new_page_button" href="'.$current_page_path.'"><i class="fa fa-file-text-o"></i> ' . gettext('New') . '</a></li>
     		<li id="save" title="' . gettext('Save The Form') . '"><button type="button" class="img-button"><i class="fa fa-save"></i> ' . gettext('Save') . '</button></li>
-        <li><a class="fa fa-eraser clickable" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="$current_page_path"></a></li>
+        <li><a class="fa fa-eraser clickable" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="'.$current_page_path.'"></a></li>
         <li class="fa fa-trash-o clickable" id="delete_button" title="' . gettext('Delete') . '"></li>
         <li class="fa fa-remove clickable" id="remove_row_button" title="' . gettext('Remove') . '"></li>
         <li class="fa fa-print clickable print" id="print_searchResult" title="' . gettext('Print') . '"></li>
@@ -359,7 +359,7 @@ class inoform {
         <li class="fa fa-refresh clickable ino-btn2 " id="refresh_button" title="' . gettext('Refresh') . '" style="background-color: $si->heading_color" ></li>
         <li class="fa fa-file-text-o clickable ino-btn2" Title="' . gettext('New Document') . '" id="new_page_button" href="'.$current_page_path.'" style="background-color: $si->heading_color"></li>
     		<li class="fa fa-save clickable ino-btn2" id="save" title="' . gettext('Save') . '" style="background-color: $si->heading_color" ></li>
-        <li class="fa fa-eraser clickable ino-btn2" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
+        <li class="fa fa-eraser clickable ino-btn2" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="'.$current_page_path.'" style="background-color: $si->heading_color"></li>
         <li class="fa fa-trash-o clickable ino-btn2" id="delete_button" title="' . gettext('Delete') . '" style="background-color: $si->heading_color"></li>
         <li class="fa fa-remove clickable ino-btn2" id="remove_row_button" title="' . gettext('Remove') . '" style="background-color: $si->heading_color" ></li>
         <li class="fa fa-search-plus clickable query_mode_icon ino-btn2" id="start_query_mode" title="' . gettext('Query Mode') . '" style="background-color: $si->heading_color"></li>
@@ -374,9 +374,9 @@ class inoform {
   echo '
 			 <ul id="form_top_image" class="draggable">
         <li class="fa fa-refresh clickable btn btn-default" id="refresh_button" title="' . gettext('Refresh') . '"></li>
-        <li class="fa fa-file-text-o clickable btn btn-default" Title="' . gettext('New Document') . '" id="new_page_button" href="$current_page_path"></li>
+        <li class="fa fa-file-text-o clickable btn btn-default" Title="' . gettext('New Document') . '" id="new_page_button" href="'.$current_page_path.'"></li>
     		<li class="fa fa-save clickable btn btn-default" id="save" title="' . gettext('Save') . '"></li>
-        <li class="fa fa-eraser clickable btn btn-default" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="$current_page_path"></li>
+        <li class="fa fa-eraser clickable btn btn-default" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="'.$current_page_path.'"></li>
         <li class="fa fa-trash-o clickable btn btn-default" id="delete_button" title="' . gettext('Delete') . '"></li>
         <li class="fa fa-remove clickable btn btn-default" id="remove_row_button" title="' . gettext('Remove') . '"></li>
         <li class="fa fa-search-plus clickable query_mode_icon btn btn-default" id="start_query_mode" title="' . gettext('Query Mode') . '"></li>
@@ -391,9 +391,9 @@ class inoform {
   echo '
 			 <ul id="form_top_image" class="draggable">
         <li class="fa fa-refresh clickable" id="refresh_button" title="' . gettext('Refresh') . '"></li>
-        <li><a class="fa fa-file-text-o clickable" Title="' . gettext('New Document') . '" id="new_page_button" href="$current_page_path"></a></li>
+        <li><a class="fa fa-file-text-o clickable" Title="' . gettext('New Document') . '" id="new_page_button" href="'.$current_page_path.'"></a></li>
     		<li class="fa fa-save clickable" id="save" title="' . gettext('Save') . '"></li>
-        <li><a class="fa fa-eraser clickable" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="$current_page_path"></a></li>
+        <li><a class="fa fa-eraser clickable" Title="' . gettext('Clear All, Quick Entry') . '" id="new_object_button" href="'.$current_page_path.'"></a></li>
         <li class="fa fa-trash-o clickable" id="delete_button" title="' . gettext('Delete') . '"></li>
 </ul>
 ';
@@ -404,10 +404,10 @@ class inoform {
   $current_page_path = 'form.php?mode=9&amp;class_name=' . $class;
   echo '
 			 <ul id="form_top_image" class="draggable">
-        <li class="fa fa-file-text-o clickable ino-btn2" Title="' . gettext('New Document') . '" id="new_page_button" href="$current_page_path" style="background-color: $si->heading_color"></li>
+        <li class="fa fa-file-text-o clickable ino-btn2" Title="' . gettext('New Document') . '" id="new_page_button" href="'.$current_page_path.'" style="background-color: $si->heading_color"></li>
         <li class="fa fa-trash-o clickable ino-btn2" id="delete_button" title="' . gettext('Delete') . '" style="background-color: $si->heading_color"></li>
 </ul>
-';//Added gettext to translate 20160927 Sytech
+';
  }
 
  private function _convert_id($id = "") {
@@ -461,8 +461,8 @@ class inoform {
 							 <li><input type="file" id="attachments" class="attachments" value="" name="uploaded_file[]" multiple/></li>
               <li><input type="hidden" class="hidden display_type" name="display_type[]" value="' . $display_type . '"/></li>
               <li><input type="hidden" class="hidden file_id ' . $name . '" name="' . $name . '[]" value="' . $value_file_id . '"/></li>
-							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">Upload</button></li>';
-  $stmt .= '<li role="button" class="delete_image btn btn-danger "  name="delete_image" data-extn_image_reference_id="'.$value_file_id.'">Delete Image</li>';
+							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">' . gettext('Upload') . '</button></li>';
+  $stmt .= '<li role="button" class="delete_image btn btn-danger "  name="delete_image" data-extn_image_reference_id="'.$value_file_id.'">' . gettext('Delete Image') . '</li>';
   $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
 							</ul>
 							<div class="uploaded_file_details"></div>
@@ -768,9 +768,9 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
         <ul class="column header_field address">';
   $add_field .= '<li><label>' . gettext('Address Name') . '</label>' . $f->text_field('addr_address_name', $default_add_name, '', '', '', 1) . '</li>';
   $add_field .= '<li><label>' . gettext('Phone') . '</label>' . $f->text_field('addr_phone', '') . '</li>';
-  $add_field .= '<li><label>' . gettext('eMail') . '</label>' . $f->text_field('addr_email', $email) . '</li>';
+  $add_field .= '<li><label>' . gettext('Email') . '</label>' . $f->text_field('addr_email', $email) . '</li>';
   $add_field .= '<li><label>' . gettext('Website') . '</label>' . $f->text_field('addr_website', '') . '</li>';
-  $add_field .= '<li><label>' . gettext('Coutry') . '</label>' . $f->text_field('addr_country', '') . '</li>';
+  $add_field .= '<li><label>' . gettext('Country') . '</label>' . $f->text_field('addr_country', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $f->text_field('addr_postal_code', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Default') . '</label>' . $f->checkBox_field('addr_default_cb', '') . '</li>';
   $add_field .= '<li><label>' . gettext('Usage Type') . '</label>' . $f->select_field_from_object('addr_usage_type', option_header::find_options_byName('ADDRESS_USAGE_TYPE'), 'option_line_code', 'option_line_value', '', 'usage_type') . '</li>';
@@ -794,14 +794,14 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
    }
   }
   $text_field = '<ul class="column header_field ' . $div_class . '">';
-  $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
+  $text_field .= '<li><label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   $field_class_name = $field_name . ' ' . $div_class;
   $text_field .= $this->val_field('address_name', $field_val, '15', '', $field_class_name, '', '', 'address', 'address_name');
   $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
   if ($show_all_fields) {
-   $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '15', '', 'country', '', 1) . '</li>';
-   $text_field .= '<li><label>Postal Code</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '15', '', 'postal_code', '', 1) . '</li>';
-   $text_field .= '<li><label>Details</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Country') . '</label>' . $this->text_field('xxcountry', $addr->country, '15', '', 'country', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '15', '', 'postal_code', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Details') . '</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
   }
   $text_field .= '<li>' . $this->hidden_field_withIdClass($field_name, $$class->$field_name, 'address_id') . '</li>';
   $text_field .= '</ul>';
@@ -823,15 +823,15 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   }
 
   $text_field = '<ul class="column header_field ' . $div_class . '">';
-  $text_field .= '<li><label>' . ucwords(str_replace('_', ' ', $field_name)) . '</label>';
+  $text_field .= '<li><label>' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   $text_field .= $this->hidden_field_withId($field_name, $$class_second->$field_name);
   $field_class_name = $field_name . ' ' . $div_class;
   $text_field .= $this->text_field('address_name', $field_val, '', '', $field_class_name, '', 1, '', $ttl);
   $text_field .= '<i class="fa fa-search address_id select_popup clickable"></i></li>';
   if ($show_all_fields) {
-   $text_field .= '<li><label>Country</label>' . $this->text_field('xxcountry', $addr->country, '', '', 'country', '', 1) . '</li>';
-   $text_field .= '<li><label>Postal Code</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '', '', 'postal_code', '', 1) . '</li>';
-   $text_field .= '<li><label>Details</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Country') . '</label>' . $this->text_field('xxcountry', $addr->country, '', '', 'country', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Postal Code') . '</label>' . $this->text_field('xxpostal_code', $addr->postal_code, '', '', 'postal_code', '', 1) . '</li>';
+   $text_field .= '<li><label>' . gettext('Details') . '</label>' . $this->text_area('xxaddress', $addr->address, '3', '', 'address', '', 1) . '</li>';
   }
   $text_field .= '</ul>';
 
@@ -877,7 +877,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $contact_stmt = '<div>
       <ul id="new_contact_reference">
        <li class="new_object1">
-        <label>Associate Contact </label> ';
+        <label>' . gettext('Associate Contact') .' </label> ';
   $contact_stmt .= $this->hidden_field_withCLass('extn_contact_id_new', '', 'extn_contact_id');
   $contact_stmt .= $this->val_field('contact_name_new', '', '20', '', 'select_contact contact_name', '', '', 'extn_contact', 'contact_name');
   $contact_stmt .='<i class="extn_contact_id select_popup clickable fa fa-search" data-class_name="extn_contact"></i> </li>
@@ -1043,7 +1043,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
 
  public function l_text_field_d_withSearch($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
+  $search_class = gettext('Search'). ' ' . gettext(ucwords(str_replace('_', ' ', $class)));
   $search_class_gt = gettext($search_class);
   echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
                                                                   title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
@@ -1057,16 +1057,16 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $class = $class_o;
   $$class = $$class_o;
   echo '</div></div></span>';
-  echo '<label class="big_popover">' . gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
+  echo '<label class="big_popover">' . gettext(trim(ucwords(str_replace('_', ' ', $field_name)))) . '</label>';
   $div_class .= 'search-text-field';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class);
  }
 
  public function l_text_field_dr_withSearch($field_name, $div_class = "") {
   global $readonly, $class, $$class;
-  $search_class = ucwords('Search ' . str_replace('_', ' ', $class));
+  $search_class = gettext('Search'). ' ' . gettext(ucwords(str_replace('_', ' ', $class)));
   $search_class_gt = gettext($search_class);
-  echo '<label class="big_popover">' . gettext(ucwords(str_replace(['_', 'id'], [' ', ''], $field_name))) . '</label>';
+  echo '<label class="big_popover">' . gettext(trim(ucwords(str_replace(['_', 'id'], [' ', ''], $field_name)))) . '</label>';
   echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
                                                                   title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .
@@ -2085,7 +2085,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
  }
 
  public function l_select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
-  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>' ;
+  echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
   echo $this->select_field_from_array($name, $array, $value, $id, $class_name, $required, $readonly, $disabled, $convertToText);
  }
 
@@ -2342,8 +2342,8 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
 
   $element_text_field = "<Select name=\"status[]\" class=\"status select\" $readonly >";
   $element_text_field .= "<option value=\"\" ></option>";
-  $element_text_field .= "<option value=\"ACTIVE\" $active > Active </option>";
-  $element_text_field .= "<option value=\"INACTIVE\" $inactive > Inactive </option>";
+  $element_text_field .= "<option value=\"ACTIVE\" $active > " . gettext('Active') . " </option>";
+  $element_text_field .= "<option value=\"INACTIVE\" $inactive > " . gettext('Inactive') . " </option>";
   $element_text_field .= "</select>";
   return $element_text_field;
  }
@@ -2436,7 +2436,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
     }
     $stmt_rtn .= '</tbody>';
    } else {
-    $stmt_rtn .= 'No Records Found!';
+    $stmt_rtn .= gettext('No Records Found!');
    }
    $stmt_rtn .= '</table> </div>';
   }

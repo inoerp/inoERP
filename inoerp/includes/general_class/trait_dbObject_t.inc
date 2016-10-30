@@ -1308,6 +1308,13 @@ trait dbObject_t {
   }
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
+dbObject_t::staticVar_init('download_format');
 ?>

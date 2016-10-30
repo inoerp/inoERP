@@ -73,7 +73,7 @@ inoERP
          <th><?php echo gettext('Resource') ?></th>
          <th><?php echo gettext('Efficiency') ?>%</th>
          <th><?php echo gettext('Utilization') ?>%</th>
-         <th><?php echo gettext('No of Units') ?></th>
+         <th><?php echo gettext('No Of Units') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody bom_dept_res_assignment_values" >

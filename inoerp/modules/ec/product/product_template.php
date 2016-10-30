@@ -1,4 +1,4 @@
-<form method="post" id="ec_product"  name="ec_product"><span class="heading">eCommerce Product </span>
+<form method="post" id="ec_product"  name="ec_product"><span class="heading"><?php echo gettext('eCommerce Product') ?> </span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -73,7 +73,7 @@
    </div>
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"> Product Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"> <?php echo gettext('Product Details') ?> </span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Price') ?></a></li>
@@ -111,7 +111,7 @@
      <ul class='column four_column'>
       <li><a class="popup popup-form view-catalog btn btn-default btn-lg" id="product_catalog" role="button"
              href="form.php?class_name=sys_catalog_value&mode=9&window_type=popup&reference_table=ec_product&reference_id=<?php echo $$class->ec_product_id ?>">
-        <i class="fa fa-list-alt"></i> Add/Update Catalog Values</a>
+        <i class="fa fa-list-alt"></i> <?php echo gettext('Add/Update Catalog Values') ?></a>
       </li>
      </ul>
      <!--                end of tab2 div three_column-->

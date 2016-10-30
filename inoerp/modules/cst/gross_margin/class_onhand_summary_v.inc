@@ -65,7 +65,7 @@ class onhand_summary_v extends dbObject {
  public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
  public $search_groupBy = [
   'locator' => 'Locator',
-  'subinventory' => 'Sub Inventory',
+  'subinventory' => 'Subinventory',
   'org_id' => 'Inventory Org',
  ];
  public $onhand_id;
@@ -144,7 +144,14 @@ GROUP BY onhand.item_id_m, onhand.org_id
   return !empty($result) ? array_pop($result) : false;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of po_detail class
+cst_gross_margin_v::staticVar_init('search_groupBy');
 ?>

@@ -80,7 +80,7 @@
         <li><label></label><a  role="button" class="quick_select button btn btn-info" target="_blank" 
                                 href="<?php echo HOME_URL ?>form.php?class_name=po_requisition_all_v&amp;router=pdf_print&amp;po_requisition_header_id=<?php echo!(empty($$class->po_requisition_header_id)) ? $$class->po_requisition_header_id : ""; ?>" >
           <?php echo gettext('Print Requisition') ?></a></li>
-        <li><label>Action</label>
+        <li><label><?php echo gettext('Action') ?></label>
          <?php
          echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly, $action_readonly)
          ?>
@@ -214,7 +214,7 @@
                   <tr>
                    <th><?php echo gettext('Order Type') ?></th>
                    <th><?php echo gettext('Order Number') ?></th>
-                   <th><?php echo gettext('Sub inventory') ?></th>
+                   <th><?php echo gettext('Subinventory') ?></th>
                    <th><?php echo gettext('Locator') ?></th>
                    <th><?php echo gettext('Requestor') ?></th>
                    <th><?php echo gettext('IR Receipt Status') ?></th>
@@ -277,7 +277,7 @@
                 </table>
                </div>
                <div id="tabsDetail-4-<?php echo $count ?>" class="tabContent">
-                <table class="form form_detail_data_table detail"><lable>Quantities</lable>
+                <table class="form form_detail_data_table detail"><label><?php echo gettext('Quantities') ?></label>
                  <thead>
                   <tr>
                    <th><?php echo gettext('Received') ?></th>

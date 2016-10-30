@@ -27,7 +27,7 @@
         <li><?php $f->l_text_field_dr('total_no_of_items'); ?></li>
         <li><?php $f->l_text_field_dr('total_value'); ?></li>
         <li><?php $f->l_select_field_from_array('assignment_action', inv_abc_assignment_header::$assignment_action_a, ''); ?></li>
-        </u>
+        </ul>
       </div>
       <div id="data_table">
        <table class="form_table">

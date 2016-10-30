@@ -4,23 +4,23 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form  method="post" id="prj_event_type"  name="prj_event_type">
-    <div id ="form_line" class="form_line"><span class="heading">Event Type </span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Event Type') ?> </span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Basics</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">
         <table class="form_table">
          <thead> 
           <tr>
-           <th>Action</th>
-           <th>Event Type</th>
-           <th>Event Class</th>
-           <th>Revenue Category</th>
-           <th>Description</th>
-           <th>Eff. From</th>
-           <th>Eff. To</th>
+           <th><?php echo gettext('Action') ?></th>
+           <th><?php echo gettext('Event Type') ?></th>
+           <th><?php echo gettext('Event Class') ?></th>
+           <th><?php echo gettext('Revenue Category') ?></th>
+           <th><?php echo gettext('Description') ?></th>
+           <th><?php echo gettext('Eff. From') ?></th>
+           <th><?php echo gettext('Eff. To') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

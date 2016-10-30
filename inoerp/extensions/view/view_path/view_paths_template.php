@@ -30,7 +30,7 @@
 
         <?php
         if (!empty($total_count)) {
-         echo '<h3>' . gettext('Total records') . ' : ' . $total_count . '</h3>';
+         echo '<h3>' . gettext('Total Records') . ' : ' . $total_count . '</h3>';
         }
         ?>
         <div id="scrollElement">
@@ -48,7 +48,7 @@
          <li> <input type="submit" class="download button excel" value="<?php echo gettext('All Records'); ?>" form="download_all"></li>
          <li> <input type="button" class="download button print" value="<?php echo gettext('Print'); ?>"></li>
          <li id="export_excel_searchResult" class="clickable" title="<?php echo gettext('Export to Excel'); ?>"><i class="fa fa-file-excel-o"></i></li>
-         <li id="print_searchResult" class=" print clickable" title="<?php echo gettext('Print'); ?>><i class="fa fa-print"></i></li>
+         <li id="print_searchResult" class=" print clickable" title="<?php echo gettext('Print'); ?>"><i class="fa fa-print"></i></li>
         </ul>
 
         <?php

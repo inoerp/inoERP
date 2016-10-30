@@ -54,7 +54,7 @@ $f = new inoform();
            <li><?php $f->l_text_field_dm('last_name'); ?></li>
            <li><?php $f->l_text_field_dm('username'); ?></li>
            <li><?php $f->l_email_field_dm('email'); ?></li>
-           <li><label>Password</label><input type="password" name="enteredPassword[]" maxlength="50" id="enteredPassword" size="30" >
+           <li><label><?php echo gettext('Password'); ?></label><input type="password" name="enteredPassword[]" maxlength="50" id="enteredPassword" size="30" >
             <!--<span class="hint">(Min 8 letter, 1 small, 1 CAP, 1 <i>Special</i>)</span>
             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" 
             -->
@@ -79,8 +79,8 @@ $f = new inoform();
            <input type="text" name="username" maxlength="50" size="30" id="username" placeholder="<?php echo gettext('example') . ' : ' . gettext(ucwords('sachin.god')); ?>"
                   value="<?php echo ($user_password_reset->username); ?>">
           </li> 
-          <li><label></label> Or </li>
-          <li><label>eMail</label>
+          <li><label></label> <?php echo gettext('Or') ?> </li>
+          <li><label><?php echo gettext('Email') ?></label>
            <input type="email" name="email" maxlength="50" size="30" id="reset_password_email" placeholder="abc@xyz.xom"
                   value="<?php echo ($user_password_reset->email); ?>"> 
           </li> 

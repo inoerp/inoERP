@@ -292,7 +292,7 @@ inoERP
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Description') ?></th>
         <th><?php echo gettext('Supply Source') ?></th>
-        <th><?php echo gettext('Destination Typet') ?>#</th>
+        <th><?php echo gettext('Destination Type') ?>#</th>
         <th><?php echo gettext('Picked Quantity') ?>#</th>
         <th><?php echo gettext('Shipped /Received Quantity') ?>#</th>
         <th><?php echo gettext('Ref Doc Type') ?></th>
@@ -333,15 +333,15 @@ inoERP
     <div id="tabsLine-6" class="scrollElement tabContent">
      <table class="form_line_data_table">
       <thead> 
-       <tr><th>Seq#</th>
-        <th>Invoiced Qty</th>
-        <th>ar_transaction_header_id </th>
-        <th>ar_transaction_line_id</th>
-        <th>Invoice/CM # </th>
-        <th>Process Id </th>
-        <th>View Process</th>
-        <th>Action</th>
-        <th>Reservation</th>
+       <tr><th><?php echo gettext('Seq') ?>#</th>
+        <th><?php echo gettext('Invoiced Qty') ?></th>
+        <th><?php echo gettext('ar_transaction_header_id') ?> </th>
+        <th><?php echo gettext('ar_transaction_line_id') ?></th>
+        <th><?php echo gettext('Invoice/CM') ?> # </th>
+        <th><?php echo gettext('Process Id') ?> </th>
+        <th><?php echo gettext('View Process') ?></th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Reservation') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -11,28 +11,28 @@
       <?php  echo (!empty($show_message)) ? $show_message : "";      ?> 
       <!--    End of place for showing error messages-->
       <div id ="form_header">
-       <form action=""  method="post" id="hr_leave_transaction_header"  name="hr_leave_transaction_header"><span class="heading">Leave Application </span>
+       <form action=""  method="post" id="hr_leave_transaction_header"  name="hr_leave_transaction_header"><span class="heading"><?php echo gettext('Leave Application') ?> </span>
         <div id="tabsHeader">
          <ul class="tabMain">
-          <li><a href="#tabsHeader-1">Basic Info</a></li>
+          <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
          </ul>
          <div class="tabContainer">
           <div id="tabsHeader-1" class="tabContent">
            <div class="large_shadow_box"> 
             <ul class="column four_column">
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_leave_transaction_header_id select_popup clickable">
-               Header Id : </label><?php $f->text_field_dsr('hr_leave_transaction_header_id') ?>
+               <?php echo gettext('Header Id') ?> : </label><?php $f->text_field_dsr('hr_leave_transaction_header_id') ?>
               <a name="show" href="form.php?class_name=hr_leave_transaction_header_id" class="show hr_leave_transaction_header_id"><img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
              </li>
              <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-               Employee Name : </label><?php $f->text_field_d('employee_name'); ?>
+               <?php echo gettext('Employee Name') ?> : </label><?php $f->text_field_d('employee_name'); ?>
               <?php echo $f->hidden_field_withId('employee_id', $$class->employee_id); ?>
              </li>
-             <li><label>  Identification # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
-             <li><label>  Requested Date : </label><?php echo $f->date_fieldFromToday('requsted_date', $$class->requsted_date); ?>  </li>
-             <li><label>  Approved Date : </label><?php  echo $f->date_fieldFromToday('approved_date', $$class->approved_date, 1); ?>  </li>
-             <li><label>  Approved By : </label><?php $f->text_field_dr('approved_by'); ?>  </li>
-             <li><label>  Leave Status : </label><?php $f->text_field_dr('leave_status'); ?>  </li>
+             <li><label>  <?php echo gettext('Identification') ?> # : </label><?php $f->text_field_dr('identification_id'); ?>  </li>
+             <li><label>  <?php echo gettext('Requested Date') ?> : </label><?php echo $f->date_fieldFromToday('requsted_date', $$class->requsted_date); ?>  </li>
+             <li><label>  <?php echo gettext('Approved Date') ?> : </label><?php  echo $f->date_fieldFromToday('approved_date', $$class->approved_date, 1); ?>  </li>
+             <li><label>  <?php echo gettext('Approved By') ?> : </label><?php $f->text_field_dr('approved_by'); ?>  </li>
+             <li><label>  <?php echo gettext('Leave Status') ?> : </label><?php $f->text_field_dr('leave_status'); ?>  </li>
             </ul>
            </div>
           </div>
@@ -41,24 +41,24 @@
        </form>
       </div>
 
-      <div id="form_line" class="form_line"><span class="heading">Dates </span>
+      <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Dates') ?> </span>
        <form action=""  method="post" id="hr_leave_transaction_line"  name="hr_leave_transaction_line">
         <div id="tabsLine">
          <ul class="tabMain">
-          <li><a href="#tabsLine-1">Main</a></li>
+          <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
          </ul>
          <div class="tabContainer">
           <div id="tabsLine-1" class="tabContent">
            <table class="form_line_data_table">
             <thead> 
              <tr>
-              <th>Action</th>
-              <th>Leave Type</th>
-              <th>From Date</th>
-              <th>To Date</th>
-              <th>Reason</th>
-              <th>Contact</th>
-              <th>Number Of Days</th>
+              <th><?php echo gettext('Action') ?></th>
+              <th><?php echo gettext('Leave Type') ?></th>
+              <th><?php echo gettext('From Date') ?></th>
+              <th><?php echo gettext('To Date') ?></th>
+              <th><?php echo gettext('Reason') ?></th>
+              <th><?php echo gettext('Contact') ?></th>
+              <th><?php echo gettext('Number Of Days') ?></th>
              </tr>
             </thead>
             <tbody class="form_data_line_tbody">
@@ -69,8 +69,8 @@
                <tr class="hr_leave_transaction_line<?php echo $count ?>">
                 <td>    
                  <ul class="inline_action">
-                  <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                  <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                  <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('add new line') ?>" /></li>
+                  <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('remove this line') ?>" /> </li>
                   <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->hr_leave_transaction_line_id); ?>"></li>           
                   <li><?php echo form::hidden_field('hr_leave_transaction_header_id', $hr_leave_transaction_header->hr_leave_transaction_header_id); ?></li>
                  </ul>

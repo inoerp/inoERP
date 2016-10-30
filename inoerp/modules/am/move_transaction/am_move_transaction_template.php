@@ -41,7 +41,7 @@ inoERP
    </div>
   </div>
  </div>
- <div id ="form_line" class="form_line"><span class="heading"> Operation Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"> <?php echo gettext('Operation Details') ?> </span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Operation') ?></a></li>
@@ -100,7 +100,7 @@ inoERP
 
       <div class="panel panel-success">
        <div class="panel-heading">
-        <h3 class="panel-title">Move Material</h3>
+        <h3 class="panel-title"><?php echo gettext('Move Material') ?></h3>
        </div>
        <div class="panel-body">
         <ul class="column header_field"> 
@@ -158,7 +158,7 @@ inoERP
         <th><?php echo gettext('Required') ?></th>
         <th><?php echo gettext('Issued') ?></th>
         <th><?php echo gettext('Supply Type') ?></th>
-        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Subinventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>

@@ -212,12 +212,12 @@
      <div id="tabsLine-3" class="tabContent">
       <ul class='column four_column'>
        <li>      <button type="button" class="btn btn-primary btn-lg disabled">
-         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Activity Meter
+         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <?php echo gettext('Activity Meter') ?>
         </button>
        </li>
 
        <li>      <button type="button" class="btn btn-primary btn-lg disabled">
-         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Maintenance Schedules
+         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <?php echo gettext('Maintenance Schedules') ?>
         </button>
        </li>
 

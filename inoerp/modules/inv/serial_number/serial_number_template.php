@@ -104,8 +104,8 @@
       <div id ="form_line" class="form_line">
        <div id="tabsDetail">
         <ul class="tabMain">
-         <li><a href="#tabsDetail-1">Info-1 </a></li>
-         <li><a href="#tabsDetail-2">Info-2 </a></li>
+         <li><a href="#tabsDetail-1"><?php echo gettext('Info-1') ?> </a></li>
+         <li><a href="#tabsDetail-2"><?php echo gettext('Info-2') ?> </a></li>
         </ul>
         <div class="tabContainer"> 
          <div id="tabsDetail-1" class="tabContent">
@@ -117,7 +117,7 @@
              <th><?php echo gettext('Item Description') ?></th>
              <th><?php echo gettext('Org Id') ?></th>
              <th><?php echo gettext('Transaction Type') ?></th>
-             <th><?php echo gettext('From Sub Inventory') ?></th>
+             <th><?php echo gettext('From Subinventory') ?></th>
              <th><?php echo gettext('From Locator') ?></th>
              <th><?php echo gettext('Transaction Details') ?></th>
             </tr>
@@ -136,7 +136,7 @@
               <td><?php $f->text_field_wid2r('transaction_type'); ?></td>
               <td><?php $f->text_field_wid2r('from_subinventory'); ?></td>
               <td><?php $f->text_field_wid2r('from_locator'); ?></td>
-              <td><a class="button" href="form.php?class_name=inv_transaction&mode=2&inv_transaction_id=<?php echo $$class_second->inv_transaction_id; ?>">View Inv Transaction</a></td>
+              <td><a class="button" href="form.php?class_name=inv_transaction&mode=2&inv_transaction_id=<?php echo $$class_second->inv_transaction_id; ?>"><?php echo gettext('View Inv Transaction') ?></a></td>
              </tr>
              <?php
              $count = $count + 1;
@@ -154,9 +154,9 @@
              <th><?php echo gettext('Transaction Id') ?></th>
              <th><?php echo gettext('Transaction Type Id') ?></th>
              <th><?php echo gettext('From SubInv Id') ?></th>
-             <th><?php echo gettext('From Locator Id ') ?></th>
+             <th><?php echo gettext('From Locator Id') ?> </th>
              <th><?php echo gettext('To SubInv Id') ?></th>
-             <th><?php echo gettext('To Locator Id ') ?></th>
+             <th><?php echo gettext('To Locator Id') ?> </th>
             </tr>
            </thead>
            <tbody class="form_data_line_tbody inv_serial_transaction_entries_values" >
@@ -198,7 +198,7 @@
     <div id="tabsLine-4" class="tabContent">
      <div> 
       <ul> 
-       <li class="simple_box parent full_width"><label>Parent </label> 
+       <li class="simple_box parent full_width"><label><?php echo gettext('Parent') ?> </label> 
         <?php
         if (!empty($parent_serial)) {
          echo "Serial Number : <a class='button' href=\"form.php?class_name=inv_serial_number&mode=9&inv_serial_number_id=$parent_serial->inv_serial_number_id\"> $parent_serial->serial_number </a> & Item Id :  $parent_serial->item_id_m <br>";
@@ -207,10 +207,10 @@
         }
         ?>            
        </li>
-       <li class="simple_box current full_width"><label>Current </label> 
+       <li class="simple_box current full_width"><label><?php echo gettext('Current') ?> </label> 
         <?php echo!empty($$class->serial_number) ? " Serial Number : " . $$class->serial_number . "& Item Id :  " . $$class->item_id_m : 'No Serial'; ?>            
        </li>
-       <li class="simple_box child full_width"><label>Child </label> 
+       <li class="simple_box child full_width"><label><?php echo gettext('Child') ?> </label> 
         <?php
         if (!empty($child_serial)) {
          foreach ($child_serial as $child) {

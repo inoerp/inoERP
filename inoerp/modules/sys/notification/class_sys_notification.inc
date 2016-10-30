@@ -249,7 +249,7 @@ class sys_notification extends dbObject {
   } else {
    $stmt .= "<li>No Open Notification </li>";
   }
-  $stmt .= "<li><a class='all_notification link' href='search.php?class_name=sys_notification_user'>View All Notifications</a></li>";
+  $stmt .= "<li><a class='all_notification link' href='search.php?class_name=sys_notification_user'>" . gettext('View All Notifications') . "</a></li>";
   $stmt .= '</ul></div>';
   return $stmt;
  }

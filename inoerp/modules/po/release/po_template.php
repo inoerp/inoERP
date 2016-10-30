@@ -114,11 +114,11 @@
     <div id="tabsHeader-6" class="tabContent">
      <div> 
       <ul class="column four_column">
-       <li id="document_print"><label>Document Print : </label>
+       <li id="document_print"><label><?php echo gettext('Document Print') ?> : </label>
         <a class="button" target="_blank"
-           href="<?php echo HOME_URL ?>modules/po/po_print.php?po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" >Print PO</a>
+           href="<?php echo HOME_URL ?>modules/po/po_print.php?po_header_id=<?php echo!(empty($$class->po_header_id)) ? $$class->po_header_id : ""; ?>" ><?php echo gettext('Print PO') ?></a>
        </li>
-       <li><label>Action</label>
+       <li><label><?php echo gettext('Action') ?></label>
         <?php
         $action_readonly = ($$class->po_status == 'CLOSED') ? 1 : '';
         echo $f->select_field_from_array('action', $$class->action_a, '', 'action', '', '', $readonly, $action_readonly)
@@ -271,7 +271,7 @@
                 <thead>
                  <tr>
                   <th><?php echo gettext('Seq') ?>#</th>
-                  <th><?php echo gettext('Sub inventory') ?></th>
+                  <th><?php echo gettext('Subinventory') ?></th>
                   <th><?php echo gettext('Locator') ?></th>
                   <th><?php echo gettext('Requestor') ?></th>
                   <th><?php echo gettext('Invoice Match Type') ?></th>
@@ -331,7 +331,7 @@
                </table>
               </div>
               <div id="tabsDetail-4-<?php echo $count ?>" class="tabContent">
-               <table class="form form_detail_data_table detail"><lable>Quantities</lable>
+               <table class="form form_detail_data_table detail"><label><?php echo gettext('Quantities') ?></label>
                 <thead>
                  <tr>
                   <th><?php echo gettext('Seq') ?>#</th>

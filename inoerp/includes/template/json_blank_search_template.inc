@@ -22,7 +22,7 @@
       ?>
       <div id="searchResultMessages" >
        <ul class="inline_list heading">
-        <li>Download All Data in </li>
+        <li><?php echo gettext('Download All Data in') ?> </li>
         <li>
          <!--download page creation for all records-->
          <?php
@@ -34,7 +34,7 @@
         </li>
         <li id="export_excel_searchResult" class="clickable" title="<?php echo gettext('Export to Excel')?>"><i class="fa fa-file-excel-o"></i></li>
         <li id="print_searchResult" class="print clickable" title="<?php echo gettext('Print')?>"><i class="fa fa-print"></i></li>
-        <li><button class="btn btn-primary" type="button"><?php echo gettext('Total records')?> <span class="badge"><?php echo $total_count; ?></span></button></li>
+        <li><button class="btn btn-primary" type="button"><?php echo gettext('Total Records')?> <span class="badge"><?php echo $total_count; ?></span></button></li>
        </ul>
       </div>
      <?php } ?>

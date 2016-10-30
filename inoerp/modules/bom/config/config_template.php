@@ -74,7 +74,7 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('BOMLine Id') ?></th>
         <th><?php echo gettext('BOM Sequence') ?>#</th>
-        <th><?php echo gettext('Routing Sequenceg') ?></th>
+        <th><?php echo gettext('Routing Sequence') ?></th>
         <th><?php echo gettext('Item Id') ?></th>
         <th><?php echo gettext('Item Number') ?></th>
         <th><?php echo gettext('Revision') ?></th>
@@ -138,7 +138,7 @@ inoERP
         <th><?php echo gettext('Planning') ?>%</th>
         <th><?php echo gettext('Yield') ?></th>
         <th><?php echo gettext('WIP Supply Type') ?>#</th>
-        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Subinventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>

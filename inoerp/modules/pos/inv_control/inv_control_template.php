@@ -10,7 +10,7 @@
     </li>
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">heading </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Heading') ?> </span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>

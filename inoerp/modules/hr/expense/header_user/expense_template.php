@@ -159,7 +159,7 @@ inoERP
       <thead> 
        <tr>
         <th><?php echo gettext('Seq') ?>#</th>
-        <th><?php echo gettext('Locaion') ?></th>
+        <th><?php echo gettext('Location') ?></th>
         <th><?php echo gettext('Daily Rate') ?></th>
         <th><?php echo gettext('No Of Days') ?></th>
         <th><?php echo gettext('Mileage UOM') ?></th>

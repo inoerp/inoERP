@@ -87,7 +87,14 @@ class prj_rate_schedule_line extends dbObject {
   return $lines;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of path class
+prj_rate_schedule_line::staticVar_init('resource_type_a');
 ?>

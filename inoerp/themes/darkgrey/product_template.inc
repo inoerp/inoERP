@@ -153,7 +153,7 @@
     <div class="col-md-8">
       <div class="dropdown">
        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-        <i class='fa fa-th'></i> Browse By Category
+        <i class='fa fa-th'></i> <?php echo gettext('Browse By Category'); ?>
        </button>
        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
         <li role="presentation"><?php echo ec_product::category_menu(); ?></li>
@@ -161,7 +161,7 @@
       </div>
 
     </div><!-- end columns --><!-- end columns -->
-    <div class="col-md-2"><a title="View Cart" href="<?php echo HOME_URL ?>?dtype=product&class_name=ec_user_cart">
+    <div class="col-md-2"><a title="<?php echo gettext('View Cart'); ?>" href="<?php echo HOME_URL ?>?dtype=product&class_name=ec_user_cart">
       <i class="fa fa-white fa-2x fa-shopping-cart clickable"></i><span id="no-of-cart-items" class="badge"> <?php echo ino_noOfItems_inCart(); ?> </span> </a></div>
     <div class="col-md-2">
      <div class="topmenu">
@@ -210,13 +210,13 @@
      </div><!-- end navbar-header -->
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
       <ul class="nav nav-pills">
-       <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-       <li><a href="http://inoideas.org/content/demo" >DEMO <div class="arrow-up"></div></a></li>
-       <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
-       <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
-       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-       <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+       <li><a href="<?php echo HOME_URL; ?>"><?php echo gettext('Home'); ?> <div class="arrow-up"></div></a></li>
+       <li><a href="http://inoideas.org/content/demo" ><?php echo gettext('Demo'); ?> <div class="arrow-up"></div></a></li>
+       <li><a href="https://github.com/inoerp/inoERP" ><?php echo gettext('Download'); ?> <div class="arrow-up"></div></a></li>
+       <li class="active"><a href="<?php echo HOME_URL; ?>content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> <?php echo gettext('Ask a Question'); ?> <div class="arrow-up"></div></a></li>
+       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30"><?php echo gettext('Documentation'); ?> <div class="arrow-up"></div></a></li><!-- end standard drop down -->
+       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1"><?php echo gettext('Forum'); ?> <div class="arrow-up"></div></a></li>
+       <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47"><?php echo gettext('About'); ?> <div class="arrow-up"></div></a> </li><!-- end drop down -->
       </ul><!-- end navbar-nav -->
      </div><!-- #navbar-collapse-1 -->			
     </nav><!-- end navbar yamm navbar-default -->
@@ -315,11 +315,11 @@
     <div class="col-lg-7 col-md-6 col-sm-12 clearfix">
      <div class="footer-menu">
       <ul class="menu">
-       <li class="active"><a href="#">Terms of Use</a></li>
-       <li><a href="#">Site Maps</a></li>
-       <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
-       <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
-       <li><a href="#">Cookie Preferences</a></li>
+       <li class="active"><a href="#"><?php echo gettext('Terms of Use'); ?></a></li>
+       <li><a href="#"><?php echo gettext('Site Maps'); ?></a></li>
+       <li><a href="https://github.com/inoerp/inoERP/releases"><?php echo gettext('Releases'); ?></a></li>
+       <li><a href="https://www.mozilla.org/MPL/2.0/"><?php echo gettext('MPL 2'); ?></a></li>
+       <li><a href="#"><?php echo gettext('Cookie Preferences'); ?></a></li>
 
       </ul>
      </div>

@@ -76,7 +76,7 @@
      ?>
      <?php if ($show_header_links) { ?>
       <!--       <div class="social-icons">
-              <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> ERP Dashboard </a></span>
+              <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="<?php //echo gettext('ERP Dashboard'); ?>"> <?php //echo gettext('ERP Dashboard'); ?> </a></span>
              </div> end social icons -->
      <?php } ?>
     </div>

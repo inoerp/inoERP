@@ -110,7 +110,7 @@ inoERP
         <th><?php echo gettext('Release Method') ?></th>
         <th><?php echo gettext('Min Order Qty') ?>#</th>
         <th><?php echo gettext('Lot Multiplier') ?></th>
-        <th><?php echo gettext('Country of Origin') ?></th>
+        <th><?php echo gettext('Country Of Origin') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

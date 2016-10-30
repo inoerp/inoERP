@@ -124,7 +124,14 @@ class pm_completion_transaction extends inv_transaction {
   }
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of inv_transaction class
+pm_completion_transaction::staticVar_init('transaction_type_id_a');
 ?>

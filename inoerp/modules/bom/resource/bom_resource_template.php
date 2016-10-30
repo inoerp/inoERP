@@ -95,7 +95,7 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Resource Cost Lines </span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Resource Cost Lines') ?> </span>
  <form   method="post" id="bom_resource_cost"  name="bom_resource_cost">
   <div id="tabsLine">
    <div class="tabContainer">

@@ -9,7 +9,7 @@
      <a name="show" href="form.php?class_name=ec_cart&<?php echo "mode=$mode"; ?>" class="show document_id ec_cart_id">
       <i class="fa fa-refresh"></i></a> 
     </div>
-    <div id ="form_line" class="ec_cart"><span class="heading">Product Details </span>
+    <div id ="form_line" class="ec_cart"><span class="heading"><?php echo gettext('Product Details') ?> </span>
      <div id="tabsLine">
       <ul class="tabMain">
        <li><a href="#tabsLine-1"><?php echo gettext('Current Cart') ?></a></li>

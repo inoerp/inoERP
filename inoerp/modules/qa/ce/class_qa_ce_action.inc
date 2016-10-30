@@ -29,8 +29,8 @@ class qa_ce_action extends dbObject {
   'UR_H' => 'User Range High',
   'SR_L' => 'Specification Range Low',
   'SR_H' => 'Specification Range High',
-  'RR_L' => 'Resonable Range Low',
-  'RR_L' => 'Resonable Range High',
+  'RR_L' => 'Reasonable Range Low',
+  'RR_H' => 'Reasonable Range High'
  ];
 //  data base variables as stored database column name
  public $field_a = [
@@ -72,7 +72,15 @@ class qa_ce_action extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of qa_ce_action class
+qa_ce_action::staticVar_init('comparison_a');
+qa_ce_action::staticVar_init('spec_value_a');
 ?>

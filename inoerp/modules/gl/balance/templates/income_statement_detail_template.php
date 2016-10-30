@@ -4,8 +4,8 @@
  <thead> 
   <tr>
    <th><?php echo gettext('Elements'); ?></th>
-   <th>As of <?php echo $current_period; ?></th>
-   <th>As of <?php echo $last_period; ?></th>
+   <th><?php echo gettext('As of') . ' ' . $current_period; ?></th>
+   <th><?php echo gettext('As of') . ' ' . $last_period; ?></th>
   </tr>
  </thead>
  <tbody>
@@ -48,7 +48,7 @@
   $total_income += $sum_amount_revn;
   ?>
   <tr class="label_three">
-   <td>Total Sales</td>
+   <td><?php echo gettext('Total Sales'); ?></td>
    <td><?php echo $sum_amount_revn ?></td>
    <td></td>
   </tr>

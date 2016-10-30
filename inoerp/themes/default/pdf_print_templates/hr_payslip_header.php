@@ -11,22 +11,22 @@
   <div class="full_page">
    <div class="half_page left header_info">
     <ul class="column header_field">
-     <li><label>Requisition Number : </label><?php echo $$class->po_requisition_number; ?> </li>
-     <li><label>Requisition Type : </label><?php echo $$class->po_requisition_type; ?> </li>
-     <li><label>Supplier Name : </label><?php echo $$class->supplier_name; ?> </li>
-     <li><label>Supplier Site : </label><?php echo $$class->supplier_site_name; ?> </li>
-     <li><label>Status : </label><?php echo $$class->requisition_status; ?> </li>
-     <li><label>Buyer : </label><?php echo $$class->buyer; ?> </li>
+     <li><label><?php echo gettext('Requisition Number') ?> : </label><?php echo $$class->po_requisition_number; ?> </li>
+     <li><label><?php echo gettext('Requisition Type') ?> : </label><?php echo $$class->po_requisition_type; ?> </li>
+     <li><label><?php echo gettext('Supplier Name') ?> : </label><?php echo $$class->supplier_name; ?> </li>
+     <li><label><?php echo gettext('Supplier Site') ?> : </label><?php echo $$class->supplier_site_name; ?> </li>
+     <li><label><?php echo gettext('Status') ?> : </label><?php echo $$class->requisition_status; ?> </li>
+     <li><label><?php echo gettext('Buyer') ?> : </label><?php echo $$class->buyer; ?> </li>
     </ul>
    </div>
    <div class="half_page right external_entiry_info">
     <ul class="column header_field">
-     <li><label>Currency : </label><?php echo $$class->currency; ?> </li>
-     <li><label>Header Amount: </label><?php echo $$class->header_amount; ?> </li>
-     <li><label>Payment Term : </label><?php echo $$class->payment_term; ?> </li>
+     <li><label><?php echo gettext('Currency') ?> : </label><?php echo $$class->currency; ?> </li>
+     <li><label><?php echo gettext('Header Amount') ?>: </label><?php echo $$class->header_amount; ?> </li>
+     <li><label><?php echo gettext('Payment Term') ?> : </label><?php echo $$class->payment_term; ?> </li>
      <li><label></label><?php echo $$class->payment_term_description; ?> </li>
-     <li><label>Rev Number : </label><?php echo $$class->rev_number; ?> </li>
-     <li><label>Description : </label><?php echo $$class->description; ?> </li>
+     <li><label><?php echo gettext('Rev Number') ?> : </label><?php echo $$class->rev_number; ?> </li>
+     <li><label><?php echo gettext('Description') ?> : </label><?php echo $$class->description; ?> </li>
     </ul>
    </div>
   </div>
@@ -36,15 +36,15 @@
    <table class="form_line_data_table">
     <thead> 
      <tr class="line_header">
-      <th>L-S #</th>
-      <th>Type</th>
-      <th>Item Number</th>
-      <th>Description</th>
-      <th>Unit Price</th>
-      <th>Line Quantity</th>
-      <th>Ship To Inv</th>
-      <th>Line Description</th>
-      <th>Need By Date</th>
+      <th><?php echo gettext('L-S') ?> #</th>
+      <th><?php echo gettext('Type') ?></th>
+      <th><?php echo gettext('Item Number') ?></th>
+      <th><?php echo gettext('Description') ?></th>
+      <th><?php echo gettext('Unit Price') ?></th>
+      <th><?php echo gettext('Line Quantity') ?></th>
+      <th><?php echo gettext('Ship To Inv') ?></th>
+      <th><?php echo gettext('Line Description') ?></th>
+      <th><?php echo gettext('Need By Date') ?></th>
      </tr>
     </thead>
     <tbody>

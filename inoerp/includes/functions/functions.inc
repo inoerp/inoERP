@@ -340,8 +340,11 @@ function getBreadCrumb($class_first) {
 	$form_bread_crum .= '<li title="' . gettext('Close This Form') . '" ><j  class="ajax-link ino-close-form clickable " ><i class="fa fa-remove"></i> </j></li>';
 	$form_bread_crum .= '<li title="' . gettext('Minimize This Form') . '" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable " ><i class="fa fa-minus"></i></j></li>';
 	$form_bread_crum .= "<li title=\"" . gettext('Navigate to') . ' ' . gettext('Dashboard') . "\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"><i class="fa fa-dashboard"></i> </a></li>';
-	$form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . gettext($module_description) . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>';
-
+	if ($module_description != null) {//The ino_user module_name is not listed in user_dashvoard_v::$icon_stmt_a, so due to $module_description being null, gettext retrieves garbage.
+	 $form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . gettext($module_description) . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>'; }
+	else {
+	 $form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . '' . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>';
+	}
 	$form_bread_crum .= '</ul>';
 	return $form_bread_crum;
  } else {
@@ -1616,7 +1619,7 @@ function search_item_id_m_to() {
 
 function search_item_number_from() {
  $stmt = '<input id="item_number_from" class="val_field textfield vf_select_item_number item_number item_number_from" 
-                type="text" data-toggle="tooltip" title="Select From Item Number" data-val_field="item" data-val_value="item_number" 
+                type="text" data-toggle="tooltip" title="' . gettetxt('Select From Item Number') . '" data-val_field="item" data-val_value="item_number" 
                 size="20" value="" name="item_number_from">
 <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
 //<input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
@@ -1625,7 +1628,7 @@ function search_item_number_from() {
 
 function search_item_number() {
  $stmt = '<input id="item_number" class="val_field textfield vf_select_item_number item_number" 
-                type="text" data-toggle="tooltip" title="Select From Item Number" data-val_field="item" data-val_value="item_number" 
+                type="text" data-toggle="tooltip" title="' . gettetxt('Select From Item Number') . '" data-val_field="item" data-val_value="item_number" 
                 size="20" value="" name="item_number">
 <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
  return $stmt;
@@ -1633,7 +1636,7 @@ function search_item_number() {
 
 function search_item_number_to() {
  $stmt = '<input id="item_number_to" class="val_field textfield vf_select_item_number item_number item_number_to" 
-                type="text" data-toggle="tooltip" title="Select Item Number To" data-val_field="item" data-val_value="item_number" 
+                type="text" data-toggle="tooltip" title="' . gettetxt('Select Item Number To') . '" data-val_field="item" data-val_value="item_number" 
                 size="20" value="" name="item_number_to">
 <i class="generic g_select_item_number select_popup clickable fa fa-search" data-class_name="item" style="display: inline-block;"></i>';
 // <input class="hidden popup_value item_id_m" type="hidden" name="item_id_m_from"> 
@@ -1713,20 +1716,20 @@ function execution_time($only_value = false) {
 function show_download_button($result_data) {
  $return_stmt = '<div id="searchResultMessages">';
  $return_stmt .='<ul class="inline_list"><li>';
- $return_stmt .='<h3>Total records : ' . count($result_data) . '</h3></li>';
+ $return_stmt .='<h3>' . gettext('Total Records') . ' : ' . count($result_data) . '</h3></li>';
  $return_stmt .= '<li>';
  $result_data_all = json_decode(json_encode($result_data), true);
  $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
  $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
- $return_stmt .= '<input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
-     <input type="radio" name="download_format" value="text_format">Text
-     <input type="radio" name="download_format" value="pdf_format">Pdf
-     <input type="radio" name="download_format" value="xml_format">XML
-     <input type="radio" name="download_format" value="worddoc_format">Word Doc
-     <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
+ $return_stmt .= '<input type="radio" name="download_format" checked="checked" value="excel_format">' . gettext('Excel') . ' 
+     <input type="radio" name="download_format" value="text_format">' . gettext('Text') . '
+     <input type="radio" name="download_format" value="pdf_format">' . gettext('Pdf') . '
+     <input type="radio" name="download_format" value="xml_format">' . gettext('XML') . '
+     <input type="radio" name="download_format" value="worddoc_format">' . gettext('Word Doc') . '
+     <input type="submit"  name="export_allResult" value="' . gettext('Download') . '" id="export_excel_allResult" class="clickable button"  >
     </form></li>';
- $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
-   <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>
+ $return_stmt .= '<li id="export_excel_searchResult" class="clickable" title="' . gettext('Export to Excel') . '"><i class="fa fa-file-excel-o"></i></li>
+   <li id="print_searchResult" class="print clickable" title="' . gettext('Print') . '"><i class="fa fa-print"></i></li>
   </ul>
  </div>';
  return $return_stmt;
@@ -1747,13 +1750,13 @@ function show_download_button_inSelectFormat($result_data_query, $total_count = 
  }
 
  $return_stmt .= $f->select_field_from_array('download_format', dbObject::$download_format, 'excel_format');
- $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="Download" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
+ $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="' . gettext('Download') . '" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
  $return_stmt .= '</form></li>';
- $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
-   <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>';
+ $return_stmt .= '<li id="export_excel_searchResult" class="clickable" title="' . gettext('Export to Excel') . '"><i class="fa fa-file-excel-o"></i></li>
+   <li id="print_searchResult" class="print clickable" title="' . gettext('Print') . '"><i class="fa fa-print"></i></li>';
  if (!empty($total_count)) {
-	$return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">' . $total_count . '</span></button></li>
-   <li><button class="btn btn-warning" type="button">Total Records <span class="badge">' . $total_count_all . '</span></button></li>';
+	$return_stmt .= '  <li><button class="btn btn-primary" type="button">' . gettext('Accessible Records') .'<span class="badge">' . $total_count . '</span></button></li>
+   <li><button class="btn btn-warning" type="button">' . gettext('Total Records') . ' ' .'<span class="badge">' . $total_count_all . '</span></button></li>';
  }
 
  $return_stmt .='</ul>
@@ -1782,13 +1785,13 @@ function xxshow_download_button_inSelectFormat($result_data, $total_count = 0, $
  $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
  $return_stmt .= '<input type="hidden"  name="data" value="' . base64_encode(serialize($result_data_all)) . '" >';
  $return_stmt .= $f->select_field_from_array('download_format', dbObject::$download_format, 'excel_format');
- $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="Download" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
+ $return_stmt .= '<input type="submit"  role="button" name="export_allResult" value="' . gettext('Download') . '" id="export_excel_allResult" class="clickable btn btn-sm btn-default"  >';
  $return_stmt .= '</form></li>';
- $return_stmt .= '<li id="export_excel_searchResult" class="clickable"><i class="fa fa-file-excel-o"></i></li>
-   <li id="print_searchResult" class="print clickable" title="Print"><i class="fa fa-print"></i></li>';
+ $return_stmt .= '<li id="export_excel_searchResult" class="clickable" title="' . gettext('Export to Excel') . '"><i class="fa fa-file-excel-o"></i></li>
+   <li id="print_searchResult" class="print clickable" title="' . gettext('Print') . '"><i class="fa fa-print"></i></li>';
  if (!empty($total_count)) {
-	$return_stmt .= '  <li><button class="btn btn-primary" type="button">Accessible Records<span class="badge">' . $total_count . '</span></button></li>
-   <li><button class="btn btn-warning" type="button">Total Records <span class="badge">' . $total_count_all . '</span></button></li>';
+	$return_stmt .= '  <li><button class="btn btn-primary" type="button">' . gettext('Accessible Records') .'<span class="badge">' . $total_count . '</span></button></li>
+   <li><button class="btn btn-warning" type="button">' . gettext('Total Records') . ' ' .'<span class="badge">' . $total_count_all . '</span></button></li>';
  }
 
  $return_stmt .='</ul>
@@ -2211,7 +2214,7 @@ function ino_recent_visits() {
 		$recent_visit .= '<li><a href="' . htmlspecialchars($v) . '"> Vsiti ' . $k . '</a>';
 	 }
 	}
-	$recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2"> View More ...</a>';
+	$recent_visit .= '<li class="view_all"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2"> ' . gettext('View More') . '...</a>';
 	$recent_visit .= '</ul>';
  }
  return $recent_visit;

@@ -48,9 +48,9 @@
        <li><label><?php echo gettext('Action') ?></label>
         <select name="transaction_action[]" class=" select  transaction_action" id="transaction_action" >
          <option value="" ></option>
-         <option value="CREATE_ACCOUNT" >Create Accounting</option>
-         <option value="ADD_LINES" >Add Receipt Lines</option>
-         <option value="PRINT_TRAVELLER" >Receipt Traveller</option>
+         <option value="CREATE_ACCOUNT" ><?php echo gettext('Create Accounting') ?></option>
+         <option value="ADD_LINES" ><?php echo gettext('Add Receipt Lines') ?></option>
+         <option value="PRINT_TRAVELLER" ><?php echo gettext('Receipt Traveller') ?></option>
         </select>
        </li>
       </ul>
@@ -62,7 +62,7 @@
  </div>
 
 </div>
-<div id="form_line" class="form_line"><span class="heading">RMA Receipt Lines</span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('RMA Receipt Lines') ?></span>
  <form action=""  method="post" id="po_site"  name="inv_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
@@ -127,7 +127,7 @@
         <th><?php echo gettext('Item Description') ?></th>
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('New Received Quantity') ?></th>
-        <th><?php echo gettext('Sub Inventory') ?></th>
+        <th><?php echo gettext('Subinventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
        </tr>
       </thead>
@@ -174,10 +174,10 @@
           ?> 
           <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>lot</legend>
+           <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Lot') ?></legend>
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-1"> Numbers</a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-1"> <?php echo gettext('Numbers') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-1" class="tabContent">
@@ -248,10 +248,10 @@
           ?> 
           <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend>Serial</legend>
+           <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Serial') ?></legend>
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-2-1"> Numbers</a></li>
+              <li class="tabLink"><a href="#tabsDetail-2-1"> <?php echo gettext('Numbers') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-2-1" class="tabContent">

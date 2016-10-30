@@ -9,7 +9,7 @@
    <div id="tabsHeader-1" class="tabContent">
     <ul class="column header_field">
      <li><label><i class="am_maintenance_schedule_id select_popup clickable fa fa-search"></i>
-       <?php echo gettext('Sehedule ID') ?></label><?php echo $f->text_field('am_maintenance_schedule_id', $maint_sch->am_maintenance_schedule_id, '', 'am_maintenance_schedule_id', '', '', 1) ?>
+       <?php echo gettext('Schedule Id') ?></label><?php echo $f->text_field('am_maintenance_schedule_id', $maint_sch->am_maintenance_schedule_id, '', 'am_maintenance_schedule_id', '', '', 1) ?>
       <a name="show" href="form.php?class_name=am_ms_meter_rule&<?php echo "mode=$mode"; ?>" class="show document_id am_maintenance_schedule_id"><i class="fa fa-refresh"></i></a> 
      </li>
      <li><?php $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $maint_sch->org_id, 'org_id', '', 1, 1); ?></li>

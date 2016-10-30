@@ -1,17 +1,17 @@
 <div id ="form_header">
  <div id="tabsHeader">
-  <form action="" method="post" id="user_header" name="user_header"><span class="heading">User Dashboard 
+  <form action="" method="post" id="user_header" name="user_header"><span class="heading"><?php echo gettext('User Dashboard') ; ?> 
     <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $user_id ?>" 
        class='fa fa-cog'></a>
    </span>
    <div id ="form_header">
     <div id="tabsHeader">
      <ul class="tabMain">
-      <li><a href="#tabsHeader-1">Navigation</a></li>
-      <li><a href="#tabsHeader-2">Quick Info</a></li>
-      <li><a href="#tabsHeader-3">On hand</a></li>
-      <li><a href="#tabsHeader-4">Purchasing</a></li>
-      <li><a href="#tabsHeader-5">WIP Value</a></li>
+      <li><a href="#tabsHeader-1"><?php echo gettext('Navigation') ; ?></a></li>
+      <li><a href="#tabsHeader-2"><?php echo gettext('Quick Info') ; ?></a></li>
+      <li><a href="#tabsHeader-3"><?php echo gettext('On Hand') ; ?></a></li>
+      <li><a href="#tabsHeader-4"><?php echo gettext('Purchasing') ; ?></a></li>
+      <li><a href="#tabsHeader-5"><?php echo gettext('WIP Value') ; ?></a></li>
      </ul>
      <div class="tabContainer"> 
       <div id="tabsHeader-1" class="tabContent">
@@ -40,21 +40,21 @@
       <div id="tabsHeader-2" class="tabContent">
        <ul class="column three_column">
         <li>
-         <h2>Notifications</h2>
+         <h2><?php echo gettext('Notifications') ; ?></h2>
          <?php
          echo block::show_block_content_by_BlockId('55');
          ?>
         </li>
         <li>
-         <h2>Recent Comments</h2>
+         <h2><?php echo gettext('Recent Comments') ; ?></h2>
          <?php
          echo block::show_block_content_by_BlockId('52');
 //                include_once HOME_URL.'report.php?class_name=ra_item&report_name=ra_report_set_item_leadtime';
          ?>
         </li>
         <li>
-         <span class="button"><a href="<?php echo HOME_URL ?>form.php?class_name=user_favourite&mode=9">Favourites 
-           <img src="<?php echo THEME_URL; ?>/images/edit.png" alt=" update favourite" title='Update Favourite'/>
+         <span class="button"><a href="<?php echo HOME_URL ?>form.php?class_name=user_favourite&mode=9"><?php echo gettext('Favourites') ; ?> 
+           <img src="<?php echo THEME_URL; ?>/images/edit.png" alt=" update favourite" title='<?php echo gettext('Update Favourite') ; ?>'/>
           </a></span>
          <?php
          echo $fav->show_currentUser_fav();

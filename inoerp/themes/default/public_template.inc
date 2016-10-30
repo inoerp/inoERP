@@ -150,7 +150,7 @@
      <div class="col-md-8">
       <div class="dropdown">
        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-        <i class='fa fa-th'></i> Browse By Category
+        <i class='fa fa-th'></i> <?php echo gettext('Browse By Category'); ?>
        </button>
        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
         <li role="presentation"><?php echo ec_product::category_menu(); ?></li>
@@ -158,7 +158,7 @@
       </div>
 
      </div><!-- end columns --><!-- end columns -->
-     <div class="col-md-2"><a title="View Cart" href="<?php echo HOME_URL ?>?dtype=product&class_name=ec_user_cart">
+     <div class="col-md-2"><a title="<?php echo gettext('View Cart'); ?>" href="<?php echo HOME_URL ?>?dtype=product&class_name=ec_user_cart">
        <i class="fa fa-white fa-2x fa-shopping-cart clickable"></i><span id="no-of-cart-items" class="badge"> <?php echo ino_noOfItems_inCart(); ?> </span> </a></div>
      <div class="col-md-2">
       <div class="topmenu">

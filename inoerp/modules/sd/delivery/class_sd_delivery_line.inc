@@ -312,7 +312,7 @@ class sd_delivery_line extends dbObject {
    * 2. Delete the delivery line
    * 3. Delete all reservation lines
    * 4. No material / finance transaction - Onhand 'll remain in staging location and 
-   * needs to be manually moved back to stock through sub inventory transfer/move order
+   * needs to be manually moved back to stock through subinventory transfer/move order
    */
   $sol = new sd_so_line();
   $sol->findBy_id($this->sd_so_line_id);
@@ -411,7 +411,7 @@ class sd_delivery_line extends dbObject {
    * 1. Update SO Line with the shipment qty and status
    * 2. Inventory Trandsaction
    * 3. Update the delivery line to SHIPPED
-   * needs to be manually moved back to stock through sub inventory transfer/move order
+   * needs to be manually moved back to stock through subinventory transfer/move order
    * 4. Remove rservation from staging
    * 5. Insert the data in ar_transaction_interface
    */
@@ -514,7 +514,7 @@ class sd_delivery_line extends dbObject {
   $invt->reference_type = 'table';
   $invt->reference_key_name = 'sd_delivery_header';
   $invt->reference_key_value = $this->sd_delivery_header_id;
-  $invt->reason = 'SO Shipping';
+  $invt->reason = gettext('SO Shipping');
   $invt->sd_so_line_id = $this->sd_so_line_id;
   $invt->d_reference_key_name = 'sd_delivery_line';
   $invt->d_reference_key_value = $this->sd_delivery_line_id;

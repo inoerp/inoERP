@@ -51,7 +51,7 @@
    <div class="container-fluid">
     <div class="navbar-header">
      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-      <span class="sr-only">Toggle navigation</span>
+      <span class="sr-only"><?php echo gettext('Toggle navigation') ?></span>
       <span class="icon-bar"></span>
      </button>
      <img src="<?php
@@ -62,11 +62,11 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
      <ul class="nav navbar-nav navbar-right">
-      <li><a href="http://demo.inoideas.org/extensions/ino_user/user_login.php" >Demo <div class="arrow-up"></div></a></li>
-      <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
-      <li class="active"><a href="http://inoideas.org/content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> Ask a Question <div class="arrow-up"></div></a></li>
-      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
+      <li><a href="http://demo.inoideas.org/extensions/ino_user/user_login.php" ><?php echo gettext('Demo') ?> <div class="arrow-up"></div></a></li>
+      <li><a href="https://github.com/inoerp/inoERP" ><?php echo gettext('Download') ?> <div class="arrow-up"></div></a></li>
+      <li class="active"><a href="http://inoideas.org/content.php?mode=9&content_type=forum&category_id=7" ><i class="fa fa-comments-o"></i> <?php echo gettext('Ask a Question') ?> <div class="arrow-up"></div></a></li>
+      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30"><?php echo gettext('Documentation') ?> <div class="arrow-up"></div></a></li><!-- end standard drop down -->
+      <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1"><?php echo gettext('Forum') ?> <div class="arrow-up"></div></a></li>
 
       <li>
        <div class="topbar-login ino_right_top">
@@ -106,13 +106,13 @@
       <li role="presentation"><i class="fa fa-toggle-left clickable right_bar_navigation_menu" title="<?php echo gettext('Toggle Navigation Menu')?>"></i></li>
       <li role="presentation"><a  href="<?php echo HOME_URL; ?>"><i class="fa fa-home" title="<?php echo gettext('Home')?>"></i></a></li>
       <li role="presentation"><a  href="#"><i class="fa fa-info" title="<?php echo gettext('Messages')?>"></i></a></li>
-      <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="<?php echo gettext('Dashborad')?>"></i></a></li>
+      <li role="presentation"><a  href="<?php echo HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id']; ?>"><i class="fa fa-dashboard" title="<?php echo gettext('Dashboard')?>"></i></a></li>
       <li>
        <div class="btn-group">
         <button type="button" class="btn btn-xs btn-info"  title="<?php echo gettext('Favourites')?>"><i class="fa fa-star-o" title="<?php echo gettext('Favourites')?>"></i></button>
         <button type="button" title="<?php echo gettext('Favourites')?>" class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
          <span class="caret"></span>
-         <span class="sr-only">Toggle Dropdown</span>
+         <span class="sr-only"><?php echo gettext('Toggle Dropdown')?></span>
         </button>
         <?php echo $fav->show_currentUser_fav(true); ?>
        </div>
@@ -133,7 +133,7 @@
      ?>
      <?php if ($show_header_links) { ?>
       <!--       <div class="social-icons">
-              <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="ERP Dashboard"> <?php //echo gettext( 'ERP Dashboard' ); ?> </a></span>
+              <span><a class="flaticon-list90 clickable erp_dashborad" href="form.php?class_name=user_dashboard_v&mode=2" title="<?php //echo gettext('ERP Dashboard'); ?>"> <?php //echo gettext('ERP Dashboard'); ?> </a></span>
              </div> end social icons -->
      <?php } ?>
     </div>
@@ -216,7 +216,7 @@
            ?>
            <div id="searchResultMessages">
             <ul class="inline_list">
-             <li>Download All Data in </li>
+             <li><?php echo gettext('Download All Data in') ?> </li>
              <li>
               <!--download page creation for all records-->
               <?php
@@ -229,12 +229,12 @@
                <!--download page form-->
                <form action="<?php echo HOME_URL; ?>download.php" method="POST" name="download_all" id="download_all" target="_blank">
                 <input type="hidden"  name="data" value="<?php print base64_encode(serialize($search_class_array_all)) ?>" >
-                <input type="radio" name="download_format" checked="checked" value="excel_format">Excel 
-                <input type="radio" name="download_format" value="text_format">Text
-                <input type="radio" name="download_format" value="pdf_format">Pdf
-                <input type="radio" name="download_format" value="xml_format">XML
-                <input type="radio" name="download_format" value="worddoc_format">Word Doc
-                <input type="submit"  name="export_allResult" value="Download" id="export_excel_allResult" class="clickable button"  >
+                <input type="radio" name="download_format" checked="checked" value="excel_format"><?php echo gettext('Excel') ?> 
+                <input type="radio" name="download_format" value="text_format"><?php echo gettext('Text') ?>
+                <input type="radio" name="download_format" value="pdf_format"><?php echo gettext('Pdf') ?>
+                <input type="radio" name="download_format" value="xml_format"><?php echo gettext('XML') ?>
+                <input type="radio" name="download_format" value="worddoc_format"><?php echo gettext('Word Doc') ?>
+                <input type="submit"  name="export_allResult" value="<?php echo gettext('Download') ?>" id="export_excel_allResult" class="clickable button"  >
                </form>
               <?php }
               ?>
@@ -242,7 +242,7 @@
              </li>
              <li id="export_excel_searchResult" class="clickable" title="<?php echo gettext('Export to Excel')?>"><i class="fa fa-file-excel-o"></i></li>
              <li id="print_searchResult" class="print clickable" title="<?php echo gettext('Print')?>"><i class="fa fa-print"></i></li>
-             <li><button class="btn btn-primary" type="button"><?php echo gettext('Total records')?> <span class="badge"><?php echo $total_count; ?></span></button></li>
+             <li><button class="btn btn-primary" type="button"><?php echo gettext('Total Records')?> <span class="badge"><?php echo $total_count; ?></span></button></li>
             </ul>
            </div>
           <?php } ?>

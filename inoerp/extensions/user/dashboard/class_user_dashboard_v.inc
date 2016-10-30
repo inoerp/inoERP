@@ -159,6 +159,13 @@ AND con.content_id =  com.reference_id
   return !empty($result) ? $result : false;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key]['description'] = gettext($value['description']);
+  }
+ }
+
 }
 
+user_dashboard_v::staticVar_init('icon_stmt_a');
 ?>

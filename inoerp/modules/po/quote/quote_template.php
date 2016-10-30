@@ -130,7 +130,7 @@
         <th><?php echo gettext('Line') ?>#</th>
         <th><?php echo gettext('Item Number') ?></th>
         <th><?php echo gettext('Item Description') ?></th>
-        <th><?php echo gettext('MFG Part Number') ?></th>
+        <th><?php echo gettext('Mfg Part Number') ?></th>
         <th><?php echo gettext('Manufacturer') ?></th>
         <th><?php echo gettext('Min Quantity') ?></th>
         <th><?php echo gettext('Max Quantity') ?></th>
@@ -198,8 +198,8 @@
            <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
-              <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>">Description</a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
+              <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('Description') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">

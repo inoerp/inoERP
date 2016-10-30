@@ -145,7 +145,7 @@ inoERP
         <th><?php echo gettext('Status') ?></th>
         <th><?php echo gettext('Source') ?></th>
         <th><?php echo gettext('Rate') ?></th>
-        <th><?php echo gettext('Trnx. Id') ?></th>
+        <th><?php echo gettext('Trnx Id') ?></th>
         <th><?php echo gettext('Journal') ?></th>
        </tr>
       </thead>

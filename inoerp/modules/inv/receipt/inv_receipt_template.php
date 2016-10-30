@@ -51,7 +51,7 @@
  </div>
 
 </div>
-<div id="form_line" class="form_line"><span class="heading">Receipt Lines</span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Receipt Lines') ?></span>
  <form method="post" id="inv_receipt_line"  name="inv_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
@@ -129,7 +129,7 @@
         <th><?php echo gettext('UOM') ?></th>
         <th><?php echo gettext('Kit Item') ?></th>
         <th><?php echo gettext('New Received Qty') ?></th>
-        <th><?php echo gettext('Sub inventory') ?></th>
+        <th><?php echo gettext('Subinventory') ?></th>
         <th><?php echo gettext('Locator') ?></th>
         <th><?php echo gettext('Kit Config') ?></th>
         <th><?php echo gettext('Quality Details') ?></th>

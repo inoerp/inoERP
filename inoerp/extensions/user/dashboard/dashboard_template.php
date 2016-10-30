@@ -7,7 +7,7 @@ if (!empty($ino_user->use_personal_db_cb)) {
 <link href="<?php echo HOME_URL; ?>includes/ecss/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 <div id ="user_dashboard_divId">
  <div id="tabsHeader">
-  <form method="post" id="user_header" name="user_header"><span class="heading"><?php echo gettext('User Dashboard ') ?>
+  <form method="post" id="user_header" name="user_header"><span class="heading"><?php echo gettext('User Dashboard') ?> 
     <a href="<?php echo HOME_URL ?>form.php?class_name=user_dashboard_config&mode=9&user_id=<?php echo $user_id ?>" 
        class='fa fa-cog getAjaxForm'></a>
     <a href="<?php echo HOME_URL ?>form.php?class_name=user&mode=9&user_id=<?php echo $user_id ?>#tabsHeader-2" class='getAjaxForm pull-right'>[using  <?php echo $selected_theme; ?> theme]</a>
@@ -15,9 +15,9 @@ if (!empty($ino_user->use_personal_db_cb)) {
    <div id="tabsHeader">
     <ul class="tabMain">
      <li><a href="#tabsHeader-1"><?php echo gettext('Navigation') ?></a></li>
-     <li><a href="#tabsHeader-2"><?php echo gettext('Quick Info ') ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Quick Info') ?> </a></li>
      <li><a href="#tabsHeader-3" class="get-report-content" data-report_id="7"><?php echo gettext('P&L Snapshot') ?></a></li>
-     <li><a href="#tabsHeader-4" class="get-report-content" data-report_id="3"><?php echo gettext('On hand') ?></a></li>
+     <li><a href="#tabsHeader-4" class="get-report-content" data-report_id="3"><?php echo gettext('On Hand') ?></a></li>
      <li><a href="#tabsHeader-5" class="get-report-content" data-report_id="5"><?php echo gettext('Open PO') ?></a></li>
      <li><a href="#tabsHeader-6" class="get-report-content" data-report_id="4"><?php echo gettext('Sales Funnel') ?></a></li>
      <li><a href="#tabsHeader-7"><?php echo gettext('WIP Value') ?></a></li>

@@ -143,7 +143,7 @@ class onhand extends dbObject {
                <tr>
                 <th>Action</th>
                 <th>Inventory</th>
-                <th>SubInventory</th>
+                <th>Subinventory</th>
                 <th>Structure</th>
                 <th>Locator Id</th>
                 <th>Locator </th>
@@ -292,7 +292,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id;
    $this->audit_trial();
    $this->save();
    $this->onhand_id_from = $this->onhand_id;
-   echo "<br>Onhand is SuccessfullyUpdated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
+   echo "<br>On Hand is Successfully Updated. The on hand Id is " . $this->onhand_id . ' & On Hand Value is ' . $this->onhand;
    return 1;
   } catch (Exception $e) {
    $dbc->rollback = true;
@@ -353,7 +353,7 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id;
    $this->audit_trial();
    $this->save();
    $this->onhand_id_to = $this->onhand_id;
-   echo "<br>Onhand is SuccessfullyUpdated. The onhand Id is " . $this->onhand_id . ' & Onhand Value is ' . $this->onhand;
+   echo "<br>On Hand is Successfully Updated. The on hand Id is " . $this->onhand_id . ' & On Hand Value is ' . $this->onhand;
    return 1;
   } catch (Exception $e) {
    $dbc->rollback = true;
@@ -438,7 +438,29 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id;
   return !empty($result) ? $result : false;
  }
 
+ public static function staticVar_init($staticvar) {
+  $lines = explode("\n", self::${$staticvar});
+  self::${$staticvar} = '';
+  foreach ($lines as $key => $line) {
+   if(strpos($line,'<th>') !== FALSE) {
+    $left = substr($line,0,strpos($line,'>')+1);
+ 	$text = trim(rtrim(trim(substr($line,strpos($line,'>')+1,strpos($line,'/')-strpos($line,'>')-2)),'#'));
+ 	$right = substr($line,strpos($line,'/')-1);
+ 	if(substr(trim(substr($line,strpos($line,'>')+1,strpos($line,'/')-strpos($line,'>')-2)),-1) == '#') {
+ 	 $line =  $left . gettext($text) . '#' . $right;
+ 	} else {
+ 	 $line =  $left . gettext($text) . $right;
+ 	}
+   }
+   self::${$staticvar} = self::${$staticvar} . $line;
+   if($line != end($lines)) {
+ 	self::${$staticvar} = self::${$staticvar} . "\n";
+   }
+  }
+ }
+
 }
 
 //end of onhand class
+onhand::staticVar_init('view_table_line_tr');
 ?>

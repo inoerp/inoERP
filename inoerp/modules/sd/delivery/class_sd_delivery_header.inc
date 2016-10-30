@@ -338,7 +338,7 @@ class sd_delivery_header extends dbObject {
    $invt->reference_type = 'table';
    $invt->reference_key_name = 'sd_so_header';
    $invt->reference_key_value = $_POST['sd_so_header_id'][$i];
-   $invt->reason = 'SO Picking';
+   $invt->reason = gettext('SO Picking');
    $invt->sd_so_line_id = $_POST['sd_so_line_id'][$i];
    $invt->d_reference_key_name = 'sd_so_line';
    $invt->d_reference_key_value = $invt->sd_so_line_id;

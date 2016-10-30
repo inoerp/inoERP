@@ -13,7 +13,7 @@
 
 /**
  * bom_overhead
- * Used for creating different user defined bom over head elements
+ * Used for creating different user defined bom overhead elements
  * Contains all the bom_overhead information, such as - overhead, description , status, org_id
  * 
  */

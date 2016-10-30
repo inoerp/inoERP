@@ -93,14 +93,14 @@
     <div id="tabsHeader-6" class="tabContent">
      <div> 
       <ul class="column five_column">
-       <li><label>Action</label>
+       <li><label><?php echo gettext('Action') ?></label>
         <?php
         echo $f->select_field_from_array('transaction_action', $$class->action_a, '', 'transaction_action', 'action', '', $readonly, $action_readonly)
         ?>
        </li>
-       <!--       <li id="document_print"><label>Document Print : </label>
+       <!--       <li id="document_print"><label><?php //echo gettext('Document Print') ?> : </label>
                <a class="button" target="_blank"
-                  href="po_print.php?ap_transaction_header_id=<?php // echo!(empty($$class->ap_transaction_header_id)) ? $$class->ap_transaction_header_id : "";    ?>" >Transaction</a>
+                  href="po_print.php?ap_transaction_header_id=<?php // echo!(empty($$class->ap_transaction_header_id)) ? $$class->ap_transaction_header_id : "";    ?>" ><?php //echo gettext('Transaction') ?></a>
               </li>-->
       </ul>
 
@@ -186,8 +186,8 @@
            <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
-              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>">Basic</a></li>
-              <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>">References</a></li>
+              <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
+              <li class="tabLink"><a href="#tabsDetail-2-<?php echo $count ?>"><?php echo gettext('References') ?></a></li>
              </ul>
              <div class="tabContainer">
               <div id="tabsDetail-1-<?php echo $count ?>" class="tabContent">

@@ -31,43 +31,43 @@ foreach ($deli_objs as $page_c => $deli_arr) {
    <div class="full_page">
     <div class="half_page left header_info">
      <ul class="column header_field">
-      <li><label>Delivery Number : </label><?php echo $$class->delivery_number; ?> </li>
-      <li><label>Carrier : </label><?php echo $$class->carrier; ?> </li>
-      <li><label>Vehicle Number : </label><?php echo $$class->vehicle_number; ?> </li>
-      <li><label>Instruction : </label><?php echo $$class->handling_instruction; ?> </li>
-      <li><label>Status : </label><?php echo $$class->delivery_status; ?> </li>
+      <li><label><?php echo gettext('Delivery Number') ?> : </label><?php echo $$class->delivery_number; ?> </li>
+      <li><label><?php echo gettext('Carrier') ?> : </label><?php echo $$class->carrier; ?> </li>
+      <li><label><?php echo gettext('Vehicle Number') ?> : </label><?php echo $$class->vehicle_number; ?> </li>
+      <li><label><?php echo gettext('Instruction') ?> : </label><?php echo $$class->handling_instruction; ?> </li>
+      <li><label><?php echo gettext('Status') ?> : </label><?php echo $$class->delivery_status; ?> </li>
      </ul>
     </div>
     <div class="half_page right external_entiry_info">
      <ul class="column header_field">
-      <li><label>Currency : </label><?php echo $$class->doc_currency; ?> </li>
-      <li><label>Amount: </label><?php echo $$class->header_amount; ?> </li>
-      <li><label>Customer Name : </label><?php echo $$class->customer_name; ?> </li>
-      <li><label>Customer Site</label><?php echo $$class->customer_site_name; ?> </li>
-      <li><label>Customer Number : </label><?php echo $$class->customer_number; ?> </li>
-      <li><label>Sales Order : </label><?php echo $$class->so_number; ?> </li>
+      <li><label><?php echo gettext('Currency') ?> : </label><?php echo $$class->doc_currency; ?> </li>
+      <li><label><?php echo gettext('Amount') ?>: </label><?php echo $$class->header_amount; ?> </li>
+      <li><label><?php echo gettext('Customer Name') ?> : </label><?php echo $$class->customer_name; ?> </li>
+      <li><label><?php echo gettext('Customer Site') ?></label><?php echo $$class->customer_site_name; ?> </li>
+      <li><label><?php echo gettext('Customer Number') ?> : </label><?php echo $$class->customer_number; ?> </li>
+      <li><label><?php echo gettext('Sales Order') ?> : </label><?php echo $$class->so_number; ?> </li>
      </ul>
     </div>
    </div>
    <div class="full_page">
-    <div class="half_page left header_info"><span class="heading">Shipping Address</span>
+    <div class="half_page left header_info"><span class="heading"><?php echo gettext('Shipping Address') ?></span>
      <ul class="column header_field">
-      <li><label>Address : </label><?php echo $$class->address; ?> </li>
-      <li><label>Country: </label><?php echo $$class->country; ?> </li>
-      <li><label>Postal Code : </label><?php echo $$class->postal_code; ?> </li>
-      <li><label>Phone</label><?php echo $$class->phone; ?> </li>
-      <li><label>Email : </label><?php echo $$class->email; ?> </li>
-      <li><label>Web Site : </label><?php echo $$class->website; ?> </li>
+      <li><label><?php echo gettext('Address') ?> : </label><?php echo $$class->address; ?> </li>
+      <li><label><?php echo gettext('Country') ?>: </label><?php echo $$class->country; ?> </li>
+      <li><label><?php echo gettext('Postal Code') ?> : </label><?php echo $$class->postal_code; ?> </li>
+      <li><label><?php echo gettext('Phone') ?></label><?php echo $$class->phone; ?> </li>
+      <li><label><?php echo gettext('Email') ?> : </label><?php echo $$class->email; ?> </li>
+      <li><label><?php echo gettext('Website') ?> : </label><?php echo $$class->website; ?> </li>
      </ul>
     </div>
-    <div class="half_page right external_entiry_info"><span class="heading">Billing Address</span>
+    <div class="half_page right external_entiry_info"><span class="heading"><?php echo gettext('Billing Address') ?></span>
      <ul class="column header_field">
-      <li><label>Address : </label><?php echo $$class->address_b; ?> </li>
-      <li><label>Country: </label><?php echo $$class->country_b; ?> </li>
-      <li><label>Postal Code : </label><?php echo $$class->postal_code_b; ?> </li>
-      <li><label>Phone</label><?php echo $$class->phone_b; ?> </li>
-      <li><label>Email : </label><?php echo $$class->email_b; ?> </li>
-      <li><label>Web Site : </label><?php echo $$class->website_b; ?> </li>
+      <li><label><?php echo gettext('Address') ?> : </label><?php echo $$class->address_b; ?> </li>
+      <li><label><?php echo gettext('Country') ?>: </label><?php echo $$class->country_b; ?> </li>
+      <li><label><?php echo gettext('Postal Code') ?> : </label><?php echo $$class->postal_code_b; ?> </li>
+      <li><label><?php echo gettext('Phone') ?></label><?php echo $$class->phone_b; ?> </li>
+      <li><label><?php echo gettext('Email') ?> : </label><?php echo $$class->email_b; ?> </li>
+      <li><label><?php echo gettext('Website') ?> : </label><?php echo $$class->website_b; ?> </li>
      </ul>
     </div>
    </div>
@@ -77,15 +77,15 @@ foreach ($deli_objs as $page_c => $deli_arr) {
     <table class="form_line_data_table">
      <thead> 
       <tr class="line_header">
-       <th>Line #</th>
-       <th>Type</th>
-       <th>Item Number</th>
-       <th>Description</th>
-       <th>Unit Price</th>
-       <th>Shipped Quantity</th>
-       <th>Request Date</th>
-       <th>Promise Date</th>
-       <th>Line Description</th>
+       <th><?php echo gettext('Line') ?> #</th>
+       <th><?php echo gettext('Type') ?></th>
+       <th><?php echo gettext('Item Number') ?></th>
+       <th><?php echo gettext('Description') ?></th>
+       <th><?php echo gettext('Unit Price') ?></th>
+       <th><?php echo gettext('Shipped Quantity') ?></th>
+       <th><?php echo gettext('Request Date') ?></th>
+       <th><?php echo gettext('Promise Date') ?></th>
+       <th><?php echo gettext('Line Description') ?></th>
        
       </tr>
      </thead>

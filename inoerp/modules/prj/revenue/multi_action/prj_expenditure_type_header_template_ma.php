@@ -4,11 +4,11 @@
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
    <form method="post" id="prj_expenditure_type_header"  name="prj_expenditure_type_header">
-    <div id ="form_line" class="form_line"><span class="heading">Expenditure Type </span>
+    <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Expenditure Type') ?> </span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Basics</a></li>
-       <li><a href="#tabsLine-2">Controls</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>
+       <li><a href="#tabsLine-2"><?php echo gettext('Controls') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">

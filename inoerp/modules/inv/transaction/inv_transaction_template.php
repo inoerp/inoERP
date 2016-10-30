@@ -1,6 +1,6 @@
 <form method="post" id="inv_transaction"  name="inv_transaction">
  <?php  echo (!empty($hidden_stmt)) ? $hidden_stmt : "";  ?> 
- <div id ="form_header"><span class="heading"><?php echo gettext('Inventory Transaction ') ?></span> 
+ <div id ="form_header"><span class="heading"><?php echo gettext('Inventory Transaction') ?> </span> 
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -91,8 +91,8 @@
       <th><?php echo gettext('To Locator') ?></th>
       <th><?php echo gettext('Description') ?></th>
       <th><?php echo gettext('Reason') ?></th>
-      <th><?php echo gettext('Onhand') ?></th>
-      <th><?php echo gettext('Res. Onhand') ?></th>
+      <th><?php echo gettext('On Hand') ?></th>
+      <th><?php echo gettext('Res. On Hand') ?></th>
 
       </thead>
       <tbody class="form_data_line_tbody">

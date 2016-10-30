@@ -1,8 +1,8 @@
       <div id ="form_line" class="form_line">
        <div id="tabsDetail">
         <ul class="tabMain">
-         <li><a href="#tabsDetail-1">Info-1 </a></li>
-         <li><a href="#tabsDetail-2">Info-2 </a></li>
+         <li><a href="#tabsDetail-1"><?php echo gettext('Info-1') ?> </a></li>
+         <li><a href="#tabsDetail-2"><?php echo gettext('Info-2') ?> </a></li>
         </ul>
         <div class="tabContainer"> 
          <form action=""  method="post" id="inv_serial_transaction_entries_line"  name="inv_serial_transaction_entries_line">
@@ -10,15 +10,15 @@
            <table class="form_table">
             <thead> 
              <tr>
-              <th>Serial Number</th>
-              <th>Origination Type</th>
-              <th>Origination Date</th>
-              <th>Activation Date </th>
-              <th>Current Inventory</th>
-              <th>Sub inventory</th>
-              <th>Locator</th>
-              <th>Inventory L/N </th>
-              <th>COO</th>
+              <th><?php echo gettext('Serial Number') ?></th>
+              <th><?php echo gettext('Origination Type') ?></th>
+              <th><?php echo gettext('Origination Date') ?></th>
+              <th><?php echo gettext('Activation Date') ?> </th>
+              <th><?php echo gettext('Current Inventory') ?></th>
+              <th><?php echo gettext('Subinventory') ?></th>
+              <th><?php echo gettext('Locator') ?></th>
+              <th><?php echo gettext('Inventory L/N') ?> </th>
+              <th><?php echo gettext('COO') ?></th>
              </tr>
             </thead>
             <tbody class="form_data_line_tbody inv_serial_transaction_entries_values" >
@@ -48,14 +48,14 @@
            <table class="form_table">
             <thead> 
              <tr>
-              <th>Supplier Site Id </th>
-              <th>PO Header Id </th>
-              <th>Supplier S/N </th>
-              <th>Supplier L/N</th>
-              <th>First Trnx Id</th>
-              <th>Last Trnx Id</th>
-              <th>Customer Site Id</th>
-              <th>Serial Details</th>
+              <th><?php echo gettext('Supplier Site Id') ?> </th>
+              <th><?php echo gettext('PO Header Id') ?> </th>
+              <th><?php echo gettext('Supplier S/N') ?> </th>
+              <th><?php echo gettext('Supplier L/N') ?></th>
+              <th><?php echo gettext('First Trnx Id') ?></th>
+              <th><?php echo gettext('Last Trnx Id') ?></th>
+              <th><?php echo gettext('Customer Site Id') ?></th>
+              <th><?php echo gettext('Serial Details') ?></th>
              </tr>
             </thead>
             <tbody class="form_data_line_tbody inv_serial_transaction_entries_values" >
@@ -72,7 +72,7 @@
                 <td><?php $f->text_field_dr('first_inv_transaction_id'); ?>             </td>
                 <td><?php $f->text_field_dr('last_inv_transaction_id'); ?>             </td>
                 <td><?php $f->text_field_dr('ar_customer_site_id'); ?>             </td>
-                <td><a class="button" href="form.php?class_name=inv_serial_number&mode=9&inv_serial_number_id=<?php echo $$class->inv_serial_number_id; ?>">View</a></td>
+                <td><a class="button" href="form.php?class_name=inv_serial_number&mode=9&inv_serial_number_id=<?php echo $$class->inv_serial_number_id; ?>"><?php echo gettext('View') ?></a></td>
                </tr>
                <?php
                $count = $count + 1;
