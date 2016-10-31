@@ -88,7 +88,7 @@
          <td><?php $f->text_field_wid2l('description'); ?></td>
          <td><?php $f->text_field_wid2('class_name'); ?></td>
          <td><?php $f->text_field_wid2('method_name'); ?></td>
-         <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+         <td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="<?php echo gettext('Add Detail Values')?>" />
           <!--</td></tr>-->	
           <?php
           $sys_process_flow_line_id = $sys_process_flow_line->sys_process_flow_line_id;

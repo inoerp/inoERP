@@ -59,7 +59,7 @@ $all_data_ai->seek($position);
         <tr class="engine_line line_no<?php  echo $count ?>">
          <td>    
           <ul class="inline_action">
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('Remove This Line') ?>" /> </li>
            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($engine_id_v); ?>"></li>           
            <li><?php echo $count ?></li>
            <?php echo $f->hidden_field('type', $dir_path) ?>

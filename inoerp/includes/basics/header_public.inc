@@ -91,15 +91,15 @@ check_browser(); ?>
         echo '<li><a  href="' . HOME_URL . '">Home</a> </li>';
         echo '<li><a href="' . HOME_URL . 'form.php?class_name=user&mode=9&user_id=' . $_SESSION['user_id'] . '">User Details</a></li>';
         echo '<li class="child_link"><a href="' . HOME_URL . 'form.php?class_name=user_activity_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '">Activities</a></li>';
-        echo '<li class="child_link"><a href = "' . HOME_URL . 'search.php?class_name=sys_notification_user">All Notifications</a></li>';
-        echo '<li data-path_description = "Dashborad">
+        echo '<li class="child_link"><a href = "' . HOME_URL . 'search.php?class_name=sys_notification_user">' . gettext('All Notifications') . '</a></li>';
+        echo '<li data-path_description = "Dashboard">
        <a href = "' . HOME_URL . 'form.php?class_name=user_dashboard_v&amp;mode=2&amp;user_id=' . $_SESSION['user_id'] . '">Dashboard</a>
        </li>
-       <li data-path_description = "Dashborad Configuration" class="child_link">
+       <li data-path_description = "Dashboard Configuration" class="child_link">
        <a href = "' . HOME_URL . 'form.php?class_name=user_dashboard_config&amp;mode=9&amp;user_id=' . $_SESSION['user_id'] . '">Configure</a>
        </li>';
         echo '<li class = "divider" role = "presentation"></li>';
-        echo '<li><a href = "' . HOME_URL . 'extensions/user/user_logout.php"> Logout</a></li>';
+        echo '<li><a href = "' . HOME_URL . 'extensions/user/user_logout.php"> ' . gettext('LogOut') . '</a></li>';
         echo '</ul>
        </li>
        </ul>
@@ -131,11 +131,11 @@ check_browser(); ?>
      <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-right">
       <ul class="nav navbar-nav">
        <li><a href="<?php echo HOME_URL; ?>">Home <div class="arrow-up"></div></a></li>
-       <li class="active"><a href="http://demo.inoideas.org/extensions/user/user_login.php" >DEMO <div class="arrow-up"></div></a></li>
-       <li><a href="https://github.com/inoerp/inoERP" >Download <div class="arrow-up"></div></a></li>
-       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30">Documentation <div class="arrow-up"></div></a></li><!-- end standard drop down -->
-       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1">Forum <div class="arrow-up"></div></a></li>
-       <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47">About <div class="arrow-up"></div></a> </li><!-- end drop down -->
+       <li class="active"><a href="http://demo.inoideas.org/extensions/user/user_login.php" ><?php echo gettext('Demo') ?> <div class="arrow-up"></div></a></li>
+       <li><a href="https://github.com/inoerp/inoERP" ><?php echo gettext('Download') ?> <div class="arrow-up"></div></a></li>
+       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=documentation&amp;category_id=30"><?php echo gettext('Documentation') ?> <div class="arrow-up"></div></a></li><!-- end standard drop down -->
+       <li><a href="<?php echo HOME_URL; ?>content.php?content_type=forum&amp;category_id=1"><?php echo gettext('Forum') ?> <div class="arrow-up"></div></a></li>
+       <li><a href="<?php echo HOME_URL; ?>content.php?mode=2&amp;content_id=197&amp;content_type_id=47"><?php echo gettext('About') ?> <div class="arrow-up"></div></a> </li><!-- end drop down -->
       </ul><!-- end navbar-nav -->
      </div><!-- #navbar-collapse-1 -->			
     </nav><!-- end navbar yamm navbar-default -->

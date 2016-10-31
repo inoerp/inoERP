@@ -55,7 +55,7 @@ inoERP
         <tr class="inv_transaction_row0" id="tab1_1">
          <td>    
           <ul class="inline_action">
-           <li class="remove_row_img"><i  class="fa fa-minus-circle" alt="remove this line" ></i></li>
+           <li class="remove_row_img"><i  class="fa fa-minus-circle" alt="<?php echo gettext('Remove This Line') ?>" ></i></li>
            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class_second->item_id_m); ?>">
             <?php echo form::hidden_field('org_id', $$class->org_id); ?>
             <?php echo form::hidden_field('wip_wo_header_id', $$class->wip_wo_header_id); ?>

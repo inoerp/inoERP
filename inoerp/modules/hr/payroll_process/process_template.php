@@ -80,8 +80,8 @@
          <tr class="hr_payslip_header<?php echo $count ?>">
           <td>    
            <ul class="inline_action">
-            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+            <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('Add New Line') ?>" /></li>
+            <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('Remove This Line') ?>" /> </li>
             <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($hr_payslip_header->hr_payslip_header_id); ?>"></li>           
             <li><?php echo form::hidden_field('hr_payroll_process_id', $$class->hr_payroll_process_id); ?></li>
            </ul>

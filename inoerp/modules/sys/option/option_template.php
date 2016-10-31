@@ -136,8 +136,8 @@
                  <tr class="option_detail_tr<?php echo $detailCount; ?>">
                   <td>   
                    <ul class="inline_action">
-                    <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-                    <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+                    <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('Add New Line') ?>" /></li>
+                    <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('Remove This Line') ?>" /> </li>
                     <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($option_detail->option_detail_id); ?>"></li>           
                     <li><?php echo form::hidden_field('option_line_id', $option_line->option_line_id); ?></li>
                     <li><?php echo form::hidden_field('option_header_id', $$class->option_header_id); ?></li>

@@ -50,7 +50,7 @@
 
 
 			<!--END OF FORM HEADER-->
-			<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Address Details') ? </span>
+			<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Address Details') ?> </span>
 			 <ul class="address inline_list">
 				<li><label><?php echo gettext('Phone') ?>  : </label> <?php $f->text_field_d2r('phone'); ?></li>
 				<li><label><?php echo gettext('Email') ?>  : </label> <?php $f->text_field_d2r('website'); ?></li>

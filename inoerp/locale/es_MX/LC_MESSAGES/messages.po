@@ -12766,11 +12766,11 @@ msgstr "Id Relación de Artículo de Inv"
 msgid "relation type"
 msgstr "Tipo de Relación"
 
-msgid "from item id m"
-msgstr "M del Id De Artículo"
+msgid "From Item Id M"
+msgstr "M Id Artículo De"
 
-msgid "to item id m"
-msgstr "M del Id A Artículo"
+msgid "To Item Id M"
+msgstr "M Id Artículo A"
 
 msgid "planning cb"
 msgstr "Cv Planificación"
@@ -15136,7 +15136,7 @@ msgstr "Req"
 msgid "Select From Item Number"
 msgstr "Selec Núm de Artículo De"
 
-msgid "Select Item Number To"
+msgid "Select To Item Number"
 msgstr "Selec Núm de Artículo A"
 
 msgid "Activity Meter"
@@ -15361,14 +15361,14 @@ msgstr "Perfil de Cliente"
 msgid "Credit Class"
 msgstr "Categoría de Crédito"
 
-msgid "add detail values"
+msgid "Add Detail Values"
 msgstr "añadir valores detalle"
 
-msgid "add new line"
-msgstr "añadir linea nueva"
+msgid "Add New Line"
+msgstr "Añadir Linea Nueva"
 
-msgid "remove this line"
-msgstr "eliminar esta linea"
+msgid "Remove This Line"
+msgstr "Eliminar Esta Linea"
 
 msgid "PO Header"
 msgstr "Encabezado P"
@@ -15597,3 +15597,21 @@ msgstr "Suscribir Extn"
 
 msgid "Select Address Id"
 msgstr "Selec Id Dirección"
+
+msgid "Process This Line"
+msgstr "Procesa Esta Linea"
+
+msgid "From Item Id"
+msgstr "Id Artículo De"
+
+msgid "Select From Item Id"
+msgstr "Selec Id Artículo De"
+
+msgid "To Item Id"
+msgstr "Id Artículo A"
+
+msgid "Select From Project Number"
+msgstr "Selec Núm de Proyecto De"
+
+msgid "Select To Project Number"
+msgstr "Selec Núm de Proyecto A"

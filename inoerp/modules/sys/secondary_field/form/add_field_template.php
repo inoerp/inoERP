@@ -68,8 +68,8 @@
                <tr class="sys_secondary_field<?php echo $count . '-' . $detailCount; ?>">
                 <td>   
                  <ul class="inline_action">
-                  <li class="add_row_detail_img3"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('add new line') ?>" /></li>
-                  <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('remove this line') ?>" /> </li>
+                  <li class="add_row_detail_img3"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('Add New Line') ?>" /></li>
+                  <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('Remove This Line') ?>" /> </li>
                   <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($secondary_field->sys_secondary_field_inst_id); ?>">
                   </li>           
                  </ul>

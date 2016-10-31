@@ -215,7 +215,7 @@ inoERP
            echo!empty($$class_second->lot_number_id) ? $f->hidden_field('lot_number_id', $$class_second->lot_number_id) : $f->hidden_field('lot_number_id', '');
            echo!empty($$class_second->lot_generation) ? $f->hidden_field('lot_generation', $$class_second->lot_generation) : $f->hidden_field('lot_generation', '');
            ?> 
-           <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+           <img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="<?php echo gettext('Add Detail Values')?>" />
            <div class="class_detail_form">
             <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Lot') ?></legend>
              <div class="tabsDetail">
