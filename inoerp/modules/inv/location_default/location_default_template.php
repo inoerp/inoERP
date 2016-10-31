@@ -5,7 +5,7 @@
    <?php echo gettext('Item Transaction Location Default') ?></span>
    <div class="tabContainer">
     <label><?php echo gettext('Inventory Org') ?> </label>
-    <?php echo $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $org_id_h, 'org_id' , 'action'); ?>
+    <?php echo $f->l_select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $org_id_h, 'org_id' , 'action medium'); ?>
     <a name="show" href="form.php?class_name=inv_location_default&<?php echo "mode=$mode"; ?>" class="show document_id inv_location_default_id">
      <i class='fa fa-refresh '></i></a> 
    </div>
@@ -54,9 +54,9 @@
             echo $f->hidden_field('item_id_m', $$class->item_id_m);
             $f->text_field_wid('item_number', 'select_item_number');
             ?><i class="select_item_number select_popup clickable fa fa-search"></i></td>
-           <td><?php echo $f->select_field_from_object('default_type', inv_location_default::location_default_types(), 'option_line_code', 'option_line_value', $$class->default_type); ?></td>
-           <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->subinventory_id, '', 'subinventory_id copyValue', ''); ?>           </td>
-           <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class->subinventory_id), 'locator_id', 'locator', $$class->locator_id, '', 'locator_id copyValue', ''); ?>       </td>
+           <td><?php echo $f->select_field_from_object('default_type', inv_location_default::location_default_types(), 'option_line_code', 'option_line_value', $$class->default_type, '' ,'meidum'); ?></td>
+           <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all_of_org_id($$class->org_id), 'subinventory_id', 'subinventory', $$class->subinventory_id, '', 'subinventory_id copyValue large', ''); ?>           </td>
+           <td><?php echo $f->select_field_from_object('locator_id', locator::find_all_of_subinventory($$class->subinventory_id), 'locator_id', 'locator', $$class->locator_id, '', 'locator_id copyValue large', ''); ?>       </td>
           </tr>
           <?php
           $location_default_object_ai->next();

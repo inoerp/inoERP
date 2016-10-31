@@ -15,12 +15,8 @@
          ?>         
          <tr class="locator_line<?php echo $count ?>">
           <td><?php echo ino_inline_action($$class->locator_id, array('locator_id' => $$class->locator_id)); ?> </td>
-          <td>
-           <?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, 'org_id'); ?>
-          </td>
-          <td>
-           <?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all(), 'subinventory_id', 'subinventory', $$class->subinventory_id, 'subinventory_id'); ?>
-          </td>
+          <td><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class->org_id, '' ,'medium'); ?></td>
+          <td><?php echo $f->select_field_from_object('subinventory_id', subinventory::find_all(), 'subinventory_id', 'subinventory', $$class->subinventory_id, '' ,'medium'); ?>        </td>
           <td class="single_line"><?php echo locator::locator_structure(); ?></td>
           <td><?php echo form::text_field_widsr('locator_id'); ?></td>
           <td><?php form::text_field_wid('locator'); ?></td>

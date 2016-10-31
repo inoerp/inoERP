@@ -2,12 +2,10 @@
  <div id="form_all">
   <div id="form_headerDiv">
    <form method="post" id="inv_item_relation_line"  name="item_relation_line">
-    <span class="heading"><?php
-     echo gettext('Item Relationships')
-     ?></span>
+    <span class="heading"><?php      echo gettext('Item Relationships')   ?></span>
     <div id="form_serach_header" class="tabContainer">
      <label><?php echo gettext('Relationship Type') ?></label>
-     <?php echo $f->select_field_from_object('relation_type_h', inv_item_relation::item_relation(), 'option_line_code', 'option_line_value', $relation_type_h, 'relation_type'); ?>
+     <?php echo $f->select_field_from_object('relation_type_h', inv_item_relation::item_relation(), 'option_line_code', 'option_line_value', $relation_type_h, 'relation_type' ,'medium action'); ?>
      <a name="show2" href="form.php?class_name=inv_item_relation&<?php echo "mode=$mode"; ?>" class="show2 document_id relation_type">
       <i class="fa fa-refresh"></i></a> 
     </div>
