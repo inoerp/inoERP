@@ -44,7 +44,7 @@
 
   </div>
 
-  <div id ="form_line" class="form_line"><span class="heading">Business Org Details </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Business Org Details') ?> </span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>

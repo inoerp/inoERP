@@ -3788,7 +3788,7 @@ msgid "Legal Id"
 msgstr "Id Legal"
 
 msgid "Legal Org Type"
-msgstr "Tipo de Org Legale"
+msgstr "Tipo de Org Legal"
 
 msgid "Registration Number"
 msgstr "Número de Registro"
@@ -15615,3 +15615,33 @@ msgstr "Selec Núm de Proyecto De"
 
 msgid "Select To Project Number"
 msgstr "Selec Núm de Proyecto A"
+
+msgid "Business"
+msgstr "Negocio"
+
+msgid "Pre Defined"
+msgstr "Predefinido"
+
+msgid "At Receipt"
+msgstr "Al Recibir"
+
+msgid "At Shipment"
+msgstr "Al Enviar"
+
+msgid "Business Org Details"
+msgstr "Detalles Org Negocios"
+
+msgid "Item Level"
+msgstr "Nivel Artículo"
+
+msgid "Organization Level"
+msgstr "Nivel Organización"
+
+msgid "Global Level"
+msgstr "Nivel Global"
+
+msgid "Inventory Org Details"
+msgstr "Detalles Org Inventario"
+
+msgid "Inventory Org Types"
+msgstr "Tipos Org Inventario"

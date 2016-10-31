@@ -1172,7 +1172,15 @@ class item extends dbObject {
   return $multi_select_hidden;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext($value);
+  }
+ }
+
 }
 
 //end of item class
+item::staticVar_init('ls_generation_a');
+item::staticVar_init('ls_uniqueness_a');
 ?>

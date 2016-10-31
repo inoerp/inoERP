@@ -15616,3 +15616,33 @@ msgstr "Select From Project Number"
 
 msgid "Select To Project Number"
 msgstr "Select To Project Number"
+
+msgid "Business"
+msgstr "Business"
+
+msgid "Pre Defined"
+msgstr "Pre Defined"
+
+msgid "At Receipt"
+msgstr "At Receipt"
+
+msgid "At Shipment"
+msgstr "At Shipment"
+
+msgid "Business Org Details"
+msgstr "Business Org Details"
+
+msgid "Item Level"
+msgstr "Item Level"
+
+msgid "Organization Level"
+msgstr "Organization Level"
+
+msgid "Global Level"
+msgstr "Global Level"
+
+msgid "Inventory Org Details"
+msgstr "Inventory Org Details"
+
+msgid "Inventory Org Types"
+msgstr "Inventory Org Types"
