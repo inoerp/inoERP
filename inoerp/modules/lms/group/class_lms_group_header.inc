@@ -10,25 +10,25 @@
  */
 
 /**
- * lms_subject_header CLass
- * Contains all the lms_subject_header information, such as - document_type, so_number, ar_customer_id
+ * lms_group_header CLass
+ * Contains all the lms_group_header information, such as - document_type, so_number, ar_customer_id
  *
  */
-class lms_subject_header extends dbObject {
+class lms_group_header extends dbObject {
 
- public static $table_name = "lms_subject_header";
- public static $dependent_classes = ['lms_subject_line'];
- public static $primary_column = "lms_subject_header_id";
- public static $key_column = 'subject_code';
+ public static $table_name = "lms_group_header";
+ public static $dependent_classes = ['lms_group_line'];
+ public static $primary_column = "lms_group_header_id";
+ public static $key_column = 'group_code';
  public static $module = "lms";
  public static $system_info = [
-		 'name' => 'LMS Subject',
-		 'number' => '8302',
-		 'description' => 'Create & Mainten Subject',
+		 'name' => 'LMS group',
+		 'number' => '8303',
+		 'description' => 'Create & Mainten group',
 		 'version' => '0.1.1',
 		 'db_version' => '1001',
 		 'mod_version' => '1.1.1',
-		 'dependent_class' => array('lms_subject_line'),
+		 'dependent_class' => array('lms_group_line'),
 		 'primary_entity_cb' => '',
 		 'module_name' => 'hd',
 		 'weight' => 1
@@ -38,26 +38,23 @@ class lms_subject_header extends dbObject {
 		 'RETURN' => 'Return'
  ];
  public $field_a = [
-		 'lms_subject_header_id',
-		 'subject_name',
-		 'subject_code',
-		 'overview',
-		 'objectives',
-		 'structure',
+		 'lms_group_header_id',
+		 'group_name',
+		 'group_code',
 		 'description',
 		 'status',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
-		 'last_update_date',
+		 'last_update_date'
  ];
  public $initial_search = [
-		 'subject_name',
-		 'subject_code',
+		 'group_name',
+		 'group_code',
  ];
  public $requiredField = [
-		 'subject_name',
-		 'subject_code',
+		 'group_name',
+		 'group_code',
  ];
  public $fields_inForm_notInDataBase = [
 		 'action',
@@ -66,14 +63,11 @@ class lms_subject_header extends dbObject {
 		 '_show_update_path' => 1,
 		 '_show_view_path' => 1
  ];
- public $pageTitle = " Subject  "; //page Title
+ public $pageTitle = " Group  "; //page Title
  
- public $lms_subject_header_id;
- public $subject_name;
- public $subject_code;
- public $overview;
- public $objectives;
- public $structure;
+ public $lms_group_header_id;
+ public $group_name;
+ public $group_code;
  public $description;
  public $status;
  public $created_by;
@@ -97,5 +91,5 @@ class lms_subject_header extends dbObject {
 
 }
 
-//end of lms_subject_header class
+//end of lms_group_header class
 ?>

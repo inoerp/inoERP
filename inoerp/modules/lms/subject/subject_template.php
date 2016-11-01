@@ -6,59 +6,62 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('Service Type') ?></span>
- <form action=""  method="post" id="hd_service_type_header"  name="hd_service_type_header">
+<div id ="form_header"><span class="heading"><?php echo gettext('Subject') ?></span>
+ <form method="post" id="lms_subject_header"  name="lms_subject_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Repair Details') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Overview') ?></a></li>
+		<li><a href="#tabsHeader-3"><?php echo gettext('Objectives') ?></a></li>
+		<li><a href="#tabsHeader-4"><?php echo gettext('Structure') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_dr_withSearch('hd_service_type_header_id') ?>
-       <a name="show" href="form.php?class_name=hd_service_type_header&<?php echo "mode=$mode"; ?>" class="show document_id hd_service_type_header_id"><i class="fa fa-refresh"></i></a> 
+      <li><?php $f->l_text_field_dr_withSearch('lms_subject_header_id') ?>
+       <a name="show" href="form.php?class_name=lms_subject_header&<?php echo "mode=$mode"; ?>" class="show document_id lms_subject_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
-      <li><?php $f->l_text_field_d('service_type'); ?></li>
+      <li><?php $f->l_text_field_d('subject_name'); ?></li>
+			<li><?php $f->l_text_field_d('subject_code'); ?></li>
       <li><?php $f->l_text_field_d('description'); ?></li>
-      <li><?php $f->l_select_field_from_array('repair_mode', hd_service_type_header::$repair_mode_a, $$class->repair_mode, 'repair_mode'); ?></li>
-      <li><?php $f->l_select_field_from_object('primary_service_type', hd_service_type_header::primary_service_type(), 'option_line_code', 'option_line_value', $$class->primary_service_type, 'primary_service_type'); ?></li>
-      <li><?php $f->l_select_field_from_object('prices_list_id', mdm_price_list_header::find_all_sales_pl(), 'mdm_price_list_header_id', 'price_list', $$class->prices_list_id, 'prices_list_id'); ?></li>
-      <li><?php $f->l_checkBox_field_d('active_cb'); ?></li>
+			<li><?php $f->l_text_field_d('status'); ?></li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-     <ul class="column header_field">
-      <?php
-      $service_activity_return = hd_service_activity_header::find_by_oneColumn(['column_name' => 'line_category', 'column_value' => 'RETURN']);
-      $service_activity_so = hd_service_activity_header::find_by_oneColumn(['column_name' => 'line_category', 'column_value' => 'ORDER']);
-      ?>
-      <li><?php $f->l_select_field_from_object('pre_repair_activity_rma', $service_activity_return, 'hd_service_activity_header_id', 'activity_name', $$class->pre_repair_activity_rma, 'pre_repair_activity_rma'); ?></li>
-      <li><?php $f->l_select_field_from_object('pre_repair_activity_so', $service_activity_so, 'hd_service_activity_header_id', 'activity_name', $$class->pre_repair_activity_so, 'pre_repair_activity_so'); ?></li>
-      <li><?php $f->l_select_field_from_object('post_repair_activity_rma', $service_activity_return, 'hd_service_activity_header_id', 'activity_name', $$class->post_repair_activity_rma, 'post_repair_activity_rma'); ?></li>
-      <li><?php $f->l_select_field_from_object('post_repair_activity_so', $service_activity_so, 'hd_service_activity_header_id', 'activity_name', $$class->post_repair_activity_so, 'post_repair_activity_so'); ?></li>
-     </ul>
+		 <div><label class="text_area_label"><?php echo gettext('Overview') ?></label>
+				 <?php echo $f->text_area_ap(array('name' => 'overview', 'value' => $$class->overview, 'row_size' => '10', 'column_size' => '90')); ?> 	
+		 </div> 
     </div>
     <div id="tabsHeader-3" class="tabContent">
+		 <div><label class="text_area_label"><?php echo gettext('Objectives') ?></label>
+				 <?php echo $f->text_area_ap(array('name' => 'objectives', 'value' => $$class->objectives, 'row_size' => '10', 'column_size' => '90')); ?> 	
+		 </div> 
+    </div>
+		<div id="tabsHeader-4" class="tabContent">
+		 <div><label class="text_area_label"><?php echo gettext('Structure') ?></label>
+				 <?php echo $f->text_area_ap(array('name' => 'structure', 'value' => $$class->structure, 'row_size' => '10', 'column_size' => '90')); ?> 	
+		 </div> 
+    </div>
+    <div id="tabsHeader-5" class="tabContent">
      <div> 
       <div id="comments">
        <div id="comment_list">
-        <?php echo!(empty($comments)) ? $comments : ""; ?>
+					 <?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
-        <?php
-        $reference_table = 'hd_service_type_header';
-        $reference_id = $$class->hd_service_type_header_id;
-        ?>
+					 <?php
+					 $reference_table = 'lms_subject_header';
+					 $reference_id = $$class->lms_subject_header_id;
+					 ?>
        </div>
        <div id="new_comment">
        </div>
       </div>
      </div>
     </div>
-    <div id="tabsHeader-4" class="tabContent">
+    <div id="tabsHeader-6" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
    </div>
@@ -67,7 +70,7 @@ inoERP
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Service Type Lines') ?></span>
- <form action=""  method="post" id="hd_service_type_line"  name="hd_service_type_line">
+ <form action=""  method="post" id="lms_subject_line"  name="lms_subject_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Order Type') ?></a></li>
@@ -80,32 +83,35 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Billing Type') ?></th>
-        <th><?php echo gettext('Service Activity') ?></th>
+        <th><?php echo gettext('Chapter Name') ?></th>
+        <th><?php echo gettext('Suggested Reading') ?></th>
         <th><?php echo gettext('Description') ?></th>
+				<th><?php echo gettext('Graded ?') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
-       <?php
-       $count = 0;
-       foreach ($hd_service_type_line_object as $hd_service_type_line) {
-        ?>         
-        <tr class="hd_service_type_line<?php echo $count ?>">
-         <td>
-          <?php
-          echo ino_inline_action($hd_service_type_line->hd_service_type_line_id, array('hd_service_type_header_id' => $$class->hd_service_type_header_id));
-          ?>
-         </td>
-         <td><?php $f->seq_field_d($count) ?></td>
-         <td><?php form::text_field_wid2sr('hd_service_type_line_id'); ?></td>
-         <td><?php echo $f->select_field_from_object('billing_type', hd_service_type_header::billing_type(), 'option_line_code', 'option_line_value', $$class_second->billing_type); ?></td>
-         <td><?php echo $f->select_field_from_object('service_activity_id', hd_service_activity_header::find_all(), 'hd_service_activity_header_id', 'activity_name', $$class_second->service_activity_id); ?></td>
-         <td><?php $f->text_field_wid2('description'); ?></td>
-        </tr>
-        <?php
-        $count = $count + 1;
-       }
-       ?>
+					<?php
+					$f = new inoform();
+					$count = 0;
+					foreach ($lms_subject_line_object as $lms_subject_line) {
+					 ?>         
+ 			 <tr class="lms_subject_line<?php echo $count ?>">
+ 				<td>
+						 <?php
+						 echo ino_inline_action($lms_subject_line->lms_subject_line_id, array('lms_subject_header_id' => $$class->lms_subject_header_id));
+						 ?>
+ 				</td>
+ 				<td><?php $f->seq_field_d($count) ?></td>
+ 				<td><?php form::text_field_wid2sr('lms_subject_line_id'); ?></td>
+				<td><?php echo $f->select_field_from_object('lms_chapter_id', lms_chapter::find_all(), 'lms_chapter_id', 'chapter_name', $$class_second->lms_chapter_id , '' , 'xlarge'); ?></td>
+ 				<td><?php $f->text_field_wid2('suggested_reading' , 'xlarge'); ?></td>
+ 				<td><?php $f->text_field_wid2('description' ,'xlarge'); ?></td>
+				<td><?php $f->checkBox_field_wid2('graded_cb'); ?></td>
+ 			 </tr>
+				<?php
+				$count = $count + 1;
+			 }
+			 ?>
       </tbody>
      </table>
     </div>
@@ -117,19 +123,19 @@ inoERP
 
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="hd_service_type_header" ></li>
-  <li class="lineClassName" data-lineClassName="hd_service_type_line" ></li>
+  <li class="headerClassName" data-headerClassName="lms_subject_header" ></li>
+  <li class="lineClassName" data-lineClassName="lms_subject_line" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
-  <li class="primary_column_id" data-primary_column_id="hd_service_type_header_id" ></li>
-  <li class="form_header_id" data-form_header_id="hd_service_type_header" ></li>
+  <li class="primary_column_id" data-primary_column_id="lms_subject_header_id" ></li>
+  <li class="form_header_id" data-form_header_id="lms_subject_header" ></li>
   <li class="line_key_field" data-line_key_field="billing_type" ></li>
   <li class="single_line" data-single_line="false" ></li>
-  <li class="form_line_id" data-form_line_id="hd_service_type_line" ></li>
+  <li class="form_line_id" data-form_line_id="lms_subject_line" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedaderId" data-docHedaderId="hd_service_type_header_id" ></li>
-  <li class="docLineId" data-docLineId="hd_service_type_line_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="hd_service_type_header" ></li>
+  <li class="docHedaderId" data-docHedaderId="lms_subject_header_id" ></li>
+  <li class="docLineId" data-docLineId="lms_subject_line_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="lms_subject_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
   <li class="tbodyClass" data-tbodyClass="form_data_line_tbody" ></li>
   <li class="noOfTabbs" data-noOfTabbs="1" ></li>

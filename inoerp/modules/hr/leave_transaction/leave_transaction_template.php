@@ -69,7 +69,7 @@
       <li><?php $f->l_date_fieldAnyDay('to_date', $$class->to_date); ?></li>
       <li><?php $f->l_text_field_d('reason'); ?></li>
       <li><?php $f->l_text_field_d('contact_details'); ?></li>
-      <li><?php $f->l_number_field('leave_quantity', $$class->leave_quantity); ?></li>
+      <li><label><?php gettext('No Of Days'); ?></label><?php echo $f->number_field('leave_quantity', $$class->leave_quantity); ?></li>
      </ul>
     </div>
    </div> 
