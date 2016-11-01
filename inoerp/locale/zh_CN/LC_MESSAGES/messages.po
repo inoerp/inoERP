@@ -15673,3 +15673,6 @@ msgstr "Auto-Schedule Options"
 
 msgid "Import Requisitions from interface"
 msgstr "Import Requisitions from interface"
+
+msgid "Po Requisition Interface"
+msgstr "Po Requisition Interface"

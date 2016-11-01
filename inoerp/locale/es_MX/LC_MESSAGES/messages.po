@@ -4298,7 +4298,7 @@ msgid "Released Amount"
 msgstr "Importe Liberado"
 
 msgid "Po Requisition Interface Id"
-msgstr "Id Interfase de Requisición del P"
+msgstr "Id Interfase Requisición P"
 
 msgid "Requirement Number"
 msgstr "Número de Requerimiento"
@@ -15672,3 +15672,6 @@ msgstr "Opciones Auto-Programa"
 
 msgid "Import Requisitions from interface"
 msgstr "Importa Requisiciones del Interfase"
+
+msgid "Po Requisition Interface"
+msgstr "Interfase Requisición de P"
