@@ -348,7 +348,15 @@
 //	}
 //	return $this->msg;
 // }
+
+  public static function staticVar_init($staticvar) {
+   foreach (self::${$staticvar} as $key => $value) {
+    self::${$staticvar}[$key] = gettext(trim($value));
+   }
+  }
+ 
  }
 
 //end of po_requisition_header class
+po_requisition_header::staticVar_init('po_requisition_type_a');
 ?>

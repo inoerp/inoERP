@@ -160,7 +160,7 @@ msgstr "Id Org de Producción"
 msgid "Ap Payment Header Id"
 msgstr "Id Encabezado de Pago CP"
 
-msgid "BU Org Id"
+msgid "Bu Org Id"
 msgstr "Id Org UDN"
 
 msgid "Payment Type"
@@ -242,7 +242,7 @@ msgid "Supplier Site Name"
 msgstr "Nom Lugar Proveedor"
 
 msgid "Supplier Site Number"
-msgstr "Número del Lugar del Proveedor"
+msgstr "Núm Lugar del Proveedor"
 
 msgid "From Bank Line Id"
 msgstr "Id Linea Del Banco"
@@ -4172,13 +4172,13 @@ msgid "Agreement End Date"
 msgstr "Fecha Final Acuerdo"
 
 msgid "Po Requisition Header Id"
-msgstr "Id Encabezado de Requisición del P"
+msgstr "Id Encab Requisición P"
 
 msgid "Po Requisition Type"
 msgstr "Tipo de Requisición del P"
 
 msgid "Po Requisition Number"
-msgstr "Número de Requisición del P"
+msgstr "Núm de Requisición del P"
 
 msgid "Requisition Status"
 msgstr "Estado de la Requisición"
@@ -4187,7 +4187,7 @@ msgid "Po Requisition Line Id"
 msgstr "Id Linea de Requisición del P"
 
 msgid "Po Requisition Line Number"
-msgstr "Número de Linea de Requisición del P"
+msgstr "Núm de Linea Requisición del P"
 
 msgid "Bpa Po Line Id"
 msgstr "Id Linea de P del ACG"
@@ -15645,3 +15645,30 @@ msgstr "Detalles Org Inventario"
 
 msgid "Inventory Org Types"
 msgstr "Tipos Org Inventario"
+
+msgid "Po Requisition Header"
+msgstr "Encab Requisición P"
+
+msgid "External"
+msgstr "Externa"
+
+msgid "Internal"
+msgstr "Interna"
+
+msgid "Supply Org Id"
+msgstr "Id Org de Suministro"
+
+msgid "Po Requisition All V"
+msgstr "V Todas Requisiciones de P"
+
+msgid "Import Requisitions"
+msgstr "Importa Requisiciones"
+
+msgid "Program Parameters"
+msgstr "Programa Parámetros"
+
+msgid "Auto-Schedule Options"
+msgstr "Opciones Auto-Programa"
+
+msgid "Import Requisitions from interface"
+msgstr "Importa Requisiciones del Interfase"

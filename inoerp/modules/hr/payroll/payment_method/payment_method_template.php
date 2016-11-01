@@ -19,7 +19,7 @@
         </li>
         <li><?php $f->l_text_field_d('payment_method'); ?> 					</li>
         <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly) ?>        </li> 
-        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', '', 1, $readonly1); ?>        </li>
+        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'currency', '', 1, $readonly1, '', '', '', '', 'SORT'); ?>        </li>
         <li><?php $f->l_select_field_from_object('payment_type', hr_payroll_payment_method::payment_method_type(), 'option_line_code', 'option_line_value', $$class->payment_type, 'payment_type', '', 1, $readonly1); ?>        </li>
         <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>
         <li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date); ?> 	</li>

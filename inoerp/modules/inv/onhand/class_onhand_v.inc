@@ -286,7 +286,7 @@ GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator
 
  public static function staticVar_init($staticvar) {
   foreach (self::${$staticvar} as $key => $value) {
-   self::${$staticvar}[$key] = gettext($value);
+   self::${$staticvar}[$key] = gettext(trim($value));
   }
  }
 

@@ -2008,9 +2008,14 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   echo $this->radio_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $divClass, $required, $readonly, $nonArrayName, $disabled);
  }
 
- public function select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
+ public function select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '', $sort = '') {
  $value = htmlentities($value, ENT_QUOTES, 'UTF-8');
   $objectValueKey = strtolower($objectValueKey);
+  if ($sort != '') {//Sort currency codes, or any other list to speed up finding them.
+  	usort($object, function ($a, $b) use ($objectValueKey) { 
+  	 return $a->$objectValueKey <=> $b->$objectValueKey; 
+  	});
+  }
   if ($nonArrayName == 1) {
    $bracketName = $name;
   } else {
@@ -2079,9 +2084,9 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   return $element_select_field;
  }
 
- public function l_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
+ public function l_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '', $sort = '') {
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
-  echo $this->select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $id, $divClass, $required, $readonly, $convertToText, $nonArrayName, $disabled, $dataname);
+  echo $this->select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $id, $divClass, $required, $readonly, $convertToText, $nonArrayName, $disabled, $dataname, $sort);
  }
 
  public function l_select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {

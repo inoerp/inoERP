@@ -66,7 +66,7 @@ if ((!empty($class_names)) && (!empty($program_name))) {
  $hidden_field_a = ['program_name' => $program_name];
  $program_parameters = $program_name . '_parameters';
  $program_details_n = $program_name . '_details';
- $program_details = $$class->$program_details_n;
+ $program_details = $$class->$program_details_n != null ? $$class->$program_details_n : $$class::$$program_details_n; //To allow the use of class static properties.
  $program_name = $program_details['name'];
  $s->setProperty('_searching_class', $class);
  $s->setProperty('_form_name', 'program_header');

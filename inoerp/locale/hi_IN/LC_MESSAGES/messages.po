@@ -158,7 +158,7 @@ msgstr "उत्पादन संगठन आईडी"
 msgid "Ap Payment Header Id"
 msgstr "एपी भुगतान हैडर पहचान पत्र"
 
-msgid "BU Org Id"
+msgid "Bu Org Id"
 msgstr "बू संगठन आईडी"
 
 msgid "Payment Type"
@@ -15643,3 +15643,30 @@ msgstr "Inventory Org Details"
 
 msgid "Inventory Org Types"
 msgstr "Inventory Org Types"
+
+msgid "Po Requisition Header"
+msgstr "Po Requisition Header"
+
+msgid "External"
+msgstr "External"
+
+msgid "Internal"
+msgstr "Internal"
+
+msgid "Supply Org Id"
+msgstr "Supply Org Id"
+
+msgid "Po Requisition All V"
+msgstr "Po Requisition All V"
+
+msgid "Import Requisitions"
+msgstr "Import Requisitions"
+
+msgid "Program Parameters"
+msgstr "Program Parameters"
+
+msgid "Auto-Schedule Options"
+msgstr "Auto-Schedule Options"
+
+msgid "Import Requisitions from interface"
+msgstr "Import Requisitions from interface"
