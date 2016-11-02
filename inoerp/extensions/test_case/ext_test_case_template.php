@@ -11,29 +11,29 @@
 			<?php echo (!empty($show_message)) ? $show_message : ""; ?> 
 			<!--    End of place for showing error messages-->
 
-			<div id ="form_header"><span class="heading">Item Cost Header </span>
+			<div id ="form_header"><span class="heading"><?php echo gettext('Item Cost Header') ?> </span>
 			 <form action=""  method="post" id="ext_test_case_header"  name="ext_test_case_header">
 				<div id="tabsHeader">
          <ul class="tabMain">
-          <li><a href="#tabsHeader-1">Basic Info</a></li>
-          <li><a href="#tabsHeader-2">Notes</a></li>
-					<li><a href="#tabsHeader-3">Attachments</a></li>
+          <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
+          <li><a href="#tabsHeader-2"><?php echo gettext('Notes') ?></a></li>
+					<li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
 				 </ul>
 				 <div class="tabContainer">
 					<div id="tabsHeader-1" class="tabContent">
 					 <div class="large_shadow_box"> 
 						<ul class="column five_column">
 						 <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="sd_delivery_header_id select_popup clickable">
-							 Header Id 	</label><?php echo form::text_field_dsr('ext_test_case_header_id'); ?><a name="show" href="form.php?class_name=ext_test_case_header" class="show ext_test_case_header clickable">
+							 <?php echo gettext('Header Id') ?> 	</label><?php echo form::text_field_dsr('ext_test_case_header_id'); ?><a name="show" href="form.php?class_name=ext_test_case_header" class="show ext_test_case_header clickable">
 							 <img src="<?php echo HOME_URL; ?>themes/images/refresh.png"/></a> 
 						 </li>
-						 <li><label>Module Name </label>
+						 <li><label><?php echo gettext('Module Name') ?> </label>
 							<?php echo $f->text_field_dm('module_name'); ?>
 						 </li>
-						 <li><label>Name </label>
+						 <li><label><?php echo gettext('Name') ?> </label>
 							<?php echo $f->text_field_dm('name'); ?>
 						 </li>
-						 <li><label>Description </label>
+						 <li><label><?php echo gettext('Description') ?> </label>
 							<?php echo $f->text_field_d('description'); ?>
 						 </li>
 						</ul>
@@ -61,7 +61,7 @@
 						 <div id="file_upload_form">
 							<ul class="inRow asperWidth">
 							 <li><input type="file" id="attachments" class="attachments" name="attachments[]" multiple/></li>
-							 <li> <input type="button" value="Attach" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
+							 <li> <input type="button" value="<?php echo gettext('Attach') ?>" form="file_upload" name="attach_submit" id="attach_submit" class="submit button"></li>
 							 <li class="show_loading_small"><img alt="Loading..." src="<?php echo HOME_URL; ?>themes/images/small_loading.gif"/></li>
 							</ul>
 						 </div>
@@ -76,23 +76,23 @@
 			 </form>
 			</div>
 
-			<div id="form_line" class="form_line"><span class="heading">Cost Lines</span>
+			<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Cost Lines') ?></span>
 			 <form action=""  method="post" id="po_site"  name="ext_test_case_line">
 				<div id="tabsLine">
 				 <ul class="tabMain">
-					<li><a href="#tabsLine-1">Basic</a></li>
+					<li><a href="#tabsLine-1"><?php echo gettext('Basic') ?></a></li>
 					</ul>
 				 <div class="tabContainer">
 					<div id="tabsLine-1" class="tabContent">
 					 <table class="form_line_data_table">
 						<thead> 
 						 <tr>
-							<th>Action</th>
-							<th>Line Id</th>
-							<th>Line Number</th>
-							<th>Step Action</th>
-							<th>Input</th>
-							<th>Expected Result</th>
+							<th>><?php echo gettext('Action') ?></th>
+							<th>><?php echo gettext('Line Id') ?></th>
+							<th>><?php echo gettext('Line Number') ?></th>
+							<th>><?php echo gettext('Step Action') ?></th>
+							<th>><?php echo gettext('Input') ?></th>
+							<th>><?php echo gettext('Expected Result') ?></th>
 						 </tr>
 						</thead>
 						<tbody class="form_data_line_tbody">

@@ -3,7 +3,7 @@ if (!empty($msg)) {
  $show_message = '<div id="dialog_box">';
  foreach ($msg as $key => $value) {
   $x = $key + 1;
-  $show_message .= 'Message ' . $x . ' : ' . $value . '<br />';
+  $show_message .= gettext('Message') . ' ' . $x . ' : ' . gettext($value) . '<br />';
  }
  $show_message .= '</div>';
 }
@@ -45,7 +45,7 @@ if (!empty($msg)) {
  });</script>
 <div id="erp_form_area_ms">
  <div id="multi_select"><span class="heading">
-   <span class="heading"><?php echo ucwords(str_replace('_', ' ', $action_message)) . ' - ' . ucwords(str_replace('_', ' ', $class)); ?></span>
+   <span class="heading"><?php echo gettext(ucwords(str_replace('_', ' ', $action_message))) . ' - ' . gettext(ucwords(str_replace('_', ' ', $class))); ?></span>
    <?php echo (!empty($show_message)) ? $show_message : ""; ?> 
    <div id="list_contents">
     <!--			Beginning of line form-->
@@ -86,7 +86,7 @@ if (!empty($msg)) {
          $no_of_tab_count = 0;
         }
         for ($i = 0; $i < $no_of_tabs; $i++) {
-         echo "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
+         echo "<li><a href=\"#tabsLine-$i\">" . gettext('Tab No') . " $i </a></li>";
         }
         ?>
        </ul>
@@ -103,9 +103,9 @@ if (!empty($msg)) {
              if ($i == 0) {
               echo "<th>" . gettext('Select') . "</th>";
              }
-             echo "<th>Seq#</th>";
+             echo "<th>" . gettext('Seq') . "#</th>";
              if (($i == 0) && (!empty($multi_selct_input_fields) && !is_array($multi_selct_input_fields))) {
-              echo '<th>Line Action</th>';
+              echo '<th>' . gettext('Line Action') . '</th>';
              }
              $new_start = ($i * ($no_of_columns_per_tab - 1)) + $i;
              $new_end = $new_start + ($no_of_columns_per_tab - 1);
@@ -115,11 +115,11 @@ if (!empty($msg)) {
               }
               if (($i == 0) && ($multi_select_select_fields_header_not_shown) && !empty($multi_select_select_fields) && is_array($multi_select_select_fields)) {
                foreach ($multi_select_select_fields as $mssf_key => $mssf_val) {
-                echo '<th>' . ucwords(str_replace('_', ' ', $mssf_key)) . '</th>';
+                echo '<th>' . gettext(ucwords(str_replace('_', ' ', $mssf_key))) . '</th>';
                }
                $multi_select_select_fields_header_not_shown = false;
               }
-              echo '<th>' . ucwords(str_replace('_', ' ', $all_columns[$j])) . '</th>';
+              echo '<th>' . gettext(ucwords(str_replace('_', ' ', $all_columns[$j]))) . '</th>';
              }
              if (!empty($multi_select_tabs) && ($i == $no_of_tabs - 1)) {
               echo $multi_select_tabs['tab_header'];
@@ -182,7 +182,7 @@ if (!empty($msg)) {
                  } else {
                   $value = $records->$all_columns[$k];
                  }
-                 echo "<td><input type=\"text\" name=\"$bracketName\" class=\"$div_class_name text $all_columns[$k]\" value=\"$value\" $readonly size=\"12\"> </td>";
+                 echo "<td><input type=\"text\" name=\"$bracketName\" class=\"$div_class_name text $all_columns[$k]\" value=\"" . gettext($value) . "\" $readonly size=\"12\"> </td>";
                 } else {
                  echo "<td><input type=\"text\" name=\"$bracketName\" class=\"$div_class_name text $all_columns[$k]\" value=\" \" $readonly size=\"12\"> </td>";
                 }

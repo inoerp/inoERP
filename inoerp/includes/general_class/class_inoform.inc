@@ -2077,7 +2077,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   }
 
   if ($convertToText == 1) {
-   $element_select_field .= "<option value=\"newentry\"  class=\"bold blue\">New Entry</option>";
+   $element_select_field .= "<option value=\"newentry\"  class=\"bold blue\">" . gettext('New Entry') . "</option>";
   }
   $element_select_field .= '</select>';
 
@@ -2391,7 +2391,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $stmt_rtn .= '<div id="tabsLine">
  <ul class="tabMain">';
   for ($i = 0; $i < $no_of_tabs; $i++) {
-   $stmt_rtn .= "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
+   $stmt_rtn .= "<li><a href=\"#tabsLine-$i\">" . gettext('Tab No') . " $i </a></li>";
   }
   $stmt_rtn .= ' </ul>
  <div class="tabContainer"> ';

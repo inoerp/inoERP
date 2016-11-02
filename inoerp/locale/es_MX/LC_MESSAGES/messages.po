@@ -3551,7 +3551,7 @@ msgid "Stockable Cb"
 msgstr "Cv Almacenable"
 
 msgid "Transactable Cb"
-msgstr "Cv Permite Transacciones"
+msgstr "Cv Gestionable"
 
 msgid "Reservable Cb"
 msgstr "Cv Reservable"
@@ -4028,7 +4028,7 @@ msgid "Reservable On Hand"
 msgstr "En Existencia Reservable"
 
 msgid "Transactable On Hand"
-msgstr "En Existencia Transaccional"
+msgstr "En Existencia Gestionable"
 
 msgid "Lot Status"
 msgstr "Estado de Lote"
@@ -7319,7 +7319,7 @@ msgid "ASL Document"
 msgstr "Documento de LPA"
 
 msgid "Search Blanket"
-msgstr "Busca Autoriza Abiertas"
+msgstr "Busca Autorizaciones Abiertas"
 
 msgid "form.php?class_name=sys_hold&mode=9"
 msgstr "form.php?class_name=sys_hold&mode=9"
@@ -9100,8 +9100,8 @@ msgstr "Info de P"
 msgid "Receipt"
 msgstr "Recibo"
 
-msgid "Line #"
-msgstr "# de Linea"
+msgid "Line#"
+msgstr "# Linea"
 
 msgid "PO #"
 msgstr "# de P"
@@ -9766,17 +9766,11 @@ msgstr "Transacción del Trabajo Sin Orden"
 msgid "WOL Transaction Details"
 msgstr "Detalles de la Transacción del TSO"
 
-msgid "Line "
-msgstr "Linea "
+msgid "PO Line"
+msgstr "Linea de P"
 
-msgid "PO "
-msgstr "P "
-
-msgid "PO Line "
-msgstr "Linea del P "
-
-msgid "Shipment "
-msgstr "Envío "
+msgid "Shipment"
+msgstr "Envío"
 
 msgid "Supplier "
 msgstr "Proveedor "
@@ -11473,8 +11467,8 @@ msgstr "De Org"
 msgid "RFID Reference"
 msgstr "Referencia IDRF"
 
-msgid " is is Successfully Opened"
-msgstr " Fue Abierta Exitosamente"
+msgid "is Successfully Opened"
+msgstr "fue Abierto Exitosamente"
 
 msgid "Existing & Available Periods"
 msgstr "Periodos Existentes y Disponibles"
@@ -14474,7 +14468,7 @@ msgid "All Elements"
 msgstr "Todos los Elementos"
 
 msgid "Data To Search..."
-msgstr "Dato A Buscar..."
+msgstr "Dato a Buscar..."
 
 msgid "Go!"
 msgstr "¡Ir!"
@@ -14585,7 +14579,7 @@ msgid "Qa Cp Assignment Header"
 msgstr "Encabezado Asignación PR AC"
 
 msgid "Quality Result"
-msgstr "Busca Especificación"
+msgstr "Resultado de Calidad"
 
 msgid "Extensions"
 msgstr "Extensiones"
@@ -15675,3 +15669,69 @@ msgstr "Importa Requisiciones del Interfase"
 
 msgid "Po Requisition Interface"
 msgstr "Interfase Requisición de P"
+
+msgid "Supplier Balance"
+msgstr "Balance del Proveedor"
+
+msgid "Supplier Volume"
+msgstr "Volumen del Proveedor"
+
+msgid "Remove Product"
+msgstr "Eliminar Producto"
+
+msgid "Select To Transact"
+msgstr "Selec Para Gestionar"
+
+msgid "Purchasing Reports"
+msgstr "Reportes de Compras"
+
+msgid "Setup - Purchasing"
+msgstr "Configuración - Compras"
+
+msgid "Quality Collection Plan"
+msgstr "Plan de Recopilación de Calidad"
+
+msgid "Quality Setup"
+msgstr "Configuración de Calidad"
+
+msgid "Tab No"
+msgstr "Sep No"
+
+msgid "Select Supplier Name"
+msgstr "Selec Nom de Proveedor"
+
+msgid "Select All"
+msgstr "Selec Todo"
+
+msgid "Deselect All"
+msgstr "Deselec Todo"
+
+msgid "Component Name"
+msgstr "Nom de Componente"
+
+msgid "Component Value"
+msgstr "Valor de Componente"
+
+msgid "Hierarchy Lines"
+msgstr "Lineas de Jerarquía"
+
+msgid "Starting Position"
+msgstr "Puesto Inicial"
+
+msgid "Lot Numbers"
+msgstr "Núm de Lotes"
+
+msgid "Serial Numbers"
+msgstr "Números de Serie"
+
+msgid "WIP Completion"
+msgstr "Terminación de TEP"
+
+msgid "Manual"
+msgstr "Manual"
+
+msgid "System Generated"
+msgstr "Generado p/Sistema"
+
+msgid "New Entry"
+msgstr "Nueva Entrada"

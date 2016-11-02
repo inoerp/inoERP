@@ -9764,16 +9764,13 @@ msgstr "आदेश कम ट्रांजेक्शन के काम"
 msgid "WOL Transaction Details"
 msgstr "WOL लेन-देन का विवरण"
 
-msgid "Line "
-msgstr "लाइन"
-
-msgid "PO "
+msgid "PO"
 msgstr "पीओ"
 
-msgid "PO Line "
+msgid "PO Line"
 msgstr "पीओ लाइन"
 
-msgid "Shipment "
+msgid "Shipment"
 msgstr "शिपमेंट"
 
 msgid "Supplier "
@@ -11471,7 +11468,7 @@ msgstr "संगठन से"
 msgid "RFID Reference"
 msgstr "आरएफआईडी संदर्भ"
 
-msgid " is is Successfully Opened"
+msgid "is Successfully Opened"
 msgstr "सफलतापूर्वक खोला है"
 
 msgid "Existing & Available Periods"
@@ -15673,3 +15670,69 @@ msgstr "Import Requisitions from interface"
 
 msgid "Po Requisition Interface"
 msgstr "Po Requisition Interface"
+
+msgid "Supplier Balance"
+msgstr "Supplier Balance"
+
+msgid "Supplier Volume"
+msgstr "Supplier Volume"
+
+msgid "Remove Product"
+msgstr "Remove Product"
+
+msgid "Select To Transact"
+msgstr "Select To Transact"
+
+msgid "Purchasing Reports"
+msgstr "Purchasing Reports"
+
+msgid "Setup - Purchasing"
+msgstr "Setup - Purchasing"
+
+msgid "Quality Collection Plan"
+msgstr "Quality Collection Plan"
+
+msgid "Quality Setup"
+msgstr "Quality Setup"
+
+msgid "Tab No"
+msgstr "Tab No"
+
+msgid "Select Supplier Name"
+msgstr "Select Supplier Name"
+
+msgid "Select All"
+msgstr "Select All"
+
+msgid "Deselect All"
+msgstr "Deselect All"
+
+msgid "Component Name"
+msgstr "Component Name"
+
+msgid "Component Value"
+msgstr "Component Value"
+
+msgid "Hierarchy Lines"
+msgstr "Hierarchy Lines"
+
+msgid "Starting Position"
+msgstr "Starting Position"
+
+msgid "Lot Numbers"
+msgstr "Lot Numbers"
+
+msgid "Serial Numbers"
+msgstr "Serial Numbers"
+
+msgid "WIP Completion"
+msgstr "WIP Completion"
+
+msgid "Manual"
+msgstr "Manual"
+
+msgid "System Generated"
+msgstr "System Generated"
+
+msgid "New Entry"
+msgstr "New Entry"

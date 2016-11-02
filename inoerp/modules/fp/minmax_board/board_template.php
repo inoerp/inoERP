@@ -86,7 +86,7 @@ $trnx_a = ['SUB_INV' => 'Subinventory Transfer', 'PUR_REQ' => 'Purchase Requisit
 
     echo "<div class='panel panel-default {$bgcolor} parent draggable_element medium'>";
     echo '<div class="panel-heading">
-     <h3 class="panel-title"><input type="checkbox" name="data_loader_element" class="data_loader checkBox" title="Select To Transact" value="" >&nbsp;' . $recod->item_number . ' - ' . $recod->item_description . '</h3>
+     <h3 class="panel-title"><input type="checkbox" name="data_loader_element" class="data_loader checkBox" title="' . gettext('Select To Transact') . '" value="" >&nbsp;' . $recod->item_number . ' - ' . $recod->item_description . '</h3>
       <div class="progress">
   <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" 
     aria-valuenow="' . $height_p . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . $height_p . '%" title="' . $height_p . '">

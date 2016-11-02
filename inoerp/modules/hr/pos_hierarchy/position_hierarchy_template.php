@@ -1,8 +1,8 @@
 <div id ="form_header">
- <form method="post" id="hr_pos_hierarchy_header"  name="hr_pos_hierarchy_header"><span class="heading">Position Hierarchy </span>
+ <form method="post" id="hr_pos_hierarchy_header"  name="hr_pos_hierarchy_header"><span class="heading"><?php echo gettext('Position Hierarchy') ?> </span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -12,11 +12,11 @@
        <a name="show" href="form.php?class_name=hr_pos_hierarchy_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_pos_hierarchy_header_id">
         <i class="fa fa-refresh"></i></a> 
       </li>
-      <li><label>Name</label><?php $f->text_field_d('hierarchy_name'); ?></li>
-      <li><label>Starting Position</label><?php echo $f->select_field_from_object('starting_position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $$class->starting_position_id, 'starting_position_id', '', 1, $readonly); ?>   </li>
-      <li><label>Description</label><?php $f->text_field_dl('description'); ?> </li>
-      <li><label>Start Date</label><?php echo $f->date_fieldAnyDay('effective_date', $$class->effective_date); ?> </li>
-      <li><label>Revision</label><?php echo $f->number_field('revision', $$class->revision); ?></li>
+      <li><label><?php echo gettext('Name') ?></label><?php $f->text_field_d('hierarchy_name'); ?></li>
+      <li><label><?php echo gettext('Starting Position') ?></label><?php echo $f->select_field_from_object('starting_position_id', hr_position::find_all(), 'hr_position_id', 'position_name', $$class->starting_position_id, 'starting_position_id', '', 1, $readonly); ?>   </li>
+      <li><label><?php echo gettext('Description') ?></label><?php $f->text_field_dl('description'); ?> </li>
+      <li><label><?php echo gettext('Start Date') ?></label><?php echo $f->date_fieldAnyDay('effective_date', $$class->effective_date); ?> </li>
+      <li><label><?php echo gettext('Revision') ?></label><?php echo $f->number_field('revision', $$class->revision); ?></li>
      </ul>
     </div>
    </div>
@@ -24,22 +24,22 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Hierarchy Lines </span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Hierarchy Lines') ?> </span>
  <form action=""  method="post" id="hr_pos_hierarchy_line"  name="hr_pos_hierarchy_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Main</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Line Id</th>
-        <th>Position</th>
-        <th>Start Date</th>
-        <th>End Date</th>
+        <th><?php echo gettext('Action') ?></th>
+        <th><?php echo gettext('Line Id') ?></th>
+        <th><?php echo gettext('Position') ?></th>
+        <th><?php echo gettext('Start Date') ?></th>
+        <th><?php echo gettext('End Date') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

@@ -9768,17 +9768,14 @@ msgstr "أمر عمل أقل حركة"
 msgid "WOL Transaction Details"
 msgstr "تفاصيل الصفقة WOL"
 
-msgid "Line "
-msgstr "خط "
+msgid "PO"
+msgstr "ص. ب."
 
-msgid "PO "
-msgstr "ص. ب. "
+msgid "PO Line"
+msgstr "بو خط"
 
-msgid "PO Line "
-msgstr "بو خط "
-
-msgid "Shipment "
-msgstr "الشحنة "
+msgid "Shipment"
+msgstr "الشحنة"
 
 msgid "Supplier "
 msgstr "المورد "
@@ -11475,8 +11472,8 @@ msgstr "From Org"
 msgid "RFID Reference"
 msgstr "RFID Reference"
 
-msgid " is is Successfully Opened"
-msgstr " is is Successfully Opened"
+msgid "is Successfully Opened"
+msgstr "is Successfully Opened"
 
 msgid "Existing & Available Periods"
 msgstr "Existing & Available Periods"
@@ -15677,3 +15674,69 @@ msgstr "Import Requisitions from interface"
 
 msgid "Po Requisition Interface"
 msgstr "Po Requisition Interface"
+
+msgid "Supplier Balance"
+msgstr "Supplier Balance"
+
+msgid "Supplier Volume"
+msgstr "Supplier Volume"
+
+msgid "Remove Product"
+msgstr "Remove Product"
+
+msgid "Select To Transact"
+msgstr "Select To Transact"
+
+msgid "Purchasing Reports"
+msgstr "Purchasing Reports"
+
+msgid "Setup - Purchasing"
+msgstr "Setup - Purchasing"
+
+msgid "Quality Collection Plan"
+msgstr "Quality Collection Plan"
+
+msgid "Quality Setup"
+msgstr "Quality Setup"
+
+msgid "Tab No"
+msgstr "Tab No"
+
+msgid "Select Supplier Name"
+msgstr "Select Supplier Name"
+
+msgid "Select All"
+msgstr "Select All"
+
+msgid "Deselect All"
+msgstr "Deselect All"
+
+msgid "Component Name"
+msgstr "Component Name"
+
+msgid "Component Value"
+msgstr "Component Value"
+
+msgid "Hierarchy Lines"
+msgstr "Hierarchy Lines"
+
+msgid "Starting Position"
+msgstr "Starting Position"
+
+msgid "Lot Numbers"
+msgstr "Lot Numbers"
+
+msgid "Serial Numbers"
+msgstr "Serial Numbers"
+
+msgid "WIP Completion"
+msgstr "WIP Completion"
+
+msgid "Manual"
+msgstr "Manual"
+
+msgid "System Generated"
+msgstr "System Generated"
+
+msgid "New Entry"
+msgstr "New Entry"

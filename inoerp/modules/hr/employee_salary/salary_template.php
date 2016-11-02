@@ -27,18 +27,18 @@
  <form action=""  method="post" id="hr_element_entry_line"  name="hr_element_entry_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Main</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Component Name</th>
-        <th>Component Value</th>
-        <th>Monetary Value</th>
-        <th>Inactive Date</th>
-        <th>Description</th>
+        <th><?php echo gettext('Component Name') ?></th>
+        <th><?php echo gettext('Component Value') ?></th>
+        <th><?php echo gettext('Monetary Value') ?></th>
+        <th><?php echo gettext('Inactive Date') ?></th>
+        <th><?php echo gettext('Description') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

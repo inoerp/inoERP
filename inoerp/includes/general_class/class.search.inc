@@ -125,7 +125,7 @@ class search extends dbObject {
   $search_result .= '<div id="tabsLine">
 				 <ul class="tabMain">';
   for ($i = 0; $i < $no_of_tabs; $i++) {
-   $search_result .= "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
+   $search_result .= "<li><a href=\"#tabsLine-$i\">" . gettext('Tab No') . " $i </a></li>";
   }
   $search_result .= ' </ul>
 				 <div class="tabContainer"> ';
@@ -238,7 +238,7 @@ class search extends dbObject {
   $search_result .= '<div id="tabsLine">
 				 <ul class="tabMain">';
   for ($i = 0; $i < $no_of_tabs; $i++) {
-   $search_result .= "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
+   $search_result .= "<li><a href=\"#tabsLine-$i\">" . gettext('Tab No') . " $i </a></li>";
   }
   $search_result .= ' </ul>
 				 <div class="tabContainer"> ';
