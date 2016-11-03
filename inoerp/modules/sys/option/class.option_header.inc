@@ -146,7 +146,7 @@ class option_header extends dbObject {
  Public static function currencies() {
   $option_header = self::find_by_name('CURRENCY');
   $ol = new option_line();
-  $currencies = $ol->findBy_parentId($option_header->option_header_id, 'option_line_value');
+  $currencies = $ol->findBy_parentId($option_header->option_header_id, 'option_line_code');
   return $currencies;
  }
 
