@@ -45,7 +45,7 @@
     <div id="tabsLine-2" class="tabContent">
      <div> 
       <ul class="column header_field">
-       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', $readonly, '', '', '', '', 'SORT'); ?>       </li>
+       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $$class->payment_term_id, 'payment_term_id', $readonly, '', ''); ?>       </li>
        <li><?php $f->l_text_field_d('finance_profile_id'); ?> </li>
        <li><?php $f->l_text_field_d('payment_method_id'); ?> </li>

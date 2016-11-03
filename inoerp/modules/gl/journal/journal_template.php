@@ -22,7 +22,7 @@ if (!isset($readonly1)) {
         <i class="fa fa-refresh"></i></a> </li>
       <li><?php $f->l_select_field_from_object('ledger_id', gl_ledger::find_all(), 'gl_ledger_id', 'ledger', $$class->ledger_id, 'ledger_id', '', 1, $readonly1); 
       echo $f->hidden_field_withId('coa_id', $$class->coa_id);    ?></li>
-      <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'ledger_currency', '', 1, 1, '', '', '', '', 'SORT'); ?>  </li>
+      <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->currency, 'ledger_currency', '', 1, 1); ?>  </li>
       <li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class->doc_currency, 'doc_currency', '', 1, $readonly1); ?>  </li>
       <li><label>Period Name(3)</label><?php echo $period_name_stmt; ?></li>
       <li><?php $f->l_date_fieldFromToday_m('document_date', $$class->document_date) ?></li>

@@ -40,7 +40,7 @@
        <li><?php $f->l_text_field_d('buyer'); ?></li>
        <li><?php $f->l_text_field_d('description'); ?></li>
         <li><?php $f->l_text_field_d('rev_number'); ?></li>
-        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, $readonly, '', '', '', '', 'SORT'); ?>        </li>
+        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', 1, $readonly); ?>        </li>
         <li><?php $f->l_text_field_d('exchange_rate_type'); ?></li>
         <li><?php $f->l_text_field_d('exchange_rate'); ?></li>
         <li><?php $f->l_text_field_d('header_amount'); ?></li>

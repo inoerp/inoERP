@@ -29,7 +29,7 @@ inoERP
        <li><?php $f->l_text_field_dm('opportunity_subject'); ?> 					</li>
        <li><?php $f->l_select_field_from_array('status', sd_opportunity::$status_a, $$class->status, 'status', '', '', 1, 1); ?> 					</li>
        <li><?php $f->l_number_field('win_probability', $$class->win_probability); ?> 					</li>
-       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', '', '', '', '', '', '', 'SORT'); ?></li>
+       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, 'currency', '', '', ''); ?></li>
        <li><?php $f->l_number_field('forecast_amount', $$class->forecast_amount); ?> 					</li>
        <li><?php $f->l_date_fieldFromToday('expected_close_date', $$class->expected_close_date); ?> 					</li>
        <li><?php $f->l_text_field_d('referral_source'); ?> 					</li>

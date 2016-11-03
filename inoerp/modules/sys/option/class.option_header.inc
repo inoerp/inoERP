@@ -147,6 +147,9 @@ class option_header extends dbObject {
   $option_header = self::find_by_name('CURRENCY');
   $ol = new option_line();
   $currencies = $ol->findBy_parentId($option_header->option_header_id, 'option_line_value');
+  usort($currencies, function ($a, $b) {
+  	return $a->option_line_code <=> $b->option_line_code;
+  });
   return $currencies;
  }
 

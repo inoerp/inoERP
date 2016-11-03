@@ -112,7 +112,7 @@
     <div id="tabsLine-2" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field"> 
-       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $supplier_site->currency, 'currency', '', '', $readonly, '', '', '', '', 'SORT'); ?>       </li>
+       <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $supplier_site->currency, 'currency', '', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $supplier_site->payment_term_id, 'payment_term_id', $readonly, '', ''); ?>       </li>
        <li><?php $f->l_checkBox_field('debit_memo_onreturn_cb', $$class_second->debit_memo_onreturn_cb); ?>       </li> 
        <li><?php $f->l_text_field('pay_on', $$class_second->pay_on); ?></li>
