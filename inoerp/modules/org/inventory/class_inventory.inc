@@ -133,7 +133,7 @@
    '_update_action_meassge' => 'Update',
    '_show_view_path' => 1,
   ];
-  public $pageTitle = " Inventory Org - Create &amp; Update Different Inventory Orgs"; //page Title
+  public $pageTitle = " Inventory Org - Create & Update Different Inventory Orgs"; //page Title
   public $option_lists = [
    'inventory_org_types' => 'ORG_TYPE',
    'costing_methods' => 'COSTING_METHODS'

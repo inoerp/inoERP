@@ -23,7 +23,7 @@ class fp_reports extends dbObject {
  ];
  public $dateField = [
  ];
- public $pageTitle = " Forecast &amp; Planning Reports "; //page Title
+ public $pageTitle = " Forecast & Planning Reports "; //page Title
  public $onhand_id;
  public $item_number;
  public $item_description;

@@ -56,7 +56,7 @@
   ];
   public $fields_inForm_notInDataBase = [
   ];
-  public $pageTitle = " Source List - Forecast &amp; Planning  "; //page Title
+  public $pageTitle = " Source List - Forecast & Planning  "; //page Title
   public $search = [
    '_show_update_path' => 1,
    '_update_action_meassge' => 'Update',

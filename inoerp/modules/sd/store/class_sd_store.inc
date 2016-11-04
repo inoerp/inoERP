@@ -71,7 +71,7 @@ class sd_store extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Stores - Create &amp; Update Different Stores"; //page Title
+ public $pageTitle = " Stores - Create & Update Different Stores"; //page Title
  public $sd_store_id;
  public $org_id;
  public $store_name;

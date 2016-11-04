@@ -15752,5 +15752,5 @@ msgstr "Select value of"
 msgid "Specifications"
 msgstr "Specifications"
 
-msgid "Option - Create &amp; Update Different Options and Values"
-msgstr "Option - Create &amp; Update Different Options and Values"
+msgid "Option - Create & Update Different Options and Values"
+msgstr "Option - Create & Update Different Options and Values"

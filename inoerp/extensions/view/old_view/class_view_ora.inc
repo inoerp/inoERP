@@ -97,7 +97,7 @@
    '_show_update_path' => 1,
    '_show_view_ora_path' => 1,
   ];
-  public $pageTitle = " view_oras "; //page Title
+  public $pageTitle = " View Oras "; //page Title
   public $all_table_names;
   public $view_ora_id;
   public $view_ora_name;

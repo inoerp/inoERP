@@ -74,7 +74,7 @@ class bom_material_element extends dbObject {
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Material Element - Create &amp; Update BOM Material Element "; //page Title
+ public $pageTitle = " Material Element - Create & Update BOM Material Element "; //page Title
  public $bom_material_element_id;
  public $material_element;
  public $description;

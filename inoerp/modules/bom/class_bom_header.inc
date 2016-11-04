@@ -80,7 +80,7 @@ class bom_header extends dbObject {
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
  ];
- public $pageTitle = " BOM - Create &amp; Update BOM "; //page Title
+ public $pageTitle = " BOM - Create & Update BOM "; //page Title
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',

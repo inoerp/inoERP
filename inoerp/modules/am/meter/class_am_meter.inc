@@ -86,7 +86,7 @@ class am_meter extends dbObject {
  public $search_functions = [
   'Organization' => 'search_org_name'
  ];
- public $pageTitle = " Meter - Create &amp; Update Meters "; //page Title
+ public $pageTitle = " Meter - Create & Update Meters "; //page Title
  public $am_meter_id;
  public $org_id;
  public $name;

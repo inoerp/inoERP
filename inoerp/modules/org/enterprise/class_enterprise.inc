@@ -75,7 +75,7 @@ class enterprise extends org {
 		 '_update_action_meassge' => 'Update',
 		 '_show_view_path' => 1,
  ];
- public $pageTitle = " Enterprise - View &amp; Update Different Enterprises"; //page Title
+ public $pageTitle = " Enterprise - View & Update Different Enterprises"; //page Title
  
   public static function search_add_extra_fields( &$arr ){
 	$org = new org;

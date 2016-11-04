@@ -1,6 +1,6 @@
 <?php
 
-$pageTitle = " User - Create &amp; Update all Users ";
+$pageTitle = " User - Create & Update all Users ";
 $view_path = "user_view";
 ?>
 <?php include_once('../../includes/basics/header_public.inc'); ?>

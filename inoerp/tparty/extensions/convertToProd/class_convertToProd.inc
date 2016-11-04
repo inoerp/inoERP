@@ -217,7 +217,7 @@ class convertToProd extends dbObject {
   'user_group_access',
   'wip_accounting_group',
  ];
- public $pageTitle = " Conver to Production "; //page Title
+ public $pageTitle = " Convert to Production "; //page Title
  public $convertToProd_id;
  public $message;
  public $convert_to_prod_mode;

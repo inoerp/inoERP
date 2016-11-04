@@ -87,7 +87,7 @@ class hd_task_type extends dbObject {
  public $search_functions = [
   'Organization' => 'search_org_name'
  ];
- public $pageTitle = " hd_task_type - Create &amp; Update Subinventories"; //page Title
+ public $pageTitle = " HD Task Type - Create & Update Subinventories"; //page Title
  public $option_lists = [
   'hd_task_type_type' => 'hd_task_type_TYPE',
   'locator_control' => 'LOCATOR_CONTROL',

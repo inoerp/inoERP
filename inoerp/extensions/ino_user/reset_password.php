@@ -1,5 +1,5 @@
 <?php
-$pageTitle = " User - Create &amp; Update all Users ";
+$pageTitle = " User - Create & Update all Users ";
 $view_path = "user_view";
 require_once __DIR__.'/../../includes/basics/basics.inc';
 ?>

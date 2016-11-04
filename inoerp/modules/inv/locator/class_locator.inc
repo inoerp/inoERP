@@ -96,7 +96,7 @@ class locator extends subinventory {
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Locator - Create &amp; Update Locators"; //page Title
+ public $pageTitle = " Locator - Create & Update Locators"; //page Title
 // public $option_lists = [
 //		 'subinventory_type' => 'SUBINVENTORY_TYPE',
 //		 'locator_control' => 'LOCATOR_CONTROL',

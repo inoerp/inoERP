@@ -84,7 +84,7 @@ class extn_comment extends dbObject {
   'comment_user_name',
   'subscribe_cb'
  ];
- public $pageTitle = " Comment - Create &amp; View Different Comments ";
+ public $pageTitle = " Comment - Create & View Different Comments ";
  public $search = [
   '_view_path' => 'form.php?class_name=',
   '_show_view_path' => 1,

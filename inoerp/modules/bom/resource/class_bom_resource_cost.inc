@@ -50,7 +50,7 @@ class bom_resource_cost extends dbObject {
 //		 '_extra_path' => array('form.php?class_name=ar_payment_header&mode=9' => 'Pay',
 //				 'form.php?class_name=ar_transaction_header&mode=9&transaction_type=DEBIT_MEMO' => 'Credit')
  ];
- public $pageTitle = " Resources - Create &amp; Update Resources Rate "; //page Title
+ public $pageTitle = " Resources - Create & Update Resources Rate "; //page Title
  public $search_functions = [
   'Cost Type' => 'search_bom_cost_type',
  ];

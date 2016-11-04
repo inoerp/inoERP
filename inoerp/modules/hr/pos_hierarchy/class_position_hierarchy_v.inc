@@ -50,7 +50,7 @@ class hr_position_hierarhcy_v extends dbObject {
 		 'org_type',
 		 'org_code',
  ];
- public $pageTitle = " HR Position Hierarhcy - Create &amp; Update HR Position Hierarhcy "; //page Title
+ public $pageTitle = " HR Position Hierarhcy - Create & Update HR Position Hierarhcy "; //page Title
  public $search = [
 		 '_update_path' => 'form.php?class_name=hr_position_hierarhcy_header',
 		 '_show_update_path' => 1,

@@ -187,7 +187,7 @@ class ar_transaction_header extends dbObject {
   '_extra_path' => array('form.php?class_name=ar_payment_header&mode=9' => 'Pay',
    'form.php?class_name=ar_transaction_header&mode=9&transaction_type=DEBIT_MEMO' => 'Credit')
  ];
- public $pageTitle = " AR Transaction - Invoice, Debit/Credit Memo, Deposit/Guarentee etc "; //page Title
+ public $pageTitle = " AR Transaction - Invoice, Debit/Credit Memo, Deposit/Guarentee, etc "; //page Title
  public $option_lists = [
   'transaction_class' => 'AR_TRANSACTION_CLASS',
 //		 'om_so_status' => 'AR_TRANSACTION_TYPE',
