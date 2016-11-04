@@ -8,7 +8,7 @@
   }
   ?>
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
-  <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
+  <title><?php echo isset($pageTitle) ? ' ' . gettext(trim($pageTitle)) . ' ' . ' - inoERP!' : ' inoERP! ' ?></title>
   <link href="<?php
 //  echo THEME_URL;
 //  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'
@@ -90,10 +90,10 @@
 
      <div class="row">
       <div class="col-md-2">
-       <a  role="button" class="erp-links form-page btn btn-lg btn-info" href="<?php echo HOME_URL; ?>"><i class="fa fa-file-text-o" title="Form Page"></i> <?php echo gettext('Create New Record'); ?></a>
+       <a  role="button" class="erp-links form-page btn btn-lg btn-info" href="<?php echo HOME_URL; ?>"><i class="fa fa-file-text-o" title="<?php echo gettext('Form Page') ?>"></i> <?php echo gettext('Create New Record'); ?></a>
       </div>
       <div class="col-md-2">
-       <button  role="button" id="refresh_button" class="erp-links select-page btn btn-lg btn-info" ><i class="fa fa-search" title="Search & List Page"></i> <?php echo gettext('Search To Select'); ?></button>
+       <button  role="button" id="refresh_button" class="erp-links select-page btn btn-lg btn-info" ><i class="fa fa-search" title="<?php echo gettext('Search & List Page') ?>"></i> <?php echo gettext('Search To Select'); ?></button>
       </div>
       <div id="header_top_container" class="col-md-6 pull-right">
 
