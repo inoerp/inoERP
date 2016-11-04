@@ -475,15 +475,14 @@ trait dbObject_t {
    $sql.= " ORDER BY {$order_by_field}  ";
    $sql.= " $order_by_seq ";
   }
-
-  $stmt = $dbc->connection->prepare(" $sql ");
+	
+	$stmt = $dbc->connection->prepare(" $sql ");
   $stmt->bindParam(':primary_id', $id);
   try {
    $stmt->execute();
    $result = $stmt->fetchAll(PDO::FETCH_CLASS);
   } catch (PDOException $e) {
-   echo "dbObject findBy parent id Error @dbOject @line " . __LINE__ . $e->getMessage();
-   echo " sql is $sql";
+	 echo ino_show_debug_msg('Failed to read the data ', $e->getMessage(), $sql, ' Error @dbObject @@ Line " '.__LINE__);
   }
   return !empty($result) ? $result : false;
  }

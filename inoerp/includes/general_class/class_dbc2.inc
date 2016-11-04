@@ -20,7 +20,7 @@ class dbc2 extends dbc {
 //	 $this->pending_transaction = true;
 	 $this->connection->beginTransaction();
 	} catch (PDOException $e) {
-	 print "Data Base Connection Error!: <br> Modify the database settings @ includes/basics/dbsettings.inc file & reload the page"
+	 print "Data Base Connection Error!: <br> Modify the database settings @ includes/basics/dbsettings.php file & reload the page"
    . "<br>" . $e->getMessage() . "<br/>";
 	 die();
 	}

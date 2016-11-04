@@ -9,7 +9,7 @@ class dbObject extends dbc {
  function __construct() {
   global $dbc;
   if (empty($dbc->connection)) {
-   exit('Data base not found. Please check the dbsettings.inc file');
+   exit('Data base not found. Please check the dbsettings.php file');
   } 
  }
 

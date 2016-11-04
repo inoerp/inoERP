@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php echo gettext('group') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Class or Group') ?></span>
  <form method="post" id="lms_group_header"  name="lms_group_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -51,7 +51,7 @@ inoERP
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Group Lines') ?></span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Class or Group Lines') ?></span>
  <form method="post" id="lms_group_line"  name="lms_group_line">
   <div id="tabsLine">
    <ul class="tabMain">

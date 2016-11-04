@@ -9,7 +9,7 @@ class dbc {
 
  function __construct() {
   if (!(DB_SERVER)) {
-//   exit('Data base not found. Please check the dbsettings.inc file');
+//   exit('Data base not found. Please check the dbsettings.php file');
    return false;
   }
   try {
@@ -35,7 +35,7 @@ class dbc {
 //	 $this->pending_transaction = true;
    $this->connection->beginTransaction();
   } catch (PDOException $e) {
-   print "Data Base Connection Error!: <br> Modify the database settings @ includes/basics/settings/dbsettings.inc file & reload the page"
+   print "Data Base Connection Error!: <br> Modify the database settings @ includes/basics/settings/dbsettings.php file & reload the page"
     . "<br>" . $e->getMessage() . "<br/>";
    die();
   }
@@ -113,7 +113,7 @@ class dbc {
       $this->connection = new PDO('mysql:host=' . DB_SERVER . '; dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
     }
    } catch (PDOException $ex) {
-    print "Data Base Connection Error!: <br> Modify the database settings @ includes/basics/dbsettings.inc file & reload the page"
+    print "Data Base Connection Error!: <br> Modify the database settings @ includes/basics/dbsettings.php file & reload the page"
      . "<br>" . $e->getMessage() . "<br/>";
     die();
    }

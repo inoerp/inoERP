@@ -3,10 +3,7 @@
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1"><?php
-      $f = new inoform();
-      echo gettext('Basic')
-      ?></a></li>
+    <li><a href="#tabsHeader-1"><?php  echo gettext('Basic') ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <div id="tabsHeader-1" class="tabContent">

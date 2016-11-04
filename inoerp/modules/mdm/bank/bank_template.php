@@ -1,6 +1,6 @@
 <div id ="form_header">
  <span class="heading"><?php echo gettext('Bank Names') ?></span>
- <form action=""  method="post" id="mdm_bank_header"  name="mdm_bank_header">
+ <form method="post" id="mdm_bank_header"  name="mdm_bank_header">
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>

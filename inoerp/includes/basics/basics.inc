@@ -22,7 +22,7 @@ defined('INC_TPARTY') ? null : define('INC_TPARTY', HOME_DIR . DS . 'tparty');
 
 
 ////load core objects
-require_once(INC_BASICS . DS . 'settings' . DS . "dbsettings.inc");
+require_once(INC_BASICS . DS . 'settings' . DS . "dbsettings.php");
 
 defined('DB_TYPE') ? null : define("DB_TYPE", "");
 defined('DB_SERVER') ? null : define("DB_SERVER", "");
