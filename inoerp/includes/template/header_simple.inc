@@ -7,7 +7,7 @@
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
+  <title><?php echo isset($pageTitle) ? ' ' . gettext(trim($pageTitle)) . ' ' . ' - inoERP!' : ' inoERP! ' ?></title>
   <link href="<?php echo HOME_URL; ?>themes/print.css" media="all" rel="stylesheet" type="text/css" />
  </head>
  <body>

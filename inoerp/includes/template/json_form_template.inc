@@ -26,7 +26,7 @@
   $pageTitle = $$class->pageTitle;
 
   if (!empty($pageTitle)) {
-   echo "<div id='page_title' >$pageTitle</div>";
+   echo "<div id='page_title' >" . ' ' . gettext(trim($pageTitle)) . ' ' . "</div>";
   } else {
    echo "<div id='page_title' ></div>";
   }

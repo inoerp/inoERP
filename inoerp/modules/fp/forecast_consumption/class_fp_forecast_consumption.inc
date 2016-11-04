@@ -91,7 +91,7 @@ class fp_forecast_consumption extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Forecast consumption ";
+ public $pageTitle = " Forecast Consumption ";
  public $message;
  public $prg_forecast_consumption_parameters = [
   'Organization' => 'search_org_name',

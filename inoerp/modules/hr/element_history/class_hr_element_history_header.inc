@@ -64,7 +64,7 @@ class hr_element_history_header extends dbObject {
   'multi_action_class_pc_value',
   'action'
  ];
- public $pageTitle = " Element history "; //page Title
+ public $pageTitle = " Element History "; //page Title
  public $search = [
   '_show_update_path' => 1,
   '_show_view_path' => 1,

@@ -71,7 +71,7 @@ class fa_asset_component extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Asset component "; //page Title
+ public $pageTitle = " Asset Component "; //page Title
  public $fa_asset_component_id;
  public $fa_asset_id;
  public $source_type;

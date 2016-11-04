@@ -95,7 +95,7 @@ class wip_resource_transaction extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Resource Trnx - WIP Work Order  Resource Transaction "; //page Title
+ public $pageTitle = " Resource Trnx - WIP Work Order Resource Transaction "; //page Title
  public $option_lists = [
 //		 'wip_wo_type' => 'WIP_WO_TYPE',
 //		 'wip_wo_status' => 'WIP_WO_STATUS',

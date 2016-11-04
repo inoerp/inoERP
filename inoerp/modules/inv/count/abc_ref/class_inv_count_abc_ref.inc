@@ -32,7 +32,7 @@ class inv_count_abc_ref extends dbObject {
    'class_code',
    'count_per_year',
  ];
- public $pageTitle = " Count abc_ref  "; //page Title
+ public $pageTitle = " Count ABC Ref  "; //page Title
  public $inv_count_abc_ref_id;
  public $inv_count_header_id;
  public $class_code;

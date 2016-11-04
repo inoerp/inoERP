@@ -120,7 +120,7 @@ class wip_wo_completion extends inv_transaction {
  public $search = [
   '_show_view_path' => 1,
  ];
- public $pageTitle = " WIP - Create & View WO Completion"; //page Title
+ public $pageTitle = " WIP - Create &amp; View WO Completion"; //page Title
  public $option_lists = [
   'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
  ];

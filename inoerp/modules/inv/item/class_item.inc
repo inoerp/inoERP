@@ -288,7 +288,7 @@ class item extends dbObject {
   'Item To' => 'search_item_number_to',
   'Organization' => 'search_org_name',
  ];
- public $pageTitle = " Item - Create | Update Items"; //page Title
+ public $pageTitle = " Item - Create &amp; Update Items"; //page Title
  public $option_lists = [
   'item_types' => 'ITEM_TYPE',
   'item_status' => 'ITEM_STATUS',

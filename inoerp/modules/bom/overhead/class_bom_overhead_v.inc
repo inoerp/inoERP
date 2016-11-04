@@ -32,7 +32,7 @@ class bom_overhead_v extends dbObject {
   'org_id',
   'overhead_type',
  ];
- public $pageTitle = " BOM Overhead - Resource & Material "; //page Title
+ public $pageTitle = " BOM Overhead - Resource &amp; Material "; //page Title
  public $search = [
   '_update_path' => 'form.php?class_name=bom_overhead',
   '_show_update_path' => 1,

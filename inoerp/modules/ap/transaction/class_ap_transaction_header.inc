@@ -167,7 +167,7 @@ class ap_transaction_header extends dbObject {
   '_extra_path' => array('form.php?class_name=ap_payment_header&mode=9' => 'Pay',
    'form.php?class_name=ap_transaction_header&mode=9&transaction_type=DEBIT_MEMO' => 'Credit')
  ];
- public $pageTitle = " AP Transaction - Invoice, Debit/Credit Memo etc "; //page Title
+ public $pageTitle = " AP Transaction - Invoice, Debit/Credit Memo, etc "; //page Title
  public $option_lists = [
 //		 'po_type' => 'PO_TYPE',
 //		 'po_status' => 'PO_STATUS',

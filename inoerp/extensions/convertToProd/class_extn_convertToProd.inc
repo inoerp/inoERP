@@ -508,7 +508,7 @@ class extn_convertToProd extends dbObject {
   'pm_process_operation_detail',
   'pm_formula_byproduct',
  ];
- public $pageTitle = " Conver to Production "; //page Title
+ public $pageTitle = " Convert to Production "; //page Title
  public $convertToProd_id;
  public $message;
  public $convert_to_prod_mode;

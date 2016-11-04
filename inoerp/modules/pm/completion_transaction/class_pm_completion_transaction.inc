@@ -69,7 +69,7 @@ class pm_completion_transaction extends inv_transaction {
  public $search = [
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Process completion Transaction"; //page Title
+ public $pageTitle = " Process Completion Transaction"; //page Title
  public $option_lists = [
   'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
  ];

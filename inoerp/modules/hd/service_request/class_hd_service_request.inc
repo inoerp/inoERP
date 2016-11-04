@@ -118,7 +118,7 @@ class hd_service_request extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " service Request "; //page Title
+ public $pageTitle = " Service Request "; //page Title
 
  Public static function sr_impact() {
   $option_header = option_header::find_by_name('HD_SR_IMPACT');

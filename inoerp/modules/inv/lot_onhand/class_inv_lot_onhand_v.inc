@@ -46,7 +46,7 @@ class inv_lot_onhand_v extends dbObject {
   '_view_path' => 'form.php?class_name=inv_lot_onhand',
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Lot Onhand "; //page Title
+ public $pageTitle = " Lot On Hand "; //page Title
  public $inv_lot_onhand_id;
  public $onhand_id;
  public $lot_inv_lot_number_id;

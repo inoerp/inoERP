@@ -139,7 +139,7 @@ class inv_transaction extends dbObject {
  public $search = [
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Transaction - Create & View Transactions"; //page Title
+ public $pageTitle = " Transaction - Create &amp; View Transactions"; //page Title
  public $option_lists = [
   'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
  ];

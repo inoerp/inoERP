@@ -87,7 +87,7 @@ class subinventory extends dbObject {
  public $search_functions = [
   'Organization' => 'search_org_name'
  ];
- public $pageTitle = " Subinventory - Create & Update Subinventories"; //page Title
+ public $pageTitle = " Subinventory - Create &amp; Update Subinventories"; //page Title
  public $option_lists = [
   'subinventory_type' => 'SUBINVENTORY_TYPE',
   'locator_control' => 'LOCATOR_CONTROL',

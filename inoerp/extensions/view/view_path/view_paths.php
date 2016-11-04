@@ -9,7 +9,7 @@ if(!empty($_GET['sql'])){
  $sql = $_GET['sql'];
 }
 
-$viewTitle = " View - Create & update $view_type_name ";
+$viewTitle = " " . gettext('View') . " - " . gettext('Create &amp; Update') . ' ' . gettext(trim($view_type_name)) . " ";
 $extension = "view";
 $key_field = "view";
 $primary_column = "view_id";

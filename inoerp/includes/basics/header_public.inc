@@ -10,7 +10,7 @@ check_browser(); ?>
   }
   ?>
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
-  <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
+  <title><?php echo isset($pageTitle) ? ' ' . gettext(trim($pageTitle)) . ' ' . ' - inoERP!' : ' inoERP! ' ?></title>
   <link href="<?php echo HOME_URL; ?>/themes/default/public.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo HOME_URL; ?>/themes/default/menu.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo HOME_URL; ?>/themes/default/jquery.css" media="all" rel="stylesheet" type="text/css" />

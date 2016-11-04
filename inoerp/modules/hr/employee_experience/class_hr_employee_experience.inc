@@ -65,7 +65,7 @@
    '_show_update_path' => 1,
    '_show_view_path' => 1,
   ];
-  public $pageTitle = " HR Employee experience  "; //page Title
+  public $pageTitle = " HR Employee Experience  "; //page Title
 
 
   Public static function find_by_employeeId($employee_id) {

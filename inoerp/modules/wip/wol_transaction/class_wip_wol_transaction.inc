@@ -79,7 +79,7 @@ class wip_wol_transaction extends dbObject {
  public $search = [
   '_show_view_path' => 1,
  ];
- public $pageTitle = " WIP - Create & View WO Completion"; //page Title
+ public $pageTitle = " WIP - Create &amp; View WO Completion"; //page Title
 
  public $fields_inForm_notInDataBase = [
   "account_id",

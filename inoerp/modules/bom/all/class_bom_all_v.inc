@@ -50,7 +50,7 @@ public static $form_class_name = "bom_header";
 		 'org_type',
 		 'org_code',
  ];
- public $pageTitle = " BOM - Create & Update BOM "; //page Title
+ public $pageTitle = " BOM - Create &amp; Update BOM "; //page Title
  public $search = [
 		 '_update_path' => 'form.php?class_name=bom_header',
 		 '_show_update_path' => 1,

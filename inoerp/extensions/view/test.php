@@ -2,7 +2,7 @@
 $extension = 'view';
 $key_field = 'view';
 $primary_column = "view_id";
-$pageTitle = " View - Create & update view ";
+$pageTitle = " View - Create &amp; Update View ";
 $required_field_flag = 1;
 include_once("../../include/basics/header.inc");
 

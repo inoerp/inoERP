@@ -47,7 +47,7 @@ class cst_item_cost_v extends dbObject {
   '_view_path' => 'form.php?class_name=cst_item_cost_header',
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Item Cost - Find & Update Item Costs "; //page Title
+ public $pageTitle = " Item Cost - Find &amp; Update Item Costs "; //page Title
  public $item_number;
  public $item_description;
  public $item_id_m;

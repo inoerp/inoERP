@@ -55,7 +55,7 @@ class onhand_v extends dbObject {
  ];
  public $dateField = [
  ];
- public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
+ public $pageTitle = " On Hand - Find Inventory On Hand "; //page Title
  public $search = [
   '_view_path' => 'form.php?class_name=inv_onhand_serial',
   '_show_view_path' => 1,

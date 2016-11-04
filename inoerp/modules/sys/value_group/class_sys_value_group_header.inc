@@ -91,7 +91,7 @@ class sys_value_group_header extends dbObject {
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
- public $pageTitle = " Value Group - Find All Calue Groups "; //page Title
+ public $pageTitle = " Value Group - Find All Value Groups "; //page Title
  public $option_list = [
 //		 'calendar_option_line_code' => 'GL_CALENDAR_NAME',
  ]; //list of search fields which have options

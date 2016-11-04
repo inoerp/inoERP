@@ -96,7 +96,7 @@ class mdm_tax_code extends dbObject {
 		 '_view_path' => 'form.php?class_name=mdm_tax_code&mode=2',
 		 '_show_view_path' => 1,
  ];
- public $pageTitle = " Tax Code & Rates "; //page Title
+ public $pageTitle = " Tax Code &amp; Rates "; //page Title
  public $option_list = [
 		 'tax_type' => 'MDM_TAX_TYPE',
  ]; //list of search fields wh

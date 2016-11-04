@@ -8,7 +8,7 @@
   }
   ?>
   <meta name="keywords" content="ERP,PHP ERP,Open Source ERP ">
-  <title><?php echo isset($pageTitle) ? $pageTitle . ' - inoERP!' : ' inoERP! ' ?></title>
+  <title><?php echo isset($pageTitle) ? ' ' . gettext(trim($pageTitle)) . ' ' . ' - inoERP!' : ' inoERP! ' ?></title>
   <link href="<?php
 //  echo THEME_URL;
 //  echo (!empty($content_class)) ? '/content_layout.css' : '/layout.css'

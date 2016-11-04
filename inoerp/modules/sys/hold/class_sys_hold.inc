@@ -70,7 +70,7 @@ class sys_hold extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " System holds  "; //page Title
+ public $pageTitle = " System Holds  "; //page Title
 
  Public static function hold_type() {
   $option_header = option_header::find_by_name('SYS_HOLD_TYPE');

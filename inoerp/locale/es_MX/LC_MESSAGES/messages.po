@@ -15735,3 +15735,21 @@ msgstr "Generado p/Sistema"
 
 msgid "New Entry"
 msgstr "Nueva Entrada"
+
+msgid "Create New Record"
+msgstr "Crear Registro Nuevo"
+
+msgid "Search To Select"
+msgstr "Busca Para Selec"
+
+msgid "Requisition - Purchasing"
+msgstr "Requisición - Compras"
+
+msgid "Select value of"
+msgstr "Selec valor de"
+
+msgid "Specifications"
+msgstr "Especificaciones"
+
+msgid "Option - Create &amp; Update Different Options and Values"
+msgstr "Opción - Crear y Actualizar Diferentes Opciones y Valores"

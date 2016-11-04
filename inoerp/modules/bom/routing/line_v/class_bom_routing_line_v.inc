@@ -42,7 +42,7 @@ public static $form_class_name = "bom_routing_header";
   ];
   public $search = [
   ];
-  public $pageTitle = " ROuting Lines "; //page Title
+  public $pageTitle = " Routing Lines "; //page Title
   public $bom_routing_header_id_h;
   public $item_id_m;
   public $alternate_routing;

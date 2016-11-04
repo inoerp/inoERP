@@ -65,7 +65,7 @@ class bom_cost_type extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Cost Type - Create & Update BOM Cost Types "; //page Title
+ public $pageTitle = " Cost Type - Create &amp; Update BOM Cost Types "; //page Title
  public $option_list = [
 //		 'calendar_option_line_code' => 'GL_CALENDAR_NAME',
  ]; //list of search fields which have options

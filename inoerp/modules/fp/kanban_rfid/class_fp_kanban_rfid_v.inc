@@ -49,7 +49,7 @@ class fp_kanban_rfid_v extends dbObject {
 ////		 '_view_action_meassge' => 'View',
 ////		 '_extra_path' => '',
  ];
- public $pageTitle = " Kanban rfid "; //page Title
+ public $pageTitle = " Kanban RFID "; //page Title
  public $search_functions = [
   'Organization' => 'search_org_name',
   'Kanban Planner' => 'search_kanban_planner',

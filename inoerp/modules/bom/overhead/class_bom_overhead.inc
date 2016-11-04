@@ -82,7 +82,7 @@ class bom_overhead extends dbObject {
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
  ];
- public $pageTitle = " OverHead - Create & Update OverHead "; //page Title
+ public $pageTitle = " Overhead - Create &amp; Update Overhead "; //page Title
  public $option_list = [
 //		 'calendar_option_line_code' => 'GL_CALENDAR_NAME',
  ]; //list of search fields which have options

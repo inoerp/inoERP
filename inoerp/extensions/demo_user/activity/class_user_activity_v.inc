@@ -47,7 +47,7 @@ class user_activity_v extends dbObject {
  public $initial_search = [
   'item_number',
  ];
- public $pageTitle = " Forecast activity "; //page Title
+ public $pageTitle = " Forecast Activity "; //page Title
  public $search_functions = [
   'Organization' => 'search_org_name',
   'Forecast ' => 'search_forecast_name',

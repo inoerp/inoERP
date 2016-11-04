@@ -85,7 +85,7 @@ class bom_routing_header extends dbObject {
  public $profile_default = [
   'org_id' => 'org_inv_name_default',
  ];
- public $pageTitle = " Routing - Resource & Usages @ Each Operation "; //page Title
+ public $pageTitle = " Routing - Resource &amp; Usages @ Each Operation "; //page Title
  public $option_lists = [
 //		 'po_type' => 'PO_TYPE',
 //		 'po_status' => 'PO_STATUS',

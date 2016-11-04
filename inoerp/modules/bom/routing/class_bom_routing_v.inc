@@ -50,7 +50,7 @@
   ];
   
 
-  public $pageTitle = " Routing - Create & Update Routing "; //page Title
+  public $pageTitle = " Routing - Create &amp; Update Routing "; //page Title
   public $search = [
    '_update_path' => 'form.php?class_name=bom_routing_header',
    '_show_update_path' => 1,

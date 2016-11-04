@@ -58,7 +58,7 @@ class sys_value_group_line extends dbObject {
     'sys_value_group_line_id'
  ];
    
- public $pageTitle = " Value Group - Find All Calue Group Lines "; //page Title
+ public $pageTitle = " Value Group - Find All Value Group Lines "; //page Title
  public $sys_value_group_line_id;
  public $sys_value_group_header_id;
  public $code_value;

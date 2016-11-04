@@ -69,7 +69,7 @@ class uom extends dbObject {
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "primary_uom"
  ];
- public $pageTitle = " UOM - Create & Update UOM"; //page Title
+ public $pageTitle = " UOM - Create &amp; Update UOM"; //page Title
  public $option_lists = [
 		 'uom_class' => 'UOM_CLASS',
  ];

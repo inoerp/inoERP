@@ -62,7 +62,7 @@ class onhand_summary_v extends dbObject {
  ];
  public $dateField = [
  ];
- public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
+ public $pageTitle = " On Hand - Find Inventory On Hand "; //page Title
  public $search_groupBy = [
   'locator' => 'Locator',
   'subinventory' => 'Subinventory',

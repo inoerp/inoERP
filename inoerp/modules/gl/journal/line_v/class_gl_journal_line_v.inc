@@ -53,7 +53,7 @@ class gl_journal_line_v extends dbObject {
   'Period Name' => 'search_gl_period_name',
   'Legal Org' => 'search_legal_org_name'
  ];
- public $pageTitle = " GL Journals - Find All  Journal Lines "; //page Title
+ public $pageTitle = " GL Journals - Find All Journal Lines "; //page Title
  public $option_lists = [
 //		 'po_type' => 'PO_TYPE',
 //		 'po_status' => 'PO_STATUS',

@@ -105,7 +105,7 @@ class bom_resource extends dbObject {
 //		 '_extra_path' => array('form.php?class_name=ar_payment_header&mode=9' => 'Pay',
 //				 'form.php?class_name=ar_transaction_header&mode=9&transaction_type=DEBIT_MEMO' => 'Credit')
  ];
- public $pageTitle = " Resources - Create & Update Resources "; //page Title
+ public $pageTitle = " Resources - Create &amp; Update Resources "; //page Title
  public $option_lists = [
   'resource_type' => 'RESOURCE_TYPE',
   'charge_type' => 'CHARGE_TYPE',
