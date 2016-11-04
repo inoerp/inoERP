@@ -45,7 +45,7 @@ class user_activity_v extends dbObject {
   'content_type',
  ];
 
- public $pageTitle = " User activity "; //page Title
+ public $pageTitle = " User Activity "; //page Title
 
  public $content_id;
  public $content_type_id;

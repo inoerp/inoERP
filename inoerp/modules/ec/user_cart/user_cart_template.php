@@ -53,7 +53,7 @@
          <tr class="ec_cart<?php echo $count ?>">
           <td class="action-td">
            <ul class="inline_action">
-            <li  class="remove_row_img remove_from_cart clickable"><i class="fa fa-2x fa-minus-circle" title="Remove Product"></i></li>
+            <li  class="remove_row_img remove_from_cart clickable"><i class="fa fa-2x fa-minus-circle" title="<?php echo gettext('Remove Product')?>"></i></li>
             <li><?php echo '<a href="' . HOME_URL . 'product.php?ec_product_id=' . $$class->ec_product_id . '" title="View Product Details"><i class="fa fa-2x fa-info-circle clickable"></i></a>'; ?>
              <?php echo form::hidden_field('ec_cart_id', $$class->ec_cart_id); ?>
              <?php echo form::hidden_field('user_id', $user_id_h); ?>
@@ -67,7 +67,7 @@
           </td>
           <td><?php echo $count; ?></td>
           <td><?php echo $product_name; ?></td>
-          <td class="long-td"><?php echo ('<a href="' . HOME_URL . 'product.php?ec_product_id=' . $$class->ec_product_id . '" title="' . $product_description . '">' . substr($product_description, 0, 100) . '</a>'); ?></td>
+          <td class="long-td"><?php echo ('<a href="' . HOME_URL . 'product.php?ec_product_id=' . $$class->ec_product_id . '" title="' . gettext($product_description) . '">' . substr($product_description, 0, 100) . '</a>'); ?></td>
           <td><?php $f->text_field_wids('quantity') ?></td>
           <td class="unit-price"><?php
            echo '<span class="currency">' . $curr . '</span>';

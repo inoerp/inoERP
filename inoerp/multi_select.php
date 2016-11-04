@@ -14,10 +14,10 @@ if ((!empty($_GET['show_block'])) && (($_GET['show_block'][0] == 1) || ($_GET['s
 }
 if (!empty($_GET['search_class_name'])) {
  $class_names = $_GET['search_class_name'];
- $pageTitle = " $class_names - Select value of $class_names ";
+ $pageTitle = " " . gettext(trim($class_names)) . " - " . gettext('Select value of') . " " . gettext(trim($class_names)) . " ";
 } else if (!empty($_GET['class_name'])) {
  $class_names = $_GET['class_name'];
- $pageTitle = " $class_names - Select value of $class_names ";
+ $pageTitle = " " . gettext(trim($class_names)) . " - " . gettext('Select value of') . " " . gettext(trim($class_names)) . " ";
 } else {
  $access_denied_msg = 'In correct class defination/election. Error @ multi_select @@ line '.__LINE__;
 }

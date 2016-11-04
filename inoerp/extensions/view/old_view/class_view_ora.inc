@@ -97,7 +97,7 @@
    '_show_update_path' => 1,
    '_show_view_ora_path' => 1,
   ];
-  public $pageTitle = " view_oras "; //page Title
+  public $pageTitle = " View Oras "; //page Title
   public $all_table_names;
   public $view_ora_id;
   public $view_ora_name;
@@ -425,7 +425,7 @@ WHERE table_name = '{$table_name}'  ";
     $content_string .= '<div id="tabsDetail">
 				 <ul class="tabMain">';
     for ($l = 0; $l < $no_of_tabs; $l++) {
-     $content_string .= "<li><a href=\"#tabsDetail-$l\">Tab No $l </a></li>";
+     $content_string .= "<li><a href=\"#tabsDetail-$l\">" . gettext('Tab No') . " $l </a></li>";
     }
     $content_string .= ' </ul>
 				 <div class="tabContainer"> ';

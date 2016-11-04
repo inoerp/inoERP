@@ -95,7 +95,7 @@ class po_requisition_interface extends dbObject {
  public $prg_import_requisition_parameters = [
 		 'Business Org' => 'search_business_org',
  ];
- public $prg_import_requisition_details = [
+ public static $prg_import_requisition_details = [
 		 'name' => 'Import Requisitions ',
 		 'description' => 'Import Requisitions from interface ',
  ];
@@ -301,7 +301,14 @@ class po_requisition_interface extends dbObject {
 	return $this->message;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext(trim($value));
+  }
+ }
+
 }
 
 //end of po_requisition_interface class
+po_requisition_interface::staticVar_init('prg_import_requisition_details');
 ?>

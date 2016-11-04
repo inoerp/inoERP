@@ -563,9 +563,9 @@ if ($readonly) {
 
 
 if (($class == 'content') && (!empty($content->subject))) {
- $pageTitle = $content->subject;
+ $pageTitle = ' ' . gettext(trim($content->subject)) . ' ';
 } else if (is_object($$class)) {
- $pageTitle = property_exists($$class, 'pageTitle') ? $$class->pageTitle : 'inoERP';
+ $pageTitle = property_exists($$class, 'pageTitle') ? ' ' . gettext(trim($$class->pageTitle)) . ' ' : 'inoERP';
 }
 
 

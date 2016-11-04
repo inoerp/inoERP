@@ -55,7 +55,7 @@ class org_v extends dbObject {
  public $option_lists = [
 		 'org_types' => 'ORG_TYPE'
  ];
- public $pageTitle = " Org - All type of organizations "; //page Title
+ public $pageTitle = " Org - All Organization Types "; //page Title
  public $org_id;
  public $org;
  public $type;

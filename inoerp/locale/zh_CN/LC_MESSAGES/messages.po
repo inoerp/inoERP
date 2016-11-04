@@ -161,7 +161,7 @@ msgstr "生产组织结构图 Id"
 msgid "Ap Payment Header Id"
 msgstr "Ap 付款标题 Id"
 
-msgid "BU Org Id"
+msgid "Bu Org Id"
 msgstr "埠 Org Id"
 
 msgid "Payment Type"
@@ -9767,16 +9767,13 @@ msgstr "工作订单少交易"
 msgid "WOL Transaction Details"
 msgstr "WOL 交易记录详细信息"
 
-msgid "Line "
-msgstr "线"
-
-msgid "PO "
+msgid "PO"
 msgstr "宝"
 
-msgid "PO Line "
+msgid "PO Line"
 msgstr "蒲线"
 
-msgid "Shipment "
+msgid "Shipment"
 msgstr "装运"
 
 msgid "Supplier "
@@ -11474,8 +11471,8 @@ msgstr "From Org"
 msgid "RFID Reference"
 msgstr "RFID Reference"
 
-msgid " is is Successfully Opened"
-msgstr " is is Successfully Opened"
+msgid "is Successfully Opened"
+msgstr "is Successfully Opened"
 
 msgid "Existing & Available Periods"
 msgstr "Existing & Available Periods"
@@ -12767,11 +12764,11 @@ msgstr "inv item relation id"
 msgid "relation type"
 msgstr "relation type"
 
-msgid "from item id m"
-msgstr "from item id m"
+msgid "From Item Id M"
+msgstr "From Item Id M"
 
-msgid "to item id m"
-msgstr "to item id m"
+msgid "To Item Id M"
+msgstr "To Item Id M"
 
 msgid "planning cb"
 msgstr "planning cb"
@@ -15137,8 +15134,8 @@ msgstr "Req"
 msgid "Select From Item Number"
 msgstr "Select From Item Number"
 
-msgid "Select Item Number To"
-msgstr "Select Item Number To"
+msgid "Select To Item Number"
+msgstr "Select To Item Number"
 
 msgid "Activity Meter"
 msgstr "Activity Meter"
@@ -15362,14 +15359,14 @@ msgstr "Customer Profile"
 msgid "Credit Class"
 msgstr "Credit Class"
 
-msgid "add detail values"
-msgstr "add detail values"
+msgid "Add Detail Values"
+msgstr "Add Detail Values"
 
-msgid "add new line"
-msgstr "add new line"
+msgid "Add New Line"
+msgstr "Add New Line"
 
-msgid "remove this line"
-msgstr "remove this line"
+msgid "Remove This Line"
+msgstr "Remove This Line"
 
 msgid "PO Header"
 msgstr "PO Header"
@@ -15598,3 +15595,165 @@ msgstr "Extn Subscribe"
 
 msgid "Select Address Id"
 msgstr "Select Address Id"
+
+msgid "Process This Line"
+msgstr "Process This Line"
+
+msgid "From Item Id"
+msgstr "From Item Id"
+
+msgid "Select From Item Id"
+msgstr "Select From Item Id"
+
+msgid "To Item Id"
+msgstr "To Item Id"
+
+msgid "Select From Project Number"
+msgstr "Select From Project Number"
+
+msgid "Select To Project Number"
+msgstr "Select To Project Number"
+
+msgid "Business"
+msgstr "Business"
+
+msgid "Pre Defined"
+msgstr "Pre Defined"
+
+msgid "At Receipt"
+msgstr "At Receipt"
+
+msgid "At Shipment"
+msgstr "At Shipment"
+
+msgid "Business Org Details"
+msgstr "Business Org Details"
+
+msgid "Item Level"
+msgstr "Item Level"
+
+msgid "Organization Level"
+msgstr "Organization Level"
+
+msgid "Global Level"
+msgstr "Global Level"
+
+msgid "Inventory Org Details"
+msgstr "Inventory Org Details"
+
+msgid "Inventory Org Types"
+msgstr "Inventory Org Types"
+
+msgid "Po Requisition Header"
+msgstr "Po Requisition Header"
+
+msgid "External"
+msgstr "External"
+
+msgid "Internal"
+msgstr "Internal"
+
+msgid "Supply Org Id"
+msgstr "Supply Org Id"
+
+msgid "Po Requisition All V"
+msgstr "Po Requisition All V"
+
+msgid "Import Requisitions"
+msgstr "Import Requisitions"
+
+msgid "Program Parameters"
+msgstr "Program Parameters"
+
+msgid "Auto-Schedule Options"
+msgstr "Auto-Schedule Options"
+
+msgid "Import Requisitions from interface"
+msgstr "Import Requisitions from interface"
+
+msgid "Po Requisition Interface"
+msgstr "Po Requisition Interface"
+
+msgid "Supplier Balance"
+msgstr "Supplier Balance"
+
+msgid "Supplier Volume"
+msgstr "Supplier Volume"
+
+msgid "Remove Product"
+msgstr "Remove Product"
+
+msgid "Select To Transact"
+msgstr "Select To Transact"
+
+msgid "Purchasing Reports"
+msgstr "Purchasing Reports"
+
+msgid "Setup - Purchasing"
+msgstr "Setup - Purchasing"
+
+msgid "Quality Collection Plan"
+msgstr "Quality Collection Plan"
+
+msgid "Quality Setup"
+msgstr "Quality Setup"
+
+msgid "Tab No"
+msgstr "Tab No"
+
+msgid "Select Supplier Name"
+msgstr "Select Supplier Name"
+
+msgid "Select All"
+msgstr "Select All"
+
+msgid "Deselect All"
+msgstr "Deselect All"
+
+msgid "Component Name"
+msgstr "Component Name"
+
+msgid "Component Value"
+msgstr "Component Value"
+
+msgid "Hierarchy Lines"
+msgstr "Hierarchy Lines"
+
+msgid "Starting Position"
+msgstr "Starting Position"
+
+msgid "Lot Numbers"
+msgstr "Lot Numbers"
+
+msgid "Serial Numbers"
+msgstr "Serial Numbers"
+
+msgid "WIP Completion"
+msgstr "WIP Completion"
+
+msgid "Manual"
+msgstr "Manual"
+
+msgid "System Generated"
+msgstr "System Generated"
+
+msgid "New Entry"
+msgstr "New Entry"
+
+msgid "Create New Record"
+msgstr "Create New Record"
+
+msgid "Search To Select"
+msgstr "Search To Select"
+
+msgid "Requisition - Purchasing"
+msgstr "Requisition - Purchasing"
+
+msgid "Select value of"
+msgstr "Select value of"
+
+msgid "Specifications"
+msgstr "Specifications"
+
+msgid "Option - Create & Update Different Options and Values"
+msgstr "Option - Create & Update Different Options and Values"

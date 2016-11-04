@@ -461,7 +461,7 @@ class view extends dbObject {
    $content_string .= '<div id="tabsDetail">
 				 <ul class="tabMain">';
    for ($l = 0; $l < $no_of_tabs; $l++) {
-    $content_string .= "<li><a href=\"#tabsDetail-$l\">Tab No $l </a></li>";
+    $content_string .= "<li><a href=\"#tabsDetail-$l\">" . gettext('Tab No') . " $l </a></li>";
    }
    $content_string .= ' </ul>
 				 <div class="tabContainer"> ';

@@ -161,7 +161,7 @@ AND con.content_id =  com.reference_id
 
  public static function staticVar_init($staticvar) {
   foreach (self::${$staticvar} as $key => $value) {
-  	self::${$staticvar}[$key]['description'] = gettext($value['description']);
+  	self::${$staticvar}[$key]['description'] = gettext(trim($value['description']));
   }
  }
 

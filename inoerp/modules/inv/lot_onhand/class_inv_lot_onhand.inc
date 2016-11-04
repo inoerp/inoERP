@@ -68,7 +68,7 @@
    'item_description',
    'org_name'
   ];
-  public $pageTitle = " lot onhands  "; //page Title
+  public $pageTitle = " Lot On Hands  "; //page Title
   public $inv_lot_onhand_id;
   public $onhand_id;
   public $inv_lot_number_id;

@@ -53,8 +53,8 @@
           <tr class="sys_hold_reference<?php echo $count ?>">
            <td>    
             <ul class="inline_action">
-             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="add new line" /></li>
-             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+             <li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('Add New Line') ?>" /></li>
+             <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('Remove This Line') ?>" /> </li>
              <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($$class->sys_hold_reference_id); ?>"></li> 
             </ul>
            </td>

@@ -50,7 +50,7 @@ class fp_minmax_board_v extends dbObject {
  ];
  public $dateField = [
  ];
- public $pageTitle = " Onhand - Find Inventory Onhand "; //page Title
+ public $pageTitle = " On Hand - Find Inventory On Hand "; //page Title
  public $search = [
   '_view_path' => 'form.php?class_name=inv_onhand_serial',
   '_show_view_path' => 1,
@@ -274,7 +274,7 @@ AND onhand.org_id = '{$org_id}'";
 
  public static function staticVar_init($staticvar) {
   foreach (self::${$staticvar} as $key => $value) {
-   self::${$staticvar}[$key] = gettext($value);
+   self::${$staticvar}[$key] = gettext(trim($value));
   }
  }
 

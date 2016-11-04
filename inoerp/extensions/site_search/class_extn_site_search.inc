@@ -524,7 +524,7 @@ class extn_site_search extends dbObject {
 
  public static function staticVar_init($staticvar) {
   foreach (self::${$staticvar} as $key => $value) {
-   self::${$staticvar}[$key] = substr($value,0,strpos($value,";")+2) . gettext(substr($value,strpos($value,";")+2));
+   self::${$staticvar}[$key] = substr($value,0,strpos($value,";")+2) . gettext(substr(trim($value),strpos($value,";")+2));
   }
  }
 

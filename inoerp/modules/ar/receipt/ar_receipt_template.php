@@ -194,7 +194,7 @@
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Comments</th>
+        <th><?php echo gettext('Comments')?></th>
 
        </tr>
       </thead>

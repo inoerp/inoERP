@@ -395,7 +395,7 @@ item_id_m, revision_name, org_id, subinventory_id, (minmax_min_quantity-onhand) 
 
  public static function staticVar_init($staticvar) {
   foreach (self::${$staticvar} as $key => $value) {
-   self::${$staticvar}[$key] = gettext($value);
+   self::${$staticvar}[$key] = gettext(trim($value));
   }
  }
 

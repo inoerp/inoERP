@@ -216,8 +216,8 @@
  						 <tr class="po_line<?php echo $count ?>">
  							<td>    
  							 <ul class="inline_action">
- 								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('add new line') ?>" /></li>
- 								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('remove this line') ?>" /> </li>
+ 								<li class="add_row_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('Add New Line') ?>" /></li>
+ 								<li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('Remove This Line') ?>" /> </li>
  								<li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($po_line->item_description); ?>"></li>           
  								<li><?php echo form::hidden_field('po_header_id', $po_header->po_header_id); ?></li>
  							 </ul>
@@ -232,7 +232,7 @@
 							<td><?php echo form::select_field_from_object('uom', uom::find_all(), 'uom_id', 'uom', $$class_second->uom, 'uom');; ?></td>
  							<td><?php form::number_field_wid2s('line_quantity'); ?></td>
 
- 							<td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+ 							<td class="add_detail_values"><img src="<?php echo HOME_URL; ?>themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="<?php echo gettext('Add Detail Values') ?>" />
  							 <!--</td></tr>-->	
 								<?php
 								$po_line_id = $po_line->po_line_id;
@@ -283,8 +283,8 @@
 												<tr class="po_detail<?php echo $count . '-' . $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
 												 <td>   
 													<ul class="inline_action">
-													 <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('add new line') ?>" /></li>!--  -->
-													 <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('remove this line') ?>" /> </li>!--  -->
+													 <li class="add_row_detail_img"><img  src="<?php echo HOME_URL; ?>themes/images/add.png"  alt="<?php echo gettext('Add New Line') ?>" /></li>
+													 <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="<?php echo gettext('Remove This Line') ?>" /> </li>
 													 <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($po_detail->po_detail_id); ?>"></li>           
 													 <li><?php echo form::hidden_field('po_line_id', $po_line->po_line_id); ?></li>
 													 <li><?php echo form::hidden_field('po_header_id', $po_header->po_header_id); ?></li>

@@ -125,7 +125,7 @@ class search extends dbObject {
   $search_result .= '<div id="tabsLine">
 				 <ul class="tabMain">';
   for ($i = 0; $i < $no_of_tabs; $i++) {
-   $search_result .= "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
+   $search_result .= "<li><a href=\"#tabsLine-$i\">" . gettext('Tab No') . " $i </a></li>";
   }
   $search_result .= ' </ul>
 				 <div class="tabContainer"> ';
@@ -238,7 +238,7 @@ class search extends dbObject {
   $search_result .= '<div id="tabsLine">
 				 <ul class="tabMain">';
   for ($i = 0; $i < $no_of_tabs; $i++) {
-   $search_result .= "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
+   $search_result .= "<li><a href=\"#tabsLine-$i\">" . gettext('Tab No') . " $i </a></li>";
   }
   $search_result .= ' </ul>
 				 <div class="tabContainer"> ';
@@ -565,11 +565,11 @@ class search extends dbObject {
    . " method='POST' class=\"search_box submit_program_form $this->_form_name\" target=\"$target\"  id=\"$this->_form_name\">";
 
   //start of first ul
-  $program_form_statement .= '<fieldset class="col-md-6 parameters"><legend class="fs-default">Program Parameters</legend>';
+  $program_form_statement .= '<fieldset class="col-md-6 parameters"><legend class="fs-default">' . gettext('Program Parameters') . '</legend>';
   $program_form_statement .= '<ul class="tabContent">';
   if (!empty($this->_search_functions)) {
    foreach ($this->_search_functions as $key => $value) {
-    $program_form_statement .= "<li class='prg' id='" . $value . "' ><label class=\"label_$key\"> $key</label>";
+    $program_form_statement .= "<li class='prg' id='" . $value . "' ><label class=\"label_$key\"> " . gettext($key) . "</label>";
     if (method_exists($class_obj, $value)) {
      $program_form_statement .= call_user_func(array($class_obj, $value));
     } else if (function_exists($value)) {
@@ -617,7 +617,7 @@ class search extends dbObject {
 //end of first ul
 //$f = new inoform();
 //start of schdule details
-  $program_form_statement .= '<fieldset class="col-md-4"><legend class="fs-default">Auto-Schedule Options</legend>';
+  $program_form_statement .= '<fieldset class="col-md-4"><legend class="fs-default">' . gettext('Auto-Schedule Options') . '</legend>';
   $program_form_statement .= '<div class="hideDiv_input fa fa-plus-circle clickable"></div>';
   $program_form_statement .= '<ul class="simple_column schdule_details hideDiv_input_element">';
   $program_form_statement .= "<li><label>" . gettext('Frequency UOM') . " </label>";

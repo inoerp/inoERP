@@ -99,7 +99,7 @@ class am_resource_transaction extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Resource Trnx - WIP Work Order  Resource Transaction "; //page Title
+ public $pageTitle = " Resource Trnx - WIP Work Order Resource Transaction "; //page Title
  public $option_lists = [
 //		 'am_wo_type' => 'am_WO_TYPE',
 //		 'am_wo_status' => 'am_WO_STATUS',

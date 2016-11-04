@@ -74,7 +74,7 @@
    '_view_path' => 'form.php?class_name=inv_lot_transaction_v',
    '_show_view_path' => 1,
   ];
-  public $pageTitle = " lot Transactions "; //page Title
+  public $pageTitle = " Lot Transactions "; //page Title
   public $inv_lot_transaction_id;
   public $inv_transaction_id;
   public $inv_lot_number_id;

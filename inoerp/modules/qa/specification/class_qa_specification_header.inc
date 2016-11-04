@@ -71,7 +71,7 @@ class qa_specification_header extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Specificaions "; //page Title
+ public $pageTitle = " Specifications "; //page Title
  public $qa_specification_header_id;
  public $budget_type;
  public $prj_project_header_id;
@@ -113,7 +113,7 @@ class qa_specification_header extends dbObject {
 
  public static function staticVar_init($staticvar) {
   foreach (self::${$staticvar} as $key => $value) {
-   self::${$staticvar}[$key] = gettext($value);
+   self::${$staticvar}[$key] = gettext(trim($value));
   }
  }
 

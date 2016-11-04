@@ -130,7 +130,7 @@ class sys_notification extends dbObject {
   '_update_action_meassge' => 'Approve/Reject',
   '_show_view_path' => 1,
  ];
- public $pageTitle = " HR notifications  "; //page Title
+ public $pageTitle = " HR Notifications  "; //page Title
 
  Public static function notification_name() {
   $option_header = option_header::find_by_name('SYS_NOTIFICATION_NAME');

@@ -66,8 +66,8 @@
              <tr class="inv_lot_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
               <td>   
                <ul class="inline_action">
-                <li class="add_row_detail_img1"><i class="fa fa-plus-circle clickable" alt="add new line"></i></li>
-                <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="remove this line"></i></li>
+                <li class="add_row_detail_img1"><i class="fa fa-plus-circle clickable" alt="<?php echo gettext('Add New Line') ?>"></i></li>
+                <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="<?php echo gettext('Remove This Line') ?>"></i></li>
                 <li><input type="checkbox" name="detail_id_cb" value="<?php echo htmlentities($lot_no->inv_lot_number_id); ?>"></li>           
                </ul>
               </td>
@@ -145,8 +145,8 @@
              <tr class="inv_serial_number<?php echo $detailCount; ?><?php echo $detailCount != 0 ? ' new_object' : '' ?>">
               <td>   
                <ul class="inline_action">
-                <li class="add_row_detail_img"><i class="fa fa-plus-circle clickable" alt="add new line"></i></li>
-                <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="remove this line"></i></li>
+                <li class="add_row_detail_img"><i class="fa fa-plus-circle clickable" alt="<?php echo gettext('Add New Line') ?>"></i></li>
+                <li class="remove_row_img"><i class="fa fa-minus-circle clickable" alt="<?php echo gettext('Remove This Line') ?>"></i></li>
                 <li><input type="checkbox" name="detail_id_cb" value="<?php echo ($serial_no->inv_serial_number_id); ?>"></li>           
 
                </ul>

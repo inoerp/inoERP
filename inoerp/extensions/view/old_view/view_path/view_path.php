@@ -2,7 +2,7 @@
 $extension = 'view_path';
 $key_field = 'column_name';
 $primary_column = "view_path_id";
-$pageTitle = " View - Create & update view path ";
+$pageTitle = " View - Create & Update View Path ";
 $required_field_flag = 1;
 ?>
 <?php include_once("../../../include/basics/header.inc"); ?>

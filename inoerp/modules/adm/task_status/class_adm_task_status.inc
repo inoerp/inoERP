@@ -78,7 +78,7 @@ class adm_task_status extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1,
  ];
- public $pageTitle = " Task status"; //page Title
+ public $pageTitle = " Task Status"; //page Title
  public $adm_task_status_id;
  public $status;
  public $access_level;

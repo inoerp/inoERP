@@ -160,7 +160,7 @@ msgstr "Id Org de Producción"
 msgid "Ap Payment Header Id"
 msgstr "Id Encabezado de Pago CP"
 
-msgid "BU Org Id"
+msgid "Bu Org Id"
 msgstr "Id Org UDN"
 
 msgid "Payment Type"
@@ -242,7 +242,7 @@ msgid "Supplier Site Name"
 msgstr "Nom Lugar Proveedor"
 
 msgid "Supplier Site Number"
-msgstr "Número del Lugar del Proveedor"
+msgstr "Núm Lugar del Proveedor"
 
 msgid "From Bank Line Id"
 msgstr "Id Linea Del Banco"
@@ -3551,7 +3551,7 @@ msgid "Stockable Cb"
 msgstr "Cv Almacenable"
 
 msgid "Transactable Cb"
-msgstr "Cv Permite Transacciones"
+msgstr "Cv Gestionable"
 
 msgid "Reservable Cb"
 msgstr "Cv Reservable"
@@ -3788,7 +3788,7 @@ msgid "Legal Id"
 msgstr "Id Legal"
 
 msgid "Legal Org Type"
-msgstr "Tipo de Org Legale"
+msgstr "Tipo de Org Legal"
 
 msgid "Registration Number"
 msgstr "Número de Registro"
@@ -4028,7 +4028,7 @@ msgid "Reservable On Hand"
 msgstr "En Existencia Reservable"
 
 msgid "Transactable On Hand"
-msgstr "En Existencia Transaccional"
+msgstr "En Existencia Gestionable"
 
 msgid "Lot Status"
 msgstr "Estado de Lote"
@@ -4172,13 +4172,13 @@ msgid "Agreement End Date"
 msgstr "Fecha Final Acuerdo"
 
 msgid "Po Requisition Header Id"
-msgstr "Id Encabezado de Requisición del P"
+msgstr "Id Encab Requisición P"
 
 msgid "Po Requisition Type"
 msgstr "Tipo de Requisición del P"
 
 msgid "Po Requisition Number"
-msgstr "Número de Requisición del P"
+msgstr "Núm de Requisición del P"
 
 msgid "Requisition Status"
 msgstr "Estado de la Requisición"
@@ -4187,7 +4187,7 @@ msgid "Po Requisition Line Id"
 msgstr "Id Linea de Requisición del P"
 
 msgid "Po Requisition Line Number"
-msgstr "Número de Linea de Requisición del P"
+msgstr "Núm de Linea Requisición del P"
 
 msgid "Bpa Po Line Id"
 msgstr "Id Linea de P del ACG"
@@ -4298,7 +4298,7 @@ msgid "Released Amount"
 msgstr "Importe Liberado"
 
 msgid "Po Requisition Interface Id"
-msgstr "Id Interfase de Requisición del P"
+msgstr "Id Interfase Requisición P"
 
 msgid "Requirement Number"
 msgstr "Número de Requerimiento"
@@ -7319,7 +7319,7 @@ msgid "ASL Document"
 msgstr "Documento de LPA"
 
 msgid "Search Blanket"
-msgstr "Busca Autoriza Abiertas"
+msgstr "Busca Autorizaciones Abiertas"
 
 msgid "form.php?class_name=sys_hold&mode=9"
 msgstr "form.php?class_name=sys_hold&mode=9"
@@ -9100,8 +9100,8 @@ msgstr "Info de P"
 msgid "Receipt"
 msgstr "Recibo"
 
-msgid "Line #"
-msgstr "# de Linea"
+msgid "Line#"
+msgstr "# Linea"
 
 msgid "PO #"
 msgstr "# de P"
@@ -9766,17 +9766,11 @@ msgstr "Transacción del Trabajo Sin Orden"
 msgid "WOL Transaction Details"
 msgstr "Detalles de la Transacción del TSO"
 
-msgid "Line "
-msgstr "Linea "
+msgid "PO Line"
+msgstr "Linea de P"
 
-msgid "PO "
-msgstr "P "
-
-msgid "PO Line "
-msgstr "Linea del P "
-
-msgid "Shipment "
-msgstr "Envío "
+msgid "Shipment"
+msgstr "Envío"
 
 msgid "Supplier "
 msgstr "Proveedor "
@@ -11473,8 +11467,8 @@ msgstr "De Org"
 msgid "RFID Reference"
 msgstr "Referencia IDRF"
 
-msgid " is is Successfully Opened"
-msgstr " Fue Abierta Exitosamente"
+msgid "is Successfully Opened"
+msgstr "fue Abierto Exitosamente"
 
 msgid "Existing & Available Periods"
 msgstr "Periodos Existentes y Disponibles"
@@ -12766,11 +12760,11 @@ msgstr "Id Relación de Artículo de Inv"
 msgid "relation type"
 msgstr "Tipo de Relación"
 
-msgid "from item id m"
-msgstr "M del Id De Artículo"
+msgid "From Item Id M"
+msgstr "M Id Artículo De"
 
-msgid "to item id m"
-msgstr "M del Id A Artículo"
+msgid "To Item Id M"
+msgstr "M Id Artículo A"
 
 msgid "planning cb"
 msgstr "Cv Planificación"
@@ -14474,7 +14468,7 @@ msgid "All Elements"
 msgstr "Todos los Elementos"
 
 msgid "Data To Search..."
-msgstr "Dato A Buscar..."
+msgstr "Dato a Buscar..."
 
 msgid "Go!"
 msgstr "¡Ir!"
@@ -14585,7 +14579,7 @@ msgid "Qa Cp Assignment Header"
 msgstr "Encabezado Asignación PR AC"
 
 msgid "Quality Result"
-msgstr "Busca Especificación"
+msgstr "Resultado de Calidad"
 
 msgid "Extensions"
 msgstr "Extensiones"
@@ -15136,7 +15130,7 @@ msgstr "Req"
 msgid "Select From Item Number"
 msgstr "Selec Núm de Artículo De"
 
-msgid "Select Item Number To"
+msgid "Select To Item Number"
 msgstr "Selec Núm de Artículo A"
 
 msgid "Activity Meter"
@@ -15361,14 +15355,14 @@ msgstr "Perfil de Cliente"
 msgid "Credit Class"
 msgstr "Categoría de Crédito"
 
-msgid "add detail values"
+msgid "Add Detail Values"
 msgstr "añadir valores detalle"
 
-msgid "add new line"
-msgstr "añadir linea nueva"
+msgid "Add New Line"
+msgstr "Añadir Linea Nueva"
 
-msgid "remove this line"
-msgstr "eliminar esta linea"
+msgid "Remove This Line"
+msgstr "Eliminar Esta Linea"
 
 msgid "PO Header"
 msgstr "Encabezado P"
@@ -15597,3 +15591,165 @@ msgstr "Suscribir Extn"
 
 msgid "Select Address Id"
 msgstr "Selec Id Dirección"
+
+msgid "Process This Line"
+msgstr "Procesa Esta Linea"
+
+msgid "From Item Id"
+msgstr "Id Artículo De"
+
+msgid "Select From Item Id"
+msgstr "Selec Id Artículo De"
+
+msgid "To Item Id"
+msgstr "Id Artículo A"
+
+msgid "Select From Project Number"
+msgstr "Selec Núm de Proyecto De"
+
+msgid "Select To Project Number"
+msgstr "Selec Núm de Proyecto A"
+
+msgid "Business"
+msgstr "Negocio"
+
+msgid "Pre Defined"
+msgstr "Predefinido"
+
+msgid "At Receipt"
+msgstr "Al Recibir"
+
+msgid "At Shipment"
+msgstr "Al Enviar"
+
+msgid "Business Org Details"
+msgstr "Detalles Org Negocios"
+
+msgid "Item Level"
+msgstr "Nivel Artículo"
+
+msgid "Organization Level"
+msgstr "Nivel Organización"
+
+msgid "Global Level"
+msgstr "Nivel Global"
+
+msgid "Inventory Org Details"
+msgstr "Detalles Org Inventario"
+
+msgid "Inventory Org Types"
+msgstr "Tipos Org Inventario"
+
+msgid "Po Requisition Header"
+msgstr "Encab Requisición P"
+
+msgid "External"
+msgstr "Externa"
+
+msgid "Internal"
+msgstr "Interna"
+
+msgid "Supply Org Id"
+msgstr "Id Org de Suministro"
+
+msgid "Po Requisition All V"
+msgstr "V Todas Requisiciones de P"
+
+msgid "Import Requisitions"
+msgstr "Importa Requisiciones"
+
+msgid "Program Parameters"
+msgstr "Programa Parámetros"
+
+msgid "Auto-Schedule Options"
+msgstr "Opciones Auto-Programa"
+
+msgid "Import Requisitions from interface"
+msgstr "Importa Requisiciones del Interfase"
+
+msgid "Po Requisition Interface"
+msgstr "Interfase Requisición de P"
+
+msgid "Supplier Balance"
+msgstr "Balance del Proveedor"
+
+msgid "Supplier Volume"
+msgstr "Volumen del Proveedor"
+
+msgid "Remove Product"
+msgstr "Eliminar Producto"
+
+msgid "Select To Transact"
+msgstr "Selec Para Gestionar"
+
+msgid "Purchasing Reports"
+msgstr "Reportes de Compras"
+
+msgid "Setup - Purchasing"
+msgstr "Configuración - Compras"
+
+msgid "Quality Collection Plan"
+msgstr "Plan de Recopilación de Calidad"
+
+msgid "Quality Setup"
+msgstr "Configuración de Calidad"
+
+msgid "Tab No"
+msgstr "Sep No"
+
+msgid "Select Supplier Name"
+msgstr "Selec Nom de Proveedor"
+
+msgid "Select All"
+msgstr "Selec Todo"
+
+msgid "Deselect All"
+msgstr "Deselec Todo"
+
+msgid "Component Name"
+msgstr "Nom de Componente"
+
+msgid "Component Value"
+msgstr "Valor de Componente"
+
+msgid "Hierarchy Lines"
+msgstr "Lineas de Jerarquía"
+
+msgid "Starting Position"
+msgstr "Puesto Inicial"
+
+msgid "Lot Numbers"
+msgstr "Núm de Lotes"
+
+msgid "Serial Numbers"
+msgstr "Números de Serie"
+
+msgid "WIP Completion"
+msgstr "Terminación de TEP"
+
+msgid "Manual"
+msgstr "Manual"
+
+msgid "System Generated"
+msgstr "Generado p/Sistema"
+
+msgid "New Entry"
+msgstr "Nueva Entrada"
+
+msgid "Create New Record"
+msgstr "Crear Registro Nuevo"
+
+msgid "Search To Select"
+msgstr "Busca Para Selec"
+
+msgid "Requisition - Purchasing"
+msgstr "Requisición - Compras"
+
+msgid "Select value of"
+msgstr "Selec valor de"
+
+msgid "Specifications"
+msgstr "Especificaciones"
+
+msgid "Option - Create & Update Different Options and Values"
+msgstr "Opción - Crear y Actualizar Diferentes Opciones y Valores"

@@ -39,8 +39,8 @@
           <tr class="coa_combination<?php echo $count ?>">
            <td>    
             <ul class="inline_action">
-             <li class="add_row_img"><i class="fa fa-plus-circle"  alt="add new line"></i></li>
-             <li class="remove_row_img"><i class="fa fa-minus-circle" alt="remove this line"></i></li>
+             <li class="add_row_img"><i class="fa fa-plus-circle"  alt="<?php echo gettext('Add New Line') ?>"></i></li>
+             <li class="remove_row_img"><i class="fa fa-minus-circle" alt="<?php echo gettext('Remove This Line') ?>"></i></li>
              <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($coa_combination->coa_combination_id); ?>"></li>           
              <li><?php echo form::hidden_field('coa_id', $coa_id_h); ?></li>
             </ul>

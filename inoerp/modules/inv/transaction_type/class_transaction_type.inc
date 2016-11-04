@@ -94,7 +94,7 @@ class transaction_type extends dbObject {
   '_update_action_meassge' => 'Update',
   '_show_view_path' => 1,
  ];
- public $pageTitle = " INV - Transaction Type  "; //page Title
+ public $pageTitle = " Inv - Transaction Type  "; //page Title
  public $option_lists = [
   'transaction_type_class' => 'TRANSACTION_TYPE_CLASS',
   'transaction_action' => 'INV_TRANSACTION_ACTION',

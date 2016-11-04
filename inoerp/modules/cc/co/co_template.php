@@ -284,7 +284,7 @@
     <ul class="tabMain">
      <?php
      for ($tl = 1; $tl <= $no_of_tabs; $tl++) {
-      echo "<li><a href='#tabsLine-{$tl}'>Tab No $tl </a></li>";
+      echo "<li><a href='#tabsLine-{$tl}'>" . gettext('Tab No') . " $tl </a></li>";
      }
      ?>
     </ul>

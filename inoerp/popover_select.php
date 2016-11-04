@@ -3,10 +3,10 @@
  $hideBlock = true;
  if (!empty($_GET['search_class_name'])) {
   $class_names = $_GET['search_class_name'];
-  $pageTitle = " $class_names - Select value of $class_names ";
+  $pageTitle = " " . gettext(trim($class_names)) . " - " . gettext('Select value of') . " " . gettext(trim($class_names)) . " ";
  } else if (!empty($_GET['class_name'])) {
   $class_names = $_GET['class_name'];
-  $pageTitle = " $class_names - Select value of $class_names ";
+  $pageTitle = " " . gettext(trim($class_names)) . " - " . gettext('Select value of') . " " . gettext(trim($class_names)) . " ";
  } else {
   $path_access = -1;
  }

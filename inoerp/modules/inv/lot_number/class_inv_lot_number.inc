@@ -34,7 +34,7 @@ class inv_lot_number extends dbObject {
  public static $origination_type_a = [
   'INVENTORY' => 'Inventory',
   'WIP_COMPLETION' => 'WIP Completion',
-  'RECEVING' => 'Receving',
+  'RECEVING' => 'Receiving',
   'SHIPMENT' => 'Shipment',
   'MANUAL' => 'Manual',
   'SYS_GEN' => 'System Generated',
@@ -359,29 +359,29 @@ class inv_lot_number extends dbObject {
   }
   $ret_stmt = '<table class="form_line_data_table">
                 <thead> 
-                <th>Lot Numbers</th>
-                <th>Serial Numbers</th>
+                <th>' . gettext('Lot Numbers') . '</th>
+                <th>' . gettext('Serial Numbers') . '</th>
                 </thead>
               <tbody class="form_data_line_tbody">
               <tr class="inv_transaction_line0" id="tab4_1">';
   $ret_stmt .= '<td class="add_detail_values0">';
   $ret_stmt .= $f->hidden_field('lot_number_id', $lot_object[0]->inv_lot_number_id);
   $ret_stmt .= $f->hidden_field('lot_generation', $lot_object[0]->lot_generation);
-  $ret_stmt .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+  $ret_stmt .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="'.  gettext('Add Detail Values').'" />
                 <div class="class_detail_form">
-                 <fieldset class="form_detail_data_fs"><legend>lot</legend>
+                 <fieldset class="form_detail_data_fs"><legend>' . gettext('Lot') . '</legend>
                   <div class="tabsDetailLN">
                    <ul class="tabMain">
-                    <li class="tabLink"><a href="#tabsDetailLN-1-1"> Numbers</a></li>
+                    <li class="tabLink"><a href="#tabsDetailLN-1-1"> ' . gettext('Numbers') . '</a></li>
                    </ul>
                    <div class="tabContainer">
                     <div id="tabsDetail-1-1" class="tabContent">
                      <table class="form form_detail_data_table detail">
                       <thead>
                        <tr>
-                        <th>Action</th>
-                        <th>Lot Number</th>
-                        <th>Quantity</th>
+                        <th>' . gettext('Action') . '</th>
+                        <th>' . gettext('Lot Number') . '</th>
+                        <th>' . gettext('Quantity') . '</th>
                        </tr>
                       </thead>
                       <tbody class="form_data_detail_tbody_ln">';
@@ -403,8 +403,8 @@ class inv_lot_number extends dbObject {
    $ret_stmt .=' <tr class="inv_lot_number' . $detailCount . '' . $new_obj_div_class . '">';
    $ret_stmt .=' <td>   
      <ul class="inline_action">
-      <li class="add_row_detail_img1"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="add new line" /></li>
-      <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this line" /> </li>
+      <li class="add_row_detail_img1"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="'.  gettext('Add New Line').'" /></li>
+      <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="'.  gettext('Remove This Line').'" /> </li>
       <li><input type="checkbox" name="detail_id_cb" value="' . htmlentities($lot_no->inv_lot_number_id) . '"></li>  ';
 //   $ret_stmt .= '<li>' . form::hidden_field('inv_transaction_id', $lot_no->inv_transaction_id) . '</li>';
    $ret_stmt .=' </ul>
@@ -437,20 +437,20 @@ class inv_lot_number extends dbObject {
 
   $ret_stmt .= $f->hidden_field('serial_number_id', $serial_object[0]->inv_serial_number_id);
   $ret_stmt .= $f->hidden_field('serial_generation', $serial_object[0]->serial_generation);
-  $ret_stmt .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+  $ret_stmt .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="'.  gettext('Add Detail Values').'" />
                 <div class="class_detail_form">
-                 <fieldset class="form_detail_data_fs"><legend>Serial</legend>
+                 <fieldset class="form_detail_data_fs"><legend>'.  gettext('Serial') . '</legend>
                   <div class="tabsDetailSN">
                    <ul class="tabMain">
-                    <li class="tabLink"><a href="#tabsDetailSN-1-1"> Numbers</a></li>
+                    <li class="tabLink"><a href="#tabsDetailSN-1-1"> '.  gettext('Numbers') . '</a></li>
                    </ul>
                    <div class="tabContainer">
                     <div id="tabsDetailSN-1-1" class="tabContent">
                      <table class="form form_detail_data_table detail">
                       <thead>
                        <tr>
-                        <th>Action</th>
-                        <th>Serial Number</th>
+                        <th>'.  gettext('Action') . '</th>
+                        <th>'.  gettext('Serial Number') . '</th>
                        </tr>
                       </thead>
                       <tbody class="form_data_detail_tbody_sn">';
@@ -471,8 +471,8 @@ class inv_lot_number extends dbObject {
    $ret_stmt .=' <tr class="inv_serial_number' . $detailCount_sn . '' . $new_obj_div_class . '">';
    $ret_stmt .=' <td>   
      <ul class="inline_action">
-      <li class="add_row_detail_img1"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="add new line" /></li>
-      <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this line" /> </li>
+      <li class="add_row_detail_img1"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="'.  gettext('Add New Line').'" /></li>
+      <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="'.  gettext('Remove This Line').'" /> </li>
       <li><input type="checkbox" name="detail_id_cb" value="' . htmlentities($sn_no->inv_serial_number_id) . '"></li>  ';
    $ret_stmt .= '<li>' . form::hidden_field('inv_transaction_id', $sn_no->inv_transaction_id) . '</li>';
    $ret_stmt .=' </ul>
@@ -513,21 +513,21 @@ class inv_lot_number extends dbObject {
   $ret_stmt_l = '<td class="add_detail_values0">';
   $ret_stmt_l .= $f->hidden_field('lot_number_id', $lot_object[0]->inv_lot_number_id);
   $ret_stmt_l .= $f->hidden_field('lot_generation', $lot_object[0]->lot_generation);
-  $ret_stmt_l .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+  $ret_stmt_l .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="'.  gettext('Add Detail Values').'" />
                 <div class="class_detail_form">
-                 <fieldset class="form_detail_data_fs"><legend>lot</legend>
+                 <fieldset class="form_detail_data_fs"><legend>'.  gettext('Lot') . '</legend>
                   <div class="tabsDetailLN">
                    <ul class="tabMain">
-                    <li class="tabLink"><a href="#tabsDetailLN-1-1"> Numbers</a></li>
+                    <li class="tabLink"><a href="#tabsDetailLN-1-1"> '.  gettext('Numbers') . '</a></li>
                    </ul>
                    <div class="tabContainer">
                     <div id="tabsDetail-1-1" class="tabContent">
                      <table class="form form_detail_data_table detail">
                       <thead>
                        <tr>
-                        <th>Action</th>
-                        <th>Lot Number</th>
-                        <th>Quantity</th>
+                        <th>'.  gettext('Action') . '</th>
+                        <th>'.  gettext('Lot Number') . '</th>
+                        <th>'.  gettext('Quantity') . '</th>
                        </tr>
                       </thead>
                       <tbody class="form_data_detail_tbody_ln">';
@@ -549,8 +549,8 @@ class inv_lot_number extends dbObject {
    $ret_stmt_l .=' <tr class="inv_lot_number' . $detailCount . '' . $new_obj_div_class . '">';
    $ret_stmt_l .=' <td>   
      <ul class="inline_action">
-      <li class="add_row_detail_img1"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="add new line" /></li>
-      <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this line" /> </li>
+      <li class="add_row_detail_img1"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="'.  gettext('Add New Line').'" /></li>
+      <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="'.  gettext('Remove This Line').'" /> </li>
       <li><input type="checkbox" name="detail_id_cb" value="' . htmlentities($lot_no->inv_lot_number_id) . '"></li>  ';
 //   $ret_stmt .= '<li>' . form::hidden_field('inv_transaction_id', $lot_no->inv_transaction_id) . '</li>';
    $ret_stmt_l .=' </ul>
@@ -582,20 +582,20 @@ class inv_lot_number extends dbObject {
 
   $ret_stmt_l .= $f->hidden_field('serial_number_id', $serial_object[0]->inv_serial_number_id);
   $ret_stmt_l .= $f->hidden_field('serial_generation', $serial_object[0]->serial_generation);
-  $ret_stmt_l .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+  $ret_stmt_l .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="'.  gettext('Add Detail Values').'" />
                 <div class="class_detail_form">
-                 <fieldset class="form_detail_data_fs"><legend>Serial</legend>
+                 <fieldset class="form_detail_data_fs"><legend>'.  gettext('Serial') . '</legend>
                   <div class="tabsDetailSN">
                    <ul class="tabMain">
-                    <li class="tabLink"><a href="#tabsDetailSN-1-1"> Numbers</a></li>
+                    <li class="tabLink"><a href="#tabsDetailSN-1-1"> '.  gettext('Numbers') . '</a></li>
                    </ul>
                    <div class="tabContainer">
                     <div id="tabsDetailSN-1-1" class="tabContent">
                      <table class="form form_detail_data_table detail">
                       <thead>
                        <tr>
-                        <th>Action</th>
-                        <th>Serial Number</th>
+                        <th>'.  gettext('Action') . '</th>
+                        <th>'.  gettext('Serial Number') . '</th>
                        </tr>
                       </thead>
                       <tbody class="form_data_detail_tbody_sn">';
@@ -616,8 +616,8 @@ class inv_lot_number extends dbObject {
    $ret_stmt_l .=' <tr class="inv_serial_number' . $detailCount_sn . '' . $new_obj_div_class . '">';
    $ret_stmt_l .=' <td>   
      <ul class="inline_action">
-      <li class="add_row_detail_img0"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="add new line" /></li>
-      <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this line" /> </li>
+      <li class="add_row_detail_img0"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="'.  gettext('Add New Line').'" /></li>
+      <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="'.  gettext('Remove This Line').'" /> </li>
       <li><input type="checkbox" name="detail_id_cb" value="' . htmlentities($sn_no->inv_serial_number_id) . '"></li>  ';
    $ret_stmt_l .= '<li>' . form::hidden_field('inv_transaction_id', $sn_no->inv_transaction_id) . '</li>';
    $ret_stmt_l .=' </ul>
@@ -644,7 +644,14 @@ class inv_lot_number extends dbObject {
   return $return_a;
  }
 
+ public static function staticVar_init($staticvar) {
+  foreach (self::${$staticvar} as $key => $value) {
+   self::${$staticvar}[$key] = gettext(trim($value));
+  }
+ }
+
 }
 
 //end of inv_lot_number class
+inv_lot_number::staticVar_init('origination_type_a');
 ?>

@@ -411,9 +411,9 @@ class path extends dbObject {
      $path_name = gettext($path->name);
      $path_description = gettext($path->description);
      if ($this->show_description) {
-      $allPaths .= "<li title=\"$path_name\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_description . '</a>';
+      $allPaths .= "<li title=\"" . gettext($path_name) . "\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_description . '</a>';
      } else {
-      $allPaths .= "<li title=\"$path_description\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_name . '</a>';
+      $allPaths .= "<li title=\"" . gettext($path_description) . "\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_name . '</a>';
      }
      $allPaths .= '<ul class="child_menu">';
 
@@ -424,9 +424,9 @@ class path extends dbObject {
       if ($key) {
        $url_1 = $path->fullPath($child_paths_oth->path_link);
        if ($this->show_description) {
-        $allPaths .= "<li title=\"$child_paths_name\" data-toggle=\"tooltip\" class='expandable {$child_paths_oth->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_description . '</a>';
+        $allPaths .= "<li title=\"" . gettext($child_paths_name) . "\" data-toggle=\"tooltip\" class='expandable {$child_paths_oth->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_description . '</a>';
        } else {
-        $allPaths .= "<li title=\"$child_paths_description\" data-toggle=\"tooltip\" class='expandable {$child_paths_oth->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_name . '</a>';
+        $allPaths .= "<li title=\"" . gettext($child_paths_description) . "\" data-toggle=\"tooltip\" class='expandable {$child_paths_oth->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_name . '</a>';
        }
        $allPaths .= $this->_indented_pathMenu_Child($child_paths_oth->path_id, $allowed_path_ids, $allPaths);
        unset($allowed_path_ids[$key]);
@@ -443,9 +443,9 @@ class path extends dbObject {
    $path_name = gettext($path->name);
    $path_description = gettext($path->description);
    if ($this->show_description) {
-    $allPaths .= "<li title=\"$path_name\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_description . '</a>';
+    $allPaths .= "<li title=\"" . gettext($path_name) . "\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_description . '</a>';
    } else {
-    $allPaths .= "<li title=\"$path_description\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_name . '</a>';
+    $allPaths .= "<li title=\"" . gettext($path_description) . "\" data-toggle=\"tooltip\" class='parent_menu expandable {$path->name} '>" . '<a href="' . $url . '">' . $path_name . '</a>';
    }
    $allPaths .= '<ul class="child_menu">';
 
@@ -456,9 +456,9 @@ class path extends dbObject {
     if ($key) {
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
-      $allPaths .= "<li title=\"$child_paths_name\" data-toggle=\"tooltip\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_description . '</a>';
+      $allPaths .= "<li title=\"" . gettext($child_paths_name) . "\" data-toggle=\"tooltip\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_description . '</a>';
      } else {
-      $allPaths .= "<li title=\"$child_paths_description\" data-toggle=\"tooltip\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_name . '</a>';
+      $allPaths .= "<li title=\"" . gettext($child_paths_description) . "\" data-toggle=\"tooltip\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths_name . '</a>';
      }
      $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
      unset($allowed_path_ids[$key]);
@@ -477,9 +477,9 @@ class path extends dbObject {
     $child_paths = $path->findBy_id($path_id);
     $url_1 = $path->fullPath($child_paths->path_link);
     if ($this->show_description) {
-     $allPaths .= "<li title=\"$child_paths->name\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
+     $allPaths .= "<li title=\"" . gettext($child_paths->name) . "\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
     } else {
-     $allPaths .= "<li title=\"$child_paths->description\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+     $allPaths .= "<li title=\"" . gettext($child_paths->description) . "\" class='expandable {$path->name} '>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
     }
 
     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
@@ -506,12 +506,12 @@ class path extends dbObject {
    $p_desc = $path->description;
    $allPaths .= '<div class="panel-heading dashboard">';
    $allPaths .= '<ul class=inline-list>';
-   $allPaths .= "<li title=\"My Dashboard\" >" .
+   $allPaths .= "<li title=\"" . gettext('My Dashboard') . "\" >" .
     '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"> ' . gettext( 'Dashboard' ) . '  >> </a></li>';
    if ($this->show_description) {
-    $allPaths .= "<li title=\"$p_name\" class='{$path->name} '>" . '<a  class="ajax-link" href="' . $url . '">' . gettext( $p_desc ) . '</a></li>';
+    $allPaths .= "<li title=\"" . gettext($p_name) . "\" class='{$path->name} '>" . '<a  class="ajax-link" href="' . $url . '">' . gettext( $p_desc ) . '</a></li>';
    } else {
-    $allPaths .= "<li title=\"$p_desc\" class='{$path->name} '>" . '<a  class="ajax-link" href="' . $url . '">' . gettext( $p_name ) . '</a></li>';
+    $allPaths .= "<li title=\"" . gettext($p_desc) . "\" class='{$path->name} '>" . '<a  class="ajax-link" href="' . $url . '">' . gettext( $p_name ) . '</a></li>';
    }
    $allPaths .= '</ul></div>';
    $allPaths .= '<div class="panel-body"><ul class="child_menu">';
@@ -524,9 +524,9 @@ class path extends dbObject {
     if ($key) {
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
-      $allPaths .= "<li title=\"$p_name_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' . $fa_icon . ' &nbsp; ' . gettext( $p_desc_child ) . '</a>';
+      $allPaths .= "<li title=\"" . gettext($p_name_child) . "\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' . $fa_icon . ' &nbsp; ' . gettext( $p_desc_child ) . '</a>';
      } else {
-      $allPaths .= "<li title=\"$p_desc_child\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' . $fa_icon . ' &nbsp; ' . gettext( $p_name_child ) . '</a>';
+      $allPaths .= "<li title=\"" . gettext($p_desc_child) . "\" class='expandable {$child_paths->name}'>" . '<a class="list-header" href="' . $url_1 . '">&nbsp;' . $fa_icon . ' &nbsp; ' . gettext( $p_name_child ) . '</a>';
      }
      $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
      unset($allowed_path_ids[$key]);
@@ -546,9 +546,9 @@ class path extends dbObject {
      $child_paths = $path->findBy_id($path_id);
      $url_1 = $path->fullPath($child_paths->path_link);
      if ($this->show_description) {
-      $allPaths .= "<li title=\"$child_paths->name\" class='expandable  {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
+      $allPaths .= "<li title=\"" . gettext($child_paths->name) . "\" class='expandable  {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $child_paths->description . '</a>';
      } else {
-      $allPaths .= "<li title=\"$child_paths->description\" class='expandable  {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
+      $allPaths .= "<li title=\"" . gettext($child_paths->description) . "\" class='expandable  {$child_paths->name}'>" . '<a href="' . $url_1 . '">' . $child_paths->name . '</a>';
      }
 
      $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths);
@@ -581,7 +581,7 @@ class path extends dbObject {
     $url = $path->fullPath($child_paths->path_link);
     $path_name = gettext($child_paths->name);
     $path_description = gettext($child_paths->description);
-    $allPaths .= "<li title=\"$path_description\" class='expandable {$path->name} '>&nbsp;&nbsp;" . '<a href="' . $url . '">' . $fa_icon . '&nbsp;' . gettext($path_name) . '</a>';
+    $allPaths .= "<li title=\"" . gettext($path_description) . "\" class='expandable {$path->name} '>&nbsp;&nbsp;" . '<a href="' . $url . '">' . $fa_icon . '&nbsp;' . gettext($path_name) . '</a>';
     $allPaths .= $this->_indented_pathMenu_Child($child_paths->path_id, $allowed_path_ids, $allPaths, $list_count);
     $allPaths .= '</li>';
     unset($allowed_path_ids[$key]);

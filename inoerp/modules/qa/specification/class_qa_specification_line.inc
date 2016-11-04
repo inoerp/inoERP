@@ -57,7 +57,7 @@ class qa_specification_line extends dbObject {
   "employee_name",
   'task_number'
  ];
- public $pageTitle = " Specificaion Line"; //page Title
+ public $pageTitle = " Specification Line"; //page Title
  public $qa_specification_line_id;
  public $qa_specification_header_id;
  public $qa_ce_header_id;

@@ -208,7 +208,7 @@ class inoform {
   'user_group_access',
   'wip_accounting_group'
  ];
- public $pageTitle = " inoFrom - All Forms "; //page Title
+ public $pageTitle = " inoForm - All Forms "; //page Title
  public $option_lists = [
 //		 'supplier_type' => 'SUPPLIER_TYPE',
  ];
@@ -2072,16 +2072,16 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   }
 
   if ($convertToText == 1) {
-   $element_select_field .= "<option value=\"newentry\"  class=\"bold blue\">New Entry</option>";
+   $element_select_field .= "<option value=\"newentry\"  class=\"bold blue\">" . gettext('New Entry') . "</option>";
   }
   $element_select_field .= '</select>';
 
   return $element_select_field;
  }
 
- public function l_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '') {
+ public function l_select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value = "", $id = "", $divClass = "", $required = "", $readonly = "", $convertToText = "", $nonArrayName = "", $disabled = "", $dataname = '', $sort = '') {
   echo '<label>' . gettext(ucwords(str_replace('_', ' ', $name))) . '</label>';
-  echo $this->select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $id, $divClass, $required, $readonly, $convertToText, $nonArrayName, $disabled, $dataname);
+  echo $this->select_field_from_object($name, $object, $objectValueKey, $objectDescriptionKey, $value, $id, $divClass, $required, $readonly, $convertToText, $nonArrayName, $disabled, $dataname, $sort);
  }
 
  public function l_select_field_from_array($name, $array, $value, $id = "", $class_name = "", $required = "", $readonly = "", $disabled = '', $convertToText = false) {
@@ -2386,7 +2386,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $stmt_rtn .= '<div id="tabsLine">
  <ul class="tabMain">';
   for ($i = 0; $i < $no_of_tabs; $i++) {
-   $stmt_rtn .= "<li><a href=\"#tabsLine-$i\">Tab No $i </a></li>";
+   $stmt_rtn .= "<li><a href=\"#tabsLine-$i\">" . gettext('Tab No') . " $i </a></li>";
   }
   $stmt_rtn .= ' </ul>
  <div class="tabContainer"> ';
