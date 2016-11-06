@@ -60,11 +60,11 @@
         <table class="form_table">
          <thead> 
           <tr>
-           <th><?php echo gettext('Details') ?>Task Type Id</th>
-           <th><?php echo gettext('Details') ?>Auto Notification</th>
-           <th><?php echo gettext('Details') ?>Schedule</th>
-           <th><?php echo gettext('Details') ?>Effort UOM</th>
-           <th><?php echo gettext('Details') ?>Effort Value</th>
+           <th><?php echo gettext('Task Type Id') ?></th>
+           <th><?php echo gettext('Auto Notification') ?></th>
+           <th><?php echo gettext('Schedule') ?></th>
+           <th><?php echo gettext('Effort UOM') ?></th>
+           <th><?php echo gettext('Effort Value') ?></th>
           </tr>
          </thead>
          <tbody class="form_data_line_tbody">

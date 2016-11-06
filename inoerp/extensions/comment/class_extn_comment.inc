@@ -27,6 +27,7 @@ class extn_comment extends dbObject {
  public static $primary_column = "extn_comment_id";
  public static $key_column = "extn_comment";
  public static $module = "extension";
+ public static $multi_select_template_path = 'extensions/comment/multi_action/comment_template_ma.php';
  public static $system_info = [
   'name' => 'Comment',
   'number' => '10040',
@@ -510,6 +511,13 @@ class extn_comment extends dbObject {
   ];
 
   return $multi_select_hidden;
+ }
+ 
+  public function multi_select_actions() {
+	 global $f ;
+	 $stmt ='<label >Action on Selected Fields</label>';
+  $stmt .=  $f->select_field_from_array('comment_action', ['unpublish' => 'Unpublish', 'delete' => 'Delete'], '' ,'comment_action' ,'medium');
+  return $stmt;
  }
 
 }
