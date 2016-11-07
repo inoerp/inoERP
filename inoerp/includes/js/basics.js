@@ -4773,7 +4773,8 @@ $(document).ready(function () {
 
 //#path_by_module a, #pagination .page_nos a, .pagination_page .page_nos a
 //#pagination .page_nos a added for price list
- $('body').on('click', '.getAjaxForm,#top-path-menu-ul a, #path_by_module a, .search_result a, #erp_form_area a.ajax-link , #pagination .page_nos a, .pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
+// #pagination .page_nos a REMOVED for comment and content multi action
+ $('body').on('click', '.getAjaxForm,#top-path-menu-ul a, #path_by_module a, .search_result a, #erp_form_area a.ajax-link ,.pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
   e.preventDefault();
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');

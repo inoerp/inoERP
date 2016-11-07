@@ -1,5 +1,6 @@
+<div id="multi_select">
 <div id="extn_comment_divId">
- <div class="row small-top-margin" id="multi_select">
+ <div class="row small-top-margin" >
   <div id="searchForm" ><div class='hideDiv_input fa fa-minus-circle clickable'></div>
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
 
@@ -103,7 +104,7 @@
  </div>
 
 </div>
-
+</div>
 <div id="js_data">
  <ul id="js_saving_data">
   <li class="lineClassName" data-lineClassName="extn_comment" ></li>

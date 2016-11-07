@@ -78,7 +78,7 @@ if (!empty($class_names)) {
 
  $s->setProperty('_initial_search_array', $$class->initial_search);
  if (property_exists($$class, 'search_groupBy')) {
-  $s->setProperty('_group_by', $$class->search_groupBy);
+  $s->setProperty('_group_by', $class::$search_groupBy);
  }
  if ((is_object($$class)) && property_exists($$class, 'search_functions')) {
   $s->setProperty('_search_functions', $$class->search_functions);

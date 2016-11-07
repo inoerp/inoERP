@@ -1849,8 +1849,9 @@ legend.major{
 }
 
 #content_data div label {
- min-width: 100px;
- text-align: right;
+width: 100px;
+text-align: right;
+margin-bottom: 10px;
 }
 
 .img-vs{
@@ -2922,13 +2923,13 @@ input:checked + .slider:before {
 
 .slider .on-color{
  float: left;
- margin: 1.5px 0 1px 4px;
+ margin: -4px 0 1px 4px;
  color: #fff;
 }
 
 .slider .off-color{
  float: right;
- margin: 1.5px 4px 1px 4px;
+ margin: -4px 4px 1px 4px;
  color: #fff;
 }
 
@@ -3017,3 +3018,13 @@ section p{
         width: 350px !important;
         margin-left: 0 !important;
 }
+
+.iinput input, .iinput select{
+        height: 26px;
+        border: 1px solid #ccc;
+}
+
+
+.iinput .checkBox{
+        height: 12px;
+        }

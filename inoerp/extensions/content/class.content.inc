@@ -28,6 +28,7 @@ class content extends dbObject {
  public static $primary_column = "content_id";
  public static $key_column = "subject";
  public static $module = "extension";
+ public static $multi_select_template_path = 'extensions/content/multi_action/content_template_ma.php';
 //  data base variables as stored database column name
  public static $system_info = [
 		 'name' => 'Content',

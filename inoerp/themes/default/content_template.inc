@@ -36,7 +36,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
             <?php echo $f->hidden_field_withId('content_type_id', $content_type->content_type_id); ?>
             <?php echo $f->hidden_field_withId('content_type', $content_type_name); ?>
             <div class="row">
-             <div class="col-sm-10 col-xs-12"><?php echo $f->text_field('subject', $$class->subject, 100, 'subject', 'extra_large', 1, '', ' Subject - Required For This Post') ?></div>
+             <div class="col-sm-10 col-xs-12"><?php echo $f->text_field('subject', $$class->subject, 100, 'subject', 'extra_large', '1', '', ' Subject - Required For This Post') ?></div>
              <div class="col-sm-2">
               <a class="show2 content_id btn btn-default" role="button" href="content.php?content_id=<?php echo $$class->content_id; ?>&content_type=<?php echo $content_type_name ?>"><?php echo gettext('View') ?></a>
              </div>
@@ -48,7 +48,7 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
             <!--End of Content-->
             <div id="content_element_divId" class="col-md-12" >
              <div class="hideDiv_input fa fa-plus-circle clickable"></div>
-             <div class="hideDiv_input_element">
+             <div class="hideDiv_input_element iinput">
               <legend class="collapsible major">
                <ul class="column header_field">
                 <li><label><?php echo gettext('Front Page'); ?>?</label><?php echo form::checkBox_field_d('show_in_fp_cb'); ?></li>
@@ -65,17 +65,18 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                  <?php
                  if (!empty($category_select_statement_array)) {
                   foreach ($category_select_statement_array as $category_select_statement) {
-                   echo '<label>' . getteext('Category') . '</label>';
+                   echo '<label>' . gettext('Category') . '</label>';
                    echo $category_select_statement;
                   }
                  } else {
                   if (!empty($categories_of_content_type_select_option_array)) {
                    foreach ($categories_of_content_type_select_option_array as $records) {
-                    echo '<label>' . getteext('Category') . '</label>';
+                    echo '<label>' . gettext('Category') . '</label>';
                     echo $records;
                    }
                   }
                  }
+								 echo $inocsrf->token_tag();
                  ?>
                 </li>
                </ul>
@@ -89,12 +90,12 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                <li class="btn btn-info active inline input_file clickable ino-100"  role="button"><input type="file" id="comment_attachments"  class="input_file_btn" name="attachments[]" multiple/>
                 <i class="fa fa-paperclip clickable"></i>&nbsp;&nbsp<?php echo gettext('Select File'); ?></li>
                <li><input type="button"  role="button" value="<?php echo gettext('Attach'); ?>"  name="attach_submit" id="comment_attach_submit" class="btn btn-info active ino-80 comment_attach_submit"></li>
+							  <li class="ino-70"><input name="subscribe_cb[]" class="checkBox subscribe_cb ino-10" id="subscribe_cb" value="1" type="checkbox">&nbsp; <?php echo gettext('Subscribe'); ?></li>
                <?php $user_name = isset($_SESSION['username']) ? $_SESSION['username'] : 'Anonymous'; ?>
                <li><div class="input-group">
                  <span class="input-group-addon" id="basic-addon1"><?php echo gettext('Post As'); ?> </span>
                  <input type="text" name="content_by" class="form-control content_by height-unset ino-100" placeholder="<?php echo $user_name ?>" aria-describedby="basic-addon1" >
                 </div></li>
-                <li class="ino-70"><input name="subscribe_cb[]" class="checkBox subscribe_cb ino-10" id="subscribe_cb" value="1" type="checkbox">&nbsp; <?php echo gettext('Subscribe'); ?></li>
                <?php
                if ($mode == 9) {
                 echo '<li><input type="button" id="save_content" role="button" name="submit_content" class="btn btn-warning ino-btn save_content submit_content ino-80" Value="' . gettext('Post') . '"></li>';
@@ -106,7 +107,6 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                echo $f->hidden_field_withId('upload_type', 'only_server');
                echo $f->hidden_field_withId('user_id', $ino_user->ino_user_id);
                ?>
-
               </ul>
               <div class="uploaded_file_details"></div>
              </div>

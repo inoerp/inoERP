@@ -5,12 +5,12 @@ $all_data_ai = new ArrayIterator($all_data);
 $all_data_ai->seek($position);
 ?> 
 <!--    End of place for showing error messages-->
-<form action=""  method="post" id="sys_engine"  name="sys_engine">
+<form  method="post" id="sys_engine"  name="sys_engine">
  <div id ="form_line" class="form_line"><span class="heading"><?php echo ucfirst($dir_path); ?>  Details  </span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Basic Info </a></li>
-    <li><a href="#tabsLine-2">Related Details </a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
+    <li><a href="#tabsLine-2"><?php echo gettext('Related Details') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
 
@@ -18,17 +18,17 @@ $all_data_ai->seek($position);
      <table class="form_table">
       <thead> 
        <tr>
-        <th>Action-Row #</th>
-        <th>Name</th>
-        <th>Number</th>
-        <th>Id</th>
-        <th>Class Name</th>
-        <th>Module</th>
-        <th>Description</th>
-        <th>File DB Ver</th>
-        <th>DB Ver</th>
-        <th>Installed</th>
-        <th>Enabled</th>
+        <th><?php echo gettext('Action-Row #') ?></th>
+        <th><?php echo gettext('Name') ?></th>
+        <th><?php echo gettext('Number') ?></th>
+        <th><?php echo gettext('Id') ?></th>
+        <th><?php echo gettext('Class Name') ?></th>
+        <th><?php echo gettext('Module') ?></th>
+        <th><?php echo gettext('Description') ?></th>
+        <th><?php echo gettext('File DB Ver') ?></th>
+        <th><?php echo gettext('DB Ver') ?></th>
+        <th><?php echo gettext('Installed') ?></th>
+        <th><?php echo gettext('Enabled') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody engine_values" >
@@ -94,14 +94,14 @@ $all_data_ai->seek($position);
       <thead> 
        <tr>
         <th>Row #</th>
-        <th><?php echo ucfirst($dir_path) ?> Name</th>
-        <th>Weight</th>
-        <th>Version</th>
-        <th>Mod Version</th>
-        <th>Dependent</th>
-        <th>Path</th>
-        <th>Update DB</th>
-        <th>Un install</th>
+        <th><?php echo ucfirst($dir_path) ?> <?php echo gettext('Name') ?></th>
+        <th><?php echo gettext('Weight') ?></th>
+        <th><?php echo gettext('Version') ?></th>
+        <th><?php echo gettext('Mod Version') ?></th>
+        <th><?php echo gettext('Dependent') ?></th>
+        <th><?php echo gettext('Path') ?></th>
+        <th><?php echo gettext('Update DB') ?></th>
+        <th><?php echo gettext('Un install') ?></th>
        </tr>
       </thead>
 

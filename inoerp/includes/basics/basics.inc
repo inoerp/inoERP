@@ -43,6 +43,7 @@ if (DB_TYPE == 'MYSQL') {
 require_once(INC_CLASS . DS . "class_ino_session.inc");
 require_once(INC_PATH . DS . 'interface' . DS . "gl_int.inc");
 require_once(INC_PATH . DS . 'interface' . DS . "hr_int.inc");
+require_once(INC_CLASS . DS . "class_inocsrf.inc");
 
 //require_once(INC_CLASS . DS . "class_dbc2.inc");
 //require_once(INC_CLASS . DS . "class_dbObject2.inc");

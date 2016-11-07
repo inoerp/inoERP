@@ -64,13 +64,13 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                  <?php
                  if (!empty($category_select_statement_array)) {
                   foreach ($category_select_statement_array as $category_select_statement) {
-                   echo '<label>' . getteext('Category') . '</label>';
+                   echo '<label>' . gettext('Category') . '</label>';
                    echo $category_select_statement;
                   }
                  } else {
                   if (!empty($categories_of_content_type_select_option_array)) {
                    foreach ($categories_of_content_type_select_option_array as $records) {
-                    echo '<label>' . getteext('Category') . '</label>';
+                    echo '<label>' . gettext('Category') . '</label>';
                     echo $records;
                    }
                   }
