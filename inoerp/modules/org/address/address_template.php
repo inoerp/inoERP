@@ -10,7 +10,7 @@
 	}
 	?>
 
-<div id ="form_header">
+<div id ="form_headerDiv">
  <form  method="post" id="address"  name="address">
   <span class="heading"><?php echo gettext('Address Header') ?></span>
 	<div id ="form_header">

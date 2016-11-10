@@ -11,11 +11,8 @@ inoERP
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Overview') ?></a></li>
-		<li><a href="#tabsHeader-3"><?php echo gettext('Objectives') ?></a></li>
-		<li><a href="#tabsHeader-4"><?php echo gettext('Structure') ?></a></li>
-    <li><a href="#tabsHeader-5"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-6"><?php echo gettext('Attachments') ?></a></li>
+    <li><a href="#tabsHeader-2"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Attachments') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -30,21 +27,6 @@ inoERP
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-		 <div><label class="text_area_label"><?php echo gettext('Overview') ?></label>
-				 <?php echo $f->text_area_ap(array('name' => 'overview', 'value' => $$class->overview, 'row_size' => '10', 'column_size' => '90')); ?> 	
-		 </div> 
-    </div>
-    <div id="tabsHeader-3" class="tabContent">
-		 <div><label class="text_area_label"><?php echo gettext('Objectives') ?></label>
-				 <?php echo $f->text_area_ap(array('name' => 'objectives', 'value' => $$class->objectives, 'row_size' => '10', 'column_size' => '90')); ?> 	
-		 </div> 
-    </div>
-		<div id="tabsHeader-4" class="tabContent">
-		 <div><label class="text_area_label"><?php echo gettext('Structure') ?></label>
-				 <?php echo $f->text_area_ap(array('name' => 'structure', 'value' => $$class->structure, 'row_size' => '10', 'column_size' => '90')); ?> 	
-		 </div> 
-    </div>
-    <div id="tabsHeader-5" class="tabContent">
      <div> 
       <div id="comments">
        <div id="comment_list">
@@ -61,7 +43,7 @@ inoERP
       </div>
      </div>
     </div>
-    <div id="tabsHeader-6" class="tabContent">
+    <div id="tabsHeader-3" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
    </div>

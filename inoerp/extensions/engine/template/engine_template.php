@@ -7,7 +7,7 @@ $all_data_ai->seek($position);
 <!--    End of place for showing error messages-->
 <form  method="post" id="sys_engine"  name="sys_engine">
  <div id ="form_line" class="form_line"><span class="heading"><?php echo ucfirst($dir_path); ?><?php echo gettext('Details') ?>
-	<a role="button" class="ajax-link btn btn-default pull-right" href="<?php echo HOME_URL.'form.php?class_name=engine&mode=9' ?>"><?php echo gettext('All Modules') ?></a></span>
+	<a role="button" class="ajax-link btn btn-success pull-right" href="<?php echo HOME_URL.'form.php?class_name=engine&mode=9' ?>"><?php echo gettext('All Modules') ?></a></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -60,7 +60,7 @@ $all_data_ai->seek($position);
         <tr class="engine_line line_no<?php  echo $count ?>">
          <td>    
           <ul class="inline_action">
-           <li class="remove_row_img"><img src="<?php echo HOME_URL; ?>themes/images/remove.png" alt="remove this line" /> </li>
+           <li class="remove_row_img"><i class="fa fa-minus-circle" alt="remove this line" /> </li>
            <li><input type="checkbox" name="line_id_cb" value="<?php echo htmlentities($engine_id_v); ?>"></li>           
            <li><?php echo $count ?></li>
            <?php echo $f->hidden_field('type', $dir_path) ?>

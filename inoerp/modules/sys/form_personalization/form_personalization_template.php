@@ -4,8 +4,8 @@
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <div id="form_serach_header" class="tabContainer">
-      <label><?php        echo gettext('Object Name')     ?></label></label>
-      <?php echo $f->select_field_from_object('obj_class_name', extn_view::find_all_tables(), 'TABLE_NAME', 'TABLE_NAME', $obj_class_name_h, 'obj_class_name'); ?>
+      <label><?php echo gettext('Object Name') ?></label></label>
+			<?php echo $f->select_field_from_object('obj_class_name', extn_view::find_all_tables(), 'TABLE_NAME', 'TABLE_NAME', $obj_class_name_h, 'obj_class_name', 'action'); ?>
       <a name="show" href="form.php?class_name=sys_form_personalization&<?php echo "mode=$mode"; ?>" class="show document_id sys_form_personalization_id">
        <i class="fa fa-refresh"></i></a> 
      </div>
@@ -20,38 +20,42 @@
      <div class="tabContainer">
       <div id="tabsDetailD-1" class="tabContent">
        <div class="well">Save the custom template @ <strong>themes\default\template</strong> as file name  <strong><?php echo $custom_template_file_name; ?></strong>
-       &nbsp;&nbsp;&nbsp;&nbsp;<button id="update_form_view" class="btn btn-primary">Refresh Form View</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span id="update_form_view" role="button" class="btn btn-primary action">Refresh Form View</span>
        </div>
-       <?php
-       if (file_exists($file_name_fp)) {
-        $file_content_fp = file_get_contents(($file_name_fp));
-       }
-       echo $f->text_area('template_code', ($file_content_fp), '20', 'template_code', '', ' ', '', '', ' ', 150);
-       ?>
+			 <?php
+			 if (file_exists($file_name_fp)) {
+				$file_content_fp = file_get_contents(($file_name_fp));
+			 }
+			 echo $f->text_area('template_code', ($file_content_fp), '20', 'template_code', '', ' ', '', '', ' ', 150);
+			 ?>
       </div>
       <div id="tabsDetailD-2" class="tabContent">
-       <?php
-       if (!empty($file_content_fp)) {
-        unset($class_names);
-        unset($template_file_names);
-        $class_names = $obj_class_name_h;
-        include(HOME_DIR . '/includes/functions/loader.inc');
-        if (!empty($template_file_names)) {
-         foreach ($template_file_names as $key => $tmpl_file) {
-          include_once $tmpl_file;
-         }
-        }
-       }
-       $class = 'sys_form_personalization';
-       $$class = new $class;
-       ?>
+			 <span id="update_form_view2" role="button" class="btn btn-primary action">Refresh Form View</span>
+			 <div id="form_data">
+					 <?php
+					 if (!empty($file_content_fp)) {
+						unset($class_names);
+						unset($template_file_names);
+						$class_names = $obj_class_name_h;
+						include(HOME_DIR . '/includes/functions/loader.inc');
+						if (!empty($template_file_names)) {
+						 foreach ($template_file_names as $key => $tmpl_file) {
+							include_once $tmpl_file;
+						 }
+						}
+					 }
+					 $class = 'sys_form_personalization';
+					 $$class = new $class;
+					 ?>
+			 </div>
+
       </div>
      </div>
     </div>
-   
+
+	 </div>
+	</form>
  </div>
-</form>
-</div>
 </div>
 <div id="js_data">
  <ul id="js_saving_data">

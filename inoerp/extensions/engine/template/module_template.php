@@ -1,3 +1,8 @@
+<br>
+<span role="button" class="btn btn-success">
+ <?php echo gettext('Click on any module link to enable /disable features of that module'); ?>
+</span>
+<br>
 <?php
 
 $all_modules = option_header::modules();
