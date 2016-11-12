@@ -48,6 +48,11 @@ $(document).ready(function() {
  });
 
  copy_option_header_id();
+ 
+ 
+  $('body').off('click', '#menu_button4, #menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4, #menu_button4_2, #menu_button4_2_1', function () {
+  $('#option_type, #access_level').removeClass('always_readonly').removeAttr('readonly');
+   });
 
 });
 

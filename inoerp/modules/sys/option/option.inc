@@ -1,7 +1,7 @@
 <?php 
- if(($class == 'option_header') && $$class->access_level == 'SYSTEM'){
-$readonly = true; $mode = 2;
- }
+// if(($class == 'option_header') && $$class->access_level == 'SYSTEM'){
+//$readonly = true; $mode = 2;
+// }
  
  
  if (!empty($_GET['option_header_id']) && empty($option_line_object)) {
