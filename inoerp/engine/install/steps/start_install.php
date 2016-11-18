@@ -81,7 +81,7 @@ require_once(INC_EXTENSIONS . DS . "view" . DS . "class_extn_view.inc");
  //verify if any existing data exists
  $existing_tables = extn_view::count_all_tables();
  if (empty($existing_tables->table_count)) {
-  $db_setting_file_path = HOME_DIR . DS . 'includes' . DS . 'basics' . DS . 'settings' . DS . 'dbsettings.inc';
+  $db_setting_file_path = HOME_DIR . DS . 'includes' . DS . 'basics' . DS . 'settings' . DS . 'dbsettings.php';
   $db_setting_file = fopen($db_setting_file_path, "w");
   $result = fwrite($db_setting_file, $dbsetting_file);
   if ($result > 0) {

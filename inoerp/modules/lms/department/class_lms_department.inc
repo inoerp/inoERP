@@ -9,7 +9,7 @@ class lms_department extends dbObject {
  public static $module = "bom";
  public static $system_info = [
 		 'name' => 'Departments',
-		 'number' => '2402',
+		 'number' => '8310',
 		 'description' => 'LMS Departments',
 		 'version' => '0.1.1',
 		 'db_version' => '1001',

@@ -349,22 +349,42 @@ class extn_file extends dbObject {
   return $result;
  }
 
- public static function attachment_statement(&$file) {
+ public static function xxxattachment_statement(&$file) {
 
   $attachment_statement = "<div id=\"existing_attachment_list\"><ul class='first_level'>";
 
   if (!empty($file) && count($file) > 0) {
-   $attachment_statement .= '<li><ul  class="second_level header"><li>Hide</li><li>Delete</li><li>File</li><li></li></ul></li>';
+   $attachment_statement .= '<li class="col-md-12"><ul  class="second_level header"><li class="col-md-2 text-center">Hide File</li><li class="col-md-2 text-center">Delete File</li><li class="col-md-6">File Name</li></ul></li>';
    foreach ($file as $records) {
     $attachment_statement .= '<li><ul class="second_level">';
-    $attachment_statement .= '<li><input type="checkbox" class="hide_file" name="hide_file[]" value="' . $records->file_reference_id . '"></li>';
-    $attachment_statement .= '<li><input type="checkbox" class="delete_file" name="delete_file[]" value="' . $records->file_reference_id . '"></li>';
-    $attachment_statement .= '<li><a href=' . HOME_URL . $records->file_path . $records->file_name . '>' . $records->file_name . '</a></li>';
+    $attachment_statement .= '<li class="col-md-2"><input type="checkbox" class="hide_file checkbox pull-left" name="hide_file[]" value="' . $records->file_reference_id . '"></li>';
+    $attachment_statement .= '<li class="col-md-2"><input type="checkbox" class="delete_file checkbox pull-left" name="delete_file[]" value="' . $records->file_reference_id . '"></li>';
+    $attachment_statement .= '<li class="col-md-6"><a href=' . HOME_URL . $records->file_path . $records->file_name . '>' . $records->file_name . '</a></li>';
 //		$attachment_statement .= '<li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this file" /> </li>';
     $attachment_statement .= '</ul></li>';
    }
   }
   $attachment_statement .= "</ul></div>";
+  return $attachment_statement;
+ }
+ 
+  public static function attachment_statement(&$file) {
+
+  $attachment_statement = "<div id=\"existing_attachment_list\" class='col-md-12'><table class='table table-striped'>";
+
+  if (!empty($file) && count($file) > 0) {
+   $attachment_statement .= '<thead><tr><th class="col-md-1 text-center">Hide File</th><th class="col-md-1 text-center">Delete File</th><th class="col-md-8">File Name</th></tr></thead><tbody>';
+   foreach ($file as $records) {
+    $attachment_statement .= '<tr>';
+    $attachment_statement .= '<td><input type="checkbox" class="hide_file checkbox pull-left" name="hide_file[]" value="' . $records->file_reference_id . '"></td>';
+    $attachment_statement .= '<td><input type="checkbox" class="delete_file checkbox pull-left" name="delete_file[]" value="' . $records->file_reference_id . '"></td>';
+    $attachment_statement .= '<td><a href=' . HOME_URL . $records->file_path . $records->file_name . '>' . $records->file_name . '</a></td>';
+//		$attachment_statement .= '<li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this file" /> </li>';
+    $attachment_statement .= '</tr>';
+   }
+	 $attachment_statement .= "</tbody>";
+  }
+  $attachment_statement .= "</table></div>";
   return $attachment_statement;
  }
 

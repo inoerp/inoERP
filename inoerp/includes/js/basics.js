@@ -2414,6 +2414,41 @@ function getViewResultByViewId(options) {
  });
 }
 
+function getFormPersonalization(options) {
+ var defaults = {
+  json_url: 'modules/sys/form_personalization/json_fp.php',
+  template_code : $('#template_code').val(),
+  obj_class_name : $('#obj_class_name').val()
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'post',
+  data: {
+   get_fp_from_form: true,
+   template_code: settings.template_code,
+   obj_class_name: settings.obj_class_name
+  },
+  success: function (result) {
+   if (result) {
+     var divHtml = '<div id="form_data">' + $(result).filter('div#return_divId').html() + '</div>';
+     $('#form_data').empty().append(divHtml);
+     $.getScript("includes/js/reload.js");
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   alert('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+  }
+ });
+}
+
 function getReportResultByReportId(options) {
  var defaults = {
   json_url: 'extensions/report/json_report.php'

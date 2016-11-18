@@ -25,7 +25,7 @@ class lms_student extends dbObject {
  public static $module = "lms";
  public static $system_info = [
 		 'name' => 'Student',
-		 'number' => '3107',
+		 'number' => '8308',
 		 'description' => 'LMS Student',
 		 'version' => '0.1.1',
 		 'db_version' => '1001',

@@ -4,7 +4,7 @@ class lms_student_experience extends dbObject {
 
  public static $system_info = [
 		 'name' => 'Student Experience',
-		 'number' => '3114',
+		 'number' => '8311',
 		 'description' => 'LMS Student Experience',
 		 'version' => '0.1.1',
 		 'db_version' => '1001',

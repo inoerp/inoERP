@@ -3983,30 +3983,6 @@ li.child_link{
     margin-right : 15px;
 }
 
-#existing_attachment_list{
-    width : 500px;
-}
-
-#existing_attachment_list ul.header{
-    margin-top: 5px;
-    padding : 2px 5px;
-    background: lightgrey;
-    width: 500px;
-}
-
-#existing_attachment_list ul li{
-    display: inline-block;
-    margin-right: 50px;
-}
-
-#existing_attachment_list .second_level.header li{
-    margin-right:30px;    
-}
-
-
-
-
-
 /*Form Line*/
 #form_line td select, #form_line td input[type="text"] {
     width: 100%;
@@ -4277,19 +4253,7 @@ span.ui-button-text{
     margin-right : 15px;
 }
 
-#existing_attachment_list{
-    width : 500px;
-    background-color: rgba(194, 187, 150, 0.3);
-}
 
-#existing_attachment_list ul.header{
-    margin-top: 5px;
-    padding : 2px 5px;
-}
-
-#existing_attachment_list ul li{
-    display: inline-block;
-}
 
 ul.second_level li{
     margin-right: 25px;
@@ -4446,9 +4410,10 @@ table.document_table input{
     width: 200px;
 }
 
+/*border is required for subject of any post*/
 .required{
     background: none repeat scroll 0% 0% rgba(242, 220, 243, 0.6);
-    /*border: 1px solid rgba(225, 208, 225, 0.61);*/
+    border: 1px solid rgba(225, 208, 225, 0.61);
 }
 
 .readonly{
@@ -4546,9 +4511,7 @@ select {
     width: 30em;
 }
 
-ul.column{
-    line-height: 100%; 
-}
+
 a.show {
     display: inline-block !important;
 }

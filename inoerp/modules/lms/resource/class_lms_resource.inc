@@ -26,7 +26,7 @@ class lms_resource extends dbObject {
  public static $module = "bom";
  public static $system_info = [
 		 'name' => 'Resource',
-		 'number' => '2406',
+		 'number' => '8307',
 		 'description' => 'LMS Resources',
 		 'version' => '0.1.1',
 		 'db_version' => '1001',

@@ -50,8 +50,6 @@ class ino_session extends dbObject {
 		foreach ($this->field_a as $k => $v) {
 		 $this->$v = $ino_sess_i->$v;
 		}
-//    $this->user_id = $_SESSION['user_id'];
-//    $this->username = $_SESSION['username'];
 	 } else {
 //    $this->logout();
 	 }
@@ -124,6 +122,9 @@ class ino_session extends dbObject {
 	if ($exist_session) {
 	 $ino_see->ino_session_id = $exist_session->ino_session_id;
 	 $ino_see->delete(false);
+	 
+	 	$ino_see = new ino_session();
+	$ino_see->ino_user_id = $this->user_id;
 	}
 
 	$ino_see->php_session_id = session_id();

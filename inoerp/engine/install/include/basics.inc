@@ -27,7 +27,7 @@ defined('INC_INV') ? null : define('INC_INV', HOME_DIR . DS . 'modules' . DS . '
 
 
 //load core objects
-require_once(INC_BASICS . DS . 'settings' . DS . "dbsettings.inc");
+require_once(INC_BASICS . DS . 'settings' . DS . "dbsettings.php");
 defined('DB_SERVER') ? null : define("DB_SERVER", "");
 defined('DB_USER') ? null : define("DB_USER", "");
 defined('DB_PASS') ? null : define("DB_PASS", "");

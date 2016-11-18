@@ -19,10 +19,10 @@
   public static $table_name = "lms_fee_element";
   public static $primary_column = "lms_fee_element_id";
   public static $key_column = 'element_name';
-  public static $module = "hr";
+  public static $module = "lms";
    public static $system_info = [
-  'name' => 'fee Element',
-  'number' => '3105',
+  'name' => 'Fee Element',
+  'number' => '8306',
   'description' => 'fee Element',
   'version' => '0.1.1',
   'db_version' => '1001',
