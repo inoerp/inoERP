@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form method="post" id="lms_term"  name="lms_term">
-  <span class="heading"><?php echo gettext('term') ?></span>
+  <span class="heading"><?php echo gettext('Term') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
