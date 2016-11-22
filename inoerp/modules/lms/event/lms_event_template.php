@@ -1,6 +1,6 @@
 <div id ="form_header">
- <form  method="post" id="hr_event_header"  name="hr_event_header">
-  <span class="heading"><?php echo gettext('Event') ?></span>
+ <form  method="post" id="lms_event_header"  name="lms_event_header">
+  <span class="heading"><?php echo gettext('Class Schedule') ?></span>
 
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -14,8 +14,8 @@
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><?php $f->l_text_field_dr_withSearch('hr_event_header_id') ?>
-        <a name="show" href="form.php?class_name=hr_event_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_event_header_id">
+       <li><?php $f->l_text_field_dr_withSearch('lms_event_header_id') ?>
+        <a name="show" href="form.php?class_name=lms_event_header&<?php echo "mode=$mode"; ?>" class="show document_id lms_event_header_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
        <li><?php $f->l_text_field_dm('title'); ?></li>
@@ -54,8 +54,8 @@
        </div>
        <div id ="display_comment_form">
         <?php
-        $reference_table = 'hr_event_header';
-        $reference_id = $$class->hr_event_header_id;
+        $reference_table = 'lms_event_header';
+        $reference_id = $$class->lms_event_header_id;
         ?>
        </div>
        <div id="new_comment">
@@ -71,8 +71,8 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Event Members & Resources') ?></span>
- <form method="post" id="hr_event_line"  name="hr_event_line">
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('CLass Members & Resources') ?></span>
+ <form method="post" id="lms_event_line"  name="lms_event_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>
@@ -96,15 +96,15 @@
        <?php
        $count = 0;
        $f = new inoform();
-       foreach ($hr_event_line_object as $hr_event_line) {
-        $$class_second->username = !empty($hr_event_line->user_id) ? ino_user::find_by_id($hr_event_line->user_id)->username : '';
+       foreach ($lms_event_line_object as $lms_event_line) {
+        $$class_second->username = !empty($lms_event_line->user_id) ? ino_user::find_by_id($lms_event_line->user_id)->username : '';
         ?>         
-        <tr class="hr_event_line<?php echo $count ?>">
+        <tr class="lms_event_line<?php echo $count ?>">
          <td><?php
-          echo ino_inline_action($$class_second->hr_event_line_id, array('hr_event_header_id' => $$class->hr_event_header_id));
+          echo ino_inline_action($$class_second->lms_event_line_id, array('lms_event_header_id' => $$class->lms_event_header_id));
           ?>
          </td>
-         <td><?php $f->text_field_wid2sr('hr_event_line_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('lms_event_line_id'); ?></td>
          <td><?php
           $f->val_field_wid2('username', 'user', 'username', '', 'select user username');
           echo $f->hidden_field('user_id', $$class_third->user_id);
@@ -129,18 +129,18 @@
 
 <div id="js_data">
  <ul id="js_saving_data">
-  <li class="headerClassName" data-headerClassName="hr_event_header" ></li>
-  <li class="lineClassName" data-lineClassName="hr_event_line" ></li>
+  <li class="headerClassName" data-headerClassName="lms_event_header" ></li>
+  <li class="lineClassName" data-lineClassName="lms_event_line" ></li>
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
-  <li class="primary_column_id" data-primary_column_id="hr_event_header_id" ></li>
-  <li class="form_header_id" data-form_header_id="hr_event_header" ></li>
+  <li class="primary_column_id" data-primary_column_id="lms_event_header_id" ></li>
+  <li class="form_header_id" data-form_header_id="lms_event_header" ></li>
   <li class="line_key_field" data-line_key_field="user_id" ></li>
   <li class="single_line" data-single_line="true" ></li>
-  <li class="form_line_id" data-form_line_id="hr_event_line" ></li>
+  <li class="form_line_id" data-form_line_id="lms_event_line" ></li>
  </ul>
  <ul id="js_contextMenu_data">
-  <li class="docHedaderId" data-docHedaderId="hr_event_header_id" ></li>
-  <li class="btn1DivId" data-btn1DivId="hr_event_header" ></li>
+  <li class="docHedaderId" data-docHedaderId="lms_event_header_id" ></li>
+  <li class="btn1DivId" data-btn1DivId="lms_event_header" ></li>
   <li class="btn2DivId" data-btn2DivId="form_line" ></li>
  </ul>
 </div>
