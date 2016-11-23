@@ -6,74 +6,73 @@ class hr_employee_v extends dbObject {
  public static $table_name = "hr_employee_v";
  public static $primary_column = "hr_employee_id";
  public $field_a = [
-  'user_id',
-  'username',
-  'first_name',
-  'last_name',
-  'email',
-  'hr_employee_id',
-  'status',
-  'identification_id',
-  'emp_start_date',
-  'citizen_number',
-  'emp_first_name',
-  'emp_last_name',
-  'phone',
-  'emp_email',
-  'gender',
-  'person_type',
-  'org_id',
-  'currency_code',
-  'employee_name'
+		 'hr_employee_id',
+		 'employee_name',
+		 'user_id',
+		 'username',
+		 'first_name',
+		 'last_name',
+		 'email',
+		 'status',
+		 'identification_id',
+		 'emp_start_date',
+		 'citizen_number',
+		 'emp_first_name',
+		 'emp_last_name',
+		 'phone',
+		 'emp_email',
+		 'gender',
+		 'person_type',
+		 'org_id',
+		 'currency_code'
  ];
  public $initial_search = [
-  'username',
-  'first_name',
-  'last_name',
+		 'username',
+		 'first_name',
+		 'last_name',
  ];
  public $multi_select_column = [
-  'user_id',
-  'username',
-  'first_name',
-  'last_name',
-  'email',
-  'hr_employee_id',
-  'status',
-  'identification_id',
-  'emp_start_date',
-  'citizen_number',
-  'emp_first_name',
-  'emp_last_name',
-  'phone',
-  'emp_email',
-  'gender',
-  'person_type',
-  'org_id',
-  'job_id',
-  'position_id',
-  'expense_ac_id',
-  'position_name',
-  'emp_org_id',
-  'hr_approval_limit_header_id',
-  'document_type',
-  'limit_start_date',
-  'limit_type',
-  'limit_range_low',
-  'limit_range_high',
-  'amount_limit',
-  'limit_object',
-  'bu_org_id',
-  'currency_code',
+		 'user_id',
+		 'username',
+		 'first_name',
+		 'last_name',
+		 'email',
+		 'hr_employee_id',
+		 'status',
+		 'identification_id',
+		 'emp_start_date',
+		 'citizen_number',
+		 'emp_first_name',
+		 'emp_last_name',
+		 'phone',
+		 'emp_email',
+		 'gender',
+		 'person_type',
+		 'org_id',
+		 'job_id',
+		 'position_id',
+		 'expense_ac_id',
+		 'position_name',
+		 'emp_org_id',
+		 'hr_approval_limit_header_id',
+		 'document_type',
+		 'limit_start_date',
+		 'limit_type',
+		 'limit_range_low',
+		 'limit_range_high',
+		 'amount_limit',
+		 'limit_object',
+		 'bu_org_id',
+		 'currency_code',
  ];
- 
-  public static $json_label_fields = [
-   'username',
-   'person_type',
-  'identification_id',
-   'employee_name'
+ public static $json_label_fields = [
+		 'username',
+		 'person_type',
+		 'identification_id',
+		 'employee_name'
  ];
  public $dateField = [
-  'limit_start_date',
+		 'limit_start_date',
  ];
  public $search = [
 //   '_update_path' => 'form.php?class_name=sd_so_header',
@@ -121,7 +120,7 @@ class hr_employee_v extends dbObject {
  public $employee_name;
 
  private function create_hr_employee_v() {
-  $sql = "
+	$sql = "
 CREATE OR REPLACE VIEW hr_employee_v
 (
 user_id, username, first_name,last_name,email,hr_employee_id,status,
@@ -146,36 +145,35 @@ LEFT JOIN org_v ON org_v.org_id =  he.org_id
  }
 
  public static function find_by_userId_docType($user_id, $document_type) {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE user_id = '{$user_id}' AND document_type = '{$document_type}' ";
-  $result = self::find_by_sql($sql);
-  return !empty($result) ? ($result) : false;
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE user_id = '{$user_id}' AND document_type = '{$document_type}' ";
+	$result = self::find_by_sql($sql);
+	return !empty($result) ? ($result) : false;
  }
 
- 
-  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
-  $sql = " SELECT   user_id,   username,   first_name,   last_name,   email,
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+	$sql = " SELECT   user_id,   username,   first_name,   last_name,   email,
   hr_employee_id,     identification_id,   emp_start_date,   citizen_number,
   emp_first_name,   emp_last_name,    emp_email,   gender,   person_type,  employee_name  ";
 
-  $sql .= " FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
+	$sql .= " FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
 
 //  if(!empty($_GET['hidden_fields']['receving_org_id'])){
 //   $rec_org_id = $_GET['hidden_fields']['receving_org_id'];
 //   $sql .= " AND receving_org_id = '{$rec_org_id}' ";
 //  }
-  if (!empty($dependent_fields)) {
-   foreach ($dependent_fields as $k => $v) {
-    if (!empty($k) && !empty($v)) {
-     $sql .= " AND $k = '{$v}' ";
-    }
-   }
-  }
-  $result_array = static::find_by_sql($sql);
-  return !empty($result_array) ? ($result_array) : false;
+	if (!empty($dependent_fields)) {
+	 foreach ($dependent_fields as $k => $v) {
+		if (!empty($k) && !empty($v)) {
+		 $sql .= " AND $k = '{$v}' ";
+		}
+	 }
+	}
+	$result_array = static::find_by_sql($sql);
+	return !empty($result_array) ? ($result_array) : false;
  }
- 
+
 }
 
 //end of so_detail class

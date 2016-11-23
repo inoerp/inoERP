@@ -2,19 +2,15 @@
  <div id="form_all">
   <div id="form_headerDiv">
    <span class="heading"><?php echo gettext('Leave Details') ?></span>
-   <form action=""  method="post" id="hr_leave_balance_line"  name="hr_leave_balance_line">
-    <div class='tabContainer'>
+   <form method="post" id="hr_leave_balance_line"  name="hr_leave_balance_line">
+    <div class='tabContainer' id="form_header">
      <ul class="inline_list">
-      <li><label><i class="employee_id select_popup clickable fa fa-search"></i>
-        <?php echo gettext('Employee Id') ?></label><?php $f->text_field_dr('employee_id') ?>
-       <a name="show" href="form.php?class_name=hr_leave_balance&<?php echo "mode=$mode"; ?>" class="show document_id employee_id">
-        <i class="fa fa-refresh"></i></a> 
-      </li>
-      <li>
-       <label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-        <?php echo gettext('Employee Name') ?></label>
-       <?php $f->text_field_d('employee_name'); ?>
-      </li>
+			<li><label><?php echo gettext('Employee Name') ?></label><?php
+					echo $f->val_field('employee_name', $$class->employee_name, '', '', 'vf_select_member_employee_name employee_name', '', '', 'hr_employee_v', 'employee_name');
+					echo $f->hidden_field_withCLass('hr_employee_id', $$class->hr_employee_id, 'employee_id');
+					?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i>
+			 <a name="show" href="form.php?class_name=hr_leave_balance&<?php echo "mode=$mode"; ?>" class="show document_id employee_id">
+        <i class="fa fa-refresh"></i></a></li>
      </ul>
     </div>
     <div id ="form_line" class="hr_leave_balance">
@@ -39,29 +35,29 @@
           </tr>
          </thead>
          <tbody class="form_data_line_tbody leave_balance_values" >
-          <?php
-          $count = 0;
-          foreach ($leave_balance_object as $hr_leave_balance) {
-           $leave_used = hr_leave_transaction::usage_sum_by_employeeId_leaveType($$class->leave_type);
-           $total_leave_used = !empty($leave_used) ? $leave_used : null;
-           ?>         
-           <tr class="hr_leave_balance<?php echo $count ?>">
-            <td>
-             <?php
-             echo ino_inline_action($$class->hr_leave_balance_id, array('employee_id' => $employee_id_h));
-             ?>
-            </td>
-            <td><?php $f->text_field_widsr('hr_leave_balance_id', 'always_readonly') ?></td>
-            <td><?php echo $f->select_field_from_object('leave_type', hr_leave_type::find_all(), 'hr_leave_type_id', 'leave_type', $$class->leave_type, '', 'leave_type', 1, $readonly1); ?></td>
-            <td><?php echo $f->number_field('leave_per_year', $$class->leave_per_year); ?></td>
-            <td><?php echo $f->number_field('total_available', $$class->total_available); ?></td>
-            <td><?php echo $f->number_field('total_used', $total_leave_used, '', '', 'always_readonly', '', 1); ?></td>
-            <td><?php echo $f->number_field('total_available', $$class->total_available + $$class->total_used, '', '', 'always_readonly', '', 1); ?></td>
-           </tr>
-           <?php
-           $count = $count + 1;
-          }
-          ?>
+						 <?php
+						 $count = 0;
+						 foreach ($leave_balance_object as $hr_leave_balance) {
+							$leave_used = hr_leave_transaction::usage_sum_by_employeeId_leaveType($$class->leave_type);
+							$total_leave_used = !empty($leave_used) ? $leave_used : null;
+							?>         
+ 					<tr class="hr_leave_balance<?php echo $count ?>">
+ 					 <td>
+								<?php
+								echo ino_inline_action($$class->hr_leave_balance_id, array('employee_id' => $employee_id_h));
+								?>
+ 					 </td>
+ 					 <td><?php $f->text_field_widsr('hr_leave_balance_id', 'always_readonly') ?></td>
+ 					 <td><?php echo $f->select_field_from_object('leave_type', hr_leave_type::find_all(), 'hr_leave_type_id', 'leave_type', $$class->leave_type, '', 'leave_type', 1, $readonly1); ?></td>
+ 					 <td><?php echo $f->number_field('leave_per_year', $$class->leave_per_year); ?></td>
+ 					 <td><?php echo $f->number_field('total_available', $$class->total_available); ?></td>
+ 					 <td><?php echo $f->number_field('total_used', $total_leave_used, '', '', 'always_readonly', '', 1); ?></td>
+ 					 <td><?php echo $f->number_field('total_available', $$class->total_available + $$class->total_used, '', '', 'always_readonly', '', 1); ?></td>
+ 					</tr>
+					 <?php
+					 $count = $count + 1;
+					}
+					?>
          </tbody>
         </table>
        </div>

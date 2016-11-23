@@ -70,6 +70,7 @@
 					<thead> 
 					 <tr>
 						<th><?php echo gettext('Content Id') ?></th>
+						<th><?php echo gettext('Content Type Id') ?></th>
 						<th><?php echo gettext('Content By') ?></th>
 						<th><?php echo gettext('Creation Time') ?></th>
 						<th><?php echo gettext('Created By') ?></th>
@@ -85,6 +86,7 @@
 								?>         
 						 <tr class="content_line<?php echo $count ?>">
 							<td><?php echo $$class->content_id; ?></td>
+							<td><?php echo $f->text_field_widr('content_type_id'); ?></td>
 							<td><?php echo $f->text_field_widr('content_by'); ?></td>
 							<td><?php echo $f->text_field_widr('creation_date'); ?></td>
 							<td><?php echo $f->text_field_widr('created_by'); ?></td>

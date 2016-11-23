@@ -48,8 +48,9 @@ class content extends dbObject {
 		 3 => 'Allow Post & View',
  ];
  public $field_a = [
-		 "content_type_id",
 		 "content_id",
+		 "content_type_id",
+		 
 		 "parent_id",
 		 "subject",
 		 "terms",
@@ -113,6 +114,7 @@ class content extends dbObject {
  public $rev_enabled_cb;
  public $weightage;
  public $rev_number;
+ public $comment_status;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -383,8 +385,8 @@ class content extends dbObject {
 					LEFT JOIN content_type ct ON ct.content_type_id = content.content_type_id 
           LEFT JOIN ext_url_alias eua ON eua.content_id=content.content_id 
           LEFT JOIN ( 
-          SELECT reference_table, reference_id, count(comment_id) as no_of_comments
-          FROM comment
+          SELECT reference_table, reference_id, count(extn_comment_id) as no_of_comments
+          FROM extn_comment
           GROUP BY reference_table, reference_id
            )
           cm ON cm.reference_table = 'content' AND content.content_id = cm.reference_id
