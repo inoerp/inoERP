@@ -100,7 +100,7 @@ $(document).ready(function () {
  if (!($('.shipment_number:first').val())) {
   $('.shipment_number:first').val('1');
  }
- 
+
 
  //default quantity
  $('#content').off("click", "table.form_line_data_table .add_detail_values_img")
@@ -132,6 +132,21 @@ $(document).ready(function () {
           var classValue1 = classValue.replace(/ /g, '.');
           getAllInventoryAccounts('modules/org/inventory/json_inventory.php', receving_org_id, classValue1);
          });
+
+ $('body').on('click', '.account_combination', function () {
+  if ($(this).val()) {
+   //ignore the code  
+  } else {
+
+   //find the code combination
+   var rowTrClass = $(this).closest("tr.line_rows").attr("class");
+   var classValue = "tr." + rowTrClass;
+   var classValue1 = classValue.replace(/ /g, '.');
+   var receving_org_id = $(classValue1).find('.receving_org_id').val();
+   getAllInventoryAccounts('modules/org/inventory/json_inventory.php', receving_org_id, classValue1);
+  }
+
+ })
 
 //get locators on changing sub inventory
  $('#content').off('change', '.subinventory_id')

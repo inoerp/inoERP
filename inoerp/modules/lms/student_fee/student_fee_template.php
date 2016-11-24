@@ -3,8 +3,8 @@
 	<div id="form_headerDiv">
 	 <form  method="post" id="lms_student_fee_line"  name="student_fee_line">
 		<span class="heading"><?php echo gettext('Student Fees') ?></span>
-		<div id="form_serach_header form_header" class="tabContent">
-     <ul class="inline_list">
+		<div id="form_serach_header form_header " >
+     <ul class="inRow asperWidth tabContent tabContainer form-single-row">
 			<li><label><?php echo gettext('Student Name') ?></label><?php
 			$f= new inoform();
 					echo $f->val_field('employee_name', $$class->employee_name, '', '', 'vf_select_member_employee_name', '', '', 'hr_employee_v', 'employee_name');
@@ -28,8 +28,8 @@
 					 <th><?php echo gettext('Action') ?></th>
 					 <th><?php echo gettext('Seq') ?>#</th>
 					 <th><?php echo gettext('Id') ?></th>
-					 <th><?php echo gettext('Fee Structure') ?>#</th>
-					 <th><?php echo gettext('Currency') ?>#</th>
+					 <th><?php echo gettext('Fee Structure') ?></th>
+					 <th><?php echo gettext('Currency') ?></th>
 					 <th><?php echo gettext('Amout') ?></th>
 					 <th><?php echo gettext('Description') ?></th>
 					 <th><?php echo gettext('Tax Amount') ?></th>
@@ -54,15 +54,14 @@
  					 </td>
  					 <td><?php $f->seq_field_d($count) ?></td>
  					 <td><?php form::number_field_drs('lms_student_fee_id') ?></td>
- 					 <td><?php form::text_field_widm('student_fee'); ?></td>
  					 <td><?php echo form::select_field_from_object('lms_fee_struct_header_id', lms_fee_struct_header::find_all(), 'lms_fee_struct_header_id', 'struct_name', $$class->lms_fee_struct_header_id, '', $readonly); ?></td>
  					 <td><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency, '', 'doc_currency', 1, $readonly); ?></td>
  					 <td><?php echo $f->number_field('amount', $$class->amount) ?></td>
  					 <td><?php $f->text_field_wid('description') ?></td>
- 					 <td><?php echo $f->number_field('tax_amount', $$class->tax_amount); ?></td>
- 					 <td><?php echo $f->number_field('paid_amount', $$class->paid_amount); ?></td>
- 					 <td><?php $f->text_field_wid('status') ?></td>
- 					 <td><?php $f->text_field_wid('invoice_status') ?></td>
+ 					 <td><?php echo $f->number_field('tax_amount', $$class->tax_amount , '', '' ,'small'); ?></td>
+ 					 <td><?php echo $f->number_field('paid_amount', $$class->paid_amount, '', '' ,'small'); ?></td>
+ 					 <td><?php $f->text_field_wids('status') ?></td>
+ 					 <td><?php $f->text_field_wids('invoice_status') ?></td>
  					</tr>
 					 <?php
 					 $student_fee_object_ai->next();
