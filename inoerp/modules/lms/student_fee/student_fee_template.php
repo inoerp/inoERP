@@ -6,8 +6,7 @@
 		<div id="form_serach_header form_header " >
      <ul class="inRow asperWidth tabContent tabContainer form-single-row">
 			<li><label><?php echo gettext('Student Name') ?></label><?php
-			$f= new inoform();
-					echo $f->val_field('employee_name', $$class->employee_name, '', '', 'vf_select_member_employee_name', '', '', 'hr_employee_v', 'employee_name');
+			  	echo $f->val_field('employee_name', $$class->employee_name, '', '', 'vf_select_member_employee_name', '', '', 'hr_employee_v', 'employee_name');
 					echo $f->hidden_field_withCLass('hr_employee_id', $$class->hr_employee_id, 'employee_id');
 					?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i>
 			 <a name="show" href="form.php?class_name=hr_leave_balance&<?php echo "mode=$mode"; ?>" class="show document_id employee_id">

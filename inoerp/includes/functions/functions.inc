@@ -625,10 +625,10 @@ function ino_show_debug_msg($simple_msg, $detailed_msg = '', $sql = '', $file_li
  global $ino_user_i;
  $return_stmt = $simple_msg;
 
- if ($ino_user_i->debug_mode == 2) {
+ if (!empty($ino_user_i) && $ino_user_i->debug_mode == 2) {
 	$return_stmt .= '<br>'. $detailed_msg;
 	$return_stmt .= '<br>'. $sql;
- }else if ($ino_user_i->debug_mode == 3) {
+ }else if (!empty($ino_user_i) && $ino_user_i->debug_mode == 3) {
 	$return_stmt .= '<br>'. $detailed_msg;
 	$return_stmt .= '<br>'. $file_line_msg;
 	$return_stmt .= '<br>'. $sql;

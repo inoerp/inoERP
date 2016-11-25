@@ -1046,7 +1046,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $search_class = gettext('Search'). ' ' . gettext(ucwords(str_replace('_', ' ', $class)));
   $search_class_gt = gettext($search_class);
   echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
-                                                                  title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
+                                                                  title="Click here to open the search form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .
   '<i title="Click Here To Make This Element Draggable"  class="fa fa-arrows medium small-left-padding make-draggable large-text clickable ">
   </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true" title="Close This Window">&times;</span></div>
@@ -1068,7 +1068,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $search_class_gt = gettext($search_class);
   echo '<label class="big_popover">' . gettext(trim(ucwords(str_replace(['_', 'id'], [' ', ''], $field_name)))) . '</label>';
   echo '<span class="big_popover"><a href="#" id="big_popover" ><i class="fa fa-search  clickable" 
-                                                                  title="Click here to open the serch form" data-toggle="tooltip" ></i></a>
+                                                                  title="Click here to open the search form" data-toggle="tooltip" ></i></a>
  <div id="popover-head" class="hide">' . $search_class_gt .
   '<i title="Click Here To Make This Element Draggable" class="fa fa-arrows small-left-padding make-draggable medium large-text clickable ">
   </i> <span  class="close_big_popover f-right medium large-text clickable" aria-hidden="true"  title="Close This Window">&times;</span></div>
@@ -1086,7 +1086,7 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
  public function xxl_text_field_dr_withSearch($field_name, $div_class = "") {
   global $readonly, $class, $$class;
   echo '<label>' . '<i class="fa fa-search-plus ' . $field_name . ' select_popup clickable" '
-  . ' title="Click here to open the serch form" data-toggle="tooltip"></i>';
+  . ' title="Click here to open the search form" data-toggle="tooltip"></i>';
   echo gettext(ucwords(str_replace('_', ' ', $field_name))) . '</label>';
   echo $this->text_field($field_name, $$class->$field_name, '20', $field_name, $div_class, '', 1);
  }

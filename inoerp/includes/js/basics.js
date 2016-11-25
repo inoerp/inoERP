@@ -3511,9 +3511,11 @@ $(document).ready(function () {
    var opener_elemenType = window.opener.$(close_field_class).parent().prop('tagName');
    if (opener_elemenType === 'LI') {
     $(selectedData).each(function (i, currentData) {
+     
      $(currentData).each(function (k, v) {
       if (v.field_name !== 'undefined') {
        var field_d = '.' + v.field_name;
+       console.log(' field_d : ' + field_d + ' v.field_value ' + v.field_value );
        if (localStorage.getItem("set_value_for_one_field") !== null) {
         window.opener.$(close_field_class).parent().find(field_d).val(v.field_value);
 //        console.log(field_d + ' : ' +  close_field_class + ' :: ' +  v.field_value);
@@ -3521,6 +3523,7 @@ $(document).ready(function () {
         window.opener.$(close_div_class).find(field_d).val(v.field_value);
 //        console.log(field_d + ' : ' +  close_field_class + ' :: ' +  v.field_value);
        } else {
+        console.log('3 field_d : ' + field_d + ' v.field_value ' + v.field_value + 'close_field_class is '+ close_field_class );
         window.opener.$(close_field_class).closest('.tabContent').find(field_d).val(v.field_value);
        }
       }

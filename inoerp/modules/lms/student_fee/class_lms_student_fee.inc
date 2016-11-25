@@ -8,7 +8,7 @@ class lms_student_fee extends dbObject {
  public static $key_column = "lms_student_id";
  public static $system_info = [
 		 'name' => 'Student Fee',
-		 'number' => '9404',
+		 'number' => '8307',
 		 'description' => 'Student Fee',
 		 'version' => '0.1.1',
 		 'db_version' => '1001',
@@ -62,7 +62,7 @@ class lms_student_fee extends dbObject {
 		 '_show_update_path' => 1,
 		 '_show_view_path' => 1,
  ];
- public $pageTitle = " LMS Student "; //page Title
+ public $pageTitle = " Student Fee "; //page Title
  public $option_list = [
 		 'tax_type' => 'MDM_TAX_TYPE',
  ]; //list of search fields wh
@@ -89,32 +89,6 @@ class lms_student_fee extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
- Public static function tax_type() {
-	$option_header = option_header::find_by_name('MDM_TAX_TYPE');
-	$ol = new option_line();
-	$option_lines = $ol->findBy_parentId($option_header->option_header_id);
-	return $option_lines;
- }
-
- public function find_all_ofyear($year) {
-	global $db;
-	$sql = " SELECT * FROM " . self::$table_name;
-	$sql .= " WHERE year= :year ";
-	$param_a = ['year'];
-	$value_a = ['year' => $year];
-	$result = $db->findBy_sql($sql, $param_a, $value_a);
-	return $result;
- }
-
- public static function find_all_by_buOrgId($org_id) {
-	$sql = " 
-	 SELECT *
-	 FROM lms_student_fee
-	 WHERE org_id = '{$org_id}'
-	";
-	$result = self::find_by_sql($sql);
-	return $result;
- }
 
  public static function find_all_outTax_by_bu_org_id($org_id) {
 	$sql = " 

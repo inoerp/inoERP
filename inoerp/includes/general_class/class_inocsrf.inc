@@ -65,6 +65,3 @@ $inocsrf = new inocsrf();
 
 //end of forma class
 ?>
-
-
-
