@@ -1,5 +1,5 @@
 <?php
-require_once(INC_EXTENSIONS . DS . "file" . DS . "class_file_reference.inc");
+
 
 class inosave extends dbObject {
 

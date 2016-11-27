@@ -48,9 +48,9 @@
            foreach ($eng_all as $k => $v) {
             $v->obj_class_name_fn = ucwords(str_replace('_', ' ', $v->obj_class_name));
            }
-           echo $f->select_field_from_object('obj_class_name', $eng_all, 'obj_class_name', 'obj_class_name_fn', $$class->obj_class_name, '', '', 1);
+           echo $f->select_field_from_object('obj_class_name', $eng_all, 'obj_class_name', 'obj_class_name_fn', $$class->obj_class_name, '', 'xlarge', 1);
            ?></td>
-          <td><?php echo $f->select_field_from_array('access_level', role_access::$access_map, $$class->access_level); ?></td>
+          <td><?php echo $f->select_field_from_array('access_level', role_access::$access_map, $$class->access_level , '' , 'xlarge'); ?></td>
          </tr>
          <?php
          $count = $count + 1;

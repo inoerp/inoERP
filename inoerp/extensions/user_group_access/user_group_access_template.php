@@ -25,7 +25,7 @@
         <tr>
          <th><?php echo gettext('Action') ?></th>
          <th><?php echo gettext('Group Access Id') ?></th>
-         <th><?php echo gettext('Organization Name') ?>#</th>
+         <th><?php echo gettext('Organization Name') ?></th>
          <th><?php echo gettext('Access Level') ?></th>
         </tr>
        </thead>
@@ -41,8 +41,8 @@
            ?>
           </td>
           <td><?php $f->text_field_dsr('user_group_access_id' , 'always_readonly') ?></td>
-          <td><?php echo $f->select_field_from_object('org_id', org::find_all(), 'org_id', 'org', $$class->org_id, '', '', 1); ?></td>
-          <td><?php echo $f->select_field_from_array('access_level', user_group_access::$access_map, $$class->access_level); ?></td>
+          <td><?php echo $f->select_field_from_object('org_id', org::find_all(), 'org_id', 'org', $$class->org_id, '', 'xlarge', 1); ?></td>
+          <td><?php echo $f->select_field_from_array('access_level', user_group_access::$access_map, $$class->access_level ,'' ,'xlarge'); ?></td>
          </tr>
          <?php
          $count = $count + 1;

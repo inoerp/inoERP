@@ -76,7 +76,7 @@ if (!empty(DB_TYPE)) {
  require_once(INC_MODULE . DS . 'sys' . DS . "profile" . DS . "class_sys_profile_header.inc");
  require_once(INC_MODULE . DS . 'sys' . DS . "profile" . DS . "class_sys_profile_line.inc");
 require_once(INC_EXTENSIONS . DS . "file" . DS . "class_extn_file.inc");
-// require_once(INC_EXTENSIONS . DS . "file" . DS . "class_file_reference.inc");
+ require_once(INC_EXTENSIONS . DS . "file" . DS . "class_file_reference.inc");
  require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image.inc");
  require_once(INC_EXTENSIONS . DS . "image" . DS . "class_extn_image_reference.inc");
  require_once(INC_EXTENSIONS . DS . "file" . DS . "class_massupload.inc");

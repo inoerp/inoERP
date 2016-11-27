@@ -76,7 +76,10 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
                    }
                   }
                  }
-								 echo $inocsrf->token_tag();
+								 if(!empty($_SESSION['session_token'])){
+									echo $inocsrf->token_tag();
+								 }
+								 
                  ?>
                 </li>
                </ul>
@@ -142,4 +145,3 @@ if (!empty($_GET['window_type']) && ($_GET['window_type'] == 'form')) {
  </div>
 </div>
 <?php include_template('footer.inc') ?>
-
