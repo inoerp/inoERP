@@ -87,8 +87,8 @@ inoERP
  				<td><?php $f->seq_field_d($count) ?></td>
  				<td><?php form::text_field_wid2sr('lms_group_line_id'); ?></td>
  				<td><?php echo $f->select_field_from_object('lms_term_id', lms_chapter::find_all(), 'lms_chapter_id', 'chapter_name', $$class_second->lms_term_id, '', 'medium'); ?></td>
-				<td><?php $f->date_fieldAnyDay('start_date', $$class_second->start_date); ?></td>
-				<td><?php $f->date_fieldAnyDay('end_date', $$class_second->end_date); ?></td>
+				<td><?php echo $f->date_fieldAnyDay('start_date', $$class_second->start_date); ?></td>
+				<td><?php echo  $f->date_fieldAnyDay('end_date', $$class_second->end_date); ?></td>
 				<td><?php $f->text_field_wid2('description' ,'large'); ?></td>
  				<td><?php $f->text_field_wid2('Status'); ?></td>
  			 </tr>

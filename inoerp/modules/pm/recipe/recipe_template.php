@@ -113,7 +113,7 @@ inoERP
           echo ino_inline_action($pm_recipe_line->pm_recipe_line_id, array('pm_recipe_header_id' => $pm_recipe_header->pm_recipe_header_id));
           ?>
          </td>
-         <td><?php $f->text_field_wid2sr('pm_recipe_line_id', 'line_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('pm_recipe_line_id', 'line_id always_readonly'); ?></td>
          <td><?php echo $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->org_id, '', '', 1, $readonly1); ?></td>
          <td><?php echo $f->select_field_from_array('org_type', pm_recipe_line::$org_type_a, $$class_second->org_type, '', 'medium'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
