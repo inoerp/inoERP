@@ -29,7 +29,7 @@ class lms_event_header extends dbObject {
   'db_version' => '1001',
   'mod_version' => '1.1.1',
   'primary_entity_cb' => '',
-  'module_name' => 'hr',
+  'module_name' => 'lms',
   'weight' => 17
  ];
  public $field_a = [

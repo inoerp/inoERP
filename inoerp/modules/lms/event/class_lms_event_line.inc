@@ -11,6 +11,7 @@ class lms_event_line extends dbObject {
  public $field_a = [
 'lms_event_line_id',
 'lms_event_header_id',
+		 'lms_group_header_id',
 'user_id',
 'resource_id',
 'expected_status',
@@ -35,6 +36,7 @@ class lms_event_line extends dbObject {
  ];
 public $lms_event_line_id;
 public $lms_event_header_id;
+public $lms_group_header_id;
 public $user_id;
 public $resource_id;
 public $expected_status;

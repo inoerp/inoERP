@@ -1,6 +1,6 @@
 <div id ="form_header">
  <form  method="post" id="lms_event_header"  name="lms_event_header">
-  <span class="heading"><?php echo gettext('Class Schedule') ?></span>
+  <span class="heading"><?php echo gettext('Class / Event Schedule') ?></span>
 
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -83,7 +83,8 @@
       <thead> 
        <tr>
         <th><?php echo gettext('Action') ?></th>
-        <th><?php echo gettext('Line Id') ?>#</th>
+        <th><?php echo gettext('Line Id') ?></th>
+				<th><?php echo gettext('Class or Group') ?></th>
         <th><?php echo gettext('User Name') ?></th>
         <th><?php echo gettext('Resource') ?></th>
         <th><?php echo gettext('Required') ?></th>
@@ -104,7 +105,8 @@
           echo ino_inline_action($$class_second->lms_event_line_id, array('lms_event_header_id' => $$class->lms_event_header_id));
           ?>
          </td>
-         <td><?php $f->text_field_wid2sr('lms_event_line_id'); ?></td>
+         <td><?php $f->text_field_wid2sr('lms_event_line_id' , 'always_readonly'); ?></td>
+				 <td><?php $f->text_field_wid2('lms_group_header_id'); ?></td>
          <td><?php
           $f->val_field_wid2('username', 'user', 'username', '', 'select user username');
           echo $f->hidden_field('user_id', $$class_third->user_id);
