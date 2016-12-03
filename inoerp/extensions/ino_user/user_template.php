@@ -29,6 +29,7 @@ if (empty($access_level) || ($access_level < 2 )) {
       <li><?php $f->l_text_field_dm('last_name'); ?>	 </li>
       <li><?php $f->l_text_field_dm('email'); ?> </li>
       <li><?php $f->l_text_field_d('phone'); ?> </li>
+			<li><label><?php echo gettext('Notify User') ?></label><?php echo $f->checkBox_field('notify_user_cb' , 1); ?> </li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">

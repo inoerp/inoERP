@@ -106,7 +106,8 @@ class ino_user extends dbObject {
 		 'identification_id',
 		 'address_id',
 		 'customer_name',
-		 'supplier_name'
+		 'supplier_name',
+		 'notify_user_cb'
  ];
  public $checkbox = [
 		 "use_personal_db_cb"
@@ -162,6 +163,7 @@ class ino_user extends dbObject {
  public $supplier_name;
  public $auth_provider_id;
  public $auth_provider_name;
+ public $notify_user_cb;
 
  public function _before_showing() {
 	
@@ -469,21 +471,9 @@ class ino_user extends dbObject {
 	global $si;
 	if ($this->ino_user_id) {
 	 $msg = "New user registration is sucessful!";
-//   $subject = "User Registrtion @ " . $si->site_name;
-//   $message = "Dear " . $this->username . '<br> your regitraton is sucessful';
-//    $replyto = "From : admin@site.com";
-	 $subject = "User Registration @" . $si->site_name;
-	 $message = "<html> <body>Dear " . $this->username . ',<br><br>';
-	 $message .= "<p>Welcome to " . $si->site_name . ' <br>You can now access the site with your registered user '
-					 . ' name & password ';
-	 $message .='<br><br>Thanks<br>' . $si->site_name . '</body></html>';
-	 $im = new inomail();
-	 $im->FromName = $si->site_name;
-	 $im->addAddress($this->email, $this->username);
-	 $im->addReplyTo($si->email, 'User Registration');
-	 $im->Subject = $subject;
-	 $im->Body = $message;
-	 $im->ino_sendMail(true);
+	 if ($this->notify_user_cb) {
+		$this->_notify_user();
+	 }
 	}//new user registration complete
 	else {
 	 $msg = "New user registration Failed!" . mysql_error();
@@ -494,6 +484,22 @@ class ino_user extends dbObject {
 	 $this->_create_address();
 	}
 	return $this->msg;
+ }
+
+ private function _notify_user() {
+	global $si;
+	$subject = "User Registration @" . $si->site_name;
+	$message = "<html> <body>Dear " . $this->username . ',<br><br>';
+	$message .= "<p>Welcome to " . $si->site_name . ' <br>You can now access the site with your registered user '
+					. ' name & password ';
+	$message .='<br><br>Thanks<br>' . $si->site_name . '</body></html>';
+	$im = new inomail();
+	$im->FromName = $si->site_name;
+	$im->addAddress($this->email, $this->username);
+	$im->addReplyTo($si->email, 'User Registration');
+	$im->Subject = $subject;
+	$im->Body = $message;
+	$im->ino_sendMail(true);
  }
 
  private function _create_address() {
