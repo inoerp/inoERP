@@ -1,6 +1,5 @@
 <?php
-//enable error during installation
-//enable error during installation
+
  ini_set('display_errors', 1);
  error_reporting(E_ALL);
  set_time_limit(0);
@@ -26,13 +25,13 @@
  $module_array = array('gl','ap','ar','inv','org','sys','hr', 'wip','bom');
  
  // Extension Directories to check
- $extensions_array = array('user','block','comment','content','content_type','file','path', 'site_info');
+ $extensions_array = array('ino_user','block','comment','content','content_type','file','path', 'site_info');
 
  // Write Directories to check
  $dir_array = array('files');
 
  // Files to check
- $file1 = 'includes' . DS . 'basics' . DS . 'settings' . DS . 'dbsettings.inc';
+ $file1 = 'includes' . DS . 'basics' . DS . 'settings' . DS . 'dbsettings.php';
  $file_array = array($file1);
 
 //exit script in case of delete statement
