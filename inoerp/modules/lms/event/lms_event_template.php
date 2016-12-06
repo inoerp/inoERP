@@ -43,20 +43,20 @@
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div class="first_rowset"> 
-      <?php echo $f->text_area('event_details', $$class->event_details, '10', '', '', '', '', '', '', '150'); ?>
+				 <?php echo $f->text_area('event_details', $$class->event_details, '10', '', '', '', '', '', '', '150'); ?>
      </div>
     </div>
     <div id="tabsHeader-4" class="tabContent">
      <div> 
       <div id="comments">
        <div id="comment_list">
-        <?php echo!(empty($comments)) ? $comments : ""; ?>
+					 <?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
-        <?php
-        $reference_table = 'lms_event_header';
-        $reference_id = $$class->lms_event_header_id;
-        ?>
+					 <?php
+					 $reference_table = 'lms_event_header';
+					 $reference_id = $$class->lms_event_header_id;
+					 ?>
        </div>
        <div id="new_comment">
        </div>
@@ -85,7 +85,7 @@
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
 				<th><?php echo gettext('Class or Group') ?></th>
-        <th><?php echo gettext('User Name') ?></th>
+        <th><?php echo gettext('Student Name') ?></th>
         <th><?php echo gettext('Resource') ?></th>
         <th><?php echo gettext('Required') ?></th>
         <th><?php echo gettext('Status') ?></th>
@@ -94,33 +94,33 @@
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
-       <?php
-       $count = 0;
-       $f = new inoform();
-       foreach ($lms_event_line_object as $lms_event_line) {
-        $$class_second->username = !empty($lms_event_line->user_id) ? ino_user::find_by_id($lms_event_line->user_id)->username : '';
-        ?>         
-        <tr class="lms_event_line<?php echo $count ?>">
-         <td><?php
-          echo ino_inline_action($$class_second->lms_event_line_id, array('lms_event_header_id' => $$class->lms_event_header_id));
-          ?>
-         </td>
-         <td><?php $f->text_field_wid2sr('lms_event_line_id' , 'always_readonly'); ?></td>
-				 <td><?php $f->text_field_wid2('lms_group_header_id'); ?></td>
-         <td><?php
-          $f->val_field_wid2('username', 'user', 'username', '', 'select user username');
-          echo $f->hidden_field('user_id', $$class_third->user_id);
-          ?><i class="select_username select_popup clickable fa fa-search"></i></td>
-         <td><?php $f->text_field_wid2('resource_id'); ?></td>
-         <td><?php $f->checkBox_field_wid2('required_cb'); ?></td>
-         <td><?php $f->text_field_wid2('expected_status'); ?></td>
-         <td><?php $f->text_field_wid2('actual_status'); ?></td>
-         <td><?php $f->text_field_wid2('description'); ?></td>
-        </tr>
-        <?php
-        $count = $count + 1;
-       }
-       ?>
+					<?php
+					$count = 0;
+					$f = new inoform();
+					foreach ($lms_event_line_object as $lms_event_line) {
+					 $$class_second->username = !empty($lms_event_line->user_id) ? ino_user::find_by_id($lms_event_line->user_id)->username : '';
+					 ?>         
+ 			 <tr class="lms_event_line<?php echo $count ?>">
+ 				<td><?php
+						 echo ino_inline_action($$class_second->lms_event_line_id, array('lms_event_header_id' => $$class->lms_event_header_id));
+						 ?>
+ 				</td>
+ 				<td><?php $f->text_field_wid2sr('lms_event_line_id', 'always_readonly'); ?></td>
+ 				<td><?php $f->text_field_wid2('lms_group_header_id'); ?></td>
+ 				<td><?php
+						 echo $f->val_field('first_name', $$class_second->first_name, '', '', 'vf_select_student_name first_name', '', '', 'lms_student_v', 'employee_name');
+						 echo $f->hidden_field_withCLass('lms_student_id', $$class_second->lms_student_id, 'lms_student_id');
+						 ?><i class="generic g_select_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></td>
+ 				<td><?php $f->text_field_wid2('resource_id'); ?></td>
+ 				<td><?php $f->checkBox_field_wid2('required_cb'); ?></td>
+ 				<td><?php $f->text_field_wid2('expected_status'); ?></td>
+ 				<td><?php $f->text_field_wid2('actual_status'); ?></td>
+ 				<td><?php $f->text_field_wid2('description'); ?></td>
+ 			 </tr>
+				<?php
+				$count = $count + 1;
+			 }
+			 ?>
       </tbody>
      </table>
     </div>
