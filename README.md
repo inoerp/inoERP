@@ -9,6 +9,8 @@ Documentation: <http://inoideas.org/content.php?content_type=documentation&categ
 
 Facebook: <https://www.facebook.com/inoerp>
 
+Support The Project: <https://salt.bountysource.com/teams/ino-erp>
+
 Introduction
 ------------
 
