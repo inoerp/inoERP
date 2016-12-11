@@ -458,7 +458,7 @@ class inoform {
   $stmt .= "<div class='show_attachment'>";
   $stmt .= '<div class="form-group">
 							<ul class="inRow asperWidth"><label for="exampleInputFile">' . gettext($label) . '</label>
-							 <li><input type="file" id="attachments" class="attachments" value="" name="uploaded_file[]" multiple/></li>
+							 <li><input type="file" id="img_attachments" class="attachments" value="" name="uploaded_file[]" multiple/></li>
               <li><input type="hidden" class="hidden display_type" name="display_type[]" value="' . $display_type . '"/></li>
               <li><input type="hidden" class="hidden file_id ' . $name . '" name="' . $name . '[]" value="' . $value_file_id . '"/></li>
 							 <li><button  form="file_upload" name="attach_submit" class="submit button upload_file">' . gettext('Upload') . '</button></li>';
@@ -648,7 +648,7 @@ class inoform {
  }
 
  public function seq_field_d($value) {
-  echo $this->text_field('seq_number', $value, '6', '', 'seq_number', '', 1);
+  echo $this->text_field('seq_number', $value, '6', '', 'seq_number always_readonly', '', 1);
  }
 
  public function seq_field_detail_d($value) {
