@@ -24,7 +24,7 @@ class lms_academic_year extends dbObject {
  public static $system_info = [
 		 'name' => 'academic_year',
 		 'number' => '8304',
-		 'description' => 'academic_year',
+		 'description' => 'LMS Academic Year',
 		 'version' => '0.1.1',
 		 'db_version' => '1001',
 		 'mod_version' => '1.1.1',
@@ -35,10 +35,11 @@ class lms_academic_year extends dbObject {
  public $field_a = [
 		 'lms_academic_year_id',
 		 'academic_year_name',
+		 'start_date',
+		 'end_date',
 		 'academic_year_code',
-		 'overview',
-		 'description',
 		 'status',
+		 'description',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
@@ -48,23 +49,20 @@ class lms_academic_year extends dbObject {
 		 'academic_year_name',
 		 'academic_year_code',
  ];
- public $column = [
-		 'lms_academic_year_id',
-		 'academic_year_name',
-		 'academic_year_code',
-		 'overview',
- ];
+
  public $requiredField = [
-		 'academic_year_name',
-		 'academic_year_code'
+		 'academic_year_name'
  ];
+ 
+ 
  
  public $lms_academic_year_id;
 public $academic_year_name;
+public $start_date;
+public $end_date;
 public $academic_year_code;
-public $overview;
-public $description;
 public $status;
+public $description;
 public $created_by;
 public $creation_date;
 public $last_update_by;
@@ -75,8 +73,7 @@ public $last_update_date;
 		 '_show_update_path' => 1,
 		 '_show_view_path' => 1,
  ];
- public $pageTitle = " academic_year  "; //page Title
-
+ public $pageTitle = " Academic Year  "; //page Title
 
 }
 
