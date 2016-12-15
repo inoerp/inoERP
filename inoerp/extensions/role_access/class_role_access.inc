@@ -43,7 +43,7 @@ class role_access extends dbObject {
 		 'role_code',
 		 'obj_class_name',
 		 'access_level',
-		 'read_only_own_content_cb',
+//		 'read_only_own_content_cb',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
