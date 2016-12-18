@@ -1,6 +1,6 @@
 <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="hr_employee_experience_line"  name="employee_experience_line">
+  <form method="post" id="hr_employee_experience_line"  name="employee_experience_line">
    <span class="heading"><?php echo gettext('Employee Experience') ?></span>
    <div id="tabsLine">
     <div id="form_serach_header" class="tabContainer">

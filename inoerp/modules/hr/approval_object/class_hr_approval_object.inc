@@ -92,13 +92,6 @@ class hr_approval_object extends dbObject {
   return !empty($result) ? $result : false;
  }
 
-//  public static function find_all_line_levels() {
-//   $sql = " SELECT * FROM ";
-//   $sql .= self::$table_name;
-//   $sql .= " WHERE level = 'LINE' ";
-//   $result = self::find_by_sql($sql);
-//   return !empty($result) ? $result : false;
-//  }
 }
 
 //end of hr_approval_object class

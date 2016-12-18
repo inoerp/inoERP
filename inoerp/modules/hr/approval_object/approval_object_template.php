@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_approval_object"  name="hr_approval_object">
+ <form  method="post" id="hr_approval_object"  name="hr_approval_object">
   <span class="heading"><?php echo gettext('Approval Object') ?> </span>
   <div id ="form_header">
    <div id="tabsHeader">

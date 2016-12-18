@@ -1,6 +1,6 @@
 <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="hr_employee_education_line"  name="employee_education_line">
+  <form  method="post" id="hr_employee_education_line"  name="employee_education_line">
    <span class="heading"><?php echo gettext('Employee Education') ?></span>
    <div class="tabContainer">
     <label><?php echo gettext('Employee Name') ?></label>

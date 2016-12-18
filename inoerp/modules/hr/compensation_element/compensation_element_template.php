@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_compensation_element"  name="hr_compensation_element">
+ <form  method="post" id="hr_compensation_element"  name="hr_compensation_element">
   <span class="heading"><?php echo gettext('Compensation Element') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
@@ -49,7 +49,7 @@
 
    </div>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">Compensation Element Details </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Compensation Element Details') ?> </span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>

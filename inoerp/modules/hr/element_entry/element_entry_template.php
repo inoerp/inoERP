@@ -1,6 +1,6 @@
 <!--    End of place for showing error messages-->
 <div id ="form_header">
- <form action=""  method="post" id="hr_element_entry_header"  name="hr_element_entry_header">
+ <form  method="post" id="hr_element_entry_header"  name="hr_element_entry_header">
   <span class="heading"><?php echo gettext('Compensation Element Entry') ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -31,7 +31,7 @@
 </div>
 
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Element Entry Lines') ?></span>
- <form action=""  method="post" id="hr_element_entry_line"  name="hr_element_entry_line">
+ <form method="post" id="hr_element_entry_line"  name="hr_element_entry_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Main') ?></a></li>

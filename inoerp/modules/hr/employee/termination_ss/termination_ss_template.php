@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_employee_termination"  name="hr_employee_termination"><span class="heading">Employee Termination </span>
+ <form  method="post" id="hr_employee_termination"  name="hr_employee_termination"><span class="heading">Employee Termination </span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

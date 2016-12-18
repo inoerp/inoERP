@@ -1,6 +1,6 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_employee"  name="hr_employee">
-  <span class="heading"><?php echo gettext('Employee Header') ?></span>
+ <form  method="post" id="hr_employee"  name="hr_employee">
+  <span class="heading"><?php $f = new inoform(); echo gettext('Employee Header') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
