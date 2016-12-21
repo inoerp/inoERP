@@ -1,6 +1,6 @@
 <div id="form_all">
  <div id="form_headerDiv">
-  <form action=""  method="post" id="hr_leave_balance_line"  name="leave_balance_line">
+  <form method="post" id="hr_leave_balance_line"  name="leave_balance_line">
    <span class="heading"><?php echo gettext('Leave Details') ?></span>
    <table class="form_table">
     <tr> 

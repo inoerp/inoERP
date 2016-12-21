@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_job"  name="hr_job">
+ <form  method="post" id="hr_job"  name="hr_job">
   <span class="heading"><?php echo gettext('Job') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

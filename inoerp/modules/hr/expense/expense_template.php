@@ -21,9 +21,7 @@ inoERP
     <div id="tabsHeader-1" class="tabContent">
      <div class="large_shadow_box"> 
       <ul class="column header_field">
-       <li><?php
-        $f->l_text_field_dr_withSearch('hr_expense_header_id')
-        ?>
+       <li><?php    $f->l_text_field_dr_withSearch('hr_expense_header_id')  ?>
         <a name="show" href="form.php?class_name=hr_expense_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_expense_header_id">
          <i class="fa fa-refresh"></i></a> 
        </li>

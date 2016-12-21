@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_leave_transaction"  name="hr_leave_transaction">
+ <form method="post" id="hr_leave_transaction"  name="hr_leave_transaction">
   <span class="heading"><?php echo gettext('Leave Application') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

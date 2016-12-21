@@ -95,7 +95,6 @@
       <tbody class="form_data_line_tbody">
        <?php
        $count = 0;
-       $f = new inoform();
        foreach ($hr_event_line_object as $hr_event_line) {
         $$class_second->username = !empty($hr_event_line->user_id) ? ino_user::find_by_id($hr_event_line->user_id)->username : '';
         ?>         
