@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_payroll_payment_method"  name="hr_payroll_payment_method">
+ <form method="post" id="hr_payroll_payment_method"  name="hr_payroll_payment_method">
   <span class="heading"><?php echo gettext('Payroll Payment Method') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

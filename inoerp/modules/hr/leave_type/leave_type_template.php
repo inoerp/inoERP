@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="hr_leave_type"  name="hr_leave_type">
+ <form method="post" id="hr_leave_type"  name="hr_leave_type">
   <span class="heading"><?php echo gettext('Leave Type') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

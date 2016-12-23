@@ -1,7 +1,7 @@
 <div class="row small-left-padding">
  <div id="form_all">
   <div id="form_headerDiv">
-   <form action=""  method="post" id="hr_payslip_header"  name="hr_payslip_header">
+   <form  method="post" id="hr_payslip_header"  name="hr_payslip_header">
     <span class="heading"><?php echo gettext('Employee Pay Slip') ?></span>
     <div class="tabContainer">
      <ul class="column header_field">
@@ -31,7 +31,7 @@
     </div>
    </form>
    <div id ="form_line" class="hr_payslip_line"><span class="heading"><?php echo gettext('Salary Details') ?></span>
-    <form action=""  method="post" id="hr_payslip_line"  name="hr_payslip_line">
+    <form  method="post" id="hr_payslip_line"  name="hr_payslip_line">
      <div id="tabsLine">
       <ul class="tabMain">
        <li><a href="#tabsLine-1"><?php echo gettext('Details') ?></a></li>

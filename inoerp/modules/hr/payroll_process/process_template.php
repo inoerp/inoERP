@@ -1,5 +1,5 @@
 <div id="form_all">
- <form action=""  method="post" id="hr_payroll_process"  name="hr_payroll_process"><span class="heading">Payroll Process </span>
+ <form method="post" id="hr_payroll_process"  name="hr_payroll_process"><span class="heading">Payroll Process </span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

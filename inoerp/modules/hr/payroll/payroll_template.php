@@ -1,6 +1,6 @@
 <div class="row small-left-padding">
 <div id="form_all">
- <form action=""  method="post" id="hr_payroll"  name="hr_payroll">
+ <form method="post" id="hr_payroll"  name="hr_payroll">
   <span class="heading"><?php echo gettext('Payroll') ?> </span>
   <div id ="form_header">
    <div id="tabsHeader">
