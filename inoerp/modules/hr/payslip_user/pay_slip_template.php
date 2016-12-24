@@ -5,8 +5,7 @@
     <span class="heading"><?php echo gettext('Employee Pay Slip') ?></span>
     <div class="tabContainer">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_dr('hr_payslip_header_id') ?>
-      </li>
+      <li><?php $f->l_text_field_dr('hr_payslip_header_id') ?> </li>
       <li><?php $f->l_text_field_dr('employee_name'); ?>
        <?php echo $f->hidden_field_withId('employee_id', $$class->hr_employee_id); ?>
       </li>

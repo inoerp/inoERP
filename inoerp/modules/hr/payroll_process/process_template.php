@@ -1,11 +1,12 @@
 <div id="form_all">
- <form method="post" id="hr_payroll_process"  name="hr_payroll_process"><span class="heading">Payroll Process </span>
+ <form method="post" id="hr_payroll_process"  name="hr_payroll_process">
+	<span class="heading"><?php echo gettext('Payroll Process') ; ?></span>
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">
-     <li><a href="#tabsHeader-1">Basic Info</a></li>
-     <li><a href="#tabsHeader-2">Action</a></li>
-     <li><a href="#tabsHeader-3">Notes</a></li>
+     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ; ?></a></li>
+     <li><a href="#tabsHeader-2"><?php echo gettext('Action') ; ?></a></li>
+     <li><a href="#tabsHeader-3"><?php echo gettext('Notes') ; ?></a></li>
     </ul>
     <div class="tabContainer">
      <div id="tabsHeader-1" class="tabContent">
@@ -49,10 +50,10 @@
    </div>
   </div>
  </form>
- <div id ="form_line" class="form_line"><span class="heading">Line Details </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Line Details') ; ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Schedules</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Schedules') ; ?></a></li>
    </ul>
    <div class="tabContainer"> 
     <form action=""  method="post" id="hr_payslip_header_line"  name="hr_payslip_header_line">

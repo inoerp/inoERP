@@ -1,8 +1,9 @@
 <div id ="form_header">
- <form method="post" id="hr_pos_hierarchy_header"  name="hr_pos_hierarchy_header"><span class="heading">Position Hierarchy </span>
+ <form method="post" id="hr_pos_hierarchy_header"  name="hr_pos_hierarchy_header">
+	<span class="heading"><?php echo gettext('Position Hierarchy') ; ?></span>
   <div id="tabsHeader">
    <ul class="tabMain">
-    <li><a href="#tabsHeader-1">Basic Info</a></li>
+    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ; ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -24,22 +25,22 @@
  </form>
 </div>
 
-<div id="form_line" class="form_line"><span class="heading">Hierarchy Lines </span>
+<div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Hierarchy Lines') ; ?></span>
  <form action=""  method="post" id="hr_pos_hierarchy_line"  name="hr_pos_hierarchy_line">
   <div id="tabsLine">
    <ul class="tabMain">
-    <li><a href="#tabsLine-1">Main</a></li>
+    <li><a href="#tabsLine-1"><?php echo gettext('Main') ; ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsLine-1" class="tabContent">
      <table class="form_line_data_table">
       <thead> 
        <tr>
-        <th>Action</th>
-        <th>Line Id</th>
-        <th>Position</th>
-        <th>Start Date</th>
-        <th>End Date</th>
+        <th><?php echo gettext('Action') ; ?></th>
+        <th><?php echo gettext('Line Id') ; ?></th>
+        <th><?php echo gettext('Position') ; ?></th>
+        <th><?php echo gettext('Start Date') ; ?></th>
+        <th><?php echo gettext('End Date') ; ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">

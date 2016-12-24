@@ -35,9 +35,6 @@
   public $last_update_by;
   public $last_update_date;
 
-  public function __set($name, $value) {
-   $this->$name = $value;
-  }
 
   public static function find_all_by_hr_position_hierarchyHeaderId($hr_position_hierarchy_headerId) {
 
