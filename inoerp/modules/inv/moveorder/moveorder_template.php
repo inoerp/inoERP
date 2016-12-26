@@ -50,7 +50,7 @@
 
 </div>
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Move Order Lines') ?></span>
- <form action=""  method="inv_moveorder_line_form" id="inv_moveorder_line_form"  name="inv_moveorder_line">
+ <form method="inv_moveorder_line_form" id="inv_moveorder_line_form"  name="inv_moveorder_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>

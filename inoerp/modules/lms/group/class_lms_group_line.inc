@@ -5,7 +5,7 @@ class lms_group_line extends dbObject {
  public static $table_name = "lms_group_line";
  public static $primary_column = "lms_group_line_id";
  public static $parent_primary_column = "lms_group_header_id";
- public static $key_column = 'lms_chapter_id';
+ public static $key_column = 'lms_term_id';
  public static $module = "lms";
  public $field_a = [
 		 'lms_group_line_id',

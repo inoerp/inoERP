@@ -1,6 +1,4 @@
-<div id ="form_all"><span class="heading"><?php
-  echo gettext('On Hand Reservation')
-  ?></span>
+<div id ="form_all"><span class="heading"><?php   echo gettext('On Hand Reservation')   ?></span>
  <form  method="post" id="inv_reservation"  name="inv_reservation">
   <div id ="form_header">
    <div id="tabsHeader">

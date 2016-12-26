@@ -100,8 +100,8 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Seq') ?> #</th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Project') ?> #</th>
-        <th><?php echo gettext('Task') ?> #</th>
+        <th><?php echo gettext('Project') ?></th>
+        <th><?php echo gettext('Task') ?></th>
         <th><?php echo !empty($day1) ? gettext($day1) : gettext('Day 1') ?></th>
         <th><?php echo !empty($day2) ? gettext($day2) : gettext('Day 2') ?></th>
         <th><?php echo !empty($day3) ? gettext($day3) : gettext('Day 3') ?></th>

@@ -85,11 +85,11 @@ inoERP
  				</td>
  				<td><?php $f->seq_field_d($count) ?></td>
  				<td><?php form::text_field_wid2sr('lms_group_line_id'); ?></td>
- 				<td><?php echo $f->select_field_from_object('lms_term_id', lms_chapter::find_all(), 'lms_chapter_id', 'chapter_name', $$class_second->lms_term_id, '', 'medium'); ?></td>
- 				<td><?php echo $f->date_fieldAnyDay('start_date', $$class_second->start_date); ?></td>
- 				<td><?php echo $f->date_fieldAnyDay('end_date', $$class_second->end_date); ?></td>
+ 				<td><?php echo $f->select_field_from_object('lms_term_id', lms_term::find_all(), 'lms_term_id', ['term_name','description'], $$class_second->lms_term_id, '', 'medium'); ?></td>
+ 				<td><?php echo $f->date_fieldAnyDay('term_start_date', $$class_second->term_start_date); ?></td>
+ 				<td><?php echo $f->date_fieldAnyDay('term_end_date', $$class_second->term_end_date); ?></td>
  				<td><?php $f->text_field_wid2('description', 'large'); ?></td>
- 				<td><?php $f->text_field_wid2('Status'); ?></td>
+ 				<td><?php $f->text_field_wid2('status'); ?></td>
  			 </tr>
 				<?php
 				$count = $count + 1;
@@ -111,7 +111,7 @@ inoERP
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="lms_group_header_id" ></li>
   <li class="form_header_id" data-form_header_id="lms_group_header" ></li>
-  <li class="line_key_field" data-line_key_field="billing_type" ></li>
+  <li class="line_key_field" data-line_key_field="lms_term_id" ></li>
   <li class="single_line" data-single_line="false" ></li>
   <li class="form_line_id" data-form_line_id="lms_group_line" ></li>
  </ul>

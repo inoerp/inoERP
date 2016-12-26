@@ -64,7 +64,7 @@
 
  </div>
  <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Internal Requisition Receipt Lines') ?></span>
-  <form action=""  method="post" id="po_site"  name="inv_receipt_line">
+  <form method="post" id="po_site"  name="inv_receipt_line">
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('IR & ISO Details') ?></a></li>

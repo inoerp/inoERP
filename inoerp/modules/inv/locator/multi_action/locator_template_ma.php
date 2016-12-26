@@ -3,7 +3,7 @@
   <div id="searchForm" ><div class='hideDiv_input fa fa-minus-circle clickable'></div>
    <div class='hideDiv_input_element'><?php echo!(empty($search_form)) ? $search_form : ""; ?></div></div>
   <div id ="searchResult">
-   <form action=""  method="post" id="locator"  name="locator">
+   <form method="post" id="locator"  name="locator">
     <div id ="form_line" class="form_line"><span class="heading">Locator Details </span>
      <table class="form_table">
       <?php echo locator::$view_table_line_tr ?>
@@ -40,8 +40,7 @@
  
   <div class="row small-top-margin">
   <div id="pagination" style="clear: both;">
-   <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";
-   ?>
+   <?php echo!(empty($pagination_statement)) ? $pagination_statement : "";   ?>
   </div>
  </div>
  

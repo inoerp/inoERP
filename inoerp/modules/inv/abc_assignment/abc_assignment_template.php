@@ -1,5 +1,5 @@
 <div class="row small-left-padding">
- <div id ="form_header"><span class="heading"><?php $f = new inoform(); echo gettext('ABC Assignment Header') ?></span>
+ <div id ="form_header"><span class="heading"><?php echo gettext('ABC Assignment Header') ?></span>
   <form method="post" id="inv_abc_assignment_header"  name="inv_abc_assignment_header">
    <div id="tabsHeader">
     <ul class="tabMain">

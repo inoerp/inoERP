@@ -10,7 +10,7 @@
     <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('LMS Attendance') ?></span>
      <div id="tabsLine">
       <ul class="tabMain">
-       <li><a href="#tabsLine-1">Basics</a></li>
+       <li><a href="#tabsLine-1"><?php echo gettext('Basics') ?></a></li>
       </ul>
       <div class="tabContainer">
        <div id="tabsLine-1" class="tabContent">

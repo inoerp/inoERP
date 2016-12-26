@@ -10,15 +10,15 @@
     <div class="large_shadow_box"> 
      <ul class="column header_field">
       <li><label><i class="inv_lot_transaction_header_id select_popup clickable fa fa-search"></i>
-        Lot Number Id </label><?php echo $f->text_field('inv_lot_number_id', $inv_lot_number_id_h, '', 'inv_lot_number_id') ?>
+        <?php echo gettext('Lot Number Id'); ?></label><?php echo $f->text_field('inv_lot_number_id', $inv_lot_number_id_h, '', 'inv_lot_number_id') ?>
        <a name="show" href="form.php?class_name=inv_lot_transaction_v&<?php echo "mode=$mode"; ?>" class="show document_id inv_lot_transaction_header_id">
         <i class='fa fa-refresh'></i></a> 
       </li>
-      <li><label>Lot Number</label><?php echo $f->text_field('lot_number', $lot_number_h, '', 'lot_number') ?>
-      <li><label>Generation</label><?php echo $f->text_field_dr('generation'); ?></li>
-      <li><label>Origination</label><?php echo $f->text_field_dr('origination_type'); ?></li>
-      <li><label>Origination Date</label><?php echo $f->text_field_dr('origination_date'); ?></li>
-      <li><label>Activation Date</label><?php echo $f->text_field_dr('activation_date'); ?></li>
+      <li><label><?php echo gettext('Lot Number'); ?></label><?php echo $f->text_field('lot_number', $lot_number_h, '', 'lot_number') ?>
+      <li><label><?php echo gettext('Generation'); ?></label><?php echo $f->text_field_dr('generation'); ?></li>
+      <li><label><?php echo gettext('Origination'); ?></label><?php echo $f->text_field_dr('origination_type'); ?></li>
+      <li><label><?php echo gettext('Origination Date'); ?></label><?php echo $f->text_field_dr('origination_date'); ?></li>
+      <li><label><?php echo gettext('Activation Date'); ?></label><?php echo $f->text_field_dr('activation_date'); ?></li>
      </ul>
     </div>
    </div>
@@ -36,7 +36,7 @@
 
 </div>
 
-<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Lot Transactions'); ?> </span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Lot Transactions'); ?></span>
  <div id="tabsLine">
   <ul class="tabMain">
    <li><a href="#tabsLine-1"><?php echo gettext('Info-1'); ?> </a></li>

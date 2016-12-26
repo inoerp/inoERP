@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="transaction_type_form"  name="transaction_type_form">
+ <form  method="post" id="transaction_type_form"  name="transaction_type_form">
   <span class="heading"><?php echo gettext('Transaction Type') ?></span>
   <div id ="form_header">
    <div id="tabsHeader">

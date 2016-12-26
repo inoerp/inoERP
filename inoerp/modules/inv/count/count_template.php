@@ -76,7 +76,7 @@
   </form>
  </div>
 
- <div id ="form_line" class="form_line"><span class="heading">Count Schedules </span>
+ <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Count Schedules') ?></span>
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('Schedule') ?></a></li>

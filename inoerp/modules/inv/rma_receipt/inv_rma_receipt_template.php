@@ -1,5 +1,4 @@
 <div id ="form_header"><span class="heading"><?php echo gettext('RMA Receipt Header') ?></span>
-
  <div id="tabsHeader">
   <ul class="tabMain">
    <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
@@ -63,7 +62,7 @@
 
 </div>
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('RMA Receipt Lines') ?></span>
- <form action=""  method="post" id="po_site"  name="inv_receipt_line">
+ <form method="post" id="po_site"  name="inv_receipt_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('RMA Info') ?></a></li>

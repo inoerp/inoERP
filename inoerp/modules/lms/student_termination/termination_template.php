@@ -16,13 +16,13 @@
          <i class="fa fa-refresh"></i></a> 
        </li>
        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="lms_student_id select_popup clickable">
-         Employee Id</label><?php $f->text_field_ds('employee_id') ?>
+         <?php echo gettext('Employee Id') ?></label><?php $f->text_field_ds('employee_id') ?>
        </li>
-       <li><label>Name</label><?php $f->text_field_d('employee_name'); ?> 					</li>
-       <li><label>Id #</label><?php $f->text_field_d('identification_id'); ?> 					</li>
-       <li><label>Date of Notification</label><?php echo $f->date_fieldAnyDay('date_of_notification', $$class->date_of_notification); ?> 					</li>
-       <li><label>Reason</label><?php $f->text_field_dm('reason'); ?> 					</li>
-       <li><label>Status</label><?php echo $f->select_field_from_array('status', lms_student_termination::$status_a, $$class->status, 'status'); ?> 					</li>
+       <li><label><?php echo gettext('Name') ?></label><?php $f->text_field_d('employee_name'); ?> 					</li>
+       <li><label><?php echo gettext('Id #') ?></label><?php $f->text_field_d('identification_id'); ?> 					</li>
+       <li><label><?php echo gettext('Date of Notification') ?></label><?php echo $f->date_fieldAnyDay('date_of_notification', $$class->date_of_notification); ?> 					</li>
+       <li><label><?php echo gettext('Reason') ?></label><?php $f->text_field_dm('reason'); ?> 					</li>
+       <li><label><?php echo gettext('Status') ?></label><?php echo $f->select_field_from_array('status', lms_student_termination::$status_a, $$class->status, 'status'); ?> 					</li>
       </ul>
      </div>
      <div id="tabsHeader-2" class="tabContent">

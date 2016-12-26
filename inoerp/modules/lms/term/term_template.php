@@ -18,15 +18,14 @@
        </li>
        <li><?php $f->l_text_field_d('term_name'); ?></li>
        <li><?php $f->l_text_field_d('term_code'); ?></li>
-			 <li><?php $f->l_status_field_d('status'); ?></li>
        <li><?php $f->l_status_field_d('status'); ?></li>
        <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>
-     <div id="tabsHeader-3" class="tabContent">
+     <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
      </div>
-     <div id="tabsHeader-4" class="tabContent">
+     <div id="tabsHeader-3" class="tabContent">
       <div> 
        <div id="comments">
         <div id="comment_list">

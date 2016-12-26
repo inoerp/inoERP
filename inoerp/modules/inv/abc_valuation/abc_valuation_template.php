@@ -1,5 +1,5 @@
 <div id ="form_header">
- <form action=""  method="post" id="inv_abc_valuation"  name="inv_abc_valuation">
+ <form method="post" id="inv_abc_valuation"  name="inv_abc_valuation">
   <span class="heading"><?php  echo gettext('ABC Valuation') ?></span>
   <div class="large_shadow_box tabContainer">
    <ul class="column header_field"> 

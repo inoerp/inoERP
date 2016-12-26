@@ -1,5 +1,5 @@
 <div id ="form_all"><span class="heading"><?php echo gettext('Unit Of Measure') ?></span>
- <form action=""  method="post" id="uom"  name="uom">
+ <form method="post" id="uom"  name="uom">
   <div id ="form_header">
    <div id="tabsHeader">
     <ul class="tabMain">

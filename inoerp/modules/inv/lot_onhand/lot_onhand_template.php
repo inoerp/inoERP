@@ -1,11 +1,11 @@
-      <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Lot On Hand') ?> </span>
+<div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Lot On Hand') ?> </span>
        <div id="tabsDetail">
         <ul class="tabMain">
          <li><a href="#tabsDetail-1"><?php echo gettext('Info-1') ?> </a></li>
          <li><a href="#tabsDetail-2"><?php echo gettext('Info-2') ?> </a></li>
         </ul>
         <div class="tabContainer"> 
-         <form action=""  method="post" id="inv_lot_transaction_entries_line"  name="inv_lot_transaction_entries_line">
+         <form  method="post" id="inv_lot_transaction_entries_line"  name="inv_lot_transaction_entries_line">
           <div id="tabsDetail-1" class="tabContent">
            <table class="form_table">
             <thead> 

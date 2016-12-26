@@ -19,7 +19,7 @@ class lms_term extends dbObject {
 
  public static $table_name = "lms_term";
  public static $primary_column = "lms_term_id";
- public static $key_column = 'job_code';
+ public static $key_column = 'term_name';
  public static $module = "lms";
  public static $system_info = [
 		 'name' => 'Term',

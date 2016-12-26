@@ -1,7 +1,5 @@
 <form method="post" id="inv_lot_number"  name="inv_lot_number">
- <span class="heading"><?php
-  echo gettext('Lot Number')
-  ?></span>
+ <span class="heading"><?php   echo gettext('Lot Number')   ?></span>
  <div id ="form_header">
   <div id="tabsHeader">
    <ul class="tabMain">

@@ -39,14 +39,6 @@
       </thead>
       <tbody class="cal-day-tbdy">
        <?php
-//       $c_count = 1;
-//       for ($i = 23; $i > 0; $i--) {
-//        echo "<tr class='cal-row'>";
-//        echo "<td class='clickable cell_{$i}'>$c_count </td>";
-//        echo "</tr>";
-//        $c_count++;
-//       }
-
        for ($i = 0; $i < 24; $i++) {
         $td_time = sys_calendar::convt_number_time($i);
         $rowclass = ($i % 2 == 0 ) ? 'cal-major' : 'cal-minor';

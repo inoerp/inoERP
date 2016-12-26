@@ -6,8 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php $f = new inoform();
-echo gettext('Assessment') ?></span>
+<div id ="form_header"><span class="heading"><?php echo gettext('Assessment') ?></span>
  <form method="post" id="lms_assessment_header"  name="lms_assessment_header">
   <div id="tabsHeader">
    <ul class="tabMain">
@@ -40,7 +39,7 @@ echo gettext('Assessment') ?></span>
      <div> 
       <div id="comments">
        <div id="comment_list">
-<?php echo!(empty($comments)) ? $comments : ""; ?>
+					 <?php echo!(empty($comments)) ? $comments : ""; ?>
        </div>
        <div id ="display_comment_form">
 					 <?php
@@ -87,9 +86,7 @@ echo gettext('Assessment') ?></span>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
-					<?php
-					$f = new inoform();
-					$count = 0;
+					<?php $count = 0;
 					foreach ($lms_assessment_line_object as $lms_assessment_line) {
 					 ?>         
  			 <tr class="lms_assessment_line<?php echo $count ?>">
@@ -99,7 +96,7 @@ echo gettext('Assessment') ?></span>
 						 ?>
  				</td>
  				<td><?php $f->seq_field_d($count) ?></td>
- 				<td><?php $f->text_field_wid2sr('lms_assessment_line_id' ,'always_readonly'); ?></td>
+ 				<td><?php $f->text_field_wid2sr('lms_assessment_line_id', 'always_readonly'); ?></td>
  				<td><?php $f->text_field_wid2sr('student_id'); ?></td>
  				<td><?php $f->text_field_wid2('attempt_number'); ?></td>
  				<td><?php $f->text_field_wid2('student_mark'); ?></td>

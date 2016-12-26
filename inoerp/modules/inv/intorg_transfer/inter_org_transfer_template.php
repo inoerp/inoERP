@@ -50,7 +50,7 @@
 
 </div>
 <div id="form_line" class="form_line"><span class="heading"><?php echo gettext('Inter-Org Transfer Lines') ?></span>
- <form action=""  method="inv_intorg_transfer_line_form" id="inv_intorg_transfer_line_form"  name="inv_intorg_transfer_line">
+ <form method="inv_intorg_transfer_line_form" id="inv_intorg_transfer_line_form"  name="inv_intorg_transfer_line">
   <div id="tabsLine">
    <ul class="tabMain">
     <li><a href="#tabsLine-1"><?php echo gettext('General Info') ?></a></li>
