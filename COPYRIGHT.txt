@@ -15,6 +15,6 @@ along with this program as the file LICENSE.txt; If a copy of the MPL was not di
 
 
 Authors :
-1. Nishit R. Das
+1. Nishit R. Das <http://inoideas.org/form.php?class_name=user_activity_v&mode=2&user_id=88>
 
 
