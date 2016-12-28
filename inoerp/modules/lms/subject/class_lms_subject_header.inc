@@ -19,7 +19,7 @@ class lms_subject_header extends dbObject {
  public static $table_name = "lms_subject_header";
  public static $dependent_classes = ['lms_subject_line'];
  public static $primary_column = "lms_subject_header_id";
- public static $key_column = 'subject_code';
+ public static $key_column = 'subject_name';
  public static $module = "lms";
  public static $system_info = [
 		 'name' => 'LMS Subject',

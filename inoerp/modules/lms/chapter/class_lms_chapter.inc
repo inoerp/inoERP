@@ -19,7 +19,7 @@ class lms_chapter extends dbObject {
 
  public static $table_name = "lms_chapter";
  public static $primary_column = "lms_chapter_id";
- public static $key_column = 'job_code';
+ public static $key_column = 'chapter_name';
  public static $module = "lms";
  public static $system_info = [
 		 'name' => 'Chapter',
@@ -51,10 +51,11 @@ class lms_chapter extends dbObject {
 		 'chapter_code',
  ];
  public $column = [
-		 'lms_chapter_id',
+	 'lms_chapter_id',
 		 'chapter_name',
 		 'chapter_code',
-		 'overview',
+		 'description',
+		 'status',
  ];
  public $requiredField = [
 		 'chapter_name',

@@ -128,7 +128,7 @@ inoERP
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="lms_subject_header_id" ></li>
   <li class="form_header_id" data-form_header_id="lms_subject_header" ></li>
-  <li class="line_key_field" data-line_key_field="billing_type" ></li>
+  <li class="line_key_field" data-line_key_field="lms_chapter_id" ></li>
   <li class="single_line" data-single_line="false" ></li>
   <li class="form_line_id" data-form_line_id="lms_subject_line" ></li>
  </ul>

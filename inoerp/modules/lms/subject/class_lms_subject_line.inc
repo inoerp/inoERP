@@ -11,6 +11,7 @@ class lms_subject_line extends dbObject {
 		 'lms_subject_line_id',
 		 'lms_subject_header_id',
 		 'lms_chapter_id',
+		 'seq_no',
 		 'required_cb',
 		 'suggested_reading',
 		 'graded_cb',
@@ -22,18 +23,21 @@ class lms_subject_line extends dbObject {
 		 'last_update_date',
  ];
  public $requiredField = [
-		 'lms_subject_header_id',
-		 'billing_type',
-		 'service_activity_id',
+ 'lms_chapter_id',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
 		 "lms_subject_header_id"
  ];
  public $lms_subject_line_id;
  public $lms_subject_header_id;
- public $billing_type;
- public $service_activity_id;
+ public $seq_no;
+ public $lms_chapter_id;
  public $description;
+ public $required_cb;
+ public $suggested_reading;
+ public $graded_cb;
+ public $status;
+ 
  public $created_by;
  public $creation_date;
  public $last_update_by;
