@@ -25,7 +25,8 @@ inoERP
       </li>
       <li><?php $f->l_text_field_d('number', 'primary_column2'); ?></li>
       <li><?php $f->l_select_field_from_array('subscription_type', hd_subscription_header::$subscription_type_a, $$class->subscription_type, 'subscription_type', '', 1); ?></li>
-      <li><?php $f->l_select_field_from_object('document_type', option_header::find_options_byName('HD_SUBSCR_DOC_TYPE'), 'option_line_code', 'option_line_value', $hd_subscription_header->document_type, 'document_type', $readonly1, '', ''); ?>						 </li>
+      <li><?php $f->l_select_field_from_object('org_id', org::find_all_business(), 'org_id', 'org', $$class->org_id, 'org_id', '', 1, $readonly1); ?>        </li>
+			<li><?php $f->l_select_field_from_object('document_type', option_header::find_options_byName('HD_SUBSCR_DOC_TYPE'), 'option_line_code', 'option_line_value', $hd_subscription_header->document_type, 'document_type', $readonly1, '', ''); ?>						 </li>
       <li><?php $f->l_text_field_d('first_name'); ?></li>
       <li><?php $f->l_text_field_d('last_name'); ?></li>
       <li><?php $f->l_text_field_d('full_name'); ?></li>

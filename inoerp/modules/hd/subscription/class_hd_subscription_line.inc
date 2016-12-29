@@ -113,7 +113,6 @@ class hd_subscription_line extends dbObject {
  }
 
  public function _before_save() {
-  pa($this);
   if ($this->_validate_before_save() < 0) {
    return -90;
   }

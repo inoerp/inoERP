@@ -215,14 +215,14 @@ class hd_subscription_header extends dbObject {
  }
 
  private function _update_number() {
-  global $prl;
-  $this->number = $prl->find_default_profile('hd_subscription_number_prefix')->level_value .  $this->hd_subscription_header_id;
-  try {
-   $this->save();
-   echo '<br/> New Subscription number is ' . $this->number;
-  } catch (Exception $e) {
-   echo '<br/> Failed to update the Subscription. Error @ ' . __FILE__ . ' @@ ' . __LINE__;
-  }
+//  global $prl;
+//	  $this->number = $prl->find_default_profile('hd_subscription_number_prefix')->level_value .  $this->hd_subscription_header_id;
+//  try {
+////   $this->save();
+//   echo '<br/> New Subscription number is ' . $this->number;
+//  } catch (Exception $e) {
+//   echo '<br/> Failed to update the Subscription. Error @ ' . __FILE__ . ' @@ ' . __LINE__;
+//  }
  }
 
  public static function instantiate_extra_fields(&$array_of_objects) {
