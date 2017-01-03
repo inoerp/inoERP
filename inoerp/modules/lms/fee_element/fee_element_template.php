@@ -58,7 +58,6 @@
       <ul class="column header_field"> 
        <li><?php $f->l_number_field_d('priority'); ?> 	</li>
        <li><?php $f->l_checkBox_field_d('recurring_cb'); ?> 	</li>
-       <li><?php $f->l_checkBox_field_d('separate_check_cb'); ?> 	</li>
        <li><?php $f->l_text_field_d('frequency_months'); ?> 	</li>
        <li><?php $f->l_select_field_from_array('calculation_rule', lms_fee_element::$calculation_rule_a, $$class->calculation_rule); ?> 	</li>
       </ul>

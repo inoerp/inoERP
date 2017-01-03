@@ -5,7 +5,7 @@ class lms_fee_struct_header extends dbObject {
  public static $table_name = "lms_fee_struct_header";
  public static $primary_column = "lms_fee_struct_header_id";
  public static $dependent_classes = ['lms_fee_struct_line'];
- public static $key_column = 'template_name';
+ public static $key_column = 'struct_name';
  public static $module = "lms";
  
   public static $system_info = [

@@ -42,12 +42,8 @@
    'end_date',
    'priority',
    'recurring_cb',
-   'deduction_start_rule',
    'calculation_rule',
-   'separate_check_cb',
    'frequency_months',
-   'standard_link_cb',
-   'deduction_rule',
    'status',
    'created_by',
    'creation_date',
@@ -79,7 +75,6 @@
   ];
   public $requiredField = [
    'element_type',
-   'start_date',
    'element_name',
   ];
   public $checkbox = [
