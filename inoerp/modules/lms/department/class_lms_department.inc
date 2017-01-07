@@ -6,7 +6,7 @@ class lms_department extends dbObject {
  public static $primary_column = "lms_department_id";
  public static $dependent_classes = ['lms_dept_res_assignment'];
  public static $key_column = 'department';
- public static $module = "bom";
+ public static $module = "lms";
  public static $system_info = [
 		 'name' => 'Departments',
 		 'number' => '8310',

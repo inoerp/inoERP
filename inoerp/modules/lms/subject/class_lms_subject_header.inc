@@ -51,6 +51,19 @@ class lms_subject_header extends dbObject {
 		 'last_update_by',
 		 'last_update_date',
  ];
+ 
+  public $column = [
+	 'lms_subject_header_id',
+		 'subject_name',
+		 'subject_code',
+		  'description',
+		 'status',
+		 'created_by',
+		 'creation_date',
+		 'last_update_by',
+		 'last_update_date',
+ ];
+	
  public $initial_search = [
 		 'subject_name',
 		 'subject_code',

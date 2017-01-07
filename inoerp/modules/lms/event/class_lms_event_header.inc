@@ -20,7 +20,7 @@ class lms_event_header extends dbObject {
  public static $table_name = 'lms_event_header';
  public static $primary_column = "lms_event_header_id";
  public static $dependent_classes = ['lms_event_line'];
- public static $module = "hr";
+ public static $module = "lms";
  public static $system_info = [
   'name' => 'LMS Event',
   'number' => '3119',

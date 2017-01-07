@@ -23,7 +23,7 @@ class lms_resource extends dbObject {
  public static $primary_column = "lms_resource_id";
  public static $dependent_classes = ['lms_resource_cost'];
  public static $key_column = 'resource';
- public static $module = "bom";
+ public static $module = "lms";
  public static $system_info = [
 		 'name' => 'Resource',
 		 'number' => '8307',
