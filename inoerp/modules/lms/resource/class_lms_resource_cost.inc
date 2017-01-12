@@ -5,7 +5,7 @@ class lms_resource_cost extends dbObject {
  public static $table_name = "lms_resource_cost";
  public static $primary_column = "lms_resource_cost_id";
  public static $parent_primary_column = "lms_resource_id";
- public static $key_column = 'lms_resource_id';
+ public static $key_column = 'lms_cost_type';
  public static $module = "lms";
 //  data base variables as stored database column name
  public $field_a = [

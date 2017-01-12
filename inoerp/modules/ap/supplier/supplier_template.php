@@ -114,7 +114,7 @@
       <ul class="column header_field"> 
        <li><?php $f->l_select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $supplier_site->currency, 'currency', '', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('payment_term_id', payment_term::find_all(), 'payment_term_id', 'payment_term', $supplier_site->payment_term_id, 'payment_term_id', $readonly, '', ''); ?>       </li>
-       <li><?php $f->l_checkBox_field('debit_memo_onreturn_cb', $$class_second->debit_memo_onreturn_cb); ?>       </li> 
+       <li><?php $f->l_checkBox_field_d_ws('debit_memo_onreturn_cb', $$class_second->debit_memo_onreturn_cb); ?>       </li> 
        <li><?php $f->l_text_field('pay_on', $$class_second->pay_on); ?></li>
        <li><?php $f->l_text_field('fob', $$class_second->fob); ?></li>
        <li><?php $f->l_text_field('freight_terms', $$class_second->freight_terms); ?></li>
@@ -130,8 +130,8 @@
     <div id="tabsLine-3" class="tabContent">
      <div class="first_rowset"> 
       <ul class="column header_field">
-       <li><?php $f->l_checkBox_field('allow_substitute_receipts_cb', $$class_second->allow_substitute_receipts_cb); ?>       </li> 
-       <li><?php $f->l_checkBox_field('allow_unordered_receipts_cb', $$class_second->allow_unordered_receipts_cb); ?>       </li> 
+       <li><?php $f->l_checkBox_field_d_ws('allow_substitute_receipts_cb', $$class_second->allow_substitute_receipts_cb); ?>       </li> 
+       <li><?php $f->l_checkBox_field_d_ws('allow_unordered_receipts_cb', $$class_second->allow_unordered_receipts_cb); ?>       </li> 
        <li><?php $f->l_select_field_from_object('ap_invoice_match_level', supplier::ap_invoice_match_level(), 'option_line_code', 'option_line_code', $supplier_site->ap_invoice_match_level, 'ap_invoice_match_level', '', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('receipt_routing', supplier::po_receipt_routing(), 'option_line_code', 'option_line_code', $supplier_site->receipt_routing, 'receipt_routing', '', '', $readonly); ?>       </li>
        <li><?php $f->l_select_field_from_object('ship_to_location_variance', option_header::exception_actions(), 'option_line_code', 'option_line_code', $supplier_site->ship_to_location_variance, 'ship_to_location_variance', $readonly, '', ''); ?>       </li>
