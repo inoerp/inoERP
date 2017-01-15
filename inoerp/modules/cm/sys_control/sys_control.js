@@ -15,11 +15,11 @@ setValFromSelectPage.prototype.setVal = function () {
 $(document).ready(function () {
 
  //get subinventories on selecting org
- $('#content').off('blur', '#org_id').on('blur', '#org_id', function () {
-  var org_id = $(this).val();
+ $('#content').off('blur', '#legal_org_id').on('blur', '#legal_org_id', function () {
+  var legal_org_id = $(this).val();
   getSubInventory({
    json_url: 'modules/inv/subinventory/json_subinventory.php',
-   org_id: org_id
+   legal_org_id: legal_org_id
   });
  });
 
@@ -29,4 +29,3 @@ $(document).ready(function () {
  });
 
 });
-
