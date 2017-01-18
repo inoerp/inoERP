@@ -6,7 +6,7 @@ inoERP
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
 -->
-<div id ="form_header"><span class="heading"><?php $f = new inoform(); echo gettext('Sales Control') ?></span>
+<div id ="form_header"><span class="heading"><?php $f = new inoform(); echo gettext('Cash Management Controls') ?></span>
  <form method="post" id="cm_sys_control"  name="cm_sys_control">
   <div class="tabContainer">
    <ul class="column header_field">
@@ -20,7 +20,7 @@ inoERP
   <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Details') ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
-     <li><a href="#tabsLine-1"><?php echo gettext('Defaulting Rules') ?></a></li>
+     <li><a href="#tabsLine-1"><?php echo gettext('System Controls') ?></a></li>
      <li><a href="#tabsLine-2"><?php echo gettext('Future Rules') ?></a></li>
     </ul>
     <div class="tabContainer"> 
@@ -33,8 +33,10 @@ inoERP
 				<li><?php $f->l_checkBox_field_d('allow_lines_cb'); ?></li>
 				<li><?php $f->l_checkBox_field_d('archive_cb'); ?></li>
 				<li><?php $f->l_checkBox_field_d('purge_cb'); ?></li>
-        <li><?php  $f->l_checkBox_field_d('default_promise_date_cb') ?> </li>
-        <li><?php  $f->l_checkBox_field_d('deffer_invoicing_cb') ?> </li>
+				<li><?php $f->l_date_fieldAnyDay('cf_rate_date', $$class->cf_rate_date); ?></li>
+				<li><?php $f->l_date_fieldAnyDay('bank_transfer_rate_date', $$class->bank_transfer_rate_date); ?></li>
+        <li><?php  $f->l_text_field_d('exchange_rate_type') ?> </li>
+        <li><?php  $f->l_text_field_d('signing_auth_approval') ?> </li>
        </ul> 
       </div> 
       <!--end of tab1 div three_column-->

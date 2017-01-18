@@ -7,8 +7,10 @@ class cm_statement_line extends dbObject {
  public static $parent_primary_column = "cm_statement_header_id";
  public static $key_column = 'line_number';
  public static $module = "cm";
- public $checkbox = [
-		 "rev_enabled_cb"
+ 
+ public static $line_type_a = [
+		 'RECE' => 'Receipt',
+		 'PAYM' => 'Payment'
  ];
  public $field_a = [
 		 'cm_statement_line_id',
@@ -45,6 +47,8 @@ class cm_statement_line extends dbObject {
 		 'status',
 		 'line_type',
  ];
+ 
+ 
  
  public $fields_inForm_notInDataBase = [
 		 "so_number",
