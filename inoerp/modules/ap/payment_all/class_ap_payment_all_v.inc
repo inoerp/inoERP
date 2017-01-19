@@ -56,6 +56,12 @@ public static $form_class_name = "ap_payment_header";
   public $option_lists = [
    'payment_types' => 'AP_PAYMENT_TYPE',
   ];
+	
+	  public $search_functions = [
+  'Organization' => 'search_bu_name',
+ ];
+	
+		
   public $ap_payment_header_id;
   public $bu_org_id;
   public $payment_type;

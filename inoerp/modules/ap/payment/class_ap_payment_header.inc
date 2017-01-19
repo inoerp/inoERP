@@ -87,7 +87,6 @@ class ap_payment_header extends dbObject {
  ];
  public $initial_search = [
   'ap_payment_header_id',
-  'bu_org_id',
   'payment_type',
   'payment_number',
   'supplier_id',
@@ -141,6 +140,11 @@ class ap_payment_header extends dbObject {
   'payment_types' => 'AP_PAYMENT_TYPE',
 //		 'po_status' => 'PO_STATUS',
  ];
+ 
+   public $search_functions = [
+  'Organization' => 'search_bu_name',
+ ];
+	
  public $ap_payment_header_id;
  public $bu_org_id;
  public $ap_transaction_header_id;

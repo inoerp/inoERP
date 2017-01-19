@@ -1366,6 +1366,12 @@ function search_org_name() {
  return $stmt;
 }
 
+function search_bu_name() {
+ global $f;
+ $stmt = $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', '', 'bu_org_id', '', '', '', '', 1);
+ return $stmt;
+}
+
 function search_shipping_org() {
  global $f;
  $stmt = $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', '', 'shipping_org_id', '', '', '', '', 1);

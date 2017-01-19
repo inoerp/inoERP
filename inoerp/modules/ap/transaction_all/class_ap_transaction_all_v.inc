@@ -87,6 +87,12 @@ class ap_transaction_all_v extends dbObject {
   '_view_path' => 'form.php?class_name=ap_transaction_header',
   '_show_view_path' => 1,
  ];
+ 
+   public $search_functions = [
+  'Organization' => 'search_bu_name',
+ ];
+	
+	 
  public $pageTitle = " AP Transaction View "; //page Title
  public $ap_transaction_header_id;
  public $bu_org_id;

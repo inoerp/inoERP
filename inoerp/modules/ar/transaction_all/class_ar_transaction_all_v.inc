@@ -113,6 +113,11 @@ class ar_transaction_all_v extends dbObject {
   '_show_update_path' => 1,
   '_show_view_path' => 1
  ];
+ 
+   public $search_functions = [
+  'Organization' => 'search_bu_name',
+ ];
+	
  public $pageTitle = " AR Transaction "; //page Title
  public $ar_transaction_header_id;
  public $bu_org_id;

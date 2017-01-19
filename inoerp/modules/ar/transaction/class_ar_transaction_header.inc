@@ -136,7 +136,6 @@ class ar_transaction_header extends dbObject {
  ];
  public $initial_search = [
   'ar_transaction_header_id',
-  'bu_org_id',
   'ledger_id',
   'period_id',
   'transaction_type',
@@ -192,6 +191,12 @@ class ar_transaction_header extends dbObject {
   'transaction_class' => 'AR_TRANSACTION_CLASS',
 //		 'om_so_status' => 'AR_TRANSACTION_TYPE',
  ];
+ 
+   public $search_functions = [
+  'Organization' => 'search_bu_name',
+ ];
+	
+	 
  public $ar_transaction_header_id;
  public $bu_org_id;
  public $transaction_type;

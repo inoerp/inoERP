@@ -100,7 +100,6 @@ class ap_transaction_header extends dbObject {
  ];
  public $initial_search = [
   'ap_transaction_header_id',
-  'bu_org_id',
   'ledger_id',
   'period_id',
   'transaction_type',
@@ -158,6 +157,11 @@ class ap_transaction_header extends dbObject {
   'exchange_rate_type' => 'gl_currency_conversion_type',
   'bu_org_id' => 'org_bu_name_default',
  ];
+ 
+  public $search_functions = [
+  'Organization' => 'search_bu_name',
+ ];
+	
  public $search = [
   '_show_update_path' => 1,
   '_update_action_meassge' => 'Update',
