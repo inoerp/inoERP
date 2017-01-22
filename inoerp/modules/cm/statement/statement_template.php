@@ -81,12 +81,11 @@ inoERP
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Line') ?>#</th>
         <th><?php echo gettext('Type') ?></th>
-        <th><?php echo gettext('Org') ?></th>
-        
-        <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Quantity') ?></th>
-        <th><?php echo gettext('Line Status') ?></th>
+        <th><?php echo gettext('Code') ?></th>
+        <th><?php echo gettext('Trx Date') ?></th>
+				<th><?php echo gettext('Amount') ?></th>
+				<th><?php echo gettext('Recon Amount') ?></th>
+				<th><?php echo gettext('Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -104,12 +103,14 @@ inoERP
  				<td><?php $f->seq_field_d($count) ?></td>
  				<td><?php form::text_field_wid2sr('cm_statement_line_id', 'line_id always_readonly'); ?></td>
  				<td><?php echo form::text_field('line_number', $$class_second->line_number, '8', '20', 1, 'Auto no', '', $readonly, 'lines_number'); ?></td>
-				<td><?php echo $f->select_field_from_array('line_type', cm_statement_line::$line_type_a, $$class_second->line_type ); ?></td>
- 				<td><?php echo $f->select_field_from_object('shipping_org_id', org::find_all_inventory(), 'org_id', 'org', $$class_second->shipping_org_id, '', '', 1, $readonly); ?></td>
- 				<td><?php $f->text_field_wid2('item_description'); ?></td>
- 				<td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', 'small'); ?></td>
- 				<td><?php form::number_field_wid2s('line_quantity'); ?></td>
- 				<td><?php $f->text_field_wid2r('line_status'); ?></td>
+ 				<td><?php echo $f->select_field_from_array('line_type', cm_statement_line::$line_type_a, $$class_second->line_type, '', 'medium'); ?></td>
+ 				<td><?php $f->text_field_wid2r('line_code'); ?></td>
+				
+				<td><?php $f->text_field_wid2r('transaction_date'); ?></td>
+				<td><?php $f->text_field_wid2r('transaction_value'); ?></td>
+				<td><?php $f->text_field_wid2r('reconciled_value'); ?></td>
+				<td><?php $f->text_field_wid2r('line_status'); ?></td>
+ 				
  			 </tr>
 				<?php
 				$count = $count + 1;
