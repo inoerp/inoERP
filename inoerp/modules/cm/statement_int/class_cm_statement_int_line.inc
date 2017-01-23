@@ -12,13 +12,6 @@ class cm_statement_line extends dbObject {
 		 'RECE' => 'Receipt',
 		 'PAYM' => 'Payment'
  ];
- 
-  public static $line_status_a = [
-		 'UNREC' => 'Unreconciled',
-		 'RECON' => 'Reconciled'
- ];
-	
-	
  public $field_a = [
 		 'cm_statement_line_id',
 		 'cm_statement_header_id',
@@ -43,10 +36,6 @@ class cm_statement_line extends dbObject {
 		 'agent_name',
 		 'agent_bank_account',
 		 'invoice_num',
-		 'ar_receipt_line_id',
-		 'ar_receipt_header_id',
-		 'ap_payment_line_id',
-		 'ap_payment_header_id',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
@@ -62,9 +51,9 @@ class cm_statement_line extends dbObject {
  
  
  public $fields_inForm_notInDataBase = [
-		 "payment_number",
-		 "receipt_number",
-		 'line_number',
+		 "so_number",
+		 "item_number",
+		 'tax_code_value',
 		 'ar_transaction_number',
 		 'line_action'
  ];
@@ -74,16 +63,6 @@ class cm_statement_line extends dbObject {
  public $notUpdatedFromWebForm = [
 		 'actual_ship_date',
  ];
- 
- 
- public $ar_receipt_line_id;
- public $ar_receipt_header_id;
- public $ap_payment_header_id;
- public $ap_payment_line_id;
- public $payment_number;
- public $receipt_number;
- public $line_number;
- 
  
  public $cm_statement_line_id;
 public $cm_statement_header_id;

@@ -91,7 +91,6 @@ inoERP
       <tbody class="form_data_line_tbody">
 					<?php
 					$count = 0;
-					$f = new inoform();
 					foreach ($cm_statement_line_object as $cm_statement_line) {
 					 ?>         
  			 <tr class="cm_statement_line<?php echo $count ?>">
@@ -109,7 +108,7 @@ inoERP
  				<td><?php $f->text_field_wid2('transaction_date'); ?></td>
  				<td><?php $f->text_field_wid2('transaction_value'); ?></td>
  				<td><?php $f->text_field_wid2('reconciled_value'); ?></td>
- 				<td><?php echo $f->select_field_from_array('line_status', cm_statement_line::$line_status_a, $$class_second->line_status); ?></td>
+ 				<td><?php $f->text_field_wid2('line_status'); ?></td>
 
  			 </tr>
 				<?php
@@ -165,10 +164,6 @@ inoERP
         <th><?php echo gettext('Agent Bank AC') ?></th>
         <th><?php echo gettext('Invoice') ?></th>
         <th><?php echo gettext('Description') ?></th>
-				<th><?php echo gettext('Receipt Number'); ?></th>
-				<th><?php echo gettext('Receipt Line'); ?></th>
-				<th><?php echo gettext('Payment Number'); ?></th>
-				<th><?php echo gettext('Payment Line'); ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -182,30 +177,6 @@ inoERP
  				<td><?php $f->text_field_wid2('agent_bank_account'); ?></td>
  				<td><?php $f->text_field_wid2('invoice_num'); ?></td>
  				<td><?php $f->text_field_wid2('description'); ?></td>
- 				<td><?php
-						 $f->val_field_wid2('receipt_number', 'ar_receipt_all_v', 'receipt_number', 'ar_customer_id');
-						 echo $f->hidden_field_withCLass('ar_receipt_header_id', $$class_second->ar_receipt_header_id, 'dont_copy_r');
-						 echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
-						 ?>
- 				 <i class="generic g_select_ar_receipt_number select_popup clickable fa fa-search" data-class_name="ar_receipt_all_v"></i></td>
- 				<td><?php
-						 $f->val_field_wid2('line_number', 'ar_receipt_all_v', 'line_number', 'ar_customer_id');
-						 echo $f->hidden_field_withCLass('ar_receipt_line_id', $$class_second->ar_receipt_line_id, 'dont_copy_r');
-						 echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
-						 ?>
- 				 <i class="generic g_select_ar_receipt_number select_popup clickable fa fa-search" data-class_name="ar_receipt_all_v"></i></td>
- 				<td><?php
-						 $f->val_field_wid2('payment_number', 'ap_payment_all_v', 'payment_number', 'supplier_id');
-						 echo $f->hidden_field_withCLass('ap_payment_header_id', $$class_second->ap_payment_header_id, 'dont_copy_r');
-						 echo $f->hidden_field_withCLass('supplier_id', $$class->supplier_id, 'popup_value supplier_id');
-						 ?>
- 				 <i class="generic g_select_ap_payment_number select_popup clickable fa fa-search" data-class_name="ap_payment_all_v"></i></td>
- 				<td><?php
-						 $f->val_field_wid2('line_number', 'ap_payment_all_v', 'line_number', 'supplier_id');
-						 echo $f->hidden_field_withCLass('ap_payment_line_id', $$class_second->ap_payment_line_id, 'dont_copy_r');
-						 echo $f->hidden_field_withCLass('supplier_id', $$class->supplier_id, 'popup_value supplier_id');
-						 ?>
- 				 <i class="generic g_select_ap_payment_number select_popup clickable fa fa-search" data-class_name="ap_payment_all_v"></i></td>
  			 </tr>
 				<?php
 				$count = $count + 1;
