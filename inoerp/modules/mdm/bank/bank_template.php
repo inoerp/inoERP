@@ -26,17 +26,8 @@
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
-     <div class="header_address"> 
-      <ul class="column four_column">
-       <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-         <?php echo gettext('Corporate Address Id'); ?></label><?php $f->text_field_d('address_id', 'address_id site_address_id'); ?>
-       </li>
-       <li><?php $f->l_text_field_dr('header_address_name', 'address_name'); ?></li>
-       <li><?php $f->l_text_field_dr('header_address', 'address'); ?></li>
-       <li><?php $f->l_text_field_dr('header_country', 'country'); ?></li>
-       <li><?php echo $f->l_text_field_dr('header_postal_code', 'postal_code'); ?></li>
-      </ul>
-     </div>
+		 <div class="header_address"><?php $f->address_field_d('address_id', 1, 'suplier_header'); ?></div>
+
     </div>
     <div id="tabsHeader-3" class="tabContent">
      <div> 
@@ -95,19 +86,7 @@
      </ul>
     </div> 
     <div id="tabsLine-3" class="tabContent">
-     <div class="first_rowset"> 
-      <div class="site_address"> 
-       <ul class="column four_column">
-        <li><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="address_id select_popup clickable">
-          <?php gettext('Site Address Id'); ?></label><?php $f->l_text_field('site_address_id', $$class_second->site_address_id, '', 'address_id', 'address_id'); ?></li>
-        <li><?php $f->l_text_field('site_address_name', $$class_second->site_address_name, '', 'site_address_name', 'address_name', '', 1); ?></li>
-        <li><?php $f->l_text_field('site_address', $$class_second->site_address, '', 'site_address', 'address', '', 1); ?></li>
-        <li><?php $f->l_text_field('site_country', $$class_second->site_country, '', 'site_country', 'country', '', 1); ?></li>
-        <li><?php $f->l_text_field('site_postal_code', $$class_second->site_postal_code, '', 'site_postal_code', 'postal_code', '', 1); ?></li>
-
-       </ul>
-      </div>
-     </div>
+		  <div class="site_address"><?php $f->address_field_d('site_address_id', 1, 'site_address'); ?></div>
     </div> 
     <div id="tabsLine-4" class="tabContent">
      <?php echo $f->contact_field('mdm_bank_site_id', $$class_second->mdm_bank_site_id, $all_contacts); ?>

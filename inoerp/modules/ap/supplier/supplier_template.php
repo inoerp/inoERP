@@ -6,8 +6,7 @@
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
     <li><a href="#tabsHeader-2"><?php echo gettext('BU Assignment') ?></a></li>
     <li><a href="#tabsHeader-3"><?php echo gettext('Address Details') ?></a></li>
-       <li><a href="#tabsHeader-4"><?php echo gettext('Address Details') ?></a></li>
-   <li><a href="#tabsHeader-5"><?php echo gettext('Notes') ?></a></li>
+   <li><a href="#tabsHeader-4"><?php echo gettext('Notes') ?></a></li>
    </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -39,10 +38,6 @@
      <div class="header_address"><?php $f->address_field_d('address_id', 1, 'suplier_header'); ?></div>
     </div>
     <div id="tabsHeader-4" class="tabContent">
-     <div class="header_address"><?php $f->address_field_d('bill_to_id', 1, 'customer_header'); ?></div>
-     <div class="shipto_address"><?php $f->address_field_d('ship_to_id', 1, 'customer_header'); ?></div>
-    </div>
-    <div id="tabsHeader-5" class="tabContent">
      <div id="comments">
       <div id="comment_list">
        <?php echo!(empty($comments)) ? $comments : ""; ?>
@@ -162,7 +157,7 @@
     </div>
     <!--end of tab2 (purchasing)!!!! start of sales tab-->
     <div id="tabsLine-4" class="tabContent">
-     <div class="header_address"><?php $f->address_field_d('address_id', 1, 'site_address'); ?></div>
+     <div class="site_address"><?php $f->address_field_d('address_id', 1, 'site_address'); ?></div>
     </div> 
     <!--                end of tab3 div three_column-->
     <!--end of tab3 (sales)!!!!start of purchasing tab-->
