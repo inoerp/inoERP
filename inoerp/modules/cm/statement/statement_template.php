@@ -186,12 +186,14 @@ inoERP
 						 $f->val_field_wid2('receipt_number', 'ar_receipt_all_v', 'receipt_number', 'ar_customer_id');
 						 echo $f->hidden_field_withCLass('ar_receipt_header_id', $$class_second->ar_receipt_header_id, 'dont_copy_r');
 						 echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
+						 echo $f->hidden_field_withCLass('receipt_status', 'PENDING', 'popup_value receipt_status');
 						 ?>
  				 <i class="generic g_select_ar_receipt_number select_popup clickable fa fa-search" data-class_name="ar_receipt_all_v"></i></td>
  				<td><?php
 						 $f->val_field_wid2('line_number', 'ar_receipt_all_v', 'line_number', 'ar_customer_id');
 						 echo $f->hidden_field_withCLass('ar_receipt_line_id', $$class_second->ar_receipt_line_id, 'dont_copy_r');
 						 echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
+						 echo $f->hidden_field_withCLass('receipt_status', 'PENDING', 'popup_value receipt_status');
 						 ?>
  				 <i class="generic g_select_ar_receipt_number select_popup clickable fa fa-search" data-class_name="ar_receipt_all_v"></i></td>
  				<td><?php
