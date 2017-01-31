@@ -37,7 +37,7 @@
        <ul class="column header_field">
         <li><?php
          echo $f->l_val_field_dm('account_number', 'mdm_bank_account', 'account_number', '', 'account_number', 'vf_select_account_number');
-         echo $f->hidden_field_withId('bank_account_id', $$class->bank_account_id);
+         echo $f->hidden_field_withId('mdm_bank_account_id', $$class->mdm_bank_account_id);
          ?><i class="generic g_select_bank_account select_popup clickable fa fa-search" data-class_name="mdm_bank_account"></i></li>
         <li><?php $f->l_text_field_d('bank_number'); ?></li> 
         <li><?php $f->l_text_field_dr('branch_number'); ?></li> 

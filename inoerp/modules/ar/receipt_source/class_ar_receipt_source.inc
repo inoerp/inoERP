@@ -61,7 +61,7 @@ class ar_receipt_source extends dbObject {
 		 'description',
 		 'remittance',
 		 'clearance',
-		 'bank_account_id',
+		 'mdm_bank_account_id',
 		 'sync_receipt_number_cb',
 		 'status',
 		 'created_by',
@@ -103,7 +103,7 @@ class ar_receipt_source extends dbObject {
 		 'bu_org_id',
 		 'remittance',
 		 'clearance',
-		 'bank_account_id',
+		 'mdm_bank_account_id',
  ];
  public $ar_receipt_source_id;
  public $receipt_source;
@@ -113,7 +113,7 @@ class ar_receipt_source extends dbObject {
  public $description;
  public $remittance;
  public $clearance;
- public $bank_account_id;
+ public $mdm_bank_account_id;
  public $sync_receipt_number_cb;
  public $status;
  public $created_by;
