@@ -125,7 +125,7 @@ ar_customer cust,
 ar_customer_site cust_site
 
 WHERE arrh.ar_receipt_header_id = arrl.ar_receipt_header_id
-AND arth.ar_transaction_header_id = arth.ar_transaction_header_id
+AND arrl.ar_transaction_header_id = arth.ar_transaction_header_id
 AND arrh.ar_customer_id = cust.ar_customer_id
 AND arrh.ar_customer_site_id = cust_site.ar_customer_site_id
 
