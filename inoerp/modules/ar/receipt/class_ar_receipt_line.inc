@@ -13,6 +13,10 @@ class ar_receipt_line extends dbObject {
   'WF' => 'Write-off',
   'REFUND' => 'Refund',
  ];
+ 
+ public static $status_a = [
+		 'CLEARED' => 'Cleared'
+ ];
  public $field_a = [
   'ar_receipt_line_id',
   'ar_receipt_header_id',
@@ -104,6 +108,10 @@ class ar_receipt_line extends dbObject {
    echo "<br>You can't update any payment line.Cancel/Viod the receipt if required";
    return 10;
   }
+ }
+ 
+  public function update_line_status($line_id, $line_status = 'CLEARED') {
+ $ar_receipt_line_i = new ar_receipt_line();
  }
 
  private function _update_invoice_amount() {

@@ -47,6 +47,7 @@ class ar_receipt_header extends dbObject {
 		 'VIEW_JOURNAL' => 'View Journal',
 		 'CANCEL' => 'Cancel Receipt',
 		 'COMPLETE' => 'Complete Receipt',
+		 'VERIFY_CLEARING' => 'Verify Clearing',
 		 'CREATE_ACCOUNT' => 'Create Accounting',
 		 'CLOSE' => 'Close Receipt',
  ];

@@ -180,7 +180,7 @@
          <td><?php $f->text_field_d2('reference_key_name'); ?></td>
          <td><?php $f->text_field_d2('reference_key_value'); ?></td>
          <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : '' ?></td>
-         <td><?php $f->text_field_wid2sr('status'); ?></td>
+         <td><?php $f->text_field_wid2sr('status' , 'always_readonly'); ?></td>
         </tr>
         <?php
         $count = $count + 1;
