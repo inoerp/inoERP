@@ -12,9 +12,10 @@ inoERP
   <div id="tabsHeader">
    <ul class="tabMain">
     <li><a href="#tabsHeader-1"><?php echo gettext('Basic Info') ?></a></li>
-    <li><a href="#tabsHeader-2"><?php echo gettext('Amount') ?></a></li>
-    <li><a href="#tabsHeader-3"><?php echo gettext('Note') ?></a></li>
-    <li><a href="#tabsHeader-4"><?php echo gettext('Attachments') ?></a></li>
+		<li><a href="#tabsHeader-2"><?php echo gettext('Bank') ?></a></li>
+    <li><a href="#tabsHeader-3"><?php echo gettext('Amount') ?></a></li>
+    <li><a href="#tabsHeader-4"><?php echo gettext('Note') ?></a></li>
+    <li><a href="#tabsHeader-5"><?php echo gettext('Attachments') ?></a></li>
 	 </ul>
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
@@ -29,7 +30,23 @@ inoERP
 			<li><?php $f->l_date_fieldAnyDay('statement_date', $$class->statement_date) ?></li>
      </ul>
     </div>
-    <div id="tabsHeader-2" class="tabContent">
+		<div id="tabsHeader-2" class="tabContent">
+     <ul class="column header_field">
+			<li><?php
+					echo $f->l_val_field_dm('account_number', 'mdm_bank_account', 'account_number', '', 'account_number', 'vf_select_account_number');
+					echo $f->hidden_field_withId('mdm_bank_account_id', $$class->mdm_bank_account_id);
+					?><i class="generic g_select_bank_account select_popup clickable fa fa-search" data-class_name="mdm_bank_account"></i></li>
+			<li><?php $f->l_text_field_d('bank_number'); ?></li> 
+			<li><?php $f->l_text_field_dr('branch_number'); ?></li> 
+			<li><?php $f->l_text_field_dr('bank_name_short'); ?></li> 
+			<li><?php $f->l_text_field_dr('bank_name_alt'); ?></li> 
+			<li><?php $f->l_text_field_dr('ifsc_code'); ?></li> 
+			<li><?php $f->l_text_field_dr('swift_code'); ?></li> 
+			<li><?php $f->l_text_field_dr('routing_number'); ?></li> 
+			<li><?php $f->l_text_field_dr('iban_code'); ?></li> 
+     </ul>
+    </div>
+    <div id="tabsHeader-3" class="tabContent">
      <ul class="column header_field">
 			<li><?php $f->l_select_field_from_object('doc_currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->doc_currency, 'doc_currency', '', 1, $readonly); ?></li>
       <li><?php $f->l_number_field('opening_balance', $$class->opening_balance, '15', 'opening_balance'); ?></li>
@@ -38,7 +55,7 @@ inoERP
       <li><?php $f->l_number_field('payments', $$class->payments, '15', 'payments'); ?></li>
      </ul>
     </div>
-		<div id="tabsHeader-3" class="tabContent">
+		<div id="tabsHeader-4" class="tabContent">
 		 <div id="comments">
 			<div id="comment_list">
 					<?php echo!(empty($comments)) ? $comments : ""; ?>
@@ -53,7 +70,7 @@ inoERP
 			</div>
 		 </div>
 		</div>
-    <div id="tabsHeader-4" class="tabContent">
+    <div id="tabsHeader-5" class="tabContent">
      <div> <?php echo ino_attachement($file) ?> </div>
     </div>
 
@@ -79,7 +96,7 @@ inoERP
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Line Id') ?></th>
-        <th><?php echo gettext('Line') ?>#</th>
+        <th><?php echo gettext('Line') ?> #</th>
         <th><?php echo gettext('Type') ?></th>
         <th><?php echo gettext('Code') ?></th>
         <th><?php echo gettext('Trx Date') ?></th>
@@ -91,25 +108,28 @@ inoERP
       <tbody class="form_data_line_tbody">
 					<?php
 					$count = 0;
-					$f = new inoform();
 					foreach ($cm_statement_line_object as $cm_statement_line) {
+					 if( $$class_second->status == 'RECON'){
+						$status_class = ' always_readonly dont_copy';
+					 }else{
+						$status_class = ' ';
+					 }
 					 ?>         
  			 <tr class="cm_statement_line<?php echo $count ?>">
  				<td>
 						 <?php
-						 echo ino_inline_action($cm_statement_line->cm_statement_line_id, array('cm_statement_header_id' => $cm_statement_header->cm_statement_header_id,
-								 'tax_code_value' => $$class_second->tax_code_value));
+						 echo ino_inline_action($cm_statement_line->cm_statement_line_id, array('cm_statement_header_id' => $cm_statement_header->cm_statement_header_id));
 						 ?>
  				</td>
  				<td><?php $f->seq_field_d($count) ?></td>
  				<td><?php form::text_field_wid2sr('cm_statement_line_id', 'line_id always_readonly'); ?></td>
- 				<td><?php $f->text_field_wid2('line_number'); ?></td>
+ 				<td><?php $f->text_field_wid2('line_num'); ?></td>
  				<td><?php echo $f->select_field_from_array('line_type', cm_statement_line::$line_type_a, $$class_second->line_type, '', 'medium'); ?></td>
  				<td><?php $f->text_field_wid2('line_code'); ?></td>
  				<td><?php $f->text_field_wid2('transaction_date'); ?></td>
  				<td><?php $f->text_field_wid2('transaction_value'); ?></td>
  				<td><?php $f->text_field_wid2('reconciled_value'); ?></td>
- 				<td><?php echo $f->select_field_from_array('line_status', cm_statement_line::$line_status_a, $$class_second->line_status); ?></td>
+ 				<td><?php echo $f->select_field_from_array('status', cm_statement_line::$line_status_a, $$class_second->status , '' , $status_class); ?></td>
 
  			 </tr>
 				<?php
@@ -175,6 +195,31 @@ inoERP
 					<?php
 					$count = 0;
 					foreach ($cm_statement_line_object as $cm_statement_line) {
+					 if (!empty($$class_second->ar_receipt_header_id)) {
+						$ar_recipt_header_i = ar_receipt_header::find_by_id($$class_second->ar_receipt_header_id);
+						$$class_second->receipt_number = $ar_recipt_header_i->receipt_number;
+						$$class_second->ar_customer_id = $ar_recipt_header_i->ar_customer_id;
+						if (!empty($$class_second->ar_receipt_line_id)) {
+						 $$class_second->line_number = ar_receipt_line::find_by_id($$class_second->ar_receipt_line_id)->line_number;
+						} else {
+						 $$class_second->line_number = null;
+						}
+					 } else {
+						$$class_second->receipt_number = $$class_second->line_number = $$class_second->ar_customer_id = null;
+					 }
+
+					 if (!empty($$class_second->ap_payment_header_id)) {
+						$ap_payment_header_i = ap_payment_header::find_by_id($$class_second->ap_payment_header_id);
+						$$class_second->payment_number = $ap_payment_header_i->payment_number;
+						$$class_second->supplier_id = $ap_payment_header_i->supplier_id;
+						if (!empty($$class_second->ap_payment_line_id)) {
+						 $$class_second->ap_line_number = ap_payment_line::find_by_id($$class_second->ap_payment_line_id)->line_number;
+						} else {
+						 $$class_second->ap_line_numberx = null;
+						}
+					 } else {
+						$$class_second->payment_number = $$class_second->ap_line_number = $$class_second->supplier_id = null;
+					 }
 					 ?>         
  			 <tr class="cm_statement_line<?php echo $count ?>">
  				<td><?php $f->seq_field_d($count) ?></td>
@@ -185,27 +230,27 @@ inoERP
  				<td><?php
 						 $f->val_field_wid2('receipt_number', 'ar_receipt_all_v', 'receipt_number', 'ar_customer_id');
 						 echo $f->hidden_field_withCLass('ar_receipt_header_id', $$class_second->ar_receipt_header_id, 'dont_copy_r');
-						 echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
+//						 echo $f->hidden_field_withCLass('ar_customer_id', $$class_second->ar_customer_id, 'popup_value ar_customer_id');
 						 echo $f->hidden_field_withCLass('receipt_status', 'PENDING', 'popup_value receipt_status');
 						 ?>
  				 <i class="generic g_select_ar_receipt_number select_popup clickable fa fa-search" data-class_name="ar_receipt_all_v"></i></td>
  				<td><?php
 						 $f->val_field_wid2('line_number', 'ar_receipt_all_v', 'line_number', 'ar_customer_id');
 						 echo $f->hidden_field_withCLass('ar_receipt_line_id', $$class_second->ar_receipt_line_id, 'dont_copy_r');
-						 echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
-						 echo $f->hidden_field_withCLass('receipt_status', 'PENDING', 'popup_value receipt_status');
+//						 echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
+//						 echo $f->hidden_field_withCLass('receipt_status', 'PENDING', 'popup_value receipt_status');
 						 ?>
  				 <i class="generic g_select_ar_receipt_number select_popup clickable fa fa-search" data-class_name="ar_receipt_all_v"></i></td>
  				<td><?php
 						 $f->val_field_wid2('payment_number', 'ap_payment_all_v', 'payment_number', 'supplier_id');
 						 echo $f->hidden_field_withCLass('ap_payment_header_id', $$class_second->ap_payment_header_id, 'dont_copy_r');
-						 echo $f->hidden_field_withCLass('supplier_id', $$class->supplier_id, 'popup_value supplier_id');
+						 echo $f->hidden_field_withCLass('supplier_id', $$class_second->supplier_id, 'popup_value supplier_id');
 						 ?>
  				 <i class="generic g_select_ap_payment_number select_popup clickable fa fa-search" data-class_name="ap_payment_all_v"></i></td>
  				<td><?php
-						 $f->val_field_wid2('line_number', 'ap_payment_all_v', 'line_number', 'supplier_id');
+						 $f->val_field_wid2('ap_line_number', 'ap_payment_all_v', 'line_number', 'supplier_id');
 						 echo $f->hidden_field_withCLass('ap_payment_line_id', $$class_second->ap_payment_line_id, 'dont_copy_r');
-						 echo $f->hidden_field_withCLass('supplier_id', $$class->supplier_id, 'popup_value supplier_id');
+//						 echo $f->hidden_field_withCLass('supplier_id', $$class->supplier_id, 'popup_value supplier_id');
 						 ?>
  				 <i class="generic g_select_ap_payment_number select_popup clickable fa fa-search" data-class_name="ap_payment_all_v"></i></td>
  			 </tr>
@@ -230,7 +275,7 @@ inoERP
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="cm_statement_header_id" ></li>
   <li class="form_header_id" data-form_header_id="cm_statement_header" ></li>
-  <li class="line_key_field" data-line_key_field="item_description" ></li>
+  <li class="line_key_field" data-line_key_field="line_num" ></li>
   <li class="single_line" data-single_line="false" ></li>
   <li class="form_line_id" data-form_line_id="cm_statement_line" ></li>
  </ul>

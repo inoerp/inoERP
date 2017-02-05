@@ -60,8 +60,7 @@ class cm_statement_header extends dbObject {
  ];
  public $requiredField = [
 		 'mdm_bank_account_id',
-		 'date',
-		 'gl_date',
+		 'statement_date',
 		 'bu_org_id',
  ];
  public $search_functions = [
@@ -122,14 +121,14 @@ class cm_statement_header extends dbObject {
  }
 
  public function _after_save() {
-	if ((!empty($this->cm_statement_header_id)) && empty($this->so_number)) {
-	 $cm_statement_header_id = $this->cm_statement_header_id;
-	 $bu_org_id = $this->bu_org_id;
-	 $so_number = $bu_org_id . '-' . $cm_statement_header_id;
-	 $this->so_number = $so_number;
-	 echo '<br/> New SO number is ' . $so_number;
-	 $this->update_soNumber();
-	}
+//	if ((!empty($this->cm_statement_header_id)) && empty($this->so_number)) {
+//	 $cm_statement_header_id = $this->cm_statement_header_id;
+//	 $bu_org_id = $this->bu_org_id;
+//	 $so_number = $bu_org_id . '-' . $cm_statement_header_id;
+//	 $this->so_number = $so_number;
+//	 echo '<br/> New SO number is ' . $so_number;
+//	 $this->update_soNumber();
+//	}
  }
 
  private function update_soNumber() {

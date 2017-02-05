@@ -20,16 +20,16 @@ $(document).ready(function () {
   $('.shipment_number:first').val('1');
  }
 
-if($('#bu_org_id').val()){
- $('#document_type, .line_type').find('option').attr('disabled', true);
-$('#document_type, .line_type').find("[data-bu_org_id_r='" + $('#bu_org_id').val() + "']").removeAttr('disabled');
-}
-
- $('body').off('change', '#cm_statement_header #bu_org_id').on('change', '#cm_statement_header #bu_org_id', function () {
-  getBUDetails($(this).val());
-  $('#document_type, .line_type').find('option').attr('disabled', true);
-  $('#document_type, .line_type').find("[data-bu_org_id_r='" + $(this).val() + "']").removeAttr('disabled');
- });
+//if($('#bu_org_id').val()){
+// $('#document_type, .line_type').find('option').attr('disabled', true);
+//$('#document_type, .line_type').find("[data-bu_org_id_r='" + $('#bu_org_id').val() + "']").removeAttr('disabled');
+//}
+//
+// $('body').off('change', '#cm_statement_header #bu_org_id').on('change', '#cm_statement_header #bu_org_id', function () {
+//  getBUDetails($(this).val());
+//  $('#document_type, .line_type').find('option').attr('disabled', true);
+//  $('#document_type, .line_type').find("[data-bu_org_id_r='" + $(this).val() + "']").removeAttr('disabled');
+// });
 
  if ($('#bu_org_id').val() && (!$('#cm_statement_header_id').val()) && ($('#bu_org_id').attr('disabled') !== 'disabled')) {
   getBUDetails($('#bu_org_id').val());

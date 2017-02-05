@@ -208,35 +208,30 @@ class ar_receipt_header extends dbObject {
 	if (($this->action == 'confirm_receipt')) {
 	 $this->_confirm_receipt();
 	 return 10;
-	} else 	if (($this->action == 'COMPLETE')) {
+	} else if (($this->action == 'COMPLETE')) {
 	 $this->_complete_receipt();
 	 return 10;
 	}
-	
  }
- 
- 
- private function _complete_receipt(){
+
+ private function _complete_receipt() {
 	/*
 	 * 1. Get the ar receipt source
 	 * 2. Check if clearance is required for the receipt source
 	 * 3. If clearance is not required change the status of the receipt to complete
 	 * 4. If clearance is required then change the status of the receipt to pending clearance
 	 */
-	
+
 	$receipt_source_i = ar_receipt_source::find_by_id($this->ar_receipt_source_id);
-	if($receipt_source_i){
+	if ($receipt_source_i) {
 	 $clearance = $receipt_source_i->clearance;
-	 if($clearance == 'MATCHING'){
+	 if ($clearance == 'MATCHING') {
 		$this->receipt_status = 'PENDING';
-	 }else{
+	 } else {
 		$this->receipt_status = 'COMPLETE';
 	 }
 	}
-	
-	
  }
- 
 
  public function _before_save() {
 	if (empty($this->ar_receipt_header_id) && !empty($this->bu_org_id)) {
@@ -250,7 +245,19 @@ class ar_receipt_header extends dbObject {
 	 $this->_do_action();
 	}
 
-	if ((!empty($this->ar_receipt_header_id)) && ($this->action === 'CREATE_ACCOUNT') && ( in_array($this->receipt_status, ['COMPLETE', 'CLEARED']))) {
+	if ((!empty($this->ar_receipt_header_id)) && ($this->action === 'CREATE_ACCOUNT')) {
+	 $this->_create_accounting();
+	 return 10;
+	}
+
+	if ((!empty($this->ar_receipt_header_id)) && ($this->receipt_action == 'CANCEL')) {
+	 $this->_cancel_receipt();
+	 return 10;
+	}
+ }
+
+ private function _create_accounting() {
+	if (in_array($this->receipt_status, ['COMPLETE', 'CLEARED'])) {
 	 $this->findBy_id($this->ar_receipt_header_id);
 
 	 //if journal header id excists then save journal lines only else first header & then lines
@@ -275,13 +282,8 @@ class ar_receipt_header extends dbObject {
 		 return;
 		}
 	 }
-
-	 return 10;
-	}
-
-	if ((!empty($this->ar_receipt_header_id)) && ($this->receipt_action == 'CANCEL')) {
-	 $this->_cancel_receipt();
-	 return 10;
+	} else {
+	 echo '<br>Status does not allow accouting creation. Complete/Clear the transaction ';
 	}
  }
 
