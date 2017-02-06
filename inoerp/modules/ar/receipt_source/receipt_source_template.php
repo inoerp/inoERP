@@ -15,7 +15,7 @@
 
    </ul>
   </div>
-  <div id ="form_line" class="form_line"><span class="heading">Receipt Source Details </span>
+  <div id ="form_line" class="form_line"><span class="heading"><?php echo gettext('Receipt Source Details'); ?></span>
    <div id="tabsLine">
     <ul class="tabMain">
      <li><a href="#tabsLine-1"><?php echo gettext('Basic Info') ?></a></li>

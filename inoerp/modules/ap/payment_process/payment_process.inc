@@ -1,8 +1,9 @@
 <?php
 
-if (!empty($$class->bank_account_id)) {
+
+if (!empty($$class->mdm_bank_account_id)) {
  $ba = new mdm_bank_account_v();
- $ba->findBy_id($$class->bank_account_id);
+ $ba->findBy_id($$class->mdm_bank_account_id);
  $$class->bank_name = $ba->bank_name;
  $$class->account_number = $ba->account_number;
  $$class->bank_number = $ba->bank_number;

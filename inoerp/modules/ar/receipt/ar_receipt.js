@@ -137,6 +137,10 @@ $(document).ready(function () {
   ar_receipt_setLineType(trClass, lineType);
  });
 
+ $('body').off('click', '#menu_button4_2, #menu_button4_2_1').on('click', '#menu_button4_2, #menu_button4_2_1', function () {
+  $('#receipt_number, .status, .receipt_status').val('');
+ });
+
 });
 
 //all actions
@@ -150,7 +154,7 @@ function create_accounting() {
   localStorage.removeItem("jsfile");
   localStorage.setItem("jsfile", "modules/ar/receipt/extra_ar_receipt.js");
   void window.open(link, '_blank',
-          'width=' +  $(window).width() + ',height=' +  $(window).height() + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+          'width=' + $(window).width() + ',height=' + $(window).height() + ',TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
   return false;
  } else {
   alert('No Transaction Header ID/nEnter or Save The Header Details ');

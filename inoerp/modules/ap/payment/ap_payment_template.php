@@ -32,7 +32,7 @@
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
        ?> </li>
       <li><?php echo $f->l_select_field_from_array('payment_status', ap_payment_header::$payment_status_a, $$class->payment_status, '', '', '', '', $readonly); ?>     </li> 
-      <li><?php $f->l_select_field_from_object('processing_method', ap_payment_process::find_all(), 'ap_payment_process_id', 'payment_process', $$class->processing_method, 'ap_payment_process_id'); ?>       </li> 
+      <li><?php $f->l_select_field_from_object('processing_method', ap_payment_process::find_all(), 'ap_payment_process_id', 'payment_process', $$class->processing_method, 'ap_payment_process_id' ,' ', 1); ?>       </li> 
       <li><?php $f->l_text_field_d('description'); ?>       </li> 
      </ul>
     </div>
@@ -178,7 +178,7 @@
          <td><?php $f->text_field_d2('reference_key_name'); ?></td>
          <td><?php $f->text_field_d2('reference_key_value'); ?></td>
          <td><?php echo!empty($ref_doc_stmt) ? $ref_doc_stmt : '' ?></td>
-         <td><?php $f->text_field_wid2sr('status'); ?></td>
+				 <td><?php echo $$class_second->line_status ?></td>
         </tr>
         <?php
         $count = $count + 1;

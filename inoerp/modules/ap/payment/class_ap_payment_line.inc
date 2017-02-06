@@ -8,6 +8,11 @@ class ap_payment_line extends dbObject {
  public static $multi_search_primary_column = "ap_payment_header_id"; //this value is used in multi search hidden value
  public static $key_column = 'amount';
  public static $module = "ap";
+ 
+  public static $line_status_a = [
+		 'CLEARED' => 'Cleared'
+ ];
+	
  public $field_a = [
   'ap_payment_line_id',
   'ap_payment_header_id',
@@ -17,7 +22,7 @@ class ap_payment_line extends dbObject {
   'line_description',
   'gl_amount',
   'exchange_rate',
-  'status',
+  'line_status',
   'line_source',
   'reference_type',
   'reference_key_name',
@@ -62,7 +67,7 @@ class ap_payment_line extends dbObject {
  public $line_description;
  public $gl_amount;
  public $exchange_rate;
- public $status;
+ public $line_status;
  public $line_source;
  public $reference_type;
  public $reference_key_name;
