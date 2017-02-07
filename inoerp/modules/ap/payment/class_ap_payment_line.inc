@@ -48,7 +48,8 @@ class ap_payment_line extends dbObject {
   'invoiced_quantity',
   'action',
   'invoice_amount',
-  'remaining_amount'
+  'remaining_amount',
+		 'payment_status'
  ];
  public $initial_search = [
   'ap_payment_line_id',
@@ -85,6 +86,7 @@ class ap_payment_line extends dbObject {
  private $_max_line_num;
  public $lines_from_transaction_header = false;
  public $gl_journal_header_id;
+ public $payment_status;
 
  public function _after_save() {
   if ($this->ap_payment_line_id) {
@@ -101,6 +103,11 @@ class ap_payment_line extends dbObject {
 
   //create acounting
   if ((!empty($this->ap_payment_header_id)) && (!empty($this->ap_payment_line_id)) && ($this->action === 'create_accounting')) {
+	 if(!in_array($this->payment_status,  ['COMPLETE', 'CLEARED'])){
+		echo '<br>Payment status does not allow account creation. Complete/Clear the payment';
+		return 10;
+	 }
+	 
    //if journal header id excists then save journal lines only else first header & then lines
    $ap_payment_header = new ap_payment_header();
    $ap_payment_header->findBy_id($this->ap_payment_header_id);

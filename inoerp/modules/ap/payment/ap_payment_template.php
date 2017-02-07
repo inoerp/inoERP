@@ -31,8 +31,8 @@
        $supplier_site_obj = !empty($$class->supplier_id) ? supplier_site::find_by_parent_id($$class->supplier_id) : array();
        echo $f->select_field_from_object('supplier_site_id', $supplier_site_obj, 'supplier_site_id', 'supplier_site_name', $$class->supplier_site_id, 'supplier_site_id', '', '', $readonly1);
        ?> </li>
-      <li><?php echo $f->l_select_field_from_array('payment_status', ap_payment_header::$payment_status_a, $$class->payment_status, '', '', '', '', $readonly); ?>     </li> 
-      <li><?php $f->l_select_field_from_object('processing_method', ap_payment_process::find_all(), 'ap_payment_process_id', 'payment_process', $$class->processing_method, 'ap_payment_process_id' ,' ', 1); ?>       </li> 
+      <li><?php echo $f->l_select_field_from_array('payment_status', ap_payment_header::$payment_status_a, $$class->payment_status, '', 'always_readonly', '', '', $readonly); ?>     </li> 
+      <li><?php $f->l_select_field_from_object('processing_method', ap_payment_process::find_all(), 'ap_payment_process_id', 'payment_process', $$class->processing_method, 'ap_payment_process_id' ,'', 1); ?>       </li> 
       <li><?php $f->l_text_field_d('description'); ?>       </li> 
      </ul>
     </div>
