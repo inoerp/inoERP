@@ -15,6 +15,9 @@ class cm_statement_line extends dbObject {
 		 'UNREC' => 'Unreconciled',
 		 'RECON' => 'Reconciled'
  ];
+ public static $source_status_a = [
+		 'U' => 'Updated'
+ ];
  public $field_a = [
 		 'cm_statement_line_id',
 		 'cm_statement_header_id',
@@ -43,6 +46,7 @@ class cm_statement_line extends dbObject {
 		 'ar_receipt_header_id',
 		 'ap_payment_line_id',
 		 'ap_payment_header_id',
+		 'source_status',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
@@ -97,6 +101,7 @@ class cm_statement_line extends dbObject {
  public $agent_name;
  public $agent_bank_account;
  public $invoice_num;
+ public $source_status;
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -137,23 +142,49 @@ class cm_statement_line extends dbObject {
  }
 
  public function _before_save() {
-	
+	if (empty($this->source_status) && ($this->status == 'RECON')) {
+	 $this->_update_source_status();
+	}
  }
 
  public function _after_save() {
 	
  }
 
- public static function pf_invoice_only($obj) {
-	$cm_statement_l = new cm_statement_line();
-	$cm_statement_l->findBy_id($obj->cm_statement_line_id);
-	$cm_statement_l->line_status = 'AWAITING_INVOICING';
+ private function _update_source_status() {
+	if (!empty($this->ap_payment_line_id)) {
+	 $this->_update_payment_status($this->ap_payment_line_id);
+	} else if (!empty($this->ar_receipt_line_id)) {
+	 $this->_update_receipt_status($this->ar_receipt_line_id);
+	}
+ }
+
+ private function _update_payment_status($ap_payment_line_id) {
+	global $dbc;
+	$ap_payment_line_i = new ap_payment_line();
+	$ap_payment_line_i->findBy_id($ap_payment_line_id);
+	$ap_payment_line_i->status = 'CLEARED';
 	try {
-	 $cm_statement_l->save();
-	 return 1;
+	 $ap_payment_line_i->save();
+	 $this->status = 'RECON';
 	} catch (Exception $e) {
-	 echo "<br>Not able to update line status.Error @ line " . __LINE__ . ' of file ' . __FILE__ . '<br>' . $e->getMessage();
-	 return -1;
+	 echo '<br>Failed to clear the AP payment. ' . $e->getMessage();
+	 $dbc->rollback = true;
+	}
+ }
+
+ private function _update_receipt_status($ar_receipt_line_id) {
+	global $dbc;
+	$ar_receipt_line_i = new ar_receipt_line();
+	$ar_receipt_line_i->findBy_id($ar_receipt_line_id);
+	$ar_receipt_line_i->status = 'CLEARED';
+
+	try {
+	 $ar_receipt_line_i->save();
+	 $this->status = 'RECON';
+	} catch (Exception $e) {
+	 echo '<br>Failed to clear the AR receipt ' . $e->getMessage();
+	 $dbc->rollback = true;
 	}
  }
 

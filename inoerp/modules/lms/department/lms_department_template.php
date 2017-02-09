@@ -62,7 +62,7 @@ inoERP
     <li><a href="#tabsLine-2"><?php echo gettext('Overhead Rate - Future') ?> </a></li>
    </ul>
    <div class="tabContainer"> 
-    <form  method="post" id="lms_dept_res_assignment_line"  name="lms_dept_res_assignment_line">
+    <form  method="post" id="lms_dept_res_assignment"  name="lms_dept_res_assignment">
      <div id="tabsLine-1" class="tabContent">
       <table class="form_line_data_table">
        <thead> 
@@ -74,10 +74,12 @@ inoERP
          <th><?php echo gettext('Efficiency') ?> %</th>
          <th><?php echo gettext('Utilization') ?> %</th>
          <th><?php echo gettext('No Of Units') ?></th>
+				 <th><?php echo gettext('Description') ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody lms_dept_res_assignment_values" >
 					 <?php
+					 $f = new inoform();
 					 $count = 0;
 					 foreach ($lms_dept_res_assignment_object as $lms_dept_res_assignment) {
 						?>         
@@ -88,11 +90,12 @@ inoERP
 							?>
  				 </td>
  				 <td><?php $f->text_field_wid2r('lms_dept_res_assignment_id', 'always_readonly'); ?></td>
- 				 <td><?php echo $f->select_field_from_object('cost_type_id', bom_cost_type::find_all(), 'bom_cost_type_id', 'cost_type', $$class_second->cost_type_id, '', 'cost_type_id medium'); ?></td>
- 				 <td><?php echo $f->select_field_from_object('resource_id', lms_resource::find_all(), 'lms_resource_id', 'resource', $$class_second->resource_id, '', 'resource_id medium'); ?></td>
- 				 <td><?php form::number_field_wid2('efficiency') ?></td>
- 				 <td><?php form::number_field_wid2('utilization') ?></td>
- 				 <td><?php form::number_field_wid2('no_of_units') ?></td>
+ 				 <td><?php echo $f->select_field_from_object('cost_type', bom_cost_type::find_all(), 'bom_cost_type_id', 'cost_type', $$class_second->cost_type, '', 'cost_type_id medium'); ?></td>
+ 				 <td><?php echo $f->select_field_from_object('lms_resource_id', lms_resource::find_all(), 'lms_resource_id', 'resource', $$class_second->lms_resource_id, '', 'resource_id medium'); ?></td>
+				 <td><?php echo $f->number_field('efficiency' , $$class_second->efficiency) ?></td>
+				 <td><?php echo $f->number_field('utilization' , $$class_second->utilization); ?></td>
+				 <td><?php echo $f->number_field('no_of_units', $$class_second->no_of_units); ?></td>
+				 <td><?php $f->text_field_wid2('description') ?></td>
  				</tr>
 				 <?php
 				 $count = $count + 1;
@@ -116,7 +119,7 @@ inoERP
   <li class="savingOnlyHeader" data-savingOnlyHeader="false" ></li>
   <li class="primary_column_id" data-primary_column_id="lms_department_id" ></li>
   <li class="form_header_id" data-form_header_id="lms_department" ></li>
-  <li class="line_key_field" data-line_key_field="resource_id" ></li>
+  <li class="line_key_field" data-line_key_field="lms_resource_id" ></li>
   <li class="single_line" data-single_line="false" ></li>
  </ul>
  <ul id="js_contextMenu_data">

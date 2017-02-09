@@ -149,6 +149,7 @@ inoERP
         <th><?php echo gettext('Rate Date') ?></th>
         <th><?php echo gettext('Rate Value') ?></th>
         <th><?php echo gettext('Original Amount') ?></th>
+				<th><?php echo gettext('Source Status'); ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -163,10 +164,11 @@ inoERP
  			 <tr class="cm_statement_line<?php echo $count ?>">
  				<td><?php $f->seq_field_d($count) ?></td>
  				<td><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class_second->currency, '', 'medium', 1); ?></td>
- 				<td><?php echo $f->select_field_from_object('exchange_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_value', $$class->exchange_type, '', 'medium', 1); ?></td>
+ 				<td><?php echo $f->select_field_from_object('exchange_type', gl_currency_conversion::currency_conversion_type(), 'option_line_code', 'option_line_value', $$class_second->exchange_type, '', 'medium', 1); ?></td>
  				<td><?php $f->text_field_wid2('exchange_date'); ?></td>
  				<td><?php $f->text_field_wid2('exchange_rate'); ?></td>
  				<td><?php $f->text_field_wid2('original_amount'); ?></td>
+				<td><?php echo $$class_second->source_status ; ?></td>
  			 </tr>
 				<?php
 				$count = $count + 1;
@@ -189,6 +191,7 @@ inoERP
 				<th><?php echo gettext('Receipt Line'); ?></th>
 				<th><?php echo gettext('Payment Number'); ?></th>
 				<th><?php echo gettext('Payment Line'); ?></th>
+				
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -231,14 +234,14 @@ inoERP
 						 $f->val_field_wid2('receipt_number', 'ar_receipt_all_v', 'receipt_number', 'ar_customer_id');
 						 echo $f->hidden_field_withCLass('ar_receipt_header_id', $$class_second->ar_receipt_header_id, 'dont_copy_r');
 //						 echo $f->hidden_field_withCLass('ar_customer_id', $$class_second->ar_customer_id, 'popup_value ar_customer_id');
-						 echo $f->hidden_field_withCLass('receipt_status', 'PENDING', 'popup_value receipt_status');
+//						 echo $f->hidden_field_withCLass('receipt_status', 'PENDING', 'popup_value receipt_status');
 						 ?>
  				 <i class="generic g_select_ar_receipt_number select_popup clickable fa fa-search" data-class_name="ar_receipt_all_v"></i></td>
  				<td><?php
 						 $f->val_field_wid2('line_number', 'ar_receipt_all_v', 'line_number', 'ar_customer_id');
 						 echo $f->hidden_field_withCLass('ar_receipt_line_id', $$class_second->ar_receipt_line_id, 'dont_copy_r');
 //						 echo $f->hidden_field_withCLass('ar_customer_id', $$class->ar_customer_id, 'popup_value ar_customer_id');
-//						 echo $f->hidden_field_withCLass('receipt_status', 'PENDING', 'popup_value receipt_status');
+						 echo $f->hidden_field_withCLass('receipt_status', 'PENDING', 'popup_value receipt_status');
 						 ?>
  				 <i class="generic g_select_ar_receipt_number select_popup clickable fa fa-search" data-class_name="ar_receipt_all_v"></i></td>
  				<td><?php
@@ -253,6 +256,7 @@ inoERP
 //						 echo $f->hidden_field_withCLass('supplier_id', $$class->supplier_id, 'popup_value supplier_id');
 						 ?>
  				 <i class="generic g_select_ap_payment_number select_popup clickable fa fa-search" data-class_name="ap_payment_all_v"></i></td>
+				
  			 </tr>
 				<?php
 				$count = $count + 1;

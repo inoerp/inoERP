@@ -5,21 +5,20 @@ class lms_dept_res_assignment extends dbObject {
  public static $table_name = "lms_dept_res_assignment";
  public static $primary_column = "lms_dept_res_assignment_id";
  public static $parent_primary_column = "lms_department_id";
- public static $key_column = 'resource_id';
- public static $module = "bom";
+ public static $key_column = 'lms_resource_id';
+ public static $module = "lms";
 //  data base variables as stored database column name
  public $field_a = [
-		 'lms_stnd_op_res_assignment_id',
-		 'resource_sequence',
-		 'lms_standard_operation_id',
-		 'charge_basis',
-		 'resource_id',
-		 'resource_usage',
-		 'resource_schedule_cb',
-		 'assigned_units',
-		 'twenty_four_hr_cb',
-		 'standard_rate_cb',
-		 'charge_type',
+		 'lms_dept_res_assignment_id',
+		 'lms_department_id',
+		 'description',
+		 'lms_resource_id',
+		 'status',
+		 'cost_type',
+		 'efficiency',
+		 'utilization',
+		 'no_of_units',
+		 'resource_assignment_id',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
@@ -32,18 +31,18 @@ class lms_dept_res_assignment extends dbObject {
  ];
  public $requiredField = [
 		 'lms_department_id',
-		 'cost_type_id',
-		 'resource_id'
+		 'lms_resource_id',
  ];
- public $lms_department_id;
- public $cost_type_id;
  public $lms_dept_res_assignment_id;
- public $resource_id;
- public $cost_type_description;
- public $resource_description;
- public $no_of_units;
+ public $lms_department_id;
+ public $description;
+ public $lms_resource_id;
+ public $status;
+ public $cost_type;
  public $efficiency;
  public $utilization;
+ public $no_of_units;
+ public $resource_assignment_id;
  public $created_by;
  public $creation_date;
  public $last_update_by;

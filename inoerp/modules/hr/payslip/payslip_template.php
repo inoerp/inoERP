@@ -9,12 +9,12 @@
        <a name="show" href="form.php?class_name=hr_payslip_header&<?php echo "mode=$mode"; ?>" class="show document_id hr_payslip_header_id">
         <i class="fa fa-refresh"></i></a> 
       </li>
-      <li data-employee_type="employee"><label><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="hr_employee_id select_popup clickable">
-        <?php echo gettext('Employee Name') ?></label><?php $f->text_field_d('employee_name'); ?>
-       <?php echo $f->hidden_field_withId('employee_id', $$class->employee_id); ?>
-      </li>
+			<li><?php
+       echo $f->l_val_field_d('employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_lead_employee_name employee_name');
+       echo $f->hidden_field_withId('employee_id', $$class->employee_id);
+       ?><i class="generic g_select_lead_employee_name select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
       <li><?php $f->l_text_field_dr('identification_id'); ?>  </li>
-      <li><?php $f->l_select_field_from_object('period_name_id', hr_payroll_schedule::find_by_parent_id($payroll_id, 'scheduled_date', 'ASC'), 'hr_payroll_schedule_id', 'period_name', $$class->period_name_id, 'period_name_id', '', 1); ?> 
+      <li><?php $f->l_select_field_from_object('period_name_id', hr_payroll_schedule::find_by_parent_id($payroll_id, 'scheduled_date', 'ASC'), 'hr_payroll_schedule_id', 'period_name', $$class->period_name_id, 'period_name_id', 'medium', 1); ?> 
        <a name="show" href="form.php?class_name=hr_payslip_header&<?php echo "mode=$mode"; ?>" class="document_id payslipBy_periodName">
         <i class="fa fa-refresh"></i></a> 
       </li>

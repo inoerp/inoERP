@@ -102,7 +102,7 @@ inoERP
       $count = 0;
       foreach ($lms_resource_cost_object as $lms_resource_cost) {
        if (!empty($lms_resource_cost->lms_cost_type)) {
-        $bcy = new lms_cost_type();
+        $bcy = new bom_cost_type();
         $bcy_i = $bcy->find_by_keyColumn($lms_resource_cost->lms_cost_type);
         $lms_resource_cost->lms_cost_type_description = $bcy_i->description;
        } else {

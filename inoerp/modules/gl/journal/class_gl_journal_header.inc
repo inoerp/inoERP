@@ -119,9 +119,9 @@ class gl_journal_header extends dbObject {
  ];
  public $pageTitle = " GL Journal Entry "; //page Title
  public $option_lists = [
-  'gl_journal_category' => 'GL_JOURNAL_CATEGORY',
-  'gl_journal_status' => 'GL_JOURNAL_STATUS',
-  'gl_balance_type' => 'GL_BALANCE_TYPE',
+  'journal_category' => 'GL_JOURNAL_CATEGORY',
+  'status' => 'GL_JOURNAL_STATUS',
+  'balance_type' => 'GL_BALANCE_TYPE',
  ];
  public $module_defaults = [
   'journal_category' => 'GL_MISCELLANEOUS',

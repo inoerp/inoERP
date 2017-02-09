@@ -103,7 +103,7 @@ inoERP
           ?><i class="generic select_project_task_number select_popup clickable fa fa-search" data-class_name="prj_project_all_v"></i></td>
          <td><?php echo $f->select_field_from_object('event_type_id', prj_event_type::find_all(), 'prj_event_type_id', 'event_type', $$class_second->event_type_id, '', '', 1); ?></td>
          <td><?php echo $f->date_fieldAnyDay('event_date', $$class_second->event_date); ?></td>
-         <td><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_code', $$class_second->currency, '', '', 1); ?></td>
+         <td><?php echo $f->select_field_from_object('currency', option_header::currencies(), 'option_line_code', 'option_line_value', $$class_second->currency, '', '', 1); ?></td>
          <td><?php $f->text_field_d2('billing_amount'); ?></td>
          <td><?php $f->text_field_d2('revenue_amount'); ?></td>
         </tr>
