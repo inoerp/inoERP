@@ -246,6 +246,9 @@ class po_all_v extends dbObject {
  ];
  public $search_functions = [
   'Organization' => 'search_org_name',
+	'Need By Date' => 'search_need_by_date',
+'> Need By Date' => 'search_need_by_date_gt',
+'< Need By Date' => 'search_need_by_date_lt',		 
  ];
  public $po_header_id;
  public $bu_org_id;

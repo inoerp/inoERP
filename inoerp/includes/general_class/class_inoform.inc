@@ -1833,6 +1833,16 @@ $valueAfterDecimal = htmlentities($valueAfterDecimal, ENT_QUOTES | ENT_HTML5, 'U
   $div_class = $div_class . ' anyDate';
   return $this->date_field($name, $value, '20', '', 'anyDate');
  }
+ 
+  public function date_fieldAnyDay_gt($name, $value, $div_class = '') {
+  $div_class = $div_class . ' anyDate_gt';
+  return $this->date_field($name, $value, '20', '', $div_class);
+ }
+ 
+   public function date_fieldAnyDay_lt($name, $value, $div_class = '') {
+  $div_class = $div_class . ' anyDate_lt';
+  return $this->date_field($name, $value, '20', '', $div_class);
+ }
 
  public function l_date_fieldAnyDay($name, $value, $div_class = '') {
   $div_class = $div_class . ' anyDate';

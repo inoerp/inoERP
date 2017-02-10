@@ -4168,6 +4168,40 @@ $(document).ready(function () {
   }
 
  });
+ 
+  $('body').on('focus', ".anyDate_gt", function () {
+  if ($(this).hasClass('readonly')) {
+   $(this).prop('disabled', true);
+   alert(readonly_field);
+  } else {
+   var currentDate = new Date();
+   $(this).datepicker({
+    defaultDate: 0,
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: ">yy-mm-dd",
+    setDate: currentDate
+   });
+  }
+
+ });
+ 
+   $('body').on('focus', ".anyDate_lt", function () {
+  if ($(this).hasClass('readonly')) {
+   $(this).prop('disabled', true);
+   alert(readonly_field);
+  } else {
+   var currentDate = '<' + new Date();
+   $(this).datepicker({
+    defaultDate: 0,
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: ">yy-mm-dd",
+    setDate: currentDate
+   });
+  }
+
+ });
 
  $('body').on('focus', ".dateFromToday", function () {
   if ($(this).hasClass('readonly')) {

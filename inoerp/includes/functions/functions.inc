@@ -1366,6 +1366,24 @@ function search_org_name() {
  return $stmt;
 }
 
+function search_need_by_date() {
+ global $f; 
+ $stmt = $f->date_fieldAnyDay('need_by_date', '');
+ return $stmt;
+}
+
+function search_need_by_date_gt() {
+ global $f; 
+ $stmt = $f->date_fieldAnyDay_gt('need_by_date', '');
+ return $stmt;
+}
+
+function search_need_by_date_lt() {
+ global $f; 
+ $stmt = $f->date_fieldAnyDay_lt('need_by_date', '');
+ return $stmt;
+}
+
 function search_bu_name() {
  global $f;
  $stmt = $f->select_field_from_object('bu_org_id', org::find_all_business(), 'org_id', 'org', '', 'bu_org_id', '', '', '', '', 1);
