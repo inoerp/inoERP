@@ -23,12 +23,11 @@
       <li><label class="auto_complete"><img src="<?php echo HOME_URL; ?>themes/images/serach.png" class="mdm_bank_site_id select_popup clickable">
         <?php echo gettext('Branch Name') ?></label><?php echo $f->hidden_field_withId('mdm_bank_site_id', $$class->mdm_bank_site_id); ?>
        <?php $f->text_field_d('branch_name') ?>	</li>
-      <li><label><?php echo gettext('Account Number') ?></label> <?php $f->text_field_d('account_number') ?>	</li>
-      <li><label><?php echo gettext('Usage') ?></label> 
-       <?php echo $f->select_field_from_array('account_usage', mdm_bank_account::$account_usage_a, $$class->account_usage, 'account_usage', '', 1, $readonly1) ?>	</li>
-      <li><label><?php echo gettext('Type') ?></label> 
-       <?php echo $f->select_field_from_object('account_type', mdm_bank_account::bank_account_type(), 'option_line_code', 'option_line_value', $$class->account_type, 'account_type', '', 1, $readonly1) ?>	</li>
-      <li><label>Description</label> <?php $f->text_field_d('description') ?>	</li>
+      <li><?php $f->l_text_field_d('account_number') ?>	</li>
+      <li><?php $f->l_select_field_from_array('account_usage', mdm_bank_account::$account_usage_a, $$class->account_usage, 'account_usage', '', 1, $readonly1) ?>	</li>
+			<li><?php $f->l_select_field_from_object('currency_code', option_header::currencies(), 'option_line_code', 'option_line_code', $$class->currency_code, 'currency_code', '', 1, $readonly1); ?></li>
+      <li><?php $f->l_select_field_from_object('account_type', mdm_bank_account::bank_account_type(), 'option_line_code', 'option_line_value', $$class->account_type, 'account_type', '', 1, $readonly1) ?>	</li>
+      <li><?php $f->l_text_field_d('description') ?>	</li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">

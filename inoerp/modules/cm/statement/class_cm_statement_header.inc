@@ -21,7 +21,7 @@ class cm_statement_header extends dbObject {
  public static $primary_column = "cm_statement_header_id";
  public static $primary_column2 = "statement_num";
  public static $key_column = 'mdm_bank_account_id';
- public static $module = "sd";
+ public static $module = "cm";
  public static $system_info = [
 		 'name' => 'Bank Statement',
 		 'number' => '2301',

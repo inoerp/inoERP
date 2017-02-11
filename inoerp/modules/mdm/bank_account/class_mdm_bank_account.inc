@@ -29,6 +29,7 @@
    'mdm_bank_header_id',
    'mdm_bank_site_id',
    'account_number',
+			'currency_code',
    'description',
    'account_usage',
    'account_type',
@@ -124,6 +125,7 @@
   public $description;
   public $account_usage;
   public $account_type;
+	public $currency_code;
   public $bu_org_id;
   public $supplier_id;
   public $supplier_site_id;
