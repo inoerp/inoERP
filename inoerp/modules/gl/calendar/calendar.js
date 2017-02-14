@@ -3,7 +3,7 @@ $(document).ready(function() {
 // select_mandatory_fields(Mandatory_Fields);
 
 //Name Value
- $('#form_line').on('focusout', '.year', function() {
+ $('#form_line').on('blur', '.c_year', function() {
 	var name = '';
 	name += $(this).closest('tr').find('.name_prefix').val();
 	name += '-' + $(this).val();
