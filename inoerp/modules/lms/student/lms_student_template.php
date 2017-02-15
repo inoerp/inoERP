@@ -13,7 +13,7 @@
     <div class="tabContainer"> 
      <div id="tabsHeader-1" class="tabContent">
       <ul class="column header_field"> 
-       <li><?php $f->l_text_field_dr_withSearch('lms_student_id') ?>
+       <li><?php $f = new inoform(); $f->l_text_field_dr_withSearch('lms_student_id') ?>
         <a name="show" href="form.php?class_name=lms_student&<?php echo "mode=$mode"; ?>" class="show document_id lms_student_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
@@ -21,7 +21,7 @@
        <li><?php $f->l_text_field_d('last_name'); ?> 					</li>
        <li><?php $f->l_text_field_d('title'); ?> 					</li>
        <li><?php $f->l_select_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, '', 'gender', '', $readonly); ?>              </li>
-       <li><?php $f->l_select_field_from_object('person_type', hr_employee::person_type(), 'option_line_code', 'option_line_value', $$class->person_type, '', 'person_type', 1, $readonly); ?>              </li>
+			 <li><?php $f->l_select_field_from_array('person_type', lms_student::$student_type_a, $$class->person_type) ; ?></li>
        <li><?php $f->l_select_field_from_object('identification_type', hr_employee::identification_type(), 'option_line_code', 'option_line_value', $$class->identification_type, '', 'identification_type', 1, $readonly); ?>              </li>
        <li><?php $f->l_text_field_dm('identification_id'); ?> 					</li>
        <li><?php $f->l_text_field_d('citizen_number'); ?> 					</li>
@@ -97,7 +97,6 @@
         <li><?php $f->l_text_field_d('social_ac_no2'); ?> 					</li>
         <li><?php $f->l_text_field_d('bank_account_id'); ?> 					</li>
         <li><?php $f->l_ac_field_d('expense_ac_id'); ?> 					</li>
-        <li><?php $f->l_ac_field_dm('salary_ac_id'); ?> 					</li>
        </ul> 
       </div> 
      </div>
@@ -115,7 +114,7 @@
             <th><?php echo gettext('Action') ?></th>
             <th><?php echo gettext('Seq') ?>#</th>
             <th><?php echo gettext('Line Id') ?></th>
-            <th><?php echo gettext('Degree Name') ?>#</th>
+            <th><?php echo gettext('Degree Name') ?></th>
             <th><?php echo gettext('University') ?></th>
             <th><?php echo gettext('Start Date') ?></th>
             <th><?php echo gettext('End Date') ?></th>
@@ -208,11 +207,11 @@
             <th><?php echo gettext('Action') ?></th>
             <th><?php echo gettext('Seq') ?>#</th>
             <th><?php echo gettext('Line Id') ?></th>
-            <th><?php echo gettext('Organization Name') ?>#</th>
+            <th><?php echo gettext('Organization Name') ?></th>
             <th><?php echo gettext('Designation') ?></th>
             <th><?php echo gettext('Start Date') ?></th>
             <th><?php echo gettext('End Date') ?></th>
-            <th><?php echo gettext('student') ?>#</th>
+            <th><?php echo gettext('Employee') ?>#</th>
             <th><?php echo gettext('Department') ?></th>
             <th><?php echo gettext('Last Manager') ?>#</th>
            </tr>
@@ -241,7 +240,7 @@
              <td><?php $f->text_field_wid3('designation'); ?></td>
              <td><?php echo $f->date_fieldAnyDay('work_start_date', $$class_third->work_start_date); ?></td>
              <td><?php echo $f->date_fieldAnyDay('work_end_date', $$class_third->work_end_date); ?></td>
-             <td><?php $f->text_field_wid3('student_number'); ?></td>
+             <td><?php $f->text_field_wid3('employee_number'); ?></td>
              <td><?php $f->text_field_wid3s('department'); ?></td>
              <td><?php $f->text_field_wid3('last_manager'); ?></td>
             </tr>
@@ -299,7 +298,7 @@
      </div>
      <div id="tabsLine-6"  class="tabContent">
       <div> 
-       <ul class="column four_column"> 
+       <ul class="column header_field"> 
         <li><?php $f->l_date_fieldAnyDay('date_of_notification', $$class_fourth->date_of_notification); ?></li>
         <li><?php $f->l_text_field('reason', $$class_fourth->projected_last_date); ?></li>
         <li><?php $f->l_date_fieldAnyDay('projected_last_date', $$class_fourth->projected_last_date); ?></li>

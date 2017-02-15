@@ -19,7 +19,7 @@ class lms_academic_year extends dbObject {
 
  public static $table_name = "lms_academic_year";
  public static $primary_column = "lms_academic_year_id";
- public static $key_column = 'job_code';
+ public static $key_column = 'academic_year_name';
  public static $module = "lms";
  public static $system_info = [
 		 'name' => 'academic_year',

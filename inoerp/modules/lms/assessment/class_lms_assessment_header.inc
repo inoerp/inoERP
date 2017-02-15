@@ -69,7 +69,7 @@ class lms_assessment_header extends dbObject {
 		 '_show_update_path' => 1,
 		 '_show_view_path' => 1
  ];
- public $pageTitle = " assessment  "; //page Title
+ public $pageTitle = " Assessment  "; //page Title
  public $lms_assessment_header_id;
  public $assessment_name;
  public $assessment_code;

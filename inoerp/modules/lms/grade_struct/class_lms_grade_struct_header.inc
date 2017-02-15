@@ -5,7 +5,7 @@ class lms_grade_struct_header extends dbObject {
  public static $table_name = "lms_grade_struct_header";
  public static $primary_column = "lms_grade_struct_header_id";
  public static $dependent_classes = ['lms_grade_struct_line'];
- public static $key_column = 'grade_name';
+ public static $key_column = 'struct_name';
  public static $module = "lms";
  public static $system_info = [
 		 'name' => 'Grade Struct',
@@ -21,15 +21,15 @@ class lms_grade_struct_header extends dbObject {
  ];
  public $field_a = [
 		 'lms_grade_struct_header_id',
-		 'grade_name',
-		 'grade_code',
+		 'struct_name',
+		 'struct_code',
 		 'description',
 		 'details',
 		 'status',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
-		 'last_update_date'
+		 'last_update_date',
  ];
  //variables used for showing data
 
@@ -45,8 +45,8 @@ class lms_grade_struct_header extends dbObject {
 		 '_show_view_path' => 1,
  ];
  public $lms_grade_struct_header_id;
- public $grade_name;
- public $grade_code;
+ public $struct_name;
+ public $struct_code;
  public $description;
  public $details;
  public $status;

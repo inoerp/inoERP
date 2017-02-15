@@ -19,15 +19,15 @@
        <li><?php $f->l_text_field_d('academic_year_name'); ?></li>
        <li><?php $f->l_text_field_d('academic_year_code'); ?></li>
        <li><?php $f->l_dateTime_field('start_date', $$class->start_date); ?></li>
-			 <li><?php $f->l_dateTime_field('end_Date' , $$class->end_date); ?></li>
+			 <li><?php $f->l_dateTime_field('end_date' , $$class->end_date); ?></li>
 			 <li><?php $f->l_status_field_d('status'); ?></li>
        <li><?php $f->l_text_field_d('description'); ?></li>
       </ul>
      </div>
-     <div id="tabsHeader-3" class="tabContent">
+     <div id="tabsHeader-2" class="tabContent">
       <div> <?php echo ino_attachement($file) ?> </div>
      </div>
-     <div id="tabsHeader-4" class="tabContent">
+     <div id="tabsHeader-3" class="tabContent">
       <div> 
        <div id="comments">
         <div id="comment_list">

@@ -5,7 +5,7 @@ class lms_grade_struct_line extends dbObject {
  public static $table_name = "lms_grade_struct_line";
  public static $primary_column = "lms_grade_struct_line_id";
  public static $parent_primary_column = "lms_grade_struct_header_id";
- public static $key_column = 'lms_grade_element_id';
+ public static $key_column = 'grade_code';
  public static $module = "lms";
  public $field_a = [
 		 'lms_grade_struct_line_id',

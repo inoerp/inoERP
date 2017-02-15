@@ -17,7 +17,7 @@ inoERP
    <div class="tabContainer">
     <div id="tabsHeader-1" class="tabContent">
      <ul class="column header_field">
-      <li><?php $f->l_text_field_dr_withSearch('lms_assessment_header_id') ?>
+      <li><?php $f = new inoform(); $f->l_text_field_dr_withSearch('lms_assessment_header_id') ?>
        <a name="show" href="form.php?class_name=lms_assessment_header&<?php echo "mode=$mode"; ?>" class="show document_id lms_assessment_header_id"><i class="fa fa-refresh"></i></a> 
       </li>
       <li><?php $f->l_text_field_d('assessment_name'); ?></li>
@@ -26,7 +26,7 @@ inoERP
 			<li><?php $f->l_text_field_d('student_group'); ?></li>
 			<li><?php $f->l_text_field_d('supervisor'); ?></li>
 			<li><?php $f->l_text_field_d('examiner'); ?></li>
-			<li><?php $f->l_text_field_d('grading_structure'); ?></li>
+			<li><?php $f->l_select_field_from_object('grading_structure', lms_grade_struct_header::find_all(),'lms_grade_struct_header_id', 'struct_name', $$class->grading_structure ); ?></li>
 			<li><?php $f->l_date_fieldAnyDay('start_date', $$class->start_date); ?></li>
 			<li><?php $f->l_date_fieldAnyDay('end_date', $$class->end_date); ?></li>
 			<li><?php $f->l_dateTime_field('start_time', $$class->start_time); ?></li>

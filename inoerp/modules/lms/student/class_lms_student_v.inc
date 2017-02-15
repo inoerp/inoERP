@@ -1,10 +1,10 @@
 <?php
 
-class hr_employee_v extends dbObject {
+class hr_student_v extends dbObject {
 
- public static $form_class_name = "hr_employee";
- public static $table_name = "hr_employee_v";
- public static $primary_column = "hr_employee_id";
+ public static $form_class_name = "hr_student_v";
+ public static $table_name = "hr_student_v";
+ public static $primary_column = "hr_student_id";
  public $field_a = [
   'user_id',
   'username',
@@ -120,26 +120,29 @@ class hr_employee_v extends dbObject {
  public $currency_code;
  public $employee_name;
 
- private function create_hr_employee_v() {
+ private function create_lms_student_v() {
   $sql = "
-CREATE OR REPLACE VIEW hr_employee_v
+CREATE OR REPLACE VIEW lms_student_v
 (
-user_id, username, first_name,last_name,email,hr_employee_id,status,
-identification_id,emp_start_date,citizen_number,emp_first_name,emp_last_name,phone, 
-employee_name,
-emp_email,gender,person_type, org_id, job_id, position_id, expense_ac_id,supervisor_employee_id,
-currency_code, org
+lms_student_id, identification_id,  start_date, identification_type, citizen_number, first_name,
+last_name, phone, email, language, title, gender, lms_program_id, date_of_birth, city_of_birth,
+country_of_birth, nationality, disability_code, marital_status, degree, highest_education,
+education_details, no_of_children, home_address_id, home_address, permanent_address, permanent_address_id,
+mobile_number, home_phone_number, other_email, date_first_joined, org_id, location_id, 
+CONCAT(last_name, ', ' , first_name) as student_name, org_v.currency_code, org_v.org
 )
 AS
- SELECT 
-user.ino_user_id, user.username, user.first_name,user.last_name,user.email,user.hr_employee_id,user.status,
-he.identification_id,he.start_date,he.citizen_number,he.first_name as emp_first_name,he.last_name as emp_last_name,he.phone, 
-CONCAT(he.last_name, ', ' , he.first_name) as employee_name,
-he.email,he.gender,he.person_type, he.org_id, he.job_id, he.position_id, he.expense_ac_id,he.supervisor_employee_id,
-org_v.currency_code, org_v.org
-FROM hr_employee he
-LEFT JOIN ino_user user ON he.hr_employee_id = user.hr_employee_id
-LEFT JOIN org_v ON org_v.org_id =  he.org_id
+SELECT 
+ls.lms_student_id, ls.identification_id,  ls.start_date, ls.identification_type, ls.citizen_number, ls.first_name,
+ls.last_name, ls.phone, ls.email, ls.language, ls.title, ls.gender, ls.lms_program_id, ls.date_of_birth, ls.city_of_birth,
+ls.country_of_birth, ls.nationality, ls.disability_code, ls.marital_status, ls.degree, ls.highest_education,
+ls.education_details, ls.no_of_children, ls.home_address_id, ls.home_address, ls.permanent_address, ls.permanent_address_id,
+ls.mobile_number, ls.home_phone_number, ls.other_email, ls.date_first_joined, ls.org_id, ls.location_id, 
+CONCAT(ls.last_name, ', ' , ls.first_name) as student_name, org_v.currency_code, org_v.org
+
+FROM lms_student ls
+LEFT JOIN ino_user user ON ls.lms_student_id = user.ino_user_id
+LEFT JOIN org_v ON org_v.org_id =  ls.org_id
 
 
 ";

@@ -39,6 +39,11 @@ class lms_student extends dbObject {
 		 'MANUAL' => 'Manual',
 		 'IMPORT' => 'Import'
  ];
+ public static $student_type_a = [
+		 'APPLICANT' => 'Applicant',
+		 'STUDENT' => 'Student',
+		 'ALLUMNI' => 'Alumni'
+ ];
  public $field_a = [
 		 'lms_student_id',
 		 'identification_id',
@@ -257,6 +262,7 @@ class lms_student extends dbObject {
 //   pa($this);
 //   pa($_POST);
 	if (!empty($this->lms_student_id) && !empty($_POST['degree_name']) && !empty($_POST['degree_name'])) {
+	 
 	 try {
 		$this->_save_education();
 		echo "<br>Education details are sucessfully saved.";
@@ -284,7 +290,7 @@ class lms_student extends dbObject {
 	 foreach ($eedu->field_a as $field_k => $field_v) {
 		$eedu->$field_v = isset($_POST[$field_v][$key]) ? $_POST[$field_v][$key] : null;
 	 }
-	 $eedu->employee_id = $this->lms_student_id;
+	 $eedu->lms_student_id = $this->lms_student_id;
 	 $eedu->save();
 	}
  }

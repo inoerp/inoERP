@@ -131,7 +131,7 @@
             <th><?php echo gettext('Action') ?></th>
             <th><?php echo gettext('Seq') ?>#</th>
             <th><?php echo gettext('Line Id') ?></th>
-            <th><?php echo gettext('Degree Name') ?>#</th>
+            <th><?php echo gettext('Degree Name') ?></th>
             <th><?php echo gettext('University') ?></th>
             <th><?php echo gettext('Start Date') ?></th>
             <th><?php echo gettext('End Date') ?></th>
@@ -224,7 +224,7 @@
             <th><?php echo gettext('Action') ?></th>
             <th><?php echo gettext('Seq') ?>#</th>
             <th><?php echo gettext('Line Id') ?></th>
-            <th><?php echo gettext('Organization Name') ?>#</th>
+            <th><?php echo gettext('Organization Name') ?></th>
             <th><?php echo gettext('Designation') ?></th>
             <th><?php echo gettext('Start Date') ?></th>
             <th><?php echo gettext('End Date') ?></th>
