@@ -690,8 +690,8 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
  var highest_line_num = 1;
  var highest_seq_num = 1;
  $('.lines_number').each(function () {
-  if ($(this).val() > highest_line_num) {
-   highest_line_num = $(this).val();
+  if (+$(this).val() > highest_line_num) {
+   highest_line_num = +$(this).val();
   }
  });
  if ($(tbodyClass).find('.seq_number').last().val()) {
