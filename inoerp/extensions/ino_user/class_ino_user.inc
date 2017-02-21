@@ -49,6 +49,7 @@ class ino_user extends dbObject {
 		 "phone",
 		 'hr_employee_id',
 		 'ar_customer_id',
+		 'lms_student_id',
 		 'supplier_id',
 		 'block_notif_count',
 		 'use_personal_db_cb',
@@ -128,6 +129,7 @@ class ino_user extends dbObject {
 //		  ];
  public $ino_user_id;
  public $hr_employee_id;
+ public $lms_student_id;
  public $username;
  public $enteredPassword;
  public $enteredRePassword;
@@ -164,6 +166,7 @@ class ino_user extends dbObject {
  public $auth_provider_id;
  public $auth_provider_name;
  public $notify_user_cb;
+ public $student_name;
 
  public function _before_showing() {
 	

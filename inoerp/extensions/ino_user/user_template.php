@@ -29,7 +29,7 @@ if (empty($access_level) || ($access_level < 2 )) {
       <li><?php $f->l_text_field_dm('last_name'); ?>	 </li>
       <li><?php $f->l_text_field_dm('email'); ?> </li>
       <li><?php $f->l_text_field_d('phone'); ?> </li>
-			<li><label><?php echo gettext('Notify User') ?></label><?php echo $f->checkBox_field('notify_user_cb' , 1); ?> </li>
+			<li><label><?php echo gettext('Notify User') ?></label><?php echo $f->checkBox_field('notify_user_cb', 1); ?> </li>
      </ul>
     </div>
     <div id="tabsHeader-2" class="tabContent">
@@ -43,8 +43,8 @@ if (empty($access_level) || ($access_level < 2 )) {
       <li><?php $f->l_color_field_d('mandatory_field_color'); ?> </li> 
       <li><?php $f->l_color_field_d('heading_color'); ?> </li> 
       <li><?php $f->l_color_field_d('content_color'); ?> </li> 
-      
-      
+
+
      </ul>
      <div class="bg-image-field"><label><?php echo gettext('Background Image'); ?></label><?php echo $f->image_field('bg_image_file_id', $$class->bg_image_file_id, '', '', 'img-vs'); ?></div>
     </div>
@@ -63,6 +63,11 @@ if (empty($access_level) || ($access_level < 2 )) {
 					<?php echo $f->hidden_field_withId('ar_customer_id', $$class->ar_customer_id); ?>
        <i class="fa fa-search ar_customer_id select_popup clickable"></i>
       </li>
+
+			<li><?php
+					echo $f->l_val_field_d('first_name', 'lms_student', 'first_name', '', 'vf_select_lms_student first_name');
+					echo $f->hidden_field_withId('lms_student_id', $$class->lms_student_id);
+					?><i class="generic g_select_lms_student select_popup clickable fa fa-search" data-class_name="lms_student"></i></li>
      </ul>
     </div>
     <div id="tabsHeader-4" class="tabContent">
