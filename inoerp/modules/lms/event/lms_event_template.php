@@ -32,12 +32,14 @@
     </div>
     <div id="tabsHeader-2" class="tabContent">
      <div class="large_shadow_box"> 
-      <ul class="column header_field two_column_form"> 
+      <ul class="column header_field"> 
        <li><?php $f->l_text_field_d('description'); ?></li>
        <li><?php $f->l_text_field_d('location'); ?></li>
        <li><?php $f->l_text_field_d('url'); ?></li>
        <li><?php $f->l_text_field_d('privacy'); ?></li>
        <li><?php $f->l_text_field_d('event_color'); ?></li>
+			 <li><?php $f->l_select_field_from_array('frequency_uom', lms_event_header::$frequencey_umo_a, $$class->frequency_uom) ?></li>
+			 <li><?php echo $f->l_number_field('frequncy_val', $$class->frequncy_val); ?></li>
       </ul>
      </div>
     </div>
@@ -106,7 +108,8 @@
 						 ?>
  				</td>
  				<td><?php $f->text_field_wid2sr('lms_event_line_id', 'always_readonly'); ?></td>
- 				<td><?php $f->text_field_wid2('lms_group_header_id'); ?></td>
+				<td><?php echo $f->select_field_from_object('lms_group_header_id', lms_group_header::find_all(), 'lms_group_header_id' ,'group_name' , $$class_second->lms_group_header_id , '', 'medium'); ?></td>
+ 				
  				<td><?php
 						 echo $f->val_field('first_name', $$class_second->first_name, '', '', 'vf_select_student_name first_name', '', '', 'lms_student_v', 'employee_name');
 						 echo $f->hidden_field_withCLass('lms_student_id', $$class_second->lms_student_id, 'lms_student_id');
