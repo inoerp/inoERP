@@ -1,37 +1,35 @@
 <?php
 
-class lms_group_line extends dbObject {
+class lms_section_line extends dbObject {
 
- public static $table_name = "lms_group_line";
- public static $primary_column = "lms_group_line_id";
- public static $parent_primary_column = "lms_group_header_id";
- public static $key_column = 'lms_term_id';
+ public static $table_name = "lms_section_line";
+ public static $primary_column = "lms_section_line_id";
+ public static $parent_primary_column = "lms_section_header_id";
+ public static $key_column = 'lms_student_id';
  public static $module = "lms";
  public $field_a = [
-		 'lms_group_line_id',
-		 'lms_group_header_id',
-		 'lms_term_id',
-		 'term_start_date',
-		 'term_end_date',
+		 'lms_section_line_id',
+		 'lms_section_header_id',
+		 'lms_student_id',
+		 'is_leader_cb',
 		 'description',
 		 'status',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
-		 'last_update_date'
+		 'last_update_date',
  ];
  public $requiredField = [
-		 'lms_group_header_id',
+		 'lms_section_header_id',
 		 'lms_term_id'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-		 "lms_group_header_id"
+		 "lms_section_header_id"
  ];
- public $lms_group_line_id;
- public $lms_group_header_id;
- public $lms_term_id;
- public $term_start_date;
- public $term_end_date;
+ public $lms_section_line_id;
+ public $lms_section_header_id;
+ public $lms_student_id;
+ public $is_leader_cb;
  public $description;
  public $status;
  public $created_by;
@@ -41,5 +39,5 @@ class lms_group_line extends dbObject {
 
 }
 
-//end of lms_group_line class
+//end of lms_section_line class
 ?>
