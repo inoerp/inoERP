@@ -1,36 +1,34 @@
-function setValFromSelectPage(bom_department_id) {
- this.bom_department_id = bom_department_id;
+function setValFromSelectPage(hr_element_entry_tpl_header_id) {
+ this.hr_element_entry_tpl_header_id = hr_element_entry_tpl_header_id;
 }
 
-setValFromSelectPage.prototype.setVal = function() {
- var bom_department_id = this.bom_department_id;
- $("#bom_department_id").val(bom_department_id);
- 
-     if (this.bom_department_id) {
-  $('a.show.bom_department_id').trigger('click');
+setValFromSelectPage.prototype.setVal = function () {
+ if (this.hr_element_entry_tpl_header_id) {
+  $("#hr_element_entry_tpl_header_id").val(this.hr_element_entry_tpl_header_id);
  }
 };
 
-$(document).ready(function() {
-
- //mandatory and field sequence
- var mandatoryCheck = new mandatoryFieldMain();
- mandatoryCheck.header_id = 'bom_department_id';
+$(document).ready(function () {
+ 
+   var mandatoryCheck = new mandatoryFieldMain();
+ mandatoryCheck.header_id = 'hr_element_entry_tpl_header_id';
  mandatoryCheck.mandatoryHeader();
- mandatoryCheck.form_area = 'form_header';
- mandatoryCheck.mandatory_fields = ["org_id", "department"];
- mandatoryCheck.mandatory_messages = ["First Select Org", "No department"];
-// mandatoryCheck.mandatoryField();
+ 
+ //setting the first tpl_line number
+ if (!($('.tpl_lines_number:first').val())) {
+  $('.tpl_lines_number:first').val('10');
+ }
 
- //selecting data
- $(".bom_department_id.select_popup").on("click", function() {
-	localStorage.idValue = "";
-	void window.open('select.php?class_name=bom_department', '_blank',
-					'width=1200,height=1000,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+
+ //selecting Id
+ //Popup for selecting bom
+ $(".hr_element_entry_tpl_header_id.select_popup").click(function () {
+  void window.open('select.php?class_name=hr_element_entry_tpl_header', '_blank',
+          'width=1000,height=800,TOOLBAR=no,MENUBAR=no,SCROLLBARS=yes,RESIZABLE=yes,LOCATION=no,DIRECTORIES=no,STATUS=no');
+  return false;
  });
 
+//get the attachement form
+ deleteData('form.php?class_name=hr_element_entry_tpl_header&tpl_line_class_name=hr_element_entry_tpl_line');
+
 });
-
-
-
-

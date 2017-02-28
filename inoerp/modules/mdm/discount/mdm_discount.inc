@@ -1,1 +1,8 @@
-<?php//$class = $class_first = 'bom_department';//$$class = $$class_first = &$bom_department;//$class_second = 'bom_dept_res_assignment';//$$class_second = &$bom_dept_res_assignment;$bom_dept_res_assignment = new bom_dept_res_assignment();$bom_dept_res_assignment_object = array();if (!empty($$class->bom_department_id)) { if (($bom_dept_res_assignment->findBy_parentId($$class->bom_department_id))) {	$bom_dept_res_assignment_object = $bom_dept_res_assignment->findBy_parentId($$class->bom_department_id); } else {	array_push($bom_dept_res_assignment_object, $bom_dept_res_assignment); }} else { array_push($bom_dept_res_assignment_object, $bom_dept_res_assignment);}//pa(bom_dept_res_assignment::find_all());?>
+<?php 
+// if(!empty($$class->employee_id)){
+//  $emp_details = hr_employee::find_by_id($$class->employee_id);
+//  $$class->identification_id = $emp_details->identification_id;
+//  $$class->employee_name = $emp_details->first_name . ' ' . $emp_details->last_name ;
+//  }
+ 
+ ?>
