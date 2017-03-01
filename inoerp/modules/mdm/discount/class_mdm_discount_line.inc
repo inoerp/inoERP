@@ -23,6 +23,8 @@ class mdm_discount_line extends dbObject {
 		 'last_update_by',
 		 'last_update_date',
  ];
+ 
+ public static $bracket_close_a = [')', ''];
  public $fields_intpl_header_needsToBeInserted_inPOST = [
 		 "mdm_discount_header_id"
  ];

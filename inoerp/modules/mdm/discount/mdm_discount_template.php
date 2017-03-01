@@ -76,12 +76,12 @@ $f->l_text_field_dr_withSearch('mdm_discount_header_id')
         <th><?php echo gettext('Action') ?></th>
         <th><?php echo gettext('Line Id') ?></th>
         <th><?php echo gettext('Condition Type') ?></th>
-        <th><?php echo gettext('Element Set') ?></th>
-        <th><?php echo gettext('Element Type') ?></th>
+        <th><?php echo gettext('Class Name') ?></th>
+        <th><?php echo gettext('Field Name') ?></th>
         <th><?php echo gettext('Compare Type') ?></th>
 				<th><?php echo gettext('Value') ?></th>
 				<th><?php echo gettext('Close Bracket') ?></th>
-				<th><?php echo gettext('Status') ?></th>
+				<th><?php echo gettext('Line Status') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -93,11 +93,14 @@ $f->l_text_field_dr_withSearch('mdm_discount_header_id')
  				<td><?php
 					echo ino_inline_action($$class_second->mdm_discount_line_id, array('mdm_discount_header_id' => $$class->mdm_discount_header_id));
 					?></td>
- 				<td><?php $f->text_field_wid2sr('mdm_discount_line_id'); ?></td>
- 				<td><?php echo $f->select_field_from_array('lms_fee_element_id', lms_fee_element::find_all(), 'lms_fee_element_id', array('element_name', 'description'), $$class_second->lms_fee_element_id, '', 'medium', 1, $readonly); ?></td>
- 				<td><?php $f->text_field_wid2m('element_value'); ?></td>
- 				<td><?php echo $f->date_fieldFromToday('end_date', $$class_second->end_date); ?></td>
- 				<td><?php $f->text_field_wid2l('description'); ?></td>
+ 				<td><?php $f->text_field_wid2sr('mdm_discount_line_id', 'always_readonly'); ?></td>
+				<td><?php echo $f->select_field_from_array('condition_type', dbObject::$condition_type_a, $$class_second->condition_type, '', 'medium', 1, $readonly); ?></td>
+				<td><?php $f->text_field_wid2m('element_set'); ?></td>
+				<td><?php $f->text_field_wid2m('element_name'); ?></td>
+				<td><?php echo $f->select_field_from_array('compare_type', dbObject::$control_type_a, $$class_second->compare_type, '' , 'medium', 1, $readonly1); ?></td>
+				<td><?php $f->text_field_wid2m('compare_value'); ?></td>
+				<td><?php echo $f->select_field_from_array('close_bracket', mdm_discount_line::$bracket_close_a , '', $$class_second->close_bracket); ?></td>
+				<td><?php echo $f->status_field_d2('status', 'medium'); ?></td>
  			 </tr>
 				<?php
 				$count = $count + 1;
