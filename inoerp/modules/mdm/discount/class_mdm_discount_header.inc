@@ -37,7 +37,10 @@ class mdm_discount_header extends dbObject {
  //variables used for showing data
 
  public $initial_search = [
-		 'struct_name',
+		 		 'discount_name',
+		 'discount_code',
+		 'module_code',
+		 'description',
  ];
  public $requiredField = [
 		 'discount_name',

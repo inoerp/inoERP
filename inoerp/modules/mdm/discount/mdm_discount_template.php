@@ -20,7 +20,7 @@ $f->l_text_field_dr_withSearch('mdm_discount_header_id')
        </li>
        <li><?php $f->l_text_field_d('discount_name'); ?></li>
 			 <li><?php $f->l_text_field_d('discount_code'); ?></li>
-			 <li><?php $f->l_text_field_d('discount_code'); ?></li>
+			 
 			 <li><?php $f->l_select_field_from_array('module_name', mdm_price_list_header::$module_a, $$class->module_name, 'module_name', '', '', $readonly); ?></li>
 			 <li><?php $f->l_text_field_d('discount_type'); ?></li>
 			 <li><?php $f->l_text_field_d('discount_percentage'); ?></li>

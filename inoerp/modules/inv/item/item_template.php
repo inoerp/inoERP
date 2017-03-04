@@ -33,6 +33,7 @@
 				<i class="fa fa-refresh"></i></a> </li>
 			<li><?php $f->l_text_field('item_description', $$class->item_description, '20', 'item_description', '', 1, $readonly_mas); ?></li>
 			<li><?php $f->l_select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>
+			<li><?php echo $f->l_number_field('product_line_percentage', $$class->product_line_percentage, '8'); ?></li>
 		 </ul>
 		</div>
 		<div id="tabsHeader-2" class="tabContent">
@@ -192,8 +193,10 @@
 			<ul class="column header_field"> 
 			 <li><?php $f->l_select_field_from_object('item_type', item::item_types(), 'option_line_code', 'option_line_value', $item->item_type, 'item_type', '', 1, $readonly); ?>       </li> 
 			 <li><?php echo $f->l_select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $item->uom_id, 'uom_id', '', 1, $readonly); ?>       </li>
-			 <li><?php echo $f->l_number_field('product_line_percentage', $$class->product_line_percentage, '8'); ?></li>
+			 
 			 <li><?php echo $f->l_select_field_from_object('item_status', item::item_status(), 'option_line_id', 'option_line_code', $item->item_status, 'item_status', '', 1, $readonly); ?>       </li>
+			 <li><?php $f->l_select_field_from_object('demand_class', option_header::find_options_byName('SYS_DEMAND_CLASS'), 'option_line_code', 'option_line_value', $$class->demand_class, 'demand_class', '', '', $readonly_mas); ?></li>
+			 <li><?php $f->l_select_field_from_object('discount_class', option_header::find_options_byName('SYS_DISCOUNT_CLASS'), 'option_line_code', 'option_line_value', $$class->discount_class, 'discount_class', '', '', $readonly_mas); ?></li>
 			</ul>
 		 </div>
 

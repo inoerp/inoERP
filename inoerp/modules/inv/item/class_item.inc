@@ -103,6 +103,8 @@ class item extends dbObject {
   "item_status",
   "bom_type",
   "item_rev_number",
+		 'demand_class',
+		 'discount_class',
   "default_cost_group",
   "lot_uniqueness",
   "lot_generation",
