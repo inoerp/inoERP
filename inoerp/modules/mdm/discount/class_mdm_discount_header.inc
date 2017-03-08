@@ -19,6 +19,14 @@ class mdm_discount_header extends dbObject {
 		 'module_name' => 'lms',
 		 'weight' => 2
  ];
+ 
+ public static $discount_type_a = [
+		 'PER' => 'Percentage',
+		 'FORMULA' => 'Formula'
+ ];
+ 
+
+ 
  public $field_a = [
 		 'mdm_discount_header_id',
 		 'discount_name',
@@ -29,6 +37,7 @@ class mdm_discount_header extends dbObject {
 		 'discount_type',
 		 'discount_percentage',
 		 'discount_formula',
+		 'check_condition_cb',
 		 'created_by',
 		 'creation_date',
 		 'last_update_by',
@@ -61,6 +70,7 @@ class mdm_discount_header extends dbObject {
  public $discount_type;
  public $discount_percentage;
  public $discount_formula;
+ public $check_condition_cb;
  public $created_by;
  public $creation_date;
  public $last_update_by;

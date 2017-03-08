@@ -24,14 +24,19 @@ class mdm_discount_line extends dbObject {
 		 'last_update_date',
  ];
  
- public static $bracket_close_a = [')', ''];
+ 
+ 
+   public static $bracket_close_a = [
+		 'CLOSE' => ')',
+		  ];
+	 
  public $fields_intpl_header_needsToBeInserted_inPOST = [
 		 "mdm_discount_header_id"
  ];
  public $requiredField = [
 		 'mdm_discount_header_id',
 		 'element_name',
-		 'element_value',
+		 'compare_value',
  ];
 // public $fields_inFormr_notinDataBase = [
 //		 "monetary_value"
