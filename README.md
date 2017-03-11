@@ -56,7 +56,7 @@ Requirements & Installation
 
 == Manual Installation ==
 
-1. Change the DB settings @ include\basics\dbsettings.inc
+1. Change the DB settings @ include\basics\settings\dbsettings.inc
 2. Change the session_set_cookie_params  in sessions file
 3. Import the database file @  enine\install\inoerp.sql
 4. Change the .htaccess
