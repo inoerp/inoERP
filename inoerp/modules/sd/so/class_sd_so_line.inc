@@ -69,6 +69,7 @@ class sd_so_line extends dbObject {
   'bom_config_header_id',
   'wip_wo_header_id',
   'sys_spd_header_id',
+		 'mdm_discount_header_id',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -152,6 +153,7 @@ class sd_so_line extends dbObject {
  public $promise_date;
  public $schedule_ship_date;
  public $actual_ship_date;
+ public $mdm_discount_header_id;
  public $time;
  public $msg;
  public $item_number;

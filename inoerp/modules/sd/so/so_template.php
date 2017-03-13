@@ -183,17 +183,18 @@ inoERP
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Price List') ?></th>
         <th><?php echo gettext('Price Date') ?></th>
-        <th><?php echo gettext('Unit Price') ?>#</th>
-        <th><?php echo gettext('Line Price') ?>#</th>
+        <th><?php echo gettext('Unit Price') ?></th>
+				<th><?php echo gettext('Discount') ?></th>
+        <th><?php echo gettext('Line Price') ?></th>
         <th><?php echo gettext('Tax Code') ?></th>
         <th><?php echo gettext('Tax Amount') ?></th>
-        <th><?php echo gettext('GL Line Price') ?></th>
-        <th><?php echo gettext('GL Tax Amount') ?></th>
+        <th><?php echo gettext('GL Price') ?></th>
+        <th><?php echo gettext('GL Tax') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
        <?php
-       $count = 0;
+       $count = 0;  $f = new inoform();
        foreach ($sd_so_line_object as $sd_so_line) {
         if ((empty($sd_so_line->price_list_header_id)) && !empty($document_type_i->price_list_header_id)) {
          $sd_so_line->price_list_header_id = $document_type_i->price_list_header_id;
@@ -206,7 +207,8 @@ inoERP
          </td>
          <td><?php echo $f->date_fieldAnyDay('price_date', $$class_second->price_date) ?></td>
          <td><?php form::number_field_wid2('unit_price'); ?></td>
-         <td><?php form::number_field_wid2('line_price'); ?></td>
+				 <td><?php echo $f->select_field_from_object('mdm_discount_header_id', mdm_discount_header::find_all(), 'mdm_discount_header_id', 'discount_name', $$class_second->mdm_discount_header_id, '', 'medium') ?></td>
+         <td><?php form::number_field_wid2s('line_price'); ?></td>
          <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_outTax_by_inv_org_id($$class_second->shipping_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'output_tax medium') ?></td>
          <td><?php form::number_field_wid2('tax_amount'); ?></td>
          <td><?php form::number_field_wid2sr('gl_line_price'); ?></td>
