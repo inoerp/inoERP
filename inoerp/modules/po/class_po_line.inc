@@ -40,6 +40,8 @@ class po_line extends dbObject {
   'hold_cb',
   'kit_cb',
   "kit_configured_cb",
+		 		 'mdm_discount_header_id',
+		 'discount_amount',
   "created_by",
   "creation_date",
   "last_update_by",
@@ -116,6 +118,9 @@ class po_line extends dbObject {
  public $hold_cb;
  public $kit_cb;
  public $kit_configured_cb;
+ public $mdm_discount_header_id;
+ public $mdm_discount_line_id;
+ 
  public $created_by;
  public $creation_date;
  public $last_update_by;

@@ -1,6 +1,4 @@
-<div id ="form_header"><span class="heading"><?php
-  echo gettext('Purchasing Transaction - Receipt/Return')
-  ?> </span>
+<div id ="form_header"><span class="heading"><?php  echo gettext('Purchasing Transaction - Receipt/Return')  ?> </span>
 
  <div id="tabsHeader">
   <ul class="tabMain">

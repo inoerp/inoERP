@@ -185,11 +185,11 @@ inoERP
         <th><?php echo gettext('Price Date') ?></th>
         <th><?php echo gettext('Unit Price') ?></th>
 				<th><?php echo gettext('Discount') ?></th>
+				<th><?php echo gettext('Discount Amount') ?></th>
         <th><?php echo gettext('Line Price') ?></th>
         <th><?php echo gettext('Tax Code') ?></th>
         <th><?php echo gettext('Tax Amount') ?></th>
-        <th><?php echo gettext('GL Price') ?></th>
-        <th><?php echo gettext('GL Tax') ?></th>
+        
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -208,11 +208,11 @@ inoERP
          <td><?php echo $f->date_fieldAnyDay('price_date', $$class_second->price_date) ?></td>
          <td><?php form::number_field_wid2('unit_price'); ?></td>
 				 <td><?php echo $f->select_field_from_object('mdm_discount_header_id', mdm_discount_header::find_all(), 'mdm_discount_header_id', 'discount_name', $$class_second->mdm_discount_header_id, '', 'medium') ?></td>
-         <td><?php form::number_field_wid2s('line_price'); ?></td>
+				 <td><?php form::number_field_wid2('discount_amount'); ?></td>
+         <td><?php form::number_field_wid2('line_price'); ?></td>
          <td><?php echo $f->select_field_from_object('tax_code_id', mdm_tax_code::find_all_outTax_by_inv_org_id($$class_second->shipping_org_id), 'mdm_tax_code_id', 'tax_code', $$class_second->tax_code_id, '', 'output_tax medium') ?></td>
          <td><?php form::number_field_wid2('tax_amount'); ?></td>
-         <td><?php form::number_field_wid2sr('gl_line_price'); ?></td>
-         <td><?php form::number_field_wid2sr('gl_tax_amount'); ?></td>
+         
         </tr>
         <?php
         $count = $count + 1;
@@ -229,8 +229,10 @@ inoERP
         <th><?php echo gettext('Seq') ?>#</th>
         <th><?php echo gettext('Requested Date') ?></th>
         <th><?php echo gettext('Promise Date') ?></th>
-        <th><?php echo gettext('Schedule Ship / Receipt Date') ?>#</th>
-        <th><?php echo gettext('Actual Ship / Receipt Date') ?>#</th>
+        <th><?php echo gettext('Schedule Ship / Receipt Date') ?></th>
+        <th><?php echo gettext('Actual Ship / Receipt Date') ?></th>
+				<th><?php echo gettext('GL Price') ?></th>
+        <th><?php echo gettext('GL Tax') ?></th>
        </tr>
       </thead>
       <tbody class="form_data_line_tbody">
@@ -244,6 +246,8 @@ inoERP
          <td><?php echo $f->date_fieldFromToday('promise_date', $$class_second->promise_date) ?></td>
          <td><?php echo $f->date_field('schedule_ship_date', ($$class_second->schedule_ship_date), '', '', 'dateFromToday copyValue'); ?></td>
          <td><?php echo $f->date_fieldFromToday('actual_ship_date', $$class_second->actual_ship_date, 'always_readonly') ?></td>
+				 <td><?php form::number_field_wid2sr('gl_line_price'); ?></td>
+         <td><?php form::number_field_wid2sr('gl_tax_amount'); ?></td>
         </tr>
         <?php
         $count = $count + 1;

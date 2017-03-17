@@ -292,11 +292,13 @@ inoERP
          <th><?php echo gettext('Seq') ?>#</th>
          <th><?php echo gettext('On Hold') ?></th>
          <th><?php echo gettext('Hold Details') ?></th>
-         <th><?php echo gettext('Kit Item') ?>?</th>
+         <th><?php echo gettext('Kit') ?>?</th>
          <th><?php echo gettext('Configured') ?>?</th>
-         <th><?php echo gettext('Item Configuration') ?></th>
+         <th><?php echo gettext('Configuration') ?></th>
          <th><?php echo gettext('Ref Doc Type') ?></th>
          <th><?php echo gettext('Ref Number') ?></th>
+				 <th><?php echo gettext('Discount');  ?></th>
+				 <th><?php echo gettext('Discount Amount');  ?></th>
         </tr>
        </thead>
        <tbody class="form_data_line_tbody">
@@ -313,6 +315,8 @@ inoERP
  				 <td><a class="popup popup-form view-item-config medium" href="form.php?class_name=bom_config_header&mode=9&window_type=popup"> <i class="fa fa-edit"></i></a></td>
  				 <td><?php form::text_field_wid2('reference_doc_type'); ?></td>
  				 <td><?php form::text_field_wid2('reference_doc_number'); ?></td>
+				 				 <td><?php echo $f->select_field_from_object('mdm_discount_header_id', mdm_discount_header::find_all(), 'mdm_discount_header_id', 'discount_name', $$class_second->mdm_discount_header_id, '', 'medium') ?></td>
+				 <td><?php form::number_field_wid2('discount_amount'); ?></td>
  				</tr>
 				 <?php
 				 $count = $count + 1;

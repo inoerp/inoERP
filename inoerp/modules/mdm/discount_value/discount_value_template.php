@@ -7,19 +7,16 @@
 		 <div id="tabsHeader-1" class="tabContent">
 			<ul class="column header_field">
 			 <li><?php
-					 $f->val_field_wid2m('po_number', 'po_all_v', 'po_number', '', $readonly1_class . ' enable_update');
+					 $f->l_val_field_d('po_number', 'po_all_v', 'po_number', '', $readonly1_class . ' enable_update');
 					 echo $f->hidden_field_withCLass('po_status', 'approved', 'popup_value');
 					 echo $f->hidden_field_withCLass('po_header_id', '', 'popup_value po_header_id');
 					 echo $f->hidden_field_withCLass('po_line_id', '', 'popup_value po_line_id');
 					 ?><i class="generic select_po_number select_popup clickable fa fa-search enable_update <?php echo $readonly1_class ?>" data-class_name="po_all_v"></i></li>
 			 <li><?php
-					 $f->val_field_wid2m('so_number', 'sd_so_all_v', 'so_number', '', $readonly1_class . ' enable_update');
+					 $f->l_val_field_d('so_number', 'sd_so_all_v', 'so_number', '', $readonly1_class . ' enable_update');
 					 echo $f->hidden_field_withCLass('sd_so_header_id', '', 'popup_value sd_so_header_id');
 					 echo $f->hidden_field_withCLass('sd_so_line_id', '', 'popup_value sd_so_line_id');
 					 ?><i class="generic select_po_number select_popup clickable fa fa-search enable_update <?php echo $readonly1_class ?>" data-class_name="po_all_v"></i></li>
-
-			 <li><?php $f->l_text_field_dr_withSearch('sd_so_header_id') ?> </li>
-			 <li><?php $f->l_text_field_dr_withSearch('sd_so_line_id') ?>
 				<a name="show" href="form.php?class_name=sd_so_line&<?php echo "mode=$mode"; ?>" class="show document_id sd_so_line_id"><i class="fa fa-refresh"></i></a> 
 			 </li>			</ul>
 		 </div>

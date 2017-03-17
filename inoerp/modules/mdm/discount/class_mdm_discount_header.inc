@@ -19,14 +19,10 @@ class mdm_discount_header extends dbObject {
 		 'module_name' => 'lms',
 		 'weight' => 2
  ];
- 
  public static $discount_type_a = [
 		 'PER' => 'Percentage',
 		 'FORMULA' => 'Formula'
  ];
- 
-
- 
  public $field_a = [
 		 'mdm_discount_header_id',
 		 'discount_name',
@@ -46,7 +42,7 @@ class mdm_discount_header extends dbObject {
  //variables used for showing data
 
  public $initial_search = [
-		 		 'discount_name',
+		 'discount_name',
 		 'discount_code',
 		 'module_code',
 		 'description',
