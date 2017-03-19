@@ -16,5 +16,3 @@ along with this program as the file LICENSE.txt; If a copy of the MPL was not di
 
 Authors :
 1. Nishit R. Das
-
-
