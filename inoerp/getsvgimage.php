@@ -1,5 +1,4 @@
 <?php
-
 include_once("includes/basics/basics.inc");
 $svgimage = new getsvgimage();
 $chart_name = 'PO Analysis';
