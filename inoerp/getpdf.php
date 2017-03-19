@@ -1,5 +1,4 @@
 <?php
-
 require_once 'includes/basics/basics.inc';
 $data = "Hello World India of skds skdssd ";
 $pdf = new inopdf();
