@@ -8,8 +8,4 @@ $(document).ready(function() {
 });
 </script>
 <h2>Printing Document</h2>
-      <div id="print_doc">
-        
-        
-      </div>
-      
+<div id="print_doc">   </div>      
