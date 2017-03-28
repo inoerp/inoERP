@@ -23,6 +23,7 @@
           } else if (method_exists($content_type, 'view_page')) {
            $non_db_page = call_user_func(array($content_type, 'view_page'), $_GET);
           } else {
+					 echo ino_access_denied();
            $non_db_page = ' <h1> No data found for the content type </h1>';
 					 $show_submit_button = false;
           }
