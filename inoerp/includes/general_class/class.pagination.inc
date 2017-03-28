@@ -84,14 +84,18 @@ VAR;
  }
 
  public function show_pagination() {
+	
   $pagination_statement = "";
   if (empty($this->_query_string)) {
    if (isset($_SERVER['QUERY_STRING'])) {
-    $this->_query_string = $_SERVER['QUERY_STRING'];
+		
+    $this->_query_string =  htmlentities ($_SERVER['QUERY_STRING']); 
    } else if (isset($_SESSION['recent_visit']['QUERY_STRING'])) {
-    $this->_query_string = $_SESSION['recent_visit']['QUERY_STRING'];
+		$this->_query_string =  htmlentities ($_SESSION['recent_visit']['QUERY_STRING']); 
    }
   }
+	
+
   if (!empty($this->_query_string)) {
    if (strpos($this->_query_string, 'pageno') !== false) {
     $pageno_value = $_GET['pageno'];

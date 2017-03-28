@@ -358,7 +358,7 @@ WHERE table_name = '{$table_name}'  ";
 
   private function xx_table_display($result) {
    if (empty($this->query_string)) {
-    $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+    $query_string = !empty($_SERVER['QUERY_STRING']) ? htmlentities($_SERVER['QUERY_STRING']) : '';
    }
    $total_count = count($result);
    $pagination = new pagination($this->pageno, $this->per_page, $total_count);
@@ -404,7 +404,7 @@ WHERE table_name = '{$table_name}'  ";
 
   private function _table_display($result) {
    if (empty($this->query_string)) {
-    $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+    $query_string = !empty($_SERVER['QUERY_STRING']) ? htmlentities($_SERVER['QUERY_STRING']) : '';
    }
    $no_of_columns_per_tab = 9;
    $column_array_s = [];
@@ -575,7 +575,7 @@ WHERE table_name = '{$table_name}'  ";
   private function _grid_display($result) {
    $columns = !empty($this->no_of_grid_columns) ? $this->no_of_grid_columns + 1 : 4;
    if (empty($this->query_string)) {
-    $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+    $query_string = !empty($_SERVER['QUERY_STRING']) ? htmlentities($_SERVER['QUERY_STRING']) : '';
    }
    $total_count = count($result);
    $pagination = new pagination($this->pageno, $this->per_page, $total_count);

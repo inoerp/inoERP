@@ -68,7 +68,7 @@ if ($continue) {
   if (strpos($_SERVER['REQUEST_URI'], "?") !== false) {
    $request_url_lo_a = explode('?', $_SERVER['REQUEST_URI'])[1];
   }
-  $alias = $_SERVER['QUERY_STRING'];
+  $alias = htmlentities($_SERVER['QUERY_STRING']);
   $orginal_path_i = ext_url_alias::find_by_urlAlias($alias);
   if (!empty($orginal_path_i)) {
    $_GET['is_alias'] = 1;
@@ -170,7 +170,7 @@ if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" || $_GET['per_page'
 $per_page = empty($per_page) ? 10 : $per_page;
 $search_order_by = !(empty($_GET['search_order_by'])) ? $_GET['search_order_by'] : '';
 $search_asc_desc = !(empty($_GET['search_asc_desc'])) ? $_GET['search_asc_desc'] : '';
-$query_string = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+$query_string = isset($_SERVER['QUERY_STRING']) ? htmlentities($_SERVER['QUERY_STRING']) : '';
 
 /*
   ---------------------------------------------------------------------------------------------------------------

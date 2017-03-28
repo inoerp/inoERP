@@ -12,6 +12,12 @@ trait dbObject_t {
 //  public $column = [];
  public $requiredField = [];
  public static $position_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 0];
+  public static $condition_type_a = [
+		 'AND' => 'AND',
+		 'OR' => 'OR',
+		 'LEFT_BRAC' => '('
+ ];
+	
  public static $control_type_a = [
 		 'EQUAL' => '=',
 		 'NE' => '!=',

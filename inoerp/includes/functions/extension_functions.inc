@@ -43,7 +43,7 @@ if (!empty($extension)) {
  $pageno = !(empty($_GET['pageno'])) ? (int) $_GET['pageno'] : 1;
 
 
- $query_string = $_SERVER['QUERY_STRING'];
+ $query_string = htmlentities($_SERVER['QUERY_STRING']);
  //per page details
  if (!empty($_POST['per_page'])) {
 	if (strpos($query_string, 'per_page') !== false) {

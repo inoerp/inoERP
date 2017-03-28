@@ -741,7 +741,7 @@ function thisPage_url() {
 }
 
 function select_per_page($per_page = '10') {
- $link = $_SERVER['PHP_SELF'] . '?';
+ $link = htmlentities($_SERVER['PHP_SELF']) . '?';
  $content_string = '<div class="noOfcontents " >';
  $content_string .= '<select name="per_page" class="per_page small">';
  $content_string .= '<option value="3" ';
@@ -1363,6 +1363,24 @@ function search_kanban_planner() {
 function search_org_name() {
  global $f;
  $stmt = $f->select_field_from_object('org_id', org::find_all_inventory(), 'org_id', 'org', '', 'org_id', '', '', '', '', 1);
+ return $stmt;
+}
+
+function search_schedule_ship_date() {
+ global $f; 
+ $stmt = $f->date_fieldAnyDay('schedule_ship_date', '');
+ return $stmt;
+}
+
+function search_schedule_ship_date_gt() {
+ global $f; 
+ $stmt = $f->date_fieldAnyDay_gt('schedule_ship_date', '');
+ return $stmt;
+}
+
+function search_schedule_ship_date_lt() {
+ global $f; 
+ $stmt = $f->date_fieldAnyDay_lt('schedule_ship_date', '');
  return $stmt;
 }
 
@@ -2233,6 +2251,7 @@ function ino_recent_visits() {
 		break;
 	 }
 	 if (!is_numeric($k)) {
+		$k = htmlentities($k);
 		$recent_visit .= '<li><a href="' . htmlspecialchars($v) . '">' . str_replace('_', ' ', substr($k, 0, 30)) . '</a>';
 	 } else {
 		$recent_visit .= '<li><a href="' . htmlspecialchars($v) . '"> Vsiti ' . $k . '</a>';

@@ -37,7 +37,7 @@
                     <span class="input-group-addon">
                      <i class="glyphicon glyphicon-user"></i>
                     </span> 
-                    <input type="text" id="username"  class="form-control  username"  value="" name="username[]" placeholder="<?php echo gettext('Username'); ?>" autofocus>
+                    <input type="text" id="username"  class="form-control  username"  value="demouser" name="username[]" readonly autofocus>
                    </div>
                   </div>
                   <div class="form-group">
@@ -45,7 +45,7 @@
                     <span class="input-group-addon">
                      <i class="glyphicon glyphicon-lock"></i>
                     </span>
-                    <input type="password" value="" placeholder="<?php echo gettext('Password'); ?>" id="password"  name="password" class="form-control">
+                    <input type="password" value="demouser" readonly id="password"  name="password" class="form-control">
                    </div>
                   </div>
                   <div class="form-group">

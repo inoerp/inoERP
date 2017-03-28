@@ -375,7 +375,7 @@ class extn_report extends dbObject {
  private function _table_display($result) {
   $drop_down_icon = ino_search_dropDownSettings();
   if (empty($this->query_string)) {
-   $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+   $query_string = !empty($_SERVER['QUERY_STRING']) ? htmlentities($_SERVER['QUERY_STRING']) : '';
   }
   $no_of_columns_per_tab = 9;
   $column_array_s = [];

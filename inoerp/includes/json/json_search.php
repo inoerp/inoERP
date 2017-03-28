@@ -1,6 +1,13 @@
 <?php include_once("../basics/basics.inc"); ?>
 <?php
 
+ if (!empty($_SESSION['default_theme'])) {
+  $selected_theme = $_SESSION['default_theme'];
+ } else {
+  set_default_theme();
+  $selected_theme = $_SESSION['default_theme'];
+ }
+ 
 $access_level = null;
 
 if (!empty($_GET['class_name'])) {

@@ -327,7 +327,7 @@ class comment extends dbObject {
   $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
   $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 20;
   $this->subject_noof_char = empty($this->subject_noof_char) ? 100 : $this->subject_noof_char;
-  $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+  $query_string = !empty($_SERVER['QUERY_STRING']) ? htmlentities($_SERVER['QUERY_STRING']) : '';
   $comment_result = $this->content_comment_with_reference();
   $total_count_c = count($comment_result);
   $pagination_c = new pagination($pageno, $per_page, $total_count_c);
@@ -403,7 +403,7 @@ class comment extends dbObject {
   global $f;
   $pageno = !empty($_GET['pageno']) ? $_GET['pageno'] : 1;
   $per_page = !empty($_GET['per_page']) ? $_GET['per_page'] : 10;
-  $query_string = !empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+  $query_string = !empty($_SERVER['QUERY_STRING']) ? htmlentities($_SERVER['QUERY_STRING']) : '';
   $comment_string = " ";
   $sql = "SELECT comment.comment_id, comment.comment, comment.created_by,  comment.creation_date, "
    . "  comment.creation_date, IFNULL(user.username, comment.comment_by) as username, user.image_file_id as image_file_id "

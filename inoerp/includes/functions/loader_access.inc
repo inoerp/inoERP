@@ -36,7 +36,7 @@ switch ($access_level) {
 
  default:
 	if (!in_array($class, ['ino_generic', 'ec_product_view'])) {
-	 $access_denied_msg = 'You dont have acess to the requested object ' . $class;
+	 $access_denied_msg = 'You dont have acess to the requested object ' . $class .  '<br><a href="'.HOME_URL.'extensions/ino_user/user_login.php"> Login </a> or request for access';
 	}
 	break;
 }

@@ -54,7 +54,7 @@ foreach ($search_array as $key => $value) {
 }
 
 if (!empty($_SERVER['QUERY_STRING'])) {
- $query_string = $_SERVER['QUERY_STRING'];
+ $query_string = htmlentities($_SERVER['QUERY_STRING']);
 //  $query_string = remove_querystring_var($query_string, 'page');
  if (!empty($_GET['pageno'])) {
   $query_string = substr($query_string, 9);
