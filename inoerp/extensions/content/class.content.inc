@@ -50,7 +50,6 @@ class content extends dbObject {
  public $field_a = [
 		 "content_id",
 		 "content_type_id",
-		 
 		 "parent_id",
 		 "subject",
 		 "terms",
@@ -154,6 +153,10 @@ class content extends dbObject {
 	 $this->content = htmlentities($this->content);
 	}
 
+	if (!empty($this->subject)) {
+	 $this->subject = htmlentities($this->subject);
+	}
+
 	if (!empty($this->non_db_content_type)) {
 	 $ndbc = new $this->non_db_content_type;
 	 if (method_exists($ndbc, '_before_save')) {
@@ -247,7 +250,7 @@ class content extends dbObject {
 
 		$field_values = '';
 		foreach ($content_field_array as $key => $value) {
-		 $field_values .= ':' . htmlentities($value) . ', ';
+		 $field_values .= ':' . ($value) . ', ';
 		}
 		$field_values = rtrim($field_values, ', ');
 //write SQL
@@ -265,7 +268,7 @@ class content extends dbObject {
 		//Bind parameters
 		foreach ($content_field_array as $key => $value) {
 		 if (!empty($_POST[$value][0])) {
-			$stmt->bindParam(":$value", $_POST[$value][0]);
+			$stmt->bindParam(":$value", htmlentities($_POST[$value][0]));
 		 } else {
 			$stmt->bindvalue(":$value", null, PDO::PARAM_INT);
 		 }
