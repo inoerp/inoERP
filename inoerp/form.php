@@ -12,10 +12,30 @@ if (!empty($_GET['router'])) {
 } else if (!empty($_GET['class_name'])) {
  $class_names = $_GET['class_name'];
 } else if (!empty($_GET['module_code'])) {
+
  $class_names = 'ino_generic';
  $type = !empty($_GET['type']) ? $_GET['type'] : null;
  include_once('includes/basics/basics.inc');
+ 
+  /*
+  * Get all modules in system and  check if module code exists
+  * If module code does not exists then show error message
+  */
+ $all_modules = option_header::find_options_byName('SYS_MODULE');
+ $mod_does_not_exists = true;
+ foreach($all_modules as $mod){
+	if($mod->option_line_code == $_GET['module_code']){
+	 $mod_does_not_exists = false;
+	 break;
+	}
+ }
+ if($mod_does_not_exists){
+	access_denied_redirection();
+ }
+ 
  $path = new path();
+ 
+ 
  if (!empty($_GET['path_id'])) {
   $ino_generic_html = $path->findBy_moduleCode($_GET['module_code'], $type, array($_GET['path_id']));
  } else {
