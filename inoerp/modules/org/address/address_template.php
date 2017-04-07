@@ -82,9 +82,10 @@
        <li><?php $f->l_text_field_d('phone'); ?></li>
        <li><?php $f->l_text_field_d('email'); ?></li>
        <li><?php $f->l_text_field_d('website'); ?></li>
-       <li><?php $f->l_text_field_d('phone'); ?></li>
+       
        <li><?php $f->l_text_field_d('country'); ?></li>
        <li><?php $f->l_text_field_d('postal_code'); ?></li>
+			 <li></li>
        <li><label><?php echo gettext('Address') ?></label>  
 					 <?php echo form::text_area('address', $address->address, '3', '22', '', 'Complete Address', 'address', $readonly); ?>
        </li>
