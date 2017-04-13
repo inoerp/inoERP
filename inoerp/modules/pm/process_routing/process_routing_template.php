@@ -82,9 +82,9 @@ inoERP
         <th><?php echo gettext('Step') ?></th>
         <th><?php echo gettext('Operation') ?></th>
         <th><?php echo gettext('Description') ?></th>
-        <th><?php echo gettext('Step Quantity') ?></th>
+        <th><?php echo gettext('Step Qty') ?></th>
         <th><?php echo gettext('UOM') ?></th>
-        <th><?php echo gettext('Min Quantity') ?></th>
+        <th><?php echo gettext('Min Qty') ?></th>
         <th><?php echo gettext('Release Type') ?></th>
         <th><?php echo gettext('Operation Details') ?></th>
        </tr>
@@ -102,12 +102,12 @@ inoERP
          </td>
          <td><?php $f->seq_field_d($count) ?></td>
          <td><?php form::text_field_wid2sr('pm_process_routing_line_id'); ?></td>
-         <td><?php $f->text_field_wid2('step_no'); ?></td>
+         <td><?php $f->text_field_wid2s('step_no'); ?></td>
          <td><?php echo $f->select_field_from_object('pm_process_operation_header_id', $all_operation_objs, 'pm_process_operation_header_id', array('operation_name' ,'org_id') , $$class_second->pm_process_operation_header_id, '', 'medium' ,'','','','','','org_id'); ?></td>
          <td><?php $f->text_field_wid2('description'); ?></td>
-         <td><?php $f->text_field_wid2('step_quantity'); ?></td>
+         <td><?php $f->text_field_wid2s('step_quantity'); ?></td>
          <td><?php echo $f->select_field_from_object('uom_id', uom::find_all(), 'uom_id', 'uom_name', $$class_second->uom_id, '', '', 'uom_id medium'); ?></td>
-         <td><?php $f->text_field_wid2('min_quantity'); ?></td>
+         <td><?php $f->text_field_wid2s('min_quantity'); ?></td>
          <td><?php echo $f->select_field_from_array('release_type', pm_process_routing_line::$release_type_a,  $$class_second->release_type, '', 'uom_id medium'); ?></td>
          <td><a target="_new" class="popup popup-form-i view-operation-details medium" href="form.php?class_name=pm_process_operation_header&mode=9&pm_process_operation_header_id=<?php echo $$class_second->pm_process_operation_header_id ; ?>"> 
            <i class="fa fa-edit"></i></a></td>
