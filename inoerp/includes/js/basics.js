@@ -5944,7 +5944,7 @@ $(document).ready(function () {
  if (typeof bg_image_path !== 'undefined' && bg_image_path != "") {
 //$('.container-fluid').css('background-image', 'url(' + bg_image_path + ')');
   $('#ino-body, body').css('background-image', 'url(' + bg_image_path + ')');
-  $('.tabContainer, #path_by_module').css('opacity', bg_opacity);
+  $(' #path_by_module').css('opacity', bg_opacity);
   $('.sidebar').css('background-color', 'transparent');
  }
 
