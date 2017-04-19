@@ -17,8 +17,8 @@
         <a name="show" href="form.php?class_name=hr_employee&<?php echo "mode=$mode"; ?>" class="show document_id hr_employee_id">
          <i class="fa fa-refresh"></i></a> 
        </li>
-       <li><?php $f->l_text_field_d('first_name'); ?> 					</li>
-       <li><?php $f->l_text_field_d('last_name'); ?> 					</li>
+       <li><?php $f->l_text_field_dm('first_name'); ?> 					</li>
+       <li><?php $f->l_text_field_dm('last_name'); ?> 					</li>
        <li><?php $f->l_text_field_d('title'); ?> 					</li>
        <li><?php $f->l_select_field_from_object('gender', hr_employee::gender(), 'option_line_code', 'option_line_value', $$class->gender, '', 'gender', '', $readonly); ?>              </li>
        <li><?php $f->l_select_field_from_object('person_type', hr_employee::person_type(), 'option_line_code', 'option_line_value', $$class->person_type, '', 'person_type', 1, $readonly); ?>              </li>
@@ -98,8 +98,8 @@
         <li><?php $f->l_select_field_from_object('payroll_id', hr_payroll::find_all(), 'hr_payroll_id', 'payroll', $$class->payroll_id, 'payroll_id'); ?>  </li>
 
 
-        <li><?php
-         echo $f->l_val_field_d('supervisor_employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
+        <li><label><?php echo gettext('Supervisor') ?></label><?php
+         echo $f->val_field_d('supervisor_employee_name', 'hr_employee_v', 'employee_name', '', 'vf_select_document_owner employee_name');
          echo $f->hidden_field_withIdClass('hr_employee_id', $$class->hr_employee_id,'employee_id');
          ?><i class="generic g_select_document_owner select_popup clickable fa fa-search" data-class_name="hr_employee_v"></i></li>
        </ul> 
@@ -159,10 +159,10 @@
              </td>
              <td><?php $f->seq_field_d($count) ?></td>
              <td><?php $f->text_field_wid2sr('hr_employee_education_id') ?></td>
-             <td><?php $f->text_field_wid2m('degree_name'); ?></td>
-             <td><?php $f->text_field_wid2m('university'); ?></td>
-             <td><?php echo $f->date_fieldAnyDay_m('edu_start_date', $$class_second->edu_start_date , false); ?></td>
-             <td><?php echo $f->date_fieldAnyDay('edu_end_date', $$class_second->edu_end_date); ?></td>
+             <td><?php $f->text_field_wid2('degree_name'); ?></td>
+             <td><?php $f->text_field_wid2('university'); ?></td>
+             <td><?php echo $f->date_fieldAnyDay('edu_start_date', $$class_second->edu_start_date , false); ?></td>
+             <td><?php echo $f->date_fieldAnyDay('edu_end_date', $$class_second->edu_end_date, false); ?></td>
              <td><?php $f->text_field_wid2('mode_of_education'); ?></td>
              <td><?php $f->text_field_wid2s('marks_percentage'); ?></td>
              <td><?php $f->text_field_wid2s('grade'); ?></td>
@@ -315,7 +315,7 @@
      </div>
      <div id="tabsLine-6"  class="tabContent">
       <div> 
-       <ul class="column four_column"> 
+       <ul class="column header_field"> 
         <li><?php $f->l_date_fieldAnyDay('date_of_notification', $$class_fourth->date_of_notification); ?></li>
         <li><?php $f->l_text_field('reason', $$class_fourth->projected_last_date); ?></li>
         <li><?php $f->l_date_fieldAnyDay('projected_last_date', $$class_fourth->projected_last_date); ?></li>
