@@ -28,6 +28,10 @@ if (isset($_FILES)) {
  if (!empty($_POST['display_type'])) {
   $file->display_type =  $_POST['display_type'];
  }
+ 
+  if (!empty($_POST['description'])) {
+  $file->description =  $_POST['description'];
+ }
 
  echo '<div id="uploaded_files">';
  $file->upload_file($_FILES);

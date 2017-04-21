@@ -441,7 +441,7 @@ class extn_comment extends dbObject {
     } elseif ((!empty($_SESSION['user_roles'])) && (in_array('ADMIN', $_SESSION['user_roles']))) {
      $allow_content_update = true;
     }
-    $comment_file = extn_file::find_by_reference_table_and_id('comment', $records->extn_comment_id);
+    $comment_file = extn_file::find_by_reference_table_and_id('extn_comment', $records->extn_comment_id);
     $comment_string .= "<div id=\"comment_id_$records->extn_comment_id\" class=\"panel panel-info commentRecord\">";
     $comment_string .= '<div class="panel-heading">';
     $comment_string .= '<ul class="header_li">';
