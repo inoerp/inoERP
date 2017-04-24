@@ -367,30 +367,73 @@ function getFieldNames(options) {
  $(".table_fields").attr("disabled", false);
 }
 
-//function treeview
-function treeView() {
- $('ul.tree_view  ul').hide();
- $('ul.tree_view > li').show();
- $('ul.tree_view > li').has('ul').addClass('contentContainer fa fa-plus-square');
- $('.tree_view').on('click', '.contentContainer, .contentViewing',
+//tree view
+function folder_treeView() {
+ var plusClass = 'fa-folder-close-o';
+ var minusClass = 'fa-folder-open-o';
+ $('ul.tree_view2  ul').hide();
+ $('ul.tree_view2 > li').show();
+ $('ul.tree_view2 > li').has('ul').addClass('contentContainer fa ' + plusClass);
+ $('.tree_view2').on('click', '.contentContainer, .contentViewing',
          function (e) {
           if (e.target === this && $(this).hasClass('contentContainer')) {
            $(this).find('>ul').show();
            $(this).find('>ul').find('>li').show();
-           $(this).find('>ul').find('>li').has('ul').addClass('contentContainer fa-plus-square');
-           $(this).removeClass('contentContainer fa-plus-square').addClass('contentViewing fa fa-minus-square');
+           $(this).find('>ul').find('>li').has('ul').addClass('contentContainer ' + plusClass);
+           $(this).removeClass('contentContainer ' + plusClass).addClass('contentViewing fa ' + minusClass);
            e.stopPropagation();
           } else if (e.target === this) {
            $(this).find('>ul').hide();
-           $(this).find('>ul').find('>li').hide().removeClass('contentContainer fa-plus-square');
-           $(this).removeClass('contentViewing fa-minus-square').addClass('contentContainer fa-plus-square');
+           $(this).find('>ul').find('>li').hide().removeClass('contentContainer ' + plusClass);
+           $(this).removeClass('contentViewing ' + minusClass).addClass('contentContainer ' + plusClass);
            e.stopPropagation();
           }
           if (e.target === this) {
            $(this).parent().find('.contentContainer, .contentViewing').not(this).each(function (e) {
             $(this).find('ul').hide();
-            $(this).find('ul').find('li').hide().removeClass('contentContainer fa-minus-square');
-            $(this).removeClass('contentViewing fa-minus-square').addClass('contentContainer fa-plus-square');
+            $(this).find('ul').find('li').hide().removeClass('contentContainer ' + minusClass);
+            $(this).removeClass('contentViewing ' + minusClass).addClass('contentContainer ' + plusClass);
+           });
+          }
+
+         });
+
+}
+
+
+
+//function treeview
+function treeView() {
+ var plusClass = 'fa-plus-square';
+ var minusClass = 'fa-minus-square';
+ if ($(this).attr('data-plusclass')) {
+  plusClass = $('ul.tree_view').Data('plusclass');
+ }
+ if ($(this).attr('data-minusclass')) {
+  minusClass = $('ul.tree_view').Data('minusclass');
+ }
+ $('ul.tree_view  ul').hide();
+ $('ul.tree_view > li').show();
+ $('ul.tree_view > li').has('ul').addClass('contentContainer fa ' + plusClass);
+ $('.tree_view').on('click', '.contentContainer, .contentViewing',
+         function (e) {
+          if (e.target === this && $(this).hasClass('contentContainer')) {
+           $(this).find('>ul').show();
+           $(this).find('>ul').find('>li').show();
+           $(this).find('>ul').find('>li').has('ul').addClass('contentContainer ' + plusClass);
+           $(this).removeClass('contentContainer ' + plusClass).addClass('contentViewing fa ' + minusClass);
+           e.stopPropagation();
+          } else if (e.target === this) {
+           $(this).find('>ul').hide();
+           $(this).find('>ul').find('>li').hide().removeClass('contentContainer ' + plusClass);
+           $(this).removeClass('contentViewing ' + minusClass).addClass('contentContainer ' + plusClass);
+           e.stopPropagation();
+          }
+          if (e.target === this) {
+           $(this).parent().find('.contentContainer, .contentViewing').not(this).each(function (e) {
+            $(this).find('ul').hide();
+            $(this).find('ul').find('li').hide().removeClass('contentContainer ' + minusClass);
+            $(this).removeClass('contentViewing ' + minusClass).addClass('contentContainer ' + plusClass);
            });
           }
 
@@ -2417,8 +2460,8 @@ function getViewResultByViewId(options) {
 function getFormPersonalization(options) {
  var defaults = {
   json_url: 'modules/sys/form_personalization/json_fp.php',
-  template_code : $('#template_code').val(),
-  obj_class_name : $('#obj_class_name').val()
+  template_code: $('#template_code').val(),
+  obj_class_name: $('#obj_class_name').val()
  };
  var settings = $.extend({}, defaults, options);
 
@@ -2432,9 +2475,9 @@ function getFormPersonalization(options) {
   },
   success: function (result) {
    if (result) {
-     var divHtml = '<div id="form_data">' + $(result).filter('div#return_divId').html() + '</div>';
-     $('#form_data').empty().append(divHtml);
-     $.getScript("includes/js/reload.js");
+    var divHtml = '<div id="form_data">' + $(result).filter('div#return_divId').html() + '</div>';
+    $('#form_data').empty().append(divHtml);
+    $.getScript("includes/js/reload.js");
    }
   },
   complete: function () {
@@ -3511,11 +3554,11 @@ $(document).ready(function () {
    var opener_elemenType = window.opener.$(close_field_class).parent().prop('tagName');
    if (opener_elemenType === 'LI') {
     $(selectedData).each(function (i, currentData) {
-     
+
      $(currentData).each(function (k, v) {
       if (v.field_name !== 'undefined') {
        var field_d = '.' + v.field_name;
-       console.log(' field_d : ' + field_d + ' v.field_value ' + v.field_value );
+       console.log(' field_d : ' + field_d + ' v.field_value ' + v.field_value);
        if (localStorage.getItem("set_value_for_one_field") !== null) {
         window.opener.$(close_field_class).parent().find(field_d).val(v.field_value);
 //        console.log(field_d + ' : ' +  close_field_class + ' :: ' +  v.field_value);
@@ -3523,7 +3566,7 @@ $(document).ready(function () {
         window.opener.$(close_div_class).find(field_d).val(v.field_value);
 //        console.log(field_d + ' : ' +  close_field_class + ' :: ' +  v.field_value);
        } else {
-        console.log('3 field_d : ' + field_d + ' v.field_value ' + v.field_value + 'close_field_class is '+ close_field_class );
+        console.log('3 field_d : ' + field_d + ' v.field_value ' + v.field_value + 'close_field_class is ' + close_field_class);
         window.opener.$(close_field_class).closest('.tabContent').find(field_d).val(v.field_value);
        }
       }
@@ -4168,8 +4211,8 @@ $(document).ready(function () {
   }
 
  });
- 
-  $('body').on('focus', ".anyDate_gt", function () {
+
+ $('body').on('focus', ".anyDate_gt", function () {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
    alert(readonly_field);
@@ -4185,8 +4228,8 @@ $(document).ready(function () {
   }
 
  });
- 
-   $('body').on('focus', ".anyDate_lt", function () {
+
+ $('body').on('focus', ".anyDate_lt", function () {
   if ($(this).hasClass('readonly')) {
    $(this).prop('disabled', true);
    alert(readonly_field);
@@ -4848,6 +4891,12 @@ $(document).ready(function () {
 // #pagination .page_nos a REMOVED for comment and content multi action
  $('body').on('click', '.getAjaxForm,#top-path-menu-ul a, #path_by_module a, .search_result a, #erp_form_area a.ajax-link ,.pagination_page .page_nos a, #header_top .menu a, #sys_menu_left_vertical .menu a,#search_result .action a,  #new_page_button', function (e) {
   e.preventDefault();
+  if (ino_light) {
+   if ($(this).closest('li').data('enterprise') == '1') {
+    alert("Sorry! for technical reasons this feature is available only in the inoERP cloud version.");
+    return false;
+   }
+  }
   var urlLink = $(this).attr('href');
   var urlLink_a = urlLink.split('?');
   var urlLink_firstPart_a = urlLink_a[0].split('/');
@@ -5691,10 +5740,11 @@ $(document).ready(function () {
   // $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">'+ noof_field_changes+' Unsaved Changes</span>');
   //}
   noof_field_changes++;
-  if ( noof_field_changes == 1 ) {
-   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + noof_field_changes + ' ' + unsaved_change + '</span>'); }
-  else {
-   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + noof_field_changes + ' ' + unsaved_changes + '</span>'); }
+  if (noof_field_changes == 1) {
+   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + noof_field_changes + ' ' + unsaved_change + '</span>');
+  } else {
+   $('#unsaved_fields').html('<span role="button" class="btn btn-warning btn-sm unsaved-msg">' + noof_field_changes + ' ' + unsaved_changes + '</span>');
+  }
   $('#unsaved_fields').data('no_of_fields', noof_field_changes);
  });
 
@@ -5944,7 +5994,7 @@ $(document).ready(function () {
  if (typeof bg_image_path !== 'undefined' && bg_image_path != "") {
 //$('.container-fluid').css('background-image', 'url(' + bg_image_path + ')');
   $('#ino-body, body').css('background-image', 'url(' + bg_image_path + ')');
-  $(' #path_by_module').css('opacity', bg_opacity);
+  $('#path_by_module').css('opacity', bg_opacity);
   $('.sidebar').css('background-color', 'transparent');
  }
 
@@ -6042,8 +6092,8 @@ $(document).ready(function () {
    deleteHeaderAjax(daletePath, headerId);
   }
  });
- 
- $('body').on('change', '#ledger_id, #gl_ledger_id', function(){
+
+ $('body').on('change', '#ledger_id, #gl_ledger_id', function () {
   $('.ledger_currency').val($(this).find('option:selected').data('currency_code'));
  });
 
