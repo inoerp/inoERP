@@ -369,7 +369,7 @@ function getFieldNames(options) {
 
 //tree view
 function folder_treeView() {
- var plusClass = 'fa-folder-close-o';
+ var plusClass = 'fa-folder-o';
  var minusClass = 'fa-folder-open-o';
  $('ul.tree_view2  ul').hide();
  $('ul.tree_view2 > li').show();
@@ -3267,6 +3267,52 @@ function save_dataInSession(options) {
 }
 
 
+function getFilesList(options) {
+ var defaults = {
+  json_url: 'extensions/folder/json_folder.php'
+ };
+ var settings = $.extend({}, defaults, options);
+
+ return $.ajax({
+  url: settings.json_url,
+  type: 'get',
+  dataType: 'json',
+  data: {
+   extn_folder_id: settings.extn_folder_id,
+   find_files: 1
+  },
+  success: function (result) {
+   $('tbody#folder-content').empty();
+   if (result) {
+    var body_stmt = '';
+    $.each(result, function (f_key, f_name) {
+     var file_lnik = '<a href="'+ f_name.file_path + f_name.file_name +'">' + f_name.file_name + '</a>';
+     body_stmt += '<tr>';
+     body_stmt += '<td>' + f_name.org + '</td>';
+     body_stmt += '<td>' + f_name.reference_table + '</td>';
+     body_stmt += '<td>' + f_name.reference_id + '</td>';
+     body_stmt += '<td>' + file_lnik + '</td>';
+     body_stmt += '<td>' + f_name.creation_date + '</td>';
+     body_stmt += '<td>' + f_name.description + '</td>';
+     body_stmt += '</tr>';
+    });
+    
+   $('tbody#folder-content').replaceWith('<tbody id="folder-content">' + body_stmt + '</tbody>');
+   }
+  },
+  complete: function () {
+   $('.show_loading_small').hide();
+  },
+  beforeSend: function () {
+   $('.show_loading_small').show();
+  },
+  error: function (request, errorType, errorMessage) {
+   $(".error").prepend('Request ' + request + ' has errored with ' + errorType + ' : ' + errorMessage);
+   $("#accordion").accordion({active: 0});
+  }
+ });
+}
+
 //get SelectOptionsForExpense
 function getSelectOptionsForExpense(options) {
  var defaults = {
@@ -4550,6 +4596,7 @@ $(document).ready(function () {
 
 //tree view
  treeView();
+ folder_treeView();
 
  $("#search_message").dialog({
   autoOpen: false,

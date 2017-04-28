@@ -284,6 +284,7 @@ $(document).ready(function () {
 
 //tree view
 // treeView();
+folder_treeView();
 
  $("#search_message").dialog({
   autoOpen: false,

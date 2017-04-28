@@ -19,6 +19,7 @@ defined('INC_CLASS') ? null : define('INC_CLASS', INC_PATH . DS . 'general_class
 defined('INC_MODULE') ? null : define('INC_MODULE', HOME_DIR . DS . 'modules');
 defined('INC_EXTENSIONS') ? null : define('INC_EXTENSIONS', HOME_DIR . DS . 'extensions');
 defined('INC_TPARTY') ? null : define('INC_TPARTY', HOME_DIR . DS . 'tparty');
+const INO_LIGHT = FALSE;
 
 
 ////load core objects

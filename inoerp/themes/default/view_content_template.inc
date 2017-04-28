@@ -1,3 +1,7 @@
+<?php require_once __DIR__.'/../../assets/vendor/HTMLPurifier/library/HTMLPurifier.auto.php';
+$config = HTMLPurifier_Config::createDefault();
+$purifier = new HTMLPurifier($config);
+?>
 <div class="container" id="content_<?php echo $content->content_id; ?>">
  <div class="row">
   <div class="col-md-8 col-xs-12 col-sm-12 blog-main">
@@ -36,7 +40,7 @@
         <div id="content_extra"><?php
          $cont_html =  content::content_by_id($content_type_name, $content->content_id);
 //         echo nl2br(($cont_html));
-				          echo nl2br(html_entity_decode($cont_html , ENT_HTML5,'UTF-8'));
+				          echo nl2br($purifier->purify(html_entity_decode($cont_html , ENT_QUOTES,'UTF-8')));
          ?></div>
         <div id="after_content_extra">
          <div id="content_navigation" class="parent-child-nav">

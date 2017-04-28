@@ -1,0 +1,27 @@
+#folder-right, #folder-left{
+    min-height: 500px;
+}
+
+#folder-left li{
+    font-size: 16px ;
+    cursor: pointer; 
+    
+}
+
+#folder-left li a{
+    margin-left: 4px;
+    font-weight: bold;
+}
+
+ #folder-left, #folder-right{
+    background-color:  #fdfdfd;
+}
+
+.second-parent{
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+}
+
+#folder-left .second-parent li{
+    margin: 25px 15px;
+}

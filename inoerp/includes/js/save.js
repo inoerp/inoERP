@@ -353,8 +353,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    savingOnlyHeader = true;
   } else if (($('#form_line').html()) && ($(primary_column_id_h).val()) && ($('input[name="line_id_cb"]:checked').length > 0) && ($(line_key_field_d).val())) {
    savingOnlyHeader = false;
-  }
-  else {
+  } else {
    savingOnlyHeader = true;
   }
 
@@ -418,8 +417,7 @@ saveMainClass.prototype.saveMain = function (beforeSave)
    var lineData = $(form_line_id_h).serializeArray();
 //   alert('315' + ' :  ' + form_line_id_h + lineData );
    saveSingleLine(json_url, lineData, primary_column_id_h, lineClassName);
-  }
-  else {
+  } else {
    /*-----------------------------------Completion of single line & start of multiple lines form save--------------------------------
     for option type of form - one header & multiple lines 
     */
@@ -681,7 +679,7 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
  var enableUpdate = this.enableUpdate;
  var lineNumberIncrementValue = this.lineNumberIncrementValue;
  var enableUpdate_c = '.' + enableUpdate;
- var divClassToBeCopied_c = '.' +  this.divClassToBeCopied;
+ var divClassToBeCopied_c = '.' + this.divClassToBeCopied;
  trClass = trClass.replace(/tr\./g, '');
  trClass = trClass.replace(/0/g, '');
  trClass = trClass.replace(/-/g, '');
@@ -718,8 +716,7 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
    $("#tabsLine-" + startingTabNumber + " " + newtrClass).clone().attr("id", "new_object" + startingTabNumber + "_" + objectCount).attr("class", "new_object" + objectCount).appendTo($("#tabsLine-" + startingTabNumber + " " + tbodyClass));
    startingTabNumber++;
    tabCount++;
-  }
-  while (tabCount <= this.noOfTabs);
+  } while (tabCount <= this.noOfTabs);
  } else {
   $(newtrClass).clone().attr("class", "new_object" + objectCount).appendTo($(tbodyClass));
  }
@@ -748,7 +745,7 @@ add_new_rowMain.prototype.add_new_row = function (afterAddNewRow) {
   });
  }
 
-$("tr.new_object" + objectCount).find(enableUpdate_c).removeAttr("disabled","readonly").removeClass('always_readonly readonly');
+ $("tr.new_object" + objectCount).find(enableUpdate_c).removeAttr("disabled", "readonly").removeClass('always_readonly readonly');
  $("tr.new_object" + objectCount).find(".class_detail_form").replaceWith("");
  $("tr.new_object" + objectCount).find(".seq_number").val(nextSeqNumber);
  $('.lines_number:last').val(nextLineSeqNumber);
@@ -1163,7 +1160,7 @@ autoCompleteMain.prototype.autoComplete = function ()
  });
 };
 //file upload
-function fileUploadMain(json_url, module_name, document_type, class_name, upload_type, directory, display_type) {
+function fileUploadMain(json_url, module_name, document_type, class_name, upload_type, directory, display_type, description, extn_folder_id) {
  this.json_url = json_url;
  this.module_name = module_name;
  this.class_name = class_name;
@@ -1171,6 +1168,8 @@ function fileUploadMain(json_url, module_name, document_type, class_name, upload
  this.upload_type = upload_type;
  this.directory = directory;
  this.display_type = display_type;
+ this.description = description;
+ this.extn_folder_id = extn_folder_id;
 }
 fileUploadMain.prototype.fileUpload = function () {
  var json_url = this.json_url;
@@ -1180,6 +1179,8 @@ fileUploadMain.prototype.fileUpload = function () {
  var upload_type = this.upload_type;
  var directory = this.directory;
  var display_type = this.display_type;
+ var description = this.description;
+ var extn_folder_id = this.extn_folder_id;
  $('body').on('click', '#attach_submit, #comment_attach_submit, .upload_file', function (e) {
   e.preventDefault();
   var this_e = $(this);
@@ -1199,6 +1200,12 @@ fileUploadMain.prototype.fileUpload = function () {
    jQuery.each($('#attachments')[0].files, function (i, file) {
     formData.append('attachments-' + i, file);
    });
+  }
+  if ($(this_e).closest('.show_attachment').find('.description').val()) {
+   description = $(this_e).closest('.show_attachment').find('.description').val();
+  }
+    if ($(this_e).closest('.show_attachment').find('.extn_folder_id').val()) {
+   extn_folder_id = $(this_e).closest('.show_attachment').find('.extn_folder_id').val();
   }
 
   if ($('#upload_type').val()) {
@@ -1225,6 +1232,17 @@ fileUploadMain.prototype.fileUpload = function () {
   if (display_type !== null) {
    formData.append('display_type', display_type);
   }
+  
+    if (description !== null) {
+   formData.append('description', description);
+  }
+  
+      if (extn_folder_id !== null) {
+   formData.append('extn_folder_id', extn_folder_id);
+  }
+  
+  
+  
   return $.ajax({
    url: json_url,
    data: formData,

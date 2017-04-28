@@ -12,5 +12,6 @@ mandatory_field_color="<?php echo !empty($site_info->mandatory_field_color) ? $s
 content_color="<?php echo !empty($site_info->content_color) ? $site_info->content_color : ''; ?>"
 bg_image_path="<?php echo !empty($site_info->bg_image_path) ? $site_info->bg_image_path : ''; ?>"
 bg_opacity="<?php echo !empty($site_info->bg_opacity) ? $site_info->bg_opacity : '1'; ?>"
+ino_light="<?php echo INO_LIGHT; ?>"
 unsaved_change="<?php echo gettext("Unsaved Change"); ?>"
 unsaved_changes="<?php echo gettext("Unsaved Changes"); ?>"

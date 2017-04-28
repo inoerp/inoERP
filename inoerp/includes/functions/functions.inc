@@ -73,14 +73,25 @@ function autoLoadAll($className) {
  }
 }
 
+/*
+ * 1. class_extn_file.inc in file
+ * 2. class_site_info.inc in site_info
+ * 3.
+ * 4. class_extn_folder_all_v in folder \all_v
+ */
+
 function extension_auto_load(&$paths, $className) {
  $filename = HOME_DIR . DS . 'extensions' . DS . $paths[1] . DS . 'class_' . $className . ".inc";
  if (!is_readable($filename)) {
 	$filename = HOME_DIR . DS . 'extensions' . DS . $paths[1] . '_' . $paths[2] . DS . 'class_' . $className . ".inc";
+	if (!is_readable($filename)) {
+	 $filename = HOME_DIR . DS . 'extensions' . DS . $paths[1] . DS . $paths[2] . DS . 'class_' . $className . ".inc";
+	 	if (!is_readable($filename)) {
+	 $filename = HOME_DIR . DS . 'extensions' . DS . $paths[1] . DS . $paths[2]. '_' . $paths[3] . DS . 'class_' . $className . ".inc";
+	}
+	}
  }
 
-// echo '<br>' . $className;
-// echo '<br>' . $filename;
  if (!empty($filename) && is_readable($filename)) {
 	require $filename;
  }
@@ -242,13 +253,13 @@ function ino_perPageSql($per_page, $offset = 0) {
  switch (DB_TYPE) {
 	case 'ORACLE' :
 	 $lessthan_v = $offset + $per_page;
-	 $sql .=" rownum >= $offset ";
-	 $sql .=" AND rownum <= $lessthan_v ";
+	 $sql .= " rownum >= $offset ";
+	 $sql .= " AND rownum <= $lessthan_v ";
 	 break;
 
 	default:
-	 $sql .=" LIMIT {$per_page} ";
-	 $sql .=" OFFSET {$offset}";
+	 $sql .= " LIMIT {$per_page} ";
+	 $sql .= " OFFSET {$offset}";
 	 break;
  }
 
@@ -260,13 +271,13 @@ function ino_perPageSql_i($sql, $per_page, $offset = 0) {
  switch (DB_TYPE) {
 	case 'ORACLE' :
 	 $lessthan_v = $offset + $per_page;
-	 $sql .=" AND rownum >= $offset ";
-	 $sql .=" AND rownum <= $lessthan_v ";
+	 $sql .= " AND rownum >= $offset ";
+	 $sql .= " AND rownum <= $lessthan_v ";
 	 break;
 
 	default:
-	 $sql .=" LIMIT {$per_page} ";
-	 $sql .=" OFFSET {$offset}";
+	 $sql .= " LIMIT {$per_page} ";
+	 $sql .= " OFFSET {$offset}";
 	 break;
  }
 
@@ -341,8 +352,8 @@ function getBreadCrumb($class_first) {
 	$form_bread_crum .= '<li title="' . gettext('Minimize This Form') . '" ><j  id="ino-minimize-form" class="ajax-link ino-minimize-form clickable " ><i class="fa fa-minus"></i></j></li>';
 	$form_bread_crum .= "<li title=\"" . gettext('Navigate to') . ' ' . gettext('Dashboard') . "\" >" . '<a  class="ajax-link" href="' . HOME_URL . 'form.php?class_name=user_dashboard_v"><i class="fa fa-dashboard"></i> </a></li>';
 	if ($module_description != null) {//The ino_user module_name is not listed in user_dashvoard_v::$icon_stmt_a, so due to $module_description being null, gettext retrieves garbage.
-	 $form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . gettext($module_description) . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>'; }
-	else {
+	 $form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . gettext($module_description) . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>';
+	} else {
 	 $form_bread_crum .= '<li title="' . gettext('Navigate to') . ' ' . '' . '" ><a  class="ajax-link" href="' . HOME_URL . 'form.php?module_code=' . $module_name . '">' . gettext($module_name_c) . ' </a></li>';
 	}
 	$form_bread_crum .= '</ul>';
@@ -468,9 +479,9 @@ function check_browser() {
 function ino_inline_action($line_id_cb_val, $hidden_field_a = '', $add_image_class = 'add_row_img', $line_id_cb = 'line_id_cb') {
  global $f;
  $ret_stmt = ' <ul class="inline_action">
-           <li class="' . $add_image_class . ' clickable"> <i class="fa fa-plus-circle" title="'.  gettext('Add New Line').'"></i> </li>
-           <li class="remove_row_img clickable"> <i class="fa fa-minus-circle" title="'.  gettext('Remove This Line').'"></i> </li>';
- $ret_stmt .= '<li><input class="clickable" type="checkbox" name="' . $line_id_cb . '" value="' . $line_id_cb_val . '" title="'.  gettext('Process This Line').'"></li>';
+           <li class="' . $add_image_class . ' clickable"> <i class="fa fa-plus-circle" title="' . gettext('Add New Line') . '"></i> </li>
+           <li class="remove_row_img clickable"> <i class="fa fa-minus-circle" title="' . gettext('Remove This Line') . '"></i> </li>';
+ $ret_stmt .= '<li><input class="clickable" type="checkbox" name="' . $line_id_cb . '" value="' . $line_id_cb_val . '" title="' . gettext('Process This Line') . '"></li>';
  $ret_stmt .= '<li class="hidden">';
  if (!empty($hidden_field_a)) {
 	foreach ($hidden_field_a as $k => $v) {
@@ -524,7 +535,7 @@ function ino_access_denied($msg = '') {
 	$stmt .= '<p class="lead">' . $msg . '</p>';
  }
 
- $stmt .='</div>
+ $stmt .= '</div>
  </div>';
  return $stmt;
 }
@@ -626,14 +637,14 @@ function ino_show_debug_msg($simple_msg, $detailed_msg = '', $sql = '', $file_li
  $return_stmt = $simple_msg;
 
  if (!empty($ino_user_i) && $ino_user_i->debug_mode == 2) {
-	$return_stmt .= '<br>'. $detailed_msg;
-	$return_stmt .= '<br>'. $sql;
- }else if (!empty($ino_user_i) && $ino_user_i->debug_mode == 3) {
-	$return_stmt .= '<br>'. $detailed_msg;
-	$return_stmt .= '<br>'. $file_line_msg;
-	$return_stmt .= '<br>'. $sql;
+	$return_stmt .= '<br>' . $detailed_msg;
+	$return_stmt .= '<br>' . $sql;
+ } else if (!empty($ino_user_i) && $ino_user_i->debug_mode == 3) {
+	$return_stmt .= '<br>' . $detailed_msg;
+	$return_stmt .= '<br>' . $file_line_msg;
+	$return_stmt .= '<br>' . $sql;
  }
- 
+
  return $return_stmt;
 }
 
@@ -687,8 +698,8 @@ function ino_getSearch() {
 	if (!empty($per_page)) {
 	 global $pagination;
 	 $pagination = new pagination($pageno, $per_page, $total_count);
-	 $sql .=" LIMIT {$per_page} ";
-	 $sql .=" OFFSET {$pagination->offset()}";
+	 $sql .= " LIMIT {$per_page} ";
+	 $sql .= " OFFSET {$pagination->offset()}";
 	}
 
 	echo "<br><br><br>sql is $sql";
@@ -1367,37 +1378,37 @@ function search_org_name() {
 }
 
 function search_schedule_ship_date() {
- global $f; 
+ global $f;
  $stmt = $f->date_fieldAnyDay('schedule_ship_date', '');
  return $stmt;
 }
 
 function search_schedule_ship_date_gt() {
- global $f; 
+ global $f;
  $stmt = $f->date_fieldAnyDay_gt('schedule_ship_date', '');
  return $stmt;
 }
 
 function search_schedule_ship_date_lt() {
- global $f; 
+ global $f;
  $stmt = $f->date_fieldAnyDay_lt('schedule_ship_date', '');
  return $stmt;
 }
 
 function search_need_by_date() {
- global $f; 
+ global $f;
  $stmt = $f->date_fieldAnyDay('need_by_date', '');
  return $stmt;
 }
 
 function search_need_by_date_gt() {
- global $f; 
+ global $f;
  $stmt = $f->date_fieldAnyDay_gt('need_by_date', '');
  return $stmt;
 }
 
 function search_need_by_date_lt() {
- global $f; 
+ global $f;
  $stmt = $f->date_fieldAnyDay_lt('need_by_date', '');
  return $stmt;
 }
@@ -1729,14 +1740,17 @@ function add_new_search_criteria() {
 }
 
 function ino_attachement($file, $file_name = 'attachments') {
+ global $f;
  $stmt = '<div id="show_attachment" class="show_attachment">
   <div id="file_upload_form" class="form-group">
    <ul class="inRow asperWidth">
     <li class="btn btn-info active inline input_file clickable" role="button">
      <input id="attachments" class="input_file_btn clickable" type="file" multiple="" name="' . $file_name . '[]"></input>
      <i class="fa fa-paperclip clickable"> &nbsp;&nbsp;&nbsp;</i>' . gettext('Select File') . ' </li>
-    <li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="btn btn-info active submit button">' . gettext('Attach') . '</button></li>';
- $stmt.='<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
+		 <li><input name="description[]" value="" maxlength="256" size="20" class="textfield description height_30" placeholder="File Name / Description" id="description" title="" data-toggle="tooltip" type="text">';
+ $stmt .= '<li>' . $f->select_field_from_object('extn_folder_id', extn_folder::find_all(), 'extn_folder_id', 'folder', '', 'extn_folder_id', 'height_30') . '</li>';
+ $stmt .= '<li> <button  form="file_upload" name="attach_submit" id="attach_submit" class="btn btn-info active submit button">' . gettext('Attach') . '</button></li>';
+ $stmt .= '<li class="show_loading_small"><img alt="Loading..." src="' . HOME_URL . 'themes/images/small_loading.gif"/></li>
    </ul>
    <div class="uploaded_file_details"></div>
   </div>';
@@ -1757,8 +1771,8 @@ function execution_time($only_value = false) {
 
 function show_download_button($result_data) {
  $return_stmt = '<div id="searchResultMessages">';
- $return_stmt .='<ul class="inline_list"><li>';
- $return_stmt .='<h3>' . gettext('Total Records') . ' : ' . count($result_data) . '</h3></li>';
+ $return_stmt .= '<ul class="inline_list"><li>';
+ $return_stmt .= '<h3>' . gettext('Total Records') . ' : ' . count($result_data) . '</h3></li>';
  $return_stmt .= '<li>';
  $result_data_all = json_decode(json_encode($result_data), true);
  $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
@@ -1780,7 +1794,7 @@ function show_download_button($result_data) {
 function show_download_button_inSelectFormat($result_data_query, $total_count = 0, $total_count_all = 0, $data_type = null) {
  global $f;
  $return_stmt = '<div id="searchResultMessages">';
- $return_stmt .='<ul class="inline_list">';
+ $return_stmt .= '<ul class="inline_list">';
  $return_stmt .= '<li>';
  $result_data_all = json_decode(json_encode($result_data_query), true);
  $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
@@ -1797,11 +1811,11 @@ function show_download_button_inSelectFormat($result_data_query, $total_count = 
  $return_stmt .= '<li id="export_excel_searchResult" class="clickable" title="' . gettext('Export to Excel') . '"><i class="fa fa-file-excel-o"></i></li>
    <li id="print_searchResult" class="print clickable" title="' . gettext('Print') . '"><i class="fa fa-print"></i></li>';
  if (!empty($total_count)) {
-	$return_stmt .= '  <li><button class="btn btn-primary" type="button">' . gettext('Accessible Records') .'<span class="badge">' . $total_count . '</span></button></li>
-   <li><button class="btn btn-warning" type="button">' . gettext('Total Records') . ' ' .'<span class="badge">' . $total_count_all . '</span></button></li>';
+	$return_stmt .= '  <li><button class="btn btn-primary" type="button">' . gettext('Accessible Records') . '<span class="badge">' . $total_count . '</span></button></li>
+   <li><button class="btn btn-warning" type="button">' . gettext('Total Records') . ' ' . '<span class="badge">' . $total_count_all . '</span></button></li>';
  }
 
- $return_stmt .='</ul>
+ $return_stmt .= '</ul>
  </div>';
  return $return_stmt;
 }
@@ -1821,7 +1835,7 @@ function ino_include_css() {
 function xxshow_download_button_inSelectFormat($result_data, $total_count = 0, $total_count_all = 0) {
  global $f;
  $return_stmt = '<div id="searchResultMessages">';
- $return_stmt .='<ul class="inline_list">';
+ $return_stmt .= '<ul class="inline_list">';
  $return_stmt .= '<li>';
  $result_data_all = json_decode(json_encode($result_data), true);
  $return_stmt .= '<form action="' . HOME_URL . 'download.php"  method="POST" name="download_all" id="download_all" target="_blank">';
@@ -1832,11 +1846,11 @@ function xxshow_download_button_inSelectFormat($result_data, $total_count = 0, $
  $return_stmt .= '<li id="export_excel_searchResult" class="clickable" title="' . gettext('Export to Excel') . '"><i class="fa fa-file-excel-o"></i></li>
    <li id="print_searchResult" class="print clickable" title="' . gettext('Print') . '"><i class="fa fa-print"></i></li>';
  if (!empty($total_count)) {
-	$return_stmt .= '  <li><button class="btn btn-primary" type="button">' . gettext('Accessible Records') .'<span class="badge">' . $total_count . '</span></button></li>
-   <li><button class="btn btn-warning" type="button">' . gettext('Total Records') . ' ' .'<span class="badge">' . $total_count_all . '</span></button></li>';
+	$return_stmt .= '  <li><button class="btn btn-primary" type="button">' . gettext('Accessible Records') . '<span class="badge">' . $total_count . '</span></button></li>
+   <li><button class="btn btn-warning" type="button">' . gettext('Total Records') . ' ' . '<span class="badge">' . $total_count_all . '</span></button></li>';
  }
 
- $return_stmt .='</ul>
+ $return_stmt .= '</ul>
  </div>';
  return $return_stmt;
 }
@@ -1953,7 +1967,7 @@ function array2worddoc(array &$array) {
 	foreach ($data as $key => $value) {
 	 $each_para .= "<br> $key : $value";
 	}
-	$each_para .='<br><br>';
+	$each_para .= '<br><br>';
 	array_push($ino_data_a, $each_para);
  }
  ob_start();
@@ -2055,7 +2069,7 @@ function searching_tips() {
  $stmt .= '<br>Ex : Supplier name inoerp in supplier field \'ll show all results such as ainoerp, aainoerp, inoerpa, etc';
  $stmt .= '<br>=inoerp in supplier field \'ll show only inoerp </li>';
  $stmt .= '<li>2. Use > for searching values greater than entered value. </li>';
- $stmt .='<li>3. Use < for searching values less than entered value. </li>';
+ $stmt .= '<li>3. Use < for searching values less than entered value. </li>';
  $stmt .= '<li>4. Use != for searching all values not equal to entered value. </li>';
  $stmt .= '<li>5. Use comma(, ) for searching multiple values. </li>';
  $stmt .= '<li>5. Use one < field & one > field for searching all values in between two values. </li>';
@@ -2436,17 +2450,17 @@ function ino_upload_error_msg($msg_code) {
  return $rtn_msg;
 }
 
-function inoToken($length = 32){
+function inoToken($length = 32) {
 
-    if (function_exists('random_bytes')) {
-        return bin2hex(random_bytes($length));
-    }
-    if (function_exists('mcrypt_create_iv')) {
-        return bin2hex(mcrypt_create_iv($length, MCRYPT_DEV_URANDOM));
-    } 
-    if (function_exists('openssl_random_pseudo_bytes')) {
-        return bin2hex(openssl_random_pseudo_bytes($length));
-    }
+ if (function_exists('random_bytes')) {
+	return bin2hex(random_bytes($length));
+ }
+ if (function_exists('mcrypt_create_iv')) {
+	return bin2hex(mcrypt_create_iv($length, MCRYPT_DEV_URANDOM));
+ }
+ if (function_exists('openssl_random_pseudo_bytes')) {
+	return bin2hex(openssl_random_pseudo_bytes($length));
+ }
 }
 
 function ino_topbar_login() {
@@ -2457,7 +2471,7 @@ function ino_topbar_login() {
           <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><i class="fa fa-user"> </i> ' . ucfirst($_SESSION['username']) . ' <span class="caret"></span></button>';
 	$stmt .= $menu_line->show_menu_list(2);
 	;
-	$stmt .='</div>';
+	$stmt .= '</div>';
 	echo $stmt;
  } else {
 	if (file_exists(THEME_DIR . '/template/user_popup_login_template.php')) {

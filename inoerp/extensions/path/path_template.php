@@ -20,7 +20,7 @@
       <!--<li><?php // $f->l_select_field_from_array('id_column_name', extn_view::find_all_idColumns_gen(), $$class->id_column_name, 'id_column_name', '', '') ?>     </li>-->
       <li><?php $f->l_text_field_d('id_column_name') ?>     </li>
      <li><?php $f->l_select_field_from_object('path_type', path::path_types(), 'option_line_code', 'option_line_value', $$class->path_type, 'path_type') ?></li>
-     <li><?php $f->l_checkBox_field_d('search_path_cb'); ?> </li>
+     <li><?php $f->l_checkBox_field_d('ino_enterprise_cb'); ?> </li>
      <li><?php $f->l_number_field_d('display_weight'); ?> </li>
     </ul>
    </div>

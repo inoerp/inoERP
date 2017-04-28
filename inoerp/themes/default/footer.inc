@@ -39,11 +39,11 @@
   <div class="col-lg-7 col-md-6 col-sm-12 clearfix">
    <div class="footer-menu">
     <ul class="menu">
-     <li class="active"><a href="#">Terms of Use</a></li>
-     <li><a href="#">Site Maps</a></li>
-     <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
-     <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
-     <li><a href="#">Cookie Preferences</a></li>
+       <li><a href="http://inoideas.org/content.php?mode=9&content_type=web_contact">Contact</a></li>
+       <li><a href="https://github.com/inoerp/inoERP/releases">Releases</a></li>
+       <li><a href="https://www.mozilla.org/MPL/2.0/">MPL 2</a></li>
+       <li><a href="https://www.facebook.com/inoerp">Facebook</a></li>
+       <li><a href="https://www.linkedin.com/company/inoerp">LinkedIn</a></li>
 
     </ul>
    </div>

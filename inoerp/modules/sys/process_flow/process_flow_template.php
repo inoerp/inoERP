@@ -102,7 +102,7 @@
           }
           ?>
           <div class="class_detail_form">
-           <fieldset class="form_detail_data_fs"><legend><?php echo gettext('Detail Data') ?></legend>
+           <fieldset class="form_detail_data_fs">
             <div class="tabsDetail">
              <ul class="tabMain">
               <li class="tabLink"><a href="#tabsDetail-1-<?php echo $count ?>"><?php echo gettext('Basic') ?></a></li>
