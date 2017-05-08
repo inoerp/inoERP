@@ -1,0 +1,18 @@
+{
+  "name": "inoPOS",
+  "version": "1.0.0",
+  "keywords": [
+    "erp",
+    "inoerp",
+    "pos",
+    "client",
+    "browser"
+  ],
+  "author": "inoerp",
+  "contributors": [],
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^1.6.2",
+    "electron-packager": "^8.6.0"
+  }
+}

@@ -1,0 +1,22 @@
+Requirements & Installation
+=========================
+
+== Requirements ==
+
+1. HTTP web server Ex. Apache, IIS. 
+2. PHP 5.5+    
+3. MySQL Server version: 5.6.17+
+    
+== Auto Installation ==
+
+1. Upload all the files into the web server.
+2. Open the index.php /or install.php page and follow the simple 4 steps installation process (mySQL user should have all the privileges equivalent to root a user  to create views. You can change to a lesser privileged user after installation by changing the username & password @ include\basics\dbsettings.php).
+3. Login in to the application using user id /password - admin/admin and remove the installation file.
+
+== Manual Installation ==
+
+1. Change the DB settings @ include\basics\dbsettings.php
+2. Change the session_set_cookie_params  in sessions file
+3. Import the database file @  enine\install\inoerp.sql
+4. Change the .htaccess
+5. Login in to the application using user id /password - admin/admin
