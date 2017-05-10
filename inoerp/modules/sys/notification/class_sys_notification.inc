@@ -224,7 +224,11 @@ class sys_notification extends dbObject {
  }
 
  public function find_openNotification_toUserId($to_user_id = '', $status = 'OPEN') {
-  $to_user_id = (empty($to_user_id)) ? $_SESSION['user_id'] : $to_user_id;
+
+  $to_user_id = (empty($to_user_id) && !empty($_SESSION['user_id'])) ? $_SESSION['user_id'] : $to_user_id;
+	if(empty($to_user_id)){
+	 return false;
+	}
   $sql = "SELECT * FROM " . self::$table_name;
   $sql .= " WHERE to_user_id = :to_user_id AND status = :status ORDER BY sys_notification_id DESC ";
   $value_a = ['to_user_id' => $to_user_id, 'status' => $status];
