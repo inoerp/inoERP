@@ -51,7 +51,7 @@ switch ($doc_type) {
   if ($class == 'index') {
    if (!empty($si) && ($si->default_home_page == 'content')) {
     include_once THEME_DIR . '/home_page_template.php';
-   } else if (!empty($si) && !empty(($si->default_home_page))) {
+   } else if (!empty($si) && !empty($si->default_home_page)) {
     include_once THEME_DIR . $si->default_home_page;
    } else {
     header('location: form.php?class_name=user_dashboard_v');
