@@ -46,13 +46,22 @@ Requirements & Installation
 1. HTTP web server Ex. Nginx, Apache, IIS, Oracle HTTP
 2. PHP 5.5+ for versions upto 0.4.1 , PHP 7+ for versions => 0.5.1  and PHP 7.1+ for versions => 0.6.1   
 3. Oracle 12c or MySQL(Server version: 5.6.17+) or MariaDB
-    
+
+== Installation for Master Branch & Future Version ==
+
+1. Download and unzip inoerp into your server. The first folder contains 2 different folders: inoerp_server and www. Copy the contents of www folder to your web folder (www or htdocs). Put the inoerp_server a directory above the web folder. 
+2. Change the DB settings @ include\basics\settings\dbsettings.inc , and Change the session_set_cookie_params  in sessions file
+3. Open the index.php /or install.php page and follow the simple four steps installation process (mySQL user must have all the privileges equivalent to root a user to create views. You can change to a lesser privileged user after installation by changing the username & password @ include\basics\dbsettings.inc)
+4. Login into the application using user id /password - inoerp/inoerp
+
+== Installation For Older Versions ==
+  
 == Auto Installation ==
 
 1. Upload all the files on the web server
 2. If using Apache then enable mod_rewrite module before you proceed further
-3. Open the index.php /or install.php page and follow the simple four steps installation process (mySQL user should have all the privileges equivalent to root a user to create views. You can change to a lesser privileged user after installation by changing the username & password @ include\basics\dbsettings.inc)
-4. Login into the application using user id /password - admin/admin
+3. Open the index.php /or install.php page and follow the simple four steps installation process (mySQL user must have all the privileges equivalent to root a user to create views. You can change to a lesser privileged user after installation by changing the username & password @ include\basics\dbsettings.inc)
+4. Login into the application using user id /password - inoerp/inoerp
 
 == Manual Installation ==
 
@@ -60,7 +69,7 @@ Requirements & Installation
 2. Change the session_set_cookie_params  in sessions file
 3. Import the database file @  enine\install\inoerp.sql
 4. Change the .htaccess
-5. Login in to the application using user id /password - admin/admin
+5. Login in to the application using user id /password - inoerp/inoerp
 
 == Security Consideration ==
 
