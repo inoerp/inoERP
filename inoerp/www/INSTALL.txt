@@ -1,0 +1,45 @@
+
+Requirements & Installation
+=========================
+
+== Requirements ==
+
+1. HTTP web server Ex. Nginx, Apache, IIS, Oracle HTTP
+2. PHP 5.5+ for versions upto 0.4.1 , and PHP 7+ for versions => 0.5.1   
+3. MySQL(Server version: 5.6.17+) or MariaDB
+    
+== Auto Installation ==
+
+1. Upload all the files on the web server
+2. If using Apache then enable mod_rewrite module before you proceed further
+3. Open the index.php /or install.php page and follow the simple four steps installation process (mySQL user should have all the privileges equivalent to root a user to create views. You can change to a lesser privileged user after installation by changing the username & password @ include\basics\dbsettings.php)
+4. Login into the application using user id /password - admin/admin
+
+== Manual Installation ==
+
+1. Change the DB settings @ include\basics\dbsettings.php
+2. Change the session_set_cookie_params  in sessions file
+3. Import the database file @  enine\install\inoerp.sql
+4. Change the .htaccess
+5. Login in to the application using user id /password - admin/admin
+
+== Security Consideration ==
+
+It is always advisable to keep the settings files outside the public directory. If you decide to keep the settings folder in the root directory, then make below two changes
+
+1. Modify basics.inc @ includes\basic modify     
+require_once(INC_BASICS . DS .  'settings'. DS. "dbsettings.php");  
+to  
+require_once(HOME_DIR . DS .  '/../settings'. DS. "dbsettings.php");
+
+2. Modify inomail file @ includes\general_class  
+include_once __DIR__.'/../basics/settings/mailsettings.inc';  
+to  
+require_once(HOME_DIR . DS .  '/../settings'. DS. "mailsettings.inc");
+
+
+== Optional setup ==
+
+
+If Auto-Schedule/run of any program is required then schedule the main program modules/sys/program/start_program.php via a cron job.
+ 

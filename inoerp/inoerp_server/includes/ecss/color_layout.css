@@ -1,0 +1,23 @@
+ul.program_form{
+border: solid #bbb;   
+border-width: 1px 1px 2px 1px;    
+ margin: 5px;
+}
+
+ul.program_form li {
+    border: solid #bbb;
+    border-width: 1px 1px 0 1px;
+    width: 600px;
+    padding: 5px;
+}
+
+ul.program_form li label {
+    display: inline-block;
+}
+
+ul.program_form li label{
+    width: 130px;
+    border-right: 1px solid #bbb;
+    margin-right: 20px;
+}
+

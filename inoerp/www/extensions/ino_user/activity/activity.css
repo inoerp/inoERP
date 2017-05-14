@@ -1,0 +1,22 @@
+#userDiv td{
+    min-width: 120px;
+    padding: 2px 10px;
+}
+
+th.topics{
+    width: 600px;
+}
+
+
+ul.inRowLi li{
+ font-size : 14px;
+    padding: 10px 1px;
+    line-height: 24px;
+  
+}
+
+ul.inRowLi li label{
+ display: inline;
+ width: 90px; 
+    line-height: 24px;
+}

@@ -1,0 +1,39 @@
+#sys_calendar table {
+ border: 1px solid #ccc;
+}
+
+table.cal-day td, table.cal-week td{
+ padding: 4px !important;
+ height : 23px !important;
+ border-top: none !important;
+ border-bottom: none !important;
+}
+
+table.cal-day tr, table.cal-week tr{
+ background-color: #fff;
+ border-color : #ddd;     
+
+}
+
+table.cal-day .col1{
+ width: 180px;
+}
+
+table.cal-day tr.cal-major,table.cal-week tr.cal-major{
+ border-bottom-width: 0.1em;
+ border-bottom-style: dotted !important;;
+}
+
+table.cal-day tr.cal-minor, table.cal-week tr.cal-minor{
+ border-bottom-width: 0.1em;
+ border-bottom-style: solid;
+}
+
+.event-msg{
+ background: rgba(204, 120, 255, 0.7) none repeat scroll 0% 0%;
+ position: absolute;
+ overflow: hidden;
+ display: block;
+ padding: 10px;
+ font-size: 0.8em;
+}

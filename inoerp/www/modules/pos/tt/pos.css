@@ -1,0 +1,165 @@
+#pos_terminal{
+ min-width: 1240px;
+}
+
+#scanner_field{
+ height: 120px;
+ width: 360px;
+ clear: both;
+ display: block;
+ position: relative; 
+ background-color: #fff;
+ margin-bottom: 10px;
+ border-radius: 5px;
+}
+
+#calculator {
+ width: 410px;
+ height: auto;
+ padding: 20px 20px 9px;
+ background: #2574A9;;
+ background: linear-gradient(#2574A9, #2074A9);
+}
+
+#calculator #screen_number {
+ height: 40px;
+ width: 275px;
+ float: left;
+ padding: 0 10px;
+ background: lightgoldenrodyellow;
+ border-radius: 3px;
+ margin-right: 10px;
+ /* Typography */
+ font-size: 17px;
+ line-height: 40px;
+ color: #060000;
+ text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+ text-align: right;
+ letter-spacing: 1px;
+}
+
+/* Clear floats */
+.keys, .top {overflow: hidden;}
+
+/* Applying same to the keys */
+.keys span, .top span.clear {
+ float: left;
+ position: relative;
+ top: 0;
+ cursor: pointer;
+ width: 66px;
+ height: 36px;
+ background: white;
+ border-radius: 3px;
+ box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+ margin: 0 7px 11px 0;
+ color: #888;
+ line-height: 36px;
+ text-align: center;
+
+ /* prevent selection of text inside keys */
+ user-select: none;
+
+ /* Smoothing out hover and active states using css3 transitions */
+ transition: all 0.2s ease;
+}
+
+.keys span.operator {
+ background: #FFF0F5;
+}
+
+.keys span.eval {
+ background: #f1ff92;
+ box-shadow: 0px 4px #9da853;
+ color: #888e5f;
+}
+
+.top span.clear {
+ background: #aaa;
+ color: white;
+}
+
+/* Some hover effects */
+.keys span:hover {
+ background: rgba(43, 210, 63, 0.67);
+ box-shadow: 0px 4px green;
+ color: white;
+}
+
+.keys span.eval:hover {
+ background: #abb850;
+ box-shadow: 0px 4px #717a33;
+ color: #ffffff;
+}
+
+.top span.clear:hover {
+ background: #f68991;
+ box-shadow: 0px 4px #d3545d;
+ color: white;
+}
+
+/* Simulating "pressed" effect on active state of the keys by removing the box-shadow and moving the keys down a bit */
+.keys span:active {
+ box-shadow: 0px 0px #6b54d3;
+ top: 4px;
+}
+
+.keys span.eval:active {
+ box-shadow: 0px 0px #717a33;
+ top: 4px;
+}
+
+.top span.clear:active {
+ top: 4px;
+ box-shadow: 0px 0px #d3545d;
+}
+
+#calculator span.enter{
+ background-image: url('images/enter_16.png');
+ background-position: center; 
+ background-repeat: no-repeat;
+}
+
+input#scanned_item{
+ display: block;
+ width: 100%;
+ height: 120px !important;
+ border:none;
+ text-align: center;
+ vertical-align: middle;
+ font-size: 30px;
+}
+
+.large-keys{
+ height: 180px;
+}
+
+.large-keys span {
+ float: left;
+ position: relative;
+ top: 0px;
+ cursor: pointer;
+ width: 110px;
+ height: 50px;
+ background: none repeat scroll 0% 0% #FFF;
+ border-radius: 3px;
+ box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+ margin: 0px 13px 11px 0px;
+ color: #888;
+ line-height: 50px;
+ text-align: center;
+ transition: all 0.2s ease 0s;
+ font-weight: bold;      
+}
+
+#pos_terminal #tabsDetailA ul.tabsDetail  li {
+display: inline-block;
+margin-right: 5px;  
+padding: 0px 10px;        
+}
+
+#pos_terminal #tabsDetailA ul.tabsDetail  li.ui-state-active {
+background-color: lightgoldenrodyellow;  
+border-bottom: 1px solid #ccc              
+}
+
