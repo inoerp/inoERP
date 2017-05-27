@@ -1,0 +1,126 @@
+/* 
+    Document   : view
+    Created on : Sep 7, 2013, 3:53:58 PM
+    Author     : dasn
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+ul#sql_query li{
+display: inline-block;
+}
+
+ul.view_filters{
+display: block;
+clear: both;
+}
+ul.view_filters li{
+display: inline-block;
+margin-right: 30px;
+}
+
+#display_div ul li{
+display: inline-block;
+margin: 5px 2px;
+}
+
+#logical_settings li label{
+padding : 0 5px 5px 10px;
+background: none repeat scroll 0% 0% rgba(147, 45, 174, 0.25);
+}
+
+#logical_settings li.field_records label{
+padding : 0 5px 5px 10px;
+background: none repeat scroll 0% 0% rgba(147, 195, 174, 0.3);
+}
+
+#logical_settings {
+margin : 10px 0;
+border: 1px solid #ccc;
+}
+
+#condition_li table{
+margin: 5px 0;
+width: 100%;
+}
+
+#condition_li table th{
+background : #eee;
+}
+
+#condition_li table tr td{
+min-width: 200px;
+width: 33%;
+border: 1px solid #ddd;
+padding: 2px 10px;
+}
+
+
+li#show_field_li{
+display: block;
+    margin : 20px 0;
+
+}
+
+li#condition_li {
+    display: block;
+    margin: 20px 0px;
+}
+
+#show_field_buttons input, #condition_buttons_table input,
+#sort_sqlQuery input{
+    width: 270px;
+}
+li#sort_sqlQuery ul li{
+display: inline-block;
+vertical-align: top;
+}
+
+li#sort_sqlQuery {
+display: block;
+border:1px solid #ccc;
+}
+
+li#sort_sqlQuery ul li{
+display: inline-block;
+border-right:2px solid #ccc;
+}
+
+li#sort_sqlQuery ul li#sorting_li{
+width: 49.5%;
+}
+
+.select.all_table_names{
+       background: rgba(111,20,193,0.15);
+   border: none;
+    padding: 2px; /* If you add too much padding here, the options won't show in IE */
+}
+
+span.view_name{
+    display: inline-block;
+    width: 250px;
+    font-size: 15px;
+    vertical-align:baseline;
+    float: left;
+}
+
+table#sort_fields_table tr td, table#group_by_table tr td, table#group_by_table tr th{
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+table#group_by_table td {
+    display: block;
+    min-height: 18px;
+   min-width: 540px;
+}
+
+.ui-draggable{
+ margin:5px;
+ background : lightgreen;
+ width: 310px;
+}
+
+.draggable_element{
+ display: inline-block;
+}

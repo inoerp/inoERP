@@ -192,16 +192,6 @@ class cm_statement_header extends dbObject {
 	
  }
 
-// public function save() {
-//	$primary_column = static::$primary_column;
-//	if (empty($this->$primary_column)) {
-//	 $this->approval_status = 'Entered';
-//	 $this->create();
-//	} else {
-//	 $this->update($this->$primary_column);
-//	}
-//	return $this->msg;
-// }
 }
 
 //end of cm_statement_header class

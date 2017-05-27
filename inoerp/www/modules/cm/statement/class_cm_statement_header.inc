@@ -121,14 +121,7 @@ class cm_statement_header extends dbObject {
  }
 
  public function _after_save() {
-//	if ((!empty($this->cm_statement_header_id)) && empty($this->so_number)) {
-//	 $cm_statement_header_id = $this->cm_statement_header_id;
-//	 $bu_org_id = $this->bu_org_id;
-//	 $so_number = $bu_org_id . '-' . $cm_statement_header_id;
-//	 $this->so_number = $so_number;
-//	 echo '<br/> New SO number is ' . $so_number;
-//	 $this->update_soNumber();
-//	}
+
  }
 
  private function update_soNumber() {
@@ -187,20 +180,7 @@ class cm_statement_header extends dbObject {
 	return $this->msg;
  }
 
- private function _pick_sales_order() {
-	
- }
 
-// public function save() {
-//	$primary_column = static::$primary_column;
-//	if (empty($this->$primary_column)) {
-//	 $this->approval_status = 'Entered';
-//	 $this->create();
-//	} else {
-//	 $this->update($this->$primary_column);
-//	}
-//	return $this->msg;
-// }
 }
 
 //end of cm_statement_header class
