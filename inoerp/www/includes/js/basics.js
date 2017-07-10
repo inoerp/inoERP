@@ -5482,7 +5482,7 @@ $(document).ready(function () {
  $('body').on('click', '#generic_save', function () {
   var noOfRequiredFileValuesMissing = 0;
   var missingMandatoryValues = [];
-  $('body').find('input:required').each(function () {
+  $(this).closest('form').find('input:required').each(function () {
    if (!$(this).val())
    {
     missingMandatoryValues.push($(this).attr('class'));
