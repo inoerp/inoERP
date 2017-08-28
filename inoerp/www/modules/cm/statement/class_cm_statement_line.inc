@@ -229,25 +229,7 @@ class cm_statement_line extends dbObject {
 	return !empty($result_array) ? $result_array : false;
  }
 
- public function copy($cm_statement_line_id) {
-	global $db;
-	$sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM cm_statement_line WHERE `cm_statement_line_id` = '{$cm_statement_line_id}' ";
-	if ($db->query($sql1)) {
-	 $sql2 = "  UPDATE tmptable SET `cm_statement_line_id` = '' ,
-           `org_id` = '{$this->org_id}' 
-          WHERE `cm_statement_line_id` = '{$cm_statement_line_id}' ";
-	 if ($db->query($sql2)) {
-		$sql3 = " INSERT INTO `cm_statement_line` SELECT * FROM tmptable WHERE `cm_statement_line_id` = '' ";
-		if ($db->query($sql3)) {
-		 $this->cm_statement_line_id = $db->insert_id();
-		 $this->msg = 1;
-		} else {
-		 $this->msg = 0;
-		}
-	 }
-	}
-	return $this->msg;
- }
+ 
 
 }
 

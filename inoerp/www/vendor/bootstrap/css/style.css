@@ -4503,12 +4503,12 @@ select {
 }
 #erp_form_area .select.large,
 #form-modal .select.large{
-    width: 20em;
+    width: 10em;
 }
 
 #erp_form_area .select.xlarge,
 #form-modal .select.xlarge{
-    width: 30em;
+    width: 20em;
 }
 
 

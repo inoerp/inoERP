@@ -6,38 +6,27 @@ class sd_sales_documents_v extends dbObject {
  public static $table_name = "sd_sales_documents_v";
  public static $primary_column = "sd_so_header_id";
  public $field_a = [
-  'document_id',
-  'docuemnt_number',
-  'sales_team',
-  'creation_date',
-  'document_type',
-  'status',
+		 'document_id',
+		 'docuemnt_number',
+		 'sales_team',
+		 'creation_date',
+		 'document_type',
+		 'status',
  ];
  public $initial_search = [
-  'docuemnt_number',
-  'docuemnt_type',
+		 'docuemnt_number',
+		 'docuemnt_type',
  ];
-// 
-// public $search = [
-//		 '_update_path' => 'form.php?class_name=sd_so_header',
-//		 '_show_update_path' => 1,
-//		 '_view_path' => 'form.php?class_name=sd_so_header',
-//		 '_show_view_path' => 1,
-//		 '_view_action_meassge' => 'Sales ',
-//		 '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
-//				 'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
-// ];
  public $pageTitle = " Sales Documents "; //page Title
  public $document_id;
-public $docuemnt_number;
-public $sales_team;
-public $creation_date;
-public $document_type;
-public $status;
-
+ public $docuemnt_number;
+ public $sales_team;
+ public $creation_date;
+ public $document_type;
+ public $status;
 
  private function create_sd_sales_documents_v() {
-  $sql = "
+	$sql = "
 CREATE OR REPLACE VIEW sd_sales_documents_v
 (
 document_id,  docuemnt_number, sales_team, creation_date , document_type, status
@@ -74,13 +63,13 @@ sd_so_header
  }
 
  public function findBY_soLineId($line_id) {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE sd_so_line_id = :sd_so_line_id ";
-  $sql = ino_perPageSql_i($sql, 1);
-  $value_a = ['sd_so_line_id' => $line_id];
-  $result = $this->findBySql($sql, $value_a);
-  return !empty($result) ? array_pop($result) : false;
+	$sql = " SELECT * FROM ";
+	$sql .= self::$table_name;
+	$sql .= " WHERE sd_so_line_id = :sd_so_line_id ";
+	$sql = ino_perPageSql_i($sql, 1);
+	$value_a = ['sd_so_line_id' => $line_id];
+	$result = $this->findBySql($sql, $value_a);
+	return !empty($result) ? array_pop($result) : false;
  }
 
 }
