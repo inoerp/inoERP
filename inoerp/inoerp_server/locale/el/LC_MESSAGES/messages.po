@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2015-03-08 22:57+0800\n"
-"PO-Revision-Date: 2017-11-05 19:36+0200\n"
+"PO-Revision-Date: 2017-11-07 18:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -151,7 +151,7 @@ msgid "Subinventory Id"
 msgstr "Υπο-αποθήκη Id"
 
 msgid "Locator Id"
-msgstr "Locator Id"
+msgstr "Εντοπιστής Id"
 
 msgid "Equipment Item Id M"
 msgstr ""
@@ -1042,7 +1042,7 @@ msgid "Eco Implemented Cb"
 msgstr ""
 
 msgid "Bom Header Id H"
-msgstr "Stücklistenkopf Id H"
+msgstr "Bom Κεφαλίδα Id H"
 
 msgid "H Created By"
 msgstr "H Δημιουργήθηκε απο"
@@ -1106,7 +1106,7 @@ msgid "Charge Type"
 msgstr "Τύπος χρέωσης"
 
 msgid "UOM"
-msgstr "Χρεος UOM"
+msgstr "UOM"
 
 msgid "Basis"
 msgstr "Βάση"
@@ -1225,7 +1225,7 @@ msgid "Code"
 msgstr "Κωδικός"
 
 msgid "Subinventory"
-msgstr "Subinventory"
+msgstr "Υπο-αποθήκη"
 
 msgid "Locator"
 msgstr "Εντοπιστής"
@@ -1417,7 +1417,7 @@ msgid "Control Value"
 msgstr "Τιμή ελέγχου"
 
 msgid "Control UOM"
-msgstr "Έλεγχος χρέους UOM"
+msgstr "Έλεγχος UOM"
 
 msgid "Active Cb"
 msgstr "Ενεργό Cb"
@@ -2078,7 +2078,7 @@ msgid "Submit Button"
 msgstr ""
 
 msgid "Action Link"
-msgstr ""
+msgstr "Link ενέργειας"
 
 msgid "Fp Forecast Consumption Id"
 msgstr ""
@@ -2093,10 +2093,10 @@ msgid "Fp Forecast Group Id"
 msgstr ""
 
 msgid "Reason"
-msgstr ""
+msgstr "Αιτία"
 
 msgid "Forecast Group"
-msgstr ""
+msgstr "Ομάδα Προγνωστικών"
 
 msgid "Bucket Type"
 msgstr ""
@@ -3011,7 +3011,7 @@ msgid "Lwp Cb"
 msgstr ""
 
 msgid "Default Reason"
-msgstr " "
+msgstr "Προεπιλεγμένη Αιτία"
 
 msgid "Hr Payroll Id"
 msgstr ""
@@ -3276,7 +3276,7 @@ msgid "From Subinventory Id"
 msgstr "Απο την υπο-αποθήκη Id"
 
 msgid "From Locator Id"
-msgstr ""
+msgstr "Από Εντοπιστή Id"
 
 msgid "Revision Name"
 msgstr "Όνομα Αναθεώρησης"
@@ -3285,7 +3285,7 @@ msgid "To Subinventory Id"
 msgstr "Στην υπο-αποθήκη Id"
 
 msgid "To Locator Id"
-msgstr ""
+msgstr "Στον Εντοπιστή Id"
 
 msgid "Transaction Quantity"
 msgstr "Ποσότητα συναλλαγής"
@@ -3306,19 +3306,19 @@ msgid "Inv Lot Number Id"
 msgstr "Inv Αριθμός LOT Id"
 
 msgid "Generation"
-msgstr "Generation"
+msgstr "Γενεά"
 
 msgid "Lock Cb"
-msgstr "Lock Cb"
+msgstr "Κλείδωμα Cb"
 
 msgid "First Inv Transaction Id"
 msgstr ""
 
 msgid "Origination Type"
-msgstr ""
+msgstr "Τύπος Οργανισμού"
 
 msgid "Activation Date"
-msgstr "Ημερομηνία ενργοποιήσης"
+msgstr "Ημερομηνία ενεργοποιήσης"
 
 msgid "Expiration Date"
 msgstr "Ημερομηνία λήξης"
@@ -3370,7 +3370,7 @@ msgid "From Locator"
 msgstr ""
 
 msgid "To Locator"
-msgstr ""
+msgstr "Στον Εντοπιστή"
 
 msgid "Lot Number Id"
 msgstr "Αριθμός LOT Id"
@@ -3409,7 +3409,7 @@ msgid "Current Subinventory Id"
 msgstr ""
 
 msgid "Current Locator Id"
-msgstr ""
+msgstr "Παρόν Εντοπιστής Id"
 
 msgid "Parent Serial Number Id"
 msgstr ""
@@ -3463,7 +3463,7 @@ msgid "Calendar"
 msgstr "Ημερολόγιο"
 
 msgid "Locator Control"
-msgstr ""
+msgstr "Έλεγχος Εντοπιστή"
 
 msgid "Allow Negative Balance Cb"
 msgstr "Να επιτρέπεται το αρνητικο ισοζύγιο Cb"
@@ -3625,13 +3625,11 @@ msgstr "Κατηγορία Κινδύνου"
 msgid "Receipt Subinventory"
 msgstr ""
 
-#, fuzzy
 msgid "Over Receipt Percentage"
-msgstr "πάνω απο το ποσοστό της απόδειξης"
+msgstr "Πάνω απο το ποσοστό της απόδειξης"
 
-#, fuzzy
 msgid "Over Receipt Action"
-msgstr "πάνω απο την ενεργεια απόδειξης"
+msgstr "Πάνω απο την ενεργεια απόδειξης"
 
 msgid "Receipt Days Early"
 msgstr ""
@@ -3823,16 +3821,16 @@ msgid "Legal Org Type"
 msgstr "Legal Org Typ"
 
 msgid "Registration Number"
-msgstr "Registrationsnummer"
+msgstr "Αριθμός Καταχώρησης"
 
 msgid "Place Of Registration"
-msgstr "Ort der Registrierung"
+msgstr "Τόπος Καταχώρησης"
 
 msgid "Country Of Registration"
-msgstr "Land der Registrierung"
+msgstr "Χώρα Καταχώρησης"
 
 msgid "Identification Number"
-msgstr "Identifikationsnummer"
+msgstr "Αριθμός Αναγνώρισης"
 
 msgid "Ein Tin Tan"
 msgstr "Ein Tin Tan"
@@ -3841,34 +3839,34 @@ msgid "Balancing Segments"
 msgstr "Balancing Segmente"
 
 msgid "Locator Structure"
-msgstr "Locator Struktur"
+msgstr "Δομή Εντοπιστή"
 
 msgid "X Coordinate"
-msgstr "X-Koordinate"
+msgstr "X συντενταγμένη"
 
 msgid "Y Coordinate"
-msgstr "Y-Koordinate"
+msgstr "Y συντενταγμένη"
 
 msgid "Z Coordinate"
-msgstr "Z-Koordinate"
+msgstr "Z συντενταγμένη"
 
 msgid "Max Units"
-msgstr "Max Units"
+msgstr "Μέγιστος αρ. μονάδων"
 
 msgid "Max Volume Uom Id"
-msgstr "Max Volume ME Id"
+msgstr "Μέγιστος Όγκος Uom Id"
 
 msgid "Max Volume"
-msgstr "Max Volume"
+msgstr "Μέγιστος Όγκος"
 
 msgid "Max Weight Uom Id"
-msgstr "Max Gewicht ME Id"
+msgstr "Μέγιστο Βάρος Uom Id"
 
 msgid "Max Weight"
-msgstr "Max Gewicht"
+msgstr "Μέγιστο Βάρος"
 
 msgid "Sub Description"
-msgstr "Sub Beschreibung"
+msgstr "Υπο περιγραφή"
 
 msgid "Business Org Id"
 msgstr "Business Org Id"
@@ -3877,7 +3875,7 @@ msgid "Inventory Org Id"
 msgstr "Inventar Org Id"
 
 msgid "Mdm Bank Account Id"
-msgstr "MDM-Bank Konto-ID"
+msgstr "Mdm Τραπεζικός Λογαριασμός Id"
 
 msgid "Mdm Bank Header Id"
 msgstr "MDM-Bank-Header ID"
@@ -3886,10 +3884,10 @@ msgid "Mdm Bank Site Id"
 msgstr "MDM-Bank-Site Id"
 
 msgid "Account Number"
-msgstr "Accountnummer"
+msgstr "Αριθμός Λογαριασμού"
 
 msgid "Account Usage"
-msgstr "Konto Usage"
+msgstr "Χρήση Λογαριασμού"
 
 msgid "Cash Clearing Ac Id"
 msgstr "Cash Clearing Ac Id"
@@ -3913,58 +3911,58 @@ msgid "Netting Ac Cb"
 msgstr "Netting Ac Cb"
 
 msgid "Minimum Payment"
-msgstr "Mindestzahlung"
+msgstr "Ελάχιστη Πληρωμή"
 
 msgid "Maximum Payment"
-msgstr "Maximale Zahlung"
+msgstr "Μέγιστη Πληρωμή"
 
 msgid "Contact Id"
-msgstr "Kontakt Id"
+msgstr "Επικοινωνία Id"
 
 msgid "Ap Payment Method Id"
 msgstr "Ap Zahlungs-Methode Id"
 
 msgid "Account Description"
-msgstr "Konto Beschreibung"
+msgstr "Περιγραφή Λογαριασμού"
 
 msgid "Bank Name"
-msgstr "Bank Name"
+msgstr "Όνομα Τράπεζας"
 
 msgid "Bank Number"
-msgstr "Bank Number"
+msgstr "Αριθμός Τράπεζας"
 
 msgid "Bank Name Short"
-msgstr "Name der Bank Short"
+msgstr "Συντομογραφία Αρ. Τράπεζας"
 
 msgid "Bank Name Alt"
 msgstr "Name der Bank Alt"
 
 msgid "Branch Name"
-msgstr "Zweigname"
+msgstr "Όνομα Παραρτήματος"
 
 msgid "Branch Country"
-msgstr "Zweig Land"
+msgstr "Χώρα Παραρτήματος"
 
 msgid "Branch Number"
-msgstr "Zweig-Nummer"
+msgstr "Αριθμός Παραρτήματος"
 
 msgid "Branch Name Short"
-msgstr "Namen der Niederlassung Kurz"
+msgstr "Συντομογραφία Ονόματος Παραρτήματος"
 
 msgid "Branch Name Alt"
 msgstr "Namen der Niederlassung Alt"
 
 msgid "Ifsc Code"
-msgstr "IFSC-Code"
+msgstr "IFSC κωδικός"
 
 msgid "Swift Code"
-msgstr "SWIFT-Code"
+msgstr "SWIFT κωδικός"
 
 msgid "Routing Number"
 msgstr "Routing-Nummer"
 
 msgid "Iban Code"
-msgstr "IBAN Code"
+msgstr "IBAN κωδικός"
 
 msgid "Branch Tax Reg No"
 msgstr "Branche Steuer IdNr"
@@ -3976,7 +3974,7 @@ msgid "Mdm Price List Header Id"
 msgstr "Mdm Preis Listenkopf Id"
 
 msgid "Price List"
-msgstr "Preisliste"
+msgstr "Τιμοκατάλογος"
 
 msgid "Allow Mutli Currency Cb"
 msgstr "Erlauben Mutli Währungs Cb"
@@ -3985,16 +3983,16 @@ msgid "Mdm Price List Line Id"
 msgstr "Mdm Preisliste Linie Id"
 
 msgid "Formula"
-msgstr "Formel"
+msgstr "Φόρμουλα"
 
 msgid "Mdm Tax Code Id"
 msgstr "Mdm Tax Code Id"
 
 msgid "Tax Code"
-msgstr "Steuer-Code"
+msgstr "Κωδικός Φόρου"
 
 msgid "Tax Type"
-msgstr "Steuerart"
+msgstr "Τύπος Φόρου"
 
 msgid "Dr Cr"
 msgstr "Dr Cr"
@@ -4003,139 +4001,140 @@ msgid "In Out"
 msgstr "In Out"
 
 msgid "Printed Tax Name"
-msgstr "Gedruckt Tax Namen"
+msgstr "Εκτυπώμενο Όνομα Φόρου"
 
 msgid "Tax Regime"
-msgstr "Steuerregelung"
+msgstr ""
 
 msgid "Tax Jurisdiction"
 msgstr "Tax Jurisdiction"
 
 msgid "Offset Tax Code"
-msgstr "Offset Abgabenordnung"
+msgstr ""
 
 msgid "Allow Adhoc Rate Cb"
-msgstr "Erlauben Adhoc bewerten Cb"
+msgstr ""
 
 msgid "Allow Tax Exemptions Cb"
-msgstr "Erlauben Steuerbefreiungen Cb"
+msgstr ""
 
 msgid "Calculation Method"
-msgstr "Berechnungsmethode"
+msgstr "Μέθοδος Υπολογισμού"
 
 msgid "Percentage"
-msgstr "Prozentsatz"
+msgstr "Ποσοστό"
 
 msgid "Country Code"
-msgstr "Landesvorwahl"
+msgstr "Κωδικός Χώρας"
 
 msgid "State"
-msgstr "Bundesland"
+msgstr "Πολιτεία/Νομός"
 
 msgid "Tax Region Name"
-msgstr "Tax Region Name"
+msgstr "Όνομα Φορολογικής Περιφέρειας"
 
 msgid "Mdm Tax Rule Id"
-msgstr "Mdm Tax Regel-ID"
+msgstr "Mdm Κανόνας Φορολόγησης Id"
 
 msgid "Ship To Region Id"
-msgstr "Ship To Region Id"
+msgstr "Αποστολή στην περιφέρεια Id"
 
 msgid "Ship From Region Id"
-msgstr "Ship Von Region Id"
+msgstr "Αποστολή από την περιφέρεια Id"
 
 msgid "Module Id"
-msgstr "Modul-ID"
+msgstr "Module Id"
 
 msgid "Lot Id"
 msgstr "Lot Id"
 
 msgid "Serial Id"
-msgstr "Serien-ID"
+msgstr ""
 
+#, fuzzy
 msgid "On Hand"
-msgstr "An Hand"
+msgstr "Μετρητοίς"
 
 msgid "Reservable On Hand"
-msgstr "Reservierbar On Hand"
+msgstr ""
 
 msgid "Transactable On Hand"
-msgstr "Transactable On Hand"
+msgstr ""
 
 msgid "Lot Status"
-msgstr "LOT Status"
+msgstr "LOT Κατάσταση"
 
 msgid "Serial Status"
-msgstr "Serienstand"
+msgstr ""
 
 msgid "Secondary Uom Id"
-msgstr "Sekundär ME Id"
+msgstr ""
 
 msgid "On Hand Status"
-msgstr "On Hand Stand"
+msgstr ""
 
 msgid "Org Name"
-msgstr "Org Namen"
+msgstr "Org Όνομα"
 
 msgid "On Hand Value"
-msgstr "On Hand Wert"
+msgstr ""
 
 msgid "Subinventory Type"
-msgstr "Subinventory Typ"
+msgstr "Τύπος υπο-αποθήκης"
 
 msgid "Option Detail Id"
-msgstr "Option Details Id"
+msgstr "Λεπτομέρειες Επιλογής Id"
 
 msgid "Option Header Id"
-msgstr "Option-Header ID"
+msgstr ""
 
 msgid "Option Line Id"
-msgstr "Option Linie Id"
+msgstr ""
 
 msgid "Option Detail Value"
-msgstr "Option Details Wert"
+msgstr "Τιμή Λεπτομέρειεας Επιλογής"
 
 msgid "Access Level"
-msgstr "Benutzer-Level"
+msgstr "Επίπεδο πρόσβασης"
 
 msgid "Module Code"
-msgstr "Modul-Code"
+msgstr "Κωδικός Module"
 
 msgid "Option Assignments"
-msgstr "Option Zuordnungen"
+msgstr ""
 
 msgid "Option Line Value"
-msgstr "Option Zeile Wert"
+msgstr ""
 
 msgid "Value Group Id"
-msgstr "Value Group Id"
+msgstr ""
 
 msgid "Page Id"
-msgstr "Seite Id"
+msgstr "Σελίδα Id"
 
 msgid "Show In Frontpage Cb"
-msgstr "Zeigen Sie in Frontpage Cb"
+msgstr "Εμφάνιση στην Αρχική Σελίδα Cb"
 
 msgid "Path Id"
-msgstr "Pfad Id"
+msgstr ""
 
 msgid "Path Link"
-msgstr "Wegverbindung"
+msgstr ""
 
 msgid "Mode"
-msgstr "Modus"
+msgstr ""
 
 msgid "Id Column Name"
-msgstr "Id Spaltenname"
+msgstr ""
 
 msgid "Path Type"
-msgstr "Einzugstyp"
+msgstr ""
 
 msgid "Search Path Cb"
-msgstr "Suchpfad Cb"
+msgstr ""
 
 msgid "Prepayment Cb"
-msgstr "Vorauszahlung Cb"
+msgstr "Προπληρωμή Cb"
 
 msgid "Payment Term Discount Id"
 msgstr "Zahlungs-Ausdruck Discount Id"
@@ -4348,28 +4347,28 @@ msgid "Target Value"
 msgstr "Zielwert"
 
 msgid "RFQ Number"
-msgstr "Anfragenummer"
+msgstr "RFQ Αριθμός"
 
 msgid "Rfq Name"
-msgstr "RFQ-Name"
+msgstr "Rfq Όνομα"
 
 msgid "Outcome"
-msgstr "Ergebnis"
+msgstr ""
 
 msgid "Rfq Type"
-msgstr "RFQ-Typ"
+msgstr "Rfq Τύπος"
 
 msgid "Due Date"
-msgstr "Geburtstermin"
+msgstr ""
 
 msgid "Rfq Status"
-msgstr "RFQ-Status"
+msgstr "Rfq Κατάσταση"
 
 msgid "Target Price"
-msgstr "Zielpreis"
+msgstr "Τιμή Στόχος"
 
 msgid "Notes From Supplier"
-msgstr "Notes From Lieferant"
+msgstr "Σημειώσεις απο Προμηθευτή"
 
 msgid "Po Sourcing Rule Header Id"
 msgstr "Po-Sourcing-Regel-Header ID"
@@ -4378,19 +4377,19 @@ msgid "Po Sourcing Rule Line Id"
 msgstr "Po-Sourcing-Regel Linie Id"
 
 msgid "Sourcing Type"
-msgstr "Sourcing-Typ"
+msgstr ""
 
 msgid "Source From Org Id"
-msgstr "Source Von Org Id"
+msgstr "Πηγή από Org Id"
 
 msgid "Allocation"
-msgstr "Zuweisung"
+msgstr ""
 
 msgid "Rank"
-msgstr "Rang"
+msgstr "Βαθμίδα"
 
 msgid "Transit Time"
-msgstr "Transitzeit"
+msgstr "Ώρα Μεταφοράς"
 
 msgid "Pos Barcode List Header Id"
 msgstr "Pos Barcode Listenkopf Id"
@@ -4426,13 +4425,13 @@ msgid "Transaction Subinventory Id"
 msgstr "Transaktions Subinventory Id"
 
 msgid "Transaction Locator Id"
-msgstr "Transaktions Locator Id"
+msgstr "Εντοπιστής συναλλαγών Id"
 
 msgid "Return Subinventory Id"
 msgstr "Return Subinventory Id"
 
 msgid "Return Locator Id"
-msgstr "Return Locator Id"
+msgstr "Εντοπιστής επιστροφών Id"
 
 msgid "Allow Negative On Hand Cb"
 msgstr "Lassen Sie Negative On Hand Cb"
@@ -4453,16 +4452,16 @@ msgid "Primary Owner Id"
 msgstr "Primary Owner Id"
 
 msgid "Terminal Type"
-msgstr "Anschlusstyp"
+msgstr "Τύπος Τερματικού"
 
 msgid "Refresh Time"
-msgstr "Aktualisierungszeit"
+msgstr "Ανανέωση Χρόνου"
 
 msgid "Pos Transaction Header Id"
 msgstr "POS-Transaktion Header ID"
 
 msgid "Total Amount"
-msgstr "Gesamtanzahl"
+msgstr "Συνολική ποσότητα"
 
 msgid "Pos Transaction Line Id"
 msgstr "POS-Transaktions Linie Id"
@@ -4483,97 +4482,97 @@ msgid "Project Status"
 msgstr "Projekt-Status"
 
 msgid "Task Number"
-msgstr "Task-Nummer"
+msgstr ""
 
 msgid "Task Name"
-msgstr "Aufgabennname"
+msgstr ""
 
 msgid "Parent Prj Project Line Id"
-msgstr "Mutter Prj Project Line Id"
+msgstr ""
 
 msgid "Service Type"
-msgstr "Service Type"
+msgstr "Τύπος Υπηρεσίας"
 
 msgid "Work Type"
-msgstr "Arbeitsorte"
+msgstr "Τύπος Εργασίας"
 
 msgid "Allow Charges Cb"
-msgstr "Erlauben Gebühren Cb"
+msgstr ""
 
 msgid "Capitalizable Cb"
-msgstr "Aktivierungs Cb"
+msgstr ""
 
 msgid "Rate Type"
-msgstr "Bewerten Typ"
+msgstr ""
 
 msgid "Cip Asset It"
-msgstr "Cip Vermögens Es"
+msgstr ""
 
 msgid "Task Status"
-msgstr "Aufgabenstatus"
+msgstr ""
 
 msgid "Field Image"
-msgstr "Feld Bild"
+msgstr "Πεδίο Εικόνας"
 
 msgid "Field Price"
-msgstr "Feld Preis"
+msgstr "Πεδίο Τιμής"
 
 msgid "Field Description"
-msgstr "Feld Beschreibung"
+msgstr "Πεδίο Περιγραφής"
 
 msgid "Role Access Id"
-msgstr "Rolle Zugangskennung"
+msgstr ""
 
 msgid "Role Path Id"
-msgstr "Rolle Pfad Id"
+msgstr ""
 
 msgid "Role Id"
-msgstr "Rolle Id"
+msgstr "Ρόλος Id"
 
 msgid "Sd Delivery Header Id"
-msgstr "SD-Lieferung Header ID"
+msgstr ""
 
 msgid "Delivery Number"
-msgstr "Lieferung Anzahl"
+msgstr "Αριθμός Παράδοσης"
 
 msgid "Shipping Org Id"
-msgstr "Versand Org Id"
+msgstr "Αποστολή Org Id"
 
 msgid "Delivery Date"
-msgstr "Lieferdatum"
+msgstr "Ημερομηνία Παραλαβής"
 
 msgid "Delivery Received By"
-msgstr "Lieferung Erhalten von"
+msgstr "Η παραλαβή έγινε από"
 
 msgid "Carrier Receipt Number"
-msgstr "Träger Receipt Anzahl"
+msgstr "Αριθμός Απόδειξης Μεταφορέα/Ταχυμεταφορέα"
 
 msgid "Expetced Delivery Date"
-msgstr "Expetced Delivery Date"
+msgstr "Αναμενώμενη Ημερομηνία Παραλαβής"
 
 msgid "Actual Delivery Date"
-msgstr "Tatsächliche Lieferdatum"
+msgstr "Πραγματική Ημερομηνία Παραλαβής"
 
 msgid "Handling Instruction"
-msgstr "Handlungsanweisung"
+msgstr "Οδηγίες Μεταχείρησης"
 
 msgid "Sd Delivery Line Id"
-msgstr "SD-Lieferung-Linie Id"
+msgstr ""
 
 msgid "Shipped Quantity"
-msgstr "Versendet Menge"
+msgstr "Απεσταλθείσα ποσότητα"
 
 msgid "Staging Subinventory Id"
-msgstr "Staging Subinventory Id"
+msgstr ""
 
 msgid "Staging Locator Id"
-msgstr "Staging Locator Id"
+msgstr ""
 
 msgid "Delivery Status"
-msgstr "Lieferstatus"
+msgstr "Κατάσταση Παράδοσης"
 
 msgid "Picking Date"
-msgstr "Picking Datum"
+msgstr ""
 
 msgid "Actual Ship Date"
 msgstr "Die tatsächlichen Versanddatum"
@@ -5312,220 +5311,227 @@ msgid "Theme"
 msgstr "Thema"
 
 msgid "Page Size"
-msgstr "Seitengröße"
+msgstr "Μέγεθος σελίδας"
 
 msgid "Prices Dec"
-msgstr "Preise Dezember"
+msgstr "Τιμές Δεκεμβρίου"
 
 msgid "Qty Dec"
-msgstr "Anz Dezember"
+msgstr "Ποσότητα Δεκεμβρίου"
 
 msgid "Rates Dec"
-msgstr "Rates Dez"
+msgstr ""
 
 msgid "Percent Dec"
-msgstr "Prozent Dezember"
+msgstr "Ποσοστό Δεκεμβρίου"
 
 msgid "Show Gl"
-msgstr "Anzeigen Gl"
+msgstr "Εμφάνιση Gl"
 
 msgid "Show Codes"
-msgstr "Codes zeigen"
+msgstr "Εμφάνιση Κωδικών"
 
 msgid "Show Hints"
-msgstr "Show Hints"
+msgstr "Εμφάνιση Hints"
 
 msgid "Last Visit Date"
-msgstr "Letzter Besuch Datum"
+msgstr "Ημερομηνία τελευταίας επίσκεψης"
 
 msgid "Query Size"
-msgstr "Query-Größe"
+msgstr "Μέγεθος Query"
 
 msgid "Graphic Links"
-msgstr "Grafik-Verbindungen"
+msgstr "Γραφικά Links"
 
 msgid "Pos"
 msgstr "Pos"
 
 msgid "Print Profile"
-msgstr "Profil drucken"
+msgstr "Εκτύπωση προφίλ"
 
 msgid "Rep Popup"
 msgstr "Rep Popup"
 
 msgid "Auth Provider Name"
-msgstr "Auth Anbietername"
+msgstr "Auth Όνομα παρόχου"
 
 msgid "Auth Provider Id"
-msgstr "Auth-Provider-ID"
+msgstr "Auth Παρόχου Id"
 
 msgid "User Dashboard Config Id"
-msgstr "User-Dashboard-Config Id"
+msgstr "User Dashboard Config Id"
 
+#, fuzzy
 msgid "Config Level"
-msgstr "Config Ebene"
+msgstr "Επίπεδο Config"
 
 msgid "User Role"
-msgstr "Benutzerrolle"
+msgstr "Ρόλος Χρήστη"
 
 msgid "Report Group"
-msgstr "Berichtsgruppe"
+msgstr "Αναφορά Ομάδων"
 
 msgid "Report Type"
-msgstr "Berichtstyp"
+msgstr "Τύπος Αναφοράς"
 
 msgid "Report Id"
-msgstr "Report Id"
+msgstr "Αναφορά Id"
 
 msgid "User Favourite Id"
-msgstr "Benutzer beliebte Id"
+msgstr "Αγαπημένα Χρήστη Id"
 
 msgid "External Link"
 msgstr "Εξωτερικός Σύνδεσμος"
 
 msgid "Fav Name"
-msgstr "Fav Namen"
+msgstr "Fav Όνομα"
 
 msgid "Fav Group"
-msgstr "Fav Gruppe"
+msgstr "Fav Ομάδα"
 
 msgid "User Group Id"
-msgstr "User Group Id"
+msgstr "Ομάδα Χρήστη Id"
 
 msgid "User Group Code"
-msgstr "User Group-Code"
+msgstr "Κωδικός Ομάδας Χρήστη"
 
 msgid "User Group Access Id"
-msgstr "User Group Zugang Id"
+msgstr "Πρόσβαση Ομάδας Χρήστη Id"
 
+#, fuzzy
 msgid "User Password Reset Id"
-msgstr "User-Password Reset Id"
+msgstr "Reset Συνθηματικού Χρήστη Id"
 
 msgid "User Role Id"
-msgstr "Benutzerrolle Id"
+msgstr "Ρόλος Χρήστη Id"
 
 msgid "User Supplier Id"
-msgstr "Benutzer Lieferant Id"
+msgstr "Χρήστης Προμηθευτής Id"
 
 msgid "View Id"
-msgstr "Ansicht Id"
+msgstr "Εμφάνιση Id"
 
 msgid "View Name"
-msgstr "Ansichtsname"
+msgstr "Εμφάνιση Ονόματος"
 
 msgid "Custom Div Class"
-msgstr "Benutzerdefinierte Div Class"
+msgstr ""
 
 msgid "Logical Settings"
-msgstr "Logische Einstellungen"
+msgstr "Λογικές Ρυθμίσεις"
 
 msgid "Query V"
-msgstr "Query-V"
+msgstr "Query V"
 
 msgid "Select V"
-msgstr "Wählen V"
+msgstr "Επιλογή V"
 
 msgid "From V"
-msgstr "Von V"
+msgstr "Από V"
 
+#, fuzzy
 msgid "Where V"
-msgstr "Wobei V"
+msgstr "Που V"
 
 msgid "Group By V"
-msgstr "Gruppe von V"
+msgstr "Ομάδα κατά V"
 
 msgid "Order By"
-msgstr "Sortieren nach"
+msgstr "Σειρά κατά"
 
 msgid "Query End"
-msgstr "Query End"
+msgstr "Τέλος Query"
 
 msgid "Filters"
-msgstr "Filter"
+msgstr "Φίλτρα"
 
 msgid "Page"
-msgstr "Seite"
+msgstr "Σελίδα"
 
 msgid "Page Title"
-msgstr "Seitentitel"
+msgstr "Τίτλος σελίδας"
 
 msgid "Page Header"
-msgstr "Kopfzeile"
+msgstr "Κεφαλίδα Σελίδας"
 
+#, fuzzy
 msgid "Page Footer"
-msgstr "Fußzeile"
+msgstr "Υποσημειωση Σελίδας"
 
+#, fuzzy
 msgid "Use Pager Cb"
-msgstr "Verwenden Pager Cb"
+msgstr "Χρήση Βομβητή Cb"
 
 msgid "Default Per Page"
-msgstr "Standard pro Seite"
+msgstr "Προεπιλεγμένο ανα σελίδα"
 
 msgid "No Of Grid Columns"
-msgstr "Anzahl Der Rasterspalten"
+msgstr "Αρ. σελίδων πλέγματος"
 
+#, fuzzy
 msgid "Block Title"
-msgstr "Block Titel"
+msgstr "Τίτλος Block"
 
 msgid "Show Graph Only Cb"
-msgstr "Show Graph Nur Cb"
+msgstr "Εμφάνιση Γραφήματος Μόνο Cb"
 
 msgid "Header Text"
-msgstr "Überschrift"
+msgstr "Κέιμενο Κεφαλίδας"
 
+#, fuzzy
 msgid "Footer Text"
-msgstr "Fusszeile"
+msgstr "Κείμενο Υποσημείωσης"
 
 msgid "Remove Default Header Cb"
-msgstr "Remove Default Header Cb"
+msgstr "Αφαιρεση Προεπιλεγμένης Κεφαλίδας Cb"
 
 msgid "List Type"
-msgstr "Liste Typ"
+msgstr "Τύπος Λίστας"
 
 msgid "Chart Type"
-msgstr "Diagrammtyp"
+msgstr "Τύπος Διαγράμματος"
 
 msgid "Chart Width"
-msgstr "Diagramm Breite"
+msgstr "Μήκος Διαγράμματος"
 
 msgid "Chart Height"
-msgstr "Ύψος Γραφήματος"
+msgstr "Ύψος Διαγράμματος"
 
 msgid "Chart Label"
-msgstr "Diagramm-Aufkleber"
+msgstr "Ετικέτα Διαγράμματος"
 
 msgid "Chart Value"
-msgstr "Diagramm Wert"
+msgstr "Τιμή Διαγράμματος"
 
 msgid "Chart Legend"
-msgstr "Diagramm Legende"
+msgstr ""
 
 msgid "View Path Id"
-msgstr "Weg anzeigen Id"
+msgstr "Εμφάνιση μονοπατιού Id"
 
 msgid "Column Name"
-msgstr "Spaltenname"
+msgstr "Όνομα Στήλης"
 
 msgid "Wip Accounting Group Id"
 msgstr "Wip Accounting Group Id"
 
 msgid "Wo Type"
-msgstr "Wo Typ"
+msgstr "Wo Τύπος"
 
 msgid "WIP Accounting Group"
 msgstr "WIP Accounting Group"
 
 msgid "Var Material Ac Id"
-msgstr "Var Werkstoff Ac Id"
+msgstr ""
 
 msgid "Var Material Oh Ac Id"
-msgstr "Var Werkstoff Oh Ac Id"
+msgstr ""
 
 msgid "Var Overhead Ac Id"
-msgstr "Var Overhead Ac Id"
+msgstr ""
 
 msgid "Var Resource Ac Id"
-msgstr "Var Ressourcen Ac Id"
+msgstr ""
 
 msgid "Var Osp Ac Id"
 msgstr "Var Osp Ac Id"
@@ -5537,106 +5543,112 @@ msgid "Default Accounting Group"
 msgstr "Standard Accounting Group"
 
 msgid "Wo Number Type"
-msgstr "Wo Nummer Art"
+msgstr "Wo Τύπος Αρίθμησης"
 
 msgid "Allow One Operation Cb"
-msgstr "Lassen Sie eine Operation Cb"
+msgstr ""
 
 msgid "Completion Subinventory Id"
-msgstr "Fertigstellung Subinventory Id"
+msgstr "Ολοκλήρωση Υποαποθήκης Id"
 
 msgid "Completion Locator Id"
-msgstr "Fertigstellung Locator Id"
+msgstr "Ολοκλήρωση Εντοπιστή Id"
 
 msgid "Issue Subinventory Id"
-msgstr "Ausgabe Subinventory Id"
+msgstr ""
 
 msgid "Issue Locator Id"
-msgstr "Auszustellen Locator Id"
+msgstr "Εντοπιστής Ζητημάτων Id"
 
+#, fuzzy
 msgid "So Change Effect"
-msgstr "So Effect ändern"
+msgstr "So Αλλαγή Φαινομένου"
 
 msgid "Auto Release Days"
 msgstr "Auto Release Tage"
 
 msgid "Wip Move Transaction Id"
-msgstr "Wip Bewegen Transaktion Id"
+msgstr ""
 
 msgid "Wo Routing Line Id"
-msgstr "Wo Routing Linie Id"
+msgstr ""
 
 msgid "Wo Routing Detail Id"
-msgstr "Wo Routing-Detail Id"
+msgstr ""
 
 msgid "Wo Number"
-msgstr "Wo Anzahl"
+msgstr "Wo Αριθμός"
 
+#, fuzzy
 msgid "From Routing Sequence"
-msgstr "Von Routing Sequence"
+msgstr "Απο σειρά Routing"
 
+#, fuzzy
 msgid "To Routing Sequence"
-msgstr "Um Routing Sequence"
+msgstr "Σε σειρά Routing"
 
 msgid "From Operation Step"
-msgstr "Von Arbeitsschritt"
+msgstr ""
 
 msgid "To Operation Step"
-msgstr "Zur Bedienung Schritt"
+msgstr ""
 
 msgid "Move Quantity"
-msgstr "Verschieben Menge"
+msgstr ""
 
 msgid "Scrap Account Id"
-msgstr "Schrott-Konto Id"
+msgstr ""
 
 msgid "Sales Order Header Id"
-msgstr "Kundenauftragskopf Id"
+msgstr "Σειρά Κεφαλίδων Πωλήσεων Id"
 
 msgid "Sales Order Line Id"
-msgstr "Auftragsposition Id"
+msgstr "Σειρά Κεφαλίδων Γραμμών Id"
 
 msgid "Wip Resource Transaction Id"
-msgstr "Wip Ressourcentransaction Id"
+msgstr ""
 
 msgid "Wip Wo Routing Line Id"
-msgstr "Wip Wo Routing Linie Id"
+msgstr ""
 
 msgid "Wip Wo Routing Detail Id"
-msgstr "Wip Wo Routing-Detail Id"
+msgstr ""
 
 msgid "Required Quantity"
-msgstr "Benötigte Menge"
+msgstr "Απαιτούμενη Ποσότητα"
 
+#, fuzzy
 msgid "Issued Quantity"
-msgstr "Ausgestellt Menge"
+msgstr "Issued ποσότητα"
 
 msgid "Wo Status"
-msgstr "Wo Stand"
+msgstr "Wo Κατάσταση"
 
 msgid "Nettable Quantity"
-msgstr "Verrechenbaren Menge"
+msgstr ""
 
 msgid "Reference Bom Item Id M"
-msgstr "Referenzstücklistenposition ID M"
+msgstr ""
 
 msgid "Bom Exploded Cb"
-msgstr "Bom Explosions Cb"
+msgstr ""
 
 msgid "Routing Exploded Cb"
-msgstr "Routing Explosions Cb"
+msgstr ""
 
 msgid "Reference Routing Item Id M"
-msgstr "Referenz Routing Artikel-Nummer M"
+msgstr ""
 
 msgid "Completed Quantity"
-msgstr "Abgeschlossene Menge"
+msgstr "Ολοκληρωμένη Ποσότητα"
 
+#, fuzzy
 msgid "Scrapped Quantity"
-msgstr "Verschrottet Menge"
+msgstr "Χύμα Ποσότητα"
 
+#, fuzzy
 msgid "Released Date"
-msgstr "Erscheinungsdatum"
+msgstr "Ημερομηνία προβολής"
 
 msgid "First Unit Completed Date"
 msgstr "Erste Einheit Abschlussdatum"
@@ -6566,7 +6578,7 @@ msgid "Multi Action-Subinventory"
 msgstr "Multi-Action-Subinventory"
 
 msgid "View Locator"
-msgstr "Locator anzeigen"
+msgstr "Εμφάνιση Εντοπιστή"
 
 msgid "Multi Action - Locators"
 msgstr "Multi Aktion - Locators"
@@ -8695,22 +8707,22 @@ msgid "Conversion Details"
 msgstr "Conversion-Details"
 
 msgid "Journal Header"
-msgstr "Journal-Header"
+msgstr "Κεφαλίδα Ημερολογίου"
 
 msgid "Reference Details"
-msgstr "Reference Details"
+msgstr "Λεπτομέρειες Αναφοράς"
 
 msgid "Rate & Amounts"
-msgstr "Beurteilen & Mengen"
+msgstr ""
 
 msgid "Journal Lines"
-msgstr "Journal-Linien"
+msgstr "Γραμμές Ημερολογίου"
 
 msgid "Debit"
-msgstr "Debit"
+msgstr "Χρεωστική"
 
 msgid "Credit"
-msgstr "Kredit"
+msgstr "Πιστωτική"
 
 msgid "Ledger Dr"
 msgstr "Ledger Dr"
@@ -8719,226 +8731,227 @@ msgid "Ledger Cr"
 msgstr "Ledger Cr"
 
 msgid "Ref Type"
-msgstr "Ref Immobilientyp"
+msgstr "Ref Τύπος"
 
 msgid "Ref Value"
-msgstr "Ref Value"
+msgstr "Ref Τιμή"
 
 msgid "Ledger Header"
-msgstr "Ledger Kopf"
+msgstr "Ledger Κεφαλίδα"
 
 msgid "Ledger Options"
-msgstr "Ledger Optionen"
+msgstr "Ledger Επιλογές"
 
 msgid "Balancing Segment Values"
-msgstr "Balancing Segmentwerte"
+msgstr ""
 
 msgid "Balance Segment Value"
-msgstr "Balance Segmentwert"
+msgstr ""
 
 msgid "Schedule & Discount Lines"
-msgstr "Spielplan & Discount-Linien"
+msgstr ""
 
 msgid "Discount"
-msgstr "Rabatt"
+msgstr "Έκπτωση"
 
 msgid "Schedule Id"
-msgstr "Spielplan Id"
+msgstr "Πρόγραμμα Id"
 
 msgid "Date of Month"
-msgstr "Datum Monat"
+msgstr "Ημέρα του Μήνα"
 
 msgid "Discount Id"
-msgstr "Discount Id"
+msgstr "Έκπτωση Id"
 
 msgid "GL Periods"
-msgstr "GL Zeiten"
+msgstr "GL Περίοδοι"
 
 msgid "Accounting Period"
-msgstr "Abrechnungszeitraum"
+msgstr "Περίοδος Λογαρισμού"
 
 msgid "Current Open Period"
-msgstr "Aktuelle Freizeitraum"
+msgstr "Τρέχουσα Ανοιχτή Περίοδος"
 
 msgid "Next Period"
-msgstr "Nächste Periode"
+msgstr "Επόμενη Περίοδος"
 
 msgid "Cal Name"
-msgstr "Cal-Name"
+msgstr "Cal Όνομα"
 
 msgid "Cal Id"
 msgstr "Cal Id"
 
 msgid "Approval Limit Header"
-msgstr "Kompetenzhöhe Kopf"
+msgstr ""
 
 msgid "Approval Limit Lines"
-msgstr "Approval Grenzwertlinien"
+msgstr ""
 
 msgid "Lowest Range"
-msgstr "Niedrigster Bereich"
+msgstr "Ελάχιστο Εύρος"
 
 msgid "Highest Range"
-msgstr "Höchste Reichweite"
+msgstr "Μέγιστο Εύρος"
 
 msgid "Compensation Element Entry"
-msgstr "Ausgleichselement Eintrag"
+msgstr ""
 
 msgid "Element Entry Lines"
-msgstr "Element Buchungszeilen"
+msgstr ""
 
 msgid "Monetary Value"
-msgstr "Geldwert"
+msgstr "Χρηματική Αξία"
 
 msgid "Compensation Element Entry Template"
-msgstr "Ausgleichselement Eingabevorlage"
+msgstr ""
 
 msgid "Details Info"
-msgstr "Details Info"
+msgstr "Λεπτομέρειες Πληροφοριών"
 
 msgid "Employee Header"
-msgstr "Mitarbeiter-Header"
+msgstr "Κεφαλίδα Υπαλλήλου"
 
 msgid "Personal"
-msgstr "Persönliches"
+msgstr "Προσωπικό"
 
 msgid "Employee Details"
-msgstr "Mitarbeiterdetails"
+msgstr "Λεπτομέρειες Υπαλλήλου"
 
 msgid "Financial Info"
-msgstr "Finanz Info"
+msgstr "Οικονομικές Πληροφορίες"
 
 msgid "Work Experience"
-msgstr "Arbeitserfahrung"
+msgstr "Εργασιακή Εμπειρία"
 
 msgid "On Boarding"
 msgstr "On Boarding"
 
 msgid "Exit"
-msgstr "Ausgang"
+msgstr "Έξοδος"
 
 msgid "Job History"
-msgstr "Auftragsverlauf"
+msgstr "Ιστορικό Εργασιών"
 
 msgid "Supervisor"
-msgstr "Supervisor"
+msgstr "Προϊστάμενος"
 
 msgid "Last Salary"
-msgstr "Letzte Salary"
+msgstr "Τελευταία Μισθοδοσία"
 
 msgid "Projects"
-msgstr "Projekte"
+msgstr "Projects"
 
 msgid "Salary Component Break Up"
-msgstr "Gehaltsbestand Break Up"
+msgstr ""
 
 msgid "Employee Termination"
-msgstr "Mitarbeiter Kündigung"
+msgstr "Απόλυση Υπαλλήλου"
 
 msgid "Requirements"
-msgstr "Bedarf"
+msgstr "Απαιτήσεις"
 
 msgid "Job Details & Responsibility"
 msgstr "Job-Details & Verantwortung"
 
 msgid "Leave Details"
-msgstr "Lassen Einzelheiten"
+msgstr "Λεπτομέρειες Άδειας"
 
 msgid "Current Balance"
-msgstr "Aktueller Kontostand"
+msgstr "Τρέχων Ισοζύγιο"
 
 msgid "Leave/Year"
-msgstr "Hinterlassen / Jahr"
+msgstr "Άδεια /Έτος"
 
 msgid "Available Balance"
-msgstr "Verfügbares Guthaben"
+msgstr "Διαθέσιμο Ισοζύγιο"
 
 msgid "Total Leave"
-msgstr "Insgesamt Leave"
+msgstr "Συνολική Άδεια"
 
 msgid "Leave/Period"
-msgstr "Hinterlassen / Periode"
+msgstr "Άδεια/Περίοδο"
 
 msgid "Leave Application"
-msgstr "Urlaubsantrag"
+msgstr "Αίτηση Αδείας"
 
+#, fuzzy
 msgid "Approver"
-msgstr "Genehmiger"
+msgstr "Εγκριτής"
 
 msgid "Date Details"
-msgstr "Datum Details"
+msgstr "Λεπτομέρειες Ημέρας"
 
 msgid "Bank Details"
-msgstr "Bankdaten"
+msgstr "Λεπτομέρειες Τράπεζας"
 
 msgid "Generate Schedule"
-msgstr "Generieren Plan"
+msgstr ""
 
 msgid "Line Details"
-msgstr "Linie-Details"
+msgstr ""
 
 msgid "Schedules"
-msgstr "Termine"
+msgstr "Προγράμματα"
 
 msgid "Employee Pay Slip"
-msgstr "Mitarbeiter Lohnzettel"
+msgstr ""
 
 msgid "Salary Details"
-msgstr "Salary details"
+msgstr "Λεπτομέρεις Μισθού"
 
 msgid "Position Header"
-msgstr "Position Kopf"
+msgstr "Θέση Κεφαλίδας"
 
 msgid "Team Lead"
-msgstr "Gruppenleiter"
+msgstr "Υπεύθυνος Ομάδας"
 
 msgid "Team Members"
-msgstr "Teammitgliedern"
+msgstr "Μέλη Ομάδας"
 
 msgid "Member Name"
-msgstr "Mitgliedsname"
+msgstr "Όνομα Μέλους"
 
 msgid "ABC Assignment Header"
-msgstr "ABC-Belegung Kopf"
+msgstr ""
 
 msgid "Assign Items"
-msgstr "Vergeben Sie Angebote"
+msgstr ""
 
 msgid "Sequence Number"
-msgstr "Sequenznummer"
+msgstr "Αριθμός Ακολουθίας"
 
 msgid "% of Items"
-msgstr "% Der Einzelteile"
+msgstr "% των αντικειμένων"
 
 msgid "% of Value"
-msgstr "% Des Wert"
+msgstr "% της αξίας"
 
 msgid "View & Update Items"
-msgstr "Ansehen und aktualisieren Sie Angebote"
+msgstr "Εμφάνιση & Ανανέωση Αντικειμένων"
 
 msgid "Item ABC Class"
-msgstr "Artikel ABC-Klasse"
+msgstr "Αντικείμενα ABC κατηγορίας"
 
 msgid "Master Item Id"
-msgstr "Master-Artikel-Nummer"
+msgstr "Κύριο Αντικείμενο Id"
 
 msgid "Valuation Details"
-msgstr "Valuation-Details"
+msgstr ""
 
 msgid "Scope"
-msgstr "Umfang"
+msgstr ""
 
 msgid "Count Header"
-msgstr "Count-Header"
+msgstr "Μετρητής Κεφαλίδας"
 
 msgid "Variance Limit/Approval"
-msgstr "Variance Limit / Zulassung"
+msgstr ""
 
 msgid "Count Frequence"
-msgstr "Graf Frequence"
+msgstr "Μετρητής Συχνότητας"
 
 msgid "Count Id"
-msgstr "Graf Id"
+msgstr "Μετρητής Id"
 
 msgid "StatusStatus"
 msgstr "StatusStatus"
@@ -11456,7 +11469,7 @@ msgid "Customer Loading failed"
 msgstr "Kunden Loading gescheitert"
 
 msgid "Locator name loading failed"
-msgstr "Locator Namen Lade gescheitert"
+msgstr "Φόρτωση ονόματος εντοπιστή απέτυχε"
 
 msgid "Accounting Group Loading Failed!!!"
 msgstr "Accounting Group Laden fehlgeschlagen !!!"
@@ -11590,7 +11603,7 @@ msgid "Entitlement Details"
 msgstr "Entitlement-Details"
 
 msgid "Locator Details"
-msgstr "Locator-Details"
+msgstr "Λεπτομέρειες Εντοπιστή"
 
 msgid "Lot Number Details"
 msgstr "Losnummer Einzelheiten"
@@ -12021,58 +12034,62 @@ msgid "inv approval hierarchy"
 msgstr ""
 
 msgid "payment approval hierarchy"
-msgstr "Zahlungsgenehmigungshierarchie"
+msgstr "ιεραρχία έγκρισης πληρωμών"
 
 msgid "liability ac id"
-msgstr "Haftung ac-ID"
+msgstr "Haftung ac id"
 
 msgid "pre payment ac id"
-msgstr "Vorauskasse ac-ID"
+msgstr "προπληρωμή ac id"
 
 msgid "discount ac id"
-msgstr "Rabatt ac-ID"
+msgstr "έκπτωση ac id"
 
+#, fuzzy
 msgid "rate gain ac id"
-msgstr "Kursgewinn ac-ID"
+msgstr "ποσοστό κέρδους ac id"
 
+#, fuzzy
 msgid "rate loss ac id"
-msgstr "Kursverlust ac-ID"
+msgstr "ποσοστό ζημίας ac id"
 
+#, fuzzy
 msgid "default exchange rate type"
-msgstr "Standardkurstyp"
+msgstr "προεπιλεγμένος τύπος τιμής ισοτιμίας"
 
 msgid "expense payment term"
-msgstr "Kosten Zahlungsfrist"
+msgstr "όρος πληρωμής εξόδων"
 
 msgid "expense pay group"
-msgstr "Kosten Entgeltgruppe"
+msgstr "ομάδα πληρωμής εξόδων"
 
 msgid "expense payment priority"
-msgstr "Kosten Zahlungs Priorität"
+msgstr "προτεραιότηατ πληρωμής εξόδων"
 
 msgid "expense template id"
-msgstr "Kosten-Vorlage ID"
+msgstr "template εξόδων id"
 
 msgid "processing method"
-msgstr "Verarbeitungsverfahren"
+msgstr "μέθοδος επεξεργασίας"
 
 msgid "ap payment process id"
 msgstr ""
 
 msgid "format class name"
-msgstr "Format Klassennamen"
+msgstr "Format ονόματος κατηγορίας"
 
 msgid "format method name"
-msgstr "Format Methodenname"
+msgstr "Format όνομα μεθόδου"
 
 msgid "sync payment number cb"
-msgstr "Sync-Zahlungsnummer cb"
+msgstr "συγχρονισμός αριθμού πληρωμής cb"
 
+#, fuzzy
 msgid "customer relationship"
-msgstr "Kundenbeziehung"
+msgstr "σχέση πελάτη"
 
 msgid "customer category"
-msgstr "Kundenkategorie"
+msgstr "κατηγορία πελάτη"
 
 msgid "ar customer relation id"
 msgstr ""
@@ -12100,13 +12117,13 @@ msgid "image file id"
 msgstr "αρχείο εικόνας Id"
 
 msgid "content block id"
-msgstr "Inhaltsblock-ID"
+msgstr "περιεχόμενα block id"
 
 msgid "filter catalog id"
-msgstr "Filter Katalog-ID"
+msgstr "φιλτράρισμα καταλόγου id"
 
 msgid "content by"
-msgstr "Inhalt von"
+msgstr "περιεχόμενο από"
 
 msgid "this level cb"
 msgstr ""
@@ -12117,11 +12134,12 @@ msgstr ""
 msgid "ec product id"
 msgstr ""
 
+#, fuzzy
 msgid "price round"
-msgstr "Preisrunde"
+msgstr "στρογγυλοποίηση τιμής"
 
 msgid "order source type"
-msgstr "Um Quellentyp"
+msgstr "τύπος παραγγελίας πηγής"
 
 msgid "send email cb"
 msgstr "αποστολή email cb"
@@ -12259,7 +12277,7 @@ msgid "fa asset component id"
 msgstr ""
 
 msgid "component asset id"
-msgstr "Komponente Asset-ID"
+msgstr ""
 
 msgid "fa asset retirement id"
 msgstr ""
@@ -12268,34 +12286,35 @@ msgid "retired units"
 msgstr ""
 
 msgid "retired cost"
-msgstr "Ruhestand Kosten"
+msgstr "κόστος συνταξιοδότησης"
 
 msgid "proceed of sales"
 msgstr ""
 
+#, fuzzy
 msgid "cost of removals"
-msgstr "Kosten für Umzüge"
+msgstr "κόστος απολύσεων"
 
 msgid "retirement convention"
-msgstr "Ruhestand Konvention"
+msgstr ""
 
 msgid "retire date"
-msgstr "Ruhestand Datum"
+msgstr "ημερομηνία συνταξιοδότησης"
 
 msgid "fa asset source id"
 msgstr ""
 
 msgid "legacy invoice num"
-msgstr "Erbe Rechnung num"
+msgstr ""
 
 msgid "reference bumber"
-msgstr "Referenz bumber"
+msgstr "αριθμός αναφοράς"
 
 msgid "fa distribution line id"
 msgstr ""
 
 msgid "retirement gl ac id"
-msgstr "Ruhestand gl ac-ID"
+msgstr "συνταξιοδότηση gl ac id"
 
 msgid "fp kanban demand id"
 msgstr ""
@@ -12346,19 +12365,19 @@ msgid "hd change request id"
 msgstr ""
 
 msgid "request number"
-msgstr "Auftragsnummer"
+msgstr "αριθμός αιτήματος"
 
 msgid "requester user id"
-msgstr "Anforderer Benutzer-ID"
+msgstr "αιτόντας χρήστης id"
 
 msgid "requester username"
-msgstr "Anforderer Benutzernamen"
+msgstr "όνομα χρήστη αιτόντα"
 
 msgid "requester email"
-msgstr "Antragsteller per E-Mail"
+msgstr "email αιτόντα"
 
 msgid "requester phone"
-msgstr "Anforderer Telefon"
+msgstr "τηλέφωνο αιτόντα"
 
 msgid "impact"
 msgstr "Auswirkung"
@@ -12615,7 +12634,7 @@ msgid "subscription type"
 msgstr "Bezugstyp"
 
 msgid "ship to address id"
-msgstr "αποστοή στην διεύθυνση id"
+msgstr "αποστολή στην διεύθυνση id"
 
 msgid "bill to address id"
 msgstr "Gesetzentwurf zur ID-Adresse"
@@ -13030,7 +13049,7 @@ msgid "budget type"
 msgstr "Budgettyp"
 
 msgid "version name"
-msgstr "Versionsnamen"
+msgstr "όνομα έκδοσης"
 
 msgid "labor effort"
 msgstr "Arbeitsaufwand"
@@ -13132,13 +13151,13 @@ msgid "allow percent cb"
 msgstr "επιτρεπόμενο ποσοστό cb"
 
 msgid "total hundred cb"
-msgstr "Gesamt hundert cb"
+msgstr ""
 
 msgid "prj category line id"
 msgstr ""
 
 msgid "category code"
-msgstr "Kategorie-Code"
+msgstr "κωδικός κατηγορίας"
 
 msgid "prj category value id"
 msgstr ""
@@ -13174,7 +13193,7 @@ msgid "billed cb"
 msgstr "χρεωμένο cb"
 
 msgid "revenue distributed cb"
-msgstr "Einnahmen verteilt cb"
+msgstr ""
 
 msgid "prj event type id"
 msgstr "prj τύπος γεγονότος id"
@@ -13186,10 +13205,10 @@ msgid "prj expenditure header id"
 msgstr ""
 
 msgid "batch name"
-msgstr "Stapelnamen"
+msgstr "όνομα παρτίδας"
 
 msgid "expenditure class"
-msgstr "Ausgaben Klasse"
+msgstr ""
 
 msgid "submitted by user id"
 msgstr "υποβλήθηκε απο τον χρήστη id"
@@ -13204,10 +13223,10 @@ msgid "over time cb"
 msgstr "υπερωρίες cb"
 
 msgid "invoice cb"
-msgstr "Rechnungs cb"
+msgstr "τιμολόγιο cb"
 
 msgid "usages cb"
-msgstr "Gebräuche cb"
+msgstr ""
 
 msgid "wip cb"
 msgstr ""
@@ -13216,10 +13235,10 @@ msgid "prj nlr header id"
 msgstr ""
 
 msgid "debit ac id"
-msgstr "Debit-ac-ID"
+msgstr "χρεωστικό ac id"
 
 msgid "credit ac id"
-msgstr "Kredit ac-ID"
+msgstr "πιστωτικό ac id"
 
 msgid "gl journal interface cb"
 msgstr ""
@@ -13228,7 +13247,7 @@ msgid "invoiced cb"
 msgstr "τιμολογημένο cb"
 
 msgid "revene calculated cb"
-msgstr "Revene berechnet cb"
+msgstr ""
 
 msgid "direct labor cb"
 msgstr ""
@@ -13240,7 +13259,7 @@ msgid "burden cb"
 msgstr "Last cb"
 
 msgid "expense reports cb"
-msgstr "Spesenabrechnungen cb"
+msgstr "αναφορές εξόδων cb"
 
 msgid "prj expenditure type line id"
 msgstr ""
@@ -13249,7 +13268,7 @@ msgid "prj invoice header id"
 msgstr ""
 
 msgid "invoice status"
-msgstr "Rechnungsstatus"
+msgstr "κατάσταση τιμολογίου"
 
 msgid "unearned coa id"
 msgstr ""
@@ -13261,7 +13280,7 @@ msgid "receivables ac id"
 msgstr "Forderungen ac-ID"
 
 msgid "transfer status"
-msgstr "Übertragungsstatus"
+msgstr "κατάσταση μεταφοράς"
 
 msgid "unearned amount"
 msgstr ""
@@ -13271,10 +13290,10 @@ msgid "unbilled amount"
 msgstr "μη χρεωσιμη ποσότητα"
 
 msgid "receivables amount"
-msgstr "Forderungsbetrag"
+msgstr ""
 
 msgid "invoice number"
-msgstr "Rechnungsnummer"
+msgstr "αριθμός τιμολογίου"
 
 msgid "Rejection Reason"
 msgstr "Λόγος απόρριψης"
@@ -13289,7 +13308,7 @@ msgid "signoff cb"
 msgstr "αποσύνδεση cb"
 
 msgid "resource name"
-msgstr "Ressourcennamen"
+msgstr ""
 
 msgid "prj nlr line id"
 msgstr ""
@@ -13319,58 +13338,59 @@ msgid "prj project type id"
 msgstr ""
 
 msgid "project number"
-msgstr "Projektnummer"
+msgstr "αριθμός project"
 
 msgid "pm employee id"
 msgstr ""
 
 msgid "finance structure cb"
-msgstr "Finanzstruktur cb"
+msgstr "οικονομική δομή cb"
 
 msgid "operation structure cb"
-msgstr "Betrieb Struktur cb"
+msgstr "επιχειρησιακή δομή cb"
 
 msgid "life cycle"
-msgstr "Lebenskreis"
+msgstr "κύκλος ζωής"
 
 msgid "current phase"
-msgstr "Stromphase"
+msgstr "τρέχουσα φάση"
 
 msgid "role list id"
-msgstr "Rollenliste id"
+msgstr "λίστα ρόλων id"
 
 msgid "prj work type"
 msgstr "τύπος εργασίας"
 
 msgid "probability"
-msgstr "Wahrscheinlichkeit"
+msgstr "πιθανότητα"
 
 msgid "opportunity value"
-msgstr "Gelegenheit Wert"
+msgstr "τιμή ευκαιρίας"
 
 msgid "expected approval date"
 msgstr "αναμενόμενη ημερομηνία αποδοχής"
 
 msgid "billing method"
-msgstr "Abrechnungsmethode"
+msgstr "μέθοδος τιμολόγησης"
 
+#, fuzzy
 msgid "billing cycle"
-msgstr "Rechnungskreislauf"
+msgstr "κύκλος τιμολόγησης"
 
 msgid "account burdened cost cb"
-msgstr "Konto belasteten Kosten cb"
+msgstr ""
 
 msgid "labor billing type"
-msgstr "Arbeits Fakturaart"
+msgstr ""
 
 msgid "nlr billing type"
-msgstr "NLR Fakturaart"
+msgstr ""
 
 msgid "employee schedule id"
-msgstr "Mitarbeiter Zeitplan-ID"
+msgstr ""
 
 msgid "job schedule id"
-msgstr "Jobzeitplan-ID"
+msgstr "προγραμματισμός εργασίας id"
 
 msgid "l revenue burden id"
 msgstr ""
@@ -13379,22 +13399,22 @@ msgid "l invoice burdern id"
 msgstr ""
 
 msgid "nlr schedule id"
-msgstr "NLR Plan-ID"
+msgstr "nlr προγραμματισμός id"
 
 msgid "nrl revenue burden id"
 msgstr ""
 
 msgid "nlr invoice burdern id"
-msgstr "NLR Rechnung burdern id"
+msgstr ""
 
 msgid "task level weight"
-msgstr "Task-Ebene Gewicht"
+msgstr ""
 
 msgid "parent prj task num"
-msgstr "Mutter prj Aufgabe num"
+msgstr ""
 
 msgid "cip asset id"
-msgstr "CIP-Asset-ID"
+msgstr ""
 
 msgid "prj project member id"
 msgstr ""
@@ -13412,34 +13432,35 @@ msgid "sponsored cb"
 msgstr ""
 
 msgid "organization planning cb"
-msgstr "Organisationsplanung cb"
+msgstr "σχεδιασμός οργανισμού cb"
 
 msgid "intercompany billing cb"
 msgstr ""
 
 msgid "cost burdened cb"
-msgstr "Kosten belastet cb"
+msgstr ""
 
 msgid "cost budget method"
-msgstr "Kostenbudget Verfahren"
+msgstr ""
 
 msgid "revenue budget method"
-msgstr "Einnahmenmethode"
+msgstr ""
 
 msgid "resource list id"
-msgstr "Ressourcenliste id"
+msgstr ""
 
 msgid "cip cost type"
 msgstr ""
 
 msgid "asset cost allocation method"
-msgstr "Vermögenskostenverteilungsmethode"
+msgstr ""
 
+#, fuzzy
 msgid "event processing method"
-msgstr "Ereignisverarbeitungsverfahren"
+msgstr "μέθοδος επεξεργασίας γεγονότος"
 
 msgid "grouping method"
-msgstr "Gruppierungsverfahren"
+msgstr "μέθοδος ομαδοποίησης"
 
 msgid "billing cycle id"
 msgstr "Abrechnungszyklus-ID"
@@ -13511,7 +13532,7 @@ msgid "task member cb"
 msgstr "Aufgabe Mitglied cb"
 
 msgid "scheduling cb"
-msgstr "Scheduling cb"
+msgstr "προγραμματισμός cb"
 
 msgid "min job level"
 msgstr "ελάχιστο επίπεδο εργασίας"
@@ -13523,10 +13544,10 @@ msgid "prj status header id"
 msgstr ""
 
 msgid "user status"
-msgstr "Benutzerstatus"
+msgstr "κατάσταση χρήστη"
 
 msgid "system status"
-msgstr "Systemstatus"
+msgstr "κατάσταση συστήματος"
 
 msgid "starting status cb"
 msgstr "Ausgangsstatus cb"
@@ -13541,7 +13562,7 @@ msgid "prj status line id"
 msgstr "prj κατάσταση γραμμής id"
 
 msgid "action code"
-msgstr "Aktionscode"
+msgstr "κωδικός ενέργειας"
 
 msgid "allow cb"
 msgstr "αποδοχή cb"
@@ -13550,28 +13571,28 @@ msgid "prj status next id"
 msgstr ""
 
 msgid "status name"
-msgstr "Status-Namen"
+msgstr "όνομα κατάστασης"
 
 msgid "tp amount type"
 msgstr "tp τύπος ποσότητας"
 
 msgid "training cb"
-msgstr "Trainings cb"
+msgstr ""
 
 msgid "shadow resource cb"
-msgstr "Schattenressourcen cb"
+msgstr ""
 
 msgid "utilization type"
-msgstr "Nutzungsart"
+msgstr ""
 
 msgid "utilization percentage"
-msgstr "Auslastung in Prozent"
+msgstr ""
 
 msgid "unassigned cb"
 msgstr ""
 
 msgid "non worked cb"
-msgstr "Nicht arbeitete cb"
+msgstr ""
 
 msgid "qa ce action type id"
 msgstr ""
@@ -13637,10 +13658,10 @@ msgid "Qa Collection Element Header Id"
 msgstr ""
 
 msgid "action condition"
-msgstr "Action Zustand"
+msgstr ""
 
 msgid "quality action"
-msgstr "Qualitätsaktions"
+msgstr ""
 
 msgid "Sys Element Name"
 msgstr ""
@@ -13692,7 +13713,7 @@ msgid "qa cp assignment line id"
 msgstr ""
 
 msgid "trigger condition"
-msgstr "Triggerbedingung"
+msgstr ""
 
 msgid "Plan Type"
 msgstr "Τύπος σχεδίου"
@@ -13707,13 +13728,13 @@ msgid "qa cp line id"
 msgstr ""
 
 msgid "readonly cb"
-msgstr "Readonly cb"
+msgstr "αναγνώσιμο μόνο cb"
 
 msgid "displayed cb"
 msgstr ""
 
 msgid "information cb"
-msgstr "Informationen cb"
+msgstr "πληροφορίες cb"
 
 msgid "Specification Name"
 msgstr ""
@@ -13725,10 +13746,10 @@ msgid "qa specification line id"
 msgstr ""
 
 msgid "user target value"
-msgstr "Nutzer-Zielwert"
+msgstr "στοχευόμενη τιμή χρήστη"
 
 msgid "specification target value"
-msgstr "Spezifikation Zielwert"
+msgstr ""
 
 msgid "reasonable target value"
 msgstr ""
@@ -13767,13 +13788,13 @@ msgid "move line wo header"
 msgstr ""
 
 msgid "supplier category"
-msgstr "Lieferanten Kategorie"
+msgstr "κατηγορία προμηθευτή"
 
 msgid "sys catalog header id"
 msgstr ""
 
 msgid "parent catalog header id"
-msgstr "Mutter Katalog Header-ID"
+msgstr ""
 
 msgid "sys catalog line id"
 msgstr ""
@@ -13782,16 +13803,16 @@ msgid "sys catalog value id"
 msgstr ""
 
 msgid "line value"
-msgstr "Linienwert"
+msgstr "τιμή γραμμής"
 
 msgid "sys message format id"
 msgstr ""
 
 msgid "message subject"
-msgstr "Betreff der Nachricht"
+msgstr "θέμα μηνύματος"
 
 msgid "message body"
-msgstr "Nachrichtentext"
+msgstr "κορμός μήνυματος"
 
 msgid "from name"
 msgstr "από όνομα"
@@ -13800,7 +13821,7 @@ msgid "from email"
 msgstr "από email"
 
 msgid "reply to"
-msgstr "Antwort an"
+msgstr "Απάντηση σε"
 
 msgid "use smtp cb"
 msgstr ""
@@ -13809,22 +13830,22 @@ msgid "sys pd header id"
 msgstr "sys pd-Header-ID"
 
 msgid "primary document"
-msgstr "Primärdokument"
+msgstr "κύριο έγγραφο"
 
 msgid "primary document id"
-msgstr "Primärdokument-ID"
+msgstr "κύριο έγγραφο id"
 
 msgid "sys pd process flow action id"
 msgstr ""
 
 msgid "object primary id"
-msgstr "Objekt primäre ID"
+msgstr ""
 
 msgid "sys pd process flow action value id"
 msgstr ""
 
 msgid "program source"
-msgstr "Programmquelle"
+msgstr "πηγή προγράμματος"
 
 msgid "op email address"
 msgstr "op διεύθυνση email"
@@ -13839,7 +13860,7 @@ msgid "Frequency UOM"
 msgstr "Συχνότητα UOM"
 
 msgid "frequency value"
-msgstr "Frequenzwert"
+msgstr "τιμή συχνότητας"
 
 msgid "one time cb"
 msgstr ""
@@ -13848,13 +13869,13 @@ msgid "increase date parameter cb"
 msgstr ""
 
 msgid "parameter"
-msgstr "Parameter"
+msgstr "παράμετρος"
 
 msgid "program class name"
-msgstr "Programmklassennamen"
+msgstr "όνομα κατηγορίας προγράμματος"
 
 msgid "start date time"
-msgstr "Startdatum Zeit"
+msgstr "ώρα ημέρας έναρξης"
 
 msgid "sys rfid interface id"
 msgstr ""
@@ -13866,10 +13887,10 @@ msgid "antena number"
 msgstr ""
 
 msgid "time stamp"
-msgstr "Zeitstempel"
+msgstr "χρονική σφραγίδα"
 
 msgid "user data"
-msgstr "Benutzerdaten"
+msgstr "δεδομένα χρήστη"
 
 msgid "Read Count"
 msgstr ""
