@@ -22,61 +22,61 @@ class hr_payslip_header extends dbObject {
  public static $key_column = 'employee_id';
  public static $module = "hr";
  public static $system_info = [
-  'name' => 'HR Payslip',
-  'number' => '3304',
-  'description' => 'Payslip',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('hr_payslip_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 16
+    'name' => 'HR Payslip',
+    'number' => '3304',
+    'description' => 'Payslip',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('hr_payslip_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 16
  ];
  public $field_a = [
-  'hr_payslip_header_id',
-  'hr_payroll_process_id',
-  'period_name_id',
-  'pay_date',
-  'description',
-  'status',
-  'job_id',
-  'position_id',
-  'employee_id',
-  'grade_id',
-  'no_of_days',
-  'bank_account_id',
-  'payment_ref_no',
-  'social_ac_no',
-  'social_ac_no2',
-  'mode_of_payment',
-  'tax_reg_number',
-  'pay_duration_type',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_payslip_header_id',
+    'hr_payroll_process_id',
+    'period_name_id',
+    'pay_date',
+    'description',
+    'status',
+    'job_id',
+    'position_id',
+    'employee_id',
+    'grade_id',
+    'no_of_days',
+    'bank_account_id',
+    'payment_ref_no',
+    'social_ac_no',
+    'social_ac_no2',
+    'mode_of_payment',
+    'tax_reg_number',
+    'pay_duration_type',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'employee_id',
-  'period_name_id',
+    'employee_id',
+    'period_name_id',
  ];
  public $fields_inForm_notInDataBase = [
-  "employee_name",
-  'identification_id',
-  'job_name',
-  'position_name',
+    "employee_name",
+    'identification_id',
+    'job_name',
+    'position_name',
  ];
  public $requiredField = [
-  'employee_id',
-  'pay_date'
+    'employee_id',
+    'pay_date'
  ];
  public $pageTitle = " Pay Slip "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $hr_payslip_header_id;
  public $hr_payroll_process_id;
@@ -108,28 +108,34 @@ class hr_payslip_header extends dbObject {
  public static function find_by_payrollProcessId($hr_payroll_process_id) {
   $sql = " SELECT * 
        FROM hr_payslip_header eeh 
-       WHERE eeh.hr_payroll_process_id = '{$hr_payroll_process_id}'   
+       WHERE eeh.hr_payroll_process_id = :hr_payroll_process_id   
 ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['hr_payroll_process_id' => $hr_payroll_process_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? ($result) : false;
  }
 
  public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM hr_payslip_header eeh 
-       WHERE eeh.employee_id = '{$employee_id}'   
+       WHERE eeh.employee_id = :employee_id   
 ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? ($result) : false;
  }
 
  public static function find_by_employeeId_periodNameId($employee_id, $period_name_id) {
   $sql = " SELECT * 
        FROM hr_payslip_header eeh 
-       WHERE eeh.employee_id = '{$employee_id}'    AND  period_name_id= '{$period_name_id}'
+       WHERE eeh.employee_id = :employee_id    AND  period_name_id= :period_name_id
 ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['employee_id' => $employee_id, 'period_name_id' => $period_name_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -137,10 +143,12 @@ class hr_payslip_header extends dbObject {
   $sql = " SELECT SUM(hpl.element_value) as header_amount
        FROM hr_payslip_header eeh ,
        hr_payslip_line hpl
-       WHERE eeh.hr_payslip_header_id = '{$hr_payslip_header_id}'    
+       WHERE eeh.hr_payslip_header_id = :hr_payslip_header_id    
        AND  eeh.hr_payslip_header_id = hpl.hr_payslip_header_id
 ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['hr_payslip_header_id' => $hr_payslip_header_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result[0]->header_amount : false;
  }
 

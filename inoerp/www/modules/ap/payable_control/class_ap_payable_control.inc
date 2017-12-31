@@ -19,75 +19,75 @@ class ap_payable_control extends dbObject {
  public static $key_column = 'org_id';
  public static $module = "ap";
  public static $system_info = [
-  'name' => 'Payable Control',
-  'number' => '1312',
-  'description' => 'Create & Mainten Payable Controls',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => '',
-  'primary_entity_cb' => '',
-  'module_name' => 'po',
-  'weight' => 4
+    'name' => 'Payable Control',
+    'number' => '1312',
+    'description' => 'Create & Mainten Payable Controls',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => '',
+    'primary_entity_cb' => '',
+    'module_name' => 'po',
+    'weight' => 4
  ];
  public static $approval_hierarchy_a = [
-  'SUPERVISOR' => 'Next Supervisor',
-  'POSITION' => 'Position Based'
+    'SUPERVISOR' => 'Next Supervisor',
+    'POSITION' => 'Position Based'
  ];
  public $field_a = [
-  'ap_payable_control_id',
-  'org_id',
-  'payment_term_id',
-  'ship_to_id',
-  'bill_to_id',
-  'inv_approval_hierarchy',
-  'payment_approval_hierarchy',
-  'tax_ac_id',
-  'liability_ac_id',
-  'pre_payment_ac_id',
-  'discount_ac_id',
-  'rate_gain_ac_id',
-  'rate_loss_ac_id',
-  'cash_ac_id',
-  'default_exchange_rate_type',
-  'expense_payment_term',
-  'expense_pay_group',
-  'expense_payment_priority',
-  'expense_template_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'ap_payable_control_id',
+    'org_id',
+    'payment_term_id',
+    'ship_to_id',
+    'bill_to_id',
+    'inv_approval_hierarchy',
+    'payment_approval_hierarchy',
+    'tax_ac_id',
+    'liability_ac_id',
+    'pre_payment_ac_id',
+    'discount_ac_id',
+    'rate_gain_ac_id',
+    'rate_loss_ac_id',
+    'cash_ac_id',
+    'default_exchange_rate_type',
+    'expense_payment_term',
+    'expense_pay_group',
+    'expense_payment_priority',
+    'expense_template_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'ap_payable_control_id',
-  'org_id',
+    'ap_payable_control_id',
+    'org_id',
  ];
  public $requiredField = [
-  'org_id'
+    'org_id'
  ];
  public $fields_inForm_notInDataBase = [
-  "ship_to_location",
-  "bill_to_location"
+    "ship_to_location",
+    "bill_to_location"
  ];
  public $account = [
-  'liability_ac_id',
-  'pre_payment_ac_id',
-  'discount_ac_id',
-  'rate_gain_ac_id',
-  'rate_loss_ac_id',
+    'liability_ac_id',
+    'pre_payment_ac_id',
+    'discount_ac_id',
+    'rate_gain_ac_id',
+    'rate_loss_ac_id',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Payable Control "; //page Title
  public $option_lists = [
-  'ap_payable_control_org_types' => 'ORG_TYPE',
+    'ap_payable_control_org_types' => 'ORG_TYPE',
  ];
  public $search_functions = [
-  'Business Org' => 'search_business_org',
+    'Business Org' => 'search_business_org',
  ];
  public $ap_payable_control_id;
  public $org_id;
@@ -146,7 +146,7 @@ class ap_payable_control extends dbObject {
  }
 
  public static function find_by_org_id($org_id) {
-  $sql = "SELECT * FROM ap_payable_control where org_id='{$org_id}' ";
+  $sql = "SELECT * FROM ap_payable_control where org_id=:org_id ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -156,7 +156,11 @@ class ap_payable_control extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['org_id' => $org_id ];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

@@ -160,8 +160,10 @@ LEFT JOIN org_v ON org_v.org_id =  halh.bu_org_id
   public static function find_by_userId_docType($user_id, $document_type) {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE user_id = '{$user_id}' AND document_type = '{$document_type}' ";
-   $result =self::find_by_sql($sql);
+   $sql .= " WHERE user_id = :user_id AND document_type = :document_type ";
+       global $db;
+	$value_a = ['user_id' => $user_id, 'document_type' => $document_type];
+	$result = $db->findBySql($sql, $value_a);
    return !empty($result) ? ($result) : false;
   }
 

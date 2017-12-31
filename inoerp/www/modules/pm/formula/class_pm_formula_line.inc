@@ -73,39 +73,13 @@ class pm_formula_line extends dbObject {
  public $msg;
  public $item_description;
 
-// public function findBy_parentId($pm_formula_header_id, $order_by_field = '', $order_by_seq = '') {
-//  /*
-//   * 1. Find all where parent project task number is null
-//   */
-//  $final_result = [];
-//  if (!ino_validate_num($pm_formula_header_id)) {
-//   return false;
-//  }
-//  $this->pm_formula_header_id = $pm_formula_header_id;
-//  $sql = " SELECT * FROM pm_formula_line WHERE pm_formula_header_id = '{$pm_formula_header_id}' AND parent_prj_task_num IS NULL ";
-//  $sql .= " ORDER BY task_level_weight ASC ";
-//  $result = self::find_by_sql($sql);
-//
-//  if ($result) {
-//   foreach ($result as $result_line) {
-//    $child_final_result = [];
-//    $this->_find_all_childs($result_line, $child_final_result);
-//    array_push($final_result, $result_line);
-//    if (!empty($child_final_result)) {
-//     foreach ($child_final_result as $k => $obj) {
-//      array_push($final_result, $obj);
-//     }
-//    }
-//   }
-//  }
-////  pa($final_result);
-//  return $final_result;
-// }
-
  private function _find_all_childs($result_line, &$child_final_result) {
-  $sql = " SELECT * FROM pm_formula_line WHERE pm_formula_header_id = '{$this->pm_formula_header_id}' AND parent_prj_task_num ='{$result_line->task_number}' ";
+  $sql = " SELECT * FROM pm_formula_line WHERE pm_formula_header_id = :pm_formula_header_id AND parent_prj_task_num = :parent_prj_task_num ";
   $sql .= " ORDER BY task_level_weight ASC ";
-  $result = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['pm_formula_header_id' => $this->pm_formula_header_id , 'parent_prj_task_num' => $result_line->task_number ];
+  $result = $db->findBySql($sql, $value_a);
+  
   if ($result) {
    foreach ($result as $result_line_l) {
     $child_final_result_a = [];
@@ -133,10 +107,13 @@ item
 WHERE item.item_id_m = pfl.item_id_m
 and pfh.pm_formula_header_id = pfl.pm_formula_header_id
 and pfh.org_id =item.org_id
-and pfl.pm_formula_header_id = '{$header_id}'
+and pfl.pm_formula_header_id = :pm_formula_header_id
 ";
 
-  $result_array = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['pm_formula_header_id' => $header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? $result_array : false;
  }
 
@@ -151,35 +128,17 @@ pfl.required_qty,
   pm_recipe_material_line rml
   
   WHERE rml.pm_formula_line_id = pfl.pm_formula_line_id
-  and pfl.pm_formula_header_id = '{$header_id}'
+  and pfl.pm_formula_header_id = :pm_formula_header_id
 ";
 
-  $result_array = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['pm_formula_header_id' => $header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+  
   return !empty($result_array) ? $result_array : false;
  }
 
-// public static function find_all_by_ReceipeHeaderId($pm_recipe_header_id) {
-//  $sql = " SELECT
-//prh.pm_recipe_header_id, prh.org_id, prh.recipe_name, prh.pm_formula_header_id, prh.pm_process_routing_header_id, prh.item_id_m,
-//pfl.pm_formula_line_id,item.item_number, item.item_description as item_description
-//
-//FROM 
-//pm_recipe_header prh,
-//item,
-//pm_formula_line pfl
-//
-//
-//WHERE prh.pm_formula_header_id = pfl.pm_formula_header_id
-//AND pfl.item_id_m = item.item_id_m
-//AND item.org_id = prh.org_id
-//and prh.pm_recipe_header_id = '{$pm_recipe_header_id}'
-//";
-//
-//  $result_array = self::find_by_sql($sql);
-//
-//  return !empty($result_array) ? $result_array : false;
-// }
- 
+
   public static function find_all_by_formulaHeaderId($pm_formula_header_id) {
   $sql = " SELECT 
 pfl.pm_formula_line_id,   pfl.pm_formula_header_id,   pfl.line_no,   pfl.line_type,   pfl.item_id_m,   pfl.uom_id,   pfl.quantity,
@@ -194,11 +153,14 @@ item
 WHERE item.item_id_m = pfl.item_id_m
 and pfh.pm_formula_header_id =pfl.pm_formula_header_id
 and pfh.org_id =item.org_id
-and pfh.pm_formula_header_id = '{$pm_formula_header_id}'
+and pfh.pm_formula_header_id = :pm_formula_header_id
 ";
 
 
-  $result_array = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['pm_formula_header_id' => $pm_formula_header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+  
   return !empty($result_array) ? $result_array : false;
  }
 

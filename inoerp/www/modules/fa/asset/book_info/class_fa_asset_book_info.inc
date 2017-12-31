@@ -274,8 +274,12 @@ class fa_asset_book_info extends dbObject {
  public static function find_by_assetId_bookId($fa_asset_book_id, $fa_asset_id) {
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where fa_asset_book_id= '{$fa_asset_book_id}'  AND fa_asset_id = '{$fa_asset_id}' ";
-  $result = self::find_by_sql($sql);
+   " where fa_asset_book_id= :fa_asset_book_id  AND fa_asset_id = :fa_asset_id ";
+   
+       global $db;
+	$value_a = ['fa_asset_book_id' => $fa_asset_book_id, 'fa_asset_id' => $fa_asset_id];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -292,7 +296,11 @@ class fa_asset_book_info extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where fa_asset_book_id= '{$fa_asset_book_id}'  ";
-  $result = self::find_by_sql($sql);
+  
+       global $db;
+	$value_a = ['fa_asset_book_id' => $fa_asset_book_id];
+	$result = $db->findBySql($sql, $value_a);
+   
   return !empty($result) ? ($result) : false;
  }
 

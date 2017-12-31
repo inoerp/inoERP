@@ -24,79 +24,79 @@ class bom_header extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "bom";
  public static $system_info = [
-  'name' => 'BOM',
-  'number' => '2401',
-  'description' => 'Define and mainten bill of materials',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('bom_line', 'bom_all_v'),
-  'primary_entity_cb' => '',
-  'module_name' => 'bom',
-  'weight' => '1'
+    'name' => 'BOM',
+    'number' => '2401',
+    'description' => 'Define and mainten bill of materials',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('bom_line', 'bom_all_v'),
+    'primary_entity_cb' => '',
+    'module_name' => 'bom',
+    'weight' => '1'
  ];
  public $field_a = [
-  'bom_header_id',
-  'item_id_m',
-  'org_id',
-  'alternate_bom',
-  'bom_revision',
-  'effective_date',
-  'common_bom_item_id_m',
-  'common_bom_org_id',
-  "ef_id",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    'bom_header_id',
+    'item_id_m',
+    'org_id',
+    'alternate_bom',
+    'bom_revision',
+    'effective_date',
+    'common_bom_item_id_m',
+    'common_bom_org_id',
+    "ef_id",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'bom_header_id',
-  'item_id_m',
-  'org_id',
-  'alternate_bom'
+    'bom_header_id',
+    'item_id_m',
+    'org_id',
+    'alternate_bom'
  ];
  public $column = [
-  'bom_header_id',
-  'item_id_m',
-  'org_id',
-  'alternate_bom',
+    'bom_header_id',
+    'item_id_m',
+    'org_id',
+    'alternate_bom',
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  "item_description",
-  "uom",
-  "commonBom_item_number",
-  "commonBom_item_description",
-  'effective_start_date',
-  'revision_name'
+    "item_number",
+    "item_description",
+    "uom",
+    "commonBom_item_number",
+    "commonBom_item_description",
+    'effective_start_date',
+    'revision_name'
  ];
  public $requiredField = [
-  'item_id_m',
-  'org_id'
+    'item_id_m',
+    'org_id'
  ];
  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
+    'org_id' => 'org_inv_name_default',
  ];
  public $pageTitle = " BOM - Create | Update BOM "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
-  '_extra_path' => array('form.php?class_name=bom_indented_bom&mode=9' => 'Indented BOM')
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
+    '_extra_path' => array('form.php?class_name=bom_indented_bom&mode=9' => 'Indented BOM')
  ];
  public $prg_varify_circular_bom_parameters = [
-  'Organization' => 'search_org_name',
-  'Item Number From' => 'search_item_number_from',
-  'Item Number To' => 'search_item_number_to',
-  'Item Id From' => 'search_item_id_m_from',
-  'Item Id To' => 'search_item_id_m_to'
+    'Organization' => 'search_org_name',
+    'Item Number From' => 'search_item_number_from',
+    'Item Number To' => 'search_item_number_to',
+    'Item Id From' => 'search_item_id_m_from',
+    'Item Id To' => 'search_item_id_m_to'
  ];
  public $prg_varify_circular_bom_details = [
-  'name' => 'Verify Circular BOM',
-  'description' => 'Verify if cicular BOM exists',
+    'name' => 'Verify Circular BOM',
+    'description' => 'Verify if cicular BOM exists',
  ];
  public $bom_header_id;
  public $item_id_m;
@@ -189,8 +189,8 @@ class bom_header extends dbObject {
  public static function find_by_itemId($item_id_m) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= '{$item_id_m}'  ";
+     self::$table_name .
+     " where item_id_m= :item_id_m  ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -200,15 +200,19 @@ class bom_header extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public static function find_by_itemId_orgId($item_id_m, $org_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= '{$item_id_m}'  AND org_id = '{$org_id}'  ";
+     self::$table_name .
+     " where item_id_m= :item_id_m  AND org_id = :org_id  ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -218,14 +222,18 @@ class bom_header extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public function findBy_itemId() {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= :item_id_m ";
+     self::$table_name .
+     " where item_id_m= :item_id_m ";
   $value_a['item_id_m'] = $this->item_id_m;
   if (!empty($this->org_id)) {
    $sql .= " AND org_id= :org_id  ";
@@ -250,8 +258,8 @@ class bom_header extends dbObject {
    $this->org_id = $org_id;
   }
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where org_id= :org_id ";
+     self::$table_name .
+     " where org_id= :org_id ";
   $value_a = ['org_id' => $this->org_id];
   $result_array = $this->findBySql($sql, $value_a);
   return !empty($result_array) ? $result_array : false;

@@ -131,12 +131,14 @@ FROM sys_program_schedule cont,
 sys_program_schedule_reference cr 
 
 WHERE cr.sys_program_schedule_id = cont.sys_program_schedule_id
-AND cr.reference_table = '{$ref_obj}'
- AND cr.reference_id = '{$ref_id}'
+AND cr.reference_table = :reference_table
+ AND cr.reference_id = :reference_id
 ";
 
-  $result = self::find_by_sql($sql);
-//  echo $sql; pa($result);
+	  global $db;
+  $value_a = ['reference_id' => $ref_id, 'reference_table' => $ref_obj];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? ($result) : false;
  }
 

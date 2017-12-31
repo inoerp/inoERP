@@ -94,7 +94,10 @@ class mdm_discount_header extends dbObject {
 	} else {
 	 $sql .= " AND hce.category = '{$category}' ";
 	}
-	$result = self::find_by_sql($sql);
+	
+    global $db;
+  $result = $db->findBySql($sql);
+  
 	return !empty($result) ? $result : false;
  }
 
@@ -113,10 +116,14 @@ class mdm_discount_header extends dbObject {
  public static function find_by_employeeId($employee_id) {
 	$sql = " SELECT * 
        FROM mdm_discount_header eeh 
-       WHERE eeh.hr_employee_id = '{$employee_id}'   
+       WHERE eeh.hr_employee_id = :hr_employee_id   
 ";
 	$sql = ino_perPageSql_i($sql, 1);
-	$result = self::find_by_sql($sql);
+	
+  	  global $db;
+  $value_a = ['hr_employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
+  
 	return !empty($result) ? array_pop($result) : false;
  }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP 
  *
@@ -20,64 +21,63 @@ class ar_transaction_type extends dbObject {
  public static $key_column = 'ar_transaction_type';
  public static $module = "ar"; //same as gl_journal_source
  public static $system_info = [
-  'name' => 'Transaction Type',
-  'number' => '1307',
-  'description' => 'AR Transaction Type',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'ar',
-  'weight' => 7
+    'name' => 'Transaction Type',
+    'number' => '1307',
+    'description' => 'AR Transaction Type',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'ar',
+    'weight' => 7
  ];
  public $field_a = [
-  'ar_transaction_type_id',
-  'ar_transaction_type',
-  'transaction_class',
-  'bu_org_id',
-  'legal_org_id',
-  'invoice_type_id',
-  'description',
-  'cm_type_id',
-  'payment_term_id',
-  'status',
-  'receivable_ac_id',
-  'revenue_ac_id',
-  'tax_ac_id',
-  'freight_ac_id',
-  'clearing_ac_id',
-  'unbilled_receivable_ac_id',
-  'unearned_revenue_ac_id',
-  'br_receivable_ac_id',
-  'br_offset_ac_id',
-  'ar_revenue_rule_header_id',
-  'receivable_rule',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'ar_transaction_type_id',
+    'ar_transaction_type',
+    'transaction_class',
+    'bu_org_id',
+    'legal_org_id',
+    'invoice_type_id',
+    'description',
+    'cm_type_id',
+    'payment_term_id',
+    'status',
+    'receivable_ac_id',
+    'revenue_ac_id',
+    'tax_ac_id',
+    'freight_ac_id',
+    'clearing_ac_id',
+    'unbilled_receivable_ac_id',
+    'unearned_revenue_ac_id',
+    'br_receivable_ac_id',
+    'br_offset_ac_id',
+    'ar_revenue_rule_header_id',
+    'receivable_rule',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'ar_transaction_type',
-  'transaction_class',
-  'bu_org_id',
-  'legal_org_id',
-  'description',
+    'ar_transaction_type',
+    'transaction_class',
+    'bu_org_id',
+    'legal_org_id',
+    'description',
  ];
  public $column = [
-  'ar_transaction_type',
-  'transaction_class',
-  'bu_org_id',
-  'legal_org_id',
-  'description',
+    'ar_transaction_type',
+    'transaction_class',
+    'bu_org_id',
+    'legal_org_id',
+    'description',
  ];
  public $requiredField = [
-  'ar_transaction_type',
-  'transaction_class',
-  'bu_org_id',
-  'legal_org_id',
+    'ar_transaction_type',
+    'transaction_class',
+    'bu_org_id',
+    'legal_org_id',
  ];
- 
  public $ar_transaction_type_id;
  public $ar_transaction_type;
  public $transaction_class;
@@ -104,17 +104,21 @@ class ar_transaction_type extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " AR - Transaction Type  "; //page Title
 
  public static function find_all_by_buOrgId($bu_org_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bu_org_id = '{$bu_org_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE bu_org_id = :bu_org_id ";
+
+  global $db;
+  $value_a = ['bu_org_id' => $bu_org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -122,7 +126,9 @@ class ar_transaction_type extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'HEADER' ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
+
   return !empty($result) ? $result : false;
  }
 
@@ -130,15 +136,21 @@ class ar_transaction_type extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'LINE' ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_transactionClass($class) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE type_class = '{$class}' AND status='active'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE type_class = :type_class AND status='active'";
+
+  global $db;
+  $value_a = ['type_class' => $class, 'reference_id' => $reference_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 

@@ -211,8 +211,10 @@ VAR;
   if (!empty($subinventory_id)) {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE subinventory_id = $subinventory_id ";
-   $result = self::find_by_sql($sql);
+   $sql .= " WHERE subinventory_id = :subinventory_id ";
+  	  global $db;
+  $value_a = ['subinventory_id' => $subinventory_id];
+  $result = $db->findBySql($sql, $value_a);
   } else {
    $result = null_instantitae('locator');
   }

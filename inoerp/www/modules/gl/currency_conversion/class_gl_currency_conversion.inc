@@ -22,70 +22,70 @@ class gl_currency_conversion extends dbObject {
  public static $primary_column = "gl_currency_conversion_id";
  public static $key_column = "rate";
  public static $system_info = [
-  'name' => 'Currency Conversion',
-  'number' => '1105',
-  'description' => 'General Ledger Currency Conversion',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'gl',
-  'weight' => 5
+    'name' => 'Currency Conversion',
+    'number' => '1105',
+    'description' => 'General Ledger Currency Conversion',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'gl',
+    'weight' => 5
  ];
  public $field_a = [
-  'gl_currency_conversion_id',
-  'currency_conversion_type',
-  'from_currency',
-  'to_currency',
-  'from_date',
-  'to_date',
-  'rate',
-  'use_reverse_conversion',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'gl_currency_conversion_id',
+    'currency_conversion_type',
+    'from_currency',
+    'to_currency',
+    'from_date',
+    'to_date',
+    'rate',
+    'use_reverse_conversion',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'currency_conversion_type',
-  'from_currency',
-  'to_currency',
-  'from_date',
-  'to_date',
+    'currency_conversion_type',
+    'from_currency',
+    'to_currency',
+    'from_date',
+    'to_date',
  ];
  public $column = [
-  'gl_currency_conversion_id',
-  'currency_conversion_type',
-  'from_currency',
-  'to_currency',
-  'from_date',
-  'to_date',
-  'rate',
-  'use_reverse_conversion',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'gl_currency_conversion_id',
+    'currency_conversion_type',
+    'from_currency',
+    'to_currency',
+    'from_date',
+    'to_date',
+    'rate',
+    'use_reverse_conversion',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'currency_conversion_type',
-  'from_currency',
-  'to_currency',
-  'from_date',
-  'rate',
+    'currency_conversion_type',
+    'from_currency',
+    'to_currency',
+    'from_date',
+    'rate',
  ];
  public $fields_inForm_notInDataBase = [
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'gl_currency_conversion_id'
+    'gl_currency_conversion_id'
  ];
  public $search = [
 //   '_update_path' => 'form.php?class_name=gl_currency_conversion',
-  '_show_update_path' => 1,
+    '_show_update_path' => 1,
 //   '_view_path' => 'form.php?class_name=gl_currency_conversion',
-  '_show_view_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Currency Conversion "; //page Title
  public $gl_currency_conversion_id;
@@ -110,9 +110,13 @@ class gl_currency_conversion extends dbObject {
 
  public static function find_by_conversion_type($conversion_type) {
   $sql = "SELECT * FROM "
-   . self::$table_name
-   . " where currency_conversion_type= '{$conversion_type}'";
-  $result = self::find_by_sql($sql);
+     . self::$table_name
+     . " where currency_conversion_type= :currency_conversion_type ";
+
+  global $db;
+  $value_a = ['currency_conversion_type' => $conversion_type];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -142,7 +146,8 @@ class gl_currency_conversion extends dbObject {
     break;
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   if (empty($result)) {
    $sql1 = " SELECT * 	FROM " . self::$table_name;
    $sql1 .= " WHERE to_currency = '{$from_currency}' AND from_currency = '{$to_currency}' AND currency_conversion_type = '{$currency_conversion_type}' ";
@@ -157,7 +162,8 @@ class gl_currency_conversion extends dbObject {
      break;
    }
 
-   $result1 = self::find_by_sql($sql1);
+   $result1 = $db->findBySql($sql1);
+
    if ((!empty($result1)) && !empty($result1[0]->use_reverse_conversion)) {
     $rate = 1 / ($result1[0]->rate);
    } else {
@@ -179,10 +185,14 @@ class gl_currency_conversion extends dbObject {
 	 mtc.effective_end_date, org.org
 	 FROM gl_currency_conversion mtc
 	 LEFT JOIN org on org.business_org_id = mtc.org_id
-	 WHERE org.org_id = '{$org_id}'
+	 WHERE org.org_id = :org_id
 	 AND in_out = 'IN'
 	";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 

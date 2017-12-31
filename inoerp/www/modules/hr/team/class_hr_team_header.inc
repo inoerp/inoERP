@@ -21,52 +21,52 @@ class hr_team_header extends dbObject {
  public static $module = "hr";
 // public static $js_fileName = 'modules/hr/element_entry/js/multi_select.js';
  public static $system_info = [
-  'name' => 'HR Team',
-  'number' => '3113',
-  'description' => 'HR Team',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 22
+    'name' => 'HR Team',
+    'number' => '3113',
+    'description' => 'HR Team',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 22
  ];
  public $field_a = [
-  'hr_team_header_id',
-  'team_name',
-  'team_lead_employee_id',
-  'type',
-  'region',
-  'objective',
-  'email',
-  'status',
-  'start_date',
-  'end_date',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_team_header_id',
+    'team_name',
+    'team_lead_employee_id',
+    'type',
+    'region',
+    'objective',
+    'email',
+    'status',
+    'start_date',
+    'end_date',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'team_name',
-  'team_lead_employee_id',
+    'team_name',
+    'team_lead_employee_id',
  ];
  public $requiredField = [
-  'team_name',
+    'team_name',
  ];
  public $fields_inForm_notInDataBase = [
-  "lead_employee_name",
+    "lead_employee_name",
  ];
  public $numberField = [
-  'hr_team_header_id',
-  'team_lead_employee_id',
+    'hr_team_header_id',
+    'team_lead_employee_id',
  ];
  public $pageTitle = " HR Team "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $hr_team_header_id;
  public $team_name;
@@ -87,10 +87,12 @@ class hr_team_header extends dbObject {
  public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM hr_team_header eeh 
-       WHERE eeh.hr_employee_id = '{$employee_id}'   
+       WHERE eeh.hr_employee_id = :hr_employee_id   
 ";
-       $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['hr_employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -99,7 +101,7 @@ class hr_team_header extends dbObject {
        FROM hr_team_header eeh 
        WHERE eeh.hr_employee_id = '{$employee_id}'   
 ";
-       $sql = ino_perPageSql_i($sql, 1);
+  $sql = ino_perPageSql_i($sql, 1);
   $result = $this->findBySql($sql);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -130,16 +132,19 @@ class hr_team_header extends dbObject {
        FROM hr_team_header eeh 
        WHERE eeh.type = 'SALES'   
 ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? ($result) : false;
  }
 
  Public static function find_all_by_type($type) {
   $sql = " SELECT * 
        FROM hr_team_header eeh 
-       WHERE eeh.type = '{$type}'   
+       WHERE eeh.type = :type   
 ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['type' => $type];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? ($result) : false;
  }
 

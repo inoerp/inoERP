@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -19,60 +20,60 @@ class hr_position_hierarchy_header extends dbObject {
  public static $key_column = 'hierarchy_name';
  public static $module = "hr";
  public static $system_info = [
-  'name' => 'Position Hierarchy',
-  'number' => '3112',
-  'description' => 'HR Position Hierarchy',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 21
+    'name' => 'Position Hierarchy',
+    'number' => '3112',
+    'description' => 'HR Position Hierarchy',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 21
  ];
  public $field_a = [
-  'hr_position_hierarchy_header_id',
-  'starting_position_id',
-  'hierarchy_name',
-  'description',
-  'revision',
-  'effective_date',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_position_hierarchy_header_id',
+    'starting_position_id',
+    'hierarchy_name',
+    'description',
+    'revision',
+    'effective_date',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'hr_position_hierarchy_header_id',
-  'starting_position_id',
-  'hierarchy_name',
+    'hr_position_hierarchy_header_id',
+    'starting_position_id',
+    'hierarchy_name',
  ];
  public $column = [
-  'hr_position_hierarchy_header_id',
-  'starting_position_id',
-  'hierarchy_name',
-  'revision',
-  'effective_date',
+    'hr_position_hierarchy_header_id',
+    'starting_position_id',
+    'hierarchy_name',
+    'revision',
+    'effective_date',
  ];
  public $requiredField = [
-  'starting_position_id',
-  'hierarchy_name',
-  'revision',
+    'starting_position_id',
+    'hierarchy_name',
+    'revision',
  ];
  public $pageTitle = " Position Hierarchy - HR "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
-  '_extra_path' => array('form.php?class_name=indented_position&mode=9' => 'Indented Position')
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
+    '_extra_path' => array('form.php?class_name=indented_position&mode=9' => 'Indented Position')
  ];
  public $prg_verify_circular_position_parameters = [
-  'Organization' => 'search_org_name',
-  'Starting Position' => 'search_item_number_from',
+    'Organization' => 'search_org_name',
+    'Starting Position' => 'search_item_number_from',
  ];
  public $prg_varify_circular_bom_details = [
-  'name' => 'Verify Circular Position ',
-  'description' => 'Verify if cicular Position exists',
+    'name' => 'Verify Circular Position ',
+    'description' => 'Verify if cicular Position exists',
  ];
  public $hr_position_hierarchy_header_id;
  public $starting_position_id;
@@ -127,16 +128,18 @@ class hr_position_hierarchy_header extends dbObject {
  public static function find_by_itemId($item_id_m) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= '{$item_id_m}' LIMIT 1 ";
-  $result_array = self::find_by_sql($sql);
+     self::$table_name .
+     " where item_id_m= :item_id_m LIMIT 1 ";
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m];
+  $result_array = $db->findBySql($sql, $value_a);
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public function findBy_itemId() {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= :item_id_m LIMIT 1 ";
+     self::$table_name .
+     " where item_id_m= :item_id_m LIMIT 1 ";
   $param_a = ['item_id_m'];
   $value_a = ['item_id_m' => $this->item_id_m];
   $result_array = $this->findBy_sql($sql, $param_a, $value_a);
@@ -148,8 +151,8 @@ class hr_position_hierarchy_header extends dbObject {
    $this->org_id = $org_id;
   }
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where org_id= :org_id ";
+     self::$table_name .
+     " where org_id= :org_id ";
   $value_a = ['org_id' => $this->org_id];
   $result_array = $this->findBySql($sql, $value_a);
   return !empty($result_array) ? $result_array : false;

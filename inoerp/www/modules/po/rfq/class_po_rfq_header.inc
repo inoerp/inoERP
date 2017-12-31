@@ -526,8 +526,10 @@
 
   public static function find_by_refPOHeaderId_releseNumber($ref_po_rfq_header_id, $release_number) {
    $sql = " SELECT * FROM " . self::$table_name;
-   $sql .= " WHERE ref_po_rfq_header_id = '{$ref_po_rfq_header_id}' AND release_number = '{$release_number}' LIMIT 1 ";
-   $result = self::find_by_sql($sql);
+   $sql .= " WHERE ref_po_rfq_header_id = :ref_po_rfq_header_id AND release_number = :release_number LIMIT 1 ";
+       global $db;
+	$value_a = ['ref_po_rfq_header_id' => $ref_po_rfq_header_id, 'release_number' => $release_number];
+	$result = $db->findBySql($sql, $value_a);
    return !empty($result) ? array_pop($result) : false;
   }
 
@@ -544,18 +546,7 @@
    return !empty($result) ? array_pop($result)->release_number + 1 : 1;
   }
 
-//  public static function instantiate_extra_fields(&$array_of_objects) {
-//   if (count($array_of_objects) > 0) {
-//    foreach ($array_of_objects as &$this_object) {
-//     $supplier_requirements = supplier::find_by_id($this_object->supplier_id);
-//     $this_object->supplier_name = $supplier_requirements->supplier_name;
-//     $this_object->supplier_number = $supplier_requirements->supplier_number;
-//     $supplier_site_requirements = supplier_site::find_by_id($this_object->supplier_site_id);
-//     $this_object->supplier_site_name = $supplier_site_requirements->supplier_site_name;
-//    }
-//   }
-//   return $array_of_objects;
-//  }
+
 
   Public static function po_rfq_types() {
    $option_header = option_header::find_by_name('po_rfq_TYPE');
@@ -600,21 +591,10 @@
    if (!empty($bu_org_id)) {
     $sql .= " AND poh.bu_org_id = '{$bu_org_id}' ";
    }
-   $result = self::find_by_sql($sql);
+     global $db;
+  $result = $db->findBySql($sql);
    return !empty($result) ? $result : false;
   }
-
-//  public function save() {
-//   $primary_column = static::$primary_column;
-//   if (empty($this->$primary_column)) {
-//    $this->po_rfq_status = 'Entered';
-//    $this->create();
-//   } else {
-//    $this->update($this->$primary_column);
-//   }
-//   return $this->msg;
-//  }
-  //multi select used for req to PO conversion
 
   public function multi_select_input_fields() {
    $multi_select_input = [

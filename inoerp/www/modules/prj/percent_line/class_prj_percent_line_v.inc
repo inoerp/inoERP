@@ -102,9 +102,11 @@ SELECT DISTINCT(prj_project_line_id) FROM prj_percent_line
  public function findBy_parentId($project_header_id,$order_by_field = '', $order_by_seq = '') {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE prj_project_header_id= '{$_GET['prj_project_header_id']}'  ORDER BY task_number ASC ";
-// echo $sql;
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE prj_project_header_id= :prj_project_header_id  ORDER BY task_number ASC ";
+
+  	  global $db;
+  $value_a = ['prj_project_header_id' => $_GET['prj_project_header_id']];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? ($result) : [new prj_percent_line_v()];
  }
@@ -112,9 +114,11 @@ SELECT DISTINCT(prj_project_line_id) FROM prj_percent_line
   public static function find_by_projectHeaderId($project_header_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE prj_project_header_id= '{$project_header_id}'  ORDER BY task_number ASC ";
-// echo $sql;
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE prj_project_header_id= :prj_project_header_id  ORDER BY task_number ASC ";
+
+    	  global $db;
+  $value_a = ['prj_project_header_id' => $project_header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? ($result) :  [new prj_percent_line_v()];
  }

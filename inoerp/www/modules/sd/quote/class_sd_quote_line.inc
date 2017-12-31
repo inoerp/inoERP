@@ -195,8 +195,11 @@ class sd_quote_line extends dbObject {
  }
 
  public static function find_by_sd_quote_headerId($sd_quote_header_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where sd_quote_header_id = '{$sd_quote_header_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where sd_quote_header_id = :sd_quote_header_id ";
+  global $db;
+  $value_a = ['sd_quote_header_id' => $sd_quote_header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+  
   return $result_array;
  }
 
@@ -211,7 +214,9 @@ class sd_quote_line extends dbObject {
   if (!empty($ssd)) {
    $sql .= " AND schedule_ship_date >= '{$ssd}'";
   }
-  $result_array = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
+  
   return !empty($result_array) ? $result_array : false;
  }
 

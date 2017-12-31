@@ -48,7 +48,7 @@ class gl_trial_balance extends gl_balance_v {
  }
 
  public function trial_balance($params) {
-  global $si;
+  global $si, $db;
   $org_name = $si->site_name;
   $last_period = '';
   if (!empty($params['gl_period_id'][0])) {
@@ -66,9 +66,10 @@ class gl_trial_balance extends gl_balance_v {
 `period_net_dr` as 'debits', `period_net_cr` as 'credits' , 
 (IFNULL(begin_balance_dr,0) + IFNULL(period_net_dr,0) - IFNULL(begin_balance_cr, 0) -  IFNULL(period_net_cr,0)) as 'ending_balance'
 FROM `gl_balance_v`
-WHERE period_id = '{$period_id}' ";
+WHERE period_id = :period_id ";
 
-  $result = self::find_by_sql($sql);
+  $value_a = ['period_id' => $period_id];
+  $result = $db->findBySql($sql, $value_a);
 
   ob_start();
   include_once __DIR__ . '/templates/trial_balance_template.php';

@@ -24,9 +24,12 @@ class wip_wo_work_bench_line extends wip_wo_routing_line {
     
    //check if record already exists
    $checkSql = " SELECT * FROM $class WHERE reference_type = 'table' AND reference_key_name='wip_wo_routing_line' "
-    . "  AND reference_key_value='{$this->wip_wo_routing_line_id}' ";
+    . "  AND reference_key_value= :reference_key_value ";
    $checkSql = ino_perPageSql_i($checkSql, 1);
-   $checkResult = self::find_by_sql($checkSql);
+   
+       global $db;
+	$value_a = ['reference_key_value' => $this->wip_wo_routing_line_id];
+	$checkResult = $db->findBySql($checkSql, $value_a);
 
    //if $checkResult is not empty update the existing data else create record
    if (!empty($checkResult)) {

@@ -24,42 +24,42 @@ class fp_forecast_group extends dbObject {
  public static $key_column = 'forecast_group';
  public static $module = "fp";
  public static $system_info = [
-  'name' => 'Group',
-  'number' => '2502',
-  'description' => 'Forecast Group',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'fp',
-  'weight' => 2
+    'name' => 'Group',
+    'number' => '2502',
+    'description' => 'Forecast Group',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'fp',
+    'weight' => 2
  ];
  public $field_a = [
-  'fp_forecast_group_id',
-  'org_id',
-  'forecast_group',
-  'description',
-  'status',
-  'bucket_type',
-  'level',
-  'consume_cb',
-  'backward_days',
-  'forward_days',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'fp_forecast_group_id',
+    'org_id',
+    'forecast_group',
+    'description',
+    'status',
+    'bucket_type',
+    'level',
+    'consume_cb',
+    'backward_days',
+    'forward_days',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'forecast_group',
-  'description',
+    'forecast_group',
+    'description',
  ];
  public $fields_inForm_notInDataBase = [
-  'org',
+    'org',
  ];
  public $requiredField = [
-  'org_id',
-  'forecast_group',
+    'org_id',
+    'forecast_group',
  ];
  public $fp_forecast_group_id;
  public $org_id;
@@ -76,8 +76,8 @@ class fp_forecast_group extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Forecast Group ";
  public $message;
@@ -94,9 +94,12 @@ class fp_forecast_group extends dbObject {
     fp_forecast_group ffg
     WHERE ffh.fp_forecast_header_id = ffl.fp_forecast_header_id
     AND ffh.forecast_group_id = ffg.fp_forecast_group_id
-    AND ffg.fp_forecast_group_id = '{$fp_forecast_group_id}'
+    AND ffg.fp_forecast_group_id = :fp_forecast_group_id
 ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['fp_forecast_group_id' => $fp_forecast_group_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? ($result) : false;
  }
 
@@ -120,7 +123,7 @@ class fp_forecast_group extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE scope_org_id = '{$org_id}' AND"
-   . " valuation_name = '{$valuation_name}' AND status='active'   ";
+     . " valuation_name = '{$valuation_name}' AND status='active'   ";
 
   switch (DB_TYPE) {
    case 'ORACLE' :

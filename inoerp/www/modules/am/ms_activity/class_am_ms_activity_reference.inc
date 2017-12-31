@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -23,51 +24,51 @@ class am_ms_activity_reference extends dbObject {
  public static $module = "am";
 // public static $js_fileName = 'modules/inv/am_ms_activity_reference/js/multi_select.js';
  public static $system_info = [
-  'name' => 'MS Activity Reference',
-  'number' => '1401',
-  'description' => 'MS Activity Reference',
-  'version' => '0.1.4',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'am',
-  'weight' => 1
+    'name' => 'MS Activity Reference',
+    'number' => '1401',
+    'description' => 'MS Activity Reference',
+    'version' => '0.1.4',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'am',
+    'weight' => 1
  ];
  public $checkbox = [
-  "physical_inventory_cb",
-  'repeat_in_cycle_cb'
+    "physical_inventory_cb",
+    'repeat_in_cycle_cb'
  ];
  public $field_a = [
-  'am_ms_activity_reference_id',
-  'am_maintenance_schedule_id',
-  'activity_item_id_m',
-  'last_date',
-  'start_date',
-  'end_date',
-  'description',
-  'interval_multiple',
-  'repeat_in_cycle_cb',
-  'last_cb',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'am_ms_activity_reference_id',
+    'am_maintenance_schedule_id',
+    'activity_item_id_m',
+    'last_date',
+    'start_date',
+    'end_date',
+    'description',
+    'interval_multiple',
+    'repeat_in_cycle_cb',
+    'last_cb',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'am_asset_id',
+    'am_asset_id',
  ];
  public $requiredField = [
-  'am_maintenance_schedule_id',
-  'activity_item_id_m',
+    'am_maintenance_schedule_id',
+    'activity_item_id_m',
  ];
  public $fields_inForm_notInDataBase = [
-  'activity_item_number',
-  'activity_item_description'
+    'activity_item_number',
+    'activity_item_description'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " MS Activity Reference "; //page Title
  public $am_ms_activity_reference_id;
@@ -98,17 +99,23 @@ class am_ms_activity_reference extends dbObject {
  public static function find_all_assigned_orgs($am_ms_activity_reference_number) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where am_ms_activity_reference_number= '{$am_ms_activity_reference_number}' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where am_ms_activity_reference_number= :am_ms_activity_reference_number ";
+
+  global $db;
+  $value_a = ['am_ms_activity_reference_number' => $am_ms_activity_reference_number];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
- 
-  public static function find_by_scheduleId($am_maintenance_schedule_id) {
+
+ public static function find_by_scheduleId($am_maintenance_schedule_id) {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where am_maintenance_schedule_id= '{$am_maintenance_schedule_id}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where am_maintenance_schedule_id= :am_maintenance_schedule_id ";
+
+  global $db;
+  $value_a = ['am_maintenance_schedule_id' => $am_maintenance_schedule_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 

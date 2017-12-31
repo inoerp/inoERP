@@ -95,11 +95,13 @@
    $sql .= " FROM sys_extra_field_instance sefi
     LEFT JOIN sys_extra_field sef ON sef.sys_extra_field_id = sefi.sys_extra_field_id ";
 
-   $sql .= " WHERE sefi.reference_key_name = '{$ref_key}' 
-    AND sefi.reference_key_value = '{$ref_value}' 
+   $sql .= " WHERE sefi.reference_key_name = :reference_key_name 
+    AND sefi.reference_key_value = :reference_key_value 
 
 ";
-   $result = self::find_by_sql($sql);
+      global $db;
+	$value_a = ['reference_key_name' => $ref_key, 'reference_key_value' => $ref_value];
+	$result = $db->findBySql($sql, $value_a);
    
    return !empty($result) ? $result : false;
   }
@@ -109,17 +111,21 @@
 
    $sql = " SELECT * FROM ";
    $sql .= $ef_table;
-   $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' ";
+   $sql .= " WHERE reference_key_name = :reference_key_name AND reference_key_value=:reference_key_value ";
    $sql = ino_perPageSql_i($sql, 1);
-   $result = self::find_by_sql($sql);
+         global $db;
+	$value_a = ['reference_key_name' => $ref_key, 'reference_key_value' => $ref_value];
+	$result = $db->findBySql($sql, $value_a);
    return !empty($result) ? array_pop($result) : false;
   }
 
   public static function find_by_extraFieldId($sys_extra_field_id) {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE sys_extra_field_id = '{$sys_extra_field_id}' AND status='active'";
-   $result = self::find_by_sql($sql);
+   $sql .= " WHERE sys_extra_field_id = :sys_extra_field_id AND status='active'";
+          global $db;
+	$value_a = ['sys_extra_field_id' => $sys_extra_field_id];
+	$result = $db->findBySql($sql, $value_a);
    return !empty($result) ? $result : false;
   }
 

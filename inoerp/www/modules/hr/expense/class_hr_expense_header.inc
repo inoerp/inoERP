@@ -8,79 +8,79 @@ class hr_expense_header extends dbObject implements hr_approval_int {
  public static $key_column = 'hr_employee_id';
  public static $module = "hr";
  public $field_a = [
-  'hr_expense_header_id',
-  'claim_number',
-  'bu_org_id',
-  'hr_employee_id',
-  'claim_date',
-  'approved_date',
-  'approved_by',
-  'approved_by_employee_id',
-  'status',
-  'purpose',
-  'expense_template_id',
-  'doc_currency',
-  'department_id',
-  'reason',
-  'contact_details',
-  'currency',
-  'exchange_rate_type',
-  'exchange_rate',
-  'header_amount',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_expense_header_id',
+    'claim_number',
+    'bu_org_id',
+    'hr_employee_id',
+    'claim_date',
+    'approved_date',
+    'approved_by',
+    'approved_by_employee_id',
+    'status',
+    'purpose',
+    'expense_template_id',
+    'doc_currency',
+    'department_id',
+    'reason',
+    'contact_details',
+    'currency',
+    'exchange_rate_type',
+    'exchange_rate',
+    'header_amount',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public static $status_a = [
-  'ENTERED' => 'Entered',
-  'APPR_HOLD' => 'Approval Hold',
-  'APPROVED' => 'Approved',
-  'INPROCESS' => 'InProcess',
-  'INVOICED' => 'Invoiced',
-  'CANCELLD' => 'Cancelled',
+    'ENTERED' => 'Entered',
+    'APPR_HOLD' => 'Approval Hold',
+    'APPROVED' => 'Approved',
+    'INPROCESS' => 'InProcess',
+    'INVOICED' => 'Invoiced',
+    'CANCELLD' => 'Cancelled',
  ];
  public $action_a = [
-  'PRINT' => 'Print',
-  'APPROVE' => 'Approve / Send For Approval',
-  'INVOICED' => 'Invoiced',
-  'CANCEL' => 'Cancel',
+    'PRINT' => 'Print',
+    'APPROVE' => 'Approve / Send For Approval',
+    'INVOICED' => 'Invoiced',
+    'CANCEL' => 'Cancel',
  ];
  public $fields_inDataBase_notInForm = [
-  'currency'
+    'currency'
  ];
  public $initial_search = [
-  'hr_employee_id',
-  'claim_date',
-  'approved_date',
-  'approved_by',
+    'hr_employee_id',
+    'claim_date',
+    'approved_date',
+    'approved_by',
  ];
  public $requiredField = [
-  'hr_employee_id',
-  'claim_date',
-  'approved_by_employee_id',
-  'expense_template_id',
-  'doc_currency',
+    'hr_employee_id',
+    'claim_date',
+    'approved_by_employee_id',
+    'expense_template_id',
+    'doc_currency',
  ];
  public $fields_inForm_notInDataBase = [
-  'identification_id',
-  "employee_name",
-  'approver_employee_name',
-  'action'
+    'identification_id',
+    "employee_name",
+    'approver_employee_name',
+    'action'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Employee Expense "; //page Title
  public $option_lists = [
-  'approval_status' => 'APPROVAL_STATUS',
+    'approval_status' => 'APPROVAL_STATUS',
  ];
  public $profile_default = [
-  'exchange_rate_type' => 'gl_currency_conversion_type',
-  'bu_org_id' => 'org_bu_name_default',
-  'ship_to_id' => 'ship_to_address_default',
-  'bill_to_id' => 'bill_to_address_default'
+    'exchange_rate_type' => 'gl_currency_conversion_type',
+    'bu_org_id' => 'org_bu_name_default',
+    'ship_to_id' => 'ship_to_address_default',
+    'bill_to_id' => 'bill_to_address_default'
  ];
  public $hr_expense_header_id;
  public $bu_org_id;
@@ -133,11 +133,16 @@ class hr_expense_header extends dbObject implements hr_approval_int {
  public static function find_by_buOrgId_status($bu_org_id, $status = "") {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bu_org_id = '{$bu_org_id}' ";
+  $sql .= " WHERE bu_org_id = :bu_org_id ";
+  global $db;
+  $value_a = ['bu_org_id' => $bu_org_id];
+
   if (!empty($status)) {
-   $sql .= " AND status = '{$status}' ";
+   $sql .= " AND status = :status ";
+   $value_a['status'] = $status;
   }
-  $result = self::find_by_sql($sql);
+
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? ($result) : false;
  }
 

@@ -27,62 +27,61 @@ class category extends dbObject {
  public static $module = "extension";
 //  data base variables as stored database column name
  public static $system_info = [
-  'name' => 'Category',
-  'number' => '10011',
-  'description' => 'Create & Mainten Categories',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 11
+    'name' => 'Category',
+    'number' => '10011',
+    'description' => 'Create & Mainten Categories',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 11
  ];
  public static $content_relation_a = [
-  'ONLY_ONE' => 'One Category From Primary',
-  'MULTIPLE' => 'Multiple Category From Primary',
+    'ONLY_ONE' => 'One Category From Primary',
+    'MULTIPLE' => 'Multiple Category From Primary',
  ];
  public $field_a = [
-  "category_id",
-  "major_category_id",
-  "parent_id",
-  "category",
-  'category_type',
-  "description",
-  "primary_cb",
-  'content_relation',
-  'priority',
-  'image_file_id',
-  'content_block_id',
-  'long_description',
-  'filter_catalog_id',
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "category_id",
+    "major_category_id",
+    "parent_id",
+    "category",
+    'category_type',
+    "description",
+    "primary_cb",
+    'content_relation',
+    'priority',
+    'image_file_id',
+    'content_block_id',
+    'long_description',
+    'filter_catalog_id',
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
 // public static $base_encoded_array = ["content"];
 //variables used for showing data
 
  public $checkbox = [
-  "primary_cb"
+    "primary_cb"
  ];
  public $initial_search = [
-  "major_category_id",
-  "category_id",
-  "parent_id",
-  "category",
-  "description",
-  "primary_cb"
+    "major_category_id",
+    "category_id",
+    "parent_id",
+    "category",
+    "description",
+    "primary_cb"
  ];
-
  public $requiredField = ["category"
  ];
  public $pageTitle = " Category "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
-  '_extra_path' => array('form.php?class_name=category_relation&mode=9' => 'Indented Category')
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
+    '_extra_path' => array('form.php?class_name=category_relation&mode=9' => 'Indented Category')
  ];
  public $category_reference_id;
  public $category_id;
@@ -137,8 +136,8 @@ class category extends dbObject {
 
  public function findBy_categoryId() {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where category_id = :category_id  ";
+     self::$table_name .
+     " where category_id = :category_id  ";
   $sql = ino_perPageSql_i($sql, 1);
   $value_a = ['category_id' => $this->category_id];
   $result_array = $this->findBySql($sql, $value_a);
@@ -238,7 +237,7 @@ class category extends dbObject {
    $select_statement .= '<option  ' . $selected_cat_id_v . $disabled . ' class="tab_' . $level . $primary_category . '" value="' . $cat->category_id . '">' . $cat->category . '</option>';
    if (is_array($category_a)) {
     $level_n = $level + 1;
-    $select_statement .=$this->_get_next_select_option($category_a, $selected_cat_id, $level_n, $disable_primary);
+    $select_statement .= $this->_get_next_select_option($category_a, $selected_cat_id, $level_n, $disable_primary);
    }
   }
   return $select_statement;
@@ -263,10 +262,10 @@ class category extends dbObject {
    $select_statement .= '<option ' . $selected_cat_id_v . $disabled . '   class="tab_' . $level . $primary_category . '" value="' . $cat->category_id . '">' . $cat->category . '</option>';
    if (is_array($category_a)) {
     $level_n = $level + 1;
-    $select_statement .=$this->_get_next_select_option($category_a, $selected_cat_id, $level_n, $disable_primary);
+    $select_statement .= $this->_get_next_select_option($category_a, $selected_cat_id, $level_n, $disable_primary);
    }
   }
-  $select_statement .='</select>';
+  $select_statement .= '</select>';
   return $select_statement;
  }
 
@@ -296,18 +295,18 @@ class category extends dbObject {
    $content_count = content::content_count_by_categoryId_contentType($category_id);
    $statement .= "<tr class=\"level_$level\"><td class='link'>";
    $statement .= '<a href="' . HOME_URL . 'content.php?content_type=' .
-    $content_type_name . '&amp;category_id=' . $category_id . '">' . $cat->category . '</a></td>';
-   if(!empty($content_count)){
-    $statement .= '<td>' . $cat->description ." <span class='badge'> $content_count </span> </td>";
-   }else{
-    $statement .= '<td>' . $cat->description ."</td>";
+      $content_type_name . '&amp;category_id=' . $category_id . '">' . $cat->category . '</a></td>';
+   if (!empty($content_count)) {
+    $statement .= '<td>' . $cat->description . " <span class='badge'> $content_count </span> </td>";
+   } else {
+    $statement .= '<td>' . $cat->description . "</td>";
    }
-   
+
 //   $statement .= '<td>' . self::contentCount_by_categoryId_contentType($category_id) . '</td>';
    $statement .= '</tr>';
    if (is_array($category_a)) {
     $level_n = $level + 1;
-    $statement .=$this->_get_next_level_category($category_a, $content_type_name, $level_n);
+    $statement .= $this->_get_next_level_category($category_a, $content_type_name, $level_n);
    }
   }
   return $statement;
@@ -322,7 +321,7 @@ class category extends dbObject {
            <th>" . gettext('Category') . "</th>
            <th>" . gettext('Description') . "</th>" .
 //           <th>" . gettext('Posts') . "</th>
-   "</tr>
+     "</tr>
          </thead><tbody>
 				 ";
 
@@ -333,12 +332,12 @@ class category extends dbObject {
   $statement .= "<tr class=\"level_$level\"><td class='link'>";
   $link_cat = HOME_URL . 'content.php?content_type=' . $content_type_name . '&category_id=' . $category_id;
   $statement .= '<a href="' . htmlspecialchars($link_cat) . '">' . $cat->category . '</a></td>';
-  if(!empty($content_count)){
+  if (!empty($content_count)) {
    $statement .= '<td>' . $cat->description . " <span class='badge'> $content_count </span> </td>";
-  }else{
+  } else {
    $statement .= '<td>' . $cat->description . "</td>";
   }
-  
+
 //  $statement .= '<td>' . self::contentCount_by_categoryId_contentType($category_id) . '</td>';
   $statement .= '</tr>';
 
@@ -346,7 +345,7 @@ class category extends dbObject {
    $cat->findBy_id($category_id);
    if (is_array($category_a)) {
     $level_n = $level + 1;
-    $statement .=$this->_get_next_level_category($category_a, $content_type_name, $level_n);
+    $statement .= $this->_get_next_level_category($category_a, $content_type_name, $level_n);
    }
   }
   $statement .= '</tbody></table>';
@@ -361,14 +360,14 @@ class category extends dbObject {
    $cat->findBy_id($category_id);
    $statement .= "<tr class=\"level_$level\"><td class='link'>";
    $statement .= '<a href="' . HOME_URL . 'content.php?content_type=' .
-    $content_type_name . '&category_id=' . $category_id . '">' . $cat->category . '</a></td>';
+      $content_type_name . '&category_id=' . $category_id . '">' . $cat->category . '</a></td>';
    $statement .= '<td>' . $cat->description . '</td>';
    $statement .= '<td>' . self::contentCount_by_categoryId_contentType($category_id) . '</td>';
    $statement .= '<td></td>';
    $statement .= '</tr>';
    if (is_array($category_a)) {
     $level_n = $level + 1;
-    $statement .=$this->_get_next_level_category($category_a, $content_type_name, $level_n);
+    $statement .= $this->_get_next_level_category($category_a, $content_type_name, $level_n);
    }
   }
   return $statement;
@@ -390,7 +389,7 @@ class category extends dbObject {
   $level = 1;
   $statement .= "<tr class=\"level_$level\"><td class='link'>";
   $statement .= '<a href="' . HOME_URL . 'content.php?content_type=' .
-   $content_type_name . '&category_id=' . $category_id . '">' . $cat->category . '</a></td>';
+     $content_type_name . '&category_id=' . $category_id . '">' . $cat->category . '</a></td>';
   $statement .= '<td>' . $cat->description . '</td>';
   $statement .= '</tr>';
 
@@ -398,7 +397,7 @@ class category extends dbObject {
    $cat->findBy_id($category_id);
    if (is_array($category_a)) {
     $level_n = $level + 1;
-    $statement .=$this->_get_next_level_category($category_a, $content_type_name, $level_n);
+    $statement .= $this->_get_next_level_category($category_a, $content_type_name, $level_n);
    }
   }
   $statement .= '</table>';
@@ -418,11 +417,14 @@ class category extends dbObject {
                category_reference.category_reference_id as category_reference_id
        FROM 
        category , category_reference
-       WHERE category_reference.reference_table = '{$reference_table}'
-       AND category_reference.reference_id = '{$reference_id}'
+       WHERE category_reference.reference_table = :reference_table
+       AND category_reference.reference_id = :reference_id
        AND category.category_id = category_reference.category_id";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
@@ -437,14 +439,17 @@ class category extends dbObject {
                category_reference.category_reference_id as category_reference_id
        FROM 
        category , category_reference
-       WHERE category_reference.category_id = '{$values}'
-       AND category_reference.reference_table = '{$reference_table}' 
-       AND category_reference.reference_id = '{$reference_id}'
+       WHERE category_reference.category_id = :category_id
+       AND category_reference.reference_table = :reference_table 
+       AND category_reference.reference_id = :reference_id
        AND category.category_id = category_reference.category_id
        ";
-       $sql = ino_perPageSql_i($sql, 1);
+  $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['category_id' => $values, 'reference_table' => $reference_table, 'reference_id' => $reference_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_shift($result) : false;
  }
 
@@ -459,27 +464,19 @@ class category extends dbObject {
                category_reference.category_reference_id as category_reference_id
        FROM 
        category , category_reference
-       WHERE category_reference.category_id = '{$category_id}'
-       AND category_reference.major_category_id = '{$major_category_id}'
-       AND category_reference.reference_table = '{$reference_table}' 
-       AND category_reference.reference_id = '{$reference_id}'
+       WHERE category_reference.category_id = :category_id
+       AND category_reference.major_category_id = :major_category_id
+       AND category_reference.reference_table = :reference_table 
+       AND category_reference.reference_id = :reference_id
        AND category.category_id = category_reference.category_id
        ";
-       $sql = ino_perPageSql_i($sql, 1);
+  $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['category_id' => $category_id, 'major_category_id' => $major_category_id, 'reference_table' => $reference_table, 'reference_id' => $reference_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_shift($result) : false;
- }
-
- public static function find_summary_by_id($category_id) {
-  $selectFields = ' SUBSTRING(content,1,2000) AS content_summary , ' .
-   implode(", ", self::$field_array);
-  $sql = "SELECT " . $selectFields . " FROM "
-   . self::$table_name . " 
-            where category_id={$category_id} ";
-            $sql = ino_perPageSql_i($sql, 1);
-  $result_array = self::find_by_sql($sql);
-  return !empty($result_array) ? array_shift($result_array) : false;
  }
 
  public static function major_categories() {
@@ -488,7 +485,8 @@ class category extends dbObject {
   $sql .= " WHERE parent_id IS NULL ";
   $sql .= " AND primary_cb = '1' ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return $result;
  }
 
@@ -497,9 +495,13 @@ class category extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE parent_id IS NULL ";
   $sql .= " AND primary_cb = '1' ";
-  $sql .= " AND category_type = '{$category_type}' ";
+  $sql .= " AND category_type = :category_type ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['category_type' => $category_type];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -509,17 +511,22 @@ class category extends dbObject {
   $sql .= " WHERE parent_id IS NOT NULL ";
   $sql .= " AND primary_cb = '1' ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
+
   return $result;
  }
 
  public static function find_by_categoryId($category_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE category_id ='{$category_id}' ";
+  $sql .= " WHERE category_id = :category_id ";
   $sql = ino_perPageSql_i($sql, 1);
-//	echo "sql1 is $sql ";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['category_id' => $category_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_shift($result) : false;
  }
 
@@ -545,17 +552,26 @@ class category extends dbObject {
  public static function child_of_parent($parent_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE parent_id ='{$parent_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE parent_id = :parent_id ";
+
+
+  global $db;
+  $value_a = ['parent_id' => $parent_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !(empty($result)) ? $result : false;
  }
 
  public static function child_of_parent_woparent($parent_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE parent_id ='{$parent_id}' ";
-  $sql .= " AND category_id !='{$parent_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE parent_id = :parent_id ";
+  $sql .= " AND category_id != :category_id ";
+
+  global $db;
+  $value_a = ['parent_id' => $parent_id, 'category_id' => $parent_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !(empty($result)) ? $result : false;
  }
 
@@ -572,9 +588,12 @@ class category extends dbObject {
  public static function parent_of_child($child_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE category_id='{$child_id}' ";
+  $sql .= " WHERE category_id= :category_id ";
 
-  $result_array = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['category_id' => $child_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
@@ -679,16 +698,20 @@ class category extends dbObject {
 
  public static function all_child_categories($category = "") {
   $result_array = array();
+     	  global $db;
 
   if (empty($category)) {
    $all_major_categories = self::major_categories();
   } else {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE category ='{$category}' ";
+   $sql .= " WHERE category = :category ";
    $sql = ino_perPageSql_i($sql, 1);
 
-   $all_major_categories = self::find_by_sql($sql);
+
+  $value_a = ['category' => $category];
+  $all_major_categories = $db->findBySql($sql, $value_a);
+  
   }
 
   if ($all_major_categories) {
@@ -773,26 +796,26 @@ class category extends dbObject {
 				 ";
   foreach ($all_categories_object as $major_category) {
    $statement .= '<tr class="first"><td class="first"><a href="' . HOME_URL . 'content.php?content_type=' .
-    $content_type_name . '&category_id=' . $major_category['category_id'] . '">' . $major_category['category'] . '</a></td>
+      $content_type_name . '&category_id=' . $major_category['category_id'] . '">' . $major_category['category'] . '</a></td>
             <td>' . $major_category['description'] . '</td>
              <td>' . self::contentCount_by_categoryId_contentType($major_category['category_id']) . '</td><td></td></tr>';
    if (!empty($major_category['child'])) {
 
     foreach ($major_category['child'] as $child1) {
      $statement .= '<tr class="second"><td class="second"><a href="' . HOME_URL . 'content.php?content_type=' .
-      $content_type_name . '&category_id=' . $child1['category_id'] . '">' . $child1['category'] . '</td>
+        $content_type_name . '&category_id=' . $child1['category_id'] . '">' . $child1['category'] . '</td>
               <td>' . $child1['description'] . '</td>
                  <td>' . self::contentCount_by_categoryId_contentType($child1['category_id']) . '</td><td></td></tr>';
      if (!empty($child1['child'])) {
       foreach ($child1['child'] as $child2) {
        $statement .= '<tr class="third"><td class="third"><a href="' . HOME_URL . 'content.php?content_type=' .
-        $content_type_name . '&category_id=' . $child2['category_id'] . '">' . $child2['category'] . '</td>
+          $content_type_name . '&category_id=' . $child2['category_id'] . '">' . $child2['category'] . '</td>
                 <td>' . $child2['description'] . '</td>
                 <td></td>' . self::contentCount_by_categoryId_contentType($child2['category_id']) . '<td></td></tr>';
        if (!empty($child2['child'])) {
         foreach ($child2['child'] as $child3) {
          $statement .= '<tr class="four"><td class="four"><a href="' . HOME_URL . 'content.php?content_type=' .
-          $content_type_name . '&category_id=' . $child3['category_id'] . '">' . $child3['category'] . '</td>
+            $content_type_name . '&category_id=' . $child3['category_id'] . '">' . $child3['category'] . '</td>
                 <td>' . $child3['description'] . '</td>
                                <td>' . self::contentCount_by_categoryId_contentType($child3['category_id']) . '</td><td></td></tr>';
         }
@@ -834,7 +857,9 @@ class category extends dbObject {
   $sql .= " WHERE cr.major_category_id = '{$category_id}'  ";
   $sql .= " AND cr.reference_table = '{$content_type}'  ";
 
-  $result = self::find_by_sql($sql);
+   global $db;
+  $result = $db->findBySql($sql);
+  
   $count_v = 0;
   if (!empty($result)) {
    foreach ($result as $r) {
@@ -850,43 +875,43 @@ class category extends dbObject {
 //	$parent_of_category = self::parent_of_child($category->parent_id);
   if (self::is_major_category($category->category_id)) {
    $linkFor_parent = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-    '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
+      '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
    array_push($bcElements, $linkFor_parent);
   } else {
    $linkFor_parent = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-    '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
+      '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
    array_push($bcElements, $linkFor_parent);
    $category1 = self::find_by_id($category->parent_id);
    if (self::is_major_category($category1->category_id)) {
     $linkFor_parent1 = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-     '&amp;category_id=' . $category1->category_id . '">' . $category1->category . '</a>';
+       '&amp;category_id=' . $category1->category_id . '">' . $category1->category . '</a>';
     array_push($bcElements, $linkFor_parent1);
    } else {
     $linkFor_parent1 = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-     '&amp;category_id=' . $category1->category_id . '">' . $category1->category . '</a>';
+       '&amp;category_id=' . $category1->category_id . '">' . $category1->category . '</a>';
     array_push($bcElements, $linkFor_parent1);
     $category2 = self::find_by_id($category1->parent_id);
     if (self::is_major_category($category2->category_id)) {
      $linkFor_parent2 = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-      '&amp;category_id=' . $category2->category_id . '">' . $category2->category . '</a>';
+        '&amp;category_id=' . $category2->category_id . '">' . $category2->category . '</a>';
      array_push($bcElements, $linkFor_parent2);
     } else {
      $linkFor_parent2 = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-      '&amp;category_id=' . $category2->category_id . '">' . $category2->category . '</a>';
+        '&amp;category_id=' . $category2->category_id . '">' . $category2->category . '</a>';
      array_push($bcElements, $linkFor_parent2);
      $category3 = self::find_by_id($category2->parent_id);
      if (self::is_major_category($category3->category_id)) {
       $linkFor_parent3 = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-       '&amp;category_id=' . $category3->category_id . '">' . $category3->category . '</a>';
+         '&amp;category_id=' . $category3->category_id . '">' . $category3->category . '</a>';
       array_push($bcElements, $linkFor_parent3);
      } else {
       $linkFor_parent3 = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-       '&amp;category_id=' . $category3->category_id . '">' . $category3->category . '</a>';
+         '&amp;category_id=' . $category3->category_id . '">' . $category3->category . '</a>';
       array_push($bcElements, $linkFor_parent3);
       $category4 = self::find_by_id($category3->parent_id);
       if (self::is_major_category($category4->category_id)) {
        $linkFor_parent4 = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-        '&amp;category_id=' . $category4->category_id . '">' . $category4->category . '</a>';
+          '&amp;category_id=' . $category4->category_id . '">' . $category4->category . '</a>';
        array_push($bcElements, $linkFor_parent4);
       }
      }
@@ -916,7 +941,7 @@ class category extends dbObject {
   if (self::is_major_category($category->category_id)) {
    if (!empty($content_type)) {
     $linkFor_parent = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-     '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
+       '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
    } else {
     $linkFor_parent = '<a href="' . HOME_URL . 'product.php?category_id=' . $category->category_id . '">' . $category->category . '</a>';
    }
@@ -932,7 +957,7 @@ class category extends dbObject {
   } else {
    if (!empty($content_type)) {
     $linkFor_parent = '<a href="' . HOME_URL . 'content.php?content_type=' . $content_type .
-     '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
+       '&amp;category_id=' . $category->category_id . '">' . $category->category . '</a>';
    } else {
     $linkFor_parent = '<a class="ino-bradcrum-link" href="' . HOME_URL . 'product.php?category_id=' . $category->category_id . '">' . $category->category . '</a>';
    }
@@ -946,10 +971,10 @@ class category extends dbObject {
   $stmt = '<ul class="category-stmt">';
   foreach ($category as $cat) {
    $stmt .= '<li class="inline"><button type="button" class="btn btn-default delete-category"  title="' . $cat->description . '" '
-    . ' data-category_reference_id="' . $cat->category_reference_id . '" >';
+      . ' data-category_reference_id="' . $cat->category_reference_id . '" >';
    $stmt .= '<i class="fa fa-remove"></i> &nbsp;&nbsp;';
    $stmt .= $cat->category;
-   $stmt .='</button></li>';
+   $stmt .= '</button></li>';
   }
   $stmt .= '</ul>';
   return $stmt;

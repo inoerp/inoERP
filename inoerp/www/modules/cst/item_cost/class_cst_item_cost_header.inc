@@ -25,65 +25,65 @@ class cst_item_cost_header extends dbObject {
 // public static $js_fileName = 'modules/cst/item_cost/item_cost.js';
  public static $gl_journal_category = "CST_ADJUSTMENT";
  public static $system_info = [
-  'name' => 'Cost',
-  'number' => '2701',
-  'description' => 'Product Cost',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('cst_item_cost_line', 'cst_item_cost_interface'),
-  'primary_entity_cb' => '',
-  'module_name' => 'cst',
-  'weight' => 17
+    'name' => 'Cost',
+    'number' => '2701',
+    'description' => 'Product Cost',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('cst_item_cost_line', 'cst_item_cost_interface'),
+    'primary_entity_cb' => '',
+    'module_name' => 'cst',
+    'weight' => 17
  ];
  public $field_a = [
-  'cst_item_cost_header_id',
-  'org_id',
-  'bom_cost_type',
-  'item_id_m',
-  'based_on_rollup_cb',
-  'include_in_rollup_cb',
-  'sales_price',
-  'purchase_price',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'cst_item_cost_header_id',
+    'org_id',
+    'bom_cost_type',
+    'item_id_m',
+    'based_on_rollup_cb',
+    'include_in_rollup_cb',
+    'sales_price',
+    'purchase_price',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $initial_search = [
-  'item_id_m',
-  'based_on_rollup_cb',
-  'include_in_rollup_cb',
+    'item_id_m',
+    'based_on_rollup_cb',
+    'include_in_rollup_cb',
  ];
  public $column = [
-  'cst_item_cost_header_id',
-  'org_id',
-  'bom_cost_type',
-  'item_id_m',
-  'based_on_rollup_cb',
-  'include_in_rollup_cb',
-  'sales_price',
-  'purchase_price',
+    'cst_item_cost_header_id',
+    'org_id',
+    'bom_cost_type',
+    'item_id_m',
+    'based_on_rollup_cb',
+    'include_in_rollup_cb',
+    'sales_price',
+    'purchase_price',
  ];
  public $requiredField = [
-  'org_id',
-  'bom_cost_type',
-  'item_id_m',
+    'org_id',
+    'bom_cost_type',
+    'item_id_m',
  ];
  public $checkbox = [
-  "based_on_rollup_cb",
-  'include_in_rollup_cb'
+    "based_on_rollup_cb",
+    'include_in_rollup_cb'
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  "item_description",
-  "uom",
-  'action'
+    "item_number",
+    "item_description",
+    "uom",
+    'action'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
@@ -93,36 +93,36 @@ class cst_item_cost_header extends dbObject {
 //		 'po_status' => 'PO_STATUS',
  ];
  public $search_functions = [
-  'Cost Type' => 'search_bom_cost_type',
-  'Item From' => 'search_item_number_from',
-  'Item To' => 'search_item_number_to',
-  'Organization' => 'search_org_name',
+    'Cost Type' => 'search_bom_cost_type',
+    'Item From' => 'search_item_number_from',
+    'Item To' => 'search_item_number_to',
+    'Organization' => 'search_org_name',
  ];
  public $prg_standard_cost_update_parameters = [
-  'Adjustment Ac' => 'adjustment_ac_id',
-  'Organization' => 'search_org_name',
-  'Cost Type' => 'search_bom_cost_type',
-  'Item Number From' => 'search_item_number_from',
-  'Item Number To' => 'search_item_number_to',
-  'Item Id From' => 'search_item_id_m_from',
-  'Item Id To' => 'search_item_id_m_to'
+    'Adjustment Ac' => 'adjustment_ac_id',
+    'Organization' => 'search_org_name',
+    'Cost Type' => 'search_bom_cost_type',
+    'Item Number From' => 'search_item_number_from',
+    'Item Number To' => 'search_item_number_to',
+    'Item Id From' => 'search_item_id_m_from',
+    'Item Id To' => 'search_item_id_m_to'
  ];
  public $prg_cost_rollup_parameters = [
-  'Organization' => 'search_org_name',
-  'Cost Type' => 'search_bom_cost_type',
-  'Item Number From' => 'search_item_number_from',
-  'Item Number To' => 'search_item_number_to',
-  'Item Id From' => 'search_item_id_m_from',
-  'Item Id To' => 'search_item_id_m_to'
+    'Organization' => 'search_org_name',
+    'Cost Type' => 'search_bom_cost_type',
+    'Item Number From' => 'search_item_number_from',
+    'Item Number To' => 'search_item_number_to',
+    'Item Id From' => 'search_item_id_m_from',
+    'Item Id To' => 'search_item_id_m_to'
  ];
  public $prg_cost_rollup_details = [
-  'name' => 'Cost Roll Up',
-  'description' => 'Roll up cost for pending or user defiled cost types',
+    'name' => 'Cost Roll Up',
+    'description' => 'Roll up cost for pending or user defiled cost types',
  ];
  public $prg_standard_cost_update_details = [
-  'name' => 'Standard Cost Update',
-  'description' => 'Update Frozen Cost from a different cost type',
-  'Item To' => 'search_item_number_to'
+    'name' => 'Standard Cost Update',
+    'description' => 'Update Frozen Cost from a different cost type',
+    'Item To' => 'search_item_number_to'
  ];
  public $cst_item_cost_header_id;
  public $bom_cost_type;
@@ -171,7 +171,7 @@ class cst_item_cost_header extends dbObject {
   }
 
   $value_a = ['bom_cost_type' => $this->bom_cost_type,
-   'item_id_m' => $this->item_id_m, 'org_id' => $this->org_id];
+     'item_id_m' => $this->item_id_m, 'org_id' => $this->org_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
@@ -181,7 +181,11 @@ class cst_item_cost_header extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE bom_cost_type = '{$bom_cost_type}' ";
   $sql .= " AND item_id = '{$item_id}' AND org_id = '{$org_id}' ";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['bom_cost_type' => $bom_cost_type, 'item_id' => $item_id,  'org_id' => $org_id ];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -304,7 +308,7 @@ class cst_item_cost_header extends dbObject {
   try {
    $ich_f->save();
    if (!empty($ich_f->cst_item_cost_header_id)) {
-    $message .=" <br>Item cost head is Successfully Updated for cst_item_cost_header_id " . $ich_f->cst_item_cost_header_id;
+    $message .= " <br>Item cost head is Successfully Updated for cst_item_cost_header_id " . $ich_f->cst_item_cost_header_id;
     //save cost line
     $message .= $this->_update_standard_cost_lines($ich_f, $old_records_a, $parameters);
     //update the WIP & Onhand Value Balances
@@ -475,7 +479,7 @@ class cst_item_cost_header extends dbObject {
 
  public function prg_standard_cost_update($seralized_parameters) {
   $parameters = unserialize($seralized_parameters);
-   $this->message .= '<br> Start of standard cost update program';
+  $this->message .= '<br> Start of standard cost update program';
   if (!empty($parameters['adjustment_ac_id'][0])) {
    $adjustment_ac_id = $parameters['adjustment_ac_id'][0];
    $this->message .= '<br> Entered Adjustment AC Id is : ' . $adjustment_ac_id;
@@ -518,13 +522,13 @@ class cst_item_cost_header extends dbObject {
     try {
      $this->message .= $ich->_update_standard_cost($parameters);
      $this->message .= "<br/>Standard cost update is Successfullyupdated for item_id_m - " . $ich->item_id_m .
-      ' bom_cost_type : ' . $ich->bom_cost_type;
+        ' bom_cost_type : ' . $ich->bom_cost_type;
     } catch (Exception $e) {
      $this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id_m . $e->getMessage();
     }
    } else {
     $this->message .= "<br/>Leaving Standard cost update as no cost exists item_id_m - " . $ich->item_id_m .
-     ' bom_cost_type : ' . $ich->bom_cost_type;
+       ' bom_cost_type : ' . $ich->bom_cost_type;
    }
    return $this->message;
   }
@@ -551,13 +555,13 @@ class cst_item_cost_header extends dbObject {
       $this->message .= "<br> Going for standard cost update for item header... ";
       $this->message .= $ich->_update_standard_cost($parameters);
       $this->message .= "<br> Standard cost update is Successfullyupdated for item_id_m - " . $ich->item_id_m .
-       ' bom_cost_type : ' . $ich->bom_cost_type;
+         ' bom_cost_type : ' . $ich->bom_cost_type;
      } catch (Exception $e) {
       $this->message .= "<br/>Standard cost update fialed for Item id " . $ich->item_id_m . $e->getMessage();
      }
     } else {
      $this->message .= "<br/>Leaving Standard cost update as no cost exists item_id_m - " . $ich->item_id_m .
-      ' bom_cost_type : ' . $ich->bom_cost_type;
+        ' bom_cost_type : ' . $ich->bom_cost_type;
     }
    }
    return $this->message;
@@ -740,7 +744,7 @@ class cst_item_cost_header extends dbObject {
 
   try {
    if (!empty($ich->cst_item_cost_header_id)) {
-    $this->message .=" <br>Item cost head is successfully created for cst_item_cost_header_id " . $ich->cst_item_cost_header_id;
+    $this->message .= " <br>Item cost head is successfully created for cst_item_cost_header_id " . $ich->cst_item_cost_header_id;
     //save cost line
     $this->_cost_rollup_cost_lines($ich);
    }
@@ -772,7 +776,7 @@ class cst_item_cost_header extends dbObject {
       $this->message .= "<br>" . gettext('Cost roll up is Successfully completed for Item Number') . " : $item->item_number & " . gettext('Cost Type') . " : $cost_type";
      } catch (Exception $e) {
       $this->message .= "<br>" . gettext('Cost roll up failed for Item Number') . " : $item->item_number & " . gettext('Cost Type') . " : $cost_type. Error @ " . __LINE__
-       . '<br>' . $e->getMessage();
+         . '<br>' . $e->getMessage();
      }
     }
    }
@@ -807,7 +811,7 @@ class cst_item_cost_header extends dbObject {
    try {
     $this->cost_rollup($item_id_m, $bom_cost_type, $org_id);
     $this->message .= "<br/>Cost Roll Up is Successfully updated for item_id_m - " . $item_id_m .
-     ' bom_cost_type : ' . $bom_cost_type;
+       ' bom_cost_type : ' . $bom_cost_type;
    } catch (Exception $e) {
     $this->message .= "<br/>Cost Roll Up fialed for Item id " . $item_id_m . $e->getMessage();
    }
@@ -830,7 +834,7 @@ class cst_item_cost_header extends dbObject {
      $this->_rolling_up_item_id_m = $items->item_id_m;
      $this->cost_rollup($items->item_id_m, $bom_cost_type, $org_id);
      $this->message .= "<br/>Cost Roll Up is Successfullyupdated for item_id_m - " . $items->item_id_m .
-      ' bom_cost_type : ' . $bom_cost_type;
+        ' bom_cost_type : ' . $bom_cost_type;
     } catch (Exception $e) {
      $this->message .= "<br/>Cost Roll Up fialed for Item id " . $items->item_id_m . $e->getMessage();
     }
@@ -853,7 +857,7 @@ class cst_item_cost_header extends dbObject {
      $this->_rolling_up_item_id_m = $items->item_id_m;
      $this->cost_rollup($items->item_id_m, $bom_cost_type, $org_id);
      $this->message .= "<br/>Cost Roll Up is Successfullyupdated for item_id_m - " . $items->item_id_m .
-      ' bom_cost_type : ' . $bom_cost_type;
+        ' bom_cost_type : ' . $bom_cost_type;
     } catch (Exception $e) {
      $this->message .= "<br/>Cost Roll Up fialed for Item id " . $items->item_id_m . $e->getMessage();
     }
@@ -920,11 +924,11 @@ class cst_item_cost_header extends dbObject {
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block',
-   'program_name'
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block',
+     'program_name'
   ];
 
   return $multi_select_hidden;

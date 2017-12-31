@@ -138,7 +138,9 @@ class mdm_discount_value extends dbObject {
 	 FROM mdm_discount_value
 	 WHERE relation_type = '{$relation_type}'
 	";
-	$result = self::find_by_sql($sql);
+		  global $db;
+  $value_a = ['option_line_code' => $option_line_code];
+  $result = $db->findBySql($sql, $value_a);
 	return !empty($result) ? $result : false;
  }
 
@@ -148,7 +150,9 @@ class mdm_discount_value extends dbObject {
 	 FROM mdm_discount_value
 	 WHERE from_item_id_m = '{$from_item_id_m}'
 	";
-	$result = self::find_by_sql($sql);
+		  global $db;
+  $value_a = ['option_line_code' => $option_line_code];
+  $result = $db->findBySql($sql, $value_a);
 	return !empty($result) ? $result : false;
  }
 

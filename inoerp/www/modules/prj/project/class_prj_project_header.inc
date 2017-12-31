@@ -309,11 +309,14 @@ class prj_project_header extends dbObject {
             WHERE org.legal_org_id = legal.org_id 
             AND gl.gl_ledger_id = legal.ledger_id
             AND org.org_id = pph.bu_org_id
-            AND pph.prj_project_header_id = '{$prj_project_header_id}'
+            AND pph.prj_project_header_id = :prj_project_header_id
  "
   ;
 $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+ 
+	  global $db;
+  $value_a = ['prj_project_header_id' => $prj_project_header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? array_pop($result) : false;
  }

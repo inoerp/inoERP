@@ -24,51 +24,51 @@ class lms_attendance extends dbObject {
  public static $js_fileName = 'modules/hr/attendance/attendance.js';
 //  data base variables as stored database column name
  public static $system_info = [
-		 'name' => 'Student Attendance',
-		 'number' => '3130',
-		 'description' => 'Student Attendance',
-		 'version' => '0.1.1',
-		 'db_version' => '1001',
-		 'mod_version' => '1.1.1',
-		 'primary_entity_cb' => '',
-		 'module_name' => 'hr',
-		 'weight' => 17
+    'name' => 'Student Attendance',
+    'number' => '3130',
+    'description' => 'Student Attendance',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 17
  ];
  public static $status_a = [
-		 'ENTERED' => 'Entered',
-		 'APPROVED' => 'Approved',
-		 'CLOSED' => 'Closed'
+    'ENTERED' => 'Entered',
+    'APPROVED' => 'Approved',
+    'CLOSED' => 'Closed'
  ];
  public $field_a = [
-		 'lms_attendance_id',
-		 'lms_student_id',
-		 'date',
-		 'punch_in',
-		 'punch_in_note',
-		 'punch_out',
-		 'punch_out_note',
-		 'description',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
+    'lms_attendance_id',
+    'lms_student_id',
+    'date',
+    'punch_in',
+    'punch_in_note',
+    'punch_out',
+    'punch_out_note',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $initial_search = [
-		 'lms_student_id',
-		 'date',
+    'lms_student_id',
+    'date',
  ];
  public $fields_inForm_notInDataBase = [
-		 "student_name",
+    "student_name",
  ];
  public $requiredField = [
-		 'lms_student_id',
-		 'date',
-		 'punch_in',
+    'lms_student_id',
+    'date',
+    'punch_in',
  ];
  public $search = [
-		 '_show_update_path' => 1,
-		 '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = "Student Attendance"; //page Title
  public $lms_attendance_id;
@@ -85,21 +85,26 @@ class lms_attendance extends dbObject {
  public $last_update_date;
 
  public static function find_by_fromDate($date) {
-	$sql = " SELECT * FROM ";
-	$sql .= self::$table_name;
-	$sql .= " WHERE from_date = '{$date}'  ";
-	$sql = ino_perPageSql_i($sql, 1);
-	$result = self::find_by_sql($sql);
-	return !empty($result) ? array_pop($result) : false;
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE from_date = :from_date  ";
+  $sql = ino_perPageSql_i($sql, 1);
+
+  global $db;
+  $value_a = ['from_date' => $date];
+  $result = $db->findBySql($sql, $value_a);
+
+
+  return !empty($result) ? array_pop($result) : false;
  }
 
  public function multi_select_hidden_fields() {
-	$multi_select_hidden = [
-			'mode',
-			'show_block'
-	];
+  $multi_select_hidden = [
+     'mode',
+     'show_block'
+  ];
 
-	return $multi_select_hidden;
+  return $multi_select_hidden;
  }
 
 }

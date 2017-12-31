@@ -40,15 +40,6 @@ class prj_status_next extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
- public static function find_by_wipWoHeaderId_and_routingSequence($wip_wo_header_id, $routing_sequence) {
-  global $db;
-  $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where wip_wo_header_id= '{$wip_wo_header_id}' 
-					 AND routing_sequence= '{$routing_sequence}' ";
-  $result = self::find_by_sql($sql);
-  return $result;
- }
 
 }
 

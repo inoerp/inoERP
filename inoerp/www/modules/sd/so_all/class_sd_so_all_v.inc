@@ -6,136 +6,136 @@ class sd_so_all_v extends dbObject {
  public static $table_name = "sd_so_all_v";
  public static $primary_column = "sd_so_header_id";
  public $field_a = [
-		 'sd_so_header_id',
-		 'bu_org_id',
-		 'document_type',
-		 'so_number',
-		 'ar_customer_id',
-		 'ar_customer_site_id',
-		 'sales_person',
-		 'hr_employee_id',
-		 'doc_currency',
-		 'header_amount',
-		 'so_status',
-		 'payment_term_id',
-		 'customer_name',
-		 'customer_number',
-		 'customer_site_name',
-		 'customer_site_number',
-		 'payment_term',
-		 'sd_so_line_id',
-		 'line_status',
-		 'line_type',
-		 'line_number',
-		 'item_id_m',
-		 'item_description',
-		 'line_description',
-		 'line_quantity',
-		 'picked_quantity',
-		 'shipped_quantity',
-		 'unit_price',
-		 'line_price',
-		 'item_number',
-		 'uom_id',
-		 'item_status',
-		 'org',
-		 'shipping_org_id',
-		 'requested_date',
-		 'promise_date',
-		 'schedule_ship_date',
-		 'actual_ship_date',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date',
+    'sd_so_header_id',
+    'bu_org_id',
+    'document_type',
+    'so_number',
+    'ar_customer_id',
+    'ar_customer_site_id',
+    'sales_person',
+    'hr_employee_id',
+    'doc_currency',
+    'header_amount',
+    'so_status',
+    'payment_term_id',
+    'customer_name',
+    'customer_number',
+    'customer_site_name',
+    'customer_site_number',
+    'payment_term',
+    'sd_so_line_id',
+    'line_status',
+    'line_type',
+    'line_number',
+    'item_id_m',
+    'item_description',
+    'line_description',
+    'line_quantity',
+    'picked_quantity',
+    'shipped_quantity',
+    'unit_price',
+    'line_price',
+    'item_number',
+    'uom_id',
+    'item_status',
+    'org',
+    'shipping_org_id',
+    'requested_date',
+    'promise_date',
+    'schedule_ship_date',
+    'actual_ship_date',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-		 'so_number',
-		 'customer_name',
-		 'customer_site_name',
-		 'so_status',
+    'so_number',
+    'customer_name',
+    'customer_site_name',
+    'so_status',
 //		 'item_number',
-		 'line_status',
-		 'schedule_ship_date',
+    'line_status',
+    'schedule_ship_date',
 //  'shipping_org_id',
-		 'item_id_m',
-		 'sd_so_header_id'
+    'item_id_m',
+    'sd_so_header_id'
  ];
  public $multi_select_column = [
-		 'so_number',
-		 'line_number',
-		 'org',
-		 'customer_name',
-		 'item_number',
-		 'line_quantity',
-		 'onhand',
-		 'picked_quantity',
-		 'shipped_quantity',
-		 'staging_subinventory',
-		 'staging_locator',
-		 'document_type',
-		 'sd_so_header_id',
-		 'bu_org_id',
-		 'shipping_org_id',
-		 'ar_customer_id',
-		 'ar_customer_site_id',
-		 'sales_person',
-		 'hr_employee_id',
-		 'doc_currency',
-		 'header_amount',
-		 'so_status',
-		 'staging_subinventory_id',
-		 'staging_locator_id',
-		 'payment_term_id',
-		 'customer_number',
-		 'customer_site_name',
-		 'customer_site_number',
-		 'payment_term',
-		 'sd_so_line_id',
-		 'line_status',
-		 'line_type',
-		 'item_id_m',
-		 "kit_cb",
-		 'kit_configured_cb',
-		 'bom_config_header_id',
-		 'wip_wo_header_id',
-		 'item_description',
-		 'line_description',
-		 'unit_price',
-		 'line_price',
-		 'uom_id',
-		 'item_status',
-		 'requested_date',
-		 'promise_date',
-		 'schedule_ship_date',
-		 'actual_ship_date',
+    'so_number',
+    'line_number',
+    'org',
+    'customer_name',
+    'item_number',
+    'line_quantity',
+    'onhand',
+    'picked_quantity',
+    'shipped_quantity',
+    'staging_subinventory',
+    'staging_locator',
+    'document_type',
+    'sd_so_header_id',
+    'bu_org_id',
+    'shipping_org_id',
+    'ar_customer_id',
+    'ar_customer_site_id',
+    'sales_person',
+    'hr_employee_id',
+    'doc_currency',
+    'header_amount',
+    'so_status',
+    'staging_subinventory_id',
+    'staging_locator_id',
+    'payment_term_id',
+    'customer_number',
+    'customer_site_name',
+    'customer_site_number',
+    'payment_term',
+    'sd_so_line_id',
+    'line_status',
+    'line_type',
+    'item_id_m',
+    "kit_cb",
+    'kit_configured_cb',
+    'bom_config_header_id',
+    'wip_wo_header_id',
+    'item_description',
+    'line_description',
+    'unit_price',
+    'line_price',
+    'uom_id',
+    'item_status',
+    'requested_date',
+    'promise_date',
+    'schedule_ship_date',
+    'actual_ship_date',
  ];
  public $dateField = [
-		 'requested_date',
-		 'promise_date',
-		 'schedule_ship_date',
-		 'actual_ship_date',
+    'requested_date',
+    'promise_date',
+    'schedule_ship_date',
+    'actual_ship_date',
  ];
  public $search_functions = [
-		 'Item' => 'search_item_number',
-		 'Business Org' => 'search_business_org_nm',
-		 'Shipping Org' => 'search_shipping_org',
-		 'Schedule Date' => 'search_schedule_ship_date',
-		 '> Schedule Date' => 'search_schedule_ship_date_gt',
-		 '< Schedule Date' => 'search_schedule_ship_date_lt',
+    'Item' => 'search_item_number',
+    'Business Org' => 'search_business_org_nm',
+    'Shipping Org' => 'search_shipping_org',
+    'Schedule Date' => 'search_schedule_ship_date',
+    '> Schedule Date' => 'search_schedule_ship_date_gt',
+    '< Schedule Date' => 'search_schedule_ship_date_lt',
  ];
  public $search = [
-		 '_update_path' => 'form.php?class_name=sd_so_header',
-		 '_show_update_path' => 1,
-		 '_view_path' => 'form.php?class_name=sd_so_header',
-		 '_show_view_path' => 1,
+    '_update_path' => 'form.php?class_name=sd_so_header',
+    '_show_update_path' => 1,
+    '_view_path' => 'form.php?class_name=sd_so_header',
+    '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
-		 '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
-				 'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
+    '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
+       'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
  ];
  public $pageTitle = " SO - Sales Orders "; //page Title
  public $option_lists = [
-		 'approval_status' => 'APPROVAL_STATUS',
+    'approval_status' => 'APPROVAL_STATUS',
  ];
  public $sd_so_header_id;
  public $bu_org_id;
@@ -191,7 +191,7 @@ class sd_so_all_v extends dbObject {
  public $action;
 
  private function create_sd_so_all_v() {
-	$sql = "
+  $sql = "
 CREATE OR REPLACE VIEW sd_so_all_v
 (
 sd_so_header_id, bu_org_id, document_type, so_number, ar_customer_id, ar_customer_site_id, hr_employee_id,
@@ -249,21 +249,25 @@ AND ssc.org_id = sdsl.shipping_org_id
  }
 
  public function findBY_soLineId($line_id) {
-	$sql = " SELECT * FROM ";
-	$sql .= self::$table_name;
-	$sql .= " WHERE sd_so_line_id = :sd_so_line_id ";
-	$sql = ino_perPageSql_i($sql, 1);
-	$value_a = ['sd_so_line_id' => $line_id];
-	$result = $this->findBySql($sql, $value_a);
-	return !empty($result) ? array_pop($result) : false;
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE sd_so_line_id = :sd_so_line_id ";
+  $sql = ino_perPageSql_i($sql, 1);
+  $value_a = ['sd_so_line_id' => $line_id];
+  $result = $this->findBySql($sql, $value_a);
+  return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_soLineId($line_id) {
-	$sql = " SELECT * FROM ";
-	$sql .= self::$table_name;
-	$sql .= " WHERE sd_so_line_id = '{$line_id}' ";
-	$result = self::find_by_sql($sql);
-	return !empty($result) ? array_pop($result) : false;
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE sd_so_line_id = :sd_so_line_id ";
+
+  global $db;
+  $value_a = ['sd_so_line_id' => $line_id];
+  $result = $db->findBySql($sql, $value_a);
+
+  return !empty($result) ? array_pop($result) : false;
  }
 
 }

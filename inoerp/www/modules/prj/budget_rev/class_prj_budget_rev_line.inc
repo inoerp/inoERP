@@ -90,14 +90,15 @@ class prj_budget_rev_line extends dbObject {
    SUM(pbl.burden_cost) as burden_cost, SUM(pbl.revenue_quantity) as revenue_quantity, pbh.prj_project_header_id
 FROM prj_budget_line pbl,
 prj_budget_header pbh
-WHERE pbh.prj_project_header_id = '{$prj_project_header_id}'
-AND pbh.budget_type = '{$budget_type}'
+WHERE pbh.prj_project_header_id = :prj_project_header_id
+AND pbh.budget_type = :budget_type
  AND pbh.baselined_cb = 1
 AND pbh.prj_budget_header_id = pbl.prj_budget_header_id
 GROUP BY pbh.prj_project_header_id
 ";
-//echo $sql;
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['prj_project_header_id' => $prj_project_header_id, 'budget_type' => $budget_type];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? array_pop($result) : false;
  }

@@ -70,10 +70,14 @@
   public $target_value;
 
   public static function find_by_lineId_rfqDetailId($po_quote_line_id, $po_rfq_detail_id) {
-   $sql = "SELECT * FROM " . self::$table_name . " where po_quote_line_id = '{$po_quote_line_id}'"
-   . " AND po_rfq_detail_id = '{$po_rfq_detail_id}' ";
+   $sql = "SELECT * FROM " . self::$table_name . " where po_quote_line_id = :po_quote_line_id "
+   . " AND po_rfq_detail_id = :po_rfq_detail_id ";
    $sql = ino_perPageSql_i($sql, 1);
-   $result_array = self::find_by_sql($sql);
+   
+   	  global $db;
+  $value_a = ['po_quote_line_id' => $po_quote_line_id , 'po_rfq_detail_id' => $po_rfq_detail_id];
+  $result_array = $db->findBySql($sql, $value_a);
+   
    return !empty($result_array) ?  array_pop($result_array) : false;
   }
 

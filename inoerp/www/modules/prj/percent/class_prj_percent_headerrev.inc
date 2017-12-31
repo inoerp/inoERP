@@ -78,9 +78,11 @@ class prj_percent_headerrev extends dbObject {
  public static function find_by_projectHeaderId($project_header_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE prj_project_header_id= '{$project_header_id}'  ORDER BY prj_percent_headerrev_id DESC ";
-// echo $sql;
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE prj_project_header_id= :prj_project_header_id  ORDER BY prj_percent_headerrev_id DESC ";
+	 
+  global $db;
+  $value_a = ['prj_project_header_id' => $project_header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? ($result) : [new prj_percent_headerrev()];
  }

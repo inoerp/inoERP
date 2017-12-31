@@ -23,50 +23,50 @@ class am_ms_date_rule extends dbObject {
  public static $key_column = "base_interval_days";
  public static $module = "am";
  public static $system_info = [
-  'name' => 'MS Date Rule',
-  'number' => '4109',
-  'description' => 'Maintenace Schedule Date Rule',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'am',
-  'weight' => 5
+    'name' => 'MS Date Rule',
+    'number' => '4109',
+    'description' => 'Maintenace Schedule Date Rule',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'am',
+    'weight' => 5
  ];
  public $field_a = [
-  'am_ms_date_rule_id',
-  'am_maintenance_schedule_id',
-  'base_interval_days',
-  'cycle_interval_days',
-  'from_date',
-  'to_date',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'am_ms_date_rule_id',
+    'am_maintenance_schedule_id',
+    'base_interval_days',
+    'cycle_interval_days',
+    'from_date',
+    'to_date',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'am_maintenance_schedule_id',
+    'am_maintenance_schedule_id',
  ];
  public $requiredField = [
-  'am_maintenance_schedule_id',
-  'base_interval_days',
-  'cycle_interval_days',
-  'from_date',
+    'am_maintenance_schedule_id',
+    'base_interval_days',
+    'cycle_interval_days',
+    'from_date',
  ];
  public $fields_inForm_notInDataBase = [
-  'am_maintenance_schedule_id',
-  'schedule_name',
-  'schedule_number',
-  'item_id_m',
-  'am_asset_id',
-  'effective_from_date',
-  'effective_start_date',
-  'description',
-  "am_asset_number",
-  'item_number',
-  'org_id'
+    'am_maintenance_schedule_id',
+    'schedule_name',
+    'schedule_number',
+    'item_id_m',
+    'am_asset_id',
+    'effective_from_date',
+    'effective_start_date',
+    'description',
+    "am_asset_number",
+    'item_number',
+    'org_id'
  ];
  public $pageTitle = " MS Date Rule "; //page Title
  public $am_ms_date_rule_id;
@@ -93,12 +93,15 @@ class am_ms_date_rule extends dbObject {
  public static function find_by_maintenance_schedule_id($am_maintenance_schedule_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE am_maintenance_schedule_id = '{$am_maintenance_schedule_id}' ";
+  $sql .= " WHERE am_maintenance_schedule_id = :am_maintenance_schedule_id ";
   $sql .= " AND ( from_date IS NULL OR from_date <= NOW() ) ";
   $sql .= " AND ( to_date IS NULL OR to_date > NOW() ) ";
   $sql .= " ORDER BY  am_ms_date_rule_id ASC";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['am_maintenance_schedule_id' => $am_maintenance_schedule_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

@@ -8,23 +8,23 @@ class hd_service_activity_line extends dbObject {
  public static $key_column = 'header_type_id';
  public static $module = "hd";
  public $field_a = [
-  'hd_service_activity_line_id',
-  'hd_service_activity_header_id',
-  'bu_org_id',
-  'header_type_id',
-  'line_type_id',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hd_service_activity_line_id',
+    'hd_service_activity_header_id',
+    'bu_org_id',
+    'header_type_id',
+    'line_type_id',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'hd_service_activity_header_id',
-  'bu_org_id'
+    'hd_service_activity_header_id',
+    'bu_org_id'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "hd_service_activity_header_id"
+    "hd_service_activity_header_id"
  ];
  public $hd_service_activity_line_id;
  public $hd_service_activity_header_id;
@@ -39,11 +39,15 @@ class hd_service_activity_line extends dbObject {
 
  public static function find_by_headerId_and_buOrgId($hd_service_activity_header_id, $bu_org_id) {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where hd_service_activity_header_id= '{$hd_service_activity_header_id}' AND bu_org_id= '{$bu_org_id}' ";
+     self::$table_name .
+     " where hd_service_activity_header_id= :hd_service_activity_header_id AND bu_org_id=  :bu_org_id ";
   $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['hd_service_activity_header_id' => $hd_service_activity_header_id, 'bu_org_id' => $bu_org_id];
+  $result = $db->findBySql($sql, $value_a);
+
+
   return !empty($result) ? array_pop($result) : false;
  }
 

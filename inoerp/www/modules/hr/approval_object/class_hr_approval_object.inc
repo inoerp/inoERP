@@ -88,7 +88,8 @@ class hr_approval_object extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'HEADER' ";
-  $result = self::find_by_sql($sql);
+    global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 

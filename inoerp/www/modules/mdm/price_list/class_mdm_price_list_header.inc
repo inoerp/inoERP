@@ -121,8 +121,11 @@ class mdm_price_list_header extends dbObject {
  }
 
  public static function find_by_module($module_name) {
-  $sql = " SELECT * FROM " . self::$table_name . " WHERE module_name = '{$module_name}' ";
-  $result = self::find_by_sql($sql);
+  $sql = " SELECT * FROM " . self::$table_name . " WHERE module_name = :module_name ";
+ 	  global $db;
+  $value_a = ['module_name' => $module_name];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 

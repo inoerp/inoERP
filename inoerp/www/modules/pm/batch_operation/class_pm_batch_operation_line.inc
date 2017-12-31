@@ -8,45 +8,45 @@ class pm_batch_operation_line extends dbObject {
  public static $key_column = 'activity_code';
  public static $module = "pm";
  public static $release_type_a = [
-  'AUTO' => 'Automatic',
-  'MANUAL' => 'Manual'
+    'AUTO' => 'Automatic',
+    'MANUAL' => 'Manual'
  ];
  public static $line_action_a = [
-  'COMPLETED' => 'Completed',
-  'CLOSED' => 'Closed'
+    'COMPLETED' => 'Completed',
+    'CLOSED' => 'Closed'
  ];
  public static $line_status_a = [
-  'COMPLETE' => 'Complete',
-  'CLOSE' => 'Close'
+    'COMPLETE' => 'Complete',
+    'CLOSE' => 'Close'
  ];
  public $field_a = [
-  'pm_batch_operation_line_id',
-  'pm_batch_header_id',
-  'step_no',
-  'pm_process_routing_header_id',
-  'activity_code',
-  'description',
-  'activity_factror',
-  'release_type',
-  'sequence_dependency_cb',
-  'offset_interval',
-  'breakable_cb',
-  'material_scheduled_cb',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'pm_batch_operation_line_id',
+    'pm_batch_header_id',
+    'step_no',
+    'pm_process_routing_header_id',
+    'activity_code',
+    'description',
+    'activity_factror',
+    'release_type',
+    'sequence_dependency_cb',
+    'offset_interval',
+    'breakable_cb',
+    'material_scheduled_cb',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'pm_batch_header_id',
-  'activity_code'
+    'pm_batch_header_id',
+    'activity_code'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "pm_batch_header_id"
+    "pm_batch_header_id"
  ];
  public $fields_inForm_notInDataBase = [
-  'line_action'
+    'line_action'
  ];
  public $pm_batch_operation_line_id;
  public $pm_batch_header_id;
@@ -145,10 +145,13 @@ class pm_batch_operation_line extends dbObject {
 
  public static function find_by_headerId_and_buOrgId($pm_batch_operation_header_id, $bu_org_id) {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where pm_batch_operation_header_id= '{$pm_batch_operation_header_id}' AND bu_org_id= '{$bu_org_id}'  ";
-   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where pm_batch_operation_header_id= :pm_batch_operation_header_id AND bu_org_id= :bu_org_id  ";
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['pm_batch_operation_header_id' => $pm_batch_operation_header_id, 'bu_org_id' => $bu_org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -164,8 +167,12 @@ FROM pm_batch_operation_line pbol,
 pm_batch_operation_detail pbod
 
 WHERE pbol.pm_batch_operation_line_id = pbod.pm_batch_operation_line_id
-AND pbol.pm_batch_header_id = '{$pm_batch_header_id}' ";
-  $result = self::find_by_sql($sql);
+AND pbol.pm_batch_header_id = :pm_batch_header_id ";
+
+  global $db;
+  $value_a = ['pm_batch_header_id' => $pm_batch_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -183,8 +190,12 @@ pm_batch_header pbh
 
 WHERE pbol.pm_batch_operation_line_id = pbod.pm_batch_operation_line_id
 AND pbol.pm_batch_header_id = pbh.pm_batch_header_id
-AND pbol.pm_batch_operation_line_id = '{$op_line_id}' ";
-  $result = self::find_by_sql($sql);
+AND pbol.pm_batch_operation_line_id = :pm_batch_operation_line_id ";
+
+  global $db;
+  $value_a = ['pm_batch_operation_line_id' => $op_line_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 

@@ -162,15 +162,20 @@
   }
 
   public static function find_by_po_rfq_headerId($po_rfq_header_id) {
-   $sql = "SELECT * FROM " . self::$table_name . " where po_rfq_header_id = '{$po_rfq_header_id}'";
-   $result_array = self::find_by_sql($sql);
+   $sql = "SELECT * FROM " . self::$table_name . " where po_rfq_header_id = :po_rfq_header_id ";
+  	  global $db;
+  $value_a = ['po_rfq_header_id' => $po_rfq_header_id];
+  $result_array = $db->findBySql($sql, $value_a);
    return $result_array;
   }
 
   public static function find_by_poHeaderId_itemId($po_rfq_header_id, $item_id) {
-   $sql = "SELECT * FROM " . self::$table_name . " where po_rfq_header_id = '{$po_rfq_header_id}' AND item_id_m = '{$item_id}' ";
+   $sql = "SELECT * FROM " . self::$table_name . " where po_rfq_header_id = :po_rfq_header_id AND item_id_m = :item_id_m ";
    $sql = ino_perPageSql_i($sql, 1);
-   $result = self::find_by_sql($sql);
+      global $db;
+	$value_a = ['po_rfq_header_id' => $po_rfq_header_id, 'item_id_m' => $item_id];
+	$result = $db->findBySql($sql, $value_a);
+  
    return !empty($result) ? array_pop($result) : false;
   }
 

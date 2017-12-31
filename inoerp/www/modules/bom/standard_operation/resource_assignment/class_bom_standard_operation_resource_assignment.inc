@@ -58,8 +58,11 @@ class bom_standard_operation_resource_assignment extends dbObject {
 	global $db;
 	$sql = "SELECT * FROM " .
 					self::$table_name .
-					" where bom_standard_operation_id= '{$bom_standard_operationId}' ";
-	$result = self::find_by_sql($sql);
+					" where bom_standard_operation_id= :bom_standard_operation_id ";
+
+	$value_a = ['bom_standard_operation_id' => $bom_standard_operationId];
+	$result = $db->findBySql($sql, $value_a);
+  
 	return $result;
  }
 

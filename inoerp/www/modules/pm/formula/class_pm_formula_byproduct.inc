@@ -78,11 +78,14 @@ item
 WHERE item.item_id_m = pfb.item_id_m
 and pfh.pm_formula_header_id =pfb.pm_formula_header_id
 and pfh.org_id =item.org_id
-and pfh.pm_formula_header_id = '{$pm_formula_header_id}'
+and pfh.pm_formula_header_id = :pm_formula_header_id
 ";
 
 
-  $result_array = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['pm_formula_header_id' => $pm_formula_header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+  
   return !empty($result_array) ? $result_array : false;
  }
 
@@ -99,10 +102,13 @@ pfb.creation_date,   pfb.last_update_by,   pfb.last_update_date,
   pm_recipe_material_line rml
   
   WHERE rml.pm_formula_byproduct_id = pfb.pm_formula_byproduct_id
-  and pfb.pm_formula_header_id = '{$header_id}'
+  and pfb.pm_formula_header_id = :pm_formula_header_id
 ";
 
-  $result_array = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['pm_formula_header_id' => $header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+  
   return !empty($result_array) ? $result_array : false;
  }
 

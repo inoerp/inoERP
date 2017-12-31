@@ -6,71 +6,71 @@ class cst_gross_margin_v extends dbObject {
  public static $table_name = "cst_gross_margin_v";
  public static $primary_column = "gross_margin_id";
  public $field_a = [
-  'item_number',
-  'org',
-  'customer_name',
-  'inv_unit_price_ledgc',
-  'country',
-  'frozen_cost',
-  'gross_profit',
-  'gross_margin',
-  'period_name',
-  'shipping_org_id',
-  'cst_item_cost_header_id',
-  'address',
-  'ar_transaction_header_id',
-  'bu_org_id',
-  'transaction_type',
-  'transaction_class',
-  'transaction_number',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'document_owner',
-  'description',
-  'ship_to_id',
-  'bill_to_id',
-  'header_amount',
-  'currency',
-  'exchange_rate',
-  'doc_currency',
-  'document_number',
-  'ledger_id',
-  'period_id',
-  'sales_person',
-  'reference_key_name_ath',
-  'reference_key_value_ath',
-  'sd_so_header_id',
-  'ar_transaction_line_id',
-  'line_number',
-  'item_id_m',
-  'item_description',
-  'inv_line_quantity',
-  'inv_unit_price',
-  'line_type',
-  'line_description',
-  'sd_so_line_id',
-  'reference_key_name',
-  'reference_key_value',
-  'customer_number',
-  'customer_site_name',
-  'customer_site_number',
-  'line_type_so_line',
-  'unit_price',
-  'ar_transaction_header_id_atl'
+    'item_number',
+    'org',
+    'customer_name',
+    'inv_unit_price_ledgc',
+    'country',
+    'frozen_cost',
+    'gross_profit',
+    'gross_margin',
+    'period_name',
+    'shipping_org_id',
+    'cst_item_cost_header_id',
+    'address',
+    'ar_transaction_header_id',
+    'bu_org_id',
+    'transaction_type',
+    'transaction_class',
+    'transaction_number',
+    'ar_customer_id',
+    'ar_customer_site_id',
+    'document_owner',
+    'description',
+    'ship_to_id',
+    'bill_to_id',
+    'header_amount',
+    'currency',
+    'exchange_rate',
+    'doc_currency',
+    'document_number',
+    'ledger_id',
+    'period_id',
+    'sales_person',
+    'reference_key_name_ath',
+    'reference_key_value_ath',
+    'sd_so_header_id',
+    'ar_transaction_line_id',
+    'line_number',
+    'item_id_m',
+    'item_description',
+    'inv_line_quantity',
+    'inv_unit_price',
+    'line_type',
+    'line_description',
+    'sd_so_line_id',
+    'reference_key_name',
+    'reference_key_value',
+    'customer_number',
+    'customer_site_name',
+    'customer_site_number',
+    'line_type_so_line',
+    'unit_price',
+    'ar_transaction_header_id_atl'
  ];
  public $initial_search = [
-  'item_number'
+    'item_number'
  ];
  public $search_functions = [
-  'Item From' => 'search_item_number_from',
-  'Item To' => 'search_item_number_to',
-  'Organization' => 'search_org_name',
-  'Customer Name' => 'search_customer_name',
+    'Item From' => 'search_item_number_from',
+    'Item To' => 'search_item_number_to',
+    'Organization' => 'search_org_name',
+    'Customer Name' => 'search_customer_name',
  ];
  public $pageTitle = " Gross Margin "; //page Title
  public static $search_groupBy = [
-  'item_number' => 'Item Number',
-  'period_name' => 'Period Name'
+    'item_number' => 'Item Number',
+    'period_name' => 'Period Name'
 //		 'subinventory' => 'Subinventory',
 //		 'org_id' => 'Inventory Org',
  ];
@@ -207,11 +207,14 @@ AS
  }
 
  public static function find_by_itemId_orgId($item_id, $org_id) {
-  $sql = " SELECT * from cst_gross_margin_v WHERE item_id_m = '{$item_id}' "
-   . " AND org_id = '{$org_id}' ";
-  $result = self::find_by_sql($sql);
-//    echo $sql;
-//  pa($result);
+  $sql = " SELECT * from cst_gross_margin_v WHERE item_id_m = :item_id_m "
+     . " AND org_id = :org_id ";
+
+  global $db;
+  $value_a = ['item_id_m' => $item_id, 'org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
+
+
   return !empty($result) ? $result : false;
  }
 

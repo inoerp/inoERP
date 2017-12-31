@@ -22,68 +22,68 @@ class pm_formula_header extends dbObject {
  public static $key_column = 'formula_name';
  public static $module = "pm";
  public static $system_info = [
-  'name' => 'Formula',
-  'number' => '2804',
-  'description' => 'Create & Mainten Formula',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('pm_formula_line', 'pm_formula_ingredient', 'pm_formula_byproduct'),
-  'primary_entity_cb' => '',
-  'module_name' => 'prj',
-  'weight' => 1
+    'name' => 'Formula',
+    'number' => '2804',
+    'description' => 'Create & Mainten Formula',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('pm_formula_line', 'pm_formula_ingredient', 'pm_formula_byproduct'),
+    'primary_entity_cb' => '',
+    'module_name' => 'prj',
+    'weight' => 1
  ];
  public $action_a = [
-  'APPROVE' => 'Approve',
-  'PRINT' => 'Print Estimates',
-  'CANCEL' => 'Cancel',
-  'CLOSE' => 'Close',
-  'CREATE_WO' => 'Create Work Order',
-  'COPY_ESTIMATES' => 'Copy Estimates to Actuals',
-  'COPY_WO' => 'Copy WO Charges to Actuals',
-  'PROCESS_LOGISTICS' => 'Process Logistics',
-  'PROCESS_ACTUALS' => 'Process Actuals',
+    'APPROVE' => 'Approve',
+    'PRINT' => 'Print Estimates',
+    'CANCEL' => 'Cancel',
+    'CLOSE' => 'Close',
+    'CREATE_WO' => 'Create Work Order',
+    'COPY_ESTIMATES' => 'Copy Estimates to Actuals',
+    'COPY_WO' => 'Copy WO Charges to Actuals',
+    'PROCESS_LOGISTICS' => 'Process Logistics',
+    'PROCESS_ACTUALS' => 'Process Actuals',
  ];
  public $field_a = [
-  'pm_formula_header_id',
-  'org_id',
-  'formula_name',
-  'type',
-  'revision',
-  'comment',
-  'status',
-  'description',
-  'owner_employee_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'pm_formula_header_id',
+    'org_id',
+    'formula_name',
+    'type',
+    'revision',
+    'comment',
+    'status',
+    'description',
+    'owner_employee_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'formula_name',
-  'type',
+    'formula_name',
+    'type',
  ];
  public $requiredField = [
-  'org_id',
-  'formula_name',
+    'org_id',
+    'formula_name',
  ];
  public $fields_inForm_notInDataBase = [
-  'action',
-  'pm_employee_name'
+    'action',
+    'pm_employee_name'
  ];
  public static $json_label_fields = [
-  'formula_name',
-  'description',
-  'status',
-  'type',
-  'org_id',
+    'formula_name',
+    'description',
+    'status',
+    'type',
+    'org_id',
  ];
  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
+    'org_id' => 'org_inv_name_default',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Formula "; //page Title
  public $pm_formula_header_id;
@@ -137,11 +137,13 @@ class pm_formula_header extends dbObject {
             WHERE org.legal_org_id = legal.org_id 
             AND gl.gl_ledger_id = legal.ledger_id
             AND org.org_id = pph.bu_org_id
-            AND pph.pm_formula_header_id = '{$pm_formula_header_id}'
- " ;
-            $sql = ino_perPageSql_i($sql, 1);
+            AND pph.pm_formula_header_id = :pm_formula_header_id
+ ";
+  $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['pm_formula_header_id' => $pm_formula_header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? array_pop($result) : false;
  }

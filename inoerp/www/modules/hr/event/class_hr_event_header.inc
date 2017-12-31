@@ -100,11 +100,13 @@ class hr_event_header extends dbObject {
 
   $sql = " SELECT * from ";
   $sql .= self::$table_name;
-  $sql .= " WHERE start_date >= '$first_date' ";
-  $sql .= " AND end_date <= '$last_date' ";
-  $sql .= " AND user_id = '$user' ";
+  $sql .= " WHERE start_date >= :start_date ";
+  $sql .= " AND end_date <= :end_date ";
+  $sql .= " AND user_id = :user_id ";
   $sql .= " ORDER BY start_date, start_time ASC ";
-  $result = self::find_by_sql($sql);
+      global $db;
+	$value_a = ['start_date' => $first_date, 'end_date' => $last_date, 'user_id'=> $user];
+	$result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 

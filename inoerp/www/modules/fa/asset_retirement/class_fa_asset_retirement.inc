@@ -22,85 +22,85 @@ class fa_asset_retirement extends dbObject implements gl_journal_int {
  public static $module = "fa";
  public static $gl_journal_category = "FA_RETIREMENT";
  public static $system_info = [
-  'name' => 'Asset Retirement',
-  'number' => '1411',
-  'description' => 'Asset Retirement',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'fa',
-  'weight' => 5
+    'name' => 'Asset Retirement',
+    'number' => '1411',
+    'description' => 'Asset Retirement',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'fa',
+    'weight' => 5
  ];
  public static $status_a = [
-  'ENTERED' => 'Entered',
-  'CONFIRMED' => 'Confirmed',
-  'CLOSED' => 'Closed',
+    'ENTERED' => 'Entered',
+    'CONFIRMED' => 'Confirmed',
+    'CLOSED' => 'Closed',
  ];
  public static $action_a = [
-  'CONFIRM' => 'Confirm Retirement'
+    'CONFIRM' => 'Confirm Retirement'
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'fa_asset_retirement_id',
-  'fa_asset_id',
-  'fa_asset_book_id',
-  'source_type',
-  'reference',
-  'status',
-  'description',
-  'retired_units',
-  'retired_cost',
-  'proceed_of_sales',
-  'cost_of_removals',
-  'adjustment_amount',
-  'retirement_convention',
-  'gl_journal_header_id',
-  'retire_date',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'fa_asset_retirement_id',
+    'fa_asset_id',
+    'fa_asset_book_id',
+    'source_type',
+    'reference',
+    'status',
+    'description',
+    'retired_units',
+    'retired_cost',
+    'proceed_of_sales',
+    'cost_of_removals',
+    'adjustment_amount',
+    'retirement_convention',
+    'gl_journal_header_id',
+    'retire_date',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $initial_search = [
-  'fa_asset_id',
-  'reference',
+    'fa_asset_id',
+    'reference',
  ];
  public $fields_inForm_notInDataBase = [
-  'asset_number',
-  'asset_description',
-  'status',
-  'type',
-  'asset_book_name',
-  'original_cost',
-  'current_cost',
-  'ytd_depreciation',
-  'accumulated_depreciation',
-  'action'
+    'asset_number',
+    'asset_description',
+    'status',
+    'type',
+    'asset_book_name',
+    'original_cost',
+    'current_cost',
+    'ytd_depreciation',
+    'accumulated_depreciation',
+    'action'
  ];
  public $numberField = [
-  'original_cost',
-  'current_cost',
-  'ytd_depreciation',
-  'retired_units',
-  'retired_cost',
-  'proceed_of_sales',
-  'adjustment_amount'
+    'original_cost',
+    'current_cost',
+    'ytd_depreciation',
+    'retired_units',
+    'retired_cost',
+    'proceed_of_sales',
+    'adjustment_amount'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'fa_asset_id',
+    'fa_asset_id',
  ];
  public $requiredField = [
-  'fa_asset_id'
+    'fa_asset_id'
  ];
  public $notUpdatedFromWebForm = [
-  'gl_journal_header_id',
-  'adjustment_amount'
+    'gl_journal_header_id',
+    'adjustment_amount'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Asset Retirement "; //page Title
  public $fa_asset_retirement_id;
@@ -132,11 +132,11 @@ class fa_asset_retirement extends dbObject implements gl_journal_int {
  public $action;
  private $_sav_jrnl;
  public $prg_confirm_retirement_parameters = [
-  'Asset Book' => 'search_asset_book'
+    'Asset Book' => 'search_asset_book'
  ];
  public $prg_confirm_retirement_details = [
-  'name' => 'Confirm Retirement',
-  'description' => 'Confirm Retirement Program',
+    'name' => 'Confirm Retirement',
+    'description' => 'Confirm Retirement Program',
  ];
 
  public function findBy_assetId_bookId() {
@@ -310,10 +310,13 @@ class fa_asset_retirement extends dbObject implements gl_journal_int {
  }
 
  public static function find_by_assetId_bookId($fa_asset_book_id, $fa_asset_id) {
+  global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where fa_asset_book_id= '{$fa_asset_book_id}'  AND fa_asset_id = '{$fa_asset_id}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where fa_asset_book_id= :fa_asset_book_id  AND fa_asset_id = :fa_asset_id ";
+  $value_a = ['fa_asset_book_id' => $fa_asset_book_id, 'fa_asset_id' => $fa_asset_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -423,9 +426,11 @@ class fa_asset_retirement extends dbObject implements gl_journal_int {
  public static function find_by_bookId_status($fa_book_id, $status = 'ENTERED') {
   $sql = ' SELECT * FROM  ';
   $sql .= self::$table_name;
-  $sql .= " WHERE fa_asset_book_id='{$fa_book_id}'  AND status='{$status}' ";
+  $sql .= " WHERE fa_asset_book_id=:fa_asset_book_id  AND status=:status ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['fa_asset_book_id' => $fa_book_id, 'status' => $status];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? $result : false;
  }

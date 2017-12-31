@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -22,43 +23,43 @@ class hr_leave_entitlement_header extends dbObject {
  public static $key_column = 'entitlement_name';
  public static $module = "hr";
  public static $system_info = [
-  'name' => 'Leave Entitlement',
-  'number' => '3204',
-  'description' => 'HR Leave Entitlement',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 13
+    'name' => 'Leave Entitlement',
+    'number' => '3204',
+    'description' => 'HR Leave Entitlement',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 13
  ];
  public $field_a = [
-  'hr_leave_entitlement_header_id',
-  'entitlement_name',
-  'description',
-  'status',
-  'job_id',
-  'position_id',
-  'employee_id',
-  'leave_group',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_leave_entitlement_header_id',
+    'entitlement_name',
+    'description',
+    'status',
+    'job_id',
+    'position_id',
+    'employee_id',
+    'leave_group',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'hr_leave_entitlement_header_id',
-  'entitlement_name',
+    'hr_leave_entitlement_header_id',
+    'entitlement_name',
  ];
  public $requiredField = [
-  'entitlement_name',
+    'entitlement_name',
  ];
  public $pageTitle = " Entitlement Details "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $hr_leave_entitlement_header_id;
  public $entitlement_name;
@@ -86,16 +87,19 @@ class hr_leave_entitlement_header extends dbObject {
        hr_leave_entitlement_line eel,
        hr_compensation_element hce
        WHERE eel.hr_leave_entitlement_header_id = eeh.hr_leave_entitlement_header_id
-       AND eeh.hr_leave_entitlement_header_id = '{$hr_leave_entitlement_header_id}'
+       AND eeh.hr_leave_entitlement_header_id = :hr_leave_entitlement_header_id
         AND hce.hr_compensation_element_id = eel.element_id
         
 ";
+  global $db;
+  $value_a = ['hr_leave_entitlement_header_id' => $hr_leave_entitlement_header_id];
+
   if (is_array($category)) {
    $sql .= " AND hce.category IN " . "( '" . implode("','", $category) . "' )";
   } else {
    $sql .= " AND hce.category = '{$category}' ";
   }
-  $result = self::find_by_sql($sql);
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
@@ -114,10 +118,12 @@ class hr_leave_entitlement_header extends dbObject {
  public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM hr_leave_entitlement_header eeh 
-       WHERE eeh.employee_id = '{$employee_id}'   
+       WHERE eeh.employee_id = :employee_id   
 ";
-       $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 

@@ -24,54 +24,54 @@ class bom_config_header extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "bom";
  public static $system_info = [
-  'name' => 'BOM',
-  'number' => '2410',
-  'description' => 'View and Update Config BOM ',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('bom_config_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'bom_config',
-  'weight' => '1'
+    'name' => 'BOM',
+    'number' => '2410',
+    'description' => 'View and Update Config BOM ',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('bom_config_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'bom_config',
+    'weight' => '1'
  ];
  public $field_a = [
-  'bom_config_header_id',
-  'item_id_m',
-  'bom_header_id',
-  'org_id',
-  'reference_key_name',
-  'reference_key_value',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'bom_config_header_id',
+    'item_id_m',
+    'bom_header_id',
+    'org_id',
+    'reference_key_name',
+    'reference_key_value',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'bom_config_header_id',
+    'bom_config_header_id',
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  "item_description",
-  "uom",
+    "item_number",
+    "item_description",
+    "uom",
  ];
  public $requiredField = [
-  'item_id_m',
-  'bom_header_id',
-  'org_id',
-  'reference_key_name',
+    'item_id_m',
+    'bom_header_id',
+    'org_id',
+    'reference_key_name',
 //  'reference_key_value',
  ];
  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
+    'org_id' => 'org_inv_name_default',
  ];
  public $pageTitle = " Config BOM - Create & Update BOM "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1
  ];
  public $bom_config_header_id;
  public $item_id_m;
@@ -108,8 +108,8 @@ class bom_config_header extends dbObject {
  public static function find_by_itemId($item_id_m) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= '{$item_id_m}' ";
+     self::$table_name .
+     " where item_id_m= :item_id_m ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -119,15 +119,19 @@ class bom_config_header extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public static function find_by_itemId_orgId($item_id_m, $org_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= '{$item_id_m}'  AND org_id = '{$org_id}' ";
+     self::$table_name .
+     " where item_id_m= :item_id_m  AND org_id = :org_id ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -137,15 +141,19 @@ class bom_config_header extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public static function find_by_referenceData($reference_key_name, $reference_key_value) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where reference_key_name= '{$reference_key_name}'  AND reference_key_value = '{$reference_key_value}' ";
+     self::$table_name .
+     " where reference_key_name= :reference_key_name  AND reference_key_value = :reference_key_value ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -155,15 +163,19 @@ class bom_config_header extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['reference_key_name' => $reference_key_name, 'reference_key_value' => $reference_key_value];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public function findBy_itemId() {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= :item_id_m ";
-    switch (DB_TYPE) {
+     self::$table_name .
+     " where item_id_m= :item_id_m ";
+  switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
     break;
@@ -183,8 +195,8 @@ class bom_config_header extends dbObject {
    $this->org_id = $org_id;
   }
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where org_id= :org_id ";
+     self::$table_name .
+     " where org_id= :org_id ";
   $value_a = ['org_id' => $this->org_id];
   $result_array = $this->findBySql($sql, $value_a);
   return !empty($result_array) ? $result_array : false;

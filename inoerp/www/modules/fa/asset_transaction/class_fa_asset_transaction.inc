@@ -8,65 +8,65 @@ class fa_asset_transaction extends dbObject {
  public static $key_column = "fa_asset_id";
  public static $module = "fa";
  public static $gl_journal_category_a = [
-  'ADD' => 'FA_ADITTION',
-  'RET' => 'FA_RETIREMENT',
-  'ADJUST' => 'FA_ADJUSTMENT',
-  'TRANSFER' => 'FA_TRANSFER',
-  'COST_ADJUST' => 'FA_COST_ADJUSTMENT',
+    'ADD' => 'FA_ADITTION',
+    'RET' => 'FA_RETIREMENT',
+    'ADJUST' => 'FA_ADJUSTMENT',
+    'TRANSFER' => 'FA_TRANSFER',
+    'COST_ADJUST' => 'FA_COST_ADJUSTMENT',
  ];
  public static $system_info = [
-  'name' => 'Asset  Transaction',
-  'number' => '1413',
-  'description' => 'FA Asset Transaction',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'fa',
-  'weight' => 6
+    'name' => 'Asset  Transaction',
+    'number' => '1413',
+    'description' => 'FA Asset Transaction',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'fa',
+    'weight' => 6
  ];
  public static $transaction_type_a = [
-  'ADD' => 'Addition',
-  'RET' => 'Retirement',
-  'ADJUST' => 'Adjsument',
-  'TRANSFER' => 'Transfer',
-  'COST_ADJUST' => 'Cost Adjustment',
+    'ADD' => 'Addition',
+    'RET' => 'Retirement',
+    'ADJUST' => 'Adjsument',
+    'TRANSFER' => 'Transfer',
+    'COST_ADJUST' => 'Cost Adjustment',
  ];
  public $field_a = [
-  'fa_asset_transaction_id',
-  'fa_asset_id',
-  'fa_asset_book_info_id',
-  'fa_asset_book_id',
-  'transaction_type',
-  'quantity',
-  'amout',
-  'gl_journal_header_id',
-  'gl_journal_line_id',
-  'description',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'fa_asset_transaction_id',
+    'fa_asset_id',
+    'fa_asset_book_info_id',
+    'fa_asset_book_id',
+    'transaction_type',
+    'quantity',
+    'amout',
+    'gl_journal_header_id',
+    'gl_journal_line_id',
+    'description',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'fa_asset_transaction_id',
-  'fa_asset_id',
-  'transaction_type',
+    'fa_asset_transaction_id',
+    'fa_asset_id',
+    'transaction_type',
  ];
  public $requiredField = [
-  'fa_asset_id',
-  'transaction_type',
+    'fa_asset_id',
+    'transaction_type',
  ];
  public $fields_inForm_notInDataBase = [
-  'asset_number',
-  'asset_type',
-  'tag_number',
-  'serial_number',
-  'key_number',
-  'asset_description',
+    'asset_number',
+    'asset_type',
+    'tag_number',
+    'serial_number',
+    'key_number',
+    'asset_description',
  ];
  public $pageTitle = "Asset Transactions  "; //page Title
  public $fa_asset_transaction_id;
@@ -175,16 +175,22 @@ class fa_asset_transaction extends dbObject {
  public static function find_by_invTransactionId($inv_transaction_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE inv_transaction_id = '{$inv_transaction_id}'  ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE inv_transaction_id = :inv_transaction_id  ";
+
+  global $db;
+  $value_a = ['inv_transaction_id' => $inv_transaction_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? ($result) : false;
  }
 
  public static function find_by_invSerialNumberId($fa_asset_number_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE fa_asset_number_id = '{$fa_asset_number_id}'  ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE fa_asset_number_id = :fa_asset_number_id  ";
+  global $db;
+  $value_a = ['fa_asset_number_id' => $fa_asset_number_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? ($result) : false;
  }
 

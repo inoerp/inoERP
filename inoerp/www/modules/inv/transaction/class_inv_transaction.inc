@@ -22,126 +22,126 @@ class inv_transaction extends dbObject {
  public static $module = "inv";
  public static $gl_journal_category = "INV_INVENTORY";
  public static $system_info = [
-  'name' => 'INV Transaction',
-  'number' => '2107',
-  'description' => 'Inventory Transaction',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 7
+    'name' => 'INV Transaction',
+    'number' => '2107',
+    'description' => 'Inventory Transaction',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 7
  ];
  public static $allowed_inv_transactions = [
-  '1' => 'Miscellaneous Issue',
-  '2' => 'Miscellaneous Receipt',
-  '3' => 'Subinventory Transfer'
+    '1' => 'Miscellaneous Issue',
+    '2' => 'Miscellaneous Receipt',
+    '3' => 'Subinventory Transfer'
  ];
  public $field_a = [
-  'inv_transaction_id',
-  'transaction_type_id',
-  'org_id',
-  'status',
-  'receipt_line_id',
-  'item_number',
-  'item_id_m',
-  'revision_name',
-  'uom_id',
-  'lot_number_id',
-  'logical_transaction_cb',
-  'document_type',
-  'document_number',
-  'document_id',
-  'wip_wo_bom_id',
-  'am_wo_bom_id',
-  'po_header_id',
-  'po_line_id',
-  'po_detail_id',
-  'sd_so_line_id',
-  'reason',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'description',
-  'from_org_id',
-  'from_subinventory_id',
-  'from_locator_id',
-  'quantity',
-  'from_account_id',
-  'to_org_id',
-  'to_subinventory_id',
-  'to_locator_id',
-  'to_account_id',
-  'unit_cost',
-  'costed_amount',
-  'gl_journal_header_id',
-  'bom_config_header_id',
-  'transaction_rev_enabled_cb',
-  'rev_start_number',
-  'pm_batch_line_id',
-  'pm_batch_header_id',
-  'pm_batch_ingredient_id',
-  'pm_batch_byproduct_id',
-  'po_requisition_detail_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'inv_transaction_id',
+    'transaction_type_id',
+    'org_id',
+    'status',
+    'receipt_line_id',
+    'item_number',
+    'item_id_m',
+    'revision_name',
+    'uom_id',
+    'lot_number_id',
+    'logical_transaction_cb',
+    'document_type',
+    'document_number',
+    'document_id',
+    'wip_wo_bom_id',
+    'am_wo_bom_id',
+    'po_header_id',
+    'po_line_id',
+    'po_detail_id',
+    'sd_so_line_id',
+    'reason',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'description',
+    'from_org_id',
+    'from_subinventory_id',
+    'from_locator_id',
+    'quantity',
+    'from_account_id',
+    'to_org_id',
+    'to_subinventory_id',
+    'to_locator_id',
+    'to_account_id',
+    'unit_cost',
+    'costed_amount',
+    'gl_journal_header_id',
+    'bom_config_header_id',
+    'transaction_rev_enabled_cb',
+    'rev_start_number',
+    'pm_batch_line_id',
+    'pm_batch_header_id',
+    'pm_batch_ingredient_id',
+    'pm_batch_byproduct_id',
+    'po_requisition_detail_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  "inv_transaction_id",
-  "transaction_type_id",
-  'status',
-  "item_id_m",
-  "org_id",
-  "item_number",
-  "creation_date",
-  "document_type",
-  "document_number"
+    "inv_transaction_id",
+    "transaction_type_id",
+    'status',
+    "item_id_m",
+    "org_id",
+    "item_number",
+    "creation_date",
+    "document_type",
+    "document_number"
  ];
  public $account = [
-  "from_account_id",
-  "to_account_id",
-  "account_id"];
+    "from_account_id",
+    "to_account_id",
+    "account_id"];
  public $checkbox = [
-  "logical_transaction_cb",
-  "transaction_rev_enabled_cb"];
+    "logical_transaction_cb",
+    "transaction_rev_enabled_cb"];
  public $fields_inForm_notInDataBase = [
-  "account_id",
-  'item_description',
-  'serial_generation',
-  'serial_number',
-  'inv_serial_number_id',
-  'lot_generation',
-  'lot_number',
-  'lot_quantity',
-  'kit_cb',
-  'onhand',
-  'reservable_onhand',
-  'line_type'
+    "account_id",
+    'item_description',
+    'serial_generation',
+    'serial_number',
+    'inv_serial_number_id',
+    'lot_generation',
+    'lot_number',
+    'lot_quantity',
+    'kit_cb',
+    'onhand',
+    'reservable_onhand',
+    'line_type'
  ];
  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
+    'org_id' => 'org_inv_name_default',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "org_id",
-  "transaction_type_id",
+    "org_id",
+    "transaction_type_id",
  ];
  public $requiredField = [
-  "uom_id",
-  "quantity",
-  "org_id",
-  "item_id_m",
-  "transaction_type_id"
+    "uom_id",
+    "quantity",
+    "org_id",
+    "item_id_m",
+    "transaction_type_id"
  ];
  public $search = [
-  '_show_view_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Transaction - Create & View Transactions"; //page Title
  public $option_lists = [
-  'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
+    'inv_transaction_class' => 'TRANSACTION_TYPE_CLASS'
  ];
  public $inv_transaction_id;
  public $transaction_type_id;
@@ -854,13 +854,13 @@ class inv_transaction extends dbObject {
   $ret_quantity = 0;
   if (!empty($_POST['inv_lot_number_id'])) {
    foreach ($_POST['inv_lot_number_id'] as $key => $value) {
-    $ret_quantity +=!empty($_POST['lot_quantity'][$key]) ? $_POST['lot_quantity'][$key] : 0;
+    $ret_quantity += !empty($_POST['lot_quantity'][$key]) ? $_POST['lot_quantity'][$key] : 0;
    }
    $this->_lot_type = 'ID';
    //good to procedd . $this->_lock_lot_number();
   } else if (!empty($_POST['lot_number'])) {
    foreach ($_POST['lot_number'] as $key => $value) {
-    $ret_quantity +=!empty($_POST['lot_quantity'][$key]) ? $_POST['lot_quantity'][$key] : 0;
+    $ret_quantity += !empty($_POST['lot_quantity'][$key]) ? $_POST['lot_quantity'][$key] : 0;
     $this->_lot_type = 'NUMBER';
    }
   }
@@ -1482,7 +1482,7 @@ class inv_transaction extends dbObject {
      $this->_journal_line_for_cr_adjustmet_amount($journal_line_a);
     } else if ($this->transaction_type_id == 20) {
      array_push($cr_inv_receving_trnx_a, 20);
-    }else if ($this->transaction_type_id == 33) {
+    } else if ($this->transaction_type_id == 33) {
      array_push($cr_inv_receving_trnx_a, 33);
     }
     if (in_array($this->transaction_type_id, $cr_inv_receving_trnx_a)) {
@@ -1838,20 +1838,17 @@ class inv_transaction extends dbObject {
   }
  }
 
-//  private function _verify_serial_reservation($inv_serial_number_id) {
-//  $sql = "SELECT * FROM ";
-//  $sql .= self::$table_name;
-//  $sql .= " WHERE   reference_key_name = '{$refname}' AND  reference_key_value ='{$refvalue}' LIMIT 1";
-//  $result = self::find_by_sql($sql);
-//  return !empty($result) ? ($result) : false;
-// }
-
  public static function find_by_refName_refValue($refname, $refvalue) {
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE   reference_key_name = '{$refname}' AND  reference_key_value ='{$refvalue}' ";
+  $sql .= " WHERE   reference_key_name = :reference_key_name AND  reference_key_value = :reference_key_value ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['reference_key_value' => $refvalue, 'reference_key_name' => $refname];
+  $result = $db->findBySql($sql, $value_a);
+
+
   return !empty($result) ? ($result) : false;
  }
 

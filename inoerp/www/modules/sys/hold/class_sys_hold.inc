@@ -91,8 +91,10 @@ class sys_hold extends dbObject {
  public static function find_by_code($code) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE hold_code = '{$code}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE hold_code = :hold_code ";
+  	  global $db;
+  $value_a = ['hold_code' => $code];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -100,15 +102,19 @@ class sys_hold extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'LINE' ";
-  $result = self::find_by_sql($sql);
+   global $db;
+  $result = $db->findBySql($sql);
+  
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_transactionClass($class) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE type_class = '{$class}' AND status='active'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE type_class = :type_class AND status='active'";
+ 	  global $db;
+  $value_a = ['type_class' => $class];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 

@@ -24,50 +24,49 @@ class sys_message_format extends dbObject {
  public static $module = "ec";
 // public static $js_fileName = 'modules/inv/sys_message_format/js/multi_select.js';
  public static $system_info = [
-  'name' => 'Message Format',
-  'number' => '8101',
-  'description' => 'Message Format',
-  'version' => '0.1.4',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'sys',
-  'weight' => 1
+    'name' => 'Message Format',
+    'number' => '8101',
+    'description' => 'Message Format',
+    'version' => '0.1.4',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'sys',
+    'weight' => 1
  ];
- 
  public static $content_type_a = [
-  'TEXT' => 'Text',
-  'HTML' => 'HTML'
+    'TEXT' => 'Text',
+    'HTML' => 'HTML'
  ];
  public $field_a = [
-  'sys_message_format_id',
-  'format_name',
-  'description',
-  'message_subject',
-  'message_body',
-  'content_type',
-  'cc_email',
-  'from_name',
-  'from_email',
-  'reply_to',
-  'use_smtp_cb',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'sys_message_format_id',
+    'format_name',
+    'description',
+    'message_subject',
+    'message_body',
+    'content_type',
+    'cc_email',
+    'from_name',
+    'from_email',
+    'reply_to',
+    'use_smtp_cb',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'format_name',
+    'format_name',
  ];
  public $requiredField = [
-  'format_name',
-  'message_subject',
-  'message_body',
+    'format_name',
+    'message_subject',
+    'message_body',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Message Format "; //page Title
  public $sys_message_format_id;
@@ -88,18 +87,17 @@ class sys_message_format extends dbObject {
  public $last_update_date;
  public static $form_template_name = 'f_single_form1_template.php';
  public static $header_tab = [
-  'basic_info' => [
-   'ec_payment_method_id' => 'search_text_field'
-  ]
+    'basic_info' => [
+       'ec_payment_method_id' => 'search_text_field'
+    ]
  ];
- 
  public static $header_tab1 = [
-  ['name' => 'ec_payment_method_id' , 'type' => 'l_text_field_dr_withSearch'],
-  ['name' => 'payment_method_name' , 'type' => 'l_text_field_dm'],
-  ['name' => 'payment_method_name' , 'type' => 'l_text_field_dm'],
-  ['name' => 'payment_method_name' , 'type' => 'l_text_field_d'],
-  ['name' => 'payment_method_name' , 'type' => 'l_text_field_d'],
-  ['name' => 'payment_method_name' , 'type' => 'l_text_field_d'],
+    ['name' => 'ec_payment_method_id', 'type' => 'l_text_field_dr_withSearch'],
+    ['name' => 'payment_method_name', 'type' => 'l_text_field_dm'],
+    ['name' => 'payment_method_name', 'type' => 'l_text_field_dm'],
+    ['name' => 'payment_method_name', 'type' => 'l_text_field_d'],
+    ['name' => 'payment_method_name', 'type' => 'l_text_field_d'],
+    ['name' => 'payment_method_name', 'type' => 'l_text_field_d'],
  ];
 
  public function findBy_sys_message_format_id_m($sys_message_format_id) {
@@ -114,18 +112,23 @@ class sys_message_format extends dbObject {
  public static function find_all_assigned_orgs($sys_message_format_number) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where sys_message_format_number= '{$sys_message_format_number}' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where sys_message_format_number= :sys_message_format_number ";
+
+  global $db;
+  $value_a = ['sys_message_format_number' => $sys_message_format_number];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_all_active_methods() {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where status= 'ACTIVE' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where status= 'ACTIVE' ";
+  global $db;
+  $result = $db->findBySql($sql);
   return $result;
  }
 

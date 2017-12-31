@@ -26,83 +26,83 @@ class ar_customer extends dbObject {
  public static $key_column = 'customer_number';
  public static $module = "ar";
  public static $system_info = [
-  'name' => 'Customer',
-  'number' => '1301',
-  'description' => 'Define and mainten external/internal customers',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('ar_customer_site', 'ar_customer_bu'),
-  'primary_entity_cb' => '',
-  'module_name' => 'ar',
-  'weight' => 1
+    'name' => 'Customer',
+    'number' => '1301',
+    'description' => 'Define and mainten external/internal customers',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('ar_customer_site', 'ar_customer_bu'),
+    'primary_entity_cb' => '',
+    'module_name' => 'ar',
+    'weight' => 1
  ];
  public $field_a = [
-  'ar_customer_id',
-  "customer_number",
-  "customer_name",
-  "supplier_id",
-  "customer_type",
-  'customer_category',
-  'customer_relationship',
-  "tax_country",
-  "tax_reg_no",
-  "tax_payer_id",
-  "bill_to_id",
-  "ship_to_id",
-  'customer_credit_class',
-  'profile_name',
-  "status",
-  "alt_name",
-  "rev_number",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    'ar_customer_id',
+    "customer_number",
+    "customer_name",
+    "supplier_id",
+    "customer_type",
+    'customer_category',
+    'customer_relationship',
+    "tax_country",
+    "tax_reg_no",
+    "tax_payer_id",
+    "bill_to_id",
+    "ship_to_id",
+    'customer_credit_class',
+    'profile_name',
+    "status",
+    "alt_name",
+    "rev_number",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
  public static $json_label_fields = [
-  "customer_number",
-  "customer_name",
-  'customer_category',
-  "tax_country",
-  "alt_name",
+    "customer_number",
+    "customer_name",
+    'customer_category',
+    "tax_country",
+    "alt_name",
  ];
  public $initial_search = [
-  "ar_customer_id",
-  "customer_number",
-  "customer_name",
-  "tax_country"
+    "ar_customer_id",
+    "customer_number",
+    "customer_name",
+    "tax_country"
  ];
  public $account = [
  ];
  public $addressField = [
-  "address_id"
+    "address_id"
  ];
  public $fields_inForm_notInDataBase = [
-  'header_address_name',
-  'header_address',
-  'header_country',
-  'header_postal_code',
-  'shipto_address_name',
-  'shipto_address',
-  'shipto_country',
-  'shipto_postal_code',
-  'supplier_name'
+    'header_address_name',
+    'header_address',
+    'header_country',
+    'header_postal_code',
+    'shipto_address_name',
+    'shipto_address',
+    'shipto_country',
+    'shipto_postal_code',
+    'supplier_name'
  ];
  public $requiredField = [
-  "customer_number",
-  "customer_name"
+    "customer_number",
+    "customer_name"
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=ar_customer',
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_update_path' => 'form.php?class_name=ar_customer',
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Customer "; //page Title
  public $option_lists = [
-  'customer_types' => 'AR_CUSTOMER_TYPE',
-  'customer_credit_class' => 'AR_CUSTOMER_CREDIT_CLASS'
+    'customer_types' => 'AR_CUSTOMER_TYPE',
+    'customer_credit_class' => 'AR_CUSTOMER_CREDIT_CLASS'
  ];
  public $ar_customer_id;
  public $customer_number;
@@ -191,7 +191,7 @@ class ar_customer extends dbObject {
 
   $param_a = ['customer_name', 'org_id'];
   $customer_name = '%' . $this->customer_name . '%';
-  $value_a = [ 'customer_name' => $customer_name, 'org_id' => $this->org_id];
+  $value_a = ['customer_name' => $customer_name, 'org_id' => $this->org_id];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
   return !(empty($result)) ? $result : false;
  }
@@ -199,8 +199,8 @@ class ar_customer extends dbObject {
  public function findBy_customer_name($limit = 30) {
   global $db;
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where customer_name LIKE :customer_name ";
+     . self::$table_name
+     . " where customer_name LIKE :customer_name ";
 
   switch (DB_TYPE) {
    case 'ORACLE' :
@@ -214,7 +214,7 @@ class ar_customer extends dbObject {
 
   $param_a = ['customer_name'];
   $customer_name = '%' . $this->customer_name . '%';
-  $value_a = [ 'customer_name' => $customer_name];
+  $value_a = ['customer_name' => $customer_name];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
   return !(empty($result)) ? $result : false;
  }
@@ -248,8 +248,8 @@ class ar_customer extends dbObject {
  public static function find_customer_number_by_customer_number($customer_number) {
   global $db;
   $sql = "SELECT * FROM "
-   . self::$table_name
-   . " where customer_number LIKE '%{$customer_number}%' ";
+     . self::$table_name
+     . " where customer_number LIKE '%{$customer_number}%' ";
 
   switch (DB_TYPE) {
    case 'ORACLE' :
@@ -265,10 +265,10 @@ class ar_customer extends dbObject {
   if ($result && mysql_num_rows($result)) {
    while ($row = $db->fetch_array($result)) {
     $data[] = array(
-     'label' => $row['customer_number'],
-     'customer_number' => $row['customer_number'],
-     'ar_customer_id' => $row['ar_customer_id'],
-     'description' => $row['customer_description']
+       'label' => $row['customer_number'],
+       'customer_number' => $row['customer_number'],
+       'ar_customer_id' => $row['ar_customer_id'],
+       'description' => $row['customer_description']
     );
    }
   }
@@ -288,10 +288,10 @@ class ar_customer extends dbObject {
   if ($result && mysql_num_rows($result)) {
    while ($row = $db->fetch_array($result)) {
     $data[] = array(
-     'label' => $row['customer_number'],
-     'customer_number' => $row['customer_number'],
-     'ar_customer_id' => $row['ar_customer_id'],
-     'description' => $row['customer_description']
+       'label' => $row['customer_number'],
+       'customer_number' => $row['customer_number'],
+       'ar_customer_id' => $row['ar_customer_id'],
+       'description' => $row['customer_description']
     );
    }
   }
@@ -303,9 +303,9 @@ class ar_customer extends dbObject {
  public static function find_ar_customer_id_from_customerNumber_OrgId($customer_number, $org_id) {
   global $db;
   $sql = "SELECT ar_customer_id FROM " .
-   self::$table_name .
-   " where customer_number= '{$customer_number}' " .
-   " AND org_id= '{$org_id }'";
+     self::$table_name .
+     " where customer_number= '{$customer_number}' " .
+     " AND org_id= '{$org_id }'";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -328,8 +328,8 @@ class ar_customer extends dbObject {
 
  public static function find_by_customerNumber($customer_number) {
   $sql = "SELECT ar_customer_id FROM " .
-   self::$table_name .
-   " where customer_number= '{$customer_number}' ";
+     self::$table_name .
+     " where customer_number= :customer_number ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -340,15 +340,18 @@ class ar_customer extends dbObject {
     break;
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['customer_number' => $customer_number];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_all_assigned_orgs($ar_customer_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   'customer_bu' .
-   " where ar_customer_id= '{$ar_customer_id}' ";
+     'customer_bu' .
+     " where ar_customer_id= '{$ar_customer_id}' ";
   $result = $db->result_array_assoc($sql);
   return $result;
  }
@@ -365,10 +368,10 @@ class ar_customer extends dbObject {
   if ($result && mysql_num_rows($result)) {
    while ($row = $db->fetch_array($result)) {
     $data[] = array(
-     'label' => $row['customer_name'],
-     'customer_name' => $row['customer_name'],
-     'ar_customer_id' => $row['ar_customer_id'],
-     'customer_number' => $row['customer_number']
+       'label' => $row['customer_name'],
+       'customer_name' => $row['customer_name'],
+       'ar_customer_id' => $row['ar_customer_id'],
+       'customer_number' => $row['customer_number']
     );
    }
   }
@@ -404,10 +407,6 @@ class ar_customer extends dbObject {
   tax_payer_id,   bill_to_id,   ship_to_id,
   customer_credit_class,   profile_name,   alt_name FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
 
-//  if(!empty($_GET['hidden_fields']['receving_org_id'])){
-//   $rec_org_id = $_GET['hidden_fields']['receving_org_id'];
-//   $sql .= " AND receving_org_id = '{$rec_org_id}' ";
-//  }
   if (!empty($dependent_fields)) {
    foreach ($dependent_fields as $k => $v) {
     if (!empty($k) && !empty($v)) {
@@ -415,7 +414,11 @@ class ar_customer extends dbObject {
     }
    }
   }
-  $result_array = static::find_by_sql($sql);
+
+  global $db;
+//  $value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+  $result_array = $db->findBySql($sql);
+
   return !empty($result_array) ? ($result_array) : false;
  }
 

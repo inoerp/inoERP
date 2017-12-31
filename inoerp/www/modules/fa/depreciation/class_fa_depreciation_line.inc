@@ -8,36 +8,34 @@ class fa_depreciation_line extends dbObject {
  public static $key_column = "asset_id";
  public static $module = "fa";
  public $field_a = [
-  'fa_depreciation_line_id',
-  'fa_depreciation_header_id',
-  'asset_id',
-  'depreciation_amount',
-  'unschedule_amount',
-  'total_depreciation_amount',
-  'depreciation_account_id',
-  'cost_before_depreciation',
-  'nbv_before_depreciation',
-  'salvage_value_bd',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'fa_depreciation_line_id',
+    'fa_depreciation_header_id',
+    'asset_id',
+    'depreciation_amount',
+    'unschedule_amount',
+    'total_depreciation_amount',
+    'depreciation_account_id',
+    'cost_before_depreciation',
+    'nbv_before_depreciation',
+    'salvage_value_bd',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
- 
-  public $fields_inForm_notInDataBase = [
-  'asset_number',
+ public $fields_inForm_notInDataBase = [
+    'asset_number',
  ];
- 
  public $initial_search = [
-  'fa_depreciation_header_id',
+    'fa_depreciation_header_id',
  ];
  public $requiredField = [
-  'fa_depreciation_header_id',
-  'asset_id',
-  'depreciation_amount',
+    'fa_depreciation_header_id',
+    'asset_id',
+    'depreciation_amount',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "fa_depreciation_header_id"
+    "fa_depreciation_header_id"
  ];
  public $pageTitle = " Depreciation Line "; //page Title
  public $fa_depreciation_line_id;
@@ -60,9 +58,12 @@ class fa_depreciation_line extends dbObject {
   $sql = " 
 	 SELECT SUM(rate) as RATE_SUM
 		FROM fa_depreciation_line 
-		WHERE  fa_depreciation_header_id = '{$fa_depreciation_header_id}'
+		WHERE  fa_depreciation_header_id = :fa_depreciation_header_id
 ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['fa_depreciation_header_id' => $fa_depreciation_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result[0]) ? $result[0]->RATE_SUM : false;
  }
 

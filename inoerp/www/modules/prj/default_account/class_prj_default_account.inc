@@ -70,9 +70,11 @@ class prj_default_account extends dbObject {
   $sql = " 
 	 SELECT *
 	 FROM prj_default_account
-	 WHERE prj_project_type_header_id = '{$prj_project_type_header_id}' AND accounting_group = '{$accounting_group}'	";
-//   echo $sql;
-  $result = self::find_by_sql($sql);
+	 WHERE prj_project_type_header_id = :prj_project_type_header_id AND accounting_group = :accounting_group	";
+    global $db;
+	$value_a = ['prj_project_type_header_id' => $prj_project_type_header_id, 'accounting_group' => $accounting_group];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 
@@ -86,9 +88,8 @@ class prj_default_account extends dbObject {
   }
   
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
-//   echo $sql;
-//   pa($result);
+   global $db;
+  $result = $db->findBySql($sql);
    
   return !empty($result) ? array_pop($result) : false;
  

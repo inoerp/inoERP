@@ -90,7 +90,7 @@ class lms_resource_cost extends dbObject {
  public static function find_by_resourceId_bomCostType($resource_id, $lms_cost_type = 'FROZEN') {
 	$sql = " SELECT * FROM  ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE lms_cost_type = '{$lms_cost_type}' AND lms_resource_id = '{$resource_id}' ";
+	$sql .= " WHERE lms_cost_type = :lms_cost_type AND lms_resource_id = :lms_resource_id ";
 	switch (DB_TYPE) {
 	 case 'ORACLE' :
 		$sql .= ' AND ' . ino_perPageSql(1);
@@ -101,7 +101,10 @@ class lms_resource_cost extends dbObject {
 		break;
 	}
 
-	$result = self::find_by_sql($sql);
+	    global $db;
+	$value_a = ['lms_cost_type' => $lms_cost_type, 'lms_resource_id' => $resource_id];
+	$result = $db->findBySql($sql, $value_a);
+  
 	return !empty($result) ? array_pop($result) : false;
  }
 

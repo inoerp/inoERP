@@ -142,7 +142,7 @@ AND item.item_id_m = prl.item_id_m
   $sql = ino_perPageSql_i($sql, 1);
 
   $value_a = ['po_requisition_detail_id' => $po_requisition_detail_id];
-  $result = self::find_by_sql_i($sql, $value_a);
+   $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 

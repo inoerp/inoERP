@@ -8,43 +8,43 @@ class pm_batch_line extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "pm";
  public $field_a = [
-  'pm_batch_line_id',
-  'pm_batch_header_id',
-  'line_no',
-  'line_type',
-  'item_id_m',
-  'uom_id',
-  'planned_quantity',
-  'wip_planned_quantity',
-  'actual_quantity',
-  'allocated_qty',
-  'yield_date',
-  'subinventory_id',
-  'locator_id',
-  'description',
-  'scale_type',
-  'yield_type',
-  'step_no',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'pm_batch_line_id',
+    'pm_batch_header_id',
+    'line_no',
+    'line_type',
+    'item_id_m',
+    'uom_id',
+    'planned_quantity',
+    'wip_planned_quantity',
+    'actual_quantity',
+    'allocated_qty',
+    'yield_date',
+    'subinventory_id',
+    'locator_id',
+    'description',
+    'scale_type',
+    'yield_type',
+    'step_no',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'pm_batch_header_id',
-  'item_id_m',
-  'uom_id'
+    'pm_batch_header_id',
+    'item_id_m',
+    'uom_id'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "pm_batch_header_id"
+    "pm_batch_header_id"
  ];
  public $fields_inForm_notInDataBase = [
-  'item_description',
-  'line_type',
-  'line_id'
+    'item_description',
+    'line_type',
+    'line_id'
  ];
  public static $yield_type_a = [
-  'MANUAL' => 'Manual',
+    'MANUAL' => 'Manual',
 //  'INC' => 'Incremental',
 //  'AUTOBS' => 'Auto By Step',
 //  'AUTO' => 'Automatic',
@@ -89,10 +89,13 @@ item
 WHERE item.item_id_m = pfl.item_id_m
 and pfh.pm_batch_header_id = pfl.pm_batch_header_id
 and pfh.org_id =item.org_id
-and pfl.pm_batch_header_id = '{$header_id}'
+and pfl.pm_batch_header_id = :pm_batch_header_id
 ";
 
-  $result_array = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['pm_batch_header_id' => $header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? $result_array : false;
  }
 
@@ -125,11 +128,13 @@ item
 
 WHERE pbb.item_id_m = item.item_id_m
 AND item.item_id = item.item_id_m     
-AND pbb.pm_batch_header_id='{$header_id}'    
+AND pbb.pm_batch_header_id= :pm_batch_header_id    
 AND pbb.pm_batch_header_id= pbh.pm_batch_header_id "
   ;
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['pm_batch_header_id' => $header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? $result : '';
  }

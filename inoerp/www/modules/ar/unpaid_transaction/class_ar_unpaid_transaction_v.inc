@@ -1,46 +1,47 @@
 <?php
 
 class ar_unpaid_transaction_v extends dbObject {
-public static $form_class_name = "ar_transaction_header";
+
+ public static $form_class_name = "ar_transaction_header";
  public static $table_name = "ar_unpaid_transaction_v";
  public static $primary_column = "ar_transaction_header_id";
  public static $key_column = 'transaction_number';
  public static $module = "ar";
  public $field_a = [
-  'ar_transaction_header_id',
-  'bu_org_id',
-  'transaction_class',
-  'transaction_number',
-  'header_amount',
-  'tax_amount',
-  'exchange_rate',
-  'receipt_amount',
-  'remaing_amount',
-  'currency',
-  'doc_currency',
-  'document_date',
-  'document_number',
-  'gl_journal_header_id',
-  'ledger_id',
-  'sd_so_header_id',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'customer_name',
-  'customer_number',
-  'customer_site_name',
-  'customer_site_number',
-  'so_number',
-  'org'
+    'ar_transaction_header_id',
+    'bu_org_id',
+    'transaction_class',
+    'transaction_number',
+    'header_amount',
+    'tax_amount',
+    'exchange_rate',
+    'receipt_amount',
+    'remaing_amount',
+    'currency',
+    'doc_currency',
+    'document_date',
+    'document_number',
+    'gl_journal_header_id',
+    'ledger_id',
+    'sd_so_header_id',
+    'ar_customer_id',
+    'ar_customer_site_id',
+    'customer_name',
+    'customer_number',
+    'customer_site_name',
+    'customer_site_number',
+    'so_number',
+    'org'
  ];
  public $initial_search = [
-  'ar_transaction_header_id',
-  'ar_customer_id',
-  'transaction_number',
-  'customer_name',
-  'so_number',
+    'ar_transaction_header_id',
+    'ar_customer_id',
+    'transaction_number',
+    'customer_name',
+    'so_number',
  ];
  public $search_functions = [
-  'Business Org' => 'search_business_org',
+    'Business Org' => 'search_business_org',
  ];
  public $search = [
 //		 '_show_view_path' => 1,
@@ -107,9 +108,9 @@ AND arth.transaction_class IN ('INVOICE','DEPOSIT','CHARGE_BACK','PREPAYMENT','D
 
  public function findBy_ItemId($item_id_m) {
   $sql = " SELECT * FROM " .
-   self::$table_name .
-   " WHERE item_id_m= :item_id_m "
-   . " ORDER BY  supply_date ASC ";
+     self::$table_name .
+     " WHERE item_id_m= :item_id_m "
+     . " ORDER BY  supply_date ASC ";
   $value_a = ['item_id_m' => $item_id_m];
   $result_array = $this->findBySql($sql, $value_a);
   return !empty($result_array) ? $result_array : false;
@@ -118,8 +119,12 @@ AND arth.transaction_class IN ('INVOICE','DEPOSIT','CHARGE_BACK','PREPAYMENT','D
  public static function find_by_transactionId($ar_transaction_header_id) {
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE   ar_transaction_header_id = '{$ar_transaction_header_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE   ar_transaction_header_id = :ar_transaction_header_id ";
+
+  global $db;
+  $value_a = ['ar_transaction_header_id' => $ar_transaction_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? ($result) : false;
  }
 

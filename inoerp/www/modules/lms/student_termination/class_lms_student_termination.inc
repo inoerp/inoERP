@@ -73,11 +73,6 @@ public $last_update_date;
  ];
  public $pageTitle = " HR Employee termination  "; //page Title
 
- Public static function find_by_employeeId($employee_id) {
-	$sql = " SELECT * FROM " . self::$table_name . " WHERE employee_id = '{$employee_id}' ";
-	$result = self::find_by_sql($sql);
-	return !empty($result) ? $result : null;
- }
 
  public function _after_save() {
 	if ($this->status == 'COMPLETED' && !empty($this->employee_id)) {

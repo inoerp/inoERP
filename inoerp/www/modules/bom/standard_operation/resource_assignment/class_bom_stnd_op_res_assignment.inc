@@ -9,31 +9,31 @@ class bom_stnd_op_res_assignment extends dbObject {
  public static $module = "bom";
 //  data base variables as stored database column name
  public $field_a = [
-		 'bom_stnd_op_res_assignment_id',
-		 'resource_sequence',
-		 'bom_standard_operation_id',
-		 'charge_basis',
-		 'resource_id',
-		 'resource_usage',
-		 'resource_schedule',
-		 'assigned_units',
-		 'twenty_four_hr_cb',
-		 'standard_rate_cb',
-		 'charge_type',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date'
+    'bom_stnd_op_res_assignment_id',
+    'resource_sequence',
+    'bom_standard_operation_id',
+    'charge_basis',
+    'resource_id',
+    'resource_usage',
+    'resource_schedule',
+    'assigned_units',
+    'twenty_four_hr_cb',
+    'standard_rate_cb',
+    'charge_type',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
 //variables used for showing data
  public $checkbox = [
-		 'twenty_four_hr_cb',
-		 'standard_rate_cb'
+    'twenty_four_hr_cb',
+    'standard_rate_cb'
  ];
  public $requiredField = [
-		 'bom_standard_operation_id',
-		 'resource_sequence',
-		 'resource_id'
+    'bom_standard_operation_id',
+    'resource_sequence',
+    'resource_id'
  ];
  public $bom_standard_operation_id;
  public $cost_type_id;
@@ -55,12 +55,16 @@ class bom_stnd_op_res_assignment extends dbObject {
  public $msg;
 
  public static function find_by_bom_standard_operationId($bom_standard_operationId) {
-	global $db;
-	$sql = "SELECT * FROM " .
-					self::$table_name .
-					" where bom_standard_operation_id= '{$bom_standard_operationId}' ";
-	$result = self::find_by_sql($sql);
-	return $result;
+  global $db;
+  $sql = "SELECT * FROM " .
+     self::$table_name .
+     " where bom_standard_operation_id= :bom_standard_operation_id ";
+
+  global $db;
+  $value_a = ['bom_standard_operation_id' => $bom_standard_operationId];
+  $result = $db->findBySql($sql, $value_a);
+
+  return $result;
  }
 
 }

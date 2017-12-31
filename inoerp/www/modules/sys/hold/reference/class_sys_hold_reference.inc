@@ -67,8 +67,12 @@
   }
 
   Public static function find_by_po_asl_lineId($po_asl_line_id) {
-   $sql = " SELECT * FROM " . self::$table_name . " WHERE po_asl_line_id = '{$po_asl_line_id}' ";
-   $result = self::find_by_sql($sql);
+   $sql = " SELECT * FROM " . self::$table_name . " WHERE po_asl_line_id = :po_asl_line_id ";
+   	  global $db;
+  $value_a = ['po_asl_line_id' => $po_asl_line_id];
+  $result = $db->findBySql($sql, $value_a);
+	
+  
    return !empty($result) ? $result : null;
   }
 
@@ -124,16 +128,24 @@
 
   public static function find_by_referenceTableId($reference_table, $reference_id) {
    $sql = " SELECT * FROM " . self::$table_name;
-   $sql .= " WHERE reference_table = '{$reference_table}' AND reference_id = '{$reference_id}' ";
-   $result = self::find_by_sql($sql);
+   $sql .= " WHERE reference_table = :reference_table AND reference_id = :reference_id ";
+   
+       global $db;
+	$value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+	$result = $db->findBySql($sql, $value_a);
+   
    return !empty($result) ? $result : false;
   }
 
   public static function find_by_referenceTableId_holdCode($reference_table, $reference_id, $hold_code) {
    $sql = " SELECT * FROM " . self::$table_name;
-   $sql .= " WHERE reference_table = '{$reference_table}' AND reference_id = '{$reference_id}' "
-     . " AND hold_code = '{$hold_code}' ";
-   $result = self::find_by_sql($sql);
+   $sql .= " WHERE reference_table = :reference_table AND reference_id = :reference_id "
+     . " AND hold_code = :hold_code ";
+  
+            global $db;
+	$value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id, 'hold_code' => $hold_code];
+	$result = $db->findBySql($sql, $value_a);
+     
    return !empty($result) ? array_pop($result) : false;
   }
 

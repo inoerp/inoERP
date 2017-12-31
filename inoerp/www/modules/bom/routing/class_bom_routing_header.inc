@@ -26,64 +26,64 @@ class bom_routing_header extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "bom"; //same as gl_journal_source
  public static $system_info = [
-  'name' => 'Routing',
-  'number' => '2407',
-  'description' => 'Product Routings',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('bom_routing_line', 'bom_routing_detail'),
-  'primary_entity_cb' => '',
-  'module_name' => 'bom',
-  'weight' => 7
+    'name' => 'Routing',
+    'number' => '2407',
+    'description' => 'Product Routings',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('bom_routing_line', 'bom_routing_detail'),
+    'primary_entity_cb' => '',
+    'module_name' => 'bom',
+    'weight' => 7
  ];
  public $field_a = [
-  'bom_routing_header_id',
-  'item_id_m',
-  'alternate_routing',
-  'org_id',
-  'routing_revision',
-  'effective_date',
-  'common_routing_item_id_m',
-  'description',
-  'completion_subinventory',
-  'completion_locator',
-  'ef_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'bom_routing_header_id',
+    'item_id_m',
+    'alternate_routing',
+    'org_id',
+    'routing_revision',
+    'effective_date',
+    'common_routing_item_id_m',
+    'description',
+    'completion_subinventory',
+    'completion_locator',
+    'ef_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $initial_search = [
-  'bom_routing_header_id',
-  'item_id_m',
-  'alternate_routing',
-  'org_id'
+    'bom_routing_header_id',
+    'item_id_m',
+    'alternate_routing',
+    'org_id'
  ];
  public $column = [
-  'bom_routing_header_id',
-  'item_id_m',
-  'alternate_routing',
-  'org_id'
+    'bom_routing_header_id',
+    'item_id_m',
+    'alternate_routing',
+    'org_id'
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  "item_description",
-  "uom",
-  "commonRouting_item_number",
-  "commonRouting_item_description"
+    "item_number",
+    "item_description",
+    "uom",
+    "commonRouting_item_number",
+    "commonRouting_item_description"
  ];
  public $requiredField = [
-  'item_id_m',
-  'org_id'
+    'item_id_m',
+    'org_id'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1
  ];
  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
+    'org_id' => 'org_inv_name_default',
  ];
  public $pageTitle = " Routing - Resource & Usages @ Each Operation "; //page Title
  public $option_lists = [
@@ -114,13 +114,23 @@ class bom_routing_header extends dbObject {
  public $commonRouting_item_description;
 
  public static function find_by_itemId($itemId) {
-  $sql = "SELECT * FROM " . self::$table_name . " WHERE item_id_m = '{$itemId}'";
-  $result = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " WHERE item_id_m = :item_id_m ";
+
+  global $db;
+  $value_a = ['item_id_m' => $itemId];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_itemId_orgId($item_id, $org_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where item_id_m = '{$item_id}' AND org_id = '{$org_id}'  ";
+  $sql = "SELECT * FROM " . self::$table_name . " where item_id_m = '{$item_id}' AND org_id = :org_id  ";
+  
+    global $db;
+  $value_a = ['item_id_m' => $item_id , 'org_id' => $org_id ];
+
+
+  
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -130,14 +140,14 @@ class bom_routing_header extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result = self::find_by_sql($sql);
+   $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
  public function findBy_itemId() {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= :item_id_m  ";
+     self::$table_name .
+     " where item_id_m= :item_id_m  ";
   $value_a['item_id_m'] = $this->item_id_m;
   if (!empty($this->org_id)) {
    $sql .= " AND org_id= :org_id  ";

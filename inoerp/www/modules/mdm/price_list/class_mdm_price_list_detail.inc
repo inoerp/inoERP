@@ -8,41 +8,41 @@ class mdm_price_list_detail extends dbObject {
  public static $key_column = 'qty_from';
  public static $module = "mdm";
  public $account = [
-  'detail_ac_id'
+    'detail_ac_id'
  ];
  public $field_a = [
-  'mdm_price_list_detail_id',
-  'mdm_price_list_header_id',
-  'mdm_price_list_line_id',
-  'qty_from',
-  'qty_to',
-  'uom_id',
-  'unit_price',
-  'formula',
-  'effective_start_date',
-  'effective_end_date',
-  'q_reference_key_name',
-  'q_reference_key_value',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'mdm_price_list_detail_id',
+    'mdm_price_list_header_id',
+    'mdm_price_list_line_id',
+    'qty_from',
+    'qty_to',
+    'uom_id',
+    'unit_price',
+    'formula',
+    'effective_start_date',
+    'effective_end_date',
+    'q_reference_key_name',
+    'q_reference_key_value',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'mdm_price_list_header_id',
-  'mdm_price_list_line_id',
-  'qty_from',
-  'qty_to',
-  'uom_id',
-  'unit_price',
+    'mdm_price_list_header_id',
+    'mdm_price_list_line_id',
+    'qty_from',
+    'qty_to',
+    'uom_id',
+    'unit_price',
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number"
+    "item_number"
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'mdm_price_list_line_id',
-  'mdm_price_list_header_id'
+    'mdm_price_list_line_id',
+    'mdm_price_list_header_id'
  ];
  public $mdm_price_list_detail_id;
  public $mdm_price_list_header_id;
@@ -65,8 +65,12 @@ class mdm_price_list_detail extends dbObject {
  public $msg;
 
  public static function find_by_mdm_price_list_lineId($mdm_price_list_line_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where mdm_price_list_line_id = '{$mdm_price_list_line_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where mdm_price_list_line_id = :mdm_price_list_line_id ";
+
+  global $db;
+  $value_a = ['mdm_price_list_line_id' => $mdm_price_list_line_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return $result_array;
  }
 
@@ -91,19 +95,23 @@ class mdm_price_list_detail extends dbObject {
  }
 
  public static function find_taxLine_by_lineId($mdm_price_list_line_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where mdm_price_list_line_id = '{$mdm_price_list_line_id}'"
-   . "  AND account_type = 'TAX'  ";
+  $sql = "SELECT * FROM " . self::$table_name . " where mdm_price_list_line_id = :mdm_price_list_line_id "
+     . "  AND account_type = 'TAX'  ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['mdm_price_list_line_id' => $mdm_price_list_line_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public function findTaxLine_byLineId($mdm_price_list_line_id = '') {
   $mdm_price_list_line_id = !empty($mdm_price_list_line_id) ? $mdm_price_list_line_id : $this->mdm_price_list_line_id;
   $sql = "SELECT * FROM " . self::$table_name . " where mdm_price_list_line_id = :mdm_price_list_line_id "
-   . "  AND account_type = 'TAX' ";
+     . "  AND account_type = 'TAX' ";
   $sql = ino_perPageSql_i($sql, 1);
-  $value_a = [ 'mdm_price_list_line_id' => $mdm_price_list_line_id];
+  $value_a = ['mdm_price_list_line_id' => $mdm_price_list_line_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }

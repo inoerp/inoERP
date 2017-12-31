@@ -5,21 +5,21 @@ class fp_reports extends dbObject {
  public static $table_name = "onhand_summary_v";
  public static $primary_column = "onhand_id";
  public $field_a = [
-  'item_number',
-  'item_description',
-  'org',
-  'onhand',
-  'reservable_onhand',
-  'transactable_onhand',
-  'open_po_qty',
-  'po_qty',
-  'po_received_qty',
-  'onhand_id',
-  'item_id_m',
-  'org_id',
+    'item_number',
+    'item_description',
+    'org',
+    'onhand',
+    'reservable_onhand',
+    'transactable_onhand',
+    'open_po_qty',
+    'po_qty',
+    'po_received_qty',
+    'onhand_id',
+    'item_id_m',
+    'org_id',
  ];
  public $initial_search = [
-  'item_number',
+    'item_number',
  ];
  public $dateField = [
  ];
@@ -38,29 +38,29 @@ class fp_reports extends dbObject {
  public $po_received_qty;
  public $open_po_qty;
  public $search_functions = [
-  'Inventory Org' => 'search_org_name'
+    'Inventory Org' => 'search_org_name'
  ];
  public $prg_update_description_details = [
-  'name' => 'Update Account Combination Description',
-  'description' => 'Run update Description program',
+    'name' => 'Update Account Combination Description',
+    'description' => 'Run update Description program',
  ];
  public $prg_balance_sheet_details = [
-  'name' => 'Generate Balance Sheet',
-  'description' => 'Generate Balance Sheet',
+    'name' => 'Generate Balance Sheet',
+    'description' => 'Generate Balance Sheet',
  ];
  public $prg_balance_sheet_parameters = [
-  'Period Name' => 'search_gl_period_name',
-  'Show Details' => 'search_show_details_cb',
-  'Legal Org' => 'search_legal_org_name_m'
+    'Period Name' => 'search_gl_period_name',
+    'Show Details' => 'search_show_details_cb',
+    'Legal Org' => 'search_legal_org_name_m'
  ];
  public $prg_income_statement_details = [
-  'name' => 'Generate Income Statement',
-  'description' => 'Generate Income Statement',
+    'name' => 'Generate Income Statement',
+    'description' => 'Generate Income Statement',
  ];
  public $prg_income_statement_parameters = [
-  'Period Name' => 'search_gl_period_name',
-  'Show Details' => 'search_show_details_cb',
-  'Legal Org' => 'search_legal_org_name_m'
+    'Period Name' => 'search_gl_period_name',
+    'Show Details' => 'search_show_details_cb',
+    'Legal Org' => 'search_legal_org_name_m'
  ];
 
  private function create_supply_analysis_v() {
@@ -100,8 +100,8 @@ GROUP BY onhand.item_id_m, onhand.org_id
 
  public function supply_analysis($params) {
   $ret_a = [
-   'name' => 'Supply Analysis Report',
-   'description' => 'Supply Analysis Report',
+     'name' => 'Supply Analysis Report',
+     'description' => 'Supply Analysis Report',
   ];
   return $ret_a;
  }
@@ -154,7 +154,8 @@ GROUP BY onhand.item_id_m, onhand.org_id
    }
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
@@ -162,7 +163,8 @@ GROUP BY onhand.item_id_m, onhand.org_id
 
   $sql = $this->_supply_analysis_sql($parameters);
 
-  $result = self::find_by_sql($sql);
+   global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? count($result) : false;
  }
 

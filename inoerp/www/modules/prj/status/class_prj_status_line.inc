@@ -57,8 +57,10 @@ public $last_update_date;
  public static function find_by_headerId_and_status($prj_status_header_id, $line_status = 'PENDING_IMPORT') {
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where prj_status_header_id= '{$prj_status_header_id}' AND line_status= '{$line_status}' ";
-  $result = self::find_by_sql($sql);
+   " where prj_status_header_id= :prj_status_header_id AND line_status=  :line_status ";
+     global $db;
+	$value_a = ['prj_status_header_id' => $prj_status_header_id, 'line_status' => $line_status];
+	$result = $db->findBySql($sql, $value_a);
   return $result;
  }
 

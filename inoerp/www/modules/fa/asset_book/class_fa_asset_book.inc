@@ -24,86 +24,86 @@ class fa_asset_book extends dbObject {
  public static $module = "fa";
 // public static $js_fileName = 'modules/inv/fa_asset_book/js/multi_select.js';
  public static $system_info = [
-  'name' => 'Fixed Asset',
-  'number' => '1404',
-  'description' => 'Fixed Asset',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'fa',
-  'weight' => 1
+    'name' => 'Fixed Asset',
+    'number' => '1404',
+    'description' => 'Fixed Asset',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'fa',
+    'weight' => 1
  ];
  public $account = [
-  "default_ac_id"
+    "default_ac_id"
  ];
  public $checkbox = [
-  "revalue_ytd_depriciation_cb",
-  "retire_revaluation_reserve_cb",
-  "revalue_accum_depriciation_cb",
-  'allow_gl_posting_cb'
+    "revalue_ytd_depriciation_cb",
+    "retire_revaluation_reserve_cb",
+    "revalue_accum_depriciation_cb",
+    'allow_gl_posting_cb'
  ];
  public $field_a = [
-  'fa_asset_book_id',
-  'asset_book_name',
-  'bu_org_id',
-  'type',
-  'primary_fa_asset_book_id',
-  'description',
-  'inactive_on',
+    'fa_asset_book_id',
+    'asset_book_name',
+    'bu_org_id',
+    'type',
+    'primary_fa_asset_book_id',
+    'description',
+    'inactive_on',
 //  'ledger_id',
 //  'gl_calendar_id',
-  'allow_gl_posting_cb',
-  'fa_calendar_code',
-  'revalue_accum_depriciation_cb',
-  'retire_revaluation_reserve_cb',
-  'revalue_ytd_depriciation_cb',
-  'sale_proceeds_gain_id',
-  'sale_proceeds_loss_id',
-  'sale_proceeds_clearing_id',
-  'removal_cost_gain_id',
-  'removal_cost_loss_id',
-  'removal_cost_clearing_id',
-  'nbv_retired_gain_id',
-  'nbv_retired_loss_id',
-  'reval_reserve_retired_gain_id',
-  'status',
-  'rev_enabled',
-  'rev_number',
-  'reval_reserve_retired_loss_id',
-  'deff_depriciation_reserve_id',
-  'deff_depriciation_expense_id',
-  'deff_depriciation_adjustment_id',
-  'default_ac_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'allow_gl_posting_cb',
+    'fa_calendar_code',
+    'revalue_accum_depriciation_cb',
+    'retire_revaluation_reserve_cb',
+    'revalue_ytd_depriciation_cb',
+    'sale_proceeds_gain_id',
+    'sale_proceeds_loss_id',
+    'sale_proceeds_clearing_id',
+    'removal_cost_gain_id',
+    'removal_cost_loss_id',
+    'removal_cost_clearing_id',
+    'nbv_retired_gain_id',
+    'nbv_retired_loss_id',
+    'reval_reserve_retired_gain_id',
+    'status',
+    'rev_enabled',
+    'rev_number',
+    'reval_reserve_retired_loss_id',
+    'deff_depriciation_reserve_id',
+    'deff_depriciation_expense_id',
+    'deff_depriciation_adjustment_id',
+    'default_ac_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public static $json_label_fields = [
-  'asset_book_name',
-  'asset_book_type',
-  'primary_fa_asset_book_id',
-  'asset_book_description',
+    'asset_book_name',
+    'asset_book_type',
+    'primary_fa_asset_book_id',
+    'asset_book_description',
  ];
  public $initial_search = [
-  'fa_asset_book_id',
+    'fa_asset_book_id',
  ];
  public $requiredField = [
-  'bu_org_id',
-  'asset_book_name',
-  'type',
+    'bu_org_id',
+    'asset_book_name',
+    'type',
  ];
  public $fields_inForm_notInDataBase = [
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Asset Class"; //page Title
  public $option_lists = [
-  'fa_asset_book_types' => 'FA_ASSET_CLASS_TYPE',
+    'fa_asset_book_types' => 'FA_ASSET_CLASS_TYPE',
  ];
  public $fa_asset_book_id;
  public $asset_book_name;
@@ -159,9 +159,10 @@ class fa_asset_book extends dbObject {
  public static function find_all_assigned_orgs($fa_asset_book_number) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where fa_asset_book_number= '{$fa_asset_book_number}' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where fa_asset_book_number= :fa_asset_book_number ";
+  $value_a = ['fa_asset_book_number' => $fa_asset_book_number];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 
@@ -181,33 +182,10 @@ gl_ledger gl
 WHERE fab.bu_org_id = org.org_id
 AND org.legal_org_id = legal.org_id 
 AND gl.gl_ledger_id = legal.ledger_id
- " ;
-  $result = self::find_by_sql($sql);
+ ";
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
- }
-
- public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
-  $sql = "SELECT   asset_book_name,   type as asset_book_type ,  primary_fa_asset_book_id,   
-            description as asset_book_description
-            FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%'  ";
-  if (!empty($dependent_fields)) {
-   foreach ($dependent_fields as $k => $v) {
-    if (!empty($k) && !empty($v)) {
-     $sql .= " AND $k = '{$v}' ";
-    }
-   }
-  }
-
-  if (!empty($hidden_fields)) {
-   foreach ($hidden_fields as $k1 => $v1) {
-    if (!empty($k1) && !empty($v1)) {
-     $sql .= " AND $k1 = '{$v1}' ";
-    }
-   }
-  }
-//  echo $sql;
-  $result_array = static::find_by_sql($sql);
-  return !empty($result_array) ? ($result_array) : false;
  }
 
 }

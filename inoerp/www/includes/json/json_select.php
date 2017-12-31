@@ -1,5 +1,6 @@
-<?php require_once __DIR__.'/../basics/wloader.inc';
-		 include_once(__DIR__.'/../../../inoerp_server/includes/basics/basics.inc'); ?>
+<?php require_once __DIR__ . '/../basics/wloader.inc';
+include_once(__DIR__ . '/../../../inoerp_server/includes/basics/basics.inc');
+?>
 <?php
 
 if (!empty($_GET['class_name'])) {
@@ -29,14 +30,14 @@ if (!empty($_GET['class_name'])) {
  $_GET['per_page'] = !empty($per_page) ? $per_page : '10';
 
  if (!empty($_GET['per_page'])) {
-  if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all"  OR  $_GET['per_page'][0] == "all")) {
+  if (!empty($_GET['per_page']) && ($_GET['per_page'] == "all" OR $_GET['per_page'][0] == "all")) {
    $per_page = 50000;
   } else if (!empty($_GET['per_page'])) {
    $per_page = (is_array($_GET['per_page'])) ? $_GET['per_page'][0] : $_GET['per_page'];
   }
   $per_page = empty($per_page) ? 10 : $per_page;
  }
- 
+
  $search_order_by = !(empty($_GET['search_order_by'])) ? $_GET['search_order_by'][0] : '';
  $search_asc_desc = !(empty($_GET['search_asc_desc'])) ? $_GET['search_asc_desc'][0] : '';
  echo '<div id="json_search_result">';
@@ -97,9 +98,9 @@ if (!empty($_GET['class_name'])) {
     $entered_search_criteria_1s = substr($entered_search_criteria, 0, 1); //1 character
     $entered_search_criteria_2s = substr($entered_search_criteria, 0, 2); //2 characters
     $entered_search_criteria_m1s = substr($entered_search_criteria, 1); //minus 1 string
-    $is_id_eq_search = !(in_array($entered_search_criteria_1s, ['=', '>', '<'])  OR  in_array($entered_search_criteria_2s, ['!=', '>=', '<=']));
+    $is_id_eq_search = !(in_array($entered_search_criteria_1s, ['=', '>', '<']) OR in_array($entered_search_criteria_2s, ['!=', '>=', '<=']));
 
-    if (($is_id_eq_search) && (strpos($value, '_ID') !== false  OR  strpos($value, '_id') !== false)) {
+    if (($is_id_eq_search) && (strpos($value, '_ID') !== false OR strpos($value, '_id') !== false)) {
      if ($entered_search_criteria == 'null') {
       $whereFields[] = " $value IS NULL ";
      } else {
@@ -177,7 +178,7 @@ if (!empty($_GET['class_name'])) {
     $no_organization_access = true;
     return;
    }
-   
+
    $all_orgs_in_cls = " BU_ORG_ID IN ('" . implode("','", array_keys($_SESSION['user_org_access'])) . "')   OR   BU_ORG_ID IS NULL ";
   } else if (property_exists($$class, 'org_id') && in_array('org_id', $$class->field_a)) {
    if (empty($_SESSION['user_org_access'])) {
@@ -209,14 +210,18 @@ if (!empty($_GET['class_name'])) {
    $all_download_sql = "SELECT * FROM  " . $table_name . $whereClause;
   }
 
+  $value_a = [];
+
   if (!empty($_GET['group_by'][0])) {
    $sum_element = $$class->search_groupBy_sum;
    $fetch_as = 'sum_' . $sum_element;
-   $sql = "SELECT * , SUM($sum_element) as $fetch_as FROM " . $table_name . $whereClause;
-   $sql .= " GROUP BY " . $_GET['group_by'][0];
-   $count_sql .= " GROUP BY " . $_GET['group_by'][0];
-   $all_download_sql = "SELECT  * , SUM($sum_element) FROM  " . $table_name . $whereClause;
-   $all_download_sql .= " GROUP BY " . $_GET['group_by'][0];
+   $sql = " SELECT * , SUM($sum_element) as $fetch_as FROM " . $table_name . $whereClause;
+   $sql .= " GROUP BY :group_by ";
+   $count_sql .= " GROUP BY :group_by ";
+   $all_download_sql = " SELECT  * , SUM($sum_element) FROM  " . $table_name . $whereClause;
+   $all_download_sql .= " GROUP BY :group_by ";
+
+   $value_a['group_by'] = $_GET['group_by'][0];
   }
 
   $total_count = $class::count_all_by_sql($count_sql);
@@ -260,8 +265,11 @@ if (!empty($_GET['class_name'])) {
    }
   }
 
-//  echo "<br><br><br> sql is $sql and per page is $per_page";
-  $search_result = $class::find_by_sql($sql);
+
+  global $db;
+  $search_result = $db->findBySql($sql, $value_a);
+
+
 //  pa($search_result);
  }
 

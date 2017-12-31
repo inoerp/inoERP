@@ -24,52 +24,52 @@ class am_activity_reference extends dbObject {
  public static $module = "am";
 // public static $js_fileName = 'modules/inv/am_activity_reference/js/multi_select.js';
  public static $system_info = [
-  'name' => 'Activity Reference',
-  'number' => '4102',
-  'description' => 'Activity Reference',
-  'version' => '0.1.4',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'am',
-  'weight' => 1
+    'name' => 'Activity Reference',
+    'number' => '4102',
+    'description' => 'Activity Reference',
+    'version' => '0.1.4',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'am',
+    'weight' => 1
  ];
  public $checkbox = [
-  "physical_inventory_cb"
+    "physical_inventory_cb"
  ];
  public $field_a = [
-  'am_activity_reference_id',
-  'am_asset_id',
-  'activity_item_id_m',
-  'priority',
-  'start_date',
-  'end_date',
-  'description',
-  'activity_cause',
-  'activity_type',
-  'accounting_class_id',
-  'owning_department_id',
-  'shutdown_type',
-  'activity_source',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'am_activity_reference_id',
+    'am_asset_id',
+    'activity_item_id_m',
+    'priority',
+    'start_date',
+    'end_date',
+    'description',
+    'activity_cause',
+    'activity_type',
+    'accounting_class_id',
+    'owning_department_id',
+    'shutdown_type',
+    'activity_source',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'am_asset_id',
+    'am_asset_id',
  ];
  public $requiredField = [
-  'am_asset_id',
-  'activity_item_id_m',
+    'am_asset_id',
+    'activity_item_id_m',
  ];
  public $fields_inForm_notInDataBase = [
-  'activity_item_number'
+    'activity_item_number'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Asset Maintenance "; //page Title
  public $am_activity_reference_id;
@@ -103,9 +103,11 @@ class am_activity_reference extends dbObject {
  public static function find_all_assigned_orgs($am_activity_reference_number) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where am_activity_reference_number= '{$am_activity_reference_number}' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where am_activity_reference_number= :am_activity_reference_number ";
+
+  $value_a = ['am_activity_reference_number' => $am_activity_reference_number];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 

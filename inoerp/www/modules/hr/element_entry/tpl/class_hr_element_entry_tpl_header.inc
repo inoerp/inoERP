@@ -8,26 +8,26 @@ class hr_element_entry_tpl_header extends dbObject {
  public static $key_column = 'template_name';
  public static $module = "hr";
  public $field_a = [
-  'hr_element_entry_tpl_header_id',
-  'template_name',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_element_entry_tpl_header_id',
+    'template_name',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'template_name',
+    'template_name',
  ];
  public $requiredField = [
-  'template_name',
+    'template_name',
  ];
  public $pageTitle = " Cost Element Entry Template "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $hr_element_entry_tpl_header_id;
  public $template_name;
@@ -61,7 +61,10 @@ class hr_element_entry_tpl_header extends dbObject {
   } else {
    $sql .= " AND hce.category = '{$category}' ";
   }
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $result = $db->findBySql($sql);
+
   return !empty($result) ? $result : false;
  }
 
@@ -80,10 +83,12 @@ class hr_element_entry_tpl_header extends dbObject {
  public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM hr_element_entry_tpl_header eeh 
-       WHERE eeh.hr_employee_id = '{$employee_id}'   
+       WHERE eeh.hr_employee_id = :hr_employee_id   
 ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['hr_employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 

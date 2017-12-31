@@ -564,8 +564,12 @@ class po_quote_header extends dbObject {
 
  public static function find_by_refPOHeaderId_releseNumber($ref_po_quote_header_id, $release_number) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE ref_po_quote_header_id = '{$ref_po_quote_header_id}' AND release_number = '{$release_number}' LIMIT 1 ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE ref_po_quote_header_id = :ref_po_quote_header_id AND release_number = :release_number LIMIT 1 ";
+  
+    global $db;
+	$value_a = ['ref_po_quote_header_id' => $ref_po_quote_header_id, 'release_number' => $release_number];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -638,21 +642,13 @@ class po_quote_header extends dbObject {
   if (!empty($bu_org_id)) {
    $sql .= " AND poh.bu_org_id = '{$bu_org_id}' ";
   }
-  $result = self::find_by_sql($sql);
+  
+    global $db;
+  $result = $db->findBySql($sql);
+  
   return !empty($result) ? $result : false;
  }
 
-//  public function save() {
-//   $primary_column = static::$primary_column;
-//   if (empty($this->$primary_column)) {
-//    $this->po_quote_status = 'Entered';
-//    $this->create();
-//   } else {
-//    $this->update($this->$primary_column);
-//   }
-//   return $this->msg;
-//  }
- //multi select used for req to PO conversion
 
  public function multi_select_input_fields() {
   $multi_select_input = [

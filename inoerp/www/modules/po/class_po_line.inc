@@ -8,84 +8,84 @@ class po_line extends dbObject {
  public static $key_column = 'line_number';
  public static $module = "po";
  public $checkbox = [
-  "rev_enabled_cb",
-  'hold_cb',
-  'kit_cb',
-  'kit_configured_cb'
+    "rev_enabled_cb",
+    'hold_cb',
+    'kit_cb',
+    'kit_configured_cb'
  ];
  public $field_a = [
-  'po_line_id',
-  'po_header_id',
-  'line_type',
-  'line_number',
-  'bpa_line_id',
-  'receving_org_id',
-  'item_id_m',
-  'item_description',
-  'revision_name',
-  'line_description',
-  'uom_id',
-  'exchange_rate',
-  'line_quantity',
-  'price_list_header_id',
-  'price_date',
-  'unit_price',
-  'line_price',
-  'gl_line_price',
-  'tax_code_id',
-  'tax_amount',
-  'gl_tax_amount',
-  'reference_doc_type',
-  'reference_doc_number',
-  'hold_cb',
-  'kit_cb',
-  "kit_configured_cb",
-		 		 'mdm_discount_header_id',
-		 'discount_amount',
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    'po_line_id',
+    'po_header_id',
+    'line_type',
+    'line_number',
+    'bpa_line_id',
+    'receving_org_id',
+    'item_id_m',
+    'item_description',
+    'revision_name',
+    'line_description',
+    'uom_id',
+    'exchange_rate',
+    'line_quantity',
+    'price_list_header_id',
+    'price_date',
+    'unit_price',
+    'line_price',
+    'gl_line_price',
+    'tax_code_id',
+    'tax_amount',
+    'gl_tax_amount',
+    'reference_doc_type',
+    'reference_doc_number',
+    'hold_cb',
+    'kit_cb',
+    "kit_configured_cb",
+    'mdm_discount_header_id',
+    'discount_amount',
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
  public $initial_search = [
-  "po_header_id",
-  "po_number",
-  "item_id_m",
-  "item_number",
-  "item_description"
+    "po_header_id",
+    "po_number",
+    "item_id_m",
+    "item_number",
+    "item_description"
  ];
  public $column = [
-  "po_header_id",
-  "po_number",
-  "item_id_m",
-  "item_number",
-  "item_description"
+    "po_header_id",
+    "po_number",
+    "item_id_m",
+    "item_number",
+    "item_description"
  ];
  public $numberField = [
-  'exchange_rate',
-  'line_quantity',
-  'unit_price',
-  'line_price',
-  'gl_line_price',
-  'gl_tax_amount'
+    'exchange_rate',
+    'line_quantity',
+    'unit_price',
+    'line_price',
+    'gl_line_price',
+    'gl_tax_amount'
  ];
  public $requiredField = [
-  'po_header_id',
-  'line_number',
-  'item_description'
+    'po_header_id',
+    'line_number',
+    'item_description'
  ];
  public $fields_inForm_notInDataBase = [
-  "po_number",
-  "item_number",
-  'released_quantity',
-  'released_amount',
-  'agreed_quantity',
-  'agreed_amount',
-  'tax_code_value',
-  'processing_lt'
+    "po_number",
+    "item_number",
+    'released_quantity',
+    'released_amount',
+    'agreed_quantity',
+    'agreed_amount',
+    'tax_code_value',
+    'processing_lt'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "po_header_id"
+    "po_header_id"
  ];
  public $po_line_id;
  public $po_header_id;
@@ -101,7 +101,7 @@ class po_line extends dbObject {
  public $line_quantity;
  public $unit_price;
  public $line_price;
- public $gl_tax_amount; 
+ public $gl_tax_amount;
  public $gl_line_price;
  public $tax_code_id;
  public $tax_amount;
@@ -120,7 +120,6 @@ class po_line extends dbObject {
  public $kit_configured_cb;
  public $mdm_discount_header_id;
  public $mdm_discount_line_id;
- 
  public $created_by;
  public $creation_date;
  public $last_update_by;
@@ -203,9 +202,9 @@ class po_line extends dbObject {
   $config_bom_h->reference_key_name = 'po_line';
   $config_bom_h->reference_key_value = $this->po_line_id;
   $config_bom_h->save();
-  
+
   $existing_bom_line_obj = bom_line::find_by_parent_id($existing_bom->bom_header_id);
-  foreach($existing_bom_line_obj as $bom_line){
+  foreach ($existing_bom_line_obj as $bom_line) {
    $config_bom_l = new bom_config_line();
    $config_bom_l->bom_config_header_id = $config_bom_h->bom_config_header_id;
    $config_bom_l->component_item_id_m = $bom_line->component_item_id_m;
@@ -216,7 +215,7 @@ class po_line extends dbObject {
    $config_bom_l->routing_sequence = $bom_line->routing_sequence;
    $config_bom_l->save();
   }
-  
+
   $this->kit_configured_cb = 1;
   $this->save();
  }
@@ -315,10 +314,10 @@ class po_line extends dbObject {
           AND bpa_line.item_id_m = rd.item_id_m
           AND bpa_line.po_line_id = '{$bpa_line_id}'
 ";
-          $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
-//   pa($result);
-//   echo "<br>going out $sql";
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $result = $db->findBySql($sql);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -329,14 +328,22 @@ class po_line extends dbObject {
  }
 
  public static function find_by_po_headerId($po_header_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where po_header_id = '{$po_header_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where po_header_id = :po_header_id ";
+
+  global $db;
+  $value_a = ['po_header_id' => $po_header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return $result_array;
  }
 
  public static function find_by_poHeaderId_itemId($po_header_id, $item_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where po_header_id = '{$po_header_id}' AND item_id_m = '{$item_id}' LIMIT 1 ";
-  $result = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where po_header_id = :po_header_id AND item_id_m = :item_id_m LIMIT 1 ";
+ 
+  	  global $db;
+  $value_a = ['po_header_id' => $po_header_id, 'item_id_m' => $item_id];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? array_pop($result) : false;
  }
 

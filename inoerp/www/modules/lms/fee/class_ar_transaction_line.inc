@@ -9,71 +9,71 @@ class ar_transaction_line extends dbObject {
  public static $key_column = 'item_description';
  public static $module = "ap";
  public $field_a = [
-  'ar_transaction_line_id',
-  'ar_transaction_header_id',
-  'line_number',
-  'item_id_m',
-  'item_description',
-  'inv_line_quantity',
-  'inv_unit_price',
-  'tax_code_id',
-  'tax_amount',
-  'gl_inv_line_price',
-  'gl_tax_amount',
-  'inv_line_price',
-  'line_type',
-  'line_description',
-  'asset_cb',
-  'fa_asset_category_id',
-  'prj_project_header_id',
-  'prj_project_line_id',
-  'uom_id',
-  'status',
-  'line_source',
-  'sd_so_header_id',
-  'sd_so_line_id',
-  'sd_so_detail_id',
-  'period_id',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'revenue_ac_id',
-  'tax_ac_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'ar_transaction_line_id',
+    'ar_transaction_header_id',
+    'line_number',
+    'item_id_m',
+    'item_description',
+    'inv_line_quantity',
+    'inv_unit_price',
+    'tax_code_id',
+    'tax_amount',
+    'gl_inv_line_price',
+    'gl_tax_amount',
+    'inv_line_price',
+    'line_type',
+    'line_description',
+    'asset_cb',
+    'fa_asset_category_id',
+    'prj_project_header_id',
+    'prj_project_line_id',
+    'uom_id',
+    'status',
+    'line_source',
+    'sd_so_header_id',
+    'sd_so_line_id',
+    'sd_so_detail_id',
+    'period_id',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'revenue_ac_id',
+    'tax_ac_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $requiredField = [
-  'ar_transaction_header_id',
-  'line_number',
-  'item_description',
-  'inv_line_quantity',
-  'inv_unit_price',
-  'inv_line_price',
+    'ar_transaction_header_id',
+    'line_number',
+    'item_description',
+    'inv_line_quantity',
+    'inv_unit_price',
+    'inv_line_price',
  ];
  public $fields_inForm_notInDataBase = [
-  'transaction_type',
-  "transaction_number",
-  "item_number",
-  'customer_name',
-  'customer_number',
-  'item_description',
-  'invoiced_quantity',
-  'action',
-  'so_order_number',
-  'so_line_number',
+    'transaction_type',
+    "transaction_number",
+    "item_number",
+    'customer_name',
+    'customer_number',
+    'item_description',
+    'invoiced_quantity',
+    'action',
+    'so_order_number',
+    'so_line_number',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "ar_transaction_header_id"
+    "ar_transaction_header_id"
  ];
  public $numberField = [
-  'inv_line_quantity',
-  'inv_unit_price',
-  'inv_line_price',
-  'tax_amount',
-  'gl_tax_amount',
-  'gl_inv_line_price',
+    'inv_line_quantity',
+    'inv_unit_price',
+    'inv_line_price',
+    'tax_amount',
+    'gl_tax_amount',
+    'gl_inv_line_price',
  ];
  public $ar_transaction_line_id;
  public $ar_transaction_header_id;
@@ -132,7 +132,7 @@ class ar_transaction_line extends dbObject {
     $trnx_details->ar_transaction_detail_id = null;
     $trnx_details->detail_number = $detail_num;
     $detail_num++;
-    $trnx_details->detail_ac_id = !empty($this->revenue_ac_id) ?  $this->revenue_ac_id : $trnx_type->revenue_ac_id;
+    $trnx_details->detail_ac_id = !empty($this->revenue_ac_id) ? $this->revenue_ac_id : $trnx_type->revenue_ac_id;
     $trnx_details->account_type = ($this->line_type == 'GOODS' || 'SERVICES' ) ? 'ITEM' : $this->line_type;
     $trnx_details->description = 'Revenue';
     $trnx_details->amount = $this->inv_line_price;
@@ -143,7 +143,7 @@ class ar_transaction_line extends dbObject {
      $trnx_details->ar_transaction_detail_id = null;
      $trnx_details->detail_number = $detail_num;
      $detail_num++;
-     $trnx_details->detail_ac_id = !empty($this->tax_ac_id) ?  $this->tax_ac_id : $trnx_type->revenue_ac_id;
+     $trnx_details->detail_ac_id = !empty($this->tax_ac_id) ? $this->tax_ac_id : $trnx_type->revenue_ac_id;
      $trnx_details->account_type = 'TAX';
      $trnx_details->description = 'Tax';
      $trnx_details->amount = $this->tax_amount;
@@ -184,38 +184,46 @@ class ar_transaction_line extends dbObject {
  Public static function find_sumAmounts($ar_transaction_header_id) {
   $sql = " SELECT SUM(inv_line_price) as total_line_amount, SUM(tax_amount) as total_tax_amount, ar_transaction_line_id
 FROM ar_transaction_line
-WHERE ar_transaction_header_id = '{$ar_transaction_header_id}'
+WHERE ar_transaction_header_id = :ar_transaction_header_id
 GROUP BY ar_transaction_header_id ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['ar_transaction_header_id' => $ar_transaction_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : null;
  }
 
  public static function find_by_ar_transaction_headerId($ar_transaction_header_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where ar_transaction_header_id = '{$ar_transaction_header_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where ar_transaction_header_id =  :ar_transaction_header_id ";
+
+
+  global $db;
+  $value_a = ['ar_transaction_header_id' => $ar_transaction_header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return $result_array;
  }
 
  public function multi_select_input_fields() {
   $multi_select_input = [
-   'inv_line_quantity',
-   'inv_unit_price',
-   'inv_line_price',
-   'inv_line_type'
+     'inv_line_quantity',
+     'inv_unit_price',
+     'inv_line_price',
+     'inv_line_type'
   ];
   return $multi_select_input;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'customer_id',
-   'sd_so_header_id',
-   'ar_transaction_header_id',
-   'mode',
-   'action',
-   'om_so_status'
+     'action_class_name',
+     'customer_id',
+     'sd_so_header_id',
+     'ar_transaction_header_id',
+     'mode',
+     'action',
+     'om_so_status'
   ];
 
   return $multi_select_hidden;

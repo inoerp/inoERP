@@ -21,83 +21,83 @@ class ar_revenue_schedule extends dbObject {
  public static $parent_primary_column = "ar_transaction_header_id";
  public static $module = "ar";
  public static $system_info = [
-  'name' => 'Revenue Schedule',
-  'number' => '1309',
-  'description' => 'Revenue Schedule',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'ar',
-  'weight' => 5
+    'name' => 'Revenue Schedule',
+    'number' => '1309',
+    'description' => 'Revenue Schedule',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'ar',
+    'weight' => 5
  ];
  public static $gl_journal_category = "AR_INVOICE";
  public static $adjustment_type_a = [
-  'ADJ' => 'Adjustment'
+    'ADJ' => 'Adjustment'
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'revenue_schedule_id',
-  'ar_transaction_header_id',
-  'ar_transaction_line_id',
-  'gl_date',
-  'amount',
-  'percentage',
-  'description',
-  'account_class',
-  'gl_ac_id',
-  'status',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'gl_journal_header_id',
-  'gl_journal_line_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'revenue_schedule_id',
+    'ar_transaction_header_id',
+    'ar_transaction_line_id',
+    'gl_date',
+    'amount',
+    'percentage',
+    'description',
+    'account_class',
+    'gl_ac_id',
+    'status',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'gl_journal_header_id',
+    'gl_journal_line_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
 //variables used for showing data
  public $initial_search = [
-  'ar_transaction_header_id',
-  'description',
+    'ar_transaction_header_id',
+    'description',
  ];
  public $fields_inForm_notInDataBase = [
-  'transaction_number',
-  'line_number',
-  'transaction_status',
-  'adjustment_type',
-  'inv_line_price',
-  'transaction_type',
-  'transaction_class',
-  'inv_unit_price',
-  'document_owner',
-  'trnx_description',
-  'currency',
-  'doc_currency',
-  'exchange_rate_type',
-  'trnx_exchange_rate',
-  'document_date',
-  'document_number',
-  'ledger_id',
-  'trnx_period_id',
+    'transaction_number',
+    'line_number',
+    'transaction_status',
+    'adjustment_type',
+    'inv_line_price',
+    'transaction_type',
+    'transaction_class',
+    'inv_unit_price',
+    'document_owner',
+    'trnx_description',
+    'currency',
+    'doc_currency',
+    'exchange_rate_type',
+    'trnx_exchange_rate',
+    'document_date',
+    'document_number',
+    'ledger_id',
+    'trnx_period_id',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'org_id',
-  'ar_transaction_header_id'
+    'org_id',
+    'ar_transaction_header_id'
  ];
  public $requiredField = [
-  'ar_transaction_header_id',
-  'gl_date',
-  'amount',
-  'ar_transaction_line_id',
+    'ar_transaction_header_id',
+    'gl_date',
+    'amount',
+    'ar_transaction_line_id',
  ];
  public $profile_default = [
-  'org_id' => 'org_bu_name_default',
+    'org_id' => 'org_bu_name_default',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = "Revenue Schedule"; //page Title
  public $revenue_schedule_id;
@@ -259,9 +259,12 @@ class ar_revenue_schedule extends dbObject {
  public static function total_adjustmentAmount_by_transactionHeaderId($ar_transaction_header_id) {
   $sql = " SELECT SUM(adjustment_amount) as adjustment_amount FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE ar_transaction_header_id = '{$ar_transaction_header_id}' ";
+  $sql .= " WHERE ar_transaction_header_id =  :ar_transaction_header_id ";
 
-  $result_a = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['ar_transaction_header_id' => $ar_transaction_header_id];
+  $result_a = $db->findBySql($sql, $value_a);
+
   return !empty($result_a) ? $result_a[0]->adjustment_amount : '0.00';
  }
 

@@ -8,47 +8,47 @@ class ar_customer_site extends dbObject {
  public static $key_column = 'customer_site_name';
  public static $module = "ar";
  public $field_a = [
-  'ar_customer_site_id',
-  'ar_customer_id',
-  'customer_site_number',
-  'customer_site_name',
-  'site_tax_country',
-  'site_tax_reg_no',
-  'site_tax_payer_id',
-  'primary_cb',
-  'customer_site_type',
-  'status',
-  'currency',
-  'payment_term_id',
-  'ar_sales_region_id',
-  'payment_method_id',
-  'order_type_id',
-  'price_list_id',
-  'internal_org_id',
-  'country_of_origin',
-  'ship_to_id',
-  'bill_to_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'ar_customer_site_id',
+    'ar_customer_id',
+    'customer_site_number',
+    'customer_site_name',
+    'site_tax_country',
+    'site_tax_reg_no',
+    'site_tax_payer_id',
+    'primary_cb',
+    'customer_site_type',
+    'status',
+    'currency',
+    'payment_term_id',
+    'ar_sales_region_id',
+    'payment_method_id',
+    'order_type_id',
+    'price_list_id',
+    'internal_org_id',
+    'country_of_origin',
+    'ship_to_id',
+    'bill_to_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $requiredField = [
-  "ar_customer_id",
-  "customer_site_number",
-  "customer_site_name",
+    "ar_customer_id",
+    "customer_site_number",
+    "customer_site_name",
  ];
  public $addressField_array = [
-  "site_address_id"
+    "site_address_id"
  ];
  public $fields_inForm_notInDataBase = [
-  'site_address_name',
-  'site_address',
-  'site_country',
-  'site_postal_code',
+    'site_address_name',
+    'site_address',
+    'site_country',
+    'site_postal_code',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'ar_customer_id'
+    'ar_customer_id'
  ];
  public $ar_customer_site_id;
  public $ar_customer_id;
@@ -122,9 +122,13 @@ class ar_customer_site extends dbObject {
  public static function find_all_sitesOfCustomer_array($customer_id = "") {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE ar_customer_id = '{$customer_id}' ";
+  $sql .= " WHERE ar_customer_id = :ar_customer_id ";
   $final_array = [];
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['ar_customer_id' => $customer_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   foreach ($result_array as $obj) {
    $key = $obj->ar_customer_site_id;
    $value = $obj->ar_customer_site_id . "-" . $obj->customer_site_name;
@@ -136,21 +140,27 @@ class ar_customer_site extends dbObject {
  public static function find_all_sitesOfCustomer($customer_id = "") {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE ar_customer_id = '{$customer_id}' ";
+  $sql .= " WHERE ar_customer_id = :ar_customer_id ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['ar_customer_id' => $customer_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
-  public static function find_customerDetails_byOrgId($org_id = "") {
+ public static function find_customerDetails_byOrgId($org_id = "") {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE internal_org_id = '{$org_id}' ";
+  $sql .= " WHERE internal_org_id = :internal_org_id ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['internal_org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
- 
+
  public function copy($ar_customer_site_id) {
   global $db;
   $sql1 = " CREATE TEMPORARY TABLE tmptable SELECT * FROM customer_site WHERE `ar_customer_site_id` = '{$ar_customer_site_id}' ";

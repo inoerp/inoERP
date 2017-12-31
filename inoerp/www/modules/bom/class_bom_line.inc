@@ -8,46 +8,46 @@ class bom_line extends dbObject {
  public static $key_column = 'component_item_id_m';
  public static $module = "bom";
  public $field_a = [
-  'bom_header_id',
-  'bom_line_id',
-  'bom_sequence',
-  'routing_sequence',
-  'component_item_id_m',
-  'component_revision',
-  'usage_basis',
-  'usage_quantity',
-  'auto_request_material_cb',
-  'effective_start_date',
-  'effective_end_date',
-  'eco_number',
-  'eco_implemented_cb',
-  'planning_percentage',
-  'yield',
-  'include_in_cost_rollup_cb',
-  'wip_supply_type',
-  'supply_sub_inventory',
-  'supply_locator',
-  "ef_id",
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'bom_header_id',
+    'bom_line_id',
+    'bom_sequence',
+    'routing_sequence',
+    'component_item_id_m',
+    'component_revision',
+    'usage_basis',
+    'usage_quantity',
+    'auto_request_material_cb',
+    'effective_start_date',
+    'effective_end_date',
+    'eco_number',
+    'eco_implemented_cb',
+    'planning_percentage',
+    'yield',
+    'include_in_cost_rollup_cb',
+    'wip_supply_type',
+    'supply_sub_inventory',
+    'supply_locator',
+    "ef_id",
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  //variables used for showing data
  public $fields_inForm_notInDataBase = [
-  "component_item_number",
-  "component_description",
-  "component_uom",
-  'bom_commonbom_line_id'
+    "component_item_number",
+    "component_description",
+    "component_uom",
+    'bom_commonbom_line_id'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "bom_header_id"
+    "bom_header_id"
  ];
  public $requiredField = [
-  'bom_sequence',
-  'routing_sequence',
-  'component_item_id_m',
-  'usage_quantity'
+    'bom_sequence',
+    'routing_sequence',
+    'component_item_id_m',
+    'usage_quantity'
  ];
  public $bom_line_id;
  public $bom_header_id;
@@ -108,8 +108,12 @@ class bom_line extends dbObject {
  public static function find_all_by_bomHeaderId($bom_headerId) {
   $sql = " Select * from ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bom_header_id = '{$bom_headerId}'";
-  $all_bom_lines = self::find_by_sql($sql);
+  $sql .= " WHERE bom_header_id = :bom_header_id ";
+
+  global $db;
+  $value_a = ['bom_header_id' => $bom_headerId];
+  $all_bom_lines = $db->findBySql($sql, $value_a);
+
   return $all_bom_lines;
  }
 
@@ -129,13 +133,16 @@ class bom_line extends dbObject {
      inv_item_revision iir
      WHERE bh.bom_header_id = bl.bom_header_id 
      AND (bl.effective_end_date IS NULL OR bl.effective_end_date > iir.effective_start_date ) 
-     AND bh.bom_header_id = '{$bom_headerId}' 
-     AND iir.revision_name = '{$rev_num}'
+     AND bh.bom_header_id = :bom_header_id 
+     AND iir.revision_name = :revision_name
      AND bh.item_id_m = iir.item_id_m
      AND bh.org_id = iir.org_id
      AND ( bl.effective_start_date <= iir.effective_end_date OR iir.effective_end_date IS NULL )
     ORDER BY bl.bom_sequence ASC";
-   $all_bom_lines = self::find_by_sql($sql);
+
+   global $db;
+   $value_a = ['bom_header_id' => $bom_headerId, 'revision_name' => $rev_num];
+   $all_bom_lines = $db->findBySql($sql, $value_a);
   }
 //   echo $sql; pa($all_bom_lines);
 
@@ -165,9 +172,12 @@ class bom_line extends dbObject {
      
      WHERE bh.bom_header_id = bl.bom_header_id 
      AND (bl.effective_end_date IS NULL OR bl.effective_end_date > CURRENT_DATE ) 
-     AND bh.bom_header_id = '{$id}' 
+     AND bh.bom_header_id = :bom_header_id 
      ORDER BY bl.bom_sequence ASC   ";
-    $all_bom_lines = self::find_by_sql($sql);
+
+    global $db;
+    $value_a = ['bom_header_id' => $id];
+    $all_bom_lines = $db->findBySql($sql, $value_a);
    }
    return !empty($all_bom_lines) ? $all_bom_lines : false;
   } else {
@@ -178,8 +188,8 @@ class bom_line extends dbObject {
  public static function find_by_itemId_orgId($item_id_m, $org_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= '{$item_id_m}'  AND org_id = '{$org_id}' ";
+     self::$table_name .
+     " where item_id_m= :item_id_m  AND org_id = :org_id ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -189,7 +199,12 @@ class bom_line extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
+
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 

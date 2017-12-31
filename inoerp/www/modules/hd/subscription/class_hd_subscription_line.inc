@@ -8,74 +8,74 @@ class hd_subscription_line extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "hd";
  public $line_status_a = [
-  'ENTERED' => 'Entered',
-  'AWAITING_PICKING' => 'Awaiting Picking',
-  'PICKED' => 'Picked',
-  'PARTIAL_PICKED' => 'Partially Picked',
-  'SHIPPED' => 'Shipped',
-  'PARTIAL_SHIPPED' => 'Partial Shipped',
-  'AWAITING_INVOICING' => 'Awaiting Invoicing',
-  'AWAITING_CLOSING' => 'Awaiting Closing',
-  'CLOSED' => 'Closed',
+    'ENTERED' => 'Entered',
+    'AWAITING_PICKING' => 'Awaiting Picking',
+    'PICKED' => 'Picked',
+    'PARTIAL_PICKED' => 'Partially Picked',
+    'SHIPPED' => 'Shipped',
+    'PARTIAL_SHIPPED' => 'Partial Shipped',
+    'AWAITING_INVOICING' => 'Awaiting Invoicing',
+    'AWAITING_CLOSING' => 'Awaiting Closing',
+    'CLOSED' => 'Closed',
  ];
  public $field_a = [
-  'hd_subscription_line_id',
-  'hd_subscription_header_id',
-  'line_number',
-  'shipping_org_id',
-  'item_id_m',
-  'item_description',
-  'line_quantity',
-  'invoiced_quantity',
-  'price_list_header_id',
-  'price_date',
-  'unit_price',
-  'line_price',
-  'tax_amount',
-  'gl_line_price',
-  'gl_tax_amount',
-  'tax_code_id',
-  'line_status',
-  'line_type',
-  'uom_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hd_subscription_line_id',
+    'hd_subscription_header_id',
+    'line_number',
+    'shipping_org_id',
+    'item_id_m',
+    'item_description',
+    'line_quantity',
+    'invoiced_quantity',
+    'price_list_header_id',
+    'price_date',
+    'unit_price',
+    'line_price',
+    'tax_amount',
+    'gl_line_price',
+    'gl_tax_amount',
+    'tax_code_id',
+    'line_status',
+    'line_type',
+    'uom_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  "hd_subscription_header_id",
-  "so_number",
-  "item_id_m",
-  "item_number",
-  "item_description",
-  'shipping_org_id'
+    "hd_subscription_header_id",
+    "so_number",
+    "item_id_m",
+    "item_number",
+    "item_description",
+    'shipping_org_id'
  ];
  public $requiredField = [
-  'hd_subscription_header_id',
-  'line_number',
-  'item_description'
+    'hd_subscription_header_id',
+    'line_number',
+    'item_description'
  ];
  public $numberField = [
-  'exchange_rate',
-  'line_quantity',
-  'unit_price',
-  'line_price',
-  'gl_line_price',
-  'gl_tax_amount'
+    'exchange_rate',
+    'line_quantity',
+    'unit_price',
+    'line_price',
+    'gl_line_price',
+    'gl_tax_amount'
  ];
  public $fields_inForm_notInDataBase = [
-  "so_number",
-  "item_number",
-  'tax_code_value',
-  'ar_transaction_number',
-  'line_action'
+    "so_number",
+    "item_number",
+    'tax_code_value',
+    'ar_transaction_number',
+    'line_action'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "hd_subscription_header_id"
+    "hd_subscription_header_id"
  ];
  public $notUpdatedFromWebForm = [
-  'actual_ship_date',
+    'actual_ship_date',
  ];
  public $hd_subscription_line_id;
  public $hd_subscription_header_id;
@@ -101,7 +101,7 @@ class hd_subscription_line extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $tax_code_value;
- public $item_number ;
+ public $item_number;
 
  private function _validate_before_save() {
   $ret = 1;
@@ -119,7 +119,7 @@ class hd_subscription_line extends dbObject {
  }
 
  public function _after_save() {
-
+  
  }
 
  public static function pf_invoice_only($obj) {
@@ -137,8 +137,8 @@ class hd_subscription_line extends dbObject {
 
  public function findAll_ByOrgId($org_id, $status = '') {
   $sql = " SELECT * FROM " .
-   self::$table_name .
-   " WHERE shipping_org_id= :shipping_org_id  ";
+     self::$table_name .
+     " WHERE shipping_org_id= :shipping_org_id  ";
   if (!empty($status)) {
    $sql .= " AND line_status = :line_status ";
    $value_a = ['shipping_org_id' => $org_id, 'line_status' => $status];
@@ -156,23 +156,33 @@ class hd_subscription_line extends dbObject {
  }
 
  public static function find_by_hd_subscription_headerId($hd_subscription_header_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where hd_subscription_header_id = '{$hd_subscription_header_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where hd_subscription_header_id = :hd_subscription_header_id ";
+
+  global $db;
+  $value_a = ['hd_subscription_header_id' => $hd_subscription_header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return $result_array;
  }
 
  public static function find_by_orgId_itemId_ssd($org_id, $item_id_m = '', $ssd = '') {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE shipping_org_id = '{$org_id}'";
+  $sql .= " WHERE shipping_org_id = :shipping_org_id ";
+  global $db;
+  $value_a = ['shipping_org_id' => $org_id];
+
+
   $sql .= " AND schedule_ship_date IS NOT NULL ";
   if (!empty($item_id_m)) {
-   $sql .= " AND item_id_m = '{$item_id_m}'";
+   $sql .= " AND item_id_m = :item_id_m ";
+   $value_a ['item_id_m'] = $item_id_m;
   }
   if (!empty($ssd)) {
-   $sql .= " AND schedule_ship_date >= '{$ssd}'";
+   $sql .= " AND schedule_ship_date >= :schedule_ship_date ";
+   $value_a ['schedule_ship_date'] = $ssd;
   }
-  $result_array = self::find_by_sql($sql);
+  $result_array = $db->findBySql($sql, $value_a);
   return !empty($result_array) ? $result_array : false;
  }
 

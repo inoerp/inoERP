@@ -8,24 +8,24 @@ class bom_oh_rate_assignment extends dbObject {
  public static $module = "bom";
 //  data base variables as stored database column name
  public $field_a = [
-		 'bom_oh_rate_assignment_id',
-		 'bom_overhead_id',
-		 'bom_cost_type',
-		 'default_basis',
-		 'rate',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date'
+    'bom_oh_rate_assignment_id',
+    'bom_overhead_id',
+    'bom_cost_type',
+    'default_basis',
+    'rate',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $fields_inForm_notInDataBase = [
-		 'cost_type_description',
-		 'resource_description'
+    'cost_type_description',
+    'resource_description'
  ];
  public $requiredField = [
-		 'bom_overhead_id',
-		 'bom_cost_type',
-		 'rate'
+    'bom_overhead_id',
+    'bom_cost_type',
+    'rate'
  ];
  public $bom_overhead_id;
  public $bom_cost_type;
@@ -40,12 +40,17 @@ class bom_oh_rate_assignment extends dbObject {
  public $msg;
 
  public static function find_by_bom_overheadId($bom_overheadId) {
-	global $db;
-	$sql = "SELECT * FROM " .
-					self::$table_name .
-					" where bom_overhead_id= '{$bom_overheadId}' ";
-	$result = self::find_by_sql($sql);
-	return $result;
+  global $db;
+  $sql = "SELECT * FROM " .
+     self::$table_name .
+     " where bom_overhead_id= :bom_overhead_id ";
+
+  global $db;
+  $value_a = ['bom_overhead_id' => $bom_overheadId];
+  $result = $db->findBySql($sql, $value_a);
+
+
+  return $result;
  }
 
 }

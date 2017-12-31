@@ -8,24 +8,24 @@ class prj_project_type_line extends dbObject {
  public static $key_column = 'prj_category_header_id';
  public static $module = "prj";
  public $field_a = [
-  'prj_project_type_line_id',
-  'prj_project_type_header_id',
-  'prj_category_header_id',
-  'required_cb',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'prj_project_type_line_id',
+    'prj_project_type_header_id',
+    'prj_category_header_id',
+    'required_cb',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'prj_project_type_header_id',
-  'prj_category_header_id',
+    'prj_project_type_header_id',
+    'prj_category_header_id',
  ];
  public $fields_inForm_notInDataBase = [
-  'category_description'
+    'category_description'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "prj_project_type_header_id"
+    "prj_project_type_header_id"
  ];
  public $prj_project_type_line_id;
  public $prj_project_type_header_id;
@@ -41,16 +41,20 @@ class prj_project_type_line extends dbObject {
 
  public static function find_by_headerId_and_status($prj_project_type_header_id, $line_status = 'PENDING_IMPORT') {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where prj_project_type_header_id= '{$prj_project_type_header_id}' AND line_status= '{$line_status}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where prj_project_type_header_id= :prj_project_type_header_id AND line_status= :line_status ";
+
+  global $db;
+  $value_a = ['prj_project_type_header_id' => $prj_project_type_header_id, 'line_status' => $line_status];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public function findAll_ByOrgId($org_id, $status = '') {
   $sql = " SELECT * FROM " .
-   self::$table_name .
-   " WHERE shipping_org_id= :shipping_org_id  ";
+     self::$table_name .
+     " WHERE shipping_org_id= :shipping_org_id  ";
   if (!empty($status)) {
    $sql .= " AND line_status = :line_status ";
    $value_a = ['shipping_org_id' => $org_id, 'line_status' => $status];
@@ -67,26 +71,6 @@ class prj_project_type_line extends dbObject {
   return $po_types;
  }
 
-// public static function find_by_hd_ro_headerId($hd_ro_header_id) {
-//  $sql = "SELECT * FROM " . self::$table_name . " where hd_ro_header_id = '{$hd_ro_header_id}'";
-//  $result_array = self::find_by_sql($sql);
-//  return $result_array;
-// }
-
- public static function find_by_orgId_itemId_ssd($org_id, $item_id_m = '', $ssd = '') {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE shipping_org_id = '{$org_id}'";
-  $sql .= " AND schedule_ship_date IS NOT NULL ";
-  if (!empty($item_id_m)) {
-   $sql .= " AND item_id_m = '{$item_id_m}'";
-  }
-  if (!empty($ssd)) {
-   $sql .= " AND schedule_ship_date >= '{$ssd}'";
-  }
-  $result_array = self::find_by_sql($sql);
-  return !empty($result_array) ? $result_array : false;
- }
 
 }
 

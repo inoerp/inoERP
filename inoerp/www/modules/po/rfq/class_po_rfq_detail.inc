@@ -66,8 +66,10 @@
   public $last_update_date;
 
   public static function find_by_po_rfq_lineId($po_rfq_line_id) {
-   $sql = "SELECT * FROM " . self::$table_name . " where po_rfq_line_id = '{$po_rfq_line_id}'";
-   $result_array = self::find_by_sql($sql);
+   $sql = "SELECT * FROM " . self::$table_name . " where po_rfq_line_id = :po_rfq_line_id ";
+       global $db;
+	$value_a = ['po_rfq_line_id' => $po_rfq_line_id];
+	$result_array = $db->findBySql($sql, $value_a);
    return $result_array;
   }
 

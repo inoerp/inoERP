@@ -8,23 +8,23 @@ class ar_revenue_rule_line extends dbObject {
  public static $key_column = 'period_number';
  public static $module = "ar";
  public $field_a = [
-  'ar_revenue_rule_line_id',
-  'ar_revenue_rule_header_id',
-  'period_number',
-  'percent',
-  'schedule_date',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'ar_revenue_rule_line_id',
+    'ar_revenue_rule_header_id',
+    'period_number',
+    'percent',
+    'schedule_date',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'ar_revenue_rule_header_id',
-  'period_number',
+    'ar_revenue_rule_header_id',
+    'period_number',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "ar_revenue_rule_header_id"
+    "ar_revenue_rule_header_id"
  ];
  public $ar_revenue_rule_line_id;
  public $ar_revenue_rule_header_id;
@@ -39,8 +39,8 @@ class ar_revenue_rule_line extends dbObject {
 
  public static function find_by_headerId_and_buOrgId($ar_revenue_rule_header_id, $bu_org_id) {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where ar_revenue_rule_header_id= '{$ar_revenue_rule_header_id}' AND bu_org_id= '{$bu_org_id}' ";
+     self::$table_name .
+     " where ar_revenue_rule_header_id= :ar_revenue_rule_header_id AND bu_org_id= :bu_org_id ";
 
   switch (DB_TYPE) {
    case 'ORACLE' :
@@ -51,7 +51,11 @@ class ar_revenue_rule_line extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['ar_revenue_rule_header_id' => $ar_revenue_rule_header_id, 'bu_org_id' => $bu_org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

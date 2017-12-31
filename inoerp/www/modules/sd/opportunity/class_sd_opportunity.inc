@@ -21,97 +21,97 @@ class sd_opportunity extends dbObject {
  public static $key_column = 'opportunity_subject';
  public static $module = "sd";
  public static $system_info = [
-  'name' => 'Sales Opportunity',
-  'number' => '2304',
-  'description' => 'Create & Mainten Sales Opportunity',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'sd',
-  'weight' => 4
+    'name' => 'Sales Opportunity',
+    'number' => '2304',
+    'description' => 'Create & Mainten Sales Opportunity',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'sd',
+    'weight' => 4
  ];
  public $action_a = [
-  'CREATE_QUOTE' => 'Create Quote',
-  'CLOSE_OPPORTUNITY' => 'Close Opportunity',
-  'CANCEL' => 'Cancel'
+    'CREATE_QUOTE' => 'Create Quote',
+    'CLOSE_OPPORTUNITY' => 'Close Opportunity',
+    'CANCEL' => 'Cancel'
  ];
  public static $status_a = [
-  'ENTERED' => 'Entered',
-  'APPROVED' => 'Approved',
-  'CANCELLED' => 'Cancelled',
-  'CLOSED' => 'Closed',
-  'CONVERTED_QUOTE' => 'Converted to Quote',
+    'ENTERED' => 'Entered',
+    'APPROVED' => 'Approved',
+    'CANCELLED' => 'Cancelled',
+    'CLOSED' => 'Closed',
+    'CONVERTED_QUOTE' => 'Converted to Quote',
  ];
  public $field_a = [
-  'sd_opportunity_id',
-  'sd_lead_id',
-  'bu_org_id',
-  'opportunity_number',
-  'primary_contact_id',
-  'opportunity_subject',
-  'type',
-  'description',
-  'status',
-  'win_probability',
-  'currency',
-  'forecast_amount',
-  'expected_close_date',
-  'last_name',
-  'first_name',
-  'mobile_number',
-  'office_number',
-  'email_id',
-  'contact_website',
-  'address_id',
-  'contact_address',
-  'fax_no',
-  'timezone',
-  'time_to_contact',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'hr_employee_id',
-  'campaign_id',
-  'campaign_os',
-  'sales_team',
-  'referral_source',
-  'sales_channel',
-  'close_reason',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'sd_opportunity_id',
+    'sd_lead_id',
+    'bu_org_id',
+    'opportunity_number',
+    'primary_contact_id',
+    'opportunity_subject',
+    'type',
+    'description',
+    'status',
+    'win_probability',
+    'currency',
+    'forecast_amount',
+    'expected_close_date',
+    'last_name',
+    'first_name',
+    'mobile_number',
+    'office_number',
+    'email_id',
+    'contact_website',
+    'address_id',
+    'contact_address',
+    'fax_no',
+    'timezone',
+    'time_to_contact',
+    'ar_customer_id',
+    'ar_customer_site_id',
+    'hr_employee_id',
+    'campaign_id',
+    'campaign_os',
+    'sales_team',
+    'referral_source',
+    'sales_channel',
+    'close_reason',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'opportunity_number',
-  'sales_team',
+    'opportunity_number',
+    'sales_team',
  ];
  public $requiredField = [
-  'opportunity_subject',
-  'sd_lead_id',
+    'opportunity_subject',
+    'sd_lead_id',
  ];
  public $numberField = [
-  'sd_opportunity_id',
-  'primary_contact_id',
-  'sd_lead_id',
-  'opportunity_number',
+    'sd_opportunity_id',
+    'primary_contact_id',
+    'sd_lead_id',
+    'opportunity_number',
  ];
  public $fields_inForm_notInDataBase = [
-  "customer_name",
-  "customer_number",
-  "customer_site_name",
-  "phone",
-  "email",
-  "website",
-  "address",
-  "country",
-  "postal_code",
-  'address_name',
-  'action',
-  'sales_person'
+    "customer_name",
+    "customer_number",
+    "customer_site_name",
+    "phone",
+    "email",
+    "website",
+    "address",
+    "country",
+    "postal_code",
+    'address_name',
+    'action',
+    'sales_person'
  ];
  public $sd_opportunity_id;
  public $bu_org_id;
@@ -166,8 +166,8 @@ class sd_opportunity extends dbObject {
  public $address_name;
  public $action;
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Sales Opportunity  "; //page Title
 
@@ -232,12 +232,14 @@ FROM extn_contact cont,
 extn_contact_reference cr 
 
 WHERE cr.extn_contact_id = cont.extn_contact_id
-AND cr.reference_table = '{$ref_obj}'
- AND cr.reference_id = '{$ref_id}'
+AND cr.reference_table = :reference_table
+ AND cr.reference_id = :reference_id
 ";
 
-  $result = self::find_by_sql($sql);
-//  echo $sql; pa($result);
+  global $db;
+  $value_a = ['reference_table' => $ref_obj, 'reference_id' => $ref_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? ($result) : false;
  }
 

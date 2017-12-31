@@ -118,9 +118,12 @@ FROM hd_service_type_line stl,
 pm_process_routing_header sah
 
 WHERE sah.pm_process_routing_header_id =stl.service_activity_id
-AND sah.pm_process_routing_header_id ='{$service_type_id}'
+AND sah.pm_process_routing_header_id = :pm_process_routing_header_id
 ";
-  $result = self::find_by_sql($sql);
+ 	  global $db;
+  $value_a = ['pm_process_routing_header_id' => $service_type_id];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? ($result) : false;
  }
 

@@ -3,83 +3,82 @@
 class inv_count_entries_v extends dbObject {
 
  public static $form_class_name = "inv_count_entries";
- 
  public static $table_name = "inv_count_entries_v";
  public static $primary_column = "inv_count_entries_id";
  public $field_a = [
-  'inv_count_entries_id',
-  'inv_count_schedule_id',
-  'item_id_m',
-  'uom_id',
-  'org_id',
-  'subinventory_id',
-  'locator_id',
-  'lot_number',
-  'serial_number',
-  'schedule_date',
-  'adjustment_ac_id',
-  'status',
-  'reason',
-  'reference',
-  'counted_by',
-  'count_date',
-  'count_qty',
-  'system_qty',
-  'adjusted_qty',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
-  'item_number',
-  'item_description',
-  'subinventory',
-  'locator',
-  'uom_name',
-  'org',
+    'inv_count_entries_id',
+    'inv_count_schedule_id',
+    'item_id_m',
+    'uom_id',
+    'org_id',
+    'subinventory_id',
+    'locator_id',
+    'lot_number',
+    'serial_number',
+    'schedule_date',
+    'adjustment_ac_id',
+    'status',
+    'reason',
+    'reference',
+    'counted_by',
+    'count_date',
+    'count_qty',
+    'system_qty',
+    'adjusted_qty',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
+    'item_number',
+    'item_description',
+    'subinventory',
+    'locator',
+    'uom_name',
+    'org',
  ];
  public $initial_search = [
-  'item_number',
-  'item_description',
-  'subinventory',
-  'locator',
-  'uom_name',
-  'org',
+    'item_number',
+    'item_description',
+    'subinventory',
+    'locator',
+    'uom_name',
+    'org',
  ];
  public $column = [
-  'item_number',
-  'item_description',
-  'subinventory',
-  'locator',
-  'uom_name',
-  'org',
-  'status',
-  'count_qty',
-  'system_qty',
-  'adjusted_qty',
-  'inv_count_entries_id',
-  'inv_count_schedule_id',
-  'item_id_m',
-  'uom_id',
-  'org_id',
-  'subinventory_id',
-  'locator_id',
-  'lot_number',
-  'serial_number',
-  'schedule_date',
-  'adjustment_ac_id',
-  'reason',
-  'reference',
-  'counted_by',
-  'count_date',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'item_number',
+    'item_description',
+    'subinventory',
+    'locator',
+    'uom_name',
+    'org',
+    'status',
+    'count_qty',
+    'system_qty',
+    'adjusted_qty',
+    'inv_count_entries_id',
+    'inv_count_schedule_id',
+    'item_id_m',
+    'uom_id',
+    'org_id',
+    'subinventory_id',
+    'locator_id',
+    'lot_number',
+    'serial_number',
+    'schedule_date',
+    'adjustment_ac_id',
+    'reason',
+    'reference',
+    'counted_by',
+    'count_date',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $search_functions = [
-  'Count Status' => 'search_inv_count_entry_status',
+    'Count Status' => 'search_inv_count_entry_status',
  ];
  public $search = [
  ];
@@ -161,9 +160,13 @@ LEFT JOIN org ON org.org_id = ice.org_id
  public static function find_cost_by_itemId_orgId($item_id, $org_id, $bom_cost_type = 'FROZEN') {
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bom_cost_type = '{$bom_cost_type}' AND org_id = '{$org_id}'  AND item_id_m = '{$item_id}' ";
+  $sql .= " WHERE bom_cost_type = :bom_cost_type AND org_id = :org_id  AND item_id_m = :item_id_m ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['bom_cost_type' => $bom_cost_type, 'org_id' => $org_id, 'item_id_m' => $item_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

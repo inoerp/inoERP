@@ -23,94 +23,94 @@ class inv_reservation extends dbObject {
  public static $multi_select_template_path = 'modules/inv/reservation/multi_action/inv_reservation_template_ma.php';
 // public static $js_fileName = 'modules/inv/reservation/multi_action/ma_reservation.js';
  public static $system_info = [
-  'name' => 'Inventory Reservation',
-  'number' => '2121',
-  'description' => 'inv_reservation',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 17
+    'name' => 'Inventory Reservation',
+    'number' => '2121',
+    'description' => 'inv_reservation',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 17
  ];
  public static $demand_type_a = [
-  'SALES_ORDER' => 'Sales Order',
-  'DELIVERY_LINE' => 'Delivery Line',
-  'MISC' => 'Miscellaneous',
+    'SALES_ORDER' => 'Sales Order',
+    'DELIVERY_LINE' => 'Delivery Line',
+    'MISC' => 'Miscellaneous',
  ];
  public static $supply_type_a = [
-  'ONHAND' => 'Onhand Quantity'
+    'ONHAND' => 'Onhand Quantity'
  ];
  public $field_a = [
-  'inv_reservation_id',
-  'item_id_m',
-  'org_id',
-  'status',
-  'demand_type',
-  'sd_so_header_id',
-  'sd_so_line_id',
-  'd_reference_key_name',
-  'd_reference_key_value',
-  'demand_comment',
-  'need_by_date',
-  'uom_id',
-  'demand_quantity',
-  'supply_type',
-  'subinventory_id',
-  'locator_id',
-  's_reference_key_name',
-  's_reference_key_value',
-  'supply_comment',
-  'inv_serial_number_id',
-  'inv_lot_number_id',
-  'reason',
-  'onhand_id',
-  'reservation_type',
-  'reference_key_name',
-  'reference_key_value',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'inv_reservation_id',
+    'item_id_m',
+    'org_id',
+    'status',
+    'demand_type',
+    'sd_so_header_id',
+    'sd_so_line_id',
+    'd_reference_key_name',
+    'd_reference_key_value',
+    'demand_comment',
+    'need_by_date',
+    'uom_id',
+    'demand_quantity',
+    'supply_type',
+    'subinventory_id',
+    'locator_id',
+    's_reference_key_name',
+    's_reference_key_value',
+    'supply_comment',
+    'inv_serial_number_id',
+    'inv_lot_number_id',
+    'reason',
+    'onhand_id',
+    'reservation_type',
+    'reference_key_name',
+    'reference_key_value',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $initial_search = [
-  'item_id_m',
-  'description',
-  'sd_so_line_id'
+    'item_id_m',
+    'description',
+    'sd_so_line_id'
  ];
  public $search_functions = [
-  'Item From' => 'search_item_number_from',
-  'Item To' => 'search_item_number_to',
-  'Organization' => 'search_org_name',
+    'Item From' => 'search_item_number_from',
+    'Item To' => 'search_item_number_to',
+    'Organization' => 'search_org_name',
  ];
  public $requiredField = [
-  'item_id_m',
-  'org_id',
-  'demand_type',
-  'd_reference_key_name',
-  'd_reference_key_value',
-  'need_by_date',
-  'uom_id',
-  'demand_quantity',
-  'supply_type',
-  's_reference_key_name',
-  's_reference_key_value',
+    'item_id_m',
+    'org_id',
+    'demand_type',
+    'd_reference_key_name',
+    'd_reference_key_value',
+    'need_by_date',
+    'uom_id',
+    'demand_quantity',
+    'supply_type',
+    's_reference_key_name',
+    's_reference_key_value',
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  "item_description",
-  'so_number',
-  'so_line_number',
-  'serial_number',
-  'lot_number',
-  'onhand',
-  'reservable_onhand'
+    "item_number",
+    "item_description",
+    'so_number',
+    'so_line_number',
+    'serial_number',
+    'lot_number',
+    'onhand',
+    'reservable_onhand'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = "Reservation"; //page Title
  public $inv_reservation_id;
@@ -202,51 +202,61 @@ class inv_reservation extends dbObject {
  public static function find_by_demandReference($d_reference_key_n, $d_reference_key_v) {
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
-  $sql .= " WHERE d_reference_key_name = '{$d_reference_key_n}' ";
-  $sql .= " AND d_reference_key_value = '{$d_reference_key_v}' ";
+  $sql .= " WHERE d_reference_key_name = :d_reference_key_name ";
+  $sql .= " AND d_reference_key_value = :d_reference_key_value ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['d_reference_key_name' => $d_reference_key_n, 'd_reference_key_value' => $d_reference_key_v];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_serialNumberId($inv_serial_number_id) {
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
-  $sql .= " WHERE inv_serial_number_id = '{$inv_serial_number_id}' ";
+  $sql .= " WHERE inv_serial_number_id = :inv_serial_number_id ";
   $sql = ino_perPageSql_i($sql, 1);
 
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['inv_serial_number_id' => $inv_serial_number_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_lotNumberId($inv_lot_number_id) {
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
-  $sql .= " WHERE inv_lot_number_id = '{$inv_lot_number_id}' ";
+  $sql .= " WHERE inv_lot_number_id = :inv_lot_number_id ";
 
-
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['inv_lot_number_id' => $inv_lot_number_id];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_demandReference_onhandReference($d_reference_key_n, $d_reference_key_v, $onhand_id) {
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
-  $sql .= " WHERE d_reference_key_name = '{$d_reference_key_n}' ";
-  $sql .= " AND d_reference_key_value = '{$d_reference_key_v}' ";
+  $sql .= " WHERE d_reference_key_name = :d_reference_key_name ";
+  $sql .= " AND d_reference_key_value = :d_reference_key_value ";
   $sql .= " AND s_reference_key_name = 'onhand' ";
-  $sql .= " AND s_reference_key_value = '{$onhand_id}' ";
-//  echo $sql;
+  $sql .= " AND s_reference_key_value = :s_reference_key_value ";
 
-  $result = self::find_by_sql($sql);
+      global $db;
+	$value_a = ['d_reference_key_value' => $d_reference_key_v, 'd_reference_key_name' => $d_reference_key_n, 's_reference_key_value' => $onhand_id];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'mode',
-   'show_block'
+     'mode',
+     'show_block'
   ];
 
   return $multi_select_hidden;

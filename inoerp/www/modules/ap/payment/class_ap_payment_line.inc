@@ -8,57 +8,55 @@ class ap_payment_line extends dbObject {
  public static $multi_search_primary_column = "ap_payment_header_id"; //this value is used in multi search hidden value
  public static $key_column = 'amount';
  public static $module = "ap";
- 
-  public static $line_status_a = [
-		 'CLEARED' => 'Cleared'
+ public static $line_status_a = [
+    'CLEARED' => 'Cleared'
  ];
-	
  public $field_a = [
-  'ap_payment_line_id',
-  'ap_payment_header_id',
-  'ap_transaction_header_id',
-  'line_number',
-  'amount',
-  'line_description',
-  'gl_amount',
-  'exchange_rate',
-  'line_status',
-  'line_source',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'period_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'ap_payment_line_id',
+    'ap_payment_header_id',
+    'ap_transaction_header_id',
+    'line_number',
+    'amount',
+    'line_description',
+    'gl_amount',
+    'exchange_rate',
+    'line_status',
+    'line_source',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'period_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $requiredField = [
-  'ap_payment_header_id',
-  'ap_transaction_header_id',
-  'line_number'
+    'ap_payment_header_id',
+    'ap_transaction_header_id',
+    'line_number'
  ];
  public $numberField = [
-  'amount',
-  'exchange_rate',
-  'gl_amount'
+    'amount',
+    'exchange_rate',
+    'gl_amount'
  ];
  public $fields_inForm_notInDataBase = [
-  "transaction_number",
-  'invoiced_quantity',
-  'action',
-  'invoice_amount',
-  'remaining_amount',
-		 'payment_status'
+    "transaction_number",
+    'invoiced_quantity',
+    'action',
+    'invoice_amount',
+    'remaining_amount',
+    'payment_status'
  ];
  public $initial_search = [
-  'ap_payment_line_id',
-  'ap_payment_header_id',
-  'ap_transaction_header_id',
-  'line_number',
+    'ap_payment_line_id',
+    'ap_payment_header_id',
+    'ap_transaction_header_id',
+    'line_number',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "ap_payment_header_id"
+    "ap_payment_header_id"
  ];
  public $ap_payment_line_id;
  public $ap_payment_header_id;
@@ -103,11 +101,11 @@ class ap_payment_line extends dbObject {
 
   //create acounting
   if ((!empty($this->ap_payment_header_id)) && (!empty($this->ap_payment_line_id)) && ($this->action === 'create_accounting')) {
-	 if(!in_array($this->payment_status,  ['COMPLETE', 'CLEARED'])){
-		echo '<br>Payment status does not allow account creation. Complete/Clear the payment';
-		return 10;
-	 }
-	 
+   if (!in_array($this->payment_status, ['COMPLETE', 'CLEARED'])) {
+    echo '<br>Payment status does not allow account creation. Complete/Clear the payment';
+    return 10;
+   }
+
    //if journal header id excists then save journal lines only else first header & then lines
    $ap_payment_header = new ap_payment_header();
    $ap_payment_header->findBy_id($this->ap_payment_header_id);
@@ -267,7 +265,7 @@ class ap_payment_line extends dbObject {
 
   //check if line already exists
   $jl_exists_cash = $cash_gjl->findBy_reference_keyName_keyValue();
-  
+
   if ($jl_exists_cash) {
    $cash_gjl->gl_journal_line_id = $jl_exists_cash->gl_journal_line_id;
    $cash_gjl->line_num = $jl_exists_cash->line_num;
@@ -331,8 +329,12 @@ class ap_payment_line extends dbObject {
  }
 
  public static function find_by_ap_payment_headerId($ap_payment_header_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where ap_payment_header_id = '{$ap_payment_header_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " WHERE ap_payment_header_id = :ap_payment_header_id ";
+
+  global $db;
+  $value_a = ['ap_payment_header_id' => $ap_payment_header_id ];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return $result_array;
  }
 
@@ -344,10 +346,10 @@ class ap_payment_line extends dbObject {
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block'
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block'
   ];
 
   return $multi_select_hidden;

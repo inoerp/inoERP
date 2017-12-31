@@ -21,105 +21,105 @@ class inv_serial_number extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "inv";
  public static $system_info = [
-  'name' => 'Serial Number',
-  'number' => '2123',
-  'description' => 'Inventory Serial Number',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 13
+    'name' => 'Serial Number',
+    'number' => '2123',
+    'description' => 'Inventory Serial Number',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 13
  ];
  public static $origination_type_a = [
-  'INVENTORY' => 'Inventory',
-  'WIP_COMPLETION' => 'WIP Completion',
-  'RECEVING' => 'Receving',
-  'SHIPMENT' => 'Shipment',
-  'MANUAL' => 'Manual',
-  'SYS_GEN' => 'System Generated',
+    'INVENTORY' => 'Inventory',
+    'WIP_COMPLETION' => 'WIP Completion',
+    'RECEVING' => 'Receving',
+    'SHIPMENT' => 'Shipment',
+    'MANUAL' => 'Manual',
+    'SYS_GEN' => 'System Generated',
  ];
  public $field_a = [
-  'inv_serial_number_id',
-  'serial_number',
-  'item_id_m',
-  'generation',
-  'org_id',
-  'lock_cb',
-  'first_inv_transaction_id',
-  'reference_key_name',
-  'reference_key_value',
-  'status',
-  'origination_type',
-  'origination_date',
-  'activation_date',
-  'current_org_id',
-  'supplier_site_id',
-  'po_header_id',
-  'supplier_sn',
-  'supplier_ln',
-  'inv_lot_number_id',
-  'current_subinventory_id',
-  'current_locator_id',
-  'item_revision',
-  'parent_serial_number_id',
-  'original_wip_wo_header_id',
-  'current_wip_wo_header_id',
-  'last_inv_transaction_id',
-  'country_of_origin',
-  'fixed_asset_cb',
-  'description',
-  'ar_customer_site_id',
-  'sd_so_line_id',
-  'fa_asset_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'inv_serial_number_id',
+    'serial_number',
+    'item_id_m',
+    'generation',
+    'org_id',
+    'lock_cb',
+    'first_inv_transaction_id',
+    'reference_key_name',
+    'reference_key_value',
+    'status',
+    'origination_type',
+    'origination_date',
+    'activation_date',
+    'current_org_id',
+    'supplier_site_id',
+    'po_header_id',
+    'supplier_sn',
+    'supplier_ln',
+    'inv_lot_number_id',
+    'current_subinventory_id',
+    'current_locator_id',
+    'item_revision',
+    'parent_serial_number_id',
+    'original_wip_wo_header_id',
+    'current_wip_wo_header_id',
+    'last_inv_transaction_id',
+    'country_of_origin',
+    'fixed_asset_cb',
+    'description',
+    'ar_customer_site_id',
+    'sd_so_line_id',
+    'fa_asset_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $dateFields = [
-  'activation_date',
+    'activation_date',
  ];
  public $initial_search = [
-  'item_id_m',
-  'current_org_id',
-  'current_subinventory_id',
-  'current_locator_id'
+    'item_id_m',
+    'current_org_id',
+    'current_subinventory_id',
+    'current_locator_id'
  ];
  public $fields_inForm_notInDataBase = [
-  'org',
-  'subinventory',
-  'locator',
-  'item_number',
-  'item_description',
-  'org_id',
-  'transaction_type',
-  'transaction_type_id'
+    'org',
+    'subinventory',
+    'locator',
+    'item_number',
+    'item_description',
+    'org_id',
+    'transaction_type',
+    'transaction_type_id'
  ];
  public $requiredField = [
-  'item_id_m',
-  'generation',
-  'org_id',
+    'item_id_m',
+    'generation',
+    'org_id',
  ];
  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
+    'org_id' => 'org_inv_name_default',
  ];
  public $search_functions = [
-  'Organization' => 'search_org_name',
+    'Organization' => 'search_org_name',
  ];
  public $prg_create_serial_number_parameters = [
-  'Organization' => 'search_org_name',
-  'Item Number From' => 'search_item_number_from',
-  'Item Number To' => 'search_item_number_to',
-  'Number of S/N' => 'search_quantity',
+    'Organization' => 'search_org_name',
+    'Item Number From' => 'search_item_number_from',
+    'Item Number To' => 'search_item_number_to',
+    'Number of S/N' => 'search_quantity',
  ];
  public $prg_create_serial_number_details = [
-  'name' => 'Create Pre Defined Serail Numbers',
-  'description' => 'Create Pre Defined Serail Numbers',
+    'name' => 'Create Pre Defined Serail Numbers',
+    'description' => 'Create Pre Defined Serail Numbers',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Serial Number ";
  public $inv_serial_number_id;
@@ -249,7 +249,7 @@ class inv_serial_number extends dbObject {
 
  public function findBasic_SerialInfo() {
   $sql = " SELECT ins.inv_serial_number_id,    ins.serial_number,    ins.item_id_m,    ins.generation,  ins.org_id, ins.current_org_id, "
-   . " ins.current_subinventory_id, ins.current_locator_id, ins.status  ";
+     . " ins.current_subinventory_id, ins.current_locator_id, ins.status  ";
   $sql .= " FROM  inv_serial_number ins ";
   $sql .= " WHERE ins.item_id_m = :item_id_m  ";
   $sql .= " AND ins.status = :status  ";
@@ -346,8 +346,12 @@ class inv_serial_number extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE status = 'IN_WIP' ";
-  $sql .= " AND  current_wip_wo_header_id = '{$wo_header_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " AND  current_wip_wo_header_id = :current_wip_wo_header_id ";
+
+  global $db;
+  $value_a = ['current_wip_wo_header_id' => $wo_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -355,26 +359,33 @@ class inv_serial_number extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE status = 'IN_STORE' ";
-  $sql .= " AND  item_id_m = '{$item_id_m}' ";
-  $sql .= " AND  current_subinventory_id = '{$current_subinventory_id}' ";
-  $sql .= " AND  current_org_id = '{$current_org_id}' ";
+  $sql .= " AND  item_id_m = :item_id_m ";
+  $sql .= " AND  current_subinventory_id = :current_subinventory_id ";
+  $sql .= " AND  current_org_id = :current_org_id ";
   if (!empty($current_locator_id)) {
-   $sql .= " AND  current_locator_id = '{$current_locator_id}' ";
+   $sql .= " AND  current_locator_id = :current_locator_id ";
+   $value_a ['current_locator_id'] = $current_locator_id;
   }
   if (!empty($non_reserved)) {
    $sql .= " AND inv_serial_number_id NOT IN";
    $sql .= " (SELECT DISTINCT(inv_serial_number_id) FROM inv_reservation  WHERE inv_serial_number_id IS NOT NULL ) ";
   }
-//   echo $sql;
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m, 'current_subinventory_id' => $current_subinventory_id, 'current_org_id' => $current_org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_allChild_bySerialId($serial_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE parent_serial_number_id = '{$serial_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE parent_serial_number_id = :parent_serial_number_id ";
+  global $db;
+  $value_a = ['parent_serial_number_id' => $serial_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 

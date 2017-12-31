@@ -22,48 +22,48 @@ class hr_leave_type extends dbObject {
  public static $key_column = 'leave_type';
  public static $module = "hr";
  public static $system_info = [
-  'name' => 'Leave Type',
-  'number' => '3201',
-  'description' => 'HR Leave Type',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 9
+    'name' => 'Leave Type',
+    'number' => '3201',
+    'description' => 'HR Leave Type',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 9
  ];
  public $field_a = [
-  'hr_leave_type_id',
-  'leave_type',
-  'leave_category',
-  'description',
-  'allow_carry_forward_cb',
-  'carry_forward_per_year',
-  'maximum_accumulation',
-  'auto_convert_salary_cb',
-  'allow_advance_cb',
-  'lwp_cb',
-  'default_reason',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_leave_type_id',
+    'leave_type',
+    'leave_category',
+    'description',
+    'allow_carry_forward_cb',
+    'carry_forward_per_year',
+    'maximum_accumulation',
+    'auto_convert_salary_cb',
+    'allow_advance_cb',
+    'lwp_cb',
+    'default_reason',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'hr_leave_type_id',
-  'leave_type',
-  'description',
+    'hr_leave_type_id',
+    'leave_type',
+    'description',
  ];
  public $requiredField = [
-  'leave_type',
-  'leave_category',
+    'leave_type',
+    'leave_category',
  ];
  public $checkbox = [
-  'allow_carry_forward_cb',
-  'auto_convert_salary_cb',
-  'allow_advance_cb',
-  'lwp_cb',
+    'allow_carry_forward_cb',
+    'auto_convert_salary_cb',
+    'allow_advance_cb',
+    'lwp_cb',
  ];
  public $hr_leave_type_id;
  public $leave_type;
@@ -82,8 +82,8 @@ class hr_leave_type extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " HR Leave Types  "; //page Title
 
@@ -103,7 +103,8 @@ class hr_leave_type extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'HEADER' ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 

@@ -24,53 +24,53 @@ class hr_element_entry_header extends dbObject {
  public static $module = "hr";
  public static $js_fileName = 'modules/hr/element_entry/js/multi_select.js';
  public static $system_info = [
-  'name' => 'Element Entry',
-  'number' => '3120',
-  'description' => 'Compensation Element Entry',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('hr_element_entry_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 6
+    'name' => 'Element Entry',
+    'number' => '3120',
+    'description' => 'Compensation Element Entry',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('hr_element_entry_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 6
  ];
  public $field_a = [
-  'hr_element_entry_header_id',
-  'hr_employee_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_element_entry_header_id',
+    'hr_employee_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'hr_employee_id',
+    'hr_employee_id',
  ];
  public $requiredField = [
-  'hr_employee_id',
+    'hr_employee_id',
  ];
  public $fields_inForm_notInDataBase = [
-  "employee_name",
-  'identification_id',
-  'multi_action_class_pc',
-  'multi_action_class_pc_value',
-  'action',
-  'archive_data_cb'
+    "employee_name",
+    'identification_id',
+    'multi_action_class_pc',
+    'multi_action_class_pc_value',
+    'action',
+    'archive_data_cb'
  ];
  public $pageTitle = " Element Entry "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $prg_update_compensation_parameters = [
-  'Enterprise' => 'search_enterprise_org',
-  'Grade Name' => 'search_grade',
+    'Enterprise' => 'search_enterprise_org',
+    'Grade Name' => 'search_grade',
  ];
  public $prg_update_compensation_details = [
-  'name' => 'Import Expense Claim',
-  'description' => 'Import Expense Claim',
+    'name' => 'Import Expense Claim',
+    'description' => 'Import Expense Claim',
  ];
  public $hr_element_entry_header_id;
  public $hr_employee_id;
@@ -199,16 +199,21 @@ class hr_element_entry_header extends dbObject {
        hr_element_entry_line eel,
        hr_compensation_element hce
        WHERE eel.hr_element_entry_header_id = eeh.hr_element_entry_header_id
-       AND eeh.hr_element_entry_header_id = '{$hr_element_entry_header_id}'
+       AND eeh.hr_element_entry_header_id = :hr_element_entry_header_id
         AND hce.hr_compensation_element_id = eel.element_id
         
 ";
+  global $db;
+  $value_a = ['hr_element_entry_header_id' => $hr_element_entry_header_id];
+
+
   if (is_array($category)) {
    $sql .= " AND hce.category IN " . "( '" . implode("','", $category) . "' )";
   } else {
-   $sql .= " AND hce.category = '{$category}' ";
+   $sql .= " AND hce.category = :category ";
+   $value_a ['category'] = $category;
   }
-  $result = self::find_by_sql($sql);
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
@@ -227,20 +232,24 @@ class hr_element_entry_header extends dbObject {
  public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM hr_element_entry_header eeh 
-       WHERE eeh.hr_employee_id = '{$employee_id}'   
+       WHERE eeh.hr_employee_id = :hr_employee_id   
 ";
-       $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['hr_employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
  public function findBy_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM hr_element_entry_header eeh 
-       WHERE eeh.hr_employee_id = '{$employee_id}'   
+       WHERE eeh.hr_employee_id = :hr_employee_id   
 ";
-       $sql = ino_perPageSql_i($sql, 1);
-  $result = $this->findBySql($sql);
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['hr_employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -289,17 +298,17 @@ class hr_element_entry_header extends dbObject {
 
  public function multi_select_input_fields() {
   $multi_select_input = [
-   'template_name'
+     'template_name'
   ];
   return $multi_select_input;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block',
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block',
   ];
 
   return $multi_select_hidden;

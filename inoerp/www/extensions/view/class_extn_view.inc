@@ -22,65 +22,65 @@ class extn_view extends dbObject {
  public static $js_fileName = 'modules/po/js/multi_select.js';
  //  data base variables as stored database column name
  public static $system_info = [
-  'name' => 'View',
-  'number' => '10047',
-  'description' => 'Create & Update View',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('view_path'),
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 23
+    'name' => 'View',
+    'number' => '10047',
+    'description' => 'Create & Update View',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('view_path'),
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 23
  ];
  public static $condition_operator_type_a = [
-  'database' => 'Database',
-  'manual' => 'Manual',
-  'remove' => 'Remove'
+    'database' => 'Database',
+    'manual' => 'Manual',
+    'remove' => 'Remove'
  ];
  public $field_a = [
-  "extn_view_id",
-  "view_name",
-  "description",
-  'custom_div_class',
-  'header_text',
-  'footer_text',
-  'remove_default_header_cb',
-  "logical_settings",
-  "query_v",
-  "select_v",
-  "from_v",
-  "where_v",
-  "order_by",
-  'group_by_v',
-  "query_end",
-  "filters",
-  "display_type",
-  "page",
-  "page_title",
-  "page_header",
-  "page_footer",
-  "use_pager_cb",
-  "default_per_page",
-  'no_of_grid_columns',
-  'list_type',
-  "path",
-  'path_id',
-  "block_id",
-  "block_title",
-  'show_graph_only_cb',
-  "rev_enabled_cb",
-  "rev_number",
-  'chart_type',
-  'chart_width',
-  'chart_height',
-  'chart_label',
-  'chart_value',
-  'chart_legend',
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "extn_view_id",
+    "view_name",
+    "description",
+    'custom_div_class',
+    'header_text',
+    'footer_text',
+    'remove_default_header_cb',
+    "logical_settings",
+    "query_v",
+    "select_v",
+    "from_v",
+    "where_v",
+    "order_by",
+    'group_by_v',
+    "query_end",
+    "filters",
+    "display_type",
+    "page",
+    "page_title",
+    "page_header",
+    "page_footer",
+    "use_pager_cb",
+    "default_per_page",
+    'no_of_grid_columns',
+    'list_type',
+    "path",
+    'path_id',
+    "block_id",
+    "block_title",
+    'show_graph_only_cb',
+    "rev_enabled_cb",
+    "rev_number",
+    'chart_type',
+    'chart_width',
+    'chart_height',
+    'chart_label',
+    'chart_value',
+    'chart_legend',
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
 // public static $array_field_array =[
 //		 "path"
@@ -89,40 +89,40 @@ class extn_view extends dbObject {
 
 
  public $initial_search = [
-  "extn_view_id",
-  "view_name",
-  "description",
+    "extn_view_id",
+    "view_name",
+    "description",
  ];
  public $checkbox = [
-  "rev_enabled_cb",
-  'update_parent_id_cb',
-  'use_pager_cb',
-  'create_block_cb'
+    "rev_enabled_cb",
+    'update_parent_id_cb',
+    'use_pager_cb',
+    'create_block_cb'
  ];
  public $column = [
-  "rev_enabled_cb",
-  "extn_view_id",
-  "view_name",
-  "description",
+    "rev_enabled_cb",
+    "extn_view_id",
+    "view_name",
+    "description",
  ];
  public $base_encoded_array = [
-  "logical_settings",
-  "query_v"
+    "logical_settings",
+    "query_v"
  ];
  public $requiredField = [
-  "view_name",
-  "description",
-  "query_v"
+    "view_name",
+    "description",
+    "query_v"
  ];
  public $numberField = [
-  'chart_width',
-  'chart_height',
+    'chart_width',
+    'chart_height',
  ];
  public $fields_inForm_notInDataBase = [
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Views "; //page Title
  public $all_table_names;
@@ -202,9 +202,12 @@ class extn_view extends dbObject {
  public static function find_by_blockId($block_id) {
   $sql = " SELECT * from ";
   $sql .= self::$table_name;
-  $sql .= " WHERE block_id = '{$block_id}' ";
+  $sql .= " WHERE block_id = :block_id ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['block_id' => $block_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -303,88 +306,6 @@ class extn_view extends dbObject {
   return $type;
  }
 
-// public static function find_all_tables_array() {
-//  global $db;
-//  $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-//   . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
-//  $result = $db->find_by_sql($query);
-//
-//  $table_name_array = array();
-//  foreach ($result as $object) {
-//   $table_name_array [] = $object->table_name;
-//  }
-//  return $table_name_array;
-// }
-//
-// public static function find_all_tables() {
-//  global $db;
-//  $query = " SELECT TABLE_NAME from information_schema.tables  "
-//   . " where TABLE_TYPE ='BASE TABLE' AND TABLE_SCHEMA= '" . DB_NAME . "' ";
-//  $result = $db->find_by_sql($query);
-//  return $result;
-// }
-//
-// public static function find_all_tables_and_views() {
-//  global $db;
-//  $query = " SELECT TABLE_NAME from information_schema.tables  "
-//   . " where TABLE_SCHEMA= '" . DB_NAME . "' ";
-//  $result = $db->find_by_sql($query);
-//  return $result;
-// }
-//
-// public static function count_all_tables() {
-//  global $db;
-//  $query = " SELECT count(TABLE_NAME) as table_count from information_schema.tables  "
-//   . " WHERE TABLE_SCHEMA= '" . DB_NAME . "' ";
-//  $result = $db->find_by_sql($query);
-//  return !empty($result) ? array_pop($result) : null;
-// }
-//
-// public static function find_all_tables_gen() {
-//  global $db;
-//  $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-//   . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
-//  $result = $db->find_by_sql($query);
-//
-//  foreach ($result as $object) {
-//   yield $object->table_name;
-//  }
-// }
-//
-// public function findAll_tables() {
-//  $query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-//   . " AND TABLE_SCHEMA= '" . DB_NAME . "' ";
-//  $result = $this->findBySql($query);
-//  $table_name_array = array();
-//  foreach ($result as $object) {
-//   $table_name_array [] = $object->table_name;
-//  }
-//  return $table_name_array;
-// }
-//
-// public static function find_columns_of_table($table_name) {
-//  global $db;
-//  if (!empty($table_name)) {
-//   $query = "SHOW COLUMNS FROM $table_name ";
-//   $result = $db->find_by_sql($query);
-//
-//   $column_name_array = array();
-//   foreach ($result as $object) {
-//    $column_name_array [] = $object->field;
-//   }
-//   return $column_name_array;
-//  }
-// }
-//
-// public static function find_columns_of_table_obj($table_name) {
-//  global $db;
-//  if (!empty($table_name)) {
-//   $query = "SHOW COLUMNS FROM $table_name ";
-//   $result = $db->find_by_sql($query);
-//   return $result;
-//  }
-// }
-
  public static function find_all_idColumns() {
   global $db;
   $all_id_columns_array = [];
@@ -393,8 +314,11 @@ class extn_view extends dbObject {
   foreach ($all_tables AS $key => $values) {
    if (!empty($values)) {
     $column_name = $values . '_id';
-    $query = "SHOW COLUMNS FROM $values WHERE Field = '{$column_name}' ";
-    $result = $db->find_by_sql($query);
+    $query = "SHOW COLUMNS FROM $values WHERE Field = :Field ";
+    global $db;
+    $value_a = ['Field' => $column_name];
+    $result = $db->findBySql($query, $value_a);
+
     if ((count($result) > 0) && (!empty($result[0]->field))) {
      $all_id_columns_array[] = $result[0]->field;
     }
@@ -409,16 +333,19 @@ class extn_view extends dbObject {
   foreach ($all_tables AS $key => $values) {
    if (!empty($values)) {
     $column_name = $values . '_id';
-    $query = "SHOW COLUMNS FROM $values WHERE Field = '{$column_name}' ";
-    $result = self::find_by_sql($query);
-    if ((count($result) > 0) && (!empty($result[0]->field))) {
+    $query = "SHOW COLUMNS FROM $values WHERE Field = :Field ";
+
+    global $db;
+    $value_a = ['Field' => $column_name];
+    $result = $db->findBySql($sql, $value_a);
+
+      if ((count($result) > 0) && (!empty($result[0]->field))) {
      yield $result[0]->field;
     }
    }
   }
  }
 
- 
  private function _table_display($result) {
   $drop_down_icon = ino_search_dropDownSettings();
   if (empty($this->query_string)) {
@@ -467,7 +394,7 @@ class extn_view extends dbObject {
 //     $content_string .= '<img src=" ' . HOME_URL . 'themes/default/images/sort_down_16.png" class="sort_down clickable"></li>';
 //     $content_string .= '</ul></th>';
     }
-    $content_string .='</tr></thead>';
+    $content_string .= '</tr></thead>';
     If (!empty($result)) {
      $content_string .= '<tbody class="form_data_line_tbody search_results" >';
      $count = 0;
@@ -482,7 +409,7 @@ class extn_view extends dbObject {
        continue;
       }
       $count++;
-      $content_string .='<tr>';
+      $content_string .= '<tr>';
       $content_string .= "<td>$count</td>";
       $new_start1 = ($i * ($no_of_columns_per_tab - 1)) + $i;
       $new_end1 = $new_start1 + ($no_of_columns_per_tab - 1);
@@ -507,7 +434,7 @@ class extn_view extends dbObject {
    }
    $content_string .= '</div>';
   }
-  $content_string .='</div>';
+  $content_string .= '</div>';
   $content_string .= '<div id="view_pagination_table" class="ajax_view pagination">';
   $content_string .= $pagination->show_pagination();
   $content_string .= '</div>';
@@ -570,7 +497,7 @@ class extn_view extends dbObject {
   if ($result) {
    $con_count = 0;
    if (count($result) > 0) {
-    $content_string .='<ul class="view top_margin10 main_list page_wise_list">';
+    $content_string .= '<ul class="view top_margin10 main_list page_wise_list">';
     foreach ($result as $recod_k => $records) {
 
      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
@@ -583,16 +510,16 @@ class extn_view extends dbObject {
       continue;
      }
      foreach ($records as $r_k => $r_v) {
-      $content_string .="<li class=\"$r_k \">" . ucwords(str_replace('_', ' ', $r_k)) . ' : ' . $r_v . "</li> ";
+      $content_string .= "<li class=\"$r_k \">" . ucwords(str_replace('_', ' ', $r_k)) . ' : ' . $r_v . "</li> ";
      }
      $content_string .= '</ul></li>';
 
      $con_count++;
     }
-    $content_string .='</ul>';
+    $content_string .= '</ul>';
    }
   }
-  $content_string .='</div>';
+  $content_string .= '</div>';
   $content_string .= '<div id="view_pagination_table" class="ajax_view pagination">';
   $content_string .= $pagination->show_pagination();
   $content_string .= '</div>';
@@ -629,7 +556,7 @@ class extn_view extends dbObject {
      }
      $content_string .= '<td>';
      foreach ($records as $r_k => $r_v) {
-      $content_string .="<span class=\"view_grid $r_k \">" . ucwords(str_replace('_', ' ', $r_k)) . ' : ' . $r_v . "</span> ";
+      $content_string .= "<span class=\"view_grid $r_k \">" . ucwords(str_replace('_', ' ', $r_k)) . ' : ' . $r_v . "</span> ";
      }
      $content_string .= '</td>';
      $column_count++;
@@ -641,8 +568,8 @@ class extn_view extends dbObject {
     }
    }
   }
-  $content_string .='</tbody></table>';
-  $content_string .='</div>';
+  $content_string .= '</tbody></table>';
+  $content_string .= '</div>';
   $content_string .= '<div id="view_pagination_table" class="ajax_view pagination">';
   $content_string .= $pagination->show_pagination();
   $content_string .= '</div>';
@@ -655,7 +582,7 @@ class extn_view extends dbObject {
   if (!empty($this->user_filter) || !empty($this->user_sort)) {
    $this->query_v = ' SELECT ' . $view_i->select_v;
    $this->query_v .= ' FROM ' . $view_i->from_v;
-   if(!empty($view_i->where_v)){
+   if (!empty($view_i->where_v)) {
     $this->query_v .= ' WHERE ' . $view_i->where_v;
    }
    if (!empty($this->user_filter)) {
@@ -667,11 +594,11 @@ class extn_view extends dbObject {
     }
    }
 
-   $this->query_v .=!empty($view_i->group_by_v) ? ' GROUP BY ' . $view_i->group_by_v : '';
+   $this->query_v .= !empty($view_i->group_by_v) ? ' GROUP BY ' . $view_i->group_by_v : '';
    if (!empty($this->user_sort)) {
     $user_sort = $this->_update_orderBY();
     $this->query_v .= ' ORDER BY ' . $user_sort;
-   }else{
+   } else {
     $this->query_v .= !empty($view_i->order_by) ? '  ORDER BY ' . $view_i->order_by : '';
    }
   }
@@ -740,7 +667,9 @@ class extn_view extends dbObject {
 
   if (!empty($this->extn_view_id) && !empty($this->chart_type)) {
    $svgimg = new getsvgimage();
-   $result = $result1 = dbObject::find_by_sql(base64_decode($this->query_v));
+   global $db;
+   $result = $db->findBySql(base64_decode($this->query_v));
+
    $svgimg->setProperty('_chart_name', $this->view_name);
    $svgimg->setProperty('_chart_width', $this->chart_width);
    $svgimg->setProperty('_chart_height', $this->chart_height);
@@ -780,7 +709,10 @@ class extn_view extends dbObject {
   $this->findBy_id($this->view_id);
   if (!empty($this->view_id) && !empty($this->chart_type)) {
    $svgimg = new getsvgimage();
-   $result = $result1 = dbObject::find_by_sql(base64_decode($this->query_v));
+
+   global $db;
+   $result = $result1 = $db->findBySql(base64_decode($this->query_v));
+
    $svgimg->setProperty('_chart_name', $this->view_name);
    $svgimg->setProperty('_chart_width', $this->chart_width);
    $svgimg->setProperty('_chart_height', $this->chart_height);

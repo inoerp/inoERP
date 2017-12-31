@@ -69,8 +69,10 @@
 
 
   Public static function find_by_employeeId($employee_id) {
-   $sql = " SELECT * FROM " . self::$table_name . " WHERE employee_id = '{$employee_id}' ";
-   $result = self::find_by_sql($sql);
+   $sql = " SELECT * FROM " . self::$table_name . " WHERE employee_id = :employee_id ";
+    global $db;
+  $value_a = ['employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
    return !empty($result) ? $result : null;
   }
 

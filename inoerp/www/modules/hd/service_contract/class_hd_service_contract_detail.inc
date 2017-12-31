@@ -8,59 +8,59 @@ class hd_service_contract_detail extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "hd";
  public $account = [
-  'detail_ac_id'
+    'detail_ac_id'
  ];
  public static $level_a = [
-  'ITEM' => 'Item',
-  'CUSTOMER' => 'Customer'
+    'ITEM' => 'Item',
+    'CUSTOMER' => 'Customer'
  ];
  public $field_a = [
-  'hd_service_contract_detail_id',
-  'hd_service_contract_line_id',
-  'item_id_m',
-  'inv_serial_number_id',
-  'detail_number',
-  'ar_customer_id',
-  'unit_price',
-  'level',
-  'line_ref',
-  'renewal_type',
-  'status',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'description',
-  'quantity',
-  'uom_id',
-  'line_amount',
-  'start_date',
-  'end_date',
-  'duration_uom_id',
-  'duration',
-  'tax_amount',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hd_service_contract_detail_id',
+    'hd_service_contract_line_id',
+    'item_id_m',
+    'inv_serial_number_id',
+    'detail_number',
+    'ar_customer_id',
+    'unit_price',
+    'level',
+    'line_ref',
+    'renewal_type',
+    'status',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'description',
+    'quantity',
+    'uom_id',
+    'line_amount',
+    'start_date',
+    'end_date',
+    'duration_uom_id',
+    'duration',
+    'tax_amount',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'hd_service_contract_line_id',
-  'item_id_m',
+    'hd_service_contract_line_id',
+    'item_id_m',
  ];
  public $dateField = [
-  'start_date',
-  'end_date',
+    'start_date',
+    'end_date',
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  'serial_number'
+    "item_number",
+    'serial_number'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'hd_service_contract_line_id'
+    'hd_service_contract_line_id'
  ];
  public $numberField = [
-  'amount',
-  'gl_amount'
+    'amount',
+    'gl_amount'
  ];
  public $hd_service_contract_detail_id;
  public $hd_service_contract_line_id;
@@ -117,8 +117,12 @@ class hd_service_contract_detail extends dbObject {
  }
 
  public static function find_by_hd_service_contract_lineId($hd_service_contract_line_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where hd_service_contract_line_id = '{$hd_service_contract_line_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where hd_service_contract_line_id = :hd_service_contract_line_id ";
+
+  global $db;
+  $value_a = ['hd_service_contract_line_id' => $hd_service_contract_line_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? $result_array : false;
  }
 

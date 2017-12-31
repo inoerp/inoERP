@@ -8,48 +8,48 @@ class hr_timesheet_header extends dbObject implements hr_approval_int {
  public static $key_column = 'hr_employee_id';
  public static $module = "hr";
  public $field_a = [
-  'hr_timesheet_header_id',
-  'hr_timesheet_period_id',
-  'approver_employee_id',
-  'entered_on',
-  'approved_on',
-  'hr_employee_id',
-  'approved_date',
-  'approved_by_employee_id',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_timesheet_header_id',
+    'hr_timesheet_period_id',
+    'approver_employee_id',
+    'entered_on',
+    'approved_on',
+    'hr_employee_id',
+    'approved_date',
+    'approved_by_employee_id',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public static $status_a = [
-  'ENTERED' => 'Entered',
-  'APPR_HOLD' => 'Approval Hold',
-  'APPROVED' => 'Approved',
-  'FREEZED' => 'Freezed',
+    'ENTERED' => 'Entered',
+    'APPR_HOLD' => 'Approval Hold',
+    'APPROVED' => 'Approved',
+    'FREEZED' => 'Freezed',
  ];
  public $action_a = [
-  'APPROVE' => 'Approve / Send For Approval',
+    'APPROVE' => 'Approve / Send For Approval',
  ];
  public $initial_search = [
-  'hr_employee_id',
-  'approver_employee_id',
+    'hr_employee_id',
+    'approver_employee_id',
  ];
  public $requiredField = [
-  'hr_timesheet_period_id',
-  'approver_employee_id',
-  'entered_on',
-  'hr_employee_id',
+    'hr_timesheet_period_id',
+    'approver_employee_id',
+    'entered_on',
+    'hr_employee_id',
  ];
  public $fields_inForm_notInDataBase = [
-  'identification_id',
-  "employee_name",
-  'approver_employee_name',
-  'action'
+    'identification_id',
+    "employee_name",
+    'approver_employee_name',
+    'action'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Timesheet "; //page Title
  public $hr_timesheet_header_id;
@@ -69,7 +69,6 @@ class hr_timesheet_header extends dbObject implements hr_approval_int {
  public $employee_name;
  public $approver_employee_name;
  public $action;
- 
 
  public function _after_save() {
   if (($this->action == 'APPROVE')) {
@@ -86,11 +85,13 @@ class hr_timesheet_header extends dbObject implements hr_approval_int {
  public static function find_by_buOrgId_status($bu_org_id, $status = "") {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bu_org_id = '{$bu_org_id}' ";
+  $sql .= " WHERE bu_org_id =  :bu_org_id ";
   if (!empty($status)) {
-   $sql .= " AND status = '{$status}' ";
+   $sql .= " AND status = :status ";
   }
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['bu_org_id' => $bu_org_id , 'status' => $status];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? ($result) : false;
  }
 
@@ -128,7 +129,7 @@ class hr_timesheet_header extends dbObject implements hr_approval_int {
   $notif->notification_subject = "Timesheet Entry From " . $notif->from_user . ' Claim#' . $this->hr_timesheet_header_id;
   $notif->text_field1 = "<br>Name :  " . $notif->from_user;
   $notif->text_field1 .= "<br>Etered Date : $this->entered_on (Employee Id : $this->hr_employee_id) ";
-  
+
   $notif->save();
   $notif->_after_save();
 

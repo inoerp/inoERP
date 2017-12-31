@@ -6,74 +6,73 @@ class hr_student_v extends dbObject {
  public static $table_name = "hr_student_v";
  public static $primary_column = "hr_student_id";
  public $field_a = [
-  'user_id',
-  'username',
-  'first_name',
-  'last_name',
-  'email',
-  'hr_employee_id',
-  'status',
-  'identification_id',
-  'emp_start_date',
-  'citizen_number',
-  'emp_first_name',
-  'emp_last_name',
-  'phone',
-  'emp_email',
-  'gender',
-  'person_type',
-  'org_id',
-  'currency_code',
-  'employee_name'
+    'user_id',
+    'username',
+    'first_name',
+    'last_name',
+    'email',
+    'hr_employee_id',
+    'status',
+    'identification_id',
+    'emp_start_date',
+    'citizen_number',
+    'emp_first_name',
+    'emp_last_name',
+    'phone',
+    'emp_email',
+    'gender',
+    'person_type',
+    'org_id',
+    'currency_code',
+    'employee_name'
  ];
  public $initial_search = [
-  'username',
-  'first_name',
-  'last_name',
+    'username',
+    'first_name',
+    'last_name',
  ];
  public $multi_select_column = [
-  'user_id',
-  'username',
-  'first_name',
-  'last_name',
-  'email',
-  'hr_employee_id',
-  'status',
-  'identification_id',
-  'emp_start_date',
-  'citizen_number',
-  'emp_first_name',
-  'emp_last_name',
-  'phone',
-  'emp_email',
-  'gender',
-  'person_type',
-  'org_id',
-  'job_id',
-  'position_id',
-  'expense_ac_id',
-  'position_name',
-  'emp_org_id',
-  'hr_approval_limit_header_id',
-  'document_type',
-  'limit_start_date',
-  'limit_type',
-  'limit_range_low',
-  'limit_range_high',
-  'amount_limit',
-  'limit_object',
-  'bu_org_id',
-  'currency_code',
+    'user_id',
+    'username',
+    'first_name',
+    'last_name',
+    'email',
+    'hr_employee_id',
+    'status',
+    'identification_id',
+    'emp_start_date',
+    'citizen_number',
+    'emp_first_name',
+    'emp_last_name',
+    'phone',
+    'emp_email',
+    'gender',
+    'person_type',
+    'org_id',
+    'job_id',
+    'position_id',
+    'expense_ac_id',
+    'position_name',
+    'emp_org_id',
+    'hr_approval_limit_header_id',
+    'document_type',
+    'limit_start_date',
+    'limit_type',
+    'limit_range_low',
+    'limit_range_high',
+    'amount_limit',
+    'limit_object',
+    'bu_org_id',
+    'currency_code',
  ];
- 
-  public static $json_label_fields = [
-   'username',
-   'person_type',
-  'identification_id',
-   'employee_name'
+ public static $json_label_fields = [
+    'username',
+    'person_type',
+    'identification_id',
+    'employee_name'
  ];
  public $dateField = [
-  'limit_start_date',
+    'limit_start_date',
  ];
  public $search = [
 //   '_update_path' => 'form.php?class_name=sd_so_header',
@@ -151,13 +150,16 @@ LEFT JOIN org_v ON org_v.org_id =  ls.org_id
  public static function find_by_userId_docType($user_id, $document_type) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE user_id = '{$user_id}' AND document_type = '{$document_type}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE user_id = :user_id AND document_type = :document_type ";
+
+  global $db;
+  $value_a = ['user_id' => $user_id, 'document_type' => $document_type];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? ($result) : false;
  }
 
- 
-  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+ public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
   $sql = " SELECT   user_id,   username,   first_name,   last_name,   email,
   hr_employee_id,     identification_id,   emp_start_date,   citizen_number,
   emp_first_name,   emp_last_name,    emp_email,   gender,   person_type,  employee_name  ";
@@ -175,10 +177,14 @@ LEFT JOIN org_v ON org_v.org_id =  ls.org_id
     }
    }
   }
-  $result_array = static::find_by_sql($sql);
+
+
+  global $db;
+  $result_array = $db->findBySql($sql);
+
   return !empty($result_array) ? ($result_array) : false;
  }
- 
+
 }
 
 //end of so_detail class

@@ -113,13 +113,16 @@ inventory inv
 
 WHERE pll.mdm_price_list_header_id = plh.mdm_price_list_header_id
 AND inv.pos_price_list_header_id = plh.mdm_price_list_header_id
-AND inv.org_id = '{$org_id}'
-AND pll.item_id_m = '{$Item_id_m}'
+AND inv.org_id = :org_id
+AND pll.item_id_m = :item_id_m
 AND pll.effective_start_date <= NOW()
 AND ( pll.effective_end_date >= NOW() OR  pll.effective_end_date IS NULL)
 ";
 $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+      global $db;
+	$value_a = ['org_id' => $org_id, 'item_id_m' => $Item_id_m];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? array_pop($result) : '';
  }
 
@@ -148,11 +151,13 @@ AND ss.sd_store_id = pt.sd_store_id
 AND pic.org_id = ss.org_id
 AND item.org_id = ss.org_id
 AND item.item_number  = ptl.item_number
-AND pt.pos_terminal_id = '{$terminal_id}'
+AND pt.pos_terminal_id = :pos_terminal_id
 ";
 
-  $transaction_lines = self::find_by_sql($sql);
-//  pa($transaction_lines);
+    global $db;
+	$value_a = ['pos_terminal_id' => $terminal_id];
+	$transaction_lines = $db->findBySql($sql, $value_a);
+
   if (empty($transaction_lines)) {
    return;
   }

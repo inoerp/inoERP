@@ -30,62 +30,62 @@ class ec_paid_order extends dbObject {
  public static $module = "ec";
 // public static $js_fileName = 'modules/inv/ec_paid_order/js/multi_select.js';
  public static $system_info = [
-  'name' => 'eComm Paid Order',
-  'number' => '4206',
-  'description' => 'eCommerce Paid Orders',
-  'version' => '0.1.4',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'ec',
-  'weight' => 1
+    'name' => 'eComm Paid Order',
+    'number' => '4206',
+    'description' => 'eCommerce Paid Orders',
+    'version' => '0.1.4',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'ec',
+    'weight' => 1
  ];
  public static $status_a = [
-  'ENTERED' => 'Entered',
-  'ERROR' => 'Errored',
-  'CONVERTED' => 'Converted to SO',
+    'ENTERED' => 'Entered',
+    'ERROR' => 'Errored',
+    'CONVERTED' => 'Converted to SO',
  ];
  public $field_a = [
-  'ec_paid_order_id',
-  'payment_method_id',
-  'total_amount',
-  'doc_currency',
-  'service_provider',
-  'sp_transaction_id',
-  'user_id',
-  'email',
-  'confirm_order_details',
-  'sp_return_data',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'ec_paid_order_id',
+    'payment_method_id',
+    'total_amount',
+    'doc_currency',
+    'service_provider',
+    'sp_transaction_id',
+    'user_id',
+    'email',
+    'confirm_order_details',
+    'sp_return_data',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'user_id',
-  'email',
+    'user_id',
+    'email',
  ];
  public $column = [
-  'ec_paid_order_id',
-  'payment_method_id',
-  'total_amount',
-  'doc_currency',
-  'service_provider',
-  'sp_transaction_id',
-  'user_id',
-  'email',
-  'status',
+    'ec_paid_order_id',
+    'payment_method_id',
+    'total_amount',
+    'doc_currency',
+    'service_provider',
+    'sp_transaction_id',
+    'user_id',
+    'email',
+    'status',
  ];
  public $requiredField = [
-  'email',
-  'confirm_order_details',
+    'email',
+    'confirm_order_details',
  ];
  public $fields_inForm_notInDataBase = [
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " eComm Paid Orders "; //page Title
  public $ec_paid_order_id;
@@ -105,11 +105,11 @@ class ec_paid_order extends dbObject {
  public $last_update_date;
  public $message;
  public $prg_create_so_parameters = [
-  'Cut Off Date' => 'search_cut_off_date',
+    'Cut Off Date' => 'search_cut_off_date',
  ];
  public $prg_create_so_details = [
-  'name' => 'Generate Sales Orders',
-  'description' => 'Generate Sales Orders From Paid eCommerce Orders',
+    'name' => 'Generate Sales Orders',
+    'description' => 'Generate Sales Orders From Paid eCommerce Orders',
  ];
 
  private function _findOrders_forSOImport($cut_off_date = '') {
@@ -126,18 +126,21 @@ class ec_paid_order extends dbObject {
  public static function find_all_assigned_orgs($ec_paid_order_number) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where ec_paid_order_number= '{$ec_paid_order_number}' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where ec_paid_order_number= :ec_paid_order_number ";
+
+  $value_a = ['ec_paid_order_number' => $ec_paid_order_number];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_all_active_methods() {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where status= 'ACTIVE' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where status= 'ACTIVE' ";
+  $result = $db->findBySql($sql);
   return $result;
  }
 

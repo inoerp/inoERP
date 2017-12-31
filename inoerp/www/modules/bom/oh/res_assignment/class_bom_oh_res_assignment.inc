@@ -43,8 +43,11 @@ class bom_oh_res_assignment extends dbObject {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where bom_overhead_id= '{$bom_overheadId}' ";
-  $result = self::find_by_sql($sql);
+   " where bom_overhead_id= :bom_overhead_id ";
+  
+	$value_a = ['bom_overhead_id' => $bom_overheadId];
+	$result = $db->findBySql($sql, $value_a);
+  
   return $result;
  }
 

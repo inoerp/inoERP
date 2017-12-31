@@ -9,53 +9,52 @@ class hr_payroll_schedule extends dbObject {
  public static $module = "hr";
  public static $js_fileName_prg = 'modules/hr/payroll/js/program_payroll.js ';
  public static $status_a = [
-  'OPEN' => 'Open',
-  'CANCELLED' => 'Cancelled',
-  'PAID' => 'Paid'
+    'OPEN' => 'Open',
+    'CANCELLED' => 'Cancelled',
+    'PAID' => 'Paid'
  ];
  public $field_a = [
-  'hr_payroll_schedule_id',
-  'hr_payroll_id',
-  'scheduled_date',
-  'start_date',
-  'end_date',
-  'period_name',
-  'description',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_payroll_schedule_id',
+    'hr_payroll_id',
+    'scheduled_date',
+    'start_date',
+    'end_date',
+    'period_name',
+    'description',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'hr_payroll_schedule_id',
-  'hr_payroll_id',
+    'hr_payroll_schedule_id',
+    'hr_payroll_id',
  ];
  public $requiredField = [
-  'hr_payroll_id',
-  'scheduled_date',
-  'start_date',
-  'end_date',
+    'hr_payroll_id',
+    'scheduled_date',
+    'start_date',
+    'end_date',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "hr_payroll_id"
+    "hr_payroll_id"
  ];
  public $prg_generate_payroll_schedule_parameters = [
-  'Payroll Name' => 'search_payroll',
+    'Payroll Name' => 'search_payroll',
  ];
  public $prg_generate_payroll_schedule_details = [
-  'name' => 'Payroll Schedule Generation',
-  'description' => 'Generate Payroll Schedule',
+    'name' => 'Payroll Schedule Generation',
+    'description' => 'Generate Payroll Schedule',
  ];
  public $prg_process_payroll_parameters = [
-  'Payroll Name' => 'search_payroll',
-  'Schedule Id/Date' => 'search_payroll_schedule',
+    'Payroll Name' => 'search_payroll',
+    'Schedule Id/Date' => 'search_payroll_schedule',
  ];
  public $prg_process_payroll_details = [
-  'name' => 'Process Payroll',
-  'description' => 'Process Payroll',
+    'name' => 'Process Payroll',
+    'description' => 'Process Payroll',
  ];
-
  public $pageTitle = " Payroll Schedule "; //page Title
  public $hr_payroll_id;
  public $hr_payroll_schedule_id;
@@ -77,15 +76,18 @@ class hr_payroll_schedule extends dbObject {
  public static function find_all_lines() {
   $sql = " SELECT * FROM " . self::$table_name;
   $sql .= " WHERE status = 'OPEN' ORDER BY scheduled_date ASC ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
  public static function find_open_schedules_by_headerId($hr_payroll_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE status = 'OPEN' AND hr_payroll_id = '{$hr_payroll_id}' "
-   . " ORDER BY scheduled_date ASC ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE status = 'OPEN' AND hr_payroll_id = :hr_payroll_id "
+     . " ORDER BY scheduled_date ASC ";
+  global $db;
+  $value_a = ['hr_payroll_id' => $hr_payroll_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
@@ -96,18 +98,22 @@ class hr_payroll_schedule extends dbObject {
 
  public static function find_latest_open_schedule_by_headerId($header_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE hr_payroll_id = '{$header_id}' AND status = 'OPEN' ";
+  $sql .= " WHERE hr_payroll_id = :hr_payroll_id AND status = 'OPEN' ";
   $sql .= " ORDER BY scheduled_date  ASC ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['hr_payroll_id' => $header_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_optionId_lineCode($header_id, $code) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where code={$code} AND hr_payroll_id={$header_id}  ";
-   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+     " where code={$code} AND hr_payroll_id= :hr_payroll_id ";
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['hr_payroll_id' => $header_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_push($result) : $result;
  }
 

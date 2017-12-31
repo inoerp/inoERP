@@ -64,49 +64,7 @@
    
   }
 
-//  Public static function find_all_lines_by_category($hr_leave_transaction_header_id, $category = 'E_REGULAR') {
-//   if (empty($hr_leave_transaction_header_id)) {
-//    return null;
-//   }
-//   $sql = " SELECT * 
-//       FROM hr_leave_transaction_header eeh, 
-//       hr_leave_transaction_line eel,
-//       hr_compensation_element hce
-//       WHERE eel.hr_leave_transaction_header_id = eeh.hr_leave_transaction_header_id
-//       AND eeh.hr_leave_transaction_header_id = '{$hr_leave_transaction_header_id}'
-//        AND hce.hr_compensation_element_id = eel.element_id
-//        
-//";
-//   if (is_array($category)) {
-//    $sql .= " AND hce.category IN " . "( '" . implode("','", $category) . "' )";
-//   } else {
-//    $sql .= " AND hce.category = '{$category}' ";
-//   }
-//   $result = self::find_by_sql($sql);
-//   return !empty($result) ? $result : false;
-//  }
-//
-//  Public static function find_all_regular_lines($hr_leave_transaction_header_id) {
-//   return self::find_all_lines_by_category($hr_leave_transaction_header_id, 'E_REGULAR');
-//  }
-//
-//  Public static function find_all_basic_lines($hr_leave_transaction_header_id) {
-//   return self::find_all_lines_by_category($hr_leave_transaction_header_id, 'E_BASIC');
-//  }
-//
-//  Public static function find_all_basic_regular_lines($hr_leave_transaction_header_id) {
-//   return self::find_all_lines_by_category($hr_leave_transaction_header_id, array('E_BASIC', 'E_REGULAR'));
-//  }
-//
-//  public static function find_by_employeeId($employee_id) {
-//   $sql = " SELECT * 
-//       FROM hr_leave_transaction_header eeh 
-//       WHERE eeh.employee_id = '{$employee_id}'   
-//        LIMIT 1
-//";
-//   $result = self::find_by_sql($sql);
-//   return !empty($result) ? array_pop($result) : false;
-//  }
+
 
  }
 

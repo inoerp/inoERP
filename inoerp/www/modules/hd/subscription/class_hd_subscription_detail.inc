@@ -53,8 +53,11 @@ class hd_subscription_detail extends dbObject {
  public $msg;
 
  public static function find_by_hd_subscription_lineId($hd_subscription_line_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where hd_subscription_line_id = '{$hd_subscription_line_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where hd_subscription_line_id = :hd_subscription_line_id ";
+  global $db;
+  $value_a = ['hd_subscription_line_id' => $hd_subscription_line_id];
+  $result_array = $db->findBySql($sql, $value_a);
+  
   return $result_array;
  }
 

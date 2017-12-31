@@ -8,48 +8,48 @@ class mdm_price_list_line extends dbObject {
  public static $key_column = "line_type";
  public static $module = "mdm";
  public static $line_type_a = [
-  'ITEM' => 'Item',
-  'DEFAULT' => 'Default',
-  'CATEGORY' => 'Catefory'];
+    'ITEM' => 'Item',
+    'DEFAULT' => 'Default',
+    'CATEGORY' => 'Catefory'];
  public $field_a = [
-  'mdm_price_list_line_id',
-  'mdm_price_list_header_id',
-  'line_type',
-  'org_id',
-  'item_id_m',
-  'uom_id',
-  'unit_price',
-  'formula',
-  'effective_start_date',
-  'effective_end_date',
-  'use_price_break_cb',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'mdm_price_list_line_id',
+    'mdm_price_list_header_id',
+    'line_type',
+    'org_id',
+    'item_id_m',
+    'uom_id',
+    'unit_price',
+    'formula',
+    'effective_start_date',
+    'effective_end_date',
+    'use_price_break_cb',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $initial_search = [
-  'mdm_price_list_line_id',
-  'mdm_price_list_header_id',
-  'line_type',
-  'item_id_m',
+    'mdm_price_list_line_id',
+    'mdm_price_list_header_id',
+    'line_type',
+    'item_id_m',
  ];
  public $column = [
-  'mdm_price_list_line_id',
-  'mdm_price_list_header_id',
-  'line_type',
-  'item_id_m',
+    'mdm_price_list_line_id',
+    'mdm_price_list_header_id',
+    'line_type',
+    'item_id_m',
  ];
  public $requiredField = [
-  'mdm_price_list_header_id',
-  'line_type',
+    'mdm_price_list_header_id',
+    'line_type',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "mdm_price_list_header_id"
+    "mdm_price_list_header_id"
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  'item_description',
+    "item_number",
+    'item_description',
  ];
  public $pageTitle = " Price List Line "; //page Title
  public $mdm_price_list_line_id;
@@ -74,7 +74,8 @@ class mdm_price_list_line extends dbObject {
 
  public static function find_all_lines() {
   $sql = " SELECT * FROM " . self::$table_name;
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return $result;
  }
 
@@ -85,9 +86,14 @@ class mdm_price_list_line extends dbObject {
 
  public static function find_by_optionId_lineCode($header_id, $code) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where code={$code} AND mdm_price_list_header_id={$header_id}  ";
+     " where code={$code} AND mdm_price_list_header_id=  :mdm_price_list_header_id ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+
+
+  global $db;
+  $value_a = ['mdm_price_list_header_id' => $header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_push($result) : $result;
  }
 
@@ -102,13 +108,17 @@ class mdm_price_list_line extends dbObject {
   $sql = " 
 	 SELECT *
 		FROM mdm_price_list_line 
-		WHERE  mdm_price_list_header_id = '{$mdm_price_list_header_id}'
-		AND item_id_m = '{$item_id_m}'
-		AND effective_start_date < '{$price_date}'
-		AND(effective_end_date IS NULL OR effective_end_date > '{$price_date}')
+		WHERE  mdm_price_list_header_id = :mdm_price_list_header_id
+		AND item_id_m = :item_id_m
+		AND effective_start_date < :effective_start_date
+		AND(effective_end_date IS NULL OR effective_end_date > :effective_end_date )
 ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['mdm_price_list_header_id' => $mdm_price_list_header_id, 'item_id_m' => $item_id_m, 'effective_start_date' => $price_date, 'effective_end_date' => $price_date];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -124,7 +134,7 @@ class mdm_price_list_line extends dbObject {
     AND use_price_break_cb IS NULL
 ";
   $sql = ino_perPageSql_i($sql, 1);
-  $sql.= "
+  $sql .= "
     UNION
     SELECT pll.mdm_price_list_line_id, pll.item_id_m, pll.mdm_price_list_header_id, pll.uom_id, pld.unit_price
 		FROM mdm_price_list_line  pll,
@@ -138,7 +148,7 @@ class mdm_price_list_line extends dbObject {
 		AND(pld.qty_to IS NULL OR pld.qty_to >= '{$this->quantity}')
     AND pll.use_price_break_cb IS NOT NULL
 ";
-    $sql = ino_perPageSql_i($sql, 1);
+  $sql = ino_perPageSql_i($sql, 1);
 
 //    echo $sql;
   $result = $this->findBySql($sql);

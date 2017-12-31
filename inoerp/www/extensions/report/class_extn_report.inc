@@ -21,62 +21,62 @@ class extn_report extends dbObject {
  public static $module = "extension";
  //  data base variables as stored database column name
  public static $system_info = [
-  'name' => 'extn_report',
-  'number' => '10036',
-  'description' => 'Create & Update extn_report',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('extn_report_path'),
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 23
+    'name' => 'extn_report',
+    'number' => '10036',
+    'description' => 'Create & Update extn_report',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('extn_report_path'),
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 23
  ];
  public static $condition_operator_type_a = [
-  'database' => 'Database',
-  'manual' => 'Manual',
-  'remove' => 'Remove'
+    'database' => 'Database',
+    'manual' => 'Manual',
+    'remove' => 'Remove'
  ];
  public $field_a = [
-  'extn_report_id',
-  'report_name',
-  'description',
-  'custom_div_class',
-  'module_code',
-  'logical_settings',
-  'query_v',
-  'report_columns',
-  'display_type',
-  'page',
-  'page_title',
-  'page_header',
-  'page_footer',
-  'use_pager_cb',
-  'default_per_page',
-  'no_of_grid_columns',
-  'path',
-  'path_id',
-  'block_id',
-  'block_title',
-  'show_graph_only_cb',
-  'rev_enabled_cb',
-  'dont_show_graph_cb',
-  'rev_number',
-  'header_text',
-  'footer_text',
-  'remove_default_header_cb',
-  'list_type',
-  'chart_type',
-  'chart_width',
-  'chart_height',
-  'chart_label',
-  'chart_value',
-  'chart_legend',
-  'chart_legend2',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'extn_report_id',
+    'report_name',
+    'description',
+    'custom_div_class',
+    'module_code',
+    'logical_settings',
+    'query_v',
+    'report_columns',
+    'display_type',
+    'page',
+    'page_title',
+    'page_header',
+    'page_footer',
+    'use_pager_cb',
+    'default_per_page',
+    'no_of_grid_columns',
+    'path',
+    'path_id',
+    'block_id',
+    'block_title',
+    'show_graph_only_cb',
+    'rev_enabled_cb',
+    'dont_show_graph_cb',
+    'rev_number',
+    'header_text',
+    'footer_text',
+    'remove_default_header_cb',
+    'list_type',
+    'chart_type',
+    'chart_width',
+    'chart_height',
+    'chart_label',
+    'chart_value',
+    'chart_legend',
+    'chart_legend2',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 // public static $array_field_array =[
 //		 "path"
@@ -84,77 +84,75 @@ class extn_report extends dbObject {
 //variables used for showing data
 
  public $column = [
-  'extn_report_id',
-  'report_name',
-  'description',
-  'custom_div_class',
-  'module_code',
-  'logical_settings',
-  'report_columns',
-  'display_type',
-  'page',
-  'page_title',
-  'page_header',
-  'page_footer',
-  'use_pager_cb',
-  'default_per_page',
-  'no_of_grid_columns',
-  'path',
-  'path_id',
-  'block_id',
-  'block_title',
-  'show_graph_only_cb',
-  'rev_enabled_cb',
-  'rev_number',
-  'header_text',
-  'footer_text',
-  'remove_default_header_cb',
-  'list_type',
-  'chart_type',
-  'chart_width',
-  'chart_height',
-  'chart_label',
-  'chart_value',
-  'chart_legend',
-  'chart_legend2',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'extn_report_id',
+    'report_name',
+    'description',
+    'custom_div_class',
+    'module_code',
+    'logical_settings',
+    'report_columns',
+    'display_type',
+    'page',
+    'page_title',
+    'page_header',
+    'page_footer',
+    'use_pager_cb',
+    'default_per_page',
+    'no_of_grid_columns',
+    'path',
+    'path_id',
+    'block_id',
+    'block_title',
+    'show_graph_only_cb',
+    'rev_enabled_cb',
+    'rev_number',
+    'header_text',
+    'footer_text',
+    'remove_default_header_cb',
+    'list_type',
+    'chart_type',
+    'chart_width',
+    'chart_height',
+    'chart_label',
+    'chart_value',
+    'chart_legend',
+    'chart_legend2',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  "extn_report_id",
-  "report_name",
-  "description",
+    "extn_report_id",
+    "report_name",
+    "description",
  ];
  public $checkbox = [
-  "rev_enabled_cb",
-  'update_parent_id_cb',
-  'use_pager_cb',
-  'create_block_cb'
+    "rev_enabled_cb",
+    'update_parent_id_cb',
+    'use_pager_cb',
+    'create_block_cb'
  ];
  public $base_encoded_array = [
-  "query_v"
+    "query_v"
  ];
  public $requiredField = [
-  "report_name",
-  "query_v"
+    "report_name",
+    "query_v"
  ];
  public $numberField = [
-  'chart_width',
-  'chart_height',
+    'chart_width',
+    'chart_height',
  ];
  public $fields_inForm_notInDataBase = [
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_extn_report_path' => 1,
+    '_show_update_path' => 1,
+    '_show_extn_report_path' => 1,
  ];
- 
-  public $option_lists = [
-  'module_code' => 'SYS_MODULE'
+ public $option_lists = [
+    'module_code' => 'SYS_MODULE'
  ];
-  
  public $pageTitle = " Report Builder "; //page Title
  public $extn_report_id;
  public $report_name;
@@ -233,15 +231,20 @@ class extn_report extends dbObject {
  public static function find_by_blockId($block_id) {
   $sql = " SELECT * from ";
   $sql .= self::$table_name;
-  $sql .= " WHERE block_id = '{$block_id}' ";
+  $sql .= " WHERE block_id = :block_id ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['block_id' => $block_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
  public function _before_save() {
+  global $db;
+
   if (!empty($this->query_v)) {
-   $result = self::find_by_sql(base64_decode($this->query_v));
+   $result = $db->findBySql(base64_decode($this->query_v));
    if ($result) {
     $this->report_columns = json_encode(array_keys((array) $result[0]));
    } else {
@@ -348,7 +351,8 @@ class extn_report extends dbObject {
    if (!empty($values)) {
     $column_name = $values . '_id';
     $query = "SHOW COLUMNS FROM $values WHERE Field = '{$column_name}' ";
-    $result = $db->find_by_sql($query);
+    global $db;
+    $result = $db->findBySql($sql);
     if ((count($result) > 0) && (!empty($result[0]->field))) {
      $all_id_columns_array[] = $result[0]->field;
     }
@@ -364,7 +368,8 @@ class extn_report extends dbObject {
    if (!empty($values)) {
     $column_name = $values . '_id';
     $query = "SHOW COLUMNS FROM $values WHERE Field = '{$column_name}' ";
-    $result = self::find_by_sql($query);
+     global $db;
+  $result = $db->findBySql($sql);
     if ((count($result) > 0) && (!empty($result[0]->field))) {
      yield $result[0]->field;
     }
@@ -420,7 +425,7 @@ class extn_report extends dbObject {
 //     $content_string .= '<img src=" ' . HOME_URL . 'themes/default/images/sort_down_16.png" class="sort_down clickable"></li>';
 //     $content_string .= '</ul></th>';
     }
-    $content_string .='</tr></thead>';
+    $content_string .= '</tr></thead>';
     If (!empty($result)) {
      $content_string .= '<tbody class="form_data_line_tbody search_results tbody_row' . $i . ' " >';
      $count = 0;
@@ -437,7 +442,7 @@ class extn_report extends dbObject {
        continue;
       }
       $count++;
-      $content_string .='<tr class="row' . $recod_k . '">';
+      $content_string .= '<tr class="row' . $recod_k . '">';
       $content_string .= "<td>$count</td>";
       $new_start1 = ($i * ($no_of_columns_per_tab - 1)) + $i;
       $new_end1 = $new_start1 + ($no_of_columns_per_tab - 1);
@@ -462,7 +467,7 @@ class extn_report extends dbObject {
    }
    $content_string .= '</div>';
   }
-  $content_string .='</div>';
+  $content_string .= '</div>';
   $content_string .= '<div id="extn_report_pagination_table" class="ajax_extn_report pagination">';
   $content_string .= $pagination->show_pagination();
   $content_string .= '</div>';
@@ -526,7 +531,7 @@ class extn_report extends dbObject {
   if ($result) {
    $con_count = 0;
    if (count($result) > 0) {
-    $content_string .='<ul class="extn_report top_margin10 main_list page_wise_list">';
+    $content_string .= '<ul class="extn_report top_margin10 main_list page_wise_list">';
     foreach ($result as $recod_k => $records) {
 
      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
@@ -539,16 +544,16 @@ class extn_report extends dbObject {
       continue;
      }
      foreach ($records as $r_k => $r_v) {
-      $content_string .="<li class=\"$r_k \">" . ucwords(str_replace('_', ' ', $r_k)) . ' : ' . $r_v . "</li> ";
+      $content_string .= "<li class=\"$r_k \">" . ucwords(str_replace('_', ' ', $r_k)) . ' : ' . $r_v . "</li> ";
      }
      $content_string .= '</ul></li>';
 
      $con_count++;
     }
-    $content_string .='</ul>';
+    $content_string .= '</ul>';
    }
   }
-  $content_string .='</div>';
+  $content_string .= '</div>';
   $content_string .= '<div id="extn_report_pagination_table" class="ajax_extn_report pagination">';
   $content_string .= $pagination->show_pagination();
   $content_string .= '</div>';
@@ -585,7 +590,7 @@ class extn_report extends dbObject {
      }
      $content_string .= '<td>';
      foreach ($records as $r_k => $r_v) {
-      $content_string .="<span class=\"extn_report_grid $r_k \">" . ucwords(str_replace('_', ' ', $r_k)) . ' : ' . $r_v . "</span> ";
+      $content_string .= "<span class=\"extn_report_grid $r_k \">" . ucwords(str_replace('_', ' ', $r_k)) . ' : ' . $r_v . "</span> ";
      }
      $content_string .= '</td>';
      $column_count++;
@@ -597,8 +602,8 @@ class extn_report extends dbObject {
     }
    }
   }
-  $content_string .='</tbody></table>';
-  $content_string .='</div>';
+  $content_string .= '</tbody></table>';
+  $content_string .= '</div>';
   $content_string .= '<div id="extn_report_pagination_table" class="ajax_extn_report pagination">';
   $content_string .= $pagination->show_pagination();
   $content_string .= '</div>';
@@ -608,13 +613,13 @@ class extn_report extends dbObject {
  public function update_extn_report_query_by_userInputs() {
   $extn_report_i = extn_report::find_by_id($this->extn_report_id);
   if (DB_TYPE == 'ORACLE') {
-   $extn_report_i->query_v = !empty($extn_report_i->query_v) ?  stream_get_contents($extn_report_i->query_v) : null ;
-   $extn_report_i->logical_settings = !empty($extn_report_i->logical_settings) ?  stream_get_contents($extn_report_i->logical_settings) : null;
-   $extn_report_i->report_columns = !empty($extn_report_i->report_columns)?  stream_get_contents($extn_report_i->report_columns): null;
-   $extn_report_i->page_header = !empty($extn_report_i->page_header) ?  stream_get_contents($extn_report_i->page_header) : null;
+   $extn_report_i->query_v = !empty($extn_report_i->query_v) ? stream_get_contents($extn_report_i->query_v) : null;
+   $extn_report_i->logical_settings = !empty($extn_report_i->logical_settings) ? stream_get_contents($extn_report_i->logical_settings) : null;
+   $extn_report_i->report_columns = !empty($extn_report_i->report_columns) ? stream_get_contents($extn_report_i->report_columns) : null;
+   $extn_report_i->page_header = !empty($extn_report_i->page_header) ? stream_get_contents($extn_report_i->page_header) : null;
    $extn_report_i->page_footer = !empty($extn_report_i->page_footer) ? stream_get_contents($extn_report_i->page_footer) : null;
-   $extn_report_i->header_text =  !empty($extn_report_i->header_text) ? stream_get_contents($extn_report_i->header_text) : null ;
-   $extn_report_i->footer_text =  !empty($extn_report_i->footer_text) ? stream_get_contents($extn_report_i->footer_text) : null;
+   $extn_report_i->header_text = !empty($extn_report_i->header_text) ? stream_get_contents($extn_report_i->header_text) : null;
+   $extn_report_i->footer_text = !empty($extn_report_i->footer_text) ? stream_get_contents($extn_report_i->footer_text) : null;
   }
 
 

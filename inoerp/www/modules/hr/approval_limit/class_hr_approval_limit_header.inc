@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -22,42 +23,42 @@ class hr_approval_limit_header extends dbObject {
  public static $key_column = 'limit_name';
  public static $module = "hr";
  public static $system_info = [
-  'name' => 'Approval Limit',
-  'number' => '3101',
-  'description' => 'HR Approval Limit',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('hr_approval_limit_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 1
+    'name' => 'Approval Limit',
+    'number' => '3101',
+    'description' => 'HR Approval Limit',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('hr_approval_limit_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 1
  ];
  public $field_a = [
-  'hr_approval_limit_header_id',
-  'bu_org_id',
-  'limit_name',
-  'description',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_approval_limit_header_id',
+    'bu_org_id',
+    'limit_name',
+    'description',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'hr_approval_limit_header_id',
-  'limit_name',
+    'hr_approval_limit_header_id',
+    'limit_name',
  ];
  public $requiredField = [
-  'bu_org_id',
-  'limit_name',
+    'bu_org_id',
+    'limit_name',
  ];
  public $pageTitle = " Approval Limit "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $hr_approval_limit_header_id;
  public $bu_org_id;
@@ -91,7 +92,8 @@ class hr_approval_limit_header extends dbObject {
   } else {
    $sql .= " AND hce.category = '{$category}' ";
   }
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
@@ -110,10 +112,14 @@ class hr_approval_limit_header extends dbObject {
  public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * 
        FROM hr_approval_limit_header eeh 
-       WHERE eeh.employee_id = '{$employee_id}'   
+       WHERE eeh.employee_id = :employee_id   
 ";
-       $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  $sql = ino_perPageSql_i($sql, 1);
+
+  global $db;
+  $value_a = ['employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

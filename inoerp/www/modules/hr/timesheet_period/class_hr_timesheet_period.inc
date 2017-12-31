@@ -24,48 +24,48 @@ class hr_timesheet_period extends dbObject {
  public static $js_fileName = 'modules/hr/timesheet_period/timesheet_period.js';
 //  data base variables as stored database column name
  public static $system_info = [
-  'name' => 'HR Timesheet Period',
-  'number' => '3123',
-  'description' => 'hr_timesheet_period',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 17
+    'name' => 'HR Timesheet Period',
+    'number' => '3123',
+    'description' => 'hr_timesheet_period',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 17
  ];
  public static $status_a = [
-  'OPEN' => 'Open',
-  'CLOSED' => 'Closed'
+    'OPEN' => 'Open',
+    'CLOSED' => 'Closed'
  ];
  public $field_a = [
-  'hr_timesheet_period_id',
-  'timesheet_period',
-  'from_date',
-  'to_date',
-  'max_work_hour',
-  'max_billable_hour',
-  'description',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_timesheet_period_id',
+    'timesheet_period',
+    'from_date',
+    'to_date',
+    'max_work_hour',
+    'max_billable_hour',
+    'description',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $initial_search = [
-  'timesheet_period',
-  'description',
+    'timesheet_period',
+    'description',
  ];
  public $requiredField = [
-  'timesheet_period',
-  'from_date',
-  'to_date',
-  'status',
+    'timesheet_period',
+    'from_date',
+    'to_date',
+    'status',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = "HR Timesheet Period"; //page Title
  public $hr_timesheet_period_id;
@@ -82,20 +82,22 @@ class hr_timesheet_period extends dbObject {
  public $last_update_date;
  public $time;
  public $msg;
- 
-  public static function find_by_fromDate($date ) {
+
+ public static function find_by_fromDate($date) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE from_date = '{$date}'  ";
+  $sql .= " WHERE from_date = :from_date  ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['from_date' => $date];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'mode',
-   'show_block'
+     'mode',
+     'show_block'
   ];
 
   return $multi_select_hidden;

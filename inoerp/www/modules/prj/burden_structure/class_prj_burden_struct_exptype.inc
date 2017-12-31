@@ -56,26 +56,6 @@ class prj_burden_struct_exptype extends dbObject {
   return $po_types;
  }
 
-// public static function find_by_hd_ro_headerId($hd_ro_header_id) {
-//  $sql = "SELECT * FROM " . self::$table_name . " where hd_ro_header_id = '{$hd_ro_header_id}'";
-//  $result_array = self::find_by_sql($sql);
-//  return $result_array;
-// }
-
- public static function find_by_orgId_itemId_ssd($org_id, $item_id_m = '', $ssd = '') {
-  $sql = " SELECT * FROM ";
-  $sql .= self::$table_name;
-  $sql .= " WHERE shipping_org_id = '{$org_id}'";
-  $sql .= " AND schedule_ship_date IS NOT NULL ";
-  if (!empty($item_id_m)) {
-   $sql .= " AND item_id_m = '{$item_id_m}'";
-  }
-  if (!empty($ssd)) {
-   $sql .= " AND schedule_ship_date >= '{$ssd}'";
-  }
-  $result_array = self::find_by_sql($sql);
-  return !empty($result_array) ? $result_array : false;
- }
 
 }
 

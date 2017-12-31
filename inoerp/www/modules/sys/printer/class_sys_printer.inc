@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,12 +8,11 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * sys_printer
  *
  */
-
-
 class sys_printer extends dbObject {
 
  public static $table_name = "sys_printer";
@@ -20,38 +20,38 @@ class sys_printer extends dbObject {
  public static $key_column = 'printer_name';
  public static $module = "sys";
  public static $system_info = [
-  'name' => 'Printer',
-  'number' => '9106',
-  'description' => 'Create & Mainten Printer',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'sys',
-  'weight' => 6
+    'name' => 'Printer',
+    'number' => '9106',
+    'description' => 'Create & Mainten Printer',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'sys',
+    'weight' => 6
  ];
  public $field_a = [
-  'sys_printer_id',
-  'printer_name',
-  'printer_type',
-  'manufacturer',
-  'description',
-  'ip_address',
-  'port_number',
-  'model_number',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'sys_printer_id',
+    'printer_name',
+    'printer_type',
+    'manufacturer',
+    'description',
+    'ip_address',
+    'port_number',
+    'model_number',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $initial_search = [
-  'printer_name',
-  'printer_type',
+    'printer_name',
+    'printer_type',
  ];
  public $requiredField = [
-  'printer_name',
-  'ip_address',
-  'port_number',
+    'printer_name',
+    'ip_address',
+    'port_number',
  ];
  public $sys_printer_id;
  public $printer_name;
@@ -66,8 +66,8 @@ class sys_printer extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Printer  "; //page Title
 
@@ -81,8 +81,13 @@ class sys_printer extends dbObject {
  public static function find_by_code($code) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE hold_code = '{$code}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE hold_code = :hold_code ";
+
+  global $db;
+  $value_a = ['hold_code' => $code];
+  $result = $db->findBySql($sql, $value_a);
+
+
   return !empty($result) ? array_pop($result) : false;
  }
 

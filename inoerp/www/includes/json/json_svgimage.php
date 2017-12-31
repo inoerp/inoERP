@@ -1,12 +1,16 @@
-<?php 
-require_once __DIR__.'/../basics/wloader.inc';
-include_once(__DIR__."/../../../inoerp_server/includes/basics/basics.inc"); ?>
+<?php
+require_once __DIR__ . '/../basics/wloader.inc';
+include_once(__DIR__ . "/../../../inoerp_server/includes/basics/basics.inc");
+?>
 <link href="<?php echo HOME_URL; ?>css/getsvgimage.css" media="all" rel="stylesheet" type="text/css" />
 <?php
 if (!empty($_GET['find_result'])) {
  if (!empty($_GET['query_v']) && !empty($_GET['chart_label']) && !empty($_GET['chart_value'])) {
   $svgimg = new getsvgimage();
-  $result = $result1 = dbObject::find_by_sql($_GET['query_v']);
+
+//  global $db;
+//  $value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+  $result = $db->findBySql($_GET['query_v']);
 
   $chart_label = str_replace('.', '__', ($_GET['chart_label']));
   $chart_value = str_replace('.', '__', ($_GET['chart_value']));
@@ -19,7 +23,7 @@ if (!empty($_GET['find_result'])) {
   $legend_name = str_replace('.', '__', $legend_name);
   $legend_name2 = str_replace('.', '__', $legend_name2);
 
-  
+
 //getSvgData($result, $legend_name, $chart_label, $chart_value, $legend, $labels, $data);
   $svgimg->setProperty('_chart_name', $chart_name);
   $svgimg->setProperty('_chart_width', $chart_width);
@@ -101,11 +105,11 @@ if (!empty($_GET['find_result'])) {
    $chart_legend2 = !empty($_GET['chart_legend2']) ? ($_GET['chart_legend2']) : $report->chart_legend2;
    $chart_label = !empty($_GET['chart_label']) ? ($_GET['chart_label']) : $report->chart_label;
    $chart_value = !empty($_GET['chart_type']) ? ($_GET['chart_value']) : $report->chart_value;
-   
-   if(empty($chart_value)){
+
+   if (empty($chart_value)) {
     return false;
    }
-   
+
    $svgimg->setProperty('_chart_name', $report->report_name);
    $svgimg->setProperty('_chart_width', $chart_width);
    $svgimg->setProperty('_chart_height', $chart_height);
@@ -117,10 +121,10 @@ if (!empty($_GET['find_result'])) {
    $svgimg->chart_value = str_replace('.', '__', $chart_value);
    $svg_chart = $svgimg->getSvgChart_forView();
    echo '<div id="return_divId">' . $svg_chart . '</div>';
-  } 
- }else {
-   return false;
   }
+ } else {
+  return false;
+ }
 }
 
 //  function getSvgData($result, $legend_name, $chart_label, $chart_value, &$legend, &$labels, &$data) {
@@ -157,4 +161,4 @@ if (!empty($_GET['find_result'])) {
 //    }
 //   }
 //  }
-  ?>
+?>

@@ -22,105 +22,105 @@ class am_planned_wo extends dbObject {
  public static $key_column = 'am_asset_id';
  public static $module = "wip";
  public static $system_info = [
-  'name' => 'AM Work Order',
-  'number' => '4112',
-  'description' => 'Maintenance Work Order',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('am_wo_routing_line', 'am_wo_routing_detail', 'am_wo_bom'),
-  'primary_entity_cb' => '',
-  'module_name' => 'am',
-  'weight' => 6
+    'name' => 'AM Work Order',
+    'number' => '4112',
+    'description' => 'Maintenance Work Order',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('am_wo_routing_line', 'am_wo_routing_detail', 'am_wo_bom'),
+    'primary_entity_cb' => '',
+    'module_name' => 'am',
+    'weight' => 6
  ];
  public static $wo_status_a = [
-  'UN_RELEASED' => 'UnReleased',
-  'RELEASED' => 'Released',
-  'ON_HOLD' => 'On Hold',
-  'COMPLETED' => 'Completed',
-  'WAITING_FOR_CLOSING' => 'Waiting For Closing',
-  'CLOSED' => 'Closed',
+    'UN_RELEASED' => 'UnReleased',
+    'RELEASED' => 'Released',
+    'ON_HOLD' => 'On Hold',
+    'COMPLETED' => 'Completed',
+    'WAITING_FOR_CLOSING' => 'Waiting For Closing',
+    'CLOSED' => 'Closed',
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'am_wo_header_id',
-  'am_asset_id',
-  'activity_item_id_m',
-  'wo_number',
-  'parent_wo_id',
-  'org_id',
-  'wip_accounting_group_id',
-  'wo_type',
-  'wo_status',
-  'start_date',
-  'completion_date',
-  'quantity',
-  'reference_bom_item_id_m',
-  'bom_exploded_cb',
-  'routing_exploded_cb',
-  'reference_routing_item_id_m',
-  'department_id',
-  'shutdown_type',
-  'failure_type',
-  'failure_cause',
-  'released_date',
-  'failure_resolution',
-  'suggested_start_date',
-  'schedule_group',
-  'build_sequence',
-  'line',
-  'scheduling_priority',
-  'closed_date',
-  'suggested_end_date',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'am_wo_header_id',
+    'am_asset_id',
+    'activity_item_id_m',
+    'wo_number',
+    'parent_wo_id',
+    'org_id',
+    'wip_accounting_group_id',
+    'wo_type',
+    'wo_status',
+    'start_date',
+    'completion_date',
+    'quantity',
+    'reference_bom_item_id_m',
+    'bom_exploded_cb',
+    'routing_exploded_cb',
+    'reference_routing_item_id_m',
+    'department_id',
+    'shutdown_type',
+    'failure_type',
+    'failure_cause',
+    'released_date',
+    'failure_resolution',
+    'suggested_start_date',
+    'schedule_group',
+    'build_sequence',
+    'line',
+    'scheduling_priority',
+    'closed_date',
+    'suggested_end_date',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $initial_search = [
-  'am_wo_header_id',
-  'am_asset_id',
-  'wo_number',
-  'org_id',
-  'wo_type',
-  'start_date',
-  'wo_status'
+    'am_wo_header_id',
+    'am_asset_id',
+    'wo_number',
+    'org_id',
+    'wo_type',
+    'start_date',
+    'wo_status'
  ];
  public $checkbox = [
-  'bom_exploded_cb',
-  'routing_exploded_cb'
+    'bom_exploded_cb',
+    'routing_exploded_cb'
  ];
  public $fields_inForm_notInDataBase = [
-  'remaining_quantity',
-  "item_number",
-  'processing_lt',
-  'item_id_m',
-  "am_asset_number",
-  'item_number',
-  'activity_item_number',
-  'am_asset_type'
+    'remaining_quantity',
+    "item_number",
+    'processing_lt',
+    'item_id_m',
+    "am_asset_number",
+    'item_number',
+    'activity_item_number',
+    'am_asset_type'
  ];
  public $requiredField = [
-  'org_id',
-  'wip_accounting_group_id',
-  'wo_type',
-  'start_date'
+    'org_id',
+    'wip_accounting_group_id',
+    'wo_type',
+    'start_date'
  ];
  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
+    'org_id' => 'org_inv_name_default',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
-  '_extra_path' => array('form.php?class_name=wip_move_transaction&mode=9' => 'Move',
-   'form.php?class_name=wip_material_transaction&mode=9' => 'Material Tnx',
-   'form.php?class_name=wip_resource_transaction&mode=9' => 'Resource Tnx',)
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
+    '_extra_path' => array('form.php?class_name=wip_move_transaction&mode=9' => 'Move',
+       'form.php?class_name=wip_material_transaction&mode=9' => 'Material Tnx',
+       'form.php?class_name=wip_resource_transaction&mode=9' => 'Resource Tnx',)
  ];
  public $pageTitle = " WO - Maintenance Work Order "; //page Title
  public $option_lists = [
-  'am_wo_type' => 'am_wo_TYPE',
-  'am_wo_status' => 'am_wo_STATUS',
+    'am_wo_type' => 'am_wo_TYPE',
+    'am_wo_status' => 'am_wo_STATUS',
  ];
  public $am_wo_header_id;
  public $am_asset_id;
@@ -175,7 +175,7 @@ class am_planned_wo extends dbObject {
  Public static function find_by_woNumber($wo_number) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE wo_number = '{$wo_number}' ";
+  $sql .= " WHERE wo_number = :wo_number ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -186,7 +186,9 @@ class am_planned_wo extends dbObject {
     break;
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['wo_number' => $wo_number];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? array_shift($result) : false;
  }

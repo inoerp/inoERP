@@ -22,40 +22,40 @@ class cc_co_template_header extends dbObject {
  public static $key_column = 'template_name';
  public static $module = "cc";
  public static $system_info = [
-  'name' => 'CC Template',
-  'number' => '9303',
-  'description' => 'Change Control Template',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('cc_co_template_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'cc',
-  'weight' => '3'
+    'name' => 'CC Template',
+    'number' => '9303',
+    'description' => 'Change Control Template',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('cc_co_template_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'cc',
+    'weight' => '3'
  ];
  public $field_a = [
-  'cc_co_template_header_id',
-  'template_name',
-  'org_id',
-  'description',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'cc_co_template_header_id',
+    'template_name',
+    'org_id',
+    'description',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'template_name'
+    'template_name'
  ];
  public $requiredField = [
-  'template_name',
+    'template_name',
  ];
  public $pageTitle = " Change Control Template "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $cc_co_template_header_id;
  public $template_name;
@@ -89,7 +89,9 @@ class cc_co_template_header extends dbObject {
   } else {
    $sql .= " AND hce.category = '{$category}' ";
   }
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
+
   return !empty($result) ? $result : false;
  }
 
@@ -105,24 +107,6 @@ class cc_co_template_header extends dbObject {
   return self::find_all_lines_by_category($cc_co_template_header_id, array('E_BASIC', 'E_REGULAR'));
  }
 
- public static function find_by_employeeId($employee_id) {
-  $sql = " SELECT * 
-       FROM cc_co_template_header eeh 
-       WHERE eeh.employee_id = '{$employee_id}'   
-        
-";
-         switch (DB_TYPE) {
-   case 'ORACLE' :
-    $sql .= ' AND ' . ino_perPageSql(1);
-    break;
-
-   default:
-    $sql .= ino_perPageSql(1);
-    break;
-  }
-  $result = self::find_by_sql($sql);
-  return !empty($result) ? array_pop($result) : false;
- }
 
 }
 

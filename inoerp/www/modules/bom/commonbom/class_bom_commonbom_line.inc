@@ -8,33 +8,33 @@ class bom_commonbom_line extends dbObject {
  public static $key_column = 'bom_line_id';
  public static $module = "bom";
  public $field_a = [
-  'bom_commonbom_line_id',
-  'bom_header_id',
-  'bom_line_id',
-  'routing_sequence',
-  'planning_percentage',
-  'yield',
-  'include_in_cost_rollup_cb',
-  'wip_supply_type',
-  'supply_sub_inventory',
-  'supply_locator',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'bom_commonbom_line_id',
+    'bom_header_id',
+    'bom_line_id',
+    'routing_sequence',
+    'planning_percentage',
+    'yield',
+    'include_in_cost_rollup_cb',
+    'wip_supply_type',
+    'supply_sub_inventory',
+    'supply_locator',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
  public $fields_inForm_notInDataBase = [
-  "component_item_number",
-  "component_description",
-  "component_uom",
+    "component_item_number",
+    "component_description",
+    "component_uom",
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "bom_header_id"
+    "bom_header_id"
  ];
  public $requiredField = [
-  'bom_header_id',
-  'bom_line_id',
+    'bom_header_id',
+    'bom_line_id',
  ];
  public $bom_commonbom_line_id;
  public $bom_header_id;
@@ -69,17 +69,19 @@ class bom_commonbom_line extends dbObject {
 
   $sql = " Select * from ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bom_header_id = '{$bom_headerId}'";
+  $sql .= " WHERE bom_header_id = :bom_header_id ";
 
-  $all_bom_commonbom_lines = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['bom_header_id' => $bom_headerId];
+  $all_bom_commonbom_lines = $db->findBySql($sql, $value_a);
 
-  return $all_bom_commonbom_lines;
+   return $all_bom_commonbom_lines;
  }
 
  public static function find_by_bomHeaderId_lineId($bom_headerId, $line_id) {
   $sql = " Select * from ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bom_header_id = '{$bom_headerId}' AND  bom_line_id = '{$line_id}'  ";
+  $sql .= " WHERE bom_header_id = :bom_header_id AND  bom_line_id = :bom_line_id  ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -89,7 +91,11 @@ class bom_commonbom_line extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result = self::find_by_sql($sql);
+  
+      global $db;
+	$value_a = ['bom_header_id' => $bom_headerId, 'bom_line_id' => $line_id];
+	$result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

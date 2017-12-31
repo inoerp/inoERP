@@ -61,8 +61,11 @@ class prj_project_control extends dbObject {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where wip_wo_header_id= '{$wi_wo_header_id}' ";
-  $result = self::find_by_sql($sql);
+   " where wip_wo_header_id= :wip_wo_header_id ";
+  	  global $db;
+  $value_a = ['wip_wo_header_id' => $wi_wo_header_id];
+  $result = $db->findBySql($sql, $value_a);
+  
   return $result;
  }
 

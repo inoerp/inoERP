@@ -401,7 +401,7 @@ AND fdh.fa_asset_book_id = :fa_asset_book_id
 
 GROUP BY fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id , ast.asset_number,  ast.description, fab.asset_book_name, fab.bu_org_id, fab.type, fab.description ";
   $value_a = ['asset_id' => $asset_id, 'fa_asset_book_id' => $fa_asset_book_id];
-  $result = self::find_by_sql_i($sql, $value_a);
+   $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : new fa_depreciation_line();
  }
 
@@ -432,7 +432,7 @@ AND fdh.fa_asset_book_id = :fa_asset_book_id
 GROUP BY fdh.fa_asset_book_id , fdh.gl_period_id , fdl.asset_id , ast.asset_number,  ast.description, fab.asset_book_name, fab.bu_org_id, fab.type, fab.description, gc.year ";
 
   $value_a = ['asset_id' => $asset_id, 'fa_asset_book_id' => $fa_asset_book_id];
-  $result = self::find_by_sql_i($sql, $value_a);
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : new fa_depreciation_line();
  }
 

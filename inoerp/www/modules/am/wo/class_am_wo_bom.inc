@@ -9,55 +9,55 @@ class am_wo_bom extends dbObject {
  public static $module = "am";
 //  data base variables as stored database column name
  public $field_a = [
-  'am_wo_bom_id',
-  'am_wo_header_id',
-  'bom_sequence',
-  'routing_sequence',
-  'component_item_id_m',
-  'component_revision',
-  'usage_basis',
-  'usage_quantity',
-  'auto_request_material_cb',
-  'effective_start_date',
-  'effective_end_date',
-  'eco_number',
-  'eco_implemented_cb',
-  'planning_percentage',
-  'yield',
-  'include_in_cost_rollup_cb',
-  'wip_supply_type',
-  'supply_sub_inventory',
-  'supply_locator',
-  'required_quantity',
-  'issued_quantity',
-  'ef_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'am_wo_bom_id',
+    'am_wo_header_id',
+    'bom_sequence',
+    'routing_sequence',
+    'component_item_id_m',
+    'component_revision',
+    'usage_basis',
+    'usage_quantity',
+    'auto_request_material_cb',
+    'effective_start_date',
+    'effective_end_date',
+    'eco_number',
+    'eco_implemented_cb',
+    'planning_percentage',
+    'yield',
+    'include_in_cost_rollup_cb',
+    'wip_supply_type',
+    'supply_sub_inventory',
+    'supply_locator',
+    'required_quantity',
+    'issued_quantity',
+    'ef_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $fields_inForm_notInDataBase = [
-  "component_item_number",
-  "component_description",
-  "component_uom",
-  'open_quantity',
-  'serial_generation',
-  'serial_number',
-  'inv_serial_number_id',
-  'lot_generation',
-  'lot_number'
+    "component_item_number",
+    "component_description",
+    "component_uom",
+    'open_quantity',
+    'serial_generation',
+    'serial_number',
+    'inv_serial_number_id',
+    'lot_generation',
+    'lot_number'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'am_wo_header_id'
+    'am_wo_header_id'
  ];
  public $requiredField = [
-  'am_wo_header_id',
-  'bom_sequence',
-  'routing_sequence',
-  'component_item_id_m',
-  'usage_basis',
-  'usage_quantity'
+    'am_wo_header_id',
+    'bom_sequence',
+    'routing_sequence',
+    'component_item_id_m',
+    'usage_basis',
+    'usage_quantity'
  ];
  public $am_wo_bom_id;
  public $am_wo_header_id;
@@ -102,19 +102,25 @@ class am_wo_bom extends dbObject {
  public static function find_by_am_wo_headerId($wi_wo_header_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where am_wo_header_id= '{$wi_wo_header_id}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where am_wo_header_id= :am_wo_header_id ";
+
+  global $db;
+  $value_a = ['am_wo_header_id' => $wi_wo_header_id];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 
  public static function find_by_wipWoHeaderId_and_routingSequence($am_wo_header_id, $routing_sequence) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where am_wo_header_id= '{$am_wo_header_id}' 
-					 AND routing_sequence= '{$routing_sequence}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where am_wo_header_id= :am_wo_header_id 
+					 AND routing_sequence= :routing_sequence ";
+
+  $value_a = ['am_wo_header_id' => $am_wo_header_id, 'routing_sequence' => $routing_sequence];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 

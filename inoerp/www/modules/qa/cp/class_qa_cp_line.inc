@@ -21,35 +21,35 @@ class qa_cp_line extends dbObject {
  public static $key_column = "qa_ce_header_id";
  public static $module = "qa";
  public $field_a = [
-  'qa_cp_line_id',
-  'qa_cp_header_id',
-  'qa_ce_header_id',
-  'description',
-  'sequence',
-  'prompt',
-  'mandatory_cb',
-  'enabled_cb',
-  'readonly_cb',
-  'displayed_cb',
-  'information_cb',
-  'dafault_value',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'qa_cp_line_id',
+    'qa_cp_header_id',
+    'qa_ce_header_id',
+    'description',
+    'sequence',
+    'prompt',
+    'mandatory_cb',
+    'enabled_cb',
+    'readonly_cb',
+    'displayed_cb',
+    'information_cb',
+    'dafault_value',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'qa_ce_header_id',
-  'description',
+    'qa_ce_header_id',
+    'description',
  ];
  public $requiredField = [
-  'qa_cp_header_id',
-  'qa_ce_header_id',
-  'sequence',
+    'qa_cp_header_id',
+    'qa_ce_header_id',
+    'sequence',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Collection Plan Line"; //page Title
  public $qa_cp_line_id;
@@ -69,19 +69,20 @@ class qa_cp_line extends dbObject {
  public $last_update_by;
  public $last_update_date;
 
- public static function find_by_parent_id($qa_cp_header_id , $order_by_field ='', $order_by_seq='') {
+ public static function find_by_parent_id($qa_cp_header_id, $order_by_field = '', $order_by_seq = '') {
   $sql = "  SELECT qcl.qa_cp_line_id , qcl.qa_cp_header_id , qcl.qa_ce_header_id,
 qceh.element_name, qceh.sys_element_name, qceh.data_type, qceh.data_length, qceh.display_type, qceh.element_type,
 qceh.element_label, qceh.option_header_id
 FROM  qa_cp_line qcl,
 qa_ce_header qceh
 WHERE qceh.qa_ce_header_id = qcl.qa_ce_header_id
-AND qcl.qa_cp_header_id = '{$qa_cp_header_id}' ";
+AND qcl.qa_cp_header_id = :qa_cp_header_id ";
 
- $result = self::find_by_sql($sql);
- 
- return !empty($result) ? $result : false;
- 
+  global $db;
+  $value_a = ['qa_cp_header_id' => $qa_cp_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
+  return !empty($result) ? $result : false;
  }
 
 }

@@ -6,65 +6,63 @@ class sys_secondary_field_inst extends dbObject {
  public static $primary_column = "sys_secondary_field_inst_id";
  public static $key_column = 'reference_key_name';
  public static $module = "sys"; //same as gl_journal_source
- 
  public static $system_info = [
-  'name' => 'Secondary Field Instance',
-  'number' => '2906',
-  'description' => 'Secondary Field Instance',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'qa',
-  'weight' => 11
+    'name' => 'Secondary Field Instance',
+    'number' => '2906',
+    'description' => 'Secondary Field Instance',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'qa',
+    'weight' => 11
  ];
- 
  public static $display_type_a = [
-  'TEXT' => 'Text',
-  'SELECT' => 'Select',
-  'MULTI_SELECT' => 'Multi Select',
-  'TEXT_AREA' => 'Text Area',
-  'CHECK_BOX' => 'Check Box',
+    'TEXT' => 'Text',
+    'SELECT' => 'Select',
+    'MULTI_SELECT' => 'Multi Select',
+    'TEXT_AREA' => 'Text Area',
+    'CHECK_BOX' => 'Check Box',
  ];
  public $field_a = [
-  'sys_secondary_field_inst_id',
-  'sys_secondary_field_id',
-  'reference_type',
-  'referece_entity',
-  'reference_key_name',
-  'reference_key_value',
-  'label',
-  'control_type',
-  'control_value',
-  'control_uom',
-  'active_cb',
-  'display_weight',
-  'list_values',
-  'lower_limit',
-  'upper_limit',
-  'list_value_option_type',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'sys_secondary_field_inst_id',
+    'sys_secondary_field_id',
+    'reference_type',
+    'referece_entity',
+    'reference_key_name',
+    'reference_key_value',
+    'label',
+    'control_type',
+    'control_value',
+    'control_uom',
+    'active_cb',
+    'display_weight',
+    'list_values',
+    'lower_limit',
+    'upper_limit',
+    'list_value_option_type',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'sys_secondary_field_inst_id',
-  'sys_secondary_field_id',
-  'label',
+    'sys_secondary_field_inst_id',
+    'sys_secondary_field_id',
+    'label',
  ];
  public $checkbox = [
-  "active_cb",
+    "active_cb",
  ];
  public $serializedFields = [
-  'list_values',
+    'list_values',
  ];
  public $requiredField = [
-  'sys_secondary_field_id',
+    'sys_secondary_field_id',
  ];
  public $fields_inForm_notInDataBase = [
-  "field_name",
-  'field_type'
+    "field_name",
+    'field_type'
  ];
  public $sys_secondary_field_inst_id;
  public $sys_secondary_field_id;
@@ -89,8 +87,8 @@ class sys_secondary_field_inst extends dbObject {
  public $field_name;
  public $field_type;
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = "Secondary Field Instance "; //page Title
 
@@ -111,10 +109,14 @@ class sys_secondary_field_inst extends dbObject {
   $sql .= " FROM sys_secondary_field_inst sefi
     LEFT JOIN sys_secondary_field sef ON sef.sys_secondary_field_id = sefi.sys_secondary_field_id ";
 
-  $sql .= " WHERE sefi.reference_key_name = '{$ref_key}' 
+  $sql .= " WHERE sefi.reference_key_name = :reference_key_name 
 
 ";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['reference_key_name' => $ref_key];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -129,10 +131,14 @@ class sys_secondary_field_inst extends dbObject {
   $sql .= " FROM sys_secondary_field_inst sefi
     LEFT JOIN sys_secondary_field sef ON sef.sys_secondary_field_id = sefi.sys_secondary_field_id ";
 
-  $sql .= " WHERE sefi.reference_key_name = '{$ref_key}' 
+  $sql .= " WHERE sefi.reference_key_name = :reference_key_name 
 
 ";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['reference_key_name' => $ref_key];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -141,9 +147,13 @@ class sys_secondary_field_inst extends dbObject {
 
   $sql = " SELECT * FROM ";
   $sql .= $ef_table;
-  $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' ";
+  $sql .= " WHERE reference_key_name = :reference_key_name AND reference_key_value= :reference_key_value ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['reference_key_name' => $ref_key, 'reference_key_value' => $ref_value];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -213,7 +223,7 @@ class sys_secondary_field_inst extends dbObject {
 
     $secondary_field_stmt .= '</li>';
    }
-   $secondary_field_stmt .='</ul>';
+   $secondary_field_stmt .= '</ul>';
   }
   return $secondary_field_stmt;
  }
@@ -221,8 +231,12 @@ class sys_secondary_field_inst extends dbObject {
  public static function find_by_secondaryFieldId($sys_secondary_field_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE sys_secondary_field_id = '{$sys_secondary_field_id}' AND status='active'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE sys_secondary_field_id = :sys_secondary_field_id AND status='active'";
+
+  global $db;
+  $value_a = ['sys_secondary_field_id' => $sys_secondary_field_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 

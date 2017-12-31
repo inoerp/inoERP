@@ -221,7 +221,8 @@ class hr_employee extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'HEADER' ";
-  $result = self::find_by_sql($sql);
+    global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
@@ -229,23 +230,28 @@ class hr_employee extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'LINE' ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_transactionClass($class) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE type_class = '{$class}' AND status='active'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE type_class = :type_class AND status='active'";
+ 	  global $db;
+  $value_a = ['type_class' => $class];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 
  public static function find_by_payrollId($payroll_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE payroll_id = '{$payroll_id}' AND status='active'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE payroll_id = :payroll_id AND status='active'";
+ 	  global $db;
+  $value_a = ['payroll_id' => $payroll_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
@@ -254,17 +260,21 @@ class hr_employee extends dbObject {
             FROM hr_employee hre, 
                  ino_user as user 
             WHERE user.hr_employee_id = hre.hr_employee_id
-            AND user.ino_user_id = '{$user_id}' ";
+            AND user.ino_user_id = :ino_user_id ";
             $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+ 	  global $db;
+  $value_a = ['ino_user_id' => $user_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_orgId($org_id) {
   $sql = " SELECT * 
             FROM hr_employee
-            WHERE org_id = '{$org_id}' ";
-  $result = self::find_by_sql($sql);
+            WHERE org_id = :org_id ";
+ 	  global $db;
+  $value_a = ['org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 

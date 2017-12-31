@@ -7,46 +7,46 @@ class lms_student_education extends dbObject {
  public static $key_column = 'degree_name';
  public static $module = "lms";
  public static $system_info = [
-		 'name' => 'Student Education',
-		 'number' => '8309',
-		 'description' => 'LMS Student Education',
-		 'version' => '0.1.1',
-		 'db_version' => '1001',
-		 'mod_version' => '1.1.1',
-		 'dependent_class' => '',
-		 'primary_entity_cb' => '',
-		 'module_name' => 'lms',
-		 'weight' => 7
+    'name' => 'Student Education',
+    'number' => '8309',
+    'description' => 'LMS Student Education',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => '',
+    'primary_entity_cb' => '',
+    'module_name' => 'lms',
+    'weight' => 7
  ];
  public $field_a = [
-		 'lms_student_education_id',
-		 'lms_student_id',
-		 'degree_name',
-		 'university',
-		 'university_address',
-		 'specialization',
-		 'edu_start_date',
-		 'edu_end_date',
-		 'mode_of_education',
-		 'grade',
-		 'marks_percentage',
-		 'comments',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date'
+    'lms_student_education_id',
+    'lms_student_id',
+    'degree_name',
+    'university',
+    'university_address',
+    'specialization',
+    'edu_start_date',
+    'edu_end_date',
+    'mode_of_education',
+    'grade',
+    'marks_percentage',
+    'comments',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $initial_search = [
-		 'lms_student_education_id',
-		 'employee_id',
-		 'degree_name',
-		 'university',
+    'lms_student_education_id',
+    'employee_id',
+    'degree_name',
+    'university',
  ];
  public $requiredField = [
-		 'employee_id',
-		 'degree_name',
-		 'university',
-		 'edu_end_date',
+    'employee_id',
+    'degree_name',
+    'university',
+    'edu_end_date',
  ];
  public $lms_student_education_id;
  public $lms_student_id;
@@ -65,25 +65,26 @@ class lms_student_education extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $search = [
-		 '_show_update_path' => 1,
-		 '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = "Student Education  "; //page Title
 
  Public static function education_mode() {
-	$option_header = option_header::find_by_name('HR_EDUCATION_MODE');
-	$ol = new option_line();
-	$option_lines = $ol->findBy_parentId($option_header->option_header_id);
-	return $option_lines;
+  $option_header = option_header::find_by_name('HR_EDUCATION_MODE');
+  $ol = new option_line();
+  $option_lines = $ol->findBy_parentId($option_header->option_header_id);
+  return $option_lines;
  }
 
- public static function find_by_studentId($student_id){
-	
-	$sql = " SELECT * FROM " . self::$table_name . " WHERE lms_student_id = :lms_student_id " ;
-	$value_a = ['lms_student_id' => $student_id ];
-	$result = self::find_by_sql_i($sql, $value_a);
-	
-	return !empty($result) ? $result : null;
+ public static function find_by_studentId($student_id) {
+
+  $sql = " SELECT * FROM " . self::$table_name . " WHERE lms_student_id = :lms_student_id ";
+  $value_a = ['lms_student_id' => $student_id];
+  global $db;
+  $result = $db->findBySql($sql, $value_a);
+
+  return !empty($result) ? $result : null;
  }
 
 }

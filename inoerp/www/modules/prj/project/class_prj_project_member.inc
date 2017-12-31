@@ -9,28 +9,28 @@ class prj_project_member extends dbObject {
  public static $module = "prj";
 //  data base variables as stored database column name
  public $field_a = [
-  'prj_project_member_id',
-  'prj_project_header_id',
-  'user_id',
-  'prj_role_id',
-  'description',
-  'start_date',
-  'end_date',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'prj_project_member_id',
+    'prj_project_header_id',
+    'user_id',
+    'prj_role_id',
+    'description',
+    'start_date',
+    'end_date',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $fields_inForm_notInDataBase = [
-  "member_username",
+    "member_username",
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'prj_project_header_id'
+    'prj_project_header_id'
  ];
  public $requiredField = [
-  'user_id',
-  'prj_role_id',
+    'user_id',
+    'prj_role_id',
  ];
  public $prj_project_member_id;
  public $prj_project_header_id;
@@ -45,23 +45,30 @@ class prj_project_member extends dbObject {
  public $last_update_date;
  public $member_username;
 
-
  public static function find_by_headerId_and_status($prj_project_header_id, $line_status = 'PENDING_IMPORT') {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where prj_project_header_id= '{$prj_project_header_id}' AND line_status= '{$line_status}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where prj_project_header_id= :prj_project_header_id AND line_status= :line_status ";
+
+  global $db;
+  $value_a = ['prj_project_header_id' => $prj_project_header_id, 'line_status' => $line_status];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_by_wipWoHeaderId_and_routingSequence($wip_wo_header_id, $routing_sequence) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where wip_wo_header_id= '{$wip_wo_header_id}' 
-					 AND routing_sequence= '{$routing_sequence}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where wip_wo_header_id= :wip_wo_header_id 
+					 AND routing_sequence= :routing_sequence ";
+
+  global $db;
+  $value_a = ['wip_wo_header_id' => $wip_wo_header_id, 'routing_sequence' => $routing_sequence];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 

@@ -97,12 +97,14 @@ FROM prj_event_line pel,
 prj_event_header peh
 
 WHERE peh.prj_event_header_id = pel.prj_event_header_id
-AND peh.prj_project_header_id = '{$prj_project_header_id}'
+AND peh.prj_project_header_id = :prj_project_header_id
  AND pel.billed_cb = NULL
 ";
 $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+ 	  global $db;
+  $value_a = ['prj_project_header_id' => $prj_project_header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? array_pop($result) : false;
  }
@@ -118,12 +120,14 @@ FROM prj_event_line pel,
 prj_event_header peh
 
 WHERE peh.prj_event_header_id = pel.prj_event_header_id
-AND peh.prj_project_header_id = '{$prj_project_header_id}'
+AND peh.prj_project_header_id = :prj_project_header_id
  AND pel.revenue_distributed_cb = NULL
 ";
 $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['prj_project_header_id' => $prj_project_header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? array_pop($result) : false;
  }

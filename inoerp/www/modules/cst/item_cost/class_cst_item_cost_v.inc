@@ -142,7 +142,7 @@ AS
  public static function find_cost_by_itemId_orgId($item_id, $org_id, $bom_cost_type = 'FROZEN') {
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bom_cost_type = '{$bom_cost_type}' AND org_id = '{$org_id}'  AND item_id_m = '{$item_id}' ";
+  $sql .= " WHERE bom_cost_type = :bom_cost_type AND org_id = :org_id  AND item_id_m = :item_id_m ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -152,7 +152,10 @@ AS
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result = self::find_by_sql($sql);
+      global $db;
+	$value_a = ['bom_cost_type' => $bom_cost_type, 'org_id' => $org_id , 'item_id_m' => $item_id ];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? array_pop($result) : false;
  }
 

@@ -52,9 +52,12 @@ class fa_depreciation_method_rate extends dbObject {
   $sql = " 
 	 SELECT SUM(rate) as RATE_SUM
 		FROM fa_depreciation_method_rate 
-		WHERE  fa_depreciation_method_id = '{$fa_depreciation_method_id}'
+		WHERE  fa_depreciation_method_id = :fa_depreciation_method_id
 ";
-  $result = self::find_by_sql($sql);
+    
+        global $db;
+	$value_a = ['fa_depreciation_method_id' => $fa_depreciation_method_id];
+	$result = $db->findBySql($sql, $value_a);
   return !empty($result[0]) ? $result[0]->RATE_SUM : false;
  }
 
@@ -62,9 +65,13 @@ class fa_depreciation_method_rate extends dbObject {
   $sql = " 
 	 SELECT rate
 		FROM fa_depreciation_method_rate 
-		WHERE  fa_depreciation_method_id = '{$fa_depreciation_method_id} AND year = '{$year}' AND period = '{$period}'
+		WHERE  fa_depreciation_method_id = :fa_depreciation_method_id AND year = :year AND period = :period
 ";
-  $result = self::find_by_sql($sql);
+    
+        global $db;
+	$value_a = ['fa_depreciation_method_id' => $fa_depreciation_method_id, 'year' => $year, 'period' => $period ];
+	$result = $db->findBySql($sql, $value_a);
+
   return !empty($result[0]) ? $result[0]->rate : false;
  }
 

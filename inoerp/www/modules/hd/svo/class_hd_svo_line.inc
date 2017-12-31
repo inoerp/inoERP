@@ -8,70 +8,70 @@ class hd_svo_line extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "sd";
  public static $action_a = [
-  "PROCESS" => 'Process Order',
-  "BOOK" => 'Book Order',
-  "CANCEL" => 'Cancel Order',
+    "PROCESS" => 'Process Order',
+    "BOOK" => 'Book Order',
+    "CANCEL" => 'Cancel Order',
  ];
  public $line_status_a = [
-  'ENTERED' => 'Entered',
-  'AWAITING_PICKING' => 'Awaiting Picking',
-  'PICKED' => 'Picked',
-  'PARTIAL_PICKED' => 'Partially Picked',
-  'SHIPPED' => 'Shipped',
-  'PARTIAL_SHIPPED' => 'Partial Shipped',
-  'CLOSED' => 'Closed',
+    'ENTERED' => 'Entered',
+    'AWAITING_PICKING' => 'Awaiting Picking',
+    'PICKED' => 'Picked',
+    'PARTIAL_PICKED' => 'Partially Picked',
+    'SHIPPED' => 'Shipped',
+    'PARTIAL_SHIPPED' => 'Partial Shipped',
+    'CLOSED' => 'Closed',
  ];
  public $field_a = [
-  'hd_svo_line_id',
-  'hd_svo_header_id',
-  'line_number',
-  'inv_org_id',
-  'sd_so_header_id',
-  'sd_so_line_id',
-  'item_id_m',
-  'quantity',
-  'action_type_id',
-  'status',
-  'price_list_header_id',
-  'price_date',
-  'unit_price',
-  'line_price',
-  'line_status',
-  'requested_date',
-  'promise_date',
-  'schedule_ship_date',
-  'reference_doc_type',
-  'reference_doc_number',
-  'service_activity_header_id',
-  'supply_source',
-  'destination_type',
-  'line_description',
-  'uom_id',
-  'return_reason',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hd_svo_line_id',
+    'hd_svo_header_id',
+    'line_number',
+    'inv_org_id',
+    'sd_so_header_id',
+    'sd_so_line_id',
+    'item_id_m',
+    'quantity',
+    'action_type_id',
+    'status',
+    'price_list_header_id',
+    'price_date',
+    'unit_price',
+    'line_price',
+    'line_status',
+    'requested_date',
+    'promise_date',
+    'schedule_ship_date',
+    'reference_doc_type',
+    'reference_doc_number',
+    'service_activity_header_id',
+    'supply_source',
+    'destination_type',
+    'line_description',
+    'uom_id',
+    'return_reason',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'hd_svo_header_id',
-  'line_number',
-  'inv_org_id',
-  'item_id_m',
-  'quantity'
+    'hd_svo_header_id',
+    'line_number',
+    'inv_org_id',
+    'item_id_m',
+    'quantity'
  ];
  public $fields_inForm_notInDataBase = [
-  "svo_number",
-  "item_number",
-  'tax_code_value',
-  'ar_transaction_number',
-  'item_description',
-  'so_number',
-  'so_line_number',
-  'logistic_action'
+    "svo_number",
+    "item_number",
+    'tax_code_value',
+    'ar_transaction_number',
+    'item_description',
+    'so_number',
+    'so_line_number',
+    'logistic_action'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "hd_svo_header_id"
+    "hd_svo_header_id"
  ];
  public $hd_svo_line_id;
  public $hd_svo_header_id;
@@ -163,23 +163,27 @@ class hd_svo_line extends dbObject {
     break;
   }
  }
- 
- private function _process_line_to_so(){
+
+ private function _process_line_to_so() {
   
  }
- 
-  public static function find_by_headerId_and_status($hd_svo_header_id, $line_status = 'PENDING_IMPORT') {
+
+ public static function find_by_headerId_and_status($hd_svo_header_id, $line_status = 'PENDING_IMPORT') {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where hd_svo_header_id= '{$hd_svo_header_id}' AND line_status= '{$line_status}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where hd_svo_header_id= :hd_svo_header_id AND line_status= :line_status ";
+
+  global $db;
+  $value_a = ['hd_svo_header_id' => $hd_svo_header_id, 'line_status' => $line_status];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public function findAll_ByOrgId($org_id, $status = '') {
   $sql = " SELECT * FROM " .
-   self::$table_name .
-   " WHERE shipping_org_id= :shipping_org_id  ";
+     self::$table_name .
+     " WHERE shipping_org_id= :shipping_org_id  ";
   if (!empty($status)) {
    $sql .= " AND line_status = :line_status ";
    $value_a = ['shipping_org_id' => $org_id, 'line_status' => $status];
@@ -196,24 +200,25 @@ class hd_svo_line extends dbObject {
   return $po_types;
  }
 
-// public static function find_by_hd_ro_headerId($hd_ro_header_id) {
-//  $sql = "SELECT * FROM " . self::$table_name . " where hd_ro_header_id = '{$hd_ro_header_id}'";
-//  $result_array = self::find_by_sql($sql);
-//  return $result_array;
-// }
-
  public static function find_by_orgId_itemId_ssd($org_id, $item_id_m = '', $ssd = '') {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE shipping_org_id = '{$org_id}'";
+  $sql .= " WHERE shipping_org_id = :shipping_org_id ";
   $sql .= " AND schedule_ship_date IS NOT NULL ";
+
+  global $db;
+  $value_a = ['shipping_org_id' => $org_id];
+
+
   if (!empty($item_id_m)) {
-   $sql .= " AND item_id_m = '{$item_id_m}'";
+   $sql .= " AND item_id_m = :item_id_m ";
+     $value_a ['item_id_m'] = $item_id_m ;
   }
   if (!empty($ssd)) {
-   $sql .= " AND schedule_ship_date >= '{$ssd}'";
+   $sql .= " AND schedule_ship_date >=  :schedule_ship_date ";
+       $value_a ['schedule_ship_date'] = $ssd ;
   }
-  $result_array = self::find_by_sql($sql);
+  $result_array = $db->findBySql($sql, $value_a);
   return !empty($result_array) ? $result_array : false;
  }
 

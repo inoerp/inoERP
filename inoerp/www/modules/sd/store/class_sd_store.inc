@@ -104,9 +104,12 @@ class sd_store extends dbObject {
  public static function find_by_orgId($org_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE org_id = '{$org_id}'";
+  $sql .= " WHERE org_id = :org_id ";
 
-  $result = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 

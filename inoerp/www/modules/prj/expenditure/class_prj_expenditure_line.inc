@@ -22,57 +22,57 @@ class prj_expenditure_line extends dbObject {
  public static $module = "prj";
  public static $gl_journal_category = "PRJ_EXPENDITURE";
  public static $status_a = [
-  'ENTERED' => 'Entered',
-  'DISTRIBUTED' => 'Distributed',
+    'ENTERED' => 'Entered',
+    'DISTRIBUTED' => 'Distributed',
  ];
  public $field_a = [
-  'prj_expenditure_line_id',
-  'prj_expenditure_header_id',
-  'org_id',
-  'hr_employee_id',
-  'description',
-  'job_id',
-  'expenditure_date',
-  'prj_project_header_id',
-  'prj_project_line_id',
-  'prj_nlr_header_id',
-  'prj_expenditure_type_header_id',
-  'uom_id',
-  'quantity',
-  'rate',
-  'line_amount',
-  'debit_ac_id',
-  'credit_ac_id',
-  'burden_amount',
-  'gl_journal_header_id',
-  'gl_journal_interface_cb',
-  'invoiced_cb',
-  'revene_calculated_cb',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'prj_expenditure_line_id',
+    'prj_expenditure_header_id',
+    'org_id',
+    'hr_employee_id',
+    'description',
+    'job_id',
+    'expenditure_date',
+    'prj_project_header_id',
+    'prj_project_line_id',
+    'prj_nlr_header_id',
+    'prj_expenditure_type_header_id',
+    'uom_id',
+    'quantity',
+    'rate',
+    'line_amount',
+    'debit_ac_id',
+    'credit_ac_id',
+    'burden_amount',
+    'gl_journal_header_id',
+    'gl_journal_interface_cb',
+    'invoiced_cb',
+    'revene_calculated_cb',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'description',
-  'gl_journal_header_id',
-  'status'
+    'description',
+    'gl_journal_header_id',
+    'status'
  ];
  public $requiredField = [
-  'prj_expenditure_header_id',
-  'prj_expenditure_type_header_id',
-  'quantity',
+    'prj_expenditure_header_id',
+    'prj_expenditure_type_header_id',
+    'quantity',
  ];
  public $fields_inForm_notInDataBase = [
-  "employee_name",
-  'project_number',
-  "task_number",
-  'action'
+    "employee_name",
+    'project_number',
+    "task_number",
+    'action'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = "Expenditure Lines"; //page Title
  public $prj_expenditure_line_id;
@@ -208,10 +208,12 @@ AND pph.bu_org_id = pbll.bu_org_id
 AND pph.prj_burden_list_header_id = pbll.prj_burden_list_header_id
 AND bplh.prj_burden_list_header_id = pbll.prj_burden_list_header_id
 AND bplh.prj_burden_structure_header_id =  pbsc.prj_burden_structure_header_id
-AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' ";
+AND pel.prj_expenditure_line_id = :prj_expenditure_line_id ";
 
-//echo "<br>$sql";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['prj_expenditure_line_id' => $prj_expenditure_line_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -233,7 +235,7 @@ AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' ";
         AND pda.accounting_group = pph.accounting_group 
         AND pda.prj_project_type_header_id = pph.prj_project_type_id 
         AND (pda.document_type = 'DEFAULT_EXPEN_CLEAR' || pda.document_type = 'DEFAULT_EXPEN' )
-        AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}'
+        AND pel.prj_expenditure_line_id = :prj_expenditure_line_id
 
         UNION
         SELECT pel.prj_expenditure_line_id,   pel.prj_expenditure_header_id,   pel.org_id,
@@ -256,59 +258,77 @@ AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' ";
         AND pda.prj_project_type_header_id = pph.prj_project_type_id 
         AND pda.document_type = ol.option_line_code
         AND ol.mapper1 = peh.expenditure_class
-        AND pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}'
+        AND pel.prj_expenditure_line_id = :prj_expenditure_line_id
 ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['prj_expenditure_line_id' => $prj_expenditure_line_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_headerId_Status($project_header_id, $status = '') {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE  prj_project_header_id = '{$project_header_id}' ";
+  $sql .= " WHERE  prj_project_header_id = :prj_project_header_id ";
   if (!empty($status)) {
-   $sql .= " AND  status = '{$status}' ";
+   $sql .= " AND  status = :status ";
+   $value_a['status'] = $status;
   } else {
    $sql .= " AND ( status IS NULL || status = 'ENTERED' ) ";
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['prj_project_header_id' => $project_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_lines_forRevenueGeneration($project_header_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE  prj_project_header_id = '{$project_header_id}' ";
+  $sql .= " WHERE  prj_project_header_id = :prj_project_header_id ";
   $sql .= " AND  status = 'DISTRIBUTED' ";
   $sql .= " AND  revene_calculated_cb IS NULL ";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['prj_project_header_id' => $project_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
- 
-  public static function find_lines_forInvoiceGeneration($project_header_id) {
+
+ public static function find_lines_forInvoiceGeneration($project_header_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE  prj_project_header_id = '{$project_header_id}' ";
+  $sql .= " WHERE  prj_project_header_id = :prj_project_header_id ";
   $sql .= " AND  status = 'DISTRIBUTED' ";
   $sql .= " AND  invoiced_cb IS NULL ";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['prj_project_header_id' => $project_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_totalExpenditure_by_projectHeaderId($project_header_id) {
   $sql = " SELECT SUM(line_amount) as line_amount, SUM(burden_amount) as burden_amount, prj_project_header_id FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE  prj_project_header_id = '{$project_header_id}' ";
+  $sql .= " WHERE  prj_project_header_id = :prj_project_header_id ";
   $sql .= " AND  status = 'DISTRIBUTED' ";
   $sql .= " GROUP BY prj_project_header_id ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['prj_project_header_id' => $project_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
- public static function find_billRates_fromLineIdSchedule($prj_expenditure_line_id, $emp_schedule_id, $job_schedule_id,$nlr_schedule_id) {
+ public static function find_billRates_fromLineIdSchedule($prj_expenditure_line_id, $emp_schedule_id, $job_schedule_id, $nlr_schedule_id) {
   $sql = " SELECT 
 pel.prj_expenditure_line_id,pel.line_amount,pel.burden_amount, pel.quantity,
 pel.line_amount,(IFNULL(pel.burden_amount,0) + pel.line_amount) as total_expn_amount,
@@ -361,9 +381,10 @@ FROM
 prj_expenditure_line pel
 WHERE pel.prj_expenditure_line_id = '{$prj_expenditure_line_id}' 
 ";
-$sql = ino_perPageSql_i($sql, 1);
+  $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
 
   return !empty($result) ? array_pop($result) : false;
  }
@@ -377,17 +398,17 @@ $sql = ino_perPageSql_i($sql, 1);
    $sql .= " WHERE ( status IS NULL || status = 'ENTERED' ) ";
   }
 
-//  echo $sql;
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block'
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block'
   ];
 
   return $multi_select_hidden;

@@ -23,45 +23,45 @@ class am_ms_calendar_date extends dbObject {
  public static $key_column = "date";
  public static $module = "am";
  public static $system_info = [
-  'name' => 'MS Calendar Date',
-  'number' => '4108',
-  'description' => 'Maintenace Schedule Calendar Date',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'am',
-  'weight' => 5
+    'name' => 'MS Calendar Date',
+    'number' => '4108',
+    'description' => 'Maintenace Schedule Calendar Date',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'am',
+    'weight' => 5
  ];
  public $field_a = [
-  'am_ms_calendar_date_id',
-  'am_maintenance_schedule_id',
-  'date',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'am_ms_calendar_date_id',
+    'am_maintenance_schedule_id',
+    'date',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'am_maintenance_schedule_id',
+    'am_maintenance_schedule_id',
  ];
  public $requiredField = [
-  'am_maintenance_schedule_id',
-  'date',
+    'am_maintenance_schedule_id',
+    'date',
  ];
  public $fields_inForm_notInDataBase = [
-  'am_maintenance_schedule_id',
-  'schedule_name',
-  'schedule_number',
-  'item_id_m',
-  'am_asset_id',
-  'effective_from_date',
-  'effective_start_date',
-  'description',
-  "am_asset_number",
-  'item_number',
-  'org_id'
+    'am_maintenance_schedule_id',
+    'schedule_name',
+    'schedule_number',
+    'item_id_m',
+    'am_asset_id',
+    'effective_from_date',
+    'effective_start_date',
+    'description',
+    "am_asset_number",
+    'item_number',
+    'org_id'
  ];
  public $pageTitle = " MS Calendar Date "; //page Title
  public $am_ms_calendar_date_id;
@@ -86,9 +86,13 @@ class am_ms_calendar_date extends dbObject {
  public static function find_by_maintenance_schedule_id($am_maintenance_schedule_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE am_maintenance_schedule_id = '{$am_maintenance_schedule_id}' ";
+  $sql .= " WHERE am_maintenance_schedule_id = :am_maintenance_schedule_id  ";
 
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['am_maintenance_schedule_id' => $am_maintenance_schedule_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 

@@ -37,15 +37,6 @@ class qa_collection_element_line extends dbObject {
  public $time;
  public $msg;
  
-
- public static function find_by_headerId_and_status($qa_collection_element_header_id, $line_status = 'PENDING_IMPORT') {
-  $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where qa_collection_element_header_id= '{$qa_collection_element_header_id}' AND line_status= '{$line_status}' ";
-  $result = self::find_by_sql($sql);
-  return $result;
- }
-
  public function findAll_ByOrgId($org_id, $status = '') {
   $sql = " SELECT * FROM " .
    self::$table_name .

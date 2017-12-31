@@ -368,15 +368,23 @@ LEFT JOIN org ON po_line.receving_org_id = org.org_id
 
  public static function find_all_by_poHeaderId($po_header_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE po_header_id = '{$po_header_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE po_header_id = :po_header_id ";
+
+  	  global $db;
+  $value_a = ['po_header_id' => $po_header_id];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 
  public static function find_all_by_poLineId($po_line_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE po_line_id = '{$po_line_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE po_line_id = :po_line_id ";
+ 
+    	  global $db;
+  $value_a = ['po_line_id' => $po_line_id];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 
@@ -439,7 +447,10 @@ LEFT JOIN org ON po_line.receving_org_id = org.org_id
     }
    }
   }
-  $result_array = static::find_by_sql($sql);
+
+    global $db;
+  $result_array = $db->findBySql($sql);
+  
   return !empty($result_array) ? ($result_array) : false;
  }
 

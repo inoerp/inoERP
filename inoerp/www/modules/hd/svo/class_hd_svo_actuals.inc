@@ -8,45 +8,45 @@ class hd_svo_actuals extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "hd";
  public static $source_a = [
-  'ESTIMATES' => 'Estimates',
-  'WORK_ORDER' => 'Work Order',
+    'ESTIMATES' => 'Estimates',
+    'WORK_ORDER' => 'Work Order',
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'hd_svo_actuals_id',
-  'hd_svo_header_id',
-  'item_id_m',
-  'source',
-  'billing_type',
-  'hd_svo_estimates_id',
-  'wip_wo_header_id',
-  'quantity',
-  'uom_id',
-  'unit_price',
-  'line_price',
-  'line_status',
-  'sd_so_header_id',
-  'sd_so_line_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hd_svo_actuals_id',
+    'hd_svo_header_id',
+    'item_id_m',
+    'source',
+    'billing_type',
+    'hd_svo_estimates_id',
+    'wip_wo_header_id',
+    'quantity',
+    'uom_id',
+    'unit_price',
+    'line_price',
+    'line_status',
+    'sd_so_header_id',
+    'sd_so_line_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $fields_inForm_notInDataBase = [
-  "billing_item_number",
-  "billing_description",
-  "billing_uom"
+    "billing_item_number",
+    "billing_description",
+    "billing_uom"
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'hd_svo_header_id'
+    'hd_svo_header_id'
  ];
  public $requiredField = [
-  'hd_svo_header_id',
-  'item_id_m',
-  'billing_source',
-  'billing_type',
-  'quantity',
+    'hd_svo_header_id',
+    'item_id_m',
+    'billing_source',
+    'billing_type',
+    'quantity',
  ];
  public $hd_svo_actuals_id;
  public $hd_svo_header_id;
@@ -92,9 +92,13 @@ class hd_svo_actuals extends dbObject {
  public static function find_by_wip_wo_headerId($wi_wo_header_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where wip_wo_header_id= '{$wi_wo_header_id}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where wip_wo_header_id= :wip_wo_header_id ";
+
+  global $db;
+  $value_a = ['wip_wo_header_id' => $wi_wo_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 

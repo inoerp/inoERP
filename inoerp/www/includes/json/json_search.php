@@ -220,17 +220,21 @@ if (!empty($_GET['class_name'])) {
 	 $all_download_sql = "SELECT * FROM  " . $table_name . $whereClause;
 	}
 
+   $value_a = [];
+   
 	if (!empty($_GET['group_by'][0])) {
 	 $sum_element = $$class->search_groupBy_sum;
 	 $fetch_as = 'sum_' . $sum_element;
 	 $sql = "SELECT * , SUM($sum_element) as $fetch_as FROM " . $table_name . $whereClause;
-	 $sql .= " GROUP BY " . $_GET['group_by'][0];
-	 $count_sql .= " GROUP BY " . $_GET['group_by'][0];
+	 $sql .= " GROUP BY :group_by " ;
+	 $count_sql .= " GROUP BY :group_by " ;
 	 $all_download_sql = "SELECT  * , SUM($sum_element) FROM  " . $table_name . $whereClause;
-	 $all_download_sql .= " GROUP BY " . $_GET['group_by'][0];
+	 $all_download_sql .= " GROUP BY :group_by  " ;
+   
+   $value_a['group_by'] = $_GET['group_by'][0];
 	}
 
-	$total_count = $class::count_all_by_sql($count_sql);
+	$total_count = $db->countAllBySql($count_sql, $value_a);
 	$total_count_all = $class::count_all_by_sql($count_sql_all_records);
 
 	$order_by_sql = '';
@@ -294,7 +298,7 @@ if (!empty($_GET['class_name'])) {
  }
 
  $s->access_level = $access_level;
-$search_result = $class::find_by_sql($sql);
+$search_result = $db->findBySql($sql, $value_a);
 
 //  pa($search_result);
  }

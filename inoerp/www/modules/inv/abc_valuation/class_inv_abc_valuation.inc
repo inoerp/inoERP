@@ -24,75 +24,75 @@ class inv_abc_valuation extends dbObject {
  public static $module = "inv";
  public static $js_fileName_prg = 'modules/inv/abc_valuation/js/abc_valuation_extra.js';
  public static $system_info = [
-  'name' => 'ABC Valuation',
-  'number' => '2102',
-  'description' => 'Inventory ABC Valuation',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('inv_abc_valuation_result'),
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 2
+    'name' => 'ABC Valuation',
+    'number' => '2102',
+    'description' => 'Inventory ABC Valuation',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('inv_abc_valuation_result'),
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 2
  ];
  public static $template_type = [
-  'header_tab' => 1,
-  'line_tab' => 2,
-  'nooffields_header_tab1' => 5,
-  'nooffields_line_tab1' => 6,
-  'nooffields_line_tab2' => 6,
+    'header_tab' => 1,
+    'line_tab' => 2,
+    'nooffields_header_tab1' => 5,
+    'nooffields_line_tab1' => 6,
+    'nooffields_line_tab2' => 6,
  ];
  public $field_a = [
-  'inv_abc_valuation_id',
-  'valuation_name',
-  'scope_org_id',
-  'scope_sub_inventory_id',
-  'scope_org_hirearchy_id',
-  'description',
-  'scope_product_line',
-  'criteria',
-  'cost_type',
-  'fp_forecast_header_id',
-  'fp_mrp_header_id',
-  'from_date',
-  'to_date',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'inv_abc_valuation_id',
+    'valuation_name',
+    'scope_org_id',
+    'scope_sub_inventory_id',
+    'scope_org_hirearchy_id',
+    'description',
+    'scope_product_line',
+    'criteria',
+    'cost_type',
+    'fp_forecast_header_id',
+    'fp_mrp_header_id',
+    'from_date',
+    'to_date',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $dateFields = [
-  'from_date',
-  'to_date',
+    'from_date',
+    'to_date',
  ];
  public $initial_search = [
-  'scope_org_id',
-  'inv_abc_valuation_id',
-  'valuation_name',
+    'scope_org_id',
+    'inv_abc_valuation_id',
+    'valuation_name',
  ];
  public $column = [
-  'inv_abc_valuation_id',
-  'valuation_name',
-  'scope_org_id',
-  'scope_sub_inventory_id',
-  'scope_org_hirearchy_id',
-  'description',
+    'inv_abc_valuation_id',
+    'valuation_name',
+    'scope_org_id',
+    'scope_sub_inventory_id',
+    'scope_org_hirearchy_id',
+    'description',
  ];
  public $fields_inForm_notInDataBase = [
-  'org',
-  'subinventory',
+    'org',
+    'subinventory',
  ];
  public $requiredField = [
-  'valuation_name',
-  'criteria',
+    'valuation_name',
+    'criteria',
  ];
  public $prg_abc_valuation_parameters = [
-  'ABC Valuation Name' => 'search_abc_valuation_name',
-  'Organization' => 'search_org_name',
+    'ABC Valuation Name' => 'search_abc_valuation_name',
+    'Organization' => 'search_org_name',
  ];
  public $prg_abc_valuation_details = [
-  'name' => 'ABC Valuation',
-  'description' => 'New ABC Valuation',
+    'name' => 'ABC Valuation',
+    'description' => 'New ABC Valuation',
  ];
  public $inv_abc_valuation_id;
  public $valuation_name;
@@ -112,8 +112,8 @@ class inv_abc_valuation extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " ABC Valuation ";
  public $message;
@@ -127,10 +127,13 @@ class inv_abc_valuation extends dbObject {
  public static function find_by_valuationName_OrgId($valuation_name, $org_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE scope_org_id = '{$org_id}'  "
-   . " AND valuation_name = '{$valuation_name}' AND status='active'  ";
-   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE scope_org_id = :scope_org_id  "
+     . " AND valuation_name = :valuation_name AND status='active'  ";
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['valuation_name' => $valuation_name, 'scope_org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -139,10 +142,12 @@ class inv_abc_valuation extends dbObject {
   $valuation_name = empty($valuation_name) ? $this->valuation_name : $valuation_name;
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE scope_org_id = '{$org_id}' AND"
-   . " valuation_name = '{$valuation_name}' AND status='active'    ";
-$sql = ino_perPageSql_i($sql, 1);
-  $result = $this->findBySql($sql);
+  $sql .= " WHERE scope_org_id = :scope_org_id AND"
+     . " valuation_name = :valuation_name AND status='active'    ";
+  $sql = ino_perPageSql_i($sql, 1);
+   global $db;
+  $value_a = ['valuation_name' => $valuation_name, 'scope_org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -313,7 +318,7 @@ $sql = ino_perPageSql_i($sql, 1);
    * 1. Get all the items from onhand_v order by onhand value
    */
   $sql = " SELECT item_id_m, SUM(quantity) as onhand_sum , "
-   . " SUM(quantity)*IFNULL(standard_cost, 0) as onhand_value_sum FROM fp_mrp_demand_v ";
+     . " SUM(quantity)*IFNULL(standard_cost, 0) as onhand_value_sum FROM fp_mrp_demand_v ";
   if (!empty($this->scope_org_id)) {
    $sql .= " WHERE org_id = '{$this->scope_org_id}' ";
   } else {

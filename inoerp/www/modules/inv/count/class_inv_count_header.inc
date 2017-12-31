@@ -46,84 +46,84 @@ class inv_count_header extends dbObject {
  public static $key_column = "count_name";
  public static $module = "inv";
  public static $system_info = [
-  'name' => 'Inventory Count',
-  'number' => '2104',
-  'description' => 'Inventory Count',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('inv_count_schedule'),
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 4
+    'name' => 'Inventory Count',
+    'number' => '2104',
+    'description' => 'Inventory Count',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('inv_count_schedule'),
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 4
  ];
  public static $count_type_a = [
-  'CYCLE_COUNT' => 'Cycle Count',
-  'PHYSICAL_INV' => 'Physical Inventory',
+    'CYCLE_COUNT' => 'Cycle Count',
+    'PHYSICAL_INV' => 'Physical Inventory',
  ];
  public static $approval_required_a = [
-  'NEVER' => 'Never',
-  'ALWAYS' => 'Always',
-  'OUT_OF_TOLERANCE_ALL' => 'Out of tolerance - All criteria',
-  'OUT_OF_TOLERANCE_ANY' => 'Out of tolerance - Any criteria',
+    'NEVER' => 'Never',
+    'ALWAYS' => 'Always',
+    'OUT_OF_TOLERANCE_ALL' => 'Out of tolerance - All criteria',
+    'OUT_OF_TOLERANCE_ANY' => 'Out of tolerance - Any criteria',
  ];
  public static $count_action_a = [
-  'SCHDULE_COUNT' => 'Schedule Count',
-  'UPDATE_COUNT' => 'Update Count',
-  'DELETE_COUNT' => 'Delete All Count',
+    'SCHDULE_COUNT' => 'Schedule Count',
+    'UPDATE_COUNT' => 'Update Count',
+    'DELETE_COUNT' => 'Delete All Count',
  ];
  public $field_a = [
-  'inv_count_header_id',
-  'count_name',
-  'count_type',
-  'adjustment_ac_id',
-  'org_id',
-  'description',
-  'inv_abc_assignment_header_id',
-  'approval_required',
-  'quantity_variance_positive',
-  'quantity_variance_negative',
-  'value_variance_positive',
-  'value_variance_negative',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'inv_count_header_id',
+    'count_name',
+    'count_type',
+    'adjustment_ac_id',
+    'org_id',
+    'description',
+    'inv_abc_assignment_header_id',
+    'approval_required',
+    'quantity_variance_positive',
+    'quantity_variance_negative',
+    'value_variance_positive',
+    'value_variance_negative',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'count_name',
-  'count_type',
-  'description',
-  'org_id',
+    'count_name',
+    'count_type',
+    'description',
+    'org_id',
  ];
  public $column = [
-  'inv_count_header_id',
-  'count_name',
-  'count_type',
-  'adjustment_ac_id',
-  'org_id',
-  'description',
-  'inv_abc_assignment_header_id',
+    'inv_count_header_id',
+    'count_name',
+    'count_type',
+    'adjustment_ac_id',
+    'org_id',
+    'description',
+    'inv_abc_assignment_header_id',
  ];
  public $requiredField = [
-  'count_name',
-  'count_type',
-  'adjustment_ac_id',
-  'org_id',
-  'inv_abc_assignment_header_id',
+    'count_name',
+    'count_type',
+    'adjustment_ac_id',
+    'org_id',
+    'inv_abc_assignment_header_id',
  ];
  public $fields_inForm_notInDataBase = [
-  'abc_assignment_name',
-  'count_action',
-  'action',
-  'multi_action_class_pc',
-  'multi_action_class_pc_value',
-  'action_class_name'
+    'abc_assignment_name',
+    'count_action',
+    'action',
+    'multi_action_class_pc',
+    'multi_action_class_pc_value',
+    'action_class_name'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Inventory Count "; //page Title
  public $inv_count_header_id;
@@ -153,7 +153,7 @@ class inv_count_header extends dbObject {
  public $action_class_name;
 
  public function _after_save() {
-   
+
   if (!empty($this->inv_count_header_id) && !empty($_POST['count_per_year'][0])) {
    $abc_ref = new inv_count_abc_ref();
 
@@ -223,7 +223,8 @@ class inv_count_header extends dbObject {
                  WHERE inv_count_header_id = '{$this->inv_count_header_id}'
                 )
        ";
-    $inv_assignment_line = self::find_by_sql($sql);
+    global $db;
+    $inv_assignment_line = $db->findBySql($sql);
     $this->_schedule_count($inv_assignment_line, $no_of_counts_per_year, $abc_ref_obj->class_code);
    }
   }
@@ -250,7 +251,7 @@ class inv_count_header extends dbObject {
    $offset = ($count) * $no_of_items_to_be_counted_per_day;
    $items_already_scheduled += $no_of_items_to_be_counted_per_day;
    $sql = " SELECT * FROM inv_abc_assignment_line WHERE inv_abc_assignment_header_id = '{$this->inv_abc_assignment_header_id}' "
-    . " AND abc_class = '{$class_code}' ";
+      . " AND abc_class = '{$class_code}' ";
    $sql = ino_perPageSql_i($sql, $no_of_items_to_be_counted_per_day, $offset);
    $result = $this->findBySql($sql);
    foreach ($result as $new_schedule) {
@@ -264,7 +265,7 @@ class inv_count_header extends dbObject {
       $count_schedule->subinventory_id = $onhand_o->subinventory_id;
       if (!empty($onhand_o->locator_id)) {
        $count_schedule->locator_id = $onhand_o->locator_id;
-      }else{
+      } else {
        $count_schedule->locator_id = null;
       }
       $count_schedule->save();
@@ -285,17 +286,17 @@ class inv_count_header extends dbObject {
 
  public function multi_select_input_fields() {
   $multi_select_input = [
-   'count_entry_actio'
+     'count_entry_actio'
   ];
   return $multi_select_input;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block',
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block',
   ];
 
   return $multi_select_hidden;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -22,75 +23,74 @@ class hd_task_type extends dbObject {
  public static $multi_select_template_path = 'modules/inv/hd_task_type/multi_action/hd_task_type_template_ma.php';
 //  data base variables as stored database column name
  public static $system_info = [
-  'name' => 'hd_task_type',
-  'number' => '5112',
-  'description' => 'hd_task_type',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 17
+    'name' => 'hd_task_type',
+    'number' => '5112',
+    'description' => 'hd_task_type',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 17
  ];
  public $field_a = [
-  "hd_task_type_id",
-  "org_id",
-  "type",
-  "hd_task_type",
-  "description",
-  "locator_control",
-  "allow_negative_balance_cb",
-  "default_cost_group",
-  'shipment_pick_priority',
-  "material_ac_id",
-  "material_oh_ac_id",
-  "overhead_ac_id",
-  "resource_ac_id",
-  "osp_ac_id",
-  "expense_ac_id",
-  "ef_id",
-  "status",
-  "rev_enabled_cb",
-  "rev_number",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "hd_task_type_id",
+    "org_id",
+    "type",
+    "hd_task_type",
+    "description",
+    "locator_control",
+    "allow_negative_balance_cb",
+    "default_cost_group",
+    'shipment_pick_priority',
+    "material_ac_id",
+    "material_oh_ac_id",
+    "overhead_ac_id",
+    "resource_ac_id",
+    "osp_ac_id",
+    "expense_ac_id",
+    "ef_id",
+    "status",
+    "rev_enabled_cb",
+    "rev_number",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
 //variables used for showing data
  public $initial_search = [
-  "hd_task_type",
-  "hd_task_type_id",
-  "description",
+    "hd_task_type",
+    "hd_task_type_id",
+    "description",
  ];
-
  public $account = ["material_ac_id",
-  "material_oh_ac_id",
-  "overhead_ac_id",
-  "resource_ac_id",
-  "osp_ac_id",
-  "expense_ac_id",
+    "material_oh_ac_id",
+    "overhead_ac_id",
+    "resource_ac_id",
+    "osp_ac_id",
+    "expense_ac_id",
  ];
  public $checkbox = ["rev_enabled_cb",
-  "allow_negative_balance_cb"
+    "allow_negative_balance_cb"
  ];
  public $requiredField = [
-  "org_id",
-  "type",
-  "hd_task_type"
+    "org_id",
+    "type",
+    "hd_task_type"
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $search_functions = [
-  'Organization' => 'search_org_name'
+    'Organization' => 'search_org_name'
  ];
  public $pageTitle = " hd_task_type - Create & Update Subinventories"; //page Title
  public $option_lists = [
-  'hd_task_type_type' => 'hd_task_type_TYPE',
-  'locator_control' => 'LOCATOR_CONTROL',
+    'hd_task_type_type' => 'hd_task_type_TYPE',
+    'locator_control' => 'LOCATOR_CONTROL',
  ];
  public $hd_task_type_id;
  public $org;
@@ -222,8 +222,10 @@ VAR;
   if (!empty($org_id)) {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE org_id = '{$org_id}' ";
-   $result = $db::find_by_sql($sql);
+   $sql .= " WHERE org_id = :org_id  ";
+
+   $value_a = ['org_id' => $org_id];
+   $result = $db->findBySql($sql, $value_a);
   } else {
    $result = null_instantitae('hd_task_type');
   }
@@ -232,8 +234,8 @@ VAR;
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'mode',
-   'show_block'
+     'mode',
+     'show_block'
   ];
 
   return $multi_select_hidden;
@@ -243,29 +245,29 @@ VAR;
   $lines = explode("\n", self::${$staticvar});
   self::${$staticvar} = '';
   foreach ($lines as $key => $line) {
-   if(strpos($line,'<th>') !== FALSE) {
- 	$left = substr($line,0,strpos($line,'>')+1);
- 	$text = trim(rtrim(trim(substr($line,strpos($line,'>')+1,strpos($line,'/')-strpos($line,'>')-2)),'#'));
- 	$right = substr($line,strpos($line,'/')-1);
- 	if(substr(trim(substr($line,strpos($line,'>')+1,strpos($line,'/')-strpos($line,'>')-2)),-1) == '#') {
- 	 $line =  $left . gettext($text) . '#' . $right;
- 	} else {
- 	 $line =  $left . gettext($text) . $right;
- 	}
+   if (strpos($line, '<th>') !== FALSE) {
+    $left = substr($line, 0, strpos($line, '>') + 1);
+    $text = trim(rtrim(trim(substr($line, strpos($line, '>') + 1, strpos($line, '/') - strpos($line, '>') - 2)), '#'));
+    $right = substr($line, strpos($line, '/') - 1);
+    if (substr(trim(substr($line, strpos($line, '>') + 1, strpos($line, '/') - strpos($line, '>') - 2)), -1) == '#') {
+     $line = $left . gettext($text) . '#' . $right;
+    } else {
+     $line = $left . gettext($text) . $right;
+    }
    }
-   if(strpos($line,'<li>') !== FALSE) {
- 	$left = substr($line,0,strpos($line,'">')+2);
- 	$text = substr($line,strpos($line,'">')+2,strpos($line,'/')-strpos($line,'">')-3);
- 	$right = substr($line,strpos($line,'/')-1);
- 	if(substr(trim(substr($line,strpos($line,'>')+1,strpos($line,'/')-strpos($line,'>')-2)),-1) == '#') {
- 	 $line =  $left . gettext($text) . '#' . $right;
- 	} else {
- 	 $line =  $left . gettext($text) . $right;
- 	}
+   if (strpos($line, '<li>') !== FALSE) {
+    $left = substr($line, 0, strpos($line, '">') + 2);
+    $text = substr($line, strpos($line, '">') + 2, strpos($line, '/') - strpos($line, '">') - 3);
+    $right = substr($line, strpos($line, '/') - 1);
+    if (substr(trim(substr($line, strpos($line, '>') + 1, strpos($line, '/') - strpos($line, '>') - 2)), -1) == '#') {
+     $line = $left . gettext($text) . '#' . $right;
+    } else {
+     $line = $left . gettext($text) . $right;
+    }
    }
    self::${$staticvar} = self::${$staticvar} . $line;
-   if($line != end($lines)) {
- 	self::${$staticvar} = self::${$staticvar} . "\n";
+   if ($line != end($lines)) {
+    self::${$staticvar} = self::${$staticvar} . "\n";
    }
   }
  }

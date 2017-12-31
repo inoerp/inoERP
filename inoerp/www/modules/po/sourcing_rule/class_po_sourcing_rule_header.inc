@@ -80,9 +80,12 @@ class po_sourcing_rule_header extends dbObject {
   global $db;
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " where sourcing_rule = '{$sourcing_rule}' ";
+  $sql .= " where sourcing_rule = :sourcing_rule ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = $db->find_by_sql($sql);
+     global $db;
+	$value_a = ['sourcing_rule' => $sourcing_rule];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !(empty($result)) ? array_pop($result) : false;
  }
 

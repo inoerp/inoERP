@@ -6,44 +6,44 @@ class bom_line_v extends dbObject {
  public static $table_name = "bom_line_v";
  public static $primary_column = "bom_line_id";
  public $field_a = [
-  'bom_header_id_h',
-  'item_id_m',
-  'org_id',
-  'alternate_bom',
-  'effective_date',
-  'common_bom_item_id_m',
-  'common_bom_org_id',
-  'h_created_by',
-  'h_creation_date',
-  'h_last_update_by',
-  'h_last_update_date',
-  'bom_header_id',
-  'bom_line_id',
-  'bom_sequence',
-  'routing_sequence',
-  'component_item_id_m',
-  'usage_basis',
-  'usage_quantity',
-  'auto_request_material_cb',
-  'effective_start_date',
-  'effective_end_date',
-  'eco_number',
-  'eco_implemented_cb',
-  'planning_percentage',
-  'yield',
-  'include_in_cost_rollup_cb',
-  'wip_supply_type',
-  'supply_sub_inventory',
-  'supply_locator',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'bom_header_id_h',
+    'item_id_m',
+    'org_id',
+    'alternate_bom',
+    'effective_date',
+    'common_bom_item_id_m',
+    'common_bom_org_id',
+    'h_created_by',
+    'h_creation_date',
+    'h_last_update_by',
+    'h_last_update_date',
+    'bom_header_id',
+    'bom_line_id',
+    'bom_sequence',
+    'routing_sequence',
+    'component_item_id_m',
+    'usage_basis',
+    'usage_quantity',
+    'auto_request_material_cb',
+    'effective_start_date',
+    'effective_end_date',
+    'eco_number',
+    'eco_implemented_cb',
+    'planning_percentage',
+    'yield',
+    'include_in_cost_rollup_cb',
+    'wip_supply_type',
+    'supply_sub_inventory',
+    'supply_locator',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'item_id_m',
-  'org_id',
-  'alternate_bom',
+    'item_id_m',
+    'org_id',
+    'alternate_bom',
  ];
  public $search = [
  ];
@@ -200,19 +200,28 @@ AND bhc.common_bom_item_id_m = bh.item_id_m
  }
 
  public static function find_by_bomHeaderId($bom_headerId) {
+  global $db;
   $sql = " Select * from ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bom_header_id_h = '{$bom_headerId}'";
+  $sql .= " WHERE bom_header_id_h = :bom_header_id_h ";
 
-  $all_bom_lines = self::find_by_sql($sql);
+
+  $value_a = ['bom_header_id_h' => $bom_headerId];
+  $all_bom_lines = $db->findBySql($sql, $value_a);
+
+
   return !empty($all_bom_lines) ? $all_bom_lines : false;
  }
 
  public static function find_by_bomHeaderId_revNumber($bom_headerId, $rev_num = '') {
+
+  global $db;
+
+ $value_a = ['bom_header_id_h' => $bom_headerId];
   if (empty($rev_num)) {
    $sql = " Select * from ";
    $sql .= self::$table_name;
-   $sql .= " WHERE bom_header_id_h = '{$bom_headerId}'";
+   $sql .= " WHERE bom_header_id_h = :bom_header_id_h ";
   } else {
    $sql = " SELECT bl.bom_line_id, 	bl.bom_header_id, 	bl.bom_sequence, 	bl.routing_sequence, 	
      bl.component_item_id_m, 	bl.usage_basis, 	bl.usage_quantity, 	bl.auto_request_material_cb, 	
@@ -224,30 +233,39 @@ AND bhc.common_bom_item_id_m = bh.item_id_m
      FROM      bom_line_v bl, 
        inv_item_revision iir
      WHERE  (bl.effective_end_date IS NULL OR bl.effective_end_date > iir.effective_start_date ) 
-     AND bl.bom_header_id = '{$bom_headerId}' 
-     AND iir.revision_name = '{$rev_num}'
+     AND bl.bom_header_id = :bom_header_id_h 
+     AND iir.revision_name = :revision_name
      AND bl.item_id_m = iir.item_id_m
      AND bl.org_id = iir.org_id
      AND  bl.effective_start_date <= iir.effective_end_date
       ORDER BY bl.bom_sequence ASC";
+     
+     $value_a ['revision_name' ] = $rev_num ;
   }
-  $all_bom_lines = self::find_by_sql($sql);
+  
+   
+  $all_bom_lines = $db->findBySql($sql, $value_a);
   return !empty($all_bom_lines) ? $all_bom_lines : false;
  }
 
  public static function find_by_itemIdM_OrgId($item_id_m, $org_id) {
   $sql = "SELECT * FROM " . self::$table_name . " "
-   . " where item_id_m = '{$item_id_m}' "
-   . " AND org_id = '{$org_id}' ";
-  $result = self::find_by_sql($sql);
+     . " where item_id_m = :item_id_m "
+     . " AND org_id = :org_id ";
+
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_itemIdM_OrgId_revNumber($item_id_m, $org_id, $rev_number = '') {
+  $value_a = ['reference_table' => $item_id_m, 'org_id' => $org_id];
   if (empty($rev_number)) {
    $sql = "SELECT * FROM " . self::$table_name . " "
-    . " where item_id_m = '{$item_id_m}' "
-    . " AND org_id = '{$org_id}' AND bl.effective_end_date IS NULL ";
+      . " where item_id_m = :item_id_m "
+      . " AND org_id = :org_id AND bl.effective_end_date IS NULL ";
   } else {
    $sql = " SELECT bl.bom_line_id, 	bl.bom_header_id, 	bl.bom_sequence, 	bl.routing_sequence, 	
      bl.component_item_id_m, 	bl.usage_basis, 	bl.usage_quantity, 	bl.auto_request_material_cb, 	
@@ -259,17 +277,19 @@ AND bhc.common_bom_item_id_m = bh.item_id_m
      FROM      bom_line_v bl, 
        inv_item_revision iir
      WHERE  (bl.effective_end_date IS NULL OR bl.effective_end_date > iir.effective_start_date ) 
-     AND bl.item_id_m = '{$item_id_m}' 
-     AND iir.revision_name = '{$rev_number}'
+     AND bl.item_id_m = :item_id_m 
+     AND iir.revision_name = :revision_name
      AND bl.item_id_m = iir.item_id_m
      AND bl.org_id = iir.org_id
-     AND bl.org_id = '{$org_id}'
+     AND bl.org_id = :org_id
      AND  bl.effective_start_date <= iir.effective_end_date
     ORDER BY bl.bom_sequence ASC";
+   $value_a['revision_name'] = $rev_number;
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
 
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? $result : false;
  }

@@ -90,59 +90,7 @@ class lms_student_fee extends dbObject {
  public $last_update_date;
 
 
- public static function find_all_outTax_by_bu_org_id($org_id) {
-	$sql = " 
-	 SELECT *
-	 FROM lms_student_fee
-	 WHERE org_id = '{$org_id}'
-	 AND in_out = 'OUT'
-	";
-	$result = self::find_by_sql($sql);
-	return $result;
- }
 
- public static function find_all_inTax_by_bu_org_id($org_id) {
-	$sql = " 
-	 SELECT *
-	 FROM lms_student_fee
-	 WHERE org_id = '{$org_id}'
-	 AND in_out = 'IN'
-	";
-	$result = self::find_by_sql($sql);
-	return $result;
- }
-
- public static function find_all_outTax_by_inv_org_id($org_id) {
-	$sql = " 
-	 SELECT mtc.lms_student_fee_id, mtc.org_id, mtc.tax_code, mtc.tax_type, mtc.dr_cr,mtc.in_out,
-	 mtc.description, mtc.printed_tax_name, mtc.tax_regime, mtc.tax_jurisdiction,
-	 mtc.offset_tax_code, mtc.allow_adhoc_rate_cb, mtc.allow_tax_exemptions_cb, mtc.calculation_method,
-	 mtc.percentage, mtc.tax_amount, mtc.tax_ac_id, mtc.status, mtc.effective_start_date,
-	 mtc.effective_end_date
-	 FROM lms_student_fee mtc
-	 LEFT JOIN org on org.business_org_id = mtc.org_id
-	 WHERE org.org_id = '{$org_id}'
-	 AND in_out = 'OUT'
-	";
-	$result = self::find_by_sql($sql);
-	return $result;
- }
-
- public static function find_all_inTax_by_inv_org_id($org_id) {
-	$sql = " 
-	 SELECT mtc.lms_student_fee_id, mtc.org_id, mtc.tax_code, mtc.tax_type, mtc.dr_cr,
-	 mtc.description, mtc.printed_tax_name, mtc.tax_regime, mtc.tax_jurisdiction,
-	 mtc.offset_tax_code, mtc.allow_adhoc_rate_cb, mtc.allow_tax_exemptions_cb, mtc.calculation_method,
-	 mtc.percentage, mtc.tax_amount, mtc.tax_ac_id, mtc.status, mtc.effective_start_date,
-	 mtc.effective_end_date, org.org
-	 FROM lms_student_fee mtc
-	 LEFT JOIN org on org.business_org_id = mtc.org_id
-	 WHERE org.org_id = '{$org_id}'
-	 AND in_out = 'IN'
-	";
-	$result = self::find_by_sql($sql);
-	return $result;
- }
 
 }
 

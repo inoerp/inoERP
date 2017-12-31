@@ -171,15 +171,19 @@ class sys_profile_line extends dbObject {
  public static function find_by_headerId_profileLevel($header_id, $profile_level) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE sys_profile_header_id = '{$header_id}' AND profile_level = '{$profile_level}' ";
+  $sql .= " WHERE sys_profile_header_id = :sys_profile_header_id AND profile_level = :profile_level ";
 
-  $result = self::find_by_sql($sql);
+     global $db;
+	$value_a = ['sys_profile_header_id' => $header_id, 'profile_level' => $profile_level];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 
  public static function find_all_lines() {
   $sql = " SELECT * FROM " . self::$table_name;
-  $result = self::find_by_sql($sql);
+    global $db;
+  $result = $db->findBySql($sql);
   return $result;
  }
 
@@ -190,9 +194,13 @@ class sys_profile_line extends dbObject {
 
  public static function find_by_optionId_lineCode($header_id, $code) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where code={$code} AND sys_profile_header_id={$header_id} ";
+   " where code={$code} AND sys_profile_header_id= :sys_profile_header_id ";
    $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  
+   	  global $db;
+  $value_a = ['sys_profile_header_id' => $header_id];
+  $result = $db->findBySql($sql, $value_a);
+	   
   return !empty($result) ? array_push($result) : $result;
  }
 

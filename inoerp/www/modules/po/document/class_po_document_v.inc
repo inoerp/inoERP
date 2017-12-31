@@ -293,15 +293,22 @@ WHERE po_header.po_type IN ('STANDARD', 'BLANKET', 'CONTRACT')
 
   public static function find_all_by_poHeaderId($po_header_id) {
    $sql = " SELECT * FROM " . self::$table_name;
-   $sql .= " WHERE po_header_id = '{$po_header_id}' ";
-   $result = self::find_by_sql($sql);
+   $sql .= " WHERE po_header_id = :po_header_id ";
+  	  global $db;
+  $value_a = ['po_header_id' => $po_header_id];
+  $result = $db->findBySql($sql, $value_a);
+  
    return !empty($result) ? $result : false;
   }
 
   public static function find_all_by_poLineId($po_line_id) {
    $sql = " SELECT * FROM " . self::$table_name;
-   $sql .= " WHERE po_line_id = '{$po_line_id}' ";
-   $result = self::find_by_sql($sql);
+   $sql .= " WHERE po_line_id = :po_line_id ";
+  
+     	  global $db;
+  $value_a = ['po_line_id' => $po_line_id];
+  $result = $db->findBySql($sql, $value_a);
+   
    return !empty($result) ? $result : false;
   }
 

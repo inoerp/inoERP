@@ -116,9 +116,12 @@ class prj_project_line extends dbObject {
    return false;
   }
   $this->prj_project_header_id = $prj_project_header_id;
-  $sql = " SELECT * FROM prj_project_line WHERE prj_project_header_id = '{$prj_project_header_id}' AND parent_prj_task_num IS NULL ";
+  $sql = " SELECT * FROM prj_project_line WHERE prj_project_header_id = :prj_project_header_id AND parent_prj_task_num IS NULL ";
   $sql .= " ORDER BY task_level_weight ASC ";
-  $result = self::find_by_sql($sql);
+ 
+  	  global $db;
+  $value_a = ['prj_project_header_id' => $prj_project_header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   if ($result) {
    foreach ($result as $result_line) {
@@ -137,9 +140,13 @@ class prj_project_line extends dbObject {
  }
 
  private function _find_all_childs($result_line, &$child_final_result) {
-  $sql = " SELECT * FROM prj_project_line WHERE prj_project_header_id = '{$this->prj_project_header_id}' AND parent_prj_task_num ='{$result_line->task_number}' ";
+  $sql = " SELECT * FROM prj_project_line WHERE prj_project_header_id = :prj_project_header_id AND parent_prj_task_num = :parent_prj_task_num ";
   $sql .= " ORDER BY task_level_weight ASC ";
-  $result = self::find_by_sql($sql);
+
+      global $db;
+	$value_a = ['prj_project_header_id' => $this->prj_project_header_id, 'parent_prj_task_num' => $result_line->task_number];
+	$result = $db->findBySql($sql, $value_a);
+  
   if ($result) {
    foreach ($result as $result_line_l) {
     $child_final_result_a = [];
@@ -198,7 +205,7 @@ class prj_project_line extends dbObject {
    prl.prj_project_line_id, prl.prj_project_header_id, prl.parent_prj_task_num
 FROM prj_project_line prl
 WHERE    
-prl.prj_project_header_id = '{$header_id}'
+prl.prj_project_header_id = :prj_project_header_id
 prl.task_number NOT IN(
 SELECT prl.parent_prj_task_num
 FROM prj_project_line prl
@@ -206,7 +213,10 @@ WHERE    prl.parent_prj_task_num IS NOT NULL
 )
 ";
 
-  $result_array = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['prj_project_header_id' => $header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? $result_array : false;
  }
 

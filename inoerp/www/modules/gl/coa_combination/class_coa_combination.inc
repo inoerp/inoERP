@@ -23,66 +23,66 @@ class coa_combination extends dbObject {
  public static $key_column = "combination";
  public static $module = "gl";
  public static $system_info = [
-  'name' => 'Combination',
-  'number' => '1104',
-  'description' => 'Chart Of Account Combinations',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'gl',
-  'weight' => 4
+    'name' => 'Combination',
+    'number' => '1104',
+    'description' => 'Chart Of Account Combinations',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'gl',
+    'weight' => 4
  ];
  public $field_a = [
-  'coa_combination_id',
-  'coa_id',
-  'field1',
-  'field2',
-  'field3',
-  'field4',
-  'field5',
-  'field6',
-  'field7',
-  'field8',
-  'combination',
-  'description',
-  'ac_type',
-  'ef_id',
-  'status',
-  'rev_enabled_cb',
-  'rev_number',
-  'effective_start_date',
-  'effective_end_date',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'coa_combination_id',
+    'coa_id',
+    'field1',
+    'field2',
+    'field3',
+    'field4',
+    'field5',
+    'field6',
+    'field7',
+    'field8',
+    'combination',
+    'description',
+    'ac_type',
+    'ef_id',
+    'status',
+    'rev_enabled_cb',
+    'rev_number',
+    'effective_start_date',
+    'effective_end_date',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'ac_type',
-  'field1',
-  'combination',
+    'ac_type',
+    'field1',
+    'combination',
  ];
  public $checkbox = [
-  'rev_enabled_cb',
+    'rev_enabled_cb',
  ];
  public $fields_inForm_notInDataBase = [
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'coa_id'
+    'coa_id'
  ];
  public $requiredField = [
-  'coa_id',
-  'field1',
-  'field2',
-  'field3',
-  'field4',
-  'ac_type'
+    'coa_id',
+    'field1',
+    'field2',
+    'field3',
+    'field4',
+    'ac_type'
  ];
  public $pageTitle = " GL COA Combinatioins "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $coa_combination_id;
  public $coa_id;
@@ -114,34 +114,42 @@ class coa_combination extends dbObject {
 //  'Period' => 'search_depreciation_period'
  ];
  public $prg_update_description_details = [
-  'name' => 'Update Account Combination Description',
-  'description' => 'Run update Description program',
+    'name' => 'Update Account Combination Description',
+    'description' => 'Run update Description program',
  ];
  public $prg_all_combinations_details = [
-  'name' => 'All Account Combinations',
-  'description' => 'All Account Combinations',
+    'name' => 'All Account Combinations',
+    'description' => 'All Account Combinations',
  ];
 
  public static function find_all_from_coa($coa_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE coa_id='{$coa_id}'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE coa_id= :coa_id ";
+
+  global $db;
+  $value_a = ['coa_id' => $coa_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_coa_combination_by_coa_id($coa_id) {
   $sql = "SELECT * FROM "
-   . self::$table_name
-   . " where coa_id={$coa_id}";
-  $result = self::find_by_sql($sql);
+     . self::$table_name
+     . " where coa_id= :coa_id ";
+
+  global $db;
+  $value_a = ['coa_id' => $coa_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_coa_combination_by_coa_combination($coa_combination) {
   global $db;
   $sql = " SELECT combination FROM "
-   . self::$table_name
-   . " where combination LIKE '%{$coa_combination}%' ";
+     . self::$table_name
+     . " where combination LIKE :combination ";
 
   switch (DB_TYPE) {
    case 'ORACLE' :
@@ -153,12 +161,14 @@ class coa_combination extends dbObject {
     break;
   }
 
-  $result = $db->find_by_sql($sql);
+  $value_a = ['combination' => "%$coa_combination%"];
+  $result = $db->findBySql($sql, $value_a);
+
   $data = array();
   foreach ($result as $obj) {
    $data[] = array(
-    'label' => $obj->combination,
-    'value' => $obj->combination
+      'label' => $obj->combination,
+      'value' => $obj->combination
    );
   }
   return $data;
@@ -167,8 +177,8 @@ class coa_combination extends dbObject {
  public function findBy_coaId_combination($limit = 30) {
   global $dbc;
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where coa_id = :coa_id AND combination LIKE :combination ";
+     . self::$table_name
+     . " where coa_id = :coa_id AND combination LIKE :combination ";
 
   if (!empty($this->ac_type)) {
    $ac_type = trim($this->ac_type);
@@ -196,7 +206,7 @@ class coa_combination extends dbObject {
 
 
   $combination = '%' . $this->combination . '%';
-  $value_a = [ 'coa_id' => $this->coa_id, 'combination' => $combination];
+  $value_a = ['coa_id' => $this->coa_id, 'combination' => $combination];
   $result = $this->findBySql($sql, $value_a);
 
   return !(empty($result)) ? $result : false;
@@ -205,9 +215,11 @@ class coa_combination extends dbObject {
  public static function find_by_coaId_description($coa_id, $description, $ac_type = '', $limit = 30) {
   global $dbc;
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where coa_id = '{$coa_id}'  ";
-  $sql .= " AND description LIKE " . "'%" . $description . "%'";
+     . self::$table_name
+     . " where coa_id = '{$coa_id}'  ";
+  $sql .= " AND description LIKE :description ";
+  global $db;
+  $value_a = ['coa_id' => $coa_id, 'description' => "%$description%"];
 
   if (!empty($ac_type)) {
    $ac_type = trim($ac_type);
@@ -234,8 +246,8 @@ class coa_combination extends dbObject {
   }
 
 
-//  echo $sql;
-  $result = self::find_by_sql($sql);
+
+  $result = $db->findBySql($sql, $value_a);
 
   return !(empty($result)) ? $result : false;
  }
@@ -243,8 +255,8 @@ class coa_combination extends dbObject {
  public function findBy_exactCombination($combination) {
   global $db;
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where  combination = :combination ";
+     . self::$table_name
+     . " where  combination = :combination ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -263,8 +275,13 @@ class coa_combination extends dbObject {
 
  public static function find_by_exactCombination($combination) {
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where  combination = '{$combination}' ";
+     . self::$table_name
+     . " where  combination = :combination ";
+
+  global $db;
+  $value_a = ['combination' => $combination];
+
+
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -275,7 +292,7 @@ class coa_combination extends dbObject {
     break;
   }
 
-  $result = self::find_by_sql($sql);
+  $result = $db->findBySql($sql, $value_a);
   return !(empty($result)) ? array_pop($result) : false;
  }
 
@@ -286,9 +303,9 @@ class coa_combination extends dbObject {
    foreach ($result as $row) {
     $desc = $row->combination . ' | ' . $row->description;
     $data[] = array(
-     'label' => $desc,
-     'value' => $row->combination,
-     'coa_combination_id' => $row->coa_combination_id
+       'label' => $desc,
+       'value' => $row->combination,
+       'coa_combination_id' => $row->coa_combination_id
     );
    }
   }
@@ -302,9 +319,9 @@ class coa_combination extends dbObject {
    foreach ($result as $row) {
     $desc = $row->combination . ' | ' . $row->description;
     $data[] = array(
-     'label' => $desc,
-     'value' => $row->combination,
-     'coa_combination_id' => $row->coa_combination_id
+       'label' => $desc,
+       'value' => $row->combination,
+       'coa_combination_id' => $row->coa_combination_id
     );
    }
   }
@@ -319,9 +336,9 @@ class coa_combination extends dbObject {
  public static function validate_coa_combination($coa_id, $coa_combination) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where coa_id='{$coa_id}' " .
-   " AND combination='{$coa_combination}' ";
+     self::$table_name .
+     " where coa_id= :coa_id " .
+     " AND combination= :combination ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -332,8 +349,10 @@ class coa_combination extends dbObject {
     break;
   }
 
-  $result_set = $db->find_by_sql($sql);
-  return !(empty($result_set)) ? true : false;
+  $value_a = ['combination' => $coa_combination, 'coa_id' => $coa_id];
+  $result = $db->findBySql($sql, $value_a);
+
+  return !(empty($result)) ? true : false;
  }
 
  public function prg_update_description($seralized_parameters) {
@@ -506,7 +525,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field1 AND coa.field1 = ol.option_line_code 
-AND cc.coa_combination_id = '{$cc_id}'
+AND cc.coa_combination_id = :coa_combination_id
 ) segment1 ,
 
 (
@@ -523,7 +542,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field2 AND coa.field2 = ol.option_line_code 
-AND cc.coa_combination_id = '{$cc_id}'
+AND cc.coa_combination_id = :coa_combination_id
 ) segment2  LEFT JOIN
 
 (
@@ -540,7 +559,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field3 AND coa.field3 = ol.option_line_code 
-AND cc.coa_combination_id = '{$cc_id}'
+AND cc.coa_combination_id = :coa_combination_id
 ) segment3 ON  segment3.coa_combination_id = segment2.coa_combination_id 
 LEFT JOIN 
 
@@ -558,7 +577,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field4 AND coa.field4 = ol.option_line_code 
-AND cc.coa_combination_id = '{$cc_id}'
+AND cc.coa_combination_id = :coa_combination_id
 ) segment4 ON  segment4.coa_combination_id = segment3.coa_combination_id 
 
 LEFT JOIN 
@@ -576,7 +595,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field5 AND coa.field5 = ol.option_line_code 
-AND cc.coa_combination_id = '{$cc_id}'
+AND cc.coa_combination_id = :coa_combination_id
 ) segment5  ON  segment5.coa_combination_id = segment4.coa_combination_id 
   LEFT JOIN 
 (
@@ -593,7 +612,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field6 AND coa.field6 = ol.option_line_code 
-AND cc.coa_combination_id = '{$cc_id}'
+AND cc.coa_combination_id = :coa_combination_id
 ) segment6 ON  segment6.coa_combination_id = segment5.coa_combination_id 
 
 LEFT JOIN 
@@ -611,7 +630,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field7 AND coa.field7 = ol.option_line_code 
-AND cc.coa_combination_id = '{$cc_id}'
+AND cc.coa_combination_id = :coa_combination_id
 ) segment7  ON  segment7.coa_combination_id = segment6.coa_combination_id 
   LEFT JOIN 
 (
@@ -628,12 +647,15 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field8 AND coa.field8 = ol.option_line_code 
-AND cc.coa_combination_id = '{$cc_id}'
+AND cc.coa_combination_id = :coa_combination_id
 ) segment8 ON  segment8.coa_combination_id = segment7.coa_combination_id 
 
 ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['coa_combination_id' => $cc_id];
+  $result = $db->findBySql($sql, $value_a);
+
   $ret_a = [];
 
   if (empty($result[0]->account_qualifier4)) {
@@ -645,7 +667,7 @@ AND cc.coa_combination_id = '{$cc_id}'
 
   $desc = '';
   foreach ($result[0] as $k => $v) {
-   $desc .=!empty($v) ? "-$v" : '';
+   $desc .= !empty($v) ? "-$v" : '';
   }
   $ret_a['desc'] = ltrim($desc, '-');
 
@@ -659,13 +681,12 @@ AND cc.coa_combination_id = '{$cc_id}'
   $cc_details = self::find_by_id($combination_id);
   $field_mapping_a = coa::find_account_qualifers_byCoaId($cc_details->coa_id);
   $field_name = $field_val = "";
-//  pa($segment_vals);
-//  pa($field_mapping_a);
+
   foreach ($segment_vals as $k => $v) {
    $field_name = $field_mapping_a[$k];
    $field_val = $v;
   }
-//  echo "<br>field_name is $field_name and field_val is $field_val ";
+
   $sql = " SELECT comb2.coa_combination_id, comb2.combination, comb2.description, comb2.ac_type ,
    comb2.effective_start_date, comb2.effective_end_date  
    FROM  
@@ -726,8 +747,8 @@ AND cc.coa_combination_id = '{$cc_id}'
    $sql .= " AND (comb1.field8 = comb2.field8 || comb1.field8 IS NULL) ";
   }
 
-//  echo $sql;
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
 
   return !empty($result) ? array_pop($result) : null;
  }

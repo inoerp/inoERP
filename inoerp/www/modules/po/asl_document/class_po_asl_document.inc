@@ -52,8 +52,12 @@
   public $pageTitle = " PO ASL Document  "; //page Title
 
   Public static function find_by_po_asl_lineId($po_asl_line_id) {
-   $sql = " SELECT * FROM " . self::$table_name . " WHERE po_asl_line_id = '{$po_asl_line_id}' ";
-   $result = self::find_by_sql($sql);
+   $sql = " SELECT * FROM " . self::$table_name . " WHERE po_asl_line_id = :po_asl_line_id ";
+
+   	  global $db;
+  $value_a = ['po_asl_line_id' => $po_asl_line_id];
+  $result = $db->findBySql($sql, $value_a);
+   
    return !empty($result) ? $result : null;
   }
 

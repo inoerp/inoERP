@@ -8,27 +8,26 @@ class sd_lead_reference extends dbObject {
  public static $key_column = 'printer_name';
  public static $module = "extn";
  public $field_a = [
-  'extn_contact_reference_id',
-  'extn_contact_id',
-  'status',
-  'reference_type',
-  'reference_table',
-  'reference_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'extn_contact_reference_id',
+    'extn_contact_id',
+    'status',
+    'reference_type',
+    'reference_table',
+    'reference_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'extn_contact_id',
-  'printer_type',
+    'extn_contact_id',
+    'printer_type',
  ];
  public $requiredField = [
-  'extn_contact_id',
-  'reference_table',
-  'reference_id',
+    'extn_contact_id',
+    'reference_table',
+    'reference_id',
  ];
- 
  public $extn_contact_reference_id;
  public $extn_contact_id;
  public $status;
@@ -48,8 +47,12 @@ class sd_lead_reference extends dbObject {
  public static function find_by_code($code) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE hold_code = '{$code}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE hold_code = :hold_code ";
+
+  global $db;
+  $value_a = ['hold_code' => $code];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

@@ -103,8 +103,10 @@ class ec_payment_method extends dbObject {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where ec_payment_method_number= '{$ec_payment_method_number}' ";
-  $result = $db->find_by_sql($sql);
+   " where ec_payment_method_number= :ec_paid_order_number ";
+   
+     $value_a = ['ec_paid_order_number' => $ec_paid_order_number];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 
@@ -113,7 +115,7 @@ class ec_payment_method extends dbObject {
   $sql = "SELECT * FROM " .
    self::$table_name .
    " where status= 'ACTIVE' ";
-  $result = $db->find_by_sql($sql);
+  $result = $db->findBySql($sql);
   return $result;
  }
 

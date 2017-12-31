@@ -18,41 +18,38 @@ class qa_quality_result extends dbObject {
 
  public static $key_column = 'reference_key_name';
  public static $table_name = 'qa_quality_result';
- 
-  public static $system_info = [
-  'name' => 'Quality Result',
-  'number' => '2908',
-  'description' => 'Quality Result',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'qa',
-  'weight' => 11
+ public static $system_info = [
+    'name' => 'Quality Result',
+    'number' => '2908',
+    'description' => 'Quality Result',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'qa',
+    'weight' => 11
  ];
-  
-  
  public $field_a = [
-  'reference_type',
-  'reference_entity',
-  'reference_key_name',
-  'reference_key_value',
-  'qa_cp_header_id',
+    'reference_type',
+    'reference_entity',
+    'reference_key_name',
+    'reference_key_value',
+    'qa_cp_header_id',
  ];
  public static $common_fields_a = [
-  'reference_type',
-  'reference_entity',
-  'reference_key_name',
-  'reference_key_value',
-  'qa_cp_header_id',
+    'reference_type',
+    'reference_entity',
+    'reference_key_name',
+    'reference_key_value',
+    'qa_cp_header_id',
  ];
  public $initial_search = [
-  'reference_key_name',
-  'reference_key_value',
+    'reference_key_name',
+    'reference_key_value',
  ];
  public $search = [
-  '_show_view_path' => 1,
-  '_show_multifield_path' => [ 'qa_cp_header_id', 'reference_key_name', 'reference_key_value']
+    '_show_view_path' => 1,
+    '_show_multifield_path' => ['qa_cp_header_id', 'reference_key_name', 'reference_key_value']
  ];
  public $pageTitle = " Collection Plan "; //page Title
  public $reference_type;
@@ -97,11 +94,13 @@ class qa_quality_result extends dbObject {
     $extra_fields = extn_view::find_columns_of_table($class);
 //    pa($extra_fields);
 
-    $checkSql = " SELECT * FROM $class WHERE reference_type = 'table' AND reference_key_name='{$this->reference_key_name}' "
-     . "  AND reference_key_value='{$this->reference_key_value}' ";
-     $checkSql = ino_perPageSql_i($checkSql, 1);
+    $checkSql = " SELECT * FROM $class WHERE reference_type = 'table' AND reference_key_name=:reference_key_name "
+       . "  AND reference_key_value=:reference_key_value ";
+    $checkSql = ino_perPageSql_i($checkSql, 1);
 
-    $checkResult = self::find_by_sql($checkSql);
+    global $db;
+    $value_a = ['reference_key_value' => $this->reference_key_value, 'reference_key_name' => $this->reference_key_name];
+    $checkResult = $db->findBySql($sql, $value_a);
 
     //if $checkResult is not empty update the existing data else create record
     if (!empty($checkResult)) {
@@ -119,10 +118,10 @@ class qa_quality_result extends dbObject {
 
 //write SQL
      $sql = " UPDATE ";
-     $sql.= $class;
+     $sql .= $class;
      $sql .= " SET ";
-     $sql.= $field_stmt;
-     $sql.= " WHERE $key_column = '{$key_column_value}' ";
+     $sql .= $field_stmt;
+     $sql .= " WHERE $key_column = '{$key_column_value}' ";
      $stmt = $dbc->connection->prepare(" $sql ");
      //Bind parameters
      if (empty($_POST['file_id_values'][0])) {
@@ -154,14 +153,14 @@ class qa_quality_result extends dbObject {
      $field_values_2 = rtrim($field_values, ', ');
 //write SQL
      $sql = " INSERT INTO ";
-     $sql.= $class;
-     $sql.= ' ( ';
-     $sql.= $field_columns_2;
-     $sql.= ' ) ';
-     $sql.= 'VALUES';
-     $sql.= ' ( ';
-     $sql.= $field_values_2;
-     $sql.= ' ) ';
+     $sql .= $class;
+     $sql .= ' ( ';
+     $sql .= $field_columns_2;
+     $sql .= ' ) ';
+     $sql .= 'VALUES';
+     $sql .= ' ( ';
+     $sql .= $field_values_2;
+     $sql .= ' ) ';
 //		print_r($_POST);
      $stmt = $dbc->connection->prepare(" $sql ");
      //Bind parameters
@@ -205,9 +204,13 @@ class qa_quality_result extends dbObject {
 
   $sql = " SELECT * FROM ";
   $sql .= $table_i;
-  $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' ";
+  $sql .= " WHERE reference_key_name = :reference_key_name AND reference_key_value= :reference_key_value ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['reference_key_name' => $ref_key, 'reference_key_value' => $ref_value];
+  $result = $db->findBySql($sql, $value_a);
+
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -235,10 +238,12 @@ class qa_quality_result extends dbObject {
    }
   }
   echo $sql;
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
 
 
-  $s_result = self::find_by_sql($this->_search_sql);
+  global $db;
+  $s_result = $db->findBySql($this->_search_sql);
   $this->_search_count = count($s_result);
   return !empty($s_result) ? $s_result : false;
  }
@@ -251,8 +256,10 @@ class qa_quality_result extends dbObject {
 information_schema.tables 
 where TABLE_TYPE ='BASE TABLE' 
 AND table_name LIKE 'qa_ce%' ";
-  $all_tables = self::find_by_sql($table_sql);
 
+  global $db;
+  $all_tables = $db->findBySql($table_sql);
+  
   if (empty($all_tables)) {
    return new stdClass();
   }
@@ -284,7 +291,8 @@ AND table_name LIKE 'qa_ce%' ";
  }
 
  public function search_downloads() {
-  return !empty($this->_search_sql) ? self::find_by_sql($this->_search_sql) : null;
+    global $db;
+    return !empty($this->_search_sql) ? $db->findBySql($this->_search_sql) : null;
  }
 
 }

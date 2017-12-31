@@ -6,68 +6,68 @@ class supplier_all_v extends dbObject {
  public static $table_name = "supplier_all_v";
  public static $primary_column = "supplier_id";
  public $field_a = [
-  'supplier_id',
-  'supplier_site_id',
-  'supplier_type',
-  'ar_customer_id',
-  'creation_date',
-  'supplier_bu_id',
-  'payable_account_id',
-  'site_tax_country',
-  'currency',
-  'supplier_number',
-  'supplier_site_number',
-  'tax_country',
-  'status',
-  'last_update_by',
-  'org_id',
-  'payment_discount_account_id',
-  'site_tax_reg_no',
-  'payment_term_id',
-  'supplier_name ',
-  'supplier_site_name',
-  'created_by',
-  'last_update_date',
-  'liability_account_id',
-  'pre_payment_account_id',
-  'site_status'
+    'supplier_id',
+    'supplier_site_id',
+    'supplier_type',
+    'ar_customer_id',
+    'creation_date',
+    'supplier_bu_id',
+    'payable_account_id',
+    'site_tax_country',
+    'currency',
+    'supplier_number',
+    'supplier_site_number',
+    'tax_country',
+    'status',
+    'last_update_by',
+    'org_id',
+    'payment_discount_account_id',
+    'site_tax_reg_no',
+    'payment_term_id',
+    'supplier_name ',
+    'supplier_site_name',
+    'created_by',
+    'last_update_date',
+    'liability_account_id',
+    'pre_payment_account_id',
+    'site_status'
  ];
  public $initial_search = [
-  "supplier_id",
-  "supplier_number",
-  "supplier_name",
-  "supplier_site_id",
-  "supplier_site_number",
-  "supplier_site_name",
-  "customer_id",
-  "status"
+    "supplier_id",
+    "supplier_number",
+    "supplier_name",
+    "supplier_site_id",
+    "supplier_site_number",
+    "supplier_site_name",
+    "customer_id",
+    "status"
  ];
  public $column = [
-  "supplier_id",
-  "supplier_number",
-  "supplier_name",
-  "supplier_site_id",
-  "supplier_site_number",
-  "supplier_site_name",
-  "ar_customer_id",
-  "status"
+    "supplier_id",
+    "supplier_number",
+    "supplier_name",
+    "supplier_site_id",
+    "supplier_site_number",
+    "supplier_site_name",
+    "ar_customer_id",
+    "status"
  ];
  public $dateField = [
-  'need_by_date',
-  'promise_date'
+    'need_by_date',
+    'promise_date'
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=supplier',
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_view_path' => 'form.php?class_name=supplier',
-  '_show_view_path' => 1,
+    '_update_path' => 'form.php?class_name=supplier',
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_view_path' => 'form.php?class_name=supplier',
+    '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
  public $pageTitle = " Supplier - Find All Supplierss "; //page Title
  public $option_lists = [
-  'supplier_type' => 'SUPPLIER_TYPE'
+    'supplier_type' => 'SUPPLIER_TYPE'
  ];
  public $supplier_id;
 //  public $bu_org_id;
@@ -150,7 +150,7 @@ LEFT JOIN supplier_bu sb ON su.supplier_id = sb.supplier_id
  }
 
  public static function find_by_supplier_siteId($supplier_site_id) {
-  $sql = " SELECT * FROM " . self::$table_name . " WHERE supplier_site_id = '{$supplier_site_id}' ";
+  $sql = " SELECT * FROM " . self::$table_name . " WHERE supplier_site_id = :supplier_site_id }' ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -160,9 +160,14 @@ LEFT JOIN supplier_bu sb ON su.supplier_id = sb.supplier_id
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['supplier_site_id' => $supplier_site_id];
+  $result = $db->findBySql($sql, $value_a);
+
+
   return !empty($result) ? array_pop($result) : null;
- }
+
+  }
 
 }
 

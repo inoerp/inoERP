@@ -60,7 +60,7 @@ class prj_milestone extends dbObject {
       ppl.task_number, ppl.description as task_description
       FROM prj_milestone pm,
       prj_project_line ppl
-		  WHERE pm.prj_project_header_id= '{$project_header_id}'  
+		  WHERE pm.prj_project_header_id= :prj_project_header_id  
        AND  pm.prj_project_line_id = ppl.prj_project_line_id
          
 		  UNION
@@ -70,7 +70,7 @@ class prj_milestone extends dbObject {
       ppl.task_number, ppl.description as task_description
 		  FROM 
           prj_project_line ppl
-		  WHERE ppl.prj_project_header_id= '{$project_header_id}'   
+		  WHERE ppl.prj_project_header_id= :prj_project_header_id   
        AND ppl.milestone_cb = '1'
 		  AND ppl.prj_project_line_id NOT IN (
 		  SELECT DISTINCT(prj_project_line_id)
@@ -80,9 +80,10 @@ class prj_milestone extends dbObject {
 
 		  ";
       
-  $result = self::find_by_sql($sql);
-//  echo $sql;
-
+	  global $db;
+  $value_a = ['prj_project_header_id' => $project_header_id];
+  $result = $db->findBySql($sql, $value_a);
+	
 
   return !empty($result) ? $result : false;
  }

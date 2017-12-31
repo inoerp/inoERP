@@ -9,50 +9,50 @@ class bom_resource_cost extends dbObject {
  public static $module = "bom";
 //  data base variables as stored database column name
  public $field_a = [
-  'bom_resource_cost_id',
-  'bom_resource_id',
-  'bom_cost_type',
-  'resource_rate',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'bom_resource_cost_id',
+    'bom_resource_id',
+    'bom_cost_type',
+    'resource_rate',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $initial_search = [
-  'bom_resource_cost_id',
-  'resource',
-  'description',
-  'org_id',
-  'status',
-  'resource_type'
+    'bom_resource_cost_id',
+    'resource',
+    'description',
+    'org_id',
+    'status',
+    'resource_type'
  ];
  public $column = [
-  'bom_resource_cost_id',
-  'resource',
-  'description',
-  'org_id',
-  'status',
-  'resource_type'
+    'bom_resource_cost_id',
+    'resource',
+    'description',
+    'org_id',
+    'status',
+    'resource_type'
  ];
  public $fields_inForm_notInDataBase = [
-  "bom_cost_type_description",
+    "bom_cost_type_description",
  ];
  public $requiredField = [
-  'bom_resource_id',
-  'bom_cost_type',
-  'resource_rate',
+    'bom_resource_id',
+    'bom_cost_type',
+    'resource_rate',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
 //		 '_extra_path' => array('form.php?class_name=ar_payment_header&mode=9' => 'Pay',
 //				 'form.php?class_name=ar_transaction_header&mode=9&transaction_type=DEBIT_MEMO' => 'Credit')
  ];
  public $pageTitle = " Resources - Create & Update Resources Rate "; //page Title
  public $search_functions = [
-  'Cost Type' => 'search_bom_cost_type',
+    'Cost Type' => 'search_bom_cost_type',
  ];
  public $bom_resource_cost_id;
  public $bom_resource_id;
@@ -89,7 +89,7 @@ class bom_resource_cost extends dbObject {
  public static function find_by_resourceId_bomCostType($resource_id, $bom_cost_type = 'FROZEN') {
   $sql = " SELECT * FROM  ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bom_cost_type = '{$bom_cost_type}' AND bom_resource_id = '{$resource_id}' ";
+  $sql .= " WHERE bom_cost_type = :bom_cost_type AND bom_resource_id = :bom_resource_id ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -100,7 +100,9 @@ class bom_resource_cost extends dbObject {
     break;
   }
 
-  $result = self::find_by_sql($sql);
+  $value_a = ['reference_table' => bom_cost_type, 'bom_resource_id' => $resource_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

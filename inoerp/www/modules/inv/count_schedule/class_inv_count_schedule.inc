@@ -115,14 +115,18 @@ class inv_count_schedule extends dbObject {
 
  public static function find_by_headerId_date_status($header_id, $date, $status = 'UNCOUNTED') {
   $sql = " SELECT * from inv_count_schedule ";
-  $sql .= " WHERE inv_count_header_id = '{$header_id}' ";
-  $sql .= " AND status = '{$status}' ";
+  $sql .= " WHERE inv_count_header_id = :inv_count_header_id ";
+  $sql .= " AND status = :status ";
+  	$value_a = ['status' => $status, 'inv_count_header_id' => $header_id];
   if (!empty($date)) {
-   $sql .= " AND schedule_date <= '{$date}' ";
+   $sql .= " AND schedule_date <= :schedule_date ";
+   	$value_a['schedule_date'] = $date ;
   }
 
-  $result = self::find_by_sql($sql);
-//  echo $sql; pa($result);
+      global $db;
+
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 

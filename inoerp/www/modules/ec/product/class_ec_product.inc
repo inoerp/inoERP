@@ -23,75 +23,75 @@ class ec_product extends dbObject {
  public static $module = "ec";
 // public static $js_fileName = 'modules/inv/ec_product/js/multi_select.js';
  public static $system_info = [
-     'name' => 'eComm Product',
-     'number' => '4208',
-     'description' => 'eCommerce Products',
-     'version' => '0.1.4',
-     'db_version' => '1001',
-     'mod_version' => '1.1.1',
-     'primary_entity_cb' => '',
-     'module_name' => 'am',
-     'weight' => 1
+    'name' => 'eComm Product',
+    'number' => '4208',
+    'description' => 'eCommerce Products',
+    'version' => '0.1.4',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'am',
+    'weight' => 1
  ];
  public static $visibility_a = [
-     'NOT_STAND_ALONE' => 'Not As a Sigle Product',
-     'NOT_STAND_ALONE' => 'Only As a Single Product',
-     'ALL' => 'Always',
-     'FREE_OFFER' => 'Free Offer',
-     'NONE' => 'Not Visible For Sale',
+    'NOT_STAND_ALONE' => 'Not As a Sigle Product',
+    'NOT_STAND_ALONE' => 'Only As a Single Product',
+    'ALL' => 'Always',
+    'FREE_OFFER' => 'Free Offer',
+    'NONE' => 'Not Visible For Sale',
  ];
  public static $status_a = [
-     'HOLD' => 'Hold',
-     'ENABLED' => 'Enabled',
-     'DISABLED' => 'Disabled'
+    'HOLD' => 'Hold',
+    'ENABLED' => 'Enabled',
+    'DISABLED' => 'Disabled'
  ];
  public $checkbox = [
-     "physical_inventory_cb"
+    "physical_inventory_cb"
  ];
  public $field_a = [
-     'ec_product_id',
-     'item_id_m',
-     'org_id',
-     'product_name',
-     'product_description',
-     'new_date_trom',
-     'new_date_to',
-     'status',
-     'visibility',
-     'tax_code_id',
-     'meta_title',
-     'meta_keywords',
-     'meta_description',
-     'price_list_id',
-     'list_price',
-     'sales_price',
-     'sp_from_date',
-     'sp_to_date',
-     'no_of_view',
-     'featured_product_cb',
-     'created_by',
-     'creation_date',
-     'last_update_by',
-     'last_update_date',
+    'ec_product_id',
+    'item_id_m',
+    'org_id',
+    'product_name',
+    'product_description',
+    'new_date_trom',
+    'new_date_to',
+    'status',
+    'visibility',
+    'tax_code_id',
+    'meta_title',
+    'meta_keywords',
+    'meta_description',
+    'price_list_id',
+    'list_price',
+    'sales_price',
+    'sp_from_date',
+    'sp_to_date',
+    'no_of_view',
+    'featured_product_cb',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-     'product_name',
-     'item_id_m',
+    'product_name',
+    'item_id_m',
  ];
  public $requiredField = [
-     'item_id_m',
-     'org_id',
-     'product_name',
+    'item_id_m',
+    'org_id',
+    'product_name',
  ];
  public $fields_inForm_notInDataBase = [
-     "item_number",
-     "item_description",
+    "item_number",
+    "item_description",
  ];
  public $search = [
-     '_show_update_path' => 1,
-     '_update_action_meassge' => 'Update',
-     '_show_view_path' => 1,
-     '_view_path' => 'product.php?'
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
+    '_view_path' => 'product.php?'
  ];
  public $pageTitle = " eComm Product "; //page Title
  public $ec_product_id;
@@ -133,18 +133,21 @@ class ec_product extends dbObject {
  public static function find_all_assigned_orgs($ec_product_number) {
   global $db;
   $sql = "SELECT * FROM " .
-          self::$table_name .
-          " where ec_product_number= '{$ec_product_number}' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where ec_product_number= :ec_product_number ";
+
+  $value_a = ['ec_product_number' => $ec_product_number];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 
  public static function find_by_orgId($org_id) {
   global $db;
   $sql = "SELECT * FROM " .
-          self::$table_name .
-          " where org_id= '{$org_id}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where org_id= :org_id ";
+  $value_a = ['org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
@@ -159,7 +162,7 @@ class ec_product extends dbObject {
            AND cr.reference_table = 'ec_product'
            AND item.item_id_m = ec.item_id_m
            AND item.org_id = ec.org_id
-           AND ec.ec_product_id != '{$product_id}'
+           AND ec.ec_product_id != :ec_product_id
            AND cr.category_id IN (
            SELECT DISTINCT(cr.category_id)
            FROM 
@@ -167,10 +170,12 @@ class ec_product extends dbObject {
            category_reference cr
            WHERE ec.ec_product_id = cr.reference_id
            AND cr.reference_table = 'ec_product'
-           AND ec.ec_product_id = '{$product_id}'
+           AND ec.ec_product_id = :ec_product_id
            )
  ";
-  $result = self::find_by_sql($sql);
+  global $db;
+   $value_a = ['org_id' => $product_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
@@ -184,7 +189,7 @@ class ec_product extends dbObject {
            AND item.org_id = ec.org_id
            AND ec.featured_product_cb = '1'
  ";
-  $result = self::find_by_sql($sql);
+  $result = self::findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
@@ -215,7 +220,7 @@ class ec_product extends dbObject {
    $sql .= " AND scv.sys_catalog_line_id IN  $line_id_a_str  ";
   }
 
-  $result = self::find_by_sql($sql);
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
@@ -253,18 +258,18 @@ class ec_product extends dbObject {
         $catg_d3 = category::find_by_id($k3);
         $stmt .= '<li><a href="' . HOME_URL . 'product.php?category_id=' . $k3 . '" title="' . $catg_d3->description . '">' . $catg_d3->category . '</a></li>';
        }
-       $stmt .='</ul>';
-       $stmt .='</li>';
+       $stmt .= '</ul>';
+       $stmt .= '</li>';
       } else {
-       $stmt .='</li>';
+       $stmt .= '</li>';
       }
      }
-     $stmt .='</ul>';
-     $stmt .='</li>';
+     $stmt .= '</ul>';
+     $stmt .= '</li>';
     } else {
-     $stmt .='</li>';
+     $stmt .= '</li>';
     }
-    $stmt .='</ul>';
+    $stmt .= '</ul>';
    }
   }
 

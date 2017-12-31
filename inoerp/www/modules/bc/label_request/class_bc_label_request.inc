@@ -7,36 +7,36 @@ class bc_label_request extends dbObject {
  public static $key_column = "association_level_value";
  public static $module = "sys";
  public static $system_info = [
-  'name' => 'Label Requst',
-  'number' => '9203',
-  'description' => 'Barcode label request',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'bc',
-  'weight' => 3
+    'name' => 'Label Requst',
+    'number' => '9203',
+    'description' => 'Barcode label request',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'bc',
+    'weight' => 3
  ];
  public $field_a = [
-  'bc_label_request_id',
-  'transaction_type_id',
-  'bc_label_format_header_id',
-  'status',
-  'label_content',
-  'sys_printer_id',
-  'output_file_path',
-  'file_name',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'bc_label_request_id',
+    'transaction_type_id',
+    'bc_label_format_header_id',
+    'status',
+    'label_content',
+    'sys_printer_id',
+    'output_file_path',
+    'file_name',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'bc_label_format_header_id',
+    'bc_label_format_header_id',
  ];
  public $requiredField = [
-  'bc_label_format_header_id',
-  'label_content',
+    'bc_label_format_header_id',
+    'label_content',
  ];
  public $pageTitle = " Barcode Label Request "; //page Title
  public $bc_label_request_id;
@@ -66,12 +66,15 @@ class bc_label_request extends dbObject {
  public static function find_by_transactionId_associationLevel($transaction_type_id, $assoc_level = '') {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE transaction_type_id = '{$transaction_type_id}' ";
+  $sql .= " WHERE transaction_type_id = :transaction_type_id ";
   if (!empty($assoc_level)) {
-   $sql .= "  AND association_level = '{$assoc_level}' ";
+   $sql .= "  AND association_level = :association_level ";
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['transaction_type_id' => $transaction_type_id, 'association_level' => $assoc_level];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -95,7 +98,7 @@ class bc_label_request extends dbObject {
    $sys_field_name = $line->sys_field_name;
 //   echo " <br> $sys_field_name ";
    $xml_content .= '<variable name = "' . $line->field_name . '">';
-   $xml_content .=!empty($data_obj->$sys_field_name) ? $data_obj->$sys_field_name : '';
+   $xml_content .= !empty($data_obj->$sys_field_name) ? $data_obj->$sys_field_name : '';
    $xml_content .= '</variable>';
   }
   $xml_content .= '</label>

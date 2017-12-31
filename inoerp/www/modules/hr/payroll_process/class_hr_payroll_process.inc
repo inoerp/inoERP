@@ -94,7 +94,8 @@ class hr_payroll_process extends dbObject {
  public static function find_payroll_available_for_cancelAndConfirmation() {
   $sql = " SELECT * from hr_payroll_process ";
   $sql .= " WHERE status IS NULL OR status =  'OPEN' ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 

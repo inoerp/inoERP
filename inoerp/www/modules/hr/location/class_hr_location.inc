@@ -22,41 +22,41 @@ class hr_location extends dbObject {
  public static $key_column = "country";
  public static $module = "hr";
  public static $system_info = [
-  'name' => 'Location',
-  'number' => '3121',
-  'description' => 'HR Location',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 4
+    'name' => 'Location',
+    'number' => '3121',
+    'description' => 'HR Location',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 4
  ];
  public $field_a = [
-  'hr_location_id',
-  'country',
-  'state',
-  'city',
-  'combination',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_location_id',
+    'country',
+    'state',
+    'city',
+    'combination',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'country',
-  'state',
-  'city',
+    'country',
+    'state',
+    'city',
  ];
  public $requiredField = [
-  'country',
-  'city'
+    'country',
+    'city'
  ];
  public $pageTitle = " HR Location "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $hr_location_id;
  public $country;
@@ -68,43 +68,48 @@ class hr_location extends dbObject {
  public $creation_date;
  public $last_update_by;
  public $last_update_date;
- 
  public $prg_update_description_details = [
-  'name' => 'Update Account Combination Description',
-  'description' => 'Run update Description program',
+    'name' => 'Update Account Combination Description',
+    'description' => 'Run update Description program',
  ];
  public $prg_all_combinations_details = [
-  'name' => 'All Account Combinations',
-  'description' => 'All Account Combinations',
+    'name' => 'All Account Combinations',
+    'description' => 'All Account Combinations',
  ];
 
  public static function find_all_from_coa($coa_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE coa_id='{$coa_id}'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE coa_id= :coa_id ";
+  global $db;
+  $value_a = ['coa_id' => $coa_id];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 
  public static function find_hr_location_by_coa_id($coa_id) {
   $sql = "SELECT * FROM "
-   . self::$table_name
-   . " where coa_id={$coa_id}";
-  $result = self::find_by_sql($sql);
+     . self::$table_name
+     . " where coa_id= :coa_id ";
+  global $db;
+  $value_a = ['coa_id' => $coa_id];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 
  public static function find_hr_location_by_hr_location($hr_location) {
   global $db;
   $sql = " SELECT combination FROM "
-   . self::$table_name
-   . " where combination LIKE '%{$hr_location}%' ";
-   $sql = ino_perPageSql_i($sql, 1);
-  $result = $db->find_by_sql($sql);
+     . self::$table_name
+     . " where combination LIKE :combination ";
+  $sql = ino_perPageSql_i($sql, 1);
+  
+  $value_a = ['combination' => "%$hr_location%"];
+  $result = $db->findBySql($sql, $value_a);
   $data = array();
   foreach ($result as $obj) {
    $data[] = array(
-    'label' => $obj->combination,
-    'value' => $obj->combination
+      'label' => $obj->combination,
+      'value' => $obj->combination
    );
   }
   return $data;
@@ -113,8 +118,8 @@ class hr_location extends dbObject {
  public function findBy_coaId_combination($limit = 30) {
   global $dbc;
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where coa_id = :coa_id AND combination LIKE :combination ";
+     . self::$table_name
+     . " where coa_id = :coa_id AND combination LIKE :combination ";
 
   if (!empty($this->ac_type)) {
    $ac_type = trim($this->ac_type);
@@ -133,7 +138,7 @@ class hr_location extends dbObject {
   $sql = ino_perPageSql_i($sql, $limit);
 
   $combination = '%' . $this->combination . '%';
-  $value_a = [ 'coa_id' => $this->coa_id, 'combination' => $combination];
+  $value_a = ['coa_id' => $this->coa_id, 'combination' => $combination];
   $result = $this->findBySql($sql, $value_a);
 
   return !(empty($result)) ? $result : false;
@@ -142,8 +147,8 @@ class hr_location extends dbObject {
  public static function find_by_coaId_description($coa_id, $description, $ac_type = '', $limit = 30) {
   global $dbc;
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where coa_id = '{$coa_id}'  ";
+     . self::$table_name
+     . " where coa_id = '{$coa_id}'  ";
   $sql .= " AND description LIKE " . "'%" . $description . "%'";
 
   if (!empty($ac_type)) {
@@ -160,8 +165,9 @@ class hr_location extends dbObject {
    }
   }
 
- $sql = ino_perPageSql_i($sql, $limit);
-  $result = self::find_by_sql($sql);
+  $sql = ino_perPageSql_i($sql, $limit);
+  global $db;
+  $result = $db->findBySql($sql);
 
   return !(empty($result)) ? $result : false;
  }
@@ -169,8 +175,8 @@ class hr_location extends dbObject {
  public function findBy_exactCombination($combination) {
   global $db;
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where  combination = :combination ";
+     . self::$table_name
+     . " where  combination = :combination ";
   $sql = ino_perPageSql_i($sql, 1);
   $param_a = ['combination'];
   $value_a = ['combination' => $combination];
@@ -180,10 +186,12 @@ class hr_location extends dbObject {
 
  public static function find_by_exactCombination($combination) {
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where  combination = '{$combination}' ";
-   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+     . self::$table_name
+     . " where  combination = :combination ";
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['combination' => $combination];
+  $result = $db->findBySql($sql, $value_a);
   return !(empty($result)) ? array_pop($result) : false;
  }
 
@@ -194,9 +202,9 @@ class hr_location extends dbObject {
    foreach ($result as $row) {
     $desc = $row->combination . ' | ' . $row->description;
     $data[] = array(
-     'label' => $desc,
-     'value' => $row->combination,
-     'hr_location_id' => $row->hr_location_id
+       'label' => $desc,
+       'value' => $row->combination,
+       'hr_location_id' => $row->hr_location_id
     );
    }
   }
@@ -210,9 +218,9 @@ class hr_location extends dbObject {
    foreach ($result as $row) {
     $desc = $row->combination . ' | ' . $row->description;
     $data[] = array(
-     'label' => $desc,
-     'value' => $row->combination,
-     'hr_location_id' => $row->hr_location_id
+       'label' => $desc,
+       'value' => $row->combination,
+       'hr_location_id' => $row->hr_location_id
     );
    }
   }
@@ -227,11 +235,13 @@ class hr_location extends dbObject {
  public static function validate_hr_location($coa_id, $hr_location) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where coa_id='{$coa_id}' " .
-   " AND combination='{$hr_location}' ";
-   $sql = ino_perPageSql_i($sql, 1);
-  $result_set = $db->find_by_sql($sql);
+     self::$table_name .
+     " where coa_id= :coa_id " .
+     " AND combination= :combination  ";
+  $sql = ino_perPageSql_i($sql, 1);
+
+  $value_a = ['coa_id' => $coa_id, 'combination' => $hr_location];
+  $result_set = $db->findBySql($sql, $value_a);
   return !(empty($result_set)) ? true : false;
  }
 
@@ -405,7 +415,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field1 AND coa.field1 = ol.option_line_code 
-AND cc.hr_location_id = '{$cc_id}'
+AND cc.hr_location_id = :hr_location_id
 ) segment1 ,
 
 (
@@ -422,7 +432,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field2 AND coa.field2 = ol.option_line_code 
-AND cc.hr_location_id = '{$cc_id}'
+AND cc.hr_location_id = :hr_location_id
 ) segment2  LEFT JOIN
 
 (
@@ -439,7 +449,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field3 AND coa.field3 = ol.option_line_code 
-AND cc.hr_location_id = '{$cc_id}'
+AND cc.hr_location_id = :hr_location_id
 ) segment3 ON  segment3.hr_location_id = segment2.hr_location_id 
 LEFT JOIN 
 
@@ -457,7 +467,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field4 AND coa.field4 = ol.option_line_code 
-AND cc.hr_location_id = '{$cc_id}'
+AND cc.hr_location_id = :hr_location_id
 ) segment4 ON  segment4.hr_location_id = segment3.hr_location_id 
 
 LEFT JOIN 
@@ -475,7 +485,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field5 AND coa.field5 = ol.option_line_code 
-AND cc.hr_location_id = '{$cc_id}'
+AND cc.hr_location_id = :hr_location_id
 ) segment5  ON  segment5.hr_location_id = segment4.hr_location_id 
   LEFT JOIN 
 (
@@ -492,7 +502,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field6 AND coa.field6 = ol.option_line_code 
-AND cc.hr_location_id = '{$cc_id}'
+AND cc.hr_location_id = :hr_location_id
 ) segment6 ON  segment6.hr_location_id = segment5.hr_location_id 
 
 LEFT JOIN 
@@ -510,7 +520,7 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field7 AND coa.field7 = ol.option_line_code 
-AND cc.hr_location_id = '{$cc_id}'
+AND cc.hr_location_id = :hr_location_id
 ) segment7  ON  segment7.hr_location_id = segment6.hr_location_id 
   LEFT JOIN 
 (
@@ -527,12 +537,15 @@ AND oh.option_header_id = ol.option_header_id
 AND vgh.sys_value_group_header_id = ol.value_group_id
 AND vgh.sys_value_group_header_id = vgl.sys_value_group_header_id
 AND vgl.code = cc.field8 AND coa.field8 = ol.option_line_code 
-AND cc.hr_location_id = '{$cc_id}'
+AND cc.hr_location_id = :hr_location_id
 ) segment8 ON  segment8.hr_location_id = segment7.hr_location_id 
 
 ";
 
-  $result = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['hr_location_id' => $cc_id];
+  $result = $db->findBySql($sql, $value_a);
+  
   $ret_a = [];
 
   if (empty($result[0]->account_qualifier4)) {
@@ -544,7 +557,7 @@ AND cc.hr_location_id = '{$cc_id}'
 
   $desc = '';
   foreach ($result[0] as $k => $v) {
-   $desc .=!empty($v) ? "-$v" : '';
+   $desc .= !empty($v) ? "-$v" : '';
   }
   $ret_a['desc'] = ltrim($desc, '-');
 

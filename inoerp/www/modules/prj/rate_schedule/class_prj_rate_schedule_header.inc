@@ -89,9 +89,11 @@ class prj_rate_schedule_header extends dbObject {
   
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name ;
-  $sql .= " WHERE rate_type = '{$rate_type}' " ;
+  $sql .= " WHERE rate_type = :rate_type " ;
   
-  $result = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['rate_type' => $rate_type];
+  $result = $db->findBySql($sql, $value_a);
   
   return !empty($result) ? $result : false;
  }

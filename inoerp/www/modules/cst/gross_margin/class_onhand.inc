@@ -156,15 +156,11 @@ class onhand extends dbObject {
               </thead>
 VAR;
 
-//Public static function onhand_structure() {
-//    $option_header = option_header::find_by_name('LOCATOR_STRUCTURE');
-//    $onhand_class = option_line::find_by_option_id($option_header->option_id);
-//    return $onhand_class;
-//  }
-
  public static function find_all_v() {
   $sql = " SELECT * FROM " . self::$view_name;
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
+  
   return $result;
  }
 

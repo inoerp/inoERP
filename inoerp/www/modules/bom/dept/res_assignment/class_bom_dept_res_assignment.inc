@@ -9,27 +9,27 @@ class bom_dept_res_assignment extends dbObject {
  public static $module = "bom";
 //  data base variables as stored database column name
  public $field_a = [
-		 'bom_dept_res_assignment_id',
-		 'bom_department_id',
-		 'cost_type_id',
-		 'resource_id',
-		 'no_of_units',
-		 'efficiency',
-		 'utilization',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date'
+    'bom_dept_res_assignment_id',
+    'bom_department_id',
+    'cost_type_id',
+    'resource_id',
+    'no_of_units',
+    'efficiency',
+    'utilization',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
 //variables used for showing data
  public $fields_inForm_notInDataBase = [
-		 'cost_type_description',
-		 'resource_description'
+    'cost_type_description',
+    'resource_description'
  ];
  public $requiredField = [
-		 'bom_department_id',
-		 'cost_type_id',
-		 'resource_id'
+    'bom_department_id',
+    'cost_type_id',
+    'resource_id'
  ];
  public $bom_department_id;
  public $cost_type_id;
@@ -48,23 +48,25 @@ class bom_dept_res_assignment extends dbObject {
  public $msg;
 
  public function _before_showing() {
-	if (!empty($this->bom_dept_res_assignment_id)) {
+  if (!empty($this->bom_dept_res_assignment_id)) {
 //	 $item = item::find_by_id($this->common_bom_item_id);
-	 $this->cost_type_description = null;
-	 $this->resource_description = null;
-	} else {
-	 $this->cost_type_description = null;
-	 $this->resource_description = null;
-	}
+   $this->cost_type_description = null;
+   $this->resource_description = null;
+  } else {
+   $this->cost_type_description = null;
+   $this->resource_description = null;
+  }
  }
 
  public static function find_by_bom_departmentId($bom_departmentId) {
-	global $db;
-	$sql = "SELECT * FROM " .
-					self::$table_name .
-					" where bom_department_id= '{$bom_departmentId}' ";
-	$result = self::find_by_sql($sql);
-	return $result;
+  global $db;
+  $sql = "SELECT * FROM " .
+     self::$table_name .
+     " where bom_department_id= :bom_department_id ";
+  $value_a = ['bom_department_id' => $bom_departmentId];
+  $result = $db->findBySql($sql, $value_a);
+
+  return $result;
  }
 
 }

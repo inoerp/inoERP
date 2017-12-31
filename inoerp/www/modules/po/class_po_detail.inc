@@ -131,8 +131,11 @@
   public $supplier_site_name;
 
   public static function find_by_po_lineId($po_line_id) {
-   $sql = "SELECT * FROM " . self::$table_name . " where po_line_id = '{$po_line_id}'";
-   $result_array = self::find_by_sql($sql);
+   $sql = "SELECT * FROM " . self::$table_name . " where po_line_id = :po_line_id ";
+   	  global $db;
+  $value_a = ['po_line_id' => $po_line_id];
+  $result_array = $db->findBySql($sql, $value_a);
+  
    return $result_array;
   }
 

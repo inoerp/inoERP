@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * PO_ASL_HEADER CLass
  * Contains all the approved supplier header information, such as - ASL Type, Org Id, Item id 
@@ -22,56 +24,56 @@ class po_asl_header extends dbObject {
  public static $key_column = 'description';
  public static $module = "pur";
  public static $system_info = [
-  'name' => 'ASL',
-  'number' => '2203',
-  'description' => 'Create & Mainten Approved Supplier List',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('po_asl_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'po',
-  'weight' => 2
+    'name' => 'ASL',
+    'number' => '2203',
+    'description' => 'Create & Mainten Approved Supplier List',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('po_asl_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'po',
+    'weight' => 2
  ];
  public static $asl_type_a = [
-  'ITEM' => 'Item',
-  'ITEM_CATEGORY' => 'Item Category',
+    'ITEM' => 'Item',
+    'ITEM_CATEGORY' => 'Item Category',
  ];
  public $field_a = [
-  'po_asl_header_id',
-  'bu_org_id',
-  'asl_type',
-  'item_id_m',
-  'item_category_id',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'po_asl_header_id',
+    'bu_org_id',
+    'asl_type',
+    'item_id_m',
+    'item_category_id',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
 
  public $initial_search = [
-  'po_asl_header_id',
-  'bu_org_id',
-  'asl_type',
+    'po_asl_header_id',
+    'bu_org_id',
+    'asl_type',
  ];
  public $requiredField = [
-  'bu_org_id',
-  'asl_type',
-  'description'
+    'bu_org_id',
+    'asl_type',
+    'description'
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  'item_decription'
+    "item_number",
+    'item_decription'
  ];
  public $profile_default = [
-  'bu_org_id' => 'org_bu_name_default',
+    'bu_org_id' => 'org_bu_name_default',
  ];
  public $pageTitle = " Approved Supplier List "; //page Title
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $po_asl_header_id;
  public $bu_org_id;
@@ -97,16 +99,20 @@ class po_asl_header extends dbObject {
   global $db;
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " where asl = '{$asl}' ";
+  $sql .= " where asl = :asl ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = $db->find_by_sql($sql);
+
+  global $db;
+  $value_a = ['asl' => $asl];
+  $result = $db->findBySql($sql, $value_a);
+
   return !(empty($result)) ? array_pop($result) : false;
  }
 
  public function findBy_itemId() {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_id_m= :item_id_m  ";
+     self::$table_name .
+     " where item_id_m= :item_id_m  ";
   $sql = ino_perPageSql_i($sql, 1);
   $param_a = ['item_id_m'];
   $value_a = ['item_id_m' => $this->item_id_m];

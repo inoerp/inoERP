@@ -93,10 +93,13 @@ item
 WHERE item.item_id_m = pfi.item_id_m
 and pfh.pm_batch_header_id =pfi.pm_batch_header_id
 and pfh.org_id =item.org_id
-and pfi.pm_batch_header_id = '{$header_id}'
+and pfi.pm_batch_header_id = :pm_batch_header_id
 ";
 
-  $result_array = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['pm_batch_header_id' => $header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+  
   return !empty($result_array) ? $result_array : false;
  }
 
@@ -114,11 +117,13 @@ pm_batch_header pbh
 WHERE pbi.item_id_m = item.item_id_m
 AND item.item_id = item.item_id_m
 AND pbh.pm_batch_header_id = pbi.pm_batch_header_id
-AND pbi.pm_batch_header_id='{$header_id}'
+AND pbi.pm_batch_header_id= :pm_batch_header_id
  "
   ;
 
-  $result = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['pm_batch_header_id' => $header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? $result : '';
  }

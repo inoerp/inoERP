@@ -94,8 +94,12 @@
   }
 
   public static function find_by_routing_headerId($routing_header_id) {
-   $sql = "SELECT * FROM " . self::$table_name . " where bom_routing_header_id = '{$routing_header_id}'";
-   $result_array = self::find_by_sql($sql);
+   $sql = "SELECT * FROM " . self::$table_name . " where bom_routing_header_id = :bom_routing_header_id ";
+   
+      global $db;
+	$value_a = ['bom_routing_header_id' => $routing_header_id];
+	$result_array = $db->findBySql($sql, $value_a);
+  
    return $result_array;
   }
 

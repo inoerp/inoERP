@@ -23,71 +23,67 @@ class adm_task_type extends dbObject {
  public static $multi_select_template_path = 'modules/adm/task_type/multi_action/task_type_template_ma.php';
 //  data base variables as stored database column name
  public static $system_info = [
-  'name' => 'adm_task_type',
-  'number' => '8001',
-  'description' => 'Admin Task Type',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 17
+    'name' => 'adm_task_type',
+    'number' => '8001',
+    'description' => 'Admin Task Type',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 17
  ];
  public $field_a = [
-  'adm_task_type_id',
-  'access_level',
-  'task_type',
-  'process_flow_header_id',
-  'description',
-  'from_date',
-  'to_date',
-  'effort_uom_id',
-  'effort_value',
-  'send_notification_cb',
-  'schedule_cb',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'adm_task_type_id',
+    'access_level',
+    'task_type',
+    'process_flow_header_id',
+    'description',
+    'from_date',
+    'to_date',
+    'effort_uom_id',
+    'effort_value',
+    'send_notification_cb',
+    'schedule_cb',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $initial_search = [
-  "task_type",
+    "task_type",
  ];
  public $checkbox = ["send_notification_cb",
-  "schedule_cb"
+    "schedule_cb"
  ];
  public $requiredField = [
- 'access_level',
-  'task_type',
+    'access_level',
+    'task_type',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
- 
- 
  public $pageTitle = " Task Type"; //page Title
-
-public $adm_task_type_id;
-public $access_level;
-public $task_type;
-public $process_flow_header_id;
-public $description;
-public $from_date;
-public $to_date;
-public $effort_uom_id;
-public $effort_value;
-public $send_notification_cb;
-public $schedule_cb;
-public $created_by;
-public $creation_date;
-public $last_update_by;
-public $last_update_date;
-
+ public $adm_task_type_id;
+ public $access_level;
+ public $task_type;
+ public $process_flow_header_id;
+ public $description;
+ public $from_date;
+ public $to_date;
+ public $effort_uom_id;
+ public $effort_value;
+ public $send_notification_cb;
+ public $schedule_cb;
+ public $created_by;
+ public $creation_date;
+ public $last_update_by;
+ public $last_update_date;
  public $time;
  public $msg;
- 
+
  public function findBy_parameter_withOrgDetails() {
   $value_a = [];
   $sql = " SELECT si.adm_task_type_id,si.type,si.adm_task_type,si.description, org.org,org.org_id  ";
@@ -113,23 +109,24 @@ public $last_update_date;
   if (!empty($org_id)) {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE org_id = '{$org_id}' ";
-   $result = $db::find_by_sql($sql);
+   $sql .= " WHERE org_id = :org_id ";
+   $value_a = ['org_id' => $org_id];
+   $result = $db->findBySql($sql, $value_a);
   } else {
    $result = null_instantitae('adm_task_type');
   }
+
   return $result;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'mode',
-   'show_block'
+     'mode',
+     'show_block'
   ];
 
   return $multi_select_hidden;
  }
- 
 
 }
 

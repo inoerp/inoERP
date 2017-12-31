@@ -100,11 +100,14 @@ class prj_invoice_line extends dbObject {
   $sql = " SELECT SUM(amount) as invoice_amount
 FROM prj_invoice_line prl,
 prj_invoice_header prh
-WHERE prh.prj_project_header_id = '{$project_header_id}'
+WHERE prh.prj_project_header_id = :prj_project_header_id
 AND prh.prj_invoice_header_id = prl.prj_invoice_header_id
 ";
 
-  $result = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['prj_project_header_id' => $project_header_id];
+  $result = $db->findBySql($sql, $value_a);
+	
 
   return !empty($result) ? $result[0]->invoice_amount : false;
  }
@@ -114,9 +117,13 @@ AND prh.prj_invoice_header_id = prl.prj_invoice_header_id
 FROM  prj_invoice_line prl,
 prj_invoice_header prh
 WHERE prh.prj_invoice_header_id = prl.prj_invoice_header_id
-AND prh.prj_invoice_header_id  = '{$prj_invoice_header_id}' ";
+AND prh.prj_invoice_header_id  = :prj_invoice_header_id ";
 
-  $result = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['prj_invoice_header_id' => $prj_invoice_header_id];
+  $result = $db->findBySql($sql, $value_a);
+	
+  
   return !empty($result) ? $result[0]->max_line_num : 0;
  }
 }

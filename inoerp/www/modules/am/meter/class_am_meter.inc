@@ -23,68 +23,68 @@ class am_meter extends dbObject {
  public static $multi_select_template_path = 'modules/inv/am_meter/multi_action/am_meter_template_ma.php';
 //  data base variables as stored database column name
  public static $system_info = [
-  'name' => 'Meter',
-  'number' => '4106',
-  'description' => 'Maintenance Meter',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'am',
-  'weight' => 17
+    'name' => 'Meter',
+    'number' => '4106',
+    'description' => 'Maintenance Meter',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'am',
+    'weight' => 17
  ];
  public static $type_a = [
-  'ABSOLUTE' => 'Absolute',
-  'CHANGE' => 'Change'
+    'ABSOLUTE' => 'Absolute',
+    'CHANGE' => 'Change'
  ];
  public static $value_change_a = [
-  'ASCENDING' => 'Ascending',
-  'DESCENDING' => 'Descending',
-  'FLUCTUATING' => 'Fluctuating',
+    'ASCENDING' => 'Ascending',
+    'DESCENDING' => 'Descending',
+    'FLUCTUATING' => 'Fluctuating',
  ];
  public $field_a = [
-  'am_meter_id',
-  'org_id',
-  'name',
-  'type',
-  'uom_id',
-  'from_date',
-  'to_date',
-  'description',
-  'value_change',
-  'initial_reading',
-  'initial_reading_date',
-  'rate_per_day',
-  'no_of_past_readings',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'am_meter_id',
+    'org_id',
+    'name',
+    'type',
+    'uom_id',
+    'from_date',
+    'to_date',
+    'description',
+    'value_change',
+    'initial_reading',
+    'initial_reading_date',
+    'rate_per_day',
+    'no_of_past_readings',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $initial_search = [
-  'name',
-  'type'
+    'name',
+    'type'
  ];
  public $checkbox = [
  ];
  public $requiredField = [
-  'name',
-  'org_id',
-  'type',
-  'uom_id',
-  'value_change',
-  'from_date',
+    'name',
+    'org_id',
+    'type',
+    'uom_id',
+    'value_change',
+    'from_date',
     'rate_per_day',
-  'no_of_past_readings',
+    'no_of_past_readings',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $search_functions = [
-  'Organization' => 'search_org_name'
+    'Organization' => 'search_org_name'
  ];
  public $pageTitle = " Meter - Create & Update Meters "; //page Title
  public $am_meter_id;
@@ -150,8 +150,10 @@ class am_meter extends dbObject {
   if (!empty($org_id)) {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE org_id = '{$org_id}' ";
-   $result = $db::find_by_sql($sql);
+   $sql .= " WHERE org_id = :org_id ";
+
+   $value_a = ['org_id' => $org_id];
+   $result = $db->findBySql($sql, $value_a);
   } else {
    $result = null_instantitae('am_meter');
   }
@@ -160,8 +162,8 @@ class am_meter extends dbObject {
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'mode',
-   'show_block'
+     'mode',
+     'show_block'
   ];
 
   return $multi_select_hidden;

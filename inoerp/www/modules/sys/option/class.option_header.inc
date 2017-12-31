@@ -165,13 +165,14 @@ class option_header extends dbObject {
 
  public static function find_all_headers() {
   $sql = " SELECT * FROM " . self::$table_name;
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return $result;
  }
 
  public static function find_by_name($option_types) {
   global $db;
-  $sql = "SELECT * FROM " . self::$table_name . " where option_type LIKE '%{$option_types}%' ";
+  $sql = "SELECT * FROM " . self::$table_name . " where option_type LIKE :option_type ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -181,16 +182,21 @@ class option_header extends dbObject {
     $sql .=  ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+ 
+  	  global $db;
+  $value_a = ['option_type' =>  "%$option_types%"];
+  $result_array = $db->findBySql($sql, $value_a);
 
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public static function find_by_exact_name($option_types) {
   global $db;
-  $sql = "SELECT * FROM " . self::$table_name . " WHERE option_type = '$option_types' ";
+  $sql = "SELECT * FROM " . self::$table_name . " WHERE option_type = :option_type ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result_array = self::find_by_sql($sql);
+   	  global $db;
+  $value_a = ['option_type' =>  "%$option_types%"];
+  $result_array = $db->findBySql($sql, $value_a);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
@@ -210,8 +216,12 @@ class option_header extends dbObject {
 
  private function check_option_type() {
   global $db;
-  $sql = "SELECT * FROM " . self::$table_name . " where option_type='{$this->option_type}' ";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where option_type= :option_type ";
+ 
+  	  global $db;
+  $value_a = ['option_type' => $this->option_type];
+  $result_array = $db->findBySql($sql, $value_a);
+  
   if (count($result_array) > 0) {
    $this->msg = 1;
   } else {

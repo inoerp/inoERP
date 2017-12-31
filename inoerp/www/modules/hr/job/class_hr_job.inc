@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP - Version 0.1.1
  *
@@ -21,72 +22,70 @@ class hr_job extends dbObject {
  public static $key_column = 'job_code';
  public static $module = "hr";
  public static $system_info = [
-  'name' => 'Job',
-  'number' => '3108',
-  'description' => 'HR Job',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'hr',
-  'weight' => 8
+    'name' => 'Job',
+    'number' => '3108',
+    'description' => 'HR Job',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'hr',
+    'weight' => 8
  ];
  public static $template_type = [
-  'header_tab' => 1,
-  'line_tab' => 2,
-  'nooffields_header_tab1' => 5,
-  'nooffields_line_tab1' => 6,
-  'nooffields_line_tab2' => 6,
+    'header_tab' => 1,
+    'line_tab' => 2,
+    'nooffields_header_tab1' => 5,
+    'nooffields_line_tab1' => 6,
+    'nooffields_line_tab2' => 6,
  ];
- 
  public static $usage_a = [
-  'HR' => 'Human Resource',
-  'PROJECT' => 'Project',
-  'ALL' => 'All',
+    'HR' => 'Human Resource',
+    'PROJECT' => 'Project',
+    'ALL' => 'All',
  ];
- 
  public $field_a = [
-  'hr_job_id',
-  'job_code',
-  'job_name',
-  'start_date',
-  'end_date',
-  'description',
-  'min_education',
-  'min_experience',
-  'technology',
-  'skillset',
-  'position_type',
-  'functional_area',
-  'job_usage',
-  'group_hr_job_id',
-  'location',
-  'job_level',
-  'status',
-  'job_details',
-  'primary_responsibility',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'hr_job_id',
+    'job_code',
+    'job_name',
+    'start_date',
+    'end_date',
+    'description',
+    'min_education',
+    'min_experience',
+    'technology',
+    'skillset',
+    'position_type',
+    'functional_area',
+    'job_usage',
+    'group_hr_job_id',
+    'location',
+    'job_level',
+    'status',
+    'job_details',
+    'primary_responsibility',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'hr_job_id',
-  'job_code',
-  'job_name',
+    'hr_job_id',
+    'job_code',
+    'job_name',
  ];
  public $column = [
-  'hr_job_id',
-  'job_code',
-  'job_name',
-  'start_date',
-  'end_date',
-  'description',
+    'hr_job_id',
+    'job_code',
+    'job_name',
+    'start_date',
+    'end_date',
+    'description',
  ];
  public $requiredField = [
-  'job_code',
-  'job_name',
-  'start_date',
+    'job_code',
+    'job_name',
+    'start_date',
  ];
  public $hr_job_id;
  public $job_code;
@@ -112,8 +111,8 @@ class hr_job extends dbObject {
  public $last_update_by;
  public $last_update_date;
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " HR Jobs  "; //page Title
 
@@ -135,7 +134,8 @@ class hr_job extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'HEADER' ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
@@ -143,15 +143,18 @@ class hr_job extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'LINE' ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_transactionClass($class) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE type_class = '{$class}' AND status='active'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE type_class = :type_class AND status='active'";
+  global $db;
+  $value_a = ['type_class' => $class];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 

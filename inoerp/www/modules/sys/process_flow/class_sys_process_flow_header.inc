@@ -21,46 +21,46 @@ class sys_process_flow_header extends dbObject {
  public static $key_column = "process_flow";
  public static $module = "sys";
  public static $system_info = [
-  'name' => 'Process Flow',
-  'number' => '9445',
-  'description' => 'Create & Mainten Process Flow',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('sys_process_flow_line', 'sys_process_flow_action'),
-  'primary_entity_cb' => '',
-  'module_name' => 'sys',
-  'weight' => 7
+    'name' => 'Process Flow',
+    'number' => '9445',
+    'description' => 'Create & Mainten Process Flow',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('sys_process_flow_line', 'sys_process_flow_action'),
+    'primary_entity_cb' => '',
+    'module_name' => 'sys',
+    'weight' => 7
  ];
  public static $type_a = [
-  'APPROVAL' => 'Approval',
-  'DOCUMENT' => 'Document',
-  'SYS_DOCUMENT' => 'System Document'
+    'APPROVAL' => 'Approval',
+    'DOCUMENT' => 'Document',
+    'SYS_DOCUMENT' => 'System Document'
  ];
  public $field_a = [
-  'sys_process_flow_header_id',
-  'process_flow',
-  'module_name',
-  'status',
-  'type',
-  'description',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'sys_process_flow_header_id',
+    'process_flow',
+    'module_name',
+    'status',
+    'type',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'sys_process_flow_header_id',
-  'process_flow',
-  'module_name'
+    'sys_process_flow_header_id',
+    'process_flow',
+    'module_name'
  ];
  public $requiredField = [
-  'process_flow',
-  'module_name'
+    'process_flow',
+    'module_name'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Process Flow Header ";
  public $sys_process_flow_header_id;
@@ -81,14 +81,17 @@ class sys_process_flow_header extends dbObject {
   return $lines;
  }
 
- Public static function find_by_type($type='SYS_DOCUMENT') {
+ Public static function find_by_type($type = 'SYS_DOCUMENT') {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= "  WHERE type =  '{$type}'
+  $sql .= "  WHERE type =  :type
          ORDER BY process_flow ASC
 ";
-  
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['type' => $type];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -98,11 +101,14 @@ class sys_process_flow_header extends dbObject {
      sys_process_flow_line fl
      
     WHERE fh.sys_process_flow_header_id = fl.sys_process_flow_header_id
-    AND fh.sys_process_flow_header_id = '{$header_id}'
+    AND fh.sys_process_flow_header_id = :sys_process_flow_header_id
      
 ORDER BY seq_number ASC
 ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['sys_process_flow_header_id' => $header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -121,8 +127,8 @@ ORDER BY seq_number ASC
    $process_count = $process_flow_line_obj_ai->key() + 1;
    $current_process = (!empty($current_line) && $current_line == $process_flow_line_obj_ai->current()->line_name ) ? 'current_processs' : '';
    $diagram_stmt .= '<li class="process  ' . $current_process . ' ' . $process_flow_line_obj_ai->current()->line_name . ' '
-    . $process_flow_line_obj_ai->current()->line_type . ' "><bdi><label>'
-    . $process_count . '. ' . $process_flow_line_obj_ai->current()->line_name . '</label>';
+      . $process_flow_line_obj_ai->current()->line_type . ' "><bdi><label>'
+      . $process_count . '. ' . $process_flow_line_obj_ai->current()->line_name . '</label>';
    $diagram_stmt .= $process_flow_line_obj_ai->current()->description;
    $diagram_stmt .= '</bdi></li>';
    $process_flow_line_obj_ai->next();
@@ -167,7 +173,7 @@ ORDER BY seq_number ASC
    $process_count = $process_flow_line_obj_ai->key() + 1;
    $current_process = (!empty($current_line) && $current_line == $process_flow_line_obj_ai->current()->line_name ) ? 'current_processs' : '';
    $diagram_stmt .= '<li class="process  ' . $current_process . ' ' . $process_flow_line_obj_ai->current()->line_name . ' '
-    . $process_flow_line_obj_ai->current()->line_type . ' "><bdi><label>';
+      . $process_flow_line_obj_ai->current()->line_type . ' "><bdi><label>';
    if (!empty($process_flow_line_obj_ai->current()->activity_path)) {
     $diagram_stmt .= '<a target="_blank" href="' . HOME_URL . $process_flow_line_obj_ai->current()->activity_path . '">';
    }

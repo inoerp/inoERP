@@ -8,45 +8,45 @@ class pm_formula_ingredient extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "pm";
  public static $source_a = [
-  'ESTIMATES' => 'Estimates',
-  'WORK_ORDER' => 'Work Order',
+    'ESTIMATES' => 'Estimates',
+    'WORK_ORDER' => 'Work Order',
  ];
  public static $consumption_type_a = [
-  'AUTO' => 'Automatic',
-  'MANUAL' => 'Manual',
-  'INC' => 'Incremental',
-  'AUTOBS' => 'Auto By Step',
+    'AUTO' => 'Automatic',
+    'MANUAL' => 'Manual',
+    'INC' => 'Incremental',
+    'AUTOBS' => 'Auto By Step',
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'pm_formula_ingredient_id',
-  'pm_formula_header_id',
-  'line_no',
-  'revision_name',
-  'item_id_m',
-  'uom_id',
-  'quantity',
-  'description',
-  'scale_type',
-  'contribute_yield_cb',
-  'consumption_type',
-  'buffer_cb',
-  'phantom_type',
-  'required_qty',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'pm_formula_ingredient_id',
+    'pm_formula_header_id',
+    'line_no',
+    'revision_name',
+    'item_id_m',
+    'uom_id',
+    'quantity',
+    'description',
+    'scale_type',
+    'contribute_yield_cb',
+    'consumption_type',
+    'buffer_cb',
+    'phantom_type',
+    'required_qty',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $fields_inForm_notInDataBase = [
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'pm_formula_header_id'
+    'pm_formula_header_id'
  ];
  public $requiredField = [
-  'pm_formula_header_id',
-  'item_id_m'
+    'pm_formula_header_id',
+    'item_id_m'
  ];
  public $pm_formula_byproduct_id;
  public $pm_formula_header_id;
@@ -82,10 +82,13 @@ item
 WHERE item.item_id_m = pfi.item_id_m
 and pfh.pm_formula_header_id =pfi.pm_formula_header_id
 and pfh.org_id =item.org_id
-and pfi.pm_formula_header_id = '{$header_id}'
+and pfi.pm_formula_header_id = :pm_formula_header_id
 ";
 
-  $result_array = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['pm_formula_header_id' => $header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? $result_array : false;
  }
 
@@ -101,10 +104,13 @@ and pfi.pm_formula_header_id = '{$header_id}'
   pm_recipe_material_line rml
   
   WHERE rml.pm_formula_ingredient_id = fih.pm_formula_ingredient_id
-  and fih.pm_formula_header_id = '{$header_id}'
+  and fih.pm_formula_header_id = :pm_formula_header_id
 ";
 
-  $result_array = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['pm_formula_header_id' => $header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? $result_array : false;
  }
 
@@ -122,11 +128,13 @@ item
 WHERE item.item_id_m = pfi.item_id_m
 and pfh.pm_formula_header_id =pfi.pm_formula_header_id
 and pfh.org_id =item.org_id
-and pfh.pm_formula_header_id = '{$pm_formula_header_id}'
+and pfh.pm_formula_header_id = :pm_formula_header_id
 ";
 
+  global $db;
+  $value_a = ['pm_formula_header_id' => $pm_formula_header_id];
+  $result_array = $db->findBySql($sql, $value_a);
 
-  $result_array = self::find_by_sql($sql);
   return !empty($result_array) ? $result_array : false;
  }
 

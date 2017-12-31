@@ -21,62 +21,62 @@ class mdm_tax_region extends dbObject {
  public static $primary_column = "mdm_tax_region_id";
  public static $key_column = "tax_region_name";
  public static $system_info = [
-  'name' => 'Tax Region',
-  'number' => '9403',
-  'description' => 'Define and mainten tax region',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'primary_entity_cb' => '',
-  'module_name' => 'mdm',
-  'weight' => 3
+    'name' => 'Tax Region',
+    'number' => '9403',
+    'description' => 'Define and mainten tax region',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'primary_entity_cb' => '',
+    'module_name' => 'mdm',
+    'weight' => 3
  ];
  public $field_a = [
-  'mdm_tax_region_id',
-  'country_code',
-  'state',
-  'city',
-  'tax_region_name',
-  'description',
-  'tax_regime',
-  'tax_jurisdiction',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'mdm_tax_region_id',
+    'country_code',
+    'state',
+    'city',
+    'tax_region_name',
+    'description',
+    'tax_regime',
+    'tax_jurisdiction',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $initial_search = [
-  'mdm_tax_region_id',
-  'country_code',
-  'tax_region_name'
+    'mdm_tax_region_id',
+    'country_code',
+    'tax_region_name'
  ];
  public $column = [
-  'mdm_tax_region_id',
-  'country_code',
-  'state',
-  'city',
-  'tax_region_name',
+    'mdm_tax_region_id',
+    'country_code',
+    'state',
+    'city',
+    'tax_region_name',
  ];
  public $requiredField = [
-  'country_code',
-  'tax_region_name',
+    'country_code',
+    'tax_region_name',
  ];
  public $fields_inForm_notInDataBase = [
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'country_code'
+    'country_code'
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=mdm_tax_region&mode=9',
-  '_show_update_path' => 1,
-  '_view_path' => 'form.php?class_name=mdm_tax_region&mode=2',
-  '_show_view_path' => 1,
+    '_update_path' => 'form.php?class_name=mdm_tax_region&mode=9',
+    '_show_update_path' => 1,
+    '_view_path' => 'form.php?class_name=mdm_tax_region&mode=2',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Tax Regions "; //page Title
  public $option_list = [
-  'country_code' => 'COUNTRY',
+    'country_code' => 'COUNTRY',
  ]; //list of search fields wh
  public $mdm_tax_region_id;
  public $country_code;
@@ -108,10 +108,12 @@ class mdm_tax_region extends dbObject {
 	 mtc.effective_end_date
 	 FROM mdm_tax_region mtc
 	 LEFT JOIN org on org.business_org_id = mtc.org_id
-	 WHERE org.org_id = '{$org_id}'
+	 WHERE org.org_id = :org_id
 	 AND in_out = 'OUT'
 	";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 
@@ -124,10 +126,12 @@ class mdm_tax_region extends dbObject {
 	 mtc.effective_end_date, org.org
 	 FROM mdm_tax_region mtc
 	 LEFT JOIN org on org.business_org_id = mtc.org_id
-	 WHERE org.org_id = '{$org_id}'
+	 WHERE org.org_id = :org_id
 	 AND in_out = 'IN'
 	";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 
@@ -135,9 +139,11 @@ class mdm_tax_region extends dbObject {
   $sql = " 
 	 SELECT *
 	 FROM mdm_tax_region
-	 WHERE country_code = '{$country_code}'
+	 WHERE country_code = :country_code
 	";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['country_code' => $country_code];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 

@@ -228,11 +228,13 @@ class prj_revenue_header extends dbObject {
  public static function find_byProjectHeaderId($prj_project_header_id) {
   $sql = " SELECT *
 FROM prj_revenue_header 
-WHERE prj_project_header_id = '{$prj_project_header_id}'
+WHERE prj_project_header_id = :prj_project_header_id
 ";
 $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+	  global $db;
+  $value_a = ['prj_project_header_id' => $prj_project_header_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? array_pop($result) : false;
  }
@@ -765,10 +767,13 @@ $sql = ino_perPageSql_i($sql, 1);
    $this->message .= '<br>Revenue status does not allow interface to GL ';
   }
   $sql = " SELECT * FROM prj_revenue_line ";
-  $sql .= " WHERE prj_revenue_header_id = '{$prj_rev_h->prj_revenue_header_id}' ";
+  $sql .= " WHERE prj_revenue_header_id = :prj_revenue_header_id ";
   $sql .= " AND gl_journal_interface_cb IS NULL ";
-  $all_rev_lines = self::find_by_sql($sql);
 
+  	  global $db;
+  $value_a = ['prj_revenue_header_id' => $prj_rev_h->prj_revenue_header_id];
+  $all_rev_lines = $db->findBySql($sql, $value_a);
+  
   if ($all_rev_lines) {
    foreach ($all_rev_lines as $rev_line) {
     $this->_insert_gl_interface($rev_line, $prj_rev_h);

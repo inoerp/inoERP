@@ -92,8 +92,9 @@ class ec_cart extends dbObject {
   global $db;
   $sql = "SELECT * FROM " .
    self::$table_name .
-   " where user_id = '{$user_id}' ";
-  $result = $db->find_by_sql($sql);
+   " where user_id = :user_id ";
+	$value_a = ['user_id' => $user_id ];
+	$result = $db->findBySql($sql, $value_a);
   return $result;
  }
 

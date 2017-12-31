@@ -23,7 +23,7 @@ class am_wo_work_bench_line extends am_wo_routing_line {
 //    pa($extra_fields);
    //check if record already exists
    $checkSql = " SELECT * FROM $class WHERE reference_type = 'table' AND reference_key_name='am_wo_routing_line' "
-    . "  AND reference_key_value='{$this->am_wo_routing_line_id}' ";
+      . "  AND reference_key_value=':reference_key_value ";
    switch (DB_TYPE) {
     case 'ORACLE' :
      $checkSql .= ' AND ' . ino_perPageSql(1);
@@ -34,7 +34,9 @@ class am_wo_work_bench_line extends am_wo_routing_line {
      break;
    }
 
-   $checkResult = self::find_by_sql($checkSql);
+   global $db;
+   $value_a = ['reference_key_value' => $this->am_wo_routing_line_id];
+   $checkResult = $db->findBySql($checkSql, $value_a);
 
    //if $checkResult is not empty update the existing data else create record
    if (!empty($checkResult)) {
@@ -52,10 +54,10 @@ class am_wo_work_bench_line extends am_wo_routing_line {
 
 //write SQL
     $sql = " UPDATE ";
-    $sql.= $class;
+    $sql .= $class;
     $sql .= " SET ";
-    $sql.= $field_stmt;
-    $sql.= " WHERE $key_column = '{$key_column_value}' ";
+    $sql .= $field_stmt;
+    $sql .= " WHERE $key_column = '{$key_column_value}' ";
     $stmt = $dbc->connection->prepare(" $sql ");
     //Bind parameters
     if (empty($_POST['file_id_values'][0])) {
@@ -87,14 +89,14 @@ class am_wo_work_bench_line extends am_wo_routing_line {
     $field_values = rtrim($field_values, ', ');
 //write SQL
     $sql = " INSERT INTO ";
-    $sql.= $class;
-    $sql.= ' ( ';
-    $sql.= $field_colums;
-    $sql.= ' ) ';
-    $sql.= 'VALUES';
-    $sql.= ' ( ';
-    $sql.= $field_values;
-    $sql.= ' ) ';
+    $sql .= $class;
+    $sql .= ' ( ';
+    $sql .= $field_colums;
+    $sql .= ' ) ';
+    $sql .= 'VALUES';
+    $sql .= ' ( ';
+    $sql .= $field_values;
+    $sql .= ' ) ';
 //		print_r($_POST);
     $stmt = $dbc->connection->prepare(" $sql ");
     //Bind parameters
@@ -130,7 +132,6 @@ class am_wo_work_bench_line extends am_wo_routing_line {
   }
  }
 
- 
 }
 
 //end of am_wo_routing_line class

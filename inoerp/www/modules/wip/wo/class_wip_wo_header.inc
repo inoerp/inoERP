@@ -178,10 +178,12 @@ class wip_wo_header extends dbObject {
  Public static function find_by_woNumber($wo_number) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE wo_number = '{$wo_number}' ";
+  $sql .= " WHERE wo_number = :wo_number ";
   $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+    global $db;
+	$value_a = ['wo_number' => $wo_number];
+	$result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? array_shift($result) : false;
  }

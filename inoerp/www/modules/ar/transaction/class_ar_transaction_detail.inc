@@ -8,53 +8,53 @@ class ar_transaction_detail extends dbObject {
  public static $key_column = 'detail_ac_id';
  public static $module = "ap";
  public $account = [
-  'detail_ac_id'
+    'detail_ac_id'
  ];
  public $field_a = [
-  'ar_transaction_detail_id',
-  'ar_transaction_line_id',
-  'ar_transaction_header_id',
-  'detail_number',
-  'account_type',
-  'description',
-  'amount',
-  'gl_amount',
-  'detail_ac_id',
-  'status',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'sd_so_header_id',
-  'sd_so_line_id',
-  'sd_so_detail_id',
-  'period_id',
-  'journal_created_cb',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'ar_transaction_detail_id',
+    'ar_transaction_line_id',
+    'ar_transaction_header_id',
+    'detail_number',
+    'account_type',
+    'description',
+    'amount',
+    'gl_amount',
+    'detail_ac_id',
+    'status',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'sd_so_header_id',
+    'sd_so_line_id',
+    'sd_so_detail_id',
+    'period_id',
+    'journal_created_cb',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $requiredField = [
-  'ar_transaction_line_id',
-  'ar_transaction_header_id',
-  'account_type',
-  'amount',
-  'detail_ac_id'
+    'ar_transaction_line_id',
+    'ar_transaction_header_id',
+    'account_type',
+    'amount',
+    'detail_ac_id'
  ];
  public $dateField = [
-  'need_by_date',
-  'promise_date'
+    'need_by_date',
+    'promise_date'
  ];
  public $fields_inForm_notInDataBase = [
-  "om_so_number"
+    "om_so_number"
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'ar_transaction_line_id',
-  'ar_transaction_header_id'
+    'ar_transaction_line_id',
+    'ar_transaction_header_id'
  ];
  public $numberField = [
-  'amount',
-  'gl_amount'
+    'amount',
+    'gl_amount'
  ];
  public $ar_transaction_detail_id;
  public $ar_transaction_line_id;
@@ -104,8 +104,12 @@ class ar_transaction_detail extends dbObject {
  }
 
  public static function find_by_ar_transaction_lineId($ar_transaction_line_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where ar_transaction_line_id = '{$ar_transaction_line_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where ar_transaction_line_id = :ar_transaction_line_id ";
+
+  global $db;
+  $value_a = ['reference_table' => $ar_transaction_line_id ];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return $result_array;
  }
 

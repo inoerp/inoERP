@@ -8,41 +8,41 @@ class bom_config_line extends dbObject {
  public static $key_column = 'component_item_id_m';
  public static $module = "bom";
  public $field_a = [
-  'bom_config_line_id',
-  'bom_config_header_id',
-  'bom_sequence',
-  'routing_sequence',
-  'component_item_id_m',
-  'component_revision',
-  'usage_basis',
-  'usage_quantity',
-  'line_quantity',
-  'transacted_quantity',
-  'auto_request_material_cb',
-  'planning_percentage',
-  'yield',
-  'wip_supply_type',
-  'supply_sub_inventory',
-  'supply_locator',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'bom_config_line_id',
+    'bom_config_header_id',
+    'bom_sequence',
+    'routing_sequence',
+    'component_item_id_m',
+    'component_revision',
+    'usage_basis',
+    'usage_quantity',
+    'line_quantity',
+    'transacted_quantity',
+    'auto_request_material_cb',
+    'planning_percentage',
+    'yield',
+    'wip_supply_type',
+    'supply_sub_inventory',
+    'supply_locator',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  //variables used for showing data
  public $fields_inForm_notInDataBase = [
-  "component_item_number",
-  "component_description",
-  "component_uom",
-  'bom_config_commonbom_config_line_id'
+    "component_item_number",
+    "component_description",
+    "component_uom",
+    'bom_config_commonbom_config_line_id'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "bom_config_header_id"
+    "bom_config_header_id"
  ];
  public $requiredField = [
-  'bom_sequence',
-  'component_item_id_m',
-  'usage_quantity'
+    'bom_sequence',
+    'component_item_id_m',
+    'usage_quantity'
  ];
  public $bom_config_line_id;
  public $bom_config_header_id;
@@ -100,8 +100,12 @@ class bom_config_line extends dbObject {
  public static function find_all_by_bom_configHeaderId($bom_config_headerId) {
   $sql = " Select * from ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bom_config_header_id = '{$bom_config_headerId}'";
-  $all_bom_config_lines = self::find_by_sql($sql);
+  $sql .= " WHERE bom_config_header_id = :bom_config_header_id ";
+
+  global $db;
+  $value_a = ['bom_config_header_id' => $bom_config_headerId, 'reference_id' => $reference_id];
+  $all_bom_config_lines = $db->findBySql($sql, $value_a);
+
   return $all_bom_config_lines;
  }
 
@@ -121,13 +125,15 @@ class bom_config_line extends dbObject {
      inv_item_revision iir
      WHERE bh.bom_config_header_id = bl.bom_config_header_id 
      AND (bl.effective_end_date IS NULL OR bl.effective_end_date > iir.effective_start_date ) 
-     AND bh.bom_config_header_id = '{$bom_config_headerId}' 
-     AND iir.revision_name = '{$rev_num}'
+     AND bh.bom_config_header_id = :bom_config_header_id 
+     AND iir.revision_name = :revision_name
      AND bh.item_id_m = iir.item_id_m
      AND bh.org_id = iir.org_id
      AND ( bl.effective_start_date <= iir.effective_end_date OR iir.effective_end_date IS NULL )
     ORDER BY bl.bom_config_sequence ASC";
-   $all_bom_config_lines = self::find_by_sql($sql);
+   global $db;
+   $value_a = ['bom_config_header_id' => $bom_config_headerId, 'revision_name' => $rev_num];
+   $all_bom_config_lines = $db->findBySql($sql, $value_a);
   }
 //   echo $sql; pa($all_bom_config_lines);
 
@@ -157,9 +163,13 @@ class bom_config_line extends dbObject {
      
      WHERE bh.bom_config_header_id = bl.bom_config_header_id 
      AND (bl.effective_end_date IS NULL OR bl.effective_end_date > CURRENT_DATE ) 
-     AND bh.bom_config_header_id = '{$id}' 
+     AND bh.bom_config_header_id = :bom_config_header_id 
      ORDER BY bl.bom_config_sequence ASC   ";
-    $all_bom_config_lines = self::find_by_sql($sql);
+
+        global $db;
+	$value_a = ['bom_config_header_id' => $id ];
+	$all_bom_config_lines = $db->findBySql($sql, $value_a);
+  
    }
    return !empty($all_bom_config_lines) ? $all_bom_config_lines : false;
   } else {

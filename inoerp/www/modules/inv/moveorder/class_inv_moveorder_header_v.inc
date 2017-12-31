@@ -6,55 +6,55 @@ class inv_interorg_transfer_v extends dbObject {
  public static $primary_column = "inv_intorg_transfer_line_id";
  public static $form_class_name = "inv_interorg_transfer";
  public static $system_info = [
-  'name' => 'Move Order Transaction View',
-  'number' => '2138',
-  'description' => 'Move Order Transaction View',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('inv_moveorder_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 6
+    'name' => 'Move Order Transaction View',
+    'number' => '2138',
+    'description' => 'Move Order Transaction View',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('inv_moveorder_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 6
  ];
  public $field_a = [
-  'inv_intorg_transfer_header_id',
-  'io_order_number',
-  'order_number',
-  'line_number',
-  'io_line_number',
-  'item_number',
-  'status',
-  'inv_intorg_transfer_line_id',
-  'comment',
-  'from_org_id',
-  'to_org_id',
-  'carrier',
-  'uom_id',
-  'vehicle_number',
-  'waybill',
-  'from_subinventory_id',
-  'from_locator_id',
-  'item_id_m',
-  'item_description',
-  'to_subinventory_id',
-  'to_locator_id',
-  'transaction_quantity',
-  'serial_number',
-  'lot_number',
+    'inv_intorg_transfer_header_id',
+    'io_order_number',
+    'order_number',
+    'line_number',
+    'io_line_number',
+    'item_number',
+    'status',
+    'inv_intorg_transfer_line_id',
+    'comment',
+    'from_org_id',
+    'to_org_id',
+    'carrier',
+    'uom_id',
+    'vehicle_number',
+    'waybill',
+    'from_subinventory_id',
+    'from_locator_id',
+    'item_id_m',
+    'item_description',
+    'to_subinventory_id',
+    'to_locator_id',
+    'transaction_quantity',
+    'serial_number',
+    'lot_number',
  ];
  public $initial_search = [
-  'order_number',
-  'line_number',
-  'item_number',
-  'transaction_type_id',
-  'status',
-  'to_org_id'
+    'order_number',
+    'line_number',
+    'item_number',
+    'transaction_type_id',
+    'status',
+    'to_org_id'
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=inv_interorg_transfer',
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_update_path' => 'form.php?class_name=inv_interorg_transfer',
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Inter Org Transfers "; //page Title
  public $inv_intorg_transfer_header_id;
@@ -111,12 +111,19 @@ AND item.org_id = ith.from_org_id
 
  public static function find_all_by_poHeaderId($po_header_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE po_header_id = '{$po_header_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE po_header_id = :po_header_id ";
+
+  global $db;
+  $value_a = ['po_header_id' => $po_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_ColumnNameVal($columnName, $columnVal, $dependent_fields = '', $hidden_fields = '') {
+   $value_a = [];
+   
   $sql = "SELECT inv_intorg_transfer_header_id, order_number , io_order_number,    io_line_number,   item_number,  
   inv_intorg_transfer_line_id,   from_org_id,   to_org_id,   carrier,   uom_id,
   vehicle_number,  waybill,   from_subinventory_id,   from_locator_id,   item_id_m,
@@ -127,7 +134,8 @@ FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%
   $sql .= " AND status = 'SHIPPED' ";
   if (!empty($_GET['hidden_fields']['to_org_id'])) {
    $rec_org_id = $_GET['hidden_fields']['to_org_id'];
-   $sql .= " AND to_org_id = '{$rec_org_id}' ";
+   $sql .= " AND to_org_id = :to_org_id ";
+    $value_a['to_org_id'] = $rec_org_id;
   }
   if (!empty($dependent_fields)) {
    foreach ($dependent_fields as $k => $v) {
@@ -136,7 +144,12 @@ FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%
     }
    }
   }
-  $result_array = static::find_by_sql($sql);
+ 
+   global $db;
+ 
+  $result_array = $db->findBySql($sql, $value_a);
+	
+  
   return !empty($result_array) ? ($result_array) : false;
  }
 
