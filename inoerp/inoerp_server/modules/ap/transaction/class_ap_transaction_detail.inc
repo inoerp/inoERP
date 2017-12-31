@@ -9,53 +9,53 @@ class ap_transaction_detail extends dbObject {
  public static $module = "ap";
  public $checkbox = ['journal_created_cb'];
  public $account = [
-  'detail_ac_id'
+    'detail_ac_id'
  ];
  public $field_a = [
-  'ap_transaction_detail_id',
-  'ap_transaction_line_id',
-  'ap_transaction_header_id',
-  'account_type',
-  'description',
-  'amount',
-  'gl_amount',
-  'detail_ac_id',
-  'status',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'po_header_id',
-  'po_line_id',
-  'po_detail_id',
-  'journal_created_cb',
-  'period_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'ap_transaction_detail_id',
+    'ap_transaction_line_id',
+    'ap_transaction_header_id',
+    'account_type',
+    'description',
+    'amount',
+    'gl_amount',
+    'detail_ac_id',
+    'status',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'po_header_id',
+    'po_line_id',
+    'po_detail_id',
+    'journal_created_cb',
+    'period_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $requiredField = [
-  'ap_transaction_line_id',
-  'ap_transaction_header_id',
-  'account_type',
-  'amount',
-  'gl_amount',
-  'detail_ac_id'
+    'ap_transaction_line_id',
+    'ap_transaction_header_id',
+    'account_type',
+    'amount',
+    'gl_amount',
+    'detail_ac_id'
  ];
  public $dateField = [
-  'need_by_date',
-  'promise_date'
+    'need_by_date',
+    'promise_date'
  ];
  public $numberField = [
-  'amount',
-  'gl_amount'
+    'amount',
+    'gl_amount'
  ];
  public $fields_inForm_notInDataBase = [
-  "po_number"
+    "po_number"
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'ap_transaction_line_id',
-  'ap_transaction_header_id'
+    'ap_transaction_line_id',
+    'ap_transaction_header_id'
  ];
  public static $otherField_array = [
  ];
@@ -85,8 +85,10 @@ class ap_transaction_detail extends dbObject {
  public $msg;
 
  public static function find_by_ap_transaction_lineId($ap_transaction_line_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where ap_transaction_line_id = '{$ap_transaction_line_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where ap_transaction_line_id =  :ap_transaction_line_id ";
+  global $db;
+  $value_a = ['ap_transaction_line_id' => $ap_transaction_line_id];
+  $result_array = $db->findBySql($sql, $value_a);
   return $result_array;
  }
 
@@ -111,8 +113,9 @@ class ap_transaction_detail extends dbObject {
  }
 
  public static function find_taxLine_by_lineId($ap_transaction_line_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where ap_transaction_line_id = '{$ap_transaction_line_id}'"
-   . "  AND account_type = 'TAX' ";
+        global $db;
+  $sql = "SELECT * FROM " . self::$table_name . " where ap_transaction_line_id = :ap_transaction_line_id "
+     . "  AND account_type = 'TAX' ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -122,14 +125,17 @@ class ap_transaction_detail extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+  
+  $value_a = ['ap_transaction_line_id' => $ap_transaction_line_id];
+	$result_array = $db->findBySql($sql, $value_a);
+  
   return !empty($result_array) ? array_pop($result_array) : false;
  }
 
  public function findTaxLine_byLineId($ap_transaction_line_id = '') {
   $ap_transaction_line_id = !empty($ap_transaction_line_id) ? $ap_transaction_line_id : $this->ap_transaction_line_id;
   $sql = "SELECT * FROM " . self::$table_name . " where ap_transaction_line_id = :ap_transaction_line_id "
-   . "  AND account_type = 'TAX'  ";
+     . "  AND account_type = 'TAX'  ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -139,7 +145,7 @@ class ap_transaction_detail extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $value_a = [ 'ap_transaction_line_id' => $ap_transaction_line_id];
+  $value_a = ['ap_transaction_line_id' => $ap_transaction_line_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }

@@ -152,7 +152,8 @@ class sys_notification extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'HEADER' ";
-  $result = self::find_by_sql($sql);
+   global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
@@ -160,15 +161,20 @@ class sys_notification extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'LINE' ";
-  $result = self::find_by_sql($sql);
+   global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_transactionClass($class) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE type_class = '{$class}' AND status='active'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE type_class = :type_class AND status='active'";
+  
+  	  global $db;
+  $value_a = ['type_class' => $class];
+  $result = $db->findBySql($sql, $value_a);
+  
   return $result;
  }
 
@@ -224,7 +230,11 @@ class sys_notification extends dbObject {
  }
 
  public function find_openNotification_toUserId($to_user_id = '', $status = 'OPEN') {
-  $to_user_id = (empty($to_user_id)) ? $_SESSION['user_id'] : $to_user_id;
+
+  $to_user_id = (empty($to_user_id) && !empty($_SESSION['user_id'])) ? $_SESSION['user_id'] : $to_user_id;
+	if(empty($to_user_id)){
+	 return false;
+	}
   $sql = "SELECT * FROM " . self::$table_name;
   $sql .= " WHERE to_user_id = :to_user_id AND status = :status ORDER BY sys_notification_id DESC ";
   $value_a = ['to_user_id' => $to_user_id, 'status' => $status];

@@ -28,67 +28,67 @@ class comment extends dbObject {
  public static $key_column = "comment";
  public static $module = "extension";
  public static $system_info = [
-  'name' => 'Comment',
-  'number' => '10012',
-  'description' => 'Comments for all type of content types and documents',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 12
+    'name' => 'Comment',
+    'number' => '10012',
+    'description' => 'Comments for all type of content types and documents',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 12
  ];
  public $field_a = [
-  "comment_id",
-  "reference_table",
-  "reference_id",
-  "subject",
-  "comment",
-  "terms",
-  "published_cb",
-  "weightage",
-  "comment_by",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "comment_id",
+    "reference_table",
+    "reference_id",
+    "subject",
+    "comment",
+    "terms",
+    "published_cb",
+    "weightage",
+    "comment_by",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
 //variables used for showing data
 
  public $checkbox = ["published_cb"];
  public $requiredField = [
-  "reference_table",
-  "reference_id",
-  "comment"
+    "reference_table",
+    "reference_id",
+    "comment"
  ];
  public $initial_search = [
-  "comment_id",
-  "reference_table",
-  "reference_id",
-  "subject",
-  "comment",
+    "comment_id",
+    "reference_table",
+    "reference_id",
+    "subject",
+    "comment",
  ];
  public $column = [
-  "comment_id",
-  "reference_table",
-  "reference_id",
-  "subject",
-  "published_cb",
-  "weightage",
-  "comment_by",
+    "comment_id",
+    "reference_table",
+    "reference_id",
+    "subject",
+    "published_cb",
+    "weightage",
+    "comment_by",
  ];
  public $fields_inForm_notInDataBase = [
-  'multi_action_class_pc',
-  'multi_action_class_pc_value',
-  'action',
-  'comment_user_name',
-  'subscribe_cb'
+    'multi_action_class_pc',
+    'multi_action_class_pc_value',
+    'action',
+    'comment_user_name',
+    'subscribe_cb'
  ];
  public $pageTitle = " Comment - Create & View different Comments ";
  public $search = [
-  '_view_path' => 'form.php?class_name=',
-  '_show_view_path' => 1,
-  '_view_action_meassge' => 'Read',
+    '_view_path' => 'form.php?class_name=',
+    '_show_view_path' => 1,
+    '_view_action_meassge' => 'Read',
  ];
  public $file_id_values;
  public $summary_characters;
@@ -123,10 +123,10 @@ class comment extends dbObject {
   }
   if (empty($this->subject)) {
    $this->subject = htmlentities(substr($this->comment, 0, 20));
-  }else{
+  } else {
    $this->subject = htmlentities($this->subject);
   }
-  
+
   if (!empty($this->comment)) {
    $this->comment = htmlentities($this->comment);
   }
@@ -220,7 +220,7 @@ class comment extends dbObject {
 					AND comment.subject IS NOT NULL AND comment.subject !='' 
           ";
 
-  $sql .=" ORDER BY comment.comment_id DESC, comment.weightage DESC ";
+  $sql .= " ORDER BY comment.comment_id DESC, comment.weightage DESC ";
   if (!empty($numbers) && !empty($start_from)) {
    $sql .= " LIMIT {$start_from} , :lmt_no_of_records  ";
    $value_a = ['lmt_no_of_records' => $numbers];
@@ -241,7 +241,7 @@ class comment extends dbObject {
   if (count($result) > 0) {
    $comment_string .= '<ul class="documentation_list comment">';
    $comment_string .= '<li class="all_comments"><span class="badge"><a href="' . HOME_URL . 'content.php?content_type=comment">'
-    . 'All Comments <i class="fa fa-comments-o"></i></a></span></li>';
+      . 'All Comments <i class="fa fa-comments-o"></i></a></span></li>';
    if (empty($result)) {
     return;
    }
@@ -251,7 +251,7 @@ class comment extends dbObject {
     }
     $comment_string .= '<li class="comment_subject">';
     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&' . 'content_id=' . $records->content_id .
-     '&content_type_id=' . $records->content_type_id . '#comment_id_' . $records->comment_id . '">';
+       '&content_type_id=' . $records->content_type_id . '#comment_id_' . $records->comment_id . '">';
     if (!empty($records->subject)) {
      $comment_string .= substr(strip_tags($records->subject), 0, $this->subject_noof_char);
     } else {
@@ -269,18 +269,21 @@ class comment extends dbObject {
  public static function find_by_reference_table_and_id($reference_table, $reference_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " WHERE reference_table = '{$reference_table}'
-       AND reference_id = '{$reference_id}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " WHERE reference_table = :reference_table
+       AND reference_id = :reference_id ";
+  global $db;
+  $value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function count_by_reference_table_and_id($reference_table, $reference_id) {
   global $db;
   $sql = "SELECT COUNT(*) FROM " .
-   self::$table_name .
-   " WHERE reference_table = '{$reference_table}'
+     self::$table_name .
+     " WHERE reference_table = '{$reference_table}'
        AND reference_id = '{$reference_id}' ";
   $result = self::count_all_by_sql($sql);
   return $result;
@@ -288,11 +291,15 @@ class comment extends dbObject {
 
  public static function find_summary_by_id($comment_id) {
   $selectFields = ' SUBSTRING(content,1,2000) AS content_summary , ' .
-   implode(", ", self::$field_array);
+     implode(", ", self::$field_array);
   $sql = "SELECT " . $selectFields . " FROM "
-   . self::$table_name . " 
-            where comment_id={$comment_id} LIMIT 1";
-  $result_array = self::find_by_sql($sql);
+     . self::$table_name . " 
+            where comment_id= :comment_id LIMIT 1";
+
+  global $db;
+  $value_a = ['comment_id' => $comment_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
@@ -301,10 +308,13 @@ class comment extends dbObject {
   if (!empty($per_comment)) {
    $total_count = self::count_all();
    $pagination = new pagination($comment_no, $per_comment, $total_count);
-   $sql .=" LIMIT {$per_comment} ";
-   $sql .=" OFFSET {$pagination->offset()}";
+   $sql .= " LIMIT :per_comment ";
+   $sql .= " OFFSET {$pagination->offset()}";
   }
-  $result = self::find_by_sql($sql);
+  
+    global $db;
+  $value_a = ['per_comment' => $per_comment];
+  $result = $db->findBySql($sql, $value_a);
 
   foreach ($result as $records) {
    $comment_summary = self::find_summary_by_id($records->comment_id);
@@ -337,7 +347,7 @@ class comment extends dbObject {
   if ($comment_result) {
    $con_count = 0;
    if (count($comment_result) > 0) {
-    $comment_string .='<table id="comment_list" class="table table-striped table-hover"><thead> 
+    $comment_string .= '<table id="comment_list" class="table table-striped table-hover"><thead> 
 						 <tr class="headerBgColor">
 							<th class="topics">Subject</th>
 							<th class="created_by">Created By</th>
@@ -355,9 +365,9 @@ class comment extends dbObject {
      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
      $user_name = empty($recod_c->username) ? 'Anonymous\SelfWeb' : $recod_c->username;
      $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
-      . " <td class='subject_summary'>";
+        . " <td class='subject_summary'>";
      $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
-      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '#comment_id_' . $recod_c->comment_id . '">';
+        . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '#comment_id_' . $recod_c->comment_id . '">';
      $comment_string .= "<i class='fa fa-comment'></i> &nbsp;";
      $comment_string .= substr(strip_tags($recod_c->comment), 0, $this->subject_noof_char);
      $comment_string .= ' </a>';
@@ -372,9 +382,9 @@ class comment extends dbObject {
     }
    }
 
-   $comment_string .='</table>';
+   $comment_string .= '</table>';
   }
-  $comment_string .='</div>';
+  $comment_string .= '</div>';
   $comment_string .= '<div id="pagination">';
 
 
@@ -406,17 +416,19 @@ class comment extends dbObject {
   $query_string = !empty($_SERVER['QUERY_STRING']) ? htmlentities($_SERVER['QUERY_STRING']) : '';
   $comment_string = " ";
   $sql = "SELECT comment.comment_id, comment.comment, comment.created_by,  comment.creation_date, "
-   . "  comment.creation_date, IFNULL(user.username, comment.comment_by) as username, user.image_file_id as image_file_id "
-   . " FROM comment left JOIN ino_user user ON user.ino_user_id = comment.created_by" .
-   " WHERE reference_table = '{$reference_table}'
-           AND reference_id = '{$reference_id}' ";
+     . "  comment.creation_date, IFNULL(user.username, comment.comment_by) as username, user.image_file_id as image_file_id "
+     . " FROM comment left JOIN ino_user user ON user.ino_user_id = comment.created_by" .
+     " WHERE reference_table = :reference_table
+           AND reference_id = :reference_id ";
   if (!empty($per_page)) {
    $total_count = self::count_by_reference_table_and_id($reference_table, $reference_id);
    $pagination = new pagination($pageno, $per_page, $total_count);
-   $sql .=" LIMIT {$per_page} ";
-   $sql .=" OFFSET {$pagination->offset()}";
+   $sql .= " LIMIT :per_page ";
+   $sql .= " OFFSET {$pagination->offset()}";
   }
-  $result = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['per_page' => $per_page, 'reference_id' => $reference_id, 'reference_table' => $reference_table];
+  $result = $db->findBySql($sql, $value_a);
 
   if (count($result) > 0) {
    foreach ($result as $records) {
@@ -444,14 +456,14 @@ class comment extends dbObject {
     $comment_string .= '<li class="creation_date">' . $records->creation_date . '</li>';
     if ($allow_content_update) {
      $comment_string .= '<li class="delete_update"><button name="delete_button" class="delete_button btn btn-danger " value="' .
-      $records->comment_id . '" >Delete</button> ';
+        $records->comment_id . '" >Delete</button> ';
      $comment_string .= ' <button name="update_button" class="update_button btn btn-warning " value="' .
-      $records->comment_id . '" >Update</button> </li>';
+        $records->comment_id . '" >Update</button> </li>';
     }
 
     $comment_string .= '</ul>';
     $comment_string .= '</div>';
-    $comment_string .= '<div class="comment panel-body update-comment">' . nl2br(html_entity_decode($records->comment, ENT_QUOTES ,'UTF-8'));
+    $comment_string .= '<div class="comment panel-body update-comment">' . nl2br(html_entity_decode($records->comment, ENT_QUOTES, 'UTF-8'));
     if (count($comment_file) > 0) {
      foreach ($comment_file as $file_record) {
       $comment_string .= '<p><a href=' . HOME_URL . $file_record->file_path . $file_record->file_name . '>' . $file_record->file_name . '</a></p>';
@@ -489,10 +501,10 @@ class comment extends dbObject {
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block',
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block',
   ];
 
   return $multi_select_hidden;

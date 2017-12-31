@@ -8,37 +8,37 @@ class inv_abc_assignment_line extends dbObject {
  public static $key_column = "item_id_m";
  public static $module = "inv";
  public $field_a = [
-   'inv_abc_assignment_line_id',
-   'inv_abc_assignment_header_id',
-   'item_id_m',
-   'abc_class',
-   'description',
-   'created_by',
-   'creation_date',
-   'last_update_by',
-   'last_update_date',
+    'inv_abc_assignment_line_id',
+    'inv_abc_assignment_header_id',
+    'item_id_m',
+    'abc_class',
+    'description',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-   'inv_abc_assignment_header_id',
-   'item_id_m',
-   'abc_class',
+    'inv_abc_assignment_header_id',
+    'item_id_m',
+    'abc_class',
  ];
  public $column = [
-   'inv_abc_assignment_header_id',
-   'item_id_m',
-   'abc_class',
+    'inv_abc_assignment_header_id',
+    'item_id_m',
+    'abc_class',
  ];
  public $requiredField = [
-   'inv_abc_assignment_header_id',
-   'item_id_m',
-   'abc_class',
+    'inv_abc_assignment_header_id',
+    'item_id_m',
+    'abc_class',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-   "inv_abc_assignment_header_id"
+    "inv_abc_assignment_header_id"
  ];
  public $fields_inForm_notInDataBase = [
-   "item_number",
-   'item_description',
+    "item_number",
+    'item_description',
  ];
  public $pageTitle = " ABC Assignment  "; //page Title
  public $inv_abc_assignment_line_id;
@@ -67,12 +67,14 @@ class inv_abc_assignment_line extends dbObject {
 
  public static function find_by_parentId_classCode($parent_id, $class_code) {
   $sql = "SELECT * FROM " . self::$table_name . " 
-      where inv_abc_assignment_header_id= '{$parent_id}' AND abc_class = '{$class_code}' ";
-  $result_array = self::find_by_sql($sql);
+      where inv_abc_assignment_header_id= :inv_abc_assignment_header_id AND abc_class = :abc_class ";
+  global $db;
+  $value_a = ['inv_abc_assignment_header_id' => $parent_id, 'abc_class' => $class_code];
+  $result_array = $db->findBySql($sql, $value_a);
   return !empty($result_array) ? $result_array : false;
  }
- 
-  public static function find_by_parentId_classCode_forCycleCount($parent_id, $class_code, $org_id) {
+
+ public static function find_by_parentId_classCode_forCycleCount($parent_id, $class_code, $org_id) {
   $sql = " SELECT 
      ail.inv_abc_assignment_line_id, ailinv_abc_assignment_header_id , ail.item_id_m ,
      ail.abc_class, ail.description
@@ -81,13 +83,15 @@ class inv_abc_assignment_line extends dbObject {
      inv_abc_assignment_line ail,
      item
 
-     WHERE ail.inv_abc_assignment_header_id= '{$parent_id}' 
-     AND ail.abc_class = '{$class_code}'  
+     WHERE ail.inv_abc_assignment_header_id= :inv_abc_assignment_header_id 
+     AND ail.abc_class = :abc_class  
      AND item.item_id_m = ail.item_id_m
-     AND item.org_id = '{$org_id}'
+     AND item.org_id = :org_id
      AND item.cycle_count_enabled_cb = '1'
  ";
-  $result_array = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['inv_abc_assignment_header_id' => $parent_id, 'abc_class' => $class_code, 'org_id' => $org_id];
+  $result_array = $db->findBySql($sql, $value_a);
   return !empty($result_array) ? $result_array : false;
  }
 

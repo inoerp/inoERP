@@ -1,4 +1,6 @@
-<?php include_once __DIR__ . '/../../includes/basics/basics.inc'; ?>
+<?php 
+require_once __DIR__.'/../../includes/basics/wloader.inc'; 
+include_once __DIR__ . '/../../../inoerp_server/includes/basics/basics.inc'; ?>
 <?php
 if ($session->login_status()) {
  redirect_to(HOME_URL);

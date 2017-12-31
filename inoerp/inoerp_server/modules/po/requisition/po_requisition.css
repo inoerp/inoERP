@@ -1,0 +1,12 @@
+#po_requisition_divId .class_detail_form{
+margin-left: -951px;
+
+}
+
+#po_requisition_divId .form_detail_data_fs{
+  width: 951px;
+}
+
+#po_requisition_divId fieldset.form_detail_data_fs{
+ margin-top: 24px;
+}

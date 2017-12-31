@@ -5,46 +5,46 @@ class inv_lot_onhand_v extends dbObject {
  public static $table_name = "inv_lot_onhand_v";
  public static $primary_column = "lot_number";
  public $field_a = [
-  'item_number',
-  'item_description',
-  'lot_quantity',
-  'lot_number',
-  'subinventory',
-  'locator',
-  'onhand',
-  'inv_lot_onhand_id',
-  'onhand_id',
-  'lot_inv_lot_number_id',
-  'inv_lot_number_id',
-  'org_id',
-  'item_id_m',
-  'subinventory_id',
-  'locator_id',
+    'item_number',
+    'item_description',
+    'lot_quantity',
+    'lot_number',
+    'subinventory',
+    'locator',
+    'onhand',
+    'inv_lot_onhand_id',
+    'onhand_id',
+    'lot_inv_lot_number_id',
+    'inv_lot_number_id',
+    'org_id',
+    'item_id_m',
+    'subinventory_id',
+    'locator_id',
  ];
  public $initial_search = [
-  "item_number",
-  'lot_number',
-  'inv_lot_number_id',
-  'item_id_m',
-  'uom_id',
-  'org_id',
-  'subinventory_id',
-  'locator_id',
+    "item_number",
+    'lot_number',
+    'inv_lot_number_id',
+    'item_id_m',
+    'uom_id',
+    'org_id',
+    'subinventory_id',
+    'locator_id',
  ];
  public $fields_inForm_notInDataBase = [
-  'status',
-  'generation',
-  'origination_type',
-  'origination_date',
-  'activation_date',
-  'current_org_id',
-  'current_subinventory_id',
-  'current_locator_id',
-  'country_of_origin',
+    'status',
+    'generation',
+    'origination_type',
+    'origination_date',
+    'activation_date',
+    'current_org_id',
+    'current_subinventory_id',
+    'current_locator_id',
+    'country_of_origin',
  ];
  public $search = [
-  '_view_path' => 'form.php?class_name=inv_lot_onhand',
-  '_show_view_path' => 1,
+    '_view_path' => 'form.php?class_name=inv_lot_onhand',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Lot Onhand "; //page Title
  public $inv_lot_onhand_id;
@@ -100,16 +100,24 @@ LEFT JOIN locator loc ON loc.locator_id = oh.locator_id
  public static function find_by_invonhandId($inv_onhand_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE inv_onhand_id = '{$inv_onhand_id}'  ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE inv_onhand_id = :inv_onhand_id  ";
+  global $db;
+  $value_a = ['inv_onhand_id' => $inv_onhand_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? ($result) : false;
  }
 
  public static function find_by_invlotNumberId($inv_lot_number_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE inv_lot_number_id = '{$inv_lot_number_id}'  ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE inv_lot_number_id = :inv_lot_number_id  ";
+
+  global $db;
+  $value_a = ['inv_lot_number_id' => $inv_lot_number_id];
+  $result = $db->findBySql($sql, $value_a);
+
+
   return !empty($result) ? ($result) : false;
  }
 

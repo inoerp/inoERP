@@ -22,43 +22,42 @@ class extn_menu_header extends dbObject {
  public static $key_column = 'menu_name';
  public static $module = "extn";
  public static $system_info = [
-  'name' => 'Menu',
-  'number' => '10043',
-  'description' => 'Create & Mainten Menu',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('extn_menu_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 1
+    'name' => 'Menu',
+    'number' => '10043',
+    'description' => 'Create & Mainten Menu',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('extn_menu_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 1
  ];
  public $field_a = [
-  'extn_menu_header_id',
-  'menu_name',
-  'description',
-  'active_cb',
-  'priority',
-  'css_class',
-  'image_file_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'extn_menu_header_id',
+    'menu_name',
+    'description',
+    'active_cb',
+    'priority',
+    'css_class',
+    'image_file_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'menu_name',
-  'description',
+    'menu_name',
+    'description',
  ];
  public $requiredField = [
-  'menu_name'
+    'menu_name'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1
+    '_show_update_path' => 1,
+    '_show_view_path' => 1
  ];
  public $pageTitle = " Menu "; //page Title
- 
  public $extn_menu_header_id;
  public $menu_name;
  public $description;
@@ -80,9 +79,13 @@ FROM hd_service_type_line stl,
 extn_menu_header sah
 
 WHERE sah.extn_menu_header_id =stl.service_activity_id
-AND sah.extn_menu_header_id ='{$service_type_id}'
+AND sah.extn_menu_header_id = :extn_menu_header_id
 ";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['extn_menu_header_id' => $service_type_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? ($result) : false;
  }
 

@@ -22,60 +22,60 @@ class onhand extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "inv";
  public static $system_info = [
-  'name' => 'Onhand',
-  'number' => '2111',
-  'description' => 'Inventory Onhand',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 11
+    'name' => 'Onhand',
+    'number' => '2111',
+    'description' => 'Inventory Onhand',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 11
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  'onhand_id',
-  'item_id_m',
-  'revision_name',
-  'org_id',
-  'subinventory_id',
-  'locator_id',
-  'lot_id',
-  'serial_id',
-  'onhand',
+    'onhand_id',
+    'item_id_m',
+    'revision_name',
+    'org_id',
+    'subinventory_id',
+    'locator_id',
+    'lot_id',
+    'serial_id',
+    'onhand',
 //  'reservable_onhand',
-  'transactable_onhand',
-  'lot_status',
-  'serial_status',
-  'uom_id',
-  'secondary_uom_id',
-  'onhand_status',
-  'ef_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'transactable_onhand',
+    'lot_status',
+    'serial_status',
+    'uom_id',
+    'secondary_uom_id',
+    'onhand_status',
+    'ef_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  "org_id",
-  "subinventory_id",
-  "locator_id",
-  "uom_id",
-  "onhand_id",
-  "item_id_m",
+    "org_id",
+    "subinventory_id",
+    "locator_id",
+    "uom_id",
+    "onhand_id",
+    "item_id_m",
  ];
 //variables used for showing data
  public $column = [
-  "item_number",
-  "item_description",
-  "org_name",
-  "subinventory",
-  "locator",
-  "uom",
-  "onhand",
-  "sum_onhand",
-  "onhand_id",
-  "item_id_m",
+    "item_number",
+    "item_description",
+    "org_name",
+    "subinventory",
+    "locator",
+    "uom",
+    "onhand",
+    "sum_onhand",
+    "onhand_id",
+    "item_id_m",
  ];
 // public static $checkbox_array =["rev_enabled"                                 
 //                                 ];
@@ -172,7 +172,8 @@ VAR;
 
  public static function find_all_v() {
   $sql = " SELECT * FROM " . self::$view_name;
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return $result;
  }
 
@@ -199,31 +200,39 @@ VAR;
 
  public static function find_by_itemIdm_location_sv($item_id_m, $org_id, $subinventory_id, $locator_id = '') {
   $sql = "SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE item_id_m = '{$item_id_m}' ";
-  $sql .= " AND org_id = '{$org_id}' ";
-  $sql .= " AND subinventory_id = '{$subinventory_id}' ";
+  $sql .= " WHERE item_id_m = :item_id_m ";
+  $sql .= " AND org_id = :org_id ";
+  $sql .= " AND subinventory_id = :subinventory_id ";
 
 
   if (!empty($locator_id)) {
-   $sql .= " AND locator_id = '{$locator_id}' ";
+   $sql .= " AND locator_id = :locator_id ";
+   $value_a['locator_id'] = $locator_id;
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id, 'subinventory_id' => $subinventory_id,];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_itemIdm_location($item_id_m, $org_id, $subinventory_id, $locator_id = '') {
   $sql = "SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE item_id_m = '{$item_id_m}' ";
-  $sql .= " AND org_id = '{$org_id}' ";
-  $sql .= " AND subinventory_id = '{$subinventory_id}' ";
+  $sql .= " WHERE item_id_m = :item_id_m ";
+  $sql .= " AND org_id = :org_id ";
+  $sql .= " AND subinventory_id = :subinventory_id ";
 
 
   if (!empty($locator_id)) {
-   $sql .= " AND locator_id = '{$locator_id}' ";
+   $sql .= " AND locator_id = :locator_id ";
+   $value_a['locator_id'] = $locator_id;
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id, 'subinventory_id' => $subinventory_id,];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -504,19 +513,19 @@ LEFT JOIN locator ON onhand.locator_id = locator.locator_id
   $lines = explode("\n", self::${$staticvar});
   self::${$staticvar} = '';
   foreach ($lines as $key => $line) {
-   if(strpos($line,'<th>') !== FALSE) {
-   	$left = substr($line,0,strpos($line,'>')+1);
-   	$text = trim(rtrim(trim(substr($line,strpos($line,'>')+1,strpos($line,'/')-strpos($line,'>')-2)),'#'));
-   	$right = substr($line,strpos($line,'/')-1);
-   	if(substr(trim(substr($line,strpos($line,'>')+1,strpos($line,'/')-strpos($line,'>')-2)),-1) == '#') {
-   	 $line =  $left . gettext($text) . '#' . $right;
-   	} else {
-   	 $line =  $left . gettext($text) . $right;
-   	}
+   if (strpos($line, '<th>') !== FALSE) {
+    $left = substr($line, 0, strpos($line, '>') + 1);
+    $text = trim(rtrim(trim(substr($line, strpos($line, '>') + 1, strpos($line, '/') - strpos($line, '>') - 2)), '#'));
+    $right = substr($line, strpos($line, '/') - 1);
+    if (substr(trim(substr($line, strpos($line, '>') + 1, strpos($line, '/') - strpos($line, '>') - 2)), -1) == '#') {
+     $line = $left . gettext($text) . '#' . $right;
+    } else {
+     $line = $left . gettext($text) . $right;
+    }
    }
    self::${$staticvar} = self::${$staticvar} . $line;
-   if($line != end($lines)) {
-   	self::${$staticvar} = self::${$staticvar} . "\n";
+   if ($line != end($lines)) {
+    self::${$staticvar} = self::${$staticvar} . "\n";
    }
   }
  }

@@ -191,17 +191,13 @@ class address extends dbObject {
  }
 
  public static function find_by_address_name($address_name) {
-	$sql = "SELECT * FROM " . self::$table_name . " where address_name REGEXP '{$address_name}$' ";
+	$sql = "SELECT * FROM " . self::$table_name . " where address_name REGEXP :address_name ";
 	$sql = ino_perPageSql_i($sql, 1);
-	$result_array = self::find_by_sql($sql);
-	return !empty($result_array) ? array_shift($result_array) : false;
- }
 
- public static function find_by_user_id($user_id = null) {
-	$user_id = empty($user_id) ? $_SESSION['user_id'] : $user_id;
-	$sql = "SELECT * FROM " . self::$table_name . " where address_name REGEXP '{$address_name}$' ";
-	$sql = ino_perPageSql_i($sql, 1);
-	$result_array = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['address_name' => "$address_name$" ];
+  $result_array = $db->findBySql($sql, $value_a);
+  
 	return !empty($result_array) ? array_shift($result_array) : false;
  }
 
@@ -252,8 +248,9 @@ class address extends dbObject {
 		}
 	 }
 	}
-//  echo $sql;
-	$result_array = static::find_by_sql($sql);
+  global $db;
+  $result_array = $db->findBySql($sql);
+  
 	return !empty($result_array) ? ($result_array) : false;
  }
 

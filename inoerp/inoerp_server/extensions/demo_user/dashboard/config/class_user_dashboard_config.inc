@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -18,51 +20,51 @@ class user_dashboard_config extends dbObject {
  public static $key_column = 'report_id';
  public static $module = "extensions";
  public static $system_info = [
-  'name' => 'Dashboard Config',
-  'number' => '10028',
-  'description' => 'Dashboard Config',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 28
+    'name' => 'Dashboard Config',
+    'number' => '10028',
+    'description' => 'Dashboard Config',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 28
  ];
  public static $config_level_a = [
-  'USER' => 'User',
-  'ROLE' => 'Role',
-  'GLOBAL' => 'Global'
+    'USER' => 'User',
+    'ROLE' => 'Role',
+    'GLOBAL' => 'Global'
  ];
  public static $report_type_a = [
-  'block' => 'Block',
-  'view' => 'View'
+    'block' => 'Block',
+    'view' => 'View'
  ];
  public $field_a = [
-  'user_dashboard_config_id',
-  'config_level',
-  'user_role',
-  'user_id',
-  'report_group',
-  'report_type',
-  'report_id',
-  'priority',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'user_dashboard_config_id',
+    'config_level',
+    'user_role',
+    'user_id',
+    'report_group',
+    'report_type',
+    'report_id',
+    'priority',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'user_id',
-  'report_group',
-  'report_type',
+    'user_id',
+    'report_group',
+    'report_type',
  ];
  public $requiredField = [
-  'report_group',
-  'report_type',
-  'report_id',
+    'report_group',
+    'report_type',
+    'report_id',
  ];
  public $fields_inForm_notInDataBase = [
-  'username'
+    'username'
  ];
  public $user_dashboard_config_id;
  public $config_level;
@@ -130,7 +132,10 @@ class user_dashboard_config extends dbObject {
 
  public static function find_roleAndGlobal_configs() {
   $sql = "SELECT * FROM " . self::$table_name . " where config_level IN ('GLOBAL', 'ROLE') ";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $result = $db->findBySql($sql);
+
   return !empty($result) ? $result : false;
  }
 

@@ -76,15 +76,19 @@ class sys_process_flow_line extends dbObject {
   $sql = " SELECT * 
             FROM sys_process_flow_line
             WHERE 
-            sys_process_flow_header_id = '{$header_id}'
+            sys_process_flow_header_id = :sys_process_flow_header_id
             AND line_number >= (
             SELECT line_number 
             FROM sys_process_flow_line 
-            WHERE sys_process_flow_header_id = '{$header_id}'
-            AND line_name ='{$status}'
+            WHERE sys_process_flow_header_id = :sys_process_flow_header_id
+            AND line_name =:line_name
           ) 
             ORDER BY line_number ASC ";
-  $result = self::find_by_sql($sql);
+ 	  global $db;
+  $value_a = ['sys_process_flow_header_id' => $header_id, 'line_name' => $status];
+  $result = $db->findBySql($sql, $value_a);
+	
+  
   return !empty($result) ? $result : false;
  }
 

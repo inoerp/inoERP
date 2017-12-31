@@ -9,81 +9,81 @@ class ap_transaction_line extends dbObject {
  public static $key_column = 'item_description';
  public static $module = "ap";
  public $field_a = [
-  'ap_transaction_line_id',
-  'ap_transaction_header_id',
-  'line_number',
-  'item_id_m',
-  'item_description',
-  'inv_line_quantity',
-  'inv_unit_price',
-  'inv_line_price',
-  'tax_code_id',
-  'tax_amount',
-  'gl_tax_amount',
-  'gl_inv_line_price',
-  'line_type',
-  'line_description',
-  'asset_cb',
-  'fa_asset_category_id',
-  'prj_project_header_id',
-  'prj_project_line_id',
-  'uom_id',
-  'status',
-  'line_source',
-  'po_header_id',
-  'po_line_id',
-  'po_detail_id',
-  'ref_transaction_header_id',
-  'ref_transaction_line_id',
-  'period_id',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date'
+    'ap_transaction_line_id',
+    'ap_transaction_header_id',
+    'line_number',
+    'item_id_m',
+    'item_description',
+    'inv_line_quantity',
+    'inv_unit_price',
+    'inv_line_price',
+    'tax_code_id',
+    'tax_amount',
+    'gl_tax_amount',
+    'gl_inv_line_price',
+    'line_type',
+    'line_description',
+    'asset_cb',
+    'fa_asset_category_id',
+    'prj_project_header_id',
+    'prj_project_line_id',
+    'uom_id',
+    'status',
+    'line_source',
+    'po_header_id',
+    'po_line_id',
+    'po_detail_id',
+    'ref_transaction_header_id',
+    'ref_transaction_line_id',
+    'period_id',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $requiredField = [
-  'ap_transaction_header_id',
-  'line_number',
-  'item_description',
-  'inv_line_quantity',
-  'inv_unit_price',
-  'inv_line_price',
+    'ap_transaction_header_id',
+    'line_number',
+    'item_description',
+    'inv_line_quantity',
+    'inv_unit_price',
+    'inv_line_price',
  ];
  public $fields_inForm_notInDataBase = [
-  "transaction_number",
-  "item_number",
-  'supplier_name',
-  'supplier_number',
-  'item_description',
-  'uom_id',
-  'action',
-  'tax_code_value',
-  'line_quantity',
-  'unit_price',
-  'gl_line_price',
-  'line_price',
-  'invoiced_quantity',
-  'invoicing_open_quantity',
-  'cm_transaction_header_id',
-  'credit_line_quantity',
-  'credit_unit_price',
-  'detail_ac_id',
-  'inv_doc_currency',
-  'doc_currency'
+    "transaction_number",
+    "item_number",
+    'supplier_name',
+    'supplier_number',
+    'item_description',
+    'uom_id',
+    'action',
+    'tax_code_value',
+    'line_quantity',
+    'unit_price',
+    'gl_line_price',
+    'line_price',
+    'invoiced_quantity',
+    'invoicing_open_quantity',
+    'cm_transaction_header_id',
+    'credit_line_quantity',
+    'credit_unit_price',
+    'detail_ac_id',
+    'inv_doc_currency',
+    'doc_currency'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "ap_transaction_header_id"
+    "ap_transaction_header_id"
  ];
  public $numberField = [
-  'inv_line_quantity',
-  'inv_unit_price',
-  'inv_line_price',
-  'tax_amount',
-  'gl_tax_amount',
-  'gl_inv_line_price',
+    'inv_line_quantity',
+    'inv_unit_price',
+    'inv_line_price',
+    'tax_amount',
+    'gl_tax_amount',
+    'gl_inv_line_price',
  ];
  public $ap_transaction_line_id;
  public $ap_transaction_header_id;
@@ -209,7 +209,6 @@ class ap_transaction_line extends dbObject {
    $ap_th->header_amount += $this->inv_line_price;
    $ap_th->tax_amount += $this->tax_amount;
    $ap_th->save();
-   
   }
  }
 
@@ -285,31 +284,34 @@ class ap_transaction_line extends dbObject {
  }
 
  public static function find_by_ap_transaction_headerId($ap_transaction_header_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where ap_transaction_header_id = '{$ap_transaction_header_id}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where ap_transaction_header_id = :ap_transaction_header_id  ";
+  global $db;
+  $value_a = ['ap_transaction_header_id' => $ap_transaction_header_id ];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return $result_array;
  }
 
  public function multi_select_input_fields() {
   $multi_select_input = [
-   'inv_line_quantity',
-   'inv_unit_price',
-   'inv_line_price',
-   'inv_line_type'
+     'inv_line_quantity',
+     'inv_unit_price',
+     'inv_line_price',
+     'inv_line_type'
   ];
   return $multi_select_input;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'supplier_id',
-   'ap_transaction_header_id',
-   'action',
-   'mode',
-   'po_status',
-   'supplier_site_id',
-   'inv_doc_currency'
+     'action_class_name',
+     'supplier_id',
+     'ap_transaction_header_id',
+     'action',
+     'mode',
+     'po_status',
+     'supplier_site_id',
+     'inv_doc_currency'
   ];
 
   return $multi_select_hidden;

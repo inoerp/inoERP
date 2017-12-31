@@ -101,11 +101,13 @@ class sys_pd_process_flow_action extends dbObject {
   $sql = " SELECT *
 FROM sys_pd_process_flow_action
 WHERE 
-sys_pd_header_id = '{$header_id}' AND sys_process_flow_line_id = '{$pf_line_id}'
+sys_pd_header_id = :sys_pd_header_id AND sys_process_flow_line_id = :sys_process_flow_line_id
 ";
 
-  $result = self::find_by_sql($sql);
-
+    global $db;
+	$value_a = ['sys_pd_header_id' => $header_id, 'sys_process_flow_line_id' => $pf_line_id];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -13,7 +14,6 @@
  * Contains all the locator information, such as - lot_number, org_id,  generation, quantity, etc.
  * 
  */
-
 class inv_lot_number extends dbObject {
 
  public static $table_name = "inv_lot_number";
@@ -21,108 +21,108 @@ class inv_lot_number extends dbObject {
  public static $key_column = 'item_id_m';
  public static $module = "inv";
  public static $system_info = [
-  'name' => 'Lot Number',
-  'number' => '2122',
-  'description' => 'Item Lot Number',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 9
+    'name' => 'Lot Number',
+    'number' => '2122',
+    'description' => 'Item Lot Number',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 9
  ];
  public static $origination_type_a = [
-  'INVENTORY' => 'Inventory',
-  'WIP_COMPLETION' => 'WIP Completion',
-  'RECEVING' => 'Receving',
-  'SHIPMENT' => 'Shipment',
-  'MANUAL' => 'Manual',
-  'SYS_GEN' => 'System Generated',
+    'INVENTORY' => 'Inventory',
+    'WIP_COMPLETION' => 'WIP Completion',
+    'RECEVING' => 'Receving',
+    'SHIPMENT' => 'Shipment',
+    'MANUAL' => 'Manual',
+    'SYS_GEN' => 'System Generated',
  ];
  public static $lot_status = [
-  'ACTIVE' => 'Active',
-  'EXPIRED' => 'Expired',
+    'ACTIVE' => 'Active',
+    'EXPIRED' => 'Expired',
  ];
  public static $expiration_action_a = [
-  'NO_TRANSACTION' => 'No Transaction',
-  'WARNING' => 'Warning',
-  'ONLY_RTV' => 'Only Allow RTV',
-  'RTV_MISC' => 'Allow RTV & Misc',
+    'NO_TRANSACTION' => 'No Transaction',
+    'WARNING' => 'Warning',
+    'ONLY_RTV' => 'Only Allow RTV',
+    'RTV_MISC' => 'Allow RTV & Misc',
  ];
  public $field_a = [
-  'inv_lot_number_id',
-  'lot_number',
-  'quantity',
-  'item_id_m',
-  'generation',
-  'org_id',
-  'lock_cb',
-  'first_inv_transaction_id',
-  'reference_key_name',
-  'reference_key_value',
-  'origination_type',
-  'origination_date',
-  'status',
-  'activation_date',
-  'expiration_date',
-  'supplier_site_id',
-  'po_header_id',
-  'supplier_sn',
-  'supplier_ln',
-  'expiration_action',
-  'item_revision',
-  'parent_lot_number_id',
-  'original_wip_wo_header_id',
-  'last_inv_transaction_id',
-  'country_of_origin',
-  'description',
-  'ar_customer_site_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'inv_lot_number_id',
+    'lot_number',
+    'quantity',
+    'item_id_m',
+    'generation',
+    'org_id',
+    'lock_cb',
+    'first_inv_transaction_id',
+    'reference_key_name',
+    'reference_key_value',
+    'origination_type',
+    'origination_date',
+    'status',
+    'activation_date',
+    'expiration_date',
+    'supplier_site_id',
+    'po_header_id',
+    'supplier_sn',
+    'supplier_ln',
+    'expiration_action',
+    'item_revision',
+    'parent_lot_number_id',
+    'original_wip_wo_header_id',
+    'last_inv_transaction_id',
+    'country_of_origin',
+    'description',
+    'ar_customer_site_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $dateFields = [
-  'activation_date',
-  'expiration_date'
+    'activation_date',
+    'expiration_date'
  ];
  public $initial_search = [
-  'item_id_m',
-   'org_id'
+    'item_id_m',
+    'org_id'
  ];
  public $fields_inForm_notInDataBase = [
-  'org',
-  'subinventory',
-  'locator',
-  'item_number',
-  'item_description',
-  'org_id',
-  'transaction_type',
-  'transaction_type_id',
-  'lot_quantity',
-  'org_name'
+    'org',
+    'subinventory',
+    'locator',
+    'item_number',
+    'item_description',
+    'org_id',
+    'transaction_type',
+    'transaction_type_id',
+    'lot_quantity',
+    'org_name'
  ];
  public $requiredField = [
-  'item_id_m',
-  'generation',
-  'org_id',
+    'item_id_m',
+    'generation',
+    'org_id',
  ];
  public $profile_default = [
-  'org_id' => 'org_inv_name_default',
+    'org_id' => 'org_inv_name_default',
  ];
  public $prg_create_lot_number_parameters = [
-  'Organization' => 'search_org_name',
-  'Item Number From' => 'search_item_number_from',
-  'Item Number To' => 'search_item_number_to',
-  'Number of S/N' => 'search_quantity',
+    'Organization' => 'search_org_name',
+    'Item Number From' => 'search_item_number_from',
+    'Item Number To' => 'search_item_number_to',
+    'Number of S/N' => 'search_quantity',
  ];
  public $prg_create_lot_number_details = [
-  'name' => 'Create Pre Defined Lot Numbers',
-  'description' => 'Create Pre Defined Lot Numbers',
+    'name' => 'Create Pre Defined Lot Numbers',
+    'description' => 'Create Pre Defined Lot Numbers',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Lot Number ";
  public $inv_lot_number_id;
@@ -225,14 +225,17 @@ class inv_lot_number extends dbObject {
  }
 
  public function findBasic_lotInfo() {
+  global $db;
+  $value_a = ['item_id_m' => $this->item_id_m, 'org_id' => $this->org_id, 'status' => $this->status];
+
   if (empty($this->subinventory_id)) {
    $sql = " SELECT inv_lot_number_id,    lot_number,    item_id_m,    generation, org_id , "
-    . " status FROM ";
+      . " status FROM ";
    $sql .= self::$table_name;
    $sql .= " WHERE item_id_m = :item_id_m  ";
    $sql .= " AND org_id = :org_id  ";
    $sql .= " AND status = :status  ";
-   $value_a = ['item_id_m' => $this->item_id_m, 'org_id' => $this->org_id, 'status' => $this->status];
+
    $result = $this->findBySql($sql, $value_a);
   } else {
    $sql = " SELECT iln.inv_lot_number_id,    iln.lot_number,    iln.item_id_m,    iln.generation, iln.org_id
@@ -241,14 +244,16 @@ class inv_lot_number extends dbObject {
               onhand 
               WHERE lo.inv_lot_number_id = iln.inv_lot_number_id
               AND onhand.onhand_id = lo.onhand_id
-              AND onhand.item_id_m = '{$this->item_id_m}'
-              AND onhand.subinventory_id = '{$this->subinventory_id}' ";
-   $sql .= " AND iln.org_id = '{$this->org_id}'   ";
-   $sql .= " AND iln.status = '{$this->status}'   ";
+              AND onhand.item_id_m = :item_id_m
+              AND onhand.subinventory_id = :subinventory_id ";
+   $sql .= " AND iln.org_id = :org_id   ";
+   $sql .= " AND iln.status = :status   ";
+   $value_a['subinventory_id'] = $this->subinventory_id;
    if (!empty($this->locator_id)) {
-    $sql .= " AND onhand.locator_id = '{$this->locator_id}'   ";
+    $value_a['locator_id'] = $this->locator_id;
+    $sql .= " AND onhand.locator_id = :locator_id   ";
    }
-   $result = self::find_by_sql($sql);
+   $result = $db->findBySql($sql, $value_a);
   }
 
   return !empty($result) ? ($result) : false;
@@ -322,16 +327,20 @@ class inv_lot_number extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE status = 'IN_WIP' ";
-  $sql .= " AND  current_wip_wo_header_id = '{$wo_header_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " AND  current_wip_wo_header_id = :current_wip_wo_header_id ";
+  global $db;
+  $value_a = ['current_wip_wo_header_id' => $wo_header_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
  public static function find_allChild_bylotId($lot_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE parent_lot_number_id = '{$lot_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE parent_lot_number_id = :parent_lot_number_id ";
+    global $db;
+  $value_a = ['parent_lot_number_id' => $lot_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
@@ -367,7 +376,7 @@ class inv_lot_number extends dbObject {
   $ret_stmt .= '<td class="add_detail_values0">';
   $ret_stmt .= $f->hidden_field('lot_number_id', $lot_object[0]->inv_lot_number_id);
   $ret_stmt .= $f->hidden_field('lot_generation', $lot_object[0]->lot_generation);
-  $ret_stmt .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+  $ret_stmt .= '<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
                 <div class="class_detail_form">
                  <fieldset class="form_detail_data_fs"><legend>lot</legend>
                   <div class="tabsDetailLN">
@@ -400,14 +409,14 @@ class inv_lot_number extends dbObject {
   foreach ($lot_object as $lot_no) {
    $new_obj_div_class = $detailCount != 0 ? '' : '';
 
-   $ret_stmt .=' <tr class="inv_lot_number' . $detailCount . '' . $new_obj_div_class . '">';
-   $ret_stmt .=' <td>   
+   $ret_stmt .= ' <tr class="inv_lot_number' . $detailCount . '' . $new_obj_div_class . '">';
+   $ret_stmt .= ' <td>   
      <ul class="inline_action">
       <li class="add_row_detail_img1"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="add new line" /></li>
       <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this line" /> </li>
       <li><input type="checkbox" name="detail_id_cb" value="' . htmlentities($lot_no->inv_lot_number_id) . '"></li>  ';
 //   $ret_stmt .= '<li>' . form::hidden_field('inv_transaction_id', $lot_no->inv_transaction_id) . '</li>';
-   $ret_stmt .=' </ul>
+   $ret_stmt .= ' </ul>
    </td>
    <td>';
    $ret_stmt .= $f->text_field('lot_number', $lot_no->lot_number, '25');
@@ -437,7 +446,7 @@ class inv_lot_number extends dbObject {
 
   $ret_stmt .= $f->hidden_field('serial_number_id', $serial_object[0]->inv_serial_number_id);
   $ret_stmt .= $f->hidden_field('serial_generation', $serial_object[0]->serial_generation);
-  $ret_stmt .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+  $ret_stmt .= '<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
                 <div class="class_detail_form">
                  <fieldset class="form_detail_data_fs"><legend>Serial</legend>
                   <div class="tabsDetailSN">
@@ -468,14 +477,14 @@ class inv_lot_number extends dbObject {
   foreach ($serial_object as $sn_no) {
    $new_obj_div_class = $detailCount != 0 ? '' : '';
 
-   $ret_stmt .=' <tr class="inv_serial_number' . $detailCount_sn . '' . $new_obj_div_class . '">';
-   $ret_stmt .=' <td>   
+   $ret_stmt .= ' <tr class="inv_serial_number' . $detailCount_sn . '' . $new_obj_div_class . '">';
+   $ret_stmt .= ' <td>   
      <ul class="inline_action">
       <li class="add_row_detail_img1"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="add new line" /></li>
       <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this line" /> </li>
       <li><input type="checkbox" name="detail_id_cb" value="' . htmlentities($sn_no->inv_serial_number_id) . '"></li>  ';
    $ret_stmt .= '<li>' . form::hidden_field('inv_transaction_id', $sn_no->inv_transaction_id) . '</li>';
-   $ret_stmt .=' </ul>
+   $ret_stmt .= ' </ul>
    </td>
    <td>';
    $ret_stmt .= $f->text_field('serial_number', $sn_no->serial_number, '25');
@@ -513,7 +522,7 @@ class inv_lot_number extends dbObject {
   $ret_stmt_l = '<td class="add_detail_values0">';
   $ret_stmt_l .= $f->hidden_field('lot_number_id', $lot_object[0]->inv_lot_number_id);
   $ret_stmt_l .= $f->hidden_field('lot_generation', $lot_object[0]->lot_generation);
-  $ret_stmt_l .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+  $ret_stmt_l .= '<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
                 <div class="class_detail_form">
                  <fieldset class="form_detail_data_fs"><legend>lot</legend>
                   <div class="tabsDetailLN">
@@ -546,14 +555,14 @@ class inv_lot_number extends dbObject {
   foreach ($lot_object as $lot_no) {
    $new_obj_div_class = $detailCount != 0 ? '' : '';
 
-   $ret_stmt_l .=' <tr class="inv_lot_number' . $detailCount . '' . $new_obj_div_class . '">';
-   $ret_stmt_l .=' <td>   
+   $ret_stmt_l .= ' <tr class="inv_lot_number' . $detailCount . '' . $new_obj_div_class . '">';
+   $ret_stmt_l .= ' <td>   
      <ul class="inline_action">
       <li class="add_row_detail_img1"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="add new line" /></li>
       <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this line" /> </li>
       <li><input type="checkbox" name="detail_id_cb" value="' . htmlentities($lot_no->inv_lot_number_id) . '"></li>  ';
 //   $ret_stmt .= '<li>' . form::hidden_field('inv_transaction_id', $lot_no->inv_transaction_id) . '</li>';
-   $ret_stmt_l .=' </ul>
+   $ret_stmt_l .= ' </ul>
    </td>
    <td>';
    $ret_stmt_l .= $f->text_field('lot_number', $lot_no->lot_number, '25');
@@ -582,7 +591,7 @@ class inv_lot_number extends dbObject {
 
   $ret_stmt_l .= $f->hidden_field('serial_number_id', $serial_object[0]->inv_serial_number_id);
   $ret_stmt_l .= $f->hidden_field('serial_generation', $serial_object[0]->serial_generation);
-  $ret_stmt_l .='<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
+  $ret_stmt_l .= '<img src="' . HOME_URL . 'themes/images/page_add_icon_16.png" class="add_detail_values_img" alt="add detail values" />
                 <div class="class_detail_form">
                  <fieldset class="form_detail_data_fs"><legend>Serial</legend>
                   <div class="tabsDetailSN">
@@ -613,14 +622,14 @@ class inv_lot_number extends dbObject {
   foreach ($serial_object as $sn_no) {
    $new_obj_div_class = $detailCount != 0 ? '' : '';
 
-   $ret_stmt_l .=' <tr class="inv_serial_number' . $detailCount_sn . '' . $new_obj_div_class . '">';
-   $ret_stmt_l .=' <td>   
+   $ret_stmt_l .= ' <tr class="inv_serial_number' . $detailCount_sn . '' . $new_obj_div_class . '">';
+   $ret_stmt_l .= ' <td>   
      <ul class="inline_action">
       <li class="add_row_detail_img0"><img  src="' . HOME_URL . 'themes/images/add.png"  alt="add new line" /></li>
       <li class="remove_row_img"><img src="' . HOME_URL . 'themes/images/remove.png" alt="remove this line" /> </li>
       <li><input type="checkbox" name="detail_id_cb" value="' . htmlentities($sn_no->inv_serial_number_id) . '"></li>  ';
    $ret_stmt_l .= '<li>' . form::hidden_field('inv_transaction_id', $sn_no->inv_transaction_id) . '</li>';
-   $ret_stmt_l .=' </ul>
+   $ret_stmt_l .= ' </ul>
    </td>
    <td>';
    $ret_stmt_l .= $f->text_field('serial_number', $sn_no->serial_number, '25');

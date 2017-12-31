@@ -1,5 +1,8 @@
-<?php include_once("../../../includes/basics/basics.inc"); ?>
 <?php
+
+require_once __DIR__.'/../../../includes/basics/wloader.inc';
+include_once(__DIR__.'/../../../../inoerp_server/includes/basics/basics.inc');
+
 
 if ((!empty($_GET['inv_abc_valuation_id'])) && (!empty($_GET['find_valuation_details'])) &&
     (!empty($_GET['element_type'])) && (!empty($_GET['element_value']))) {

@@ -100,12 +100,14 @@ FROM extn_contact cont,
 extn_contact_reference cr 
 
 WHERE cr.extn_contact_id = cont.extn_contact_id
-AND cr.reference_table = '{$ref_obj}'
- AND cr.reference_id = '{$ref_id}'
+AND cr.reference_table = :reference_table
+ AND cr.reference_id = :reference_id
 ";
  
-  $result = self::find_by_sql($sql);
-//  echo $sql; pa($result);
+    global $db;
+	$value_a = ['reference_table' => $ref_obj, 'reference_id' => $ref_id];
+	$result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? ($result) : false;
  }
 

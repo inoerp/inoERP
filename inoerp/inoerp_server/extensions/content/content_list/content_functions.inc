@@ -135,7 +135,7 @@ if (!empty($_GET['submit_search'])) {
   $sql = ino_perPageSql_i($sql, $per_page, $pagination->offset());
  }
  
- $result = $extension::find_by_sql($sql);
+   $result = $db->findBySql($sql);
  
   foreach ($result as $result_e) {
   

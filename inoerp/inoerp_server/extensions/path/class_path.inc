@@ -215,34 +215,39 @@ class path extends dbObject {
  public static function find_all_view_paths() {
 	$sql = " SELECT * FROM " . self::$table_name;
 	$sql .= " WHERE id_column_name IS NOT NULL ";
-	$result = self::find_by_sql($sql);
+	  global $db;
+  $result = $db->findBySql($sql);
 	return $result;
  }
 
  public static function find_by_path($path) {
-	$sql = "SELECT * FROM " . self::$table_name . " where path_link=' {
-	 $path
-	}' ";
+	$sql = "SELECT * FROM " . self::$table_name . " where path_link= :path_link ";
 	$sql = ino_perPageSql_i($sql, 1);
-	$result_array = self::find_by_sql($sql);
+	
+  	  global $db;
+  $value_a = ['path_link' => $path];
+  $result_array = $db->findBySql($sql, $value_a);
+  
 	return !empty($result_array) ? array_shift($result_array) : false;
  }
 
  public static function find_by_idColumn_name($idColumn_name) {
-	$sql = "SELECT * FROM " . self::$table_name . " where id_column_name=' {
-	 $idColumn_name
-	}' ";
+	$sql = "SELECT * FROM " . self::$table_name . " where id_column_name= :id_column_name ";
 	$sql = ino_perPageSql_i($sql, 1);
-	$result_array = self::find_by_sql($sql);
+	
+   	  global $db;
+  $value_a = ['id_column_name' => $idColumn_name];
+  $result_array = $db->findBySql($sql, $value_a);
+  
 	return !empty($result_array) ? array_shift($result_array) : false;
  }
 
  public static function find_by_name($name) {
-	$sql = "SELECT * FROM " . self::$table_name . " where path_link REGEXP ' {
-	 $name
-	}$' ";
+	$sql = "SELECT * FROM " . self::$table_name . " where path_link REGEXP  :path_link ";
 	$sql = ino_perPageSql_i($sql, 1);
-	$result_array = self::find_by_sql($sql);
+   	  global $db;
+  $value_a = ['path_link' => "{$name}$"];
+  $result_array = $db->findBySql($sql, $value_a);
 	return !empty($result_array) ? array_shift($result_array) : false;
  }
 

@@ -8,55 +8,55 @@ class ap_import_claim_v extends dbObject {
 // public static $js_fileName = 'modules/ar/transaction/js/multi_select_ar.js';
  public static $key_column = 'hr_expense_header_id';
  public static $system_info = [
-  'name' => 'Import Claim',
-  'number' => '1205',
-  'description' => 'AP Import Claim',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'ar',
-  'weight' => 6
+    'name' => 'Import Claim',
+    'number' => '1205',
+    'description' => 'AP Import Claim',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'ar',
+    'weight' => 6
  ];
  public $field_a = [
-  'claim_number',
-  'hr_expense_header_id',
-  'bu_org_id',
-  'first_name',
-  'last_name',
-  'identification_id',
-  'claim_date',
-  'header_amount',
-  'status',
-  'purpose',
-  'hr_employee_id',
-  'doc_currency',
-  'department_id',
-  'reason',
-  'currency',
-  'exchange_rate_type',
-  'exchange_rate',
-  'supplier_id',
+    'claim_number',
+    'hr_expense_header_id',
+    'bu_org_id',
+    'first_name',
+    'last_name',
+    'identification_id',
+    'claim_date',
+    'header_amount',
+    'status',
+    'purpose',
+    'hr_employee_id',
+    'doc_currency',
+    'department_id',
+    'reason',
+    'currency',
+    'exchange_rate_type',
+    'exchange_rate',
+    'supplier_id',
  ];
  public $initial_search = [
-  'claim_number',
-  'hr_expense_header_id',
-  'bu_org_id',
-  'first_name',
-  'last_name',
+    'claim_number',
+    'hr_expense_header_id',
+    'bu_org_id',
+    'first_name',
+    'last_name',
  ];
  public $dateField = [
-  'document_date'
+    'document_date'
  ];
  public $fields_inForm_notInDataBase = [
-  'action'
+    'action'
  ];
  public $prg_import_expense_claim_parameters = [
-  'Business Org' => 'search_business_org',
+    'Business Org' => 'search_business_org',
  ];
  public $prg_import_expense_claim_details = [
-  'name' => 'Import Expense Claim',
-  'description' => 'Import Expense Claim',
+    'name' => 'Import Expense Claim',
+    'description' => 'Import Expense Claim',
  ];
  public $pageTitle = " Import Expense Claim "; //page Title
  public $claim_number;
@@ -86,8 +86,12 @@ class ap_import_claim_v extends dbObject {
  public static function find_by_buOrgId($bu_org_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE bu_org_id = '{$bu_org_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE bu_org_id = :bu_org_id ";
+
+  global $db;
+  $value_a = ['bu_org_id' => $bu_org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? ($result) : false;
  }
 
@@ -285,10 +289,10 @@ AND he.hr_employee_id = eh.hr_employee_id
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block'
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block'
   ];
 
   return $multi_select_hidden;

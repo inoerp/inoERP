@@ -20,67 +20,67 @@ class inv_item_relation extends dbObject {
  public static $primary_column = "inv_item_relation_id";
  public static $key_column = "relation_type";
  public static $system_info = [
-  'name' => 'Item Relation',
-  'number' => '2119',
-  'description' => 'Define and Mainten Item Relations',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 4
+    'name' => 'Item Relation',
+    'number' => '2119',
+    'description' => 'Define and Mainten Item Relations',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 4
  ];
  public static $status_a = [
-  'active' => 'Active',
-  'inactive' => 'Inactive'
+    'active' => 'Active',
+    'inactive' => 'Inactive'
  ];
  public $field_a = [
-  'inv_item_relation_id',
-  'relation_type',
-  'from_item_id_m',
-  'to_item_id_m',
-  'org_id',
-  'from_date',
-  'to_date',
-  'description',
-  'planning_cb',
-  'status',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'inv_item_relation_id',
+    'relation_type',
+    'from_item_id_m',
+    'to_item_id_m',
+    'org_id',
+    'from_date',
+    'to_date',
+    'description',
+    'planning_cb',
+    'status',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'from_item_id_m',
-  'to_item_id_m',
+    'from_item_id_m',
+    'to_item_id_m',
  ];
  public $requiredField = [
-  'relation_type',
-  'from_item_id_m',
-  'to_item_id_m',
+    'relation_type',
+    'from_item_id_m',
+    'to_item_id_m',
  ];
  public $checkbox = [
-  'planning_cb'
+    'planning_cb'
  ];
  public $fields_inForm_notInDataBase = [
-  'from_item_number',
-  'to_item_number',
-  'from_item_description',
-  'to_item_description',
+    'from_item_number',
+    'to_item_number',
+    'from_item_description',
+    'to_item_description',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'relation_type'
+    'relation_type'
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=inv_item_relation&mode=9',
-  '_show_update_path' => 1,
-  '_view_path' => 'form.php?class_name=inv_item_relation&mode=2',
-  '_show_view_path' => 1,
+    '_update_path' => 'form.php?class_name=inv_item_relation&mode=9',
+    '_show_update_path' => 1,
+    '_view_path' => 'form.php?class_name=inv_item_relation&mode=2',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Item Relations "; //page Title
  public $option_list = [
-  'relation_type' => 'INV_ITEM_RELATION',
+    'relation_type' => 'INV_ITEM_RELATION',
  ]; //list of search fields wh
  public $inv_item_relation_id;
  public $relation_type;
@@ -140,9 +140,11 @@ class inv_item_relation extends dbObject {
   $sql = " 
 	 SELECT *
 	 FROM inv_item_relation
-	 WHERE relation_type = '{$relation_type}'
+	 WHERE relation_type = :relation_type
 	";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['relation_type' => $relation_type];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
@@ -150,9 +152,11 @@ class inv_item_relation extends dbObject {
   $sql = " 
 	 SELECT *
 	 FROM inv_item_relation
-	 WHERE from_item_id_m = '{$from_item_id_m}'
+	 WHERE from_item_id_m = :from_item_id_m
 	";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['from_item_id_m' => $from_item_id_m];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 

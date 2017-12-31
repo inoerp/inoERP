@@ -29,67 +29,67 @@ class extn_comment extends dbObject {
  public static $module = "extension";
  public static $multi_select_template_path = 'extensions/comment/multi_action/comment_template_ma.php';
  public static $system_info = [
-  'name' => 'Comment',
-  'number' => '10040',
-  'description' => 'Comments for all type of content types and documents',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 12
+    'name' => 'Comment',
+    'number' => '10040',
+    'description' => 'Comments for all type of content types and documents',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 12
  ];
  public $field_a = [
-  "extn_comment_id",
-  "reference_table",
-  "reference_id",
-  "subject",
-  "extn_comment",
-  "terms",
-  "published_cb",
-  "weightage",
-  "comment_by",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "extn_comment_id",
+    "reference_table",
+    "reference_id",
+    "subject",
+    "extn_comment",
+    "terms",
+    "published_cb",
+    "weightage",
+    "comment_by",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
 //variables used for showing data
 
  public $checkbox = ["published_cb"];
  public $requiredField = [
-  "reference_table",
-  "reference_id",
-  "extn_comment"
+    "reference_table",
+    "reference_id",
+    "extn_comment"
  ];
  public $initial_search = [
-  "extn_comment_id",
-  "reference_table",
-  "reference_id",
-  "subject",
-  "extn_comment",
+    "extn_comment_id",
+    "reference_table",
+    "reference_id",
+    "subject",
+    "extn_comment",
  ];
  public $column = [
-  "extn_comment_id",
-  "reference_table",
-  "reference_id",
-  "subject",
-  "published_cb",
-  "weightage",
-  "comment_by",
+    "extn_comment_id",
+    "reference_table",
+    "reference_id",
+    "subject",
+    "published_cb",
+    "weightage",
+    "comment_by",
  ];
  public $fields_inForm_notInDataBase = [
-  'multi_action_class_pc',
-  'multi_action_class_pc_value',
-  'action',
-  'comment_user_name',
-  'subscribe_cb'
+    'multi_action_class_pc',
+    'multi_action_class_pc_value',
+    'action',
+    'comment_user_name',
+    'subscribe_cb'
  ];
  public $pageTitle = " Comment - Create & View different Comments ";
  public $search = [
-  '_view_path' => 'form.php?class_name=',
-  '_show_view_path' => 1,
-  '_view_action_meassge' => 'Read',
+    '_view_path' => 'form.php?class_name=',
+    '_show_view_path' => 1,
+    '_view_action_meassge' => 'Read',
  ];
  public $file_id_values;
  public $summary_characters;
@@ -221,7 +221,7 @@ class extn_comment extends dbObject {
 					AND extn_comment.subject IS NOT NULL AND extn_comment.subject !='' 
           ";
 
-  $sql .=" ORDER BY extn_comment.extn_comment_id DESC, extn_comment.weightage DESC ";
+  $sql .= " ORDER BY extn_comment.extn_comment_id DESC, extn_comment.weightage DESC ";
   if (!empty($numbers) && !empty($start_from)) {
    $sql = ino_perPageSql_i($sql, $numbers, $start_from);
    $result = $this->findBySql($sql);
@@ -241,7 +241,7 @@ class extn_comment extends dbObject {
   if (count($result) > 0) {
    $comment_string .= '<ul class="documentation_list comment">';
    $comment_string .= '<li class="all_comments"><span class="badge"><a href="' . HOME_URL . 'content.php?content_type=comment">'
-    . 'All Comments <i class="fa fa-comments-o"></i></a></span></li>';
+      . 'All Comments <i class="fa fa-comments-o"></i></a></span></li>';
    if (empty($result)) {
     return;
    }
@@ -251,7 +251,7 @@ class extn_comment extends dbObject {
     }
     $comment_string .= '<li class="comment_subject">';
     $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&' . 'content_id=' . $records->content_id .
-     '&content_type_id=' . $records->content_type_id . '#comment_id_' . $records->extn_comment_id . '">';
+       '&content_type_id=' . $records->content_type_id . '#comment_id_' . $records->extn_comment_id . '">';
     if (!empty($records->subject)) {
      $comment_string .= substr(strip_tags($records->subject), 0, $this->subject_noof_char);
     } else {
@@ -269,31 +269,42 @@ class extn_comment extends dbObject {
  public static function find_by_reference_table_and_id($reference_table, $reference_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " WHERE reference_table = '{$reference_table}'
-       AND reference_id = '{$reference_id}' ";
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " WHERE reference_table = :reference_table
+       AND reference_id = :reference_id ";
+  global $db;
+  $value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function count_by_reference_table_and_id($reference_table, $reference_id) {
   global $db;
   $sql = "SELECT COUNT(*) FROM " .
-   self::$table_name .
-   " WHERE reference_table = '{$reference_table}'
-       AND reference_id = '{$reference_id}' ";
-  $result = self::count_all_by_sql($sql);
+     self::$table_name .
+     " WHERE reference_table = :reference_table
+       AND reference_id = :reference_id ";
+
+  global $db;
+  $value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_summary_by_id($comment_id) {
   $selectFields = ' SUBSTRING(content,1,2000) AS content_summary , ' .
-   implode(", ", self::$field_array);
+     implode(", ", self::$field_array);
   $sql = "SELECT " . $selectFields . " FROM "
-   . self::$table_name . " 
-            where extn_comment_id={$comment_id} ";
+     . self::$table_name . " 
+            where extn_comment_id= :extn_comment_id ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['extn_comment_id' => $comment_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
@@ -304,7 +315,9 @@ class extn_comment extends dbObject {
    $pagination = new pagination($comment_no, $per_comment, $total_count);
    $sql = ino_perPageSql_i($sql, $per_comment, $pagination->offset());
   }
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $result = $db->findBySql($sql);
 
   foreach ($result as $records) {
    $comment_summary = self::find_summary_by_id($records->extn_comment_id);
@@ -337,7 +350,7 @@ class extn_comment extends dbObject {
   if ($comment_result) {
    $con_count = 0;
    if (count($comment_result) > 0) {
-    $comment_string .='<table id="comment_list" class="table table-striped table-hover"><thead> 
+    $comment_string .= '<table id="comment_list" class="table table-striped table-hover"><thead> 
 						 <tr class="headerBgColor">
 							<th class="topics">Subject</th>
 							<th class="created_by">Created By</th>
@@ -355,9 +368,9 @@ class extn_comment extends dbObject {
      $even_odd = ($con_count % 2 == 0) ? 'even' : 'odd';
      $user_name = empty($recod_c->username) ? 'Anonymous\SelfWeb' : $recod_c->username;
      $comment_string .= "<tr id=\"row_no$con_count\" class='new_row $even_odd'> "
-      . " <td class='subject_summary'>";
+        . " <td class='subject_summary'>";
      $comment_string .= '<a href="' . HOME_URL . 'content.php?mode=2&'
-      . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '#comment_id_' . $recod_c->extn_comment_id . '">';
+        . 'content_id=' . $recod_c->reference_id . '&content_type_id=' . $recod_c->content_type_id . '#comment_id_' . $recod_c->extn_comment_id . '">';
      $comment_string .= "<i class='fa fa-comment'></i> &nbsp;";
      $comment_string .= substr(strip_tags($recod_c->extn_comment), 0, $this->subject_noof_char);
      $comment_string .= ' </a>';
@@ -372,9 +385,9 @@ class extn_comment extends dbObject {
     }
    }
 
-   $comment_string .='</table>';
+   $comment_string .= '</table>';
   }
-  $comment_string .='</div>';
+  $comment_string .= '</div>';
   $comment_string .= '<div id="pagination">';
 
 
@@ -409,18 +422,18 @@ class extn_comment extends dbObject {
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql = "SELECT extn_comment.extn_comment_id, extn_comment.extn_comment, extn_comment.created_by,  extn_comment.creation_date, "
-     . "  extn_comment.creation_date, NVL(iuser.username, extn_comment.comment_by) as username, iuser.image_file_id as image_file_id "
-     . " FROM extn_comment left JOIN ino_user iuser ON iuser.ino_user_id = extn_comment.created_by" .
-     " WHERE reference_table = '{$reference_table}'
-           AND reference_id = '{$reference_id}' ";
+       . "  extn_comment.creation_date, NVL(iuser.username, extn_comment.comment_by) as username, iuser.image_file_id as image_file_id "
+       . " FROM extn_comment left JOIN ino_user iuser ON iuser.ino_user_id = extn_comment.created_by" .
+       " WHERE reference_table = :reference_table
+           AND reference_id = :reference_id ";
     break;
 
    default:
     $sql = "SELECT extn_comment.extn_comment_id, extn_comment.extn_comment, extn_comment.created_by,  extn_comment.creation_date, "
-     . "  extn_comment.creation_date, IFNULL(iuser.username, extn_comment.comment_by) as username, iuser.image_file_id as image_file_id "
-     . " FROM extn_comment left JOIN ino_user iuser ON iuser.ino_user_id = extn_comment.created_by" .
-     " WHERE reference_table = '{$reference_table}'
-           AND reference_id = '{$reference_id}' ";
+       . "  extn_comment.creation_date, IFNULL(iuser.username, extn_comment.comment_by) as username, iuser.image_file_id as image_file_id "
+       . " FROM extn_comment left JOIN ino_user iuser ON iuser.ino_user_id = extn_comment.created_by" .
+       " WHERE reference_table = :reference_table
+           AND reference_id = :reference_id ";
     break;
   }
 
@@ -430,9 +443,11 @@ class extn_comment extends dbObject {
    $sql = ino_perPageSql_i($sql, $per_page, $pagination->offset());
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+  $result = $db->findBySql($sql, $value_a);
 
-  
+
   if (count($result) > 0 && $result) {
    foreach ($result as $records) {
     $allow_content_update = false;
@@ -459,15 +474,15 @@ class extn_comment extends dbObject {
     $comment_string .= '<li class="creation_date">' . $records->creation_date . '</li>';
     if ($allow_content_update) {
      $comment_string .= '<li class="delete_update"><button name="delete_button" class="delete_button btn btn-danger " value="' .
-      $records->extn_comment_id . '" >Delete</button> ';
+        $records->extn_comment_id . '" >Delete</button> ';
      $comment_string .= ' <button name="update_button" class="update_button btn btn-warning " value="' .
-      $records->extn_comment_id . '" >Update</button> </li>';
+        $records->extn_comment_id . '" >Update</button> </li>';
     }
 
     $comment_string .= '</ul>';
     $comment_string .= '</div>';
     $comment_string .= '<div class="comment panel-body update-comment">' . nl2br(html_entity_decode($records->extn_comment, ENT_QUOTES, 'UTF-8'));
-    if (count($comment_file) > 0) {
+    if ( is_array($comment_file) && count($comment_file) > 0 ) {
      foreach ($comment_file as $file_record) {
       $comment_string .= '<p><a href=' . HOME_URL . $file_record->file_path . $file_record->file_name . '>' . $file_record->file_name . '</a></p>';
      }
@@ -504,19 +519,19 @@ class extn_comment extends dbObject {
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block',
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block',
   ];
 
   return $multi_select_hidden;
  }
- 
-  public function multi_select_actions() {
-	 global $f ;
-	 $stmt ='<label >Action on Selected Fields</label>';
-  $stmt .=  $f->select_field_from_array('comment_action', ['unpublish' => 'Unpublish', 'delete' => 'Delete'], '' ,'comment_action' ,'medium');
+
+ public function multi_select_actions() {
+  global $f;
+  $stmt = '<label >Action on Selected Fields</label>';
+  $stmt .= $f->select_field_from_array('comment_action', ['unpublish' => 'Unpublish', 'delete' => 'Delete'], '', 'comment_action', 'medium');
   return $stmt;
  }
 

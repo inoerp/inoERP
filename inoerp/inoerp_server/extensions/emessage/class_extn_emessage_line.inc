@@ -8,28 +8,28 @@ class extn_emessage_line extends dbObject {
  public static $key_column = 'text_message';
  public static $module = "extn";
  public $field_a = [
-  'extn_emessage_line_id',
-  'extn_emessage_header_id',
-  'from_user_id',
-  'user_id',
-  'text_message',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'extn_emessage_line_id',
+    'extn_emessage_header_id',
+    'from_user_id',
+    'user_id',
+    'text_message',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'extn_emessage_header_id',
-  'from_user_id',
-  'user_id',
-  'text_message',
+    'extn_emessage_header_id',
+    'from_user_id',
+    'user_id',
+    'text_message',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "extn_emessage_header_id"
+    "extn_emessage_header_id"
  ];
  public static $chat_mode_a = [
-  'on' => 'Switche On',
-  'off' => 'Switche Off'
+    'on' => 'Switche On',
+    'off' => 'Switche Off'
  ];
  public $extn_emessage_line_id;
  public $extn_emessage_header_id;
@@ -57,14 +57,17 @@ class extn_emessage_line extends dbObject {
  Public static function find_by_parent_id_k($extn_emessage_header_id, $extn_emessage_line_id = '') {
   $sql = " SELECT  * FROM  ";
   $sql .= self::$table_name;
-  $sql .= " WHERE extn_emessage_header_id='{$extn_emessage_header_id}' ";
+  $sql .= " WHERE extn_emessage_header_id= :extn_emessage_header_id ";
   if (!empty($extn_emessage_line_id)) {
-   $sql .= " AND extn_emessage_line_id < '{$extn_emessage_line_id}' ";
+   $sql .= " AND extn_emessage_line_id < :extn_emessage_line_id ";
   }
   $sql .= " ORDER BY extn_emessage_line_id DESC ";
   $sql = ino_perPageSql_i($sql, 30);
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['extn_emessage_line_id' => $extn_emessage_line_id, 'extn_emessage_header_id' => $extn_emessage_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : ' ';
  }
 

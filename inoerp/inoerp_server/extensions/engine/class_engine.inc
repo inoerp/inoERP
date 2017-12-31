@@ -132,10 +132,13 @@ class engine extends dbObject {
   public static function find_by_className($obj_class_name) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE obj_class_name = '{$obj_class_name}' ";
+  $sql .= " WHERE obj_class_name = :obj_class_name ";
   $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['obj_class_name' => $obj_class_name];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? array_pop($result) : false;
  }
  

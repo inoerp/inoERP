@@ -1,5 +1,8 @@
-<?php include_once("../../../includes/basics/basics.inc"); ?>
 <?php
+require_once __DIR__.'/../../../includes/basics/wloader.inc';
+include_once(__DIR__.'/../../../../inoerp_server/includes/basics/basics.inc');
+
+
  if ((!empty($_GET['item_id_m'])) && (!empty($_GET['find_serial_list'])) && (!empty($_GET['status']))) {
   $isn = new inv_serial_number();
   $isn->item_id_m = $_GET['item_id_m'];

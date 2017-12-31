@@ -132,10 +132,13 @@ class extn_theme extends dbObject {
  public static function find_by_themeName($theme_name) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE theme_name = '{$theme_name}' ";
+  $sql .= " WHERE theme_name = :theme_name ";
   $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+  	  global $db;
+  $value_a = ['theme_name' => $theme_name];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -145,7 +148,9 @@ class extn_theme extends dbObject {
   $sql .= " WHERE default_cb = 1 ";
   $sql = ino_perPageSql_i($sql, 1);
 
-  $result = self::find_by_sql($sql);
+    global $db;
+  $result = $db->findBySql($sql);
+  
   return !empty($result) ? array_pop($result) : false;
  }
  
@@ -154,7 +159,9 @@ class extn_theme extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE enabled_cb = 1 ";
 
-  $result = self::find_by_sql($sql);
+   global $db;
+  $result = $db->findBySql($sql);
+  
   return !empty($result) ? $result : false;
  }
  

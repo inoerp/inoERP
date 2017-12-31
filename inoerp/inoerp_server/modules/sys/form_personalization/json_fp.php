@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__.'/../../../includes/basics/wloader.inc';
+include_once(__DIR__.'/../../../../inoerp_server/includes/basics/basics.inc');
+
 
 if (!empty($_POST['get_fp_from_form']) && !empty($_POST['template_code'])) {
  $obj_class_name = $_POST['obj_class_name'];

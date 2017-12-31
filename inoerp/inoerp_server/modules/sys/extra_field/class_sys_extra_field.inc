@@ -91,17 +91,22 @@ class sys_extra_field extends dbObject {
  public static function find_by_transactionNumber($number) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE sys_extra_field_number = '{$number}' ";
+  $sql .= " WHERE sys_extra_field_number = :sys_extra_field_number ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+ 	  global $db;
+  $value_a = ['sys_extra_field_number' => $number];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 
  public static function find_by_transactionClass($class) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE type_class = '{$class}' AND status='active'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE type_class = :type_class AND status='active'";
+  	  global $db;
+  $value_a = ['type_class' => $class];
+  $result = $db->findBySql($sql, $value_a);
   return $result;
  }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * inoERP
  *
@@ -7,6 +8,7 @@
  * @link        http://inoideas.org
  * @source code https://github.com/inoerp/inoERP
  */
+
 /**
  * 
  *
@@ -20,100 +22,100 @@ class content_type extends dbObject {
  public static $module = "extension";
  public static $js_fileName = 'extensions/content_type/content_type.js';
  public static $system_info = [
-  'name' => 'Content Type',
-  'number' => '10030',
-  'description' => 'Used for creating different type of contents. Such as Forum, Documentation, etc',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('block_content'),
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 30
+    'name' => 'Content Type',
+    'number' => '10030',
+    'description' => 'Used for creating different type of contents. Such as Forum, Documentation, etc',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('block_content'),
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 30
  ];
  public static $comment_order_by_a = [
-  'DATE_ASC' => 'Date Newest First',
-  'DATE_DESC' => 'Date Oldest First',
+    'DATE_ASC' => 'Date Newest First',
+    'DATE_DESC' => 'Date Oldest First',
  ];
  public $field_a = [
-  "content_type_id",
-  "allow_file_cb",
-  "content_type",
-  'read_role',
-  'write_role',
-  'update_role',
-  "description",
-  "has_subject_cb",
-  "subject_label",
-  "has_content_cb",
-  "content_label",
-  'summary_display_type',
-  'allow_comment_cb',
-  'comment_read_role',
-  'comment_write_role',
-  'comment_update_role',
-  'comment_order_by',
-  'comments_perpage',
-  'auto_url_alias_cb',
-  'show_category_onsummary_cb',
-  "rev_enabled_cb",
-  "rev_number",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "content_type_id",
+    "allow_file_cb",
+    "content_type",
+    'read_role',
+    'write_role',
+    'update_role',
+    "description",
+    "has_subject_cb",
+    "subject_label",
+    "has_content_cb",
+    "content_label",
+    'summary_display_type',
+    'allow_comment_cb',
+    'comment_read_role',
+    'comment_write_role',
+    'comment_update_role',
+    'comment_order_by',
+    'comments_perpage',
+    'auto_url_alias_cb',
+    'show_category_onsummary_cb',
+    "rev_enabled_cb",
+    "rev_number",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
 //variables used for showing data
 
  public static $newField_array = [
-  "field_label",
-  "field_position",
-  "field_name",
-  "field_num",
-  "field_type",
-  "field_enum",
-  "option_type"
+    "field_label",
+    "field_position",
+    "field_name",
+    "field_num",
+    "field_type",
+    "field_enum",
+    "option_type"
  ];
  public $initial_search = [
-  "content_type_id",
-  "content_type",
-  "description",
-  'summary_display_type'
+    "content_type_id",
+    "content_type",
+    "description",
+    'summary_display_type'
  ];
  public $column = [
-  "content_type_id",
-  "allow_file_cb",
-  "content_type",
-  "description",
-  "subject_label",
-  "content_label",
-  'summary_display_type',
+    "content_type_id",
+    "allow_file_cb",
+    "content_type",
+    "description",
+    "subject_label",
+    "content_label",
+    'summary_display_type',
  ];
  public $checkbox = [
-  "allow_file_cb",
-  'allow_comment_cb',
-  "has_subject_cb",
-  "has_content_cb",
-  "rev_enabled_cb",
-  'show_category_onsummary_cb'
+    "allow_file_cb",
+    'allow_comment_cb',
+    "has_subject_cb",
+    "has_content_cb",
+    "rev_enabled_cb",
+    'show_category_onsummary_cb'
  ];
  public $fields_inForm_notInDataBase = [
-  'field_num',
-  'field_enum',
-  'multi_action_class_pc',
-  'multi_action_class_pc_value',
-  'action'
+    'field_num',
+    'field_enum',
+    'multi_action_class_pc',
+    'multi_action_class_pc_value',
+    'action'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
  ];
  public $base_encoded_array = [];
  public $requiredField = [
-  "content_type",
-  "description"
+    "content_type",
+    "description"
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
@@ -225,20 +227,27 @@ class content_type extends dbObject {
  }
 
  public static function find_by_content_type($content_type) {
-  $sql = "SELECT * FROM " . self::$table_name . " where content_type='{$content_type}' ";
+  $sql = "SELECT * FROM " . self::$table_name . " where content_type= :content_type ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result_array = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['content_type' => $content_type];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
  public static function find_summary_by_id($content_type_id) {
   $selectFields = ' SUBSTRING(content,1,2000) AS content_summary , ' .
-   implode(", ", self::$field_array);
+     implode(", ", self::$field_array);
   $sql = "SELECT " . $selectFields . " FROM "
-   . self::$table_name . " 
-            where content_type_id={$content_type_id} ";
-            $sql = ino_perPageSql_i($sql, 1);
-  $result_array = self::find_by_sql($sql);
+     . self::$table_name . " 
+            where content_type_id= :content_type_id ";
+  $sql = ino_perPageSql_i($sql, 1);
+
+  global $db;
+  $value_a = ['content_type_id' => $content_type_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
@@ -246,7 +255,7 @@ class content_type extends dbObject {
   global $dbc;
   $table_name = 'c_' . $content_name;
   $sql = " ALTER TABLE $table_name";
-  $sql .=" DROP COLUMN $field_name";
+  $sql .= " DROP COLUMN $field_name";
 
   if ($dbc->ddlexecute($sql)) {
    $msg = 1;
@@ -301,10 +310,10 @@ class content_type extends dbObject {
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block',
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block',
   ];
 
   return $multi_select_hidden;
@@ -314,7 +323,7 @@ class content_type extends dbObject {
 
   if (!empty($any_record)) {
    $error_msg = "<div class='error'>Content types deleted from this form wont drop the corresponding table."
-    . "Use this page only to delete content type whose table doesnt exists </div>";
+      . "Use this page only to delete content type whose table doesnt exists </div>";
   }
   return $error_msg;
  }

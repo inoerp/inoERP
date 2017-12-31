@@ -11,17 +11,17 @@ class user_role extends user {
  ];
 //  data base variables as stored database column name
  public $field_a = [
-		 "user_role_id",
-		 "user_id",
-		 "role_code",
-		 "created_by",
-		 "creation_date",
-		 "last_update_by",
-		 "last_update_date"
+    "user_role_id",
+    "user_id",
+    "role_code",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
  public $requiredField = [
-		 "user_id",
-		 "role_code"
+    "user_id",
+    "role_code"
  ];
  public $user_id;
  public $user_role_id;
@@ -34,20 +34,23 @@ class user_role extends user {
  public $msg;
 
  public static function find_by_userId($user_id) {
-	$sql = " SELECT * FROM ";
-	$sql .= self::$table_name;
-	$sql .= " WHERE user_id='{$user_id}' ";
-	$result = self::find_by_sql($sql);
-	return $result;
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE user_id= :user_id ";
+  global $db;
+  $value_a = ['user_id' => $user_id];
+  $result = $db->findBySql($sql, $value_a);
+
+  return $result;
  }
 
  public function findBy_userId() {
-	$sql = " SELECT * FROM ";
-	$sql .= self::$table_name;
-	$sql .= " WHERE user_id= :user_id ";
-	$value_a = ['user_id' => $this->user_id];
-	$result = $this->findBySql($sql, $value_a);
-	return !empty($result) ? $result : false;
+  $sql = " SELECT * FROM ";
+  $sql .= self::$table_name;
+  $sql .= " WHERE user_id= :user_id ";
+  $value_a = ['user_id' => $this->user_id];
+  $result = $this->findBySql($sql, $value_a);
+  return !empty($result) ? $result : false;
  }
 
 }

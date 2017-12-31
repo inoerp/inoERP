@@ -1,5 +1,9 @@
-<?php include_once("../../../includes/basics/basics.inc"); ?>
-<?php
+<?php 
+
+require_once __DIR__.'/../../../includes/basics/wloader.inc';
+include_once(__DIR__.'/../../../../inoerp_server/includes/basics/basics.inc');
+
+
  if ((!empty($_GET['item_id_m'])) && (!empty($_GET['find_lot_list'])) && (!empty($_GET['org_id'])) && (!empty($_GET['status']))) {
   $iln = new inv_lot_number();
   $iln->item_id_m = $_GET['item_id_m'];

@@ -21,67 +21,67 @@ class user extends dbObject {
  public static $key_column = 'username';
  public static $module = "extension";
  public static $system_info = [
-  'name' => 'User',
-  'number' => '10022',
-  'description' => 'Create & Update User Details',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('user_role', 'user_password_reset'),
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 22
+    'name' => 'User',
+    'number' => '10022',
+    'description' => 'Create & Update User Details',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('user_role', 'user_password_reset'),
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 22
  ];
 //  data base variables as stored database column name
  public $field_a = [
-  "user_id",
-  "username",
-  "password",
-  "first_name",
-  "last_name",
-  "email",
-  'user_language',
-  "phone",
-  'hr_employee_id',
-  'block_notif_count',
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "user_id",
+    "username",
+    "password",
+    "first_name",
+    "last_name",
+    "email",
+    'user_language',
+    "phone",
+    'hr_employee_id',
+    'block_notif_count',
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
 //variables used for showing data
  public $initial_search = [
-  "user_id",
-  "username",
-  "first_name",
-  "last_name",
-  "email"
+    "user_id",
+    "username",
+    "first_name",
+    "last_name",
+    "email"
  ];
  public $column = [
-  "user_id",
-  "username",
-  "first_name",
-  "last_name",
-  "email"
+    "user_id",
+    "username",
+    "first_name",
+    "last_name",
+    "email"
  ];
  public $requiredField = [
-  "username",
-  "first_name",
-  "last_name",
-  "email",
-  'password'
+    "username",
+    "first_name",
+    "last_name",
+    "email",
+    'password'
  ];
  public $fields_inForm_notInDataBase = [
-  "enteredPassword",
-  "enteredRePassword",
-  "employee_name",
-  'identification_id'
+    "enteredPassword",
+    "enteredRePassword",
+    "employee_name",
+    'identification_id'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
-  '_extra_path' => array('form.php?class_name=user_role&mode=9' => 'Role')
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
+    '_extra_path' => array('form.php?class_name=user_role&mode=9' => 'Role')
  ];
  public $pageTitle = " User  "; //page Title
 // public $option_lists = [
@@ -150,16 +150,24 @@ class user extends dbObject {
  Public static function find_by_employeeId($employee_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE hr_employee_id = '{$employee_id}' LIMIT 1";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE hr_employee_id = :hr_employee_id LIMIT 1";
+
+  global $db;
+  $value_a = ['hr_employee_id' => $employee_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
  Public static function find_by_user_name($username) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE username = '{$username}' LIMIT 1";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE username = :username LIMIT 1";
+
+  global $db;
+  $value_a = ['username' => $username];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -175,8 +183,12 @@ class user extends dbObject {
  Public static function find_by_email($email) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE email = '{$email}' LIMIT 1";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE email = :email LIMIT 1";
+
+  global $db;
+  $value_a = ['email' => $email];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -186,14 +198,14 @@ class user extends dbObject {
 
  public function authenticate($username = "", $password = "") {
   global $db;
-//	$username = $db->escape_value($username);
-//	$password = $db->escape_value($password);
-////	$password_final = hash("sha256", $password);
   $password_final = $this->_codeThePassword($password);
 
   $sql = "SELECT * from user 
-            WHERE username='{$username}' and password= '{$password_final}' LIMIT 1";
-  $result_array = self::find_by_sql($sql);
+            WHERE username= :username and password=  :password LIMIT 1";
+
+  global $db;
+  $value_a = ['username' => $username, 'password' => $password_final];
+  $result_array = $db->findBySql($sql, $value_a);
 
   return !empty($result_array) ? array_pop($result_array) : false;
  }
@@ -208,9 +220,9 @@ class user extends dbObject {
 
  private function _findPasswordBy_id() {
   $sql = " SELECT * FROM ";
-  $sql.= static::$table_name;
-  $sql.= " WHERE user_id = :primary_id ";
-  $sql.= " LIMIT 1 ";
+  $sql .= static::$table_name;
+  $sql .= " WHERE user_id = :primary_id ";
+  $sql .= " LIMIT 1 ";
   $value_a = ['primary_id' => $this->user_id];
   $result = $this->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
@@ -223,9 +235,9 @@ class user extends dbObject {
   }
   $sql = " SELECT user_id, username, first_name, last_name, email,  phone, hr_employee_id, user_language,
             block_notif_count,    created_by,    creation_date,  last_update_by,    last_update_date FROM ";
-  $sql.= static::$table_name;
-  $sql.= " WHERE " . static::$primary_column . "= :primary_id ";
-  $sql.= " LIMIT 1 ";
+  $sql .= static::$table_name;
+  $sql .= " WHERE " . static::$primary_column . "= :primary_id ";
+  $sql .= " LIMIT 1 ";
   $stmt = $dbc->connection->prepare(" $sql ");
   $stmt->bindParam(':primary_id', $id);
   $stmt->setFetchMode(PDO::FETCH_INTO, $this);
@@ -246,8 +258,12 @@ class user extends dbObject {
  public static function check_email_userName($email, $userName) {
   global $db;
   $email = $db->escape_value($email);
-  $sql = "SELECT * FROM user WHERE email='{$email}' OR username ='{$userName}'";
-  $result_array = self::find_by_sql($sql);
+  $sql = "SELECT * FROM user WHERE email= :email OR username = :username ";
+  
+      global $db;
+	$value_a = ['email' => $email, 'username' => $userName];
+	$result_array = $db->findBySql($sql, $value_a);
+  
   return !empty($result_array) ? true : false;
  }
 
@@ -307,8 +323,8 @@ class user extends dbObject {
    $subject = "User Reginstration @" . $si->site_name;
    $message = "<html> <body>Dear " . $this->username . ',<br><br>';
    $message .= "<p>Welcome to " . $si->site_name . ' <br>You can now access the site with your registered user '
-    . ' name & password ';
-   $message .='<br><br>Thanks<br>' . $si->site_name . '</body></html>';
+      . ' name & password ';
+   $message .= '<br><br>Thanks<br>' . $si->site_name . '</body></html>';
    $from = "admin@" . $si->site_name;
    $headers = "From: $from\r\n";
    $headers .= "Content-type: text/html\r\n";

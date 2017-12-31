@@ -7,7 +7,7 @@
 <?php
 if (!empty($_GET['search_class_name'])) {
 
- require_once __DIR__ . '/../../locale/gettext.inc';
+ require_once __DIR__ . '/../../../inoerp_server/locale/gettext.inc';
  $locale = (isset($_SESSION['lang'])) ? $_SESSION['lang'] : DEFAULT_LOCALE;
  $encoding = 'UTF-8';
  T_setlocale(LC_MESSAGES, $locale);
@@ -116,7 +116,7 @@ if (!empty($_GET['search_class_name'])) {
  $primary_column = property_exists($$class, 'primary_column') ? $class::$primary_column : $table_name . '_id';
 
 
-  if (!(empty($_GET['pageno']))) {
+ if (!(empty($_GET['pageno']))) {
   $pageno = is_array($_GET['pageno']) ? (int) $_GET['pageno'][0] : (int) $_GET['pageno'];
  } else {
   $pageno = 1;
@@ -128,7 +128,7 @@ if (!empty($_GET['search_class_name'])) {
   $per_page = null;
  }
 
-$_GET = $search_param_values;
+ $_GET = $search_param_values;
 
  $_GET['pageno'] = $pageno;
  $_GET['class_name'] = $class;
@@ -142,8 +142,8 @@ $_GET = $search_param_values;
   }
   $per_page = empty($per_page) ? 10 : $per_page;
  }
- 
- 
+
+
  $search_order_by = !(empty($_GET['search_order_by'])) ? $_GET['search_order_by'][0] : '';
  $search_asc_desc = !(empty($_GET['search_asc_desc'])) ? $_GET['search_asc_desc'][0] : '';
  echo '<div id="json_search_result">';
@@ -251,14 +251,17 @@ $_GET = $search_param_values;
   $whereClause = null;
  }
 
+ $value_a = [];
+
  if (!empty($_GET['group_by'][0])) {
   $sum_element = $$class->search_groupBy_sum;
   $fetch_as = 'sum_' . $sum_element;
   $sql = "SELECT * , SUM($sum_element) as $fetch_as FROM " . $table_name . $whereClause;
-  $sql .= " GROUP BY " . $_GET['group_by'][0];
-  $count_sql .= " GROUP BY " . $_GET['group_by'][0];
+  $sql .= " GROUP BY :group_by ";
+  $count_sql .= " GROUP BY :group_by ";
   $all_download_sql = "SELECT  * , SUM($sum_element) FROM  " . $table_name . $whereClause;
-  $all_download_sql .= " GROUP BY " . $_GET['group_by'][0];
+  $all_download_sql .= " GROUP BY :group_by ";
+  $value_a['group_by'] = $_GET['group_by'][0];
  }
 
  if ((!empty($search_order_by)) && (!empty($search_asc_desc))) {
@@ -286,10 +289,10 @@ $_GET = $search_param_values;
   $pagination = new pagination($pageno, $per_page, $total_count);
   $pagination_statement = $pagination->show_pagination();
 
-  $sql .=" LIMIT {$per_page} ";
-  $sql .=" OFFSET {$pagination->offset()}";
+  $sql .= " LIMIT {$per_page} ";
+  $sql .= " OFFSET {$pagination->offset()}";
  }
- 
+
 // echo $sql;
  $search_result = $class::find_by_sql($sql);
 

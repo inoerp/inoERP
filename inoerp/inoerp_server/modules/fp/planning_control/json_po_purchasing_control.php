@@ -1,4 +1,7 @@
-<?php include_once("../../../includes/basics/basics.inc"); ?>
+<?php 
+require_once __DIR__.'/../../../includes/basics/wloader.inc';
+include_once(__DIR__.'/../../../../inoerp_server/includes/basics/basics.inc');
+ ?>
 <div id="json_inventory_ac_all">
  <?php
  if ((!empty($_GET['ship_to_inventory'])) && ($_GET['find_account_details'] = 1)) {

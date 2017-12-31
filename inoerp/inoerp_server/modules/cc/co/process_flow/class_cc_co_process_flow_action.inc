@@ -22,57 +22,56 @@ class cc_co_process_flow_action extends dbObject {
  public static $parent_primary_column = "cc_co_header_id";
  public static $key_column = "pf_action_type";
  public static $module = "sys";
-  public static $system_info = [
-  'name' => 'CC Action',
-  'number' => '9302',
-  'description' => 'Change Control Process Flow Actions',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'cc',
-  'weight' => '2'
+ public static $system_info = [
+    'name' => 'CC Action',
+    'number' => '9302',
+    'description' => 'Change Control Process Flow Actions',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'cc',
+    'weight' => '2'
  ];
-  
  public static $pf_action_type_a = [
-  'APPROVAL' => 'Approval',
-  'INFORMATION' => 'Information',
+    'APPROVAL' => 'Approval',
+    'INFORMATION' => 'Information',
  ];
  public static $value_a = [
-  'APPROVE' => 'Approve',
-  'REJECT' => 'Reject',
-  'HOLD' => 'Hold'
+    'APPROVE' => 'Approve',
+    'REJECT' => 'Reject',
+    'HOLD' => 'Hold'
  ];
  public $field_a = [
-  'cc_co_process_flow_action_id',
-  'cc_co_header_id',
-  'sys_process_flow_line_id',
-  'action_number',
-  'role_code',
-  'user_id',
-  'pf_action_type',
-  'required_cb',
-  'field_value',
-  'comment',
-  'action_user_id',
-  'action_duration',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'cc_co_process_flow_action_id',
+    'cc_co_header_id',
+    'sys_process_flow_line_id',
+    'action_number',
+    'role_code',
+    'user_id',
+    'pf_action_type',
+    'required_cb',
+    'field_value',
+    'comment',
+    'action_user_id',
+    'action_duration',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'cc_co_header_id',
+    'cc_co_header_id',
  ];
  public $requiredField = [
-  'cc_co_header_id',
-  'pf_action_type',
+    'cc_co_header_id',
+    'pf_action_type',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "cc_co_header_id"
+    "cc_co_header_id"
  ];
  public $fields_inForm_notInDataBase = [
-  "username",
+    "username",
  ];
  public $pageTitle = " CC Process Flow Action "; //page Title
  public $cc_co_process_flow_action_id;
@@ -98,10 +97,12 @@ class cc_co_process_flow_action extends dbObject {
   $sql = " SELECT *
 FROM cc_co_process_flow_action
 WHERE 
-cc_co_header_id = '{$header_id}' AND sys_process_flow_line_id = '{$pf_line_id}'
+cc_co_header_id = :cc_co_header_id AND sys_process_flow_line_id = :sys_process_flow_line_id
 ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['cc_co_header_id' => $header_id, 'sys_process_flow_line_id' => $pf_line_id];
+  $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? $result : false;
  }

@@ -61,13 +61,15 @@ class extn_rating_control extends dbObject {
 
 	$sql = "SELECT * FROM  ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE major_category_id = '{$major_category_id}'
-       AND reference_table = '{$reference_table}' 
-       AND reference_id = '{$reference_id}'
+	$sql .= " WHERE major_category_id = :major_category_id
+       AND reference_table = :reference_table 
+       AND reference_id = :reference_id
        ";
        $sql = ino_perPageSql_i($sql, 1);
 
-	$result = self::find_by_sql($sql);
+    global $db;
+	$value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id, 'major_category_id' => $major_category_id];
+	$result = $db->findBySql($sql, $value_a);
 
 
 	return !empty($result) ? array_shift($result) : false;

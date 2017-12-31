@@ -207,10 +207,14 @@ public function simple_carousel($div_class="box-54", $show_caption = true) {
 							 ir.status as status, ir.img_description1,ir.img_description2
        FROM 
        extn_image image , extn_image_reference ir
-       WHERE ir.reference_table = '{$reference_table}'
-       AND ir.reference_id = '{$reference_id}'
+       WHERE ir.reference_table = :reference_table
+       AND ir.reference_id = :reference_id
        AND image.extn_image_id = ir.extn_image_id";
-  $result = self::find_by_sql($sql);
+  
+       global $db;
+	$value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 

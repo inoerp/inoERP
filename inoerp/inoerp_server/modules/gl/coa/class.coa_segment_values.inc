@@ -42,24 +42,8 @@ class coa_segment_values {
   return $coa_account_types;
  }
 
- public static function find_by_sql($sql = "") {
-  global $db;
-  $result_set = $db->query($sql);
-  $object_array = array();
-  while ($row = $db->fetch_array($result_set)) {
-   $object_array[] = self::instantiate($row);
-  }//end of while Loop
-  return $object_array;
- }
-
- public static function find_all() {
-  $sql = " SELECT * FROM " . self::$table_name;
-  $result = self::find_by_sql($sql);
-  return $result;
- }
-
  public static function find_by_id($coa_segment_values_id) {
-  $sql = "SELECT * FROM " . self::$table_name . " where coa_segment_values_id={$coa_segment_values_id} ";
+  $sql = "SELECT * FROM " . self::$table_name . " where coa_segment_values_id= :coa_segment_values_id ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -69,25 +53,34 @@ class coa_segment_values {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['coa_segment_values_id' => $coa_segment_values_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
+
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
  public static function find_by_coa_id_and_segments($coa_id, $coa_segments) {
   $sql = "SELECT * FROM " . self::$table_name .
-   " where coa_id={$coa_id}" .
-   "  AND coa_segments LIKE '%{$coa_segments}%' ";
-  $result = self::find_by_sql($sql);
+     " where coa_id= :coa_id  " .
+     "  AND coa_segments LIKE '%{$coa_segments}%' ";
+
+  global $db;
+  $value_a = ['coa_id' => $coa_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_by_coaid_segment_segmentcode($coa_id, $coa_segments, $segment_code) {
   global $db;
   $sql = "SELECT coa_segment_values_id FROM " . self::$table_name .
-   " where coa_id={$coa_id}" .
-   "  AND coa_segments LIKE '%{$coa_segments}%' " .
-   "  AND segment_code = '{$segment_code}'" .
-   "  AND  segment_code IS NOT NULL ";
+     " where coa_id={$coa_id}" .
+     "  AND coa_segments LIKE '%{$coa_segments}%' " .
+     "  AND segment_code = '{$segment_code}'" .
+     "  AND  segment_code IS NOT NULL ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -109,7 +102,7 @@ class coa_segment_values {
  public static function find_coa_segment_values_fields_by_id($coa_segment_values_id) {
   $sql = "SELECT balancing, cost_center, 	natural_account, inter_company,
       segment1, segment2, segment3, segment4 FROM "
-   . self::$table_name . " where coa_segment_values_id={$coa_segment_values_id} ";
+     . self::$table_name . " where coa_segment_values_id=  :coa_segment_values_id ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -119,24 +112,15 @@ class coa_segment_values {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result_array = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['coa_segment_values_id' => $coa_segment_values_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
- private static function instantiate($record) {
-  $object = new self;
-  foreach ($record as $attribute => $value) {
-   if ($object->has_attribute($attribute)) {
-    $object->$attribute = $value;
-   }
-  }
-  return $object;
- }
 
- Private function has_attribute($attribute) {
-  $object_vars = get_object_vars($this);
-  return array_key_exists($attribute, $object_vars);
- }
 
  public static function install() {
   global $db;

@@ -8,94 +8,94 @@ class supplier_site extends dbObject {
  public static $key_column = 'supplier_site_name';
  public static $module = "ap";
  public $field_a = [
-  "supplier_site_id",
-  'supplier_id',
-  "supplier_site_number",
-  "supplier_site_name",
-  "supplier_site_ref",
-  "pay_on",
-  "debit_memo_onreturn_cb",
-  "fob",
-  "freight_terms",
-  "transportation",
-  "country_of_origin",
-  'currency',
-  'payment_term_id',
-  "supplier_site_type",
-  "site_tax_country",
-  "site_tax_reg_no",
-  "site_tax_payer_id",
-  "site_tax_code",
-  "site_address_id",
-  "site_contact_id",
-  "allow_substitute_receipts_cb",
-  "allow_unordered_receipts_cb",
-  "ap_invoice_match_level",
-  "receipt_routing",
-  "ship_to_location_variance",
-  "positive_qty_tolerance",
-  "negative_qty_tolerance",
-  "qty_variance",
-  "positive_receipt_days_tolerance",
-  "negative_receipt_days_tolerance",
-  "receipt_days_variance",
-  "bank_id",
-  "bank_account_id",
-  "primary_cb",
-  "status",
-  "rev_enabled_cb",
-  "rev_number",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "supplier_site_id",
+    'supplier_id',
+    "supplier_site_number",
+    "supplier_site_name",
+    "supplier_site_ref",
+    "pay_on",
+    "debit_memo_onreturn_cb",
+    "fob",
+    "freight_terms",
+    "transportation",
+    "country_of_origin",
+    'currency',
+    'payment_term_id',
+    "supplier_site_type",
+    "site_tax_country",
+    "site_tax_reg_no",
+    "site_tax_payer_id",
+    "site_tax_code",
+    "site_address_id",
+    "site_contact_id",
+    "allow_substitute_receipts_cb",
+    "allow_unordered_receipts_cb",
+    "ap_invoice_match_level",
+    "receipt_routing",
+    "ship_to_location_variance",
+    "positive_qty_tolerance",
+    "negative_qty_tolerance",
+    "qty_variance",
+    "positive_receipt_days_tolerance",
+    "negative_receipt_days_tolerance",
+    "receipt_days_variance",
+    "bank_id",
+    "bank_account_id",
+    "primary_cb",
+    "status",
+    "rev_enabled_cb",
+    "rev_number",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
  public $initial_search = [
-  "supplier_site_id",
-  "supplier_site_number",
-  "supplier_site_name",
-  "supplier_site_ref"
+    "supplier_site_id",
+    "supplier_site_number",
+    "supplier_site_name",
+    "supplier_site_ref"
  ];
  public $column = [
-  "supplier_site_id",
-  "supplier_site_number",
-  "supplier_site_name",
-  "supplier_site_ref"
+    "supplier_site_id",
+    "supplier_site_number",
+    "supplier_site_name",
+    "supplier_site_ref"
  ];
  public $checkbox = [
-  "rev_enabled_cb",
-  "allow_substitute_receipts_cb",
-  "allow_unordered_receipts_cb",
-  "debit_memo_onreturn_cb"
+    "rev_enabled_cb",
+    "allow_substitute_receipts_cb",
+    "allow_unordered_receipts_cb",
+    "debit_memo_onreturn_cb"
  ];
  public $requiredField = [
-  "supplier_id",
-  "supplier_site_number",
-  "supplier_site_name",
+    "supplier_id",
+    "supplier_site_number",
+    "supplier_site_name",
  ];
  public static $addressField = [
-  "site_address_id"
+    "site_address_id"
  ];
  public static $fields_inHeader_needsToBeInserted_inPOST = [
-  'supplier_id'
+    'supplier_id'
  ];
  public $fields_inForm_notInDataBase = [
-  'site_address_name',
-  'site_address',
-  'site_country',
-  'site_postal_code',
+    'site_address_name',
+    'site_address',
+    'site_country',
+    'site_postal_code',
  ];
  public $number_fields = [
-  'supplier_site_number'
+    'supplier_site_number'
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=supplier',
-  '_update_action_meassge' => 'Update',
+    '_update_path' => 'form.php?class_name=supplier',
+    '_update_action_meassge' => 'Update',
  ];
  public $pageTitle = " Supplier Sites "; //page Title
  public $option_lists = [
-  'supplier_site_type' => 'SUPPLIER_SITE_TYPE',
-  'ap_pay_on' => 'AP_PAY_ON'
+    'supplier_site_type' => 'SUPPLIER_SITE_TYPE',
+    'ap_pay_on' => 'AP_PAY_ON'
  ];
  public $supplier_site_id;
  public $supplier_site_number;
@@ -169,32 +169,38 @@ class supplier_site extends dbObject {
   global $db;
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE supplier_id = '{$supplier_id}' ";
+  $sql .= " WHERE supplier_id = :supplier_id ";
   $final_array = [];
-  $result_array = $db->find_by_sql($sql);
+
+  $value_a = ['supplier_id' => $supplier_id];
+  $result_array = $db->findBySql($sql, $value_a);
+
   foreach ($result_array as $array) {
    $key = $array->supplier_site_id;
    $value = $array->supplier_site_id . "-" . $array->supplier_site_name;
    $final_array[$key] = $value;
   }
 
-//	$result = self::find_by_sql($sql);
+
   return $final_array;
  }
 
  public static function find_all_sitesOfSupplier($supplier_id = "") {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE supplier_id = '{$supplier_id}' ";
+  $sql .= " WHERE supplier_id = :supplier_id ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['supplier_id' => $supplier_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_primary_supplierSite($supplier_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE supplier_id = '{$supplier_id}' AND primary_cb = '1' ";
+  $sql .= " WHERE supplier_id = :supplier_id  AND primary_cb = '1' ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
@@ -205,7 +211,10 @@ class supplier_site extends dbObject {
     break;
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['supplier_id' => $supplier_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 

@@ -5,118 +5,118 @@ class ap_po_matching_v extends dbObject {
  public static $table_name = "ap_po_matching_v";
  public static $primary_column = "po_header_id";
  public $field_a = [
-  'po_header_id',
-  'bu_org_id',
-  'po_type',
-  'po_number',
-  'supplier_id',
-  'supplier_site_id',
-  'buyer',
-  'currency',
-  'header_amount',
-  'po_status',
-  'payment_term_id',
-  'supplier_name',
-  'supplier_number',
-  'supplier_site_name',
-  'supplier_site_number',
-  'payment_term',
-  'payment_term_description',
-  'po_line_id',
-  'line_type',
-  'po_line_number',
-  'item_id_m',
-  'item_description',
-  'line_description',
-  'line_quantity',
-  'unit_price',
-  'line_price',
-  'gl_line_price',
-  'tax_amount',
-  'gl_tax_amount',
-  'item_number',
-  'uom_id',
-  'item_status',
-  'po_detail_id',
-  'shipment_number',
-  'receving_org_id',
-  'subinventory_id',
-  'locator_id',
-  'requestor',
-  'quantity',
-  'received_quantity',
-  'receiving_open_quantity',
-  'need_by_date',
-  'promise_date',
-  'accepted_quantity',
-  'delivered_quantity',
-  'invoiced_quantity',
-  'paid_quantity',
-  'invoicing_open_quantity',
-  'charge_ac_id',
-  'accrual_ac_id',
-  'budget_ac_id',
-  'ppv_ac_id',
-  'receving_org',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'po_header_id',
+    'bu_org_id',
+    'po_type',
+    'po_number',
+    'supplier_id',
+    'supplier_site_id',
+    'buyer',
+    'currency',
+    'header_amount',
+    'po_status',
+    'payment_term_id',
+    'supplier_name',
+    'supplier_number',
+    'supplier_site_name',
+    'supplier_site_number',
+    'payment_term',
+    'payment_term_description',
+    'po_line_id',
+    'line_type',
+    'po_line_number',
+    'item_id_m',
+    'item_description',
+    'line_description',
+    'line_quantity',
+    'unit_price',
+    'line_price',
+    'gl_line_price',
+    'tax_amount',
+    'gl_tax_amount',
+    'item_number',
+    'uom_id',
+    'item_status',
+    'po_detail_id',
+    'shipment_number',
+    'receving_org_id',
+    'subinventory_id',
+    'locator_id',
+    'requestor',
+    'quantity',
+    'received_quantity',
+    'receiving_open_quantity',
+    'need_by_date',
+    'promise_date',
+    'accepted_quantity',
+    'delivered_quantity',
+    'invoiced_quantity',
+    'paid_quantity',
+    'invoicing_open_quantity',
+    'charge_ac_id',
+    'accrual_ac_id',
+    'budget_ac_id',
+    'ppv_ac_id',
+    'receving_org',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  "po_number",
-  'po_type',
-  "supplier_number",
-  "receving_org_id",
-  "item_number",
-  'po_status',
-  'supplier_site_id'
+    "po_number",
+    'po_type',
+    "supplier_number",
+    "receving_org_id",
+    "item_number",
+    'po_status',
+    'supplier_site_id'
  ];
  public $multi_select_column = [
-  'unit_price',
-  'line_quantity',
-  'po_number',
-  'po_line_number',
-  'shipment_number',
-  'quantity',
-  'received_quantity',
-  'invoicing_open_quantity',
-  'accepted_quantity',
-  'delivered_quantity',
-  'invoiced_quantity',
-  'paid_quantity',
-  'line_price',
-  'gl_line_price',
-  'tax_amount',
-  'gl_tax_amount',
-  'supplier_id',
-  'supplier_site_id',
-  'supplier_name',
-  'supplier_number',
-  'supplier_site_name',
-  'supplier_site_number',
-  'item_number',
-  'item_description',
-  'item_id_m',
-  'uom_id',
-  'po_header_id',
-  'po_line_id',
-  'po_detail_id',
-  'po_status',
-  'currency',
-  'doc_currency'
+    'unit_price',
+    'line_quantity',
+    'po_number',
+    'po_line_number',
+    'shipment_number',
+    'quantity',
+    'received_quantity',
+    'invoicing_open_quantity',
+    'accepted_quantity',
+    'delivered_quantity',
+    'invoiced_quantity',
+    'paid_quantity',
+    'line_price',
+    'gl_line_price',
+    'tax_amount',
+    'gl_tax_amount',
+    'supplier_id',
+    'supplier_site_id',
+    'supplier_name',
+    'supplier_number',
+    'supplier_site_name',
+    'supplier_site_number',
+    'item_number',
+    'item_description',
+    'item_id_m',
+    'uom_id',
+    'po_header_id',
+    'po_line_id',
+    'po_detail_id',
+    'po_status',
+    'currency',
+    'doc_currency'
  ];
  public $dateField = [
-  'need_by_date',
-  'promise_date'
+    'need_by_date',
+    'promise_date'
  ];
  public $search = [
-  '_show_view_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Invoicing Matching "; //page Title
  public $option_lists = [
-  'po_type' => 'PO_TYPE',
-  'po_status' => 'PO_STATUS',
+    'po_type' => 'PO_TYPE',
+    'po_status' => 'PO_STATUS',
  ];
  public $po_header_id;
  public $bu_org_id;
@@ -241,15 +241,24 @@ AND po_detail.po_detail_id IS NOT NULL
 
  public static function find_all_by_poHeaderId($po_header_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE po_header_id = '{$po_header_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE po_header_id = :po_header_id ";
+
+  global $db;
+  $value_a = ['po_header_id' => $po_header_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 
  public static function find_all_by_poLineId($po_line_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE po_line_id = '{$po_line_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE po_line_id = :po_line_id ";
+
+
+  global $db;
+  $value_a = ['po_line_id' => $po_line_id];
+  $result = $db->findBySql($sql, $value_a);
+
+
   return !empty($result) ? $result : false;
  }
 

@@ -22,89 +22,88 @@ class gl_calendar extends dbObject {
  public static $primary_column = "gl_calendar_id";
  public static $key_column = "name";
  public static $system_info = [
-  'name' => 'Calendar',
-  'number' => '1102',
-  'description' => 'General Ledger Calendar',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'gl',
-  'weight' => 2
+    'name' => 'Calendar',
+    'number' => '1102',
+    'description' => 'General Ledger Calendar',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'gl',
+    'weight' => 2
  ];
  public $fields_inForm_notInDataBase = [
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  'option_line_code'
+    'option_line_code'
  ];
  public $field_a = [
-  'gl_calendar_id',
-  'option_line_code',
-  'adjustment_period_cb',
-  'name',
-  'calendar_type',
-  'c_year',
-  'c_quarter',
-  'c_number',
-  'from_date',
-  'to_date',
-  'name_prefix',
-  'ef_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'gl_calendar_id',
+    'option_line_code',
+    'adjustment_period_cb',
+    'name',
+    'calendar_type',
+    'c_year',
+    'c_quarter',
+    'c_number',
+    'from_date',
+    'to_date',
+    'name_prefix',
+    'ef_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'c_name',
-  'c_year',
-  'c_quarter',
-  'name_prefix'
+    'c_name',
+    'c_year',
+    'c_quarter',
+    'name_prefix'
  ];
  public $number_fields = [
-  'c_year',
-  'c_quarter',
-  'c_number',
+    'c_year',
+    'c_quarter',
+    'c_number',
  ];
  public $column = [
-  'name',
-  'c_year',
-  'c_quarter',
-  'c_number',
-  'from_date',
-  'to_date',
-  'name_prefix'
+    'name',
+    'c_year',
+    'c_quarter',
+    'c_number',
+    'from_date',
+    'to_date',
+    'name_prefix'
  ];
  public $requiredField = [
-  'option_line_code',
-  'name',
-  'calendar_type',
-  'c_year',
-  'c_quarter',
-  'from_date',
-  'to_date',
-  'name_prefix'
+    'option_line_code',
+    'name',
+    'calendar_type',
+    'c_year',
+    'c_quarter',
+    'from_date',
+    'to_date',
+    'name_prefix'
  ];
  public $account = [
-  'combination'
+    'combination'
  ];
  public $checkbox = [
-  'adjustment_period_cb',
+    'adjustment_period_cb',
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=gl_calendar',
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update Calendar',
-  '_view_path' => 'modules/gl/ledger/calendar_view',
-  '_show_view_path' => 1,
+    '_update_path' => 'form.php?class_name=gl_calendar',
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update Calendar',
+    '_view_path' => 'modules/gl/ledger/calendar_view',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Ledger - Find All Calendars "; //page Title
  public $option_list = [
-  'option_line_code' => 'GL_CALENDAR_NAME',
-  'calendar_type' => 'GL_PERIOD_TYPE'
+    'option_line_code' => 'GL_CALENDAR_NAME',
+    'calendar_type' => 'GL_PERIOD_TYPE'
  ]; //list of search fields wh
  //gl_calendar name is stored in OP
-
  public $gl_calendar_id;
  public $option_line_code;
  public $adjustment_period_cb;
@@ -202,64 +201,82 @@ class gl_calendar extends dbObject {
  }
 
  public static function find_all_from_coa($coa_id) {
+  global $db;
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE coa_id='{$coa_id}'";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE coa_id=  :coa_id ";
+
+  $value_a = ['coa_id' => $coa_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_by_optionLineCode($option_line_code) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE option_line_code='{$option_line_code}'";
+  $sql .= " WHERE option_line_code = :option_line_code ";
   $sql .= " ORDER BY c_year DESC, c_number DESC ";
-  $result = self::find_by_sql($sql);
+
+  global $db;
+  $value_a = ['option_line_code' => $option_line_code];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
  public static function find_gl_calendar_by_coa_id($coa_id) {
-  $sql = "SELECT * FROM "
-   . self::$table_name
-   . " where coa_id={$coa_id}";
-  $result = self::find_by_sql($sql);
+  $sql = " SELECT * FROM "
+     . self::$table_name
+     . " where coa_id =  :coa_id ";
+
+  global $db;
+  $value_a = ['coa_id' => $coa_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_gl_calendar_by_gl_calendar($gl_calendar) {
   global $db;
   $sql = " SELECT combination FROM "
-   . self::$table_name
-   . " where combination LIKE '%{$gl_calendar}%' ";
+     . self::$table_name
+     . " where combination LIKE '%{$gl_calendar}%' ";
   $sql = ino_perPageSql_i($sql, 30);
-  $result = $db->find_by_sql($sql);
+  $result = $db->findBySql($sql);
   $data = array();
   foreach ($result as $obj) {
    $data[] = array(
-    'label' => $obj->combination,
-    'value' => $obj->combination
+      'label' => $obj->combination,
+      'value' => $obj->combination
    );
   }
   return $data;
  }
 
  public static function validate_gl_calendar($coa_id, $gl_calendar) {
-  global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where coa_id='{$coa_id}' " .
-   " AND combination='{$gl_calendar}' ";
+     self::$table_name .
+     " where coa_id= :coa_id  " .
+     " AND combination= :combination ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result_set = $db->find_by_sql($sql);
+
+  global $db;
+  $value_a = ['coa_id' => $coa_id, 'combination' => $gl_calendar];
+  $result_set = $db->findBySql($sql, $value_a);
+
   return !(empty($result_set)) ? true : false;
  }
 
  public static function find_combination_id_from_combination($coa_id, $gl_calendar) {
-  global $db;
   $sql = "SELECT gl_calendar_id FROM " .
-   self::$table_name .
-   " where coa_id={$coa_id}" .
-   " AND combination='{$gl_calendar}' ";
+     self::$table_name .
+     " where coa_id= :coa_id " .
+     " AND combination= :combination ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = $db->find_by_sql($sql);
+
+  global $db;
+  $value_a = ['coa_id' => $coa_id, 'combination' => $gl_calendar];
+  $result = $db->findBySql($sql, $value_a);
+
   return !(empty($result)) ? array_shift($result) : false;
  }
 

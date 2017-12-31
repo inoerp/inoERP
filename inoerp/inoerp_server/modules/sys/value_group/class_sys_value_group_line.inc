@@ -9,55 +9,53 @@ class sys_value_group_line extends dbObject {
  public static $module = "sys";
  public static $query_order_by_field = 'code_value';
  public $field_a = [
-		 'sys_value_group_line_id',
-		 'sys_value_group_header_id',
-		 'code_value',
-		 'code',
-		 'description',
-		 'account_qualifier',
-		 'status',
-		 'parent_cb',
-		 'parent_line_id',
-		 'effective_start_date',
-		 'effective_end_date',
-		 'created_by',
-		 'creation_date',
-		 'last_update_by',
-		 'last_update_date'
+    'sys_value_group_line_id',
+    'sys_value_group_header_id',
+    'code_value',
+    'code',
+    'description',
+    'account_qualifier',
+    'status',
+    'parent_cb',
+    'parent_line_id',
+    'effective_start_date',
+    'effective_end_date',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date'
  ];
  public $checkbox = [
-		 "parent_cb",
+    "parent_cb",
  ];
  public $initial_search = [
-		 'sys_value_group_line_id',
-		 'sys_value_group_header_id',
-		 'code_value',
-		 'code',
-		 'description',
-		 'account_qualifier'
+    'sys_value_group_line_id',
+    'sys_value_group_header_id',
+    'code_value',
+    'code',
+    'description',
+    'account_qualifier'
  ];
  public $column = [
-		 'sys_value_group_line_id',
-		 'sys_value_group_header_id',
-		 'code_value',
-		 'code',
-		 'description',
-		 'account_qualifier'
+    'sys_value_group_line_id',
+    'sys_value_group_header_id',
+    'code_value',
+    'code',
+    'description',
+    'account_qualifier'
  ];
  public $requiredField = [
-		 'sys_value_group_header_id',
-		 'code_value',
-		 'code',
+    'sys_value_group_header_id',
+    'code_value',
+    'code',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-		 "sys_value_group_header_id"
+    "sys_value_group_header_id"
  ];
- 
-   public $number_fields = [
-  "sys_value_group_header_id",
+ public $number_fields = [
+    "sys_value_group_header_id",
     'sys_value_group_line_id'
  ];
-   
  public $pageTitle = " Value Group - Find All Calue Group Lines "; //page Title
  public $sys_value_group_line_id;
  public $sys_value_group_header_id;
@@ -87,26 +85,31 @@ class sys_value_group_line extends dbObject {
 // }
 
  public function __set($name, $value) {
-	$this->$name = $value;
+  $this->$name = $value;
  }
 
  public static function find_all_lines() {
-	$sql = " SELECT * FROM " . self::$table_name;
-	$result = self::find_by_sql($sql);
-	return $result;
+  $sql = " SELECT * FROM " . self::$table_name;
+  global $db;
+  $result = $db->findBySql($sql);
+  return $result;
  }
 
  public static function find_by_header_id($id) {
-	$vgl = new sys_value_group_line();
-	return $vgl->findBy_parentId($id,'code','ASC');
+  $vgl = new sys_value_group_line();
+  return $vgl->findBy_parentId($id, 'code', 'ASC');
  }
 
  public static function find_by_optionId_lineCode($header_id, $code) {
-	$sql = "SELECT * FROM " . self::$table_name .
-					" where code={$code} AND sys_value_group_header_id={$header_id} ";
-          $sql = ino_perPageSql_i($sql, 1);
-	$result = self::find_by_sql($sql);
-	return !empty($result) ? array_push($result) : $result;
+  $sql = "SELECT * FROM " . self::$table_name .
+     " where code= :code AND sys_value_group_header_id= :reference_id ";
+  $sql = ino_perPageSql_i($sql, 1);
+
+  global $db;
+  $value_a = ['code' => $code, 'reference_id' => $header_id];
+  $result = $db->findBySql($sql, $value_a);
+
+  return !empty($result) ? array_push($result) : $result;
  }
 
 }

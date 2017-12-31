@@ -17,30 +17,30 @@ class new_content_type extends content_type {
 
  public static $table_name = "";
  public static $system_info = [
-  'name' => 'New Content Type',
-  'number' => '10031',
-  'description' => 'New Content Type',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('block_content'),
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 31
+    'name' => 'New Content Type',
+    'number' => '10031',
+    'description' => 'New Content Type',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('block_content'),
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 31
  ];
  public static $Field_array = [
-  'field_label',
-  'field_position',
-  "field_name",
-  "field_num",
-  "field_type",
-  'option_type'
+    'field_label',
+    'field_position',
+    "field_name",
+    "field_num",
+    "field_type",
+    'option_type'
  ];
  public static $checkbox_array = [];
  public static $column_array = [];
  public static $requiredField_array = [
-  "field_name",
-  "field_type"
+    "field_name",
+    "field_type"
  ];
  public static $primary_column = "content_type";
  public $content_type;
@@ -64,25 +64,6 @@ class new_content_type extends content_type {
   $this->$name = $value;
  }
 
- public function _after_save() {
-//	if (count($_POST['field_name']) > 0) {
-//	 $i = 0;
-//	 foreach ($_POST['field_name'] as $records) {
-//
-//		$field_record = new new_category;
-//		$field_name = trim(mysql_prep($_POST['field_name'][$i]));
-//		$field_type = trim(mysql_prep($_POST['field_type'][$i]));
-//		$field_num = trim(mysql_prep($_POST['field_num'][$i]));
-//		$new_category = trim(mysql_prep($_POST['category']));
-//		$new_fild_entry = $field_record->save_table_field($new_category, $field_name, $field_type, $field_num);
-//		if ($new_fild_entry) {
-//		 $newMsg = 'Record is Successfully Saved';
-//		}
-//		$i++;
-//	 }
-//	}
- }
-
  public static function find_fields_by_id($content_type_id) {
   global $db;
   $content_type = content_type::find_by_id($content_type_id);
@@ -100,7 +81,10 @@ class new_content_type extends content_type {
     $sql_fields .= $table_name;
     break;
   }
-  $result = self::find_by_sql($sql_fields);
+
+  global $db;
+  $result = $db->findBySql($sql);
+
   foreach ($result as &$object) {
 
    switch (DB_TYPE) {
@@ -153,14 +137,14 @@ class new_content_type extends content_type {
   if (!empty($enum_array)) {
    $enum_value = "";
    foreach ($enum_array as $key => $value) {
-    $enum_value .="'$value',";
+    $enum_value .= "'$value',";
    }
    $enum_value = rtrim($enum_value, ",");
   }
 //check for existing table name
 //	$exist_query = "Select table_name from information_schema.tables where table_name= :table_name ";
   $exist_query = " SELECT TABLE_NAME from information_schema.tables where TABLE_TYPE ='BASE TABLE' "
-   . " AND TABLE_SCHEMA= '" . DB_NAME . "' AND table_name= :table_name ";
+     . " AND TABLE_SCHEMA= '" . DB_NAME . "' AND table_name= :table_name ";
   $stmt = $dbc->connection->prepare("$exist_query");
   $stmt->bindParam(':table_name', $table_name);
   try {
@@ -208,14 +192,14 @@ class new_content_type extends content_type {
     }
 
     $sql = " ALTER TABLE " . $table_name;
-    $sql .=" ADD COLUMN $this->field_name $this->field_type ";
+    $sql .= " ADD COLUMN $this->field_name $this->field_type ";
     if (($this->field_type == 'varchar') || ($this->field_type == 'int')) {
-     $sql .="(" . $this->field_num . ")";
+     $sql .= "(" . $this->field_num . ")";
     }
     if (($this->field_type == 'enum')) {
-     $sql .="(" . $enum_value . ")";
+     $sql .= "(" . $enum_value . ")";
     }
-    $sql .=" DEFAULT NULL ";
+    $sql .= " DEFAULT NULL ";
 
     echo $sql;
     if ($db->query($sql)) {
@@ -226,20 +210,20 @@ class new_content_type extends content_type {
    }
   } else {
    $sql = " CREATE TABLE IF NOT EXISTS " . $table_name;
-   $sql .=" ( ";
-   $sql .="  content_id int(12) NOT NULL , ";
-   $sql .="  $this->field_name $this->field_type ";
+   $sql .= " ( ";
+   $sql .= "  content_id int(12) NOT NULL , ";
+   $sql .= "  $this->field_name $this->field_type ";
    if (($this->field_type == 'varchar') || ($this->field_type == 'int')) {
-    $sql .="(" . $this->field_num . ")";
+    $sql .= "(" . $this->field_num . ")";
    }
    if (($this->field_type == 'enum')) {
-    $sql .="(" . $enum_value . ")";
+    $sql .= "(" . $enum_value . ")";
    }
-   $sql .=" DEFAULT NULL ";
-   $sql .=" , ";
+   $sql .= " DEFAULT NULL ";
+   $sql .= " , ";
    $sql .= " PRIMARY KEY (`content_id`) ";
-   $sql .=" ) ";
-   $sql .="ENGINE=MyISAM DEFAULT CHARSET=latin1;";
+   $sql .= " ) ";
+   $sql .= "ENGINE=MyISAM DEFAULT CHARSET=latin1;";
 //	 echo '$sql is ' . $sql;
    try {
     $dbc->connection->exec($sql);

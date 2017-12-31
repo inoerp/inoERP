@@ -26,9 +26,13 @@ FROM address ad,
 address_reference ar
 
 WHERE ad.address_id = ar.address_id
-AND ar.reference_id = '{$ref_id}'
-AND ar.reference_table = '{$ref_table}'";
-  $result_array = self::find_by_sql($sql);
+AND ar.reference_id = :reference_id
+AND ar.reference_table =  :reference_table ";
+
+    global $db;
+	$value_a = ['reference_id' => $ref_id, 'reference_table' => $ref_table];
+	$result_array = $db->findBySql($sql, $value_a);
+
   return !empty($result_array) ? $result_array : false;
  }
 

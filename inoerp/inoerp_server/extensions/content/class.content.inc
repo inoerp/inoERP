@@ -197,7 +197,7 @@ class content extends dbObject {
 	 $checkSql = " SELECT * FROM $table_name WHERE content_id = :content_id ";
 //   $checkSql = ino_perPageSql_i($checkSql, 1);
 	 $value_a = ['content_id' => $this->content_id];
-	 $checkResult = self::find_by_sql_i($checkSql, $value_a);
+	 $checkResult = $db->findBySql($checkSql, $value_a);
 	 if (!empty($checkResult)) {
 		$checkIfContentExists = true;
 	 } else {
@@ -835,7 +835,8 @@ AND content.content_id = category_reference.reference_id  ";
 	}
 	$sql = ino_perPageSql_i($sql, 1);
 	$value_a = ['content_id' => $content_id];
-	$result = self::find_by_sql_i($sql, $value_a);
+  global $db;
+	$result = $db->findBySql($sql, $value_a);
 	return !empty($result) ? array_pop($result) : false;
  }
 
@@ -853,7 +854,8 @@ AND content.content_id = category_reference.reference_id  ";
 	}
 	$sql = ino_perPageSql_i($sql, 1);
 	$value_a = ['content_id' => $content_id];
-	$result = self::find_by_sql_i($sql, $value_a);
+  global $db;
+	$result = $db->findBySql($sql, $value_a);
 	return !empty($result) ? array_pop($result) : false;
  }
 
@@ -872,7 +874,8 @@ AND content.content_id = category_reference.reference_id  ";
  public static function find_childs_of_parent_id($parent_id) {
 	$sql = "SELECT * FROM " . self::$table_name . " where parent_id=:parent_id ";
 	$value_a = ['parent_id' => $parent_id];
-	$result = self::find_by_sql_i($sql, $value_a);
+  global $db;
+	$result = $db->findBySql($sql, $value_a);
 	return $result;
  }
 
@@ -884,7 +887,8 @@ AND content.content_id = category_reference.reference_id  ";
             where content_id=:content_id ";
 	$sql = ino_perPageSql_i($sql, 1);
 	$value_a = ['content_id' => $content_id];
-	$result_array = self::find_by_sql_i($sql, $value_a);
+  global $db;
+	$result_array = $db->findBySql($sql, $value_a);
 	return !empty($result_array) ? array_pop($result_array) : false;
  }
 
@@ -936,7 +940,8 @@ AND content.content_id = category_reference.reference_id  ";
 	}
 
 	$value_a = ['content_type_id' => $content_type_id, 'category_id' => $category_id];
-	$result = self::find_by_sql_i($sql, $value_a);
+  global $db;
+	$result = $db->findBySql($sql, $value_a);
 	if (count($result) > 0) {
 	 $content_string .='<table id="summary_list" class="top_margin10 form_line_data_table"><thead> 
 						 <tr>

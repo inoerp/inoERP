@@ -2,60 +2,59 @@
 
 class inv_interorg_transfer_v extends dbObject {
 
-
  public static $table_name = "inv_interorg_transfer_v";
  public static $primary_column = "inv_interorg_transfer_line_id";
  public static $form_class_name = "inv_interorg_transfer";
-  public static $system_info = [
-  'name' => 'InterOrg Transfer View',
-  'number' => '2135',
-  'description' => 'Inventory InterOrg Transfer View',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('inv_interorg_transfer_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 6
+ public static $system_info = [
+    'name' => 'InterOrg Transfer View',
+    'number' => '2135',
+    'description' => 'Inventory InterOrg Transfer View',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('inv_interorg_transfer_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 6
  ];
  public $field_a = [
-  'inv_interorg_transfer_header_id',
-  'io_order_number',
-  'order_number',
-  'line_number',
-  'io_line_number',
-  'item_number',
-  'status',
-  'inv_interorg_transfer_line_id',
-  'comment',
-  'from_org_id',
-  'to_org_id',
-  'carrier',
-  'uom_id',
-  'vehicle_number',
-  'waybill',
-  'from_subinventory_id',
-  'from_locator_id',
-  'item_id_m',
-  'item_description',
-  'to_subinventory_id',
-  'to_locator_id',
-  'transaction_quantity',
-  'serial_number',
-  'lot_number',
+    'inv_interorg_transfer_header_id',
+    'io_order_number',
+    'order_number',
+    'line_number',
+    'io_line_number',
+    'item_number',
+    'status',
+    'inv_interorg_transfer_line_id',
+    'comment',
+    'from_org_id',
+    'to_org_id',
+    'carrier',
+    'uom_id',
+    'vehicle_number',
+    'waybill',
+    'from_subinventory_id',
+    'from_locator_id',
+    'item_id_m',
+    'item_description',
+    'to_subinventory_id',
+    'to_locator_id',
+    'transaction_quantity',
+    'serial_number',
+    'lot_number',
  ];
  public $initial_search = [
-  'order_number',
-  'line_number',
-  'item_number',
-  'transaction_type_id',
-  'status',
-  'to_org_id'
+    'order_number',
+    'line_number',
+    'item_number',
+    'transaction_type_id',
+    'status',
+    'to_org_id'
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=inv_interorg_transfer',
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_update_path' => 'form.php?class_name=inv_interorg_transfer',
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Inter Org Transfers "; //page Title
  public $inv_interorg_transfer_header_id;
@@ -112,8 +111,12 @@ AND item.org_id = ith.from_org_id
 
  public static function find_all_by_poHeaderId($po_header_id) {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE po_header_id = '{$po_header_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " WHERE po_header_id = :po_header_id ";
+
+  global $db;
+  $value_a = ['po_header_id' => $po_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -137,7 +140,8 @@ FROM " . static::$table_name . " where " . $columnName . " LIKE  '%{$columnVal}%
     }
    }
   }
-  $result_array = static::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return !empty($result_array) ? ($result_array) : false;
  }
 

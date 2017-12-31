@@ -85,11 +85,14 @@ class sys_calendar extends dbObject {
     $extra_fields = extn_view::find_columns_of_table($class);
 //    pa($extra_fields);
 
-    $checkSql = " SELECT * FROM $class WHERE reference_type = 'table' AND reference_key_name='{$this->reference_key_name}' "
-     . "  AND reference_key_value='{$this->reference_key_value}' ";
+    $checkSql = " SELECT * FROM $class WHERE reference_type = 'table' AND reference_key_name= :reference_key_name "
+     . "  AND reference_key_value= :reference_key_value ";
      $sql = ino_perPageSql_i($sql, 1);
 
-    $checkResult = self::find_by_sql($checkSql);
+   
+        global $db;
+	$value_a = ['reference_key_value' => $this->reference_key_value, 'reference_key_name' => $this->reference_key_name];
+	$checkResult = $db->findBySql($checkSql, $value_a);
 
     //if $checkResult is not empty update the existing data else create record
     if (!empty($checkResult)) {
@@ -193,9 +196,13 @@ class sys_calendar extends dbObject {
 
   $sql = " SELECT * FROM ";
   $sql .= $table_i;
-  $sql .= " WHERE reference_key_name = '{$ref_key}' AND reference_key_value='{$ref_value}' ";
+  $sql .= " WHERE reference_key_name = :reference_key_name AND reference_key_value=:reference_key_value ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  
+      global $db;
+	$value_a = ['reference_key_name' => $ref_key, 'reference_key_value' => $ref_value];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -222,12 +229,11 @@ class sys_calendar extends dbObject {
     $order_by_i = ' ORDER BY ' . $search_order_by . ' ' . $search_asc_desc;
    }
   }
-  echo $sql;
-  $result = self::find_by_sql($sql);
+    global $db;
+	$s_result = $db->findBySql($this->_search_sql);
 
 
-  $s_result = self::find_by_sql($this->_search_sql);
-  $this->_search_count = count($s_result);
+ $this->_search_count = count($s_result);
   return !empty($s_result) ? $s_result : false;
  }
 
@@ -239,7 +245,9 @@ class sys_calendar extends dbObject {
 information_schema.tables 
 where TABLE_TYPE ='BASE TABLE' 
 AND table_name LIKE 'qa_ce%' ";
-  $all_tables = self::find_by_sql($table_sql);
+  
+    global $db;
+  $all_tables = $db->findBySql($table_sql);
 
   if (empty($all_tables)) {
    return new stdClass();
@@ -272,7 +280,8 @@ AND table_name LIKE 'qa_ce%' ";
  }
 
  public function search_downloads() {
-  return !empty($this->_search_sql) ? self::find_by_sql($this->_search_sql) : null;
+    global $db;
+  return !empty($this->_search_sql) ?$db->findBySql($this->_search_sql) : null;
  }
 
 }

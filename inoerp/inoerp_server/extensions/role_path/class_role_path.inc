@@ -125,8 +125,12 @@ class role_path extends dbObject {
  }
 
  public static function find_by_roleId($role_id) {
-	$sql = "SELECT * FROM " . self::$table_name . " where role_id='{$role_id}' ";
-	$result = self::find_by_sql($sql);
+	$sql = "SELECT * FROM " . self::$table_name . " where role_id= :role_id ";
+	
+  	  global $db;
+  $value_a = ['role_id' => $role_id];
+  $result = $db->findBySql($sql, $value_a);
+  
 	return $result;
  }
 

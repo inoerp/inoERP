@@ -1,5 +1,7 @@
-<?php include_once("../../../includes/basics/basics.inc"); ?>
-<?php
+<?php 
+require_once __DIR__.'/../../../includes/basics/wloader.inc';
+include_once(__DIR__.'/../../../../inoerp_server/includes/basics/basics.inc');
+
  if ((!empty($_GET['save_terminal_name'])) && (!empty($_GET['terminal_name']))) {
   $terminal_name = !empty($_GET['terminal_name']) ? ($_GET['terminal_name']) : '';
     try{

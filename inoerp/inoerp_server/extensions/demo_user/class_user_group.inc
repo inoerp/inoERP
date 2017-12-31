@@ -36,8 +36,12 @@ class user_group extends user {
  public static function find_by_userId($user_id) {
 	$sql = " SELECT * FROM ";
 	$sql .= self::$table_name;
-	$sql .= " WHERE user_id='{$user_id}' ";
-	$result = self::find_by_sql($sql);
+	$sql .= " WHERE user_id= :user_id ";
+
+    global $db;
+  $value_a = ['user_id' => $user_id];
+  $result = $db->findBySql($sql, $value_a);
+  
 	return $result;
  }
 

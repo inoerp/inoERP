@@ -191,12 +191,18 @@ class gl_period extends dbObject {
 
  public static function find_all_periods($ledger_id, $status = '') {
   $sql = " SELECT * FROM " . self::$table_name;
-  $sql .= " WHERE ledger_id= '{$ledger_id}'  ";
+  $sql .= " WHERE ledger_id= :ledger_id  ";
+    global $db;
+  $value_a = ['ledger_id' => $ledger_id];
+
+  
   if (!empty($status)) {
-   $sql .= " AND status = '{$status}'";
+   $sql .= " AND status = :status ";
+   $value_a['status'] = $status ;
   }
   $sql .= " ORDER BY gl_period_id DESC ";
-  $result = self::find_by_sql($sql);
+    $result = $db->findBySql($sql, $value_a);
+    
   return !empty($result) ? $result : false;
  }
 

@@ -210,7 +210,8 @@ class block extends dbObject {
   $sql .= self::$table_name;
   $sql .= " WHERE enabled_cb = 1 ";
   $sql .= " ORDER BY position, weight DESC ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
   return $result;
  }
 
@@ -240,9 +241,12 @@ class block extends dbObject {
    implode(", ", self::$field_array);
   $sql = "SELECT " . $selectFields . " FROM "
    . self::$table_name . " 
-            where block_id={$block_id} ";
+            where block_id= :block_id ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result_array = self::find_by_sql($sql);
+ 	  global $db;
+  $value_a = ['block_id' => $block_id];
+  $result_array = $db->findBySql($sql, $value_a);
+	
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
@@ -344,7 +348,9 @@ class block extends dbObject {
    $pagination = new pagination($block_no, $per_block, $total_count);
    $sql = ino_perPageSql_i($sql, $per_block, $pagination->offset());
   }
-  $result = self::find_by_sql($sql);
+  
+    global $db;
+  $result = $db->findBySql($sql);
 
   foreach ($result as $records) {
    $block_summary = self::find_summary_by_id($records->block_id);
@@ -384,7 +390,8 @@ class block extends dbObject {
    $pagination = new pagination($block_no, $per_block, $total_count);
    $sql = ino_perPageSql_i($sql, $per_block, $pagination->offset());
   }
-  $result = self::find_by_sql($sql);
+   global $db;
+  $result = $db->findBySql($sql);
 
   if (count($result) > 0) {
    foreach ($result as $records) {

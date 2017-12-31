@@ -93,11 +93,14 @@ class extn_rating_values extends dbObject {
                extn_rating_values_reference.extn_rating_values_reference_id as extn_rating_values_reference_id
        FROM 
        extn_rating_values , extn_rating_values_reference
-       WHERE extn_rating_values_reference.reference_table = '{$reference_table}'
-       AND extn_rating_values_reference.reference_id = '{$reference_id}'
+       WHERE extn_rating_values_reference.reference_table = :reference_table
+       AND extn_rating_values_reference.reference_id = :reference_id
        AND extn_rating_values.extn_rating_values_id = extn_rating_values_reference.extn_rating_values_id";
 
-  $result = self::find_by_sql($sql);
+     global $db;
+	$value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+	$result = $db->findBySql($sql, $value_a);
+  
   return $result;
  }
 
@@ -105,8 +108,11 @@ class extn_rating_values extends dbObject {
   $sql = "SELECT count(extn_rating_values_id) as rating_count , SUM(rating) as rating_value "
    . " FROM " .
    self::$table_name .
-   " where reference_id= '{$reference_id}' AND reference_table= '{$reference_table}' ";
-  $result = self::find_by_sql($sql);
+   " where reference_id= :reference_id AND reference_table= :reference_table ";
+     global $db;
+	$value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id];
+	$result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? array_pop($result) : false;
  }
 

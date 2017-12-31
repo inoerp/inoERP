@@ -182,9 +182,11 @@ ORDER BY gp.gl_period_id DESC, cc.combination DESC
  }
 
  public static function find_by_referenceDetails($ref_key_name, $ref_key_value, $account_type = 'all') {
+    global $db;
+	$value_a = ['reference_key_name_h' => $ref_key_name, 'reference_key_value_h' => $ref_key_value];
 
   $sql = " SELECT * FROM gl_journal_line_v ";
-  $sql .= " WHERE  reference_key_name_h = '{$ref_key_name}' AND reference_key_value_h = '{$ref_key_value}' ";
+  $sql .= " WHERE  reference_key_name_h = :reference_key_name_h AND reference_key_value_h = :reference_key_value_h ";
   if ($account_type == 'dr') {
    $sql .= " AND  total_ac_dr IS NOT NULL ";
   } else if ($account_type == 'cr') {
@@ -192,7 +194,7 @@ ORDER BY gp.gl_period_id DESC, cc.combination DESC
   }
 
   
-  $result = self::find_by_sql($sql);
+  	$result = $db->findBySql($sql, $value_a);
   return !empty($result) ? $result : false;
  }
 

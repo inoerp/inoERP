@@ -71,7 +71,8 @@ class fp_urgent_card extends dbObject {
     $sql .= ino_perPageSql(1);
     break;
   }
-  $result = self::find_by_sql($sql);
+    global $db;
+  $result = $db->findBySql($sql);
   return !empty($result) ? $result[0]->card_details : false;
  }
 

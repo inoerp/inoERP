@@ -8,7 +8,7 @@ class gl_balance_v extends dbObject {
  public $field_a = [
  ];
  public $initial_search = [
-  "field1",
+    "field1",
  ];
  public $dateField = [
  ];
@@ -20,8 +20,8 @@ class gl_balance_v extends dbObject {
 //		 'po_status' => 'PO_STATUS',
  ];
  public $search_functions = [
-  'Period Name' => 'search_gl_period_name',
-  'Legal Org' => 'search_legal_org_name'
+    'Period Name' => 'search_gl_period_name',
+    'Legal Org' => 'search_legal_org_name'
  ];
  public $parent_segments_arrayIterator;
  public $account_code_low_limit;
@@ -29,26 +29,26 @@ class gl_balance_v extends dbObject {
  public $account_code_upper_limit;
  public $fs_detail_data = false;
  public $prg_update_description_details = [
-  'name' => 'Update Account Combination Description',
-  'description' => 'Run update Description program',
+    'name' => 'Update Account Combination Description',
+    'description' => 'Run update Description program',
  ];
  public $prg_balance_sheet_details = [
-  'name' => 'Generate Balance Sheet',
-  'description' => 'Generate Balance Sheet',
+    'name' => 'Generate Balance Sheet',
+    'description' => 'Generate Balance Sheet',
  ];
  public $prg_balance_sheet_parameters = [
-  'Period Name' => 'search_gl_period_name',
-  'Show Details' => 'search_show_details_cb',
-  'Legal Org' => 'search_legal_org_name_m'
+    'Period Name' => 'search_gl_period_name',
+    'Show Details' => 'search_show_details_cb',
+    'Legal Org' => 'search_legal_org_name_m'
  ];
  public $prg_income_statement_details = [
-  'name' => 'Generate Income Statement',
-  'description' => 'Generate Income Statement',
+    'name' => 'Generate Income Statement',
+    'description' => 'Generate Income Statement',
  ];
  public $prg_income_statement_parameters = [
-  'Period Name' => 'search_gl_period_name',
-  'Show Details' => 'search_show_details_cb',
-  'Legal Org' => 'search_legal_org_name_m'
+    'Period Name' => 'search_gl_period_name',
+    'Show Details' => 'search_show_details_cb',
+    'Legal Org' => 'search_legal_org_name_m'
  ];
 
  function __construct() {
@@ -140,34 +140,40 @@ ORDER BY gp.gl_period_id DESC
  public static function find_balance_between_accounts($account_l, $account_u, $gl_period_id = '') {
 
   $sql = " SELECT field1, field4, ledger_id, period_id, ( IFNULL(period_net_dr,0) - IFNULL(period_net_cr,0) "
-   . " + IFNULL(begin_balance_dr,0) - IFNULL(begin_balance_cr,0) ) AS balance "
-   . " FROM gl_balance_v ";
-  $sql .= " WHERE field4 >= '{$account_l}' AND  field4 <= '{$account_u}' ";
+     . " + IFNULL(begin_balance_dr,0) - IFNULL(begin_balance_cr,0) ) AS balance "
+     . " FROM gl_balance_v ";
+  $sql .= " WHERE field4 >= :field4_l AND  field4 <= :field4_u ";
+  $value_a = ['field4_l' => $account_l, 'field4_u' => $account_u];
   if (!empty($gl_period_id)) {
-   $sql .= " AND gl_period_id = '{$gl_period_id}' ";
+   $sql .= " AND gl_period_id = :gl_period_id ";
+   $value_a['gl_period_id'] = $gl_period_id;
   }
 
   $sql .= " ORDER BY field4 ASC ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+
+  $result = $db->findBySql($sql, $value_a);
 
 //  echo $sql . '<br><br>';
   return !empty($result) ? $result : false;
  }
 
  public static function find_balance_sum_between_accounts($account_l, $account_u, $gl_period_id = '') {
+  global $db;
+  $value_a = ['field4_l' => $account_l, 'field4_u' => $account_u];
 
   $sql = " SELECT field1, field4, ledger_id, period_id, ( IFNULL(SUM(period_net_dr),0) - IFNULL(SUM(period_net_cr),0) "
-   . " + IFNULL(SUM(begin_balance_dr),0) - IFNULL(SUM(begin_balance_cr),0) ) AS balance "
-   . " FROM gl_balance_v ";
-  $sql .= " WHERE field4 >= '{$account_l}' AND  field4 <= '{$account_u}' ";
+     . " + IFNULL(SUM(begin_balance_dr),0) - IFNULL(SUM(begin_balance_cr),0) ) AS balance "
+     . " FROM gl_balance_v ";
+  $sql .= " WHERE field4 >= :field4_l AND  field4 <= :field4_u ";
   if (!empty($gl_period_id)) {
-   $sql .= " AND gl_period_id = '{$gl_period_id}' ";
+   $sql .= " AND gl_period_id = :gl_period_id ";
   }
   $sql .= " GROUP BY  ledger_id, field1, period_id ";
-  $result = self::find_by_sql($sql);
-//  
-//  echo $sql .'<br><br>'; pa($result );
+  $value_a['gl_period_id'] = $gl_period_id;
+
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -308,7 +314,7 @@ ORDER BY gp.gl_period_id DESC
     $gl_balances = gl_balance_v::find_balance_between_accounts($account_l, $account_h, $this->period_id_for_fs);
     if ($gl_balances) {
      foreach ($gl_balances as $bal_r) {
-      $row_stmt .=' <tr class="asset_detail_line label_four' . $count . '">';
+      $row_stmt .= ' <tr class="asset_detail_line label_four' . $count . '">';
       $row_stmt .= ' <td>' . $bal_r->field4 . '</td>';
       $row_stmt .= ' <td>' . $bal_r->balance . '</td>';
       $row_stmt .= '<td></td>';
@@ -319,7 +325,7 @@ ORDER BY gp.gl_period_id DESC
     } else {
      $curr_bal = null;
     }
-    $row_stmt .=' <tr class="asset_parent_line' . $count . '">';
+    $row_stmt .= ' <tr class="asset_parent_line' . $count . '">';
     $row_stmt .= ' <td>' . $curr_parent_line->description . '</td>';
     $row_stmt .= ' <td>' . $curr_bal . '</td>';
     $row_stmt .= '<td></td>';
@@ -333,7 +339,7 @@ ORDER BY gp.gl_period_id DESC
     } else {
      $curr_bal = null;
     }
-    $row_stmt .=' <tr class="asset_parent_line' . $count . '">';
+    $row_stmt .= ' <tr class="asset_parent_line' . $count . '">';
     $row_stmt .= ' <td>' . $curr_parent_line->description . '</td>';
     $row_stmt .= ' <td>' . $curr_bal . '</td>';
     $row_stmt .= '<td></td>';

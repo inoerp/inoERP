@@ -166,6 +166,35 @@ trait dbObject_t {
 	 return 0;
 	}
  }
+ 
+  public function findBySql_Array($sql, $value_a = '') {
+	global $dbc;
+	if (empty($dbc->connection)) {
+	 return false;
+	}
+	$stmt = $dbc->connection->prepare(" $sql ");
+	if (!empty($value_a)) {
+	 foreach ($value_a as $key => $value) {
+		if (!empty($value)) {
+		 if ($key == 'lmt_no_of_records' || $key == 'lmt_start_from') {
+			$stmt->bindValue(":$key", $value, PDO::PARAM_INT);
+		 } else {
+			$stmt->bindValue(":$key", $value);
+		 }
+		} else {
+		 $stmt->bindValue(":$key", NULL);
+		}
+	 }
+	}
+	try {
+	 $stmt->execute();
+	$result = $stmt->fetchAll(PDO::FETCH_NUM);
+	 return $result;
+	} catch (PDOException $e) {
+//    echo "Record couldnt be fetched !!: " . $e->getMessage();
+	 return 0;
+	}
+ }
 
  protected function write_comment($comment_by, $comment_msg, $comment_sub = '') {
 	$comment = new extn_comment();
@@ -179,16 +208,16 @@ trait dbObject_t {
 	$comment->save();
  }
 
- public function findBySql_array($sql = "") {
-	$dbc;
-	if (empty($dbc->connection)) {
-	 $dbc = new dbc();
-	}
-	$prepare = $dbc->connection->prepare($sql);
-	$prepare->execute();
-	$result = $prepare->fetchAll(PDO::FETCH_NUM);
-	return $result;
- }
+// public function findBySql_array($sql = "") {
+//	$dbc;
+//	if (empty($dbc->connection)) {
+//	 $dbc = new dbc();
+//	}
+//	$prepare = $dbc->connection->prepare($sql);
+//	$prepare->execute();
+//	$result = $prepare->fetchAll(PDO::FETCH_NUM);
+//	return $result;
+// }
 
  public function findFirstColumn_BySql_array($sql = "") {
 	global $dbc;
@@ -347,6 +376,12 @@ trait dbObject_t {
 	return !empty($result) ? array_shift2($result) : false;
  }
 
+  public function countAllBySql($sql, $value_a) {
+//   echo "sql is $sql";
+	$result = $this->findBySql_Array($sql, $value_a);
+	return !empty($result) ? array_shift2($result) : false;
+ }
+ 
  public static function find_by_id($id) {
 	global $ie;
 	global $dbc;

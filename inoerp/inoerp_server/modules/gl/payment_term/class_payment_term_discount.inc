@@ -7,28 +7,25 @@ class payment_term_discount extends dbObject {
  public static $primary_column = "payment_term_discount_id";
  public static $key_column = 'discount_percentage';
  public static $module = "gl";
-
  public $field_a = [
-		 'payment_term_discount_id',
-		 'payment_term_id',
-		 'seq_number',
-		 'discount_percentage',
-		 'due_days',
-		 'due_dates',
-		 'due_date_of_month',
-		 "ef_id",
-		 "created_by",
-		 "creation_date",
-		 "last_update_by",
-		 "last_update_date"
+    'payment_term_discount_id',
+    'payment_term_id',
+    'seq_number',
+    'discount_percentage',
+    'due_days',
+    'due_dates',
+    'due_date_of_month',
+    "ef_id",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
-
  public $requiredField = [
-		 'payment_term_id',
-		 'seq_number',
-		 'discount_percentage'
+    'payment_term_id',
+    'seq_number',
+    'discount_percentage'
  ];
-
  public $payment_term_discount_id;
  public $payment_term_id;
  public $seq_number;
@@ -45,12 +42,14 @@ class payment_term_discount extends dbObject {
  public $msg;
 
  public static function find_by_payment_termId($term_id) {
-	global $db;
-	$sql = "SELECT * FROM " .
-					self::$table_name .
-					" where payment_term_id= '{$term_id}' ";
-	$result = self::find_by_sql($sql);
-	return $result;
+  global $db;
+  $sql = "SELECT * FROM " .
+     self::$table_name .
+     " where payment_term_id= :payment_term_id ";
+  global $db;
+  $value_a = ['payment_term_id' => $term_id];
+  $result = $db->findBySql($sql, $value_a);
+  return $result;
  }
 
 }

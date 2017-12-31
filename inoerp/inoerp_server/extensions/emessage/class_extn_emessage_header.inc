@@ -99,16 +99,19 @@ class extn_emessage_header extends dbObject {
 FROM extn_emessage_header eeh,
 ino_user as user
 WHERE user.ino_user_id = eeh.user_id
-AND eeh.from_user_id = '{$user_id}'
+AND eeh.from_user_id = :user_id
  
 UNION
 SELECT  eeh.from_user_id, eeh.extn_emessage_header_id, eeh.user_id_comb, user.username, user.image_file_id
 FROM extn_emessage_header eeh,
 ino_user as user
 WHERE user.ino_user_id = eeh.from_user_id 
-AND eeh.user_id = '{$user_id}' ";
-//echo $sql;
-  $result = self::find_by_sql($sql);
+AND eeh.user_id = :user_id ";
+
+	  global $db;
+  $value_a = ['user_id' => $user_id];
+  $result = $db->findBySql($sql, $value_a);
+
    return !empty($result) ? $result : ' ';
  }
 

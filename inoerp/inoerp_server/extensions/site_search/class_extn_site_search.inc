@@ -372,9 +372,9 @@ class extn_site_search extends dbObject {
 
 
 
-//  echo $sql;
-
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
+  
   return !empty($result) ? $result : false;
  }
 

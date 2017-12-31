@@ -21,55 +21,55 @@ class fp_kanban_line extends dbObject {
  public static $key_column = "fp_kanban_header_id";
  public static $module = "prj";
  public static $card_status_a = [
-  'ACTIVE' => 'Active',
-  'INACTIVE' => 'In active',
-  'CANCELLED' => 'Cancelled'
+    'ACTIVE' => 'Active',
+    'INACTIVE' => 'In active',
+    'CANCELLED' => 'Cancelled'
  ];
  public static $supply_status_a = [
-  'UNKNOWN' => 'Unknown',
-  'FULL' => 'Full',
-  'EMPTY' => 'Empty',
-  'INPROCESS' => 'InProcess',
-  'HOLD' => 'On Hold',
+    'UNKNOWN' => 'Unknown',
+    'FULL' => 'Full',
+    'EMPTY' => 'Empty',
+    'INPROCESS' => 'InProcess',
+    'HOLD' => 'On Hold',
  ];
  public static $card_type_a = [
-  'MANUAL' => 'Manual',
-  'AUTO' => 'Automatic'
+    'MANUAL' => 'Manual',
+    'AUTO' => 'Automatic'
  ];
  public static $action_a = [
-  'REPLENISH' => 'Replenish',
-  'SET_FULL' => 'Full',
-  'ON_HOLD' => 'On Hold',
-  'CANCEL' => 'Cancelled',
+    'REPLENISH' => 'Replenish',
+    'SET_FULL' => 'Full',
+    'ON_HOLD' => 'On Hold',
+    'CANCEL' => 'Cancelled',
  ];
  public $field_a = [
-  'fp_kanban_line_id',
-  'fp_kanban_header_id',
-  'description',
-  'card_number',
-  'card_status',
-  'supply_status',
-  'kanban_size',
-  'card_type',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'fp_kanban_line_id',
+    'fp_kanban_header_id',
+    'description',
+    'card_number',
+    'card_status',
+    'supply_status',
+    'kanban_size',
+    'card_type',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'description',
-  'card_number',
+    'description',
+    'card_number',
  ];
  public $requiredField = [
-  'fp_kanban_header_id',
-  'kanban_size'
+    'fp_kanban_header_id',
+    'kanban_size'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $fields_inForm_notInDataBase = [
-  'action'
+    'action'
  ];
  public $pageTitle = "Kanban Cards"; //page Title
  public $fp_kanban_line_id;
@@ -95,7 +95,9 @@ class fp_kanban_line extends dbObject {
 
  Public static function highest_card_number() {
   $sql = " SELECT MAX(card_number) as max_number from fp_kanban_line ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $result = $db->findBySql($sql);
+
   return !empty($result) ? $result[0]->max_number : 0;
  }
 
@@ -111,13 +113,17 @@ class fp_kanban_line extends dbObject {
     break;
   }
   $value_a = ['card_number' => $card_num];
-  $result = self::find_by_sql_i($sql, $value_a);
+   $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
  Public static function noof_active_cards($fp_kanban_header_id) {
-  $sql = " SELECT COUNT(card_number) as card_count from fp_kanban_line  WHERE fp_kanban_header_id = '{$fp_kanban_header_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql = " SELECT COUNT(card_number) as card_count from fp_kanban_line  WHERE fp_kanban_header_id = :fp_kanban_header_id ";
+
+  global $db;
+  $value_a = ['fp_kanban_header_id' => $fp_kanban_header_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result[0]->card_count : 0;
  }
 

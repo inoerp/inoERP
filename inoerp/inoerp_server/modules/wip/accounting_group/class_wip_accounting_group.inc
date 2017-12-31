@@ -20,78 +20,78 @@ class wip_accounting_group extends org {
  public static $key_column = 'wip_accounting_group';
  public static $module = "wip";
  public static $system_info = [
-  'name' => 'Accounting Group',
-  'number' => '2601',
-  'description' => 'Create & Mainten Approved Accounting Group',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'wip',
-  'weight' => 1
+    'name' => 'Accounting Group',
+    'number' => '2601',
+    'description' => 'Create & Mainten Approved Accounting Group',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'wip',
+    'weight' => 1
  ];
  public $field_a = [
-  'wip_accounting_group_id',
-  'org_id',
-  'wo_type',
-  'wip_accounting_group',
-  'description',
-  'ef_id',
-  'rev_enabled',
-  'rev_number',
-  'status',
-  'material_ac_id',
-  'material_oh_ac_id',
-  'overhead_ac_id',
-  'resource_ac_id',
-  'osp_ac_id',
-  'var_material_ac_id',
-  'var_material_oh_ac_id',
-  'var_overhead_ac_id',
-  'var_resource_ac_id',
-  'var_osp_ac_id',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'wip_accounting_group_id',
+    'org_id',
+    'wo_type',
+    'wip_accounting_group',
+    'description',
+    'ef_id',
+    'rev_enabled',
+    'rev_number',
+    'status',
+    'material_ac_id',
+    'material_oh_ac_id',
+    'overhead_ac_id',
+    'resource_ac_id',
+    'osp_ac_id',
+    'var_material_ac_id',
+    'var_material_oh_ac_id',
+    'var_overhead_ac_id',
+    'var_resource_ac_id',
+    'var_osp_ac_id',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'wip_accounting_group_id',
-  'wip_accounting_group',
+    'wip_accounting_group_id',
+    'wip_accounting_group',
  ];
  public $account = [
-  'material_ac_id',
-  'material_oh_ac_id',
-  'overhead_ac_id',
-  'resource_ac_id',
-  'osp_ac_id',
-  'var_material_ac_id',
-  'var_material_oh_ac_id',
-  'var_overhead_ac_id',
-  'var_resource_ac_id',
-  'var_osp_ac_id',
+    'material_ac_id',
+    'material_oh_ac_id',
+    'overhead_ac_id',
+    'resource_ac_id',
+    'osp_ac_id',
+    'var_material_ac_id',
+    'var_material_oh_ac_id',
+    'var_overhead_ac_id',
+    'var_resource_ac_id',
+    'var_osp_ac_id',
  ];
  public $column = [
-  'wip_accounting_group_id',
-  'org_id',
-  'wo_type',
-  'wip_accounting_group',
-  'description',
+    'wip_accounting_group_id',
+    'org_id',
+    'wo_type',
+    'wip_accounting_group',
+    'description',
  ];
  public $requiredField = [
-  'org_id',
-  'wo_type',
-  'wip_accounting_group',
+    'org_id',
+    'wo_type',
+    'wip_accounting_group',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $option_lists = [
-  'wo_type' => 'WIP_WO_TYPE',
+    'wo_type' => 'WIP_WO_TYPE',
  ];
  public $search_functions = [
-  'Organization' => 'search_org_name',
+    'Organization' => 'search_org_name',
  ];
  public $pageTitle = " WIP - Accounting Group "; //page Title
  public $wip_accounting_group_id;
@@ -123,8 +123,9 @@ class wip_accounting_group extends org {
   if (!empty($org_id)) {
    $sql = " SELECT * FROM ";
    $sql .= self::$table_name;
-   $sql .= " WHERE org_id = '{$org_id}' ";
-   $result = $db::find_by_sql($sql);
+   $sql .= " WHERE org_id = :org_id  ";
+   $value_a = ['org_id' => $org_id];
+   $result = $db->findBySql($sql, $value_a);
   } else {
    $result = null_instantitae('subinventory');
   }
@@ -142,15 +143,20 @@ class wip_accounting_group extends org {
  }
 
  public static function find_by_woType($woType = 'STANDARD') {
+  global $db;
+
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   if (!empty($woType)) {
-   $sql .= " WHERE wo_type = '{$woType}' ";
+   $sql .= " WHERE wo_type = :wo_type ";
   } else {
    $sql .= " WHERE wo_type IN ('STANDARD' , 'NON_STANDARD') ";
   }
 
-  $result = self::find_by_sql($sql);
+
+  $value_a = ['wo_type' => $woType];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 

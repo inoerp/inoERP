@@ -8,29 +8,29 @@ class extn_menu_line extends dbObject {
  public static $key_column = 'extn_menu_header_id';
  public static $module = "extn";
  public $field_a = [
-  'extn_menu_line_id',
-  'extn_menu_header_id',
-  'link_name',
-  'description',
-  'link_title',
-  'path_id',
-  'external_link',
-  'interanl_link',
-  'parent_id',
-  'css_class',
-  'icon_css_class',
-  'priority',
-  'dropdown_cb',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'extn_menu_line_id',
+    'extn_menu_header_id',
+    'link_name',
+    'description',
+    'link_title',
+    'path_id',
+    'external_link',
+    'interanl_link',
+    'parent_id',
+    'css_class',
+    'icon_css_class',
+    'priority',
+    'dropdown_cb',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $requiredField = [
-  'extn_menu_header_id'
+    'extn_menu_header_id'
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "extn_menu_header_id"
+    "extn_menu_header_id"
  ];
  public $extn_menu_line_id;
  public $extn_menu_header_id;
@@ -52,10 +52,13 @@ class extn_menu_line extends dbObject {
 
  public static function find_by_headerId_and_buOrgId($extn_menu_header_id, $bu_org_id) {
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where extn_menu_header_id= '{$extn_menu_header_id}' AND bu_org_id= '{$bu_org_id}'  ";
-   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+     self::$table_name .
+     " where extn_menu_header_id= :extn_menu_header_id AND bu_org_id= :bu_org_id  ";
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['extn_menu_header_id' => $extn_menu_header_id, 'bu_org_id' => $bu_org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -65,6 +68,7 @@ class extn_menu_line extends dbObject {
     * Check if revision exists. If yes, use revision else find all items where 
     * (bl.effective_end_date IS NULL OR bl.effective_end_date > CURRENT_DATE
     */
+   global $db;
    $boh_i = bom_header::find_by_id($id);
    $item_rev = inv_item_revision::find_currentRev_by_itemIdM_orgId($boh_i->item_id_m, $boh_i->org_id, $this->revsion_effecitve_date);
    if ($item_rev) {
@@ -82,9 +86,11 @@ class extn_menu_line extends dbObject {
      
      WHERE bh.bom_header_id = bl.bom_header_id 
      AND (bl.effective_end_date IS NULL OR bl.effective_end_date > CURRENT_DATE ) 
-     AND bh.bom_header_id = '{$id}' 
+     AND bh.bom_header_id = :bom_header_id 
      ORDER BY bl.bom_sequence ASC   ";
-    $all_bom_lines = self::find_by_sql($sql);
+
+    $value_a = ['bom_header_id' => $id];
+    $all_bom_lines = $db->findBySql($sql, $value_a);
    }
    return !empty($all_bom_lines) ? $all_bom_lines : false;
   } else {
@@ -106,8 +112,8 @@ class extn_menu_line extends dbObject {
  }
 
  public function menu_explosion($extn_menu_header_id) {
-  $all_child_first_l = self::find_by_fieldVal(['extn_menu_header_id' => $extn_menu_header_id, 'parent_id' => 'NULL'], 'extn_menu_line_id' , 'ASC');
-  if(empty($all_child_first_l)){
+  $all_child_first_l = self::find_by_fieldVal(['extn_menu_header_id' => $extn_menu_header_id, 'parent_id' => 'NULL'], 'extn_menu_line_id', 'ASC');
+  if (empty($all_child_first_l)) {
    return;
   }
   $menu_ids_f = [];
@@ -134,7 +140,7 @@ class extn_menu_line extends dbObject {
 
  public function show_menu_list($extn_menu_header_id) {
   $menu_h = extn_menu_header::find_by_id($extn_menu_header_id);
-  if(empty($menu_h)){
+  if (empty($menu_h)) {
    return false;
   }
   $menu_a = $this->menu_explosion($extn_menu_header_id);
@@ -142,11 +148,11 @@ class extn_menu_line extends dbObject {
   foreach ($menu_a as $menu) {
    if (is_array($menu)) {
     $menu_stmt .= '<li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="' . $menu[0]->icon_css_class . '"></i>&nbsp; ' . $menu[0]->link_name . ' <span class="'.$menu[0]->css_class.'"></span></a>';
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="' . $menu[0]->icon_css_class . '"></i>&nbsp; ' . $menu[0]->link_name . ' <span class="' . $menu[0]->css_class . '"></span></a>';
     $menu_stmt .= '<ul class="dropdown-menu" role="menu">';
     $menu_2_chl_a = $menu['childs'];
     foreach ($menu_2_chl_a as $k => $menu_2) {
-     if (!empty($menu_2->path_id)) { 
+     if (!empty($menu_2->path_id)) {
       $path_j = path::find_by_id($menu_2->path_id);
       $link = HOME_URL . $path_j->path_link;
      } else if (!empty($menu_2->external_link)) {

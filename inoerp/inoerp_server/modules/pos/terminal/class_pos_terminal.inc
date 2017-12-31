@@ -80,9 +80,12 @@ class pos_terminal extends dbObject {
   public static function find_by_storeId($store_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE sd_store_id = '{$store_id}'";
+  $sql .= " WHERE sd_store_id = :sd_store_id ";
 
-  $result = self::find_by_sql($sql);
+ 	  global $db;
+  $value_a = ['sd_store_id' => $store_id];
+  $result = $db->findBySql($sql, $value_a);
+  
   return !empty($result) ? $result : false;
  }
 

@@ -1,5 +1,8 @@
-<?php include_once("../../../includes/basics/basics.inc"); ?>
-<?php
+<?php 
+require_once __DIR__.'/../../../includes/basics/wloader.inc';
+include_once(__DIR__.'/../../../../inoerp_server/includes/basics/basics.inc');
+
+
 // global $db;
 //// if the 'term' variable is not sent with the request, exit
 //if ( !isset($_REQUEST['term']) )

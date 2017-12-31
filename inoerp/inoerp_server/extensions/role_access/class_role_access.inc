@@ -163,14 +163,18 @@ class role_access extends dbObject {
  }
 
  public function findBy_roleCode($role_code) {
-	$sql = "SELECT * FROM " . self::$table_name . " where role_code='{$role_code}' ";
-	$result = $this->findBySql($sql);
+	$sql = "SELECT * FROM " . self::$table_name . " where role_code= :role_code ";
+		  global $db;
+  $value_a = ['role_code' => $role_code];
+  $result = $db->findBySql($sql, $value_a);
 	return !empty($result) ? $result : false;
  }
 
  public static function find_by_roleCode($role_code) {
-	$sql = "SELECT * FROM " . self::$table_name . " where role_code='{$role_code}' ";
-	$result = self::find_by_sql($sql);
+	$sql = "SELECT * FROM " . self::$table_name . " where role_code= :role_code ";
+		  global $db;
+  $value_a = ['role_code' => $role_code];
+  $result = $db->findBySql($sql, $value_a);
 	return !empty($result) ? $result : false;
  }
 

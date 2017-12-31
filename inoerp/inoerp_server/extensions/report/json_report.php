@@ -1,5 +1,6 @@
-<?php include_once("../../includes/basics/basics.inc"); ?>
-<?php
+<?php 
+ require_once __DIR__.'/../../includes/basics/wloader.inc';
+include_once(__DIR__ ."/../../../inoerp_server/includes/basics/basics.inc");
 
 if (!empty($_GET['find_result'])) {
  if (!empty($_GET['query_v'])) {

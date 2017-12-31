@@ -25,209 +25,209 @@ class item extends dbObject {
  public static $module = "inv";
 // public static $js_fileName = 'modules/inv/item/js/multi_select.js';
  public static $system_info = [
-  'name' => 'Item',
-  'number' => '2101',
-  'description' => 'Item',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'inv',
-  'weight' => 1
+    'name' => 'Item',
+    'number' => '2101',
+    'description' => 'Item',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'inv',
+    'weight' => 1
  ];
  public static $ls_uniqueness_a = [
-  'ITEM' => 'Item Level',
-  'ORG' => 'Organization Level',
-  'GLOBAL' => 'Global Level',
+    'ITEM' => 'Item Level',
+    'ORG' => 'Organization Level',
+    'GLOBAL' => 'Global Level',
  ];
  public static $am_asset_type_a = [
-  'ASSET_ITEM' => 'Asset Item',
-  'ASSET_ACTIVITY' => 'Asset Activity',
-  'ASSET_COMPONENT' => 'Asset Component',
+    'ASSET_ITEM' => 'Asset Item',
+    'ASSET_ACTIVITY' => 'Asset Activity',
+    'ASSET_COMPONENT' => 'Asset Component',
  ];
  public static $ls_generation_a = [
-  'PRE_DEFINED' => 'Pre Defined',
-  'AT_RECEIPT' => 'At Receipt',
-  'AT_SHIPMENT' => 'At Shipment',
+    'PRE_DEFINED' => 'Pre Defined',
+    'AT_RECEIPT' => 'At Receipt',
+    'AT_SHIPMENT' => 'At Shipment',
  ];
  public $account = [
-  "material_ac_id",
-  "material_oh_ac_id",
-  "overhead_ac_id",
-  "resource_ac_id",
-  "osp_ac_id",
-  "expense_ac_id",
-  "sales_ac_id",
-  "cogs_ac_id",
-  "deffered_cogs_ac_id"
+    "material_ac_id",
+    "material_oh_ac_id",
+    "overhead_ac_id",
+    "resource_ac_id",
+    "osp_ac_id",
+    "expense_ac_id",
+    "sales_ac_id",
+    "cogs_ac_id",
+    "deffered_cogs_ac_id"
  ];
  public $checkbox = [
-  "item_rev_enabled_cb",
-  'kit_cb',
-  "inventory_item_cb",
-  "stockable_cb",
-  "transactable_cb",
-  "reservable_cb",
-  "cycle_count_enabled_cb",
-  "equipment_cb",
-  "electronic_format_cb",
-  "rev_enabled_cb",
-  "customer_ordered_cb",
-  "internal_ordered_cb",
-  "shippable_cb",
-  "returnable_cb",
-  "purchased_cb",
-  "use_asl_cb",
-  "bom_enabled_cb",
-  "costing_enabled_cb",
-  "inventory_asset_cb",
-  "build_in_wip_cb",
-  "allow_negative_balance_cb",
-  'update_revision_cb',
-  'invoiceable_cb',
-  'service_request_cb'
+    "item_rev_enabled_cb",
+    'kit_cb',
+    "inventory_item_cb",
+    "stockable_cb",
+    "transactable_cb",
+    "reservable_cb",
+    "cycle_count_enabled_cb",
+    "equipment_cb",
+    "electronic_format_cb",
+    "rev_enabled_cb",
+    "customer_ordered_cb",
+    "internal_ordered_cb",
+    "shippable_cb",
+    "returnable_cb",
+    "purchased_cb",
+    "use_asl_cb",
+    "bom_enabled_cb",
+    "costing_enabled_cb",
+    "inventory_asset_cb",
+    "build_in_wip_cb",
+    "allow_negative_balance_cb",
+    'update_revision_cb',
+    'invoiceable_cb',
+    'service_request_cb'
  ];
  public $field_a = [
-  "item_id",
-  'item_id_m',
-  "org_id",
-  "item_number",
-  "item_description",
-  'image_file_id',
-  'product_line',
-  'product_line_percentage',
-  "locator_control",
-  "long_description",
-  "uom_id",
-  "item_type",
-  "item_status",
-  "bom_type",
-  "item_rev_number",
-		 'demand_class',
-		 'discount_class',
-  "default_cost_group",
-  "lot_uniqueness",
-  "lot_generation",
-  "lot_prefix",
-  "lot_starting_number",
-  "serial_generation",
-  "serial_prefix",
-  "serial_starting_number",
-  "serial_uniqueness",
-  "invoice_matching",
-  'invoiceable_cb',
-  "default_buyer",
-  "list_price",
-  "contract_item_type",
-  "duration_uom_id",
-  "over_receipt_percentage",
-  "receipt_days_early",
-  "receipt_days_late",
-  "receipt_day_action",
-  "receipt_routing",
-  "weight_uom_id",
-  "weight",
-  "volume_uom_id",
-  "volume",
-  "dimension_uom_id",
-  "length",
-  "width",
-  "height",
-  "planning_method",
-  "planner",
-  "make_buy",
-  'wip_supply_subinventory',
-  'wip_supply_locator',
-  "fix_order_quantity",
-  "fix_days_supply",
-  "fix_lot_multiplier",
-  "minimum_order_quantity",
-  "maximum_order_quantity",
-  'rounding_option',
-  'minmax_min_quantity',
-  'minmax_max_quantity',
-  'minmax_multibin_number',
-  'minmax_multibin_size',
-  'saftey_stock_days',
-  'saftey_stock_quantity',
-  'saftey_stock_percentage',
-  "forecast_method",
-  "forecast_control",
-  "demand_timefence",
-  "planning_timefence",
-  "release_timefence",
-  "pre_processing_lt",
-  "post_processing_lt",
-  "processing_lt",
-  "cumulative_mfg_lt",
-  "cumulative_total_lt",
-  "lt_lot_size",
-  "wip_supply_type",
-  "atp",
-  "picking_rule",
-  "sourcing_rule_id",
-  "ip_tax_class",
-  "op_tax_class",
-  "ap_payment_term",
-  "ar_payment_term",
-  "duration",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date",
-  "material_ac_id",
-  "material_oh_ac_id",
-  "overhead_ac_id",
-  "resource_ac_id",
-  "osp_ac_id",
-  "expense_ac_id",
-  "sales_ac_id",
-  "cogs_ac_id",
-  "deffered_cogs_ac_id",
-  "onhand_with_rev_cb",
-  'kit_cb',
-  "inventory_item_cb",
-  "stockable_cb",
-  "transactable_cb",
-  "reservable_cb",
-  "cycle_count_enabled_cb",
-  "equipment_cb",
-  "electronic_format_cb",
-  "rev_enabled_cb",
-  "customer_ordered_cb",
-  "internal_ordered_cb",
-  "shippable_cb",
-  "returnable_cb",
-  "purchased_cb",
-  "use_asl_cb",
-  "bom_enabled_cb",
-  "costing_enabled_cb",
-  "inventory_asset_cb",
-  "build_in_wip_cb",
-  "allow_negative_balance_cb",
-  'am_asset_type',
-  'am_activity_cause',
-  'am_activity_type',
-  'am_activity_source',
-  'billing_type',
-  'service_request_cb'
+    "item_id",
+    'item_id_m',
+    "org_id",
+    "item_number",
+    "item_description",
+    'image_file_id',
+    'product_line',
+    'product_line_percentage',
+    "locator_control",
+    "long_description",
+    "uom_id",
+    "item_type",
+    "item_status",
+    "bom_type",
+    "item_rev_number",
+    'demand_class',
+    'discount_class',
+    "default_cost_group",
+    "lot_uniqueness",
+    "lot_generation",
+    "lot_prefix",
+    "lot_starting_number",
+    "serial_generation",
+    "serial_prefix",
+    "serial_starting_number",
+    "serial_uniqueness",
+    "invoice_matching",
+    'invoiceable_cb',
+    "default_buyer",
+    "list_price",
+    "contract_item_type",
+    "duration_uom_id",
+    "over_receipt_percentage",
+    "receipt_days_early",
+    "receipt_days_late",
+    "receipt_day_action",
+    "receipt_routing",
+    "weight_uom_id",
+    "weight",
+    "volume_uom_id",
+    "volume",
+    "dimension_uom_id",
+    "length",
+    "width",
+    "height",
+    "planning_method",
+    "planner",
+    "make_buy",
+    'wip_supply_subinventory',
+    'wip_supply_locator',
+    "fix_order_quantity",
+    "fix_days_supply",
+    "fix_lot_multiplier",
+    "minimum_order_quantity",
+    "maximum_order_quantity",
+    'rounding_option',
+    'minmax_min_quantity',
+    'minmax_max_quantity',
+    'minmax_multibin_number',
+    'minmax_multibin_size',
+    'saftey_stock_days',
+    'saftey_stock_quantity',
+    'saftey_stock_percentage',
+    "forecast_method",
+    "forecast_control",
+    "demand_timefence",
+    "planning_timefence",
+    "release_timefence",
+    "pre_processing_lt",
+    "post_processing_lt",
+    "processing_lt",
+    "cumulative_mfg_lt",
+    "cumulative_total_lt",
+    "lt_lot_size",
+    "wip_supply_type",
+    "atp",
+    "picking_rule",
+    "sourcing_rule_id",
+    "ip_tax_class",
+    "op_tax_class",
+    "ap_payment_term",
+    "ar_payment_term",
+    "duration",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date",
+    "material_ac_id",
+    "material_oh_ac_id",
+    "overhead_ac_id",
+    "resource_ac_id",
+    "osp_ac_id",
+    "expense_ac_id",
+    "sales_ac_id",
+    "cogs_ac_id",
+    "deffered_cogs_ac_id",
+    "onhand_with_rev_cb",
+    'kit_cb',
+    "inventory_item_cb",
+    "stockable_cb",
+    "transactable_cb",
+    "reservable_cb",
+    "cycle_count_enabled_cb",
+    "equipment_cb",
+    "electronic_format_cb",
+    "rev_enabled_cb",
+    "customer_ordered_cb",
+    "internal_ordered_cb",
+    "shippable_cb",
+    "returnable_cb",
+    "purchased_cb",
+    "use_asl_cb",
+    "bom_enabled_cb",
+    "costing_enabled_cb",
+    "inventory_asset_cb",
+    "build_in_wip_cb",
+    "allow_negative_balance_cb",
+    'am_asset_type',
+    'am_activity_cause',
+    'am_activity_type',
+    'am_activity_source',
+    'billing_type',
+    'service_request_cb'
  ];
  public $initial_search = [
-  'item_id',
-  'org_id',
-  "customer_ordered_cb",
-  "internal_ordered_cb",
-  "shippable_cb",
-  "returnable_cb",
-  "purchased_cb",
-  "use_asl_cb",
-  "bom_enabled_cb",
-  "costing_enabled_cb",
-  "inventory_asset_cb",
-  "build_in_wip_cb",
-  "item_number",
-  'am_asset_type',
-  'transactable_cb'
+    'item_id',
+    'org_id',
+    "customer_ordered_cb",
+    "internal_ordered_cb",
+    "shippable_cb",
+    "returnable_cb",
+    "purchased_cb",
+    "use_asl_cb",
+    "bom_enabled_cb",
+    "costing_enabled_cb",
+    "inventory_asset_cb",
+    "build_in_wip_cb",
+    "item_number",
+    'am_asset_type',
+    'transactable_cb'
  ];
 // public $column = [
 //  'item_id',
@@ -244,69 +244,69 @@ class item extends dbObject {
 //  'kit_cb'
 // ];
  public $requiredField = [
-  "item_number",
-  "uom_id",
-  "org_id",
-  "item_description",
-  "item_type",
-  "make_buy"];
+    "item_number",
+    "uom_id",
+    "org_id",
+    "item_description",
+    "item_type",
+    "make_buy"];
  public $otherField = [
-  "org.org"
+    "org.org"
  ];
  public $fields_inForm_notInDataBase = [
-  'item_category',
-  'item_catalog',
-  'item_reference',
-  'item_template',
-  'sourcing_rule',
-  'action',
-  'multibin_minmax_quantity',
-  'overwrite_minmax_min_quantity',
-  'overwrite_minmax_max_quantity',
-  'overwrite_minmax_multibin_number',
-  'overwrite_minmax_multibin_size'
+    'item_category',
+    'item_catalog',
+    'item_reference',
+    'item_template',
+    'sourcing_rule',
+    'action',
+    'multibin_minmax_quantity',
+    'overwrite_minmax_min_quantity',
+    'overwrite_minmax_max_quantity',
+    'overwrite_minmax_multibin_number',
+    'overwrite_minmax_multibin_size'
  ];
  public static $json_label_fields = [
-  'item_id_m',
-  'org_id',
-  "item_number",
-  "item_description",
-  'product_line',
-  "item_type",
-  "lot_generation",
-  "serial_generation",
-  "list_price",
-  "planner",
-  "fix_lot_multiplier",
-  'item_id'
+    'item_id_m',
+    'org_id',
+    "item_number",
+    "item_description",
+    'product_line',
+    "item_type",
+    "lot_generation",
+    "serial_generation",
+    "list_price",
+    "planner",
+    "fix_lot_multiplier",
+    'item_id'
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $search_functions = [
-  'Item From' => 'search_item_number_from',
-  'Item To' => 'search_item_number_to',
-  'Organization' => 'search_org_name',
+    'Item From' => 'search_item_number_from',
+    'Item To' => 'search_item_number_to',
+    'Organization' => 'search_org_name',
  ];
  public $pageTitle = " Item - Create | Update Items"; //page Title
  public $option_lists = [
-  'item_types' => 'ITEM_TYPE',
-  'item_status' => 'ITEM_STATUS',
-  'planning_method' => 'MP_PLANNING_METHOD',
+    'item_types' => 'ITEM_TYPE',
+    'item_status' => 'ITEM_STATUS',
+    'planning_method' => 'MP_PLANNING_METHOD',
  ];
  public $prg_minmax_update_parameters = [
-  'Organization' => 'search_org_name',
-  'Min Max Planner ' => 'search_minmax_planner',
-  'Item Number From' => 'search_item_number_from',
-  'Item Number To' => 'search_item_number_to',
-  'Item Id From' => 'search_item_id_from',
-  'Item Id To' => 'search_item_id_to'
+    'Organization' => 'search_org_name',
+    'Min Max Planner ' => 'search_minmax_planner',
+    'Item Number From' => 'search_item_number_from',
+    'Item Number To' => 'search_item_number_to',
+    'Item Id From' => 'search_item_id_from',
+    'Item Id To' => 'search_item_id_to'
  ];
  public $prg_minmax_update_details = [
-  'name' => 'Min Max Attribute Update ',
-  'description' => 'Update Item Attributes related to Min Max ',
+    'name' => 'Min Max Attribute Update ',
+    'description' => 'Update Item Attributes related to Min Max ',
  ];
  public $item_id;
  public $item_id_m;
@@ -619,36 +619,42 @@ class item extends dbObject {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE item_id = item_id_m ";
-  $sql .= " AND item_id = '{$item_id}' ";
-  $result = self::find_by_sql($sql);
+  $sql .= " AND item_id = :item_id ";
+  global $db;
+  $value_a = ['item_id' => $item_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_by_orgId_item_id_m($item_id, $org_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE item_id_m = '{$item_id}' AND org_id = '{$org_id}'  ";
+  $sql .= " WHERE item_id_m = :item_id_m AND org_id = :org_id  ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['item_id_m' => $item_id, 'org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? array_pop($result) : false;
  }
 
  public static function find_item_number_by_item_number($item_number) {
   global $db;
   $sql = "SELECT * FROM "
-   . self::$table_name
-   . " where item_number LIKE '%{$item_number}%' ";
+     . self::$table_name
+     . " where item_number LIKE '%{$item_number}%' ";
   $sql = ino_perPageSql_i($sql, 30);
   $result = $db->query($sql);
   $data = array();
   if ($result && mysql_num_rows($result)) {
    while ($row = $db->fetch_array($result)) {
     $data[] = array(
-     'label' => $row['item_number'],
-     'item_number' => $row['item_number'],
-     'item_id' => $row['item_id'],
-     'description' => $row['item_description'],
-     'uom_id' => $row['uom_id']
+       'label' => $row['item_number'],
+       'item_number' => $row['item_number'],
+       'item_id' => $row['item_id'],
+       'description' => $row['item_description'],
+       'uom_id' => $row['uom_id']
     );
    }
   }
@@ -660,10 +666,12 @@ class item extends dbObject {
   global $db;
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " where item_number LIKE '%{$item_number}%' ";
-  $sql .= " AND org_id  = '{$org_id}' ";
+  $sql .= " where item_number LIKE :item_number ";
+  $sql .= " AND org_id  = :org_id ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = $db->find_by_sql($sql);
+  global $db;
+  $value_a = ['item_number' => "%$item_number%", 'org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
   return !(empty($result)) ? array_pop($result) : false;
  }
 
@@ -671,19 +679,22 @@ class item extends dbObject {
   global $db;
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " where item_number LIKE '%{$item_number}%' ";
+  $sql .= " where item_number LIKE :item_number ";
   $sql .= " AND item_id_m  = item_id ";
   $sql = ino_perPageSql_i($sql, 1);
-  $result = $db->find_by_sql($sql);
+  global $db;
+  $value_a = ['item_number' => "%$item_number%", 'org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
   return !(empty($result)) ? array_pop($result) : false;
  }
 
  public function findBy_item_id_m($item_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE item_id = item_id_m ";
-  $sql .= " AND item_id = '{$item_id}' ";
-  $result = $this->findBySql($sql);
+  $sql .= " WHERE item_id = :item_id_m ";
+  global $db;
+  $value_a = ['item_id_m' => $item_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 
@@ -817,7 +828,7 @@ class item extends dbObject {
     }
     $mm_item->_update_item_minmax();
     $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " . $mm_item->item_id_m . ' & org_id ' . $mm_item->org_id .
-     ' min max header id : ' . $fp_minmax_header_id;
+       ' min max header id : ' . $fp_minmax_header_id;
    } catch (Exception $e) {
     $this->message .= "<br/> Min Max Item Updat fialed for Item id " . $item_id . $e->getMessage();
    }
@@ -847,7 +858,7 @@ class item extends dbObject {
     try {
      $mm_item->_update_item_minmax();
      $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " . $mm_item->item_id_m . ' & org_id ' . $mm_item->org_id .
-      ' fp_minmax_header_id : ' . $fp_minmax_header_id;
+        ' fp_minmax_header_id : ' . $fp_minmax_header_id;
     } catch (Exception $e) {
      $this->message .= "<br>Min Max Plannerp failed for Item id " . $mm_item->item_id_m . $e->getMessage();
     }
@@ -878,7 +889,7 @@ class item extends dbObject {
     try {
      $mm_item->_update_item_minmax();
      $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " . $mm_item->item_id_m . ' & org_id ' . $mm_item->org_id .
-      ' fp_minmax_header_id : ' . $fp_minmax_header_id;
+        ' fp_minmax_header_id : ' . $fp_minmax_header_id;
     } catch (Exception $e) {
      $this->message .= "<br>Min Max Plannerp failed for Item id " . $mm_item->item_id_m . $e->getMessage();
     }
@@ -900,7 +911,7 @@ class item extends dbObject {
    try {
     $mm_item->_update_item_minmax();
     $this->message .= "<br>Min Max item attributes are successfully updated for item_id - " . $mm_item->item_id_m . ' & org_id ' . $mm_item->org_id .
-     ' fp_minmax_header_id : ' . $mms->plan_id;
+       ' fp_minmax_header_id : ' . $mms->plan_id;
    } catch (Exception $e) {
     $this->message .= "<br>Min Max Plannerp failed for Item id " . $mm_item->item_id_m . $e->getMessage();
    }
@@ -951,8 +962,8 @@ class item extends dbObject {
   $param_a = ['item_number1', 'item_number2', 'org_id'];
   $org_id_i = !empty($org_id) ? $org_id : $this->org_id;
   $value_a = ['item_number1' => $item_number1,
-   'item_number2' => $item_number2,
-   'org_id' => $org_id_i];
+     'item_number2' => $item_number2,
+     'org_id' => $org_id_i];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
   return !(empty($result)) ? $result : false;
  }
@@ -970,18 +981,26 @@ class item extends dbObject {
  public static function find_all_assigned_orgs($item_number) {
   global $db;
   $sql = "SELECT * FROM " .
-   self::$table_name .
-   " where item_number= '{$item_number}' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where item_number= :item_number ";
+
+  global $db;
+  $value_a = ['item_number' => $item_number];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
  public static function find_all_assigned_org_ids($item_number) {
   global $db;
   $sql = "SELECT org_id FROM " .
-   self::$table_name .
-   " where item_number= '{$item_number}' ";
-  $result = $db->find_by_sql($sql);
+     self::$table_name .
+     " where item_number= :item_number ";
+
+  global $db;
+  $value_a = ['item_number' => $item_number];
+  $result = $db->findBySql($sql, $value_a);
+
   $assigned_inventory_orgs_array = [];
 
   foreach ($result as $orgs) {
@@ -1004,24 +1023,26 @@ class item extends dbObject {
     $sql .= " AND $key  = '{$val}' ";
    }
   }
-  
-  $result = self::find_by_sql($sql);
-    if(empty($result)){
+
+  global $db;
+  $result = $db->findBySql($sql);
+
+  if (empty($result)) {
    return false;
   }
   $data = array();
   foreach ($result as $row) {
    $data[] = array(
-    'label' => $row->item_number,
-    'item_number' => $row->item_number,
-    'item_id' => $row->item_id,
-    'item_id_m' => $row->item_id_m,
-    'item_description' => $row->item_description,
-    'uom_id' => $row->uom_id,
-    'processing_lt' => $row->processing_lt,
-    'lot_generation' => $row->lot_generation,
-    'serial_generation' => $row->serial_generation,
-    'kit_cb' => $row->kit_cb
+      'label' => $row->item_number,
+      'item_number' => $row->item_number,
+      'item_id' => $row->item_id,
+      'item_id_m' => $row->item_id_m,
+      'item_description' => $row->item_description,
+      'uom_id' => $row->uom_id,
+      'processing_lt' => $row->processing_lt,
+      'lot_generation' => $row->lot_generation,
+      'serial_generation' => $row->serial_generation,
+      'kit_cb' => $row->kit_cb
    );
   }
 //	$return_array['jsonvalue'] = $data;
@@ -1032,9 +1053,15 @@ class item extends dbObject {
  public static function find_item_number_by_itemNumber_OrgId_allAttributes($item_number, $org_id = "", $options = '') {
   $sql = "SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " where item_number LIKE '%{$item_number}%' ";
+  $sql .= " where item_number LIKE :item_number ";
+
+  global $db;
+  $value_a = ['item_number' => "%$item_number%"];
+
+
   if (!empty($org_id)) {
-   $sql .= " AND org_id  = '{$org_id}' ";
+   $sql .= " AND org_id  = :org_id ";
+   $value_a['org_id'] = $org_id;
   }
   if (!empty($options)) {
    foreach ($options as $key => $val) {
@@ -1044,7 +1071,7 @@ class item extends dbObject {
    }
   }
 
-  $result = self::find_by_sql($sql);
+  $result = $db->findBySql($sql, $value_a);
 
   if (!empty($result)) {
    foreach ($result as &$obj) {
@@ -1087,10 +1114,13 @@ class item extends dbObject {
        FROM 
        category , category_reference
        WHERE category_reference.reference_table = 'item'
-       AND category_reference.reference_id = '{$item_id}'
+       AND category_reference.reference_id = :reference_id
        AND category.category_id = category_reference.category_id";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['reference_id' => $item_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
@@ -1108,10 +1138,13 @@ class item extends dbObject {
        WHERE category_reference.reference_table = 'item'
        AND category_reference.reference_id = item.item_id
        AND category.category_id = category_reference.category_id 
-       AND item.item_id_m = '{$item_id_m}'
-       AND item.org_id = '{$org_id}' ";
+       AND item.item_id_m = :item_id_m
+       AND item.org_id = :org_id ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return $result;
  }
 
@@ -1149,26 +1182,27 @@ class item extends dbObject {
    $sql .= " AND item_id = item_id_m ";
   }
 
-  $result_array = static::find_by_sql($sql);
+  global $db;
+  $result_array = $db->findBySql($sql);
   return !empty($result_array) ? ($result_array) : false;
  }
 
  public function multi_select_input_fields() {
   $multi_select_input = [
-   'overwrite_minmax_min_quantity',
-   'overwrite_minmax_max_quantity',
-   'overwrite_minmax_multibin_number',
-   'overwrite_minmax_multibin_size'
+     'overwrite_minmax_min_quantity',
+     'overwrite_minmax_max_quantity',
+     'overwrite_minmax_multibin_number',
+     'overwrite_minmax_multibin_size'
   ];
   return $multi_select_input;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block',
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block',
   ];
 
   return $multi_select_hidden;

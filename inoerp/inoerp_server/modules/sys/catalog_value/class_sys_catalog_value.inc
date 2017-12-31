@@ -21,31 +21,31 @@ class sys_catalog_value extends dbObject {
  public static $key_column = "line_value";
  public static $module = "sys";
  public $field_a = [
-  'sys_catalog_value_id',
-  'sys_catalog_line_id',
-  'sys_catalog_header_id',
-  'line_value',
-  'reference_table',
-  'reference_id',
+    'sys_catalog_value_id',
+    'sys_catalog_line_id',
+    'sys_catalog_header_id',
+    'line_value',
+    'reference_table',
+    'reference_id',
  ];
  public $initial_search = [
-  'line_value'
+    'line_value'
  ];
  public $requiredField = [
-  'sys_catalog_line_id',
-  'line_value',
-  'reference_table',
-  'reference_id',
+    'sys_catalog_line_id',
+    'line_value',
+    'reference_table',
+    'reference_id',
  ];
  public $fields_inForm_notInDataBase = [
-  'sys_catalog_header_id',
-  'line_name',
-  'description',
+    'sys_catalog_header_id',
+    'line_name',
+    'description',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Catalog Values"; //page Title
  public $sys_catalog_value_id;
@@ -64,12 +64,14 @@ class sys_catalog_value extends dbObject {
 							 sci.line_name,  sci.description, sch.catalog, sch.description as catalog_description
        FROM 
        sys_catalog_value scv , sys_catalog_line sci, sys_catalog_header sch
-       WHERE scv.reference_table = '{$reference_table}'
-       AND scv.reference_id = '{$reference_id}'
-        AND scv.sys_catalog_header_id = '{$sys_catalog_header_id}'
+       WHERE scv.reference_table = :reference_table
+       AND scv.reference_id = :reference_id
+        AND scv.sys_catalog_header_id = :sys_catalog_header_id
        AND scv.sys_catalog_line_id = sci.sys_catalog_line_id
         AND scv.sys_catalog_header_id = sch.sys_catalog_header_id ";
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id, 'sys_catalog_header_id' => $sys_catalog_header_id];
+  $result = $db->findBySql($sql, $value_a);
 //  echo $sql;
   return !empty($result) ? $result : false;
  }
@@ -117,14 +119,14 @@ class sys_catalog_value extends dbObject {
   $all_data = $this->findValues_forDocument();
   $stmt = '';
   foreach ($all_data as $cat_val_a) {
-   $stmt .= '<div class="panel panel-ino-light-grey catalog-list-element '.$cat_val_a[0]->catalog.' ">
+   $stmt .= '<div class="panel panel-ino-light-grey catalog-list-element ' . $cat_val_a[0]->catalog . ' ">
        <div class="panel-heading"><h3 class="panel-title">' . $cat_val_a[0]->catalog . '</h3></div>
        <div class="panel-body">
         <ul class="column header_field catalog-ul">';
    foreach ($cat_val_a as $k => $obj) {
-    $stmt .='<li><label>' . $obj->line_name . '</label> ' . $obj->line_value . '</li>';
+    $stmt .= '<li><label>' . $obj->line_name . '</label> ' . $obj->line_value . '</li>';
    }
-   $stmt .='</ul>
+   $stmt .= '</ul>
        </div>
       </div>';
   }
@@ -137,13 +139,14 @@ class sys_catalog_value extends dbObject {
 							 sci.line_name,  sci.description
        FROM 
        sys_catalog_value scv , sys_catalog_line sci
-       WHERE scv.reference_table = '{$reference_table}'
-       AND scv.reference_id = '{$reference_id}'
-        AND scv.sys_catalog_line_id = '{$sys_catalog_line_id}'
+       WHERE scv.reference_table = :reference_table
+       AND scv.reference_id = :reference_id
+        AND scv.sys_catalog_line_id = :sys_catalog_line_id
        AND scv.sys_catalog_line_id = sci.sys_catalog_line_id ";
-        $sql = ino_perPageSql_i($sql, 1);
-  $result = self::find_by_sql($sql);
-//  echo $sql;
+  $sql = ino_perPageSql_i($sql, 1);
+  global $db;
+  $value_a = ['reference_table' => $reference_table, 'reference_id' => $reference_id, 'sys_catalog_line_id' => $sys_catalog_line_id];
+  $result = $db->findBySql($sql, $value_a);
   return !empty($result) ? array_pop($result) : false;
  }
 

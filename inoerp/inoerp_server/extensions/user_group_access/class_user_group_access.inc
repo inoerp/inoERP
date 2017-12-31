@@ -20,42 +20,42 @@ class user_group_access extends dbObject {
  public static $key_column = 'org_id';
  public static $module = "extensions";
  public static $system_info = [
-  'name' => 'User Group Access',
-  'number' => '10044',
-  'description' => 'Define and mainten user froup access',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'extn',
-  'weight' => 19
+    'name' => 'User Group Access',
+    'number' => '10044',
+    'description' => 'Define and mainten user froup access',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'extn',
+    'weight' => 19
  ];
 //  data base variables as stored database column name
  public static $access_map = [
-  '2' => 'Read',
+    '2' => 'Read',
 //  '3' => 'Write',
 //  '4' => 'Update Own Content',
 //  '5' => 'Update Any Content',
-  '9' => 'Update All'
+    '9' => 'Update All'
  ];
  public $field_a = [
-  'user_group_access_id',
-  'user_group_code',
-  'org_id',
-  'access_level',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'user_group_access_id',
+    'user_group_code',
+    'org_id',
+    'access_level',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  "user_group_access_id",
-  "user_group_code",
+    "user_group_access_id",
+    "user_group_code",
  ];
  public $requiredField = [
-  'user_group_code',
-  'org_id',
-  'access_level',
+    'user_group_code',
+    'org_id',
+    'access_level',
  ];
  public $user_group_access_id;
  public $user_group_code;
@@ -93,8 +93,8 @@ class user_group_access extends dbObject {
 
  public function assign_user_group_accesss_paths() {
   if (empty($_SESSION['allowed_path_ids']) &&
-   !empty($_SESSION['user_id']) &&
-   (in_array('ADMIN', $_SESSION['user_roles']))) {
+     !empty($_SESSION['user_id']) &&
+     (in_array('ADMIN', $_SESSION['user_roles']))) {
    $paths = path::find_all('display_weight');
    $allowed_path_ids = [];
    foreach ($paths as $path) {
@@ -102,7 +102,7 @@ class user_group_access extends dbObject {
    }
    $_SESSION['allowed_path_ids'] = $allowed_path_ids;
   } else if (empty($_SESSION['allowed_path_ids']) &&
-   (!empty($_SESSION['user_roles']))) {
+     (!empty($_SESSION['user_roles']))) {
    $allowed_path_ids = [];
 
    foreach ($_SESSION['user_group_access'] as $obj_class_name => $mode) {
@@ -125,8 +125,12 @@ class user_group_access extends dbObject {
  }
 
  public static function find_by_groupCode($group_code) {
-  $sql = "SELECT * FROM " . self::$table_name . " where user_group_code='{$group_code}' ";
-  $result = self::find_by_sql($sql);
+  $sql = "SELECT * FROM " . self::$table_name . " where user_group_code= :user_group_code ";
+
+  global $db;
+  $value_a = ['user_group_code' => $group_code];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
@@ -135,19 +139,22 @@ class user_group_access extends dbObject {
    FROM user_group ug, ino_user, user_group_access uga 
    WHERE ino_user.ino_user_id = ug.ino_user_id 
    AND uga.user_group_code = ug.user_group_code
-    AND ino_user.ino_user_id = '{$user_id}'
+    AND ino_user.ino_user_id = :ino_user_id
  ";
 
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['ino_user_id' => $user_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : false;
  }
 
  public static function user_group_access_all_v() {
   global $db;
   $sql = " SELECT * FROM ";
-  $sql .=" user_group_access AS rp , option_line  AS ol";
-  $sql .=" WHERE rp.role_code = ol.option_line_id ";
+  $sql .= " user_group_access AS rp , option_line  AS ol";
+  $sql .= " WHERE rp.role_code = ol.option_line_id ";
 
   $result = $db->result_array_assoc($sql);
 

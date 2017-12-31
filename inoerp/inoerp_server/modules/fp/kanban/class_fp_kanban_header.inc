@@ -24,102 +24,102 @@ class fp_kanban_header extends dbObject {
  public static $multi_select_template_path = 'modules/fp/kanban/multi_action/fp_kanban_header_template_ma.php';
 //  data base variables as stored database column name
  public static $system_info = [
-  'name' => 'Kanban Routing',
-  'number' => '2511',
-  'description' => 'fp_kanban_header',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'fp',
-  'weight' => 17
+    'name' => 'Kanban Routing',
+    'number' => '2511',
+    'description' => 'fp_kanban_header',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'fp',
+    'weight' => 17
  ];
  public $action_a = [
-  'CREATE_CARD' => 'Create Card',
-  'UPDATE_CARD' => 'Create/Update Card',
+    'CREATE_CARD' => 'Create Card',
+    'UPDATE_CARD' => 'Create/Update Card',
  ];
  public static $card_generate_mode_a = [
-  'CREATE_NEW_CARD' => 'Create New Card',
-  'UPDATE_CARD' => 'Update Existing Card',
-  'CREATE_UPDATE' => 'Create & Update'
+    'CREATE_NEW_CARD' => 'Create New Card',
+    'UPDATE_CARD' => 'Update Existing Card',
+    'CREATE_UPDATE' => 'Create & Update'
  ];
  public static $source_type_a = [
-  'SUPPLIER' => 'Supplier',
-  'SUBINV' => 'Subinventory',
-  'PRODUCTION' => 'Production',
-  'ORG' => 'Organization',
-  'LOGICAL' => 'Logical'
+    'SUPPLIER' => 'Supplier',
+    'SUBINV' => 'Subinventory',
+    'PRODUCTION' => 'Production',
+    'ORG' => 'Organization',
+    'LOGICAL' => 'Logical'
  ];
  public static $calculate_a = [
-  'CARD' => 'Number of Cards',
-  'CARD_SIZE' => 'Card Size'
+    'CARD' => 'Number of Cards',
+    'CARD_SIZE' => 'Card Size'
  ];
  public $field_a = [
-  'fp_kanban_header_id',
-  'org_id',
-  'description',
-  'item_id_m',
-  'effective_from',
-  'effective_to',
-  'subinventory_id',
-  'locator_id',
-  'source_type',
-  'supplier_id',
-  'supplier_site_id',
-  'from_org_id',
-  'from_subinventory_id',
-  'from_locator_id',
-  'planning_only_cb',
-  'auto_request_cb',
-  'calculate',
-  'card_size',
-  'noof_card',
-  'moq',
-  'size_roundup',
-  'lead_time',
-  'allocation_per',
-  'flm',
-  'ssd',
-  'rfid_reference',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'fp_kanban_header_id',
+    'org_id',
+    'description',
+    'item_id_m',
+    'effective_from',
+    'effective_to',
+    'subinventory_id',
+    'locator_id',
+    'source_type',
+    'supplier_id',
+    'supplier_site_id',
+    'from_org_id',
+    'from_subinventory_id',
+    'from_locator_id',
+    'planning_only_cb',
+    'auto_request_cb',
+    'calculate',
+    'card_size',
+    'noof_card',
+    'moq',
+    'size_roundup',
+    'lead_time',
+    'allocation_per',
+    'flm',
+    'ssd',
+    'rfid_reference',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
 //variables used for showing data
  public $initial_search = [
-  'description',
-  'item_id_m',
+    'description',
+    'item_id_m',
  ];
  public $checkbox = [
-  'planning_only_cb',
-  'auto_request_cb',
+    'planning_only_cb',
+    'auto_request_cb',
  ];
  public $requiredField = [
-  'item_id_m',
-  'org_id',
-  'subinventory_id',
-  'source_type',
+    'item_id_m',
+    'org_id',
+    'subinventory_id',
+    'source_type',
  ];
  public $fields_inForm_notInDataBase = [
-  "item_number",
-  "item_description",
-  "supplier_name",
-  "supplier_number",
-  "supplier_site_name",
-  'multibin_kanban_quantity',
-  'overwrite_kanban_multibin_number',
-  'overwrite_kanban_multibin_size',
-  'kanban_multibin_number',
-  'kanban_multibin_size',
-  'action',
+    "item_number",
+    "item_description",
+    "supplier_name",
+    "supplier_number",
+    "supplier_site_name",
+    'multibin_kanban_quantity',
+    'overwrite_kanban_multibin_number',
+    'overwrite_kanban_multibin_size',
+    'kanban_multibin_number',
+    'kanban_multibin_size',
+    'action',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
  ];
  public $search_functions = [
-  'Organization' => 'search_org_name'
+    'Organization' => 'search_org_name'
  ];
  public $pageTitle = " Kanban Route "; //page Title
  public $fp_kanban_header_id;
@@ -165,16 +165,16 @@ class fp_kanban_header extends dbObject {
  public $kanban_multibin_number;
  public $kanban_multibin_size;
  public $prg_generate_card_parameters = [
-  'Organization' => 'search_org_name',
-  'Item Number From' => 'search_item_number_from',
-  'Item Number To' => 'search_item_number_to',
-  'Item Id From' => 'search_item_id_m_from',
-  'Item Id To' => 'search_item_id_m_to',
-  'Mode' => 'search_kanban_card_generate_mode',
+    'Organization' => 'search_org_name',
+    'Item Number From' => 'search_item_number_from',
+    'Item Number To' => 'search_item_number_to',
+    'Item Id From' => 'search_item_id_m_from',
+    'Item Id To' => 'search_item_id_m_to',
+    'Mode' => 'search_kanban_card_generate_mode',
  ];
  public $prg_generate_card_details = [
-  'name' => 'Kanban Card Update ',
-  'description' => 'Update Kanban Card Details ',
+    'name' => 'Kanban Card Update ',
+    'description' => 'Update Kanban Card Details ',
  ];
 
  public function _before_save() {
@@ -245,9 +245,12 @@ class fp_kanban_header extends dbObject {
  Public static function all_kanbans_for_itemOrg($item_id_m, $org_id) {
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
-  $sql .= " WHERE item_id_m = '{$item_id_m}' AND org_id='{$org_id}' ";
+  $sql .= " WHERE item_id_m = :item_id_m AND org_id=:org_id ";
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id];
+  $result = $db->findBySql($sql, $value_a);
+
   return !empty($result) ? $result : null;
  }
 
@@ -355,19 +358,18 @@ class fp_kanban_header extends dbObject {
 
  public function multi_select_input_fields() {
   $multi_select_input = [
-
-   'overwrite_kanban_multibin_number',
-   'overwrite_kanban_multibin_size'
+     'overwrite_kanban_multibin_number',
+     'overwrite_kanban_multibin_size'
   ];
   return $multi_select_input;
  }
 
  public function multi_select_hidden_fields() {
   $multi_select_hidden = [
-   'action_class_name',
-   'mode',
-   'action',
-   'show_block',
+     'action_class_name',
+     'mode',
+     'action',
+     'show_block',
   ];
 
   return $multi_select_hidden;

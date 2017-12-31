@@ -8,26 +8,26 @@ class cc_co_line_value extends dbObject {
  public static $key_column = 'cc_co_line_id';
  public static $module = "cc";
  public $field_a = [
-  'cc_co_line_value_id',
-  'cc_co_line_id',
-  'cc_co_template_line_id',
-  'field_value',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'cc_co_line_value_id',
+    'cc_co_line_id',
+    'cc_co_template_line_id',
+    'field_value',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $fields_inHeader_needsToBeInserted_inPOST = [
-  "cc_co_header_id"
+    "cc_co_header_id"
  ];
  public $requiredField = [
-  'cc_co_line_id',
-  'cc_co_template_line_id',
-  'field_value',
+    'cc_co_line_id',
+    'cc_co_template_line_id',
+    'field_value',
  ];
  public $fields_inFormr_notinDataBase = [
-  "field_name",
-  'item_number',
+    "field_name",
+    'item_number',
  ];
  public $cc_co_line_value_id;
  public $cc_co_line_id;
@@ -46,11 +46,11 @@ FROM
 cc_co_line ccl
 LEFT JOIN cc_co_line_value cclv ON cclv.cc_co_line_id = ccl.cc_co_line_id 
 
-WHERE cclv.cc_co_template_line_id = '{$cc_co_template_line_id}'
- AND cclv.cc_co_line_id = '{$cc_co_line_id}'
+WHERE cclv.cc_co_template_line_id = :cc_co_template_line_id
+ AND cclv.cc_co_line_id = :cc_co_line_id
 ";
- 
-   switch (DB_TYPE) {
+
+  switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(1);
     break;
@@ -60,7 +60,9 @@ WHERE cclv.cc_co_template_line_id = '{$cc_co_template_line_id}'
     break;
   }
 
-  $result = self::find_by_sql($sql);
+  global $db;
+  $value_a = ['cc_co_template_line_id' => $cc_co_template_line_id, 'cc_co_line_id' => $cc_co_line_id];
+  $result = $db->findBySql($sql, $value_a);
 // echo $sql;
   return !empty($result) ? array_pop($result) : false;
  }

@@ -7,131 +7,129 @@ class gl_journal_interface extends dbObject {
  public static $multi_search_primary_column = "gl_journal_line_id"; //this value is used in multi search hidden value
  public static $key_column = 'gl_journal_line_id';
  public static $system_info = [
-  'name' => 'Journal Interface',
-  'number' => '110',
-  'description' => 'GL Journal Interface',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'primary_entity_cb' => '',
-  'module_name' => 'gl',
-  'weight' => 6
+    'name' => 'Journal Interface',
+    'number' => '110',
+    'description' => 'GL Journal Interface',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'primary_entity_cb' => '',
+    'module_name' => 'gl',
+    'weight' => 6
  ];
  public static $line_status_a = [
-  'N' => 'New not imported',
-  'E' => 'Error',
-  'S' => 'Sucessfully Imported',
+    'N' => 'New not imported',
+    'E' => 'Error',
+    'S' => 'Sucessfully Imported',
  ];
  public $field_a = [
-  'gl_journal_interface_id',
-  'gl_journal_header_id',
-  'gl_journal_line_id',
-  'ledger_id',
-  'currency',
-  'document_date',
-  'period_id',
-  'journal_source',
-  'journal_category',
-  'journal_name',
-  'description',
-  'balance_type',
-  'post_date',
-  'header_amount',
-  'doc_currency',
-  'exchange_type',
-  'exchange_date',
-  'exchange_rate',
-  'control_total',
-  'running_total_dr',
-  'running_total_cr',
-  'running_toatl_ac_dr',
-  'running_toatl_ac_cr',
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
+    'gl_journal_interface_id',
+    'gl_journal_header_id',
+    'gl_journal_line_id',
+    'ledger_id',
+    'currency',
+    'document_date',
+    'period_id',
+    'journal_source',
+    'journal_category',
+    'journal_name',
+    'description',
+    'balance_type',
+    'post_date',
+    'header_amount',
+    'doc_currency',
+    'exchange_type',
+    'exchange_date',
+    'exchange_rate',
+    'control_total',
+    'running_total_dr',
+    'running_total_cr',
+    'running_toatl_ac_dr',
+    'running_toatl_ac_cr',
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
 //  'status',
-  'line_num',
-  'line_status',
-  'line_type',
-  'line_description',
-  'code_combination_id',
-  'total_dr',
-  'total_cr',
-  'total_ac_dr',
-  'total_ac_cr',
-  'line_reference_type',
-  'line_reference_key_name',
-  'line_reference_key_value',
-  'rev_enabled_cb',
-  'rev_number',
-  'created_by',
-  'creation_date',
-  'last_update_by',
-  'last_update_date',
+    'line_num',
+    'line_status',
+    'line_type',
+    'line_description',
+    'code_combination_id',
+    'total_dr',
+    'total_cr',
+    'total_ac_dr',
+    'total_ac_cr',
+    'line_reference_type',
+    'line_reference_key_name',
+    'line_reference_key_value',
+    'rev_enabled_cb',
+    'rev_number',
+    'created_by',
+    'creation_date',
+    'last_update_by',
+    'last_update_date',
  ];
  public $initial_search = [
-  'gl_journal_interface_id',
-  'gl_journal_header_id',
-  'gl_journal_line_id',
+    'gl_journal_interface_id',
+    'gl_journal_header_id',
+    'gl_journal_line_id',
  ];
  public $dateField = [
-  'document_date'
+    'document_date'
  ];
  public $requiredField = [
-  'ledger_id',
-  'journal_source',
-  'journal_category',
-  'period_id',
-  'balance_type',
-  'currency',
-  'doc_currency',
-  'exchange_type',
-  'exchange_rate',
-  'code_combination_id',
+    'ledger_id',
+    'journal_source',
+    'journal_category',
+    'period_id',
+    'balance_type',
+    'currency',
+    'doc_currency',
+    'exchange_type',
+    'exchange_rate',
+    'code_combination_id',
  ];
  public $fields_inForm_notInDataBase = [
-  'action',
+    'action',
  ];
  public $numberField = [
-  'header_amount',
-  'exchange_rate',
-  'control_total',
-  'running_total_dr',
-  'running_total_cr',
-  'running_toatl_ac_dr',
-  'running_toatl_ac_cr',
+    'header_amount',
+    'exchange_rate',
+    'control_total',
+    'running_total_dr',
+    'running_total_cr',
+    'running_toatl_ac_dr',
+    'running_toatl_ac_cr',
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=gl_journal_interface',
-  '_show_update_path' => 1,
-  '_view_path' => 'form.php?class_name=gl_journal_interface',
-  '_show_view_path' => 1
+    '_update_path' => 'form.php?class_name=gl_journal_interface',
+    '_show_update_path' => 1,
+    '_view_path' => 'form.php?class_name=gl_journal_interface',
+    '_show_view_path' => 1
  ];
  public $search_functions = [
-  'Ledger' => 'search_ledger',
+    'Ledger' => 'search_ledger',
  ];
  public $prg_import_gl_journal_parameters = [
-  'Ledger' => 'search_ledger',
-  'Source' => 'search_journal_source',
-  'Category' => 'search_journal_category',
-  'Period' => 'search_gl_period_name',
+    'Ledger' => 'search_ledger',
+    'Source' => 'search_journal_source',
+    'Category' => 'search_journal_category',
+    'Period' => 'search_gl_period_name',
  ];
  public $prg_import_gl_journal_details = [
-  'name' => 'Import GL Journal ',
-  'description' => 'Import GL Journal from Interface ',
+    'name' => 'Import GL Journal ',
+    'description' => 'Import GL Journal from Interface ',
  ];
- 
-  public $prg_delete_gl_journal_parameters = [
-  'Ledger' => 'search_ledger',
-  'Source' => 'search_journal_source',
-  'Category' => 'search_journal_category',
-  'Period' => 'search_gl_period_name',
+ public $prg_delete_gl_journal_parameters = [
+    'Ledger' => 'search_ledger',
+    'Source' => 'search_journal_source',
+    'Category' => 'search_journal_category',
+    'Period' => 'search_gl_period_name',
  ];
  public $prg_delete_gl_journal_details = [
-  'name' => 'Delete Journal Interface Lines',
-  'description' => 'Delete Journal Interface Lines',
+    'name' => 'Delete Journal Interface Lines',
+    'description' => 'Delete Journal Interface Lines',
  ];
- 
  public $pageTitle = " Import GL Journals "; //page Title
  public $gl_journal_interface_id;
  public $gl_journal_header_id;
@@ -208,8 +206,8 @@ FROM gl_journal_interface ";
   if (!empty($this->ledegr_id)) {
    $sql .= " AND ledegr_id = '{$this->ledegr_id}' ";
   }
-  
-    if (!empty($this->journal_source)) {
+
+  if (!empty($this->journal_source)) {
    $sql .= " AND journal_source = '{$this->journal_source}' ";
   }
 
@@ -226,8 +224,7 @@ FROM gl_journal_interface ";
   return !empty($result) ? $result : false;
  }
 
- 
-  private function _lines_for_delete() {
+ private function _lines_for_delete() {
   $sql = " SELECT *
           FROM gl_journal_interface 
           WHERE line_status = 'S' ";
@@ -235,8 +232,8 @@ FROM gl_journal_interface ";
   if (!empty($this->ledegr_id)) {
    $sql .= " AND ledegr_id = '{$this->ledegr_id}' ";
   }
-  
-    if (!empty($this->journal_source)) {
+
+  if (!empty($this->journal_source)) {
    $sql .= " AND journal_source = '{$this->journal_source}' ";
   }
 
@@ -252,14 +249,18 @@ FROM gl_journal_interface ";
   $result = $this->findBySql($sql);
   return !empty($result) ? $result : false;
  }
- 
+
  private function _create_journal($iline) {
   $sql = " SELECT * 
 FROM gl_journal_interface 
 WHERE CONCAT(ledger_id, '|' ,currency, '|' ,doc_currency, '|' , period_id, '|' ,balance_type, '|' ,journal_source, '|' ,
-journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate) = '{$iline->line_combination}' ";
+journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate) = :line_combination ";
 
-  $all_lines = $this->find_by_sql($sql);
+  global $db;
+  $value_a = ['line_combination' => $iline->line_combination];
+  $all_lines = $db->findBySql($sql, $value_a);
+
+
   if ($all_lines) {
    $gl_journal_header_id = $this->_create_journal_header($all_lines[0]);
 
@@ -274,7 +275,7 @@ journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate) = '{$iline->line
      $gl_ji->findBy_id($journal_line->gl_journal_interface_id);
      if ($journal_line_id) {
       $gl_ji->line_status = 'S';
-     }else{
+     } else {
       $gl_ji->line_status = 'E';
      }
      $gl_ji->save();
@@ -360,7 +361,7 @@ journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate) = '{$iline->line
   if (!empty($parameters['ledger_id'][0])) {
    $this->ledger_id = $parameters['ledger_id'][0];
    $this->message .= '<br> Entered Ledger Id is : ' . $this->ledger_id;
-  } 
+  }
 
   if (!empty($parameters['journal_category'][0])) {
    $this->journal_category = $parameters['journal_category'][0];
@@ -388,14 +389,14 @@ journal_category,'|' , '|' ,exchange_type, '|' , exchange_rate) = '{$iline->line
 
   return $this->message;
  }
- 
+
  public function prg_delete_gl_journal($seralized_parameters) {
   $parameters = unserialize($seralized_parameters);
   $this->message = '<br> Starting to Delete GL Journal Interface Lines....<br>';
   if (!empty($parameters['ledger_id'][0])) {
    $this->ledger_id = $parameters['ledger_id'][0];
    $this->message .= '<br> Entered Ledger Id is : ' . $this->ledger_id;
-  } 
+  }
 
   if (!empty($parameters['journal_category'][0])) {
    $this->journal_category = $parameters['journal_category'][0];

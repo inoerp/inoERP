@@ -49,11 +49,13 @@ class payment_term_schedule extends dbObject {
  public $msg;
 
  public static function find_by_payment_termId($term_id) {
-	global $db;
+
 	$sql = "SELECT * FROM " .
 					self::$table_name .
-					" where payment_term_id= '{$term_id}' ";
-	$result = self::find_by_sql($sql);
+					" where payment_term_id= :payment_term_id ";
+  global $db;
+  $value_a = ['payment_term_id' => $term_id];
+  $result = $db->findBySql($sql, $value_a);
 	return $result;
  }
 

@@ -1,0 +1,203 @@
+<?php
+/**
+ * inoERP
+ *
+ * @copyright   2014 Nishit R. Das
+ * @license     https://www.mozilla.org/MPL/2.0/
+ * @link        http://inoideas.org
+ * @source code https://github.com/inoerp/inoERP
+ */
+ class po_quote_line extends dbObject {
+
+  public static $table_name = "po_quote_line";
+  public static $primary_column = "po_quote_line_id";
+  public static $parent_primary_column = "po_quote_header_id";
+  public static $key_column = 'po_rfq_line_id';
+  public static $module = "po";
+  public $field_a = [
+   'po_quote_header_id',
+   'po_quote_line_id',
+   'po_rfq_line_id',
+   'line_number',
+   'item_id_m',
+   'item_description',
+   'mfg_part_number',
+   'manufacturer',
+   'supplier_part_number',
+   'minimum_agreement_quantity',
+   'minimum_order_quantity',
+   'fix_lot_multiplier',
+   'daily_capacity',
+   'processing_lead_time',
+   'replenishment_lead_time',
+   'uom_id',
+   'quote_unit_price',
+   'status',
+   'created_by',
+   'creation_date',
+   'last_update_by',
+   'last_update_date',
+  ];
+  public $initial_search = [
+   'po_quote_header_id',
+   'mfg_part_number',
+   'manufacturer',
+   'item_id_m',
+   'item_description',
+  ];
+  public $numberField = [
+   'minimum_agreement_quantity',
+   'minimum_order_quantity',
+   'unit_price',
+   'quote_unit_price'
+  ];
+  public $requiredField = [
+   'po_quote_header_id',
+   'po_rfq_line_id',
+   'item_description',
+  ];
+  public $fields_inForm_notInDataBase = [
+   "po_quote_number",
+   "item_number",
+  ];
+  public $fields_inHeader_needsToBeInserted_inPOST = [
+   "po_quote_header_id"
+  ];
+  public $po_quote_line_id;
+  public $po_quote_header_id;
+  public $po_rfq_line_id;
+  public $line_number;
+  public $item_id_m;
+  public $item_description;
+  public $mfg_part_number;
+  public $manufacturer;
+  public $supplier_part_number;
+  public $minimum_agreement_quantity;
+  public $minimum_order_quantity;
+  public $fix_lot_multiplier;
+  public $daily_capacity;
+  public $processing_lead_time;
+  public $replenishment_lead_time;
+  public $uom_id;
+  public $quote_unit_price;
+  public $status;
+  public $created_by;
+  public $creation_date;
+  public $last_update_by;
+  public $last_update_date;
+  public $item_number;
+  public $minimum_quantity;
+  public $maximum_quantity;
+  public $target_price;
+  public $unit_price;
+
+  public function _before_save() {
+//   pa($_POST);
+  }
+
+  public function _after_save() {
+   
+  }
+
+  private function _update_hold() {
+   $hold_value = 0;
+   $hold_ref = new sys_hold_reference();
+   $hold_ref->reference_table = 'po_quote_line';
+   $hold_ref->reference_id = $this->po_quote_line_id;
+   $agreement_requirements = self::find_agreement_requirements_by_lineId($this->bpa_line_id);
+//   pa($agreement_requirements);
+   $hold_ref->hold_code = 'po_quote_LINE_OVER_RELEASED_QTY';
+   if (($agreement_requirements) && ($agreement_requirements->released_quantity + $this->line_quantity) > $agreement_requirements->agreed_quantity) {
+    if (!$hold_ref->findBy_referenceTableId_holdCode(true)) {
+     $application_reason = 'Released quantity is more than aggreed quantity';
+     $this->_put_onHold('po_quote_LINE_OVER_RELEASED_QTY', $application_reason);
+    }
+    $hold_value = 1;
+   }
+
+   if (($this->hold_cb == 1) && ($hold_value == 0) && !empty($this->po_quote_line_id)) {
+    $hold_ref->findBy_referenceTableId_holdCode(true);
+    if (!empty($hold_ref->sys_hold_reference_id)) {
+     $hold_ref->removal_reason = 'Quantity variance is removed';
+     $this->_remove_Hold($hold_ref);
+     $hold_value = 0;
+    }
+   }
+
+   $hold_ref->hold_code = 'po_quote_LINE_OVER_RELEASED_AMNT';
+   if (($agreement_requirements) && ($agreement_requirements->released_amount + $this->line_price) > $agreement_requirements->agreed_amount) {
+    if (!$hold_ref->findBy_referenceTableId_holdCode(true)) {
+     $application_reason = 'Released amount is more than aggreed amount';
+     $this->_put_onHold('po_quote_LINE_OVER_RELEASED_AMNT', $application_reason);
+    }
+    $hold_value = 1;
+   }
+
+   if (($this->hold_cb == 1) && ($hold_value == 0) && !empty($this->po_quote_line_id)) {
+    $hold_ref->findBy_referenceTableId_holdCode(true);
+    if (!empty($hold_ref->sys_hold_reference_id)) {
+     $hold_ref->removal_reason = 'Amount variance is removed';
+     $this->_remove_Hold($hold_ref);
+     $hold_value = 0;
+    }
+   }
+   $this->hold_cb = $hold_value;
+  }
+
+  private function _remove_Hold(&$obj) {
+   $obj->hold_removed_by = $_SESSION['username'];
+   $obj->hold_removed_on = current_time(true);
+   $obj->save();
+  }
+
+  private function _put_onHold($hold_code, $application_reason) {
+   $hold_ref = new sys_hold_reference();
+   $hold_ref->hold_code = $hold_code;
+   $hold_ref->reference_table = 'po_quote_line';
+   $hold_ref->reference_id = $this->po_quote_line_id;
+   $hold_ref->hold_applied_by = $_SESSION['username'];
+   $hold_ref->hold_applied_on = current_time(true);
+   $hold_ref->application_reason = $application_reason;
+   $hold_ref->save();
+  }
+
+  public function _before_delete() {
+   $detail_line_exists = po_quote_requirement::find_by_parent_id($this->po_quote_header_id);
+   if ($detail_line_exists) {
+    echo "<br>Delete is not allowed as PO Detail Lines exists!. First delete detail lines and then try again ";
+    return -99;
+   } else {
+    return 1;
+   }
+  }
+
+  Public static function po_quote_line_types() {
+   $option_header = option_header::find_by_name('po_quote_LINE_TYPE');
+   $po_quote_types = option_line::find_by_option_id($option_header->option_header_id);
+   return $po_quote_types;
+  }
+
+  public static function find_by_po_quote_headerId($po_quote_header_id) {
+   $sql = "SELECT * FROM " . self::$table_name . " where po_quote_header_id = :po_quote_header_id ";
+   
+   	  global $db;
+  $value_a = ['po_quote_header_id' => $po_quote_header_id];
+  $result_array = $db->findBySql($sql, $value_a);
+  
+   return $result_array;
+  }
+
+  public static function find_by_poHeaderId_itemId($po_quote_header_id, $item_id) {
+   $sql = "SELECT * FROM " . self::$table_name . " where po_quote_header_id = :po_quote_header_id AND item_id_m = :item_id_m  ";
+   $sql = ino_perPageSql_i($sql, 1);
+       global $db;
+	$value_a = ['po_quote_header_id' => $po_quote_header_id, 'item_id_m' => $item_id];
+	$result = $db->findBySql($sql, $value_a);
+  
+   return !empty($result) ? array_pop($result) : false;
+  }
+
+ }
+
+//end of po_quote_line class
+?>

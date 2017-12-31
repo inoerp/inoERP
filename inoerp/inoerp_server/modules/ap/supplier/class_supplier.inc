@@ -26,85 +26,85 @@ class supplier extends dbObject {
  public static $key_column = 'supplier_name';
  public static $module = "ap";
  public $checkbox = [
-  "rev_enabled_cb"
+    "rev_enabled_cb"
  ];
  public static $system_info = [
-  'name' => 'Supplier',
-  'number' => '1201',
-  'description' => 'Define and Mainten external/internal suppliers',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('supplier_site', 'supplier_all_v', 'supplier_bu'),
-  'primary_entity_cb' => '',
-  'module_name' => 'ap',
-  'weight' => 1
+    'name' => 'Supplier',
+    'number' => '1201',
+    'description' => 'Define and Mainten external/internal suppliers',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('supplier_site', 'supplier_all_v', 'supplier_bu'),
+    'primary_entity_cb' => '',
+    'module_name' => 'ap',
+    'weight' => 1
  ];
  public $field_a = [
-  "supplier_id",
-  "supplier_number",
-  "supplier_name",
-  "ar_customer_id",
-  "supplier_type",
-  "tax_country",
-  "tax_reg_no",
-  "tax_payer_id",
-  "address_id",
-  "supplier_category",
-  "status",
-  "alt_name",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "supplier_id",
+    "supplier_number",
+    "supplier_name",
+    "ar_customer_id",
+    "supplier_type",
+    "tax_country",
+    "tax_reg_no",
+    "tax_payer_id",
+    "address_id",
+    "supplier_category",
+    "status",
+    "alt_name",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
  public static $json_label_fields = [
-  "supplier_number",
-  "supplier_name",
-  "supplier_type",
-  "tax_country",
-  "alt_name",
+    "supplier_number",
+    "supplier_name",
+    "supplier_type",
+    "tax_country",
+    "alt_name",
  ];
  public $initial_search = [
-  "supplier_id",
-  "supplier_number",
-  "supplier_name",
-  "tax_country"
+    "supplier_id",
+    "supplier_number",
+    "supplier_name",
+    "tax_country"
  ];
  public $column = [
-  "supplier_id",
-  "supplier_number",
-  "supplier_name",
-  "tax_country",
-  "tax_reg_no"
+    "supplier_id",
+    "supplier_number",
+    "supplier_name",
+    "tax_country",
+    "tax_reg_no"
  ];
  public $numberField = [
-  'supplier_number',
+    'supplier_number',
  ];
  public $requiredField = [
-  "supplier_number",
-  "supplier_name",
-  "tax_country"
+    "supplier_number",
+    "supplier_name",
+    "tax_country"
  ];
  public $addressField = [
-  "address_id"
+    "address_id"
  ];
  public $fields_inForm_notInDataBase = [
-  'header_address_name',
-  'header_address',
-  'header_country',
-  'header_postal_code',
-  'customer_name'
+    'header_address_name',
+    'header_address',
+    'header_country',
+    'header_postal_code',
+    'customer_name'
  ];
  public $search = [
-  '_update_path' => 'form.php?class_name=supplier',
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update',
-  '_show_view_path' => 1,
+    '_update_path' => 'form.php?class_name=supplier',
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update',
+    '_show_view_path' => 1,
  ];
  public $pageTitle = " Supplier "; //page Title
  public $option_lists = [
-  'supplier_type' => 'SUPPLIER_TYPE',
+    'supplier_type' => 'SUPPLIER_TYPE',
  ];
  public $supplier_id;
  public $supplier_number;
@@ -177,8 +177,8 @@ class supplier extends dbObject {
  public static function find_by_supplier_number($supplier_number) {
   global $db;
   $sql = "SELECT * FROM "
-   . self::$table_name
-   . " where supplier_number LIKE '%{$supplier_number}%' ";
+     . self::$table_name
+     . " where supplier_number LIKE '%{$supplier_number}%' ";
   switch (DB_TYPE) {
    case 'ORACLE' :
     $sql .= ' AND ' . ino_perPageSql(30);
@@ -193,10 +193,10 @@ class supplier extends dbObject {
   if ($result && mysql_num_rows($result)) {
    while ($row = $db->fetch_array($result)) {
     $data[] = array(
-     'label' => $row['supplier_number'],
-     'supplier_number' => $row['supplier_number'],
-     'supplier_id' => $row['supplier_id'],
-     'description' => $row['supplier_description']
+       'label' => $row['supplier_number'],
+       'supplier_number' => $row['supplier_number'],
+       'supplier_id' => $row['supplier_id'],
+       'description' => $row['supplier_description']
     );
    }
   }
@@ -207,8 +207,8 @@ class supplier extends dbObject {
  public static function find_all_assigned_orgs($supplier_id) {
   global $db;
   $sql = "SELECT * FROM " .
-   'supplier_bu' .
-   " where supplier_id= '{$supplier_id}' ";
+     'supplier_bu' .
+     " where supplier_id= '{$supplier_id}' ";
   $result = $db->result_array_assoc($sql);
   return $result;
  }
@@ -216,12 +216,12 @@ class supplier extends dbObject {
  public function findBy_supplier_name($limit = 30) {
   global $db;
   $sql = " SELECT * FROM "
-   . self::$table_name
-   . " where supplier_name LIKE :supplier_name ";
+     . self::$table_name
+     . " where supplier_name LIKE :supplier_name ";
   $sql = ino_perPageSql_i($sql, $limit);
   $param_a = ['supplier_name'];
   $supplier_name = '%' . $this->supplier_name . '%';
-  $value_a = [ 'supplier_name' => $supplier_name];
+  $value_a = ['supplier_name' => $supplier_name];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
   return !(empty($result)) ? $result : false;
  }
@@ -239,7 +239,7 @@ class supplier extends dbObject {
 
   $param_a = ['supplier_name', 'org_id'];
   $supplier_name = '%' . $this->supplier_name . '%';
-  $value_a = [ 'supplier_name' => $supplier_name, 'org_id' => $this->org_id];
+  $value_a = ['supplier_name' => $supplier_name, 'org_id' => $this->org_id];
   $result = $db->findBy_sql($sql, $param_a, $value_a);
   return !(empty($result)) ? $result : false;
  }
@@ -250,9 +250,9 @@ class supplier extends dbObject {
   if (!empty($result)) {
    foreach ($result as $obj) {
     $data[] = array(
-     'label' => $obj->supplier_name,
-     'supplier_id' => $obj->supplier_id,
-     'supplier_number' => $obj->supplier_number
+       'label' => $obj->supplier_name,
+       'supplier_id' => $obj->supplier_id,
+       'supplier_number' => $obj->supplier_number
     );
    }
   }
@@ -265,9 +265,9 @@ class supplier extends dbObject {
   if (!empty($result)) {
    foreach ($result as $obj) {
     $data[] = array(
-     'label' => $obj->supplier_name,
-     'supplier_id' => $obj->supplier_id,
-     'supplier_number' => $obj->supplier_number
+       'label' => $obj->supplier_name,
+       'supplier_id' => $obj->supplier_id,
+       'supplier_number' => $obj->supplier_number
     );
    }
   }
@@ -378,8 +378,9 @@ LEFT JOIN supplier_bu sb ON su.supplier_id = sb.supplier_id
    }
   }
 
+  global $db;
+  $result_array = $db->findBySql($sql);
 
-  $result_array = static::find_by_sql($sql);
   return !empty($result_array) ? ($result_array) : false;
  }
 
