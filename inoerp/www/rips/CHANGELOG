@@ -1,0 +1,206 @@
+RIPS CHANGELOG
+===============
+
+RIPS 0.55
+----------
+	- updated configuration (sources, sinks, sanitization)
+	- added session fixation detection
+	- seperated reflection injection from code injection
+	- changed defaults (subdirs, vuln type)
+	- referenced user survey
+
+RIPS 0.54
+----------
+	- fixed Javascript errors
+	- fixed bug with false negatives in non-OOP code after OOP code (thanks to Gareth Heyes)
+	- improved handling of parse_str() function
+	- added new taintable $_SERVER parameters to sources (thanks to Mike Brooks)
+	- added new sinks
+
+RIPS 0.53
+----------
+	- fixed bug with includes (thanks to Ryan Dewhurst)
+
+RIPS 0.52
+----------
+	Code analysis:
+	- fixed bug where RIPS hangs on includes building a loop 1->2->3->1->2->3->1... (thanks to Michael Hoffmann)
+	- fixed bug where RIPS string analyzer hangs on certain array keys coming from foreach statements (thanks to Ricky-Lee Birtles)
+	- fixed bug where RIPS hangs on certain switch statements (thanks to Jay Bonci)
+	- fixed bug with wrong brace wrapping for "case x;" instead of "case x:" statements
+	- fixed bug with wrong brace wrapping when if-clause contains only 1 token or in a try/catch block
+	- fixed bug with parameter count in interprocedural analysis
+	- fixed bug with register_globals implementation and constants
+	- fixed bug with tokenizing a do-while in a do-while
+	- fixed bug with wrong boundary detection when a function is declared in another function
+	- fixed bug with wrong file pointer of included files, improved include rate
+	- added auto_prepend/append_file support, improved include_path support (thanks to Jay Bonci)
+	- added support for func_get_args() and func_get_arg()
+	- added support for alternative syntax for control structures (while(): ... endwhile;)
+	- added new sensitive sinks
+	- added experimental option SCAN_REGISTER_GLOBALS (/config/general.php)
+	- added parsing errors to verbosity level = debug, improved code stability
+	
+	Interface:
+	- added stylesheet "print" (thanks to Kurt Payne)
+	- added scrollbars to function code on mouseover
+	- disabled graphs for large projects (>50 files) due to performance
+	- improved output when a vulnerability is found multiple times (e.g. by multiple inclusion of a vulnerable file)
+	- fixed bug with style of multiline comments in code viewer
+	- optimized code viewer with file preview window
+
+RIPS 0.51
+----------
+	- fixed bug with apache_setenv() for non-Apache webservers
+	- fixed bug in leakscan preloader
+
+RIPS 0.50
+----------
+	Code analysis:
+	- added about 30 new sensitive sinks and some new userinput functions
+	- RIPS now traces codeblocks, not lines anymore 
+		-> code in one line without whitespaces ("obfuscated") is now possible to analyse
+		-> this also fixes several known bugs
+	- RIPS now handles arrays and its keys a lot more accurate
+		-> arrays are handled as variables with saved keys
+		-> dynamic key values are resolved
+		-> this also fixes several known bugs
+	- RIPS is now recoded object oriented
+		-> structure is better
+		-> code easier to understand
+	- fixes bug when an old define is overwritten by a new one	
+	- ignores "@" for correct detection of connected tokens
+	- added leakscan: trace if return value of tainted sensitive sink is echo'd (non-blind/blind exploitation)
+	- fixed lots of securing detection bugs
+	- automatically scans for register_globals implementation (extract, parse_str, $$key = $value, import_request_variables, etc.) 
+	- lots of new testcases added and fixed
+	- improved reconstruction of file names to be included
+	- set_time_limit is set to 0 now
+	
+	Interface:
+	- included SaveGraph patch	
+	- added preloader information about current scanning status (thanks for the input, Michael Hoffmann)
+	- added links to the stats window to other windows	
+	- fixed bug with color highlighting in regex search results
+	- improved jumping between functions in scan result
+	- moved http response splitting to clientside vulnerability list	
+
+RIPS 0.40 SaveGraph Patch:
+----------
+	- added option to save HTML5 canvas graph as image (feature request by ksaok)
+
+RIPS 0.40:
+----------
+	Code analysis:
+	- fixed bug with vartrace and different dependencies (if(condition) $var=1; else $var=2;)
+	- fixed bug with string reconstruction of included files (include("/foo/$var/bar");)
+	- improved file inclusion rate (name reconstruction, consider include_path, try to guess file)	
+	- fixed bug with usage of defined CONSTANTs (thanks to Dawid) 
+	- fixed bug with successful inclusion and FI vulnerability within one inclusion
+	- fixed bug with FI vulnerability and function call (require urldecode($_GET['a']))
+	- fixed bug with overwritten parameter vars in user-defined function
+	- fixed bug with two sensitive sinks in one userdefined functions affected by different parameters
+	- improved ternary operator handling
+	- added quote analysis for more precise securing detection (mysql_query("SELECT ".addslashes($id)); =vuln)
+		(still some bugs with quote analysis, TBD)
+	- added vulnerability type 'Unserialize' to scan for POP gadgets
+	
+	Interface:
+	- fixed bug with exploit creator and error_reporting=on (thanks Gregory and others)
+	- moved info gathering to seperate verbosity level, removed info about program exits
+	- added maximize button to code viewer
+	- added graph for file inclusion visualization
+	- added graph for function call and vulnerability flow visualization
+	- added pie chart for result
+	- grouped vulnerable lines for each vulnerability
+	- added new color schema 'ayti' and improved other color schemas
+	- fixed bug with vulnerable functions in the result that have not been called with userinput
+	- fixed bug with multiline comments in the code viewer
+	- added link to stats to show only vulns of specific type (click on vulnerability type)	
+	- added color highlighting for regex search results
+	- changed stylesheet is now tracked permanently by cookie
+
+RIPS 0.35:
+----------
+	- added ini_set("auto_detect_line_endings", true) to support MAC OSX newlines
+	- added preg_match(_all) support with $matches array
+	- prevented getmultiline() funtion to recursively loop for more than 10 rows (tracker ID: 3075359, thanks to lexak)
+	- added vulnerability type 'LDAP Injection'
+	- fixed bug with wrong detection of user defined securing functions using for-loops
+	- fixed critical bug with wrong detection of securing during inter-procedual analysis
+	- fixed bug with not detected function calls in included files and case-sensitive function names
+	- fixed bug with userinput returned by user-defined functions
+
+RIPS 0.34:
+----------
+	- fixed false positive when userinput is overwritten: $_GET['c']=1; exec($_GET['c']);
+	- fixed critical bug with missing scan results
+	- added more database securing and tainting functions (thanks to Yasuo Ohgaki)
+
+RIPS 0.33:
+----------
+	Code analysis:
+	- added vulnerability type 'XPath Injection'
+	- implemented $F_INSECURING_STRING (list of functions like urldecode() that can re-taint already sanitized data) 
+	- fixed bug with $GLOBALS[] (ignore previous local vars, accept only global vars)
+	- improved tainted $_SESSION (=global var) handling
+	- fixed bug with tainting functions not displayed in the result tree
+	- fixed bug with differently used quotes in array['"parameter'"] during traceback
+	- added compact() support
+	- ignore upper/lowercase in function names because PHP does not (sYsTem())
+	- scan for dynamic function calls $variable() (possible code exec)
+	
+	Interface:
+	- added missing taint-highlighting in the first line of PVF tree
+	- added file list: listing all scanned files and includes
+	- added list of function calls to each list item of user-defined functions
+	- added help button for simple visualization, description, example, PoC, patch and securing function list in a new window
+	- RIPS warns you when scan may last very long (counts files to scan)
+	- added AJAX interface with scan animation
+	- added scan result statistics and graphs
+	- highlight variables onMouseOver in code viewer and scan result. persistent highlight onClick.
+	- code viewer now supports active jumping between function calls and declarations 
+		(click on function call to jump to declaration, click "return" to jump back to the call)
+	- added regex search function 
+	- windows are now resizeable
+	- added curl headers for all tainting $_SERVER parameters in the exploit creator
+
+RIPS 0.32:
+----------
+	Code analysis:
+	- rebuild PVF config (FILE, CODE and SYSTEM PVF into FILE_READ, FILE_AFFECT, FILE_INCLUDE and EXEC PVF)
+	- added $_SERVER parameters that are tainting to the config (example: $_SERVER['PHP_SELF'];)
+	- fixed bug with securing detection of global string securing functions (example: md5($a.$b);)
+	- fixed bug where the first token of an included file was ignored
+	
+	Interface:
+	- added a little howto to the welcome page
+	- added more detailed vulnerability types to scan for
+	- added vulnerability name to each find (name still present during minimization of output block)
+	- added .phps-tainted-var for highlighting tainting vars in the trace output
+	- added explaination to inter-procedual analysis results
+	- added RIPS logo (created by Gareth Heyes, thank you)
+	- added a option to change the output tree from bottom-up to top-down (requested by Joel, thank you)
+	- fixed bug with missing link by inter-procedual analysis when function name appeared in the "requires" list
+
+RIPS 0.31:
+----------
+	Code analysis:
+	- improved RIPS code + performance 
+		(http://code.google.com/speed/articles/optimizing-php.html)
+		(http://www.wmtips.com/php/tips-optimizing-php-code.htm)
+	- improved securing detection by detecting automatic type casts	
+	- added connection poisoning PVFs
+	- added support for $arrays{'a'} with curly braces
+	- added missing support for tainted OO function with XSS
+	- added a missing class-to-variable association when using a constructor call instead the keyword 'new'
+	- fixed bug where successful file inclusions were scanned again for a file inclusion vulnerability
+	- fixed bugs with detecting commands written over several code lines (reported by Stefan Esser & Pragmatk)
+		(patch does not solve all multi-line bugs)
+	- corrected analysis of variables marked as 'global'	
+	
+	Interface:
+	- better arranged user input list
+	- added option to highlight variables in the CodeViewer by click
+	- added vulnerability type "All" to scan client- and server-side vulns simultaneously 
+	- added missing exploit button for direct-tainted XSS vulnerabilities

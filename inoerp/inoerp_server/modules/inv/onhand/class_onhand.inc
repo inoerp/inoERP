@@ -43,7 +43,7 @@ class onhand extends dbObject {
     'lot_id',
     'serial_id',
     'onhand',
-//  'reservable_onhand',
+  'reservable_onhand',
     'transactable_onhand',
     'lot_status',
     'serial_status',

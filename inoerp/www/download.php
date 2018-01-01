@@ -1,6 +1,7 @@
 <?php
 
 set_time_limit(0);
+require_once __DIR__.'/includes/basics/wloader.inc';
 include_once(__DIR__ . '/../inoerp_server/includes/basics/basics.inc');
 if (!empty($_POST) && !empty($_POST['program_name'])) {
  if ((!empty($_POST['class_name'])) && (!empty($_POST['program_name']))) {

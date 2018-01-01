@@ -1,0 +1,192 @@
+#scrollwindow {
+	background-color: grey;
+	opacity:0.22;
+}	
+
+body, html {
+	color: #111111;
+}
+
+.textcolor {
+	color: #ffffff;
+}
+
+.darkcolor {
+	color: black;
+}
+
+.userinput, .persistent {
+	list-style-type: disc;
+	color:grey; 
+}
+.validated {
+	list-style-type: disc;
+	color:red; 
+}
+.functioninput {
+	list-style-type: disc;
+	color:yellow; 
+}
+
+.vulnblock {
+	background-color:#D4D0C8;
+	color:black;
+	font-weight:bold;
+}
+
+.codebox {
+	margin-bottom: 10px;
+	background-color: #ffffff;
+}
+
+.windowcontent, #funccodecontent, #funccodetitle, .funclistcontent  {
+	background-color: #ffffff;
+	opacity:0.95;
+}
+
+.markline {
+	background-color: #EF9486;
+}
+
+.requires
+	{color: #000000; font-weight:bold;}
+	
+.linenr
+	{color: #808080;}
+	
+.link
+	{color: #0000FF; font-weight:bold;}
+
+
+.code, .vulntitle {
+	font-size:9pt;
+	font-family: "Bitstream Vera Sans Mono", "Monaco", "Courier New", monospace;
+}
+	
+.code,
+.phps-code, .phps-t-curly-open, .phps-t-dollar-open-curly-braces, .vulntitle
+	{color: #8000FF;  font-weight: bold;}
+
+.phps-t-string,
+.phps-t-eval
+	{color: #000000; font-weight: bold;}
+	
+.phps-t-and-equal, 
+.phps-t-concat-equal, 
+.phps-t-div-equal, 
+.phps-t-minus-equal, 
+.phps-t-mod-equal, 
+.phps-t-mul-equal, 
+.phps-t-or-equal, 
+.phps-t-plus-equal, 
+.phps-t-sl-equal, 
+.phps-t-sr-equal, 
+.phps-t-xor-equal, 
+.phps-t-is-equal,
+.phps-t-is-greater-or-equal,
+.phps-t-is-identical,
+.phps-t-is-not-equal,	
+.phps-t-is-not-identical,
+.phps-t-inc,
+.phps-t-dec,
+.phps-t-object-operator,
+.phps-t-double-colon,
+.phps-t-paamayim-nekudotayim,
+.phps-t-double-arrow,
+.phps-t-boolean-or,
+.phps-t-boolean-and
+	{color: #8000FF;}
+	
+.phps-t-print,
+.phps-t-include,
+.phps-t-include-once,
+.phps-t-require,
+.phps-t-require-once,
+.phps-t-isset,
+.phps-t-empty,
+.phps-t-while,
+.phps-t-do,
+.phps-t-exit,
+.phps-t-try,
+.phps-t-catch,
+.phps-t-unset,
+.phps-t-list,
+.phps-t-array,
+.phps-t-echo,
+.phps-t-if,
+.phps-t-switch,
+.phps-t-isset,
+.phps-t-exclaim,
+.phps-t-for,
+.phps-t-foreach,
+.phps-t-return,
+.phps-t-as,
+.phps-t-or,
+.phps-t-logical-and,
+.phps-t-logical-or,
+.phps-t-boolean-or,
+.phps-t-boolean-and,
+.phps-t-case,
+.phps-t-default,
+.phps-t-break,
+.phps-t-continue,
+.phps-t-goto,
+.phps-t-and,
+.phps-t-xor,
+.phps-t-global,
+.phps-t-else,
+.phps-t-elseif,
+.phps-t-use,
+.phps-t-var,
+.phps-t-function,
+.phps-t-public,
+.phps-t-private,
+.phps-t-protected,
+.phps-t-static,
+.phps-t-class,
+.phps-t-new,
+.phps-t-bool-cast,
+.phps-t-double-cast,
+.phps-t-int-cast,
+.phps-t-unset-cast,
+.phps-t-file, 
+.phps-t-line, 
+.phps-t-dir, 
+.phps-t-func-c, 
+.phps-t-class-c, 
+.phps-t-method-c, 
+.phps-t-ns-c
+	{color: #0000FF; font-weight:bold;}
+	
+.phps-t-open-tag,
+.phps-t-close-tag
+	{color: #FF0000;  font-weight:bold;}
+
+.phps-t-const
+	{color: #000000;}
+	
+.phps-t-variable, .phps-t-string-varname, .funclistline, .phps-t-variable-marked
+	{color: #000080;}
+
+.phps-t-variable-marked
+	{background-color:#F5A69A;}
+
+.phps-tainted-var
+	{color: #0606Ed;}
+	
+.phps-t-lnumber
+	{color: #FF8000}
+
+.phps-t-encapsed-and-whitespace,
+.phps-t-constant-encapsed-string,
+.phps-t-start-heredoc,
+.phps-t-end-heredoc
+	{color: #4A4A4A;}
+
+.phps-t-inline-html
+	{color: #000000; font-weight:bold;}
+
+.phps-t-comment,
+.phps-t-ml-comment,
+.phps-t-doc-comment
+	{color: #63C763; font-weight:normal;}

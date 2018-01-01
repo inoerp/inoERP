@@ -120,6 +120,7 @@ class sd_document_type extends dbObject {
  public $pageTitle = " SD - Document Type  "; //page Title
 
  public static function find_all_header_levels($bu_org_id_r = '') {
+  global $db;
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'HEADER' ";
@@ -134,6 +135,7 @@ class sd_document_type extends dbObject {
  }
 
  public static function find_all_line_levels($bu_org_id_r = '') {
+    global $db;
   $sql = " SELECT * FROM ";
   $sql .= self::$table_name;
   $sql .= " WHERE level = 'LINE' ";
