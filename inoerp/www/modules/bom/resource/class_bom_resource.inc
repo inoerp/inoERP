@@ -145,6 +145,7 @@ class bom_resource extends dbObject {
 
  Public static function charge_type() {
   $option_header = option_header::find_by_exact_name('CHARGE_TYPE');
+
   $charge_type = option_line::find_by_option_id($option_header->option_header_id);
   return $charge_type;
  }

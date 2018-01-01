@@ -195,7 +195,7 @@ class option_header extends dbObject {
   $sql = "SELECT * FROM " . self::$table_name . " WHERE option_type = :option_type ";
   $sql = ino_perPageSql_i($sql, 1);
    	  global $db;
-  $value_a = ['option_type' =>  "%$option_types%"];
+  $value_a = ['option_type' =>  $option_types];
   $result_array = $db->findBySql($sql, $value_a);
   return !empty($result_array) ? array_shift($result_array) : false;
  }

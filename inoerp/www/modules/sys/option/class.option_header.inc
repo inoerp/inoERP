@@ -21,65 +21,65 @@ class option_header extends dbObject {
  public static $key_column = 'option_type';
  public static $module = "sys";
  public static $system_info = [
-  'name' => 'Option',
-  'number' => '9105',
-  'description' => 'Create & Mainten Options',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('option_line', 'option_detail'),
-  'primary_entity_cb' => '',
-  'module_name' => 'sys',
-  'weight' => 5
+    'name' => 'Option',
+    'number' => '9105',
+    'description' => 'Create & Mainten Options',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('option_line', 'option_detail'),
+    'primary_entity_cb' => '',
+    'module_name' => 'sys',
+    'weight' => 5
  ];
  public static $access_level_a = [
-  'SYSTEM' => 'System',
-  'USER' => 'User',
-  'BOTH' => 'Both'
+    'SYSTEM' => 'System',
+    'USER' => 'User',
+    'BOTH' => 'Both'
  ];
  public $field_a = [
-  "option_header_id",
-  "option_type",
-  "access_level",
-  "description",
-  "module_code",
-  'option_assignments',
-  "efid",
-  "status",
-  "rev_enabled",
-  "rev_number",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    "option_header_id",
+    "option_type",
+    "access_level",
+    "description",
+    "module_code",
+    'option_assignments',
+    "efid",
+    "status",
+    "rev_enabled",
+    "rev_number",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
  public $initial_search = [
-  "option_header_id",
-  "option_type",
-  "description",
+    "option_header_id",
+    "option_type",
+    "description",
  ];
  public $checkbox = [
  ];
  public $column = [
-  "option_header_id",
-  "option_type",
-  "description",
-  "module_code"
+    "option_header_id",
+    "option_type",
+    "description",
+    "module_code"
  ];
  public $number_fields = [
-  "option_header_id"
+    "option_header_id"
  ];
  public $requiredField = [
-  "option_type",
-  "access_level",
-  "description",
-  "module_code",
+    "option_type",
+    "access_level",
+    "description",
+    "module_code",
  ];
  public $search = [
 //		 '_update_path' => 'modules/sys/option/option',
-  '_show_update_path' => 1,
-  '_update_action_meassge' => 'Update Option',
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_update_action_meassge' => 'Update Option',
+    '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
 //		 '_extra_path' => '',
  ];
@@ -179,12 +179,12 @@ class option_header extends dbObject {
     break;
 
    default:
-    $sql .=  ino_perPageSql(1);
+    $sql .= ino_perPageSql(1);
     break;
   }
- 
-  	  global $db;
-  $value_a = ['option_type' =>  "%$option_types%"];
+
+  global $db;
+  $value_a = ['option_type' => "%$option_types%"];
   $result_array = $db->findBySql($sql, $value_a);
 
   return !empty($result_array) ? array_pop($result_array) : false;
@@ -194,9 +194,10 @@ class option_header extends dbObject {
   global $db;
   $sql = "SELECT * FROM " . self::$table_name . " WHERE option_type = :option_type ";
   $sql = ino_perPageSql_i($sql, 1);
-   	  global $db;
-  $value_a = ['option_type' =>  "%$option_types%"];
+  global $db;
+  $value_a = ['option_type' => $option_types];
   $result_array = $db->findBySql($sql, $value_a);
+  pa($result_array);
   return !empty($result_array) ? array_shift($result_array) : false;
  }
 
@@ -217,11 +218,11 @@ class option_header extends dbObject {
  private function check_option_type() {
   global $db;
   $sql = "SELECT * FROM " . self::$table_name . " where option_type= :option_type ";
- 
-  	  global $db;
+
+  global $db;
   $value_a = ['option_type' => $this->option_type];
   $result_array = $db->findBySql($sql, $value_a);
-  
+
   if (count($result_array) > 0) {
    $this->msg = 1;
   } else {
@@ -232,7 +233,7 @@ class option_header extends dbObject {
 
  public static function staticVar_init($staticvar) {
   foreach (self::${$staticvar} as $key => $value) {
-  	self::${$staticvar}[$key] = gettext($value);
+   self::${$staticvar}[$key] = gettext($value);
   }
  }
 
