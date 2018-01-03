@@ -15,7 +15,7 @@
 	 <div class="tabContainer"> 
 		<div id="tabsHeader-1" class="tabContent">
 		 <ul class="column header_field">
-			<li><?php
+			<li><?php $f = new inoform();
 					if (!empty($item->org_id)) {
 					 $f->l_select_field_from_object('org_id', $org->findAll_inventory(), 'org_id', 'org', $item->org_id, 'org_id', '', 1, $readonly, '', '', '', 'item_master_cb');
 					} else {
@@ -33,7 +33,7 @@
 				<i class="fa fa-refresh"></i></a> </li>
 			<li><?php $f->l_text_field('item_description', $$class->item_description, '20', 'item_description', '', 1, $readonly_mas); ?></li>
 			<li><?php $f->l_select_field_from_object('product_line', item::product_line(), 'option_line_code', 'option_line_value', $$class->product_line, 'product_line', '', '', $readonly_mas); ?></li>
-			<li><?php echo $f->l_number_field('product_line_percentage', $$class->product_line_percentage, '8'); ?></li>
+      <li><label><?php echo gettext('PL Percentage') ?></label><?php echo $f->text_field('product_line_percentage', $$class->product_line_percentage); ?></li>
 		 </ul>
 		</div>
 		<div id="tabsHeader-2" class="tabContent">

@@ -203,7 +203,7 @@ VAR;
   $sql .= " WHERE item_id_m = :item_id_m ";
   $sql .= " AND org_id = :org_id ";
   $sql .= " AND subinventory_id = :subinventory_id ";
-
+$value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id, 'subinventory_id' => $subinventory_id,];
 
   if (!empty($locator_id)) {
    $sql .= " AND locator_id = :locator_id ";
@@ -211,7 +211,7 @@ VAR;
   }
 
   global $db;
-  $value_a = ['item_id_m' => $item_id_m, 'org_id' => $org_id, 'subinventory_id' => $subinventory_id,];
+  
   $result = $db->findBySql($sql, $value_a);
 
   return !empty($result) ? array_pop($result) : false;

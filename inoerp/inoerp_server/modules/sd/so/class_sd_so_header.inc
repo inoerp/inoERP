@@ -23,124 +23,134 @@ class sd_so_header extends dbObject {
  public static $key_column = 'ar_customer_id';
  public static $module = "sd";
  public static $system_info = [
-  'name' => 'Sales Order',
-  'number' => '2301',
-  'description' => 'Create & Mainten Sales Order',
-  'version' => '0.1.1',
-  'db_version' => '1001',
-  'mod_version' => '1.1.1',
-  'dependent_class' => array('sd_so_line'),
-  'primary_entity_cb' => '',
-  'module_name' => 'sd',
-  'weight' => 1
+    'name' => 'Sales Order',
+    'number' => '2301',
+    'description' => 'Create & Mainten Sales Order',
+    'version' => '0.1.1',
+    'db_version' => '1001',
+    'mod_version' => '1.1.1',
+    'dependent_class' => array('sd_so_line'),
+    'primary_entity_cb' => '',
+    'module_name' => 'sd',
+    'weight' => 1
  ];
  public $checkbox = [
-  "rev_enabled_cb"
+    "rev_enabled_cb"
  ];
  public static $order_source_type_a = [
-  'MANUAL' => 'Manual',
-  'ECOMMERCE' => 'eCommerce',
-  'SERVICE' => 'Serive',
-  'INV' => 'Inventory',
-  'IR' => 'Internal Requisition',
-  'QUOTE' => 'Quote',
-  'COPY' => 'Copy',
+    'MANUAL' => 'Manual',
+    'ECOMMERCE' => 'eCommerce',
+    'SERVICE' => 'Serive',
+    'INV' => 'Inventory',
+    'IR' => 'Internal Requisition',
+    'QUOTE' => 'Quote',
+    'COPY' => 'Copy',
+ ];
+ public static $order_action_a = [
+    'REAPPROVAL' => 'Re Approve',
+    'BOOKED' => 'Book',
+    'CANCELLED' => 'Cancel',
+    'ENTERED' => 'Enter',
+    'APPROVED' => 'Approve',
+    'INCOMPLETE' => 'InComplete',
+    'ONHOLD' => 'On Hold',
+    'INPROCESS' => 'In Process',
  ];
  public $field_a = [
-  'sd_so_header_id',
-  'bu_org_id',
-  'document_type',
-  'so_number',
-  'ar_customer_id',
-  'ar_customer_site_id',
-  'hr_employee_id',
-  "description",
-  'ship_to_id',
-  'bill_to_id',
-  'price_list_header_id',
-  'header_amount',
-  'tax_amount',
-  'currency',
-  'doc_currency',
-  'payment_term_id',
-  'payment_term_date',
-  'agreement_start_date',
-  'aggrement_end_date',
-  'exchange_rate_type',
-  'exchange_rate',
-  'released_amount',
-  'prepaid_amount',
-  'prepaid_status',
-  "order_source_type",
-  "order_reference_table",
-  "order_reference_id",
-  'reference_type',
-  'reference_key_name',
-  'reference_key_value',
-  'so_status',
-  "rev_enabled_cb",
-  "rev_number",
-  "created_by",
-  "creation_date",
-  "last_update_by",
-  "last_update_date"
+    'sd_so_header_id',
+    'bu_org_id',
+    'document_type',
+    'so_number',
+    'ar_customer_id',
+    'ar_customer_site_id',
+    'hr_employee_id',
+    "description",
+    'ship_to_id',
+    'bill_to_id',
+    'price_list_header_id',
+    'header_amount',
+    'tax_amount',
+    'currency',
+    'doc_currency',
+    'payment_term_id',
+    'payment_term_date',
+    'agreement_start_date',
+    'aggrement_end_date',
+    'exchange_rate_type',
+    'exchange_rate',
+    'released_amount',
+    'prepaid_amount',
+    'prepaid_status',
+    "order_source_type",
+    "order_reference_table",
+    "order_reference_id",
+    'reference_type',
+    'reference_key_name',
+    'reference_key_value',
+    'so_status',
+    "rev_enabled_cb",
+    "rev_number",
+    "created_by",
+    "creation_date",
+    "last_update_by",
+    "last_update_date"
  ];
  public $initial_search = [
-  "sd_so_header_id",
-  "so_number",
-  "ar_customer_id",
+    "sd_so_header_id",
+    "so_number",
+    "ar_customer_id",
  ];
  public $requiredField = [
-  'ar_customer_id',
-  'ship_to_id',
-  'bill_to_id',
-  'doc_currency',
-  'document_type'
+    'ar_customer_id',
+    'ship_to_id',
+    'bill_to_id',
+    'doc_currency',
+    'document_type'
  ];
  public $addressField = [
-  'ship_to_id',
-  'bill_to_id'
+    'ship_to_id',
+    'bill_to_id'
  ];
  public $fields_inForm_notInDataBase = [
-  'action',
-  "customer_name",
-  "customer_number",
-  "customer_site_name",
-  "ship_to_address_name",
-  "bill_to_address_name",
-  'sales_action',
-  'ship_to_phone',
-  'ship_to_email',
-  'ship_to_address',
-  'ship_to_country',
-  'ship_to_postal_code',
-  'bill_to_phone',
-  'bill_to_email',
-  'bill_to_address',
-  'bill_to_country',
-  'bill_to_postal_code',
-  'sales_person'
+    'action',
+    "customer_name",
+    "customer_number",
+    "customer_site_name",
+    "ship_to_address_name",
+    "bill_to_address_name",
+    'sales_action',
+    'ship_to_phone',
+    'ship_to_email',
+    'ship_to_address',
+    'ship_to_country',
+    'ship_to_postal_code',
+    'bill_to_phone',
+    'bill_to_email',
+    'bill_to_address',
+    'bill_to_country',
+    'bill_to_postal_code',
+    'sales_person'
  ];
  public $fields_inDataBase_notInForm = [
-  'currency'
+    'currency'
  ];
  public $search_functions = [
-  'BU Org' => 'search_business_org',
+    'BU Org' => 'search_business_org',
  ];
  public $profile_default = [
-  'exchange_rate_type' => 'gl_currency_conversion_type',
-  'bu_org_id' => 'org_bu_name_default',
+    'exchange_rate_type' => 'gl_currency_conversion_type',
+    'bu_org_id' => 'org_bu_name_default',
  ];
  public $search = [
-  '_show_update_path' => 1,
-  '_show_view_path' => 1,
+    '_show_update_path' => 1,
+    '_show_view_path' => 1,
 //		 '_view_action_meassge' => 'View',
-  '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
-   'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
+    '_extra_path' => array('form.php?class_name=ar_transaction_header&mode=9' => 'Invoice',
+       'form.php?class_name=sd_delivery_header&mode=9' => 'Ship')
  ];
  public $pageTitle = " SO - Sales Orders "; //page Title
  public $option_lists = [
-  'approval_status' => 'APPROVAL_STATUS',
+    'approval_status' => 'APPROVAL_STATUS',
  ];
  public $sd_so_header_id;
  public $bu_org_id;

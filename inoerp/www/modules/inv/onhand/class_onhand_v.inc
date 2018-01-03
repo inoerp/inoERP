@@ -62,12 +62,12 @@ class onhand_v extends dbObject {
     '_view_action_meassge' => 'Serial Numbers',
     '_extra_path' => array('form.php?class_name=inv_lot_onhand&mode=2' => 'Lot Numbers')
  ];
- public static $search_groupBy = [
-    'item_number' => 'Item Number'
-//		 'locator' => 'Locator',
-//		 'subinventory' => 'Subinventory',
-//		 'org_id' => 'Inventory Org',
- ];
+// public static $search_groupBy = [
+//    'item_number' => 'Item Number'
+////		 'locator' => 'Locator',
+////		 'subinventory' => 'Subinventory',
+////		 'org_id' => 'Inventory Org',
+// ];
  public $search_groupBy_sum = 'onhand';
  public $ra_onhand_by_subinventoryType_parameters = [
     'Result Limit' => 'ra_result_limit',
@@ -294,5 +294,5 @@ GROUP BY onhand.item_id_m, onhand.org_id, onhand.subinventory_id, onhand.locator
 }
 
 //end of po_detail class
-onhand_v::staticVar_init('search_groupBy');
+//onhand_v::staticVar_init('search_groupBy');
 ?>
