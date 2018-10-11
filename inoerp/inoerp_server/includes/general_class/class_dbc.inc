@@ -35,8 +35,7 @@ class dbc {
 //	 $this->pending_transaction = true;
    $this->connection->beginTransaction();
   } catch (PDOException $e) {
-   print "Data Base Connection Error!: <br> Modify the database settings @ includes/basics/settings/dbsettings.php file & reload the page"
-    . "<br>" . $e->getMessage() . "<br/>";
+   print "Data Base Connection Error : Please check your dbsettings file & reload the page";
    die();
   }
  }
