@@ -25,8 +25,8 @@ RewriteRule    ^content/([A-Za-z0-9-]+)/?$    content.php?$1    [NC,L]
 php_value upload_max_filesize 128M
 
 
-php_flag display_startup_errors on
-php_flag display_errors on
-php_flag html_errors on
-php_flag  log_errors on
-php_value error_log  /var/www/inoerp.org/public_html/inoerp/www/files/php-error/PHP_errors.log
+# php_flag display_startup_errors on
+# php_flag display_errors on
+# php_flag html_errors on
+# php_flag  log_errors on
+# php_value error_log  /var/www/inoerp.org/public_html/inoerp/www/files/php-error/PHP_errors.log
