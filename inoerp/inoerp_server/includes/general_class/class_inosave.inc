@@ -395,17 +395,16 @@ class inosave extends dbObject {
 	if (!empty($_POST)) {
 	 $$class = $this->save_class($class);
 	}
-
 	if (!$dont_show_save_msg) {
 	 if ((!empty($$class)) && (count($$class) > 1)) {
-		echo '<div class="message">' . gettext('Data is Successfully saved') . '</div>';
+		echo '<div class="message">' . gettext('Data is Successfully Saved') . '</div>';
 		echo '<ul id="linids">';
 		foreach ($$class as $array) {
 		 echo '<li class="' . $array->$keyField . '">' . $array->$primaryColumn . '</li>';
 		}
 		echo '</ul>';
 	 } else if (!empty($$class->$primaryColumn)) {
-		echo '<div class="message">' . gettext('Data is Successfully saved') . ' ' . $primaryColumn . gettext(' is ') . ' </div>';
+		echo '<div class="message">' . gettext('Data is Successfully Saved') . ' ' . $primaryColumn . gettext(' is ') . ' </div>';
 		echo '<div id="headerId">' . $$class->$primaryColumn . '</div>';
 		if (!empty($primaryColumn2)) {
 		 echo '<div id="primary_column2">' . $$class->$primaryColumn2 . '</div>';

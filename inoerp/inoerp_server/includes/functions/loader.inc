@@ -235,7 +235,7 @@ if (($continue) && (!empty($class_names))) {
   } else {
    $class = 'user_dashboard_v';
    $class_names[0] = $class;
-   $$class = new $class;
+   $$class = new $class();
   }
 
   $module = property_exists($class, 'module') ? $class::$module : 'module';

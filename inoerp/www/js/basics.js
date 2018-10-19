@@ -4556,7 +4556,7 @@ $(document).ready(function () {
   var print_title = $('span.heading').first().text() + ' with ' + primary_column_id + ' ' + $(primary_column_id_h).val();
   var printContenet = '<!DOCTYPE html><html><head>';
   printContenet += '<title>' + print_title + '</title>';
-  printContenet += '<link rel="stylesheet" type="text/css" href="tparty/bootstrap/css/bootstrap.css">';
+  printContenet += '<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.css">';
   printContenet += '<link rel="stylesheet" type="text/css" href="themes/default/kprint.css">';
   printContenet += '</head><body>';
   printContenet += pContent;

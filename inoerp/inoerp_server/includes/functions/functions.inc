@@ -1823,8 +1823,8 @@ function show_download_button_inSelectFormat($result_data_query, $total_count = 
 function ino_include_css() {
  $stmt = '';
  $stmt .= '<link href="' . HOME_URL . 'misc/ecss/pdf_print.css" rel="stylesheet">';
- $stmt .= '<link href="' . HOME_URL . 'tparty/bootstrap/css/bootstrap.css" rel="stylesheet">';
- $stmt .= '<link href="' . HOME_URL . 'tparty/bootstrap/css/style.css" rel="stylesheet">';
+ $stmt .= '<link href="' . HOME_URL . 'vendor/bootstrap/css/bootstrap.css" rel="stylesheet">';
+ $stmt .= '<link href="' . HOME_URL . 'vendor/bootstrap/css/style.css" rel="stylesheet">';
  $stmt .= '<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic" rel="stylesheet" type="text/css">';
  $stmt .= '<link href="https://fonts.googleapis.com/css?family=Lato:400,300,400italic,300italic,700,700italic,900" rel="stylesheet" type="text/css">';
  $stmt .= '<link href="https://fonts.googleapis.com/css?family=Exo:400,300,600,500,400italic,700italic,800,900" rel="stylesheet" type="text/css">';

@@ -83,7 +83,7 @@ class new_content_type extends content_type {
   }
 
   global $db;
-  $result = $db->findBySql($sql);
+  $result = $db->findBySql($sql_fields);
 
   foreach ($result as &$object) {
 

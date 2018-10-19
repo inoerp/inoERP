@@ -21,8 +21,8 @@
   <title>inoERP Document Print</title>
   <meta name="description" content="inoERP Document PDF Print">
   <meta name="inoerp" content="Print">
-  <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/bootstrap.css" rel="stylesheet">
-  <link href="<?php echo HOME_URL; ?>tparty/bootstrap/css/style.css" rel="stylesheet">
+  <link href="<?php echo HOME_URL; ?>vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="<?php echo HOME_URL; ?>vendor/bootstrap/css/style.css" rel="stylesheet">
   <link href="<?php echo THEME_URL ?>/public.css" media="all" rel="stylesheet" type="text/css" />
   <link href="<?php echo THEME_URL ?>/print.css" media="all" rel="stylesheet" type="text/css" />
   <script src="<?php echo HOME_URL; ?>includes/js/jquery-2.0.3.min.js"></script>
