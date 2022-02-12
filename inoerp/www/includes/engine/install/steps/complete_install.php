@@ -75,10 +75,12 @@ function getQueriesFromSQLFile($sqlfile) {
 
  # import file line by line
  # and filter (remove) those lines, beginning with an sql comment token
- $file = array_filter($file, create_function('$line', 'return strpos(ltrim($line), "--") !== 0;'));
+ $file = array_filter($file, create_function('$line', 'return strpos(ltrim($line), "--") !== 0;')); //php5.5+
+ #$file = array_filter($file, function($line) { return strpos(ltrim($line), "--") !== 0; }); //php7+
 
  # and filter (remove) those lines, beginning with an sql notes token
- $file = array_filter($file, create_function('$line', 'return strpos(ltrim($line), "/*") !== 0;'));
+ $file = array_filter($file, create_function('$line', 'return strpos(ltrim($line), "/*") !== 0;')); //php5.5+
+ #$file = array_filter($file, function($line) { return strpos(ltrim($line), "/*") !== 0; }); //php7+
 
  # this is a whitelist of SQL commands, which are allowed to follow a semicolon
  $keywords = array(
@@ -93,10 +95,13 @@ function getQueriesFromSQLFile($sqlfile) {
  $splitter = preg_split($regexp, implode("\r\n", $file));
 
  # remove trailing semicolon or whitespaces
- $splitter = array_map(create_function('$line', 'return preg_replace("/[\s;]*$/", "", $line);'), $splitter);
-
+ $splitter = array_map(create_function('$line', 'return preg_replace("/[\s;]*$/", "", $line);'), $splitter); //php5.5+
+ #$splitter = array_map(function($line) {return preg_replace("/[\s;]*$/", "", $line);}, $splitter); //php7+
+ 
  # remove empty lines
- return array_filter($splitter, create_function('$line', 'return !empty($line);'));
+ return array_filter($splitter, create_function('$line', 'return !empty($line);')); //php5.5+
+ #return array_filter($splitter, function($line) {return !empty($line); }); //php7+
+ 
 }
 ?>
 <div id="progress_message" class="message">
