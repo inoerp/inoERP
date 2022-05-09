@@ -1,7 +1,7 @@
 
 > *The old PHP version of inoERP is available @ https://github.com/php-inoerp/inoERP*
 
-inoERP is an open source **[OneApp](https://docs.rikdata.com)** (Go back-end & Flutter front-end) based enterprise management system. The ERP systems contain all the required modules for running any small to midsize businesses. The features are very similar to Oracle R12/ Cloud Application and SAP ECC/Hana S/4. It also contains a lightweight CMS which seamlessly integrates with the ERP
+[inoERP](https://docs.inoerp.com) is an open source **[OneApp](https://docs.rikdata.com)** (Go back-end & Flutter front-end) based enterprise management system. The ERP systems contain all the required modules for running any small to midsize businesses. The features are very similar to Oracle R12/ Cloud Application and SAP ECC/Hana S/4. It also contains a lightweight CMS which seamlessly integrates with the ERP
 
 
 ## Modules
