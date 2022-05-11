@@ -1,0 +1,66 @@
+{
+  "application": {
+    "protocol": "http://",
+    "hostName": "localhost",
+    "portNumber": 8085
+  },
+
+  "settings": {
+    "debugLevel": 0,
+    "accessSecret": "12345",
+    "autoCreateUsers": true,
+    "disableAuthorization": false,
+    "enableJsValidation": true,
+    "enableAuditTrialForAllTransactions": false,
+    "showSqlStatements": false,
+    "ebsServerTimeDifferenceMin": 60,
+    "ebsServerTimeDifferenceDay": 0,
+    "rikdataDisableClientSecurity": false,
+    "showAllColumns": false,
+    "maximumJsVmCount": 50
+  },
+  "database": [
+    {
+      "dbConnName": "Inoerp",
+      "dbType": "MySQL",
+      "host": "localhost",
+      "portNumber": 3306,
+      "dbName": "inoerp",
+      "userName": "inoerp",
+      "password": "inoerp",
+      "connPoll": 5,
+      "maxConnPoll": 10,
+      "defaultRowLimit": 200
+    },
+    {
+      "dbConnName": "Sqlite",
+      "dbType": "Sqlite",
+      "host": "localhost",
+      "portNumber": 3060,
+      "dbName": "Sqlite",
+      "connPoll": 5,
+      "maxConnPoll": 10,
+      "defaultRowLimit": 50
+    }
+  ],
+  "oauth": {
+    "userName": ["unique_name", "user_name"],
+    "email": ["upn"],
+    "lastName": ["family_name", "last_name"],
+    "firstName": ["given_name", "first_name"],
+    "phoneNumber": ["mobile", "phone_number"],
+    "roles": ["scp"]
+  },
+  "email": {
+    "smtpHost": "smtp.gmail.com",
+    "smtpPort": 465,
+    "smtpUser": "",
+    "smtpPassword": "",
+    "smtpSsl": true,
+    "smtpTls": true,
+    "smtpFrom": "",
+    "smtpFromName": "",
+    "smtpReplyTo": "",
+    "smtpReplyToName": ""
+  }
+}
