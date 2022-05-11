@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 12 6">
+	<title>Flag of Jamaica</title>
+	<defs>
+		<clipPath id="c">
+			<path d="m0 0h12v6H0z"/>
+		</clipPath>
+	</defs>
+	<path fill="#009b3a" d="m0 0h12v6H0z"/>
+	<path stroke="#fed100" clip-path="url(#c)" d="m-2-1v8l16-8v8z"/>
+</svg>
