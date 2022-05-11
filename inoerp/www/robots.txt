@@ -1,4 +1,0 @@
-# Directories
-Disallow: /includes/
-Disallow: /modules/
-Disallow: /extensions/

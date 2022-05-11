@@ -1,1 +1,0 @@
-<?phpif(!empty($$class->fp_kanban_release_id)){ $mode = 2; $readonly =1;}?>

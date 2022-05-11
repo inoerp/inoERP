@@ -1,1 +1,0 @@
-<?phpif (!empty($_GET['legal_org_id'])) { $$class->legal_org_id = $_GET['legal_org_id']; $class_i = $$class->findBy_orgId($_GET['legal_org_id']); if (!empty($class_i)) {	foreach ($class_i as $key => $value) {	 if ((!empty($value)) && (property_exists($$class, $key))) {		$$class->$key = $value;	 }	} } }?>
