@@ -1,3 +1,5 @@
+> *The old PHP version of inoERP is available @ https://github.com/php-inoerp/inoERP*
+
 inoERP is an  **[OneApp](https://docs.rikdata.com)** (Go back-end & Flutter front-end) based enterprise management system. The ERP systems contain all the required modules for running small to midsize businesses. The features are similar to Oracle R12/ Cloud Application and SAP ECC/Hana S/4. 
 
 The application uses MySQL database and OneApp JavaScript APIs to create business logic. All the database and javascript codes are available on GitHub.
