@@ -2,7 +2,9 @@
   "application": {
     "protocol": "http://",
     "hostName": "localhost",
-    "portNumber": 8085
+    "portNumber": 8085,
+    "certFile": "",
+    "keyFile": ""
   },
 
   "settings": {
