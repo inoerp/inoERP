@@ -14,6 +14,7 @@
     "disableAuthorization": false,
     "enableJsValidation": true,
     "enableAuditTrialForAllTransactions": false,
+	"updateInstanceWithAppHostName": true,
     "showSqlStatements": false,
     "ebsServerTimeDifferenceMin": 60,
     "ebsServerTimeDifferenceDay": 0,
