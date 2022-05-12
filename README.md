@@ -10,6 +10,10 @@ The server is available for Windows, macOS, and Linux.
 
 Documentation: <http://docs.inoerp.com>
 
+Web Demo: <http://demo.inoerp.com:8085/>
+
+***The web client is experimental and doesn't have all functionalities of native clients (Windows/macOS/Andriod/iOS). The performance of the web is also not at the same level as a native client. So, try the application with a native client and use the above URL in your native client.***
+
 ## Modules
 ------------
 
