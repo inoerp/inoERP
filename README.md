@@ -8,6 +8,7 @@ The client is available for Andriod, iOS, macOS, Windows, and Web.
 
 The server is available for Windows, macOS, and Linux.
 
+Documentation: <http://docs.inoerp.com>
 
 ## Modules
 ------------
