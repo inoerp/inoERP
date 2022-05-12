@@ -105,7 +105,7 @@ Starting server @ localhost:8085
 
 Open the application in a browser and test that you can login with the default username and password (admin/admin)
 
-<img src="/images/modules/admin/server/server_01.PNG" width="800"/>
+<img src="http://docs.inoerp.com/images/modules/admin/server/server_01.PNG" width="800"/>
 
 Click on the sign-in button, and the system will redirect you to the dashboard.
 
@@ -116,7 +116,7 @@ The web client is experimental and doesn't have all functionalities of native cl
 
 :::
 
-<img src="/images/modules/admin/server/server_01.PNG" width="800"/>
+<img src="http://docs.inoerp.com/images/modules/admin/server/server_02.PNG" width="800"/>
 
 
 
