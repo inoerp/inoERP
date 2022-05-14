@@ -88,11 +88,12 @@ nohup ./oneapp_linux &
 ## Client
 
 Access the application using any client of your choice. The clients are available for
+* Andriod
 * Windows
 * macOS
 * iOS
-* Linux
 * Web
+
 
 [Download Client](https://docs.rikdata.com/docs/download)
 
