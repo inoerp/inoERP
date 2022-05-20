@@ -63,10 +63,12 @@ Ensure ***SET GLOBAL log_bin_trust_function_creators = 1;***
 
 1. Enter server hostname and port on the config.json file
 ````
-"application": {
+  "application": {
     "protocol": "http://",
-    "hostName": "104.248.31.179",
-    "portNumber": 8085
+    "hostName": "localhost",
+    "portNumber": 8085,
+    "certFile": "",
+    "keyFile": ""
   },
 
 ````
