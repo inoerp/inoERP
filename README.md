@@ -12,7 +12,7 @@ Documentation: <http://docs.inoerp.com>
 
 REST APIs <http://api.inoerp.com>
 
-Web Demo: <http://demo.inoerp.com:8085/>
+Web Demo: <https://demo.inoerp.com:8085/>
 
 Contact : contact@rikdata.com, rikdata.com@gmail.com
 
