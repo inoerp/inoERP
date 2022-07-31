@@ -1,6 +1,6 @@
-function afterGet(inputData) {
-  return validationForAfterGet(inputData);
-}
+// function afterGet(inputData) {
+//   return validationForAfterGet(inputData);
+// }
 
 
 

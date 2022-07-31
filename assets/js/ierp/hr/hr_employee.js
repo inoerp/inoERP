@@ -11,7 +11,7 @@ function beforePatch(inputData) {
   if (action == "hr_create_assignment_from_entitlement") {
     let hrLeaveEntitlementHeaderId = data["hrLeaveEntitlementHeaderId"];
     if (hrLeaveEntitlementHeaderId) {
-      return createLeaveAssignment(hrLeaveEntitlementHeaderId);
+      return createNextPayroll(hrLeaveEntitlementHeaderId);
     }else{
       retDataMap["rd_proceed_message"] = "Unable to create assignments as no leave entitlement header id is provided";
     }
@@ -22,7 +22,7 @@ function beforePatch(inputData) {
   return retDataMap;
 }
 
-function createLeaveAssignment(hrLeaveEntitlementHeaderId) {
+function createNextPayroll(hrLeaveEntitlementHeaderId) {
   var retDataMap = {
     rd_proceed_status: false,
     rd_proceed_message: "Action is successfully submitted",

@@ -1,5 +1,29 @@
 function main() {
   let allMethods = {
+    ArTransactionHeaderEv: {
+      BeforePatch: [
+        "ar/ar_transaction_header.js,shared/gl_journal_header_ev.js",
+        "beforePatch",
+      ],
+    },
+    ArPaymentHeaderEv: {
+      BeforePatch: [
+        "ar/ar_payment_header.js,shared/gl_journal_header_ev.js",
+        "beforePatch",
+      ],
+    },
+    ApPaymentHeaderEv: {
+      BeforePatch: [
+        "ap/ap_payment_header.js,shared/gl_journal_header_ev.js",
+        "beforePatch",
+      ],
+    },
+    ApTransactionHeaderEv: {
+      BeforePatch: [
+        "ap/ap_transaction_header.js,shared/gl_journal_header_ev.js",
+        "beforePatch",
+      ],
+    },
     CstItemCostHeaderEv: {
       BeforePatch: ["cst/cst_item_cost_header_ev.js", "beforePatch"],
     },
@@ -42,8 +66,21 @@ function main() {
     HrLeaveEntitlementHeader: {
       BeforePatch: ["hr/hr_employee.js", "beforePatch"],
     },
+    HrPayrollEv: {
+      BeforePatch: ["hr/hr_payroll.js", "beforePatch"],
+    },
+    HrPayrollProcessV: {
+      BeforePatch: ["hr/hr_payroll.js", "beforePatch"],
+    },
     InvTransactionDocHeaderEv: {
-      AfterPatch: ["inv/inv_transaction_doc_header.js", "afterPatch"],
+      //  AfterPatch: ["inv/inv_transaction_doc_header.js", "afterPatch"],
+      BeforePatch: [
+        "inv/inv_transaction_doc_header.js,inv/gl_inv_transaction_doc_header.js,shared/gl_journal_header_ev.js",
+        "beforePatch",
+      ],
+    },
+    InvTransactionNewLineEv: {
+      BeforeGet: ["inv/inv_transaction_doc_line.js", "beforeGet"],
     },
     InvItemEv: {
       AfterPost: ["inv/inv_item.js", "afterPost"],
@@ -87,11 +124,38 @@ function main() {
     },
     PoHeaderEv: {
       BeforePatch: ["po/po_header.js", "beforePatch"],
-      AfterGet: ["po/po_header.js", "afterGet"],
+      //  AfterGet: ["po/po_header.js", "afterGet"],
     },
     PoLineEv: {
       AfterPost: ["po/po_line.js", "afterPost"],
       AfterPatch: ["po/po_line.js", "afterPatch"],
+    },
+    PrjBillingDocHeaderEv: {
+      BeforePatch: ["prj/prj_billing_doc_header_ev.js", "beforePatch"],
+    },
+    PrjBudgetHeaderEv: {
+      BeforePatch: [
+        "prj/prj_budget_header_ev.js,prj/prj_generate_draft_revenue.js",
+        "beforePatch",
+      ],
+    },
+    PrjExpenditureHeaderEv: {
+      BeforePatch: ["prj/prj_expenditure_header_ev.js", "beforePatch"],
+    },
+    PrjProjectCostV: {
+      BeforePatch: ["prj/prj_project_cost_v.js", "beforePatch"],
+    },
+    PrjProjectHeaderEv: {
+      BeforePatch: [
+        "prj/prj_revenue_doc_header_ev.js,prj/prj_generate_draft_revenue.js",
+        "beforePatch",
+      ],
+    },
+    PrjRevenueDocHeaderEv: {
+      BeforePatch: [
+        "prj/prj_revenue_doc_header_ev.js,prj/prj_generate_draft_revenue.js,shared/gl_journal_header_ev.js",
+        "beforePatch",
+      ],
     },
     SdSoHeaderEv: {
       BeforePatch: ["sd/so_header.js", "beforePatch"],
@@ -155,6 +219,55 @@ function getData(inputData) {
     return inputData;
   }
 }
+
+function getDataFromSql(selectSql) {
+  request = {
+    sql: selectSql,
+    dbType: "MySQL",
+    connName: "Inoerp",
+  };
+
+  let response = sqlSelect(request);
+
+  return response["data"];
+}
+
+function updateDataWithSql(updateSql) {
+  request = {
+    sql: updateSql,
+    dbType: "MySQL",
+    connName: "Inoerp",
+  };
+
+  let response = sqlUpdate(request);
+
+  return response["data"];
+}
+
+function insertDataWithSql(insertSql) {
+  request = {
+    sql: insertSql,
+    dbType: "MySQL",
+    connName: "Inoerp",
+  };
+
+  let response = sqlInsert(request);
+
+  return response["data"];
+}
+
+function deleteDataWithSql(deleteSql) {
+  request = {
+    sql: deleteSql,
+    dbType: "MySQL",
+    connName: "Inoerp",
+  };
+
+  let response = sqlDelete(request);
+
+  return response["data"];
+}
+
 
 function getFlatObject(obj, flatObject) {
   if (Object.keys(obj).length > 0) {
@@ -264,6 +377,24 @@ function printNestedObject(obj) {
         }
       }
     }
+  }
+}
+
+function isNull(str) {
+  return !isNotNull(str);
+}
+
+function isNotNull(str) {
+  if (
+    str != undefined &&
+    str != null &&
+    str != "" &&
+    str != "null" &&
+    str.length > 0
+  ) {
+    return true;
+  } else {
+    return false;
   }
 }
 

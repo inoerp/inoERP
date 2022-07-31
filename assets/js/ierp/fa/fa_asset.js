@@ -589,9 +589,6 @@ function createAccountingFromParams(dataObject, action) {
       const vvDepreciationCb = headerFirstRow["vvDepreciationCb"];
       const vvBookType = headerFirstRow["vvBookType"];
 
-           consoleLog("\n\n\n journalTemplateLines faJournalProfiles vvBookType "  + vvBookType + " vvGlLedgerId " + vvGlLedgerId + " vvGlDocumentType " + vvGlDocumentType + " depreciationCb " + vvDepreciationCb);
-
-
       if (
         vvBookType == "primary" &&
         (vvDepreciationCb == "1" || vvDepreciationCb == "true")
@@ -608,8 +605,6 @@ function createAccountingFromParams(dataObject, action) {
         vvGlDocumentType
       );
       let journalTemplateLines = [];
-
-      //consoleLog("\n\n\n journalTemplateLines faJournalProfiles "  + JSON.stringify(faJournalProfiles));
 
       for (const jlLine of faJournalProfiles) {
         if (jlLine["faTransactionCode"] == transactionType) {
@@ -740,9 +735,6 @@ function createJournalLines(
     connName: "Inoerp",
   };
   const updateResponse = sqlUpdate(updateRequest);
-
-  consoleLog("\n\n\n lineSql " + JSON.stringify(updateSql));
-  consoleLog("\n\n\n insertResponse " + JSON.stringify(updateResponse));
 }
 
 function getGlAcId(allAccountProfiles, glAcLineType, drOrCr) {

@@ -80,7 +80,6 @@ function completeWorkOrderCreation(wipWoHeaderId) {
   if (isArray) {
     for (let i = 0; i < lineData.length; i++) {
       const line = lineData[i];
-      printNestedObject(line);
       let wipWdLineId = line["wipWdLineId"];
       let wipWoLineId = line["wipWoLineId"];
       insertOperationResources(wipWoLineId, wipWdLineId, quantity);
