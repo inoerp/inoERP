@@ -1,5 +1,23 @@
 function main() {
   let allMethods = {
+    AmAssetInstanceEv: {
+      BeforePatch: [
+        "am/am_asset_instance.js,am/am_asset_instance_calendar.js,am/am_asset_instance_meter.js",
+        "beforePatch",
+      ],
+    },
+    AmFaAssetV: {
+      BeforePatch: [
+        "am/am_asset_instance.js,am/am_asset_instance_calendar.js,am/am_asset_instance_meter.js",
+        "beforePatch",
+      ],
+    },
+    AmAssetGroup: {
+      BeforePatch: [
+        "am/am_asset_instance.js,am/am_asset_instance_calendar.js,am/am_asset_instance_meter.js",
+        "beforePatch",
+      ],
+    },
     ArTransactionHeaderEv: {
       BeforePatch: [
         "ar/ar_transaction_header.js,shared/gl_journal_header_ev.js",
@@ -267,7 +285,6 @@ function deleteDataWithSql(deleteSql) {
 
   return response["data"];
 }
-
 
 function getFlatObject(obj, flatObject) {
   if (Object.keys(obj).length > 0) {

@@ -1,0 +1,25 @@
+LOG: 2022/08/13 16:43:57 C:/Files/GitHub/s-goRest/app/system/js/js.go:440: 
+
+Error in reading script function: open ./assets/js/ierp/ar/ar_transaction_header.js,shared/gl_journal_header_ev.js: The system cannot find the path specified. 
+LOG: 2022/08/13 16:43:58 C:/Files/GitHub/s-goRest/app/system/js/js.go:440: 
+
+Error in reading script function: open ./assets/js/ierp/prj/prj_budget_header_ev.js,prj/prj_generate_draft_revenue.js: The system cannot find the path specified. 
+LOG: 2022/08/13 16:43:58 C:/Files/GitHub/s-goRest/app/system/js/js.go:440: 
+
+Error in reading script function: open ./assets/js/ierp/ap/ap_transaction_header.js,shared/gl_journal_header_ev.js: The system cannot find the path specified. 
+LOG: 2022/08/13 16:43:58 C:/Files/GitHub/s-goRest/app/system/js/js.go:440: 
+
+Error in reading script function: open ./assets/js/ierp/prj/prj_revenue_doc_header_ev.js,prj/prj_generate_draft_revenue.js,shared/gl_journal_header_ev.js: The system cannot find the path specified. 
+LOG: 2022/08/13 16:43:58 C:/Files/GitHub/s-goRest/app/system/js/js.go:440: 
+
+Error in reading script function: open ./assets/js/ierp/prj/prj_revenue_doc_header_ev.js,prj/prj_generate_draft_revenue.js: The system cannot find the path specified. 
+LOG: 2022/08/13 16:43:58 C:/Files/GitHub/s-goRest/app/system/js/js.go:440: 
+
+Error in reading script function: open ./assets/js/ierp/ar/ar_payment_header.js,shared/gl_journal_header_ev.js: The system cannot find the path specified. 
+LOG: 2022/08/13 16:43:58 C:/Files/GitHub/s-goRest/app/system/js/js.go:440: 
+
+Error in reading script function: open ./assets/js/ierp/inv/inv_transaction_doc_header.js,inv/gl_inv_transaction_doc_header.js,shared/gl_journal_header_ev.js: The system cannot find the path specified. 
+LOG: 2022/08/13 16:43:58 C:/Files/GitHub/s-goRest/app/system/js/js.go:440: 
+
+Error in reading script function: open ./assets/js/ierp/ap/ap_payment_header.js,shared/gl_journal_header_ev.js: The system cannot find the path specified. 
+LOG: 2022/08/13 16:43:58 C:/Files/GitHub/s-goRest/app/controller/controller.go:89: HTTP server ListenAndServe: listen tcp 127.0.0.1:8085: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.

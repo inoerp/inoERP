@@ -358,20 +358,3 @@ function completeSerialTransaction(invTransactionId, newInvTransactionId) {
   }
 }
 
-
-let xxx = {
-
- "%": "%",
- " =": "=",
-  "!=": "!=",
-  ">":" >",
-  ">=":" >=",
-  "<": "<",
-  "<=": "<=",
-  "STARTS_WITH": "Starts",
-  "ENDS_WITH": "Ends",
-  "NULL": "Null",
-  "NOT_NULL": "!Null",
-  "CONTAINS": "Contains",
-  "DOES_NOT_CONTAINS":" !Contains",
-}

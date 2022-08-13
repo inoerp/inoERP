@@ -731,8 +731,6 @@ function cancelRescheduleOutLines(cancelOutList) {
 
   cancelSql += " ) ";
 
-  consoleLog("\n\n\n\ncancelSql" + cancelSql);
-
   let updateSqlRequest = {
     sql: cancelSql,
     dbType: "MySQL",
