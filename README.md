@@ -1,5 +1,3 @@
-> *The old PHP version of inoERP is available @ https://github.com/php-inoerp/inoERP*
-
 inoERP is an  **[OneApp](https://docs.rikdata.com)** (Go back-end & Flutter front-end) based enterprise management system. The ERP systems contain all the required modules for running small to midsize businesses. The features are similar to Oracle R12/ Cloud Application and SAP ECC/Hana S/4. 
 
 The application uses MySQL database and OneApp JavaScript APIs to create business logic. All the database and javascript codes are available on GitHub.
@@ -301,3 +299,5 @@ The idea behind inoERP is to provide a dynamic pull-based system where the deman
 A dynamic pull system is an advanced version of a pull system that encompasses the best feature of the traditional pull system & MRP. The major disadvantage of the conventional Kanban system is the fixed Kanban size and requirement of at least two bins for the entire operation. In a sudden demand decrease, the Kanban system can result in extra inventory, and the value of unused inventory can go up to 2 bin size. Similarly, In case of unexpected demand increases can result in a line down, and the issue will be severe if the lead times are not short.
 
 The dynamic pull system overcomes this issue by recalculating the bucket size (Kanban size/lot size) before creating any supply (requisitions/purchase order/work order). Each time a new supply is created, the system automatically decides the best supply size per the actual demand.
+
+> *The old PHP version of inoERP is available @ https://github.com/php-inoerp/inoERP*
