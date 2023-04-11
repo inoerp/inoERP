@@ -9,6 +9,21 @@ _flutter.loader = null;
 
 (function () {
   "use strict";
+
+  const baseUri = ensureTrailingSlash(getBaseURI());
+
+  function getBaseURI() {
+    const base = document.querySelector("base");
+    return (base && base.getAttribute("href")) || "";
+  }
+
+  function ensureTrailingSlash(uri) {
+    if (uri == "") {
+      return uri;
+    }
+    return uri.endsWith("/") ? uri : `${uri}/`;
+  }
+
   /**
    * Wraps `promise` in a timeout of the given `duration` in ms.
    *
@@ -109,8 +124,7 @@ _flutter.loader = null;
       }
       const {
         serviceWorkerVersion,
-        serviceWorkerUrl = "flutter_service_worker.js?v=" +
-          serviceWorkerVersion,
+        serviceWorkerUrl = `${baseUri}flutter_service_worker.js?v=${serviceWorkerVersion}`,
         timeoutMillis = 4000,
       } = settings;
 
@@ -228,7 +242,7 @@ _flutter.loader = null;
      * Returns undefined when an `onEntrypointLoaded` callback is supplied in `options`.
      */
     async loadEntrypoint(options) {
-      const { entrypointUrl = "main.dart.js", onEntrypointLoaded } =
+      const { entrypointUrl = `${baseUri}main.dart.js`, onEntrypointLoaded } =
         options || {};
 
       return this._loadEntrypoint(entrypointUrl, onEntrypointLoaded);
