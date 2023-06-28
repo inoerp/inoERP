@@ -1,0 +1,68 @@
+# config.yaml
+host: "localhost"
+protocol: "http" # https must contain cert_file and key_file path
+port: 3030
+cert_file: "demo.inoerp.com.crt"
+key_file: "demo.inoerp.com_key.txt"
+
+#basic application settings
+app_settings:
+  #Run initialization scripts. Required only once on a new server
+  run_init_scripts: false
+  # 1 to 5 : 1 = Error, 2 = WARN, 3 =  INFO, 4 = DEBUG, 5 = TRACE
+  debug_level: 2
+  #Enable javascript APIs. If disabled application won't call any JavaScript APIs
+  enable_js_api: true
+  show_all_columns: false
+  access_secret: "12345"
+  auto_create_users: true
+  #The number of records fetched from database if no limit/top is provided in REST request
+  default_query_limit: 20
+
+#jwt_settings for user authorization
+jwt_settings:
+  secret: "12345123451234512345"
+  expired_in: "60m"
+  max_age: 60
+
+#name must match db_conn_name of rikdata_application table
+db_settings:
+  - name : "Inoerp"
+    db_type : "MySql"
+    host: "localhost"
+    port: 3306
+    username: "root"
+    password: "inoerp"
+    database_name: "inoerp"    
+
+#email configuration to send automatic emails from the application
+email_settings:
+  smtp_host: smtp.gmail.com
+  smtp_port: 465
+  smtp_user: ""
+  smtp_password: ""
+  smtp_ssl: true
+  smtp_tls: true
+  smtp_from: ""
+  smtp_from_name: ""
+  smtp_reply_to: ""
+  smtp_reply_to_name: ""
+  
+oauth_settings:
+  user_name:
+    - unique_name
+    - user_name
+  email:
+    - upn
+  last_name:
+    - family_name
+    - last_name
+  first_name:
+    - given_name
+    - first_name
+  phone_number:
+    - mobile
+    - phone_number
+  roles:
+    - scp
+
